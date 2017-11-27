@@ -1,0 +1,26 @@
+- name: Centre des architectures Azure
+  href: /azure/architecture
+- name: Meilleures pratiques
+  items:
+    - name: Conception de l’API
+      href: api-design.md
+    - name: Implémentation de l’API
+      href: api-implementation.md
+    - name: Mise à l’échelle automatique
+      href: auto-scaling.md
+    - name: Tâches en arrière-plan
+      href: background-jobs.md
+    - name: Mise en cache
+      href: caching.md
+    - name: Réseau de distribution de contenu
+      href: cdn.md
+    - name: Partitionnement des données
+      href: data-partitioning.md
+    - name: Surveillance et diagnostics
+      href: monitoring.md
+    - name: Conventions d’affectation de noms
+      href: naming-conventions.md
+    - name: Guide du mécanisme de nouvelle tentative relatif aux différents services
+      href: retry-service-specific.md
+    - name: Gestion des échecs temporaires
+      href: transient-faults.md
