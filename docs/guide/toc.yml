@@ -1,0 +1,60 @@
+- name: Centre des architectures Azure
+  href: /azure/architecture
+- name: Guide de l’architecture des applications
+  href: index.md
+  items:
+    - name: Styles d’architecture
+      href: architecture-styles/index.md
+      items:
+        - name: Application multiniveau
+          href: architecture-styles/n-tier.md
+        - name: Web-File d’attente-Worker
+          href: architecture-styles/web-queue-worker.md
+        - name: Microservices
+          href: architecture-styles/microservices.md
+        - name: CQRS
+          href: architecture-styles/cqrs.md
+        - name: Architecture basée sur les événements
+          href: architecture-styles/event-driven.md
+        - name: "Données volumineuses («\_Big Data\_»)"
+          href: architecture-styles/big-data.md
+        - name: Big Compute
+          href: architecture-styles/big-compute.md
+    - name: Choix de technologie
+      href: technology-choices/index.md
+      items:
+        - name: Vue d’ensemble des options de calcul
+          href: technology-choices/compute-overview.md
+        - name: Comparaison des calculs
+          href: technology-choices/compute-comparison.md
+        - name: Vue d’ensemble du magasin de données
+          href: technology-choices/data-store-overview.md
+        - name: Comparaison du magasin de données
+          href: technology-choices/data-store-comparison.md
+    - name: Principes de conception
+      href: design-principles/index.md
+      items:
+        - name: Conception de la réparation spontanée
+          href: design-principles/self-healing.md
+        - name: Rendre tous les éléments redondants
+          href: design-principles/redundancy.md
+        - name: Minimiser la coordination
+          href: design-principles/minimize-coordination.md
+        - name: Penser la conception des applications pour augmenter la taille des instances
+          href: design-principles/scale-out.md
+        - name: Partitionner pour contourner les limites
+          href: design-principles/partition.md
+        - name: Penser la conception des applications pour les opérations
+          href: design-principles/design-for-operations.md
+        - name: Utiliser les services managés
+          href: design-principles/managed-services.md
+        - name: Utiliser la meilleure banque de données pour le travail
+          href: design-principles/use-the-best-data-store.md
+        - name: Penser la conception des applications en vue de leur évolution
+          href: design-principles/design-for-evolution.md
+        - name: Créer pour les besoins de l’entreprise
+          href: design-principles/build-for-business.md
+    - name: Piliers de la qualité logicielle
+      href: pillars.md
+    - name: Modèles de conception
+      href: ../patterns/index.md?toc=/azure/architecture/guide/toc.json
