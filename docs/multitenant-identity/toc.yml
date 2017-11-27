@@ -1,0 +1,30 @@
+- name: Centre des architectures Azure
+  href: /azure/architecture
+- name: Gérer l’identité dans les applications mutualisées
+  items:
+    - name: Introduction
+      href: index.md
+    - name: Le scénario Tailspin
+      href: tailspin.md
+    - name: Authentification
+      href: authenticate.md
+    - name: Identité basée sur des revendications
+      href: claims.md
+    - name: Inscription du locataire
+      href: signup.md
+    - name: Rôles d’application
+      href: app-roles.md
+    - name: Autorisation
+      href: authorize.md
+    - name: Sécuriser une API Web
+      href: web-api.md
+    - name: Mettre en cache des jetons d’accès
+      href: token-cache.md
+    - name: Assertion de client
+      href: client-assertion.md
+    - name: Protection des secrets d’application
+      href: key-vault.md
+    - name: Fédération avec l’AD FS d’un client
+      href: adfs.md
+    - name: Exécution de l’application Surveys
+      href: run-the-app.md
