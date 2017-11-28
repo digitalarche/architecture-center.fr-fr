@@ -5,11 +5,11 @@ keywords: "Experts AWS, comparaison de Azure, comparaison de AWS, différences e
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: 251489e7a6d78d82f3ed70ca2df6c88f8759f9a5
-ms.sourcegitcommit: fbcf9a1c25db13b2627a8a58bbc985cd01ea668d
+ms.openlocfilehash: 75fda82ee5ca7ca3665501fe428d1d01995e7422
+ms.sourcegitcommit: c53adf50d3a787956fc4ebc951b163a10eeb5d20
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/16/2017
+ms.lasthandoff: 11/23/2017
 ---
 # <a name="azure-for-aws-professionals"></a>Azure pour les professionnels AWS
 
@@ -21,7 +21,7 @@ Vous apprendrez ce qui suit :
 * Comment les solutions disponibles sont structurées dans Azure.
 * Comment les principaux services Azure diffèrent des services AWS.
 
- Azure et AWS ont développé leurs fonctionnalités indépendamment au fil du temps, de sorte qu’ils ont des différences importantes de conception et d’implémentation.
+Azure et AWS ont développé leurs fonctionnalités indépendamment au fil du temps, de sorte qu’ils ont des différences importantes de conception et d’implémentation.
 
 ## <a name="overview"></a>Vue d'ensemble
 
@@ -62,7 +62,7 @@ Ces limites peuvent être augmentées jusqu’à la limite maximale grâce au [d
 
 Le terme « ressource » dans Azure est utilisé de la même façon que dans AWS, référant à n’importe quel objet de stockage, instance de calcul, périphérique réseau ou toute autre entité que vous pouvez créer ou configurer au sein de la plateforme.
 
-Les ressources Azure sont déployées et gérées à partir de l’un des deux modèles suivants : [Azure Resource Manager ou le [modèle de déploiement classique](/azure/azure-resource-manager/resource-manager-deployment-model) Azure plus ancien.
+Les ressources Azure sont déployées et gérées à partir de l’un des deux modèles suivants : [Azure Resource Manager](/azure/azure-resource-manager/resource-group-overview) ou le [modèle de déploiement classique Azure](/azure/azure-resource-manager/resource-manager-deployment-model) plus ancien.
 Chaque nouvelle ressource est créée à l’aide du modèle de gestionnaire des ressources.
 
 ### <a name="resource-groups"></a>Groupes de ressources
@@ -166,7 +166,7 @@ Bien que les types d’instance de AWS et les tailles de machine virtuelle de Az
 
 Contrairement à la facturation par seconde de AWS, les machines virtuelles Azure à la demande sont facturées à la minute.
 
-Azure ne possède aucun équivalent aux instances de place EC2, instances réservées ou aux hôtes dédiés.
+Azure ne possède aucun équivalent aux instances de place EC2 ou aux hôtes dédiés.
 
 #### <a name="ebs-and-azure-storage-for-vm-disks"></a>EBS et stockage Azure pour les disques de machine virtuelle
 
@@ -232,16 +232,18 @@ Au sein de la plateforme AWS, le stockage cloud est divisé en trois services :
 Dans le stockage Azure, les [comptes de stockage](https://azure.microsoft.com/documentation/articles/storage-create-storage-account/) liés aux abonnements vous permettent de créer et de gérer les services de stockage suivants :
 
 -   [Stockage Blob](https://azure.microsoft.com/documentation/articles/storage-create-storage-account/) - stocke tout type de données texte ou binaires, par exemple, un document, un fichier multimédia ou un programme d’installation d’application. Vous pouvez définir le stockage Blob pour un accès privé ou un partage public du contenu sur internet. Le stockage Blob a le même objectif que S3 et EBS de AWS.
-
 -   [Stockage Table](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-table-storage/) - stocke des jeux de données structurés. Stockage Table est un magasin de données de clés d’attributs NoSQL qui permet le développement et l’accès rapide à de grosses quantités de données. Similaire aux services SimpleDB et DynamoDB de AWS.
 
 -   [Stockage de files d’attente](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-queues/) - fournit une messagerie pour le traitement des flux de travail et pour la communication entre les composants des services cloud.
 
 -   [Stockage Fichier](https://azure.microsoft.com/documentation/articles/storage-java-how-to-use-file-storage/) - offre un stockage partagé pour les applications héritées utilisant le protocole SMB. Stockage de fichier est utilisé d’une façon similaire à EFS dans la plateforme AWS.
 
-#### <a name="glacier-and-azure-storage"></a>Glacier et Stockage Azure
 
-Stockage Azure n’offre pas d’équivalent direct à Glacier, solution d’archivage à long terme de AWS. Pour le stockage des données rarement sollicitées et durables, Azure offre le [niveau de stockage Blob à froid Azure](https://azure.microsoft.com/documentation/articles/storage-blob-storage-tiers/).
+
+
+ 
+#### <a name="glacier-and-azure-storage"></a>Glacier et Stockage Azure 
+[Azure Storage Standard Archive](/azure/storage/blobs/storage-blob-storage-tiers) offre un équivalent direct à Glacier, solution d’archivage à long terme de AWS. Pour le stockage des données rarement sollicitées et durables, Azure offre le [niveau de stockage Blob à froid Azure](/azure/storage/blobs/storage-blob-storage-tiers).
 Le stockage à froid fournit un stockage plus économique et moins performant que le stockage Blob standard et il est comparable à S3 (accès peu fréquent) de AWS.
 
 #### <a name="see-also"></a>Voir aussi
@@ -284,13 +286,17 @@ Azure fournit des connexions dédiées de site à site similaires via son servic
 
 ### <a name="database-services"></a>Services de base de données
 
-#### <a name="rds-and-azure-sql-database-service"></a>Service Azure SQL Database et RDS
+#### <a name="rds-and-azure-relational-database-services"></a>Services de base de données relationnelle et RDS
 
-AWS et Azure ont des approches différentes concernant sur les offres de base de données relationnelle dans le cloud. Relational Database Service (RDS) de AWS prend en charge la création d’instances à l’aide de plusieurs moteurs de base de données, comme Oracle et MySQL.
+Azure fournit plusieurs services de base de données relationnelle différents qui sont l’équivalent du RDS d’AWS.
 
-[SQL Database](https://azure.microsoft.com/documentation/articles/sql-database-technical-overview/) est une offre de base de données en cloud de Azure. Elle fournit un stockage de données relationnelles hautement évolutif, via un service géré. SQL Database utilise son propre moteur et ne prend pas en charge la création d’autres types de base de données. D’autres moteurs de base de données tels que [SQL Server](https://azure.microsoft.com/services/virtual-machines/sql-server/), [Oracle](https://azure.microsoft.com/campaigns/oracle/), ou [MySQL](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-classic-mysql-2008r2/) peuvent être déployés à l’aide des instances de machines virtuelles Azure.
+-   [Base de données SQL](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview)
+-   [Azure Database pour MySQL](https://docs.microsoft.com/azure/mysql/overview)
+-   [Base de données Azure pour PostgreSQL](https://docs.microsoft.com/azure/postgresql/overview)
 
-Les coûts pour RDS de AWS sont déterminés par la quantité de ressources matérielles utilisées par votre instance, tels que l’UC, la mémoire RAM, le stockage et la bande passante réseau. Dans le service SQL Database, le coût dépend de la taille de votre base de données, des connexions simultanées et des niveaux de débit.
+D’autres moteurs de base de données tels que [SQL Server](https://azure.microsoft.com/services/virtual-machines/sql-server/), [Oracle](https://azure.microsoft.com/campaigns/oracle/) et [MySQL](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-classic-mysql-2008r2/) peuvent être déployés à l’aide des instances de machines virtuelles Azure.
+
+Les coûts pour RDS de AWS sont déterminés par la quantité de ressources matérielles utilisées par votre instance, tels que l’UC, la mémoire RAM, le stockage et la bande passante réseau. Dans les services de base de données Azure, le coût dépend de la taille de votre base de données, des connexions simultanées et des niveaux de débit.
 
 #### <a name="see-also"></a>Voir aussi
 
@@ -342,7 +348,7 @@ Simple Queueing Service (SQS) de AWS fournit un système de messagerie pour conn
 
 #### <a name="device-farm"></a>Batterie d’appareils
 
-La batterie d’appareils de AWS fournit des services de tests inter-périphériques. Dans Azure, [Xamarin Test Cloud](https://www.xamarin.com/test-cloud) fournit un test frontal entre les périphériques semblable pour les appareils mobiles.
+La batterie d’appareils de AWS fournit des services de tests inter-périphériques. Dans Azure, [Xamarin Test Cloud](https://www.xamarin.com/test-cloud) fournit un test frontal entre les périphériques semblables pour les appareils mobiles.
 
 En plus des tests frontaux, [Azure DevTest Labs](https://azure.microsoft.com/services/devtest-lab/) fournit des ressources de test principales pour les environnements Linux et Windows.
 
@@ -392,7 +398,7 @@ En plus des tests frontaux, [Azure DevTest Labs](https://azure.microsoft.com/ser
 
 #### <a name="notifications"></a>Notifications
 
-Notification Hubs ne prend pas en charge l’envoi de messages SMS ou de courriers électroniques, des services tiers sont donc nécessaire pour ces types d’envoi.
+Notification Hubs ne prend pas en charge l’envoi de messages SMS ou de courriers électroniques, des services tiers sont donc nécessaires pour ces types d’envoi.
 
 #### <a name="see-also"></a>Voir aussi
 
