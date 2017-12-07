@@ -3,11 +3,11 @@ title: "Critères de sélection d’une option de calcul Azure"
 description: Comparaison multidimensionnelle des services de calcul Azure.
 author: MikeWasson
 layout: LandingPage
-ms.openlocfilehash: 640793b56c1713f63456bab75ab4b9289d22a53c
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 36b57d1fb674b5a1452a0e8208de836963b2b01b
+ms.sourcegitcommit: c53adf50d3a787956fc4ebc951b163a10eeb5d20
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 11/23/2017
 ---
 # <a name="criteria-for-choosing-an-azure-compute-option"></a>Critères de sélection d’une option de calcul Azure
 
@@ -17,12 +17,12 @@ Le terme *calcul* fait référence au modèle d’hébergement pour les ressourc
 
 | Critères | Machines virtuelles | App Service | Service Fabric | Azure Functions | Azure Container Service | Services cloud | Azure Batch |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
-| Composition de l’application | Sans dépendance | Applications | Services, exécutables invités | Fonctions | Conteneurs | contrôleur | Scheduled jobs  |
+| Composition de l’application | Sans dépendance | Applications | Services, exécutables invités, conteneurs | Fonctions | Conteneurs | contrôleur | Scheduled jobs  |
 | Densité | Sans dépendance | Plusieurs applications par instance via des plans d’application | Plusieurs services par machine virtuelle | Aucune instance dédiée <a href="#note1"><sup>1</sup></a> | Plusieurs conteneurs par machine virtuelle | Une instance de rôle par machine virtuelle | Plusieurs applications par machine virtuelle |
 | Nombre minimal de nœuds | 1 <a href="#note2"><sup>2</sup></a>  | 1 | 5 <a href="#note3"><sup>3</sup></a> | Aucun nœud dédié <a href="#note1"><sup>1</sup></a> | 3 | 2 | 1 <a href="#note4"><sup>4</sup></a> |
 | Gestion de l'état | Sans état ou avec état | Sans état | Sans état ou avec état | Sans état | Sans état ou avec état | Sans état | Sans état |
-| Hébergement web | Sans dépendance | Intégré | Auto-hébergement, Internet Information Services dans des conteneurs | Non applicable | Sans dépendance | Intégré (Internet Information Services) | Non |
-| SE | Windows, Linux | Windows, Linux (préversion)  | Windows, Linux (préversion) | Non applicable | Windows, Linux | Windows | Windows, Linux |
+| Hébergement web | Sans dépendance | Intégré | Sans dépendance | Non applicable | Sans dépendance | Intégré (Internet Information Services) | Non |
+| SE | Windows, Linux | Windows, Linux  | Windows, Linux | Non applicable | Windows (version préliminaire), Linux | Windows | Windows, Linux |
 | Peut être déployé vers le réseau virtuel dédié ? | Pris en charge | Pris en charge <a href="#note5"><sup>5</sup></a> | Pris en charge | Non pris en charge | Pris en charge | Pris en charge <a href="#note6"><sup>6</sup></a> | Pris en charge |
 | Connectivité hybride | Pris en charge | Pris en charge <a href="#note1"><sup>7</sup></a>  | Pris en charge | Non pris en charge | Pris en charge | Pris en charge <a href="#note8"><sup>8</sup></a> | Pris en charge |
 
