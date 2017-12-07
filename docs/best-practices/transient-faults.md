@@ -4,11 +4,11 @@ description: Conseils sur les nouvelles tentatives dans le cadre de la gestion d
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 05558abad8938788d09caa5df8b1f088ce3b5bdc
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9562e3447b2219fe2f3df96cfca24b845efa39b0
+ms.sourcegitcommit: c53adf50d3a787956fc4ebc951b163a10eeb5d20
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 11/23/2017
 ---
 # <a name="transient-fault-handling"></a>Gestion des erreurs temporaires
 
@@ -93,7 +93,7 @@ Les recommandations suivantes vous aideront à concevoir un mécanisme de gestio
 * **Autres points à considérer**
   
   * Lorsque vous choisissez les valeurs pour le nombre de nouvelles tentatives et les intervalles avant nouvelle tentative d’une politique, demandez-vous si l’opération à effectuer sur le service ou la ressource fait partie d’une opération de longue durée ou à plusieurs étapes. Lorsqu’une étape opérationnelle échoue, il peut être difficile ou coûteux de compenser toutes les autres ayant déjà abouti. Dans ce cas, un intervalle très long et un grand nombre de nouvelles tentatives peuvent être acceptables à condition que les autres opérations ne soient pas bloquées par la mise en attente ou le verrouillage de ressources rares.
-  * Demandez-vous si une nouvelle tentative pour la même opération peut donner lieu à des incohérences dans les données. Si certaines parties d’un processus à plusieurs étapes sont répétées et que les opérations ne sont pas idempotentes, cela risque d’entraîner une incohérence. Par exemple, si une opération qui incrémente une valeur est répétée, elle produira un résultat non valide. La répétition d’une opération qui envoie un message à une file d’attente peut entraîner une incohérence dans le consommateur de message si celui-ci ne prend pas en charge la détection des messages en double. Pour éviter ce problème, veillez à concevoir chaque étape comme une opération idempotente. Pour plus d’informations sur l’idempotence, consultez l’article [Modèles d’idempotence](http://blog.jonathanoliver.com/2010/04/idempotency-patterns/).
+  * Demandez-vous si une nouvelle tentative pour la même opération peut donner lieu à des incohérences dans les données. Si certaines parties d’un processus à plusieurs étapes sont répétées et que les opérations ne sont pas idempotentes, cela risque d’entraîner une incohérence. Par exemple, si une opération qui incrémente une valeur est répétée, elle produira un résultat non valide. La répétition d’une opération qui envoie un message à une file d’attente peut entraîner une incohérence dans le consommateur de message si celui-ci ne prend pas en charge la détection des messages en double. Pour éviter ce problème, veillez à concevoir chaque étape comme une opération idempotente. Pour plus d’informations sur l’idempotence, consultez l’article [Modèles d’idempotence][idempotency-patterns].
   * Réfléchissez à la portée des opérations qui vont être retentées. Par exemple, il peut s’avérer plus simple d’implémenter du code de nouvelle tentative à un niveau qui englobe plusieurs opérations et de toutes les retenter en cas de défaillance de l’une d’elles. Cependant, cela peut donner lieu à des problèmes d’idempotence ou à des opérations de restauration inutiles.
   * Si vous choisissez une portée de nouvelle tentative qui englobe plusieurs opérations, prenez en compte la latence totale de toutes ces opérations pour déterminer les intervalles avant nouvelle tentative et surveiller le temps nécessaire, ou avant de déclencher des alertes pour des défaillances.
   * Réfléchissez à l’impact que votre stratégie de nouvelle tentative peut avoir sur les voisins et les autres clients au sein d’une application partagée ou lors de l’utilisation de ressources et de services partagés. Les politiques de nouvelle tentative agressives peuvent augmenter le nombre d’erreurs temporaires pour ces autres utilisateurs et pour les applications qui partagent les ressources et les services. De même, votre application peut être affectée par les politiques de nouvelle tentative implémentées par les autres utilisateurs des ressources et des services. Pour les applications stratégiques, vous pouvez décider d’utiliser des services Premium qui ne sont pas partagés. Vous bénéficierez ainsi d’un contrôle considérablement accru sur la charge de ces ressources et services et sur la limitation qui en découle, ce qui peut contribuer à justifier le coût supplémentaire de ces services.
@@ -103,5 +103,7 @@ Les recommandations suivantes vous aideront à concevoir un mécanisme de gestio
 * [Bloc applicatif de gestion des erreurs temporaires](http://msdn.microsoft.com/library/hh680934.aspx)
 * [Modèle Disjoncteur](http://msdn.microsoft.com/library/dn589784.aspx)
 * [Modèle de transaction de compensation](http://msdn.microsoft.com/library/dn589804.aspx)
-* [Modèles d’idempotence](http://blog.jonathanoliver.com/2010/04/idempotency-patterns/)
+* [Modèles d’idempotence][idempotency-patterns]
+
+[idempotency-patterns]: http://blog.jonathanoliver.com/idempotency-patterns/
 
