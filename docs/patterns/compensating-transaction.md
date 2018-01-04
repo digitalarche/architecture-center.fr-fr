@@ -6,11 +6,11 @@ author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories: resiliency
-ms.openlocfilehash: f8337717c4afd6b558f0da8e1ded3a8071340db7
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: a822de990d6ce933024207073b110e98f8da40bf
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="compensating-transaction-pattern"></a>Modèle de transaction de compensation
 
@@ -38,7 +38,7 @@ Une approche courante consiste à utiliser un flux de travail pour implémenter 
 
 > Cette approche est similaire à la stratégie Sagas présentée sur [le blog de Clemens Vasters](http://vasters.com/clemensv/2012/09/01/Sagas.aspx).
 
-Une transaction de compensation est également une opération de cohérence éventuelle qui peut échouer. Le système doit être en mesure de relancer la transaction de compensation à partir du point de défaillance et de poursuivre son exécution. Il peut être nécessaire de répéter une étape qui a échoué. Les étapes d’une transaction de compensation doivent donc être définies en tant que commandes idempotentes. Pour plus d’informations, consultez l’article [Idempotency Patterns](http://blog.jonathanoliver.com/2010/04/idempotency-patterns/) sur le blog de Jonathan Oliver.
+Une transaction de compensation est également une opération de cohérence éventuelle qui peut échouer. Le système doit être en mesure de relancer la transaction de compensation à partir du point de défaillance et de poursuivre son exécution. Il peut être nécessaire de répéter une étape qui a échoué. Les étapes d’une transaction de compensation doivent donc être définies en tant que commandes idempotentes. Pour plus d’informations, consultez l’article [Idempotency Patterns](http://blog.jonathanoliver.com/idempotency-patterns/) sur le blog de Jonathan Oliver.
 
 Dans certains cas, il n’est pas possible de reprendre l’opération à partir d’une étape qui a échoué, sauf via une intervention manuelle. Dans ces situations, le système doit générer une alerte et fournir autant d’informations que possible sur la raison de l’échec.
 
@@ -68,7 +68,7 @@ Envisagez d’utiliser la logique de nouvelle tentative qui est généralement p
 
 Utilisez ce modèle uniquement pour les opérations qui doivent être annulées si elles échouent. Si possible, concevez vos solutions de manière à ne pas avoir à gérer la complexité liée aux transactions de compensation.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>exemples
 
 Prenons l’exemple d’un site web sur lequel les clients peuvent réserver leur itinéraire de voyage. Un seul itinéraire peut comprendre plusieurs vols et hôtels. Un client qui part de Seattle en direction de Londres, puis de Paris, pourrait suivre les étapes suivantes pour créer son itinéraire :
 
@@ -91,9 +91,9 @@ Dans de nombreuses solutions d’entreprise, l’échec d’une seule étape ne 
 
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
-Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
+Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
 
-- [Manuel d’introduction à la cohérence des données](https://msdn.microsoft.com/library/dn589800.aspx). Le modèle de transaction de compensation est souvent utilisé pour annuler les opérations qui implémentent le modèle de cohérence éventuelle. Ce manuel présente les avantages et les inconvénients de la cohérence éventuelle.
+- [Data Consistency Primer](https://msdn.microsoft.com/library/dn589800.aspx) (Manuel d’introduction à la cohérence des données). Le modèle de transaction de compensation est souvent utilisé pour annuler les opérations qui implémentent le modèle de cohérence éventuelle. Ce manuel présente les avantages et les inconvénients de la cohérence éventuelle.
 
 - [Modèle Planificateur-Agent-Superviseur](scheduler-agent-supervisor.md). Ce modèle décrit comment implémenter des systèmes résilients qui exécutent des opérations métiers utilisant des ressources et des services distribués. Parfois, il peut être nécessaire d’annuler le travail effectué par une opération à l’aide d’une transaction de compensation.
 

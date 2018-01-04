@@ -6,11 +6,11 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: web-api
 pnp.series.next: adfs
-ms.openlocfilehash: ed0def244f3229bbd3fdd0976574d13a345f9aee
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: cffc15686ef9d77fafb40982efdbcd4a79f5aaf2
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="cache-access-tokens"></a>Mettre en cache des jetons d’accès
 
@@ -18,7 +18,7 @@ ms.lasthandoff: 11/14/2017
 
 Il est relativement coûteux d’obtenir un jeton d’accès OAuth, car cette opération requiert une requête HTTP au point de terminaison de jeton. Par conséquent, il est bon de mettre en cache les jetons lorsque cela est possible. La [bibliothèque d’authentification Azure AD][ADAL] (ADAL) met automatiquement en cache les jetons obtenus à partir d’Azure AD, notamment des jetons d’actualisation.
 
-ADAL fournit une implémentation de cache de jeton par défaut. Toutefois, ce cache de jeton est destiné aux applications clientes natives et n’est *pas* approprié pour les applications web :
+ADAL fournit une implémentation de cache de jeton par défaut. Toutefois, ce cache de jeton est destiné aux applications clientes natives et n’est **pas** approprié pour les applications web :
 
 * Il s’agit d’une instance statique, qui n’est pas thread-safe.
 * Elle ne convient pas pour un grand nombre d’utilisateurs, car les jetons de tous les utilisateurs sont placés dans le même dictionnaire.

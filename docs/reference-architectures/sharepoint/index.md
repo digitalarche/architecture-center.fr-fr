@@ -3,11 +3,11 @@ title: "Exécuter une batterie de serveurs SharePoint Server 2016 à haute dispo
 description: "Pratiques éprouvées pour la configuration d’une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure."
 author: njray
 ms.date: 08/01/2017
-ms.openlocfilehash: a3d47eea15f1e7e8cecf2bf1be55d8c3a9bb9bdc
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 0c0e9a7b2ae12a2d12919548f91304e6cbd2d8a6
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Exécuter une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure
 
@@ -171,14 +171,14 @@ En outre, il est toujours conseillé de planifier le renforcement de la sécurit
 
 Les scripts de déploiement pour cette architecture de référence sont disponibles sur [GitHub][github]. 
 
-Vous pouvez déployer cette architecture de façon incrémentielle ou en une seule fois. La première fois, nous vous recommandons un déploiement incrémentiel, afin que vous puissiez voir ce que fait chaque déploiement. Spécifiez l’incrément à l’aide d’un des paramètres de *mode* suivants.
+Vous pouvez déployer cette architecture de manière incrémentielle ou en une seule fois. La première fois, nous vous recommandons un déploiement incrémentiel, afin que vous puissiez voir ce que fait chaque déploiement. Spécifiez l’incrément à l’aide d’un des paramètres de *mode* suivants.
 
 | Mode           | Résultat                                                                                                            |
 |----------------|-------------------------------------------------------------------------------------------------------------------------|
 | onprem         | (Facultatif) Déploie un environnement réseau local simulé, de test ou d’évaluation. Cette étape n’implique pas la connexion à un réseau local réel. |
 | infrastructure | Déploie l’infrastructure de réseau SharePoint 2016 et la jumpbox vers Azure.                                                |
 | createvpn      | Déploie une passerelle de réseau virtuel pour SharePoint et les réseaux locaux et les connecte. Exécutez cette étape uniquement si vous avez exécuté l’étape `onprem`.                |
-| workload       | Déploie les serveurs SharePoint sur le réseau de SharePoint.                                                               |
+| charge de travail       | Déploie les serveurs SharePoint sur le réseau de SharePoint.                                                               |
 | security       | Déploie le groupe de sécurité réseau sur le réseau de SharePoint.                                                           |
 | tout            | Déploie tous les déploiements précédents.                            
 
@@ -188,18 +188,18 @@ Pour déployer l’architecture de façon incrémentielle avec un environnement 
 1. onprem
 2. infrastructure
 3. createvpn
-4. workload
+4. charge de travail
 5. security
 
 Pour déployer l’architecture de façon incrémentielle sans environnement de réseau local simulé, exécutez les étapes suivantes dans l’ordre :
 
 1. infrastructure
-2. workload
+2. charge de travail
 3. security
 
 Pour déployer tous les éléments en une seule étape, utilisez `all`. Notez que l’ensemble du processus peut prendre plusieurs heures.
 
-### <a name="prerequisites"></a>Composants requis
+### <a name="prerequisites"></a>configuration requise
 
 * Installez la dernière version d’[Azure PowerShell][azure-ps].
 
