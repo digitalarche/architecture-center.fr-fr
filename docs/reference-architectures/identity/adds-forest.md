@@ -7,11 +7,11 @@ pnp.series.title: Identity management
 pnp.series.prev: adds-extend-domain
 pnp.series.next: adfs
 cardTitle: Create an AD DS forest in Azure
-ms.openlocfilehash: bb7e57af2afacf1faa7679c854bf49217918eba8
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: b946afa91e8bd303c51f97e18be170c4105cc8c5
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Créer une forêt de ressources Active Directory Domain Services (AD DS) dans Azure
 
@@ -63,7 +63,7 @@ Le tableau suivant récapitule les configurations d’approbation pour certains 
 | Les utilisateurs dans le cloud requièrent l’accès aux ressources locales, mais l’inverse n’est pas vrai. |À sens unique, sortante |À sens unique, entrante |
 | Les utilisateurs dans le cloud et locaux requièrent l’accès aux ressources contenues dans le cloud et locales. |Bidirectionnelle, entrante et sortante |Bidirectionnelle, entrante et sortante |
 
-## <a name="scalability-considerations"></a>Considérations relatives à la scalabilité
+## <a name="scalability-considerations"></a>Considérations relatives à l’extensibilité
 
 Active Directory peut évoluer automatiquement pour les contrôleurs de domaine qui font partie du même domaine. Les demandes sont distribuées sur tous les contrôleurs d’un domaine. Vous pouvez ajouter un contrôleur de domaine, qui se synchronise alors automatiquement avec le domaine. Ne configurez pas d’équilibreur de charge distinct pour diriger le trafic vers des contrôleurs dans le domaine. Vérifiez que tous les contrôleurs de domaine disposent de suffisamment de ressources mémoire et de stockage pour gérer la base de données du domaine. Attribuez la même taille aux machines virtuelles de contrôleur de domaine.
 
@@ -87,13 +87,13 @@ Pour connaître les considérations relatives à la sécurité propres à Active
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
-Vous disposez d’une solution sur [Github][github] pour déployer cette architecture de référence. Vous avez besoin de la dernière version de l’interface de ligne de commande Azure pour exécuter le script PowerShell qui déploie la solution. Pour déployer l’architecture de référence, effectuez les étapes suivantes :
+Vous disposez d’une solution sur [GitHub][github] pour déployer cette architecture de référence. Vous avez besoin de la dernière version de l’interface de ligne de commande Azure pour exécuter le script PowerShell qui déploie la solution. Pour déployer l’architecture de référence, effectuez les étapes suivantes :
 
-1. Téléchargez ou clonez le dossier de solution à partir de [Github][github] sur votre ordinateur local.
+1. Téléchargez ou clonez le dossier de solution à partir de [GitHub][github] sur votre ordinateur local.
 
 2. Ouvrez l’interface de ligne de commande Azure et accédez au dossier de solution local.
 
-3. Exécutez la commande suivante :
+3. Exécutez la commande suivante :
    
     ```Powershell
     .\Deploy-ReferenceArchitecture.ps1 <subscription id> <location> <mode>
@@ -133,7 +133,7 @@ Vous disposez d’une solution sur [Github][github] pour déployer cette archite
 
 9. Patientez quelques minutes, puis connectez-vous à une machine virtuelle locale et effectuez les étapes décrites dans l’article [Vérifier une approbation][verify-a-trust] pour déterminer si la relation d’approbation entre les domaines *contoso.com* et *treyresearch.com* est configurée correctement.
 
-## <a name="next-steps"></a>Étapes suivantes
+## <a name="next-steps"></a>étapes suivantes
 
 * Découvrez les bonnes pratiques pour [étendre votre domaine AD DS local à Azure][adds-extend-domain].
 * Découvrez les bonnes pratiques pour [créer une infrastructure AD FS][adfs] dans Azure.

@@ -10,11 +10,11 @@ pnp.pattern.categories:
 - availability
 - performance-scalability
 - resiliency
-ms.openlocfilehash: d8b010648d4ec0edcfbb24f9b03243a79a34a40b
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 99b226511fe14bffdab3cdcf65d4e6cffe89bba6
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="queue-based-load-leveling-pattern"></a>Modèle de nivellement de charge basé sur une file d’attente
 
@@ -60,14 +60,14 @@ Ce modèle est utile pour toute application qui utilise des services soumis à u
 
 Ce modèle n’est pas utile si l’application attend une réponse du service avec une latence minimale.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>exemples
 
 Un rôle web Microsoft Azure stocke les données à l’aide d’un service de stockage distinct. Si un grand nombre d’instances du rôle web s’exécutent simultanément, le service de stockage risque de ne pas répondre aux requêtes assez vite pour les empêcher d’expirer ou d’échouer. Cette illustration met en évidence un service saturé par un grand nombre de requêtes simultanées émises des instances de rôle web.
 
 ![Illustration 2 : service saturé par un grand nombre de requêtes simultanées émises des instances de rôle web](./_images/queue-based-load-leveling-overwhelmed.png)
 
 
-Pour résoudre ce problème, vous pouvez utiliser une file d’attente pour niveler la charge entre les instances de rôle web et le service de stockage. Toutefois, le service de stockage est conçu pour accepter des requêtes synchrones et ne peut pas être facilement modifié pour lire les messages et gérer le débit. Vous pouvez introduire un rôle de travail agissant en tant que service proxy, qui reçoit des requêtes de la file d’attente et les transmet au service de stockage. La logique d’application du rôle de travail peut contrôler la fréquence à laquelle les requêtes sont transmises au service de stockage pour empêcher la surcharge de ce dernier. Cette illustration montre l’utilisation d’une file d’attente et d’un rôle de travail pour niveler la charge entre les instances du rôle web et le service.
+Pour résoudre ce problème, vous pouvez utiliser une file d’attente pour niveler la charge entre les instances de rôle web et le service de stockage. Toutefois, le service de stockage est conçu pour accepter des requêtes synchrones et ne peut pas être facilement modifié pour lire les messages et gérer le débit. Vous pouvez introduire un rôle de travail agissant en tant que service proxy, qui reçoit des requêtes de la file d’attente et les transmet au service de stockage. La logique d’application du rôle de travail peut contrôler la fréquence à laquelle les requêtes sont transmises au service de stockage pour empêcher la surcharge de ce dernier. Cette figure illustre l’utilisation d’une file d’attente et d’un rôle de travail pour niveler la charge entre les instances du rôle Web et le service.
 
 ![Illustration 3 : utilisation d’une file d’attente et d’un rôle de travail pour niveler la charge entre les instances du rôle web et le service](./_images/queue-based-load-leveling-worker-role.png)
 

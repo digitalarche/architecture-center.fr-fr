@@ -4,11 +4,11 @@ description: "Conventions d’affectation de noms pour les ressources Azure. Com
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 5084fc2ba5a18707de1213276111c53203b6cdd7
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 20f090c4cc39f96887cd58ffd2a9c7736e77de57
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="naming-conventions"></a>Conventions d’affectation de noms
 
@@ -37,7 +37,7 @@ L’affectation de noms détaillés aux abonnements Azure permet de mieux compre
 * La gamme de produits est le nom spécifique d’un produit ou d’une fonction réalisé au sein du service. Cet élément est généralement facultatif pour les services et applications internes. En revanche, il est vivement recommandé pour les services destinés au public, qui doivent être faciles à séparer et à identifier (par exemple, pour une séparation claire des enregistrements de facturation).
 * L’environnement est le nom qui décrit le cycle de vie de déploiement des applications ou services, par exemple, Dev, AQ ou Prod.
 
-| Entreprise | Department | Gamme de produits ou service | Environnement | Nom complet |
+| Company | Department | Gamme de produits ou service | Environnement | Nom complet |
 | --- | --- | --- | --- | --- |
 | Contoso |SocialGaming |AwesomeService |Production |Contoso SocialGaming AwesomeService Production |
 | Contoso |SocialGaming |AwesomeService |Dev |Contoso SocialGaming AwesomeService Dev |
@@ -57,10 +57,10 @@ Voici deux exemples de noms possibles pour un service hébergeant un moteur de c
 
 Les affixes peuvent faire référence à différents aspects des ressources spécifiques. Le tableau suivant présente des exemples généralement utilisés.
 
-| Aspect | Exemple | Remarques |
+| Aspect | exemples | Notes |
 | --- | --- | --- |
 | Environnement |dev, prod, AQ |Identifie l’environnement de la ressource |
-| Emplacement |uw (ouest des États-Unis), ue (est des États-Unis) |Identifie la région dans laquelle la ressource est déployée |
+| Lieu |uw (ouest des États-Unis), ue (est des États-Unis) |Identifie la région dans laquelle la ressource est déployée |
 | Instance |01, 02 |Pour les ressources possédant plusieurs instances nommées (serveurs web, etc.) |
 | Produit ou service |service |Identifie le produit, l’application ou le service pris en charge par la ressource |
 | Rôle |sql, web, messagerie |Identifie le rôle de la ressource associée |
@@ -73,38 +73,53 @@ Chaque ressource ou type de ressource dans Azure applique un ensemble de restric
 
 En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`) comme premier ou dernier caractère d’un nom quel qu’il soit. Ces caractères entraînent l’échec de la plupart des règles de validation.
 
-| Catégorie | Service ou entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemple |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Groupe de ressources |Groupe de ressources |Globale |1-64 |Non-respect de la casse |Alphanumériques, trait de soulignement, parenthèses, trait d’union, point (sauf à la fin) |`<service short name>-<environment>-rg` |`profx-prod-rg` |
-| Groupe de ressources |Groupe à haute disponibilité |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait de soulignement et trait d’union |`<service-short-name>-<context>-as` |`profx-sql-as` |
-| Généralités |Tag |Entité associée |512 (nom), 256 (valeur) |Non-respect de la casse |Alphanumérique |`"key" : "value"` |`"department" : "Central IT"` |
-| Calcul |Machine virtuelle |Groupe de ressources |1-15 (Windows), 1-64 (Linux) |Non-respect de la casse |Alphanumériques, trait de soulignement et trait d’union |`<name>-<role>-vm<number>` |`profx-sql-vm1` |
-| Calcul |Function App | Globale |1-60 |Non-respect de la casse |Alphanumériques et trait d’union |`<name>-func` |`calcprofit-func` |
-| Storage |Nom du compte de stockage (données) |Globale |3-24 |Minuscules |Alphanumérique |`<globally unique name><number>` (utilisez une fonction afin de calculer un GUID unique pour l’affectation de noms aux comptes de stockage) |`profxdata001` |
-| Storage |Nom du compte de stockage (disques) |Globale |3-24 |Minuscules |Alphanumérique |`<vm name without dashes>st<number>` |`profxsql001st0` |
-| Storage | Nom du conteneur |Compte de stockage |3-63 |Minuscules |Alphanumériques et tiret |`<context>` |`logs` |
-| Storage |Nom de l’objet blob | Conteneur |1-1024 |Respect de la casse |Tout caractère d’URL |`<variable based on blob usage>` |`<variable based on blob usage>` |
-| Storage |Nom de la file d'attente |Compte de stockage |3-63 |Minuscules |Alphanumériques et tiret |`<service short name>-<context>-<num>` |`awesomeservice-messages-001` |
-| Storage |Nom de la table | Compte de stockage |3-63 |Non-respect de la casse |Alphanumérique |`<service short name><context>` |`awesomeservicelogs` |
-| Storage |Nom de fichier | Compte de stockage |3-63 |Minuscules | Alphanumérique |`<variable based on blob usage>` |`<variable based on blob usage>` |
-| Storage |Data Lake Store | Globale |3-24 |Minuscules | Alphanumérique |`<name>-dtl` |`telemetry-dtl` |
-| Mise en réseau |Réseau virtuel (VNet) |Groupe de ressources |2-64 |ne respecte pas la casse |Alphanumériques, tiret, trait de soulignement et point |`<service short name>-vnet` |`profx-vnet` |
-| Mise en réseau |Sous-réseau |Réseau virtuel parent |2-80 |Non-respect de la casse |Alphanumériques, trait de soulignement, tiret et point |`<descriptive context>` |`web` |
-| Mise en réseau |Interface réseau |Groupe de ressources |1-80 |ne respecte pas la casse |Alphanumériques, tiret, trait de soulignement et point |`<vmname>-nic<num>` |`profx-sql1-nic1` |
-| Mise en réseau |Groupe de sécurité réseau |Groupe de ressources |1-80 |ne respecte pas la casse |Alphanumériques, tiret, trait de soulignement et point |`<service short name>-<context>-nsg` |`profx-app-nsg` |
-| Mise en réseau |Règle de groupe de sécurité réseau |Groupe de ressources |1-80 |ne respecte pas la casse |Alphanumériques, tiret, trait de soulignement et point |`<descriptive context>` |`sql-allow` |
-| Mise en réseau |Adresse IP publique |Groupe de ressources |1-80 |ne respecte pas la casse |Alphanumériques, tiret, trait de soulignement et point |`<vm or service name>-pip` |`profx-sql1-pip` |
-| Mise en réseau |Load Balancer |Groupe de ressources |1-80 |ne respecte pas la casse |Alphanumériques, tiret, trait de soulignement et point |`<service or role>-lb` |`profx-lb` |
-| Mise en réseau |Configuration des règles d’équilibrage de charge |Load Balancer |1-80 |ne respecte pas la casse |Alphanumériques, tiret, trait de soulignement et point |`<descriptive context>` |`http` |
-| Mise en réseau |Azure Application Gateway |Groupe de ressources |1-80 |ne respecte pas la casse |Alphanumériques, tiret, trait de soulignement et point |`<service or role>-agw` |`profx-agw` |
-| Mise en réseau |Profil Traffic Manager |Groupe de ressources |1-63 |ne respecte pas la casse |Alphanumériques, tiret et point |`<descriptive context>` |`app1` |
+### <a name="general"></a>Généralités
+
+| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | exemples |
+| --- | --- | --- | --- | --- | --- | --- |
+|Groupe de ressources |Abonnement |1-90 |Non-respect de la casse |Alphanumériques, trait de soulignement, parenthèses, trait d’union et point (sauf à la fin) |`<service short name>-<environment>-rg` |`profx-prod-rg` |
+|Groupe à haute disponibilité |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait de soulignement et trait d’union |`<service-short-name>-<context>-as` |`profx-sql-as` |
+|Tag |Entité associée |512 (nom), 256 (valeur) |Non-respect de la casse |Alphanumérique |`"key" : "value"` |`"department" : "Central IT"` |
+
+### <a name="compute"></a>Calcul
+
+| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | exemples |
+| --- | --- | --- | --- | --- | --- | --- |
+|Machine virtuelle |Groupe de ressources |1-15 (Windows), 1-64 (Linux) |Non-respect de la casse |Alphanumériques, trait de soulignement et trait d’union |`<name>-<role>-vm<number>` |`profx-sql-vm1` |
+|Function App | Globale |1-60 |Non-respect de la casse |Alphanumériques et trait d’union |`<name>-func` |`calcprofit-func` |
 
 > [!NOTE]
 > Les machines virtuelles dans Azure portent deux noms distincts : un nom de machine virtuelle et un nom d’hôte. Lorsque vous créez une machine virtuelle dans le portail, le même nom est utilisé pour le nom d’hôte et pour le nom de ressource de machine virtuelle. Les restrictions ci-dessus s’appliquent au nom d’hôte. Le nom de ressource proprement dit peut comporter jusqu’à 64 caractères.
 
-Microsoft ajoute fréquemment de nouveaux services à Azure. Le tableau ci-dessus répertorie les services les plus couramment utilisés en matière de mise en réseau, de calcul et de stockage. Pour les autres services, utilisez un suffixe de 3 lettres approprié.
+### <a name="storage"></a>Stockage
 
-## <a name="organizing-resources-with-tags"></a>Organisation des ressources à l’aide de balises
+| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | exemples |
+| --- | --- | --- | --- | --- | --- | --- |
+|Nom du compte de stockage (données) |Globale |3-24 |Minuscules |Alphanumérique |`<globally unique name><number>` (utilisez une fonction afin de calculer un GUID unique pour l’affectation de noms aux comptes de stockage) |`profxdata001` |
+|Nom du compte de stockage (disques) |Globale |3-24 |Minuscules |Alphanumérique |`<vm name without dashes>st<number>` |`profxsql001st0` |
+| Nom du conteneur |Compte de stockage |3-63 |Minuscules |Alphanumériques et tiret |`<context>` |`logs` |
+|Nom de l’objet blob | Conteneur |1-1024 |Respect de la casse |Tout caractère d’URL |`<variable based on blob usage>` |`<variable based on blob usage>` |
+|Nom de la file d'attente |Compte de stockage |3-63 |Minuscules |Alphanumériques et tiret |`<service short name>-<context>-<num>` |`awesomeservice-messages-001` |
+|Nom de la table | Compte de stockage |3-63 |Non-respect de la casse |Alphanumérique |`<service short name><context>` |`awesomeservicelogs` |
+|Nom de fichier | Compte de stockage |3-63 |Minuscules | Alphanumérique |`<variable based on blob usage>` |`<variable based on blob usage>` |
+|Data Lake Store | Globale |3-24 |Minuscules | Alphanumérique |`<name>-dls` |`telemetry-dls` |
+
+### <a name="networking"></a>Mise en réseau
+
+| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | exemples |
+| --- | --- | --- | --- | --- | --- | --- |
+|Réseau virtuel (VNet) |Groupe de ressources |2-64 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<service short name>-vnet` |`profx-vnet` |
+|Sous-réseau |Réseau virtuel parent |2-80 |Non-respect de la casse |Alphanumériques, trait de soulignement, tiret et point |`<descriptive context>` |`web` |
+|Interface réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<vmname>-nic<num>` |`profx-sql1-nic1` |
+|Groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<service short name>-<context>-nsg` |`profx-app-nsg` |
+|Règle de groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<descriptive context>` |`sql-allow` |
+|Adresse IP publique |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<vm or service name>-pip` |`profx-sql1-pip` |
+|Équilibreur de charge |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<service or role>-lb` |`profx-lb` |
+|Configuration des règles d’équilibrage de charge |Équilibreur de charge |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<descriptive context>` |`http` |
+|Azure Application Gateway |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<service or role>-agw` |`profx-agw` |
+|Profil Traffic Manager |Groupe de ressources |1-63 |Non-respect de la casse |Alphanumériques, tiret et point |`<descriptive context>` |`app1` |
+
+## <a name="organize-resources-with-tags"></a>Organiser les ressources à l’aide de balises
 
 Azure Resource Manager prend en charge le balisage d’entités avec des chaînes de texte arbitraires pour identifier le contexte et simplifier l’automatisation.  Par exemple, la balise `"sqlVersion: "sql2014ee"` peut identifier les machines virtuelles d’un déploiement exécutant SQL Server 2014 Enterprise Edition pour l’exécution d’un script automatisé sur ces dernières.  Les balises doivent être intégrées aux conventions d’affectation de noms choisies pour préciser ou améliorer le contexte.
 
@@ -126,12 +141,12 @@ Les balises sont notamment utilisées dans les cas suivants :
 
 Voici un exemple d’approche de balisage courante :
 
-| Nom de la balise | Clé | Exemple | Commentaire |
+| Nom de la balise | Clé | exemples | Commentaire |
 | --- | --- | --- | --- |
 | Facturer à / ID de facturation interne |billTo |`IT-Chargeback-1234` |Un code d’E/S ou de facturation interne |
 | Opérateur ou personne directement responsable |managedBy |`joe@contoso.com` |Alias ou adresse de messagerie |
-| Nom du projet |nom-projet |`myproject` |Nom du projet ou de la gamme de produits |
-| Version du projet |version-projet |`3.4` |Version du projet ou de la gamme de produits |
+| Nom du projet |projectName |`myproject` |Nom du projet ou de la gamme de produits |
+| Version du projet |projectVersion |`3.4` |Version du projet ou de la gamme de produits |
 | Environnement |Environnement |`<Production, Staging, QA >` |Identificateur de l’environnement |
 | Niveau |Niveau |`Front End, Back End, Data` |Identification du niveau ou du rôle/contexte |
 | Profil de données |dataProfile |`Public, Confidential, Restricted, Internal` |Niveau des données stockées dans la ressource |

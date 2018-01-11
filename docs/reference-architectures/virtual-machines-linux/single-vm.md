@@ -2,15 +2,15 @@
 title: "Exécuter une machine virtuelle Linux dans Azure"
 description: "Comment exécuter une machine virtuelle Linux sur Azure, en privilégiant l’évolutivité, la résilience, la gestion et la sécurité."
 author: telmosampaio
-ms.date: 11/16/2017
+ms.date: 12/12/2017
 pnp.series.title: Linux VM workloads
 pnp.series.next: multi-vm
 pnp.series.prev: ./index
-ms.openlocfilehash: f538958be934ad2e9ea8d53791814b1e963c1a20
-ms.sourcegitcommit: 115db7ee008a0b1f2b0be50a26471050742ddb04
+ms.openlocfilehash: a51e0d7ed4e35c5331241cf78d1715e63f9b4d86
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/17/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="run-a-linux-vm-on-azure"></a>Exécuter une machine virtuelle Linux dans Azure
 
@@ -24,13 +24,14 @@ Cette architecture de référence présente un ensemble de pratiques éprouvées
 
 L’approvisionnement d’une machine virtuelle Azure requiert des composants supplémentaires, tels que les ressources de calcul, de mise en réseau et de stockage.
 
-* **Groupe de ressources.** Un [*groupe de ressources*][resource-manager-overview] est un conteneur qui héberge les ressources associées. En général, vous devez regrouper les ressources d’une solution en fonction de leur durée de vie et de la personne qui doit gérer les ressources. Pour une charge de travail de machine virtuelle unique, vous souhaiterez peut-être créer un seul groupe de ressources pour toutes les ressources.
+* **Groupe de ressources.** Un [groupe de ressources][resource-manager-overview] est un conteneur qui héberge des ressources associées. En général, vous devez regrouper les ressources d’une solution en fonction de leur durée de vie et de la personne qui doit gérer les ressources. Pour une charge de travail de machine virtuelle unique, vous souhaiterez peut-être créer un seul groupe de ressources pour toutes les ressources.
 * **Machine virtuelle**. Vous pouvez approvisionner une machine virtuelle issue d’une liste d’images publiées, d’une image managée personnalisée ou d’un fichier de disque dur virtuel (VHD) chargé(e) dans Stockage Blob Azure. Azure prend en charge l’exécution de plusieurs distributions Linux populaires, y compris CentOS, Debian, Red Hat Enterprise, Ubuntu et FreeBSD. Pour en savoir plus, voir [Azure et Linux][azure-linux].
 * **Disque du système d’exploitation.** Le disque du système d’exploitation est un disque dur virtuel stocké dans [Stockage Azure][azure-storage], donc il persiste même lorsque l’ordinateur hôte est arrêté. Pour les machines virtuelles Linux, le disque du système d’exploitation est `/dev/sda1`.
-* **Disque temporaire** La machine virtuelle est créée avec un disque temporaire. Ce disque est stocké sur un lecteur physique de l’ordinateur hôte. Il n’est *pas* enregistré dans Stockage Azure et peut être supprimé lors des redémarrages ou d’autres événements de cycle de vie de la machine virtuelle. N’utilisez ce disque que pour des données temporaires, telles que des fichiers de pagination ou d’échange. Pour les machines virtuelles Linux, le disque temporaire est `/dev/sdb1`. Il est monté sur `/mnt/resource` ou `/mnt`.
+* **Disque temporaire** La machine virtuelle est créée avec un disque temporaire. Ce disque est stocké sur un lecteur physique de l’ordinateur hôte. Il n’est **pas** enregistré dans Stockage Azure et peut être supprimé lors des redémarrages ou d’autres événements de cycle de vie de la machine virtuelle. N’utilisez ce disque que pour des données temporaires, telles que des fichiers de pagination ou d’échange. Pour les machines virtuelles Linux, le disque temporaire est `/dev/sdb1`. Il est monté sur `/mnt/resource` ou `/mnt`.
 * **Disques de données.** Un [disque de données][data-disk] est un disque dur virtuel persistant utilisé pour les données d’application. Les disques de données sont stockés dans Stockage Azure, comme le disque du système d’exploitation.
 * **Réseau virtuel (VNet) et sous-réseau.** Chaque machine virtuelle Azure est déployée dans un réseau virtuel qui peut être segmenté en plusieurs sous-réseaux.
 * **Adresse IP publique.** Une adresse IP publique est nécessaire pour communiquer avec la machine virtuelle, par exemple par le biais du protocole SSH.
+* **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.  
 * **Interfaces réseau (NIC)**. La carte d’interface réseau assignée permet à la machine virtuelle de communiquer avec le réseau virtuel.
 * **Groupe de sécurité réseau**. Les [groupes de sécurité réseau][nsg] sont utilisés pour autoriser ou refuser le trafic réseau vers une ressource réseau. Vous pouvez associer un NSG à une carte réseau individuelle ou à un sous-réseau. Si vous l’associez à un sous-réseau, les règles du NSG s’appliquent à toutes les machines virtuelles de ce sous-réseau.
 * **Diagnostics.** La journalisation des diagnostics est essentielle à la gestion et au dépannage de la machine virtuelle.
@@ -65,7 +66,7 @@ Si vous utilisez des disques non gérés, créez des comptes de stockage Azure d
 
 Ajoutez un ou plusieurs disques de données. Lorsque vous créez un disque dur virtuel, il n’est pas formaté. Connectez-vous à la machine virtuelle pour formater le disque. Si vous n’utilisez pas de disques managés et que vous avez un grand nombre de disques de données, n’oubliez pas les limites d’E/S du compte de stockage. Pour en savoir plus, voir les [limites du nombre de disques de machine virtuelle][vm-disk-limits].
 
-Dans l’interpréteur de commandes Linux, les disques de données sont affichés en tant que `/dev/sdc`, `/dev/sdd`, et ainsi de suite. Vous pouvez exécuter `lsblk` pour répertorier les périphériques de bloc, y compris les disques. Pour utiliser un disque de données, créez une partition et un système de fichiers, puis montez le disque. Par exemple :
+Dans l’interpréteur de commandes Linux, les disques de données sont affichés en tant que `/dev/sdc`, `/dev/sdd`, et ainsi de suite. Vous pouvez exécuter `lsblk` pour répertorier les périphériques de bloc, y compris les disques. Pour utiliser un disque de données, créez une partition et un système de fichiers, puis montez le disque. Par exemple : 
 
 ```bat
 # Create a partition.
@@ -90,7 +91,7 @@ Pour maximiser les performances, créez un compte de stockage distinct destiné 
 Cette adresse IP publique peut être dynamique ou statique. Par défaut, elle est dynamique.
 
 * Utilisez une [adresse IP statique][static-ip] si vous avez besoin d’une adresse IP non modifiable, par exemple pour créer un enregistrement A dans le DNS ou ajouter l’adresse IP dans une liste sécurisée.
-* Vous pouvez également créer un nom de domaine complet (FQDN) pour l’adresse IP. Vous pouvez inscrire un [enregistrement CNAME][cname-record] dans le DNS qui pointe vers le nom de domaine complet (FQDN). Pour en savoir plus, voir [Créer un nom de domaine complet dans le Portail Azure][fqdn].
+* Vous pouvez également créer un nom de domaine complet (FQDN) pour l’adresse IP. Vous pouvez inscrire un [enregistrement CNAME][cname-record] dans le DNS qui pointe vers le nom de domaine complet (FQDN). Pour en savoir plus, voir [Créer un nom de domaine complet dans le Portail Azure][fqdn]. Vous pouvez utiliser [Azure DNS][azure-dns] ou un autre service DNS.
 
 Tous les groupes de sécurité réseau contiennent un ensemble de [règles par défaut][nsg-default-rules], notamment une règle qui bloque tout le trafic Internet entrant. Les règles par défaut ne peuvent pas être supprimées, mais d’autres règles peuvent les remplacer. Pour autoriser le trafic Internet, créez des règles qui autorisent le trafic entrant vers des ports spécifiques, par exemple, le port 80 pour HTTP.
 
@@ -102,7 +103,7 @@ Vous pouvez réduire ou augmenter la puissance d’une machine virtuelle en en [
 
 ## <a name="availability-considerations"></a>Considérations relatives à la disponibilité
 
-Pour bénéficier d’une disponibilité plus élevée, déployez plusieurs machines virtuelles dans un groupe à haute disponibilité. Cela fournit également un [contrat de niveau de service][vm-sla] (SLA) supérieur.
+Pour bénéficier d’une disponibilité plus élevée, déployez plusieurs machines virtuelles dans un groupe à haute disponibilité. Cette approche offre également un [contrat de niveau de service (SLA)][vm-sla] supérieur.
 
 Votre machine virtuelle peut être affectée par la [maintenance planifiée][planned-maintenance] ou la [maintenance non planifiée][manage-vm-availability]. Vous pouvez utiliser les [journaux de redémarrage de machine virtuelle][reboot-logs] pour déterminer si un redémarrage de la machine virtuelle a été provoqué par une maintenance planifiée.
 
@@ -118,7 +119,7 @@ Pour vous protéger contre la perte accidentelle de données pendant les opérat
 
 **Arrêt d’une machine virtuelle.** Azure établit une distinction entre les états « arrêté » et « désalloué ». Vous payez lorsque l’état de la machine virtuelle est « arrêté », mais pas lorsque la machine virtuelle est désallouée.
 
-Le bouton **Arrêter** du portail Azure désalloue la machine virtuelle. Si vous arrêtez la machine virtuelle par le biais du système d’exploitation pendant que vous êtes connecté, la machine virtuelle est arrêtée mais *non* désallouée. Vous serez donc toujours facturé.
+Le bouton **Arrêter** du portail Azure désalloue la machine virtuelle. Si vous arrêtez la machine virtuelle par le biais du système d’exploitation pendant que vous êtes connecté, la machine virtuelle est arrêtée mais **non** désallouée. Vous serez donc toujours facturé.
 
 **Suppression d’une machine virtuelle.** La suppression d’une machine virtuelle n’entraîne pas celle des disques durs virtuels. Vous pouvez donc supprimer la machine virtuelle, sans risque de perdre des données. Toutefois, vous serez toujours facturé pour le stockage. Pour supprimer le disque dur virtuel, supprimez le fichier de [Stockage Blob][blob-storage].
 
@@ -150,7 +151,7 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github-folde
   * Une machine virtuelle exécutant la version la plus récente d’Ubuntu 16.04.3 LTS.
   * Un exemple d’extension de script personnalisé qui formate les deux disques de données et déploie Apache HTTP Server sur la machine virtuelle Ubuntu.
 
-### <a name="prerequisites"></a>Composants requis
+### <a name="prerequisites"></a>configuration requise
 
 Avant de pouvoir déployer l’architecture de référence sur votre propre abonnement, vous devez effectuer les étapes suivantes.
 
@@ -187,7 +188,7 @@ Pour déployer l’exemple de charge de travail de machine virtuelle unique, eff
 
 Pour plus d’informations sur le déploiement de cet exemple d’architecture de référence, visitez notre [dépôt GitHub][git].
 
-## <a name="next-steps"></a>Étapes suivantes
+## <a name="next-steps"></a>étapes suivantes
 
 - En savoir plus sur nos [modules Azure][azbbv2].
 - Déployer [plusieurs machines virtuelles][multi-vm] dans Azure.
@@ -207,6 +208,7 @@ Pour plus d’informations sur le déploiement de cet exemple d’architecture d
 [data-disk]: /azure/virtual-machines/virtual-machines-linux-about-disks-vhds
 [disk-encryption]: /azure/security/azure-security-disk-encryption
 [enable-monitoring]: /azure/monitoring-and-diagnostics/insights-how-to-use-diagnostics
+[azure-dns]: /azure/dns/dns-overview
 [fqdn]: /azure/virtual-machines/virtual-machines-linux-portal-create-fqdn
 [git]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/single-vm
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/single-vm

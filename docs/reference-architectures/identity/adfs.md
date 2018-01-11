@@ -6,11 +6,11 @@ ms.date: 11/28/2016
 pnp.series.title: Identity management
 pnp.series.prev: adds-forest
 cardTitle: Extend AD FS to Azure
-ms.openlocfilehash: b24f4e72b13331437d92f20a228e3ba8121db90a
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: b8c9ae0621c087c68d449dd13e60046104c01513
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="extend-active-directory-federation-services-ad-fs-to-azure"></a>Étendre les services de fédération Active Directory (AD FS) dans Azure
 
@@ -214,13 +214,13 @@ Envisagez d’utiliser un ensemble d’appliances réseau virtuelles qui enregis
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
-Vous disposez d’une solution sur [Github][github] pour déployer cette architecture de référence. Vous avez besoin de la dernière version de [l’interface de ligne de commande Azure][azure-cli] pour exécuter le script PowerShell qui déploie la solution. Pour déployer l’architecture de référence, effectuez les étapes suivantes :
+Vous disposez d’une solution sur [GitHub][github] pour déployer cette architecture de référence. Vous avez besoin de la dernière version de [l’interface de ligne de commande Azure][azure-cli] pour exécuter le script PowerShell qui déploie la solution. Pour déployer l’architecture de référence, effectuez les étapes suivantes :
 
-1. Téléchargez ou clonez le dossier de solution à partir de [Github][github] sur votre ordinateur local.
+1. Téléchargez ou clonez le dossier de solution à partir de [GitHub][github] sur votre ordinateur local.
 
 2. Ouvrez l’interface de ligne de commande Azure et accédez au dossier de solution local.
 
-3. Exécutez la commande suivante :
+3. Exécutez la commande suivante :
    
     ```powershell
     .\Deploy-ReferenceArchitecture.ps1 <subscription id> <location> <mode>
@@ -280,7 +280,7 @@ Vous disposez d’une solution sur [Github][github] pour déployer cette archite
 
 13. Suivez les instructions qui s’affichent dans le script pour tester la configuration complète des serveurs proxy.
 
-## <a name="next-steps"></a>Étapes suivantes
+## <a name="next-steps"></a>étapes suivantes
 
 * En savoir plus sur [Azure Active Directory][aad].
 * En savoir plus sur [Azure Active Directory B2C][aadb2c].

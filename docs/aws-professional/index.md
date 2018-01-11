@@ -5,11 +5,11 @@ keywords: "Experts AWS, comparaison de Azure, comparaison de AWS, différences e
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: 75fda82ee5ca7ca3665501fe428d1d01995e7422
-ms.sourcegitcommit: c53adf50d3a787956fc4ebc951b163a10eeb5d20
+ms.openlocfilehash: b576b11bc152ef721f56e79609cb7a03f2d31dd3
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/23/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="azure-for-aws-professionals"></a>Azure pour les professionnels AWS
 
@@ -23,7 +23,7 @@ Vous apprendrez ce qui suit :
 
 Azure et AWS ont développé leurs fonctionnalités indépendamment au fil du temps, de sorte qu’ils ont des différences importantes de conception et d’implémentation.
 
-## <a name="overview"></a>Vue d'ensemble
+## <a name="overview"></a>Vue d’ensemble
 
 Comme AWS, Microsoft Azure est construit autour d’un ensemble basique de services de calcul, de stockage, de base de données et de réseau. Dans de nombreux cas, les deux plateformes offrent une équivalence de base entre les produits et services qu’elles proposent. AWS et Azure permettent de concevoir des solutions hautement disponibles basées sur des ordinateurs hôtes Windows ou Linux. Par conséquent, si vous êtes habitué au développement à l’aide de Linux et de la technologie OSS, les deux plateformes peuvent faire le travail.
 
@@ -113,14 +113,14 @@ Si vous déployez vos serveurs d’applications pour séparer des zones de dispo
 Dans Azure, un [domaine d’erreur](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-manage-availability/) définit un groupe de machines virtuelles qui partagent une source d’alimentation physique et un commutateur réseau.
 Vous utilisez des [groupes à haute disponibilité](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-manage-availability/) pour répartir les machines virtuelles dans plusieurs domaines d’erreur. Lorsque des instances sont attribuées au même groupe de disponibilité, Azure les répartit uniformément entre plusieurs domaines d’erreur. Si une panne d’alimentation ou de réseau se produit dans un domaine d’erreur, certaines des machines virtuelles de l’ensemble font parties d’un autre domaine d’erreur et ne sont pas affectées par la panne.
 
-![Comparaison des zones de disponibilité de AWS avec les domaines d’erreur et groupes à haute disponibilité de Azure](./images/zone-fault-domains.png "Zones de disponibilité de AWS comparées aux domaines d’erreur et groupes à haute disponibilité de Azure")
-<br/>*Zones de disponibilité de AWS comparées aux domaines d’erreur et groupes à haute disponibilité de Azure*
+![Comparaison des zones de disponibilité d’AWS avec les domaines d’erreur et groupes à haute disponibilité d’Azure](./images/zone-fault-domains.png "Zones de disponibilité d’AWS comparées aux domaines d’erreur et groupes à haute disponibilité d’Azure")
+<br/>*Zones de disponibilité d’AWS comparées aux domaines d’erreur et groupes à haute disponibilité d’Azure*
 <br/><br/>
 
 Les groupes à haute disponibilité devraient être organisés en fonction du rôle de l’instance dans votre application pour garantir qu’une instance de chaque rôle est opérationnelle. Par exemple, dans une application web standard à trois niveaux, vous souhaitez créer un groupe à haute disponibilité distinct pour le serveur frontal, l’application et des instances de données.
 
-![Groupes à haute disponibilité de Azure pour chaque rôle d’application](./images/three-tier-example.png "Groupes à haute disponibilité pour chaque rôle d’application")
-<br/>*Groupes à haute disponibilité de Azure pour chaque rôle d’application*
+![Groupes à haute disponibilité d’Azure pour chaque rôle d’application](./images/three-tier-example.png "Groupes à haute disponibilité pour chaque rôle d’application")
+<br/>*Groupes à haute disponibilité d’Azure pour chaque rôle d’application*
 <br/><br/>
 
 Lorsque des instances de machine virtuelle sont ajoutées aux groupes à haute disponibilité, un [domaine de mise à jour](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-manage-availability/) leur est également attribuées.
@@ -217,7 +217,7 @@ Azure offre plusieurs services de calcul qui n’ont pas d’équivalents direct
 
 -   [Créer votre première fonction Azure](https://azure.microsoft.com/documentation/articles/functions-create-first-azure-function/)
 
-### <a name="storage"></a>Storage
+### <a name="storage"></a>Stockage
 
 #### <a name="s3ebsefs-and-azure-storage"></a>S3/EBS/EFS et Stockage Azure
 
@@ -237,14 +237,12 @@ Dans le stockage Azure, les [comptes de stockage](https://azure.microsoft.com/do
 -   [Stockage de files d’attente](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-queues/) - fournit une messagerie pour le traitement des flux de travail et pour la communication entre les composants des services cloud.
 
 -   [Stockage Fichier](https://azure.microsoft.com/documentation/articles/storage-java-how-to-use-file-storage/) - offre un stockage partagé pour les applications héritées utilisant le protocole SMB. Stockage de fichier est utilisé d’une façon similaire à EFS dans la plateforme AWS.
-
-
-
-
  
 #### <a name="glacier-and-azure-storage"></a>Glacier et Stockage Azure 
-[Azure Storage Standard Archive](/azure/storage/blobs/storage-blob-storage-tiers) offre un équivalent direct à Glacier, solution d’archivage à long terme de AWS. Pour le stockage des données rarement sollicitées et durables, Azure offre le [niveau de stockage Blob à froid Azure](/azure/storage/blobs/storage-blob-storage-tiers).
-Le stockage à froid fournit un stockage plus économique et moins performant que le stockage Blob standard et il est comparable à S3 (accès peu fréquent) de AWS.
+
+Le service [Stockage Blob Archive Azure](/azure/storage/blobs/storage-blob-storage-tiers#archive-access-tier) est comparable au service de stockage Glacier AWS. Il est destiné aux données rarement sollicitées qui sont stockées pendant 180 jours au moins et qui peuvent tolérer plusieurs heures de latence de récupération. 
+
+Dans le cas des données qui sont peu consultées mais qui doivent être immédiatement accessibles, le [niveau de stockage Blob à froid Azure](/azure/storage/blobs/storage-blob-storage-tiers#cool-access-tier) offre un stockage plus économique que le stockage Blob standard. Ce niveau de stockage est comparable au service de stockage AWS S3 - Infrequent Access.
 
 #### <a name="see-also"></a>Voir aussi
 
@@ -348,7 +346,7 @@ Simple Queueing Service (SQS) de AWS fournit un système de messagerie pour conn
 
 #### <a name="device-farm"></a>Batterie d’appareils
 
-La batterie d’appareils de AWS fournit des services de tests inter-périphériques. Dans Azure, [Xamarin Test Cloud](https://www.xamarin.com/test-cloud) fournit un test frontal entre les périphériques semblables pour les appareils mobiles.
+La batterie d’appareils de AWS fournit des services de tests inter-périphériques. Dans Azure, [Xamarin Test Cloud](https://www.xamarin.com/test-cloud) fournit un test frontal entre les périphériques semblable pour les appareils mobiles.
 
 En plus des tests frontaux, [Azure DevTest Labs](https://azure.microsoft.com/services/devtest-lab/) fournit des ressources de test principales pour les environnements Linux et Windows.
 
@@ -398,7 +396,7 @@ En plus des tests frontaux, [Azure DevTest Labs](https://azure.microsoft.com/ser
 
 #### <a name="notifications"></a>Notifications
 
-Notification Hubs ne prend pas en charge l’envoi de messages SMS ou de courriers électroniques, des services tiers sont donc nécessaires pour ces types d’envoi.
+Notification Hubs ne prend pas en charge l’envoi de messages SMS ou de courriers électroniques, des services tiers sont donc nécessaire pour ces types d’envoi.
 
 #### <a name="see-also"></a>Voir aussi
 
@@ -418,7 +416,7 @@ Notification Hubs ne prend pas en charge l’envoi de messages SMS ou de courrie
 -   [Modèles de démarrage rapide de Azure Resource Manager](https://azure.microsoft.com/documentation/templates/)
 
 
-## <a name="next-steps"></a>Étapes suivantes
+## <a name="next-steps"></a>étapes suivantes
 
 -   [Matrice complète de comparaison des services de AWS et de Azure](https://aka.ms/azure4aws-services)
 

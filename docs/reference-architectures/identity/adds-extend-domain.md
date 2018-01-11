@@ -6,11 +6,11 @@ ms.date: 11/28/2016
 pnp.series.title: Identity management
 pnp.series.prev: azure-ad
 pnp.series.next: adds-forest
-ms.openlocfilehash: 7f771f77c7fa7f266dcce9f5b45e5be658213b8d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 216c59a0a5912d0fe90011e49ad20eb017ada6be
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="extend-active-directory-domain-services-ad-ds-to-azure"></a>Étendre Active Directory Domain Services (AD DS) à Azure
 
@@ -76,7 +76,7 @@ Nous vous déconseillons d’affecter des rôles de maître d’opérations aux 
 
 Surveillez les ressources des machines virtuelles de contrôleur de domaine ainsi que les services AD DS et créez un plan pour corriger les problèmes rapidement. Pour plus d’informations, consultez [Surveillance d’Active Directory][monitoring_ad]. Vous pouvez également installer des outils tels que [Microsoft Systems Center][microsoft_systems_center] sur le serveur de surveillance (voir le diagramme de l’architecture) pour effectuer ces tâches.  
 
-## <a name="scalability-considerations"></a>Considérations relatives à la scalabilité
+## <a name="scalability-considerations"></a>Considérations relatives à l’extensibilité
 
 AD DS est conçu dans un souci de scalabilité. Vous n’avez pas besoin de configurer un équilibreur de charge ou un contrôleur de trafic pour diriger les demandes vers les contrôleurs de domaine AD DS. Vous devez simplement configurer les machines virtuelles exécutant AD DS avec la taille appropriée suivant les exigences de charge de votre réseau, surveiller la charge sur les machines virtuelles et faire évoluer la configuration en fonction des besoins.
 
@@ -100,13 +100,13 @@ Utilisez BitLocker ou le chiffrement de disque Azure pour chiffrer le disque qui
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
-Vous disposez d’une solution sur [Github][github] pour déployer cette architecture de référence. Vous avez besoin de la dernière version de [l’interface de ligne de commande Azure][azure-powershell] pour exécuter le script PowerShell qui déploie la solution. Pour déployer l’architecture de référence, effectuez les étapes suivantes :
+Vous disposez d’une solution sur [GitHub][github] pour déployer cette architecture de référence. Vous avez besoin de la dernière version de [l’interface de ligne de commande Azure][azure-powershell] pour exécuter le script PowerShell qui déploie la solution. Pour déployer l’architecture de référence, effectuez les étapes suivantes :
 
-1. Téléchargez ou clonez le dossier de solution à partir de [Github][github] sur votre ordinateur local.
+1. Téléchargez ou clonez le dossier de solution à partir de [GitHub][github] sur votre ordinateur local.
 
 2. Ouvrez l’interface de ligne de commande Azure et accédez au dossier de solution local.
 
-3. Exécutez la commande suivante :
+3. Exécutez la commande suivante :
     ```Powershell
     .\Deploy-ReferenceArchitecture.ps1 <subscription id> <location> <mode>
     ```
@@ -122,7 +122,7 @@ Vous disposez d’une solution sur [Github][github] pour déployer cette archite
 
 4. Attendez la fin du déploiement. Si vous déployez le déploiement `All`, l’opération prend plusieurs heures.
 
-## <a name="next-steps"></a>Étapes suivantes
+## <a name="next-steps"></a>étapes suivantes
 
 * Découvrez les bonnes pratiques pour [créer une forêt de ressources AD DS][adds-resource-forest] dans Azure.
 * Découvrez les bonnes pratiques pour [créer une infrastructure de services de fédération Active Directory (AD FS)][adfs] dans Azure.

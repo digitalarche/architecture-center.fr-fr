@@ -3,11 +3,11 @@ title: "Antimodèle d’instanciation incorrect"
 description: "Évitez de créer continuellement de nouvelles instances d’un objet destiné à être créé une seule fois, puis partagé."
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 3387eca45119b105b68cd60ab842d033df84727c
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: d6ea27b0ea88ad7527353d263d900626c0aff720
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="improper-instantiation-antipattern"></a>Antimodèle d’instanciation incorrect
 

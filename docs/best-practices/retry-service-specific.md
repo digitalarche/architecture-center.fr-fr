@@ -4,11 +4,11 @@ description: "Guide spécifique relatif au service pour définir le mécanisme d
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 6aba60dc3a60e96e59e2034d4a1e380e0f1c996a
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 0a416bc6297c7406de92fbc695b62c39c637de8f
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="retry-guidance-for-specific-services"></a>Guide du mécanisme de nouvelle tentative relatif aux différents services
 
@@ -59,7 +59,7 @@ TableRequestOptions interactiveRequestOption = new TableRequestOptions()
   // For Read-access geo-redundant storage, use PrimaryThenSecondary.
   // Otherwise set this to PrimaryOnly.
   LocationMode = LocationMode.PrimaryThenSecondary,
-  // Maximum execution time based on the business use case. Maximum value up to 10 seconds.
+  // Maximum execution time based on the business use case. 
   MaximumExecutionTime = TimeSpan.FromSeconds(2)
 };
 ```
@@ -94,13 +94,32 @@ Vous utilisez une instance **OperationContext** pour spécifier le code à exéc
 
 En plus d’indiquer si un échec donne droit à une nouvelle tentative, les stratégies de nouvelle tentative étendues renvoient un objet **RetryContext** indiquant le nombre de nouvelles tentatives, les résultats de la dernière demande, et si la tentative suivante se déroulera dans l’emplacement principal ou secondaire (voir le tableau ci-dessous pour plus d’informations). Les propriétés de l’objet **RetryContext** peuvent être utilisées pour décider de l’éventualité d’une nouvelle tentative et du moment où elle doit se dérouler. Pour plus d’informations, reportez-vous à la [méthode IExtendedRetryPolicy.Evaluate](http://msdn.microsoft.com/library/microsoft.windowsazure.storage.retrypolicies.iextendedretrypolicy.evaluate.aspx).
 
-Le tableau suivant présente les paramètres par défaut pour les stratégies de nouvelle tentative intégrées.
+Les tableaux ci-après présentent les paramètres par défaut pour les stratégies de nouvelle tentative intégrées.
 
-| **Contexte** | **Paramètre** | **Valeur par défaut** | **Signification** |
-| --- | --- | --- | --- |
-| Table/Objet Blob/Fichier<br />QueueRequestOptions |MaximumExecutionTime<br /><br />ServerTimeout<br /><br /><br /><br /><br />LocationMode<br /><br /><br /><br /><br /><br /><br />RetryPolicy |120 secondes<br /><br />Aucune<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />ExponentialPolicy |Durée d’exécution maximale pour la demande, y compris toutes les nouvelles tentatives potentielles.<br />Intervalle du délai d’attente du serveur pour la demande (la valeur est arrondie aux secondes). Si non spécifié, il utilisera la valeur par défaut pour toutes les demandes au serveur. En règle générale, la meilleure option consiste à omettre ce paramètre afin que le serveur par défaut soit utilisé.<br />Si le compte de stockage est créé avec l’option de duplication du stockage géo-redondant avec accès en lecture (RA-GRS), vous pouvez utiliser le mode de d’emplacement pour indiquer l’emplacement devant recevoir la demande. Par exemple, si **PrimaryThenSecondary** est spécifié, les demandes sont dans un premier temps toujours envoyées vers l’emplacement principal. En cas d’échec, la demande est envoyée vers l’emplacement secondaire.<br />Voir ci-dessous pour obtenir plus d’informations sur chaque option. |
-| Stratégie exponentielle |maxAttempt<br />deltaBackoff<br /><br /><br />MinBackoff<br /><br />MaxBackoff |3<br />4 secondes<br /><br /><br />3 secondes<br /><br />120 secondes |Nombre de nouvelles tentatives.<br />Intervalle de temporisation entre les tentatives. Multiples de ce laps de temps, y compris un élément aléatoire, seront utilisés pour les tentatives suivantes.<br />Ajouté à tous les intervalles des tentatives calculés à partir de deltaBackoff. Cette valeur ne peut pas être modifiée.<br />MaxBackoff est utilisé si l’intervalle des tentatives calculé est supérieur à MaxBackoff. Cette valeur ne peut pas être modifiée. |
-| Stratégie linéaire |maxAttempt<br />deltaBackoff |3<br />30 secondes |Nombre de nouvelles tentatives.<br />Intervalle de temporisation entre les tentatives. |
+**Options de requête**
+
+| **Paramètre** | **Valeur par défaut** | **Signification** |
+| --- | --- | --- |
+| MaximumExecutionTime | 120 secondes | Durée d’exécution maximale pour la demande, y compris toutes les nouvelles tentatives potentielles. |
+| ServerTimeout | Aucun | Intervalle du délai d’attente du serveur pour la demande (la valeur est arrondie aux secondes). Si non spécifié, il utilisera la valeur par défaut pour toutes les demandes au serveur. En règle générale, la meilleure option consiste à omettre ce paramètre afin que le serveur par défaut soit utilisé. | 
+| LocationMode | Aucun | Si le compte de stockage est créé avec l’option de duplication du stockage géo-redondant avec accès en lecture (RA-GRS), vous pouvez utiliser le mode de d’emplacement pour indiquer l’emplacement devant recevoir la demande. Par exemple, si **PrimaryThenSecondary** est spécifié, les demandes sont dans un premier temps toujours envoyées vers l’emplacement principal. En cas d’échec, la demande est envoyée vers l’emplacement secondaire. |
+| RetryPolicy | ExponentialPolicy | Voir ci-dessous pour obtenir plus d’informations sur chaque option. |
+
+**Stratégie exponentielle** 
+
+| **Paramètre** | **Valeur par défaut** | **Signification** |
+| --- | --- | --- |
+| maxAttempt | 3 | Nombre de nouvelles tentatives. |
+| deltaBackoff | 4 secondes | Intervalle de temporisation entre les tentatives. Multiples de ce laps de temps, y compris un élément aléatoire, seront utilisés pour les tentatives suivantes. |
+| MinBackoff | 3 secondes | Ajouté à tous les intervalles des tentatives calculés à partir de deltaBackoff. Cette valeur ne peut pas être modifiée.
+| MaxBackoff | 120 secondes | MaxBackoff est utilisé si l’intervalle des tentatives calculé est supérieur à MaxBackoff. Cette valeur ne peut pas être modifiée. |
+
+**Stratégie linéaire**
+
+| **Paramètre** | **Valeur par défaut** | **Signification** |
+| --- | --- | --- |
+| maxAttempt | 3 | Nombre de nouvelles tentatives. |
+| deltaBackoff | 30 secondes | Intervalle de temporisation entre les tentatives. |
 
 ### <a name="retry-usage-guidance"></a>Guide d’utilisation des nouvelles tentatives
 Respectez les consignes suivantes lorsque vous accédez aux services de stockage Azure à l’aide de l’API client de stockage :
@@ -116,7 +135,7 @@ Pensez à commencer par les paramètres suivants pour les opérations liées aux
 | **Contexte** | **Exemple de cible E2E<br />latence max** | **Stratégie de nouvelle tentative** | **Paramètres** | **Valeurs** | **Fonctionnement** |
 | --- | --- | --- | --- | --- | --- |
 | Interactif, interface utilisateur,<br />ou premier plan |2 secondes |Linéaire |maxAttempt<br />deltaBackoff |3<br />500 ms |Tentative 1 - délai 500 ms<br />Tentative 2 - délai 500 ms<br />Tentative 3 - délai 500 ms |
-| Arrière-plan<br />ou lot |30 secondes |Exponentielle |maxAttempt<br />deltaBackoff |5<br />4 secondes |Tentative 1 - délai ~3 sec<br />Tentative 2 - délai ~7 sec<br />Tentative 3 - délai ~15 sec |
+| Arrière-plan<br />ou lot |30 secondes |Exponentielle |maxAttempt<br />deltaBackoff |5.<br />4 secondes |Tentative 1 - délai ~3 sec<br />Tentative 2 - délai ~7 sec<br />Tentative 3 - délai ~15 sec |
 
 ### <a name="telemetry"></a>Télémétrie
 Les nouvelles tentatives sont enregistrées dans un **TraceSource**. Vous devez configurer un **TraceListener** pour capturer les événements et les écrire dans un journal de destination approprié. Vous pouvez utiliser le **TextWriterTraceListener** ou **XmlWriterTraceListener** pour écrire les données dans un fichier journal, le **EventLogTraceListener** pour écrire dans le journal des événements Windows, ou le **EventProviderTraceListener** pour écrire les données de trace dans le sous-système ETW. Vous pouvez également configurer le vidage automatique de la mémoire tampon et le niveau de détail des événements qui seront enregistrés (par exemple, erreur, avertissement, information et informations détaillées). Pour plus d’informations, consultez [Journalisation côté client avec la bibliothèque cliente de stockage .NET](http://msdn.microsoft.com/library/azure/dn782839.aspx).
@@ -149,7 +168,7 @@ namespace RetryCodeSamples
                 // For Read-access geo-redundant storage, use PrimaryThenSecondary.
                 // Otherwise set this to PrimaryOnly.
                 LocationMode = LocationMode.PrimaryThenSecondary,
-                // Maximum execution time based on the business use case. Maximum value up to 10 seconds.
+                // Maximum execution time based on the business use case. 
                 MaximumExecutionTime = TimeSpan.FromSeconds(2)
             };
 
@@ -270,7 +289,14 @@ Pour plus d’informations, consultez [Configuration basée sur le code (Entity 
 
 Le tableau suivant présente les paramètres par défaut pour la stratégie de nouvelle tentative intégrée lors de l’utilisation d’Entity Framework 6.
 
-![Tableau du guide de paramétrage de la stratégie de nouvelle tentative](./images/retry-service-specific/RetryServiceSpecificGuidanceTable4.png)
+| Paramètre | Valeur par défaut | Signification |
+|---------|---------------|---------|
+| Stratégie | Exponentielle | Temporisation exponentielle. |
+| MaxRetryCount | 5. | Nombre maximal de nouvelles tentatives. |
+| MaxDelay | 30 secondes | Délai maximal entre les nouvelles tentatives. Cette valeur n’affecte pas le mode de calcul de la série de délais. Elle définit uniquement une limite supérieure. |
+| DefaultCoefficient | 1 seconde | Coefficient du calcul de temporisation exponentielle. Cette valeur ne peut pas être modifiée. |
+| DefaultRandomFactor | 1.1 | Multiplicateur utilisé pour l’ajout d’un délai aléatoire pour chaque entrée. Cette valeur ne peut pas être modifiée. |
+| DefaultExponentialBase | 2 | Multiplicateur utilisé pour le calcul du délai suivant. Cette valeur ne peut pas être modifiée. |
 
 ### <a name="retry-usage-guidance"></a>Guide d’utilisation des nouvelles tentatives
 Respectez les consignes suivantes lorsque vous accédez à la base de données SQL à l’aide d’Entity Framework 6 :
@@ -285,7 +311,7 @@ Pensez à commencer par les paramètres ci-après pour les opérations liées au
 | **Contexte** | **Exemple de cible E2E<br />latence max** | **Stratégie de nouvelle tentative** | **Paramètres** | **Valeurs** | **Fonctionnement** |
 | --- | --- | --- | --- | --- | --- |
 | Interactif, interface utilisateur,<br />ou premier plan |2 secondes |Exponentielle |MaxRetryCount<br />MaxDelay |3<br />750 ms |Tentative 1 - délai 0 s<br />Tentative 2 - délai 750 ms<br />Tentative 3 - délai 750 ms |
-| Arrière-plan<br /> ou lot |30 secondes |Exponentielle |MaxRetryCount<br />MaxDelay |5<br />12 secondes |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~1 s<br />Tentative 3 - délai ~3 s<br />Tentative 4 - délai ~7 s<br />Tentative 5 - délai 12 s |
+| Arrière-plan<br /> ou lot |30 secondes |Exponentielle |MaxRetryCount<br />MaxDelay |5.<br />12 secondes |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~1 s<br />Tentative 3 - délai ~3 s<br />Tentative 4 - délai ~7 s<br />Tentative 5 - délai 12 s |
 
 > [!NOTE]
 > Les cibles de latence de bout en bout supposent le délai d’attente par défaut pour les connexions au service. Si vous spécifiez des délais de connexion, la latence de bout en bout sera prolongée de ce temps supplémentaire pour toute nouvelle tentative.
@@ -416,7 +442,7 @@ Pensez à commencer par les paramètres suivants pour les opérations liées aux
 | **Contexte** | **Exemple de cible E2E<br />latence max** | **Stratégie de nouvelle tentative** | **Paramètres** | **Valeurs** | **Fonctionnement** |
 | --- | --- | --- | --- | --- | --- |
 | Interactif, interface utilisateur,<br />ou premier plan |2 secondes |FixedInterval |Nombre de tentatives<br />Intervalle avant nouvelle tentative<br />Première nouvelle tentative rapide |3<br />500 ms<br />true |Tentative 1 - délai 0 s<br />Tentative 2 - délai 500 ms<br />Tentative 3 - délai 500 ms |
-| Arrière-plan<br />ou lot |30 secondes |ExponentialBackoff |Nombre de tentatives<br />Temporisation min<br />Temporisation max<br />Temporisation delta<br />Première nouvelle tentative rapide |5<br />0 seconde<br />60 secondes<br />2 secondes<br />false |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~2 s<br />Tentative 3 - délai ~6 s<br />Tentative 4 - délai ~14 s<br />Tentative 5 - délai ~30 s |
+| Arrière-plan<br />ou lot |30 secondes |ExponentialBackoff |Nombre de tentatives<br />Temporisation min<br />Temporisation max<br />Temporisation delta<br />Première nouvelle tentative rapide |5.<br />0 seconde<br />60 secondes<br />2 secondes<br />false |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~2 s<br />Tentative 3 - délai ~6 s<br />Tentative 4 - délai ~14 s<br />Tentative 5 - délai ~30 s |
 
 > [!NOTE]
 > Les cibles de latence de bout en bout supposent le délai d’attente par défaut pour les connexions au service. Si vous spécifiez des délais de connexion, la latence de bout en bout sera prolongée de ce temps supplémentaire pour toute nouvelle tentative.
@@ -510,7 +536,15 @@ client.RetryPolicy = new RetryExponential(minBackoff: TimeSpan.FromSeconds(0.1),
 Impossible de définir la stratégie de nouvelle tentative au niveau de l’opération individuelle. Elle s’applique à toutes les opérations pour le client de messagerie.
 Le tableau suivant présente les paramètres par défaut pour la stratégie de nouvelle tentative intégrée.
 
-![Tableau du guide de paramétrage de la stratégie de nouvelle tentative](./images/retry-service-specific/RetryServiceSpecificGuidanceTable7.png)
+| Paramètre | Valeur par défaut | Signification |
+|---------|---------------|---------|
+| Stratégie | Exponentielle | Temporisation exponentielle. |
+| MinimalBackoff | 0 | Intervalle de temporisation minimal. Cette valeur est ajoutée à l’intervalle avant nouvelle tentative calculé à partir de deltaBackoff. |
+| MaximumBackoff | 30 secondes | Intervalle de temporisation maximal. Le paramètre MaximumBackoff est utilisé si l’intervalle avant nouvelle tentative calculé est supérieur à la valeur MaxBackoff. |
+| DeltaBackoff | 3 secondes | Intervalle de temporisation entre les tentatives. Des multiples de cette durée seront utilisés pour les tentatives suivantes. |
+| TimeBuffer | 5 secondes | Mémoire tampon de délai d’expiration associé à la nouvelle tentative. Les nouvelles tentatives seront abandonnées si le temps restant est inférieur à la valeur TimeBuffer. |
+| MaxRetryCount | 10 | Nombre maximal de nouvelles tentatives. |
+| ServerBusyBaseSleepTime | 10 secondes | Si la dernière exception rencontrée était **ServerBusyException**, cette valeur sera ajoutée à l’intervalle avant nouvelle tentative calculé. Cette valeur ne peut pas être modifiée. |
 
 ### <a name="retry-usage-guidance"></a>Guide d’utilisation des nouvelles tentatives
 Respectez les consignes suivantes lors de l’utilisation de Service Bus :
@@ -520,7 +554,12 @@ Respectez les consignes suivantes lors de l’utilisation de Service Bus :
 
 Pensez à commencer par les paramètres suivants pour les opérations liées aux nouvelles tentatives. Il s’agit de paramètres généraux. Vous devez par conséquent surveiller les opérations et optimiser les valeurs en fonction de votre propre scénario.
 
-![Tableau du guide de paramétrage de la stratégie de nouvelle tentative](./images/retry-service-specific/RetryServiceSpecificGuidanceTable8.png)
+| Context | Exemple de latence maximale | Stratégie de nouvelle tentative | Paramètres | Fonctionnement |
+|---------|---------|---------|---------|---------|
+| Interactif, interface utilisateur ou premier plan | 2 secondes*  | Exponentielle | MinimumBackoff = 0 <br/> MaximumBackoff = 30 s <br/> DeltaBackoff = 300 ms <br/> TimeBuffer = 300 ms <br/> MaxRetryCount = 2 | Tentative 1 : délai 0 s <br/> Tentative 2 : délai ~ 300 ms <br/> Tentative 3 : délai ~ 900 ms |
+| Arrière-plan ou lot | 30 secondes | Exponentielle | MinimumBackoff = 1 <br/> MaximumBackoff = 30 s <br/> DeltaBackoff = 1,75 s <br/> TimeBuffer = 5 s <br/> MaxRetryCount = 3 | Tentative 1 : délai ~ 1 s <br/> Tentative 2 : délai ~ 3 s <br/> Tentative 3 : délai ~ 6 ms <br/> Tentative 4 : délai ~ 13 ms |
+
+\* N’inclut pas le délai supplémentaire qui s’ajoute en cas de réception d’une réponse du type Serveur occupé.
 
 ### <a name="telemetry"></a>Télémétrie
 Service Bus enregistre les nouvelles tentatives sous forme d’événements ETW à l’aide d’ **EventSource**. Vous devez associer un élément **EventListener** à la source d’événement pour capturer les événements et les afficher dans la visionneuse de performances ou les écrire dans un journal de destination approprié. Vous pouvez utiliser le [bloc applicatif de journalisation sémantique](http://msdn.microsoft.com/library/dn775006.aspx) pour effectuer cette opération. Les événements de nouvelle tentative se présentent sous la forme suivante :
@@ -831,12 +870,12 @@ Si Cosmos DB limite le client, il renvoie une erreur HTTP 429. Vérifiez le code
 ### <a name="policy-configuration"></a>Configuration de la stratégie
 Le tableau suivant présente les paramètres par défaut pour la classe `RetryOptions`.
 
-| Paramètre | Valeur par défaut | Description |
+| Paramètre | Valeur par défaut | DESCRIPTION |
 | --- | --- | --- |
-| MaxRetryAttemptsOnThrottledRequests |9 |Nombre maximal de nouvelles tentatives en cas d’échec de la requête, car Cosmos DB a appliqué une limite du débit au client. |
+| MaxRetryAttemptsOnThrottledRequests |9. |Nombre maximal de nouvelles tentatives en cas d’échec de la requête, car Cosmos DB a appliqué une limite du débit au client. |
 | MaxRetryWaitTimeInSeconds |30 |La durée maximale de nouvelle tentative en secondes. |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a>exemples
 ```csharp
 DocumentClient client = new DocumentClient(new Uri(endpoint), authKey); ;
 var options = client.ConnectionPolicy.RetryOptions;
@@ -880,7 +919,7 @@ Effectuez le suivi avec ETW ou via l’inscription d’un fournisseur de suivi p
 Azure Active Directory (AD) est une solution cloud complète de gestion des accès et des identités qui combine des services d’annuaire essentiels, une gouvernance avancée des identités, des services de sécurité et une gestion des accès aux applications. Azure AD offre également aux développeurs une plate-forme de gestion des identités pour permettre un contrôle d’accès à leurs applications, en fonction d’une stratégie et de règles centralisés.
 
 ### <a name="retry-mechanism"></a>Mécanisme de nouvelle tentative
-La bibliothèque d’authentification d’Active Directory (ADAL) intègre un mécanisme de nouvelle tentative pour Azure Active Directory. Pour éviter les verrouillages imprévus, il est recommandé que les bibliothèques et codes d’application tiers ne procèdent *pas* à de nouvelles tentatives pour les connexions ayant échoué, mais autorisent la bibliothèque ADAL à gérer les nouvelles tentatives. 
+La bibliothèque d’authentification d’Active Directory (ADAL) intègre un mécanisme de nouvelle tentative pour Azure Active Directory. Pour éviter les verrouillages imprévus, il est recommandé que les bibliothèques et codes d’application tiers ne procèdent **pas** à de nouvelles tentatives pour les connexions ayant échoué, mais autorisent la bibliothèque ADAL à gérer les nouvelles tentatives. 
 
 ### <a name="retry-usage-guidance"></a>Guide d’utilisation des nouvelles tentatives
 Respectez les consignes suivantes lors de l’utilisation d’Azure Active Directory :
@@ -894,7 +933,7 @@ Pensez à commencer par les paramètres ci-après pour les opérations liées au
 | **Contexte** | **Exemple de cible E2E<br />latence max** | **Stratégie de nouvelle tentative** | **Paramètres** | **Valeurs** | **Fonctionnement** |
 | --- | --- | --- | --- | --- | --- |
 | Interactif, interface utilisateur,<br />ou premier plan |2 secondes |FixedInterval |Nombre de tentatives<br />Intervalle avant nouvelle tentative<br />Première nouvelle tentative rapide |3<br />500 ms<br />true |Tentative 1 - délai 0 s<br />Tentative 2 - délai 500 ms<br />Tentative 3 - délai 500 ms |
-| Arrière-plan ou <br />lot |60 secondes |ExponentialBackoff |Nombre de tentatives<br />Temporisation min<br />Temporisation max<br />Temporisation delta<br />Première nouvelle tentative rapide |5<br />0 seconde<br />60 secondes<br />2 secondes<br />false |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~2 s<br />Tentative 3 - délai ~6 s<br />Tentative 4 - délai ~14 s<br />Tentative 5 - délai ~30 s |
+| Arrière-plan ou <br />lot |60 secondes |ExponentialBackoff |Nombre de tentatives<br />Temporisation min<br />Temporisation max<br />Temporisation delta<br />Première nouvelle tentative rapide |5.<br />0 seconde<br />60 secondes<br />2 secondes<br />false |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~2 s<br />Tentative 3 - délai ~6 s<br />Tentative 4 - délai ~14 s<br />Tentative 5 - délai ~30 s |
 
 ### <a name="more-information"></a>Plus d’informations
 * [Bibliothèques d’authentification d’Azure Active Directory][adal]
@@ -934,7 +973,7 @@ Azure Event Hubs est un service d’ingestion de données de télémétrie à tr
 ### <a name="retry-mechanism"></a>Mécanisme de nouvelle tentative
 Le comportement du mécanisme de nouvelle tentative dans la bibliothèque de client Azure Event Hubs est contrôlé par la propriété `RetryPolicy` sur la classe `EventHubClient`. La stratégie par défaut effectue de nouvelles tentatives avec une interruption exponentielle lorsqu’Azure Event Hubs renvoie une exception temporaire `EventHubsException` ou une exception `OperationCanceledException`.
 
-### <a name="example"></a>Exemple
+### <a name="example"></a>exemples
 ```csharp
 EventHubClient client = EventHubClient.CreateFromConnectionString("[event_hub_connection_string]");
 client.RetryPolicy = RetryPolicy.Default;
@@ -967,7 +1006,7 @@ Prenez en compte les éléments suivants lors de l’accès aux services Azure o
 ### <a name="retry-strategies"></a>Stratégie de nouvelle tentative
 Voici les types d’intervalles de stratégie de nouvelle tentative classiques :
 
-* **Exponentielle**: une stratégie de nouvelle tentative qui effectue un nombre spécifié de tentatives en utilisant une approche de secours exponentielle répartie de manière aléatoire pour déterminer l’intervalle entre deux tentatives. Par exemple :
+* **Exponentielle**: une stratégie de nouvelle tentative qui effectue un nombre spécifié de tentatives en utilisant une approche de secours exponentielle répartie de manière aléatoire pour déterminer l’intervalle entre deux tentatives. Par exemple : 
 
         var random = new Random();
 
@@ -977,11 +1016,11 @@ Voici les types d’intervalles de stratégie de nouvelle tentative classiques 
         var interval = (int)Math.Min(checked(this.minBackoff.TotalMilliseconds + delta),
                        this.maxBackoff.TotalMilliseconds);
         retryInterval = TimeSpan.FromMilliseconds(interval);
-* **Incrémentielle**: une stratégie de nouvelle tentative avec un nombre spécifié de nouvelles tentatives et un intervalle de temps incrémentiel entre deux tentatives. Par exemple :
+* **Incrémentielle**: une stratégie de nouvelle tentative avec un nombre spécifié de nouvelles tentatives et un intervalle de temps incrémentiel entre deux tentatives. Par exemple : 
 
         retryInterval = TimeSpan.FromMilliseconds(this.initialInterval.TotalMilliseconds +
                        (this.increment.TotalMilliseconds * currentRetryCount));
-* **LinearRetry**: une stratégie de nouvelle tentative qui effectue un nombre spécifié de nouvelles tentatives en utilisant un intervalle fixe spécifique entre deux tentatives. Par exemple :
+* **LinearRetry**: une stratégie de nouvelle tentative qui effectue un nombre spécifié de nouvelles tentatives en utilisant un intervalle fixe spécifique entre deux tentatives. Par exemple : 
 
         retryInterval = this.deltaBackoff;
 

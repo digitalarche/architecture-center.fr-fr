@@ -4,11 +4,11 @@ description: "Conseils portant sur l’exécution de tâches en arrière-plan in
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 62266b822a238ee53b62e74e91d753dc5da308b4
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: d8c1d4dfe12208b72fd6991def805f90a830b5f0
+ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/29/2017
 ---
 # <a name="background-jobs"></a>Travaux en arrière-plan
 [!INCLUDE [header](../_includes/header.md)]
@@ -100,7 +100,7 @@ Les tâches web Azure présentent les caractéristiques suivantes :
 * **Journalisation**: la commande Console.Out est traitée (marquée) comme étant de type INFO. La commande Console.Error est traitée comme étant de type ERROR. Vous pouvez accéder aux données de surveillance et de diagnostic à l’aide du portail Azure. Vous pouvez télécharger les fichiers journaux directement à partir du site. Ces éléments sont sauvegardés aux emplacements suivants :
   * Pour une exécution déclenchée : Vfs/data/jobs/triggered/jobName
   * Pour une exécution en continu : Vfs/data/jobs/continuous/jobName
-* **Configuration**: vous pouvez configurer des tâches web à l’aide du portail, de l’API REST et de PowerShell. Utilisez un fichier de configuration nommé settings.job, situé dans le même répertoire racine que le script de travail, pour fournir des informations sur la configuration d’un travail. Par exemple :
+* **Configuration**: vous pouvez configurer des tâches web à l’aide du portail, de l’API REST et de PowerShell. Utilisez un fichier de configuration nommé settings.job, situé dans le même répertoire racine que le script de travail, pour fournir des informations sur la configuration d’un travail. Par exemple : 
   * { "stopping_wait_time": 60 }
   * { "is_singleton": true }
 
@@ -129,7 +129,7 @@ Consultez la section relative aux [déclencheurs](#triggers) (ci-dessus) pour en
 Si vous envisagez de déployer des tâches en arrière-plan sur une machine virtuelle Azure, tenez compte des points suivants :
 
 * L’hébergement de tâches en arrière-plan sur une machine virtuelle Azure distincte vous permet une certaine flexibilité et vous offre un contrôle précis sur l’initiation, l’exécution, la planification et l’allocation des ressources. Toutefois, cela augmente le coût d’exécution si un ordinateur virtuel doit être déployé uniquement pour exécuter des tâches en arrière-plan.
-* Il n’existe pas d’outil de suivi des tâches dans le portail Azure, ni de fonctionnalité de redémarrage automatique des tâches ayant échoué, mais vous pouvez surveiller l’état de base de la machine virtuelle et le gérer au moyen des [applets de commande Azure Resource Manager](https://msdn.microsoft.com/en-us/library/mt125356.aspx). Toutefois, il n’existe aucune fonction permettant de contrôler les processus et threads dans les nœuds de calcul. En règle générale, l’utilisation d’une machine virtuelle nécessite des efforts supplémentaires pour implémenter un mécanisme afin de collecter des données d’instrumentation dans la tâche et de rassembler les données du système d’exploitation sur l’ordinateur virtuel. Pour ce faire, essayez d’utiliser le composant [System Center Management Pack pour Azure](https://www.microsoft.com/en-us/download/details.aspx?id=50013).
+* Il n’existe pas d’outil de suivi des tâches dans le portail Azure, ni de fonctionnalité de redémarrage automatique des tâches ayant échoué, mais vous pouvez surveiller l’état de base de la machine virtuelle et le gérer au moyen des [applets de commande Azure Resource Manager](https://msdn.microsoft.com/library/mt125356.aspx). Toutefois, il n’existe aucune fonction permettant de contrôler les processus et threads dans les nœuds de calcul. En règle générale, l’utilisation d’une machine virtuelle nécessite des efforts supplémentaires pour implémenter un mécanisme afin de collecter des données d’instrumentation dans la tâche et de rassembler les données du système d’exploitation sur l’ordinateur virtuel. Pour ce faire, essayez d’utiliser le composant [System Center Management Pack pour Azure](https://www.microsoft.com/download/details.aspx?id=50013).
 * Vous pouvez envisager de créer des sondes de surveillance exposées via des points de terminaison HTTP. Le code de ces sondes peut effectuer des contrôles d’intégrité, collecter des statistiques et des informations opérationnelles ou collecter les informations sur les erreurs et les renvoyer à une application de gestion. Pour en savoir plus, voir [Modèle de surveillance de point de terminaison d’intégrité](http://msdn.microsoft.com/library/dn589789.aspx).
 
 #### <a name="more-information"></a>Plus d’informations
@@ -180,7 +180,7 @@ Vous pouvez exécuter des tâches en arrière-plan dans un rôle web ou dans un 
 
 Vous pouvez implémenter des tâches en arrière-plan dans un rôle Cloud Services de différentes manières :
 
-* Créez une implémentation de la classe **RoleEntryPoint** dans le rôle et utilisez ses méthodes pour exécuter des tâches en arrière-plan. Les tâches s’exécutent dans le contexte de WaIISHost.exe. Elles peuvent utiliser la méthode **GetSetting** de la classe **CloudConfigurationManager** pour charger les paramètres de configuration. Pour en savoir plus, voir [Cycle de vie (Cloud Services)](#lifecycle-cloud-services).
+* Créez une implémentation de la classe **RoleEntryPoint** dans le rôle et utilisez ses méthodes pour exécuter des tâches en arrière-plan. Les tâches s’exécutent dans le contexte de WaIISHost.exe. Elles peuvent utiliser la méthode **GetSetting** de la classe **CloudConfigurationManager** pour charger les paramètres de configuration. Pour en savoir plus, consultez [Cycle de vie](#lifecycle).
 * Utilisez les tâches de démarrage pour exécuter des tâches en arrière-plan lorsque l’application démarre. Pour forcer les tâches à continuer leur exécution en arrière-plan, définissez la propriété **taskType** sur **background** (sinon, le processus de démarrage de l’application s’arrête et attend la fin de la tâche). Pour plus d’informations, consultez [Exécuter des tâches de démarrage dans Azure](/azure/cloud-services/cloud-services-startup-tasks).
 * Utilisez le Kit de développement logiciel (SDK) WebJobs pour implémenter des tâches en arrière-plan, telles que des tâches web lancées comme une tâche de démarrage. Pour plus d’informations, consultez l’article [Créer une tâche web .NET dans Azure App Service](/azure/app-service-web/websites-dotnet-webjobs-sdk-get-started).
 * Utilisez une tâche de démarrage pour installer un service Windows qui exécute une ou plusieurs tâches en arrière-plan. Vous devez définir la propriété **taskType** sur **background**, afin que le service s’exécute en arrière-plan. Pour plus d’informations, consultez [Exécuter des tâches de démarrage dans Azure](/azure/cloud-services/cloud-services-startup-tasks).
@@ -321,9 +321,8 @@ Les tâches en arrière-plan doivent offrir des performances suffisantes pour é
 * [Exécution de tâches en arrière-plan](http://msdn.microsoft.com/library/ff803365.aspx)
 * [Azure Role Startup Life Cycle](http://blog.syntaxc4.net/post/2011/04/13/windows-azure-role-startup-life-cycle.aspx) (billet de blog)
 * [Azure Cloud Services Role Lifecycle](http://channel9.msdn.com/Series/Windows-Azure-Cloud-Services-Tutorials/Windows-Azure-Cloud-Services-Role-Lifecycle) (vidéo)
-* [Présentation du Kit de développement logiciel (SDK) Azure WebJobs](https://docs.microsoft.com/en-us/azure/app-service-web/websites-dotnet-webjobs-sdk)
-* [Créer une tâche web .NET dans Azure App Service](https://docs.microsoft.com/en-us/azure/app-service-web/websites-dotnet-webjobs-sdk-get-started)
-* [Exécuter des tâches en arrière-plan avec WebJobs](https://docs.microsoft.com/en-us/azure/app-service-web/web-sites-create-web-jobs)
-* [Files d’attente Azure et files d’attente Service Bus - comparaison et différences](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted)
-* [Activation des diagnostics dans un service cloud](https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-dotnet-diagnostics)
+* [Présentation du Kit de développement logiciel (SDK) Azure WebJobs](https://docs.microsoft.com/azure/app-service-web/websites-dotnet-webjobs-sdk)
+* [Exécuter des tâches en arrière-plan avec WebJobs](https://docs.microsoft.com/azure/app-service-web/web-sites-create-web-jobs)
+* [Files d’attente Azure et files d’attente Service Bus - comparaison et différences](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted)
+* [Activation des diagnostics dans un service cloud](https://docs.microsoft.com/azure/cloud-services/cloud-services-dotnet-diagnostics)
 

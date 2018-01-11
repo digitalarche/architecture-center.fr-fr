@@ -2,13 +2,13 @@
 title: Application web de base
 description: "Architecture recommandée pour une application web basique exécutée dans Microsoft Azure."
 author: MikeWasson
-ms.date: 11/23/2016
+ms.date: 12/12/2017
 cardTitle: Basic web application
-ms.openlocfilehash: b7475c4087a184bb7608d0c45ffecee912c920d7
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 598eb547f0e96ae334af391183a792637caa8631
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="basic-web-application"></a>Application web de base
 [!INCLUDE [header](../../_includes/header.md)]
@@ -29,15 +29,23 @@ Cette architecture de référence présente un ensemble de pratiques éprouvées
 Elle comporte les composants suivants :
 
 * **Groupe de ressources**. Un [groupe de ressources](/azure/azure-resource-manager/resource-group-overview) est un conteneur logique pour les ressources Azure.
+
 * **Application App Service**. [Azure App Service][app-service] est une plateforme entièrement gérée pour créer et déployer des applications cloud.     
+
 * **Plan App Service**. Un [plan App Service][app-service-plans] fournit les machines virtuelles gérées qui hébergent votre application. Toutes les applications associées à un plan s’exécutent dans les mêmes instances de machine virtuelle.
 
 * **Emplacements de déploiement**.  Un [emplacement de déploiement][deployment-slots] vous permet de planifier un déploiement et de l’échanger ensuite avec le déploiement de production. De cette façon, vous évitez le déploiement directement dans l’environnement de production. Consultez la section [Facilité de gestion](#manageability-considerations) pour obtenir des recommandations spécifiques.
 
-* **Adresse IP**. L’application App Service a une adresse IP publique et un nom de domaine. Le nom de domaine est un sous-domaine de `azurewebsites.net`, tel que `contoso.azurewebsites.net`. Pour utiliser un nom de domaine personnalisé, tel que `contoso.com`, créez des enregistrements de service de nom de domaine (DNS) qui mappent le nom de domaine personnalisé à l’adresse IP du domaine. Pour plus d’informations, consultez [Configurer un nom de domaine personnalisé dans Azure App Service][custom-domain-name].
+* **Adresse IP**. L’application App Service a une adresse IP publique et un nom de domaine. Le nom de domaine est un sous-domaine de `azurewebsites.net`, tel que `contoso.azurewebsites.net`.  
+
+* **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure. Pour utiliser un nom de domaine personnalisé, tel que `contoso.com`, créez des enregistrements DNS qui mappent le nom de domaine personnalisé sur l’adresse IP. Pour plus d’informations, consultez [Configurer un nom de domaine personnalisé dans Azure App Service][custom-domain-name].  
+
 * **Base de données SQL Azure**. [SQL Database][sql-db] est une base de données relationnelle sous forme de service dans le cloud.
+
 * **Serveur logique**. Dans Azure SQL Database, un serveur logique héberge vos bases de données. Vous pouvez créer plusieurs bases de données dans un serveur logique.
+
 * **Stockage Azure**. Créez un compte de stockage Azure avec un conteneur d’objets blob pour stocker les journaux de diagnostic.
+
 * **Azure Active Directory** (Azure AD). Utilisez Azure AD ou un autre fournisseur d’identité pour l’authentification.
 
 ## <a name="recommendations"></a>Recommandations
@@ -102,7 +110,7 @@ Pour en savoir plus, consultez l’article [Continuité des activités cloud et 
 App Service possède une fonctionnalité [Sauvegarde et restauration][web-app-backup] pour les fichiers de votre application. Toutefois, sachez que les fichiers sauvegardés incluent les paramètres de l’application en texte brut et qu’ils peuvent contenir des secrets, comme les chaînes de connexion. Évitez d’utiliser la fonctionnalité de sauvegarde de App Service pour sauvegarder vos bases de données SQL, car elle exporte la base de données dans un fichier .bacpac SQL, en consommant des [DTU][sql-dtu]. Utilisez plutôt la restauration dans le temps de SQL Database, décrite ci-dessus.
 
 ## <a name="manageability-considerations"></a>Considérations relatives à la facilité de gestion
-Créez des groupes de ressources distincts pour la production, le développement et les environnements de test. Cela simplifie la gestion des déploiements, la suppression des déploiements de test et l’attribution des droits d’accès.
+Créez des groupes de ressources distincts pour les environnements de production, de développement et de test. Cela simplifie la gestion des déploiements, la suppression des déploiements de test et l’attribution des droits d’accès.
 
 Lorsque vous attribuez des ressources aux groupes de ressources, considérez les points suivants :
 
@@ -215,6 +223,7 @@ Pour plus d’informations, consultez [Déployer des ressources à l’aide de m
 [app-service-security]: /azure/app-service-web/web-sites-security
 [app-settings]: /azure/app-service-web/web-sites-configure
 [arm-template]: /azure/azure-resource-manager/resource-group-overview#resource-groups
+[azure-dns]: /azure/dns/dns-overview
 [custom-domain-name]: /azure/app-service-web/web-sites-custom-domain-name
 [deploy]: /azure/app-service-web/web-sites-deploy
 [deploy-arm-template]: /azure/resource-group-template-deploy
@@ -223,7 +232,7 @@ Pour plus d’informations, consultez [Déployer des ressources à l’aide de m
 [kudu]: https://azure.microsoft.com/blog/windows-azure-websites-online-tools-you-should-know-about/
 [monitoring-guidance]: ../../best-practices/monitoring.md
 [new-relic]: http://newrelic.com/
-[paas-basic-arm-template]: https://github.com/mspnp/reference-architectures/tree/master/app-service-web-app/basic-web-app/Paas-Basic/Templates
+[paas-basic-arm-template]: https://github.com/mspnp/reference-architectures/tree/master/managed-web-app/basic-web-app/Paas-Basic/Templates
 [perf-analysis]: https://github.com/mspnp/performance-optimization/blob/master/Performance-Analysis-Primer.md
 [rbac]: /azure/active-directory/role-based-access-control-what-is
 [resource-group]: /azure/azure-resource-manager/resource-group-overview

@@ -3,21 +3,30 @@ title: "Récupération d’urgence des applications Microsoft Azure"
 description: "Présentations techniques et informations détaillées sur la conception d’applications pour la récupération d’urgence sur Microsoft Azure."
 author: adamglick
 ms.date: 05/26/2017
-ms.openlocfilehash: d415b27dd7928996e2a6dc7fd8fcf6a77c835768
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 5ed6e2cec149571724f1545b40f628d6bbe1ad71
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
-[!INCLUDE [header](../_includes/header.md)]
 # <a name="disaster-recovery-for-azure-applications"></a>Récupération d’urgence des applications Microsoft Azure
-Les stratégies de résilience et de haute disponibilité sont conçues pour faciliter la gestion des conditions de défaillance temporaire. La récupération d’urgence (DR) se concentre sur la récupération des fonctionnalités des applications en cas de perte catastrophique. Par exemple, si une région Azure hébergeant votre application devient indisponible, vous avez besoin d’un plan pour exécuter votre application ou accéder à vos données dans une autre région. La mise en œuvre de ce plan implique des personnes, des processus et la prise en charge d’applications permettant au système de continuer à fonctionner. Pour être parfaitement fiable, votre plan doit inclure une préparation aux conditions de panne et des essais de récupération des bases de données. Les entrepreneurs et propriétaires de technologies qui définissent le mode opérationnel du système dans une situation d’urgence déterminent également le niveau de fonctionnalité du service requis en cas d’incident. Le niveau de fonctionnalité peut prendre plusieurs formes : complètement indisponible, partiellement disponible (fonctionnalité réduite ou traitement différé) ou entièrement disponible.
+
+La récupération d’urgence (DR) se concentre sur la récupération des fonctionnalités des applications en cas de perte catastrophique. Par exemple, si une région Azure hébergeant votre application devient indisponible, vous avez besoin d’un plan pour exécuter votre application ou accéder à vos données dans une autre région. 
+
+Les chefs d’entreprises et les propriétaires de technologie doivent déterminer les fonctionnalités requises en cas d’incident. Le niveau de fonctionnalité peut prendre plusieurs formes : complètement indisponible, partiellement disponible (fonctionnalité réduite ou traitement différé) ou entièrement disponible.
+
+Les stratégies de résilience et de haute disponibilité sont conçues pour faciliter la gestion des conditions de défaillance temporaire.  La mise en œuvre de ce plan implique des personnes, des processus et la prise en charge d’applications permettant au système de continuer à fonctionner. Pour être parfaitement fiable, votre plan doit inclure une préparation aux conditions de panne et des essais de récupération des bases de données. 
 
 ## <a name="azure-disaster-recovery-features"></a>Fonctionnalités de la récupération d’urgence Azure
+
 Comme pour les considérations relatives à la disponibilité, Azure fournit un [Guide technique de la résilience](./index.md), conçu pour prendre en charge la récupération d’urgence. Il existe également une relation entre les fonctionnalités de disponibilité d’Azure et la récupération d’urgence. Par exemple, la gestion des rôles sur les domaines d’erreur augmente la disponibilité d’une application. Sans cette gestion, une défaillance matérielle non gérée deviendrait un scénario « catastrophe ». Tirer parti de ces stratégies et fonctionnalités de disponibilité fait partie intégrante de la protection de votre application contre les situations d’urgence. Toutefois, cet article va au-delà des problèmes de disponibilité générale pour traiter des événements d’urgence plus graves (et plus rares).
 
 ## <a name="multiple-datacenter-regions"></a>Plusieurs régions contenant des centres de données
 Azure exploite des centres de données dans plusieurs régions à l’échelle internationale. Cette infrastructure prend en charge plusieurs scénarios de récupération d’urgence, tels que la géoréplication du stockage Azure vers des régions secondaires, fournie par le système. Vous pouvez également déployer un service cloud vers de nombreux emplacements dans le monde entier facilement et de manière économique. Comparez cela au coût et à la difficulté que représente la création et la maintenance de vos propres centres de données dans plusieurs régions différentes. Le déploiement de services et de données dans plusieurs régions contribue à protéger votre application contre une panne majeure survenant dans une seule région. Lorsque vous concevez votre plan de récupération d’urgence, il est important de comprendre le concept des régions jumelées. Pour plus d’informations, consultez l’article [Continuité des activités et récupération d’urgence (BCDR) : régions jumelées d’Azure](/azure/best-practices-availability-paired-regions).
+
+## <a name="azure-site-recovery"></a>Azure Site Recovery
+
+[Azure Site Recovery](/azure/site-recovery/) fournit un moyen simple de répliquer des machines virtuelles Azure d’une région à une autre. Il a une charge de gestion minimale, car vous n’avez pas besoin de configurer de ressources supplémentaires dans la région secondaire. Quand vous activez la réplication, Site Recovery crée automatiquement les ressources nécessaires dans la région cible en fonction des paramètres de la machine virtuelle source. Il fournit une réplication continue automatisée et vous permet d’effectuer le basculement d’application avec un seul clic. Vous pouvez effectuer des exercices de récupération d’urgence avec des tests de basculement, sans effet sur vos charges de travail de production ni la réplication continue. 
 
 ## <a name="azure-traffic-manager"></a>Azure Traffic Manager
 En cas de défaillance spécifique à une région, vous devez rediriger le trafic vers les services ou les déploiements dans une autre région. Il est préférable de gérer cette situation via des services tels qu’Azure Traffic Manager, qui automatise le basculement du trafic utilisateur en cas de défaillance dans la région principale. La compréhension des principes de base de Traffic Manager est essentielle pour concevoir une stratégie efficace de récupération d’urgence.
@@ -69,9 +78,7 @@ Vous devez comprendre les conséquences d’une interruption de service pour cha
 Les échecs précédents étaient principalement des défaillances pouvant être gérées au sein de la même région Azure. Toutefois, vous devez également prévoir l’éventualité d’une interruption du service dans l’ensemble de la région. Le cas échéant, les copies localement redondantes de vos données ne sont pas disponibles. Si vous avez activé la géoréplication, trois copies supplémentaires de vos tables et objets blob sont stockées dans une autre région. Si Microsoft déclare la région comme étant perdue, Azure remappe toutes les entrées DNS vers la région géorépliquée.
 
 > [!NOTE]
-> N’oubliez pas que vous n’avez aucun contrôle sur ce processus et qu’il ne se produit que pour les interruptions du service au niveau régional. Ainsi, vous devez vous appuyer sur d’autres stratégies de sauvegarde propres à l’application pour atteindre le plus haut niveau de disponibilité. Pour plus d’informations, consultez la section consacrée aux [stratégies de données pour une récupération d’urgence](#data-strategies-for-disaster-recovery).
-> 
-> 
+> N’oubliez pas que vous n’avez aucun contrôle sur ce processus et qu’il ne se produit que pour les interruptions du service au niveau régional. Envisagez d’utiliser [Azure Site Recovery](/azure/site-recovery/) pour obtenir de meilleurs RPO et RTO. Site Recovery permet à l’application de décider si une indisponibilité est acceptable ou si elle doit basculer vers les machines virtuelles répliquées.
 
 ### <a name="azure-wide-service-disruption"></a>Interruption du service dans l’ensemble des régions Azure
 Vous devez prendre en compte l’ensemble des scénarios catastrophe lors de la planification d’urgence. L’une des interruptions de service les plus graves impliquerait l’interruption simultanée de toutes les régions Azure. Comme pour les autres interruptions de service, vous pouvez alors décider d’accepter le risque d’un arrêt temporaire. Les interruptions de service importantes, couvrant des régions entières, sont beaucoup plus rares que les interruptions de service isolées impliquant des services dépendants ou des régions uniques.
@@ -110,7 +117,7 @@ Vous pouvez également avoir recours à une approche plus manuelle pour la sauve
 
 La redondance intégrée d’Azure Storage crée deux réplicas du fichier de sauvegarde dans la même région. Toutefois, la fréquence d’exécution du processus de sauvegarde détermine votre RPO, c’est-à-dire la quantité de données que vous risquez de perdre dans les scénarios d’urgence. Par exemple, imaginez que vous effectuez une sauvegarde toutes les heures et qu’un incident survient deux minutes avant la nouvelle sauvegarde. Vous perdez ainsi 58 minutes de données enregistrées depuis la dernière sauvegarde. En outre, pour vous protéger contre une interruption de service à l’échelle régionale, vous devez copier les fichiers BACPAC vers une autre région. Vous avez ensuite la possibilité de restaurer ces sauvegardes dans l’autre région. Pour en savoir plus, consultez l’article [Vue d’ensemble : continuité des activités cloud et récupération d’urgence d’une base de données avec SQL Database](/azure/sql-database/sql-database-business-continuity/).
 
-#### <a name="azure-storage"></a>Azure Storage
+#### <a name="azure-storage"></a>Stockage Azure
 Pour le stockage Azure, vous pouvez développer un processus de sauvegarde personnalisé ou utiliser l’un des nombreux outils de sauvegarde tiers. Notez que la plupart des conceptions d’applications comportent des complexités supplémentaires dans la mesure où les ressources de stockage se référencent mutuellement. Prenez l’exemple d’une base de données SQL comportant une colonne liée à un objet blob dans Azure Storage. Si les sauvegardes ne sont pas effectuées simultanément, cela peut être dû à l’absence de sauvegarde du pointeur vers un objet blob de la base de données avant la défaillance. L’application ou le plan de récupération d’urgence doit implémenter des processus pour gérer cette incohérence une fois la récupération effectuée.
 
 #### <a name="other-data-platforms"></a>Autres plateformes de données
@@ -178,6 +185,18 @@ Dans ce scénario, la base de données constitue un point de défaillance unique
 Pour toutes les applications les moins critiques, vous devez concevoir un plan pour déployer vos applications dans plusieurs régions. Vous devez également considérer le RTO et les contraintes de coût lorsque vous décidez quelle topologie de déploiement utiliser.
 
 Examinons à présent les approches spécifiques pour prendre en charge le basculement entre les différentes régions. Ces exemples utilisent tous deux régions pour décrire le processus.
+
+### <a name="failover-using-azure-site-recovery"></a>Basculement à l’aide d’Azure Site Recovery
+
+Lorsque vous activez la réplication de machine virtuelle Azure à l’aide d’Azure Site Recovery, le programme crée plusieurs ressources dans la région secondaire :
+
+- Groupe de ressources.
+- Réseau virtuel (VNet).
+- Compte de stockage. 
+- Groupes à haute disponibilité pour contenir les machines virtuelles après le basculement.
+
+Les écritures de données sur les disques de machine virtuelle de la région primaire sont transférées en continu vers le compte de stockage dans la région secondaire. Des points de récupération sont générés dans le compte de stockage cible à intervalles de quelques minutes. Lorsque vous démarrez un basculement, les machines virtuelles récupérées sont créées dans le groupe de ressources cible, le réseau virtuel cible et le groupe à haute disponibilité cible. Lors d’un basculement, vous pouvez choisir n’importe quel point de récupération disponible.
+
 
 ### <a name="redeployment-to-a-secondary-azure-region"></a>Redéploiement vers une région Azure secondaire
 Dans l’approche de redéploiement vers une région secondaire, seule la région primaire contient des applications et des bases de données en cours d’exécution. La région secondaire n’est pas configurée pour un basculement automatique. Par conséquent, en cas d’incident, vous devez activer toutes les parties du service dans la nouvelle région. Cela inclut le chargement d’un service cloud sur Azure, le déploiement du service cloud, la restauration des données et la modification du DNS afin de rerouter le trafic.
@@ -269,17 +288,19 @@ Envisagez de créer un type de « menu général » dans l’application pour si
 
 La simulation souligne les problèmes non résolus. Les scénarios simulés doivent être entièrement contrôlables. Cela signifie que, même si le plan de récupération échoue, vous pouvez restaurer l’état normal sans entraîner de dommage significatif. Il est également important que vous informiez vos dirigeants de quand et comment les exercices de simulation seront conduits. Ce plan doit préciser le temps ou les ressources impactés pendant la simulation. Lorsque vous testez votre plan de récupération d’urgence, vous devez également définir les mesures de réussite.
 
+Si vous utilisez Azure Site Recovery, vous pouvez exécuter un test de basculement vers Azure, afin de valider votre stratégie de réplication ou d’effectuer un test de récupération d’urgence sans perte de données ou temps d’arrêt. Un test de basculement n’a aucun effet sur la réplication de machine virtuelle en cours, ni sur votre environnement de production.
+
 Plusieurs autres techniques permettent de tester les plans de récupération d’urgence. Toutefois, la plupart sont simplement des variantes de ces techniques de base. Ce test vise à évaluer la faisabilité du plan de récupération. Les tests des plans de récupération d’urgence recherchent les lacunes dans ces plans.
 
 ## <a name="service-specific-guidance"></a>Guide spécifique relatif au service
 
 Les rubriques suivantes décrivent les services Azure spécifiques à la récupération d’urgence :
 
-| Service | Rubrique |
+| de diffusion en continu | Rubrique |
 |---------|-------|
-| Services cloud | [Que faire si une interruption de service Azure affecte Azure Cloud Services](/azure/cloud-services/cloud-services-disaster-recovery-guidance) |
+| Cloud Services | [Que faire si une interruption de service Azure affecte Azure Cloud Services](/azure/cloud-services/cloud-services-disaster-recovery-guidance) |
 | Key Vault | [Disponibilité et redondance d’Azure Key Vault](/azure/key-vault/key-vault-disaster-recovery-guidance) |
-|Storage | [Que faire en cas de panne du Stockage Azure](/azure/storage/storage-disaster-recovery-guidance) |
+|Stockage | [Que faire en cas de panne du Stockage Azure](/azure/storage/storage-disaster-recovery-guidance) |
 | Base de données SQL | [Restaurer une base de données SQL Azure ou basculer vers une base de données secondaire](/azure/sql-database/sql-database-disaster-recovery) |
 | Machines virtuelles | [Que faire si une interruption du service Azure affecte des machines virtuelles Azure ?](/azure/virtual-machines/virtual-machines-disaster-recovery-guidance) |
 | Réseaux virtuels | [Réseau virtuel – Continuité des activités](/azure/virtual-network/virtual-network-disaster-recovery-guidance) |

@@ -6,11 +6,11 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: tailspin
 pnp.series.next: claims
-ms.openlocfilehash: 74f4e85e282799b7eee92caf2da083fb264f8733
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: e85817626675cec4d126921c19a31a0983ecd62d
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="authenticate-using-azure-ad-and-openid-connect"></a>S’authentifier avec Azure AD et OpenID Connect
 
@@ -131,7 +131,7 @@ Voici comment se déroule le processus d’authentification :
 Si l’authentification réussit, le middleware OIDC crée un ticket d’authentification, qui contient une entité de revendications regroupant les revendications de l’utilisateur. Vous pouvez accéder au ticket dans l’événement **AuthenticationValidated** ou **TicketReceived**.
 
 > [!NOTE]
-> Tant que le flux d’authentification n’est pas entièrement terminé, `HttpContext.User` contient toujours un principal anonyme, et *non* l’utilisateur authentifié. L’entité anonyme comporte un ensemble de revendications vide. Une fois l’authentification effectuée et l’utilisateur redirigé par l’application, le middleware cookie désérialise le cookie d’authentification et définit le paramètre `HttpContext.User` sur une entité de revendications représentant l’utilisateur authentifié.
+> Tant que le flux d’authentification n’est pas entièrement terminé, `HttpContext.User` contient toujours un principal anonyme, et **non** l’utilisateur authentifié. L’entité anonyme comporte un ensemble de revendications vide. Une fois l’authentification effectuée et l’utilisateur redirigé par l’application, le middleware cookie désérialise le cookie d’authentification et définit le paramètre `HttpContext.User` sur une entité de revendications représentant l’utilisateur authentifié.
 > 
 > 
 
@@ -170,7 +170,7 @@ Lorsque le middleware OIDC redirige vers le point de terminaison d’autorisatio
 * response_type  = "code id_token". Spécifie le flux hybride.
 * response_mode = "form_post". Spécifie la réponse POST du formulaire.
 
-Pour spécifier un autre flux, définissez la propriété **ResponseType** sur les options. Par exemple :
+Pour spécifier un autre flux, définissez la propriété **ResponseType** sur les options. Par exemple : 
 
 ```csharp
 app.UseOpenIdConnectAuthentication(options =>

@@ -5,11 +5,11 @@ author: MikeWasson
 ms.date: 05/26/2017
 ms.custom: resiliency
 pnp.series.title: Design for Resiliency
-ms.openlocfilehash: 31a685e46da02fb59d93a210e6f14da5c68331de
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 0cbcf0a8af1a8e20f2a1c024f5146a37176c5d1e
+ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Conception d’applications résilientes pour Azure
 
@@ -25,13 +25,17 @@ Cet article fournit une vue d’ensemble de la création d’applications résil
 Deux aspects importants de la résilience sont la haute disponibilité et la récupération d’urgence.
 
 * **La haute disponibilité** (HA) est la capacité de l’application à continuer de s’exécuter dans un état sain, sans temps d’arrêt significatif. « Sain » signifie que l’application est réactive et que les utilisateurs peuvent s’y connecter et interagir avec elle.  
-* **La récupération d’urgence** est la capacité à récupérer après des incidents rares mais majeurs : des échecs non temporaires et à grande échelle, telles que l’interruption de service qui peut affecter une région entière. La récupération d’urgence inclut la sauvegarde et l’archivage des données. Elle peut également inclure une intervention manuelle, comme la restauration d’une base de données à partir de la sauvegarde. 
+* **La récupération d’urgence** est la capacité à récupérer après des incidents rares mais majeurs : des échecs non temporaires et à grande échelle, telles que l’interruption de service qui peut affecter une région entière. La récupération d’urgence inclut la sauvegarde et l’archivage des données. Elle peut également inclure une intervention manuelle, comme la restauration d’une base de données à partir de la sauvegarde.
 
-Une façon d’associer la haute disponibilité et la récupération d’urgence est que la récupération d’urgence démarre lorsque l’impact d’une erreur dépasse la capacité de la conception de haute disponibilité pour la manipuler. Par exemple, placer plusieurs machines virtuelles derrière un équilibreur de charge apportera de la disponibilité en cas de défaillance d’une machine virtuelle, mais pas si elles échouent toutes en même temps. 
+Une façon d’associer la haute disponibilité et la récupération d’urgence est que la récupération d’urgence démarre lorsque l’impact d’une erreur dépasse la capacité de la conception de haute disponibilité pour la manipuler.  
 
-Lorsque vous concevez une application qui doit être résiliente, vous devez comprendre vos besoins en matière de disponibilité. Quel temps d’arrêt maximal est acceptable ? Cela dépend en partie du coût. Combien les interruptions potentielles vont-elles coûter à votre entreprise ? Combien devriez-vous investir pour rendre l’application hautement disponible ? Vous devez également définir ce que cela signifie que l’application soit disponible. Par exemple, l’application est-elle « inactive » si un client peut envoyer une commande mais que le système ne peut pas la traiter dans les délais d’exécution habituels ? Envisagez également la probabilité qu’un type particulier de défaillance se produise, et si une stratégie d’atténuation est économique.
+Lorsque vous concevez la résilience, vous devez comprendre vos exigences en matière de disponibilité. Quel temps d’arrêt maximal est acceptable ? Cela dépend en partie du coût. Combien les temps d’arrêt vont-ils coûter à votre entreprise ? Combien devriez-vous investir pour rendre l’application hautement disponible ? Vous devez également définir ce que cela signifie que l’application soit disponible. Par exemple, l’application est-elle « inactive » si un client peut envoyer une commande mais que le système ne peut pas la traiter dans les délais d’exécution habituels ? Envisagez également la probabilité qu’un type particulier de défaillance se produise, et si une stratégie d’atténuation est économique.
 
-Un autre terme courant est la **continuité de l’activité**. Il s’agit de la capacité d’effectuer des fonctions opérationnelles essentielles pendant et après des conditions défavorables, comme une catastrophe naturelle ou la panne d’un service. La continuité de l’activité couvre l’intégralité des opérations de l’entreprise, y compris les installations physiques, les personnes, les communications, le transport, et l’informatique. Cet article se concentre sur les applications cloud, mais la planification de résilience doit être effectuée dans le contexte des exigences globales de continuité de l’activité. Pour plus d’informations, consultez [Guide de planification d’urgence] [capacity-planning-guide] à partir du National Institute of Science and Technology (NIST).
+Un autre terme courant est la **continuité de l’activité**. Il s’agit de la capacité d’effectuer des fonctions opérationnelles essentielles pendant et après des conditions défavorables, comme une catastrophe naturelle ou la panne d’un service. La continuité de l’activité couvre l’intégralité des opérations de l’entreprise, y compris les installations physiques, les personnes, les communications, le transport, et l’informatique. Cet article se concentre sur les applications cloud, mais la planification de résilience doit être effectuée dans le contexte des exigences globales de continuité de l’activité. 
+
+La **sauvegarde des données** est une composante essentielle de la récupération d’urgence. Si les composants sans état d’une application subissent une défaillance, vous avez toujours la possibilité de les redéployer. Cependant, si des données sont perdues, le système ne peut retrouver sa stabilité. Les données doivent être sauvegardées, idéalement dans une région différente, ceci pour éviter tout risque en cas d’incident se produisant à l’échelle régionale. 
+
+La sauvegarde et la **réplication des données** sont deux processus distincts. La réplication des données consiste en leur copie quasiment en temps réel, de manière à ce que le système puisse basculer rapidement vers un réplica. De nombreux systèmes de bases de données prennent en charge la réplication. Par exemple, SQL Server prend en charge les groupes de disponibilité SQL Server AlwaysOn. La réplication des données peut réduire les intervalles de récupération après une panne, en garantissant la conservation permanente d’un réplica des données. Toutefois, la réplication des données ne vous protège pas contre les erreurs humaines. Les données corrompues en raison d’une erreur humaine sont elles aussi copiées sur les réplicas. Par conséquent, il vous faut intégrer une stratégie de sauvegarde à long terme dans votre stratégie de récupération d’urgence. 
 
 ## <a name="process-to-achieve-resiliency"></a>Processus pour obtenir la résilience
 La résilience n’est pas un module complémentaire. Elle doit être conçue dans le système et mise en pratique opérationnelle. Voici un modèle général à suivre :
@@ -64,6 +68,7 @@ Envisagez également des modèles d’utilisation. Y a-t-il certaines périodes 
 Deux métriques importantes sont à prendre en considération : les objectifs de délai de récupération et de point de récupération.
 
 * L’**objectif de délai de récupération** (RTO) est la durée maximale acceptable pendant laquelle une application peut être indisponible après un incident. Si votre objectif RTO est de 90 minutes, vous devez être en mesure de remettre l’application en état de fonctionnement dans les 90 minutes à partir du début d’une panne. Si vous avez un objectif RTO très faible, vous pouvez conserver un deuxième déploiement fonctionnant de manière continue en veille, pour vous protéger contre une panne régionale.
+
 * L’**objectif de point de récupération** (RPO) est la durée maximale de perte de données acceptable pendant une panne. Par exemple, si vous stockez des données dans une base de données unique, sans aucune réplication vers d’autres bases de données, et effectuez des sauvegardes toutes les heures, vous risquez de perdre jusqu’à une heure de données. 
 
 Les objectifs RTO et RPO sont des exigences de l’entreprise. Procéder à une évaluation des risques peut vous aider à définir les objectifs RTO et RPO de l’application. Une autre métrique commune est le **temps moyen de récupération** (MTTR), qui est la durée moyenne nécessaire à la restauration de l’application après une panne. La métrique MTTR est un fait empirique concernant un système. Si la métrique MTTR dépasse celle de l’objectif RTO, une défaillance du système entraînera une interruption inacceptable des opérations, car il ne sera pas possible de restaurer le système au sein de l’objectif RTO défini. 
@@ -86,7 +91,7 @@ Le tableau suivant présente les temps d’arrêt cumulatifs potentiels pour dif
 | 99,9 % |10,1 minutes |43,2 minutes |8,76 heures |
 | 99,95 % |5 minutes |21,6 minutes |4,38 heures |
 | 99,99 % |1,01 minute |4,32 minutes |52,56 minutes |
-| 99,999 % |6 secondes |25,9 secondes |5,26 minutes |
+| 99, 999 % |6 secondes |25,9 secondes |5,26 minutes |
 
 Bien entendu, une plus grande disponibilité est préférable, tout le reste étant égal. Mais si vous cherchez à obtenir davantage de 9, le coût et la complexité nécessaires pour atteindre ce niveau augmenteront. Une disponibilité de 99,99 % se traduit par environ 5 minutes de temps d’arrêt total par mois. L’augmentation du coût et de la complexité en vaut-elle la peine pour atteindre cinq 9 (99,999 %) de disponibilité ? La réponse dépend des exigences de l’entreprise. 
 
@@ -134,6 +139,33 @@ De plus, un échec n’est pas instantané et peut entraîner un temps d’arrê
 
 Le numéro de contrat SLA calculé est une base utile, mais il ne dit pas tout sur la disponibilité. Souvent, il arrive qu’une application se dégrade normalement lorsqu’un chemin d’accès non critique échoue. Imaginez une application qui propose un catalogue de livres. Si l’application ne peut pas récupérer l’image miniature de la couverture, elle affichera une image de substitution. Dans ce cas, le fait que l’application n’ait pas réussi à obtenir l’image ne réduit pas son temps de fonctionnement, mais cela affecte l’expérience utilisateur.  
 
+## <a name="redundancy-and-designing-for-failure"></a>Redondance et conception pour les défaillances
+
+Les défaillances n’ont pas toutes la même incidence. Certaines défaillances matérielles, comme une panne de disque, peuvent affecter un seul ordinateur hôte. Un commutateur réseau défaillant peut impacter un rack entier de serveurs. Vous déplorerez moins fréquemment des défaillances perturbant un centre de données dans son ensemble, comme une panne d’alimentation. Exceptionnellement, une région entière peut être indisponible.
+
+La redondance est l’un des moyens de rendre une application résiliente. Toutefois, vous devez planifier en fonction de cette redondance lorsque vous concevez l’application. Par ailleurs, le niveau de redondance dont vous avez besoin dépend des exigences de votre entreprise. Toutes les applications ne nécessitent pas une redondance entre les régions à titre de prévention contre les pannes régionales. En général, il existe un compromis entre redondance et fiabilité supérieures d’un côté contre complexité et coûts plus élevés de l’autre.  
+
+Azure offre un certain nombre de fonctionnalités servant à rendre une application redondante à tous les nivaux de défaillances, d’une machine virtuelle unique à une région entière. 
+
+![](./images/redundancy.svg)
+
+**Machine virtuelle unique**. Azure fournit un contrat SLA de durée de fonctionnement pour les machines virtuelles uniques. Bien que vous puissiez obtenir un contrat supérieur en exécutant deux machines virtuelles ou plus, une machine virtuelle unique peut présenter une fiabilité suffisante pour certaines charges de travail. Pour les charges de travail de production, nous vous recommandons d’utiliser au moins deux machines virtuelles pour la redondance. 
+
+**Groupes à haute disponibilité**. Pour vous protéger contre les défaillances matérielles localisées, comme une panne de disque ou de commutateur réseau, déployez au moins deux machines virtuelles dans un groupe à haute disponibilité. Un groupe à haute disponibilité se compose d’au moins deux *domaines d’erreur* qui partagent une source d’alimentation et un commutateur réseau. Les machines virtuelles d’un groupe à haute disponibilité sont distribuées entre les domaines d’erreur. Ainsi, si une défaillance matérielle affecte un domaine d’erreur, le trafic réseau peut toujours être acheminé vers les machines virtuelles des autres domaines d’erreur. Pour plus d’informations sur les groupes à haute disponibilité, consultez la section [Gestion de la disponibilité des machines virtuelles Windows dans Azure](/azure/virtual-machines/windows/manage-availability).
+
+**Zones de disponibilité (aperçu)**.  Une zone de disponibilité est une zone physiquement séparée au sein d’une région Azure. Chaque zone de disponibilité possède une source d’alimentation, un réseau et un système de refroidissement propres. Le déploiement des machines virtuelles entre les zones de disponibilité aide à protéger une application contre les défaillances à l’échelle du centre de données. 
+
+**Régions jumelées**. Pour protéger une application contre une panne régionale, vous pouvez la déployer dans plusieurs régions, en vous appuyant sur Azure Traffic Manager pour distribuer le trafic Internet entre les différentes régions. Chaque région Azure est jumelée à une autre région. Ensemble, elles forment une [paire régionale](/azure/best-practices-availability-paired-regions). Une région se trouve dans la même zone géographique que la région avec laquelle elle est jumelée (à l’exception du Sud du Brésil) pour répondre aux exigences de la résidence de données en termes d’impôts et d’application de la loi.
+
+Lorsque vous concevez une application multirégion, tenez compte du fait que la latence du réseau entre les régions et plus importante qu’au sein d’une région unique. Par exemple, si vous répliquez une base de données pour prendre en charge un basculement, utilisez la réplication des données synchrone au sein d’une région unique, mais la réplication des données asynchrones entre plusieurs régions.
+
+| &nbsp; | Groupe à haute disponibilité | Zone de disponibilité | Région jumelée |
+|--------|------------------|-------------------|---------------|
+| Étendue de la défaillance | Rack | Centre de données | Région |
+| Routage des requêtes | Équilibreur de charge | Équilibreur de charge entre les zones | Traffic Manager |
+| Latence du réseau | Très faible | Faible | Moyenne à élevée |
+| Réseau virtuel  | Réseau virtuel | Réseau virtuel | Homologation de réseaux virtuels entre régions (aperçu) |
+
 ## <a name="designing-for-resiliency"></a>Conception pour la résilience
 Pendant la phase de conception, vous devez effectuer une analyse du mode d’échec (FMA). Une analyse FMA vise à identifier les points de défaillance possibles et à définir la manière dont l’application y répondra.
 
@@ -168,12 +200,11 @@ Pour plus d’informations, consultez [Modèle de relance][retry-pattern].
 ### <a name="load-balance-across-instances"></a>Équilibrer la charge sur les instances
 Pour l’extensibilité, une application cloud doit être en mesure de monter en charge en ajoutant d’autres instances. Cette approche améliore également la résilience, car des instances défectueuses peuvent être supprimées de la rotation.  
 
-Par exemple :
+Par exemple : 
 
 * Placez au moins deux machines virtuelles derrière un équilibreur de charge. L’équilibreur de charge répartit le trafic vers toutes les machines virtuelles. Consultez [Exécuter des machines virtuelles à charge équilibrée à des fins d’extensibilité et de disponibilité][ra-multi-vm].
 * Montez en charge une application Azure App Service à plusieurs instances. App Service équilibre automatiquement la charge entre les instances. Consultez [Application web de base][ra-basic-web].
 * Utilisez [Azure Traffic Manager] [ tm] pour répartir le trafic sur un ensemble de points de terminaison.
-
 
 ### <a name="replicate-data"></a>Réplication des données
 La réplication de données est une stratégie générale pour gérer les échecs non temporaires dans un magasin de données. De nombreuses technologies de stockage fournissent une stratégie de réplication intégrée, y compris Azure SQL Database, Cosmos DB et Apache Cassandra.  
@@ -183,7 +214,7 @@ Il est important de tenir compte des chemins d’accès de lecture et d’écrit
 Pour optimiser la disponibilité, les réplicas peuvent être placés dans plusieurs régions. Toutefois, cela augmente la latence lors de la réplication des données. En règle générale, la réplication entre les régions est effectuée de manière asynchrone, ce qui implique un modèle de cohérence éventuel et une perte de données potentielle si un réplica échoue. 
 
 ### <a name="degrade-gracefully"></a>Dégradation normale
-Si un service échoue et qu’il n’existe aucun chemin d’accès de basculement, l’application devrait se dégrader normalement, tout en offrant une expérience utilisateur acceptable. Par exemple :
+Si un service échoue et qu’il n’existe aucun chemin d’accès de basculement, l’application devrait se dégrader normalement, tout en offrant une expérience utilisateur acceptable. Par exemple : 
 
 * Placer un élément de travail dans une file d’attente, pour qu’il soit traité ultérieurement. 
 * Retourner une valeur estimée.

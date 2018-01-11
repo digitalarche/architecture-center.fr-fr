@@ -2,15 +2,15 @@
 title: "Exécuter une machine virtuelle Windows dans Azure"
 description: "Découvrez comment exécuter une machine virtuelle Windows dans Azure, en privilégiant l’extensibilité, la résilience, la facilité de gestion et la sécurité."
 author: telmosampaio
-ms.date: 11/16/2017
+ms.date: 12/12/2017
 pnp.series.title: Windows VM workloads
 pnp.series.next: multi-vm
 pnp.series.prev: ./index
-ms.openlocfilehash: b519cb96c124a91d95fb5965f34b86026c95805c
-ms.sourcegitcommit: 115db7ee008a0b1f2b0be50a26471050742ddb04
+ms.openlocfilehash: 71eeebae1f557ecbb6f33c4a7e37a278204f3dcd
+ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/17/2017
+ms.lasthandoff: 01/02/2018
 ---
 # <a name="run-a-windows-vm-on-azure"></a>Exécuter une machine virtuelle Windows dans Azure
 
@@ -24,14 +24,15 @@ Cette architecture de référence présente un ensemble de pratiques éprouvées
 
 L’approvisionnement d’une machine virtuelle Azure requiert des composants supplémentaires, tels que les ressources de calcul, de mise en réseau et de stockage.
 
-* **Groupe de ressources.** Un [*groupe de ressources*][resource-manager-overview] est un conteneur qui héberge les ressources associées. En général, vous devez regrouper les ressources d’une solution en fonction de leur durée de vie et de la personne qui doit gérer les ressources. Pour une charge de travail de machine virtuelle unique, vous souhaiterez peut-être créer un seul groupe de ressources pour toutes les ressources.
+* **Groupe de ressources.** Un [groupe de ressources][resource-manager-overview] est un conteneur qui héberge des ressources associées. En général, vous devez regrouper les ressources d’une solution en fonction de leur durée de vie et de la personne qui doit gérer les ressources. Pour une charge de travail de machine virtuelle unique, vous souhaiterez peut-être créer un seul groupe de ressources pour toutes les ressources.
 * **Machine virtuelle**. Vous pouvez approvisionner une machine virtuelle issue d’une liste d’images publiées, d’une image managée personnalisée ou d’un fichier de disque dur virtuel (VHD) chargé(e) dans Stockage Blob Azure.
 * **Disque du système d’exploitation.** Le disque du système d’exploitation est un disque dur virtuel stocké dans [Stockage Azure][azure-storage], donc il persiste même lorsque l’ordinateur hôte est arrêté.
-* **Disque temporaire** La machine virtuelle est créée avec un disque temporaire (le lecteur `D:` sous Windows). Ce disque est stocké sur un lecteur physique de l’ordinateur hôte. Il n’est *pas* enregistré dans Stockage Azure et peut être supprimé lors des redémarrages ou d’autres événements de cycle de vie de la machine virtuelle. N’utilisez ce disque que pour des données temporaires, telles que des fichiers de pagination ou d’échange.
+* **Disque temporaire** La machine virtuelle est créée avec un disque temporaire (le lecteur `D:` sous Windows). Ce disque est stocké sur un lecteur physique de l’ordinateur hôte. Il n’est **pas** enregistré dans Stockage Azure et peut être supprimé lors des redémarrages ou d’autres événements de cycle de vie de la machine virtuelle. N’utilisez ce disque que pour des données temporaires, telles que des fichiers de pagination ou d’échange.
 * **Disques de données.** Un [disque de données][data-disk] est un disque dur virtuel persistant utilisé pour les données d’application. Les disques de données sont stockés dans Stockage Azure, comme le disque du système d’exploitation.
 * **Réseau virtuel (VNet) et sous-réseau.** Chaque machine virtuelle Azure est déployée dans un réseau virtuel qui peut être segmenté en plusieurs sous-réseaux.
-* **Adresse IP publique.** Une adresse IP publique est nécessaire pour communiquer avec la machine virtuelle &mdash; par exemple via le protocole RDP.
-* **Interfaces réseau (NIC)**. La carte d’interface réseau assignée permet à la machine virtuelle de communiquer avec le réseau virtuel.
+* **Adresse IP publique.** Une adresse IP publique est nécessaire pour communiquer avec la machine virtuelle &mdash; par exemple via le protocole RDP.  
+* **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.  
+* **Interfaces réseau (NIC)**. La carte d’interface réseau assignée permet à la machine virtuelle de communiquer avec le réseau virtuel.  
 * **Groupe de sécurité réseau**. Les [groupes de sécurité réseau][nsg] sont utilisés pour autoriser ou refuser le trafic réseau vers une ressource réseau. Vous pouvez associer un NSG à une carte réseau individuelle ou à un sous-réseau. Si vous l’associez à un sous-réseau, les règles du NSG s’appliquent à toutes les machines virtuelles de ce sous-réseau.
 * **Diagnostics.** La journalisation des diagnostics est essentielle à la gestion et au dépannage de la machine virtuelle.
 
@@ -86,7 +87,7 @@ Vous pouvez réduire ou augmenter la puissance d’une machine virtuelle en en [
 
 ## <a name="availability-considerations"></a>Considérations relatives à la disponibilité
 
-Pour bénéficier d’une disponibilité plus élevée, déployez plusieurs machines virtuelles dans un groupe à haute disponibilité. Cela fournit également un [contrat de niveau de service][vm-sla] (SLA) supérieur.
+Pour bénéficier d’une disponibilité plus élevée, déployez plusieurs machines virtuelles dans un groupe à haute disponibilité. Cette approche offre également un [contrat de niveau de service (SLA)][vm-sla] supérieur.
 
 Votre machine virtuelle peut être affectée par la [maintenance planifiée][planned-maintenance] ou la [maintenance non planifiée][manage-vm-availability]. Vous pouvez utiliser les [journaux de redémarrage de machine virtuelle][reboot-logs] pour déterminer si un redémarrage de la machine virtuelle a été provoqué par une maintenance planifiée.
 
@@ -100,7 +101,7 @@ Pour vous protéger contre la perte accidentelle de données pendant les opérat
 
 **Arrêt d’une machine virtuelle.** Azure établit une distinction entre les états « arrêté » et « désalloué ». Vous payez lorsque l’état de la machine virtuelle est « arrêté », mais pas lorsque la machine virtuelle est désallouée.
 
-Le bouton **Arrêter** du portail Azure désalloue la machine virtuelle. Si vous arrêtez la machine virtuelle par le biais du système d’exploitation pendant que vous êtes connecté, la machine virtuelle est arrêtée mais *non* désallouée. Vous serez donc toujours facturé.
+Le bouton **Arrêter** du portail Azure désalloue la machine virtuelle. Si vous arrêtez la machine virtuelle par le biais du système d’exploitation pendant que vous êtes connecté, la machine virtuelle est arrêtée mais **non** désallouée. Vous serez donc toujours facturé.
 
 **Suppression d’une machine virtuelle.** La suppression d’une machine virtuelle n’entraîne pas celle des disques durs virtuels. Vous pouvez donc supprimer la machine virtuelle, sans risque de perdre des données. Toutefois, vous serez toujours facturé pour le stockage. Pour supprimer le disque dur virtuel, supprimez le fichier de [Stockage Blob][blob-storage].
 
@@ -132,7 +133,7 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github-folde
   * Une machine virtuelle exécutant la version la plus récente de Windows Server 2016 Datacenter Edition.
   * Un exemple d’extension de script personnalisé qui formate les deux disques de données, et un script DSC PowerShell qui déploie IIS.
 
-### <a name="prerequisites"></a>Composants requis
+### <a name="prerequisites"></a>configuration requise
 
 Avant de pouvoir déployer l’architecture de référence sur votre propre abonnement, vous devez effectuer les étapes suivantes.
 
@@ -169,7 +170,7 @@ Pour déployer l’exemple de charge de travail de machine virtuelle unique, eff
 
 Pour plus d’informations sur le déploiement de cet exemple d’architecture de référence, visitez notre [dépôt GitHub][git].
 
-## <a name="next-steps"></a>Étapes suivantes
+## <a name="next-steps"></a>étapes suivantes
 
 - En savoir plus sur nos [modules Azure][azbbv2].
 - Déployer [plusieurs machines virtuelles][multi-vm] dans Azure.
@@ -180,6 +181,7 @@ Pour plus d’informations sur le déploiement de cet exemple d’architecture d
 [azbb]: https://github.com/mspnp/template-building-blocks/wiki/Install-Azure-Building-Blocks
 [azbbv2]: https://github.com/mspnp/template-building-blocks
 [azure-cli-2]: /cli/azure/install-azure-cli?view=azure-cli-latest
+[azure-dns]: /azure/dns/dns-overview
 [azure-storage]: /azure/storage/storage-introduction
 [blob-snapshot]: /azure/storage/storage-blob-snapshots
 [blob-storage]: /azure/storage/storage-introduction

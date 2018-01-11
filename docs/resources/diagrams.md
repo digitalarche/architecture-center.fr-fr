@@ -1,11 +1,11 @@
 ---
 title: "Icônes et autres ressources pour les diagrammes d’architecture"
 description: "Icônes, modèles Visio, fichiers PNG et fichiers SVG qui vous sont utiles pour générer vos propres diagrammes d’architecture"
-ms.openlocfilehash: d02e2ddcb4068ac1656fd848d14e162aecb8543c
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 863c5cd479e6c4b6d57299176b80d02661e5466b
+ms.sourcegitcommit: 662f27f37d45f778ad1b6355fb6fb66e3c65558c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="icons-and-diagrams"></a>Icônes et diagrammes
 
