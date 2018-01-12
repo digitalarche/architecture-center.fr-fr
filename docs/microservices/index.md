@@ -3,17 +3,17 @@ title: "Conception, génération et exploitation de microservices sur Azure avec
 description: "Conception, génération et exploitation de microservices sur Azure"
 author: MikeWasson
 ms.date: 12/08/2017
-ms.openlocfilehash: c279546552d731a01ed970e7942ad7d4a56157da
-ms.sourcegitcommit: 94c769abc3d37d4922135ec348b5da1f4bbcaa0a
+ms.openlocfilehash: 857e91a8eeefec18b459f2e66fde9a4f8bbe7b21
+ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/13/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="designing-building-and-operating-microservices-on-azure"></a>Conception, génération et exploitation de microservices sur Azure
 
 ![](./images/drone.svg)
 
-Les microservices sont devenus un style architectural populaire pour générer des applications cloud résilientes, hautement évolutives et capables d’évoluer rapidement. Toutefois, au-delà du concept à la mode, les microservices requièrent une approche différente pour concevoir et générer des applications. 
+Les microservices sont devenus un style architectural populaire pour générer des applications cloud résilientes, hautement évolutives, capables d’évoluer rapidement et pouvant être déployées indépendamment. Toutefois, au-delà du concept à la mode, les microservices requièrent une approche différente pour concevoir et générer des applications. 
 
 Dans cet ensemble d’articles, nous explorons comment générer et exécuter une architecture de microservices sur Azure. Les sujets abordés sont les suivants :
 
@@ -35,7 +35,7 @@ Mais tout d’abord, commençons par les notions de base. Que sont les microserv
 Dans une architecture de microservices, l’application est composée de services indépendants et de petite taille. Voici certaines caractéristiques qui définissent un microservice :
 
 - Chaque microservice implémente une fonctionnalité métier unique.
-- Un microservice est suffisamment petit pour qu’une équipe réduite de développeurs, en général 5&ndash;10 personnes, puisse l’écrire et en assurer la maintenance.
+- Un microservice est suffisamment petit pour qu’une équipe réduite de développeurs puisse l’écrire et en assurer la maintenance.
 - Les microservices s’exécutent dans des processus distincts, en communiquant via des API bien définies ou des modèles de messagerie. 
 - Les microservices ne partagent pas de magasins de données ou de schémas de données. Chaque microservice est chargé de gérer ses propres données. 
 - Les microservices ont des bases de code distinctes et ne partagent pas de code source. Ils peuvent néanmoins utiliser des bibliothèques d’utilitaires communes.

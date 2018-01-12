@@ -5,11 +5,11 @@ keywords: "Experts AWS, comparaison de Azure, comparaison de AWS, différences e
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: b576b11bc152ef721f56e79609cb7a03f2d31dd3
-ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
+ms.openlocfilehash: ac96110e3fe69b4bb69714e18fd0f193208bc244
+ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/02/2018
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="azure-for-aws-professionals"></a>Azure pour les professionnels AWS
 
@@ -23,7 +23,7 @@ Vous apprendrez ce qui suit :
 
 Azure et AWS ont développé leurs fonctionnalités indépendamment au fil du temps, de sorte qu’ils ont des différences importantes de conception et d’implémentation.
 
-## <a name="overview"></a>Vue d’ensemble
+## <a name="overview"></a>Vue d'ensemble
 
 Comme AWS, Microsoft Azure est construit autour d’un ensemble basique de services de calcul, de stockage, de base de données et de réseau. Dans de nombreux cas, les deux plateformes offrent une équivalence de base entre les produits et services qu’elles proposent. AWS et Azure permettent de concevoir des solutions hautement disponibles basées sur des ordinateurs hôtes Windows ou Linux. Par conséquent, si vous êtes habitué au développement à l’aide de Linux et de la technologie OSS, les deux plateformes peuvent faire le travail.
 
@@ -103,36 +103,45 @@ La syntaxe et la structure de ces interfaces sont différentes de leurs équival
 
 ## <a name="regions-and-zones-high-availability"></a>Régions et zones (haute disponibilité)
 
-Dans AWS, la disponibilité est centrée autour du concept de zones de disponibilité. Dans Azure, les domaines d’erreur et les groupes à haute disponibilité sont impliqués dans la création de solutions hautement disponibles. Les régions jumelées offrent des fonctionnalités de récupération d’urgence supplémentaires.
+Les défaillances n’ont pas toutes la même incidence. Certaines défaillances matérielles, comme une panne de disque, peuvent affecter un seul ordinateur hôte. Un commutateur réseau défaillant peut impacter un rack entier de serveurs. Vous déplorerez moins fréquemment des défaillances perturbant un centre de données dans son ensemble, comme une panne d’alimentation. Exceptionnellement, une région entière peut être indisponible.
 
-### <a name="availability-zones-azure-fault-domains-and-availability-sets"></a>Zones de disponibilité, domaines d’erreur Azure et groupes à haute disponibilité
+La redondance est l’un des moyens de rendre une application résiliente. Toutefois, vous devez planifier en fonction de cette redondance lorsque vous concevez l’application. Par ailleurs, le niveau de redondance dont vous avez besoin dépend des exigences de votre entreprise. Toutes les applications ne nécessitent pas une redondance entre les régions à titre de prévention contre les pannes régionales. En général, il existe un compromis entre redondance et fiabilité supérieures d’un côté contre complexité et coûts plus élevés de l’autre.  
 
-Dans AWS, une région est divisée en deux zones de disponibilité ou plus. Une zone de disponibilité correspond à un centre de données physiquement isolé dans la région géographique.
-Si vous déployez vos serveurs d’applications pour séparer des zones de disponibilité, une panne de connexion ou matérielle affectant une zone n’affecte pas les serveurs hébergés dans d’autres zones.
+Dans AWS, une région est divisée en deux zones de disponibilité ou plus. Une zone de disponibilité correspond à un centre de données physiquement isolé dans la région géographique. Azure offre un certain nombre de fonctionnalités servant à rendre une application redondante à tous les nivaux de défaillances, dont les **groupes à haute disponibilité**, les **zones de disponibilité** et les **régions jumelées**. 
 
-Dans Azure, un [domaine d’erreur](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-manage-availability/) définit un groupe de machines virtuelles qui partagent une source d’alimentation physique et un commutateur réseau.
-Vous utilisez des [groupes à haute disponibilité](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-manage-availability/) pour répartir les machines virtuelles dans plusieurs domaines d’erreur. Lorsque des instances sont attribuées au même groupe de disponibilité, Azure les répartit uniformément entre plusieurs domaines d’erreur. Si une panne d’alimentation ou de réseau se produit dans un domaine d’erreur, certaines des machines virtuelles de l’ensemble font parties d’un autre domaine d’erreur et ne sont pas affectées par la panne.
+![](../resiliency/images/redundancy.svg)
 
-![Comparaison des zones de disponibilité d’AWS avec les domaines d’erreur et groupes à haute disponibilité d’Azure](./images/zone-fault-domains.png "Zones de disponibilité d’AWS comparées aux domaines d’erreur et groupes à haute disponibilité d’Azure")
-<br/>*Zones de disponibilité d’AWS comparées aux domaines d’erreur et groupes à haute disponibilité d’Azure*
-<br/><br/>
+Le tableau suivant récapitule chaque option.
 
-Les groupes à haute disponibilité devraient être organisés en fonction du rôle de l’instance dans votre application pour garantir qu’une instance de chaque rôle est opérationnelle. Par exemple, dans une application web standard à trois niveaux, vous souhaitez créer un groupe à haute disponibilité distinct pour le serveur frontal, l’application et des instances de données.
+| &nbsp; | Groupe à haute disponibilité | Zone de disponibilité | Région jumelée |
+|--------|------------------|-------------------|---------------|
+| Étendue de la défaillance | Rack | Centre de données | Région |
+| Routage des requêtes | Équilibreur de charge | Équilibreur de charge entre les zones | Traffic Manager |
+| Latence du réseau | Très faible | Faible | Moyenne à élevée |
+| Réseau virtuel  | Réseau virtuel | Réseau virtuel | Homologation de réseaux virtuels entre régions (aperçu) |
+
+### <a name="availability-sets"></a>Groupes à haute disponibilité 
+
+Pour vous protéger contre les défaillances matérielles localisées, comme une panne de disque ou de commutateur réseau, déployez au moins deux machines virtuelles dans un groupe à haute disponibilité. Un groupe à haute disponibilité se compose d’au moins deux *domaines d’erreur* qui partagent une source d’alimentation et un commutateur réseau. Les machines virtuelles d’un groupe à haute disponibilité sont distribuées entre les domaines d’erreur. Ainsi, si une défaillance matérielle affecte un domaine d’erreur, le trafic réseau peut toujours être acheminé vers les machines virtuelles des autres domaines d’erreur. Pour plus d’informations sur les groupes à haute disponibilité, consultez la section [Gestion de la disponibilité des machines virtuelles Windows dans Azure](/azure/virtual-machines/windows/manage-availability).
+
+Lorsque des instances de machine virtuelle sont ajoutées aux groupes à haute disponibilité, un [domaine de mise à jour](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-manage-availability/) leur est également attribuées. Un domaine de mise à jour est un groupe de machines virtuelles définies pour des événements de maintenance planifiée en même temps. La distribution de machines virtuelles sur plusieurs domaines de mise à jour garantit qu’une mise à jour planifiée et des événements de mise à jour corrective affectent uniquement un sous-ensemble de ces machines virtuelles à un moment donné.
+
+Les groupes à haute disponibilité devraient être organisés en fonction du rôle de l’instance dans votre application pour garantir qu’une instance de chaque rôle est opérationnelle. Par exemple, dans une application web à trois couches, créez des groupes à haute disponibilité distincts pour les couches frontales, d’application et de données.
 
 ![Groupes à haute disponibilité d’Azure pour chaque rôle d’application](./images/three-tier-example.png "Groupes à haute disponibilité pour chaque rôle d’application")
-<br/>*Groupes à haute disponibilité d’Azure pour chaque rôle d’application*
-<br/><br/>
 
-Lorsque des instances de machine virtuelle sont ajoutées aux groupes à haute disponibilité, un [domaine de mise à jour](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-manage-availability/) leur est également attribuées.
-Un domaine de mise à jour est un groupe de machines virtuelles définies pour des événements de maintenance planifiée en même temps. La distribution de machines virtuelles sur plusieurs domaines de mise à jour garantit qu’une mise à jour planifiée et des événements de mise à jour corrective affectent uniquement un sous-ensemble de ces machines virtuelles à un moment donné.
+### <a name="availability-zones-preview"></a>Zones de disponibilité (aperçu)
+
+Une [zone de disponibilité](/azure/availability-zones/az-overview) est une zone physiquement séparée au sein d’une région Azure. Chaque zone de disponibilité possède une source d’alimentation, un réseau et un système de refroidissement propres. Le déploiement des machines virtuelles entre les zones de disponibilité aide à protéger une application contre les défaillances à l’échelle du centre de données. 
 
 ### <a name="paired-regions"></a>Régions jumelées
 
-Dans Azure, vous utilisez des [régions jumelées](https://azure.microsoft.com/documentation/articles/best-practices-availability-paired-regions/) pour prendre en charge la redondance entre deux régions géographiques prédéfinies, garantissant que votre solution reste disponible même si une panne affecte une région Azure entière.
+Pour protéger une application contre une panne régionale, vous pouvez la déployer dans plusieurs régions, en vous appuyant sur [Azure Traffic Manager][traffic-manager] pour distribuer le trafic Internet entre les différentes régions. Chaque région Azure est jumelée à une autre région. Ensemble, elles forment une [paire régionale][paired-regions]. Une région se trouve dans la même zone géographique que la région avec laquelle elle est jumelée (à l’exception du Sud du Brésil) pour répondre aux exigences de la résidence de données en termes d’impôts et d’application de la loi.
 
-Contrairement aux zones de disponibilité de AWS, physiquement séparées des centres de données mais pouvant être dans des zones géographiques relativement proches, les régions jumelées associées sont généralement séparées de plusieurs centaines de kilomètres. Cela permet de s’assurer que les sinistres importants n’affectent que l’une des régions jumelées. Les paires voisines peuvent être définies pour synchroniser une base de données et des données de service de stockage, et elle sont configurées de sorte que les mises à jour de plateforme soient déployées sur une région de la paire à la fois.
+Contrairement aux zones de disponibilité, physiquement séparées des centres de données mais pouvant être dans des zones géographiques relativement proches, les régions jumelées associées sont généralement séparées de plusieurs centaines de kilomètres. Cela permet de s’assurer que les sinistres importants n’affectent que l’une des régions jumelées. Les paires voisines peuvent être définies pour synchroniser une base de données et des données de service de stockage, et elle sont configurées de sorte que les mises à jour de plateforme soient déployées sur une région de la paire à la fois.
 
 [Le stockage géo-redondant](https://azure.microsoft.com/documentation/articles/storage-redundancy/#geo-redundant-storage) de Azure est automatiquement sauvegardé vers la région jumelée appropriée. Pour toutes les autres ressources, la création d’une solution entièrement redondante à l’aide de régions jumelées implique la création d’une copie complète de votre solution dans les deux régions.
+
 
 ### <a name="see-also"></a>Voir aussi
 
@@ -266,9 +275,9 @@ Les équivalents Azure des deux services de Elastic Load Balancing sont :
 
 Dans AWS, Route 53 fournit un service de gestion du nom DNS et un service de routage et de basculement au niveau du DNS. Dans Azure, ceci est géré par deux services :
 
--   [Azure DNS](https://azure.microsoft.com/documentation/services/dns/) - effectue la gestion du DNS et du domaine.
+-   [Azure DNS](https://azure.microsoft.com/documentation/services/dns/) effectue la gestion du DNS et du domaine.
 
--   [Traffic Manager](https://azure.microsoft.com/documentation/articles/traffic-manager-overview/) -s’occupe des fonctionnalités de routage du trafic au niveau DNS, d’équilibrage de charge et du basculement.
+-   [Traffic Manager][traffic-manager] s’occupe des fonctionnalités de routage du trafic au niveau DNS, d’équilibrage de charge et du basculement.
 
 #### <a name="direct-connect-and-azure-expressroute"></a>Connexion directe et Azure ExpressRoute
 
@@ -431,3 +440,9 @@ Notification Hubs ne prend pas en charge l’envoi de messages SMS ou de courrie
 -   [Modèles et pratiques : Recommandations sur Azure](https://azure.microsoft.com/documentation/articles/guidance/)
 
 -   [Cours en ligne gratuit : Microsoft Azure pour les experts de AWS](http://aka.ms/azureforaws)
+
+
+<!-- links -->
+
+[paired-regions]: https://azure.microsoft.com/documentation/articles/best-practices-availability-paired-regions/
+[traffic-manager]: /azure/traffic-manager/
