@@ -1,8 +1,6 @@
 # <a name="devops-checklist"></a>Liste de contrôle DevOps
 
-Le DevOps consiste à intégrer le développement, l’assurance qualité et les opérations informatiques dans une culture unifiée et dans un ensemble de processus pour la distribution de logiciels. 
-
-Utilisez cette liste de contrôle comme point de départ pour évaluer votre culture et vos processus DevOps.
+Le DevOps consiste à intégrer le développement, l’assurance qualité et les opérations informatiques dans une culture unifiée et dans un ensemble de processus pour la distribution de logiciels. Utilisez cette liste de contrôle comme point de départ pour évaluer votre culture et vos processus DevOps.
 
 ## <a name="culture"></a>Culture
 
@@ -94,7 +92,7 @@ Après la mise en production initiale, vous devez effectuer des tests de capacit
 
 **Surveillez le délai d’expiration des ressources.** Certaines ressources, comme les certificats, expirent au bout d’un certain temps. Assurez-vous de suivre les dates d’expiration des ressources et de savoir quels services ou fonctionnalités en dépendent. Utilisez des processus automatisés pour surveiller ces ressources. Informez l’équipe chargée des opérations avant l’expiration d’une ressource et réaffectez-la si son expiration risque de perturber l’application.
 
-## <a name="management"></a>Gestion
+## <a name="management"></a>gestion
 
 **Automatisez les tâches opérationnelles.** L’exécution manuelle des processus opérationnels répétitifs est sujette aux erreurs. Automatisez ces tâches aussi souvent que possible pour assurer la qualité et des exécutions cohérentes. Le code qui implémente l’automation doit être versionné dans le contrôle de code source. Comme pour tous les autres codes, les outils d’automatisation doivent être testés.
 

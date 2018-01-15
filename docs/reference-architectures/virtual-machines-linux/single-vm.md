@@ -6,11 +6,11 @@ ms.date: 12/12/2017
 pnp.series.title: Linux VM workloads
 pnp.series.next: multi-vm
 pnp.series.prev: ./index
-ms.openlocfilehash: a51e0d7ed4e35c5331241cf78d1715e63f9b4d86
-ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
+ms.openlocfilehash: 7caef46e53b42011b5a12ef53384c0352b9b9a72
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/02/2018
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-a-linux-vm-on-azure"></a>Exécuter une machine virtuelle Linux dans Azure
 
@@ -31,7 +31,7 @@ L’approvisionnement d’une machine virtuelle Azure requiert des composants su
 * **Disques de données.** Un [disque de données][data-disk] est un disque dur virtuel persistant utilisé pour les données d’application. Les disques de données sont stockés dans Stockage Azure, comme le disque du système d’exploitation.
 * **Réseau virtuel (VNet) et sous-réseau.** Chaque machine virtuelle Azure est déployée dans un réseau virtuel qui peut être segmenté en plusieurs sous-réseaux.
 * **Adresse IP publique.** Une adresse IP publique est nécessaire pour communiquer avec la machine virtuelle, par exemple par le biais du protocole SSH.
-* **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.  
+* **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.
 * **Interfaces réseau (NIC)**. La carte d’interface réseau assignée permet à la machine virtuelle de communiquer avec le réseau virtuel.
 * **Groupe de sécurité réseau**. Les [groupes de sécurité réseau][nsg] sont utilisés pour autoriser ou refuser le trafic réseau vers une ressource réseau. Vous pouvez associer un NSG à une carte réseau individuelle ou à un sous-réseau. Si vous l’associez à un sous-réseau, les règles du NSG s’appliquent à toutes les machines virtuelles de ce sous-réseau.
 * **Diagnostics.** La journalisation des diagnostics est essentielle à la gestion et au dépannage de la machine virtuelle.
@@ -151,7 +151,7 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github-folde
   * Une machine virtuelle exécutant la version la plus récente d’Ubuntu 16.04.3 LTS.
   * Un exemple d’extension de script personnalisé qui formate les deux disques de données et déploie Apache HTTP Server sur la machine virtuelle Ubuntu.
 
-### <a name="prerequisites"></a>configuration requise
+### <a name="prerequisites"></a>Conditions préalables
 
 Avant de pouvoir déployer l’architecture de référence sur votre propre abonnement, vous devez effectuer les étapes suivantes.
 

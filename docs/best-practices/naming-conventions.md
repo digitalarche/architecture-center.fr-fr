@@ -4,11 +4,11 @@ description: "Conventions d’affectation de noms pour les ressources Azure. Com
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 20f090c4cc39f96887cd58ffd2a9c7736e77de57
-ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
+ms.openlocfilehash: 364735dec9658b4d2a9d21330f38c57f6fa694bd
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/02/2018
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="naming-conventions"></a>Conventions d’affectation de noms
 
@@ -109,7 +109,7 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 | Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | exemples |
 | --- | --- | --- | --- | --- | --- | --- |
 |Réseau virtuel (VNet) |Groupe de ressources |2-64 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<service short name>-vnet` |`profx-vnet` |
-|Sous-réseau |Réseau virtuel parent |2-80 |Non-respect de la casse |Alphanumériques, trait de soulignement, tiret et point |`<descriptive context>` |`web` |
+|Sous-réseau |Réseau virtuel parent |2-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<descriptive context>` |`web` |
 |Interface réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<vmname>-nic<num>` |`profx-sql1-nic1` |
 |Groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<service short name>-<context>-nsg` |`profx-app-nsg` |
 |Règle de groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<descriptive context>` |`sql-allow` |

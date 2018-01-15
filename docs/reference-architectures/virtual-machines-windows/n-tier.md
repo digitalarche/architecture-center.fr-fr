@@ -6,11 +6,11 @@ ms.date: 11/22/2016
 pnp.series.title: Windows VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: e25d10d661ac4759f209bd27384303dee2ee454e
-ms.sourcegitcommit: 583e54a1047daa708a9b812caafb646af4d7607b
+ms.openlocfilehash: 0654239a5bbd966a2aa776415b7f15ae723ffd63
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/28/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-windows-vms-for-an-n-tier-application"></a>Exécuter des machines virtuelles Windows pour une architecture multiniveau
 
@@ -32,6 +32,7 @@ Il existe de nombreuses façons d’implémenter une architecture multiniveau. L
 * **Groupes de sécurité réseau.** Utilisez des [groupes de sécurité réseau][nsg] pour limiter le trafic réseau au sein du réseau virtuel. Par exemple, dans l’architecture à 3 niveaux illustrée ici, le niveau base de données n’accepte pas le trafic en provenance du frontend web, mais uniquement du niveau Business et du sous-réseau de gestion.
 * **Groupe de disponibilité SQL Server AlwaysOn.** Fournit une haute disponibilité du niveau Données, en activant la réplication et le basculement.
 * **Serveurs AD DS (Active Directory Domain Services)**. Avec les versions antérieures à Windows Server 2016, les groupes de disponibilité SQL Server AlwaysOn doivent être joints à un domaine. Ceci est dû au fait que les groupes de disponibilité reposent sur la technologie WSFC (Cluster de basculement Windows Server). Windows Server 2016 introduit la possibilité de créer un cluster de basculement sans Active Directory, auquel cas les serveurs de domaine Active Directory ne sont pas nécessaires pour cette architecture. Pour plus d’informations, consultez [Nouveautés du clustering de basculement dans Windows Server 2016][wsfc-whats-new].
+* **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.
 
 ## <a name="recommendations"></a>Recommandations
 
@@ -47,7 +48,7 @@ Concevez les sous-réseaux en tenant compte des exigences en matière de sécuri
 
 Pour chaque sous-réseau, spécifiez l’espace d’adressage du sous-réseau d’après la notation CIDR. Par exemple, « 10.0.0.0/24 » crée une plage de 256 adresses IP. Les machines virtuelles peuvent en utiliser 251, tandis que cinq sont réservées. Vérifiez que les plages d’adresses ne chevauchent pas plusieurs sous-réseaux. Voir le [FAQ sur les réseaux virtuels][vnet faq].
 
-### <a name="network-security-groups"></a>groupes de sécurité réseau ;
+### <a name="network-security-groups"></a>Groupes de sécurité réseau
 
 Utilisez des règles de groupe de sécurité réseau pour limiter le trafic entre les niveaux. Par exemple, dans l’architecture à 3 niveaux ci-dessus, le niveau Web ne communique pas directement avec le niveau Base de données. Pour appliquer cette recommandation, le niveau Base de données doit bloquer le trafic entrant provenant du sous-réseau du niveau Web.  
 
@@ -130,7 +131,7 @@ Simplifiez la gestion de l’ensemble du système en utilisant des outils d’ad
 
 Un déploiement pour cette architecture de référence est disponible sur [GitHub][github-folder]. 
 
-### <a name="prerequisites"></a>Composants requis
+### <a name="prerequisites"></a>Conditions préalables
 
 Avant de pouvoir déployer l’architecture de référence sur votre propre abonnement, vous devez effectuer les étapes suivantes.
 
@@ -184,6 +185,7 @@ Pour plus d’informations sur le déploiement de cet exemple d’architecture d
 [azure-availability-sets]: /azure/virtual-machines/virtual-machines-windows-manage-availability#configure-each-application-tier-into-separate-availability-sets
 [azure-cli]: /azure/virtual-machines-command-line-tools
 [azure-cli-2]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest
+[azure-dns]: /azure/dns/dns-overview
 [azure-key-vault]: https://azure.microsoft.com/services/key-vault
 [hôte bastion]: https://en.wikipedia.org/wiki/Bastion_host
 [cidr]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing

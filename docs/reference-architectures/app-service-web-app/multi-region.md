@@ -4,11 +4,11 @@ description: "Architecture recommandée pour une application web à haute dispon
 author: MikeWasson
 ms.date: 11/23/2016
 cardTitle: Run in multiple regions
-ms.openlocfilehash: 2d7d0c38bef3efc73a7ba2dd61e4190d07deb1b5
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 60caa121d0ce2f1aa2638650229bed8048804c22
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-a-web-application-in-multiple-regions"></a>Exécuter une application web dans plusieurs régions
 [!INCLUDE [header](../../_includes/header.md)]
@@ -17,13 +17,14 @@ Cette architecture de référence indique comment exécuter une application Azur
 
 ![Architecture de référence : application web à haute disponibilité](./images/multi-region-web-app-diagram.png) 
 
-*Téléchargez un [fichier Visio][visio-download] de cette architecture.*
+*Téléchargez un [fichier Visio][visio-download] de cette architecture.*
 
 ## <a name="architecture"></a>Architecture 
 
 Cette architecture repose sur celle illustrée dans l’article [Améliorer l’évolutivité dans une application web][guidance-web-apps-scalability]. Les principales différences entre ces deux architectures sont les suivantes :
 
 * **Régions primaires et secondaires**. Cette architecture utilise deux régions pour garantir une meilleure disponibilité. L’application est déployée dans chaque région. Pendant les opérations normales, le trafic réseau est routé vers la région primaire. Si la région primaire n’est plus disponible, le trafic est routé vers la région secondaire. 
+* **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.
 * **Azure Traffic Manager**. [Traffic Manager][traffic-manager] route les demandes entrantes vers la région primaire. Si l’application qui s’exécute dans cette région n’est plus disponible, Traffic Manager bascule vers la région secondaire.
 * **Géoréplication** de SQL Database et de Cosmos DB. 
 
@@ -32,7 +33,7 @@ Une architecture multirégion peut offrir une meilleure disponibilité qu’un d
 Plusieurs approches générales permettent de bénéficier d’une haute disponibilité dans l’ensemble des régions : 
 
 * Mode actif/passif avec serveur de secours. Le trafic est dirigé vers une région, tandis que l’autre région est en attente sur le serveur de secours. Le terme « serveur de secours » signifie que les machines virtuelles de la région secondaire sont allouées et en cours d’exécution en permanence.
-* Mode actif/passif avec reprise progressive. Le trafic est dirigé vers une région, tandis que l’autre région est en attente sur le centre de données de reprise progressive. Le terme « reprise progressive » signifie que les machines virtuelles de la région secondaire ne sont pas allouées tant qu’elles ne sont pas requises pour le basculement. La mise en œuvre de cette approche se révèle moins coûteuse, mais nécessite généralement davantage de temps en cas de défaillance.
+* Mode actif/passif avec reprise progressive. Le trafic est dirigé vers une région, tandis que l’autre région est en attente sur le centre de données de reprise progressive. Le terme « reprise progressive » signifie que les machines virtuelles de la région secondaire ne sont pas allouées tant qu’elles ne sont pas requises pour le basculement. La mise en œuvre de cette approche se révèle moins coûteuse, mais nécessite davantage de temps en cas de défaillance.
 * Mode actif/actif. Les deux régions sont actives, et la charge de travail des requêtes est équilibrée entre les régions. Si l’une des régions n’est plus disponible, elle est mise hors service. 
 
 Cette architecture de référence est axée sur le mode actif/passif avec serveur de secours, et utilise Traffic Manager pour le basculement. 
@@ -56,13 +57,13 @@ Envisagez de placer la région primaire, la région secondaire et Traffic Manage
 
 ### <a name="traffic-manager-configuration"></a>Configuration de Traffic Manager 
 
-**Routage**. Traffic Manager prend en charge plusieurs [algorithmes de routage][tm-routing]. Pour le scénario décrit dans cet article, utilisez le routage *par priorité* (auparavant désigné sous le terme de routage *par basculement*). Lorsque cette méthode de routage est configurée, Traffic Manager envoie toutes les requêtes à la région primaire, sauf si le point de terminaison de cette région devient inaccessible. Dans ce dernier cas, les requêtes basculent automatiquement vers la région secondaire. Consultez l’article [Configurer la méthode de routage par basculement][tm-configure-failover].
+**Routage**. Traffic Manager prend en charge plusieurs [algorithmes de routage][tm-routing]. Pour le scénario décrit dans cet article, utilisez le routage *par priorité* (auparavant désigné sous le terme de routage *par basculement*). Lorsque cette méthode de routage est configurée, Traffic Manager envoie toutes les requêtes à la région primaire, sauf si le point de terminaison de cette région devient inaccessible. Dans ce dernier cas, les requêtes basculent automatiquement vers la région secondaire. Consultez [Configurer la méthode de routage de basculement][tm-configure-failover].
 
 **Sonde d’intégrité**. Traffic Manager utilise une sonde HTTP (ou HTTPS) pour surveiller la disponibilité de chaque point de terminaison. Cette sonde offre à Traffic Manager un test de réussite/échec pour le basculement vers la région secondaire. Elle envoie une requête à un chemin d’URL spécifié. Si la sonde obtient une réponse autre que 200 dans le délai d’expiration imparti, elle échoue. Après quatre échecs de requêtes, Traffic Manager marque le point de terminaison comme détérioré et bascule vers l’autre point de terminaison. Pour plus d’informations, consultez l’article [Surveillance et basculement des points de terminaison Traffic Manager][tm-monitoring].
 
 Une bonne pratique consiste à créer un point de terminaison de sonde d’intégrité qui signale l’intégrité globale de l’application et à utiliser ce point de terminaison pour la sonde d’intégrité. Le point de terminaison doit vérifier les dépendances critiques telles que les applications App Service, la file d’attente de stockage et SQL Database. Dans le cas contraire, la sonde risque de signaler un point de terminaison intègre alors que des parties critiques de l’application sont défaillantes.
 
-En revanche, n’utilisez pas la sonde d’intégrité pour vérifier des services de priorité inférieure. Par exemple, si un service de messagerie tombe en panne, l’application peut basculer vers un second fournisseur ou simplement différer l’envoi des e-mails. Cette situation n’est pas suffisamment prioritaire pour entraîner le basculement de l’application. Pour plus d’informations, consultez l’article [Modèle Surveillance de point de terminaison d’intégrité][health-endpoint-monitoring-pattern].
+En revanche, n’utilisez pas la sonde d’intégrité pour vérifier des services de priorité inférieure. Par exemple, si un service de messagerie tombe en panne, l’application peut basculer vers un second fournisseur ou simplement différer l’envoi des e-mails. Cette situation n’est pas suffisamment prioritaire pour entraîner le basculement de l’application. Pour plus d’informations, consultez [Modèle de surveillance de point de terminaison d’intégrité][health-endpoint-monitoring-pattern].
  
 ### <a name="sql-database"></a>Base de données SQL
 Utilisez la [géoréplication active][sql-replication] pour créer un réplica secondaire lisible dans une autre région. Vous pouvez posséder jusqu’à quatre réplicas secondaires lisibles. Basculez vers une base de données secondaire si votre base de données primaire est défaillante ou doit être mise hors connexion. La géoréplication active peut être configurée pour toute base de données faisant partie d’un pool de bases de données élastique.
@@ -77,7 +78,7 @@ Dans l’éventualité d’une interruption de service régionale, vous pouvez p
 >
 >
 
-### <a name="storage"></a>Storage
+### <a name="storage"></a>Stockage
 Pour le service Stockage Azure, utilisez un [stockage géographiquement redondant avec accès en lecture][ra-grs] (RA-GRS). Dans le cadre d’un stockage RA-GRS, les données sont répliquées vers une région secondaire. Vous disposez d’un accès en lecture seule aux données de la région secondaire par le biais d’un point de terminaison distinct. En cas d’interruption de service régionale ou de situation d’urgence, l’équipe Stockage Azure peut décider de procéder à un basculement géographique vers la région secondaire. Ce basculement ne nécessite aucune action de la part du client.
 
 Pour le service Stockage File d’attente, créez une file d’attente de sauvegarde dans la région secondaire. Pendant le basculement, l’application peut utiliser la file d’attente de sauvegarde jusqu’à ce que la région primaire redevienne disponible. De cette façon, l’application peut continuer à traiter les nouvelles requêtes.
@@ -99,7 +100,7 @@ Traffic Manager est un point de défaillance possible dans le système. Si le se
 ### <a name="sql-database"></a>Base de données SQL
 L’objectif de point de récupération (RPO) et le temps de récupération estimé (ERT) pour SQL Database sont décrits dans l’article [Vue d’ensemble de la continuité de l’activité avec la base de données Azure SQL][sql-rpo]. 
 
-### <a name="storage"></a>Storage
+### <a name="storage"></a>Stockage
 Le stockage RA-GRS assure un stockage durable, mais il est important que vous compreniez ce qui peut se produire en cas d’interruption de service :
 
 * Si le stockage cesse d’être disponible, les données ne vous sont plus accessibles en écriture pendant un certain laps de temps. Pendant l’interruption de service, vous pouvez continuer à lire les données à partir du point de terminaison secondaire.
@@ -118,9 +119,9 @@ Pour plus d’informations, consultez l’article [Que faire en cas de panne du 
 
 ### <a name="traffic-manager"></a>Traffic Manager
 
-En cas de basculement de Traffic Manager, nous vous recommandons de procéder à une restauration automatique manuelle plutôt que d’implémenter une restauration automatique. Dans le cas contraire, l’application risque d’alterner continuellement entre les régions. Vérifiez que tous les sous-systèmes de l’application sont intègres avant d’effectuer la restauration automatique.
+En cas de basculement de Traffic Manager, nous vous recommandons de procéder à une restauration manuelle plutôt que d’implémenter une restauration automatique. Dans le cas contraire, l’application risque d’alterner continuellement entre les régions. Vérifiez que tous les sous-systèmes de l’application sont intègres avant d’effectuer la restauration automatique.
 
-Notez que Traffic Manager procède à une restauration automatique par défaut. Pour éviter cela, diminuez manuellement la priorité de la région primaire après un événement de basculement. Par exemple, supposons que la région primaire soit dotée de la priorité 1, et que la base de données secondaire présente la priorité 2. Après un basculement, définissez la priorité de la région primaire sur la valeur 3 afin d’empêcher la restauration automatique. Lorsque vous êtes prêt à rebasculer vers cette région, redéfinissez sa priorité sur la valeur 1.
+Notez que Traffic Manager procède à une restauration automatique par défaut. Pour éviter cela, diminuez manuellement la priorité de la région primaire après un événement de basculement. Par exemple, supposez que la région primaire a la priorité 1, et que la base de données secondaire a la priorité 2. Après un basculement, définissez la priorité de la région primaire sur la valeur 3 afin d’empêcher la restauration automatique. Lorsque vous êtes prêt à rebasculer vers cette région, redéfinissez sa priorité sur la valeur 1.
 
 Les commandes permettant de mettre à jour la priorité sont indiquées ci-après.
 
@@ -147,6 +148,7 @@ Si la base de données primaire est défaillante, effectuez un basculement manue
 <!-- links -->
 
 [azure-sql-db]: https://azure.microsoft.com/documentation/services/sql-database/
+[azure-dns]: /azure/dns/dns-overview
 [docdb-geo]: /azure/documentdb/documentdb-distribute-data-globally
 [guidance-web-apps-scalability]: ./scalable-web-app.md
 [health-endpoint-monitoring-pattern]: https://msdn.microsoft.com/library/dn589789.aspx

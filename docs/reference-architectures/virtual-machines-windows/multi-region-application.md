@@ -5,11 +5,11 @@ author: MikeWasson
 ms.date: 11/22/2016
 pnp.series.title: Windows VM workloads
 pnp.series.prev: n-tier
-ms.openlocfilehash: b3f1fcf1403a5199191cb37dfed4fbe86695766d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9c54959da96115e55ba8a5c9e0f3c358d29ce5dd
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-windows-vms-in-multiple-regions-for-high-availability"></a>Exécuter des machines virtuelles Windows dans plusieurs régions à des fins de haute disponibilité
 
@@ -23,7 +23,8 @@ Cette architecture de référence présente un ensemble de pratiques éprouvées
 
 Cette architecture repose sur celle décrite dans l’article [Exécuter des machines virtuelles Windows pour une application multiniveau](n-tier.md). 
 
-* **Régions primaires et secondaires**. Pour obtenir une plus haute disponibilité, utilisez deux régions. L’une est la région primaire, tandis que l’autre sert au basculement. 
+* **Régions primaires et secondaires**. Pour obtenir une plus haute disponibilité, utilisez deux régions. L’une est la région primaire, tandis que l’autre sert au basculement.
+* **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.
 * **Azure Traffic Manager**. [Traffic Manager][traffic-manager] achemine les requêtes entrantes vers l’une des régions. Pendant le fonctionnement normal, il achemine les requêtes vers la région primaire. Si cette région n’est plus disponible, Traffic Manager bascule vers la région secondaire. Pour plus d’informations, consultez la section [Configuration de Traffic Manager](#traffic-manager-configuration).
 * **Groupes de ressources**. Créez des [groupes de ressources][resource groups] distincts pour la région primaire, la région secondaire et Traffic Manager. Vous obtenez ainsi la flexibilité nécessaire pour gérer chaque région comme une collection de ressources unique. Par exemple, vous pourriez redéployer une région sans arrêter l’autre. [Liez les groupes de ressources][resource-group-links] afin de pouvoir exécuter une requête pour répertorier toutes les ressources de l’application.
 * **Réseaux virtuels**. Créez un réseau virtuel distinct pour chaque région. Vérifiez que les espaces d’adressage ne se chevauchent pas. 
@@ -37,7 +38,7 @@ Cette architecture repose sur celle décrite dans l’article [Exécuter des mac
 
 ## <a name="recommendations"></a>Recommandations
 
-Une architecture multirégion peut offrir une disponibilité plus élevée qu’un déploiement dans une seule région. Si une panne régionale affecte la région primaire, vous pouvez utiliser [Traffic Manager][traffic-manager] pour basculer vers la région secondaire. Cette architecture peut également se révéler utile en cas de défaillance d’un sous-système spécifique de l’application.
+Une architecture multirégion peut offrir une meilleure disponibilité qu’un déploiement dans une seule région. Si une interruption de service régionale affecte la région primaire, vous pouvez utiliser [Traffic Manager][traffic-manager] pour basculer vers la région secondaire. Cette architecture peut également se révéler utile en cas de défaillance d’un sous-système spécifique de l’application.
 
 Plusieurs approches générales permettent de bénéficier d’une haute disponibilité dans l’ensemble des régions : 
 
@@ -164,7 +165,7 @@ Mesurez les temps de récupération et vérifiez qu’ils répondent aux besoins
 
 <!-- Links -->
 [hybrid-vpn]: ../hybrid-networking/vpn.md
-
+[azure-dns]: /azure/dns/dns-overview
 [azure-sla]: https://azure.microsoft.com/support/legal/sla/
 [azure-sql-db]: https://azure.microsoft.com/documentation/services/sql-database/
 [health-endpoint-monitoring-pattern]: https://msdn.microsoft.com/library/dn589789.aspx

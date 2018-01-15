@@ -6,11 +6,11 @@ ms.date: 11/22/2017
 pnp.series.title: Linux VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: 98814685e0f33f2a1258bf8307a86f92d8a81968
-ms.sourcegitcommit: 583e54a1047daa708a9b812caafb646af4d7607b
+ms.openlocfilehash: e875a58aa83339560fd1de5b03a960f071883927
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/28/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-linux-vms-for-an-n-tier-application"></a>Exécuter des machines virtuelles Linux pour une application multiniveau
 
@@ -27,6 +27,7 @@ Il existe de nombreuses façons d’implémenter une architecture multiniveau. L
 * **Groupes à haute disponibilité.** Créez un [groupe à haute disponibilité][azure-availability-sets] pour chaque niveau et configurez au moins deux machines virtuelles dans chaque niveau.  Cela rend les machines virtuelles éligibles pour un [niveau contrat de service (SLA)][vm-sla] plus élevé. Vous pouvez déployer une seule machine virtuelle dans un groupe à haute disponibilité, mais cette machine virtuelle unique ne sera pas éligible à la garantie de contrat de niveau de service, à moins qu’elle n’utilise le stockage Premium Azure pour tous les systèmes d’exploitation et disques de données.  
 * **Sous-réseaux.** Créez un sous-réseau distinct pour chaque niveau. Spécifiez la plage d’adresses et le masque de sous-réseau d’après la notation [CIDR]. 
 * **Équilibreurs de charge.** Utilisez un [équilibreur de charge accessible sur Internet][load-balancer-external] pour distribuer le trafic Internet entrant vers le niveau Web et un [équilibreur de charge interne][load-balancer-internal] pour distribuer le trafic réseau du niveau Web vers le niveau Business.
+* **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.
 * **Serveur de rebond (jumpbox).** Également appelée [hôte bastion]. Machine virtuelle sécurisée sur le réseau, utilisée par les administrateurs pour se connecter aux autres machines virtuelles. Le serveur de rebond a un groupe de sécurité réseau qui autorise le trafic distant provenant uniquement d’adresses IP publiques figurant sur une liste verte. Le groupe de sécurité réseau doit autoriser le trafic SSH (Secure Shell).
 * **Surveillance.** Des logiciels de surveillance tels que [Nagios], [Zabbix] ou [Icinga] peuvent vous donner une idée du temps de réponse, du temps de fonctionnement de machine virtuelle et de l’intégrité globale de votre système. Installez le logiciel de surveillance sur une machine virtuelle placée sur un sous-réseau de gestion distinct.
 * **Groupes de sécurité réseau.** Utilisez des [groupes de sécurité réseau][nsg] pour limiter le trafic réseau au sein du réseau virtuel. Par exemple, dans l’architecture à 3 niveaux illustrée ici, le niveau base de données n’accepte pas le trafic en provenance du frontend web, mais uniquement du niveau Business et du sous-réseau de gestion.
@@ -46,7 +47,7 @@ Concevez les sous-réseaux en tenant compte des exigences en matière de sécuri
 
 Pour chaque sous-réseau, spécifiez l’espace d’adressage du sous-réseau d’après la notation CIDR. Par exemple, « 10.0.0.0/24 » crée une plage de 256 adresses IP. Les machines virtuelles peuvent en utiliser 251, tandis que cinq sont réservées. Vérifiez que les plages d’adresses ne chevauchent pas plusieurs sous-réseaux. Voir le [FAQ sur les réseaux virtuels][vnet faq].
 
-### <a name="network-security-groups"></a>groupes de sécurité réseau ;
+### <a name="network-security-groups"></a>Groupes de sécurité réseau
 
 Utilisez des règles de groupe de sécurité réseau pour limiter le trafic entre les niveaux. Par exemple, dans l’architecture à 3 niveaux ci-dessus, le niveau Web ne communique pas directement avec le niveau Base de données. Pour appliquer cette recommandation, le niveau Base de données doit bloquer le trafic entrant provenant du sous-réseau du niveau Web.  
 
@@ -115,7 +116,7 @@ Simplifiez la gestion de l’ensemble du système en utilisant des outils d’ad
 
 Un déploiement pour cette architecture de référence est disponible sur [GitHub][github-folder]. 
 
-### <a name="prerequisites"></a>Composants requis
+### <a name="prerequisites"></a>Conditions préalables
 
 Avant de pouvoir déployer l’architecture de référence sur votre propre abonnement, vous devez effectuer les étapes suivantes.
 
@@ -160,6 +161,7 @@ Pour plus d’informations sur le déploiement de cet exemple d’architecture d
 [azure-administration]: /azure/automation/automation-intro
 [azure-availability-sets]: /azure/virtual-machines/virtual-machines-linux-manage-availability
 [azure-cli-2]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest
+[azure-dns]: /azure/dns/dns-overview
 [hôte bastion]: https://en.wikipedia.org/wiki/Bastion_host
 [cassandra-in-azure]: https://docs.datastax.com/en/datastax_enterprise/4.5/datastax_enterprise/install/installAzure.html
 [cidr]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing

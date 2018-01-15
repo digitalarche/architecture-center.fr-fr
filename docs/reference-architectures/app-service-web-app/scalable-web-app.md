@@ -7,11 +7,11 @@ pnp.series.prev: basic-web-app
 pnp.series.next: multi-region-web-app
 ms.date: 11/23/2016
 cardTitle: Improve scalability
-ms.openlocfilehash: b875b89b87edd5636d90da8b7f8211f965b39937
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 1fdaf6e3695cb814fa4c275a4a273f9fa9a7b71b
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="improve-scalability-in-a-web-application"></a>Améliorer la scalabilité dans une application web
 
@@ -34,6 +34,7 @@ Cette architecture repose sur celle décrite dans l’article [Application web d
 * **Stockage des données**. Utilisez [Azure SQL Database][sql-db] pour les données relationnelles. Pour les données non relationnelles, envisagez un magasin NoSQL, tel que [Cosmos DB][documentdb].
 * **Recherche Azure**. Utilisez [Recherche Azure][azure-search] pour ajouter des fonctionnalités de recherche telles que les suggestions de recherche, la recherche partielle et la recherche spécifique à une langue. Recherche Azure est généralement utilisé conjointement avec un autre magasin de données, surtout si le magasin de données principal requiert la cohérence stricte. Dans cette approche, stockez les données faisant autorité dans l’autre magasin de données et l’index de recherche dans Recherche Azure. Recherche Azure peut également servir à consolider un index de recherche unique à partir de plusieurs magasins de données.  
 * **E-mail/SMS**. Utilisez un service tiers tel que SendGrid ou Twilio pour envoyer des e-mails ou SMS au lieu de générer cette fonctionnalité directement dans l’application.
+* **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.
 
 ## <a name="recommendations"></a>Recommandations
 
@@ -76,19 +77,19 @@ Pour plus d’informations, consultez [Aide relative au réseau de distribution 
 ### <a name="storage"></a>Stockage
 Les applications modernes traitent souvent de grandes quantités de données. Afin de trouver une bonne adaptation pour le cloud, il est important de choisir le type de stockage adéquat. Voici quelques recommandations de base : 
 
-| Éléments à stocker | Exemple | Stockage recommandé |
+| Éléments à stocker | exemples | Stockage recommandé |
 | --- | --- | --- |
-| Fichiers |Images, documents, fichiers PDF |Stockage Blob Azure |
-| Paires clé/valeur |Données de profil utilisateur recherchées par ID d’utilisateur |Stockage Table Azure |
+| Fichiers |Images, documents, fichiers PDF |un stockage Azure Blob |
+| Paires clé/valeur |Données de profil utilisateur recherchées par ID d’utilisateur |Stockage de tables Azure |
 | Messages courts destinés à déclencher un traitement supplémentaire |Demandes de commande |Stockage File d’attente Azure, file d’attente Service Bus ou rubrique Service Bus |
 | Données non relationnelles avec un schéma flexible nécessitant une interrogation de base |Catalogue produits |Base de données de document, comme Azure Cosmos DB, MongoDB ou Apache CouchDB |
-| Données relationnelles nécessitant une prise en charge des requêtes enrichie, un schéma strict et/ou une cohérence forte |Inventaire de produits |Azure SQL Database |
+| Données relationnelles nécessitant une prise en charge des requêtes enrichie, un schéma strict et/ou une cohérence forte |Inventaire de produits |Base de données SQL Azure |
 
-## <a name="scalability-considerations"></a>Considérations relatives à la scalabilité
+## <a name="scalability-considerations"></a>Considérations relatives à l’extensibilité
 
-Le principal avantage d’Azure App Service est la possibilité de mettre à l’échelle votre application en fonction de la charge. Voici quelques considérations à prendre en compte pendant la planification de la mise à l’échelle de votre application.
+Le principal avantage de Azure App Service est la possibilité de mettre à l’échelle votre application en fonction de la charge. Voici quelques considérations à prendre en compte pendant la planification de la mise à l’échelle de votre application.
 
-### <a name="app-service-app"></a>Application App Service
+### <a name="app-service-app"></a>application App Service
 Si votre solution inclut plusieurs applications App Service, envisagez de les déployer sur des plans App Service distincts. Cette approche vous permet de les mettre à l’échelle indépendamment, car elles s’exécutent sur des instances distinctes. 
 
 De même, envisagez de placer une tâche web dans son propre plan afin que les tâches en arrière-plan ne s’exécutent pas sur les mêmes instances qui gèrent les requêtes HTTP.  
@@ -127,6 +128,7 @@ Utilisez [Transparent Data Encryption][sql-encryption] si vous avez besoin de ch
 [app-service-api-app]: /azure/app-service-api/app-service-api-apps-why-best-platform
 [app-service-pricing]: https://azure.microsoft.com/pricing/details/app-service/
 [azure-cdn]: https://azure.microsoft.com/services/cdn/
+[azure-dns]: /azure/dns/dns-overview
 [azure-redis]: https://azure.microsoft.com/services/cache/
 [azure-search]: https://azure.microsoft.com/documentation/services/search/
 [azure-search-scaling]: /azure/search/search-capacity-planning

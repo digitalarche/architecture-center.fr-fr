@@ -6,11 +6,11 @@ ms.date: 11/16/2017
 pnp.series.title: Windows VM workloads
 pnp.series.next: n-tier
 pnp.series.prev: single-vm
-ms.openlocfilehash: c9b1e52044d38348ecf1bd29cb24b3c20d1d6a45
-ms.sourcegitcommit: 115db7ee008a0b1f2b0be50a26471050742ddb04
+ms.openlocfilehash: 14e7e023afd7cb7cbe0e8db8e224ba777f6fe863
+ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/17/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="run-load-balanced-vms-for-scalability-and-availability"></a>Exécuter des machines virtuelles à charge équilibrée à des fins de scalabilité et de disponibilité
 
@@ -32,6 +32,7 @@ Elle comporte les composants suivants :
 * **Réseau virtuel (VNet) et sous-réseau.** Chaque machine virtuelle Azure est déployée dans un réseau virtuel qui peut être segmenté en plusieurs sous-réseaux.
 * **Équilibreur de charge Azure**. [L’équilibreur de charge][load-balancer] répartit les requêtes Internet entrantes entre les instances de machine virtuelle. 
 * **Adresse IP publique**. Une adresse IP publique est nécessaire pour que l’équilibreur de charge puisse recevoir le trafic Internet.
+* **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.
 * **Groupe de machines virtuelles identiques**. Un [groupe de machines virtuelles identiques][vm-scaleset] est un ensemble de machines virtuelles identiques utilisé pour héberger une charge de travail. Les groupes identiques permettent d’augmenter ou de réduire le nombre de machines virtuelles manuellement ou automatiquement en fonction de règles prédéfinies.
 * **Groupe à haute disponibilité**. Le [groupe à haute disponibilité][availability-set] contient les machines virtuelles, ce qui leur permet d’être éligibles pour un [niveau contrat de service (SLA)][vm-sla] supérieur. Pour appliquer le contrat SLA supérieur, vous devez ajouter au moins deux machines virtuelles dans le groupe à haute disponibilité. Les groupes à haute disponibilité sont implicites dans les groupes identiques. Si vous créez des machines virtuelles en dehors d’un groupe identique, vous devez créer le groupe à haute disponibilité indépendamment.
 * **Disques managés**. Les disques managés Azure gèrent les fichiers de disque dur virtuel (VHD) des disques de machine virtuelle. 
@@ -124,7 +125,7 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github-folde
   * Un équilibreur de charge placé devant le groupe de machines virtuelles identiques.
   * Un groupe de sécurité réseau avec des règles de trafic entrant qui autorisent le trafic HTTP vers le groupe de machines virtuelles identiques.
 
-### <a name="prerequisites"></a>Composants requis
+### <a name="prerequisites"></a>Conditions préalables
 
 Avant de pouvoir déployer l’architecture de référence sur votre propre abonnement, vous devez effectuer les étapes suivantes.
 
@@ -169,6 +170,7 @@ Pour plus d’informations sur le déploiement de cet exemple d’architecture d
 [azure-automation]: /azure/automation/automation-intro
 [azure-cli]: /azure/virtual-machines-command-line-tools
 [azure-cli-2]: /azure/install-azure-cli?view=azure-cli-latest
+[azure-dns]: /azure/dns/dns-overview
 [git]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/multi-vm
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/multi-vm
 [health-probe-log]: /azure/load-balancer/load-balancer-monitor-log
