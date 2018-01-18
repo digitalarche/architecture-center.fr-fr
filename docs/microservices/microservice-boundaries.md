@@ -3,11 +3,11 @@ title: Identification des limites de microservice
 description: Identification des limites de microservice
 author: MikeWasson
 ms.date: 12/08/2017
-ms.openlocfilehash: 046749191bd565813218b3834cb4674c4c5100e2
-ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
+ms.openlocfilehash: e4f11da9f970724c55ad99824f808a10c4558971
+ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/29/2017
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="designing-microservices-identifying-microservice-boundaries"></a>Conception de microservices : identification des limites de microservice
 
@@ -116,7 +116,7 @@ Voici quelques éléments à prendre en compte lors du choix entre une approche 
 
 **Portabilité** : tous les orchestrateurs répertoriés ici (Kubernetes, DC/OS, Docker Swarm et Service Fabric) peuvent s’exécuter localement ou dans plusieurs clouds publics. 
 
-**Intégration d’application** : il peut être difficile de créer une application complexe à l’aide d’une architecture sans serveur. Une option dans Azure consiste à utiliser [Azure Logic Apps](/azure/logic-apps/) pour coordonner un ensemble de fonctions Azure. Pour obtenir un exemple de cette approche, voir [Créer une fonction qui s’intègre avec Azure Logic Apps](/azure/azure-functions/functions-twitter-email.).
+**Intégration d’application** : il peut être difficile de créer une application complexe à l’aide d’une architecture sans serveur. Une option dans Azure consiste à utiliser [Azure Logic Apps](/azure/logic-apps/) pour coordonner un ensemble de fonctions Azure. Pour obtenir un exemple de cette approche, consultez [Créer une fonction qui s’intègre avec Azure Logic Apps](/azure/azure-functions/functions-twitter-email).
 
 **Coût** : avec un orchestrateur, vous payez pour les machines virtuelles qui s’exécutent dans le cluster. Avec une application sans serveur, vous payez uniquement pour les ressources de calcul réellement consommées. Dans les deux cas, vous devez tenir compte du coût des services supplémentaires, tels que le stockage, les bases de données et les services de messagerie.
 

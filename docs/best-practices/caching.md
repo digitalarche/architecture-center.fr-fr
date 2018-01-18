@@ -4,11 +4,11 @@ description: "Conseils sur la mise en cache pour améliorer les performances et 
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: f8bc25ef10847e8308e830b745e87a176438d200
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 7968c1578dfef2c7ad28576b9aafbbe2b6672cd9
+ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/11/2018
 ---
 # <a name="caching"></a>Mise en cache
 
@@ -105,7 +105,7 @@ Pour certains caches, vous pouvez spécifier une période d’expiration en tant
 
 Il est également possible que le cache soit saturé si des données peuvent y résider pendant une longue période. Dans ce cas, toute demande d’ajout d’éléments au cache peut entraîner la suppression forcée d’autres éléments. On parle alors d’éviction. Les services de cache suppriment généralement les données les moins récemment utilisées (LRU), mais vous pouvez généralement remplacer cette stratégie et empêcher l’éviction des éléments. Toutefois, si vous adoptez cette approche, vous risquez un dépassement de la mémoire disponible dans le cache. Dans ce cas, si une application tente d’ajouter un élément au cache, l’opération échoue et lève une exception.
 
-Certaines implémentations de la mise en cache peuvent nécessiter des stratégies d’éviction supplémentaires. Il existe plusieurs types de stratégies d’éviction. Vous avez notamment vu les points suivants :
+Certaines implémentations de la mise en cache peuvent nécessiter des stratégies d’éviction supplémentaires. Il existe plusieurs types de stratégies d’éviction. Il s’agit des actions suivantes :
 
 * Stratégie des dernières données utilisées (en supposant que les données ne seront plus nécessaires).
 * Stratégie dite du premier entré, premier sorti (les données les plus anciennes sont supprimées en premier).
@@ -185,23 +185,13 @@ Si vous devez restreindre l’accès à des sous-ensembles des données mises en
 Vous devez également protéger les données échangées avec le cache. Pour ce faire, vous dépendez des fonctionnalités de sécurité fournies par l’infrastructure réseau que les applications clientes utilisent pour se connecter au cache. Si le cache est implémenté à l’aide d’un serveur local de l’organisation qui héberge les applications clientes, il se peut que l’isolation du réseau lui-même ne nécessite aucune mesure supplémentaire. Si le cache est distant et requiert une connexion TCP ou HTTP via un réseau public (comme Internet), songez à implémenter le protocole SSL.
 
 ## <a name="considerations-for-implementing-caching-with-microsoft-azure"></a>Considérations sur l'implémentation de la mise en cache avec Microsoft Azure
-Azure fournit le Cache Redis Azure. Il s’agit d’une implémentation du cache Redis open source qui s’exécute en tant que service dans un centre de données Azure. Il fournit un service de mise en cache qui est accessible à partir de n'importe quelle application Azure, que l'application soit implémentée comme un service cloud, un site web, ou soit située à l'intérieur d'une machine virtuelle Azure. Les caches peuvent être partagés par les applications clientes qui possèdent la clé d'accès appropriée.
+
+[Cache Redis Azure](/azure/redis-cache/) est une implémentation du cache Redis open source qui s’exécute en tant que service dans un centre de données Azure. Il fournit un service de mise en cache qui est accessible à partir de n'importe quelle application Azure, que l'application soit implémentée comme un service cloud, un site web, ou soit située à l'intérieur d'une machine virtuelle Azure. Les caches peuvent être partagés par les applications clientes qui possèdent la clé d'accès appropriée.
 
 Le cache Redis Azure est une solution de mise en cache très performante qui offre disponibilité, extensibilité et sécurité. Il s’exécute généralement en tant que service réparti sur une ou plusieurs machines dédiées. Il tente de stocker autant d’informations que possible en mémoire pour assurer un accès rapide. Cette architecture est conçue pour fournir une latence faible et un haut débit en réduisant la nécessité d'effectuer des opérations d'E/S lentes.
 
  Le cache Redis Azure est compatible avec de nombreuses API utilisées par des applications clientes. Si vous avez des applications existantes qui utilisent déjà le cache Redis Azure localement, celui-ci fournit un chemin de migration rapide vers une mise en cache dans le cloud.
 
-> [!NOTE]
-> Azure fournit également le service de cache géré. Ce service est basé sur le moteur du cache Azure Service Fabric. Il vous permet de créer un cache distribué qui peut être partagé par les applications faiblement couplées. Le cache est hébergé sur des serveurs hautes performances exécutés dans un centre de données Azure.
-> Toutefois, cette option n'est plus recommandée et elle est fournie uniquement pour prendre en charge des applications existantes qui ont été générées afin de l'utiliser. Pour tout nouveau développement, utilisez plutôt le cache Redis Azure.
-> 
-> En outre, Azure prend en charge la mise en cache In-Role Cache. Cette fonctionnalité vous permet de créer un cache propre à un service cloud.
-> Le cache est hébergé sur des instances de rôle web ou de travail, et n’est accessible qu’aux rôles opérant en relation avec la même unité de déploiement de service cloud. (Une unité de déploiement est l’ensemble des instances de rôle déployées sous la forme d’un service cloud dans une région spécifique.) Le cache est mis en cluster, et toutes les instances du rôle situées dans la même unité de déploiement hébergeant le cache font partie du même cluster de cache. Toutefois, cette option n'est plus recommandée et elle est fournie uniquement pour prendre en charge des applications existantes qui ont été générées afin de l'utiliser. Pour tout nouveau développement, utilisez plutôt le cache Redis Azure.
-> 
-> La mise hors service du service de cache géré Azure et d’In-Role Cache Azure est actuellement prévue pour le 16 novembre 2016.
-> Nous vous recommandons de migrer vers Cache Redis Azure en vue de cette mise hors service. Pour plus d’informations, consultez la section [Que propose Cache Redis et quelle taille dois-je utiliser ?](/azure/redis-cache/cache-faq#what-redis-cache-offering-and-size-should-i-use).
-> 
-> 
 
 ### <a name="features-of-redis"></a>Fonctionnalités de Redis
  Redis est plus qu’un simple serveur de cache. Il fournit une base de données en mémoire distribuée avec un jeu de commandes complet qui prend en charge de nombreux scénarios courants. Ceux-ci sont décrits plus loin dans ce document, dans la section Utilisation de la mise en cache Redis. Cette section décrit quelques-unes des fonctionnalités clés que fournit Redis.

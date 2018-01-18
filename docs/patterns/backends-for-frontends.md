@@ -3,15 +3,15 @@ title: "Modèle de services principaux destinés aux frontaux"
 description: "Créez différents services principaux destinés à être consommés par des applications ou interfaces frontales spécifiques."
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: dd71b65e99ae21dff1443f5728ae5f0f54f8122c
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 87acd39d021c5e44594a2e7c9574e4dd363ce83b
+ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/05/2018
 ---
 # <a name="backends-for-frontends-pattern"></a>Modèle de services principaux destinés aux frontaux
 
-Créez différents services principaux destinés à être consommés par des applications ou interfaces frontales spécifiques. Ce modèle se révèle utile lorsque vous souhaitez personnaliser un même service principal pour plusieurs interfaces.
+Créez différents services principaux destinés à être utilisés par des applications ou interfaces frontales spécifiques. Ce modèle se révèle utile lorsque vous souhaitez personnaliser un même service principal pour plusieurs interfaces. Ce modèle a d’abord été décrit par Sam Newman.
 
 ## <a name="context-and-problem"></a>Contexte et problème
 
@@ -33,6 +33,8 @@ Créez un service principal par interface utilisateur. Ajustez le comportement e
 
 Étant donné que chaque service principal est propre à une interface, il peut être optimisé pour cette dernière. Par conséquent, il sera moins volumineux, moins complexe et probablement plus rapide qu’un service principal générique qui tente de répondre aux exigences de toutes les interfaces. Chaque équipe d’interface a la possibilité de contrôler son propre service principal et ne dépend pas d’une équipe de développement de service principal centralisée. L’équipe d’interface dispose ainsi d’une réelle flexibilité en matière de sélection de langue, de cadence de mise en production, de hiérarchisation des charges de travail et d’intégration de fonctionnalités à son service principal.
 
+Pour plus d’informations, consultez [Pattern: Backends For Frontends](http://samnewman.io/patterns/architectural/bff/) (Modèle : Services principaux destinés aux frontaux).
+
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
 - Considérez le nombre de services principaux à déployer.
@@ -44,7 +46,7 @@ Créez un service principal par interface utilisateur. Ajustez le comportement e
 
 ## <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
 
-Utilisez ce modèle dans les situations suivantes :
+Utilisez ce modèle dans les situations suivantes :
 
 - Un service principal partagé ou à usage général doit être entretenu avec des coûts de développement substantiels.
 - Vous devez optimiser le service principal pour les exigences d’interfaces clientes spécifiques.
@@ -58,8 +60,8 @@ Ce modèle peut ne pas convenir dans les cas suivants :
 
 ## <a name="related-guidance"></a>Aide connexe
 
-- [Gateway Aggregation pattern (Modèle d’agrégation de passerelle)](./gateway-aggregation.md)
+- [Gateway Aggregation pattern](./gateway-aggregation.md) (Modèle d’agrégation de passerelle)
 - [Modèle de déchargement de passerelle](./gateway-offloading.md)
-- [Gateway Routing pattern (Modèle de routage de passerelle)](./gateway-routing.md)
+- [Gateway Routing pattern](./gateway-routing.md) (Modèle de routage de passerelle)
 
 

@@ -3,15 +3,15 @@ title: "Modèle de couche de lutte contre la corruption"
 description: "Implémentez une couche de façade ou d’adaptateur entre une application moderne et un système hérité."
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 590d5f3676c92f5f18661360106e2b2fdd4efbe1
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: e41f080abbef772596ee7f8b10ad72bb03a3b829
+ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/05/2018
 ---
 # <a name="anti-corruption-layer-pattern"></a>Modèle de couche de lutte contre la corruption
 
-Implémentez une couche de façade ou d’adaptateur entre une application moderne et un système hérité dont elle dépend. Cette couche traduit des requêtes entre l’application moderne et le système hérité. Utilisez ce modèle pour vous assurer que la conception d’une application n’est pas limitée par les dépendances sur les systèmes hérités.
+Implémentez une couche de façade ou d’adaptateur entre une application moderne et un système hérité dont elle dépend. Cette couche traduit des requêtes entre l’application moderne et le système hérité. Utilisez ce modèle pour vous assurer que la conception d’une application n’est pas limitée par les dépendances sur les systèmes hérités. Ce modèle a d’abord été décrit par Eric Evans dans *Domain-Driven Design* (Conception orientée domaine).
 
 ## <a name="context-and-problem"></a>Contexte et problème
 
@@ -42,7 +42,7 @@ La communication entre l’application moderne et de la couche de lutte contre l
 
 ## <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
 
-Utilisez ce modèle dans les situations suivantes :
+Utilisez ce modèle dans les situations suivantes :
 
 - Une migration est planifiée pour avoir lieu en plusieurs étapes, mais l’intégration entre les systèmes nouveaux et hérités doit être maintenue.
 - Les systèmes nouveaux et hérités ont des sémantiques différentes, mais doivent tout de même communiquer.

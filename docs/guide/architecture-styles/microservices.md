@@ -2,15 +2,15 @@
 title: "Style d’architecture de microservices"
 description: "Décrit les avantages, les inconvénients et les bonnes pratiques pour les architectures de microservices sur Azure"
 author: MikeWasson
-ms.openlocfilehash: 6426b3342a319832baf5eec35e9c783ba9348bdd
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 08fd39b6cf0b3c88af654b27e21b2d7dd9fb19b1
+ms.sourcegitcommit: 7764a804f000180c37a4f8dbab946b525f784f58
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/09/2018
 ---
 # <a name="microservices-architecture-style"></a>Style d’architecture de microservices
 
-Une architecture de microservices se compose d’un ensemble de petits services autonomes. Chaque service est autonome et doit implémenter une fonctionnalité unique. 
+Une architecture de microservices se compose d’un ensemble de petits services autonomes. Chaque service est autonome et doit implémenter une fonctionnalité unique. Pour obtenir des instructions détaillées sur la création d’une architecture de microservices sur Azure, consultez [Conception, génération et exploitation de microservices sur Azure](../../microservices/index.md).
 
 ![](./images/microservices-logical.svg)
  
@@ -71,7 +71,7 @@ Envisagez ce style d’architecture pour :
 
 - **Mise à l’échelle précise** : les services peuvent mis à l’échelle de manière indépendante. Dans le même temps, la plus grande densité des services par machine virtuelle signifie que les ressources des machines virtuelles sont entièrement exploitées. En utilisant des contraintes de placement, un service peut être assorti à un profil de machine virtuelle (processeur rapide, mémoire volumineuse, etc.).
 
-## <a name="challenges"></a>Inconvénients
+## <a name="challenges"></a>Défis
 
 - **Complexité** : une application de microservices possède plus d’éléments mobiles qu’une application monolithique équivalente. Si chaque service est plus simple, le système dans son ensemble est plus complexe.
 
@@ -89,7 +89,7 @@ Envisagez ce style d’architecture pour :
 
 - **Compétences** : les microservices sont des systèmes hautement distribués. Évaluez avec soin les chances de réussite en tenant compte des compétences et de l’expérience de l’équipe.
 
-## <a name="best-practices"></a>Bonnes pratiques
+## <a name="best-practices"></a>Meilleures pratiques
 
 - Modélisez les services autour du domaine de l’entreprise. 
 
@@ -111,7 +111,7 @@ Envisagez ce style d’architecture pour :
 
 ## <a name="microservices-using-azure-container-service"></a>Microservices et Azure Container Service 
 
-Vous pouvez utiliser Azure Container Service pour configurer et provisionner un cluster Docker. Azure Container Services prend en charge plusieurs conteneurs et orchestrateurs courants, dont Kubernetes, DC/OS et Docker Swarm.
+Vous pouvez utiliser [Azure Container Service](/azure/container-service/) pour configurer et provisionner un cluster Docker. Azure Container Services prend en charge plusieurs conteneurs et orchestrateurs courants, dont Kubernetes, DC/OS et Docker Swarm.
 
 ![](./images/microservices-acs.png)
  
@@ -133,7 +133,7 @@ Le diagramme suivant illustre trois nœuds exécutant quatre services différent
 
 ## <a name="microservices-using-azure-service-fabric"></a>Microservices et Azure Service Fabric
 
-Le diagramme suivant illustre une architecture de microservices utilisant Azure Service Fabric.
+Le schéma suivant illustre une architecture de microservices utilisant [Azure Service Fabric](/azure/service-fabric/).
 
 ![](./images/service-fabric.png)
 

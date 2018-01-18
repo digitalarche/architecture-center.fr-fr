@@ -4,18 +4,17 @@ description: "Conseils sur l’implémentation d’une API."
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: b4d197719380bf55033942b3ebcad384170d950d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: cc28864de36afdeed2f8a7155a307e312c3a398e
+ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/05/2018
 ---
 # <a name="api-implementation"></a>Implémentation de l’API
-[!INCLUDE [header](../_includes/header.md)]
 
 Une API Web RESTful soigneusement développée définit les ressources, les relations et les schémas de navigation auxquels ont accès les applications clientes. Lorsque vous implémentez et déployez une API Web, vous devez tenir compte des exigences physiques de l’environnement hébergeant l’API Web et de la configuration de l’API Web, non de la structure logique des données. Ce guide est axé sur les meilleures pratiques relatives à l’implémentation d’une API Web et sa publication dans l’objectif de la rendre disponible aux applications clientes. Pour plus d’informations sur la conception de l’API Web, consultez le [guide de conception d’API](/azure/architecture/best-practices/api-design).
 
-## <a name="considerations-for-processing-requests"></a>Considérations relatives au traitement des requêtes
+## <a name="processing-requests"></a>Traitement des requêtes
 
 Lorsque vous implémentez le code de traitement des requêtes, tenez compte des points ci-après.
 
@@ -126,7 +125,7 @@ Les liens HATEOAS représentés dans l’exemple de réponse HTTP indiquent qu�
 * Une requête HTTP GET dirigée vers l’URI `http://adventure-works.com/customers/2/orders` pour rechercher toutes les commandes du client. Les données peuvent être renvoyées au format XML ou JSON.
 * Une requête HTTP PUT dirigée vers l’URI `http://adventure-works.com/customers/2/orders` pour créer une commande pour ce client. Les données doivent être fournies dans le message de requête, sous le format x-www-form-urlencoded.
 
-## <a name="considerations-for-handling-exceptions"></a>Considérations relatives au traitement des exceptions
+## <a name="handling-exceptions"></a>Gestion des exceptions
 
 Si une opération lève une exception non interceptée, tenez compte des points ci-après.
 
@@ -190,7 +189,7 @@ Pour gérer les exceptions de manière cohérente, envisagez d’implémenter un
 
 Le protocole HTTP fait la distinction entre les erreurs qui sont provoquées par l’application cliente (codes de statut HTTP 4xx) et les erreurs qui sont causées par un dysfonctionnement du serveur (codes de statut HTTP 5xx). Veillez à respecter cette convention dans l’ensemble des messages d’erreur.
 
-## <a name="considerations-for-optimizing-client-side-data-access"></a>Considérations relatives à l’optimisation de l’accès aux données côté client
+## <a name="optimizing-client-side-data-access"></a>Optimisation de l’accès aux données côté client
 Au sein d’un environnement distribué, comme ceux comportant un serveur Web et des applications clientes, l’une des problématiques prioritaires est le réseau. Il peut agir comme un véritable goulot d’étranglement, en particulier si une application cliente envoie fréquemment des requêtes ou reçoit régulièrement des données. Par conséquent, vous devez veiller à réduire le volume de trafic sur le réseau. Lorsque vous implémentez le code pour récupérer et conserver les données, tenez compte des points suivants :
 
 ### <a name="support-client-side-caching"></a>Prenez en charge la mise en cache côté client
@@ -541,7 +540,7 @@ public class OrdersController : ApiController
 >
 >
 
-## <a name="considerations-for-handling-large-requests-and-responses"></a>Considérations relatives au traitement de requêtes et de réponses de taille importante
+## <a name="handling-large-requests-and-responses"></a>Gestion des requêtes et des réponses de taille importante
 Il peut arriver qu’une application cliente doive émettre des requêtes qui envoient ou reçoivent des données présentant une taille de plusieurs mégaoctets (ou supérieure). Il est possible que l’application cliente, soumise au délai d’attente lié à la transmission de ce volume de données, ne réponde pas. Lorsque vous devez traiter des requêtes comportant des volumes importants de données, tenez compte des points suivants :
 
 ### <a name="optimize-requests-and-responses-that-involve-large-objects"></a>Optimisez les requêtes et les réponses impliquant des objets volumineux
@@ -608,7 +607,7 @@ Une application cliente peut émettre une requête destinée à récupérer 30 c
 >
 >
 
-## <a name="considerations-for-maintaining-responsiveness-scalability-and-availability"></a>Considérations relatives au maintien de la réactivité, de l’évolutivité et de la disponibilité
+## <a name="maintaining-responsiveness-scalability-and-availability"></a>Maintien de la réactivité, de l’extensibilité et de la disponibilité
 Une API Web peut être utilisée par de nombreuses applications clientes de différentes zones géographiques. Il est important de s’assurer que l’API Web implémentée garantisse une réactivité appropriée en cas de charge importante, puisse prendre en charge une charge de travail hautement évolutive et maintienne une disponibilité adéquate pour les clients exécutant des opérations critiques. Lorsque vous déterminez la manière appropriée de répondre à ces exigences, tenez compte des points suivants :
 
 ### <a name="provide-asynchronous-support-for-long-running-requests"></a>Offrez une prise en charge asynchrone pour les requêtes de longue durée
@@ -652,7 +651,7 @@ Le maintien d’une connexion ouverte peut contribuer à l’amélioration de la
 >
 >
 
-## <a name="considerations-for-publishing-and-managing-a-web-api"></a>Considérations relatives à la publication et à la gestion d’une API Web
+## <a name="publishing-and-managing-a-web-api"></a>Publication et gestion d’une API web
 Pour rendre une API Web disponible pour les applications clientes, vous devez la déployer au sein d’un environnement d’hôte. Il s’agit généralement d’un serveur Web, mais vous pouvez également utiliser un autre type de processus hôte. Lorsque vous publiez une API Web, vous devez tenir compte des points suivants :
 
 * Toutes les requêtes doivent être authentifiées et autorisées, et le niveau approprié de contrôle d’accès doit être appliqué.
@@ -668,7 +667,7 @@ Il est utile de pouvoir séparer ces problématiques des dysfonctionnements tech
 * transformation des messages et traduction des protocoles de communication pour les clients développés à l’aide de technologies diverses ;
 * mise en cache des requêtes et des réponses afin de réduire la charge sur le serveur hébergeant l’API Web.
 
-## <a name="considerations-for-testing-a-web-api"></a>Considérations relatives au test d’une API Web
+## <a name="testing-a-web-api"></a>Test d’une API web
 Une API Web doit être testée aussi minutieusement qu’une toute autre composante logicielle. Vous devez envisager de créer des tests unitaires afin de valider la fonctionnalité de chaque opération. Chaque API Web doit faire l’objet de vérifications supplémentaires de son bon fonctionnement. Vous devez prêter une attention particulière aux points suivants :
 
 * Testez l’ensemble des itinéraires afin de vérifier qu’ils invoquent les opérations appropriées. Accordez une attention particulière au code de statut HTTP 405 (Méthode non autorisée). Lorsqu’il est renvoyé de manière imprévue, cela peut indiquer un écart entre un itinéraire et les méthodes HTTP (GET, POST, PUT, DELETE) qui peuvent être réparties sur cet itinéraire.
@@ -684,7 +683,7 @@ Une API Web doit être testée aussi minutieusement qu’une toute autre compos
 * Vérifiez que les requêtes et les messages de réponse sont correctement composés. Par exemple, si une requête HTTP POST contient les données associées à une nouvelle ressource sous le format x-www-form-urlencoded, assurez-vous que l’opération correspondante analyse correctement les données, crée les ressources et renvoie une réponse comportant les détails de la nouvelle ressource, notamment l’en-tête Location adéquat.
 * Vérifiez l’ensemble des liens et des URI des messages de réponse. Par exemple, un message HTTP POST doit renvoyer l’URI de la ressource nouvellement créée. Tous les liens HATEOAS doivent être valides.
 
-* Assurez-vous que chaque opération renvoie les codes de statut appropriés pour différentes combinaisons d’entrée. Par exemple :
+* Assurez-vous que chaque opération renvoie les codes de statut appropriés pour différentes combinaisons d’entrée. Par exemple : 
 
   * Si une requête est réussie, elle doit renvoyer le code de statut 200 (OK).
   * Si une ressource est introuvable, l’opération doit renvoyer le code de statut HTTP 404 (Non trouvé).
@@ -699,8 +698,9 @@ Méfiez-vous des codes de statut de réponse inattendus, situés dans la plage 5
 
 Vous devez également créer et exécuter des tests de performances afin de vérifier que l’API Web fonctionne correctement sous contraintes. Pour développer un projet de test de chargement et de performances Web, utilisez Visual Studio Ultimate. Pour plus d’informations, consultez l’article [Exécuter des tests de performances sur votre application](https://msdn.microsoft.com/library/dn250793.aspx).
 
-## <a name="publish-and-manage-a-web-api-using-the-azure-api-management-service"></a>Publier et gérer une API Web à l’aide du service de gestion des API Azure
-Microsoft Azure offre le [service de gestion des API](https://azure.microsoft.com/documentation/services/api-management/) , que vous pouvez utiliser pour publier et gérer une API Web. À l’aide de cette fonctionnalité, vous générez un service utilisé comme façade pour une ou plusieurs API Web. Il s’agit d’un service pouvant être créé et configuré à l’aide du portail de gestion Microsoft Azure. Il peut être mis à profit pour publier et gérer une API Web comme suit :
+## <a name="using-azure-api-management"></a>Utilisation de Gestion des API Azure 
+
+Sur Azure, envisagez d’utiliser [Gestion des API Azure](https://azure.microsoft.com/documentation/services/api-management/) pour publier et gérer une API web. À l’aide de cette fonctionnalité, vous générez un service utilisé comme façade pour une ou plusieurs API Web. Il s’agit d’un service pouvant être créé et configuré à l’aide du portail de gestion Microsoft Azure. Il peut être mis à profit pour publier et gérer une API Web comme suit :
 
 1. Déployez l’API Web sur un site Web, un service cloud Microsoft Azure ou une machine virtuelle Microsoft Azure.
 2. Connectez le service de gestion des API à l’API Web. Les requêtes envoyées à l’URL de l’API de gestion sont mappées sur les URI de l’API Web. Un service de gestion des API peut router les requêtes vers plusieurs API Web. Cela vous permet d’agréger plusieurs API Web au sein d’un service unique de gestion. De la même manière, une API Web peut être référencée à partir de plusieurs services de gestion des API si vous devez restreindre ou partitionner la fonctionnalité accessible par différentes applications.
@@ -729,7 +729,7 @@ Pour plus d’informations, consultez la page [Documentation Gestion des API](/a
 > Dans cette structure, si vous utilisez des noms DNS personnalisés pour vos sites Web, vous devez configurer l’enregistrement CNAME approprié afin que chaque site Web pointe sur le nom DNS du site Web Microsoft Azure Traffic Manager.
 >
 
-## <a name="support-developers-building-client-applications"></a>Offrir un support aux développeurs d’applications clientes
+## <a name="supporting-client-side-developers"></a>Prise en charge des développeurs côté client
 Les développeurs d’applications clientes ont généralement besoin d’informations relatives à l’accès à l’API Web et d’une documentation relatives aux paramètres, aux types de données, aux types de renvoi et aux codes de renvoi associés aux différentes requêtes et réponses échangées entre le service Web et l’application cliente.
 
 ### <a name="document-the-rest-operations-for-a-web-api"></a>Documentez les opérations REST associées à une API Web
