@@ -2,11 +2,11 @@
 title: Centre des architectures Azure
 description: "Le centre des architectures Azure est le centre officiel pour obtenir des instructions, des schémas, des modèles et les meilleures pratiques pour la création de solutions avec Microsoft Azure. Il est organisé par l’équipe Modèles et pratiques de Microsoft."
 layout: LandingPage
-ms.openlocfilehash: d48861a1001c9bef8cad152a3664077f2ad915c6
-ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
+ms.openlocfilehash: 204d32c8de934665fff7b1a321bfdf893ac69983
+ms.sourcegitcommit: 441185360db49cfb3cf39527b68f318d17d4cb3d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/29/2017
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="azure-architecture-center"></a>Centre des architectures Azure
 
@@ -92,7 +92,7 @@ ms.lasthandoff: 12/29/2017
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="_images/new-content.svg" alt="Designing, building, and operating microservices on Azure" />
+                                <img src="_images/microservices.svg" alt="Designing, building, and operating microservices on Azure" />
                             </div>
                         </div>
                         <div class="cardText">
