@@ -4,11 +4,11 @@ description: "Conseils sur la mise en cache pour améliorer les performances et 
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 7968c1578dfef2c7ad28576b9aafbbe2b6672cd9
-ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
+ms.openlocfilehash: fde1c3e8c65d357746e4ccaddebeebace943cf9d
+ms.sourcegitcommit: 441185360db49cfb3cf39527b68f318d17d4cb3d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/11/2018
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="caching"></a>Mise en cache
 
