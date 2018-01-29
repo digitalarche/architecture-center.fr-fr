@@ -17,12 +17,14 @@
 - name: Architectures de référence
   href: reference-architectures/index.md
   items:
+    - name: Applications web App Service
+      href: reference-architectures/app-service-web-app/index.md
+    - name: Réseaux hybrides
+      href: reference-architectures/hybrid-networking/index.md
     - name: Gestion des identités
       href: reference-architectures/identity/index.md
-    - name: Réseau hybride
-      href: reference-architectures/hybrid-networking/index.md
-    - name: Application web App Service
-      href: reference-architectures/app-service-web-app/index.md
+    - name: Serveur Jenkins
+      href: reference-architectures/jenkins/index.md
     - name: Zone DMZ réseau
       href: reference-architectures/dmz/index.md
     - name: SAP NetWeaver et SAP HANA
@@ -54,13 +56,13 @@
       href: patterns/category/security.md
 - name: Meilleures pratiques
   items:
-    - name: Conception de l’API
+    - name: Conception d’API
       href: best-practices/api-design.md
     - name: Implémentation de l’API
       href: best-practices/api-implementation.md
     - name: Mise à l’échelle automatique
       href: best-practices/auto-scaling.md
-    - name: Tâches en arrière-plan
+    - name: Travaux en arrière-plan
       href: best-practices/background-jobs.md
     - name: Mise en cache
       href: best-practices/caching.md
@@ -97,7 +99,7 @@
       href: antipatterns/synchronous-io/index.md
 - name: Checklists de révision de la conception
   items:
-    - name: Availability
+    - name: Disponibilité
       href: checklist/availability.md
     - name: DevOps
       href: checklist/dev-ops.md
@@ -117,7 +119,7 @@
   items:
     - name: Azure pour les professionnels AWS
       href: aws-professional/index.md
-    - name: Gérer l’identité dans les applications multi-locataire
+    - name: Gérer l’identité dans les applications mutualisées
       href: multitenant-identity/index.md
     - name: Migrer à partir de Services cloud vers Service Fabric
       href: service-fabric/migrate-from-cloud-services.md
