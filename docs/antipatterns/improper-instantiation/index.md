@@ -3,11 +3,11 @@ title: "Antimodèle d’instanciation incorrect"
 description: "Évitez de créer continuellement de nouvelles instances d’un objet destiné à être créé une seule fois, puis partagé."
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: d6ea27b0ea88ad7527353d263d900626c0aff720
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: 4b217f7fc644901eb5c3e77319d151caed30eef1
+ms.sourcegitcommit: cf207fd10110f301f1e05f91eeb9f8dfca129164
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2017
+ms.lasthandoff: 01/29/2018
 ---
 # <a name="improper-instantiation-antipattern"></a>Antimodèle d’instanciation incorrect
 
@@ -71,7 +71,7 @@ public class ExpensiveToCreateService
 
 Si la classe qui encapsule la ressource externe est partageable et thread-safe, créez une instance de singleton partagée ou un pool d’instances réutilisables de la classe.
 
-L’exemple suivant utilise une instance `HttpClient` statique partageant la connexion pour toutes les requêtes.
+L’exemple suivant utilise une instance `HttpClient` statique, ce qui entraîne le partage de la connexion sur l’ensemble des requêtes.
 
 ```csharp
 public class SingleHttpClientInstanceController : ApiController
