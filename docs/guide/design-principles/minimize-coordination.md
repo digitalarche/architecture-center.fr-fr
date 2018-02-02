@@ -3,11 +3,11 @@ title: Minimiser la coordination
 description: "Minimiser la coordination entre les services d’application pour privilégier la scalabilité"
 author: MikeWasson
 layout: LandingPage
-ms.openlocfilehash: 1f8caa8b7cd85593c937f1d99d582492d4cf9a8b
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 3cab05b539612234fd8e66517b140ac5257c3e70
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="minimize-coordination"></a>Minimiser la coordination 
 
@@ -49,7 +49,7 @@ Ces deux modèles se complètent mutuellement. Si la banque en écriture seule d
 
 **Utilisez si possible l’accès concurrentiel optimiste** : le contrôle d’accès concurrentiel pessimiste utilise des verrous de base de données pour éviter les conflits. Cela peut dégrader les performances et réduire la disponibilité. Avec le contrôle d’accès concurrentiel optimiste, chaque transaction modifie une copie ou un instantané des données. Une fois la transaction engagée, le moteur de base de données valide la transaction et rejette celles qui affecteraient la cohérence de la base de données. 
 
-Azure SQL Database et SQL Server prennent en charge l’accès concurrentiel optimiste via l’[isolement d’instantané][sql-snapshot-isolation]. Certains services de stockage Azure prennent en charge l’accès concurrentiel optimiste via l’utilisation d’ETags, notamment l’[API DocumentDB][docdb-faq] et [Stockage Azure][storage-concurrency].
+Azure SQL Database et SQL Server prennent en charge l’accès concurrentiel optimiste via l’[isolement d’instantané][sql-snapshot-isolation]. Certains services de stockage Azure prennent en charge l’accès concurrentiel optimiste via l’utilisation d’ETags, notamment [Azure Cosmos DB][cosmosdb-faq] et le [stockage Azure][storage-concurrency].
 
 **Envisagez d’utiliser MapReduce ou d’autres algorithmes parallèles distribués**. Selon les données et le type de travail à effectuer, vous pourrez peut-être répartir le travail en plusieurs tâches indépendantes qui seront effectuées par plusieurs nœuds fonctionnant en parallèle. Consultez [Style d’architecture Big Compute][big-compute].
 
@@ -62,7 +62,7 @@ Azure SQL Database et SQL Server prennent en charge l’accès concurrentiel opt
 [compensating-transaction]: ../../patterns/compensating-transaction.md
 [cqrs-style]: ../architecture-styles/cqrs.md
 [cqrs-pattern]: ../../patterns/cqrs.md
-[docdb-faq]: /azure/documentdb/documentdb-faq
+[cosmosdb-faq]: /azure/cosmos-db/faq
 [domain-event]: https://martinfowler.com/eaaDev/DomainEvent.html
 [event-sourcing]: ../../patterns/event-sourcing.md
 [leader-election]: ../../patterns/leader-election.md
