@@ -4,16 +4,16 @@ description: "Instructions relatives au réseau de distribution contenu (CDN) po
 author: dragon119
 ms.date: 09/30/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 94036c803552d5e7061f99e6dd0ca9e563a32690
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: fffe0b0523c0a9c817f4346744ff3b5e3f11dede
+ms.sourcegitcommit: cf207fd10110f301f1e05f91eeb9f8dfca129164
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/29/2018
 ---
 # <a name="content-delivery-network"></a>Réseau de distribution de contenu
 [!INCLUDE [header](../_includes/header.md)]
 
-Microsoft Azure Content Delivery Network (CDN) offre aux développeurs une solution globale pour fournir du contenu de large bande passante hébergé dans Azure ou ailleurs. Le réseau de diffusion de contenu (CDN) vous permet de mettre en cache des objets disponibles publiquement, chargés à partir d’un stockage d’objets blob Azure, d’une application web, d’une machine virtuelle, d’un dossier d’application ou d’un autre emplacement HTTP/HTTPS. Le cache du CDN peut être maintenu dans des emplacements stratégiques afin d’offrir une bande passante maximale pour la distribution de contenu aux utilisateurs. Le CDN est généralement utilisé pour distribuer du contenu statique tel que des images, des feuilles de style, des documents, des fichiers, des scripts côté client et des pages HTML.
+La fonction [Microsoft Azure Content Delivery Network (CDN)](/azure/cdn/cdn-overview) offre aux développeurs une solution globale pour fournir du contenu de large bande passante hébergé dans Azure ou ailleurs. Le réseau de diffusion de contenu (CDN) vous permet de mettre en cache des objets disponibles publiquement, chargés à partir d’un stockage d’objets blob Azure, d’une application web, d’une machine virtuelle, d’un dossier d’application ou d’un autre emplacement HTTP/HTTPS. Le cache du CDN peut être maintenu dans des emplacements stratégiques afin d’offrir une bande passante maximale pour la distribution de contenu aux utilisateurs. Le CDN est généralement utilisé pour distribuer du contenu statique tel que des images, des feuilles de style, des documents, des fichiers, des scripts côté client et des pages HTML.
 
 Vous pouvez également utiliser le CDN en tant que cache pour servir du contenu dynamique, tel qu’un rapport au format PDF ou un graphique basé sur des entrées spécifiées. Si les mêmes valeurs d’entrée sont fournies par différents utilisateurs, le résultat doit être identique.
 
@@ -74,7 +74,7 @@ Les scénarios où le CDN peut s’avérer moins utile sont :
 L’utilisation du CDN est une bonne façon de réduire la charge sur votre application et d’optimiser la disponibilité et les performances. Envisagez d’adopter cette stratégie pour l’ensemble du contenu et des ressources appropriés que votre application utilise. Lors de l’élaboration de votre stratégie d’utilisation du CDN, prenez en considération les points des sections suivantes :  
 
 ### <a name="origin"></a>Origine
-Un déploiement de contenu via le CDN nécessite simplement que vous spécifiiez un point de terminaison HTTP et/ou HTTPS que le service CDN utilisera pour accéder au contenu et le mettre en cache.
+Un déploiement de contenu via la fonction CDN nécessite simplement que vous spécifiiez un [point de terminaison](/azure/cdn/cdn-create-new-endpoint) HTTP et/ou HTTPS que le service CDN utilisera pour accéder au contenu et le mettre en cache.
 
 Le point de terminaison peut spécifier un conteneur de stockage d’objets blob Azure comprenant le contenu statique que vous voulez distribuer via le CDN. Le conteneur doit être marqué comme étant public. Seuls les blobs d’un conteneur public qui disposent d’un accès en lecture public sont disponibles par le biais du CDN.
 

@@ -4,11 +4,11 @@ description: "Architecture recommandée pour une application web à haute dispon
 author: MikeWasson
 ms.date: 11/23/2016
 cardTitle: Run in multiple regions
-ms.openlocfilehash: 60caa121d0ce2f1aa2638650229bed8048804c22
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 50ac9636e1e3c25bd0403c89281a3a06915d065f
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="run-a-web-application-in-multiple-regions"></a>Exécuter une application web dans plusieurs régions
 [!INCLUDE [header](../../_includes/header.md)]
@@ -71,7 +71,7 @@ Utilisez la [géoréplication active][sql-replication] pour créer un réplica s
 ### <a name="cosmos-db"></a>Cosmos DB
 Cosmos DB prend en charge la géoréplication entre régions. L’une des régions est désignée comme étant accessible en écriture, tandis que les autres régions sont des réplicas en lecture seule.
 
-Dans l’éventualité d’une interruption de service régionale, vous pouvez procéder à un basculement en désignant une autre région comme étant accessible en écriture. Le Kit de développement logiciel (SDK) client envoie automatiquement des requêtes d’écriture à la région accessible en écriture ; vous n’avez donc pas besoin de mettre à jour la configuration du client après un basculement. Pour plus d’informations, consultez l’article [Comment distribuer des données mondialement avec Azure Cosmos DB][docdb-geo].
+Dans l’éventualité d’une interruption de service régionale, vous pouvez procéder à un basculement en désignant une autre région comme étant accessible en écriture. Le Kit de développement logiciel (SDK) client envoie automatiquement des requêtes d’écriture à la région accessible en écriture ; vous n’avez donc pas besoin de mettre à jour la configuration du client après un basculement. Pour en savoir plus, voir [Comment distribuer des données mondialement avec Azure Cosmos DB][cosmosdb-geo].
 
 > [!NOTE]
 > Tous les réplicas appartiennent au même groupe de ressources.
@@ -149,7 +149,7 @@ Si la base de données primaire est défaillante, effectuez un basculement manue
 
 [azure-sql-db]: https://azure.microsoft.com/documentation/services/sql-database/
 [azure-dns]: /azure/dns/dns-overview
-[docdb-geo]: /azure/documentdb/documentdb-distribute-data-globally
+[cosmosdb-geo]: /azure/cosmos-db/distribute-data-globally
 [guidance-web-apps-scalability]: ./scalable-web-app.md
 [health-endpoint-monitoring-pattern]: https://msdn.microsoft.com/library/dn589789.aspx
 [ra-grs]: /azure/storage/storage-redundancy#read-access-geo-redundant-storage

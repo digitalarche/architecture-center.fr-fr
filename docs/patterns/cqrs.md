@@ -9,11 +9,11 @@ pnp.pattern.categories:
 - data-management
 - design-implementation
 - performance-scalability
-ms.openlocfilehash: f36f759b16566a6c46bf78b8c8b8df4fcd2c493d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 80f4a8880cf2212acf82dadb67b0181e1cbae099
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="command-and-query-responsibility-segregation-cqrs-pattern"></a>Modèle de séparation des responsabilités en matière de commande et de requête (CQRS)
 
@@ -111,7 +111,7 @@ Lorsque vous utilisez CQRS avec le modèle d’approvisionnement en événements
 
 - Générer des vues matérialisées à utiliser dans le modèle de lecture ou les projections des données en réexécutant et en traitant les événements d’entités spécifiques ou de collections d’entités peut nécessiter une utilisation des ressources et un temps de traitement importants. Cela est particulièrement vrai si des valeurs d’une longue période doivent être analysées ou additionnées, car tous les événements associés doivent être examinés. Corrigez ce problème en implémentant des captures instantanées des données à des intervalles planifiés, comme un compteur indiquant le nombre total d’occurrences d’une action spécifique ou l’état actuel d’une entité.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>exemples
 
 Le code suivant présente certains extraits d’un exemple d’implémentation CQRS qui utilise diverses définitions pour les modèles de lecture et d’écriture. Les interfaces du modèle n’imposent pas de fonctionnalités des magasins de données sous-jacents ; elles peuvent également évoluer et être ajustées de façon indépendante car elles sont séparées.
 

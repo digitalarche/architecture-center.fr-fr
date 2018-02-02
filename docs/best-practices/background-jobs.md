@@ -4,11 +4,11 @@ description: "Conseils portant sur l’exécution de tâches en arrière-plan in
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: d8c1d4dfe12208b72fd6991def805f90a830b5f0
-ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
+ms.openlocfilehash: 10c24afee4b880cfbf8ee534f4d7f945d2b046a9
+ms.sourcegitcommit: 3426a9c5ed937f097725c487cf3d073ae5e2a347
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/29/2017
+ms.lasthandoff: 02/01/2018
 ---
 # <a name="background-jobs"></a>Travaux en arrière-plan
 [!INCLUDE [header](../_includes/header.md)]
@@ -244,7 +244,7 @@ Si vous implémentez des tâches en arrière-plan dans un rôle Web ou de travai
     }
     ```
     
-    * Ajoutez la définition du paramètre **Freeze** en tant que valeur booléenne dans les fichiers ServiceDefinition.csdef et ServiceConfiguration.*.cscfg du rôle, puis définissez ce paramètre sur la valeur **false**. Si le rôle entre dans un mode de redémarrage répété, vous pouvez redéfinir ce paramètre sur la valeur **true** pour geler l’exécution du rôle et permettre son échange avec une version précédente.
+  * Ajoutez la définition du paramètre **Freeze** en tant que valeur booléenne dans les fichiers ServiceDefinition.csdef et ServiceConfiguration.\*.cscfg du rôle, puis définissez ce paramètre sur la valeur **false**. Si le rôle entre dans un mode de redémarrage répété, vous pouvez redéfinir ce paramètre sur la valeur **true** pour geler l’exécution du rôle et permettre son échange avec une version précédente.
 
 #### <a name="more-information"></a>Plus d’informations
 * [Modèle de consolidation des ressources de calcul](http://msdn.microsoft.com/library/dn589778.aspx)

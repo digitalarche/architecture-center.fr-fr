@@ -4,11 +4,11 @@ description: "Liste de vérification fournissant des indications relatives aux p
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 66ff802c1f7b35db147ffe4279982c827570c3c1
-ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
+ms.openlocfilehash: 51f807715d0ac929806b9a5a13da4efa00566592
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/11/2018
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="resiliency-checklist"></a>Liste de vérification de résilience
 
@@ -203,7 +203,7 @@ Les éléments de liste de vérification suivants s’appliquent à des services
 
 ### <a name="cosmos-db"></a>Cosmos DB
 
-**Répliquez la base de données dans différentes régions.** Cosmos DB vous permet d’associer n’importe quel nombre de régions Azure à un compte de base de données Cosmos DB. Une base de données Cosmos DB peut présenter une région d’écriture et plusieurs régions de lecture. En cas de défaillance dans la région d’écriture, vous pouvez lire les données à partir d’un autre réplica. Le Kit de développement logiciel (SDK) client gère cela automatiquement. Vous pouvez également basculer la région d’écriture vers une autre région. Pour plus d’informations, consultez [Comment distribuer des données mondialement avec Azure Cosmos DB](/azure/documentdb/documentdb-distribute-data-globally).
+**Répliquez la base de données dans différentes régions.** Cosmos DB vous permet d’associer n’importe quel nombre de régions Azure à un compte de base de données Cosmos DB. Une base de données Cosmos DB peut présenter une région d’écriture et plusieurs régions de lecture. En cas de défaillance dans la région d’écriture, vous pouvez lire les données à partir d’un autre réplica. Le Kit de développement logiciel (SDK) client gère cela automatiquement. Vous pouvez également basculer la région d’écriture vers une autre région. Pour en savoir plus, voir [Comment distribuer des données mondialement avec Azure Cosmos DB](/azure/cosmos-db/distribute-data-globally).
 
 ### <a name="redis-cache"></a>Cache Redis
 

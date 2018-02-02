@@ -5,11 +5,11 @@ author: MikeWasson
 ms.date: 03/24/2017
 ms.custom: resiliency
 pnp.series.title: Design for Resiliency
-ms.openlocfilehash: 09d09468eebe5c6fe1c9cdab14e142ff46cf0b25
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: aca2088cb007728c5717a968969000c0a19bcd07
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="failure-mode-analysis"></a>Analyse du mode d’échec
 [!INCLUDE [header](../_includes/header.md)]
@@ -133,7 +133,7 @@ La stratégie de nouvelles tentatives par défaut utilise une temporisation expo
 * Le kit de développement logiciel retente automatiquement les tentatives ayant échoué. Pour définir le nombre de nouvelles tentatives et le délai d’attente maximal, configurez `ConnectionPolicy.RetryOptions`. Les exceptions déclenchées par le client sont au-delà de la stratégie de nouvelle tentative ou ne sont pas des erreurs temporaires.
 * Si Cosmos DB limite le client, il renvoie une erreur HTTP 429. Vérifiez le code d’état dans `DocumentClientException`. Si l’erreur 429 se produit régulièrement, envisagez d’augmenter la valeur de débit de la collection.
     * Si vous utilisez l’API MongoDB, le service retourne le code d’erreur 16500 lors de la limitation.
-* Répliquez la base de données Cosmos DB entre deux ou plusieurs régions. Tous les réplicas sont lisibles. À l’aide des kits de développement logiciel, spécifiez le paramètre `PreferredLocations`. Il s’agit d’une liste ordonnée des régions Azure. Toutes les lectures sont envoyées vers la première région disponible dans la liste. Si la requête échoue, le client va essayer les autres régions dans la liste, dans l’ordre. Pour plus d’information, voir [Comment configurer la distribution mondiale de Azure Cosmos DB à l’aide de l’API DocumentDB][docdb-multi-region].
+* Répliquez la base de données Cosmos DB entre deux ou plusieurs régions. Tous les réplicas sont lisibles. À l’aide des kits de développement logiciel, spécifiez le paramètre `PreferredLocations`. Il s’agit d’une liste ordonnée des régions Azure. Toutes les lectures sont envoyées vers la première région disponible dans la liste. Si la requête échoue, le client va essayer les autres régions dans la liste, dans l’ordre. Pour en savoir plus, voir [Comment configurer la distribution mondiale Azure Cosmos DB à l’aide de l’API SQL][cosmosdb-multi-region].
 
 **Diagnostics**. Journalisation de toutes les erreurs côté client.
 
@@ -145,7 +145,7 @@ La stratégie de nouvelles tentatives par défaut utilise une temporisation expo
 * Le kit de développement logiciel retente automatiquement les tentatives ayant échoué. Pour définir le nombre de nouvelles tentatives et le délai d’attente maximal, configurez `ConnectionPolicy.RetryOptions`. Les exceptions déclenchées par le client sont au-delà de la stratégie de nouvelle tentative ou ne sont pas des erreurs temporaires.
 * Si Cosmos DB limite le client, il renvoie une erreur HTTP 429. Vérifiez le code d’état dans `DocumentClientException`. Si l’erreur 429 se produit régulièrement, envisagez d’augmenter la valeur de débit de la collection.
 * Répliquez la base de données Cosmos DB entre deux ou plusieurs régions. Si la région principale échoue, une autre région sera promue pour l’écriture. Vous pouvez également déclencher le basculement manuellement. Le kit de développement logiciel effectue une découverte et un routage automatique, le code de l’application continue donc de fonctionner après un basculement. Pendant la période de basculement (généralement quelques minutes), les opérations d’écriture ont une latence plus élevée, étant donné que le kit de développement logiciel est en train de trouver la nouvelle zone d’écriture.
-  Pour plus d’information, voir [Comment configurer la distribution mondiale de Azure Cosmos DB à l’aide de l’API DocumentDB][docdb-multi-region].
+  Pour en savoir plus, voir [Comment configurer la distribution mondiale Azure Cosmos DB à l’aide de l’API SQL][cosmosdb-multi-region].
 * Comme solution de secours, conservez le document dans une file d’attente de sauvegarde et traitez cette file plus tard.
 
 **Diagnostics**. Journalisation de toutes les erreurs côté client.
@@ -331,15 +331,15 @@ Pour plus d’informations, voir [Vue d’ensemble des files d’attente de lett
 
 **Diagnostics**. Journaux d’application
 
-## <a name="storage"></a>Storage
+## <a name="storage"></a>Stockage
 ### <a name="writing-data-to-azure-storage-fails"></a>L’écriture de données sur Stockage Azure échoue
 **Détection**. Le client reçoit des erreurs lors de l’écriture.
 
 **Récupération**
 
-1. Recommencez l’opération, pour récupérer après des défaillances temporaires. La [stratégie de nouvelles tentatives][Storage.RetryPolicies] dans le kit de développement logiciel client gère cela automatiquement.
+1. Recommencez l’opération pour récupérer après des défaillances temporaires. La [stratégie de nouvelles tentatives][Storage.RetryPolicies] dans le kit de développement logiciel client gère cela automatiquement.
 2. Implémentez le modèle disjoncteur pour éviter une surcharge de stockage.
-3. Si N tentatives échouent, exécutez une procédure de secours appropriée. Par exemple :
+3. Si N tentatives échouent, exécutez une procédure de secours appropriée. Par exemple : 
 
    * Stockez les données dans un cache local et transférez les écritures dans le stockage plus tard, lorsque le service devient disponible.
    * Si l’action d’écriture se trouvait dans une étendue transactionnelle, compensez la transaction.
@@ -434,7 +434,7 @@ Pour plus d’informations, voir [Vue d’ensemble des files d’attente de lett
 
 **Diagnostics**. Journalisation de tous les échecs d’appel distant.
 
-## <a name="next-steps"></a>Étapes suivantes
+## <a name="next-steps"></a>étapes suivantes
 Pour plus d’informations sur le processus FMA, consultez [Résilience par la conception pour les services de cloud computing][resilience-by-design-pdf] (téléchargement PDF).
 
 <!-- links -->
@@ -453,7 +453,7 @@ Pour plus d’informations sur le processus FMA, consultez [Résilience par la c
 [BrokeredMessage.TimeToLive]: https://msdn.microsoft.com/library/microsoft.servicebus.messaging.brokeredmessage.timetolive.aspx
 [cassandra-error-handling]: http://www.datastax.com/dev/blog/cassandra-error-handling-done-right
 [circuit-breaker]: https://msdn.microsoft.com/library/dn589784.aspx
-[docdb-multi-region]: /azure/documentdb/documentdb-developing-with-multiple-regions/
+[cosmosdb-multi-region]: /azure/cosmos-db/tutorial-global-distribution-sql-api
 [elasticsearch-azure]: ../elasticsearch/index.md
 [elasticsearch-client]: https://www.elastic.co/guide/en/elasticsearch/client/index.html
 [health-endpoint-monitoring-pattern]: https://msdn.microsoft.com/library/dn589789.aspx
