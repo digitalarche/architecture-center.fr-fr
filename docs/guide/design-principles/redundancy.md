@@ -3,11 +3,11 @@ title: "Rendre tous les éléments redondants"
 description: "Évitez les points de défaillance uniques en intégrant la redondance à votre application."
 author: MikeWasson
 layout: LandingPage
-ms.openlocfilehash: 89a1e6d2d3b1217ab07c9a99a4c4fb3e8cd2cd29
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 05ccf78c2cfbcd4e2d26200e70463d388d54f671
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="make-all-things-redundant"></a>Rendre tous les éléments redondants
 
@@ -25,7 +25,7 @@ Une application résiliente contourne les défaillances. Identifiez les chemins 
 
 **Répliquez les bases de données**. Azure SQL Database et Cosmos DB répliquent automatiquement les données dans une région, et vous pouvez activer la géoréplication entre les régions. Si vous utilisez une solution de base de données IaaS, choisissez-en une qui prend en charge la réplication et le basculement, telle que [Groupes de disponibilité Always On SQL Server][sql-always-on]. 
 
-**Activez la géoréplication**. La géoréplication pour [Azure SQL Database][sql-geo-replication] et [Cosmos DB][docdb-geo-replication] crée des réplicas lisibles secondaires de vos données dans une ou plusieurs régions secondaires. En cas de défaillance, la base de données peut basculer vers la région secondaire pour les écritures.
+**Activez la géoréplication**. La géoréplication pour [Azure SQL Database][sql-geo-replication] et [Cosmos DB][cosmosdb-geo-replication] crée des réplicas lisibles secondaires de vos données dans une ou plusieurs régions secondaires. En cas de défaillance, la base de données peut basculer vers la région secondaire pour les écritures.
 
 **Créez des partitions pour garantir la disponibilité**. Le partitionnement de base de données est souvent utilisé pour améliorer l’extensibilité, mais peut également optimiser la disponibilité. Si l’une des partitions n’est plus disponible, les autres partitions restent accessibles. Une défaillance dans une partition n’interrompra ainsi qu’un sous-ensemble du nombre total de transactions. 
 
@@ -46,6 +46,6 @@ Une application résiliente contourne les défaillances. Identifiez les chemins 
 [multi-vm-blueprint]: ../../reference-architectures/virtual-machines-windows/multi-vm.md
 
 [cassandra]: http://cassandra.apache.org/
-[docdb-geo-replication]: /azure/documentdb/documentdb-distribute-data-globally
+[cosmosdb-geo-replication]: /azure/cosmos-db/distribute-data-globally
 [sql-always-on]: https://msdn.microsoft.com/library/hh510230.aspx
 [sql-geo-replication]: /azure/sql-database/sql-database-geo-replication-overview

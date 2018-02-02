@@ -2,22 +2,22 @@
 title: "Piliers de la qualité logicielle"
 description: "Décrit les cinq piliers de la qualité des logiciels : l’extensibilité, la disponibilité, la résilience, la gestion et la sécurité."
 author: MikeWasson
-ms.openlocfilehash: 78e613368a07718f5923d619ace335d399b0cc80
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 1d5e30602cafa0d39f92de3101974e77ae258595
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="pillars-of-software-quality"></a>Piliers de la qualité logicielle 
 
 Une application cloud réussie se concentrera sur ces cinq piliers de la qualité des logiciels : l’extensibilité, la disponibilité, la résilience, la gestion et la sécurité.
 
-| Pilier | Description |
+| Pilier | DESCRIPTION |
 |--------|-------------|
 | Extensibilité | Capacité d’un système à traiter une charge accrue. |
-| Availability | Durée pendant laquelle le système est fonctionnel et opérationnel. |
+| Disponibilité | Durée pendant laquelle le système est fonctionnel et opérationnel. |
 | Résilience | Capacité d’un système à récupérer après des défaillances et à continuer de fonctionner. |
-| Gestion | Processus d’opérations assurant l’exécution d’un système en production. |
+| gestion | Processus d’opérations assurant l’exécution d’un système en production. |
 | Sécurité | Protection des applications et des données contre les menaces. |
 
 ## <a name="scalability"></a>Extensibilité
@@ -153,7 +153,7 @@ Les applications cloud utilisent souvent des services gérés ayant des clés d�
 
 Assurez-vous que vos données restent dans la zone géopolitique appropriée lors de l’utilisation de la haute disponibilité d’Azure. Le stockage géo-répliqué d’Azure utilise le concept de [région associée] [ paired-region] dans la même région géopolitique. 
 
-Utilisez le coffre de clés pour protéger les clés et les secrets de chiffrement. Le coffre de clés vous permet de chiffrer les clés et les secrets à l’aide de clés protégées par des modules de sécurité matériels (HSM). De nombreux services de stockage Azure et de base de données prennent en charge le chiffrement des données au repos, y compris [Stockage Microsoft Azure][storage-encryption], [Microsoft Azure SQL Database][sql-db-encryption], [Microsoft Azure SQL Data Warehouse][data-warehouse-encryption], et [Azure Cosmos DB][documentdb-encryption].
+Utilisez le coffre de clés pour protéger les clés et les secrets de chiffrement. Le coffre de clés vous permet de chiffrer les clés et les secrets à l’aide de clés protégées par des modules de sécurité matériels (HSM). De nombreux services de stockage Azure et de base de données prennent en charge le chiffrement des données au repos, y compris [Stockage Microsoft Azure][storage-encryption], [Microsoft Azure SQL Database][sql-db-encryption], [Microsoft Azure SQL Data Warehouse][data-warehouse-encryption], et [Azure Cosmos DB][cosmosdb-encryption].
 
 ### <a name="security-resources"></a>Ressources de sécurité
 
@@ -171,7 +171,7 @@ Utilisez le coffre de clés pour protéger les clés et les secrets de chiffreme
 
 [ad-subscriptions]: /azure/active-directory/active-directory-how-subscriptions-associated-directory
 [data-warehouse-encryption]: /azure/data-lake-store/data-lake-store-security-overview#data-protection
-[documentdb-encryption]: /azure/documentdb/documentdb-nosql-database-security
+[cosmosdb-encryption]: /azure/cosmos-db/database-security
 [rbac]: /azure/active-directory/role-based-access-control-what-is
 [paired-region]: /azure/best-practices-availability-paired-regions
 [resource-manager-auditing]: /azure/azure-resource-manager/resource-group-audit

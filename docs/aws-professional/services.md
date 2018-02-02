@@ -5,11 +5,11 @@ keywords: "comparaison des services cloud, services cloud comparés, multicloud,
 author: lbrader
 ms.date: 11/30/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: 0f0d103407c78b224f427f96b0f10aa216ebc0bd
-ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
+ms.openlocfilehash: f54df7b3a8d69b6ac5b1458cd4e27e914c39e4f9
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="aws-to-azure-services-comparison"></a>Comparaison des services AWS avec les services Azure
 
@@ -85,7 +85,7 @@ Pour une vue d’ensemble d’Azure pour les utilisateurs AWS, consultez [Azure 
 | Domaine                    | Service AWS                          | Service Azure                                                                                                         | DESCRIPTION                                                                                                                                             |
 |-------------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Base de données relationnelle     | RDS                                  | [Base de données SQL](https://azure.microsoft.com/services/sql-database/)<br/><br/>[Azure Database pour MySQL](https://azure.microsoft.com/en-us/services/mysql/)<br/><br/>[Base de données Azure pour PostgreSQL](https://azure.microsoft.com/en-us/services/postgresql/)                                       | Base de données relationnelle opérant en tant que service (DBaaS) pour laquelle la résilience, la mise à l’échelle et la maintenance de base de données sont principalement gérées par la plateforme.                   |
-| NoSQL—Stockage de documents  | DynamoDB                             | [Azure Cosmos DB](https://azure.microsoft.com/services/documentdb/)                                                  | Base de données multimodèle distribuée globalement prenant en charge de façon native plusieurs modèles de données : clé-valeur, documents, graphiques et colonnes.         |
+| NoSQL—Stockage de documents  | DynamoDB                             | [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/)                                                  | Base de données multimodèle distribuée globalement prenant en charge de façon native plusieurs modèles de données : clé-valeur, documents, graphiques et colonnes.         |
 | NoSQL- Stockage clé-valeur | DynamoDB et SimpleDB                | [Stockage de table](https://azure.microsoft.com/services/storage/tables/)                                           | Magasin de données non relationnel pour des données semi-structurées. Les développeurs stockent et interrogent des éléments de données via des demandes de services web.                                   |
 | Mise en cache                 | ElastiCache                          | [Cache Redis Azure](https://azure.microsoft.com/services/cache/)                                                | Service de mise en cache distribuée en mémoire qui offre un magasin hautes performances généralement utilisé pour décharger le travail non-transactionnel d’une base de données. |
 | Migration de base de données      | Database Migration Service (version préliminaire) | [Azure Database Migration Service](https://azure.microsoft.com/en-us/campaigns/database-migration/) | La migration porte généralement sur le schéma et les données de base de données à partir d’un format de base de données vers une technologie de base de données spécifique dans le cloud.              |

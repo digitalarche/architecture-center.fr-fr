@@ -7,11 +7,11 @@ pnp.series.prev: basic-web-app
 pnp.series.next: multi-region-web-app
 ms.date: 11/23/2016
 cardTitle: Improve scalability
-ms.openlocfilehash: 1fdaf6e3695cb814fa4c275a4a273f9fa9a7b71b
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 4ad12fb041a79fcb706530c9968fd0f96211d7f9
+ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="improve-scalability-in-a-web-application"></a>Améliorer la scalabilité dans une application web
 
@@ -31,7 +31,7 @@ Cette architecture repose sur celle décrite dans l’article [Application web d
 * **File d’attente**. Dans l’architecture illustrée ici, l’application met en file d’attente des tâches exécutées en arrière-plan en plaçant un message dans la file d’attente [Stockage File d’attente Azure][queue-storage]. Le message déclenche une fonction dans la tâche web. Vous pouvez également utiliser des files d’attente Service Bus. Pour obtenir une comparaison, consultez [Files d’attente Azure et files d’attente Service Bus : comparaison et différences][queues-compared].
 * **Cache**. Stockez les données semi-statiques dans [Cache Redis Azure][azure-redis].  
 * **CDN**. Utilisez [Azure Content Delivery Network][azure-cdn] (CDN) pour mettre en cache le contenu disponible publiquement afin de réduire la latence et d’accélérer la remise du contenu.
-* **Stockage des données**. Utilisez [Azure SQL Database][sql-db] pour les données relationnelles. Pour les données non relationnelles, envisagez un magasin NoSQL, tel que [Cosmos DB][documentdb].
+* **Stockage des données**. Utilisez [Azure SQL Database][sql-db] pour les données relationnelles. Pour les données non relationnelles, envisagez un magasin NoSQL, tel que [Cosmos DB][cosmosdb].
 * **Recherche Azure**. Utilisez [Recherche Azure][azure-search] pour ajouter des fonctionnalités de recherche telles que les suggestions de recherche, la recherche partielle et la recherche spécifique à une langue. Recherche Azure est généralement utilisé conjointement avec un autre magasin de données, surtout si le magasin de données principal requiert la cohérence stricte. Dans cette approche, stockez les données faisant autorité dans l’autre magasin de données et l’index de recherche dans Recherche Azure. Recherche Azure peut également servir à consolider un index de recherche unique à partir de plusieurs magasins de données.  
 * **E-mail/SMS**. Utilisez un service tiers tel que SendGrid ou Twilio pour envoyer des e-mails ou SMS au lieu de générer cette fonctionnalité directement dans l’application.
 * **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.
@@ -140,7 +140,7 @@ Utilisez [Transparent Data Encryption][sql-encryption] si vous avez besoin de ch
 [cdn-storage-account]: /azure/cdn/cdn-create-a-storage-account-with-cdn
 [cdn-guidance]: ../../best-practices/cdn.md
 [cors]: /azure/app-service-api/app-service-api-cors-consume-javascript
-[documentdb]: https://azure.microsoft.com/documentation/services/documentdb/
+[cosmosdb]: /azure/cosmos-db/
 [queue-storage]: /azure/storage/storage-dotnet-how-to-use-queues
 [queues-compared]: /azure/service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted
 [resource-group]: /azure/azure-resource-manager/resource-group-overview#resource-groups
