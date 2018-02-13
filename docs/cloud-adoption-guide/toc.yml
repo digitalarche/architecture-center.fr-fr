@@ -1,0 +1,64 @@
+- name: Centre des architectures Azure
+  href: /azure/architecture
+- name: Guide d’adoption du cloud Azure
+  href: index.md
+  items:
+    - name: Notions fondamentales de l’adoption d’Azure
+      href: adoption-intro/overview.md
+      items:
+        - name: Présentation des mécanismes Azure
+          items:
+            - name: "Explicatif\_: comment fonctionne Azure\_?"
+              href: adoption-intro/azure-explainer.md
+        - name: Présentation de l’identité numérique dans Azure
+          items:
+            - name: "Explicatif\_: qu’est-ce qu’un abonné Azure Active Directory\_?"
+              href: adoption-intro/tenant-explainer.md
+            - name: Obtenir un abonné Azure Active Directory
+              href: /azure/active-directory/develop/active-directory-howto-tenant?toc=/azure/architecture/cloud-adoption-guide/toc.json
+            - name: "Guide\_: conception d’un abonné Azure\_AD"
+              href: adoption-intro/tenant.md
+            - name: Ajouter un utilisateur à un abonné Azure AD
+              href: /azure/active-directory/add-users-azure-active-directory?toc=/azure/architecture/cloud-adoption-guide/toc.json
+        - name: Présentation des abonnements Azure
+          items:
+            - name: "Explicatif\_: qu’est-ce qu’un abonnement Azure\_?"
+              href: adoption-intro/subscription-explainer.md
+            - name: "Guide\_: conception d’un abonnement Azure"
+              href: adoption-intro/subscription.md
+        - name: Présentation de la gestion des ressources dans Azure
+          items:
+            - name: "Explicatif\_: qu’est-ce qu’Azure Resource Manager\_?"
+              href: adoption-intro/resource-manager-explainer.md
+            - name: "Explicatif\_: qu’est-ce qu’un groupe de ressources Azure\_?"
+              href: adoption-intro/resource-group-explainer.md
+            - name: "Explicatif\_: présentation de l’accès aux ressources dans Azure"
+              href: /azure/active-directory/active-directory-understanding-resource-access?toc=/azure/architecture/cloud-adoption-guide/toc.json
+            - name: Créer un groupe de ressources avec le portail
+              href: /azure/azure-resource-manager/resource-group-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
+            - name: "Guide\_: conception d’un groupe de ressources"
+              href: adoption-intro/resource-group.md
+            - name: "Guide\_: convention d’affectation de noms de ressources Azure"
+              href: /azure/architecture/best-practices/naming-conventions?toc=/azure/architecture/cloud-adoption-guide/toc.json
+        - name: Déploiement d’architectures de base vers Azure
+          items:
+            - name: Architecture Platform as a Service (PaaS)
+              items:
+                - name: Déployer une application web de base vers Azure
+                  href: /azure/app-service?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: "Guide\_: meilleures pratiques pour les applications web dans Azure"
+                  href: /azure/architecture/reference-architectures/app-service-web-app/basic-web-app?toc=/azure/architecture/cloud-adoption-guide/toc.json
+            - name: Infrastructure as a service (IaaS)
+              items:
+                - name: "Explicatif\_: qu’est-ce qu’un réseau virtuel Azure\_?"
+                  href: /azure/virtual-network/virtual-networks-overview?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: Déployer un réseau virtuel dans Azure
+                  href: /azure/virtual-network/virtual-networks-create-vnet-arm-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: Déployer une charge de travail IaaS unique de machine virtuelle Windows dans Azure
+                  href: /azure/virtual-machines/windows/quick-create-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: "Guide\_: meilleures pratiques pour le déploiement d’une machine virtuelle Windows dans Azure"
+                  href: /azure/architecture/reference-architectures/virtual-machines-windows/single-vm?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: Déployer une charge de travail IaaS unique de machine virtuelle Linux dans Azure
+                  href: /azure/virtual-machines/linux/quick-create-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
+                - name: "Guide\_: meilleures pratiques pour le déploiement d’une machine virtuelle Linux dans Azure"
+                  href: /azure/architecture/reference-architectures/virtual-machines-linux/single-vm?toc=/azure/architecture/cloud-adoption-guide/toc.json
