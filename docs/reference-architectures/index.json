@@ -1,0 +1,60 @@
+{
+    "series": [
+        {
+            "title": "Charges de travail de machine virtuelle Windows",
+            "url": "./virtual-machines-windows/index.md",
+            "image": "./virtual-machines-windows/images/n-tier.svg",
+            "summary": "Cette série commence avec les meilleures pratiques pour l’exécution d’une machine virtuelle Windows unique, puis les machines virtuelles à charge équilibrée et enfin une application multiniveau et multirégion."
+        },
+        {
+            "title": "Charges de travail de machine virtuelle Linux",
+            "url": "./virtual-machines-linux/index.md",
+            "image": "./virtual-machines-linux/images/n-tier.svg",
+            "summary": "Cette série commence avec les meilleures pratiques pour l’exécution d’une seule machine virtuelle Linux unique, puis les machines virtuelles à charge équilibrée et enfin une application multiniveau et multirégion."
+        },
+        {
+            "title": "Réseau hybride",
+            "url": "./hybrid-networking/index.md",
+            "image": "./hybrid-networking/images/vpn.svg",
+            "summary": "Cette série présente des options pour la création d’une connexion réseau entre un réseau local et Azure."
+        },
+        {
+            "title": "Zone DMZ réseau",
+            "url": "./dmz/index.md",
+            "image": "./dmz/images/secure-vnet-dmz.svg",
+            "summary": "Cette série montre comment créer une zone DMZ réseau pour protéger la limite entre un réseau virtuel Azure et un réseau local ou Internet."
+        },
+        {
+            "title": "Gestion des identités",
+            "url": "./identity/index.md",
+            "image": "./identity/images/adds-extend-domain.svg",
+            "summary": "Cette série montre les options pour l’intégration de votre environnement local Active Directory (AD) avec un réseau Azure."
+        },
+        {
+            "title": "Application web App Service",
+            "url": "./app-service-web-app/index.md",
+            "image": "./app-service-web-app/images/scalable-web-app.svg",
+            "summary": "Cette série présente les meilleures pratiques pour les applications web qui utilisent Azure App Service."
+        }
+    ],
+    "individuals": [
+        {
+            "title": "Serveur de builds Jenkins",
+            "url": "./jenkins/index.md",
+            "image": "./jenkins/images/logo.svg",
+            "summary": "Déployez et utilisez un serveur Jenkins professionnel et évolutif sur Azure."
+        },
+        {
+            "title": "Batterie de serveurs SharePoint Server 2016",
+            "url": "./sharepoint/index.md",
+            "image": "./sharepoint/images/sharepoint.svg",
+            "summary": "Déployez et exécutez une batterie de serveurs SharePoint Server 2016 sur Azure avec des groupes de disponibilité SQL Server AlwaysOn."
+        },
+        {
+            "title": "SAP NetWeaver et SAP HANA",
+            "url": "./sap/index.md",
+            "image": "./sap/images/sap.svg",
+            "summary": "Déployez et exécutez SAP NetWeaver et SAP HANA dans un environnement à haute disponibilité dans Azure."
+        }
+    ]
+}
