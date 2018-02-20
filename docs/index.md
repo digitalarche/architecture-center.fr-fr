@@ -2,11 +2,11 @@
 title: Centre des architectures Azure
 description: "Le centre des architectures Azure est le centre officiel pour obtenir des instructions, des schémas, des modèles et les meilleures pratiques pour la création de solutions avec Microsoft Azure. Il est organisé par l’équipe Modèles et pratiques de Microsoft."
 layout: LandingPage
-ms.openlocfilehash: 204d32c8de934665fff7b1a321bfdf893ac69983
-ms.sourcegitcommit: 441185360db49cfb3cf39527b68f318d17d4cb3d
+ms.openlocfilehash: eb069ae80ce70eb66ef57b1e0e21f7181d17d21f
+ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/19/2018
+ms.lasthandoff: 02/19/2018
 ---
 # <a name="azure-architecture-center"></a>Centre des architectures Azure
 
@@ -64,26 +64,6 @@ ms.lasthandoff: 01/19/2018
 
 <!-- Second panel -->
 <ul class="panelContent cardsI">
-    <!-- Best practices -->
-    <li>
-        <a href="/azure/architecture/best-practices/">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/best-practices.svg" alt="Best Practices" height="100%" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Meilleures pratiques pour les applications cloud</h3>
-                            <p>Meilleures pratiques pour les applications cloud, qui couvrent des aspects tels que la mise à l’échelle automatique, la mise en cache, le partitionnement des données, la conception de l’API et autres.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
     <!-- Microservices -->
     <li>
         <a href="/azure/architecture/microservices">
@@ -96,8 +76,88 @@ ms.lasthandoff: 01/19/2018
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Building microservices on Azure (Création de microservices sur Azure)</h3>
+                            <h3>Création de microservices sur Azure</h3>
                             <p>Cette série en plusieurs parties vous guide tout au long du processus de conception et de création d’une architecture de microservices sur Azure. Elle inclut une implémentation de référence.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- data guide -->
+    <li>
+        <a href="/azure/architecture/data-guide/">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/data-guide.svg" alt="Data Architecture Guide"  />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Guide d’architecture des données Azure</h3>
+                            <p>Une approche structurée pour concevoir des solutions orientées données sur Microsoft Azure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Best practices -->
+    <li>
+        <a href="/azure/architecture/best-practices/">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/best-practices.svg" alt="Best Practices" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Meilleures pratiques pour les applications cloud</h3>
+                            <p>Meilleures pratiques pour les applications cloud, qui couvrent des aspects tels que la mise à l’échelle automatique, la mise en cache, le partitionnement des données, la conception de l’API et autres.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Resiliency -->
+    <li>
+        <a href="/azure/architecture/resiliency">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/resiliency.svg" alt="Designing for Resiliency" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Conception pour la résilience</h3>
+                            <p>Apprendre à concevoir des applications résilientes pour Azure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Building blocks -->
+    <li>
+        <a href="https://github.com/mspnp/template-building-blocks/wiki">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/azbb.svg" alt="Azure Building Blocks" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Blocs de construction Azure</h3>
+                            <p>Simplifiez le déploiement de ressources Azure. Avec un seul fichier de paramètres, déployez des architectures complexes dans Azure.</p>
                         </div>
                     </div>
                 </div>
@@ -158,46 +218,6 @@ ms.lasthandoff: 01/19/2018
                         <div class="cardText">
                             <h3>Azure pour les professionnels AWS</h3>
                             <p>Tirer parti de vos expériences AWS dans Microsoft Azure.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- Resiliency -->
-    <li>
-        <a href="/azure/architecture/resiliency">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/resiliency.svg" alt="Designing for Resiliency" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Conception pour la résilience</h3>
-                            <p>Apprendre à concevoir des applications résilientes pour Azure.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- Building blocks -->
-    <li>
-        <a href="https://github.com/mspnp/template-building-blocks/wiki">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/azbb.svg" alt="Azure Building Blocks" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Blocs de construction Azure</h3>
-                            <p>Simplifiez le déploiement de ressources Azure. Avec un seul fichier de paramètres, déployez des architectures complexes dans Azure.</p>
                         </div>
                     </div>
                 </div>
