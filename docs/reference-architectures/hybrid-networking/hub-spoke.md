@@ -2,14 +2,14 @@
 title: "Implémentation d’une topologie de réseau hub-and-spoke dans Azure"
 description: "Comment implémenter une topologie de réseau hub-and-spoke dans Azure."
 author: telmosampaio
-ms.date: 05/05/2017
+ms.date: 02/14/2018
 pnp.series.title: Implement a hub-spoke network topology in Azure
 pnp.series.prev: expressroute
-ms.openlocfilehash: e6f07a7962dd5728226b023700268340590d97a3
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: c03ecd4ba5ddbe50cfb17e56d75c18102b751cfb
+ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/19/2018
 ---
 # <a name="implement-a-hub-spoke-network-topology-in-azure"></a>Implémenter une topologie de réseau hub-and-spoke dans Azure
 
@@ -34,9 +34,9 @@ Utilisations courantes de cette architecture :
 
 ## <a name="architecture"></a>Architecture
 
-L’architecture est constituée des composants suivants :
+L’architecture est constituée des composants suivants.
 
-* **Réseau local**. Un réseau local privé s’exécutant au sein d’une organisation.
+* **Réseau local**. Un réseau local privé qui s’exécute au sein d’une organisation.
 
 * **Périphérique VPN**. Périphérique ou service qui assure la connectivité externe au réseau local. Le périphérique VPN peut être un périphérique matériel ou une solution logicielle telle que le service RRAS (Routing and Remote Access Service) dans Windows Server 2012. Pour obtenir la liste des périphériques VPN pris en charge et des informations sur la configuration de certains périphériques VPN pour la connexion à Azure, consultez [À propos des périphériques VPN pour les connexions de la passerelle VPN de site à site][vpn-appliance].
 
@@ -114,7 +114,7 @@ Déterminez également les services qui sont partagés dans le hub, afin que ce 
 
 Un déploiement pour cette architecture est disponible sur [GitHub][ref-arch-repo]. Il utilise des machines virtuelles Ubuntu dans chaque réseau virtuel pour tester la connectivité. Aucun service réel n’est hébergé dans le sous-réseau **shared-services** du **réseau virtuel hub**.
 
-### <a name="prerequisites"></a>Composants requis
+### <a name="prerequisites"></a>configuration requise
 
 Avant de pouvoir déployer l’architecture de référence sur votre propre abonnement, vous devez effectuer les étapes suivantes.
 
@@ -339,68 +339,6 @@ Pour vérifier que la topologie hub-and-spoke connectée à un déploiement de c
 
   ```bash
   ping 10.1.1.37
-  ```
-
-### <a name="add-connectivity-between-spokes"></a>Ajouter la connectivité entre les membres spokes
-
-Pour autoriser les membres spokes à se connecter les uns aux autres, vous devez déployer des itinéraires définis par l’utilisateur sur chaque membre spoke qui transfère du trafic destiné à d’autres membres spokes vers la passerelle dans le réseau virtuel hub. Effectuez les étapes suivantes pour vérifier que vous n’êtes pas en mesure de vous connecter à partir d’un membre spoke à un autre, puis déployer les itinéraires définis par l’utilisateur et retester la connectivité.
-
-1. Répétez les étapes 1 à 4 ci-dessus, si vous n’êtes plus connecté à la machine virtuelle du serveur de rebond.
-
-2. Connectez-vous à un des serveurs web dans le membre spoke 1.
-
-  ```bash
-  ssh 10.1.1.37
-  ```
-
-3. Testez la connectivité entre le membre spoke 1 et le membre spoke 2. Le test doit se solder par un échec.
-
-  ```bash
-  ping 10.1.2.37
-  ```
-
-4. Revenez à l’invite de commandes de votre ordinateur.
-
-5. Accédez au dossier `hybrid-networking\hub-spoke\spokes` pour le dépôt que vous avez téléchargé à l’étape des prérequis ci-dessus.
-
-6. Exécutez la commande bash ou PowerShell ci-dessous pour déployer un itinéraire défini par l’utilisateur sur le premier membre spoke. Remplacez les valeurs par l’abonnement, le nom de groupe de ressources et la région Azure.
-
-  ```bash
-  sh ./spoke.udr.deploy.sh --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-    --resourcegroup ra-spoke1-rg \
-    --location westus \
-    --spoke 1
-  ```
-
-  ```powershell
-  ./spoke.udr.deploy.ps1 -Subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
-    -ResourceGroup ra-spoke1-rg `
-    -Location westus `
-    -Spoke 1
-  ```
-
-7. Exécutez la commande bash ou PowerShell ci-dessous pour déployer un itinéraire défini par l’utilisateur sur le second membre spoke. Remplacez les valeurs par l’abonnement, le nom de groupe de ressources et la région Azure.
-
-  ```bash
-  sh ./spoke.udr.deploy.sh --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
-    --resourcegroup ra-spoke2-rg \
-    --location westus \
-    --spoke 2
-  ```
-
-  ```powershell
-  ./spoke.udr.deploy.ps1 -Subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx `
-    -ResourceGroup ra-spoke2-rg `
-    -Location westus `
-    -Spoke 2
-  ```
-
-8. Revenez au terminal ssh.
-
-9. Testez la connectivité entre le membre spoke 1 et le membre spoke 2. Le test doit réussir.
-
-  ```bash
-  ping 10.1.2.37
   ```
 
 <!-- links -->
