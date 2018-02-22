@@ -1,3 +1,15 @@
+---
+title: "Liste de contrôle DevOps"
+description: "Liste de contrôle qui fournit des conseils liés à DevOps."
+author: dragon119
+ms.date: 01/10/2018
+ms.custom: checklist
+ms.openlocfilehash: c435ea0aed9571cb6508d7d23f93414a138998fe
+ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 02/14/2018
+---
 # <a name="devops-checklist"></a>Liste de contrôle DevOps
 
 Le DevOps consiste à intégrer le développement, l’assurance qualité et les opérations informatiques dans une culture unifiée et dans un ensemble de processus pour la distribution de logiciels. Utilisez cette liste de contrôle comme point de départ pour évaluer votre culture et vos processus DevOps.
@@ -16,7 +28,7 @@ Le DevOps consiste à intégrer le développement, l’assurance qualité et les
 
 **Exploitez les informations issues des pannes.** Les pannes sont inévitables, mais il est important de savoir en tirer des informations pour éviter qu’elles ne se répètent. En cas de défaillance opérationnelle, triez le problème, documentez sa cause et sa solution et partagez les leçons que vous en tirez. Quand c’est possible, mettez à jour votre processus de génération pour détecter automatiquement ce type de défaillance à l’avenir.
 
-**Accélérez vos processus et collectez des données.** Chaque amélioration planifiée est une hypothèse. Faites des incréments aussi petits que possible. Considérez les nouvelles idées comme des expériences. Instrumentez les expériences afin de pouvoir collecter des données de production pour évaluer leur efficacité. Préparez-vous à échouer rapidement si l’hypothèse est incorrecte.
+**Accélérez vos processus et collectez des données.** Chaque amélioration planifiée est une hypothèse. Faites des incréments aussi petits que possible. Considérez les nouvelles idées comme des expériences. Instrumentez les expériences afin de pouvoir collecter des données de production pour évaluer leur efficacité. Préparez-vous à effectuer un Fail-fast si l’hypothèse est incorrecte.
 
 **Prenez le temps d’apprendre.** Vous pouvez apprendre de vos échecs aussi bien que de vos réussites. Avant de passer à de nouveaux projets, prenez le temps de tirer les leçons importantes de vos résultats et assurez-vous que votre équipe les intègre correctement. Donnez aussi à votre équipe le temps d’acquérir de nouvelles compétences, d’expérimenter et d’en apprendre plus sur les nouveaux outils et techniques. 
 

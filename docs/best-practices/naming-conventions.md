@@ -4,11 +4,11 @@ description: "Conventions d’affectation de noms pour les ressources Azure. Com
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 364735dec9658b4d2a9d21330f38c57f6fa694bd
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: f814201901af69b816d7f1588e58057b252b22db
+ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 02/09/2018
 ---
 # <a name="naming-conventions"></a>Conventions d’affectation de noms
 
@@ -96,10 +96,10 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 | Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | exemples |
 | --- | --- | --- | --- | --- | --- | --- |
 |Nom du compte de stockage (données) |Globale |3-24 |Minuscules |Alphanumérique |`<globally unique name><number>` (utilisez une fonction afin de calculer un GUID unique pour l’affectation de noms aux comptes de stockage) |`profxdata001` |
-|Nom du compte de stockage (disques) |Globale |3-24 |Minuscules |Alphanumérique |`<vm name without dashes>st<number>` |`profxsql001st0` |
-| Nom du conteneur |Compte de stockage |3-63 |Minuscules |Alphanumériques et tiret |`<context>` |`logs` |
+|Nom du compte de stockage (disques) |Globale |3-24 |Minuscules |Alphanumérique |`<vm name without hyphens>st<number>` |`profxsql001st0` |
+| Nom du conteneur |Compte de stockage |3-63 |Minuscules |Alphanumériques et trait d’union |`<context>` |`logs` |
 |Nom de l’objet blob | Conteneur |1-1024 |Respect de la casse |Tout caractère d’URL |`<variable based on blob usage>` |`<variable based on blob usage>` |
-|Nom de la file d'attente |Compte de stockage |3-63 |Minuscules |Alphanumériques et tiret |`<service short name>-<context>-<num>` |`awesomeservice-messages-001` |
+|Nom de la file d'attente |Compte de stockage |3-63 |Minuscules |Alphanumériques et trait d’union |`<service short name>-<context>-<num>` |`awesomeservice-messages-001` |
 |Nom de la table | Compte de stockage |3-63 |Non-respect de la casse |Alphanumérique |`<service short name><context>` |`awesomeservicelogs` |
 |Nom de fichier | Compte de stockage |3-63 |Minuscules | Alphanumérique |`<variable based on blob usage>` |`<variable based on blob usage>` |
 |Data Lake Store | Globale |3-24 |Minuscules | Alphanumérique |`<name>-dls` |`telemetry-dls` |
@@ -108,16 +108,16 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 
 | Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | exemples |
 | --- | --- | --- | --- | --- | --- | --- |
-|Réseau virtuel (VNet) |Groupe de ressources |2-64 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<service short name>-vnet` |`profx-vnet` |
-|Sous-réseau |Réseau virtuel parent |2-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<descriptive context>` |`web` |
-|Interface réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<vmname>-nic<num>` |`profx-sql1-nic1` |
-|Groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<service short name>-<context>-nsg` |`profx-app-nsg` |
-|Règle de groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<descriptive context>` |`sql-allow` |
-|Adresse IP publique |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<vm or service name>-pip` |`profx-sql1-pip` |
-|Équilibreur de charge |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<service or role>-lb` |`profx-lb` |
-|Configuration des règles d’équilibrage de charge |Équilibreur de charge |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<descriptive context>` |`http` |
-|Azure Application Gateway |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, tiret, trait de soulignement et point |`<service or role>-agw` |`profx-agw` |
-|Profil Traffic Manager |Groupe de ressources |1-63 |Non-respect de la casse |Alphanumériques, tiret et point |`<descriptive context>` |`app1` |
+|Réseau virtuel (VNet) |Groupe de ressources |2-64 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service short name>-vnet` |`profx-vnet` |
+|Sous-réseau |Réseau virtuel parent |2-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`web` |
+|Interface réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<vmname>-nic<num>` |`profx-sql1-nic1` |
+|Groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service short name>-<context>-nsg` |`profx-app-nsg` |
+|Règle de groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`sql-allow` |
+|Adresse IP publique |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<vm or service name>-pip` |`profx-sql1-pip` |
+|Équilibreur de charge |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service or role>-lb` |`profx-lb` |
+|Configuration des règles d’équilibrage de charge |Équilibreur de charge |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`http` |
+|Azure Application Gateway |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service or role>-agw` |`profx-agw` |
+|Profil Traffic Manager |Groupe de ressources |1-63 |Non-respect de la casse |Alphanumériques, trait d’union et point |`<descriptive context>` |`app1` |
 
 ## <a name="organize-resources-with-tags"></a>Organiser les ressources à l’aide de balises
 

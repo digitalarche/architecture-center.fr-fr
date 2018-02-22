@@ -6,11 +6,11 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: token-cache
 pnp.series.next: client-assertion
-ms.openlocfilehash: bf385ccc988a709a61d9bee5fb1ee084a133138d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: a5dc25a4b61ffd13d86f1abb2b839054e5fb4c7f
+ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/19/2018
 ---
 # <a name="federate-with-a-customers-ad-fs"></a>Se fédérer avec les services AD FS d’un client
 
@@ -55,18 +55,18 @@ Pour obtenir un exemple d’utilisation de WS-Federation avec ASP.NET 4, consul
 ## <a name="limitations"></a>Limites
 Par défaut, l’application par partie de confiance ne reçoit qu’un ensemble fixe de revendications disponibles dans id_token, comme le montre le tableau suivant. Avec AD FS 2016, vous pouvez personnaliser id_token dans les scénarios OpenID Connect. Pour plus d’informations, consultez [Jetons d’ID personnalisés dans AD FS](/windows-server/identity/ad-fs/development/customize-id-token-ad-fs-2016).
 
-| Revendication | Description |
+| Revendication | DESCRIPTION |
 | --- | --- |
-| aud |Audience. Application pour laquelle les revendications ont été émises. |
+| aud |Audience. L’application pour laquelle les revendications ont été émises. |
 | AuthenticationInstant |[Moment d’authentification]. Heure à laquelle l’authentification s’est produite. |
 | c_hash |Valeur de hachage de code. Il s’agit d’un hachage du contenu du jeton. |
 | exp |[Délai d’expiration]. Délai au bout duquel le jeton n’est plus accepté. |
 | iat |Émis à. Heure d’émission du jeton. |
 | iss |Émetteur. La valeur de cette revendication correspond toujours aux services AD FS du partenaire de ressources. |
-| name |Nom d’utilisateur. Exemple : `john@corp.fabrikam.com`. |
+| Nom |Nom d’utilisateur. Exemple : `john@corp.fabrikam.com`. |
 | nameidentifier |[Identificateur de nom]. Identificateur du nom de l’entité pour laquelle le jeton a été émis. |
 | nonce |Valeur à usage unique de session. Valeur unique générée par AD FS pour empêcher les attaques par relecture. |
-| upn |Nom d’utilisateur principal. Exemple : john@corp.fabrikam.com |
+| upn |Nom d’utilisateur principal. Exemple : john@corp.fabrikam.com |
 | pwd_exp |Période d’expiration de mot de passe. Délai en secondes au bout duquel le mot de passe de l’utilisateur ou un secret d’authentification équivalent, tel qu’un code PIN, arrive à expiration. |
 
 > [!NOTE]
