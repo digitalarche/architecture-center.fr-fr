@@ -4,11 +4,11 @@ description: "Guide spécifique relatif au service pour définir le mécanisme d
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: da1145e2f2f91befd69505ae9ef2734d6110c1d0
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: 6bb623bd8be89573178f250570407bf83d62c098
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="retry-guidance-for-specific-services"></a>Guide du mécanisme de nouvelle tentative relatif aux différents services
 
@@ -229,7 +229,7 @@ La base de données SQL est une base de données SQL hébergée disponible en di
 La prise en charge de la fonctionnalité de nouvelle tentative est assurée lors de l’accès à la base de données SQL à l’aide d’Entity Framework 6.0 et version supérieure via un mécanisme appelé [Résilience des connexions/logique de nouvelle tentative](http://msdn.microsoft.com/data/dn456835.aspx). Les principales fonctionnalités de ce mécanisme sont :
 
 * L’abstraction principale est l’interface **IDbExecutionStrategy** . Cette interface :
-  * Définit les méthodes synchrones et asynchrones **Execute*** .
+  * Définit les méthodes synchrones et asynchrones **Execute***.
   * Définit les classes qui peuvent être utilisées directement ou configurées sur un contexte de base de données comme une stratégie par défaut mappée sur un nom de fournisseur ou un nom de fournisseur et un nom de serveur. En cas de configuration sur un contexte, les nouvelles tentatives se produisent au niveau des opérations de base de données individuelles. Il peut y en avoir plusieurs pour une opération de contexte donnée.
   * Définit à quel moment et comment proposer une nouvelle tentative en cas d’échec de connexion.
 * Il inclut plusieurs implémentations intégrées de l’interface **IDbExecutionStrategy** :
@@ -416,7 +416,7 @@ using (var db = new BloggingContext())
 
 ### <a name="more-information"></a>Plus d’informations
 * [Résilience de connexion](/ef/core/miscellaneous/connection-resiliency)
-* [Data Points - EF Core 1.1 (Points de données - EF Core 1.1)](https://msdn.microsoft.com/en-us/magazine/mt745093.aspx)
+* [Data Points - EF Core 1.1 (Points de données - EF Core 1.1)](https://msdn.microsoft.com/magazine/mt745093.aspx)
 
 ## <a name="sql-database-using-adonet-retry-guidelines"></a>Instructions relatives aux nouvelles tentatives pour la base de données SQL utilisant ADO.NET
 La base de données SQL est une base de données SQL hébergée disponible en différentes tailles et sous forme de service standard (partagé) et premium (non partagé).

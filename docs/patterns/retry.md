@@ -5,12 +5,13 @@ keywords: "modèle de conception"
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories: resiliency
-ms.openlocfilehash: 6c02b384e71c068ecbc78f3170d28cea406538e2
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+pnp.pattern.categories:
+- resiliency
+ms.openlocfilehash: 73fdcbcc2bd75593a4c8e33dc2259c90593e14db
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="retry-pattern"></a>Modèle Nouvelle tentative
 
@@ -48,13 +49,13 @@ L’application doit inclure toutes les tentatives d’accès à un service dist
 
 Une application doit consigner les détails des erreurs et des opérations ayant échoué. Ces informations sont utiles pour les opérateurs. Si un service est fréquemment occupé ou indisponible, cela signifie souvent que le service a épuisé ses ressources. Vous pouvez réduire la fréquence de ces erreurs en procédant à une montée en charge du service. Par exemple, si un service de base de données est surchargé en permanence, il peut être utile de partitionner la base de données et de répartir la charge sur plusieurs serveurs.
 
-> [Microsoft Entity Framework](https://docs.microsoft.com/ef/) fournit des fonctionnalités pour relancer les opérations de base de données. De même, la plupart des services Azure et des kits de développement logiciel (SDK) clients incluent un mécanisme de nouvelle tentative. Pour plus d’informations, consultez [Guide du mécanisme de nouvelle tentative relatif aux différents services](https://docs.microsoft.com/en-us/azure/architecture/best-practices/retry-service-specific).
+> [Microsoft Entity Framework](https://docs.microsoft.com/ef/) fournit des fonctionnalités pour relancer les opérations de base de données. De même, la plupart des services Azure et des kits de développement logiciel (SDK) clients incluent un mécanisme de nouvelle tentative. Pour plus d’informations, consultez [Guide du mécanisme de nouvelle tentative relatif aux différents services](https://docs.microsoft.com/azure/architecture/best-practices/retry-service-specific).
 
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
 Prenez en compte les points suivants quand vous choisissez comment implémenter ce modèle.
 
-La stratégie de nouvelle tentative doit être configurée en fonction des exigences métiers de l’application et de la nature de l’échec. Pour certaines opérations non critiques, il est préférable d’accepter un échec rapide plutôt que d’effectuer plusieurs autres tentatives qui peuvent avoir un impact sur le débit de l’application. Par exemple, dans le cas d’une application web interactive souhaitant accéder à un service distant, il est préférable d’accepter un échec après un plus petit nombre de tentatives avec un délai d’attente court entre chaque nouvelle tentative et d’afficher un message à l’intention de l’utilisateur (par exemple, « Veuillez réessayer ultérieurement »). Pour une application de traitement par lot, il peut être plus judicieux d’augmenter le nombre de tentatives de connexion en augmentant de manière exponentielle le délai d’attente entre chaque tentative.
+La stratégie de nouvelle tentative doit être configurée en fonction des exigences métiers de l’application et de la nature de l’échec. Pour certaines opérations non critiques, il est préférable d’effectuer un Fail-fast plutôt que d’effectuer plusieurs autres tentatives qui peuvent avoir un impact sur le débit de l’application. Par exemple, dans le cas d’une application web interactive souhaitant accéder à un service distant, il est préférable d’accepter un échec après un plus petit nombre de tentatives avec un délai d’attente court entre chaque nouvelle tentative et d’afficher un message à l’intention de l’utilisateur (par exemple, « Veuillez réessayer ultérieurement »). Pour une application de traitement par lot, il peut être plus judicieux d’augmenter le nombre de tentatives de connexion en augmentant de manière exponentielle le délai d’attente entre chaque tentative.
 
 Une stratégie de relance agressive avec un délai minimal entre les tentatives et un grand nombre de nouvelles tentatives peut affecter encore davantage les performances d’un service occupé qui a déjà atteint ou est sur le point d’atteindre sa capacité maximale. Cette stratégie de relance peut également affecter la réactivité de l’application si elle tente en permanence de relancer une opération ayant échoué.
 
@@ -68,7 +69,7 @@ Tenez compte de la manière dont la relance d’une opération faisant partie d�
 
 Vérifiez que l’ensemble du code de relance a été testé pour un large éventail de conditions d’échec. Vérifiez qu’il ne nuit pas gravement aux performances ou à la fiabilité de l’application, qu’il ne créé pas une charge excessive au niveau des services et des ressources, et qu’il ne génère pas des conditions de concurrence ou des goulots d’étranglement.
 
-Implémentez la logique de nouvelle tentative uniquement lorsque vous avez identifié le contexte à l’origine de l’échec d’une opération. Par exemple, si une tâche qui contient une stratégie de nouvelle tentative appelle une autre tâche qui contient également une stratégie de nouvelle tentative, cette couche supplémentaire de nouvelles tentatives peut retarder de manière considérable le processus de traitement. Il peut être préférable d’accepter l’échec rapide de la tâche de niveau inférieur et d’indiquer la raison de l’échec à la tâche qui l’a appelée. Cette tâche de niveau supérieur peut alors gérer l’échec en fonction de sa propre stratégie.
+Implémentez la logique de nouvelle tentative uniquement lorsque vous avez identifié le contexte à l’origine de l’échec d’une opération. Par exemple, si une tâche qui contient une stratégie de nouvelle tentative appelle une autre tâche qui contient également une stratégie de nouvelle tentative, cette couche supplémentaire de nouvelles tentatives peut retarder de manière considérable le processus de traitement. Il peut être préférable d’effectuer un Fail-fast de la tâche de niveau inférieur et d’indiquer la raison de l’échec à la tâche qui l’a appelée. Cette tâche de niveau supérieur peut alors gérer l’échec en fonction de sa propre stratégie.
 
 Il est important de consigner tous les échecs de connexion qui entraînent une nouvelle tentative afin que les problèmes sous-jacents liés à l’application, aux services ou aux ressources puissent être identifiés.
 
@@ -84,7 +85,7 @@ Ce modèle peut ne pas avoir d’utilité dans les cas suivants :
 - Pour gérer les échecs qui ne sont pas dus à des erreurs temporaires, tels que les exceptions internes générées par des erreurs dans la logique métier d’une application.
 - Pour éviter de résoudre les problèmes d’extensibilité dans un système. Si une application génère fréquemment des erreurs liées à la disponibilité, cela indique souvent que le service ou la ressource concerné(e) doit être mis(e) à l’échelle.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>exemples
 
 Cet exemple en C# illustre une implémentation du modèle Nouvelle tentative. La méthode `OperationWithBasicRetryAsync`, illustrée ci-dessous, appelle un service externe en mode asynchrone via la méthode `TransientOperationAsync`. Les détails de la méthode `TransientOperationAsync` sont propres au service et ne sont donc pas spécifiés dans l’exemple de code.
 
@@ -172,5 +173,5 @@ private bool IsTransient(Exception ex)
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
 - [Modèle Disjoncteur](circuit-breaker.md). Le modèle Nouvelle tentative est idéal pour gérer les erreurs temporaires. Lorsque l’erreur semble être de plus longue durée, il peut être plus judicieux d’implémenter le modèle Disjoncteur. Le modèle Nouvelle tentative peut également être combiné à un modèle Disjoncteur afin de mettre en place une approche complète de gestion des erreurs.
-- [Guide du mécanisme de nouvelle tentative relatif aux différents services](https://docs.microsoft.com/en-us/azure/architecture/best-practices/retry-service-specific)
-- [Résilience de connexion](https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency)
+- [Guide du mécanisme de nouvelle tentative relatif aux différents services](https://docs.microsoft.com/azure/architecture/best-practices/retry-service-specific)
+- [Résilience de connexion](https://docs.microsoft.com/ef/core/miscellaneous/connection-resiliency)

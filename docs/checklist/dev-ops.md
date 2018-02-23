@@ -4,11 +4,11 @@ description: "Liste de contrôle qui fournit des conseils liés à DevOps."
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist
-ms.openlocfilehash: c435ea0aed9571cb6508d7d23f93414a138998fe
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 356fef2415347ae132915695a25fd9b50779bd8b
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="devops-checklist"></a>Liste de contrôle DevOps
 
@@ -126,7 +126,7 @@ Il est essentiel de partager cette documentation. Encouragez les membres de votr
 
 **Utilisez la gestion de la configuration.** Les modifications de configuration doivent être planifiées, visibles pour l’équipe chargée des opérations et enregistrées. Cette opération peut prendre la forme d’une base de données de gestion de la configuration ou d’une approche de type configuration en tant que code. La configuration doit être auditée régulièrement pour vérifier que ce que vous aviez demandé a réellement été mis en place.
 
-**Prévoyez un plan de support Azure et étudiez le processus.** Azure offre plusieurs [plans de support][azure-support-plans]. Identifiez le plan qui correspond à vos besoins et assurez-vous que toute votre équipe sait comment l’utiliser. Chaque membre de l’équipe doit comprendre tous les détails du plan, comment fonctionne le processus de support et comment ouvrir un ticket de support avec Azure. Si vous prévoyez un événement à grande échelle, le support Azure peut vous aider à augmenter les limites de votre service. Pour plus d’informations, consultez le [Forum Aux Questions sur le support technique Azure](https://azure.microsoft.com/en-us/support/faq/).
+**Prévoyez un plan de support Azure et étudiez le processus.** Azure offre plusieurs [plans de support][azure-support-plans]. Identifiez le plan qui correspond à vos besoins et assurez-vous que toute votre équipe sait comment l’utiliser. Chaque membre de l’équipe doit comprendre tous les détails du plan, comment fonctionne le processus de support et comment ouvrir un ticket de support avec Azure. Si vous prévoyez un événement à grande échelle, le support Azure peut vous aider à augmenter les limites de votre service. Pour plus d’informations, consultez le [Forum Aux Questions sur le support technique Azure](https://azure.microsoft.com/support/faq/).
 
 **Suivez les principes de séparation des privilèges lorsque vous octroyez un accès aux ressources.** Gérez prudemment l'accès aux ressources. L’accès doit être refusé par défaut, sauf si un utilisateur obtient explicitement l’accès à une ressource. N’accordez aux utilisateurs que les accès dont ils ont besoin pour effectuer leurs tâches. Effectuez un suivi des privilèges accordés aux utilisateurs et réalisez régulièrement des audits de sécurité.
 

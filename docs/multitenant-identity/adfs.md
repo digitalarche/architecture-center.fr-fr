@@ -6,11 +6,11 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: token-cache
 pnp.series.next: client-assertion
-ms.openlocfilehash: a5dc25a4b61ffd13d86f1abb2b839054e5fb4c7f
-ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
+ms.openlocfilehash: 08bf567085a940287de310f61b9f447d0ce5d5ec
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/19/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="federate-with-a-customers-ad-fs"></a>Se fédérer avec les services AD FS d’un client
 
@@ -63,10 +63,10 @@ Par défaut, l’application par partie de confiance ne reçoit qu’un ensemble
 | exp |[Délai d’expiration]. Délai au bout duquel le jeton n’est plus accepté. |
 | iat |Émis à. Heure d’émission du jeton. |
 | iss |Émetteur. La valeur de cette revendication correspond toujours aux services AD FS du partenaire de ressources. |
-| Nom |Nom d’utilisateur. Exemple : `john@corp.fabrikam.com`. |
+| Nom |Nom d’utilisateur. Exemple : `john@corp.fabrikam.com` |
 | nameidentifier |[Identificateur de nom]. Identificateur du nom de l’entité pour laquelle le jeton a été émis. |
 | nonce |Valeur à usage unique de session. Valeur unique générée par AD FS pour empêcher les attaques par relecture. |
-| upn |Nom d’utilisateur principal. Exemple : john@corp.fabrikam.com |
+| upn |Nom d’utilisateur principal. Exemple : `john@corp.fabrikam.com` |
 | pwd_exp |Période d’expiration de mot de passe. Délai en secondes au bout duquel le mot de passe de l’utilisateur ou un secret d’authentification équivalent, tel qu’un code PIN, arrive à expiration. |
 
 > [!NOTE]

@@ -2,11 +2,11 @@
 title: "Style d’architecture basée sur les événements"
 description: "Décrit les avantages, les inconvénients et les bonnes pratiques pour les architectures basées sur les événements et les architectures IoT sur Azure"
 author: MikeWasson
-ms.openlocfilehash: ff7f936ceabefe7079a1ebbfa717ff4095bf133b
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 3289bf784b02d62e3d0c1a29b4839c9be3501134
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="event-driven-architecture-style"></a>Style d’architecture basée sur les événements
 
@@ -49,7 +49,7 @@ Dans le diagramme logique ci-dessus, chaque type de consommateur est représent�
 - Architecture hautement scalable et distribuée. 
 - Les sous-systèmes ont des vues indépendantes du flux d’événements.
 
-## <a name="challenges"></a>Inconvénients
+## <a name="challenges"></a>Défis
 
 - Transmission non garantie. Dans certains systèmes, surtout dans les scénarios IoT, il est essentiel de garantir la transmission des événements.
 - Traitement des événements dans l’ordre ou une seule fois. Chaque type de consommateur s’exécute généralement dans plusieurs instances à des fins de résilience et de scalabilité. Cela peut être une source de problèmes si les événements doivent être traités dans l’ordre (dans un type de consommateur) ou si la logique de traitement n’est pas idempotent.
@@ -89,7 +89,7 @@ Les cadres gris représentent les composants d’un système IoT qui ne sont pas
  <!-- links -->
 
 [competing-consumers]: ../../patterns/competing-consumers.md
-[iot-ref-arch]: https://azure.microsoft.com/en-us/updates/microsoft-azure-iot-reference-architecture-available/
+[iot-ref-arch]: https://azure.microsoft.com/updates/microsoft-azure-iot-reference-architecture-available/
 [minimize-coordination]: ../design-principles/minimize-coordination.md
 
 

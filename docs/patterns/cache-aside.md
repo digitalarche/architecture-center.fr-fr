@@ -8,11 +8,11 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - performance-scalability
-ms.openlocfilehash: e0a6a91fda6ea43236f6eea552f7b8f8d31160ad
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 1536a33884c9c9faa1e3702c951067249e691bf8
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="cache-aside-pattern"></a>Modèle Cache-Aside
 
@@ -55,7 +55,7 @@ Prenez en compte les points suivants lorsque vous choisissez comment implémente
 
 ## <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
 
-Utilisez ce modèle dans les situations suivantes :
+Utilisez ce modèle dans les situations suivantes :
 
 - Un cache ne fournit pas d’opérations de double lecture et de double écriture natives.
 - La demande en ressources n’est pas prévisible. Ce modèle permet aux applications de charger des données à la demande. Il n’émet aucune hypothèse sur les données dont aura besoin une application.
@@ -65,7 +65,7 @@ Ce modèle peut ne pas convenir :
 - Lorsque le jeu de données mises en cache est statique. Si les données ne tiennent pas dans l’espace de cache disponible, amorcez le cache avec les données au démarrage et appliquez une stratégie qui empêche l’expiration des données.
 - Pour mettre en cache les informations d’état de session dans une application web hébergée dans une batterie de serveurs web. Dans cet environnement, vous devez éviter d’introduire des dépendances basées sur l’affinité client-serveur.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>exemples
 
 Dans Microsoft Azure, vous pouvez utiliser le Cache Redis Azure pour créer un cache distribué qui peut être partagé par plusieurs instances d’une application. 
 
@@ -125,7 +125,7 @@ public async Task<MyEntity> GetMyEntityAsync(int id)
 }
 ```
 
->  Les exemples utilisent l’API du Cache Redis Azure pour accéder à la banque de données et récupérer des informations à partir du cache. Pour plus d’informations, consultez les articles [Using Microsoft Azure Redis Cache](https://docs.microsoft.com/en-us/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) (Utilisation du Cache Redis Microsoft Azure) et [Création d’une application web avec le Cache Redis](https://docs.microsoft.com/en-us/azure/redis-cache/cache-web-app-howto).
+>  Les exemples utilisent l’API du Cache Redis Azure pour accéder à la banque de données et récupérer des informations à partir du cache. Pour plus d’informations, consultez les articles [Using Microsoft Azure Redis Cache](https://docs.microsoft.com/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) (Utilisation du Cache Redis Microsoft Azure) et [Création d’une application web avec le Cache Redis](https://docs.microsoft.com/azure/redis-cache/cache-web-app-howto).
 
 La méthode `UpdateEntityAsync` illustrée ci-dessous montre comment invalider un objet dans le cache lorsque sa valeur est modifiée par l’application. Le code met à jour la banque de données d’origine, puis supprime l’élément en cache du cache.
 
@@ -151,6 +151,6 @@ public async Task UpdateEntityAsync(MyEntity entity)
 
 Les informations suivantes peuvent également être pertinentes durant l’implémentation de ce modèle :
 
-- [Recommandations en matière de cache](https://docs.microsoft.com/en-us/azure/architecture/best-practices/caching). Fournit des informations supplémentaires sur la façon dont vous pouvez mettre en cache des données dans une solution cloud, ainsi que les points à prendre en compte lorsque vous implémentez un cache.
+- [Recommandations en matière de cache](https://docs.microsoft.com/azure/architecture/best-practices/caching). Fournit des informations supplémentaires sur la façon dont vous pouvez mettre en cache des données dans une solution cloud, ainsi que les points à prendre en compte lorsque vous implémentez un cache.
 
 - [Manuel d’introduction à la cohérence des données](https://msdn.microsoft.com/library/dn589800.aspx). Les applications cloud utilisent généralement des données réparties dans plusieurs banques de données. La gestion et la maintenance de la cohérence des données dans cet environnement constituent un aspect essentiel du système, notamment par rapport aux problèmes de concurrence et de disponibilité pouvant survenir. Ce manuel décrit les problèmes de cohérence des données distribuées et explique comment une application peut implémenter la cohérence éventuelle pour garantir la disponibilité des données.
