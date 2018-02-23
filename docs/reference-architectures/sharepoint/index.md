@@ -3,11 +3,11 @@ title: "Exécuter une batterie de serveurs SharePoint Server 2016 à haute dispo
 description: "Pratiques éprouvées pour la configuration d’une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure."
 author: njray
 ms.date: 08/01/2017
-ms.openlocfilehash: 0c0e9a7b2ae12a2d12919548f91304e6cbd2d8a6
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: d16f8721c6edc8e5049766f13e2d3bc59524453f
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2017
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Exécuter une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure
 
@@ -289,7 +289,7 @@ Le tableau suivant présente les ordinateurs virtuels qui sont déployés.
 [availability-set]: /azure/virtual-machines/windows/manage-availability
 [azure-portal]: https://portal.azure.com
 [azure-ps]: /powershell/azure/overview
-[azure-pricing]: https://azure.microsoft.com/en-us/pricing/calculator/
+[azure-pricing]: https://azure.microsoft.com/pricing/calculator/
 [bastion-host]: https://en.wikipedia.org/wiki/Bastion_host
 [create-availability-group]: https://technet.microsoft.com/library/mt793548(v=office.16).aspx
 [connect-to-vm]: /azure/virtual-machines/windows/quick-create-portal#connect-to-virtual-machine

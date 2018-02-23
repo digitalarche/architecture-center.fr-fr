@@ -3,11 +3,11 @@ title: "Antimodèle d’instanciation incorrect"
 description: "Évitez de créer continuellement de nouvelles instances d’un objet destiné à être créé une seule fois, puis partagé."
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 8955f37e76c8b5e66c1ed7737d200d11ed321612
-ms.sourcegitcommit: 9ba82cf84cee06ccba398ec04c51dab0e1ca8974
+ms.openlocfilehash: 4d5ef9ad9e675b46df94b51e81d7a4bd4c1b25e9
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/13/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="improper-instantiation-antipattern"></a>Antimodèle d’instanciation incorrect
 
@@ -22,9 +22,7 @@ De nombreuses bibliothèques fournissent des abstractions de ressources externes
 - `Microsoft.Azure.Documents.Client.DocumentClient`. Se connecte à une instance Cosmos DB
 - `StackExchange.Redis.ConnectionMultiplexer`. Se connecte à Redis, y compris le Cache Redis Azure.
 
-Ces classes sont destinées à être instanciées une seule fois et réutilisées tout au long de la durée de vie d’une application. Toutefois, on pense à tort que ces classes doivent être acquises uniquement en cas de besoin et publiées rapidement. Celles répertoriées ici sont des bibliothèques .NET, mais le modèle n’est pas propre à .NET.
-
-L’exemple ASP.NET suivant crée une instance de `HttpClient` pour communiquer avec un service distant. Vous trouverez l’exemple complet [ici][sample-app].
+Ces classes sont destinées à être instanciées une seule fois et réutilisées tout au long de la durée de vie d’une application. Toutefois, on pense à tort que ces classes doivent être acquises uniquement en cas de besoin et publiées rapidement. Celles répertoriées ici sont des bibliothèques .NET, mais le modèle n’est pas propre à .NET. L’exemple ASP.NET suivant crée une instance de `HttpClient` pour communiquer avec un service distant. Vous trouverez l’exemple complet [ici][sample-app].
 
 ```csharp
 public class NewHttpClientInstancePerRequestController : ApiController
@@ -76,18 +74,18 @@ L’exemple suivant utilise une instance `HttpClient` statique, ce qui entraîne
 ```csharp
 public class SingleHttpClientInstanceController : ApiController
 {
-    private static readonly HttpClient HttpClient;
+    private static readonly HttpClient httpClient;
 
     static SingleHttpClientInstanceController()
     {
-        HttpClient = new HttpClient();
+        httpClient = new HttpClient();
     }
 
     // This method uses the shared instance of HttpClient for every call to GetProductAsync.
     public async Task<Product> GetProductAsync(string id)
     {
         var hostName = HttpContext.Current.Request.Url.Host;
-        var result = await HttpClient.GetStringAsync(string.Format("http://{0}:8080/api/...", hostName));
+        var result = await httpClient.GetStringAsync(string.Format("http://{0}:8080/api/...", hostName));
         return new Product { Name = result };
     }
 }

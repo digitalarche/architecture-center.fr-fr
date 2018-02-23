@@ -2,11 +2,11 @@
 title: "Antimodèle E/S bavardes"
 description: "Un grand nombre de demandes d’E/S peut nuire aux performances et à la réactivité."
 author: dragon119
-ms.openlocfilehash: 50001316939b56c9b57a119f6ae20f0878f54c0f
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 4f0e0e455ceb58317d3029d8ab4631d476802499
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="chatty-io-antipattern"></a>Antimodèle E/S bavardes
 
@@ -215,7 +215,7 @@ await SaveCustomerListToFileAsync(customers);
 
 - Lors de l’écriture de données, évitez de verrouiller les ressources plus longtemps que nécessaire, pour réduire les risques de contention au cours d’une opération de longue durée. Si une opération d’écriture s’étend sur plusieurs magasins de données, fichiers ou services, il convient d’adopter une approche cohérente. Reportez-vous aux [conseils en termes de cohérence des données][data-consistency-guidance].
 
-- Le fait de placer les données en mémoire tampon avant de les écrire les rend vulnérables en cas de blocage du processus. Si le débit de données connaît généralement des pics ou est relativement peu important, il peut être plus sûr de mettre les données en mémoire tampon dans une file d’attente durable externe, tels que des[concentrateurs d’événements](http://azure.microsoft.com/en-us/services/event-hubs/).
+- Le fait de placer les données en mémoire tampon avant de les écrire les rend vulnérables en cas de blocage du processus. Si le débit de données connaît généralement des pics ou est relativement peu important, il peut être plus sûr de mettre les données en mémoire tampon dans une file d’attente durable externe, tels que des[concentrateurs d’événements](http://azure.microsoft.com/services/event-hubs/).
 
 - Envisagez la mise en cache des données que vous récupérez à partir d’un service ou d’une base de données. Cela peut permettre de réduire le volume d’E/S en évitant de répéter les requêtes pour les mêmes données. Pour plus d’informations, voir [Meilleures pratiques pour la mise en cache][caching-guidance].
 
