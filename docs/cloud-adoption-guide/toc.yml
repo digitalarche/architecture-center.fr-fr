@@ -1,6 +1,6 @@
 - name: Centre des architectures Azure
   href: /azure/architecture
-- name: Guide d’adoption du cloud Azure
+- name: Guide d’adoption du cloud
   href: index.md
   items:
     - name: Notions fondamentales de l’adoption d’Azure

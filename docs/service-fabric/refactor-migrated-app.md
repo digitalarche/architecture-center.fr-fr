@@ -3,11 +3,11 @@ title: "Refactoriser une application Azure Service Fabric migrée depuis Azure C
 description: "Comment refactoriser une application Azure Service Fabric existante migrée depuis Azure Cloud Services"
 author: petertay
 ms.date: 01/30/2018
-ms.openlocfilehash: 18af7c7fe0c0933b1a2a132ee2ee0d8479d41b2a
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.openlocfilehash: 450648fbd0b19cdc7585738701914a1ebc1ed779
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="refactor-an-azure-service-fabric-application-migrated-from-azure-cloud-services"></a>Refactoriser une application Azure Service Fabric migrée depuis Azure Cloud Services
 
@@ -78,7 +78,7 @@ Le diagramme suivant illustre l’architecture de l’application Surveys refact
 
 Azure Service Fabric prend en charge les modèles de programmation suivants :
 * Le modèle exécutable invité permet d’empaqueter n’importe quel fichier exécutable comme un service et de le déployer dans un cluster Service Fabric. Service Fabric orchestre et gère l’exécution de l’exécutable invité.
-* Le modèle de conteneur permet le déploiement des services dans les images de conteneur. Service Fabric prend en charge la création et la gestion des conteneurs sur les conteneurs de noyau Linux ainsi que les conteneurs Windows Server. 
+* Le modèle de conteneur permet le déploiement des services dans les images de conteneur. Service Fabric prend en charge la création et la gestion de conteneurs en plus des conteneurs Windows Serveur et de noyau Linux. 
 * Le modèle de programmation de services fiables permet la création de services sans état ou avec état s’intègrant à toutes les fonctionnalités de la plateforme Service Fabric. Les services avec état permettent de stocker un état répliqué dans le cluster Service Fabric. Les services sans état ne le permettent pas.
 * Le modèle de programmation des acteurs fiables permet la création de services qui implémentent le modèle d’acteur virtuel.
 
@@ -151,7 +151,7 @@ Le code de l’application Surveys est disponible sur [GitHub][sample-code].
 Si vous venez de démarrer avec [Azure Service Fabric][service-fabric], configurez d’abord votre environnement de développement, puis téléchargez la dernière version du [SDK Azure ][azure-sdk] et du [SDK Azure Service Fabric ][service-fabric-sdk]. Le SDK inclut le gestionnaire de clusters OneBox afin que vous puissiez déployer et tester l’application Surveys localement avec le débogage F5 complet.
 
 <!-- links -->
-[azure-sdk]: https://azure.microsoft.com/en-us/downloads/archive-net-downloads/
+[azure-sdk]: https://azure.microsoft.com/downloads/archive-net-downloads/
 [container-scenarios]: /azure/service-fabric/service-fabric-containers-overview
 [kestrel]: https://docs.microsoft.com/aspnet/core/fundamentals/servers/kestrel?tabs=aspnetcore2x
 [kestrel-intro]: https://docs.microsoft.com/aspnet/core/fundamentals/servers/kestrel?tabs=aspnetcore1x
