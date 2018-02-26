@@ -1,12 +1,12 @@
 ---
 layout: LandingPage
-ms.openlocfilehash: e39a744b6f0226a5b0bb14d03a0b8a3d4479e01b
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.openlocfilehash: b5c88ac0307c7d47f5bde73322bedd7063136576
+ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 02/23/2018
 ---
-# <a name="azure-cloud-adoption-guide"></a>Guide d’adoption du cloud Azure
+# <a name="cloud-adoption-guide"></a>Guide d’adoption du cloud
 
 Le cloud présente un changement fondamental dans la façon dont les entreprises se procurent et utilisent des ressources technologiques. Par le passé, elles étaient propriétaires et responsables de tous les niveaux technologiques, des infrastructures aux logiciels. À présent, le cloud offre la possibilité de changer de façon d’utiliser les technologies en approvisionnant et en consommant les ressources nécessaires.
 
