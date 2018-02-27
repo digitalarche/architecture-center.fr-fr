@@ -229,7 +229,7 @@ La base de données SQL est une base de données SQL hébergée disponible en di
 La prise en charge de la fonctionnalité de nouvelle tentative est assurée lors de l’accès à la base de données SQL à l’aide d’Entity Framework 6.0 et version supérieure via un mécanisme appelé [Résilience des connexions/logique de nouvelle tentative](http://msdn.microsoft.com/data/dn456835.aspx). Les principales fonctionnalités de ce mécanisme sont :
 
 * L’abstraction principale est l’interface **IDbExecutionStrategy** . Cette interface :
-  * Définit les méthodes synchrones et asynchrones **Execute***.
+  * Définit les méthodes synchrones et asynchrones **Execute** \*.
   * Définit les classes qui peuvent être utilisées directement ou configurées sur un contexte de base de données comme une stratégie par défaut mappée sur un nom de fournisseur ou un nom de fournisseur et un nom de serveur. En cas de configuration sur un contexte, les nouvelles tentatives se produisent au niveau des opérations de base de données individuelles. Il peut y en avoir plusieurs pour une opération de contexte donnée.
   * Définit à quel moment et comment proposer une nouvelle tentative en cas d’échec de connexion.
 * Il inclut plusieurs implémentations intégrées de l’interface **IDbExecutionStrategy** :
