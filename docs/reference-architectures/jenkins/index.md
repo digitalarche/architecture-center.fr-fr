@@ -3,11 +3,11 @@ title: "Exécuter un serveur Jenkins sur Azure"
 description: "Cette architecture de référence montre comment déployer et utiliser un serveur Jenkins professionnel et évolutif sur Azure sécurisé avec l’authentification unique (SSO)."
 author: njray
 ms.date: 01/21/18
-ms.openlocfilehash: 9cab4990b259695f310da339bfef3060b0905640
-ms.sourcegitcommit: 3426a9c5ed937f097725c487cf3d073ae5e2a347
+ms.openlocfilehash: 724185e43ed743013f52ded04b779552dd8e48c1
+ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/01/2018
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Exécuter un serveur Jenkins sur Azure
 
@@ -119,7 +119,7 @@ La sélection d’un serveur de taille appropriée dépend de la taille de la ch
 
 -   L’objectif de point de récupération (RPO) indique la quantité de données que vous pouvez vous permettre de perdre si une interruption de service affecte Jenkins.
 
-Dans la pratique, le RTO et le RPO impliquent la redondance et la sauvegarde. La disponibilité n’est pas une question de récupération du matériel, qui fait partie d’Azure, mais plutôt de maintien à jour de l’état de votre serveur Jenkins. Cette architecture de référence utilise le [contrat de niveau de service Azure][sla] (SLA), qui garantit la durée de fonctionnement à 99,9 % pour une seule machine virtuelle. Si ce contrat de niveau de service (SLA) ne répond pas à vos exigences de durée de fonctionnement, assurez vous de disposer d’un plan de récupération d’urgence, ou envisagez l’utilisation d’un déploiement de [serveur Jenkins multimaître][multi-master] (non traitée dans ce document).
+Dans la pratique, le RTO et le RPO impliquent la redondance et la sauvegarde. La disponibilité n’est pas une question de récupération du matériel, qui fait partie d’Azure, mais plutôt de maintien à jour de l’état de votre serveur Jenkins. Cette architecture de référence utilise le [contrat de niveau de service Azure][sla] (SLA), qui garantit la durée de fonctionnement à 99,9 % pour une seule machine virtuelle. Si ce contrat de niveau de service (SLA) ne répond pas à vos exigences de durée de fonctionnement, assurez-vous de disposer d’un plan de récupération d’urgence, ou envisagez l’utilisation d’un déploiement de [serveur Jenkins multimaître][multi-master] (non traitée dans ce document).
 
 Envisagez l’utilisation des [scripts][disaster] de récupération d’urgence à l’étape 7 du déploiement pour créer un compte de stockage Azure avec des disques managés pour stocker l’état du serveur Jenkins. Si Jenkins tombe en panne, il peut être restauré à l’état stocké dans ce compte de stockage distinct.
 
@@ -139,7 +139,7 @@ Utilisez l’une des approches suivantes pour verrouiller la sécurité sur un s
 
 -   Installer le plug-in [Informations d’identification Azure][configure-credential] pour utiliser Key Vault pour gérer les secrets des ressources Azure, des agents dans le pipeline et des composants tiers.
 
--   Créez un profil de sécurité qui définit les ressources requises par les utilisateurs, les services et les agents du pipeline pour effectuer leurs travaux, mais pas plus. Cette étape devient critique lors de l’examen de vos paramètres de sécurité.
+-   Utilisez RBAC pour restreindre l’accès au principal du service à la condition minimale requise pour exécuter les travaux. Cela permet de limiter l’étendue des dommages causés par un travail non fiable.
 
 Les travaux Jenkins nécessitent souvent des secrets pour accéder aux services Azure qui requièrent une autorisation, tels que Azure Container Service. Utilisez [Key Vault][key-vault] avec le [plug-in Informations d’identification Azure][configure-credential] pour gérer ces secrets en toute sécurité. Utilisez Key Vault pour stocker les informations d’identification du principal de service, les mots de passe, les jetons et d’autres secrets.
 
