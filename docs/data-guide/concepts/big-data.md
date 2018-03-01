@@ -3,11 +3,11 @@ title: Architectures de Big Data
 description: 
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 6ee44c6d94ae7ac5cb67cb5f16337deb1ffd4b70
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 2a1336faea81470b082d4eef8e2cc53a082c63c7
+ms.sourcegitcommit: 023d88e781f7fe64c62b247d876441ee40921b1b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="big-data-architectures"></a>Architectures de Big Data
 
@@ -48,26 +48,13 @@ La plupart des architectures Big Data incluent tout ou partie des composants sui
 
 * **Ingestion de messages en temps réel**. Si la solution inclut des sources en temps réel, l’architecture doit inclure un moyen pour capturer et stocker des messages en temps réel pour le traitement de flux de données. Il peut s’agir d’un simple magasin de données, où les messages entrants sont déposés dans un dossier en vue du traitement. Toutefois, de nombreuses solutions besoin d’un magasin d’ingestion des messages qui agit comme une mémoire tampon pour les messages et qui prend en charge un traitement de montée en puissance, une remise fiable et d’autres sémantiques de files d’attente de message. Cette partie d’une architecture de diffusion est communément appelée mise en mémoire tampon du flux. Les options incluent Azure Event Hubs, Azure IoT Hub et Kafka.
 
-* **Traitement de flux**. Après la capture des messages en temps réel, la solution doit les traiter en filtrant, agrégeant et préparant les données en vue de l’analyse. Les données de flux traitées sont ensuite écrites dans un récepteur de sortie. Azure Stream Analytics fournit un service de traitement de flux managé reposant sur des requêtes SQL à l’exécution permanente qui fonctionnent sur les flux de données indépendants. Vous pouvez également utiliser des technologies de flux Apache open source comme Storm et Spark dans un cluster HDInsight.
+* **Traitement de flux**. Après avoir capturé les messages en temps réel, la solution doit les traiter en filtrant, en agrégeant et, plus généralement, en préparant les données pour l’analyse. Les données de flux traitées sont ensuite écrites dans un récepteur de sortie. Azure Stream Analytics fournit un service de traitement de flux managé reposant sur des requêtes SQL à l’exécution permanente qui fonctionnent sur les flux de données indépendants. Vous pouvez également utiliser des technologies de flux Apache open source comme Storm et Spark dans un cluster HDInsight.
 
 * **Magasin de données analytique**. De nombreuses solutions Big Data préparent les données pour l’analyse, puis fournissent les données traitées dans un format structuré qui peut être interrogé à l’aide des outils d’analyse. Le magasin de données analytique utilisé pour répondre à ces requêtes peut être un entrepôt de données relationnelles de type Kimball, comme indiqué dans les solutions décisionnelles (BI) plus traditionnelles. Les données peuvent également être présentées via une technologie NoSQL à faible latence, telle que HBase, ou via une base de données Hive interactif qui fournit une abstraction de métadonnées sur les fichiers de données dans le magasin de données distribuées. Azure SQL Data Warehouse fournit un service managé pour l’entreposage cloud des données à grande échelle. HDInsight prend en charge les formats Hive interactif, HBase et Spark SQL, qui peuvent également servir à préparer les données en vue de l’analyse.
 
-* **Analyse et rapports**. La plupart des solutions Big Data ont pour but de fournir des informations sur les données via l’analyse et les rapports. Pour permettre aux utilisateurs d’analyser les données, l’architecture peut inclure une couche de modélisation des données, comme un cube OLAP multidimensionnel ou un modèle de données tabulaire dans Azure Analysis Services. Elle peut également prendre en charge le décisionnel libre-service, en utilisant les technologies de modélisation et de visualisation de Microsoft Power BI ou Microsoft Excel. L’analyse et les rapports peuvent aussi prendre la forme d’une exploration interactive des données par les scientifiques de données ou les analystes de données. Pour ces scénarios, plusieurs services Azure prennent en charge les blocs-notes analytiques, tels que Jupyter, ce qui permet à ces utilisateurs de tirer parti de leurs connaissances avec Python ou R. Pour l’exploration de données à grande échelle, vous pouvez utiliser Microsoft R Server seul ou avec Spark.
+* **Analyse et rapports**. La plupart des solutions Big Data ont pour but de fournir des informations sur les données par le biais de l’analyse et des rapports. Pour permettre aux utilisateurs d’analyser les données, l’architecture peut inclure une couche de modélisation des données, comme un cube OLAP multidimensionnel ou un modèle de données tabulaire dans Azure Analysis Services. Elle peut également prendre en charge le décisionnel libre-service, en utilisant les technologies de modélisation et de visualisation de Microsoft Power BI ou Microsoft Excel. L’analyse et les rapports peuvent aussi prendre la forme d’une exploration interactive des données par les scientifiques de données ou les analystes de données. Pour ces scénarios, plusieurs services Azure prennent en charge les blocs-notes analytiques, tels que Jupyter, ce qui permet à ces utilisateurs de tirer parti de leurs connaissances avec Python ou R. Pour l’exploration de données à grande échelle, vous pouvez utiliser Microsoft R Server seul ou avec Spark.
 
 * **Orchestration**. La plupart des solutions Big Data consistent en des opérations de traitement de données répétées, encapsulées dans des workflows, qui transforment les données source, déplacent les données entre plusieurs sources et récepteurs, chargent les données traitées dans un magasin de données analytique, ou envoient les résultats directement à un rapport ou à un tableau de bord. Pour automatiser ces workflows, vous pouvez utiliser une technologie d’orchestration telle qu’Azure Data Factory ou Apache Oozie avec Sqoop.
-
-## <a name="data-lake"></a>Data Lake
-
-Si vous avez déjà lu des informations sur le Big Data, vous avez probablement rencontré le terme _data lake_. Ce terme a peut-être été utilisé pour désigner un produit ou un concept lié au stockage de grandes quantités de données. 
-
-Un Data Lake regroupe à la fois le stockage et le traitement. Le stockage Data Lake vise plusieurs objectifs : la tolérance aux pannes, l’évolutivité infinie et l’ingestion à débit élevé de données de différentes formes et tailles. Le traitement Date Lake implique un ou plusieurs moteurs de traitement configurés pour ces objectifs et qui peuvent fonctionner sur des données stockées dans un volume Data Lake à grande échelle.
-
-Les magasins Data Lake sont souvent utilisés pour la diffusion en continu d’événements ou dans des scénarios IoT, car ils permettent de conserver de grandes quantités de données relationnelles et non relationnelles sans transformation ou définition de schéma. Ils sont conçus pour gérer de grands volumes de petites écritures à faible latence, et sont optimisés pour un débit important.
-
-Un autre terme souvent utilisé dans les scénarios de données est _entrepôt de données_ (data mart). En règle générale, un entrepôt de données est un magasin de données nettoyées, empaquetées et structurées pour faciliter leur utilisation. Contrairement à un entrepôt de données, un Data Lake est conçu pour recevoir des données brutes, laissées à leur état d’origine ou dans une forme peu traitée, pour permettre de poser des questions de diverses manières et à différents moments. Si les données sont nettoyées et structurées d’une certaine façon, comme dans un entrepôt de données, il est difficile de s’adapter à la manière dont les données sont traitées et analysées lorsque de nouvelles questions ou de nouveaux outils surviennent. C’est pourquoi dans un Data Lake le stockage et le traitement constituent des entités distinctes.
-
-Service Azure approprié :
-- [Azure Data Lake](https://azure.microsoft.com/scenarios/data-lake/)
 
 ## <a name="lambda-architecture"></a>Architecture lambda
 
