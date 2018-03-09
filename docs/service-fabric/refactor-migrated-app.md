@@ -3,11 +3,11 @@ title: "Refactoriser une application Azure Service Fabric migrée depuis Azure C
 description: "Comment refactoriser une application Azure Service Fabric existante migrée depuis Azure Cloud Services"
 author: petertay
 ms.date: 01/30/2018
-ms.openlocfilehash: 450648fbd0b19cdc7585738701914a1ebc1ed779
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 08ef3af68b8eaba36a5b871449f0aba764fe5a04
+ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 03/08/2018
 ---
 # <a name="refactor-an-azure-service-fabric-application-migrated-from-azure-cloud-services"></a>Refactoriser une application Azure Service Fabric migrée depuis Azure Cloud Services
 
@@ -17,7 +17,7 @@ Cet article décrit la refactorisation d’une application Azure Service Fabric 
 
 ## <a name="scenario"></a>Scénario
 
-Comme indiqué dans l’article précédent, [Migration d’une application Azure Cloud Services vers Azure Service Fabric][migrate-from-cloud-services], l’équipe Patterns & Practices a écrit un livre en 2012, décrivant le processus de conception et d’implémentation d’une application Cloud Services dans Azure. Ce manuel décrit une société fictive nommée Tailspin souhaitant créer une application Cloud Services nommée **Surveys**. L’application Surveys permet aux utilisateur de créer et de publier des enquêtes auxquelles le public peut répondre. Le diagramme suivant illustre l’architecture de cette version de l’application Surveys :
+Comme indiqué dans l’article précédent, [Migration d’une application Azure Cloud Services vers Azure Service Fabric][migrate-from-cloud-services], l’équipe Patterns & Practices a écrit un livre en 2012, décrivant le processus de conception et d’implémentation d’une application Cloud Services dans Azure. Ce manuel décrit une société fictive nommée Tailspin souhaitant créer une application Cloud Services nommée **Surveys**. L’application Surveys permet aux utilisateurs de créer et de publier des enquêtes auxquelles le public peut répondre. Le diagramme suivant illustre l’architecture de cette version de l’application Surveys :
 
 ![](./images/tailspin01.png)
 
@@ -78,17 +78,17 @@ Le diagramme suivant illustre l’architecture de l’application Surveys refact
 
 Azure Service Fabric prend en charge les modèles de programmation suivants :
 * Le modèle exécutable invité permet d’empaqueter n’importe quel fichier exécutable comme un service et de le déployer dans un cluster Service Fabric. Service Fabric orchestre et gère l’exécution de l’exécutable invité.
-* Le modèle de conteneur permet le déploiement des services dans les images de conteneur. Service Fabric prend en charge la création et la gestion de conteneurs en plus des conteneurs Windows Serveur et de noyau Linux. 
-* Le modèle de programmation de services fiables permet la création de services sans état ou avec état s’intègrant à toutes les fonctionnalités de la plateforme Service Fabric. Les services avec état permettent de stocker un état répliqué dans le cluster Service Fabric. Les services sans état ne le permettent pas.
+* Le modèle de conteneur permet le déploiement des services dans les images de conteneur. Service Fabric prend en charge la création et la gestion de conteneurs placés sur des conteneurs de noyau Linux et Windows Server. 
+* Le modèle de programmation de services fiables permet la création de services sans état ou avec état s’intégrant à toutes les fonctionnalités de la plateforme Service Fabric. Les services avec état permettent de stocker un état répliqué dans le cluster Service Fabric. Les services sans état ne le permettent pas.
 * Le modèle de programmation des acteurs fiables permet la création de services qui implémentent le modèle d’acteur virtuel.
 
 Tous les services de l’application Surveys sont des services sans état fiables, à l’exception du service *Tailspin.SurveyResponseService*. Ce service implémente un [ReliableConcurrentQueue][reliable-concurrent-queue] pour traiter les réponses d’enquête une fois reçues. Les réponses dans le ReliableConcurrentQueue sont enregistrées dans le Stockage Blob Azure et passées au *Tailspin.SurveyAnalysisService* pour analyse. Tailspin choisit un ReliableConcurrentQueue, car les réponses ne nécessitent pas un ordre premier entré, premier sorti (FIFO) strict fourni par une file d’attente comme Azure Service Bus. Un ReliableConcurrentQueue est également conçu pour fournir un débit élevé et une faible latence pour les opérations de mise en file d’attente et de retrait.
 
-Notez que les opérations pour conserver les éléments retirés d’une file d’attente à partir d’un ReliableConcurrentQueue doivent idéalement être idempotente. Si une exception est levée pendant le traitement d’un élément à partir de la file d’attente, le même élément est susceptible d’être traité plusieurs fois. Dans l’application Surveys, l’opération de fusion des réponses d’enquête répond que le *Tailspin.SurveyAnalysisService* n’est pas idempotente car Tailspin a décidé que les données d’analyse d’enquête sont seulement une capture instantanée des données d’analyse et n’ont pas besoin d’être cohérentes. Les réponses d’enquête enregistrées dans le Stockage Blob Azure sont finalement cohérentes, de sorte que l’analyse finale de l’enquête peut toujours être recalculée correctement à partir de ces données.
+Notez que les opérations pour conserver les éléments retirés d’une file d’attente à partir d’un ReliableConcurrentQueue doivent idéalement être idempotentes. Si une exception est levée pendant le traitement d’un élément à partir de la file d’attente, le même élément est susceptible d’être traité plusieurs fois. Dans l’application Surveys, l’opération de fusion des réponses d’enquête répond que le *Tailspin.SurveyAnalysisService* n’est pas idempotente car Tailspin a décidé que les données d’analyse d’enquête sont seulement une capture instantanée des données d’analyse et n’ont pas besoin d’être cohérentes. Les réponses d’enquête enregistrées dans le Stockage Blob Azure sont finalement cohérentes, de sorte que l’analyse finale de l’enquête peut toujours être recalculée correctement à partir de ces données.
 
 ## <a name="communication-framework"></a>Infrastructure de communication
 
-Chaque service dans l’application Surveys communique à l’aide d’une API web RESTful. Les API RESTful offre les avantages suivants :
+Chaque service dans l’application Surveys communique à l’aide d’une API web RESTful. Les API RESTful offrent les avantages suivants :
 * Facilité d’utilisation : chaque service est généré à l’aide de ASP.Net Core MVC, qui prend nativement en charge la création d’API web.
 * Sécurité : alors que chaque service ne requiert pas SSL, Tailspin peut demander à chaque service de le demander. 
 * Contrôle de version : les clients peuvent être écrits et testés par rapport à une version spécifique d’une API web.

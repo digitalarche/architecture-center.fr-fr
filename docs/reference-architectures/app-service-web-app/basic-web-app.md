@@ -4,11 +4,11 @@ description: "Architecture recommandée pour une application web basique exécut
 author: MikeWasson
 ms.date: 12/12/2017
 cardTitle: Basic web application
-ms.openlocfilehash: 598eb547f0e96ae334af391183a792637caa8631
-ms.sourcegitcommit: 1c0465cea4ceb9ba9bb5e8f1a8a04d3ba2fa5acd
+ms.openlocfilehash: 38b0739cc61d679742b610b99e92aaad8d3b394d
+ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/02/2018
+ms.lasthandoff: 03/08/2018
 ---
 # <a name="basic-web-application"></a>Application web de base
 [!INCLUDE [header](../../_includes/header.md)]
@@ -40,7 +40,7 @@ Elle comporte les composants suivants :
 
 * **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure. Pour utiliser un nom de domaine personnalisé, tel que `contoso.com`, créez des enregistrements DNS qui mappent le nom de domaine personnalisé sur l’adresse IP. Pour plus d’informations, consultez [Configurer un nom de domaine personnalisé dans Azure App Service][custom-domain-name].  
 
-* **Base de données SQL Azure**. [SQL Database][sql-db] est une base de données relationnelle sous forme de service dans le cloud.
+* **Base de données SQL Azure**. [SQL Database][sql-db] est une base de données relationnelle sous forme de service dans le cloud. SQL Database partage sa base de code avec le moteur de base de données Microsoft SQL Server. Selon les exigences de votre application, vous pouvez également utiliser [Azure Database pour MySQL](/azure/mysql) ou [Azure Database pour PostgreSQL](/azure/postgresql). Il s’agit de services de base de données entièrement gérés, basés sur des moteurs de base de données managées open source MySQL Server et Postgres, respectivement.
 
 * **Serveur logique**. Dans Azure SQL Database, un serveur logique héberge vos bases de données. Vous pouvez créer plusieurs bases de données dans un serveur logique.
 
@@ -77,7 +77,7 @@ Il existe deux façons de mettre à l’échelle une application App Service :
 
 * *Monter en charge*, signifiant l’ajout d’instances pour traiter une augmentation de charge. Chaque niveau de tarification possède un nombre d’instances maximal. 
 
-  Vous pouvez monter en charge manuellement en modifiant le nombre d’instances, ou en utilisant la [mise à l’échelle automatique ][web-app-autoscale] pour que Azure ajoute ou supprime automatiquement des instances en fonctions des mesures de performances et/ou de planification. Chaque opération de mise à l’échelle se produit rapidement&mdash;généralement en quelques secondes. 
+  Vous pouvez monter en charge manuellement en modifiant le nombre d’instances, ou en utilisant la [mise à l’échelle automatique ][web-app-autoscale] pour que Azure ajoute ou supprime automatiquement des instances en fonction des mesures de performances et/ou de planification. Chaque opération de mise à l’échelle se produit rapidement&mdash;généralement en quelques secondes. 
 
   Pour activer la mise à l’échelle automatique, créez un *profil* de mise à l’échelle qui définit le nombre minimal et maximal d’instances. Les profils peuvent être planifiés. Par exemple, vous pouvez créer des profils différents pour les jours de la semaine et le week-end. Un profil peut contenir des règles pour l’ajout ou la suppression des instances. (Exemple : ajouter deux instances si l’utilisation du processeur est supérieure à 70 % pendant 5 minutes.)
   
@@ -129,7 +129,7 @@ Le déploiement implique deux étapes :
 Une application App Service dispose toujours d’un emplacement de déploiement nommé `production`, représentant le site de production en direct. Nous vous recommandons de créer un emplacement de préproduction pour le déploiement des mises à jour. Voici plusieurs avantages de l’utilisation d’un emplacement de préproduction :
 
 * Vous pouvez vérifier la réussite du déploiement, avant de le permuter en production.
-* Le déploiement vers un emplacement de préproduction garantit la préparation de toutes les instances avant de le permuter en production. Un grand nombre d’application possèdent un temps de préparation et de démarrage à froid important.
+* Le déploiement vers un emplacement de préproduction garantit la préparation de toutes les instances avant de le permuter en production. Un grand nombre d’applications possèdent un temps de préparation et de démarrage à froid important.
 
 Nous vous recommandons également la création d’un troisième emplacement pour stocker le dernier déploiement correct. Après avoir échangé les emplacements de préproduction et de production, déplacez le déploiement de production précédent (maintenant à l’emplacement de préproduction) vers l’emplacement du dernier déploiement correct. Ainsi, vous pouvez rapidement revenir à la dernière version correcte si vous détectez un problème plus tard.
 
@@ -170,7 +170,7 @@ L’audit peut vous aider à respecter une conformité réglementaire et à déc
 Chaque emplacement de déploiement possède une adresse IP publique. Sécuriser les emplacements de production à l’aide de la [connexion de Azure Active Directory][aad-auth] afin que seuls les membres de vos équipes de DevOps et de développement puissent atteindre ces points de terminaison.
 
 ### <a name="logging"></a>Journalisation
-Les journaux ne devrez jamais enregistrer les mots de passe des utilisateurs ou d’autres informations qui peuvent être utilisées pour valider l’usurpation d’identité. Retirez ces détails des données avant de les stocker.   
+Les journaux ne devraient jamais enregistrer les mots de passe des utilisateurs ou d’autres informations qui peuvent être utilisées pour valider l’usurpation d’identité. Retirez ces détails des données avant de les stocker.   
 
 ### <a name="ssl"></a>SSL
 Une application App Service comprend un point de terminaison SSL sur un sous-domaine de `azurewebsites.net` sans coût supplémentaire. Le point de terminaison SSL comprend un certificat générique pour le domaine `*.azurewebsites.net`. Si vous utilisez un nom de domaine personnalisé, vous devez fournir un certificat correspondant au domaine personnalisé. L’approche la plus simple est d’acheter un certificat directement via le portail Azure. Vous pouvez également importer des certificats à partir d’autres autorités de certification. Pour plus d’informations, consultez [Acheter et configurer un certificat SSL pour votre service Azure App Service][ssl-cert].

@@ -25,6 +25,8 @@
           href: hybrid-networking/expressroute-vpn-failover.md
         - name: Topologie hub-and-spoke
           href: hybrid-networking/hub-spoke.md
+        - name: Topologie hub-and-spoke avec des services partagés
+          href: hybrid-networking/shared-services.md
     - name: Gestion des identités
       href: identity/index.md
       items:

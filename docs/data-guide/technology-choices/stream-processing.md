@@ -3,11 +3,11 @@ title: "Sélectionner une technologie de traitement de flux"
 description: 
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: e06f46e2951159219bd8cc430102e2ec0c5d6d4d
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 23d9849c14964b0905300f191a41084b589fd127
+ms.sourcegitcommit: 943e671a8d522cef5ddc8c6e04848134b03c2de4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 03/05/2018
 ---
 # <a name="choosing-a-stream-processing-technology-in-azure"></a>Sélectionner une technologie de traitement de flux dans Azure
 
@@ -19,6 +19,7 @@ Le traitement de flux en temps réel utilise les messages provenant d’une file
 Dans Azure, tous les magasins de données suivants répondent aux principales exigences de prise en charge du traitement en temps réel :
 - [Azure Stream Analytics](/azure/stream-analytics/)
 - [HDInsight avec Spark Streaming](/azure/hdinsight/spark/apache-spark-streaming-overview)
+- [Apache Spark dans Azure Databricks](/azure/azure-databricks/)
 - [HDInsight avec Storm](/azure/hdinsight/storm/apache-storm-overview)
 - [Azure Functions](/azure/azure-functions/functions-overview)
 - [Azure App Service WebJobs](/azure/app-service/web-sites-create-web-jobs)
@@ -40,25 +41,25 @@ Pour les scénarios de traitement en temps réel, commencez par choisir le servi
 Les tableaux suivants résument les principales différences entre les fonctionnalités. 
 
 ### <a name="general-capabilities"></a>Fonctionnalités générales
-| | Azure Stream Analytics | HDInsight avec Spark Streaming | HDInsight avec Storm | Azure Functions | Azure App Service WebJobs |
-| --- | --- | --- | --- | --- | --- | 
-| Programmabilité | Langage de requête Stream Analytics, JavaScript | Scala, Python, Java | Java, C# | C#, F#, Node.js | C#, Node.js, PHP, Java, Python |
-| Paradigme de programmation | Déclarative | Mélange de méthodes déclarative et impérative | Impérative | Impérative | Impérative |    
-| Modèle de tarification | Par unité de diffusion en continu | Par heure de cluster | Par heure de cluster | Par exécution de fonction et consommation de ressources | Par heure de plan App Service |  
+| | Azure Stream Analytics | HDInsight avec Spark Streaming | Apache Spark dans Azure Databricks | HDInsight avec Storm | Azure Functions | Azure App Service WebJobs |
+| --- | --- | --- | --- | --- | --- | --- | 
+| Programmabilité | Langage de requête Stream Analytics, JavaScript | Scala, Python, Java | Scala, Python, Java, R | Java, C# | C#, F#, Node.js | C#, Node.js, PHP, Java, Python |
+| Paradigme de programmation | Déclarative | À la fois déclaratif et impératif | À la fois déclaratif et impératif | Impérative | Impérative | Impérative |    
+| Modèle de tarification | [Unités de streaming](https://azure.microsoft.com/pricing/details/stream-analytics/) | Par heure de cluster | [Unités Databricks](https://azure.microsoft.com/pricing/details/databricks/) | Par heure de cluster | Par exécution de fonction et consommation de ressources | Par heure de plan App Service |  
 
 ### <a name="integration-capabilities"></a>Fonctionnalités d’intégration
-| | Azure Stream Analytics | HDInsight avec Spark Streaming | HDInsight avec Storm | Azure Functions | Azure App Service WebJobs |
-| --- | --- | --- | --- | --- | --- | 
-| Entrées | [Entrées Stream Analytics](/azure/stream-analytics/stream-analytics-define-inputs)  | Event Hubs, IoT Hub, Kafka, HDFS  | Event Hubs, IoT Hub, Storage Blobs, Azure Data Lake Store  | [Liaisons prises en charge](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Service Bus, files d’attente de stockage, Storage Blobs, Event Hubs, WebHooks, Cosmos DB, fichiers |
-| Récepteurs |  [Sorties Stream Analytics](/azure/stream-analytics/stream-analytics-define-outputs) | HDFS | Event Hubs, Service Bus, Kafka | [Liaisons prises en charge](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Service Bus, files d’attente de stockage, Storage Blobs, Event Hubs, WebHooks, Cosmos DB, fichiers | 
+| | Azure Stream Analytics | HDInsight avec Spark Streaming | Apache Spark dans Azure Databricks | HDInsight avec Storm | Azure Functions | Azure App Service WebJobs |
+| --- | --- | --- | --- | --- | --- | --- | 
+| Entrées | [Entrées Stream Analytics](/azure/stream-analytics/stream-analytics-define-inputs)  | Event Hubs, IoT Hub, Kafka, HDFS, Storage Blobs, Azure Data Lake Store  | Event Hubs, IoT Hub, Kafka, HDFS, Storage Blobs, Azure Data Lake Store  | Event Hubs, IoT Hub, Storage Blobs, Azure Data Lake Store  | [Liaisons prises en charge](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Service Bus, files d’attente de stockage, Storage Blobs, Event Hubs, WebHooks, Cosmos DB, fichiers |
+| Récepteurs |  [Sorties Stream Analytics](/azure/stream-analytics/stream-analytics-define-outputs) | HDFS, Kafka, Storage Blobs, Azure Data Lake Store, Cosmos DB | HDFS, Kafka, Storage Blobs, Azure Data Lake Store, Cosmos DB | Event Hubs, Service Bus, Kafka | [Liaisons prises en charge](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Service Bus, files d’attente de stockage, Storage Blobs, Event Hubs, WebHooks, Cosmos DB, fichiers | 
 
 ### <a name="processing-capabilities"></a>Fonctionnalités de traitement
-| | Azure Stream Analytics | HDInsight avec Spark Streaming | HDInsight avec Storm | Azure Functions | Azure App Service WebJobs |
-| --- | --- | --- | --- | --- | --- | 
-| Prise en charge temporelle/fenêtrage intégrée | OUI | OUI | OUI | Non  | Non  |
-| Formats de données d’entrée | Avro, JSON ou CSV, encodage UTF-8 | Tout format à base de code personnalisé | Tout format à base de code personnalisé | Tout format à base de code personnalisé | Tout format à base de code personnalisé |
-| Extensibilité | [Interroger des partitions](/azure/stream-analytics/stream-analytics-parallelization) | Limitée par la taille du cluster | Limitée par la taille du cluster | Jusqu'à 200 instances d’application de fonction traitées en parallèle | Limitée par la capacité du plan App Service | 
-| Prise en charge de l’arrivée tardive et de la gestion des événements de manière désordonnée | OUI | OUI | OUI | Non  | Non  |
+| | Azure Stream Analytics | HDInsight avec Spark Streaming | Apache Spark dans Azure Databricks | HDInsight avec Storm | Azure Functions | Azure App Service WebJobs |
+| --- | --- | --- | --- | --- | --- | --- | 
+| Prise en charge temporelle/fenêtrage intégrée | OUI | OUI | OUI | OUI | Non  | Non  |
+| Formats de données d’entrée | Avro, JSON ou CSV, encodage UTF-8 | Tout format à base de code personnalisé | Tout format à base de code personnalisé | Tout format à base de code personnalisé | Tout format à base de code personnalisé | Tout format à base de code personnalisé |
+| Extensibilité | [Interroger des partitions](/azure/stream-analytics/stream-analytics-parallelization) | Limitée par la taille du cluster | Limitée par la configuration de la mise à l’échelle du cluster Databricks | Limitée par la taille du cluster | Jusqu'à 200 instances d’application de fonction traitées en parallèle | Limitée par la capacité du plan App Service | 
+| Prise en charge de l’arrivée tardive et de la gestion des événements de manière désordonnée | OUI | OUI | OUI | OUI | Non  | Non  |
 
 Voir aussi :
 
