@@ -2,11 +2,13 @@
   href: /azure/architecture
 - name: Checklists de révision de la conception
   items:
-    - name: Availability
+    - name: Disponibilité
       href: availability.md
     - name: DevOps
       href: dev-ops.md
-    - name: Résilience
+    - name: Résilience (général)
       href: resiliency.md
+    - name: Résilience (services Azure)
+      href: resiliency-per-service.md
     - name: Extensibilité
       href: scalability.md

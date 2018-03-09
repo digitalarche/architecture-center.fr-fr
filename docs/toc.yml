@@ -110,8 +110,10 @@
       href: checklist/availability.md
     - name: DevOps
       href: checklist/dev-ops.md
-    - name: Résilience
+    - name: Résilience (général)
       href: checklist/resiliency.md
+    - name: Résilience (services Azure)
+      href: checklist/resiliency-per-service.md
     - name: Extensibilité
       href: checklist/scalability.md
 - name: Conception pour la résilience
@@ -132,8 +134,6 @@
       href: service-fabric/migrate-from-cloud-services.md
     - name: Refactoriser une application Azure Service Fabric migrée depuis Azure Cloud Services
       href: service-fabric/refactor-migrated-app.md
-    - name: Exécuter Elasticsearch sur Azure
-      href: elasticsearch/index.md
     - name: Étendre la fonctionnalité des modèles Azure Resource Manager
       href: building-blocks/extending-templates/index.md
 - name: Ressources
