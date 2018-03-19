@@ -1,10 +1,10 @@
 ---
 layout: LandingPage
-ms.openlocfilehash: 00abbfdeac89a9006517195bd4bbc514d587fe74
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9bd86f1b3527f1116d4f5169baf76f8a5b9a385b
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="azure-application-architecture-guide"></a>Guide de l’architecture des applications Azure
 
@@ -14,7 +14,7 @@ Ce guide présente une approche structurée pour concevoir des applications sur 
 
 ## <a name="introduction"></a>Introduction
 
-Le cloud change la façon dont les applications sont conçues. À la place de monolithes, les applications sont décomposées en services plus petits et décentralisés. Ces services communiquent via des API ou à l’aide d’une messagerie ou d’une gestion des évènements asynchrone. Les applications sont mises à l’échelle horizontalement, en ajoutant de nouvelles instances lorsque c’est demandé. 
+Le cloud change la façon dont les applications sont conçues. À la place de monolithes, les applications sont décomposées en services plus petits et décentralisés. Ces services communiquent via des API ou à l’aide d’une messagerie ou d’une gestion des événements asynchrone. Les applications sont mises à l’échelle horizontalement, en ajoutant de nouvelles instances lorsque c’est demandé. 
 
 Ces tendances amènent de nouveaux défis. L’état de l’application est distribué. Les opérations sont effectuées en parallèle et de façon asynchrone. Le système dans son ensemble doit être résilient lorsque des échecs se produisent. Les déploiements doivent être automatisée et prévisibles. La surveillance et les données de télémétrie sont critiques pour obtenir des informations du système. Le guide de l’architecture des applications Azure est conçu pour vous aider à naviguer au travers de ces modifications. 
 
@@ -46,7 +46,7 @@ Infrastructure immuable<br/>
 </tbody>
 </table>
 
-Ce guide est destiné aux architectes, développeurs et aux équipes d’exploitation des applications. Il ne s’agit pas d’un guide de procédure montrant comment utiliser les services Azure individuels. Après avoir lu ce guide, vous comprendrez les modèles architecturaux et les meilleures pratiques à appliquer lors d’une conception sur la plateforme de Azure Cloud.
+Ce guide est destiné aux architectes, développeurs et aux équipes d’exploitation des applications. Il ne s’agit pas d’un guide de procédure montrant comment utiliser les services Azure individuels. Après avoir lu ce guide, vous comprendrez les modèles architecturaux et les meilleures pratiques à appliquer lors d’une conception sur la plateforme de Azure Cloud. Vous pouvez également télécharger une [version du livre électronique du guide][ebook].
 
 ## <a name="how-this-guide-is-structured"></a>Structure de ce guide
 
@@ -78,6 +78,7 @@ Le guide d’architecture des applications Azure est organisé comme une série 
 [checklists]: ../checklist/index.md
 [compute-options]: ./technology-choices/compute-comparison.md
 [design-principles]: ./design-principles/index.md
+[ebook]: https://azure.microsoft.com/campaigns/cloud-application-architecture-guide/
 [patterns]: ../patterns/index.md?toc=/azure/architecture/guide/toc.json
 [pillars]: ./pillars.md
 [ref-archs]: ../reference-architectures/index.md
