@@ -4,7 +4,7 @@
   href: index.md
 - name: Catégories
   items:
-    - name: Availability
+    - name: Disponibilité
       href: category/availability.md
     - name: Gestion des données
       href: category/data-management.md
@@ -68,7 +68,7 @@
   href: priority-queue.md
 - name: Nivellement de la charge basé sur une file d’attente
   href: queue-based-load-leveling.md
-- name: Retry
+- name: Recommencer
   href: retry.md
 - name: Superviseur de l’agent du planificateur
   href: scheduler-agent-supervisor.md
