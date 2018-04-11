@@ -1,6 +1,6 @@
 ---
-title: "À propos de l’application Tailspin Surveys"
-description: "Présentation de l’application Tailspin Surveys"
+title: À propos de l’application Tailspin Surveys
+description: Présentation de l’application Tailspin Surveys
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
@@ -68,4 +68,5 @@ ms.lasthandoff: 11/14/2017
 
 [Run the Surveys application]: ./run-the-app.md
 [d’ASP.NET Core]: /aspnet/core
+[ASP.NET Core]: /aspnet/core
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance

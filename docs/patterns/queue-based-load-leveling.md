@@ -1,7 +1,7 @@
 ---
-title: "Nivellement de la charge basé sur une file d’attente"
-description: "Utilisez une file d’attente qui agit comme mémoire tampon entre une tâche et un service qu’elle appelle, afin d’atténuer les surcharges intermittentes."
-keywords: "modèle de conception"
+title: Nivellement de la charge basé sur une file d’attente
+description: Utilisez une file d’attente qui agit comme mémoire tampon entre une tâche et un service qu’elle appelle, afin d’atténuer les surcharges intermittentes.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

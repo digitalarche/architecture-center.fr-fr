@@ -1,6 +1,6 @@
 ---
-title: "Sécurisation d’une API web de serveur principal dans une application multi-locataire"
-description: "Comment sécuriser une API web de serveur principal"
+title: Sécurisation d’une API web de serveur principal dans une application multi-locataire
+description: Comment sécuriser une API web de serveur principal
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
@@ -270,10 +270,12 @@ public void ConfigureServices(IServiceCollection services)
 [JwtBearer]: https://www.nuget.org/packages/Microsoft.AspNet.Authentication.JwtBearer
 
 [Surveys de Tailspin]: tailspin.md
+[Tailspin Surveys]: tailspin.md
 [IdentityServer3]: https://github.com/IdentityServer/IdentityServer3
 [Update the application manifests]: ./run-the-app.md#update-the-application-manifests
 [Token caching]: token-cache.md
 [l’inscription du locataire]: signup.md
+[tenant sign-up]: signup.md
 [claims-transformation]: claims.md#claims-transformations
 [Authorization]: authorize.md
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance

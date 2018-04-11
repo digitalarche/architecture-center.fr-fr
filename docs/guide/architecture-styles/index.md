@@ -1,6 +1,6 @@
 ---
-title: "Styles d’architecture"
-description: "Styles d’architecture courants pour les applications cloud"
+title: Styles d’architecture
+description: Styles d’architecture courants pour les applications cloud
 layout: LandingPage
 ms.openlocfilehash: 15a316f9ebf7cfe4e72a6992f264a68abb904819
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60

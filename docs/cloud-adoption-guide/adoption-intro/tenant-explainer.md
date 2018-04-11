@@ -1,6 +1,6 @@
 ---
-title: "Fiche explicative : qu’est-ce qu’un client Azure Active Directory ?"
-description: "Explique le fonctionnement interne d’Azure Active Directory en matière d’identité en tant que service (IDaaS) dans Azure."
+title: 'Fiche explicative : qu’est-ce qu’un client Azure Active Directory ?'
+description: Explique le fonctionnement interne d’Azure Active Directory en matière d’identité en tant que service (IDaaS) dans Azure.
 author: petertay
 ms.openlocfilehash: ce5a33b92047e1f360eee8fcbc7a726bcf8cd19f
 ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242

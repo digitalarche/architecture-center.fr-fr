@@ -1,6 +1,6 @@
 ---
-title: "Antimodèle de base de données occupé"
-description: "Le déchargement du traitement sur un serveur de base de données peut entraîner des problèmes de performances et d’évolutivité."
+title: Antimodèle de base de données occupé
+description: Le déchargement du traitement sur un serveur de base de données peut entraîner des problèmes de performances et d’évolutivité.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: 9fdbde0731a1be570ef611894a9d23a1be87f4e7

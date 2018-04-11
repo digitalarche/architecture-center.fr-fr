@@ -1,6 +1,6 @@
 ---
-title: "Créer pour les besoins de l’entreprise"
-description: "Chaque décision de conception doit être justifiée par une exigence métier"
+title: Créer pour les besoins de l’entreprise
+description: Chaque décision de conception doit être justifiée par une exigence métier
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 110a441ae74334d212a717da2cb038d60b24bb1f

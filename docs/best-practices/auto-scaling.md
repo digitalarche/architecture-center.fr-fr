@@ -1,6 +1,6 @@
 ---
-title: "Recommandations en matière de mise à l’échelle automatique"
-description: "Recommandations sur le processus de mise à l’échelle automatique nécessaire pour l’allocation dynamique des ressources requises par une application."
+title: Recommandations en matière de mise à l’échelle automatique
+description: Recommandations sur le processus de mise à l’échelle automatique nécessaire pour l’allocation dynamique des ressources requises par une application.
 author: dragon119
 ms.date: 05/17/2017
 pnp.series.title: Best Practices

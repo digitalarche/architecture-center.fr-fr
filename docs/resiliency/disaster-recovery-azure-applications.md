@@ -1,6 +1,6 @@
 ---
-title: "Récupération d’urgence des applications Microsoft Azure"
-description: "Présentations techniques et informations détaillées sur la conception d’applications pour la récupération d’urgence sur Microsoft Azure."
+title: Récupération d’urgence des applications Microsoft Azure
+description: Présentations techniques et informations détaillées sur la conception d’applications pour la récupération d’urgence sur Microsoft Azure.
 author: adamglick
 ms.date: 05/26/2017
 ms.openlocfilehash: 7235e752cf1b96e392a700b223d63b07c0f85b66

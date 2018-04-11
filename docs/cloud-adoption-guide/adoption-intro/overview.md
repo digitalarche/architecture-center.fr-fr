@@ -1,6 +1,6 @@
 ---
-title: "Adoption d’Azure : phase initiale"
-description: "Décrit le niveau de base de connaissances que doit posséder une entreprise pour adopter Azure"
+title: 'Adoption d’Azure : phase initiale'
+description: Décrit le niveau de base de connaissances que doit posséder une entreprise pour adopter Azure
 author: petertay
 ms.openlocfilehash: e9421b610e4eb07a3ed37bca56e513b0689484ef
 ms.sourcegitcommit: 9ba82cf84cee06ccba398ec04c51dab0e1ca8974

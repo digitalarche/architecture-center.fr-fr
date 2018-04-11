@@ -1,6 +1,6 @@
 ---
-title: "Antimodèle Serveur frontal occupé"
-description: "L’exécution d’un travail asynchrone sur un grand nombre de threads d’arrière-plan peut priver les tâches de premier plan de ressources."
+title: Antimodèle Serveur frontal occupé
+description: L’exécution d’un travail asynchrone sur un grand nombre de threads d’arrière-plan peut priver les tâches de premier plan de ressources.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: cedb80ddac5ceb1eb901455df3165993fd28a138

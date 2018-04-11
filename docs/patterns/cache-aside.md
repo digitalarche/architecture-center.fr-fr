@@ -1,7 +1,7 @@
 ---
 title: Cache-Aside
-description: "Chargez les données à la demande dans un cache à partir d’une banque de données"
-keywords: "modèle de conception"
+description: Chargez les données à la demande dans un cache à partir d’une banque de données
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

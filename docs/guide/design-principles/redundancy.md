@@ -1,6 +1,6 @@
 ---
-title: "Rendre tous les éléments redondants"
-description: "Évitez les points de défaillance uniques en intégrant la redondance à votre application."
+title: Rendre tous les éléments redondants
+description: Évitez les points de défaillance uniques en intégrant la redondance à votre application.
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 05ccf78c2cfbcd4e2d26200e70463d388d54f671

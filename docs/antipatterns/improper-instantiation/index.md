@@ -1,6 +1,6 @@
 ---
-title: "Antimodèle d’instanciation incorrect"
-description: "Évitez de créer continuellement de nouvelles instances d’un objet destiné à être créé une seule fois, puis partagé."
+title: Antimodèle d’instanciation incorrect
+description: Évitez de créer continuellement de nouvelles instances d’un objet destiné à être créé une seule fois, puis partagé.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: 4d5ef9ad9e675b46df94b51e81d7a4bd4c1b25e9

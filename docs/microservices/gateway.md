@@ -1,6 +1,6 @@
 ---
-title: "Passerelles d’API"
-description: "Passerelles d’API dans les microservices"
+title: Passerelles d’API
+description: Passerelles d’API dans les microservices
 author: MikeWasson
 ms.date: 12/08/2017
 ms.openlocfilehash: 6483d416363e24f4084d6b856847a740bf4054d9

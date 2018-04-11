@@ -1,6 +1,6 @@
 ---
-title: "Style d’architecture multiniveau"
-description: "Décrit les avantages, les inconvénients et les bonnes pratiques pour les architectures multiniveaux sur Azure"
+title: Style d’architecture multiniveau
+description: Décrit les avantages, les inconvénients et les bonnes pratiques pour les architectures multiniveaux sur Azure
 author: MikeWasson
 ms.openlocfilehash: 8333b789e03a9da2b021abe7d7c193cd2af8d6bf
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60

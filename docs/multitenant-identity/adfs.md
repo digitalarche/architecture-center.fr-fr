@@ -1,6 +1,6 @@
 ---
-title: "Se fédérer avec les services AD FS d’un client"
-description: "Comment effectuer la fédération avec les services AD FS d’un client dans une application mutualisée"
+title: Se fédérer avec les services AD FS d’un client
+description: Comment effectuer la fédération avec les services AD FS d’un client dans une application mutualisée
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
@@ -180,15 +180,24 @@ Set-ADFSClaimsProviderTrust -TargetName "name" -OrganizationalAccountSuffix @("s
 
 <!-- Links -->
 [Azure AD Connect]: /azure/active-directory/active-directory-aadconnect/
+[Azure AD Connect]: /azure/active-directory/active-directory-aadconnect/
 [approbation de fédération]: https://technet.microsoft.com/library/cc770993(v=ws.11).aspx
+[federation trust]: https://technet.microsoft.com/library/cc770993(v=ws.11).aspx
 [partenaire du compte]: https://technet.microsoft.com/library/cc731141(v=ws.11).aspx
+[account partner]: https://technet.microsoft.com/library/cc731141(v=ws.11).aspx
 [partenaire de ressources]: https://technet.microsoft.com/library/cc731141(v=ws.11).aspx
+[resource partner]: https://technet.microsoft.com/library/cc731141(v=ws.11).aspx
 [Moment d’authentification]: https://msdn.microsoft.com/library/system.security.claims.claimtypes.authenticationinstant%28v=vs.110%29.aspx
+[Authentication instant]: https://msdn.microsoft.com/library/system.security.claims.claimtypes.authenticationinstant%28v=vs.110%29.aspx
 [Délai d’expiration]: http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25#section-4.1.
+[Expiration time]: http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25#section-4.1.
 [Identificateur de nom]: https://msdn.microsoft.com/library/system.security.claims.claimtypes.nameidentifier(v=vs.110).aspx
+[Name identifier]: https://msdn.microsoft.com/library/system.security.claims.claimtypes.nameidentifier(v=vs.110).aspx
 [active-directory-on-azure]: https://msdn.microsoft.com/library/azure/jj156090.aspx
 [billet de blog]: http://www.cloudidentity.com/blog/2015/08/21/OPENID-CONNECT-WEB-SIGN-ON-WITH-ADFS-IN-WINDOWS-SERVER-2016-TP3/
+[blog post]: http://www.cloudidentity.com/blog/2015/08/21/OPENID-CONNECT-WEB-SIGN-ON-WITH-ADFS-IN-WINDOWS-SERVER-2016-TP3/
 [Personnalisation des pages de connexion AD FS]: https://technet.microsoft.com/library/dn280950.aspx
+[Customizing the AD FS Sign-in Pages]: https://technet.microsoft.com/library/dn280950.aspx
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance
 [client assertion]: client-assertion.md
 [active-directory-dotnet-webapp-wsfederation]: https://github.com/Azure-Samples/active-directory-dotnet-webapp-wsfederation

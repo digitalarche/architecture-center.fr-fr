@@ -1,6 +1,6 @@
 ---
-title: "Utiliser la meilleure banque de données pour le travail"
-description: "Choisissez la technologie de stockage la mieux adaptée à vos données et son mode d’utilisation"
+title: Utiliser la meilleure banque de données pour le travail
+description: Choisissez la technologie de stockage la mieux adaptée à vos données et son mode d’utilisation
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: ef9439f7a3766d13b498eac915e0f5afd23de4e2

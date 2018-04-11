@@ -1,7 +1,7 @@
 ---
-title: "File d’attente avec un ordre de priorité"
-description: "Classez par ordre de priorité les demandes envoyées aux services de telle sorte que les demandes à plus haute priorité soient reçues et traitées plus rapidement que celles à plus basse priorité."
-keywords: "modèle de conception"
+title: File d’attente avec un ordre de priorité
+description: Classez par ordre de priorité les demandes envoyées aux services de telle sorte que les demandes à plus haute priorité soient reçues et traitées plus rapidement que celles à plus basse priorité.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

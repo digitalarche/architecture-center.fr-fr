@@ -1,6 +1,6 @@
 ---
-title: "Modèle d’agrégation de passerelle"
-description: "Utilisez une passerelle pour agréger plusieurs requêtes individuelles dans une requête unique."
+title: Modèle d’agrégation de passerelle
+description: Utilisez une passerelle pour agréger plusieurs requêtes individuelles dans une requête unique.
 author: dragon119
 ms.date: 06/23/2017
 ms.openlocfilehash: f59c8b8b02c6db28024d13621b782997e63a4e9e

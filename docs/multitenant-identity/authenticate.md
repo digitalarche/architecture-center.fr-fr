@@ -1,6 +1,6 @@
 ---
-title: "Authentification dans les applications mutualisées"
-description: "Comment une application mutualisée peut authentifier les utilisateurs à partir d’Azure AD"
+title: Authentification dans les applications mutualisées
+description: Comment une application mutualisée peut authentifier les utilisateurs à partir d’Azure AD
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

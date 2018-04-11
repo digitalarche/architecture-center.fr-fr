@@ -1,6 +1,6 @@
 ---
-title: "Recommandations en matière de cache"
-description: "Conseils sur la mise en cache pour améliorer les performances et l'extensibilité."
+title: Recommandations en matière de cache
+description: Conseils sur la mise en cache pour améliorer les performances et l'extensibilité.
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices

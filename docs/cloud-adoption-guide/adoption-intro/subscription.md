@@ -1,6 +1,6 @@
 ---
-title: "Guide : conception d’un abonnement Azure"
-description: "Aide à la conception d’un abonnement Azure dans le cadre d’une stratégie d’adoption cloud de base"
+title: 'Guide : conception d’un abonnement Azure'
+description: Aide à la conception d’un abonnement Azure dans le cadre d’une stratégie d’adoption cloud de base
 author: alexbuckgit
 ms.openlocfilehash: 7134a0000ce33a786166d759cb390023a062dfda
 ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242

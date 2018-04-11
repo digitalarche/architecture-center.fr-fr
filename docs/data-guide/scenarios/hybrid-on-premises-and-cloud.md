@@ -1,6 +1,6 @@
 ---
-title: "Extension des solutions de données locales vers le cloud"
-description: 
+title: Extension des solutions de données locales vers le cloud
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 ms.openlocfilehash: 66fc225dc123202ba587d82f15ea0883e1bbf3b5

@@ -1,6 +1,6 @@
 ---
-title: "Guide : conception d’un abonné Azure AD"
-description: "Aide à la conception d’un client Azure dans le cadre d’une stratégie préparatoire à l’adoption du cloud"
+title: 'Guide : conception d’un abonné Azure AD'
+description: Aide à la conception d’un client Azure dans le cadre d’une stratégie préparatoire à l’adoption du cloud
 author: telmosampaio
 ms.openlocfilehash: 9ac52e9fd44bd8b9c777625002d5960f4f269be2
 ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc

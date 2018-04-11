@@ -1,6 +1,6 @@
 ---
-title: "Utilisation d’identités basées sur les revendications dans les applications multi-locataires"
-description: "Comment utiliser des revendications pour la validation de l’émetteur et l’autorisation"
+title: Utilisation d’identités basées sur les revendications dans les applications multi-locataires
+description: Comment utiliser des revendications pour la validation de l’émetteur et l’autorisation
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
@@ -117,8 +117,11 @@ ms.lasthandoff: 11/14/2017
 <!-- Links -->
 
 [paramètre d’étendue]: http://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/
+[scope parameter]: http://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/
 [Types de jeton et de revendication pris en charge]: /azure/active-directory/active-directory-token-and-claims/
+[Supported Token and Claim Types]: /azure/active-directory/active-directory-token-and-claims/
 [Émetteur]: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
+[issuer]: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
 [Authentication events]: authenticate.md#authentication-events
 [signup]: signup.md
 [Claims-Based Authorization]: /aspnet/core/security/authorization/claims

@@ -1,6 +1,6 @@
 ---
-title: "Choisir une solution pour intégrer l’environnement Active Directory local à Azure."
-description: "Comparatif des différentes architectures de référence pour intégrer l’environnement Active Directory local à Azure."
+title: Choisir une solution pour intégrer l’environnement Active Directory local à Azure.
+description: Comparatif des différentes architectures de référence pour intégrer l’environnement Active Directory local à Azure.
 ms.date: 04/06/2017
 ms.openlocfilehash: 413a5463d90547197c4b6834d353b4ecf61483ee
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60

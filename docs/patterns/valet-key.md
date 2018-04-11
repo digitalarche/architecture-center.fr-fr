@@ -1,7 +1,7 @@
 ---
-title: "Clé de valet"
-description: "Utilisez un jeton ou une clé qui fournissent aux clients un accès direct limité à une ressource ou à un service spécifique."
-keywords: "modèle de conception"
+title: Clé de valet
+description: Utilisez un jeton ou une clé qui fournissent aux clients un accès direct limité à une ressource ou à un service spécifique.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

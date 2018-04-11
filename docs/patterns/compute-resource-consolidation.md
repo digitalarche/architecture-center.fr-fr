@@ -1,11 +1,12 @@
 ---
 title: Consolidation des ressources de calcul
-description: "Consolidez plusieurs tâches ou opérations en une seule unité de calcul."
-keywords: "modèle de conception"
+description: Consolidez plusieurs tâches ou opérations en une seule unité de calcul.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories: design-implementation
+pnp.pattern.categories:
+- design-implementation
 ms.openlocfilehash: 85191fc630549559f8a1395e5a8622a7a6140a2d
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT

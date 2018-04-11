@@ -1,6 +1,6 @@
 ---
-title: "Style d’architecture de microservices"
-description: "Décrit les avantages, les inconvénients et les bonnes pratiques pour les architectures de microservices sur Azure"
+title: Style d’architecture de microservices
+description: Décrit les avantages, les inconvénients et les bonnes pratiques pour les architectures de microservices sur Azure
 author: MikeWasson
 ms.openlocfilehash: 08fd39b6cf0b3c88af654b27e21b2d7dd9fb19b1
 ms.sourcegitcommit: 7764a804f000180c37a4f8dbab946b525f784f58

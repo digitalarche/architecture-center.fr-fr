@@ -1,6 +1,6 @@
 ---
-title: "Penser la conception des applications en vue de leur évolution"
-description: "Une conception évolutive est essentielle pour une innovation continue."
+title: Penser la conception des applications en vue de leur évolution
+description: Une conception évolutive est essentielle pour une innovation continue.
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 35e91228f3fb0a303594ec06f05b6865008e3a4f

@@ -1,6 +1,6 @@
 ---
-title: "Modèle de routage de passerelle"
-description: "Acheminez les requêtes vers plusieurs services à l’aide d’un seul point de terminaison."
+title: Modèle de routage de passerelle
+description: Acheminez les requêtes vers plusieurs services à l’aide d’un seul point de terminaison.
 author: dragon119
 ms.date: 06/23/2017
 ms.openlocfilehash: 53239b23cfd98fad1edc38ca37c2274d5a9d7a0f

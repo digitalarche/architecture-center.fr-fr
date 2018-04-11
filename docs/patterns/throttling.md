@@ -1,7 +1,7 @@
 ---
 title: Limitation
-description: "Contrôlez la consommation des ressources utilisées par une instance d’une application, un locataire ou un service entier."
-keywords: "modèle de conception"
+description: Contrôlez la consommation des ressources utilisées par une instance d’une application, un locataire ou un service entier.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
@@ -103,3 +103,4 @@ ms.lasthandoff: 11/14/2017
 - <span data-ttu-id="289be-197">[modèle de file d’attente de priorité][] (Modèle de file d’attente de priorité).</span><span class="sxs-lookup"><span data-stu-id="289be-197">[Priority Queue pattern][].</span></span> <span data-ttu-id="289be-198">Un système peut utiliser la file d’attente de priorité dans le cadre de la stratégie de limitation pour maintenir les performances des applications critiques ou très importantes tout en réduisant les performances des applications moins importantes.</span><span class="sxs-lookup"><span data-stu-id="289be-198">A system can use priority queuing as part of its throttling strategy to maintain performance for critical or higher value applications, while reducing the performance of less important applications.</span></span>
 
 [modèle de file d’attente de priorité]: priority-queue.md (Modèle de file d’attente de priorité)
+[Priority Queue pattern]: priority-queue.md
