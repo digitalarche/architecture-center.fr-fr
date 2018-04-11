@@ -1,6 +1,6 @@
 ---
-title: "Liste de vérification de la résilience pour les services Azure"
-description: "Liste de vérification qui fournit des conseils de résilience pour divers services Azure."
+title: Liste de vérification de la résilience pour les services Azure
+description: Liste de vérification qui fournit des conseils de résilience pour divers services Azure.
 author: petertaylor9999
 ms.date: 03/02/2018
 ms.custom: resiliency, checklist

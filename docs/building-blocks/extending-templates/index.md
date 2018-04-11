@@ -1,6 +1,6 @@
 ---
-title: "Étend la fonctionnalité des modèles Azure Resource Manager"
-description: "Décrit des conseils et astuces pour étendre la fonctionnalité des modèles Azure Resource Manager"
+title: Étend la fonctionnalité des modèles Azure Resource Manager
+description: Décrit des conseils et astuces pour étendre la fonctionnalité des modèles Azure Resource Manager
 author: petertay
 ms.date: 06/09/2017
 ms.openlocfilehash: 33ae6850ffa5b28108f30475804be5347859f0c3
