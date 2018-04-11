@@ -1,6 +1,6 @@
 ---
-title: "Penser la conception des applications pour les opérations"
-description: "Concevez vos applications en offrant à l’équipe des opérations les outils dont elle a besoin"
+title: Penser la conception des applications pour les opérations
+description: Concevez vos applications en offrant à l’équipe des opérations les outils dont elle a besoin
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 76338cc27daf82ccb99df4e4c51c7a5ac6f26065

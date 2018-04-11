@@ -1,7 +1,7 @@
 ---
 title: Magasin de configurations externes
-description: "Déplacez les informations de configuration depuis le package de déploiement d’application vers un emplacement centralisé."
-keywords: "modèle de conception"
+description: Déplacez les informations de configuration depuis le package de déploiement d’application vers un emplacement centralisé.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

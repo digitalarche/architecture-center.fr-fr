@@ -1,6 +1,6 @@
 ---
-title: "Utilisation d’identités basées sur les revendications dans les applications multi-locataires"
-description: "Comment utiliser des revendications pour la validation de l’émetteur et l’autorisation"
+title: Utilisation d’identités basées sur les revendications dans les applications multi-locataires
+description: Comment utiliser des revendications pour la validation de l’émetteur et l’autorisation
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

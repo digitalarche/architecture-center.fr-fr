@@ -1,6 +1,6 @@
 ---
-title: "Liste de contrôle de disponibilité"
-description: "Liste de contrôle fournissant des indications relatives aux problématiques de disponibilité durant la conception."
+title: Liste de contrôle de disponibilité
+description: Liste de contrôle fournissant des indications relatives aux problématiques de disponibilité durant la conception.
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist

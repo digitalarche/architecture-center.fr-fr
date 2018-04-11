@@ -1,6 +1,6 @@
 ---
-title: "Conception d’applications résilientes pour Azure"
-description: "Comment créer des applications résilientes dans Azure, pour une haute disponibilité et une récupération d’urgence."
+title: Conception d’applications résilientes pour Azure
+description: Comment créer des applications résilientes dans Azure, pour une haute disponibilité et une récupération d’urgence.
 author: MikeWasson
 ms.date: 05/26/2017
 ms.custom: resiliency

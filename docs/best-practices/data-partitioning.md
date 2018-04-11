@@ -1,6 +1,6 @@
 ---
-title: "Recommandations en matière de partitionnement des données"
-description: "Recommandations concernant le fractionnement de partitions pour une gestion et un accès distincts."
+title: Recommandations en matière de partitionnement des données
+description: Recommandations concernant le fractionnement de partitions pour une gestion et un accès distincts.
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices

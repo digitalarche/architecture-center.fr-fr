@@ -1,6 +1,6 @@
 ---
-title: "Anti-modèle E/S synchrone"
-description: "Bloquer le thread appelant lorsque l’E/S se termine peut réduire les performances et affecter l’extensibilité verticale."
+title: Anti-modèle E/S synchrone
+description: Bloquer le thread appelant lorsque l’E/S se termine peut réduire les performances et affecter l’extensibilité verticale.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: d5b3635565c6b71ef7716f54ee8cccc76093c3a3

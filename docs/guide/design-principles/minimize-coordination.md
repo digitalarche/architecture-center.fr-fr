@@ -1,6 +1,6 @@
 ---
 title: Minimiser la coordination
-description: "Minimiser la coordination entre les services d’application pour privilégier la scalabilité"
+description: Minimiser la coordination entre les services d’application pour privilégier la scalabilité
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 3cab05b539612234fd8e66517b140ac5257c3e70

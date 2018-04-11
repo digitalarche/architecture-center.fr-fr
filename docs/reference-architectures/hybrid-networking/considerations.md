@@ -1,6 +1,6 @@
 ---
-title: "Choisir une solution pour connecter un réseau local à Azure"
-description: "Comparatif des architectures de référence pour connecter un réseau local à Azure."
+title: Choisir une solution pour connecter un réseau local à Azure
+description: Comparatif des architectures de référence pour connecter un réseau local à Azure.
 author: telmosampaio
 ms.date: 04/06/2017
 ms.openlocfilehash: 274b9df1817632a7f3eaafa8bf02e965fdc3feea

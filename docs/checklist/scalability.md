@@ -1,6 +1,6 @@
 ---
-title: "Liste de contrôle de l’extensibilité"
-description: "Liste de contrôle de l’extensibilité et recommandations concernant les problématiques de conception pour la mise à l’échelle automatique d’Azure."
+title: Liste de contrôle de l’extensibilité
+description: Liste de contrôle de l’extensibilité et recommandations concernant les problématiques de conception pour la mise à l’échelle automatique d’Azure.
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist

@@ -1,6 +1,6 @@
 ---
-title: "Guide : conception d’un groupe de ressources Azure"
-description: "Guide pour la conception d’un groupe de ressources Azure dans le cadre d’une stratégie d’adoption cloud fondamentale"
+title: 'Guide : conception d’un groupe de ressources Azure'
+description: Guide pour la conception d’un groupe de ressources Azure dans le cadre d’une stratégie d’adoption cloud fondamentale
 author: petertay
 ms.openlocfilehash: ac6cbb03be8cdba020641d3b9034ad9d20101acf
 ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242

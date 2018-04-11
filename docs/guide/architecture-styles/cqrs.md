@@ -1,6 +1,6 @@
 ---
-title: "Style d’architecture CQRS"
-description: "Décrit les avantages, les inconvénients et les bonnes pratiques relatifs aux architectures CQRS"
+title: Style d’architecture CQRS
+description: Décrit les avantages, les inconvénients et les bonnes pratiques relatifs aux architectures CQRS
 author: MikeWasson
 ms.openlocfilehash: dd3da5886587159f57646ff1bfffa2094725f798
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60

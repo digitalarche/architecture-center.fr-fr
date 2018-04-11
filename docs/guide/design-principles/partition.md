@@ -1,6 +1,6 @@
 ---
 title: Partitionner pour contourner les limites
-description: "Utilisez le partitionnement pour contourner les limites liées à la base de données, au réseau et au calcul"
+description: Utilisez le partitionnement pour contourner les limites liées à la base de données, au réseau et au calcul
 author: MikeWasson
 layout: LandingPage
 ms.openlocfilehash: 4371490385b24230551bf17db0075052f320b574

@@ -1,6 +1,6 @@
 ---
-title: "Sécurisation d’une API web de serveur principal dans une application multi-locataire"
-description: "Comment sécuriser une API web de serveur principal"
+title: Sécurisation d’une API web de serveur principal dans une application multi-locataire
+description: Comment sécuriser une API web de serveur principal
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

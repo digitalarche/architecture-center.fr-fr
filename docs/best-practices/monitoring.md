@@ -1,6 +1,6 @@
 ---
 title: Guide de surveillance et de diagnostic
-description: "Meilleures pratiques pour la surveillance des applications distribuées dans le cloud."
+description: Meilleures pratiques pour la surveillance des applications distribuées dans le cloud.
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices

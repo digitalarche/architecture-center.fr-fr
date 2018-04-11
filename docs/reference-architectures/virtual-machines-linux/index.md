@@ -1,6 +1,6 @@
 ---
 title: Charges de travail de machine virtuelle Linux
-description: "Explique certaines architectures communes pour le déploiement de machines virtuelles hébergeant des applications à l’échelle de l’entreprise dans Azure."
+description: Explique certaines architectures communes pour le déploiement de machines virtuelles hébergeant des applications à l’échelle de l’entreprise dans Azure.
 layout: LandingPage
 ms.openlocfilehash: ef06fb93355f4676f44954930bcfeb2c2d012d43
 ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb

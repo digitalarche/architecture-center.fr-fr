@@ -1,6 +1,6 @@
 ---
-title: "Zone DMZ réseau"
-description: "Explique et compare les différentes méthodes disponibles pour protéger les applications et les composants s’exécutant dans Azure en tant que partie d’un système hybride à partir d’une intrusion non autorisée."
+title: Zone DMZ réseau
+description: Explique et compare les différentes méthodes disponibles pour protéger les applications et les composants s’exécutant dans Azure en tant que partie d’un système hybride à partir d’une intrusion non autorisée.
 layout: LandingPage
 ms.openlocfilehash: 98df0a25767c7a7282e67381c6465fe3263ce1fa
 ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb

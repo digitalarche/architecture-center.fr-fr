@@ -1,5 +1,5 @@
 ---
-title: "Conseils généraux sur les nouvelles tentatives"
+title: Conseils généraux sur les nouvelles tentatives
 description: Conseils sur les nouvelles tentatives dans le cadre de la gestion des erreurs temporaires.
 author: dragon119
 ms.date: 07/13/2016

@@ -1,5 +1,5 @@
 ---
-title: "Critères de sélection d’une option de calcul Azure"
+title: Critères de sélection d’une option de calcul Azure
 description: Comparaison multidimensionnelle des services de calcul Azure.
 author: MikeWasson
 layout: LandingPage

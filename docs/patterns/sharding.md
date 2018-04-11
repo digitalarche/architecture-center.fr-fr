@@ -1,7 +1,7 @@
 ---
 title: Partitionnement
-description: "Divisez un magasin de données en un ensemble de partitions horizontales ou de partitions de base de données."
-keywords: "modèle de conception"
+description: Divisez un magasin de données en un ensemble de partitions horizontales ou de partitions de base de données.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

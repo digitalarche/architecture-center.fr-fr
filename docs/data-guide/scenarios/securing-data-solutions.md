@@ -1,6 +1,6 @@
 ---
-title: "Sécurisation des solutions de données"
-description: 
+title: Sécurisation des solutions de données
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 ms.openlocfilehash: 57897c31a8abdcd801874bf92d60360f7a80d1fa

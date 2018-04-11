@@ -1,6 +1,6 @@
 ---
-title: "Se fédérer avec les services AD FS d’un client"
-description: "Comment effectuer la fédération avec les services AD FS d’un client dans une application mutualisée"
+title: Se fédérer avec les services AD FS d’un client
+description: Comment effectuer la fédération avec les services AD FS d’un client dans une application mutualisée
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

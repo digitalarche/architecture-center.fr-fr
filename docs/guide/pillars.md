@@ -1,6 +1,6 @@
 ---
-title: "Piliers de la qualité logicielle"
-description: "Décrit les cinq piliers de la qualité des logiciels : l’extensibilité, la disponibilité, la résilience, la gestion et la sécurité."
+title: Piliers de la qualité logicielle
+description: 'Décrit les cinq piliers de la qualité des logiciels : l’extensibilité, la disponibilité, la résilience, la gestion et la sécurité.'
 author: MikeWasson
 ms.openlocfilehash: 1d5e30602cafa0d39f92de3101974e77ae258595
 ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f

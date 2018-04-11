@@ -1,6 +1,6 @@
 ---
-title: "Recommandations relatives à l’implémentation de l’API"
-description: "Conseils sur l’implémentation d’une API."
+title: Recommandations relatives à l’implémentation de l’API
+description: Conseils sur l’implémentation d’une API.
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices

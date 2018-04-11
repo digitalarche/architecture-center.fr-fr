@@ -1,11 +1,12 @@
 ---
-title: "Opérateur de contrôle"
-description: "Protégez les applications et services à l’aide d’une instance d’hôte dédiée qui agit comme un intermédiaire entre les clients et l’application ou le service, valide et assainit les requêtes, et transmet les requêtes et les données entre eux."
-keywords: "modèle de conception"
+title: Opérateur de contrôle
+description: Protégez les applications et services à l’aide d’une instance d’hôte dédiée qui agit comme un intermédiaire entre les clients et l’application ou le service, valide et assainit les requêtes, et transmet les requêtes et les données entre eux.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories: security
+pnp.pattern.categories:
+- security
 ms.openlocfilehash: 39f8548bbccb5e19d433f65b2e7e09147d676996
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT

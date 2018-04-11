@@ -1,6 +1,6 @@
 ---
-title: "Conventions d’affectation de noms pour les ressources Azure"
-description: "Conventions d’affectation de noms pour les ressources Azure. Comment nommer les machines virtuelles, comptes de stockage, réseaux, réseaux virtuels, sous-réseaux et autres entités Azure"
+title: Conventions d’affectation de noms pour les ressources Azure
+description: Conventions d’affectation de noms pour les ressources Azure. Comment nommer les machines virtuelles, comptes de stockage, réseaux, réseaux virtuels, sous-réseaux et autres entités Azure
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices

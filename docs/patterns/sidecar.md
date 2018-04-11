@@ -1,6 +1,6 @@
 ---
-title: "Modèle side-car"
-description: "Déployez les composants d’une application sur un processus ou conteneur distinct pour fournir l’isolation et l’encapsulation."
+title: Modèle side-car
+description: Déployez les composants d’une application sur un processus ou conteneur distinct pour fournir l’isolation et l’encapsulation.
 author: dragon119
 ms.date: 06/23/2017
 ms.openlocfilehash: ec168009aa99f412c3f1222a1c404ea4ea5cb669

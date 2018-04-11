@@ -1,6 +1,6 @@
 ---
-title: "Mettre à jour une ressource dans un modèle Azure Resource Manager"
-description: "Explique comment étendre les fonctionnalités des modèles Azure Resource Manager afin de mettre à jour une ressource"
+title: Mettre à jour une ressource dans un modèle Azure Resource Manager
+description: Explique comment étendre les fonctionnalités des modèles Azure Resource Manager afin de mettre à jour une ressource
 author: petertay
 ms.date: 06/09/2017
 ms.openlocfilehash: fc2565819c66ee7695224ef5793e7276e6e552e0

@@ -1,6 +1,6 @@
 ---
-title: "Anti-modèles de performance pour les applications cloud"
-description: "Pratiques courantes susceptibles de provoquer des problèmes d’extensibilité."
+title: Anti-modèles de performance pour les applications cloud
+description: Pratiques courantes susceptibles de provoquer des problèmes d’extensibilité.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: 423fe6533e57268610f625f523714cd1bce89546

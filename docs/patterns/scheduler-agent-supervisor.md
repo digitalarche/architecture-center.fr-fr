@@ -1,7 +1,7 @@
 ---
-title: "Superviseur de l’agent du planificateur"
-description: "Coordonnez un ensemble d’actions sur un ensemble distribué de services et d’autres ressources à distance."
-keywords: "modèle de conception"
+title: Superviseur de l’agent du planificateur
+description: Coordonnez un ensemble d’actions sur un ensemble distribué de services et d’autres ressources à distance.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

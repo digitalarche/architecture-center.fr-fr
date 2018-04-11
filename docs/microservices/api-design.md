@@ -1,6 +1,6 @@
 ---
-title: "Conception d’API"
-description: "Conception d’API pour les microservices"
+title: Conception d’API
+description: Conception d’API pour les microservices
 author: MikeWasson
 ms.date: 12/08/2017
 ms.openlocfilehash: d85407f3092ddb5f77aacfea8def2784c4741eb9

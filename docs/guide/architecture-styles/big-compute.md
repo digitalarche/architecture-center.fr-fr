@@ -1,6 +1,6 @@
 ---
-title: "Style d’architecture Big Compute"
-description: "Décrit les avantages, les inconvénients et les bonnes pratiques relatifs aux architectures Big Compute sur Azure"
+title: Style d’architecture Big Compute
+description: Décrit les avantages, les inconvénients et les bonnes pratiques relatifs aux architectures Big Compute sur Azure
 author: MikeWasson
 ms.openlocfilehash: b16be4133143d7d73062eeb280b44779c390f387
 ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60

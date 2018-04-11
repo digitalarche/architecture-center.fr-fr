@@ -1,6 +1,6 @@
 ---
-title: "Inscription et intégration de locataire dans des applications multi-locataires"
-description: "Comment intégrer des locataires à une application multi-locataire"
+title: Inscription et intégration de locataire dans des applications multi-locataires
+description: Comment intégrer des locataires à une application multi-locataire
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

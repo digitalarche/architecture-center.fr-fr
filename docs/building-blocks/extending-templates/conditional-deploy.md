@@ -1,6 +1,6 @@
 ---
-title: "Déployer une ressource de manière conditionnelle dans un modèle Azure Resource Manager"
-description: "Explique comment étendre les fonctionnalités des modèles Azure Resource Manager au déploiement conditionnel d’une ressource en fonction de la valeur d’un paramètre"
+title: Déployer une ressource de manière conditionnelle dans un modèle Azure Resource Manager
+description: Explique comment étendre les fonctionnalités des modèles Azure Resource Manager au déploiement conditionnel d’une ressource en fonction de la valeur d’un paramètre
 author: petertay
 ms.date: 06/09/2017
 ms.openlocfilehash: e911e7dc41b4f71ebfaf13a00f8cdbb5b4e2578b

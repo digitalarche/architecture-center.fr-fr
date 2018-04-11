@@ -1,7 +1,7 @@
 ---
-title: "Hébergement de contenu statique"
-description: "Déployez un contenu statique dans un service de stockage cloud qui peut distribuer ce contenu directement au client."
-keywords: "modèle de conception"
+title: Hébergement de contenu statique
+description: Déployez un contenu statique dans un service de stockage cloud qui peut distribuer ce contenu directement au client.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

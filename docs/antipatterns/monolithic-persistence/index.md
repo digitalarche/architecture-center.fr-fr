@@ -1,6 +1,6 @@
 ---
-title: "Antimodèle de persistance monolithique"
-description: "Rassembler toutes les données d’une application dans un magasin de données unique peut dégrader les performances."
+title: Antimodèle de persistance monolithique
+description: Rassembler toutes les données d’une application dans un magasin de données unique peut dégrader les performances.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: 7f04b9f0805c281068b6b2edaf040683773e6f6e

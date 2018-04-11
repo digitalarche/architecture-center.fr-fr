@@ -1,7 +1,7 @@
 ---
-title: "Table d’index"
-description: "Créez des index sur les champs des magasins de données qui sont souvent référencés par les requêtes."
-keywords: "modèle de conception"
+title: Table d’index
+description: Créez des index sur les champs des magasins de données qui sont souvent référencés par les requêtes.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns

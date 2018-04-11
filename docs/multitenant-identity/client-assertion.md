@@ -1,6 +1,6 @@
 ---
-title: "Utiliser une assertion du client pour obtenir des jetons d’accès d’Azure AD"
-description: "Utilisation d’une assertion du client pour obtenir des jetons d’accès d’Azure AD."
+title: Utiliser une assertion du client pour obtenir des jetons d’accès d’Azure AD
+description: Utilisation d’une assertion du client pour obtenir des jetons d’accès d’Azure AD.
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

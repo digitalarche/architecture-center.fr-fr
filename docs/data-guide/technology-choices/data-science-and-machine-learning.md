@@ -1,6 +1,6 @@
 ---
-title: "Sélectionner une technologie Machine Learning"
-description: 
+title: Sélectionner une technologie Machine Learning
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 ms.openlocfilehash: 995349c795066ec3067b20ad2615e40b0fb152db

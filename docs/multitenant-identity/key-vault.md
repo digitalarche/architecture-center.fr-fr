@@ -1,6 +1,6 @@
 ---
-title: "Utiliser Key Vault pour protéger les secrets d’application"
-description: "Comment utiliser le service Key Vault pour stocker les secrets d’application"
+title: Utiliser Key Vault pour protéger les secrets d’application
+description: Comment utiliser le service Key Vault pour stocker les secrets d’application
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

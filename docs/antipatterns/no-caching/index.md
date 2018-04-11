@@ -1,6 +1,6 @@
 ---
-title: "Absence d’antimodèle de mise en cache"
-description: "Extraire plusieurs fois les mêmes données peut réduire les performances et l’évolutivité."
+title: Absence d’antimodèle de mise en cache
+description: Extraire plusieurs fois les mêmes données peut réduire les performances et l’évolutivité.
 author: dragon119
 ms.date: 06/05/2017
 ms.openlocfilehash: 8a2bc3b473a30536cc1bef9e1dcad87acb46c4a9

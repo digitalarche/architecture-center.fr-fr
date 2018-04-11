@@ -1,6 +1,6 @@
 ---
-title: "Modèle de déchargement de passerelle"
-description: "Déchargez des fonctionnalités de service partagé ou spécialisé sur un proxy de passerelle."
+title: Modèle de déchargement de passerelle
+description: Déchargez des fonctionnalités de service partagé ou spécialisé sur un proxy de passerelle.
 author: dragon119
 ms.date: 06/23/2017
 ms.openlocfilehash: 6b3e4541aae77349ca91c18c788ddb508912361d

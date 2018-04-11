@@ -1,6 +1,6 @@
 ---
-title: "Gestion des identités pour les applications multi-locataire"
-description: "Meilleures pratiques pour la gestion de l’authentification, de l’autorisation et de l’identité dans les applications multi-locataires."
+title: Gestion des identités pour les applications multi-locataire
+description: Meilleures pratiques pour la gestion de l’authentification, de l’autorisation et de l’identité dans les applications multi-locataires.
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications

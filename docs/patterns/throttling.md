@@ -1,7 +1,7 @@
 ---
 title: Limitation
-description: "Contrôlez la consommation des ressources utilisées par une instance d’une application, un locataire ou un service entier."
-keywords: "modèle de conception"
+description: Contrôlez la consommation des ressources utilisées par une instance d’une application, un locataire ou un service entier.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
