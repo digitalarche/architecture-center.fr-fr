@@ -1,6 +1,6 @@
 ---
-title: "Aide relative au réseau de distribution de contenu"
-description: "Instructions relatives au réseau de distribution contenu (CDN) pour la distribution de contenu d’une bande passante élevée hébergé dans Azure."
+title: Aide relative au réseau de distribution de contenu
+description: Instructions relatives au réseau de distribution contenu (CDN) pour la distribution de contenu d’une bande passante élevée hébergé dans Azure.
 author: dragon119
 ms.date: 02/02/2018
 pnp.series.title: Best Practices

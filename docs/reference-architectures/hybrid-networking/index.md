@@ -1,6 +1,6 @@
 ---
-title: "Connecter un réseau local à Azure"
-description: "Architectures recommandées pour des connexions réseau sécurisées et fiables entre les réseaux locaux et Azure."
+title: Connecter un réseau local à Azure
+description: Architectures recommandées pour des connexions réseau sécurisées et fiables entre les réseaux locaux et Azure.
 layout: LandingPage
 ms.openlocfilehash: 372efb8ecf69245a5895c51e3da156a348bd665e
 ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994

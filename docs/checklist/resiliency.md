@@ -1,6 +1,6 @@
 ---
-title: "Liste de vérification de résilience"
-description: "Liste de vérification fournissant des indications relatives aux problématiques de résilience durant la conception."
+title: Liste de vérification de résilience
+description: Liste de vérification fournissant des indications relatives aux problématiques de résilience durant la conception.
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist
