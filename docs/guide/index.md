@@ -1,10 +1,11 @@
 ---
 layout: LandingPage
-ms.openlocfilehash: 9bd86f1b3527f1116d4f5169baf76f8a5b9a385b
-ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
+ms.topic: landing-page
+ms.openlocfilehash: 530844a0d3b1256cec807e7bad509a40dca304f6
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/17/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="azure-application-architecture-guide"></a>Guide de l’architecture des applications Azure
 
@@ -14,7 +15,7 @@ Ce guide présente une approche structurée pour concevoir des applications sur 
 
 ## <a name="introduction"></a>Introduction
 
-Le cloud change la façon dont les applications sont conçues. À la place de monolithes, les applications sont décomposées en services plus petits et décentralisés. Ces services communiquent via des API ou à l’aide d’une messagerie ou d’une gestion des événements asynchrone. Les applications sont mises à l’échelle horizontalement, en ajoutant de nouvelles instances lorsque c’est demandé. 
+Le cloud change la façon dont les applications sont conçues. À la place de monolithes, les applications sont décomposées en services plus petits et décentralisés. Ces services communiquent via des API ou à l’aide d’une messagerie ou d’une gestion des évènements asynchrone. Les applications sont mises à l’échelle horizontalement, en ajoutant de nouvelles instances lorsque c’est demandé. 
 
 Ces tendances amènent de nouveaux défis. L’état de l’application est distribué. Les opérations sont effectuées en parallèle et de façon asynchrone. Le système dans son ensemble doit être résilient lorsque des échecs se produisent. Les déploiements doivent être automatisée et prévisibles. La surveillance et les données de télémétrie sont critiques pour obtenir des informations du système. Le guide de l’architecture des applications Azure est conçu pour vous aider à naviguer au travers de ces modifications. 
 
@@ -54,23 +55,23 @@ Le guide d’architecture des applications Azure est organisé comme une série 
 
 **[Styles d’architecture][arch-styles]**. Le premier point de décision est le plus fondamental. Quel type d’architecture concevez-vous ? Cela peut être une architecture de microservices, une application multiniveau plus classique ou une solution Big Data. Nous avons identifié sept styles d’architecture distincts. Voici les avantages et les problèmes de chacun.
 
-> &#10148; La page [Architectures de référence Azure][ref-archs] montre les déploiements recommandés dans Azure, ainsi que des considérations pour l’extensibilité, la disponibilité, la facilité de gestion et la sécurité. La plupart incluent également des modèles Resource Manager à déployer.
+> & #10148 ; La page [Architectures de référence Azure][ref-archs] montre les déploiements recommandés dans Azure, ainsi que des considérations pour l’extensibilité, la disponibilité, la facilité de gestion et la sécurité. La plupart incluent également des modèles Resource Manager à déployer.
 
 **[Choix de technologie][technology-choices]**. Deux choix de technologie doivent être faits dès le départ car ils affectent l’ensemble de l’architecture. Il s’agit des choix des technologies de calcul et de stockage. Le terme *calcul* fait référence au modèle d’hébergement pour les ressources de calcul utilisées par vos applications. Le stockage comprend les bases de données, mais également le stockage pour les files d’attente, les caches, les données IoT, les données de journal non structurées et toutes les autres choses qu’une application peut stocker d’une façon persistante. 
 
-> &#10148; Les [options de calcul][compute-options] et les [options de stockage][storage-options] fournissent des critères de comparaison détaillés pour sélectionner les services de calcul et de stockage.
+> & #10148 ; Les [options de calcul][compute-options] et les [options de stockage][storage-options] fournissent des critères de comparaison détaillés pour sélectionner les services de calcul et de stockage.
 
 **[Principes de conception][design-principles]**. Tout au long du processus de conception, gardez à l’esprit ces dix principes de conception de haut niveau. 
 
-> &#10148; Les articles [Meilleures pratiques][best-practices] donnent des recommandations spécifiques sur des zones telles que la mise à l’échelle automatique, la mise en cache, le partitionnement des données, la conception de l’API et d’autres.   
+> & #10148 ; Les articles [Meilleures pratiques][best-practices] donnent des recommandations spécifiques sur des zones telles que la mise à l’échelle automatique, la mise en cache, le partitionnement des données, la conception de l’API et d’autres.   
 
 **[Piliers][pillars]**. Une application cloud réussie se concentrera sur ces cinq piliers de la qualité des logiciels : l’extensibilité, la disponibilité, la résilience, la gestion et la sécurité. 
 
-> &#10148; Utilisez nos [checklists de révision de la conception][checklists] pour passer en revue votre conception en fonction de ces piliers de qualité. 
+> & #10148 ; Utilisez nos [checklists de révision de la conception][checklists] pour passer en revue votre conception en fonction de ces piliers de qualité. 
 
 **[Modèles de conception de cloud][patterns]**. Ces modèles de conception sont utiles pour développer des applications fiables, évolutives et sécurisées sur Azure. Chaque modèle décrit un problème, un modèle qui résout le problème et un exemple basé sur Azure.
 
-> &#10148; Consultez le [catalogue complet des modèles de conception de cloud](../patterns/index.md).
+> & #10148 ; Consultez le [catalogue complet des modèles de conception de cloud](../patterns/index.md).
 
 
 [arch-styles]: ./architecture-styles/index.md
