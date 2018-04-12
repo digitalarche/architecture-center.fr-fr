@@ -1,7 +1,7 @@
 ---
-title: "Surveillance de point de terminaison d’intégrité"
-description: "Implémentez des contrôles fonctionnels dans une application à laquelle des outils externes peuvent accéder par le biais de points de terminaison exposés à intervalles réguliers."
-keywords: "modèle de conception"
+title: Surveillance de point de terminaison d’intégrité
+description: Implémentez des contrôles fonctionnels dans une application à laquelle des outils externes peuvent accéder par le biais de points de terminaison exposés à intervalles réguliers.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
@@ -9,11 +9,11 @@ pnp.pattern.categories:
 - availability
 - management-monitoring
 - resiliency
-ms.openlocfilehash: 36171d568b9b5bfbbd48ee762b16adea695cf0e9
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 3b3bce46b460148af17bfe6064cd052a5f9a6458
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="health-endpoint-monitoring-pattern"></a>Modèle Surveillance de point de terminaison
 
@@ -82,9 +82,9 @@ Comment configurer la sécurité des points de terminaison de surveillance pour 
 
 - Sécurisez le point de terminaison en exigeant l’authentification. Pour cela, utilisez une clé de sécurité d’authentification dans l’en-tête de demande ou passez les informations d’identification avec la demande, sous réserve que l’outil ou le service de surveillance prenne en charge l’authentification.
 
- - Utilisez un point de terminaison obscur ou masqué. Par exemple, exposez le point de terminaison sur une adresse IP différente de celle utilisée par l’URL d’application par défaut, configurez le point de terminaison sur un port HTTP non standard et/ou utilisez un chemin complexe à la page de test. Vous pouvez généralement spécifier des ports et des adresses de point de terminaison supplémentaires dans la configuration de l’application, et ajouter des entrées pour ces points de terminaison au serveur DNS si nécessaire pour éviter d’avoir à spécifier l’adresse IP directement.
+  - Utilisez un point de terminaison obscur ou masqué. Par exemple, exposez le point de terminaison sur une adresse IP différente de celle utilisée par l’URL d’application par défaut, configurez le point de terminaison sur un port HTTP non standard et/ou utilisez un chemin complexe à la page de test. Vous pouvez généralement spécifier des ports et des adresses de point de terminaison supplémentaires dans la configuration de l’application, et ajouter des entrées pour ces points de terminaison au serveur DNS si nécessaire pour éviter d’avoir à spécifier l’adresse IP directement.
 
- - Exposez une méthode sur un point de terminaison qui accepte un paramètre tel qu’une valeur de clé ou une valeur de mode d’opération. En fonction de la valeur fournie pour ce paramètre, quand une demande est reçue, le code peut effectuer un test ou un ensemble de tests spécifique, ou retourner un code d’erreur 404 (Introuvable) si la valeur du paramètre n’est pas reconnue. Vous pouvez définir les valeurs de paramètre reconnues dans la configuration de l’application.
+  - Exposez une méthode sur un point de terminaison qui accepte un paramètre tel qu’une valeur de clé ou une valeur de mode d’opération. En fonction de la valeur fournie pour ce paramètre, quand une demande est reçue, le code peut effectuer un test ou un ensemble de tests spécifique, ou retourner un code d’erreur 404 (Introuvable) si la valeur du paramètre n’est pas reconnue. Vous pouvez définir les valeurs de paramètre reconnues dans la configuration de l’application.
 
      >  Les attaques DoS auront probablement un impact moindre sur un point de terminaison distinct qui effectue des tests fonctionnels de base sans compromettre le fonctionnement de l’application. Dans l’idéal, évitez d’utiliser un test susceptible d’exposer des informations sensibles. Si vous devez retourner des informations qui peuvent être utiles à un agresseur, réfléchissez à la façon dont vous protégerez le point de terminaison et les données contre tout accès non autorisé. Dans ce cas, s’appuyer uniquement sur l’obscurité n’est pas suffisant. Vous devez également envisager l’utilisation d’une connexion HTTPS et le chiffrement des données sensibles, mais cela augmentera la charge sur le serveur.
 
@@ -102,7 +102,7 @@ Ce modèle est utile dans les situations suivantes :
 - Surveillance de services de couche intermédiaire ou de services partagés pour détecter et isoler une défaillance susceptible de perturber d’autres applications.
 - En complément de l’instrumentation existante dans l’application, telle que les compteurs de performances et les gestionnaires d’erreurs. La vérification de l’intégrité ne se substitue pas à l’obligation de journalisation et d’audit dans l’application. L’instrumentation peut fournir des informations précieuses pour un framework existant qui surveille des compteurs et des journaux d’erreurs pour détecter les défaillances ou autres problèmes. Toutefois, elle ne peut pas fournir d’informations si l’application n’est pas disponible.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Les exemples de code suivants, tirés de la classe `HealthCheckController` (un exemple qui illustre ce modèle est disponible sur [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/health-endpoint-monitoring)), montrent comment exposer un point de terminaison pour exécuter différents contrôles d’intégrité.
 

@@ -1,13 +1,13 @@
 ---
-title: "Utiliser un objet en tant que paramètre dans un modèle Azure Resource Manager"
-description: "Explique comment étendre les fonctionnalités des modèles Azure Resource Manager afin d’utiliser des objets en tant que paramètres"
+title: Utiliser un objet en tant que paramètre dans un modèle Azure Resource Manager
+description: Explique comment étendre les fonctionnalités des modèles Azure Resource Manager afin d’utiliser des objets en tant que paramètres
 author: petertay
 ms.date: 06/09/2017
-ms.openlocfilehash: 08ee1cf2924f78ce366c58e20e84a512785f85cc
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 76f8b9d459f4ab3147b52762b7c26552ec92c7a3
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="use-an-object-as-a-parameter-in-an-azure-resource-manager-template"></a>Utiliser un objet en tant que paramètre dans un modèle Azure Resource Manager
 
@@ -294,7 +294,6 @@ Commençons par étudier nos paramètres. Lorsque nous examinerons notre modèle
   ],          
   "outputs": {}
 }
-
 ```
 
 Examinons de plus près la façon dont nous spécifions nos valeurs de propriété dans la ressource enfant `securityRules`. Toutes nos propriétés sont référencées à l’aide de la fonction `parameter()`, puis nous utilisons l’opérateur point pour référencer notre tableau `securityRules`, indexé par la valeur actuelle de l’itération. Enfin, nous utilisons un autre opérateur point pour référencer le nom de l’objet. 

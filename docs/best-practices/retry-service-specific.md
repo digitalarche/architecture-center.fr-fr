@@ -1,14 +1,14 @@
 ---
-title: "Guide spécifique relatif au service de nouvelle tentative"
-description: "Guide spécifique relatif au service pour définir le mécanisme de nouvelle tentative."
+title: Guide spécifique relatif au service de nouvelle tentative
+description: Guide spécifique relatif au service pour définir le mécanisme de nouvelle tentative.
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 6bb623bd8be89573178f250570407bf83d62c098
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 332f96e73def360926b6a934bbb1361b2254ec41
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="retry-guidance-for-specific-services"></a>Guide du mécanisme de nouvelle tentative relatif aux différents services
 
@@ -478,7 +478,6 @@ public async static Task<SqlDataReader> ExecuteReaderWithRetryAsync(this SqlComm
 
     }, cancellationToken);
 }
-
 ```
 
 Cette méthode d’extension asynchrone est utilisable comme suit.
@@ -792,7 +791,7 @@ namespace RetryCodeSamples
                 try
                 {
                     var retryTimeInMilliseconds = TimeSpan.FromSeconds(4).Milliseconds; // delay between retries
-                    
+
                     // Using object-based configuration.
                     var options = new ConfigurationOptions
                                         {
@@ -870,12 +869,12 @@ Si Cosmos DB limite le client, il renvoie une erreur HTTP 429. Vérifiez le code
 ### <a name="policy-configuration"></a>Configuration de la stratégie
 Le tableau suivant présente les paramètres par défaut pour la classe `RetryOptions`.
 
-| Paramètre | Valeur par défaut | DESCRIPTION |
+| Paramètre | Valeur par défaut | Description |
 | --- | --- | --- |
-| MaxRetryAttemptsOnThrottledRequests |9. |Nombre maximal de nouvelles tentatives en cas d’échec de la requête, car Cosmos DB a appliqué une limite du débit au client. |
+| MaxRetryAttemptsOnThrottledRequests |9 |Nombre maximal de nouvelles tentatives en cas d’échec de la requête, car Cosmos DB a appliqué une limite du débit au client. |
 | MaxRetryWaitTimeInSeconds |30 |La durée maximale de nouvelle tentative en secondes. |
 
-### <a name="example"></a>exemples
+### <a name="example"></a>Exemples
 ```csharp
 DocumentClient client = new DocumentClient(new Uri(endpoint), authKey); ;
 var options = client.ConnectionPolicy.RetryOptions;
@@ -973,7 +972,7 @@ Azure Event Hubs est un service d’ingestion de données de télémétrie à tr
 ### <a name="retry-mechanism"></a>Mécanisme de nouvelle tentative
 Le comportement du mécanisme de nouvelle tentative dans la bibliothèque de client Azure Event Hubs est contrôlé par la propriété `RetryPolicy` sur la classe `EventHubClient`. La stratégie par défaut effectue de nouvelles tentatives avec une interruption exponentielle lorsqu’Azure Event Hubs renvoie une exception temporaire `EventHubsException` ou une exception `OperationCanceledException`.
 
-### <a name="example"></a>exemples
+### <a name="example"></a>Exemples
 ```csharp
 EventHubClient client = EventHubClient.CreateFromConnectionString("[event_hub_connection_string]");
 client.RetryPolicy = RetryPolicy.Default;

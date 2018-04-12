@@ -1,16 +1,19 @@
 ---
-title: "Extension d’Active Directory Domain Services (AD DS) à Azure"
-description: "Comment implémenter une architecture réseau hybride sécurisée avec l’autorisation d’Active Directory dans Azure.\nconseils, passerelle vpn, expressroute, équilibreur de charge, réseau virtuel, active directory"
+title: Extension d’Active Directory Domain Services (AD DS) à Azure
+description: >-
+  Comment implémenter une architecture réseau hybride sécurisée avec l’autorisation d’Active Directory dans Azure.
+
+  conseils, passerelle vpn, expressroute, équilibreur de charge, réseau virtuel, active directory
 author: telmosampaio
 ms.date: 11/28/2016
 pnp.series.title: Identity management
 pnp.series.prev: azure-ad
 pnp.series.next: adds-forest
-ms.openlocfilehash: 216c59a0a5912d0fe90011e49ad20eb017ada6be
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: 007d244f29bf11c6e2bd703c7f4f245d22c02f0f
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="extend-active-directory-domain-services-ad-ds-to-azure"></a>Étendre Active Directory Domain Services (AD DS) à Azure
 
@@ -122,7 +125,7 @@ Vous disposez d’une solution sur [GitHub][github] pour déployer cette archite
 
 4. Attendez la fin du déploiement. Si vous déployez le déploiement `All`, l’opération prend plusieurs heures.
 
-## <a name="next-steps"></a>étapes suivantes
+## <a name="next-steps"></a>Étapes suivantes
 
 * Découvrez les bonnes pratiques pour [créer une forêt de ressources AD DS][adds-resource-forest] dans Azure.
 * Découvrez les bonnes pratiques pour [créer une infrastructure de services de fédération Active Directory (AD FS)][adfs] dans Azure.
@@ -150,7 +153,7 @@ Vous disposez d’une solution sur [GitHub][github] pour déployer cette archite
 [security-considerations]: #security-considerations
 [set-a-static-ip-address]: https://azure.microsoft.com/documentation/articles/virtual-networks-static-private-ip-arm-pportal/
 [standby-operations-masters]: https://technet.microsoft.com/library/cc794737(v=ws.10).aspx
-[visio-download]: https://archcenter.azureedge.net/cdn/identity-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/identity-architectures.vsdx
 [vm-windows-sizes]: /azure/virtual-machines/virtual-machines-windows-sizes
 
 [0]: ./images/adds-extend-domain.png "Architecture réseau hybride sécurisée avec Active Directory"

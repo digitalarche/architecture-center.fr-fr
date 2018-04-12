@@ -1,13 +1,13 @@
 ---
-title: "Choisir un magasin de données de recherche"
-description: 
+title: Choisir un magasin de données de recherche
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 7fe5952c880921984beb30c71458fd1ef72ef239
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: ead07e307e96696faa5ddf48505eee378027523c
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="choosing-a-search-data-store-in-azure"></a>Choisir un magasin de données de recherche dans Azure
 
@@ -42,20 +42,23 @@ Pour les scénarios de recherche, commencez par choisir le magasin de données d
 Les tableaux suivants résument les principales différences entre les fonctionnalités.
 
 ### <a name="general-capabilities"></a>Fonctionnalités générales
+
 | | Recherche Azure | Elasticsearch | HDInsight avec Solr | Base de données SQL | 
 | --- | --- | --- | --- | --- | 
-| Un service managé | OUI | Non  | OUI | OUI |  
+| Est un service géré | OUI | Non  | OUI | OUI |  
 | de l’API REST | OUI | OUI | OUI | Non  |
 | Programmabilité | .NET | Java | Java | T-SQL | 
 | Indexeurs de documents pour les types de fichiers courants (PDF, DOCX, TXT, etc.) | OUI | Non  | OUI | Non  |
 
 ### <a name="manageability-capabilities"></a>Fonctionnalités de facilité de gestion
+
 | | Recherche Azure | Elasticsearch | HDInsight avec Solr | Base de données SQL | 
 | --- | --- | --- | --- | --- |
 | Schéma pouvant être mis à jour | Non  | OUI | OUI | OUI |
 | Prend en charge la montée en puissance  | OUI | OUI | OUI | Non  |
 
 ### <a name="analytic-workload-capabilities"></a>Fonctionnalités de la charge de travail analytique
+
 | | Recherche Azure | Elasticsearch | HDInsight avec Solr | SQL Databash | 
 | --- | --- | --- | --- | --- | 
 | Prend en charge l’analytique au-delà de la recherche en texte intégral | Non  | OUI | OUI | OUI |
@@ -63,6 +66,7 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 | Prend en charge la recherche sémantique | Oui (rechercher uniquement les documents similaires) | OUI | OUI | OUI | 
 
 ### <a name="security-capabilities"></a>Fonctionnalités de sécurité
+
 | | Recherche Azure | Elasticsearch | HDInsight avec Solr | SQL Databash | 
 | --- | --- | --- | --- | --- | 
 | Sécurité au niveau des lignes | Partielle (requête d’application requise pour filtrer par ID de groupe) | Partielle (requête d’application requise pour filtrer par ID de groupe) | OUI | OUI | 

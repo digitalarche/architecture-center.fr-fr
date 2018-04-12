@@ -1,14 +1,14 @@
 ---
 title: Application web de base
-description: "Architecture recommandée pour une application web basique exécutée dans Microsoft Azure."
+description: Architecture recommandée pour une application web basique exécutée dans Microsoft Azure.
 author: MikeWasson
 ms.date: 12/12/2017
 cardTitle: Basic web application
-ms.openlocfilehash: 38b0739cc61d679742b610b99e92aaad8d3b394d
-ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
+ms.openlocfilehash: efd831b1f54fa0662bdfa9874318e7b314172215
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="basic-web-application"></a>Application web de base
 [!INCLUDE [header](../../_includes/header.md)]
@@ -77,7 +77,7 @@ Il existe deux façons de mettre à l’échelle une application App Service :
 
 * *Monter en charge*, signifiant l’ajout d’instances pour traiter une augmentation de charge. Chaque niveau de tarification possède un nombre d’instances maximal. 
 
-  Vous pouvez monter en charge manuellement en modifiant le nombre d’instances, ou en utilisant la [mise à l’échelle automatique ][web-app-autoscale] pour que Azure ajoute ou supprime automatiquement des instances en fonction des mesures de performances et/ou de planification. Chaque opération de mise à l’échelle se produit rapidement&mdash;généralement en quelques secondes. 
+  Vous pouvez monter en charge manuellement en modifiant le nombre d’instances, ou en utilisant la [mise à l’échelle automatique ][web-app-autoscale] pour que Azure ajoute ou supprime automatiquement des instances en fonctions des mesures de performances et/ou de planification. Chaque opération de mise à l’échelle se produit rapidement&mdash;généralement en quelques secondes. 
 
   Pour activer la mise à l’échelle automatique, créez un *profil* de mise à l’échelle qui définit le nombre minimal et maximal d’instances. Les profils peuvent être planifiés. Par exemple, vous pouvez créer des profils différents pour les jours de la semaine et le week-end. Un profil peut contenir des règles pour l’ajout ou la suppression des instances. (Exemple : ajouter deux instances si l’utilisation du processeur est supérieure à 70 % pendant 5 minutes.)
   
@@ -129,7 +129,7 @@ Le déploiement implique deux étapes :
 Une application App Service dispose toujours d’un emplacement de déploiement nommé `production`, représentant le site de production en direct. Nous vous recommandons de créer un emplacement de préproduction pour le déploiement des mises à jour. Voici plusieurs avantages de l’utilisation d’un emplacement de préproduction :
 
 * Vous pouvez vérifier la réussite du déploiement, avant de le permuter en production.
-* Le déploiement vers un emplacement de préproduction garantit la préparation de toutes les instances avant de le permuter en production. Un grand nombre d’applications possèdent un temps de préparation et de démarrage à froid important.
+* Le déploiement vers un emplacement de préproduction garantit la préparation de toutes les instances avant de le permuter en production. Un grand nombre d’application possèdent un temps de préparation et de démarrage à froid important.
 
 Nous vous recommandons également la création d’un troisième emplacement pour stocker le dernier déploiement correct. Après avoir échangé les emplacements de préproduction et de production, déplacez le déploiement de production précédent (maintenant à l’emplacement de préproduction) vers l’emplacement du dernier déploiement correct. Ainsi, vous pouvez rapidement revenir à la dernière version correcte si vous détectez un problème plus tard.
 
@@ -157,7 +157,7 @@ Conseils de dépannage de votre application :
 
 * Utilisez le [panneau de dépannage][troubleshoot-blade] dans le portail Azure pour trouver des solutions aux problèmes courants.
 * Activez la [diffusion de journaux][web-app-log-stream] pour consulter les informations de journalisation en temps quasi-réel.
-* Le [tableau de bord Kudu][kudu] dispose de plusieurs outils pour surveiller et déboguer votre application. Pour plus d'informations, consultez [Outils en ligne de Sites Web Azure que vous devez connaître][kudu] (billet de blog). Vous pouvez atteindre le tableau de bord Kudu à partir du portail Azure. Ouvrez le panneau pour votre application et cliquez sur **Outils**, puis cliquez sur **Kudu**.
+* Le [tableau de bord Kudu][kudu] dispose de plusieurs outils pour surveiller et déboguer votre application. Pour plus d'informations, consultez [Outils en ligne de Sites Web Azure que vous devez connaître][kudu] (billet de blog). Vous pouvez atteindre le tableau de bord Kudu à partir du portail Azure. Ouvrez le panneau pour votre application et cliquez sur <strong>Outils</strong>, puis cliquez sur <strong>Kudu</strong>.
 * Si vous utilisez Visual Studio, consultez l’article [Dépanner une application web dans Azure App Service à l’aide de Visual Studio][troubleshoot-web-app] pour obtenir des conseils de débogage et de dépannage.
 
 ## <a name="security-considerations"></a>Considérations relatives à la sécurité
@@ -170,7 +170,7 @@ L’audit peut vous aider à respecter une conformité réglementaire et à déc
 Chaque emplacement de déploiement possède une adresse IP publique. Sécuriser les emplacements de production à l’aide de la [connexion de Azure Active Directory][aad-auth] afin que seuls les membres de vos équipes de DevOps et de développement puissent atteindre ces points de terminaison.
 
 ### <a name="logging"></a>Journalisation
-Les journaux ne devraient jamais enregistrer les mots de passe des utilisateurs ou d’autres informations qui peuvent être utilisées pour valider l’usurpation d’identité. Retirez ces détails des données avant de les stocker.   
+Les journaux ne devrez jamais enregistrer les mots de passe des utilisateurs ou d’autres informations qui peuvent être utilisées pour valider l’usurpation d’identité. Retirez ces détails des données avant de les stocker.   
 
 ### <a name="ssl"></a>SSL
 Une application App Service comprend un point de terminaison SSL sur un sous-domaine de `azurewebsites.net` sans coût supplémentaire. Le point de terminaison SSL comprend un certificat générique pour le domaine `*.azurewebsites.net`. Si vous utilisez un nom de domaine personnalisé, vous devez fournir un certificat correspondant au domaine personnalisé. L’approche la plus simple est d’acheter un certificat directement via le portail Azure. Vous pouvez également importer des certificats à partir d’autres autorités de certification. Pour plus d’informations, consultez [Acheter et configurer un certificat SSL pour votre service Azure App Service][ssl-cert].
@@ -252,7 +252,7 @@ Pour plus d’informations, consultez [Déployer des ressources à l’aide de m
 [ssl-cert]: /azure/app-service-web/web-sites-purchase-ssl-web-site
 [troubleshoot-blade]: https://azure.microsoft.com/updates/self-service-troubleshooting-for-app-service-web-apps-customers/
 [troubleshoot-web-app]: /azure/app-service-web/web-sites-dotnet-troubleshoot-visual-studio
-[visio-download]: https://archcenter.azureedge.net/cdn/app-service-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/app-service-reference-architectures.vsdx
 [vsts]: https://www.visualstudio.com/features/vso-cloud-load-testing-vs.aspx
 [web-app-autoscale]: /azure/app-service-web/web-sites-scale
 [web-app-backup]: /azure/app-service-web/web-sites-backup

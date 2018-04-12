@@ -3,11 +3,11 @@ title: Traitement en temps réel
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: f1054ce5e8c2053aa4f80d8b472604125ba47187
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 8d3497c37d15dc0aa4645ddfce3bd30740217b2c
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="real-time-processing"></a>Traitement en temps réel
 
@@ -49,7 +49,7 @@ Pour plus d’informations, consultez la page [Ingestion de messages en temps r�
 
 ### <a name="data-storage"></a>Stockage des données
 
-- **Conteneurs Azure Storage Blob** ou **Azure Data Lake Store**. Les données entrantes en temps réel sont généralement capturées dans un répartiteur de messages (voir ci-dessus), mais, dans certains cas, il peut être judicieux de surveiller l’apparition de nouveaux fichiers dans un dossier pour les traiter au fil de leur création ou de leur mise à jour. Par ailleurs, de nombreuses solutions de traitement en temps réel combinent des données de diffusion en continu avec des données de référence statiques, qui peuvent être stockées dans un magasin de fichiers. Enfin, le stockage de fichiers peut servir de destination de sortie pour les données en temps réel capturées à des fins d’archivage, ou en vue de traitements par lots supplémentaires dans une [architecture lambda](../concepts/big-data.md#lambda-architecture).
+- **Conteneurs Azure Storage Blob** ou **Azure Data Lake Store**. Les données entrantes en temps réel sont généralement capturées dans un répartiteur de messages (voir ci-dessus), mais, dans certains cas, il peut être judicieux de surveiller l’apparition de nouveaux fichiers dans un dossier pour les traiter au fil de leur création ou de leur mise à jour. Par ailleurs, de nombreuses solutions de traitement en temps réel combinent des données de diffusion en continu avec des données de référence statiques, qui peuvent être stockées dans un magasin de fichiers. Enfin, le stockage de fichiers peut servir de destination de sortie pour les données en temps réel capturées à des fins d’archivage, ou en vue de traitements par lots supplémentaires dans une [architecture lambda](../big-data/index.md#lambda-architecture).
 
 Pour plus d’informations, consultez la page [Stockage de données](../technology-choices/data-storage.md).
 

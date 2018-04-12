@@ -1,13 +1,13 @@
 ---
-title: "Déployer SAP NetWeaver et SAP HANA sur Azure"
-description: "Pratiques éprouvées d’exécution de SAP HANA dans un environnement à haute disponibilité dans Azure."
+title: Déployer SAP NetWeaver et SAP HANA sur Azure
+description: Pratiques éprouvées d’exécution de SAP HANA dans un environnement à haute disponibilité dans Azure.
 author: njray
 ms.date: 06/29/2017
-ms.openlocfilehash: 27a97103c0c6f305cb8e830d670c8d0ba7e22aa5
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 33171164c59a520a87ef3209c5bb1b208377221c
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="deploy-sap-netweaver-and-sap-hana-on-azure"></a>Déployer SAP NetWeaver et SAP HANA sur Azure
 
@@ -22,7 +22,7 @@ Cette architecture de référence présente un ensemble de pratiques éprouvées
 
 ## <a name="architecture"></a>Architecture
 
-L’architecture est constituée des composants suivants :
+L’architecture est constituée des composants suivants.
 
 - **Réseau virtuel**. Un réseau virtuel est une représentation d’un réseau isolé logiquement dans Azure. Toutes les machines virtuelles de cette architecture de référence sont déployées sur le même réseau virtuel. Le réseau virtuel est en outre subdivisé en sous-réseaux. Créez un sous-réseau distinct pour chaque couche, y compris l’application (SAP NetWeaver), la base de données (SAP HANA), la gestion (le jumpbox) et Active Directory.
 
@@ -64,14 +64,14 @@ Les fonctions de gestion du paysage SAP nécessitent la séparation du trafic du
 
 Attribuer la carte réseau d’administration au sous-réseau de gestion et affectez la carte réseau de communication des données à un sous-réseau distinct. Pour obtenir des informations relatives à la configuration, consultez [Créer et gérer une machine virtuelle Windows équipée de plusieurs cartes d’interface réseau][multiple-vm-nics].
 
-### <a name="azure-storage"></a>Azure Storage
+### <a name="azure-storage"></a>Stockage Azure
 
 Avec toutes les machines virtuelles du serveur de base de données, nous recommandons l’utilisation du Stockage Premium Azure pour la latence en lecture/écriture. Pour les serveurs d’applications SAP, y compris les machines virtuelles (A)SCS, vous pouvez utiliser le stockage standard Azure, car l’exécution d’applications s’effectue en mémoire et utilise les disques uniquement pour la connexion.
 
-Pour une meilleure fiabilité, nous recommandons l’utilisation d’[Azure Managed Disks][managed-disks]. Les Managed Disks s’assurent que les disques des machines virtuelles au sein d’un groupe à haute disponibilité sont isolés afin d’éviter des points de défaillance uniques.
+Pour une meilleure fiabilité, nous recommandons l’utilisation d’[Azure Managed Disks][managed-disks]. Les disques gérés assurent que les disques des machines virtuelles au sein d’un groupe à haute disponibilité sont isolés afin d’éviter des points de défaillance uniques.
 
 > [!NOTE]
-> Actuellement, le modèle Resource Manager de cette architecture de référence n’utilise pas de managed disks. Nous avons l’intention de mettre à jour le modèle pour utiliser des managed disks.
+> Actuellement, le modèle Resource Manager de cette architecture de référence n’utilise pas de disques gérés. Nous avons l’intention de mettre à jour le modèle pour utiliser des managed disks.
 
 Pour obtenir un débit de bande passante de disque et d’ES/S élevé, les pratiques courantes en termes d’optimisation des performances du volume de stockage s’appliquent à la disposition du stockage Azure. Par exemple, l’entrelacement de plusieurs disques pour créer un plus grand volume de disque améliore les performances d’E/S. L’activation du cache de lecture sur un contenu de stockage qui change rarement améliore la vitesse de récupération des données. Pour plus d’informations sur les exigences en termes de performances, consultez [SAP note 1943937 - Hardware Configuration Check Tool][sap-1943937] (Note SAP 1943937 - Outil de vérification de la configuration matérielle).
 
@@ -133,7 +133,8 @@ Envisagez d’utiliser des [groupes de sécurité réseau] [ nsg] (NSG) pour lim
 Les scripts de déploiement pour cette architecture de référence sont disponibles sur [GitHub][github].
 
 
-### <a name="prerequisites"></a>Composants requis
+### <a name="prerequisites"></a>Prérequis
+
 
 - Vous devez avoir accès au centre de téléchargement de logiciels SAP pour terminer l’installation.
  
@@ -153,7 +154,7 @@ Cette architecture de référence déploie les machines virtuelles suivantes :
 | `ra-sapApps-vm1` ... `ra-sapApps-vmN` | DS11v2 | Application SAP NetWeaver |
 | `ra-sap-wdp-vm1` ... `ra-sap-wdp-vmN` | DS11v2 | SAP Web Dispatcher |
 | `ra-sap-data-vm1` | GS5 | Instance de base de données SAP HANA |
-| `ra-sap-jumpbox-vm1` | DS1V2 | Jumpbox |
+| `ra-sap-jumpbox-vm1` | DS1V2 | Serveur de rebond |
 
 Une seule instance SAP HANA est déployée. Pour les machines virtuelles de l’application, le nombre d’instances à déployer est spécifié dans les paramètres du modèle.
 
@@ -235,7 +236,7 @@ Après avoir déployé l’infrastructure SAP, installez et configurez vos appli
 [sap-hana-on-azure]: https://azure.microsoft.com/services/virtual-machines/sap-hana/
 [sap-netweaver-dr]: http://download.microsoft.com/download/9/5/6/956FEDC3-702D-4EFB-A7D3-2DB7505566B6/SAP%20NetWeaver%20-%20Building%20an%20Azure%20based%20Disaster%20Recovery%20Solution%20V1_5%20.docx
 [sap-security]: https://archive.sap.com/documents/docs/DOC-62943
-[visio-download]: https://archcenter.azureedge.net/cdn/SAP-HANA-architecture.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/SAP-HANA-architecture.vsdx
 [vm-sizes-mem]: /azure/virtual-machines/windows/sizes-memory
 [swd]: https://help.sap.com/doc/saphelp_nw70ehp2/7.02.16/en-us/48/8fe37933114e6fe10000000a421937/frameset.htm
 [0]: ./images/sap-hana.png "Architecture SAP HANA à l’aide de Microsoft Azure"

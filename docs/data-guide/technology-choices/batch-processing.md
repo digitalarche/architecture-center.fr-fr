@@ -1,13 +1,13 @@
 ---
 title: Choisir une technologie de traitement par lots
-description: 
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: bfb850ee8e9d8fd41927b4ca3b612e15b5ae6b11
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 0117798af82f2caa6704dc86e88be57f09c381ea
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="choosing-a-batch-processing-technology-in-azure"></a>Choisir une technologie de traitement par lots dans Azure
 
@@ -39,13 +39,13 @@ Pour restreindre les choix, commencez par répondre aux questions suivantes :
 
 ## <a name="capability-matrix"></a>Matrice des fonctionnalités
 
-Les tableaux suivants résument les principales différences de fonctionnalités. 
+Les tableaux suivants résument les principales différences entre les fonctionnalités. 
 
 ### <a name="general-capabilities"></a>Fonctionnalités générales
 
 | | Service Analytique Azure Data Lake | Azure SQL Data Warehouse | HDInsight avec Spark | HDInsight avec Hive | HDInsight avec Hive LLAP |
 | --- | --- | --- | --- | --- | --- |
-| Est un service géré | OUI | OUI | Oui<sup>1</sup> | Oui<sup>1</sup> | Oui<sup>1</sup> |
+| Est un service géré | OUI | OUI | Oui <sup>1</sup> | Oui <sup>1</sup> | Oui<sup>1</sup> |
 | Prend en charge l’interruption du calcul | Non  | OUI | Non  | Non  | Non  |
 | Magasin de données relationnel | OUI | OUI | Non  | Non  | Non  |
 | Programmabilité | U-SQL | T-SQL | Python, Scala, Java, R | HiveQL | HiveQL |
@@ -53,8 +53,9 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 | Modèle de tarification | Par programme de traitement par lots | Par heure de cluster | Par heure de cluster | Par heure de cluster | Par heure de cluster |  
 
 [1] Avec mise à l’échelle et configuration manuelles.
- 
+
 ### <a name="integration-capabilities"></a>Fonctionnalités d’intégration
+
 | | Service Analytique Azure Data Lake | SQL Data Warehouse | HDInsight avec Spark | HDInsight avec Hive | HDInsight avec Hive LLAP |
 | --- | --- | --- | --- | --- | --- |
 | Accès à partir d’Azure Data Lake Store | OUI | OUI | OUI | OUI | OUI |
@@ -62,6 +63,7 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 | Interrogation à partir de magasins relationnels externes | OUI | Non  | OUI | Non  | Non  |
 
 ### <a name="scalability-capabilities"></a>Fonctionnalités d’évolutivité
+
 | | Service Analytique Azure Data Lake | SQL Data Warehouse | HDInsight avec Spark | HDInsight avec Hive | HDInsight avec Hive LLAP |
 | --- | --- | --- | --- | --- | --- |
 | Granularité de la montée en charge  | Par tâche | Par cluster | Par cluster | Par cluster | Par cluster |
@@ -69,15 +71,16 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 | Mise en cache des données en mémoire | Non  | OUI | OUI | Non  | OUI | 
 
 ### <a name="security-capabilities"></a>Fonctionnalités de sécurité
+
 | | Service Analytique Azure Data Lake | SQL Data Warehouse | HDInsight avec Spark | Apache Hive sur HDInsight | Hive LLAP sur HDInsight |
 | --- | --- | --- | --- | --- | --- |
-| Authentification  | Azure Active Directory (Azure AD) | SQL / Azure AD | Non  | local / Azure AD<sup>1</sup> | local / Azure AD<sup>1</sup> |
-| Authorization  | OUI | OUI| Non  | Oui<sup>1</sup> | Oui<sup>1</sup> |
-| Audit  | OUI | OUI | Non  | Oui<sup>1</sup> | Oui<sup>1</sup> |
-| Chiffrement des données au repos | OUI| Oui<sup>2</sup> | OUI | OUI | OUI |
-| Sécurité au niveau des lignes | Non  | OUI | Non  | Oui<sup>1</sup> | Oui<sup>1</sup> |
-| Prend en charge les pare-feu | OUI | OUI | OUI | Oui<sup>3</sup> | Oui<sup>3</sup> |
-| Masquage des données dynamiques | Non  | Non  | Non  | Oui<sup>1</sup> | Oui<sup>1</sup> |
+| Authentification  | Azure Active Directory (Azure AD) | SQL / Azure AD | Non  | local / Azure AD <sup>1</sup> | local / Azure AD <sup>1</sup> |
+| Authorization  | OUI | OUI| Non  | Oui <sup>1</sup> | Oui <sup>1</sup> |
+| Audit  | OUI | OUI | Non  | Oui <sup>1</sup> | Oui <sup>1</sup> |
+| Chiffrement des données au repos | OUI| Oui <sup>2</sup> | OUI | OUI | OUI |
+| Sécurité au niveau des lignes | Non  | OUI | Non  | Oui <sup>1</sup> | Oui<sup>1</sup> |
+| Prend en charge les pare-feu | OUI | OUI | OUI | Oui <sup>3</sup> | Oui <sup>3</sup> |
+| Masquage des données dynamiques | Non  | Non  | Non  | Oui <sup>1</sup> | Oui<sup>1</sup> |
 
 [1] Suppose d’utiliser un [cluster HDInsight joint à un domaine](/azure/hdinsight/domain-joined/apache-domain-joined-introduction).
 

@@ -1,13 +1,13 @@
 ---
-title: "Choix d’une banque de données OLAP"
-description: 
+title: Choix d’une banque de données OLAP
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 ms.openlocfilehash: f3041b95696c9408a2c9ab747fe1ec3041db0743
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 03/31/2018
 ---
 # <a name="choosing-an-olap-data-store-in-azure"></a>Choix d’une banque de données OLAP dans Azure
 
@@ -57,10 +57,10 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 | Est un service géré | OUI | Non  | Non  | OUI |
 | Prend en charge des cubes multidimensionnels | Non  | OUI | Non  | Non  |
 | Prend en charge les modèles sémantiques tabulaires | OUI | OUI | Non  | Non  |
-| Intégrer facilement plusieurs sources de données | OUI | OUI | Nonn <sup>1</sup> | Nonn <sup>1</sup> |
+| Intègre facilement plusieurs sources de données | OUI | OUI | Nonn <sup>1</sup> | Nonn <sup>1</sup> |
 | Prend en charge l’analytique en temps réel | Non  | Non  | OUI | OUI |
 | Exige un processus pour copier des données à partir de sources | OUI | OUI | Non  | Non  |
-| Intégration Azure AD | OUI | Non  | Non <sup>2</sup> | OUI |
+| Intégration Azure AD | OUI | Non  | Non<sup>2</sup> | OUI |
 
 [1] bien que SQL Server et SQL Database Azure ne peuvent pas être utilisés pour interroger et intégrer plusieurs sources de données externes, vous pouvez toujours créer un pipeline qui effectue cette opération à l’aide de [SSIS](/sql/integration-services/sql-server-integration-services) ou [Azure Data Factory](/azure/data-factory/). SQL Server hébergé dans une machine virtuelle Azure, propose des options supplémentaires, telles que les serveurs liés et [PolyBase](/sql/relational-databases/polybase/polybase-guide). Pour plus d’informations, consultez [Orchestration, flux de contrôle et déplacement des données de pipeline](../technology-choices/pipeline-orchestration-data-movement.md).
 
@@ -70,7 +70,7 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 | | Azure Analysis Services | SQL Server Analysis Services | SQL Server avec index Columnstore | SQL Database Azure avec des index Columnstore |
 | --- | --- | --- | --- | --- |
-| Serveurs régionaux redondants pour une haute disponibilité  | OUI | Non  | OUI | OUI |
+| Serveurs régionaux redondants pour assurer une haute disponibilité  | OUI | Non  | OUI | OUI |
 | Prend en charge l’augmentation de la taille des instances de la requête  | OUI | Non  | OUI | Non  |
-| Évolutivité dynamique (monter en puissance)  | OUI | Non  | OUI | Non  |
+| Évolutivité dynamique (montée en puissance)  | OUI | Non  | OUI | Non  |
 

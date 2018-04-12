@@ -1,13 +1,13 @@
 ---
 title: Traitement en langage naturel
-description: 
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: c03e2d017f9b4eb955a0e3494b5bc6c2603d1058
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 0afd8ac9a8a2e56f79ade0b2e10328630866c03c
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="natural-language-processing"></a>Traitement en langage naturel
 
@@ -34,7 +34,7 @@ Lorsque vous utilisez NLP pour extraire des informations et des analyses de text
 
 ## <a name="architecture"></a>Architecture
 
-Dans une solution NLP, le traitement de textes de forme libre est effectué par rapport à des documents contenant des paragraphes de texte. L’architecture globale peut être une architecture de [traitement par lots](./batch-processing.md) ou de [traitement de flux en temps réel](./real-time-processing.md).
+Dans une solution NLP, le traitement de textes de forme libre est effectué par rapport à des documents contenant des paragraphes de texte. L’architecture globale peut être une architecture de [traitement par lots](../big-data/batch-processing.md) ou de [traitement de flux en temps réel](../big-data/real-time-processing.md).
 
 Le traitement réel varie en fonction du résultat souhaité, mais en termes de pipeline, NLP peut être appliqué par lots ou en temps réel. Par exemple, l’analyse des sentiments peut être utilisée par rapport à des blocs de texte pour produire un score de sentiment. Cela peut être possible en exécutant un traitement par lots sur des données dans le stockage ou en temps réel à l’aide de plusieurs petits blocs de données transitant via un service de messagerie.
 

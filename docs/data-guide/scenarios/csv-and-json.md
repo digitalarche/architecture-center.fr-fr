@@ -3,11 +3,11 @@ title: Traitement des fichiers CSV et JSON
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 6b888ff230afefbd74249aa913e5bab66d47d7e2
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 02e684d562cfe555f9e3596ad0a2f1a00d05c7a7
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="working-with-csv-and-json-files-for-data-solutions"></a>Utilisation des fichiers CSV et JSON pour des solutions de données
 
@@ -44,7 +44,7 @@ Les formats de fichiers CSV et JSON facilitent tous les deux les échanges des d
 
 Azure offre plusieurs solutions pour l’utilisation des fichiers CSV et JSON, en fonction de vos besoins. L’emplacement de lancement principale de ces fichiers est le stockage Azure ou Azure Data Lake Store. La plupart des services Azure qui fonctionnent avec ces fichiers et autres fichiers texte s’intègrent à un des services de stockage d’objets. Toutefois, dans certaines situations, vous pouvez opter pour importer directement les données dans Azure SQL ou un autre magasin de données. SQL Server dispose d’une prise en charge native pour le stockage et l’utilisation de documents JSON, ce qui simplifie [l’importation et le traitement de ces types de fichiers](/sql/relational-databases/json/import-json-documents-into-sql-server). Vous pouvez utiliser un utilitaire tel que l’importation en bloc SQL pour [importer des fichiers CSV](/sql/relational-databases/json/import-json-documents-into-sql-server) facilement.
 
-Selon le scénario, vous pouvez effectuer le [traitement par lots](../scenarios/batch-processing.md) ou le [traitement en temps réel](../scenarios/real-time-processing.md) des données.
+Selon le scénario, vous pouvez effectuer le [traitement par lots](../big-data/batch-processing.md) ou le [traitement en temps réel](../big-data/real-time-processing.md) des données.
 
 ## <a name="challenges"></a>Défis
 

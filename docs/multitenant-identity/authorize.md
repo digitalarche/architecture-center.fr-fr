@@ -1,16 +1,16 @@
 ---
 title: Autorisation dans les applications multi-locataires
-description: "Comment déclarer des autorisations dans une application multi-locataire"
+description: Comment déclarer des autorisations dans une application multi-locataire
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: app-roles
 pnp.series.next: web-api
-ms.openlocfilehash: 86c308d21f19bb3ac2a4a2240a9a03a504de5cf4
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 03c4d5fa10c75437a7b066534619ba9a123c350c
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="role-based-and-resource-based-authorization"></a>Autorisation basée sur les ressources et les rôles
 
@@ -102,7 +102,6 @@ Dans les versions antérieures d’ASP.NET, vous devez définir la propriété *
 ```csharp
 // old way
 [Authorize(Roles = "SurveyCreator")]
-
 ```
 
 Elle est toujours prise en charge dans ASP.NET Core, mais elle présente certains inconvénients par rapport aux stratégies d’autorisation :
@@ -154,8 +153,8 @@ Sachant que nous passons un objet `Survey`, cet appel appelle `SurveyAuthorizati
 Dans votre code d’autorisation, une bonne approche consiste à agréger toutes les autorisations de l’utilisateur basées sur les rôles et basées sur les ressources, puis vérifiez l’agrégat défini par rapport à l’opération souhaitée.
 Voici un exemple de l’application Surveys. L’application définit plusieurs types d’autorisations :
 
-* Administrateur
-* Collaborateur
+* Admin
+* Contributeur
 * Créateur
 * Propriétaire
 * Lecteur
@@ -166,7 +165,7 @@ L’application définit également un ensemble d’opérations possibles sur le
 * Lire
 * Mettre à jour
 * Supprimer
-* Publier
+* Publish
 * Annuler la publication
 
 Le code suivant crée une liste d’autorisations pour un utilisateur et une enquête particuliers. Notez que ce code examine aussi bien les rôles d’application de l’utilisateur que les champs du propriétaire/collaborateur dans l’enquête.

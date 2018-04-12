@@ -3,11 +3,11 @@ title: Traitement par lots
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: d3d3b92034c251586ecc9caff2785ecd0808b2a7
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: d6843bf4e20c3eb26e61cfa09300ad533e969c2e
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="batch-processing"></a>Traitement par lots
 
@@ -19,7 +19,7 @@ Par exemple, les journaux provenant d’un serveur web peuvent être copiés dan
 
 ## <a name="when-to-use-this-solution"></a>Quand utiliser cette solution
 
-Le traitement par lots est utilisé dans différents scénarios, qui vont des transformations de données simples à un pipeline ETL (extraction, transformation et chargement) plus complet. Dans un contexte de Big Data, le traitement par lots peut fonctionner sur des jeux de données très volumineux, pour lesquels le calcul prend beaucoup de temps. (Voir par exemple [Architecture lambda](../concepts/big-data.md#lambda-architecture).) En général, il aboutit à une exploration interactive plus poussée, fournit des données modélisables pour le Machine Learning ou écrit les données dans un magasin de données optimisé pour l’analytique et la visualisation.
+Le traitement par lots est utilisé dans différents scénarios, qui vont des transformations de données simples à un pipeline ETL (extraction, transformation et chargement) plus complet. Dans un contexte de Big Data, le traitement par lots peut fonctionner sur des jeux de données très volumineux, pour lesquels le calcul prend beaucoup de temps. (Voir par exemple [Architecture lambda](../big-data/index.md#lambda-architecture).) En général, il aboutit à une exploration interactive plus poussée, fournit des données modélisables pour le Machine Learning ou écrit les données dans un magasin de données optimisé pour l’analytique et la visualisation.
 
 Il peut s’agir par exemple de transformer un grand ensemble de fichiers CSV ou JSON plats et semi-structurées dans un format schématisé et structuré afin de pousser plus loin les requêtes. La plupart du temps, les données sont converties d’un format brut utilisé pour l’ingestion (par exemple, CSV) dans un format binaire, plus performant pour l’interrogation, car stockant les données en colonnes et fournissant souvent des index et des statistiques incluses sur les données.
 

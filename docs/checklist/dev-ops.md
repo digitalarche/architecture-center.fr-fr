@@ -1,14 +1,14 @@
 ---
-title: "Liste de contrôle DevOps"
-description: "Liste de contrôle qui fournit des conseils liés à DevOps."
+title: Liste de contrôle DevOps
+description: Liste de contrôle qui fournit des conseils liés à DevOps.
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist
-ms.openlocfilehash: 356fef2415347ae132915695a25fd9b50779bd8b
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 2e338d2f2e61b404223001a61f44e06e89e7f563
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="devops-checklist"></a>Liste de contrôle DevOps
 
@@ -130,7 +130,7 @@ Il est essentiel de partager cette documentation. Encouragez les membres de votr
 
 **Suivez les principes de séparation des privilèges lorsque vous octroyez un accès aux ressources.** Gérez prudemment l'accès aux ressources. L’accès doit être refusé par défaut, sauf si un utilisateur obtient explicitement l’accès à une ressource. N’accordez aux utilisateurs que les accès dont ils ont besoin pour effectuer leurs tâches. Effectuez un suivi des privilèges accordés aux utilisateurs et réalisez régulièrement des audits de sécurité.
 
-**Utilisez le contrôle d’accès en fonction du rôle.** L’assignation des comptes utilisateur et des accès aux ressources ne doit pas être un processus manuel. Utilisez le [contrôle d’accès en fonction du rôle][rbac] pour accorder les accès en fonction des identités et des groupes [Azure Active Directory][azure-ad]. 
+<strong>Utilisez le contrôle d’accès en fonction du rôle.</strong> L’assignation des comptes utilisateur et des accès aux ressources ne doit pas être un processus manuel. Utilisez le [contrôle d’accès en fonction du rôle][rbac] pour accorder les accès en fonction des identités et des groupes [Azure Active Directory][azure-ad]. 
 
 **Utilisez un système de suivi des bogues pour suivre les problèmes.** Si vous ne disposez pas d’un bon moyen pour effectuer le suivi des problèmes, vous risquez d’égarer des éléments, de dupliquer certaines tâches ou même de provoquer des problèmes supplémentaires. Ne vous fiez pas aux communications orales informelles pour suivre l’état des bogues. Utilisez un outil de suivi des bogues pour enregistrer tous les détails sur les différents problèmes, assigner des ressources pour les résoudre et créer un journal d’audit contenant la progression et l’état de chaque problème. 
 

@@ -1,19 +1,19 @@
 ---
-title: "Sélectionner une technologie de traitement de flux"
-description: 
+title: Sélectionner une technologie de traitement de flux
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 23d9849c14964b0905300f191a41084b589fd127
-ms.sourcegitcommit: 943e671a8d522cef5ddc8c6e04848134b03c2de4
+ms.openlocfilehash: 29e4cd3d5ea6e10f036bfe226152290512dafa65
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/05/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="choosing-a-stream-processing-technology-in-azure"></a>Sélectionner une technologie de traitement de flux dans Azure
 
 Cet article compare les choix technologiques pour le traitement de flux en temps réel dans Azure.
 
-Le traitement de flux en temps réel utilise les messages provenant d’une file d’attente ou d’un stockage de fichiers, traite les messages, puis transfère le résultat à une autre file d’attente de messages, magasin de fichiers ou base de données. Ce traitement peut inclure l’interrogation, le filtrage et l’agrégation de messages. Les moteurs de traitement de flux doivent être en mesure d’utiliser des flux infinis de données et de produire des résultats avec une latence minimale. Pour plus d’informations, consultez [Traitement en temps réel](../scenarios/real-time-processing.md).
+Le traitement de flux en temps réel utilise les messages provenant d’une file d’attente ou d’un stockage de fichiers, traite les messages, puis transfère le résultat à une autre file d’attente de messages, magasin de fichiers ou base de données. Ce traitement peut inclure l’interrogation, le filtrage et l’agrégation de messages. Les moteurs de traitement de flux doivent être en mesure d’utiliser des flux infinis de données et de produire des résultats avec une latence minimale. Pour plus d’informations, consultez [Traitement en temps réel](../big-data/real-time-processing.md).
 
 ## <a name="what-are-your-options-when-choosing-a-technology-for-real-time-processing"></a>Quelles sont vos options quant au choix d’une technologie de traitement en temps réel ?
 Dans Azure, tous les magasins de données suivants répondent aux principales exigences de prise en charge du traitement en temps réel :
@@ -41,6 +41,7 @@ Pour les scénarios de traitement en temps réel, commencez par choisir le servi
 Les tableaux suivants résument les principales différences entre les fonctionnalités. 
 
 ### <a name="general-capabilities"></a>Fonctionnalités générales
+
 | | Azure Stream Analytics | HDInsight avec Spark Streaming | Apache Spark dans Azure Databricks | HDInsight avec Storm | Azure Functions | Azure App Service WebJobs |
 | --- | --- | --- | --- | --- | --- | --- | 
 | Programmabilité | Langage de requête Stream Analytics, JavaScript | Scala, Python, Java | Scala, Python, Java, R | Java, C# | C#, F#, Node.js | C#, Node.js, PHP, Java, Python |
@@ -48,12 +49,14 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 | Modèle de tarification | [Unités de streaming](https://azure.microsoft.com/pricing/details/stream-analytics/) | Par heure de cluster | [Unités Databricks](https://azure.microsoft.com/pricing/details/databricks/) | Par heure de cluster | Par exécution de fonction et consommation de ressources | Par heure de plan App Service |  
 
 ### <a name="integration-capabilities"></a>Fonctionnalités d’intégration
+
 | | Azure Stream Analytics | HDInsight avec Spark Streaming | Apache Spark dans Azure Databricks | HDInsight avec Storm | Azure Functions | Azure App Service WebJobs |
 | --- | --- | --- | --- | --- | --- | --- | 
 | Entrées | [Entrées Stream Analytics](/azure/stream-analytics/stream-analytics-define-inputs)  | Event Hubs, IoT Hub, Kafka, HDFS, Storage Blobs, Azure Data Lake Store  | Event Hubs, IoT Hub, Kafka, HDFS, Storage Blobs, Azure Data Lake Store  | Event Hubs, IoT Hub, Storage Blobs, Azure Data Lake Store  | [Liaisons prises en charge](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Service Bus, files d’attente de stockage, Storage Blobs, Event Hubs, WebHooks, Cosmos DB, fichiers |
 | Récepteurs |  [Sorties Stream Analytics](/azure/stream-analytics/stream-analytics-define-outputs) | HDFS, Kafka, Storage Blobs, Azure Data Lake Store, Cosmos DB | HDFS, Kafka, Storage Blobs, Azure Data Lake Store, Cosmos DB | Event Hubs, Service Bus, Kafka | [Liaisons prises en charge](/azure/azure-functions/functions-triggers-bindings#supported-bindings) | Service Bus, files d’attente de stockage, Storage Blobs, Event Hubs, WebHooks, Cosmos DB, fichiers | 
 
 ### <a name="processing-capabilities"></a>Fonctionnalités de traitement
+
 | | Azure Stream Analytics | HDInsight avec Spark Streaming | Apache Spark dans Azure Databricks | HDInsight avec Storm | Azure Functions | Azure App Service WebJobs |
 | --- | --- | --- | --- | --- | --- | --- | 
 | Prise en charge temporelle/fenêtrage intégrée | OUI | OUI | OUI | OUI | Non  | Non  |
@@ -65,4 +68,4 @@ Voir aussi :
 
 - [Choisir une technologie d’ingestion de messages en temps réel](./real-time-ingestion.md)
 - [Comparaison d’Apache Storm et d’Azure Stream Analytics](/azure/stream-analytics/stream-analytics-comparison-storm)
-- [Traitement en temps réel](../scenarios/real-time-processing.md)
+- [Traitement en temps réel](../big-data/real-time-processing.md)

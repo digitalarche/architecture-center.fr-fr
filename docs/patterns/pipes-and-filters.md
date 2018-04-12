@@ -1,18 +1,18 @@
 ---
 title: Canaux et filtres
-description: "Divisez une tâche qui exécute un traitement complexe en une série d’éléments séparés qui peuvent être réutilisés."
-keywords: "modèle de conception"
+description: Divisez une tâche qui exécute un traitement complexe en une série d’éléments séparés qui peuvent être réutilisés.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - design-implementation
 - messaging
-ms.openlocfilehash: b41f3e46ad5982a3a4ec6635918481cb440c5e02
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 2c17504f594843c10fcfe221f0087f1087a73fb8
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="pipes-and-filters-pattern"></a>Modèle de canaux et de filtres
 
@@ -54,7 +54,7 @@ L’utilisation du modèle de canaux et de filtres conjointement avec le [Modèl
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
 Prenez en compte les points suivants quand vous choisissez comment implémenter ce modèle :
-- **Complexité**. La flexibilité accrue fournie par ce modèle peut également introduire de la complexité, surtout si les filtres dans un pipeline sont répartis sur différents serveurs.
+- **Complexité** : La flexibilité accrue fournie par ce modèle peut également introduire de la complexité, surtout si les filtres dans un pipeline sont répartis sur différents serveurs.
 
 - **Fiabilité**. Utilisez une infrastructure qui permet de s’assurer que la circulation des données entre les filtres dans un pipeline ne sera pas perdue.
 
@@ -68,7 +68,7 @@ Prenez en compte les points suivants quand vous choisissez comment implémenter 
 
 ## <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
 
-Utilisez ce modèle dans les situations suivantes :
+Utilisez ce modèle dans les situations suivantes :
 - Le traitement requis par une application peut facilement être décomposé en un ensemble d’étapes indépendantes.
 
 - Les étapes de traitement réalisées par une application possèdent différentes exigences d’extensibilité.
@@ -86,7 +86,7 @@ Ce modèle peut ne pas avoir d’utilité dans les cas suivants :
 
 - La quantité d’informations de contexte ou d’état requise par une étape rend cette approche inefficace. Il est possible de conserver les informations d’état dans une base de données à la place, mais n’utilisez pas cette stratégie si la charge supplémentaire sur la base de données provoque une contention excessive.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Vous pouvez utiliser une séquence de files d’attente de message pour fournir l’infrastructure requise pour implémenter un pipeline. Une file d’attente de messages initiale reçoit des messages non traités. Un composant implémenté en tant que tâche de filtre attend un message dans cette file d’attente, effectue son travail puis publie le message transformé dans la file d’attente suivante dans la séquence. Une autre tâche de filtre peut attendre les messages dans cette file d’attente, les traiter, poster les résultats dans une autre file d’attente, et ainsi de suite jusqu’à ce que les données intégralement transformées s’affichent dans le message final dans la file d’attente. La figure suivante illustre l’implémentation d’un pipeline à l’aide de files d’attente.
 
@@ -274,9 +274,9 @@ public class FinalReceiverRoleEntry : RoleEntryPoint
 }
 ```
 
-##<a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
+## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
-Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
+Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
 - Un exemple illustrant ce modèle est disponible sur [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/pipes-and-filters).
 - [Modèle des consommateurs concurrents](competing-consumers.md). Un pipeline peut contenir plusieurs instances d’un ou plusieurs filtres. Cette approche est utile pour l’exécution d’instances parallèles de filtres lents, permettant au système de répartir la charge et d’améliorer le débit. Chaque instance d’un filtre est en concurrence avec les autres pour l’entrée, deux instances d’un même filtre ne doivent pas être en mesure de traiter les mêmes données. Fournit une explication de cette approche.
 - [Modèle de consolidation des ressources de calcul](compute-resource-consolidation.md). Il est possible de regrouper les filtres qui doivent être mis à l’échelle ensemble dans le même processus. Fournit plus d’informations sur les avantages et les inconvénients de cette stratégie.

@@ -1,22 +1,22 @@
 ---
-title: "Déployer des appliances virtuelles réseau à haute disponibilité"
-description: "Comment déployer des appliances virtuelles réseau dans un environnement à haute disponibilité."
+title: Déployer des appliances virtuelles réseau à haute disponibilité
+description: Comment déployer des appliances virtuelles réseau dans un environnement à haute disponibilité.
 author: telmosampaio
 ms.date: 12/06/2016
 pnp.series.title: Network DMZ
 pnp.series.prev: secure-vnet-dmz
 cardTitle: Deploy highly available network virtual appliances
-ms.openlocfilehash: 844c87f535d2a8cb415489cb2c8e840f8c585d7d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: fe279eea3f9cb024d6c6c14943013b9b9a87bc9c
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="deploy-highly-available-network-virtual-appliances"></a>Déployer des appliances virtuelles réseau hautement disponibles
 
 Cet article explique comment déployer des appliances virtuelles réseau pour la haute disponibilité dans Azure. Une appliance virtuelle réseau est généralement utilisée pour contrôler le flux de trafic réseau à partir d’un réseau de périmètre, également appelé DMZ, vers d’autres réseaux ou sous-réseaux. Pour en savoir plus sur l’implémentation d’une zone DMZ dans Azure, consultez [Microsoft cloud services and network security][cloud-security] (Services de cloud computing Microsoft et sécurité réseau). L’article inclut des exemples d’architecture pour l’entrée ou la sortie uniquement, et pour les deux à la fois. 
 
-**Conditions préalables :** cet article suppose une connaissance élémentaire de la mise en réseau Azure, des [équilibreurs de charge Azure][lb-overview], et des [itinéraires définis par l’utilisateur] [ udr-overview] (UDRs). 
+<strong>Conditions préalables :</strong> cet article suppose une connaissance élémentaire de la mise en réseau Azure, des [équilibreurs de charge Azure][lb-overview], et des [itinéraires définis par l’utilisateur] [ udr-overview] (UDRs). 
 
 
 ## <a name="architecture-diagrams"></a>Diagrammes architecturaux

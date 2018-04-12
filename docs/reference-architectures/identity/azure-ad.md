@@ -1,17 +1,17 @@
 ---
-title: "Intégrer les domaines AD locaux avec Azure Active Directory"
-description: "Découvrez comment implémenter une architecture réseau hybride sécurisée à l’aide d’Azure Active Directory."
+title: Intégrer les domaines AD locaux avec Azure Active Directory
+description: Découvrez comment implémenter une architecture réseau hybride sécurisée à l’aide d’Azure Active Directory.
 author: telmosampaio
 pnp.series.title: Identity management
 ms.date: 11/28/2016
 pnp.series.next: adds-extend-domain
 pnp.series.prev: ./index
 cardTitle: Integrate on-premises AD with Azure AD
-ms.openlocfilehash: dd4cf0369974ea68d240ed294b1c50972d361d74
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 431de4b2e08c79f70cc9830fda8315e07bf22c64
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="integrate-on-premises-active-directory-domains-with-azure-active-directory"></a>Intégrer des domaines Active Directory locaux avec Azure Active Directory
 
@@ -119,7 +119,7 @@ Pour plus d’informations sur ces topologies, consultez [Topologies pour Azure 
 
 ### <a name="user-authentication"></a>Authentification utilisateur
 
-Par défaut, le serveur de synchronisation Azure AD Connect configure la synchronisation de mot de passe entre le domaine local et Azure AD, et le service Azure AD suppose que les utilisateurs s’authentifient en fournissant le même mot de passe que celui utilisé localement. Cela est adapté à de nombreuses organisations, mais vous devez prendre en considération les stratégies et l’infrastructure existantes de votre organisation. Par exemple :
+Par défaut, le serveur de synchronisation Azure AD Connect configure la synchronisation de mot de passe entre le domaine local et Azure AD, et le service Azure AD suppose que les utilisateurs s’authentifient en fournissant le même mot de passe que celui utilisé localement. Cela est adapté à de nombreuses organisations, mais vous devez prendre en considération les stratégies et l’infrastructure existantes de votre organisation. Par exemple : 
 
 * Il se peut que la stratégie de sécurité de votre organisation empêche la synchronisation des hachages de mot de passe avec le cloud.
 * Vous pouvez avoir besoin que les utilisateurs bénéficient d’une authentification unique (SSO) transparente quand ils accèdent aux ressources cloud à partir de machines jointes au domaine sur le réseau d’entreprise.
@@ -217,7 +217,7 @@ Pour plus d’informations, consultez [Accès conditionnel Azure Active Director
 
 Un déploiement pour une architecture de référence implémentant ces recommandations et considérations est disponible sur GitHub. Cette architecture de référence déploie un réseau local simulé dans Azure que vous pouvez utiliser pour tester et expérimenter différents scénarios. L’architecture de référence peut être déployée avec des machines virtuelles Windows ou Linux en procédant comme suit : 
 
-1. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fidentity%2Fazure-ad%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+1. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fidentity%2Fazure-ad%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 2. Une fois le lien ouvert dans le portail Azure, vous devez entrer des valeurs pour certains paramètres : 
    * Le nom du **groupe de ressources** est déjà défini dans le fichier de paramètres ; sélectionnez **Créer nouveau** et entrez `ra-aad-onpremise-rg` dans la zone de texte.
    * Sélectionnez la région à partir de la zone déroulante **Emplacement**.
@@ -260,7 +260,7 @@ Un déploiement pour une architecture de référence implémentant ces recommand
 [considerations]: ./considerations.md
 [resource-manager-overview]: /azure/azure-resource-manager/resource-group-overview
 [sla-aad]: https://azure.microsoft.com/support/legal/sla/active-directory/v1_0/
-[visio-download]: https://archcenter.azureedge.net/cdn/identity-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/identity-architectures.vsdx
 
 
 [0]: ./images/azure-ad.png "Architecture d’identités cloud utilisant Azure Active Directory"

@@ -1,16 +1,17 @@
 ---
 title: Disjoncteur
-description: "Gérer les erreurs dont la résolution peut prendre un certain temps lors de la connexion à une ressource ou à un service distant."
-keywords: "modèle de conception"
+description: Gérer les erreurs dont la résolution peut prendre un certain temps lors de la connexion à une ressource ou à un service distant.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories: resiliency
-ms.openlocfilehash: ce110d0bbda600575d328895f2feca5aa253479d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+pnp.pattern.categories:
+- resiliency
+ms.openlocfilehash: 0f93c1ef664c8e7385895e3854835699f674ee0e
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="circuit-breaker-pattern"></a>Modèle Disjoncteur
 
@@ -94,7 +95,7 @@ Ce modèle n’est pas recommandé :
 - Pour la gestion de l’accès aux ressources privées locales dans une application, comme la structure de données en mémoire. Dans cet environnement, l’utilisation d’un disjoncteur ajouterait une surcharge à votre système.
 - Comme substitut pour la gestion des exceptions dans la logique métier de vos applications.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Dans une application web, plusieurs pages sont remplies avec des données extraites à partir d’un service externe. Si le système implémente une mise en cache minimale, la plupart des accès à ces pages provoquent un aller-retour vers le service. Les connexions de l’application web au service peuvent être configurées avec un délai d’expiration (en général 60 secondes) et, si le service ne répond pas dans le délai imparti, la logique dans chaque page web considère que le service est indisponible et lève une exception.
 
@@ -212,7 +213,7 @@ Cet exemple utilise aussi un verrou pour empêcher que le disjoncteur n’essaie
         bool lockTaken = false;
         try
         {
-          Monitor.TryEnter(halfOpenSyncObject, ref lockTaken)
+          Monitor.TryEnter(halfOpenSyncObject, ref lockTaken);
           if (lockTaken)
           {
             // Set the circuit breaker state to HalfOpen.

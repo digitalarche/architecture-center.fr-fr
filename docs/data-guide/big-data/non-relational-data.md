@@ -3,17 +3,17 @@ title: Données non relationnelles et NoSQL
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 8dd8f2b9dfef680f99c9c6b32aacf019c13095b0
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 2c284099bd7e8bbb85f1252a24d699d9fca09eae
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="non-relational-data-and-nosql"></a>Données non relationnelles et NoSQL
 
 Une *base de données non relationnelle* est une base de données qui n’utilise pas le schéma tabulaire sous forme de lignes et de colonnes présent dans la plupart des systèmes de base de données plus traditionnels. Au lieu de cela, les bases de données non relationnelles utilisent un modèle de stockage qui est optimisé pour les exigences spécifiques du type des données stockées. Par exemple, les données peuvent être stockées sous forme de paires clé/valeur simples, de documents JSON ou de graphe comprenant des arêtes et des sommets. 
 
-Tous ces magasins de données ont en commun qu’ils n’utilisent pas un [modèle relationnel](./relational-data.md). En outre, ils ont tendance à être plus précis dans le type de données pris en charge et la façon dont les données peuvent être interrogées. Par exemple, les magasins de données de séries chronologiques sont optimisés pour les requêtes sur des séquences de données temporelles, tandis que les magasins de données de graphes sont optimisés pour explorer les relations pondérées entre des entités. Aucun des deux formats n’est adapté à la tâche de gestion des données transactionnelles. 
+Tous ces magasins de données ont en commun qu’ils n’utilisent pas un [modèle relationnel](../relational-data/index.md). En outre, ils ont tendance à être plus précis dans le type de données pris en charge et la façon dont les données peuvent être interrogées. Par exemple, les magasins de données de séries chronologiques sont optimisés pour les requêtes sur des séquences de données temporelles, tandis que les magasins de données de graphes sont optimisés pour explorer les relations pondérées entre des entités. Aucun des deux formats n’est adapté à la tâche de gestion des données transactionnelles. 
 
 Le terme *NoSQL* fait référence à des magasins de données qui n’utilisent pas SQL pour les requêtes et qui, à la place, utilisent d’autres langages de programmation et constructions pour interroger les données. Dans la pratique, « NoSQL » signifie « base de données non relationnelle », même si la plupart de ces bases de données prennent en charge les requêtes SQL compatibles. Toutefois, la stratégie d’exécution de requête sous-jacente est généralement très différente de la façon dont un SGBDR traditionnel exécute la même requête SQL.
 

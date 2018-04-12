@@ -3,11 +3,11 @@ title: Extraire, transformer et charger (ETL)
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: a980c1f8aef99fc263083e5e496b1340204f7dac
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 1879b649fa3dfdf5c00f8ee30e53b83f7139fbf0
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="extract-transform-and-load-etl"></a>Extraire, transformer et charger (ETL)
 
@@ -21,7 +21,7 @@ ETL est un pipeline de données utilisé pour collecter des données provenant d
 
 La transformation des données qui a lieu implique généralement plusieurs opérations, comme le filtrage, le tri, l’agrégation, la jointure des données, le nettoyage des données, la déduplication et la validation des données.
 
-![Processus ETL (Extraire-transformer-charger)](./images/etl.png)
+![Processus ETL (Extraire-transformer-charger)](../images/etl.png)
 
 Souvent, les trois phases ETL sont exécutées en parallèle pour gagner du temps. Par exemple, tandis que les données sont extraites, un processus de transformation peut travailler sur les données déjà reçues et les préparer pour le chargement, et un processus de chargement peut commencer à travailler sur les données préparées, au lieu d’attendre la fin du processus d’extraction complet.
 
@@ -35,7 +35,7 @@ Autres outils :
 
 Extraire, charger et transformer (ELT) diffère du processus ETL uniquement où la transformation a lieu. Dans le pipeline ELT, la transformation se produit dans le magasin de données cible. Au lieu d’utiliser un moteur de transformation distinct, les fonctionnalités de traitement du magasin de données cible sont utilisées pour transformer les données. Cela simplifie l’architecture en supprimant le moteur de transformation du pipeline. Un autre avantage de cette approche est que la montée en puissance du magasin de données cible permet également la montée en puissance des performances du pipeline ELT. Toutefois, ELT fonctionne bien uniquement lorsque le système cible est suffisamment puissant pour transformer les données de manière efficace.
 
-![Processus ELT (Extraire-charger-transformer)](./images/elt.png)
+![Processus ELT (Extraire-charger-transformer)](../images/elt.png)
 
 Les scénarios d’utilisation classiques d’ELT concernent le domaine du Big Data. Par exemple, vous pouvez commencer par extraire toutes les données sources dans des fichiers plats dans un stockage évolutif comme le système de fichiers distribués (HDFS) Hadoop ou Azure Data Lake Store. Les technologies comme Spark, Hive ou PolyBase peuvent ensuite être utilisées pour interroger les données sources. Le point clé avec ELT est que le magasin de données utilisé pour effectuer la transformation est le même magasin de données que celui où les données sont finalement consommées. Ce magasin de données lit directement à partir du stockage évolutif, au lieu de charger les données dans son propre stockage propriétaire. Cette approche ignore l’étape de copie des données présente dans ETL, qui peut être une opération longue pour les jeux de données volumineux.
 
@@ -62,7 +62,7 @@ Dans le contexte de pipelines de données, le flux de contrôle garantit le trai
 
 Les flux de contrôle exécutent les flux de données en tant que tâche. Dans une tâche de flux de données, les données sont extraites d’une source, transformées ou chargées dans un magasin de données. La sortie d’une tâche de flux de données peut correspondre à l’entrée de la prochaine tâche de flux de données et les flux de données peuvent s’exécuter en parallèle. Contrairement aux flux de contrôle, vous ne pouvez pas ajouter de contraintes entre les tâches d’un flux de données. Toutefois, vous pouvez ajouter une visionneuse de données afin d’observer les données lorsqu’elles sont traitées par chaque tâche.
 
-![Flux de données exécuté en tant que tâche dans un flux de contrôle](./images/control-flow-data-flow.png)
+![Flux de données exécuté en tant que tâche dans un flux de contrôle](../images/control-flow-data-flow.png)
 
 Dans le schéma ci-dessus, le flux de contrôle comporte plusieurs tâches, notamment une tâche de flux de données. L’une des tâches est imbriquée dans un conteneur. Les conteneurs peuvent être utilisés pour donner une structure aux tâches, fournissant une unité de travail. La répétition d’éléments dans une collection, comme des fichiers dans un dossier ou des instructions dans une base de données, en est un exemple.
 
@@ -74,7 +74,7 @@ Autres outils :
 
 ## <a name="technology-choices"></a>Choix de technologie
 
-- [Magasins de données de traitement transactionnel en ligne (OLTP)](../technology-choices/oltp-data-stores.md)
-- [Magasins de données de traitement analytique en ligne (OLAP)](../technology-choices/olap-data-stores.md)
-- [Entrepôts de données](../technology-choices/data-warehouses.md)
+- [Magasins de données de traitement transactionnel en ligne (OLTP)](./online-transaction-processing.md#oltp-in-azure)
+- [Magasins de données de traitement analytique en ligne (OLAP)](./online-analytical-processing.md#olap-in-azure)
+- [Entrepôts de données](./data-warehousing.md)
 - [Orchestration de pipeline](../technology-choices/pipeline-orchestration-data-movement.md)

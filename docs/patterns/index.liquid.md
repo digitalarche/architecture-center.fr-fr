@@ -1,12 +1,12 @@
 ---
-title: "Modèles de conception de cloud"
-description: "Modèles de conception de cloud pour Microsoft Azure"
+title: Modèles de conception de cloud
+description: Modèles de conception de cloud pour Microsoft Azure
 keywords: Azure
-ms.openlocfilehash: 264b8296a428f9c1b87314b782efcabc89cf010f
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 4747c896fc6fc5866be782d76c5290d6b49ad451
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="cloud-design-patterns"></a>Modèles de conception de cloud
 
@@ -29,5 +29,7 @@ Chaque modèle décrit le problème traité par le modèle, les aspects à prend
 ## <a name="catalog-of-patterns"></a>Catalogue de modèles
 
 | Modèle | Résumé |
-| ------- | ------- |
+|---------|---------|
+|         |         |
+
 {%- for pattern in patterns %} | [{{ pattern.title }}](./{{ pattern.file }}) | {{ pattern.description }} | {%- endfor %}

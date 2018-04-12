@@ -1,18 +1,18 @@
 ---
-title: "Approvisionnement en événements"
-description: "Utilisez un magasin d’ajout uniquement pour enregistrer la série complète d’événements qui décrivent les actions exécutées sur les données dans un domaine."
-keywords: "modèle de conception"
+title: Approvisionnement en événements
+description: Utilisez un magasin d’ajout uniquement pour enregistrer la série complète d’événements qui décrivent les actions exécutées sur les données dans un domaine.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - performance-scalability
-ms.openlocfilehash: d5d4e99a6ff49cb823f592c83590471c0d68bfd1
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9a0bf170c9b54c3b2ee9cc91d6dcb5c55a13b96a
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="event-sourcing-pattern"></a>Modèle d'approvisionnement en événements
 
@@ -52,17 +52,17 @@ La figure montre une vue d’ensemble du modèle, y compris certaines des option
 
 Le modèle d'approvisionnement en événements offre les avantages suivants :
 
-Les événements sont immuables et peuvent être conservés au moyen d’une opération d’ajout uniquement. L’interface utilisateur, le flux de travail ou le processus qui a déclenché un événement peut continuer, et les tâches qui gèrent les événements peuvent s’exécuter en arrière-plan. Ceci, associé à l’absence de contention lors du traitement des transactions, peut considérablement améliorer les performances et l’évolutivité des applications, surtout pour le niveau de présentation ou l’interface utilisateur.
+- Les événements sont immuables et peuvent être conservés au moyen d’une opération d’ajout uniquement. L’interface utilisateur, le flux de travail ou le processus qui a déclenché un événement peut continuer, et les tâches qui gèrent les événements peuvent s’exécuter en arrière-plan. Ceci, associé à l’absence de contention lors du traitement des transactions, peut considérablement améliorer les performances et l’évolutivité des applications, surtout pour le niveau de présentation ou l’interface utilisateur.
 
-Les événements sont des objets simples qui décrivent certaines actions qui se sont produites, ainsi que toutes les données associées nécessaires pour décrire l’action représentée par l’événement. Les événements ne mettent pas directement à jour un magasin de données. Ils sont simplement enregistrés afin d’être traités au moment opportun. Cela permet de simplifier la mise en œuvre et la gestion.
+- Les événements sont des objets simples qui décrivent certaines actions qui se sont produites, ainsi que toutes les données associées nécessaires pour décrire l’action représentée par l’événement. Les événements ne mettent pas directement à jour un magasin de données. Ils sont simplement enregistrés afin d’être traités au moment opportun. Cela permet de simplifier la mise en œuvre et la gestion.
 
-Les événements ont généralement un sens pour les experts de domaine, tandis que l’[anomalie d’impédance objet-relationnel](https://en.wikipedia.org/wiki/Object-relational_impedance_mismatch) peut rendre difficile à comprendre les tables de base de données complexes. Les tables sont des constructions artificielles qui représentent l’état actuel du système, et non les événements qui se sont produits.
+- Les événements ont généralement un sens pour les experts de domaine, tandis que l’[anomalie d’impédance objet-relationnel](https://en.wikipedia.org/wiki/Object-relational_impedance_mismatch) peut rendre difficile à comprendre les tables de base de données complexes. Les tables sont des constructions artificielles qui représentent l’état actuel du système, et non les événements qui se sont produits.
 
-L’approvisionnement en événements peut permettre d’éviter que les mises à jour simultanées ne provoquent des conflits car cela évite d’avoir mettre à jour directement des objets dans le magasin de données. Toutefois, le modèle de domaine doit toujours être conçu de manière à se protéger lui-même contre les requêtes pouvant entraîner un état incohérent.
+- L’approvisionnement en événements peut permettre d’éviter que les mises à jour simultanées ne provoquent des conflits car cela évite d’avoir mettre à jour directement des objets dans le magasin de données. Toutefois, le modèle de domaine doit toujours être conçu de manière à se protéger lui-même contre les requêtes pouvant entraîner un état incohérent.
 
-Le stockage d’ajout uniquement des événements fournit une piste d’audit pouvant être utilisée pour surveiller les actions effectuées sur un magasin de données, régénérer l’état actuel sous forme de vues matérialisées ou de projections en relisant les événements à tout moment, et vous aider à tester et déboguer le système. En outre, la nécessité d’utiliser des événements de compensation pour annuler les modifications fournit un historique des modifications qui ont été annulées, ce qui ne serait pas possible si le modèle stockait simplement l’état actuel. La liste des événements peut également être utilisée pour analyser les performances applicatives et détecter les tendances de comportement des utilisateurs, ou pour obtenir d’autres informations utiles.
+- Le stockage d’ajout uniquement des événements fournit une piste d’audit pouvant être utilisée pour surveiller les actions effectuées sur un magasin de données, régénérer l’état actuel sous forme de vues matérialisées ou de projections en relisant les événements à tout moment, et vous aider à tester et déboguer le système. En outre, la nécessité d’utiliser des événements de compensation pour annuler les modifications fournit un historique des modifications qui ont été annulées, ce qui ne serait pas possible si le modèle stockait simplement l’état actuel. La liste des événements peut également être utilisée pour analyser les performances applicatives et détecter les tendances de comportement des utilisateurs, ou pour obtenir d’autres informations utiles.
 
-Le magasin d’événements déclenche des événements et les tâches effectuent des opérations en réponse à ces événements. Ce découplage des tâches à partir des événements favorise la flexibilité et l’extensibilité. Les tâches connaissent le type d’événement et ses données, mais pas l’opération qui a déclenché l’événement. En outre, plusieurs tâches peuvent gérer chaque événement. Cela facilite l’intégration avec d’autres services et systèmes qui écoutent uniquement les nouveaux événements déclenchés par le magasin d’événements. Toutefois, les événements d’approvisionnement en événements ont tendance à être à un très bas niveau et il peut être nécessaire de générer à la place des événements d’intégration spécifiques.
+- Le magasin d’événements déclenche des événements et les tâches effectuent des opérations en réponse à ces événements. Ce découplage des tâches à partir des événements favorise la flexibilité et l’extensibilité. Les tâches connaissent le type d’événement et ses données, mais pas l’opération qui a déclenché l’événement. En outre, plusieurs tâches peuvent gérer chaque événement. Cela facilite l’intégration avec d’autres services et systèmes qui écoutent uniquement les nouveaux événements déclenchés par le magasin d’événements. Toutefois, les événements d’approvisionnement en événements ont tendance à être à un très bas niveau et il peut être nécessaire de générer à la place des événements d’intégration spécifiques.
 
 > L’approvisionnement en événements est couramment associé au modèle CQRS en effectuant les tâches de gestion des données en réponse aux événements et en matérialisant les vues à partir des événements stockés.
 
@@ -115,7 +115,7 @@ Ce modèle peut s’avérer inutile dans les situations suivantes :
 
 - Systèmes présentant uniquement un très faible nombre d’occurrences de mises à jour conflictuelles des données sous-jacentes. Par exemple, les systèmes qui ajoutent surtout des données au lieu de les mettre à jour.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Un système de gestion de conférences doit suivre le nombre de réservations effectuées afin de pouvoir vérifier s’il reste des places disponibles lorsqu’un participant potentiel tente d’effectuer une réservation. Le système peut stocker le nombre total de réservations pour une conférence d’au moins deux façons possibles :
 
@@ -150,7 +150,7 @@ En plus d’accroître l’extensibilité, l’utilisation d’un magasin d’é
 
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
-Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
+Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
 
 - [Modèle de séparation des responsabilités en matière de commande et de requête (CQRS)](cqrs.md). Le magasin d’écriture qui fournit la source permanente d’informations relatives à une implémentation CQRS est souvent basé sur une implémentation du modèle d’approvisionnement en événements. Décrit comment séparer les opérations qui lisent les données dans une application des opérations qui mettent à jour les données en utilisant des interfaces distinctes.
 
@@ -158,7 +158,7 @@ Les modèles et les conseils suivants peuvent aussi présenter un intérêt quan
 
 - [Modèle de transaction de compensation](compensating-transaction.md). Les données existantes dans un magasin d’approvisionnement en événements ne sont pas mises à jour. À la place, de nouvelles entrées sont ajoutées pour assurer la transition de l’état des entités vers les nouvelles valeurs. Pour annuler une modification, on utilise les entrées de compensation car il n’est pas possible de simplement annuler la modification précédente. Décrit comment annuler le travail qui a été effectué par une opération précédente.
 
-- [Manuel d’introduction à la cohérence des données](https://msdn.microsoft.com/library/dn589800.aspx). En cas d’utilisation de l’approvisionnement en événements avec un magasin de lecture distinct ou des vues matérialisées, les données de lecture ne sont pas immédiatement cohérentes, mais uniquement cohérentes. Résume les problèmes se rapportant à la conservation de la cohérence des données distribuées.
+- [Data Consistency Primer](https://msdn.microsoft.com/library/dn589800.aspx) (Manuel d’introduction à la cohérence des données). En cas d’utilisation de l’approvisionnement en événements avec un magasin de lecture distinct ou des vues matérialisées, les données de lecture ne sont pas immédiatement cohérentes, mais uniquement cohérentes. Résume les problèmes se rapportant à la conservation de la cohérence des données distribuées.
 
 - [Conseils sur le partitionnement des données](https://msdn.microsoft.com/library/dn589795.aspx). Les données sont souvent partitionnées lorsque vous utilisez l’approvisionnement en événements pour améliorer l’extensibilité, réduire la contention et optimiser les performances. Décrit comment diviser les données en partitions distinctes, et les problèmes pouvant survenir.
 

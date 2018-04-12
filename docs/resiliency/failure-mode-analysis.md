@@ -1,15 +1,15 @@
 ---
-title: "Analyse du mode d’échec"
-description: "Instructions pour effectuer l’analyse du mode d’échec pour les solutions cloud basées sur Azure."
+title: Analyse du mode d’échec
+description: Instructions pour effectuer l’analyse du mode d’échec pour les solutions cloud basées sur Azure.
 author: MikeWasson
 ms.date: 03/24/2017
 ms.custom: resiliency
 pnp.series.title: Design for Resiliency
-ms.openlocfilehash: aca2088cb007728c5717a968969000c0a19bcd07
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: 8786c411249267e502003a90d5f2ff5e4c786803
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="failure-mode-analysis"></a>Analyse du mode d’échec
 [!INCLUDE [header](../_includes/header.md)]
@@ -122,7 +122,7 @@ La stratégie de nouvelles tentatives par défaut utilise une temporisation expo
 ### <a name="web-or-worker-roles-are-unexpectedlybeing-shut-down"></a>Les rôles web ou de travail sont arrêtés de façon inattendue.
 **Détection**. L’événement [RoleEnvironment.Stopping][RoleEnvironment.Stopping] est déclenché.
 
-**Récupération**. Remplacez la méthode [RoleEntryPoint.OnStop][RoleEntryPoint.OnStop] pour nettoyer de manière appropriée. Pour plus d’informations, consultez [La bonne manière de gérer les événements de Azure OnStop][onstop-events] (blog).
+<strong>Récupération</strong>. Remplacez la méthode [RoleEntryPoint.OnStop][RoleEntryPoint.OnStop] pour nettoyer de manière appropriée. Pour plus d’informations, consultez [La bonne manière de gérer les événements de Azure OnStop][onstop-events] (blog).
 
 ## <a name="cosmos-db"></a>Cosmos DB 
 ### <a name="reading-data-fails"></a>Échec de la lecture des données.
@@ -434,7 +434,7 @@ Pour plus d’informations, voir [Vue d’ensemble des files d’attente de lett
 
 **Diagnostics**. Journalisation de tous les échecs d’appel distant.
 
-## <a name="next-steps"></a>étapes suivantes
+## <a name="next-steps"></a>Étapes suivantes
 Pour plus d’informations sur le processus FMA, consultez [Résilience par la conception pour les services de cloud computing][resilience-by-design-pdf] (téléchargement PDF).
 
 <!-- links -->

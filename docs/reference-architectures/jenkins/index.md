@@ -1,13 +1,13 @@
 ---
-title: "Exécuter un serveur Jenkins sur Azure"
-description: "Cette architecture de référence montre comment déployer et utiliser un serveur Jenkins professionnel et évolutif sur Azure sécurisé avec l’authentification unique (SSO)."
+title: Exécuter un serveur Jenkins sur Azure
+description: Cette architecture de référence montre comment déployer et utiliser un serveur Jenkins professionnel et évolutif sur Azure sécurisé avec l’authentification unique (SSO).
 author: njray
 ms.date: 01/21/18
-ms.openlocfilehash: 724185e43ed743013f52ded04b779552dd8e48c1
-ms.sourcegitcommit: 29fbcb1eec44802d2c01b6d3bcf7d7bd0bae65fc
+ms.openlocfilehash: c07a341bbe4d0304087e4535408967c45d36199e
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/27/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Exécuter un serveur Jenkins sur Azure
 
@@ -15,7 +15,7 @@ Cette architecture de référence montre comment déployer et utiliser un serveu
 
 ![Serveur Jenkins s’exécutant sur Azure][0]
 
-*Téléchargez un [fichier Visio](https://arch-center.azureedge.net/cdn/Jenkins-architecture.vsdx) contenant ce diagramme d’architecture.*
+*Téléchargez un [fichier Visio](https://archcenter.blob.core.windows.net/cdn/Jenkins-architecture.vsdx) contenant ce diagramme d’architecture.*
 
 Cette architecture prend en charge la récupération d’urgence avec les services Azure, mais ne couvre pas les scénarios plus avancés de montée en puissance impliquant plusieurs maîtres ou la haute disponibilité (HA) sans temps d’arrêt. Pour des informations générales sur les différents composants Azure, notamment un didacticiel pas à pas sur la création d’un pipeline d’intégration continue/de déploiement continu sur Azure, consultez [Jenkins sur Azure][jenkins-on-azure].
 
@@ -25,30 +25,30 @@ Ce document porte sur les opérations Azure principales nécessaires à la prise
 
 L’architecture est constituée des composants suivants :
 
--   **Groupe de ressources.** Un [groupe de ressources][rg] sert à regrouper des ressources Azure afin de pouvoir les gérer en fonction de la durée de vie, du propriétaire et d’autres critères. Utiliser des groupes de ressources vous permet de déployer et de surveiller les ressources Azure en tant que groupe et de suivre les coûts de facturation par groupe de ressources. Vous pouvez également supprimer des ressources dans un ensemble, ce qui est très utile pour les déploiements de test.
+- **Groupe de ressources.** Un [groupe de ressources][rg] sert à regrouper des ressources Azure afin de pouvoir les gérer en fonction de la durée de vie, du propriétaire et d’autres critères. Utiliser des groupes de ressources vous permet de déployer et de surveiller les ressources Azure en tant que groupe et de suivre les coûts de facturation par groupe de ressources. Vous pouvez également supprimer des ressources dans un ensemble, ce qui est très utile pour les déploiements de test.
 
--   **Serveur Jenkins**. Une machine virtuelle est déployée pour exécuter [Jenkins][azure-market] en tant que serveur Automation et servir en tant que maître Jenkins. Cette architecture de référence utilise le modèle de solution [ pour Jenkins sur Azure][solution], installé sur une machine virtuelle Linux (Ubuntu 16.04 LTS) sur Azure. D’autres offres Jenkins sont disponibles sur la Place de marché Microsoft Azure.
+- **Serveur Jenkins**. Une machine virtuelle est déployée pour exécuter [Jenkins][azure-market] en tant que serveur Automation et servir en tant que maître Jenkins. Cette architecture de référence utilise le modèle de solution [ pour Jenkins sur Azure][solution], installé sur une machine virtuelle Linux (Ubuntu 16.04 LTS) sur Azure. D’autres offres Jenkins sont disponibles sur la Place de marché Microsoft Azure.
 
-    > [!NOTE]
-    > Nginx est installé sur la machine virtuelle en tant que proxy inverse pour Jenkins. Vous pouvez configurer Nginx pour activer SSL pour le serveur Jenkins.
-    > 
-    > 
+  > [!NOTE]
+  > Nginx est installé sur la machine virtuelle en tant que proxy inverse pour Jenkins. Vous pouvez configurer Nginx pour activer SSL pour le serveur Jenkins.
+  > 
+  > 
 
--   **Réseau virtuel**. Un [réseau virtuel][vnet] connecte des ressources Azure entre elles et fournit une isolation logique. Dans cette architecture, le serveur Jenkins s’exécute dans un réseau virtuel.
+- **Réseau virtuel**. Un [réseau virtuel][vnet] connecte des ressources Azure entre elles et fournit une isolation logique. Dans cette architecture, le serveur Jenkins s’exécute dans un réseau virtuel.
 
--   **Sous-réseaux**. Le serveur Jenkins est isolé dans un [sous-réseau][subnet] pour le rendre plus facile à gérer et répartir le trafic réseau sans impact sur les performances.
+- **Sous-réseaux**. Le serveur Jenkins est isolé dans un [sous-réseau][subnet] pour le rendre plus facile à gérer et répartir le trafic réseau sans impact sur les performances.
 
--   **NSG**. Utilisez des [groupes de sécurité réseau][nsg] (NSG) pour limiter le trafic réseau à partir d’Internet vers le sous-réseau d’un réseau virtuel.
+- <strong>NSG</strong>. Utilisez des [groupes de sécurité réseau][nsg] (NSG) pour limiter le trafic réseau à partir d’Internet vers le sous-réseau d’un réseau virtuel.
 
--   **Disques managés**. Un [disque managé][managed-disk] est un disque dur virtuel (VHD) persistant utilisé pour le stockage d’application et également pour maintenir l’état du serveur Jenkins et permettre une récupération d’urgence. Les disques de données sont stockés dans Stockage Azure. Le [stockage Premium][premium] est recommandé pour de hautes performances.
+- **Disques managés**. Un [disque managé][managed-disk] est un disque dur virtuel (VHD) persistant utilisé pour le stockage d’application et également pour maintenir l’état du serveur Jenkins et permettre une récupération d’urgence. Les disques de données sont stockés dans Stockage Azure. Le [stockage Premium][premium] est recommandé pour de hautes performances.
 
--   **Stockage Blob Azure**. Le [plug-in Stockage Microsoft Azure][configure-storage] utilise le stockage Blob Azure pour stocker les artefacts de build qui sont créés et partagés avec d’autres builds Jenkins.
+- **Stockage Blob Azure**. Le [plug-in Stockage Microsoft Azure][configure-storage] utilise le stockage Blob Azure pour stocker les artefacts de build qui sont créés et partagés avec d’autres builds Jenkins.
 
--   **Azure Active Directory (Azure AD)**. [Azure AD][azure-ad] prend en charge l’authentification utilisateur, ce qui vous permet de configurer l’authentification unique. Les [principaux de service][service-principal] Azure AD définissent la stratégie et les autorisations pour chaque autorisation de rôle dans le flux de travail via le [contrôle d’accès en fonction du rôle][rbac] (RBAC). Chaque principal de service est associé à un travail Jenkins.
+- <strong>Azure Active Directory (Azure AD)</strong>. [Azure AD][azure-ad] prend en charge l’authentification utilisateur, ce qui vous permet de configurer l’authentification unique. Les [principaux de service][service-principal] Azure AD définissent la stratégie et les autorisations pour chaque autorisation de rôle dans le flux de travail via le [contrôle d’accès en fonction du rôle][rbac] (RBAC). Chaque principal de service est associé à un travail Jenkins.
 
--   **Azure Key Vault**. Pour gérer les clés secrètes et de chiffrement utilisées pour configurer les ressources Azure lorsque les secrets sont requis, cette architecture utilise [Key Vault][key-vault]. Pour obtenir de l’aide supplémentaire concernant le stockage des secrets associés à l’application dans le pipeline, consultez également le plug-in pour Jenkins [Informations d’identification Azure][configure-credential].
+- **Azure Key Vault**. Pour gérer les clés secrètes et de chiffrement utilisées pour configurer les ressources Azure lorsque les secrets sont requis, cette architecture utilise [Key Vault][key-vault]. Pour obtenir de l’aide supplémentaire concernant le stockage des secrets associés à l’application dans le pipeline, consultez également le plug-in pour Jenkins [Informations d’identification Azure][configure-credential].
 
--   **Services de surveillance Azure**. Ce service [analyse][monitor] la machine virtuelle Azure hébergeant Jenkins. Ce déploiement surveille l’état de la machine virtuelle et l’utilisation de l’UC et envoie des alertes.
+- **Services de surveillance Azure**. Ce service [analyse][monitor] la machine virtuelle Azure hébergeant Jenkins. Ce déploiement surveille l’état de la machine virtuelle et l’utilisation de l’UC et envoie des alertes.
 
 ## <a name="recommendations"></a>Recommandations
 
@@ -119,7 +119,7 @@ La sélection d’un serveur de taille appropriée dépend de la taille de la ch
 
 -   L’objectif de point de récupération (RPO) indique la quantité de données que vous pouvez vous permettre de perdre si une interruption de service affecte Jenkins.
 
-Dans la pratique, le RTO et le RPO impliquent la redondance et la sauvegarde. La disponibilité n’est pas une question de récupération du matériel, qui fait partie d’Azure, mais plutôt de maintien à jour de l’état de votre serveur Jenkins. Cette architecture de référence utilise le [contrat de niveau de service Azure][sla] (SLA), qui garantit la durée de fonctionnement à 99,9 % pour une seule machine virtuelle. Si ce contrat de niveau de service (SLA) ne répond pas à vos exigences de durée de fonctionnement, assurez-vous de disposer d’un plan de récupération d’urgence, ou envisagez l’utilisation d’un déploiement de [serveur Jenkins multimaître][multi-master] (non traitée dans ce document).
+Dans la pratique, le RTO et le RPO impliquent la redondance et la sauvegarde. La disponibilité n’est pas une question de récupération du matériel, qui fait partie d’Azure, mais plutôt de maintien à jour de l’état de votre serveur Jenkins. Cette architecture de référence utilise le [contrat de niveau de service Azure][sla] (SLA), qui garantit la durée de fonctionnement à 99,9 % pour une seule machine virtuelle. Si ce contrat de niveau de service (SLA) ne répond pas à vos exigences de durée de fonctionnement, assurez vous de disposer d’un plan de récupération d’urgence, ou envisagez l’utilisation d’un déploiement de [serveur Jenkins multimaître][multi-master] (non traitée dans ce document).
 
 Envisagez l’utilisation des [scripts][disaster] de récupération d’urgence à l’étape 7 du déploiement pour créer un compte de stockage Azure avec des disques managés pour stocker l’état du serveur Jenkins. Si Jenkins tombe en panne, il peut être restauré à l’état stocké dans ce compte de stockage distinct.
 
@@ -167,7 +167,8 @@ Pour plus de meilleures pratiques de la communauté Jenkins, visitez [meilleures
 
 Pour déployer cette architecture, suivez les étapes ci-dessous pour installer le [modèle de solution pour Jenkins sur Azure][azure-market], puis installez les scripts de récupération d’urgence et de surveillance dans les étapes ci-dessous.
 
-### <a name="prerequisites"></a>configuration requise
+### <a name="prerequisites"></a>Prérequis
+
 
 - Cette architecture de référence requiert un abonnement Azure. 
 - Pour créer un principal de service Azure, vous devez disposer des droits d’administrateur pour le locataire Azure AD qui est associé au serveur Jenkins déployé.

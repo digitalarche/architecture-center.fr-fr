@@ -1,15 +1,16 @@
 ---
-title: "Haute disponibilité des applications Azure"
-description: "Présentation technique et informations détaillées sur la conception et le développement d’applications pour la haute disponibilité sur Microsoft Azure."
+title: Haute disponibilité des applications Azure
+description: Présentation technique et informations détaillées sur la conception et le développement d’applications pour la haute disponibilité sur Microsoft Azure.
 author: adamglick
 ms.date: 05/31/2017
-ms.openlocfilehash: 46b7b802326a8de03546528aaeb1a1c6419d41db
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: f116b9e64f1722b5141ae90239d5c8a8b4a89487
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 [!INCLUDE [header](../_includes/header.md)]
+
 # <a name="high-availability-for-applications-built-on-microsoft-azure"></a>Haute disponibilité pour les applications développées sur Microsoft Azure
 Une application hautement disponible absorbe les variations de disponibilité, de charge et les défaillances temporaires de services dépendants et de matériel. L’application continue à fonctionner de manière acceptable, tel que défini par les besoins de votre entreprise ou les contrats de niveau de service de l’application.
 
@@ -36,14 +37,14 @@ Bien qu’Azure offre de nombreuses fonctionnalités qui prennent en charge la h
 
 * Pour le calcul, Azure garantit que vos rôles sont disponibles et opérationnels, mais il ne peut pas détecter si votre application est exécutée ou surchargée.
 * Pour Azure SQL Database, les données sont répliquées de manière synchrone au sein de la région. Vous pouvez choisir la géoréplication active, qui autorise jusqu’à quatre copies supplémentaires de base de données dans la même région (ou différentes régions). Bien que ces réplicas de base de données ne soient pas des sauvegardes à un point dans le temps, SQL Database fournit des fonctionnalités de sauvegarde à un point dans le temps. Pour plus d’informations, consultez [Récupérer une base de données Azure SQL à l’aide de sauvegardes de données automatisées : restauration à un point dans le temps](/azure/sql-database/sql-database-recovery-using-backups#point-in-time-restore).
-* Pour Stockage Azure, les données de tables et les données des objets blob sont répliquées par défaut dans une autre région. Toutefois, vous ne pouvez pas accéder aux réplicas avant que Microsoft ne décide de basculer sur l’autre site. Un basculement de région se produit uniquement pendant l’interruption de service prolongée à l’échelle de la région, et il n’existe aucun contrat de niveau de service dédié au temps de basculement géographique. Il est également important de noter que les altérations de données se propagent rapidement entre les réplicas. Pour ces raisons, vous devez compléter les fonctionnalités de disponibilité de plateforme avec des fonctionnalités de disponibilité spécifiques à l’application, notamment la fonctionnalité de capture instantanée d’objet blob pour créer des sauvegardes de données blob à un point dans le temps.
+* Pour Stockage Azure, les données de tables et les données des objets blob sont répliquées par défaut dans une autre région. Toutefois, vous ne pouvez pas accéder aux réplicas avant que Microsoft ne décide de basculer sur l’autre site. Un basculement de région se produit uniquement pendant l’interruption de service prolongée à l’échelle de la région, et il n’existe aucun contrat de niveau de service dédié au temps de basculement géographique. Il est également important de noter que les corruptions de données se propagent rapidement entre les réplicas. Pour ces raisons, vous devez compléter les fonctionnalités de disponibilité de plateforme avec des fonctionnalités de disponibilité spécifiques à l’application, notamment la fonctionnalité de capture instantanée d’objet blob pour créer des sauvegardes de données blob à un point dans le temps.
 
-### <a name="availability-sets-for-azure-virtual-machines"></a>Groupes à haute disponibilité pour Machines virtuelles Azure
-Ce document est principalement axé sur les services cloud qui utilisent un modèle Platform as a Service (PaaS). Il existe également des fonctions de disponibilité spécifiques pour Machines virtuelles Azure qui utilisent un modèle Infrastructure as a Service (IaaS). Pour atteindre une haute disponibilité avec Machines virtuelles, vous devez utiliser des groupes à haute disponibilité, qui remplissent une fonction similaire pour les domaines d’erreur et de mise à niveau. Au sein d’un groupe à haute disponibilité, Azure positionne les machines virtuelles de manière à ce que les défaillances matérielles localisées et les activités de maintenance ne provoquent pas la panne de toutes les machines de ce groupe. Des groupes à haute disponibilité sont requis pour respecter les contrats de niveau de service dédiés à la disponibilité de Machines virtuelles.
+### <a name="availability-sets-for-azure-virtual-machines"></a>Groupes à haute disponibilité pour Azure Virtual Machines
+Ce document est principalement axé sur les services cloud qui utilisent un modèle Platform as a Service (PaaS). Il existe également des fonctions de disponibilité spécifiques pour Machines virtuelles Azure qui utilisent un modèle Infrastructure as a Service (IaaS). Pour atteindre une haute disponibilité avec Machines virtuelles, vous devez utiliser des groupes à haute disponibilité, qui remplissent une fonction similaire pour les domaines d’erreur et de mise à niveau. Au sein d’un groupe à haute disponibilité, Azure positionne les machines virtuelles de manière à ce que les défaillances matérielles localisées et les activités de maintenance ne provoquent pas la panne de toutes les machines de ce groupe. Des groupes à haute disponibilité sont requis pour respecter les contrats de niveau de service dédiés à la disponibilité de Virtual Machines.
 
 Le diagramme suivant montre deux groupes à haute disponibilité pour les machines virtuelles web et SQL Server, respectivement.
 
-![Groupes à haute disponibilité pour Machines virtuelles Azure](./images/high-availability-azure-applications/availability-set-for-azure-virtual-machines.png)
+![Groupes à haute disponibilité pour Azure Virtual Machines](./images/high-availability-azure-applications/availability-set-for-azure-virtual-machines.png)
 
 > [!NOTE]
 > Dans le diagramme précédent, SQL Server est installé et exécuté sur des machines virtuelles. Cette configuration est différente d’Azure SQL Database, dans laquelle la base de données est fournie en tant que service géré.
@@ -103,11 +104,11 @@ Le rôle Web est autonome du reste de l’infrastructure. Son profil de disponib
 Le diagramme précédent représente une implémentation de cette approche dissociée des données transactionnelles. Il existe de nombreuses autres implémentations possibles. La liste suivante vous propose quelques alternatives :
 
 * Un rôle de travail peut être placé entre le rôle web et la file d’attente de stockage.
-* Une file d’attente Service Bus peut remplacer une file d’attente de stockage Azure.
-* La destination finale peut être Stockage Azure ou un autre fournisseur de base de données.
+* Une file d’attente Service Bus peut remplacer une file d’attente Azure Storage.
+* La destination finale peut être Azure Storage ou un fournisseur différent de base de données.
 * La fonctionnalité Azure Cache peut être utilisée au niveau de la couche Web pour prendre en charge les besoins immédiats de mise en cache après la transaction.
 
-### <a name="scalability-patterns"></a>Modèles de scalabilité
+### <a name="scalability-patterns"></a>Modèles d’extensibilité
 Il est important de noter que la scalabilité d’un service cloud affecte directement la disponibilité. Si l’accroissement de la charge affecte la réactivité de votre service, l’utilisateur a l’impression que l’application est en panne. Suivez des pratiques de scalabilité éprouvées en fonction des prévisions de charge de votre application et des besoins futurs. L’optimisation de la mise à l’échelle implique de nombreuses questions : faut-il utiliser un ou plusieurs comptes de stockage ? Comment se déroule le partage entre plusieurs bases de données ? Quelles stratégies de mise en cache implémenter ? Pour obtenir des informations détaillées sur ces modèles, consultez [Best practices for designing large-scale services on Microsoft Azure](https://azure.microsoft.com/blog/best-practices-for-designing-large-scale-services-on-windows-azure/) (Bonnes pratiques pour concevoir des services à grande échelle sur Microsoft Azure).
 
 ## <a name="next-steps"></a>Étapes suivantes

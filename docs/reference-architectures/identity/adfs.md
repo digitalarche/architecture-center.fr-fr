@@ -1,16 +1,19 @@
 ---
-title: "Implémentation des services de fédération Active Directory (AD FS) dans Azure"
-description: "Comment implémenter une architecture réseau hybride sécurisée avec l’autorisation de service de fédération Active Directory dans Azure.\nconseils, passerelle vpn, expressroute, équilibreur de charge, réseau virtuel, active directory"
+title: Implémentation des services de fédération Active Directory (AD FS) dans Azure
+description: >-
+  Comment implémenter une architecture réseau hybride sécurisée avec l’autorisation de service de fédération Active Directory dans Azure.
+
+  conseils, passerelle vpn, expressroute, équilibreur de charge, réseau virtuel, active directory
 author: telmosampaio
 ms.date: 11/28/2016
 pnp.series.title: Identity management
 pnp.series.prev: adds-forest
 cardTitle: Extend AD FS to Azure
-ms.openlocfilehash: b8c9ae0621c087c68d449dd13e60046104c01513
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: 87489b7b81cf323c221466c539ee14ea90e23c14
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="extend-active-directory-federation-services-ad-fs-to-azure"></a>Étendre les services de fédération Active Directory (AD FS) dans Azure
 
@@ -247,7 +250,7 @@ Vous disposez d’une solution sur [GitHub][github] pour déployer cette archite
 
 5. Redémarrez le serveur de rebond (*ra-adfs-mgmt-vm1* dans le groupe *ra-adfs-security-rg*) pour activer ses paramètres DNS.
 
-6. [Récupérez un certificat SSL pour AD FS][adfs_certificates] et installez ce certificat sur les machines virtuelles AD FS. Notez que vous pouvez vous y connecter via le serveur de rebond. Les adresses IP sont *10.0.5.4* et *10.0.5.5*. Le nom d’utilisateur par défaut est *contoso\testuser*, et le mot de passe est *AweSome@PW*.
+6. [Récupérez un certificat SSL pour AD FS][adfs_certificates] et installez ce certificat sur les machines virtuelles AD FS. Notez que vous pouvez vous y connecter via le serveur de rebond. Les adresses IP sont <em>10.0.5.4</em> et <em>10.0.5.5</em>. Le nom d’utilisateur par défaut est <em>contoso\testuser</em>, et le mot de passe est <em>AweSome@PW</em>.
    
    > [!NOTE]
    > À ce stade, les commentaires dans le script Deploy-ReferenceArchitecture.ps1 fournissent des instructions détaillées pour créer une autorité et un certificat de test auto-signé à l’aide de la commande `makecert`. Toutefois, effectuez uniquement ces étapes dans le cadre d’un **test** et n’utilisez pas les certificats générés par MakeCert dans un environnement de production.
@@ -260,7 +263,7 @@ Vous disposez d’une solution sur [GitHub][github] pour déployer cette archite
     .\Deploy-ReferenceArchitecture.ps1 <subscription id> <location> Adfs
     ``` 
 
-8. Sur le serveur de rebond, accédez à `https://adfs.contoso.com/adfs/ls/idpinitiatedsignon.htm` pour tester l’installation AD FS (vous pouvez recevoir un avertissement de certificat que vous pouvez ignorer dans le cadre de ce test). Vérifiez que la page de connexion Contoso Corporation s’affiche. Connectez-vous avec le nom d’utilisateur *contoso\testuser* et le mot de passe *AweS0me@PW*.
+8. Sur le serveur de rebond, accédez à `https://adfs.contoso.com/adfs/ls/idpinitiatedsignon.htm` pour tester l’installation AD FS (vous pouvez recevoir un avertissement de certificat que vous pouvez ignorer dans le cadre de ce test). Vérifiez que la page de connexion Contoso Corporation s’affiche. Connectez-vous avec le nom d’utilisateur <em>contoso\testuser</em> et le mot de passe <em>AweS0me@PW</em>.
 
 9. Installez le certificat SSL sur les machines virtuelles proxy AD FS. Les adresses IP sont *10.0.6.4* et *10.0.6.5*.
 
@@ -280,7 +283,7 @@ Vous disposez d’une solution sur [GitHub][github] pour déployer cette archite
 
 13. Suivez les instructions qui s’affichent dans le script pour tester la configuration complète des serveurs proxy.
 
-## <a name="next-steps"></a>étapes suivantes
+## <a name="next-steps"></a>Étapes suivantes
 
 * En savoir plus sur [Azure Active Directory][aad].
 * En savoir plus sur [Azure Active Directory B2C][aadb2c].
@@ -319,5 +322,5 @@ Vous disposez d’une solution sur [GitHub][github] pour déployer cette archite
 [github]: https://github.com/mspnp/reference-architectures/tree/master/identity/adfs
 [adfs_certificates]: https://technet.microsoft.com/library/dn781428(v=ws.11).aspx
 [considerations]: ./considerations.md
-[visio-download]: https://archcenter.azureedge.net/cdn/identity-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/identity-architectures.vsdx
 [0]: ./images/adfs.png "Architecture réseau hybride sécurisée avec Active Directory"

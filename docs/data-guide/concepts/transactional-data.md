@@ -1,13 +1,13 @@
 ---
-title: "Données transactionnelles"
-description: 
+title: Données transactionnelles
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 ms.openlocfilehash: b7fdbb403d2a438ebc59e40ef58ed8067489dddc
-ms.sourcegitcommit: 943e671a8d522cef5ddc8c6e04848134b03c2de4
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/05/2018
+ms.lasthandoff: 03/31/2018
 ---
 # <a name="transactional-data"></a>Données transactionnelles
 
@@ -25,7 +25,7 @@ L’architecture de déploiement la plus courante utilisant des données transac
 
 Les données transactionnelles ont tendance à présenter les caractéristiques suivantes :
 
-| Prérequis | DESCRIPTION |
+| Prérequis | Description |
 | --- | --- |
 | Normalisation | Très normalisées |
 | Schéma | Schéma lors de l’écriture, fortement appliqué|

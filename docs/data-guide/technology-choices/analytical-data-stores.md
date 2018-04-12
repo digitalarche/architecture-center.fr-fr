@@ -1,19 +1,19 @@
 ---
-title: "Sélectionner un magasin de données analytique"
-description: 
+title: Sélectionner un magasin de données analytique
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: b2e5e63982d4b89b95cd28e596d3b882a4a2263e
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: cdc32c16e30aec5e1c0cb6959182215f99d56b56
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="choosing-an-analytical-data-store-in-azure"></a>Sélectionner un magasin de données analytique dans Azure
 
-Une architecture [Big Data](../concepts/big-data.md) nécessite souvent un magasin de données analytique qui fournit les données traitées dans un format structuré qui peut être interrogé à l’aide des outils d’analyse. Les magasins de données analytiques prenant en charge l’interrogation des données provenant d’un chemin relatif et d’un chemin à froid sont collectivement appelés couche service ou stockage de service des données.
+Une architecture [Big Data](../big-data/index.md) nécessite souvent un magasin de données analytique qui fournit les données traitées dans un format structuré qui peut être interrogé à l’aide des outils d’analyse. Les magasins de données analytiques prenant en charge l’interrogation des données provenant d’un chemin relatif et d’un chemin à froid sont collectivement appelés couche service ou stockage de service des données.
 
-La couche service gère les données traitées à partir du chemin réactif et du chemin à froid. Dans l[’architecture lambda](../concepts/big-data.md#lambda-architecture), la couche service est divisée en une couche de _service vitesse_, qui stocke les données qui ont été traitées de façon incrémentielle, et en une couche de _service par lots_, contenant la sortie traitée par lots. La couche service requiert une prise en charge des lectures aléatoires à faible latence. Le stockage des données de la couche vitesse doit également prendre en charge les écritures aléatoires, car le chargement par lots des données dans ce magasin entraînerait des délais indésirables. En revanche, le stockage des données de la couche de traitement par lots n’a pas besoin de prendre en charge les écritures aléatoires, mais plutôt les écritures par lots.
+La couche service gère les données traitées à partir du chemin réactif et du chemin à froid. Dans l[’architecture lambda](../big-data/index.md#lambda-architecture), la couche service est divisée en une couche de _service vitesse_, qui stocke les données qui ont été traitées de façon incrémentielle, et en une couche de _service par lots_, contenant la sortie traitée par lots. La couche service requiert une prise en charge des lectures aléatoires à faible latence. Le stockage des données de la couche vitesse doit également prendre en charge les écritures aléatoires, car le chargement par lots des données dans ce magasin entraînerait des délais indésirables. En revanche, le stockage des données de la couche de traitement par lots n’a pas besoin de prendre en charge les écritures aléatoires, mais plutôt les écritures par lots.
 
 Il n’existe pas de choix optimal pour la gestion des données de toutes les tâches de stockage de données. Chaque solution de gestion des données est optimisée pour différentes tâches. La plupart des applications cloud du monde réel et des processus Big Data dépendent de diverses exigences en matière de stockage de données, et utilisent souvent une combinaison de solutions de stockage de données.
 
@@ -54,35 +54,35 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 | | Base de données SQL | SQL Data Warehouse | HBase/Phoenix sur HDInsight | Hive LLAP sur HDInsight | Azure Analysis Services | Cosmos DB |
 | --- | --- | --- | --- | --- | --- | --- |
-| Un service managé | OUI | OUI | Oui <sup>1</sup> | Oui <sup>1</sup> | OUI | OUI |
+| Est un service géré | OUI | OUI | Oui <sup>1</sup> | Oui <sup>1</sup> | OUI | OUI |
 | Modèle de base de données primaire | Relationnel (format en colonnes lors de l’utilisation des index columnstore) | Tables relationnelles avec stockage en colonnes | Stockage de colonnes larges | Hive/In-Memory | Modèles sémantiques MOLAP/tabulaires | Stockage de documents, graphiques, stockage de clé-valeur, stockage de colonnes larges |
 | Prise en charge du langage SQL | OUI | OUI | Oui (à l’aide du pilote JDBC [Phoenix](http://phoenix.apache.org/)) | OUI | Non  | OUI |
 | Optimisé pour la couche de service vitesse | Oui <sup>2</sup> | Non  | OUI | OUI | Non  | OUI |
 
-[1] Avec configuration manuelle et mise à l’échelle.
+[1] Avec mise à l’échelle et configuration manuelles.
 
 [2] Avec un hachage et des tables à mémoire optimisée ou des index non cluster.
  
-### <a name="scalability-capabilities"></a>Fonctionnalités d’extensibilité
+### <a name="scalability-capabilities"></a>Fonctionnalités d’évolutivité
 
-| | Base de données SQL | SQL Data Warehouse | HBase/Phoenix sur HDInsight | Hive LLAP sur HDInsight | Azure Analysis Services | Cosmos DB |
-| --- | --- | --- | --- | --- | --- | --- |
-| Serveurs régionaux redondants pour une haute disponibilité  | OUI | OUI | OUI | Non  | Non  | OUI | OUI |
-| Prend en charge l’augmentation de la taille des instances de la requête  | Non  | OUI | OUI | OUI | OUI | OUI |
-| Évolutivité dynamique (monter en puissance)  | OUI | OUI | Non  | Non  | OUI | OUI |
-| Prend en charge la mise en cache en mémoire des données  | OUI | OUI | Non  | OUI | OUI | Non  |
+|                                                  | Base de données SQL | SQL Data Warehouse | HBase/Phoenix sur HDInsight | Hive LLAP sur HDInsight | Azure Analysis Services | Cosmos DB |
+|--------------------------------------------------|--------------|--------------------|----------------------------|------------------------|-------------------------|-----------|
+| Serveurs régionaux redondants pour assurer une haute disponibilité |     OUI      |        OUI         |            OUI             |           Non            |           Non             |    OUI    |
+|             Prend en charge l’augmentation de la taille des instances de la requête             |      Non       |        OUI         |            OUI             |          OUI           |           OUI           |    OUI    |
+|          Évolutivité dynamique (montée en puissance)          |     OUI      |        OUI         |             Non              |           Non            |           OUI           |    OUI    |
+|        Prend en charge la mise en cache en mémoire des données        |     OUI      |        OUI         |             Non              |          OUI           |           OUI           |    Non      |
 
 ### <a name="security-capabilities"></a>Fonctionnalités de sécurité
 
 | | Base de données SQL | SQL Data Warehouse | HBase/Phoenix sur HDInsight | Hive LLAP sur HDInsight | Azure Analysis Services | Cosmos DB |
 | --- | --- | --- | --- | --- | --- | --- |
-| Authentification  | SQL / Azure Active Directory (Azure AD) | SQL / Azure AD | local / Azure AD <sup>1</sup> | local / Azure AD <sup>1</sup> | Azure AD | utilisateurs de base de données / Azure AD via un contrôle d’accès (IAM) |
+| Authentification  | SQL / Azure Active Directory (Azure AD) | SQL / Azure AD | local / Azure AD<sup>1</sup> | local / Azure AD <sup>1</sup> | Azure AD | utilisateurs de base de données / Azure AD via un contrôle d’accès (IAM) |
 | Chiffrement des données au repos | Oui <sup>2</sup> | Oui <sup>2</sup> | Oui <sup>1</sup> | Oui <sup>1</sup> | OUI | OUI |
 | Sécurité au niveau des lignes | OUI | Non  | Oui <sup>1</sup> | Oui <sup>1</sup> | Oui (via la sécurité au niveau de l’objet dans le modèle) | Non  |
 | Prend en charge les pare-feu | OUI | OUI | Oui <sup>3</sup> | Oui <sup>3</sup> | OUI | OUI |
 | Masquage des données dynamiques | OUI | Non  | Oui <sup>1</sup> | Oui * | Non  | Non  |
 
-[1] Nécessite un [cluster HDInsight joint à un domaine](/azure/hdinsight/domain-joined/apache-domain-joined-introduction).
+[1] Suppose d’utiliser un [cluster HDInsight joint à un domaine](/azure/hdinsight/domain-joined/apache-domain-joined-introduction).
 
 [2] Nécessite l’utilisation du chiffrement transparent des données (TDE) pour chiffrer et déchiffrer vos données au repos.
 

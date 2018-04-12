@@ -1,22 +1,53 @@
 ---
-title: Choisir un entrepôt de données
+title: Entreposage de données et mini-Data Warehouses
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 9cb3d4d0196b02da76d85c7f7f0e4a2a69d531e9
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 552cdfad2d571c93f83bc1e4ff0d09ac12d0b6a4
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/06/2018
 ---
-# <a name="choosing-a-data-warehouse-in-azure"></a>Choisir un entrepôt de données dans Azure
+# <a name="data-warehousing-and-data-marts"></a>Entreposage de données et mini-Data Warehouses
 
-Un entrepôt de données est un référentiel central, organisationnel et relationnel de données intégrées provenant d’une ou de plusieurs sources hétérogènes. Cette rubrique compare les choix possibles d’entrepôts de données dans Azure.
+Un entrepôt de données est un référentiel central, organisationnel et relationnel de données intégrées provenant d’une ou de plusieurs sources hétérogènes, à travers de nombreuses ou toutes les zones de sujet. Les entrepôts de données stockent des données d’historique et actuelles, et permettent de créer des rapports et d’analyser des données de différentes façons.
 
-> [!NOTE]
-> Pour savoir quand utiliser un entrepôt de données, consultez la page [Entreposage de données et mini-Data Warehouse](../scenarios/data-warehousing.md).
+![Entreposage de données dans Azure](../images/data-warehousing.png)
 
-## <a name="what-are-your-options-when-choosing-a-data-warehouse"></a>Quels sont les choix qui s’offrent à vous en matière de magasin de données ?
+Les données à déplacer dans un entrepôt de données sont régulièrement extraites de différentes sources qui contiennent d’importantes informations d’entreprise. Durant leur déplacement, les données peuvent être mises en forme, nettoyées, validées, synthétisées et réorganisées. Elles peuvent également être stockées avec le plus bas niveau de détail, avec des vues agrégées fournies dans l’entrepôt pour la création de rapports. Dans tous les cas, l’entrepôt de données devient un espace de stockage permanent pour les données utilisées pour la création de rapports, l’analyse et la prise d’importantes décisions commerciales à l’aide d’outils de Business Intelligence (BI).
+
+## <a name="data-marts-and-operational-data-stores"></a>Mini-Data Warehouses et magasins de données opérationnels
+
+La gestion des données à l’échelle est complexe, et disposer d’un entrepôt de données unique qui représente l’ensemble des données au sein de toute l’entreprise est une pratique de moins en moins courante. À la place, les organisations créent des entrepôts de données plus petits et plus spécifiques, appelés *mini-Data Warehouses*, qui exposent les données souhaitées à des fins d’analyse. Un processus d’orchestration renseigne les mini-Data Warehouses à partir des données conservées dans un magasin de données opérationnel. Le magasin de données opérationnel agit en tant qu’intermédiaire entre le système transactionnel source et le mini-Data Warehouse. Les données gérées par le magasin de données opérationnel sont une version nettoyée des données présentes dans le système transactionnel source, et représentent généralement un sous-ensemble des données d’historique gérées par l’entrepôt de données ou le mini-Data Warehouse. 
+
+## <a name="when-to-use-this-solution"></a>Quand utiliser cette solution ?
+
+Optez pour un entrepôt de données si vous avez besoin de convertir un grand nombre de données de systèmes d’exploitation dans un format actuel, précis et facile à comprendre. Les entrepôts de données ne doivent pas forcément suivre la même structure de données laconique que vous pouvez utiliser dans vos bases de données opérationnelles/OLTP. Vous pouvez utiliser des noms de colonne pertinents pour les utilisateurs professionnels et les analystes, restructurer le schéma pour simplifier les relations entre les données, et consolider plusieurs tables en une seule. Ces étapes guident les utilisateurs qui ont besoin de créer des rapports ad hoc, ou de créer des rapports et d’analyser les données dans des systèmes de BI, sans l’aide d’un administrateur de base de données (DBA) ou d’un développeur de données.
+
+Vous pouvez utiliser un entrepôt de données si vous avez besoin de conserver vos données d’historique dans un emplacement autre que les systèmes transactionnels sources pour des raisons de performances. Les entrepôts de données facilitent l’accès aux données d’historique à partir de plusieurs emplacements, en fournissant un emplacement centralisé utilisant des formats, des clés, des méthodes d’accès et des modèles de données courants.
+
+L’accès en lecture des entrepôts de données est optimisé, ce qui accélère la génération de rapports en comparaison avec l’exécution de rapports via le système transactionnel source. Les entrepôts de données présentent en outre les avantages suivants :
+
+* Toutes les données d’historique provenant de différentes sources peuvent être stockées et sont accessibles à partir d’un entrepôt de données en tant que source de vérité unique.
+* Vous pouvez améliorer la qualité des données en les nettoyant au cours de leur importation dans l’entrepôt de données, afin de disposer de données plus précises, ainsi que de descriptions et codes cohérents.
+* Les outils de création de rapports ne sont pas comparables aux systèmes transactionnels sources pour ce qui est des cycles de traitement des requêtes. Un entrepôt de données permet au système transactionnel de se centrer principalement sur la gestion des écritures, tandis que l’entrepôt lui-même répond à la plupart des demandes de lecture.
+* Un entrepôt de données peut aider à consolider des données provenant de différents logiciels.
+* Les outils d’exploration de données peuvent vous aider à rechercher des modèles masqués à l’aide de méthodologies automatiques appliquées aux données stockées dans votre entrepôt.
+* Les entrepôts de données facilitent la mise en place d’un accès sécurisé aux utilisateurs autorisés, tout en limitant l’accès aux autres utilisateurs. Il n’est pas nécessaire d’accorder aux utilisateurs professionnels l’accès aux données sources, ce qui élimine un vecteur d’attaque potentiel par rapport à un ou plusieurs systèmes transactionnels de production.
+* Les entrepôts de données facilitent la création de solutions de Business Intelligence applicables aux données, telles que les [cubes OLAP](online-analytical-processing.md).
+
+## <a name="challenges"></a>Défis
+
+La configuration correcte d’un entrepôt de données en fonction des besoins de votre entreprise peut présenter les difficultés suivantes :
+
+* Consacrer le temps nécessaire à la définition correcte des concepts de votre entreprise : il s’agit d’une étape importante, car les entrepôts de données sont axés sur les informations, où le reste du projet dépend du mappage des concepts. Cela implique la normalisation des termes et formats professionnels courants (tels que les devises et les dates) et la restructuration du schéma qui soit pertinente pour les utilisateurs professionnels, mais qui garantisse toujours l’exactitude des relations et agrégats de données.
+* Planifier et configurer l’orchestration de vos données : ces étapes doivent notamment prendre en compte la façon dont les données doivent être copiées du système transactionnel source vers l’entrepôt de données, et le moment auquel les données d’historique doivent être déplacées de vos magasins de données opérationnels vers l’entrepôt.
+* Préserver ou améliorer la qualité des données en les nettoyant au cours de leur importation dans l’entrepôt.
+
+## <a name="data-warehousing-in-azure"></a>Entreposage de données dans Azure
+
+Dans Azure, vous pouvez avoir une ou plusieurs sources de données, provenant de transactions de clients ou de diverses applications métier utilisées par différents services. Ces données sont généralement stockées dans une ou plusieurs bases de données [OLTP](online-transaction-processing.md). Les données peuvent être persistantes dans d’autres supports de stockage tels que des partages réseau, des objets blob de stockage Azure ou un Data Lake. Elles peuvent également être stockées dans l’entrepôt de données lui-même ou dans une base de données relationnelle comme Azure SQL Database. L’objectif de la couche du magasin de données analytique est de satisfaire les requêtes émises par les outils d’analyse et de création de rapports au niveau de l’entrepôt de données ou du mini-Data Warehouse. Dans Azure, cette fonctionnalité de magasin analytique est disponible avec Azure SQL Data Warehouse, ou avec HDInsight Azure à l’aide d’une requête Hive ou interactive. Vous avez également besoin d’un certain niveau d’orchestration pour déplacer ou copier régulièrement des données du stockage de données vers l’entrepôt de données, ce qui peut être effectué à l’aide d’Azure Data Factory ou d’Oozie sur Azure HDInsight.
 
 Il existe plusieurs façons d’implémenter un entrepôt de données dans Azure, en fonction des besoins. Les listes suivantes sont divisées en deux catégories, [multitraitement symétrique](https://en.wikipedia.org/wiki/Symmetric_multiprocessing) (SMP) et [traitement massivement parallèle](https://en.wikipedia.org/wiki/Massively_parallel) (MPP). 
 
@@ -31,7 +62,7 @@ MPP :
 - [Apache Hive sur HDInsight](/azure/hdinsight/hadoop/hdinsight-use-hive)
 - [Interactive Query (Hive LLAP) sur HDInsight](/azure/hdinsight/interactive-query/apache-interactive-query-get-started)
 
-En règle générale, les entrepôts SMP sont idéaux pour les jeux de données de taille petite ou moyenne (jusqu'à 4-100 To), tandis que les entrepôts MPP sont souvent utilisés pour le Big Data. La frontière entre le Big Data et les volumes petits/moyens de données est en partie liée à la définition et à l’infrastructure sous-jacente de votre organisation. (Voir [Choisir un magasin de données OLTP](oltp-data-stores.md#scalability-capabilities).) 
+En règle générale, les entrepôts SMP sont idéaux pour les jeux de données de taille petite ou moyenne (jusqu'à 4-100 To), tandis que les entrepôts MPP sont souvent utilisés pour le Big Data. La frontière entre le Big Data et les volumes petits/moyens de données est en partie liée à la définition et à l’infrastructure sous-jacente de votre organisation. (Voir [Choisir un magasin de données OLTP](online-transaction-processing.md#scalability-capabilities).) 
 
 Au-delà de la taille des données, le type de modèle de charge de travail a toutes les chances d’être un facteur plus déterminant. Par exemple, les requêtes complexes risquent d’être trop lentes pour une solution SMP et d’exiger plutôt une solution MPP. Les systèmes MPP sont susceptibles d’imposer une pénalité de performances aux données de petite taille, en raison de la façon dont les tâches sont distribuées et consolidées sur les différents nœuds. Si vos données dépassent déjà 1 To et qu’elles seront amenées à croître en permanence, envisagez une solution MPP. Toutefois, si elles sont de plus petite taille, mais que vos charges de travail dépassent les ressources disponibles de votre solution SMP, le meilleur choix reste peut-être là aussi un système MPP.
 
@@ -60,7 +91,7 @@ Pour restreindre les choix, commencez par répondre aux questions suivantes :
 
 - Dans le cas d’un jeu de données volumineux, la source de données est-elle structurée ou non structurée ? Le traitement des données non structurées doit parfois s’effectuer dans un environnement Big Data comme Spark sur HDInsight, Azure Databricks, Hive LLAP sur HDInsight ou Azure Data Lake Analytics. Tous ces outils peuvent servir de moteurs ELT (extraction, chargement, transformation) et ETL (extraction, transformation, chargement). À partir des données traitées, ils peuvent produire des données structurées, plus faciles à charger dans SQL Data Warehouse ou les autres solutions. Pour les données structurées, SQL Data Warehouse a un niveau de performances nommé Optimisé pour le calcul, adapté aux charges de travail nécessitant de nombreuses ressources de calcul et des performances extrêmement élevées.
 
-- Souhaitez-vous séparer vos données historiques de vos données opérationnelles actuelles ? Si oui, sélectionnez l’une des solutions pour lesquelles [l’orchestration](pipeline-orchestration-data-movement.md) est requise. Ces sont des entrepôts autonomes optimisés pour un accès en lecture intensif et idéaux comme magasins de données historiques distincts.
+- Souhaitez-vous séparer vos données historiques de vos données opérationnelles actuelles ? Si oui, sélectionnez l’une des solutions pour lesquelles [l’orchestration](../technology-choices/pipeline-orchestration-data-movement.md) est requise. Ces sont des entrepôts autonomes optimisés pour un accès en lecture intensif et idéaux comme magasins de données historiques distincts.
 
 - Avez-vous besoin d’intégrer des données provenant de plusieurs sources, au-delà de votre magasin de données OLTP ? Si oui, choisissez des solutions qui intègrent facilement plusieurs sources de données. 
 
@@ -118,15 +149,15 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 
 ### <a name="security-capabilities"></a>Fonctionnalités de sécurité
 
-| | Base de données SQL Azure | SQL Server dans une machine virtuelle | SQL Data Warehouse | Apache Hive sur HDInsight | Hive LLAP sur HDInsight |
-| --- | --- | --- | --- | --- | --- | -- |
-| Authentification  | SQL / Azure Active Directory (Azure AD) | SQL / Azure AD / Active Directory | SQL / Azure AD | local / Azure AD<sup>1</sup> | local / Azure AD <sup>1</sup> |
-| Authorization  | OUI | OUI | OUI | OUI | Oui <sup>1</sup> | Oui <sup>1</sup> |
-| Audit  | OUI | OUI | OUI | OUI | Oui <sup>1</sup> | Oui <sup>1</sup> |
-| Chiffrement des données au repos | Oui <sup>2</sup> | Oui<sup>2</sup> | Oui<sup>2</sup> | Oui <sup>2</sup> | Oui <sup>1</sup> | Oui <sup>1</sup> |
-| Sécurité au niveau des lignes | OUI | OUI | OUI | Non  | Oui <sup>1</sup> | Oui<sup>1</sup> |
-| Prend en charge les pare-feu | OUI | OUI | OUI | OUI | Oui <sup>3</sup> | Oui <sup>3</sup> |
-| Masquage des données dynamiques | OUI | OUI | OUI | Non  | Oui <sup>1</sup> | Oui<sup>1</sup> |
+|                         |           Base de données SQL Azure            |  SQL Server dans une machine virtuelle  | SQL Data Warehouse |   Apache Hive sur HDInsight    |    Hive LLAP sur HDInsight     |
+|-------------------------|-----------------------------------------|-----------------------------------|--------------------|-------------------------------|-------------------------------|
+|     Authentification      | SQL / Azure Active Directory (Azure AD) | SQL / Azure AD / Active Directory |   SQL / Azure AD   | local / Azure AD<sup>1</sup> | local / Azure AD <sup>1</sup> |
+|      Authorization      |                   OUI                   |                OUI                |        OUI         |              OUI              |       Oui <sup>1</sup>        |
+|        Audit         |                   OUI                   |                OUI                |        OUI         |              OUI              |       Oui <sup>1</sup>        |
+| Chiffrement des données au repos |            Oui <sup>2</sup>             |         Oui<sup>2</sup>          |  Oui<sup>2</sup>  |       Oui <sup>2</sup>        |       Oui <sup>1</sup>        |
+|   Sécurité au niveau des lignes    |                   OUI                   |                OUI                |        OUI         |              Non                |       Oui <sup>1</sup>        |
+|   Prend en charge les pare-feu    |                   OUI                   |                OUI                |        OUI         |              OUI              |       Oui <sup>3</sup>        |
+|  Masquage des données dynamiques   |                   OUI                   |                OUI                |        OUI         |              Non                |       Oui <sup>1</sup>        |
 
 [1] Suppose d’utiliser un [cluster HDInsight joint à un domaine](/azure/hdinsight/domain-joined/apache-domain-joined-introduction).
 

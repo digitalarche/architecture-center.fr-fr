@@ -1,13 +1,13 @@
 ---
-title: "Exécution de l’application Surveys"
-description: "Comment exécuter l’exemple d’application Surveys localement"
+title: Exécution de l’application Surveys
+description: Comment exécuter l’exemple d’application Surveys localement
 author: MikeWasson
 ms:date: 07/21/2017
-ms.openlocfilehash: d17cd939c1172edd0947b30ea13657806060b5f1
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 28d976374e5d6dbad434873eef149704f26a1f3f
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-the-surveys-application"></a>Exécution de l’application Surveys
 
@@ -22,7 +22,8 @@ Voici un résumé des étapes :
 5. Exécutez l’application et inscrivez un nouveau locataire.
 6. Ajoutez des rôles d’application aux utilisateurs.
 
-## <a name="prerequisites"></a>Composants requis
+## <a name="prerequisites"></a>Prérequis
+
 -   [Visual Studio 2017][VS2017]
 -   Compte [Microsoft Azure](https://azure.microsoft.com)
 
@@ -52,15 +53,15 @@ Pour réaliser le scénario de bout en bout, vous aurez besoin d’un second ann
 
 3. Cliquez sur **Inscription d’applications** > **Nouvelle inscription d’application**.
 
-4.  Dans le panneau **Créer**, entrez les informations suivantes :
+4. Dans le panneau **Créer**, entrez les informations suivantes :
 
-  - **Nom** : `Surveys.WebAPI`
+   - **Nom** : `Surveys.WebAPI`
 
-  - **Type d’application** : `Web app / API`
+   - **Type d’application** : `Web app / API`
 
-  - **URL d’authentification** : `https://localhost:44301/`
+   - **URL d’authentification** : `https://localhost:44301/`
    
-  ![](./images/running-the-app/register-web-api.png) 
+   ![](./images/running-the-app/register-web-api.png) 
 
 5. Cliquez sur **Créer**.
 
@@ -78,15 +79,15 @@ Pour réaliser le scénario de bout en bout, vous aurez besoin d’un second ann
 
 ## <a name="register-the-surveys-web-app"></a>Inscrire l’application web Surveys 
 
-1.  Revenez au panneau **Inscriptions des applications**, puis cliquez sur **Nouvelle inscription d’application**.
+1. Revenez au panneau **Inscriptions des applications**, puis cliquez sur **Nouvelle inscription d’application**.
 
-2.  Dans le panneau **Créer**, entrez les informations suivantes :
+2. Dans le panneau **Créer**, entrez les informations suivantes :
 
-  - **Nom** : `Surveys`
-  - **Type d’application** : `Web app / API`
-  - **URL d’authentification** : `https://localhost:44300/`
+   - **Nom** : `Surveys`
+   - **Type d’application** : `Web app / API`
+   - **URL d’authentification** : `https://localhost:44300/`
    
-    Notez que l’URL d’authentification a un numéro de port différent de celui de l’application `Surveys.WebAPI` à l’étape précédente.
+   Notez que l’URL d’authentification a un numéro de port différent de celui de l’application `Surveys.WebAPI` à l’étape précédente.
 
 3. Cliquez sur **Créer**.
  
@@ -150,36 +151,36 @@ Pour réaliser le scénario de bout en bout, vous aurez besoin d’un second ann
 
     ![](./images/running-the-app/manifest.png)
  
-3.  Ajoutez le code JSON suivant à l’élément `appRoles`. Générez de nouveaux GUID pour les propriétés `id`.
+3. Ajoutez le code JSON suivant à l’élément `appRoles`. Générez de nouveaux GUID pour les propriétés `id`.
 
-    ```json
-    {
-      "allowedMemberTypes": ["User"],
-      "description": "Creators can create surveys",
-      "displayName": "SurveyCreator",
-      "id": "<Generate a new GUID. Example: 1b4f816e-5eaf-48b9-8613-7923830595ad>",
-      "isEnabled": true,
-      "value": "SurveyCreator"
-    },
-    {
-      "allowedMemberTypes": ["User"],
-      "description": "Administrators can manage the surveys in their tenant",
-      "displayName": "SurveyAdmin",
-      "id": "<Generate a new GUID>",  
-      "isEnabled": true,
-      "value": "SurveyAdmin"
-    }
-    ```
+   ```json
+   {
+     "allowedMemberTypes": ["User"],
+     "description": "Creators can create surveys",
+     "displayName": "SurveyCreator",
+     "id": "<Generate a new GUID. Example: 1b4f816e-5eaf-48b9-8613-7923830595ad>",
+     "isEnabled": true,
+     "value": "SurveyCreator"
+   },
+   {
+     "allowedMemberTypes": ["User"],
+     "description": "Administrators can manage the surveys in their tenant",
+     "displayName": "SurveyAdmin",
+     "id": "<Generate a new GUID>",  
+     "isEnabled": true,
+     "value": "SurveyAdmin"
+   }
+   ```
 
-5.  Dans la propriété `knownClientApplications`, ajoutez l’ID de l’application web Surveys, que vous avez obtenu lors de l’inscription de l’application Surveys précédemment. Par exemple :
+4. Dans la propriété `knownClientApplications`, ajoutez l’ID de l’application web Surveys, que vous avez obtenu lors de l’inscription de l’application Surveys précédemment. Par exemple : 
 
-  ```json
-  "knownClientApplications": ["be2cea23-aa0e-4e98-8b21-2963d494912e"],
-  ```
+   ```json
+   "knownClientApplications": ["be2cea23-aa0e-4e98-8b21-2963d494912e"],
+   ```
 
-  Ce paramètre ajoute l’application Surveys à la liste des clients autorisés à appeler l’API web.
+   Ce paramètre ajoute l’application Surveys à la liste des clients autorisés à appeler l’API web.
 
-6.  Cliquez sur **Enregistrer**.
+5. Cliquez sur **Enregistrer**.
 
 À présent, répétez les mêmes étapes pour l’application Surveys, mais n’ajoutez pas d’entrée pour `knownClientApplications`. Utilisez les mêmes définitions de rôle, mais générez de nouveaux GUID pour les ID.
 
@@ -251,7 +252,7 @@ Pour plus d’informations sur la création d’un cache Redis, voir [Utilisatio
 
 2.  Accédez au projet Tailspin.Surveys.Data.
 
-3.  Exécutez la commande suivante :
+3.  Exécutez la commande suivante :
 
     ```
     dotnet ef database update --startup-project ..\Tailspin.Surveys.Web

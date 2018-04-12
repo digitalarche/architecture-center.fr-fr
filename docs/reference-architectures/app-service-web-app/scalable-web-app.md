@@ -1,17 +1,17 @@
 ---
 title: Application web scalable
-description: "Amélioration de la scalabilité dans une application web s’exécutant dans Microsoft Azure."
+description: Amélioration de la scalabilité dans une application web s’exécutant dans Microsoft Azure.
 author: MikeWasson
 pnp.series.title: Azure App Service
 pnp.series.prev: basic-web-app
 pnp.series.next: multi-region-web-app
 ms.date: 11/23/2016
 cardTitle: Improve scalability
-ms.openlocfilehash: 4ad12fb041a79fcb706530c9968fd0f96211d7f9
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: 6459acebfa25491332e2118b9e8fe51d5fc79ff3
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="improve-scalability-in-a-web-application"></a>Améliorer la scalabilité dans une application web
 
@@ -30,7 +30,7 @@ Cette architecture repose sur celle décrite dans l’article [Application web d
 * **Tâche web**. Utilisez des [tâches web Azure][webjobs] pour exécuter des tâches longues en arrière-plan. Les tâches web peuvent s’exécuter selon une planification, en continu ou en réponse à un déclencheur, tel que le placement d’un message dans une file d’attente. Une tâche web s’exécute en tant que processus en arrière-plan dans le contexte d’une application App Service.
 * **File d’attente**. Dans l’architecture illustrée ici, l’application met en file d’attente des tâches exécutées en arrière-plan en plaçant un message dans la file d’attente [Stockage File d’attente Azure][queue-storage]. Le message déclenche une fonction dans la tâche web. Vous pouvez également utiliser des files d’attente Service Bus. Pour obtenir une comparaison, consultez [Files d’attente Azure et files d’attente Service Bus : comparaison et différences][queues-compared].
 * **Cache**. Stockez les données semi-statiques dans [Cache Redis Azure][azure-redis].  
-* **CDN**. Utilisez [Azure Content Delivery Network][azure-cdn] (CDN) pour mettre en cache le contenu disponible publiquement afin de réduire la latence et d’accélérer la remise du contenu.
+* <strong>CDN</strong>. Utilisez [Azure Content Delivery Network][azure-cdn] (CDN) pour mettre en cache le contenu disponible publiquement afin de réduire la latence et d’accélérer la remise du contenu.
 * **Stockage des données**. Utilisez [Azure SQL Database][sql-db] pour les données relationnelles. Pour les données non relationnelles, envisagez un magasin NoSQL, tel que [Cosmos DB][cosmosdb].
 * **Recherche Azure**. Utilisez [Recherche Azure][azure-search] pour ajouter des fonctionnalités de recherche telles que les suggestions de recherche, la recherche partielle et la recherche spécifique à une langue. Recherche Azure est généralement utilisé conjointement avec un autre magasin de données, surtout si le magasin de données principal requiert la cohérence stricte. Dans cette approche, stockez les données faisant autorité dans l’autre magasin de données et l’index de recherche dans Recherche Azure. Recherche Azure peut également servir à consolider un index de recherche unique à partir de plusieurs magasins de données.  
 * **E-mail/SMS**. Utilisez un service tiers tel que SendGrid ou Twilio pour envoyer des e-mails ou SMS au lieu de générer cette fonctionnalité directement dans l’application.
@@ -77,7 +77,7 @@ Pour plus d’informations, consultez [Aide relative au réseau de distribution 
 ### <a name="storage"></a>Stockage
 Les applications modernes traitent souvent de grandes quantités de données. Afin de trouver une bonne adaptation pour le cloud, il est important de choisir le type de stockage adéquat. Voici quelques recommandations de base : 
 
-| Éléments à stocker | exemples | Stockage recommandé |
+| Éléments à stocker | Exemples | Stockage recommandé |
 | --- | --- | --- |
 | Fichiers |Images, documents, fichiers PDF |un stockage Azure Blob |
 | Paires clé/valeur |Données de profil utilisateur recherchées par ID d’utilisateur |Stockage de tables Azure |
@@ -148,7 +148,7 @@ Utilisez [Transparent Data Encryption][sql-encryption] si vous avez besoin de ch
 [sql-elastic]: /azure/sql-database/sql-database-elastic-scale-introduction
 [sql-encryption]: https://msdn.microsoft.com/library/dn948096.aspx
 [tm]: https://azure.microsoft.com/services/traffic-manager/
-[visio-download]: https://archcenter.azureedge.net/cdn/app-service-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/app-service-reference-architectures.vsdx
 [web-app-multi-region]: ./multi-region.md
 [webjobs-guidance]: ../../best-practices/background-jobs.md
 [webjobs]: /azure/app-service/app-service-webjobs-readme

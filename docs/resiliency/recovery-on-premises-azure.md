@@ -1,15 +1,16 @@
 ---
-title: "Guide technique : récupération de l’environnement local vers Azure"
-description: "Cet article permet de comprendre et concevoir des systèmes de récupération de l’infrastructure locale vers Azure"
+title: 'Guide technique : récupération de l’environnement local vers Azure'
+description: Cet article permet de comprendre et concevoir des systèmes de récupération de l’infrastructure locale vers Azure
 author: adamglick
 ms.date: 08/18/2016
-ms.openlocfilehash: f5ce86dbd605fa7dc74e6a7cc97f0d6c6acd79e5
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 6992e27d148074b3d60c282318741f45974d1afd
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 [!INCLUDE [header](../_includes/header.md)]
+
 # <a name="azure-resiliency-technical-guidance-recovery-from-on-premises-to-azure"></a>Guide technique de la résilience Azure : récupération de l’environnement local vers Azure
 Azure offre un ensemble complet de services conçus pour étendre un centre de données local vers Azure afin de faciliter la récupération d’urgence et de garantir une haute disponibilité :
 
@@ -18,7 +19,7 @@ Azure offre un ensemble complet de services conçus pour étendre un centre de d
 * **Stockage** : StorSimple étend votre système de fichiers à Azure Storage. Le service Azure Backup assure la sauvegarde des fichiers et des bases de données SQL dans Azure Storage.
 * **Réplication de base de données** : grâce aux groupes de disponibilité SQL Server 2014 (ou version ultérieure), vous pouvez garantir la haute disponibilité et la récupération d’urgence de vos données locales.
 
-## <a name="networking"></a>Réseau
+## <a name="networking"></a>Mise en réseau
 Vous pouvez utiliser le réseau virtuel Azure pour créer une section isolée logiquement dans Azure et la connecter en toute sécurité à votre centre de données local ou à un seul ordinateur client à l’aide d’une connexion IPsec. Grâce au réseau virtuel, vous pouvez tirer parti de l’infrastructure évolutive et à la demande d’Azure tout en assurant la connectivité aux données et aux applications locales, y compris aux systèmes s’exécutant sur Windows Server, les ordinateurs centraux et les systèmes UNIX. Pour plus d’informations, consultez la [documentation réseau d’Azure](/azure/virtual-network/virtual-networks-overview/) .
 
 ## <a name="compute"></a>Calcul
@@ -33,7 +34,7 @@ Pour utiliser Azure comme site de sauvegarde pour les données locales, vous dis
 ### <a name="storsimple"></a>StorSimple
 StorSimple intègre le stockage cloud en toute sécurité et en toute transparence pour les applications locales. Il propose également une appliance unique conçue pour garantir un stockage en local et dans le cloud hiérarchisé et performant, tout en offrant des fonctions d’archivage dynamique, de protection des données dans le cloud et de récupération d’urgence. Pour plus d’informations, consultez la [page produit StorSimple](https://azure.microsoft.com/services/storsimple/).
 
-### <a name="azure-backup"></a>Azure Backup
+### <a name="azure-backup"></a>Sauvegarde Azure
 Azure Backup exécute des sauvegardes dans le cloud à l’aide des outils de sauvegarde classiques de Windows Server 2012 (ou version ultérieure), de Windows Server 2012 Essentials (ou version ultérieure) et de System Center 2012 Data Protection Manager (ou version ultérieure). Ces outils établissent pour la gestion des sauvegarde un workflow totalement indépendant de l’emplacement de stockage des sauvegardes, qu’il s’agisse d’un disque local ou d’Azure Storage. Une fois les données sauvegardées dans le cloud, les utilisateurs autorisés peuvent facilement restaurer les sauvegardes sur un serveur.
 
 Avec les sauvegardes incrémentielles, seules les modifications des fichiers sont transférées dans le cloud. Cela permet d’utiliser efficacement le stockage, de réduire la consommation de bande passante et d’assurer une récupération à tout moment des différentes versions des données. Vous pouvez également choisir d’utiliser des fonctionnalités supplémentaires, telles que les stratégies de rétention des données, la compression des données et la limitation du transfert de données. L’utilisation d’Azure comme emplacement de sauvegarde a l’avantage d’offrir des sauvegardes qui sont automatiquement exécutées « hors site ». Cette approche vous évite d’avoir à sécuriser et protéger vos supports de sauvegarde sur site.
@@ -62,7 +63,7 @@ Vous pouvez enfin sauvegarder une base de données locale directement dans Azure
 Pour plus d’informations, consultez [Haute disponibilité et récupération d’urgence pour SQL Server sur des machines virtuelles Azure](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr/) et [Sauvegarde et restauration de SQL Server dans les machines virtuelles Azure](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-backup-recovery/).
 
 ## <a name="checklists-for-on-premises-recovery-in-microsoft-azure"></a>Listes de vérification pour la récupération des données locales dans Microsoft Azure
-### <a name="networking"></a>Réseau
+### <a name="networking"></a>Mise en réseau
 1. Consultez la section Mise en réseau de ce document.
 2. Utilisez un réseau virtuel pour connecter en toute sécurité votre environnement local au cloud.
 
@@ -70,7 +71,7 @@ Pour plus d’informations, consultez [Haute disponibilité et récupération d�
 1. Consultez la section Calcul de ce document.
 2. Déplacez des machines virtuelles entre Hyper-V et Azure.
 
-### <a name="storage"></a>Storage
+### <a name="storage"></a>Stockage
 1. Consultez la section Stockage de ce document.
 2. Utilisez les services StorSimple pour tirer parti du stockage cloud.
 3. Utilisez le service Azure Backup.

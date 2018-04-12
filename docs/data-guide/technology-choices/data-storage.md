@@ -1,13 +1,13 @@
 ---
-title: "Sélectionner une technologie de stockage de données"
-description: 
+title: Sélectionner une technologie de stockage de données
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: d8f831e758ddc8604758392644a68b56dc51cf57
-ms.sourcegitcommit: 475064f0a3c2fac23e1286ba159aaded287eec86
+ms.openlocfilehash: b14611a2dc34bcb145cf420441795d4124e7baeb
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/19/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="choosing-a-big-data-storage-technology-in-azure"></a>Sélectionner une technologie de stockage de Big Data dans Azure
 
@@ -109,12 +109,13 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 ### <a name="nosql-database-capabilities"></a>Fonctionnalités de base de données NoSQL
 
-| | Azure Cosmos DB | HBase sur HDInsight |
-| --- | --- | --- |
-| Modèle de base de données primaire | Stockage de documents, graphiques, stockage de valeurs clés, stockage de colonnes larges | Stockage de colonnes larges |
-| Index secondaires | OUI | Non  |
-| Prise en charge du langage SQL | OUI | Oui (à l’aide du pilote JDBC [Phoenix](http://phoenix.apache.org/)) |
-| Cohérence | Fort, Obsolescence limitée, Session, Préfixe cohérent et Éventuel | Remarque |
-| Intégration native à Azure Functions | [Oui](/azure/cosmos-db/serverless-computing-database) | Non  |
-| Distribution mondiale automatique | [Oui](/azure/cosmos-db/distribute-data-globally) | Aucune [réplication de cluster HBase ne peut être configurée ](/azure/hdinsight/hbase/apache-hbase-replication) dans les régions avec une cohérence éventuelle |
-| Modèle de tarification | Unités de requête (RU) avec mise à l’échelle élastique facturées par seconde en fonction des besoins, stockage avec mise à l’échelle élastique | Prix par minute du cluster HDInsight (mise à l’échelle horizontale des nœuds), stockage |
+|                                    |                                           Azure Cosmos DB                                           |                                                             HBase sur HDInsight                                                             |
+|------------------------------------|-----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+|       Modèle de base de données primaire       |                      Stockage de documents, graphiques, stockage de valeurs clés, stockage de colonnes larges                      |                                                             Stockage de colonnes larges                                                              |
+|         Index secondaires          |                                                 OUI                                                 |                                                                     Non                                                                      |
+|        Prise en charge du langage SQL        |                                                 OUI                                                 |                                     Oui (à l’aide du pilote JDBC [Phoenix](http://phoenix.apache.org/))                                      |
+|            Cohérence             |                   Fort, Obsolescence limitée, Session, Préfixe cohérent et Éventuel                   |                                                                   Remarque                                                                   |
+| Intégration native à Azure Functions |                        [Oui](/azure/cosmos-db/serverless-computing-database)                        |                                                                     Non                                                                      |
+|   Distribution mondiale automatique    |                          [Oui](/azure/cosmos-db/distribute-data-globally)                           | Aucune [réplication de cluster HBase ne peut être configurée ](/azure/hdinsight/hbase/apache-hbase-replication) dans les régions avec une cohérence éventuelle |
+|           Modèle de tarification            | Unités de requête (RU) avec mise à l’échelle élastique facturées par seconde en fonction des besoins, stockage avec mise à l’échelle élastique |                              Prix par minute du cluster HDInsight (mise à l’échelle horizontale des nœuds), stockage                               |
+

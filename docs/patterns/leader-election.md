@@ -1,18 +1,18 @@
 ---
-title: "Élection du responsable"
-description: "Coordonnez les actions effectuées par un ensemble d’instances de tâche de collaboration dans une application distribuée en élisant l’instance responsable qui sera chargée de gérer les autres instances."
-keywords: "modèle de conception"
+title: Élection du responsable
+description: Coordonnez les actions effectuées par un ensemble d’instances de tâche de collaboration dans une application distribuée en élisant l’instance responsable qui sera chargée de gérer les autres instances.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - design-implementation
 - resiliency
-ms.openlocfilehash: ddb61097ed3229ed0ed517b94c280d3ef892c999
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 3e7d47f70f660f2507f0619e1c41bf9a32a25be4
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="leader-election-pattern"></a>Modèle d’élection du responsable
 
@@ -26,7 +26,7 @@ Une application cloud type a de nombreuses tâches simultanées à coordonner. C
 
 Si les instances de tâche s’exécutent la plupart du temps séparément, il peut aussi s’avérer nécessaire de coordonner leurs actions individuelles pour éviter les conflits, la contention pour des ressources partagées ou des interférences inopinées avec le travail effectué par d’autres instances de tâche.
 
-Par exemple :
+Par exemple : 
 
 - Dans un système cloud qui implémente une mise à l’échelle horizontale, plusieurs instances d’une même tâche peuvent s’exécuter en même temps, chaque instance servant un utilisateur différent. Si ces instances écrivent dans une ressource partagée, il est nécessaire de coordonner leurs actions pour éviter que chaque instance remplace les modifications apportées par les autres.
 - Si les tâches effectuent chacune en parallèle une partie d’un calcul complexe, les résultats doivent être agrégés une fois que toutes les tâches sont terminées.
@@ -65,14 +65,14 @@ Ce modèle peut ne pas avoir d’utilité dans les cas suivants :
 - La coordination entre les tâches peut être accomplie en utilisant une méthode plus légère. Par exemple, si plusieurs instances de tâche ont simplement besoin d’un accès coordonné à une ressource partagée, une meilleure solution est d’utiliser le verrouillage optimiste ou pessimiste pour contrôler l’accès.
 - Une solution tierce est plus appropriée. Par exemple, le service Microsoft Azure HDInsight (basé sur Apache Hadoop) utilise les services fournis par Apache Zookeeper pour coordonner le mappage et réduire les tâches qui collectent et synthétisent les données.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Le projet DistributedMutex de la solution LeaderElection (un exemple illustrant ce modèle est disponible sur [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/leader-election)) montre comment utiliser un bail sur un objet blob Stockage Microsoft Azure pour fournir un mécanisme permettant d’implémenter un mutex partagé et distribué. Ce mutex peut être utilisé pour élire un responsable parmi un groupe d’instances de rôle dans un service cloud Azure. La première instance de rôle à acquérir le bail est élue responsable et le reste jusqu’à ce qu’elle libère le bail ou qu’elle ne puisse pas le renouveler. Les autres instances de rôle peuvent continuer à surveiller le bail de l’objet blob si le responsable n’est plus disponible.
 
 >  Un bail d’objet blob est un verrou d’écriture exclusif sur un objet blob. Un même objet blob peut être l’objet d’un seul bail à un instant donné. Une instance de rôle peut demander un bail sur un objet blob spécifié, qui lui sera accordé si aucune autre instance de rôle ne détient un bail sur le même objet blob. Dans le cas contraire, la demande lèvera une exception.
-
+> 
 > Pour éviter qu’une instance de rôle en échec conserve le bail indéfiniment, spécifiez une durée de vie pour le bail. Une fois arrivé à expiration, le bail deviendra disponible. Cependant, une instance de rôle peut demander à ce que le bail qu’elle détient lui soit renouvelé. Il lui est alors accordé pour une période supplémentaire. L’instance de rôle peut répéter continuellement ce processus si elle souhaite conserver le bail.
-Pour plus d’informations sur la façon de louer un objet blob, consultez [Louer un objet blob (API REST)](https://msdn.microsoft.com/library/azure/ee691972.aspx).
+> Pour plus d’informations sur la façon de louer un objet blob, consultez [Louer un objet blob (API REST)](https://msdn.microsoft.com/library/azure/ee691972.aspx).
 
 La classe `BlobDistributedMutex` dans l’exemple C# suivant contient la méthode `RunTaskWhenMutexAquired` qui permet à une instance de rôle de tenter d’acquérir un bail sur un objet blob spécifié. Les détails de l’objet blob (nom, conteneur et compte de stockage) sont passés au constructeur dans un objet `BlobSettings` au moment où l’objet `BlobDistributedMutex` est créé (cet objet est un struct simple qui est inclus dans l’exemple de code). Le constructeur accepte aussi un `Task` qui fait référence au code que doit exécuter l’instance de rôle si elle réussit à acquérir le bail sur l’objet blob et est élue responsable. Notez que le code qui gère les détails de bas niveau de l’acquisition du bail est implémenté dans une classe d’assistance distincte nommée `BlobLeaseManager`.
 
@@ -194,7 +194,7 @@ Notez les points suivants à propos de l’exemple de solution :
 
 Les recommandations suivantes peuvent aussi s’avérer utiles pendant l’implémentation de ce modèle :
 - Ce modèle contient un [exemple d’application](https://github.com/mspnp/cloud-design-patterns/tree/master/leader-election) téléchargeable.
-- [Recommandations en matière de mise à l’échelle automatique](https://msdn.microsoft.com/library/dn589774.aspx) : il est possible de démarrer et d’arrêter des instances des hôtes de tâche à mesure que la charge varie au niveau de l’application. La mise à l’échelle automatique peut contribuer à maintenir le débit et les performances pendant les périodes d’intense traitement.
+- [Mise à l’échelle automatique](https://msdn.microsoft.com/library/dn589774.aspx). il est possible de démarrer et d’arrêter des instances des hôtes de tâche à mesure que la charge varie au niveau de l’application. La mise à l’échelle automatique peut contribuer à maintenir le débit et les performances pendant les périodes d’intense traitement.
 - [Recommandations en matière de partitionnement du calcul](https://msdn.microsoft.com/library/dn589773.aspx) : ces recommandations expliquent comment allouer des tâches aux hôtes d’un service cloud dans l’optique de minimiser les coûts de fonctionnement tout en préservant la scalabilité, les performances, la disponibilité et la sécurité du service.
 - [Modèle asynchrone basé sur des tâches](https://msdn.microsoft.com/library/hh873175.aspx) :
 - exemple illustrant l’[algorithme du plus fort (Bully)](http://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/BullyExample.html).

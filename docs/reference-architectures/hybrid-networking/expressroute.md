@@ -1,17 +1,17 @@
 ---
-title: "Connecter un réseau local à Azure à l’aide d’ExpressRoute"
-description: "Comment implémenter une architecture réseau de site à site sécurisée qui s’étend sur un réseau virtuel Azure et un réseau local connecté à l’aide d’Azure ExpressRoute."
+title: Connecter un réseau local à Azure à l’aide d’ExpressRoute
+description: Comment implémenter une architecture réseau de site à site sécurisée qui s’étend sur un réseau virtuel Azure et un réseau local connecté à l’aide d’Azure ExpressRoute.
 author: telmosampaio
 ms.date: 11/28/2016
 pnp.series.title: Connect an on-premises network to Azure
 pnp.series.next: expressroute-vpn-failover
 pnp.series.prev: vpn
 cardTitle: ExpressRoute
-ms.openlocfilehash: 671be5118faaefab5ba5348de81642d8a8124b59
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: ada07f399925da6da28b24260f5c73f1e106fd7d
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-expressroute"></a>Connecter un réseau local à Azure à l’aide d’ExpressRoute
 
@@ -23,7 +23,7 @@ Cette architecture de référence montre comment connecter un réseau local à d
 
 ## <a name="architecture"></a>Architecture
 
-L’architecture est constituée des composants suivants :
+L’architecture est constituée des composants suivants.
 
 * **Réseau d’entreprise local**. Un réseau local privé qui s’exécute au sein d’une organisation.
 
@@ -112,7 +112,7 @@ Créez un circuit ExpressRoute comme suit :
 
 Vous pouvez connecter plusieurs réseaux virtuels situés dans des régions différentes à un même circuit ExpressRoute, tant que tous les réseaux virtuels et le circuit ExpressRoute sont situés dans la même région géopolitique.
 
-### <a name="troubleshooting"></a>Résolution des problèmes 
+### <a name="troubleshooting"></a>Résolution de problèmes 
 
 Si un circuit ExpressRoute qui fonctionnait ne parvient plus à se connecter, en l’absence de toute modification de configuration en local ou sur votre réseau privé virtuel, vous devrez peut-être contacter le fournisseur de connectivité et travailler avec lui pour résoudre le problème. Pour vérifier que le circuit ExpressRoute a été approvisionné, utilisez les commandes Powershell suivantes :
 
@@ -246,7 +246,7 @@ Si vous devez exposer sur un réseau externe des points de terminaison de gestio
 Pour déployer la solution, procédez comme suit :
 
 1. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fhybrid-networking%2Fexpressroute%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-2. Attendez que le lien s’ouvre dans le portail Azure, puis procédez comme suit :
+2. Attendez que le lien s’ouvre dans le portail Azure, puis procédez comme suit :
    * Le nom du **groupe de ressources** est déjà défini dans le fichier de paramètres ; sélectionnez **Créer nouveau** et entrez `ra-hybrid-er-rg` dans la zone de texte.
    * Sélectionnez la région à partir de la zone déroulante **Emplacement**.
    * Ne modifiez pas les zones de texte **Template Root Uri** (Uri racine de modèle) ou **Parameter Root Uri** (Uri racine de paramètre).
@@ -278,7 +278,7 @@ Pour déployer la solution, procédez comme suit :
 [expressroute-pricing]: https://azure.microsoft.com/pricing/details/expressroute/
 [expressroute-limits]: /azure/azure-subscription-service-limits#networking-limits
 [azurect]: https://github.com/Azure/NetworkMonitoring/tree/master/AzureCT
-[visio-download]: https://archcenter.azureedge.net/cdn/hybrid-network-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/hybrid-network-architectures.vsdx
 [er-circuit-parameters]: https://github.com/mspnp/reference-architectures/tree/master/hybrid-networking/expressroute/parameters/expressRouteCircuit.parameters.json
 [azure-powershell-download]: https://azure.microsoft.com/documentation/articles/powershell-install-configure/
 [azure-cli]: https://azure.microsoft.com/documentation/articles/xplat-cli-install/

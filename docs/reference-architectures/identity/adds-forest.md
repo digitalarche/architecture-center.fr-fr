@@ -1,17 +1,20 @@
 ---
-title: "Créer une forêt de ressources AD DS dans Azure"
-description: "Comment créer un domaine Active Directory approuvé dans Azure.\nconseils, passerelle vpn, expressroute, équilibreur de charge, réseau virtuel, active directory"
+title: Créer une forêt de ressources AD DS dans Azure
+description: >-
+  Comment créer un domaine Active Directory approuvé dans Azure.
+
+  conseils, passerelle vpn, expressroute, équilibreur de charge, réseau virtuel, active directory
 author: telmosampaio
 ms.date: 11/28/2016
 pnp.series.title: Identity management
 pnp.series.prev: adds-extend-domain
 pnp.series.next: adfs
 cardTitle: Create an AD DS forest in Azure
-ms.openlocfilehash: b946afa91e8bd303c51f97e18be170c4105cc8c5
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: e32a6420821e70c84e77d2c39614f0c45efbb7e2
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Créer une forêt de ressources Active Directory Domain Services (AD DS) dans Azure
 
@@ -117,8 +120,8 @@ Vous disposez d’une solution sur [GitHub][github] pour déployer cette archite
      
 5. Si vous utilisez la configuration locale simulée, configurez la relation d’approbation entrante :
    
-   1. Connectez-vous au serveur de rebond (*ra-adtrust-mgmt-vm1* dans le groupe de ressources *ra-adtrust-security-rg*). Connectez-vous en tant que *testuser* avec le mot de passe*AweS0me@PW*.
-   2. Sur le serveur de rebond, ouvrez une session RDP sur la première machine virtuelle dans le domaine *contoso.com* (le domaine local). Cette machine virtuelle possède l’adresse IP 192.168.0.4. Le nom d’utilisateur est *contoso\testuser*, et le mot de passe est *AweS0me@PW*.
+   1. Connectez-vous au serveur de rebond (<em>ra-adtrust-mgmt-vm1</em> dans le groupe de ressources <em>ra-adtrust-security-rg</em>). Connectez-vous en tant que <em>testuser</em> avec le mot de passe<em>AweS0me@PW</em>.
+   2. Sur le serveur de rebond, ouvrez une session RDP sur la première machine virtuelle dans le domaine <em>contoso.com</em> (le domaine local). Cette machine virtuelle possède l’adresse IP 192.168.0.4. Le nom d’utilisateur est <em>contoso\testuser</em>, et le mot de passe est <em>AweS0me@PW</em>.
    3. Téléchargez le script [incoming-trust.ps1][incoming-trust] et exécutez-le pour créer l’approbation entrante à partir du domaine *treyresearch.com*.
 
 6. Si vous utilisez votre propre infrastructure locale :
@@ -127,13 +130,13 @@ Vous disposez d’une solution sur [GitHub][github] pour déployer cette archite
    2. Modifiez le script et remplacez la valeur de la variable `$TrustedDomainName` par le nom de votre domaine.
    3. Exécutez le script.
 
-7. À partir du serveur de rebond, connectez-vous à la première machine virtuelle dans le domaine *treyresearch.com* (le domaine dans le cloud). Cette machine virtuelle possède l’adresse IP 10.0.4.4. Le nom d’utilisateur est *treyresearch\testuser*, et le mot de passe est *AweS0me@PW*.
+7. À partir du serveur de rebond, connectez-vous à la première machine virtuelle dans le domaine <em>treyresearch.com</em> (le domaine dans le cloud). Cette machine virtuelle possède l’adresse IP 10.0.4.4. Le nom d’utilisateur est <em>treyresearch\testuser</em>, et le mot de passe est <em>AweS0me@PW</em>.
 
 8. Téléchargez le script [outgoing-trust.ps1][outgoing-trust] et exécutez-le pour créer l’approbation sortante à partir du domaine *treyresearch.com*. Si vous utilisez vos propres machines locales, commencez par modifier le script. Définissez la variable `$TrustedDomainName` sur le nom de votre domaine local, puis spécifiez les adresses IP des serveurs Active Directory DS pour ce domaine dans la variable `$TrustedDomainDnsIpAddresses`.
 
 9. Patientez quelques minutes, puis connectez-vous à une machine virtuelle locale et effectuez les étapes décrites dans l’article [Vérifier une approbation][verify-a-trust] pour déterminer si la relation d’approbation entre les domaines *contoso.com* et *treyresearch.com* est configurée correctement.
 
-## <a name="next-steps"></a>étapes suivantes
+## <a name="next-steps"></a>Étapes suivantes
 
 * Découvrez les bonnes pratiques pour [étendre votre domaine AD DS local à Azure][adds-extend-domain].
 * Découvrez les bonnes pratiques pour [créer une infrastructure AD FS][adfs] dans Azure.
@@ -162,5 +165,5 @@ Vous disposez d’une solution sur [GitHub][github] pour déployer cette archite
 [standby-operations-masters]: https://technet.microsoft.com/library/cc794737(v=ws.10).aspx
 [outgoing-trust]: https://raw.githubusercontent.com/mspnp/reference-architectures/master/identity/adds-forest/extensions/outgoing-trust.ps1
 [verify-a-trust]: https://technet.microsoft.com/library/cc753821.aspx
-[visio-download]: https://archcenter.azureedge.net/cdn/identity-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/identity-architectures.vsdx
 [0]: ./images/adds-forest.png "Architecture réseau hybride sécurisée avec des domaines Active Directory distincts"

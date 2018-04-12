@@ -1,13 +1,13 @@
 ---
-title: "Données de la série chronologique"
-description: 
+title: Données de la série chronologique
+description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: ceb8f34d4fd950e5270edfea05945a824c4492f0
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 80ff6c45988062afcb0eb92cc79e640d39dbb21f
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/14/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="time-series-solutions"></a>Solutions de la série chronologique
 
@@ -42,7 +42,7 @@ L’utilisation de la série chronologique présente les avantages suivants :
 
 Les données collectées par les appareils IoT sont naturellement adaptées au stockage et à l’analyse de la série chronologique. Les données entrantes sont insérées et rarement, voire jamais, mises à jour. Les données sont horodatées et insérées selon leur ordre de réception et elles sont généralement affichées par ordre chronologique, permettant aux utilisateurs de découvrir des tendances, repérer les anomalies et utiliser les informations pour des analyses prédictives.
 
-Pour plus d’informations, consultez la rubrique [Internet des objets](../concepts/big-data.md#internet-of-things-iot).
+Pour plus d’informations, consultez la rubrique [Internet des objets](../big-data/index.md#internet-of-things-iot).
 
 ### <a name="real-time-analytics"></a>Analyse en temps réel
 
@@ -57,7 +57,7 @@ Dans l’idéal, vous devriez avoir une couche de traitement de flux qui puisse 
 
 ## <a name="architecture"></a>Architecture
 
-Dans de nombreux scénarios qui impliquent des données de la série chronologique, tels que l’IoT, les données sont capturées en temps réel. Par conséquent, une architecture de [traitement en temps réel](./real-time-processing.md) est appropriée. 
+Dans de nombreux scénarios qui impliquent des données de la série chronologique, tels que l’IoT, les données sont capturées en temps réel. Par conséquent, une architecture de [traitement en temps réel](../big-data/real-time-processing.md) est appropriée. 
 
 Les données à partir d’une ou de plusieurs sources de données sont ingérées dans la couche de mise en mémoire tampon du flux par [IoT Hub](/azure/iot-hub/), [Event Hubs](/azure/event-hubs/) ou [Kafka sur HDInsight](/azure/hdinsight/kafka/apache-kafka-introduction). Les données sont ensuite traitées dans la couche de traitement du flux qui peut éventuellement transférer les données traitées dans un service de Machine Learning pour des analyses prédictives. Les données traitées sont stockées dans une banque de données analytiques, telles que [HBase](/azure/hdinsight/hbase/apache-hbase-overview), [Azure Cosmos DB](/azure/cosmos-db/), Azure Data Lake ou stockage Blob. Une application ou un service analytique et de création de rapports, tels que Power BI ou OpenTSDB (s’il est stocké dans HBase) peut être utilisé pour afficher les données de la série chronologique pour analyse.
 

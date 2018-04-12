@@ -1,10 +1,11 @@
 ---
 layout: LandingPage
-ms.openlocfilehash: b5c88ac0307c7d47f5bde73322bedd7063136576
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.topic: landing-page
+ms.openlocfilehash: 48600cc07983b1ec588cc56448c521f524f134e0
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="cloud-adoption-guide"></a>Guide d’adoption du cloud
 
@@ -35,6 +36,6 @@ Les articles sont classés par ordre, de façon progressive. Si vous connaissez 
 
 Le public du guide d’adoption du cloud Azure comprend les administrateurs, les départements des opérations informatiques, de la sécurité et de la conformité, des finances, les propriétaires de développement et d’opération de charge de travail.
 
-## <a name="next-steps"></a>étapes suivantes
+## <a name="next-steps"></a>Étapes suivantes
 
 * Si vous êtes nouveau dans Azure, commencez par la section [Notions fondamentales de l’adoption d’Azure](adoption-intro/overview.md) de ce guide.
