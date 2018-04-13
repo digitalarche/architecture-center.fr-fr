@@ -38,13 +38,9 @@
         - name: Guide d’architecture des données
           tocHref: /azure/architecture/data-guide
           topicHref: /azure/architecture/data-guide
+        - name: Microservices de conception
+          tocHref: /azure/architecture/microservices
+          topicHref: /azure/architecture/microservices
         - name: Anti-modèles de performance
           tocHref: /azure/architecture/antipatterns
           topicHref: /azure/architecture/
-        - name: Conformité
-          tocHref: /azure/architecture/compliance
-          topicHref: /azure/architecture/compliance
-          items:
-            - name: PCI-DSS
-              tocHref: /azure/architecture/compliance/pci-dss
-              topicHref: /azure/architecture/compliance/pci-dss
