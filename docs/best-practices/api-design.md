@@ -1,14 +1,14 @@
 ---
-title: "Guide de conception d’API"
-description: "Conseils sur la création et la conception efficace d’une API web."
+title: Guide de conception d’API
+description: Conseils sur la création et la conception efficace d’une API web.
 author: dragon119
 ms.date: 01/12/2018
 pnp.series.title: Best Practices
-ms.openlocfilehash: f0813c18da03b9deeabbf529a560c60e8ce579d8
-ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
+ms.openlocfilehash: a8c4a81835ebd3ebdba2fd2cec624a9a9d5646f5
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/05/2018
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="api-design"></a>Conception d’API
 
@@ -394,7 +394,7 @@ Le contrôle de version permet à une API web d’indiquer les fonctionnalités 
 ### <a name="no-versioning"></a>Aucun contrôle de version
 Il s’agit de l’approche la plus simple. Elle peut être acceptable pour certaines API internes. De nouvelles ressources ou de nouveaux liens peuvent représenter des changements importants.  L’ajout de contenu à des ressources existantes ne représente pas nécessairement une modification avec rupture, dans la mesure où les applications clientes qui n’attendent pas ce contenu l’ignoreront simplement.
 
-Par exemple, une requête à l’URI *http://adventure-works.com/customers/3* doit renvoyer les détails d’un client unique contenant les champs `id`, `name` et `address` attendus par l’application cliente :
+Par exemple, une requête à l’URI *http://adventure-works.com/customers/3* doit renvoyer les détails d’un client unique contenant les champs `id`, `name` et `address` attendus par l’application cliente :
 
 ```HTTP
 HTTP/1.1 200 OK
@@ -422,7 +422,7 @@ Les applications clientes existantes peuvent continuer à fonctionner correcteme
 ### <a name="uri-versioning"></a>Contrôle de version d’URI
 Dès lors que vous modifiez l’API web ou le schéma des ressources, vous ajoutez un numéro de version à l’URI pour chaque ressource. Les URI existants doivent continuer à fonctionner comme avant et à renvoyer les ressources conformes à leur schéma d’origine.
 
-Si l’on étend l’exemple précédent, si le champ `address` est restructuré dans des sous-champs contenant chaque partie de l’adresse (par exemple, `streetAddress`, `city`, `state` et `zipCode`), cette version de la ressource peut être exposée par le biais d’un URI qui contient un numéro de version, tel que http://adventure-works.com/v2/customers/3 :
+Si l’on étend l’exemple précédent, si le champ `address` est restructuré dans des sous-champs contenant chaque partie de l’adresse (par exemple, `streetAddress`, `city`, `state` et `zipCode`), cette version de la ressource peut être exposée par le biais d’un URI qui contient un numéro de version, tel que http://adventure-works.com/v2/customers/3:
 
 ```HTTP
 HTTP/1.1 200 OK

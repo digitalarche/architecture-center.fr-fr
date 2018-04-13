@@ -1,17 +1,17 @@
 ---
-title: "Modèle de couche de lutte contre la corruption"
-description: "Implémentez une couche de façade ou d’adaptateur entre une application moderne et un système hérité."
+title: Modèle de couche de lutte contre la corruption
+description: Implémentez une couche de façade ou d’adaptateur entre une application moderne et un système hérité.
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: e41f080abbef772596ee7f8b10ad72bb03a3b829
-ms.sourcegitcommit: c93f1b210b3deff17cc969fb66133bc6399cfd10
+ms.openlocfilehash: efb1f90be33c2621c7a24c42730da9fffe70dfad
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/05/2018
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="anti-corruption-layer-pattern"></a>Modèle de couche de lutte contre la corruption
 
-Implémentez une couche de façade ou d’adaptateur entre une application moderne et un système hérité dont elle dépend. Cette couche traduit des requêtes entre l’application moderne et le système hérité. Utilisez ce modèle pour vous assurer que la conception d’une application n’est pas limitée par les dépendances sur les systèmes hérités. Ce modèle a d’abord été décrit par Eric Evans dans *Domain-Driven Design* (Conception orientée domaine).
+Implémentez une couche de façade ou d’adaptateur entre différents sous-systèmes qui ne partagent pas la même sémantique. Cette couche traduit les requêtes qu’un sous-système envoie à l’autre sous-système. Utilisez ce modèle pour vous assurer que la conception d’une application n’est pas limitée par les dépendances aux sous-systèmes externes. Ce modèle a d’abord été décrit par Eric Evans dans *Domain-Driven Design* (Conception orientée domaine).
 
 ## <a name="context-and-problem"></a>Contexte et problème
 
@@ -21,13 +21,15 @@ Souvent, ces systèmes hérités connaissent des problèmes de qualité comme de
 
 Maintenir l’accès entre les systèmes nouveaux et hérités peut forcer le nouveau système à respecter au moins certaines API ou d’autres sémantiques du système hérité. Lorsque ces fonctionnalités héritées ont des problèmes de qualité, le fait de les prendre en charge « corrompt » ce qui pourrait être une application moderne correctement conçue. 
 
+Des problèmes similaires peuvent se produire avec n’importe quel système externe que votre équipe de développement ne contrôle pas, pas uniquement avec les systèmes hérités. 
+
 ## <a name="solution"></a>Solution
 
-Isolez les systèmes hérités et modernes en plaçant une couche de lutte contre la corruption entre eux. Cette couche traduit les communications entre les deux systèmes, ce qui permet au système hérité de rester identique alors que l’application moderne peut éviter de compromettre sa conception et son approche technologique.
+Isolez les différents sous-systèmes en plaçant une couche de lutte contre la corruption entre eux. Cette couche traduit les communications entre les deux systèmes, ce qui permet à un système de rester identique alors que l’autre système peut éviter de compromettre sa conception et son approche technologique.
 
 ![](./_images/anti-corruption-layer.png) 
 
-La communication entre l’application moderne et de la couche de lutte contre la corruption utilise toujours l’architecture et le modèle de données de l’application. Les appels de la couche de lutte contre la corruption au système hérité sont conformes aux méthodes ou au modèle de données de ce système. La couche de lutte contre la corruption contient toute la logique nécessaire pour effectuer la traduction entre les deux systèmes. La couche peut être implémentée en tant que composant dans l’application ou en tant que service indépendant.
+Le diagramme ci-dessus illustre une application comprenant deux sous-systèmes. Le sous-système A appelle le sous-système B à travers une couche de lutte contre la corruption. La communication entre le sous-système A et la couche de lutte contre la corruption utilise toujours le modèle de données et l’architecture du sous-système A. Les appels à partir de la couche de lutte contre la corruption vers le sous-système B sont conformes au modèle de données ou aux méthodes de ce sous-système. La couche de lutte contre la corruption contient toute la logique nécessaire pour effectuer la traduction entre les deux systèmes. La couche peut être implémentée en tant que composant dans l’application ou en tant que service indépendant.
 
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
@@ -37,20 +39,18 @@ La communication entre l’application moderne et de la couche de lutte contre l
 - Évaluez si vous avez besoin de plus d’une couche de lutte contre la corruption. Vous pouvez décomposer les fonctionnalités en plusieurs services à l’aide de différents langages ou technologies ; vous pouvez également choisir de partitionner la couche de lutte contre la corruption pour d’autres raisons.
 - Réfléchissez à la façon dont la couche de lutte contre la corruption sera gérée par rapport à vos autres applications ou services. Comment sera-t-elle intégrée à vos processus de surveillance, de mise en production et de configuration ?
 - Assurez-vous que la cohérence des transactions et des données est conservée et qu’elle peut être surveillée.
-- Déterminez si la couche de lutte contre la corruption doit gérer toutes les communications entre les systèmes hérités et modernes ou uniquement un sous-ensemble de fonctionnalités. 
-- Évaluez si la couche de lutte contre la corruption doit être permanente ou si elle devra être mise hors service une fois toutes les fonctionnalités héritées migrées.
+- Déterminez si la couche de lutte contre la corruption doit gérer toutes les communications entre différents sous-systèmes ou uniquement un sous-ensemble de fonctionnalités. 
+- Si la couche de lutte contre la corruption fait partie d’une stratégie de migration d’application, déterminez si elle sera permanente, ou si elle sera mise hors service une fois toutes les fonctionnalités hérités migrées.
 
 ## <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
 
 Utilisez ce modèle dans les situations suivantes :
 
 - Une migration est planifiée pour avoir lieu en plusieurs étapes, mais l’intégration entre les systèmes nouveaux et hérités doit être maintenue.
-- Les systèmes nouveaux et hérités ont des sémantiques différentes, mais doivent tout de même communiquer.
+- Deux ou plusieurs sous-systèmes ont des sémantiques différentes, mais doivent tout de même communiquer. 
 
 Ce modèle peut ne pas convenir s’il n’y a aucune différence de sémantique significative entre les systèmes nouveaux et hérités. 
 
 ## <a name="related-guidance"></a>Aide connexe
 
-- [Strangler pattern][strangler] (Modèle d’étranglement)
-
-[strangler]: ./strangler.md
+- [Modèle d’étranglement](./strangler.md)

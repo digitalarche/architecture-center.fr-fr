@@ -1,16 +1,16 @@
 ---
-title: "Exécuter des machines virtuelles à charge équilibrée dans Azure à des fins de scalabilité et de disponibilité"
-description: "Découvrez comment exécuter plusieurs machines virtuelles Linux dans Azure à des fins de scalabilité et de disponibilité."
+title: Exécuter des machines virtuelles à charge équilibrée dans Azure à des fins de scalabilité et de disponibilité
+description: Découvrez comment exécuter plusieurs machines virtuelles Linux dans Azure à des fins de scalabilité et de disponibilité.
 author: telmosampaio
 ms.date: 11/16/2017
 pnp.series.title: Linux VM workloads
 pnp.series.next: n-tier
 pnp.series.prev: single-vm
-ms.openlocfilehash: 8f081baa40355b4f02b83c308466df8333d7ad87
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 2c8b1310e0a76ae0cea0a52cdbd2a0e5d3205d6e
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-load-balanced-vms-for-scalability-and-availability"></a>Exécuter des machines virtuelles à charge équilibrée à des fins de scalabilité et de disponibilité
 
@@ -125,11 +125,12 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github-folde
   * Un équilibreur de charge placé devant le groupe de machines virtuelles identiques.
   * Un groupe de sécurité réseau avec des règles de trafic entrant qui autorisent le trafic HTTP vers le groupe de machines virtuelles identiques.
 
-### <a name="prerequisites"></a>Conditions préalables
+### <a name="prerequisites"></a>Prérequis
+
 
 Avant de pouvoir déployer l’architecture de référence sur votre propre abonnement, vous devez effectuer les étapes suivantes.
 
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le dépôt GitHub des [architectures de référence AzureCAT][ref-arch-repo].
+1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][ref-arch-repo].
 
 2. Vérifiez qu’Azure CLI 2.0 est installé sur votre ordinateur. Pour des instructions d’installation de l’interface de ligne de commande, consultez [Installer Azure CLI 2.0][azure-cli-2].
 
@@ -137,9 +138,9 @@ Avant de pouvoir déployer l’architecture de référence sur votre propre abon
 
 4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de l’une des commandes ci-dessous et suivez les invites.
 
-  ```bash
-  az login
-  ```
+   ```bash
+   az login
+   ```
 
 ### <a name="deploy-the-solution-using-azbb"></a>Déployer la solution à l’aide d’azbb
 
@@ -149,16 +150,16 @@ Pour déployer l’exemple de charge de travail de machine virtuelle unique, eff
 
 2. Ouvrez le fichier `multi-vm-v2.json` et entrez un nom d’utilisateur et une clé SSH entre les guillemets, comme illustré ci-dessous, puis enregistrez le fichier.
 
-  ```bash
-  "adminUsername": "",
-  "sshPublicKey": "",
-  ```
+   ```bash
+   "adminUsername": "",
+   "sshPublicKey": "",
+   ```
 
 3. Exécutez `azbb` pour déployer les machines virtuelles comme illustré ci-dessous.
 
-  ```bash
-  azbb -s <subscription_id> -g <resource_group_name> -l <location> -p multi-vm-v2.json --deploy
-  ```
+   ```bash
+   azbb -s <subscription_id> -g <resource_group_name> -l <location> -p multi-vm-v2.json --deploy
+   ```
 
 Pour plus d’informations sur le déploiement de cet exemple d’architecture de référence, visitez notre [dépôt GitHub][git].
 
@@ -187,7 +188,7 @@ Pour plus d’informations sur le déploiement de cet exemple d’architecture d
 [runbook-gallery]: /azure/automation/automation-runbook-gallery#runbooks-in-runbook-gallery
 [single-vm]: single-vm.md
 [subscription-limits]: /azure/azure-subscription-service-limits
-[visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [vm-disk-limits]: /azure/azure-subscription-service-limits#virtual-machine-disk-limits
 [vm-scaleset]: /azure/virtual-machine-scale-sets/virtual-machine-scale-sets-overview
 [vm-sizes]: https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/

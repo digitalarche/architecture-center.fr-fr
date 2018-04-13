@@ -1,12 +1,12 @@
 ---
-title: "Explicatif : comment Azure fonctionne-t-il ?"
-description: "Explique le fonctionnement interne d’Azure"
+title: 'Explicatif : comment Azure fonctionne-t-il ?'
+description: Explique le fonctionnement interne d’Azure
 author: petertay
-ms.openlocfilehash: 847d24b7057d80f3d34aac7900cfb64fec60a640
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.openlocfilehash: b4830fec69ac6d256d934d91ea2c295219925a9a
+ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="explainer-how-does-azure-work"></a>Explicatif : comment Azure fonctionne-t-il ?
 
@@ -22,11 +22,11 @@ Dans chaque rack ou cluster, la plupart des serveurs sont désignés pour exécu
 
 Chaque instance du contrôleur de structure est connectée à un autre ensemble de serveurs exécutant le logiciel d’orchestration du cloud, généralement appelé **frontal**. Le serveur frontal héberge les services web, les API RESTful et les bases de données Azure internes utilisés pour toutes les fonctions exécutées par le cloud. 
 
-Par exemple, le serveur frontal héberge les services qui gèrent les demandes clients pour allouer des ressources Azure telles que [réseaux virtuels][vnet], [machines virtuelles] [ vms]et des services tels que [CosmosDB]. Tout d’abord, le serveur frontal valide l’utilisateur et vérifie que l’utilisateur est autorisé à allouer les ressources demandées. Dans ce cas, le serveur frontal consulte une base de données pour localiser un rack de serveurs avec une capacité suffisante, puis fait en sorte que le contrôleur de structure sur le rack alloue la ressource.
+Par exemple, le serveur frontal héberge les services qui gèrent les demandes clients pour allouer des ressources Azure telles que des [réseaux virtuels][vnet], [machines virtuelles][vms]et des services tels que [CosmosDB][cosmosdb]. Tout d’abord, le serveur frontal valide l’utilisateur et vérifie que l’utilisateur est autorisé à allouer les ressources demandées. Dans ce cas, le serveur frontal consulte une base de données pour localiser un rack de serveurs avec une capacité suffisante, puis fait en sorte que le contrôleur de structure sur le rack alloue la ressource.
 
 Par conséquent, tout simplement, Azure est une vaste collection de serveurs et de matériel réseau, ainsi qu’un ensemble complexe d’applications distribuées qui orchestrent la configuration et l’opération du matériel et des logiciels virtualisés sur ces serveurs. Cette orchestration rend alors Azure tellement puissant : les utilisateurs ne sont plus responsables du suivi ni de la mise à niveau du matériel, Azure effectue tout cela en arrière-plan. 
 
-## <a name="next-steps"></a>étapes suivantes
+## <a name="next-steps"></a>Étapes suivantes
 
 * Maintenant que vous comprenez le fonctionnement interne d’Azure, la première étape pour l’adoption d’Azure consiste à [comprendre l’identité numérique dans Azure](tenant-explainer.md). Vous pouvez alors enfin [créer votre premier utilisateur dans Azure AD][docs-add-users-to-aad].
 

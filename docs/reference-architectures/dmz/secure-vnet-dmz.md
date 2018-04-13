@@ -1,17 +1,17 @@
 ---
-title: "Implémentation d’une zone DMZ entre Azure et Internet"
-description: "Comment implémenter une architecture réseau hybride sécurisée avec accès Internet dans Azure."
+title: Implémentation d’une zone DMZ entre Azure et Internet
+description: Comment implémenter une architecture réseau hybride sécurisée avec accès Internet dans Azure.
 author: telmosampaio
 ms.date: 11/23/2016
 pnp.series.title: Network DMZ
 pnp.series.next: nva-ha
 pnp.series.prev: secure-vnet-hybrid
 cardTitle: DMZ between Azure and the Internet
-ms.openlocfilehash: 372d5bb0fc0e3c272843e062210dec5c15b2b78a
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: c88545b1fcae49b413e7e2b6ac5bd92d3fd3456d
+ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="dmz-between-azure-and-the-internet"></a>Zone DMZ entre Azure et Internet
 
@@ -30,7 +30,7 @@ Utilisations courantes de cette architecture :
 
 ## <a name="architecture"></a>Architecture
 
-L’architecture est constituée des composants suivants :
+L’architecture est constituée des composants suivants.
 
 * **Adresse IP publique**. Adresse IP publique du point de terminaison public. Les utilisateurs externes connectés à Internet peuvent accéder au système via cette adresse.
 * **Appliance virtuelle réseau**. Cette architecture inclut un pool distinct d’appliances virtuelles réseau pour le trafic provenant d’Internet.
@@ -42,7 +42,7 @@ L’architecture est constituée des composants suivants :
 
 Les recommandations suivantes s’appliquent à la plupart des scénarios. Suivez ces recommandations, sauf si vous avez un besoin spécifique qui vous oblige à les ignorer. 
 
-### <a name="nva-recommendations"></a>Recommandations relatives aux appliances virtuelles réseau
+### <a name="nva-recommendations"></a>Recommandations en matière d’appliances virtuelles réseau
 
 Utilisez un ensemble d’appliances virtuelles réseau pour le trafic provenant d’Internet, et un autre ensemble pour le trafic émanant du niveau local. L’utilisation d’un seul ensemble d’appliances virtuelles réseau pour ces deux types de trafics réseau constitue un risque pour la sécurité, car elle n’offre aucun périmètre de sécurité entre les deux. L’utilisation d’appliances virtuelles réseau distinctes simplifie la vérification des règles de sécurité et permet d’identifier clairement les règles auxquelles correspondent les différentes requêtes réseau entrantes. Un ensemble d’appliances virtuelles réseau implémente les règles pour le trafic Internet uniquement, et l’autre celles du trafic local uniquement.
 
@@ -64,7 +64,7 @@ L’équilibreur de charge accessible sur Internet requiert que chaque appliance
 
 ## <a name="manageability-considerations"></a>Considérations relatives à la facilité de gestion
 
-L’ensemble de l’analyse et de la gestion des appliances virtuelles réseau de la zone publique DMZ doit être effectuée par le jumpbox dans le sous-réseau de gestion. Comme indiqué dans [Implementing a DMZ between Azure and your on-premises datacenter][implementing-a-secure-hybrid-network-architecture] (Implémenter une zone DMZ entre Azure et votre centre de données local), définissez un itinéraire de réseau unique à partir du réseau local via la passerelle menant au jumpbox afin de restreindre accès.
+L’ensemble de l’analyse et de la gestion des appliances virtuelles réseau de la zone publique DMZ doit être effectuée par la jumpbox dans le sous-réseau de gestion. Comme indiqué dans [Implementing a DMZ between Azure and your on-premises datacenter][implementing-a-secure-hybrid-network-architecture] (Implémenter une zone DMZ entre Azure et votre centre de données local), définissez un itinéraire de réseau unique à partir du réseau local via la passerelle menant au jumpbox afin de restreindre accès.
 
 Si la connectivité de la passerelle de votre réseau local vers Azure est interrompue, vous pouvez toujours atteindre le jumpbox en déployant une adresse IP publique, en l’ajoutant au jumpbox et en vous connectant à partir d’Internet.
 
@@ -82,7 +82,7 @@ Vous devez journaliser toutes les requêtes entrantes sur tous les ports. Effect
 
 Un déploiement pour une architecture de référence implémentant ces recommandations est disponible sur [GitHub][github-folder]. L’architecture de référence peut être déployée avec Windows ou les machines virtuelles Linux en procédant comme suit :
 
-1. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-dmz%2FvirtualNetwork.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+1. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-dmz%2FvirtualNetwork.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 2. Une fois le lien ouvert dans le portail Azure, vous devez entrer des valeurs pour certains paramètres :
    * Le nom du **groupe de ressources** est déjà défini dans le fichier de paramètres ; sélectionnez **Créer nouveau** et entrez `ra-public-dmz-network-rg` dans la zone de texte.
    * Sélectionnez la région à partir de la zone déroulante **Emplacement**.
@@ -91,7 +91,7 @@ Un déploiement pour une architecture de référence implémentant ces recommand
    * Passez en revue les termes et conditions, puis cochez la case **J’accepte les termes et conditions mentionnés ci-dessus**.
    * Cliquez sur le bouton **Acheter**.
 3. Attendez la fin du déploiement.
-4. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-dmz%2Fworkload.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+4. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-dmz%2Fworkload.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 5. Une fois le lien ouvert dans le portail Azure, vous devez entrer des valeurs pour certains paramètres :
    * Le nom du **groupe de ressources** est déjà défini dans le fichier de paramètres ; sélectionnez **Créer nouveau** et entrez `ra-public-dmz-wl-rg` dans la zone de texte.
    * Sélectionnez la région à partir de la zone déroulante **Emplacement**.
@@ -99,7 +99,7 @@ Un déploiement pour une architecture de référence implémentant ces recommand
    * Passez en revue les termes et conditions, puis cochez la case **J’accepte les termes et conditions mentionnés ci-dessus**.
    * Cliquez sur le bouton **Acheter**.
 6. Attendez la fin du déploiement.
-7. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-dmz%2Fsecurity.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
+7. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-dmz%2Fsecurity.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 8. Une fois le lien ouvert dans le portail Azure, vous devez entrer des valeurs pour certains paramètres :
    * Le nom du **Groupe de ressources** est déjà défini dans le fichier de paramètres. Sélectionnez **Existant** et entrez `ra-public-dmz-network-rg` dans la zone de texte.
    * Sélectionnez la région à partir de la zone déroulante **Emplacement**.
@@ -119,7 +119,7 @@ Un déploiement pour une architecture de référence implémentant ces recommand
 [load-balancer]: /azure/load-balancer/load-balancer-Internet-overview
 [network-security-group]: /azure/virtual-network/virtual-networks-nsg
 
-[visio-download]: https://archcenter.azureedge.net/cdn/dmz-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/dmz-reference-architectures.vsdx
 
 
 [0]: ./images/dmz-public.png "Architecture réseau hybride sécurisée"

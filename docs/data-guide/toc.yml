@@ -3,56 +3,36 @@
 - name: Guide d’architecture des données
   href: index.md
   items:
-    - name: SGBDR traditionnel
+    - name: Charges de travail SGBDR traditionnelles
       items:
-        - name: Concepts
-          items:
-            - name: Données relationnelles
-              href: concepts/relational-data.md
-            - name: Données transactionnelles
-              href: concepts/transactional-data.md
-            - name: Modélisation sémantique
-              href: concepts/semantic-modeling.md
+        - name: Vue d'ensemble
+          href: relational-data/index.md
+        - name: Traitement transactionnel en ligne (OLTP)
+          href: relational-data/online-transaction-processing.md
+        - name: Entrepôt de données
+          href: relational-data/data-warehousing.md
+        - name: Traitement analytique en ligne (OLAP)
+          href: relational-data/online-analytical-processing.md
+        - name: 'Extraire, transformer et charger (ETL)'
+          href: relational-data/etl.md
+    - name: Architectures de Big Data
+      items:
+        - name: Vue d'ensemble
+          href: big-data/index.md
+        - name: Traitement par lots
+          href: big-data/batch-processing.md
+        - name: Traitement en temps réel
+          href: big-data/real-time-processing.md
+        - name: Machine Learning à l’échelle
+          href: big-data/machine-learning-at-scale.md
+        - name: Banques de données non relationnelles
+          href: big-data/non-relational-data.md
         - name: Scénarios
           items:
-            - name: Traitement transactionnel en ligne (OLTP)
-              href: scenarios/online-transaction-processing.md
-            - name: Traitement analytique en ligne (OLAP)
-              href: scenarios/online-analytical-processing.md
-            - name: Entrepôt de données
-              href: scenarios/data-warehousing.md
-            - name: 'Extraire, transformer et charger (ETL)'
-              href: scenarios/etl.md
-        - name: Choix de technologie
-          items:
-            - name: Entrepôts de données
-              href: technology-choices/data-warehouses.md
-            - name: Traitement analytique en ligne (OLAP)
-              href: technology-choices/olap-data-stores.md
-            - name: Traitement transactionnel en ligne (OLTP)
-              href: technology-choices/oltp-data-stores.md
-    - name: Big Data et NoSQL
-      items:
-        - name: Concepts
-          items:
-            - name: Banques de données non relationnelles
-              href: concepts/non-relational-data.md
-            - name: Utilisation des fichiers CSV et JSON
-              href: concepts/csv-and-json.md
-            - name: Lacs de données
-              href: concepts/data-lake.md
-            - name: Architectures de Big Data
-              href: concepts/big-data.md
             - name: Analytique avancée
-              href: concepts/advanced-analytics.md
-            - name: Machine Learning à l’échelle
-              href: concepts/machine-learning-at-scale.md
-        - name: Scénarios
-          items:
-            - name: Traitement par lots
-              href: scenarios/batch-processing.md
-            - name: Traitement en temps réel
-              href: scenarios/real-time-processing.md
+              href: scenarios/advanced-analytics.md
+            - name: Lacs de données
+              href: scenarios/data-lake.md
             - name: Recherche de texte de forme libre
               href: scenarios/search.md
             - name: Exploration interactive des données
@@ -61,6 +41,8 @@
               href: scenarios/natural-language-processing.md
             - name: Solutions de la série chronologique
               href: scenarios/time-series.md
+            - name: Utilisation des fichiers CSV et JSON
+              href: scenarios/csv-and-json.md
         - name: Choix de technologie
           items:
             - name: Banques de données analytiques

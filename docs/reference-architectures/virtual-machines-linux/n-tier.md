@@ -1,16 +1,16 @@
 ---
-title: "Exécuter des machines virtuelles Linux pour une application multiniveau dans Azure"
-description: "Découvrez comment exécuter des machines virtuelles Linux pour une architecture multiniveau dans Microsoft Azure."
+title: Exécuter des machines virtuelles Linux pour une application multiniveau dans Azure
+description: Découvrez comment exécuter des machines virtuelles Linux pour une architecture multiniveau dans Microsoft Azure.
 author: MikeWasson
 ms.date: 11/22/2017
 pnp.series.title: Linux VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: e875a58aa83339560fd1de5b03a960f071883927
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 8d3e6e5124a0abb27a3c72e1ecbd52a1a1da2a33
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-linux-vms-for-an-n-tier-application"></a>Exécuter des machines virtuelles Linux pour une application multiniveau
 
@@ -30,7 +30,7 @@ Il existe de nombreuses façons d’implémenter une architecture multiniveau. L
 * **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.
 * **Serveur de rebond (jumpbox).** Également appelée [hôte bastion]. Machine virtuelle sécurisée sur le réseau, utilisée par les administrateurs pour se connecter aux autres machines virtuelles. Le serveur de rebond a un groupe de sécurité réseau qui autorise le trafic distant provenant uniquement d’adresses IP publiques figurant sur une liste verte. Le groupe de sécurité réseau doit autoriser le trafic SSH (Secure Shell).
 * **Surveillance.** Des logiciels de surveillance tels que [Nagios], [Zabbix] ou [Icinga] peuvent vous donner une idée du temps de réponse, du temps de fonctionnement de machine virtuelle et de l’intégrité globale de votre système. Installez le logiciel de surveillance sur une machine virtuelle placée sur un sous-réseau de gestion distinct.
-* **Groupes de sécurité réseau.** Utilisez des [groupes de sécurité réseau][nsg] pour limiter le trafic réseau au sein du réseau virtuel. Par exemple, dans l’architecture à 3 niveaux illustrée ici, le niveau base de données n’accepte pas le trafic en provenance du frontend web, mais uniquement du niveau Business et du sous-réseau de gestion.
+* <strong>Groupes de sécurité réseau.</strong> Utilisez des [groupes de sécurité réseau][nsg] pour limiter le trafic réseau au sein du réseau virtuel. Par exemple, dans l’architecture à 3 niveaux illustrée ici, le niveau base de données n’accepte pas le trafic en provenance du frontend web, mais uniquement du niveau Business et du sous-réseau de gestion.
 * **Base de données Apache Cassandra**. Fournit une haute disponibilité du niveau Données, en activant la réplication et le basculement.
 
 ## <a name="recommendations"></a>Recommandations
@@ -116,25 +116,26 @@ Simplifiez la gestion de l’ensemble du système en utilisant des outils d’ad
 
 Un déploiement pour cette architecture de référence est disponible sur [GitHub][github-folder]. 
 
-### <a name="prerequisites"></a>Conditions préalables
+### <a name="prerequisites"></a>Prérequis
+
 
 Avant de pouvoir déployer l’architecture de référence sur votre propre abonnement, vous devez effectuer les étapes suivantes.
 
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le dépôt GitHub des [architectures de référence AzureCAT][ref-arch-repo].
+1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][ref-arch-repo].
 
 2. Vérifiez qu’Azure CLI 2.0 est installé sur votre ordinateur. Pour installer l’interface CLI, suivez les instructions fournies dans [Installer Azure CLI 2.0][azure-cli-2].
 
 3. Installez le package npm des [modules Azure][azbb].
 
-  ```bash
-  npm install -g @mspnp/azure-building-blocks
-  ```
+   ```bash
+   npm install -g @mspnp/azure-building-blocks
+   ```
 
 4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de l’une des commandes ci-dessous et suivez les invites.
 
-  ```bash
-  az login
-  ```
+   ```bash
+   az login
+   ```
 
 ### <a name="deploy-the-solution-using-azbb"></a>Déployer la solution à l’aide d’azbb
 
@@ -146,9 +147,9 @@ Pour déployer les machines virtuelles Linux pour une architecture de référenc
 
 3. Déployez l’architecture de référence à l’aide de l’outil de ligne de commande **azbb**, comme indiqué ci-dessous.
 
-  ```bash
-  azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-linux.json --deploy
-  ```
+   ```bash
+   azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-linux.json --deploy
+   ```
 
 Pour plus d’informations sur le déploiement de cet exemple d’architecture de référence à l’aide des blocs de construction Azure, visitez notre [référentiel GitHub][git].
 
@@ -183,7 +184,7 @@ Pour plus d’informations sur le déploiement de cet exemple d’architecture d
 [ref-arch-repo]: https://github.com/mspnp/reference-architectures
 [vm-sla]: https://azure.microsoft.com/support/legal/sla/virtual-machines
 [vnet faq]: /azure/virtual-network/virtual-networks-faq
-[visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [Nagios]: https://www.nagios.org/
 [Zabbix]: http://www.zabbix.com/
 [Icinga]: http://www.icinga.org/

@@ -1,15 +1,15 @@
 ---
-title: "Implémentation d’une topologie de réseau hub-and-spoke avec des services partagés dans Azure"
-description: "Procédure d’implémentation d’une topologie de réseau hub-and-spoke avec des services partagés dans Azure."
+title: Implémentation d’une topologie de réseau hub-and-spoke avec des services partagés dans Azure
+description: Procédure d’implémentation d’une topologie de réseau hub-and-spoke avec des services partagés dans Azure.
 author: telmosampaio
 ms.date: 02/25/2018
 pnp.series.title: Implement a hub-spoke network topology with shared services in Azure
 pnp.series.prev: hub-spoke
-ms.openlocfilehash: c0fb1d1ddd7c70ed914d58e7c73b10475b91aedf
-ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
+ms.openlocfilehash: b492427f12e026be97629ccdc2b8d19c8c66f47d
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="implement-a-hub-spoke-network-topology-with-shared-services-in-azure"></a>Implémentation d’une topologie de réseau hub-and-spoke avec des services partagés dans Azure
 
@@ -94,11 +94,12 @@ Déterminez également les services qui sont partagés dans le hub, afin que ce 
 
 Un déploiement pour cette architecture est disponible sur [GitHub][ref-arch-repo]. Il utilise des machines virtuelles Ubuntu dans chaque réseau virtuel pour tester la connectivité. Aucun service réel n’est hébergé dans le sous-réseau **shared-services** du **réseau virtuel hub**.
 
-### <a name="prerequisites"></a>configuration requise
+### <a name="prerequisites"></a>Prérequis
+
 
 Avant de pouvoir déployer l’architecture de référence sur votre propre abonnement, vous devez effectuer les étapes suivantes.
 
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le dépôt GitHub des [architectures de référence AzureCAT][ref-arch-repo].
+1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][ref-arch-repo].
 
 2. Vérifiez qu’Azure CLI 2.0 est installé sur votre ordinateur. Pour des instructions d’installation de l’interface de ligne de commande, consultez [Installer Azure CLI 2.0][azure-cli-2].
 
@@ -106,9 +107,9 @@ Avant de pouvoir déployer l’architecture de référence sur votre propre abon
 
 4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de la commande ci-dessous et suivez les invites.
 
-  ```bash
-  az login
-  ```
+   ```bash
+   az login
+   ```
 
 ### <a name="deploy-the-simulated-on-premises-datacenter-using-azbb"></a>Déployer le centre de données local simulé à l’aide d’azbb
 
@@ -118,18 +119,18 @@ Pour déployer le centre de données local simulé en tant que réseau virtuel A
 
 2. Ouvrez le fichier `onprem.json` et entrez un nom d’utilisateur et un mot de passe entre les guillemets aux lignes 45 et 46, comme illustré ci-dessous, puis enregistrez le fichier.
 
-  ```bash
-  "adminUsername": "XXX",
-  "adminPassword": "YYY",
-  ```
+   ```bash
+   "adminUsername": "XXX",
+   "adminPassword": "YYY",
+   ```
 
 3. Exécutez `azbb` pour déployer l’environnement local simulé, comme indiqué ci-dessous.
 
-  ```bash
-  azbb -s <subscription_id> -g onprem-vnet-rg - l <location> -p onoprem.json --deploy
-  ```
-  > [!NOTE]
-  > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `onprem-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
+   ```bash
+   azbb -s <subscription_id> -g onprem-vnet-rg - l <location> -p onoprem.json --deploy
+   ```
+   > [!NOTE]
+   > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `onprem-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
 
 4. Attendez que le déploiement se termine. Ce déploiement crée un réseau virtuel, une machine virtuelle exécutant Windows et une passerelle VPN. La création de la passerelle VPN peut prendre plus de 40 minutes.
 
@@ -139,26 +140,26 @@ Pour déployer le réseau virtuel hub et vous connecter au réseau virtuel local
 
 1. Ouvrez le fichier `hub-vnet.json` et entrez un nom d’utilisateur et un mot de passe entre les guillemets aux lignes 50 et 51, comme illustré ci-dessous.
 
-  ```bash
-  "adminUsername": "XXX",
-  "adminPassword": "YYY",
-  ```
+   ```bash
+   "adminUsername": "XXX",
+   "adminPassword": "YYY",
+   ```
 
 2. À la ligne 52, pour `osType`, saisissez `Windows` ou `Linux` pour installer le système d’exploitation Windows Server 2016 Datacenter ou Ubuntu 16.04 sur le serveur de rebond.
 
 3. Saisissez une clé partagée entre les guillemets à la ligne 83, comme illustré ci-dessous, puis enregistrez le fichier.
 
-  ```bash
-  "sharedKey": "",
-  ```
+   ```bash
+   "sharedKey": "",
+   ```
 
 4. Exécutez `azbb` pour déployer l’environnement local simulé, comme indiqué ci-dessous.
 
-  ```bash
-  azbb -s <subscription_id> -g hub-vnet-rg - l <location> -p hub-vnet.json --deploy
-  ```
-  > [!NOTE]
-  > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `hub-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
+   ```bash
+   azbb -s <subscription_id> -g hub-vnet-rg - l <location> -p hub-vnet.json --deploy
+   ```
+   > [!NOTE]
+   > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `hub-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
 
 5. Attendez que le déploiement se termine. Ce déploiement crée un réseau virtuel, une machine virtuelle, une passerelle VPN et une connexion à la passerelle créée à la section précédente. La création de la passerelle VPN peut prendre plus de 40 minutes.
 
@@ -168,22 +169,22 @@ Pour déployer des contrôleurs de domaine AD DS dans Azure, procédez comme sui
 
 1. Ouvrez le fichier `hub-adds.json` et entrez un nom d’utilisateur et un mot de passe entre les guillemets aux lignes 14 et 15, comme illustré ci-dessous, puis enregistrez le fichier.
 
-  ```bash
-  "adminUsername": "XXX",
-  "adminPassword": "YYY",
-  ```
+   ```bash
+   "adminUsername": "XXX",
+   "adminPassword": "YYY",
+   ```
 
 2. Exécutez `azbb` pour déployer les contrôleurs de domaine AD DS, comme indiqué ci-dessous.
 
-  ```bash
-  azbb -s <subscription_id> -g hub-adds-rg - l <location> -p hub-adds.json --deploy
-  ```
+   ```bash
+   azbb -s <subscription_id> -g hub-adds-rg - l <location> -p hub-adds.json --deploy
+   ```
   
-  > [!NOTE]
-  > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `hub-adds-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
+   > [!NOTE]
+   > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `hub-adds-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
 
-  > [!NOTE]
-  > Cette partie du déploiement peut prendre plusieurs minutes, car elle requiert la jonction de deux machines virtuelles au domaine hébergé dans le centre de données local simulé, puis l’installation d’AD DS sur ces dernières.
+   > [!NOTE]
+   > Cette partie du déploiement peut prendre plusieurs minutes, car elle requiert la jonction de deux machines virtuelles au domaine hébergé dans le centre de données local simulé, puis l’installation d’AD DS sur ces dernières.
 
 ### <a name="nva"></a>Appliances virtuelles réseau
 
@@ -191,17 +192,17 @@ Pour déployer une appliance virtuelle réseau dans le sous-réseau `dmz`, effec
 
 1. Ouvrez le fichier `hub-nva.json` et entrez un nom d’utilisateur et un mot de passe entre les guillemets aux lignes 13 et 14, comme illustré ci-dessous, puis enregistrez le fichier.
 
-  ```bash
-  "adminUsername": "XXX",
-  "adminPassword": "YYY",
-  ```
+   ```bash
+   "adminUsername": "XXX",
+   "adminPassword": "YYY",
+   ```
 2. Exécutez `azbb` pour déployer la VM de l’appliance virtuelle réseau et les itinéraires définis par l’utilisateur.
 
-  ```bash
-  azbb -s <subscription_id> -g hub-nva-rg - l <location> -p hub-nva.json --deploy
-  ```
-  > [!NOTE]
-  > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `hub-nva-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
+   ```bash
+   azbb -s <subscription_id> -g hub-nva-rg - l <location> -p hub-nva.json --deploy
+   ```
+   > [!NOTE]
+   > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `hub-nva-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
 
 ### <a name="azure-spoke-vnets"></a>Réseaux virtuels spokes Azure
 
@@ -209,31 +210,31 @@ Pour déployer les réseaux virtuels spokes, procédez comme suit.
 
 1. Ouvrez le fichier `spoke1.json` et entrez un nom d’utilisateur et un mot de passe entre les guillemets aux lignes 52 et 53, comme illustré ci-dessous, puis enregistrez le fichier.
 
-  ```bash
-  "adminUsername": "XXX",
-  "adminPassword": "YYY",
-  ```
+   ```bash
+   "adminUsername": "XXX",
+   "adminPassword": "YYY",
+   ```
 
 2. À la ligne 54, pour `osType`, saisissez `Windows` ou `Linux` pour installer le système d’exploitation Windows Server 2016 Datacenter ou Ubuntu 16.04 sur le serveur de rebond.
 
 3. Exécutez `azbb` pour déployer le premier environnement de réseau virtuel spoke, comme indiqué ci-dessous.
 
-  ```bash
-  azbb -s <subscription_id> -g spoke1-vnet-rg - l <location> -p spoke1.json --deploy
-  ```
+   ```bash
+   azbb -s <subscription_id> -g spoke1-vnet-rg - l <location> -p spoke1.json --deploy
+   ```
   
-  > [!NOTE]
-  > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `spoke1-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
+   > [!NOTE]
+   > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `spoke1-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
 
-3. Répétez l’étape 1 ci-dessus pour le fichier `spoke2.json`.
+4. Répétez l’étape 1 ci-dessus pour le fichier `spoke2.json`.
 
-4. Exécutez `azbb` pour déployer le deuxième environnement de réseau virtuel spoke, comme indiqué ci-dessous.
+5. Exécutez `azbb` pour déployer le deuxième environnement de réseau virtuel spoke, comme indiqué ci-dessous.
 
-  ```bash
-  azbb -s <subscription_id> -g spoke2-vnet-rg - l <location> -p spoke2.json --deploy
-  ```
-  > [!NOTE]
-  > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `spoke2-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
+   ```bash
+   azbb -s <subscription_id> -g spoke2-vnet-rg - l <location> -p spoke2.json --deploy
+   ```
+   > [!NOTE]
+   > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `spoke2-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
 
 ### <a name="azure-hub-vnet-peering-to-spoke-vnets"></a>Appairage de réseaux virtuels hub Azure avec des réseaux virtuels spokes
 
@@ -243,12 +244,12 @@ Procédez comme suit pour créer une connexion d’homologation entre le réseau
 
 2. Exécutez `azbb` pour déployer le premier environnement de réseau virtuel spoke, comme indiqué ci-dessous.
 
-  ```bash
-  azbb -s <subscription_id> -g hub-vnet-rg - l <location> -p hub-vnet-peering.json --deploy
-  ```
+   ```bash
+   azbb -s <subscription_id> -g hub-vnet-rg - l <location> -p hub-vnet-peering.json --deploy
+   ```
 
-  > [!NOTE]
-  > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `hub-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
+   > [!NOTE]
+   > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `hub-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
 
 <!-- links -->
 
@@ -270,7 +271,7 @@ Procédez comme suit pour créer une connexion d’homologation entre le réseau
 [vpn-appliance]: /azure/vpn-gateway/vpn-gateway-about-vpn-devices
 [windows-vm-ra]: ../virtual-machines-windows/index.md
 
-[visio-download]: https://archcenter.azureedge.net/cdn/hybrid-network-hub-spoke.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/hybrid-network-hub-spoke.vsdx
 [ref-arch-repo]: https://github.com/mspnp/reference-architectures
 [0]: ./images/shared-services.png "Topologie de service partagé dans Azure"
 [3]: ./images/hub-spokehub-spoke.svg "Topologie hub-and-spoke/hub-and-spoke dans Azure"

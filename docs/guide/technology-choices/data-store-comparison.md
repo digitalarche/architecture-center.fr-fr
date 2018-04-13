@@ -1,12 +1,12 @@
 ---
-title: "Critères de sélection d’une banque de données"
-description: "Vue d’ensemble des options de calcul Azure"
+title: Critères de sélection d’une banque de données
+description: Vue d’ensemble des options de calcul Azure
 author: MikeWasson
-ms.openlocfilehash: 7fb75cd334438c5b985fa04ad8afe3236f2391f8
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9cb2f77b854a38450490bc96bf0b6a2998ceb1c7
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="criteria-for-choosing-a-data-store"></a>Critères de sélection d’une banque de données
 
@@ -24,7 +24,7 @@ Pour débuter votre comparaison, rassemblez le maximum d’informations ci-desso
 - **Relations entre les données** : vos données devront-elles prendre en charge des relations un-à-plusieurs ou plusieurs à plusieurs ? Les relations proprement dites constituent-elles une part importante des données ? Prévoyez-vous de joindre ou de combiner les données d’un même jeu de données ou de plusieurs jeux de données externes ? 
 - **Modèle de cohérence** : quelle importance accordez-vous à ce que les mises à jour effectuées dans un nœud apparaissent dans les autres nœuds, avant que d’autres modifications puissent avoir lieu ? Pouvez-vous accepter la cohérence éventuelle ? Avez-vous besoin de garanties ACID pour les transactions ?
 - **Flexibilité de schéma** : quel type de schéma appliquerez-vous à vos données ? Allez-vous utiliser un schéma fixe, une approche de schéma à l’écriture ou une approche de schéma à la lecture ?
-- **Accès concurrentiel** : quel type de mécanisme d’accès concurrentiel souhaitez-vous utiliser durant la mise à jour et la synchronisation des données ? L’application sera-t-elle appelée à procéder à de nombreuses mises à jour qui pourraient potentiellement entrer en conflit ? Dans ce cas, vous aurez peut-être besoin du verrouillage des enregistrements et du contrôle d’accès concurrentiel pessimiste. Sinon, pouvez vous prendre en charge les contrôles d’accès concurrentiel optimiste ? Dans ce cas, le contrôle d’accès concurrentiel basé sur l’horodatage est-il suffisant ou avez-vous besoin de l’ajout de la fonctionnalité de contrôle d’accès concurrentiel multiversion ?
+- **Accès concurrentiel**. quel type de mécanisme d’accès concurrentiel souhaitez-vous utiliser durant la mise à jour et la synchronisation des données ? L’application sera-t-elle appelée à procéder à de nombreuses mises à jour qui pourraient potentiellement entrer en conflit ? Dans ce cas, vous aurez peut-être besoin du verrouillage des enregistrements et du contrôle d’accès concurrentiel pessimiste. Sinon, pouvez vous prendre en charge les contrôles d’accès concurrentiel optimiste ? Dans ce cas, le contrôle d’accès concurrentiel basé sur l’horodatage est-il suffisant ou avez-vous besoin de l’ajout de la fonctionnalité de contrôle d’accès concurrentiel multiversion ?
 - **Déplacement des données** : votre solution devra-t-elle effectuer des tâches ETL pour déplacer les données vers d’autres banques ou entrepôts de données ?
 - **Cycle de vie des données** : les données sont-elles écrites une fois et lues autant de fois que souhaité ? Peuvent-elles être déplacées dans un espace de stockage froid ?
 - **Autres fonctionnalités prises en charge** : avez-vous besoin d’autres fonctionnalités spécifiques, telles que la validation de schéma, l’agrégation, l’indexation, la recherche en texte intégral, MapReduce ou d’autres fonctions de requête ?
@@ -47,7 +47,7 @@ Pour débuter votre comparaison, rassemblez le maximum d’informations ci-desso
 
 ### <a name="security"></a>Sécurité
 
-- **Sécurité** : de quel type de chiffrement avez-vous besoin ? Avez-vous besoin d’un chiffrement au repos ? Quel mécanisme d’authentification voulez-vous utiliser pour vous connecter à vos données ?
+- **Sécurité**. de quel type de chiffrement avez-vous besoin ? Avez-vous besoin d’un chiffrement au repos ? Quel mécanisme d’authentification voulez-vous utiliser pour vous connecter à vos données ?
 - **Audit** : quel type de journal d’audit avez-vous besoin de générer ?
 - **Spécifications réseau** : devez-vous limiter ou gérer l’accès à vos données à partir d’autres ressources réseau ? Les données ne doivent-elle être accessibles qu’à l’intérieur de l’environnement Azure ? Les données doivent-elle être accessibles à partir d’adresses IP ou de sous-réseaux spécifiques ? Doivent-elles être accessibles à partir d’applications ou de services hébergés localement ou dans d’autres centres de données externes ?
 
@@ -61,7 +61,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
 ## <a name="relational-database-management-systems-rdbms"></a>Systèmes de gestion de base de données relationnelle (SGBDR)
 
 <table>
-<tr><td>**Charge de travail**</td>
+<tr><td><strong>Charge de travail</strong></td>
     <td>
         <ul>
             <li>La création d’enregistrements et la mise à jour des données existantes se produisent régulièrement.</li>
@@ -74,7 +74,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Type de données**</td>
+<tr><td><strong>Type de données</strong></td>
     <td>
         <ul>
             <li>Les données sont très normalisées.</li>
@@ -87,7 +87,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Exemples**</td>
+<tr><td><strong>Exemples</strong></td>
     <td>
         <ul>
             <li>Applications métier (gestion du capital humain, gestion de la relation client, planification des ressources d’entreprise)</li>
@@ -105,7 +105,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
 ## <a name="document-databases"></a>Bases de données de documents
 
 <table>
-<tr><td>**Charge de travail**</td>
+<tr><td><strong>Charge de travail</strong></td>
     <td>
         <ul>
             <li>Usage général.</li>
@@ -117,7 +117,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
             <li>Les documents individuels sont récupérés et écrits en un seul bloc.</li>
     </td>
 </tr>
-<tr><td>**Type de données**</td>
+<tr><td><strong>Type de données</strong></td>
     <td>
         <ul>
             <li>Les données peuvent être gérées de façon dénormalisée.</li>
@@ -129,7 +129,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Exemples**</td>
+<tr><td><strong>Exemples</strong></td>
     <td>
         <ul>
             <li>Catalogue produits</li>
@@ -149,7 +149,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
 ## <a name="keyvalue-stores"></a>Magasins de clés/valeurs
 
 <table>
-<tr><td>**Charge de travail**</td>
+<tr><td><strong>Charge de travail</strong></td>
     <td>
         <ul>
             <li>L’identification des données et l’accès à celles-ci se fait au moyen d’une clé d’ID unique, comme un dictionnaire.</li>
@@ -160,7 +160,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Type de données**</td>
+<tr><td><strong>Type de données</strong></td>
     <td>
         <ul>
             <li>Les données ont tendance à être volumineuses.</li>
@@ -170,7 +170,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Exemples**</td>
+<tr><td><strong>Exemples</strong></td>
     <td>
         <ul>
             <li>Mise en cache des données</li>
@@ -186,7 +186,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
 ## <a name="graph-databases"></a>Bases de données de graphiques
 
 <table>
-<tr><td>**Charge de travail**</td>
+<tr><td><strong>Charge de travail</strong></td>
     <td>
         <ul>
             <li>Les relations entre les éléments de données sont très complexes, impliquant de nombreux sauts entre les éléments de données associés.</li>
@@ -195,7 +195,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Type de données**</td>
+<tr><td><strong>Type de données</strong></td>
     <td>
         <ul>
             <li>Les données sont constituées de nœuds et de relations.</li>
@@ -205,7 +205,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Exemples**</td>
+<tr><td><strong>Exemples</strong></td>
     <td>
         <ul>
             <li>Organigrammes</li>
@@ -221,7 +221,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
 ## <a name="column-family-databases"></a>Bases de données de familles de colonnes
 
 <table>
-<tr><td>**Charge de travail**</td>
+<tr><td><strong>Charge de travail</strong></td>
     <td>
         <ul>
             <li>La plupart des bases de données de familles de colonnes effectuent les opérations d’écriture de manière extrêmement rapide.</li>
@@ -232,7 +232,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Type de données**</td>
+<tr><td><strong>Type de données</strong></td>
     <td>
         <ul>
             <li>Les données sont stockées dans des tables comprenant une colonne clé et une ou plusieurs familles de colonnes.</li>
@@ -242,12 +242,12 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Exemples**</td>
+<tr><td><strong>Exemples</strong></td>
     <td>
         <ul>
             <li>Recommandations</li>
             <li>Personnalisation</li>
-            <li>Données de capteur</li>
+            <li>données de capteur</li>
             <li>Télémétrie</li>
             <li>Messagerie</li>
             <li>Analytique des réseaux sociaux</li>
@@ -262,7 +262,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
 ## <a name="search-engine-databases"></a>Bases de données de moteur de recherche
 
 <table>
-<tr><td>**Charge de travail**</td>
+<tr><td><strong>Charge de travail</strong></td>
     <td>
         <ul>
             <li>Indexation de données de plusieurs sources et services.</li>
@@ -274,7 +274,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Type de données**</td>
+<tr><td><strong>Type de données</strong></td>
     <td>
         <ul>
             <li>Semi-structurées ou non structurées</li>
@@ -283,7 +283,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Exemples**</td>
+<tr><td><strong>Exemples</strong></td>
     <td>
         <ul>
             <li>Catalogue produits</li>
@@ -299,25 +299,25 @@ Les sections suivantes comparent les différents modèles de banque de données 
 ## <a name="data-warehouse"></a>Entrepôt de données
 
 <table>
-<tr><td>**Charge de travail**</td>
+<tr><td><strong>Charge de travail</strong></td>
     <td>
         <ul>
-            <li>Analytique données</li>
+            <li>Analyse de données</li>
             <li>Décisionnel d’entreprise   </li>
         </ul>
     </td>
 </tr>
-<tr><td>**Type de données**</td>
+<tr><td><strong>Type de données</strong></td>
     <td>
         <ul>
             <li>Données d’historique de plusieurs sources.</li>
-            <li>Généralement dénormalisé dans un schéma « en étoile » ou « en flocon », constitué de tables de faits et de dimensions.</li>
+            <li>Généralement dénormalisé dans un schéma &quot;en étoile&quot; ou &quot;en flocon&quot;, constitué de tables de faits et de dimensions.</li>
             <li>Généralement chargé de façon régulière avec de nouvelles données.</li>
-            <li>Les tables de dimension comprennent souvent plusieurs versions historiques d’une entité, appelée *dimension à variation lente*.</li>
+            <li>Les tables de dimension comprennent souvent plusieurs versions historiques d’une entité, appelée <em>dimension à variation lente</em>.</li>
         </ul>
     </td>
 </tr>
-<tr><td>**Exemples**</td>
+<tr><td><strong>Exemples</strong></td>
     <td>Entrepôt de données d’entreprise fournissant des données pour des modèles, rapports et tableaux de bord analytiques.
     </td>
 </tr>
@@ -327,7 +327,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
 ## <a name="time-series-databases"></a>Bases de données de séries chronologiques
 
 <table>
-<tr><td>**Charge de travail**</td>
+<tr><td><strong>Charge de travail</strong></td>
     <td>
         <ul>
             <li>Les opérations sont dans une très large proportion (95-99 %) des écritures.</li>
@@ -340,7 +340,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Type de données**</td>
+<tr><td><strong>Type de données</strong></td>
     <td>
         <ul>
             <li>Horodatage utilisé comme clé primaire et mécanisme de tri.</li>
@@ -349,7 +349,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Exemples**</td>
+<tr><td><strong>Exemples</strong></td>
     <td>
         <ul>
             <li>Surveillance et données de télémétrie des événements.</li>
@@ -362,7 +362,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
 ## <a name="object-storage"></a>Stockage d’objets
 
 <table>
-<tr><td>**Charge de travail**</td>
+<tr><td><strong>Charge de travail</strong></td>
     <td>
         <ul>
             <li>Identifié par la clé.</li>
@@ -372,7 +372,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Type de données**</td>
+<tr><td><strong>Type de données</strong></td>
     <td>
         <ul>
             <li>Données volumineuses.</li>
@@ -381,7 +381,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Exemples**</td>
+<tr><td><strong>Exemples</strong></td>
     <td>
         <ul>
             <li>Images, vidéos, documents Office, PDF</li>
@@ -397,7 +397,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
 ## <a name="shared-files"></a>Fichiers partagés
 
 <table>
-<tr><td>**Charge de travail**</td>
+<tr><td><strong>Charge de travail</strong></td>
     <td>
         <ul>
             <li>Migration à partir d’applications existantes qui interagissent avec le système de fichiers.</li>
@@ -405,7 +405,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Type de données**</td>
+<tr><td><strong>Type de données</strong></td>
     <td>
         <ul>
             <li>Fichiers figurant dans un ensemble hiérarchique de dossiers.</li>
@@ -413,7 +413,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
         </ul>
     </td>
 </tr>
-<tr><td>**Exemples**</td>
+<tr><td><strong>Exemples</strong></td>
     <td>
         <ul>
             <li>Fichiers hérités</li>

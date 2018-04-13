@@ -1,16 +1,16 @@
 ---
-title: "Exécuter des machines virtuelles Windows pour une architecture multiniveau"
-description: "Découvrez comment implémenter une architecture multiniveau dans Azure, en privilégiant la disponibilité, la sécurité, la scalabilité et la facilité de gestion."
+title: Exécuter des machines virtuelles Windows pour une architecture multiniveau
+description: Découvrez comment implémenter une architecture multiniveau dans Azure, en privilégiant la disponibilité, la sécurité, la scalabilité et la facilité de gestion.
 author: MikeWasson
 ms.date: 11/22/2016
 pnp.series.title: Windows VM workloads
 pnp.series.next: multi-region-application
 pnp.series.prev: multi-vm
-ms.openlocfilehash: 0654239a5bbd966a2aa776415b7f15ae723ffd63
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 5ed94eb9ab8203d35d9597336e367d54e03944d7
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-windows-vms-for-an-n-tier-application"></a>Exécuter des machines virtuelles Windows pour une architecture multiniveau
 
@@ -29,7 +29,7 @@ Il existe de nombreuses façons d’implémenter une architecture multiniveau. L
 * **Équilibreurs de charge.** Utilisez un [équilibreur de charge accessible sur Internet][load-balancer-external] pour distribuer le trafic Internet entrant vers le niveau Web et un [équilibreur de charge interne][load-balancer-internal] pour distribuer le trafic réseau du niveau Web vers le niveau Business.
 * **Serveur de rebond (jumpbox).** Également appelée [hôte bastion]. Machine virtuelle sécurisée sur le réseau, utilisée par les administrateurs pour se connecter aux autres machines virtuelles. Le serveur de rebond a un groupe de sécurité réseau qui autorise le trafic distant provenant uniquement d’adresses IP publiques figurant sur une liste verte. Le groupe de sécurité réseau doit autoriser le trafic RDP (Bureau à distance).
 * **Surveillance.** Des logiciels de surveillance tels que [Nagios], [Zabbix] ou [Icinga] peuvent vous donner une idée du temps de réponse, du temps de fonctionnement de machine virtuelle et de l’intégrité globale de votre système. Installez le logiciel de surveillance sur une machine virtuelle placée sur un sous-réseau de gestion distinct.
-* **Groupes de sécurité réseau.** Utilisez des [groupes de sécurité réseau][nsg] pour limiter le trafic réseau au sein du réseau virtuel. Par exemple, dans l’architecture à 3 niveaux illustrée ici, le niveau base de données n’accepte pas le trafic en provenance du frontend web, mais uniquement du niveau Business et du sous-réseau de gestion.
+* <strong>Groupes de sécurité réseau.</strong> Utilisez des [groupes de sécurité réseau][nsg] pour limiter le trafic réseau au sein du réseau virtuel. Par exemple, dans l’architecture à 3 niveaux illustrée ici, le niveau base de données n’accepte pas le trafic en provenance du frontend web, mais uniquement du niveau Business et du sous-réseau de gestion.
 * **Groupe de disponibilité SQL Server AlwaysOn.** Fournit une haute disponibilité du niveau Données, en activant la réplication et le basculement.
 * **Serveurs AD DS (Active Directory Domain Services)**. Avec les versions antérieures à Windows Server 2016, les groupes de disponibilité SQL Server AlwaysOn doivent être joints à un domaine. Ceci est dû au fait que les groupes de disponibilité reposent sur la technologie WSFC (Cluster de basculement Windows Server). Windows Server 2016 introduit la possibilité de créer un cluster de basculement sans Active Directory, auquel cas les serveurs de domaine Active Directory ne sont pas nécessaires pour cette architecture. Pour plus d’informations, consultez [Nouveautés du clustering de basculement dans Windows Server 2016][wsfc-whats-new].
 * **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.
@@ -82,10 +82,10 @@ Configurez le groupe de disponibilité SQL Server AlwaysOn comme suit :
 3. Créez un écouteur de groupe de disponibilité et mappez le nom DNS de l’écouteur à l’adresse IP d’un équilibreur de charge interne. 
 4. Créez une règle d’équilibreur de charge pour le port d’écoute SQL Server (port TCP 1433 par défaut). La règle d’équilibreur de charge doit activer *l’adresse IP flottante*, également appelé Retour direct du serveur. Cela force la machine virtuelle à répondre directement au client, ce qui permet de bénéficier d’une connexion directe au réplica principal.
   
-  > [!NOTE]
-  > Quand l’adresse IP flottante est activée, le numéro de port frontend doit être identique au numéro de port backend dans la règle d’équilibreur de charge.
-  > 
-  > 
+   > [!NOTE]
+   > Quand l’adresse IP flottante est activée, le numéro de port frontend doit être identique au numéro de port backend dans la règle d’équilibreur de charge.
+   > 
+   > 
 
 Quand un client SQL tente de se connecter, l’équilibreur de charge achemine la demande de connexion au réplica principal. En cas de basculement vers un autre réplica, l’équilibreur de charge achemine automatiquement les demandes suivantes à un nouveau réplica principal. Pour plus d’informations, consultez [Configurer un écouteur à équilibrage de charge interne pour des groupes de disponibilité SQL Server AlwaysOn][sql-alwayson-ilb].
 
@@ -131,25 +131,26 @@ Simplifiez la gestion de l’ensemble du système en utilisant des outils d’ad
 
 Un déploiement pour cette architecture de référence est disponible sur [GitHub][github-folder]. 
 
-### <a name="prerequisites"></a>Conditions préalables
+### <a name="prerequisites"></a>Prérequis
+
 
 Avant de pouvoir déployer l’architecture de référence sur votre propre abonnement, vous devez effectuer les étapes suivantes.
 
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le dépôt GitHub des [architectures de référence AzureCAT][ref-arch-repo].
+1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][ref-arch-repo].
 
 2. Vérifiez qu’Azure CLI 2.0 est installé sur votre ordinateur. Pour installer l’interface CLI, suivez les instructions fournies dans [Installer Azure CLI 2.0][azure-cli-2].
 
 3. Installez le package npm des [modules Azure][azbb].
 
-  ```bash
-  npm install -g @mspnp/azure-building-blocks
-  ```
+   ```bash
+   npm install -g @mspnp/azure-building-blocks
+   ```
 
 4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de l’une des commandes ci-dessous et suivez les invites.
 
-  ```bash
-  az login
-  ```
+   ```bash
+   az login
+   ```
 
 ### <a name="deploy-the-solution-using-azbb"></a>Déployer la solution à l’aide d’azbb
 
@@ -159,18 +160,18 @@ Pour déployer les machines virtuelles Windows pour une architecture de référe
 
 2. Le fichier de paramètres spécifie un nom d’utilisateur et un mot de passe administrateur par défaut pour chaque machine virtuelle dans le déploiement. Vous devez les modifier avant de déployer l’architecture de référence. Ouvrez le fichier `n-tier-windows.json` et remplacez chaque champ **adminUsername** et **adminPassword** par vos nouveaux paramètres.
   
-  > [!NOTE]
-  > Plusieurs scripts s’exécutent pendant ce déploiement, à la fois dans les objets **VirtualMachineExtension** et dans les paramètres **extensions** pour certains des objets **VirtualMachine**. Certains de ces scripts nécessitent le nom d’utilisateur et le mot de passe administrateur que vous venez de modifier. Il est recommandé que vous passiez en revue ces scripts pour vous assurer que vous avez spécifié les bonnes informations d’identification. Le déploiement risque d’échouer si vous n’avez pas spécifié les bonnes informations d’identification.
-  > 
-  > 
+   > [!NOTE]
+   > Plusieurs scripts s’exécutent pendant ce déploiement, à la fois dans les objets **VirtualMachineExtension** et dans les paramètres **extensions** pour certains des objets **VirtualMachine**. Certains de ces scripts nécessitent le nom d’utilisateur et le mot de passe administrateur que vous venez de modifier. Il est recommandé que vous passiez en revue ces scripts pour vous assurer que vous avez spécifié les bonnes informations d’identification. Le déploiement risque d’échouer si vous n’avez pas spécifié les bonnes informations d’identification.
+   > 
+   > 
 
 Enregistrez le fichier .
 
 3. Déployez l’architecture de référence à l’aide de l’outil de ligne de commande **azbb**, comme indiqué ci-dessous.
 
-  ```bash
-  azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-windows.json --deploy
-  ```
+   ```bash
+   azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-windows.json --deploy
+   ```
 
 Pour plus d’informations sur le déploiement de cet exemple d’architecture de référence à l’aide des blocs de construction Azure, visitez notre [référentiel GitHub][git].
 
@@ -216,5 +217,5 @@ Pour plus d’informations sur le déploiement de cet exemple d’architecture d
 [Nagios]: https://www.nagios.org/
 [Zabbix]: http://www.zabbix.com/
 [Icinga]: http://www.icinga.org/
-[visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [0]: ./images/n-tier-diagram.png "Architecture multiniveau à l’aide de Microsoft Azure"

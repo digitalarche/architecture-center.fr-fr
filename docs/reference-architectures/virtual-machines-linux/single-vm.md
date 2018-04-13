@@ -1,16 +1,16 @@
 ---
-title: "Exécuter une machine virtuelle Linux dans Azure"
-description: "Comment exécuter une machine virtuelle Linux sur Azure, en privilégiant l’évolutivité, la résilience, la gestion et la sécurité."
+title: Exécuter une machine virtuelle Linux dans Azure
+description: Comment exécuter une machine virtuelle Linux sur Azure, en privilégiant l’évolutivité, la résilience, la gestion et la sécurité.
 author: telmosampaio
-ms.date: 12/12/2017
+ms.date: 04/03/2018
 pnp.series.title: Linux VM workloads
 pnp.series.next: multi-vm
 pnp.series.prev: ./index
-ms.openlocfilehash: 7caef46e53b42011b5a12ef53384c0352b9b9a72
-ms.sourcegitcommit: c9e6d8edb069b8c513de748ce8114c879bad5f49
+ms.openlocfilehash: 50e23b00dd898c0b8e6230730ecf27323ee50d14
+ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="run-a-linux-vm-on-azure"></a>Exécuter une machine virtuelle Linux dans Azure
 
@@ -22,31 +22,37 @@ Cette architecture de référence présente un ensemble de pratiques éprouvées
 
 ## <a name="architecture"></a>Architecture
 
-L’approvisionnement d’une machine virtuelle Azure requiert des composants supplémentaires, tels que les ressources de calcul, de mise en réseau et de stockage.
+L’approvisionnement d’une machine virtuelle Azure requiert des composants supplémentaires en plus de la machine virtuelle elle-même, notamment les ressources de mise en réseau et de stockage.
 
-* **Groupe de ressources.** Un [groupe de ressources][resource-manager-overview] est un conteneur qui héberge des ressources associées. En général, vous devez regrouper les ressources d’une solution en fonction de leur durée de vie et de la personne qui doit gérer les ressources. Pour une charge de travail de machine virtuelle unique, vous souhaiterez peut-être créer un seul groupe de ressources pour toutes les ressources.
+* **Groupe de ressources.** Un [groupe de ressources][resource-manager-overview] est un conteneur logique qui héberge les ressources Azure associées. En règle générale, regroupez les ressources en fonction de leur durée de vie et de qui va les gérer. 
+
 * **Machine virtuelle**. Vous pouvez approvisionner une machine virtuelle issue d’une liste d’images publiées, d’une image managée personnalisée ou d’un fichier de disque dur virtuel (VHD) chargé(e) dans Stockage Blob Azure. Azure prend en charge l’exécution de plusieurs distributions Linux populaires, y compris CentOS, Debian, Red Hat Enterprise, Ubuntu et FreeBSD. Pour en savoir plus, voir [Azure et Linux][azure-linux].
-* **Disque du système d’exploitation.** Le disque du système d’exploitation est un disque dur virtuel stocké dans [Stockage Azure][azure-storage], donc il persiste même lorsque l’ordinateur hôte est arrêté. Pour les machines virtuelles Linux, le disque du système d’exploitation est `/dev/sda1`.
-* **Disque temporaire** La machine virtuelle est créée avec un disque temporaire. Ce disque est stocké sur un lecteur physique de l’ordinateur hôte. Il n’est **pas** enregistré dans Stockage Azure et peut être supprimé lors des redémarrages ou d’autres événements de cycle de vie de la machine virtuelle. N’utilisez ce disque que pour des données temporaires, telles que des fichiers de pagination ou d’échange. Pour les machines virtuelles Linux, le disque temporaire est `/dev/sdb1`. Il est monté sur `/mnt/resource` ou `/mnt`.
-* **Disques de données.** Un [disque de données][data-disk] est un disque dur virtuel persistant utilisé pour les données d’application. Les disques de données sont stockés dans Stockage Azure, comme le disque du système d’exploitation.
-* **Réseau virtuel (VNet) et sous-réseau.** Chaque machine virtuelle Azure est déployée dans un réseau virtuel qui peut être segmenté en plusieurs sous-réseaux.
+
+* **Disques managés**. [Les disques managés Azure][managed-disks] simplifient la gestion des disques en gérant le stockage pour vous. Le disque du système d’exploitation est un disque dur virtuel stocké dans [Stockage Azure][azure-storage], donc il persiste même lorsque l’ordinateur hôte est arrêté. Pour les machines virtuelles Linux, le disque du système d’exploitation est `/dev/sda1`. Nous vous recommandons également de créer un ou plusieurs [disques de données][data-disk], qui sont des disques durs virtuels persistants utilisés pour les données d’application. 
+
+* **Disque temporaire** La machine virtuelle est créée avec un disque temporaire. Ce disque est stocké sur un lecteur physique de l’ordinateur hôte. Il n’est *pas* enregistré dans Stockage Azure et peut être supprimé lors des redémarrages ou d’autres événements de cycle de vie de la machine virtuelle. N’utilisez ce disque que pour des données temporaires, telles que des fichiers de pagination ou d’échange. Pour les machines virtuelles Linux, le disque temporaire est `/dev/sdb1`. Il est monté sur `/mnt/resource` ou `/mnt`.
+
+* **Réseau virtuel (VNet).** Chaque machine virtuelle Azure est déployée dans un réseau virtuel qui peut être segmenté en plusieurs sous-réseaux.
+
+* **Interfaces réseau (NIC)**. La carte d’interface réseau permet à la machine virtuelle de communiquer avec le réseau virtuel.
+
 * **Adresse IP publique.** Une adresse IP publique est nécessaire pour communiquer avec la machine virtuelle, par exemple par le biais du protocole SSH.
+
 * **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.
-* **Interfaces réseau (NIC)**. La carte d’interface réseau assignée permet à la machine virtuelle de communiquer avec le réseau virtuel.
-* **Groupe de sécurité réseau**. Les [groupes de sécurité réseau][nsg] sont utilisés pour autoriser ou refuser le trafic réseau vers une ressource réseau. Vous pouvez associer un NSG à une carte réseau individuelle ou à un sous-réseau. Si vous l’associez à un sous-réseau, les règles du NSG s’appliquent à toutes les machines virtuelles de ce sous-réseau.
+
+* **Groupe de sécurité réseau**. Les [groupes de sécurité réseau][nsg] sont utilisés pour autoriser ou refuser le trafic réseau vers des machines virtuelles. Les groupes de sécurité réseau peuvent être associés à des sous-réseaux ou à des instances de machine virtuelle individuelles.
+
 * **Diagnostics.** La journalisation des diagnostics est essentielle à la gestion et au dépannage de la machine virtuelle.
 
 ## <a name="recommendations"></a>Recommandations
 
-Cette architecture présente les recommandations de base pour l’exécution d’une machine virtuelle Linux dans Azure. Nous vous déconseillons toutefois d’utiliser une seule et même machine virtuelle pour les charges de travail critiques, car ce faisant, un point de défaillance unique est créé. Pour bénéficier d’une disponibilité plus élevée, vous devez déployer plusieurs machines virtuelles dans un [groupe à haute disponibilité][availability-set]. Pour plus d’informations, voir [Running multiple VMs on Azure (Exécution de plusieurs machines virtuelles sur Azure)][multi-vm]. 
+Cette architecture présente les recommandations de base pour l’exécution d’une machine virtuelle Linux dans Azure. Nous vous déconseillons toutefois d’utiliser une seule et même machine virtuelle pour les charges de travail critiques, car ce faisant, un point de défaillance unique est créé. Pour augmenter la disponibilité, déployez au moins deux machines virtuelles soumises à l’équilibrage de charge. Pour plus d’informations, voir [Running multiple VMs on Azure (Exécution de plusieurs machines virtuelles sur Azure)][multi-vm].
 
 ### <a name="vm-recommendations"></a>Recommandations pour les machines virtuelles
 
-Azure propose de nombreuses tailles de machines virtuelles. Le [Stockage Premium][premium-storage] est recommandé en raison de ses hautes performances et d’une faible latence, et il est [pris en charge par des tailles de machine virtuelle spécifiques][premium-storage-supported]. Choisissez l’une de ces tailles, sauf si vous disposez d’une charge de travail spécialisée telle qu’un système de calcul hautes performances. Pour plus d’informations, consultez [Tailles de machines virtuelles][virtual-machine-sizes].
+Azure propose de nombreuses tailles de machines virtuelles. Pour plus d’informations, consultez [Tailles des machines virtuelles sur Azure][virtual-machine-sizes]. Si vous déplacez une charge de travail vers Azure, commencez par choisir la taille de machine virtuelle qui correspond le mieux à vos serveurs locaux. Mesurez ensuite les performances de votre charge de travail réelle en termes de processeur, de mémoire et d’opérations d’entrée/sortie par seconde du disque, puis ajustez la taille selon vos besoins. Si vous avez besoin de plusieurs cartes réseau (NIC) pour votre machine virtuelle, notez que le nombre maximal de cartes NIC est défini pour chaque [taille de machine virtuelle][vm-size-tables].
 
-Si vous déplacez une charge de travail vers Azure, commencez par choisir la taille de machine virtuelle qui correspond le mieux à vos serveurs locaux. Mesurez ensuite les performances de votre charge de travail réelle en termes de processeur, de mémoire et d’opérations d’entrée/sortie par seconde du disque, puis ajustez la taille selon vos besoins. Si vous avez besoin de plusieurs cartes réseau (NIC) pour votre machine virtuelle, notez que le nombre maximal de cartes NIC est défini pour chaque [taille de machine virtuelle][vm-size-tables].
-
-Lorsque vous approvisionnez des ressources Azure, vous devez spécifier une région. En général, choisissez une région la plus proche possible de vos utilisateurs internes ou de vos clients. Sachez toutefois que certaines tailles de machine virtuelle ne sont pas disponibles dans toutes les régions. Pour en savoir plus, consultez [Services par région][services-by-region]. Pour obtenir la liste des tailles de machine virtuelle disponibles dans une région spécifique, exécutez la commande suivante dans l’interface de ligne de commande (CLI) Azure :
+En général, choisissez une région Azure la plus proche possible de vos utilisateurs internes ou de vos clients. Sachez toutefois que certaines tailles de machine virtuelle ne sont pas disponibles dans toutes les régions. Pour en savoir plus, consultez [Services par région][services-by-region]. Pour obtenir la liste des tailles de machine virtuelle disponibles dans une région spécifique, exécutez la commande suivante dans l’interface de ligne de commande (CLI) Azure :
 
 ```
 az vm list-sizes --location <location>
@@ -60,13 +66,9 @@ Permet la surveillance et le diagnostic, avec notamment des indicateurs d’int�
 
 Pour optimiser les performances d’E/S du disque, nous vous recommandons le [Stockage Premium][premium-storage], qui stocke les données sur des disques SSD. Le coût est basé sur la capacité du disque approvisionné. Le nombre d’E/S par seconde et le débit (c’est-à-dire le taux de transfert des données) dépendent également de la taille du disque. Lorsque vous approvisionnez un disque, vous devez donc tenir compte des trois facteurs : capacité, E/S par seconde et débit. 
 
-Nous vous recommandons également d’utiliser des [disques managés](/azure/storage/storage-managed-disks-overview). Les disques managés ne nécessitent pas de compte de stockage. Il vous suffit de spécifier leur taille et leur type, puis de les déployer en tant que ressource hautement disponible.
+Nous vous recommandons également d’utiliser des [disques managés][managed-disks]. Les disques managés ne nécessitent pas de compte de stockage. Il vous suffit de spécifier leur taille et leur type, puis de les déployer en tant que ressource hautement disponible.
 
-Si vous utilisez des disques non gérés, créez des comptes de stockage Azure distincts pour chaque machine virtuelle pour stocker les disques durs virtuels (VHD), afin d’éviter d’atteindre les [limites d’E/S par seconde][vm-disk-limits] des comptes de stockage.
-
-Ajoutez un ou plusieurs disques de données. Lorsque vous créez un disque dur virtuel, il n’est pas formaté. Connectez-vous à la machine virtuelle pour formater le disque. Si vous n’utilisez pas de disques managés et que vous avez un grand nombre de disques de données, n’oubliez pas les limites d’E/S du compte de stockage. Pour en savoir plus, voir les [limites du nombre de disques de machine virtuelle][vm-disk-limits].
-
-Dans l’interpréteur de commandes Linux, les disques de données sont affichés en tant que `/dev/sdc`, `/dev/sdd`, et ainsi de suite. Vous pouvez exécuter `lsblk` pour répertorier les périphériques de bloc, y compris les disques. Pour utiliser un disque de données, créez une partition et un système de fichiers, puis montez le disque. Par exemple : 
+Ajoutez un ou plusieurs disques de données. Lorsque vous créez un disque dur virtuel, il n’est pas formaté. Connectez-vous à la machine virtuelle pour formater le disque. Dans l’interpréteur de commandes Linux, les disques de données sont affichés en tant que `/dev/sdc`, `/dev/sdd`, et ainsi de suite. Vous pouvez exécuter `lsblk` pour répertorier les périphériques de bloc, y compris les disques. Pour utiliser un disque de données, créez une partition et un système de fichiers, puis montez le disque. Par exemple : 
 
 ```bat
 # Create a partition.
@@ -84,7 +86,11 @@ Lorsque vous ajoutez un disque de données, un numéro d’unité logique (LUN) 
 
 Vous pouvez modifier le planificateur d’E/S afin d’optimiser les performances des disques SSD, les disques des machines virtuelles associées à des comptes de Stockage Premium étant de type SSD. Il est généralement recommandé d’utiliser le planificateur NOOP pour les disques SSD, mais vous devez utiliser un outil tel que [iostat] pour surveiller les performances d’E/S du disque pour votre charge de travail.
 
-Pour maximiser les performances, créez un compte de stockage distinct destiné à héberger les journaux de diagnostic. Un compte de stockage localement redondant (LRS) standard suffit pour les journaux de diagnostic.
+Créez un compte de stockage pour contenir les journaux de diagnostic. Un compte de stockage localement redondant (LRS) standard suffit pour les journaux de diagnostic.
+
+> [!NOTE]
+> Si vous n’utilisez pas de disques managés, créez des comptes de stockage Azure distincts pour chaque machine virtuelle pour stocker les disques durs virtuels (VHD), afin d’éviter d’atteindre les [limites d’E/S par seconde][vm-disk-limits] des comptes de stockage. Tenez compte des limites d’E/S totales du compte de stockage. Pour en savoir plus, voir les [limites du nombre de disques de machine virtuelle][vm-disk-limits].
+
 
 ### <a name="network-recommendations"></a>Recommandations pour le réseau
 
@@ -99,15 +105,13 @@ Pour activer le protocole SSH, ajoutez une règle de groupe de sécurité résea
 
 ## <a name="scalability-considerations"></a>Considérations relatives à l’extensibilité
 
-Vous pouvez réduire ou augmenter la puissance d’une machine virtuelle en en [modifiant la taille][vm-resize]. Pour une mise à l’échelle horizontale, placez plusieurs machines virtuelles derrière un équilibreur de charge. Pour plus d’informations, voir [Exécution de plusieurs machines virtuelles sur Azure pour l’extensibilité et la disponibilité][multi-vm].
+Vous pouvez réduire ou augmenter la puissance d’une machine virtuelle en en [modifiant la taille][vm-resize]. Pour une mise à l’échelle horizontale, placez plusieurs machines virtuelles derrière un équilibreur de charge. Pour plus d’informations, consultez [Exécuter des machines virtuelles à charge équilibrée à des fins d’extensibilité et de disponibilité][multi-vm].
 
 ## <a name="availability-considerations"></a>Considérations relatives à la disponibilité
 
 Pour bénéficier d’une disponibilité plus élevée, déployez plusieurs machines virtuelles dans un groupe à haute disponibilité. Cette approche offre également un [contrat de niveau de service (SLA)][vm-sla] supérieur.
 
 Votre machine virtuelle peut être affectée par la [maintenance planifiée][planned-maintenance] ou la [maintenance non planifiée][manage-vm-availability]. Vous pouvez utiliser les [journaux de redémarrage de machine virtuelle][reboot-logs] pour déterminer si un redémarrage de la machine virtuelle a été provoqué par une maintenance planifiée.
-
-Les disques durs virtuels sont stockés dans [Stockage Azure][azure-storage]. Stockage Azure est répliqué à des fins de durabilité et de disponibilité.
 
 Pour vous protéger contre la perte accidentelle de données pendant les opérations normales (par exemple, en cas d’erreur d’un utilisateur), vous devez également implémenter des sauvegardes ponctuelles, à l’aide de [captures instantanées d’objets blob][blob-snapshot] ou d’un autre outil.
 
@@ -117,13 +121,9 @@ Pour vous protéger contre la perte accidentelle de données pendant les opérat
 
 **SSH**. Avant de créer une machine virtuelle Linux, générez une paire de clés publique-privée RSA 2048 bits. Utilisez le fichier de clé publique lorsque vous créez la machine virtuelle. Pour en savoir plus, voir [Utilisation de SSH avec Linux et Mac sur Azure][ssh-linux].
 
-**Arrêt d’une machine virtuelle.** Azure établit une distinction entre les états « arrêté » et « désalloué ». Vous payez lorsque l’état de la machine virtuelle est « arrêté », mais pas lorsque la machine virtuelle est désallouée.
+**Arrêt d’une machine virtuelle.** Azure établit une distinction entre les états « arrêté » et « désalloué ». Vous payez lorsque l’état de la machine virtuelle est « arrêté », mais pas lorsque la machine virtuelle est désallouée. Le bouton **Arrêter** du portail Azure désalloue la machine virtuelle. Si vous arrêtez la machine virtuelle par le biais du système d’exploitation pendant que vous êtes connecté, la machine virtuelle est arrêtée mais **non** désallouée. Vous serez donc toujours facturé.
 
-Le bouton **Arrêter** du portail Azure désalloue la machine virtuelle. Si vous arrêtez la machine virtuelle par le biais du système d’exploitation pendant que vous êtes connecté, la machine virtuelle est arrêtée mais **non** désallouée. Vous serez donc toujours facturé.
-
-**Suppression d’une machine virtuelle.** La suppression d’une machine virtuelle n’entraîne pas celle des disques durs virtuels. Vous pouvez donc supprimer la machine virtuelle, sans risque de perdre des données. Toutefois, vous serez toujours facturé pour le stockage. Pour supprimer le disque dur virtuel, supprimez le fichier de [Stockage Blob][blob-storage].
-
-Pour éviter toute suppression accidentelle, utilisez un [verrou de ressource][resource-lock] pour verrouiller tout le groupe de ressources ou des ressources individuelles, par exemple une machine virtuelle.
+**Suppression d’une machine virtuelle.** La suppression d’une machine virtuelle n’entraîne pas celle des disques durs virtuels. Vous pouvez donc supprimer la machine virtuelle, sans risque de perdre des données. Toutefois, vous serez toujours facturé pour le stockage. Pour supprimer le disque dur virtuel, supprimez le fichier de [Stockage Blob][blob-storage]. Pour éviter toute suppression accidentelle, utilisez un [verrou de ressource][resource-lock] pour verrouiller tout le groupe de ressources ou des ressources individuelles, par exemple une machine virtuelle.
 
 ## <a name="security-considerations"></a>Considérations relatives à la sécurité
 
@@ -151,44 +151,53 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github-folde
   * Une machine virtuelle exécutant la version la plus récente d’Ubuntu 16.04.3 LTS.
   * Un exemple d’extension de script personnalisé qui formate les deux disques de données et déploie Apache HTTP Server sur la machine virtuelle Ubuntu.
 
-### <a name="prerequisites"></a>Conditions préalables
+### <a name="prerequisites"></a>Prérequis
 
-Avant de pouvoir déployer l’architecture de référence sur votre propre abonnement, vous devez effectuer les étapes suivantes.
 
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le dépôt GitHub des [architectures de référence AzureCAT][ref-arch-repo].
+1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][ref-arch-repo].
 
 2. Vérifiez qu’Azure CLI 2.0 est installé sur votre ordinateur. Pour des instructions d’installation de l’interface de ligne de commande, consultez [Installer Azure CLI 2.0][azure-cli-2].
 
 3. Installez le package npm des [modules Azure][azbb].
 
-4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de l’une des commandes ci-dessous et suivez les invites.
+4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, entrez la commande suivante pour vous connecter à votre compte Azure.
 
-  ```bash
-  az login
-  ```
+   ```bash
+   az login
+   ```
+
+5. Créez une paire de clés SSH. Pour plus d’informations, consultez [Comment créer et utiliser une paire de clés publique et privée SSH pour les machines virtuelles Linux dans Azure](/azure/virtual-machines/linux/mac-create-ssh-keys).
 
 ### <a name="deploy-the-solution-using-azbb"></a>Déployer la solution à l’aide d’azbb
 
-Pour déployer l’exemple de charge de travail de machine virtuelle unique, effectuez les étapes suivantes :
+Pour déployer cette architecture de référence, effectuez les étapes suivantes :
 
-1. Accédez au dossier `virtual-machines\single-vm\parameters\linux` pour le dépôt que vous avez téléchargé à l’étape des prérequis ci-dessus.
+1. Accédez au dossier `virtual-machines/single-vm/parameters/linux` pour le dépôt que vous avez téléchargé à l’étape des prérequis ci-dessus.
 
-2. Ouvrez le fichier `single-vm-v2.json` et entrez un nom d’utilisateur et une clé publique SSH entre les guillemets, comme illustré ci-dessous, puis enregistrez le fichier.
+2. Ouvrez le fichier `single-vm-v2.json` et entrez votre nom d’utilisateur et votre clé publique SSH entre les guillemets, puis enregistrez le fichier.
 
-  ```bash
-  "adminUsername": "",
-  "sshPublicKey": "",
-  ```
+   ```bash
+   "adminUsername": "<your username>",
+   "sshPublicKey": "ssh-rsa AAAAB3NzaC1...",
+   ```
 
 3. Exécutez `azbb` pour déployer l’exemple de machine virtuelle, comme illustré ci-dessous.
 
-  ```bash
-  azbb -s <subscription_id> -g <resource_group_name> -l <location> -p single-vm-v2.json --deploy
-  ```
+   ```bash
+   azbb -s <subscription_id> -g <resource_group_name> -l <location> -p single-vm-v2.json --deploy
+   ```
 
-Pour plus d’informations sur le déploiement de cet exemple d’architecture de référence, visitez notre [dépôt GitHub][git].
+Pour vérifier le déploiement, exécutez la commande Azure CLI suivante pour rechercher l’adresse IP publique de la machine virtuelle :
 
-## <a name="next-steps"></a>étapes suivantes
+```bash
+az vm show -n ra-single-linux-vm1 -g <resource-group-name> -d -o table
+```
+
+Si vous accédez à cette adresse dans un navigateur web, vous devez voir la page d’accueil Apache 2 par défaut.
+
+Pour plus d’informations sur la personnalisation de ce déploiement, visitez notre [référentiel GitHub][git].
+
+## <a name="next-steps"></a>Étapes suivantes
 
 - En savoir plus sur nos [modules Azure][azbbv2].
 - Déployer [plusieurs machines virtuelles][multi-vm] dans Azure.
@@ -214,6 +223,7 @@ Pour plus d’informations sur le déploiement de cet exemple d’architecture d
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/virtual-machines/single-vm
 [iostat]: https://en.wikipedia.org/wiki/Iostat
 [manage-vm-availability]: /azure/virtual-machines/virtual-machines-linux-manage-availability
+[managed-disks]: /azure/storage/storage-managed-disks-overview
 [multi-vm]: multi-vm.md
 [naming-conventions]: /azure/architecture/best-practices/naming-conventions.md
 [nsg]: /azure/virtual-network/virtual-networks-nsg
@@ -236,7 +246,7 @@ Pour plus d’informations sur le déploiement de cet exemple d’architecture d
 [ssh-linux]: /azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys
 [static-ip]: /azure/virtual-network/virtual-networks-reserved-public-ip
 [virtual-machine-sizes]: /azure/virtual-machines/virtual-machines-linux-sizes
-[visio-download]: https://archcenter.azureedge.net/cdn/vm-reference-architectures.vsdx
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [vm-disk-limits]: /azure/azure-subscription-service-limits#virtual-machine-disk-limits
 [vm-resize]: /azure/virtual-machines/virtual-machines-linux-change-vm-size
 [vm-size-tables]: /azure/virtual-machines/virtual-machines-linux-sizes
