@@ -5,11 +5,11 @@ keywords: Experts AWS, comparaison de Azure, comparaison de AWS, différences en
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: b8698675efa42bb3fae73cefe7b078942549b412
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 0af0890d383d22db0ed9d3b445cdd5b561b498ae
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="azure-for-aws-professionals"></a>Azure pour les professionnels AWS
 
@@ -118,7 +118,7 @@ Le tableau suivant récapitule chaque option.
 | Étendue de la défaillance | Rack | Centre de données | Région |
 | Routage des requêtes | Équilibreur de charge | Équilibreur de charge entre les zones | Traffic Manager |
 | Latence du réseau | Très faible | Faible | Moyenne à élevée |
-| Réseau virtuel  | Réseau virtuel | Réseau virtuel | Homologation de réseaux virtuels entre régions (aperçu) |
+| Réseau virtuel  | Réseau virtuel | Réseau virtuel | Homologation de réseaux virtuels entre régions |
 
 ### <a name="availability-sets"></a>Groupes à haute disponibilité 
 
@@ -130,7 +130,7 @@ Les groupes à haute disponibilité devraient être organisés en fonction du r�
 
 ![Groupes à haute disponibilité d’Azure pour chaque rôle d’application](./images/three-tier-example.png "Groupes à haute disponibilité pour chaque rôle d’application")
 
-### <a name="availability-zones-preview"></a>Zones de disponibilité (aperçu)
+### <a name="availability-zones"></a>Zones de disponibilité
 
 Une [zone de disponibilité](/azure/availability-zones/az-overview) est une zone physiquement séparée au sein d’une région Azure. Chaque zone de disponibilité possède une source d’alimentation, un réseau et un système de refroidissement propres. Le déploiement des machines virtuelles entre les zones de disponibilité aide à protéger une application contre les défaillances à l’échelle du centre de données. 
 
@@ -425,7 +425,7 @@ Notification Hubs ne prend pas en charge l’envoi de messages SMS ou de courrie
 -   [Modèles de démarrage rapide de Azure Resource Manager](https://azure.microsoft.com/documentation/templates/)
 
 
-## <a name="next-steps"></a>étapes suivantes
+## <a name="next-steps"></a>Étapes suivantes
 
 -   [Matrice complète de comparaison des services de AWS et de Azure](https://aka.ms/azure4aws-services)
 
