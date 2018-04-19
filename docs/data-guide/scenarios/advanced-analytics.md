@@ -55,7 +55,7 @@ Services Azure appropriés :
 
 ## <a name="deep-learning"></a>Apprentissage approfondi
 
-Les modèles d’apprentissage automatique basés sur des techniques telles que la régression linéaire ou logistique existent depuis un certain temps. Depuis peu, l’utilisation de techniques d*’apprentissage approfondi* basées sur des réseaux neuronaux ne cesse d’augmenter. Cela s’explique en partie par la disponibilité de systèmes de traitement hautement évolutifs qui réduisent le temps nécessaire à l’apprentissage de modèles complexes. En outre, l’importance croissante du Big Data facilite l’apprentissage des modèles d’apprentissage approfondi dans différents domaines.
+Les modèles d’apprentissage automatique basés sur des techniques telles que la régression linéaire ou logistique existent depuis un certain temps. Depuis peu, l’utilisation de techniques *d’apprentissage approfondi* basées sur des réseaux neuronaux ne cesse d’augmenter. Cela s’explique en partie par la disponibilité de systèmes de traitement hautement évolutifs qui réduisent le temps nécessaire à l’apprentissage de modèles complexes. En outre, l’importance croissante du Big Data facilite l’apprentissage des modèles d’apprentissage approfondi dans différents domaines.
 
 Lorsque vous concevez une architecture cloud d’analytique avancée, vous devez envisager la possibilité d’inclure un traitement de modèles d’apprentissage approfondi à grande échelle. Ces modèles peuvent être fournis via des plateformes de traitement distribué comme Apache Spark et la dernière génération de machines virtuelles permettant d’accéder au matériel GPU.
 

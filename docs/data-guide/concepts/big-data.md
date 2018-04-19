@@ -4,10 +4,10 @@ description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
 ms.openlocfilehash: 2a1336faea81470b082d4eef8e2cc53a082c63c7
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2018
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="big-data-architectures"></a>Architectures de Big Data
 
@@ -62,7 +62,7 @@ Lorsque vous utilisez des jeux de données très volumineux, l'exécution des re
 
 L’inconvénient de cette approche est qu’elle entraîne une latence &mdash; si le traitement dure quelques heures, une requête peut donc retourner des résultats datant de plusieurs heures. Dans l’idéal, vous devez obtenir des résultats en temps réel (malgré une certaine perte de précision) et combiner ces résultats avec ceux de l’analyse en mode batch.
 
-L**’architecture lambda**, proposée pour la première fois par Nathan Marz, résout ce problème en créant deux chemins d’accès aux flux de données. Toutes les données entrantes dans le système transitent par ces deux chemins d’accès :
+**L’architecture lambda**, proposée pour la première fois par Nathan Marz, résout ce problème en créant deux chemins d’accès aux flux de données. Toutes les données entrantes dans le système transitent par ces deux chemins d’accès :
 
 * une **couche de traitement par lots** (chemin à froid) stocke toutes les données entrantes dans leur forme brute et effectue un traitement par lots de ces données. Le résultat de ce traitement est stocké sous forme d’une **vue de traitement par lots**.
 
@@ -84,7 +84,7 @@ Les données brutes stockées au niveau de la couche de traitement par lots sont
 
 Un inconvénient de l’architecture lambda est sa complexité. La logique de traitement apparaît en deux emplacements différents &mdash; le chemin réactif et le chemin à froid &mdash; avec différentes infrastructures. Cela double la logique de calcul et la complexité de la gestion de l’architecture pour ces deux chemins.
 
-L**’architecture kappa** a été proposée par Jay Kreps comme alternative à l’architecture lambda. Elle vise les mêmes objectifs de base que l’architecture lambda, mais avec une différence importante : toutes les données transitent via un chemin unique en utilisant un système de traitement de flux. 
+**L’architecture kappa** a été proposée par Jay Kreps comme alternative à l’architecture lambda. Elle vise les mêmes objectifs de base que l’architecture lambda, mais avec une différence importante : toutes les données transitent via un chemin unique en utilisant un système de traitement de flux. 
 
 ![Diagramme d'architecture kappa](./images/kappa.png)
 
