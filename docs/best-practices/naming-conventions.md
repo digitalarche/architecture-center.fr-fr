@@ -4,11 +4,11 @@ description: Conventions d’affectation de noms pour les ressources Azure. Comm
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: f814201901af69b816d7f1588e58057b252b22db
-ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
+ms.openlocfilehash: f3f010ceb3c810caafa53523de63aa787d392aa1
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/09/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="naming-conventions"></a>Conventions d’affectation de noms
 
@@ -57,7 +57,7 @@ Voici deux exemples de noms possibles pour un service hébergeant un moteur de c
 
 Les affixes peuvent faire référence à différents aspects des ressources spécifiques. Le tableau suivant présente des exemples généralement utilisés.
 
-| Aspect | exemples | Notes |
+| Aspect | Exemples | Notes |
 | --- | --- | --- |
 | Environnement |dev, prod, AQ |Identifie l’environnement de la ressource |
 | Lieu |uw (ouest des États-Unis), ue (est des États-Unis) |Identifie la région dans laquelle la ressource est déployée |
@@ -75,7 +75,7 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 
 ### <a name="general"></a>Généralités
 
-| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | exemples |
+| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
 | --- | --- | --- | --- | --- | --- | --- |
 |Groupe de ressources |Abonnement |1-90 |Non-respect de la casse |Alphanumériques, trait de soulignement, parenthèses, trait d’union et point (sauf à la fin) |`<service short name>-<environment>-rg` |`profx-prod-rg` |
 |Groupe à haute disponibilité |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait de soulignement et trait d’union |`<service-short-name>-<context>-as` |`profx-sql-as` |
@@ -83,7 +83,7 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 
 ### <a name="compute"></a>Calcul
 
-| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | exemples |
+| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
 | --- | --- | --- | --- | --- | --- | --- |
 |Machine virtuelle |Groupe de ressources |1-15 (Windows), 1-64 (Linux) |Non-respect de la casse |Alphanumériques, trait de soulignement et trait d’union |`<name>-<role>-vm<number>` |`profx-sql-vm1` |
 |Function App | Globale |1-60 |Non-respect de la casse |Alphanumériques et trait d’union |`<name>-func` |`calcprofit-func` |
@@ -93,7 +93,7 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 
 ### <a name="storage"></a>Stockage
 
-| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | exemples |
+| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
 | --- | --- | --- | --- | --- | --- | --- |
 |Nom du compte de stockage (données) |Globale |3-24 |Minuscules |Alphanumérique |`<globally unique name><number>` (utilisez une fonction afin de calculer un GUID unique pour l’affectation de noms aux comptes de stockage) |`profxdata001` |
 |Nom du compte de stockage (disques) |Globale |3-24 |Minuscules |Alphanumérique |`<vm name without hyphens>st<number>` |`profxsql001st0` |
@@ -102,11 +102,11 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 |Nom de la file d'attente |Compte de stockage |3-63 |Minuscules |Alphanumériques et trait d’union |`<service short name>-<context>-<num>` |`awesomeservice-messages-001` |
 |Nom de la table | Compte de stockage |3-63 |Non-respect de la casse |Alphanumérique |`<service short name><context>` |`awesomeservicelogs` |
 |Nom de fichier | Compte de stockage |3-63 |Minuscules | Alphanumérique |`<variable based on blob usage>` |`<variable based on blob usage>` |
-|Data Lake Store | Globale |3-24 |Minuscules | Alphanumérique |`<name>-dls` |`telemetry-dls` |
+|Data Lake Store | Globale |3-24 |Minuscules | Alphanumérique |`<name>dls` |`telemetrydls` |
 
 ### <a name="networking"></a>Mise en réseau
 
-| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | exemples |
+| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
 | --- | --- | --- | --- | --- | --- | --- |
 |Réseau virtuel (VNet) |Groupe de ressources |2-64 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service short name>-vnet` |`profx-vnet` |
 |Sous-réseau |Réseau virtuel parent |2-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`web` |
@@ -141,7 +141,7 @@ Les balises sont notamment utilisées dans les cas suivants :
 
 Voici un exemple d’approche de balisage courante :
 
-| Nom de la balise | Clé | exemples | Commentaire |
+| Nom de la balise | Clé | Exemples | Commentaire |
 | --- | --- | --- | --- |
 | Facturer à / ID de facturation interne |billTo |`IT-Chargeback-1234` |Un code d’E/S ou de facturation interne |
 | Opérateur ou personne directement responsable |managedBy |`joe@contoso.com` |Alias ou adresse de messagerie |
