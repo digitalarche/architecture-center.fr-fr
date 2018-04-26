@@ -1,15 +1,17 @@
 ---
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 530844a0d3b1256cec807e7bad509a40dca304f6
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 80cb7fde0694257a5c413b702505e27f18aed8d3
+ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="azure-application-architecture-guide"></a>Guide de l’architecture des applications Azure
 
 Ce guide présente une approche structurée pour concevoir des applications sur Azure qui sont évolutives, robustes et hautement disponibles. Il est basé sur des pratiques éprouvées que nous avons apprises au contact des clients.
+
+<br/>
 
 <img src="./images/guide-steps.svg" style="max-width:800px;"/>
 
@@ -53,25 +55,49 @@ Ce guide est destiné aux architectes, développeurs et aux équipes d’exploit
 
 Le guide d’architecture des applications Azure est organisé comme une série d’étapes, depuis l’architecture et la conception jusqu’à l’implémentation. À chaque étape, des recommandations vous aideront pour la conception de l’architecture de votre application.
 
-**[Styles d’architecture][arch-styles]**. Le premier point de décision est le plus fondamental. Quel type d’architecture concevez-vous ? Cela peut être une architecture de microservices, une application multiniveau plus classique ou une solution Big Data. Nous avons identifié sept styles d’architecture distincts. Voici les avantages et les problèmes de chacun.
+### <a name="architecture-styles"></a>Styles d’architecture
 
-> &#10148; La page [Architectures de référence Azure][ref-archs] montre les déploiements recommandés dans Azure, ainsi que des considérations pour l’extensibilité, la disponibilité, la facilité de gestion et la sécurité. La plupart incluent également des modèles Resource Manager à déployer.
+Le premier point de décision est le plus fondamental. Quel type d’architecture concevez-vous ? Cela peut être une architecture de microservices, une application multiniveau plus classique ou une solution Big Data. Nous avons identifié plusieurs styles d’architecture distincts. Voici les avantages et les problèmes de chacun.
 
-**[Choix de technologie][technology-choices]**. Deux choix de technologie doivent être faits dès le départ car ils affectent l’ensemble de l’architecture. Il s’agit des choix des technologies de calcul et de stockage. Le terme *calcul* fait référence au modèle d’hébergement pour les ressources de calcul utilisées par vos applications. Le stockage comprend les bases de données, mais également le stockage pour les files d’attente, les caches, les données IoT, les données de journal non structurées et toutes les autres choses qu’une application peut stocker d’une façon persistante. 
+En savoir plus :
 
-> &#10148; Les [options de calcul][compute-options] et les [options de stockage][storage-options] fournissent des critères de comparaison détaillés pour sélectionner les services de calcul et de stockage.
+- [Styles d’architecture][arch-styles]
+- [Architectures de référence Azure][ref-archs]
 
-**[Principes de conception][design-principles]**. Tout au long du processus de conception, gardez à l’esprit ces dix principes de conception de haut niveau. 
+### <a name="technology-choices"></a>Choix de technologie
 
-> &#10148; Les articles [Meilleures pratiques][best-practices] donnent des recommandations spécifiques sur des zones telles que la mise à l’échelle automatique, la mise en cache, le partitionnement des données, la conception de l’API et d’autres.   
+Deux choix de technologie doivent être faits dès le départ car ils affectent l’ensemble de l’architecture. Il s’agit des choix des technologies de calcul et magasins de données. *Calcul* fait référence au modèle d’hébergement pour les ressources de calcul utilisées par vos applications. Les *magasins de données* comprennent les bases de données, mais également le stockage pour les files d’attente, les caches, les journaux et toutes les autres choses qu’une application peut stocker d’une façon persistante. 
 
-**[Piliers][pillars]**. Une application cloud réussie se concentrera sur ces cinq piliers de la qualité des logiciels : l’extensibilité, la disponibilité, la résilience, la gestion et la sécurité. 
+En savoir plus :
 
-> &#10148; Utilisez nos [checklists de révision de la conception][checklists] pour passer en revue votre conception en fonction de ces piliers de qualité. 
+- [Choisir un service de calcul](./technology-choices/compute-overview.md)
+- [Choisir un magasin de données](./technology-choices/data-store-overview.md)
 
-**[Modèles de conception de cloud][patterns]**. Ces modèles de conception sont utiles pour développer des applications fiables, évolutives et sécurisées sur Azure. Chaque modèle décrit un problème, un modèle qui résout le problème et un exemple basé sur Azure.
+### <a name="design-principles"></a>Principes de conception
 
-> &#10148; Consultez le [catalogue complet des modèles de conception de cloud](../patterns/index.md).
+Nous avons identifié dix principes de conception de haut niveau qui rendront votre application plus évolutive, résiliente et gérable. Ces principes de conception s’appliquent à tous les styles architecture. Tout au long du processus de conception, gardez à l’esprit ces dix principes de conception de haut niveau. Envisagez l’ensemble de meilleures pratiques pour les aspects spécifiques de l’architecture, tels que la mise à l’échelle automatique, la mise en cache, le partitionnement des données, la conception d’API et d’autres encore.
+
+En savoir plus :
+
+- [Principes de conception pour les applications Azure][design-principles]
+- [Meilleures pratiques lors de la génération sur le cloud][best-practices]
+
+### <a name="quality-pillars"></a>Piliers de qualité
+
+Une application cloud réussie se concentrera sur cinq piliers de qualité logicielle : l’extensibilité, la disponibilité, la résilience, la gestion et la sécurité. Utilisez nos checklists de révision de la conception pour passer en revue votre architecture en fonction de ces piliers de qualité.
+
+En savoir plus :
+
+- [Piliers de la qualité logicielle][pillars]
+- [Checklists de révision de la conception][checklists] 
+
+### <a name="cloud-design-patterns"></a>Modèles de conception de cloud
+
+Les modèles de conception sont des solutions générales à des problèmes de conception logicielle courants. Nous avons identifié un ensemble de modèles de conception qui sont particulièrement utiles lors de la conception d’applications distribuées pour le cloud.
+
+En savoir plus :
+
+- [Catalogue de modèles de conception de cloud](../patterns/index.md)
 
 
 [arch-styles]: ./architecture-styles/index.md

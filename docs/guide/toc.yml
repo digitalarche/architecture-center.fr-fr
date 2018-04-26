@@ -20,14 +20,17 @@
           href: architecture-styles/big-data.md
         - name: Big Compute
           href: architecture-styles/big-compute.md
-    - name: Choix de technologie
-      href: technology-choices/index.md
+    - name: Choisir un service de calcul
       items:
-        - name: Vue d’ensemble des options de calcul
+        - name: Vue d'ensemble
           href: technology-choices/compute-overview.md
+        - name: Arbre de décision
+          href: technology-choices/compute-decision-tree.md
         - name: Comparaison des calculs
           href: technology-choices/compute-comparison.md
-        - name: Vue d’ensemble du magasin de données
+    - name: Choisir un magasin de données
+      items:
+        - name: Vue d'ensemble
           href: technology-choices/data-store-overview.md
         - name: Comparaison du magasin de données
           href: technology-choices/data-store-comparison.md
