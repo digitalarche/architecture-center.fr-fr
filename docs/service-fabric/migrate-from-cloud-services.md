@@ -3,11 +3,11 @@ title: Migrer une application Azure Cloud Services vers Azure Service Fabric
 description: Comment migrer une application à partir d’Azure Cloud Services vers Azure Service Fabric.
 author: MikeWasson
 ms.date: 04/27/2017
-ms.openlocfilehash: ce9c138a6b093fb7f0329c619c75bd4f4aacc2e7
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: b9ecbc88ae74da99a0ff3bb8814a9cb3422f79d5
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/23/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="migrate-an-azure-cloud-services-application-to-azure-service-fabric"></a>Migrer une application Azure Cloud Services vers Azure Service Fabric 
 
@@ -141,9 +141,9 @@ L’application Surveys d’origine utilise ASP.NET MVC. Étant donné qu’ASP.
 
 - Déplacement des rôles web vers l’infrastructure ASP.NET Core qui peut être auto-hébergée.
 - Conversion du site web en une application à page unique appelant une API web implémentée à l’aide de l’API Web ASP.NET. Cela aurait demandé une refonte complète du serveur web frontal.
-- Conservation du code ASP.NET MVC existant et déploiement d’IIS au sein d’un conteneur Windows Server sur Service Fabric. Cette approche ne nécessite que peu ou pas de modifications de code. Toutefois, la [prise en charge des conteneurs][sf-containers] dans Service Fabric n’est actuellement disponible que dans la préversion.
+- Conservation du code ASP.NET MVC existant et déploiement d’IIS au sein d’un conteneur Windows Server sur Service Fabric. Cette approche ne nécessite que peu ou pas de modifications de code. 
 
-En tenant compte de toutes ces données, nous avons sélectionné la première option, à savoir le déplacement vers ASP.NET Core. Pour ce faire, nous avons suivi les étapes décrites dans l’article [Migrating From ASP.NET MVC to ASP.NET Core MVC][aspnet-migration] (Migration de ASP.NET MVC vers ASP.NET Core MVC). 
+La première option a été de déplacer vers ASP.NET Core. Elle nous a permis de tirer parti des dernières fonctionnalités dans ASP.NET Core. Pour procéder à la conversion, nous avons suivi les étapes décrites dans l’article [Migrating From ASP.NET MVC to ASP.NET Core MVC][aspnet-migration] (Migration de ASP.NET MVC vers ASP.NET Core MVC). 
 
 > [!NOTE]
 > Pour des raisons de sécurité, lorsque vous utilisez ASP.NET Core avec Kestrel, vous devez placer un proxy inversé en amont du serveur Kestrel pour gérer le trafic en provenance d’Internet. Pour plus d’informations, consultez [Kestrel web server implementation in ASP.NET Core][kestrel] (Implémentation du serveur web Kestrel dans ASP.NET Core). La section [Déploiement de l’application](#deploying-the-application) décrit un déploiement Azure recommandé.
@@ -176,7 +176,7 @@ Un service doit créer explicitement des écouteurs pour chaque point de termina
 
  Un service cloud contient les fichiers de configuration et de package suivants :
 
-| Fichier | DESCRIPTION |
+| Fichier | Description |
 |------|-------------|
 | Définition de service (.csdef) | Paramètres utilisés par Azure pour configurer le service cloud. Définit les rôles, les points de terminaison, les tâches de démarrage et les noms des paramètres de configuration. |
 | Configuration de service (.cscfg) | Paramètres spécifiques à chaque déploiement, y compris le nombre d’instances de rôle, les numéros de port de point de terminaison et les valeurs des paramètres de configuration. 
@@ -198,7 +198,7 @@ Le package d’application est ce que vous déployez. Il contient un ou plusieur
 
 Une application Service Fabric contient les fichiers de configuration suivants :
 
-| Fichier | Lieu | DESCRIPTION |
+| Fichier | Lieu | Description |
 |------|----------|-------------|
 | ApplicationManifest.xml | Package d’application | Définit les services qui composent l’application. |
 | ServiceManifest.xml | Package de service| Décrit un ou plusieurs services. |
@@ -289,7 +289,7 @@ Déplacer l’application Surveys vers Service Fabric était relativement simple
 
 En outre, le déploiement Cloud Services a été remplacé par un cluster Service Fabric s’exécutant dans un groupe de machines virtuelles identiques.
 
-## <a name="next-steps"></a>étapes suivantes
+## <a name="next-steps"></a>Étapes suivantes
 
 Maintenant que l’application Surveys a été correctement déplacée, Tailspin souhaite tirer parti des fonctionnalités de l’infrastructure de Service Fabric telles que le déploiement de services indépendants et le contrôle de version. Découvrez comment Tailspin décompose ces services en une architecture plus granulaire pour tirer parti de ces fonctionnalités de Service Fabric dans [Refactoriser une application Azure Service Fabric migrée depuis Azure Cloud Services][refactor-surveys]
 

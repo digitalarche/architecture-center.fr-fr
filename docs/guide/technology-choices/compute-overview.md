@@ -2,11 +2,12 @@
 title: Vue d’ensemble des options de calcul Azure
 description: Vue d’ensemble des options de calcul Azure
 author: MikeWasson
-ms.openlocfilehash: a23dd49f24bc52db6f357540e3ebccb19e0497ee
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.date: 04/21/2018
+ms.openlocfilehash: 6781e1f1f6e239e3853920cb544092538cccfc62
+ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="overview-of-azure-compute-options"></a>Vue d’ensemble des options de calcul Azure
 
@@ -42,4 +43,6 @@ Lorsque vous sélectionnez une option de calcul, voici quelques facteurs à pren
 - Quelles sont les limitations globales de chaque service ? 
 - Quels sont les types d’architectures d’application les mieux adaptés à ce service ? 
 
-Pour découvrir une comparaison détaillée des options de calcul dans Azure, consultez l’article [Criteria for choosing an Azure compute option (Critères de choix d’une option de calcul Azure)](./compute-comparison.md).
+Pour vous aider à sélectionner un service de calcul pour votre application, utilisez l’[Arbre de décision des services de calcul Azure](./compute-decision-tree.md).
+
+Pour découvrir une comparaison détaillée des options de calcul dans Azure, consultez l’article [Criteria for choosing an Azure compute service (Critères de choix d’un service de calcul Azure)](./compute-comparison.md).

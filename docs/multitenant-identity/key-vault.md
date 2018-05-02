@@ -5,11 +5,11 @@ author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: client-assertion
-ms.openlocfilehash: 45d1564c255f2450f68c5e92ebe0d7de0c40ae31
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: d49129a38d0413f6006095f03b817885e1ce6c92
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="use-azure-key-vault-to-protect-application-secrets"></a>Utiliser Azure Key Vault pour protéger les secrets d’application
 
@@ -21,21 +21,21 @@ Il est courant que les paramètres d’une application revêtent un caractère s
 * Mot de passe
 * Clés de chiffrement
 
-Par sécurité, il est conseillé de ne jamais stocker ces secrets dans le contrôle de code source. Elles peuvent fuiter très facilement, même si votre dépôt de code source est privé. De plus, il ne s’agit pas seulement de les préserver d’un accès par le grand public. Sur les projets volumineux, vous souhaiterez peut-être restreindre l’accès aux données de production secrètes à certains développeurs et opérateurs. (Les paramètres sont différents pour les environnements de test et de développement.)
+Par sécurité, il est conseillé de ne jamais stocker ces données secrètes dans le contrôle de code source. Elles peuvent fuiter très facilement, même si votre dépôt de code source est privé. De plus, il ne s’agit pas seulement de les préserver d’un accès par le grand public. Sur les projets volumineux, vous souhaiterez peut-être restreindre l’accès aux données de production secrètes à certains développeurs et opérateurs. (Les paramètres sont différents pour les environnements de test et de développement.)
 
-Une option plus sûre consiste à stocker ces secrets dans [Azure Key Vault][KeyVault]. Ce service hébergé dans le cloud assure la gestion des clés de chiffrement et d’autres secrets. Cet article explique comment l’utiliser pour stocker les paramètres de configuration de votre application.
+Une option plus sûre consiste à stocker ces secrets dans [Azure Key Vault][KeyVault]. Ce service hébergé dans le cloud assure la gestion des clés de chiffrement et d’autres données secrètes. Cet article explique comment l’utiliser pour stocker les paramètres de configuration de votre application.
 
 Dans l’application [Tailspin Surveys][Surveys], les paramètres suivants sont secrets :
 
-* La chaîne de connexion de base de données.
-* La chaîne de connexion Redis.
-* Le secret client de l’application web.
+* la chaîne de connexion de base de données ;
+* la chaîne de connexion Redis ;
+* la clé secrète client de l’application web.
 
 L’application Surveys charge les paramètres de configuration à partir des emplacements suivants :
 
-* Le fichier appsettings.json
+* le fichier appsettings.json ;
 * Le [magasin des secrets utilisateur][user-secrets] (environnement de développement uniquement ; à des fins de test)
-* L’environnement d’hébergement (paramètres des applications web Azure)
+* l’environnement d’hébergement (paramètres des applications web Azure) ;
 * Le service Key Vault (quand il est activé)
 
 Chacun de ces paramètres se substituant aux précédents, les paramètres stockés dans Key Vault sont prioritaires.
@@ -46,7 +46,7 @@ Chacun de ces paramètres se substituant aux précédents, les paramètres stock
 Au démarrage, l’application lit les paramètres de chaque fournisseur de configuration enregistré et les utilise pour remplir un objet d’options fortement typé. Pour plus d’informations, consultez [Utilisation des options et des objets de configuration][options].
 
 ## <a name="setting-up-key-vault-in-the-surveys-app"></a>Configuration du coffre de clés dans l’application Surveys
-Prérequis :
+Configuration requise :
 
 * Installez les [applets de commande Azure Resource Manager][azure-rm-cmdlets].
 * Configurez l’application Surveys, comme indiqué dans [Exécuter l’application Surveys][readme].
@@ -87,7 +87,7 @@ Assignez maintenant cet utilisateur comme propriétaire d’abonnement.
 
 2. Sélectionnez l’abonnement auquel l’administrateur doit accéder.
 3. Dans le panneau de l’abonnement, sélectionnez **Contrôle d’accès (IAM)**.
-4. Cliquez sur **Ajouter**.
+4. Cliquez sur **Add**.
 4. Sous **Rôle**, sélectionnez **Propriétaire**.
 5. Tapez l’adresse e-mail de l’utilisateur à ajouter comme propriétaire.
 6. Sélectionnez l’utilisateur et cliquez sur **Enregistrer**.
@@ -106,7 +106,7 @@ Assignez maintenant cet utilisateur comme propriétaire d’abonnement.
 
 4.  Cliquez sur **Manifeste**, puis sur **Modifier**.
 
-5.  Collez la sortie du script dans la propriété `keyCredentials`. Le résultat doit être semblable à ce qui suit :
+5.  Collez la sortie du script dans la propriété `keyCredentials` . Le résultat doit être semblable à ce qui suit :
         
     ```json
     "keyCredentials": [
@@ -167,7 +167,7 @@ Assignez maintenant cet utilisateur comme propriétaire d’abonnement.
     ```
     .\Setup-KeyVault.ps1 -KeyVaultName <<key vault name> -KeyName Redis--Configuration -KeyValue "<<Redis DNS name>>.redis.cache.windows.net,password=<<Redis access key>>,ssl=true" 
     ```
-    où 
+    where
    
    * key vault name = Le nom que vous avez affecté au coffre de clés à l’étape précédente.
    * Redis DNS name = Le nom DNS de votre instance de cache Redis.
@@ -243,7 +243,7 @@ Dans l’Explorateur de solutions, cliquez avec le bouton droit sur le projet Ta
 Remplacez les entrées entre [crochets] par les valeurs correctes.
 
 * `AzureAd:ClientId`: L’ID client de l’application Surveys.
-* `AzureAd:ClientSecret`: La clé que vous avez générée au moment d’inscrire l’application Surveys dans Azure AD.
+* `AzureAd:ClientSecret` : clé que vous avez générée au moment d’inscrire l’application Surveys dans Azure AD.
 * `AzureAd:WebApiResourceId`: L’URI ID d’application que vous avez spécifié lorsque vous avez créé l’application Surveys.WebAPI dans Azure AD.
 * `Asymmetric:CertificateThumbprint`: L’empreinte numérique de certificat que vous avez obtenue précédemment, lorsque vous avez créé le certificat client.
 * `KeyVault:Name`: Le nom de votre coffre de clés.

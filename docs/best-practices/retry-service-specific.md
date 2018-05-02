@@ -4,11 +4,11 @@ description: Guide spécifique relatif au service pour définir le mécanisme de
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 332f96e73def360926b6a934bbb1361b2254ec41
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: c80a4aa232cca1283d84368a36dd7341cab8a314
+ms.sourcegitcommit: 3846a0ab2b2b2552202a3c9c21af0097a145ffc6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 04/29/2018
 ---
 # <a name="retry-guidance-for-specific-services"></a>Guide du mécanisme de nouvelle tentative relatif aux différents services
 
@@ -924,7 +924,7 @@ La bibliothèque d’authentification d’Active Directory (ADAL) intègre un m�
 Respectez les consignes suivantes lors de l’utilisation d’Azure Active Directory :
 
 * Dans la mesure du possible, utilisez la bibliothèque ADAL et la prise en charge intégrée des nouvelles tentatives.
-* Si vous utilisez l’API REST pour Azure Active Directory, vous devez retenter l’opération uniquement si le résultat est une erreur comprise dans la plage 5xx (par exemple, 500 Erreur interne du serveur, 502 Passerelle incorrecte, 503 Service Indisponible et 504 Dépassement du délai de la passerelle). N’effectuez pas de nouvelle tentative pour toute autre erreur.
+* Si vous utilisez l’API REST pour Azure Active Directory, réessayez l’opération si le code de résultat est 429 (trop de demandes) ou si vous rencontrez une erreur dans la plage 5xx. N’effectuez pas de nouvelle tentative pour toute autre erreur.
 * Une stratégie de temporisation exponentielle est recommandée pour une utilisation dans des scénarios de traitement par lots avec Azure Active Directory.
 
 Pensez à commencer par les paramètres ci-après pour les opérations liées aux nouvelles tentatives. Il s’agit de paramètres généraux. Vous devez par conséquent surveiller les opérations et optimiser les valeurs en fonction de votre propre scénario.
@@ -989,6 +989,7 @@ Prenez en compte les éléments suivants lors de l’accès aux services Azure o
 * La logique de détection temporaire dépend de l’API client réelle utilisée pour appeler les appels REST. Certains clients, tels que la nouvelle classe **HttpClient** , ne lanceront pas d’exceptions pour les demandes terminées avec un code d’état HTTP indiquant un échec. Cela améliore les performances, mais vous empêche d’utiliser le bloc applicatif de gestion des erreurs temporaires. Dans ce cas, vous pourriez encapsuler l’appel à l’API REST avec le code qui génère des exceptions pour les codes d’état HTTP indiquant un échec, qui peuvent ensuite être traités par le bloc. Vous pouvez également utiliser un mécanisme différent pour piloter les nouvelles tentatives.
 * Le code d’état HTTP renvoyé par le service peut permettre d’indiquer si l’échec est temporaire. Vous devrez peut-être examiner les exceptions générées par un client ou l’infrastructure de nouvelle tentative pour accéder au code d’état ou pour déterminer le type d’exception équivalent. Les codes HTTP suivants indiquent habituellement qu’une nouvelle tentative est appropriée :
   * 408 Délai d’expiration de la requête
+  * 429 Trop de demandes
   * 500 Erreur interne du serveur
   * 502 Passerelle incorrecte
   * 503 Service indisponible

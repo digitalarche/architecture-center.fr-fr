@@ -2,14 +2,14 @@
 title: Implémentation d’une topologie de réseau hub-and-spoke dans Azure
 description: Comment implémenter une topologie de réseau hub-and-spoke dans Azure.
 author: telmosampaio
-ms.date: 02/23/2018
+ms.date: 04/09/2018
 pnp.series.title: Implement a hub-spoke network topology in Azure
 pnp.series.prev: expressroute
-ms.openlocfilehash: 243ad026c7c9703d9659cbef6815131fcdaa8a11
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 3b19526a9ed77c1605325a9eec101ffbee7c8401
+ms.sourcegitcommit: 3846a0ab2b2b2552202a3c9c21af0097a145ffc6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 04/29/2018
 ---
 # <a name="implement-a-hub-spoke-network-topology-in-azure"></a>Implémenter une topologie de réseau hub-and-spoke dans Azure
 
@@ -109,192 +109,188 @@ Déterminez également les services qui sont partagés dans le hub, afin que ce 
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
-Un déploiement pour cette architecture est disponible sur [GitHub][ref-arch-repo]. Il utilise des machines virtuelles Ubuntu dans chaque réseau virtuel pour tester la connectivité. Aucun service réel n’est hébergé dans le sous-réseau **shared-services** du **réseau virtuel hub**.
+Un déploiement pour cette architecture est disponible sur [GitHub][ref-arch-repo]. Il utilise des machines virtuelles dans chaque réseau virtuel pour tester la connectivité. Aucun service réel n’est hébergé dans le sous-réseau **shared-services** du **réseau virtuel hub**.
+
+Le déploiement crée les groupes de ressources suivants dans votre abonnement :
+
+- hub-nva-rg
+- hub-vnet-rg
+- onprem-jb-rg
+- onprem-vnet-rg
+- spoke1-vnet-rg
+- spoke2-vent-rg
+
+Les fichiers de paramètre modèle font référence à ces noms. Si vous les modifiez, mettez à jour les fichiers de paramètres afin qu’ils correspondent.
 
 ### <a name="prerequisites"></a>Prérequis
 
 
-Avant de pouvoir déployer l’architecture de référence sur votre propre abonnement, vous devez effectuer les étapes suivantes.
-
 1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][ref-arch-repo].
 
-2. Vérifiez qu’Azure CLI 2.0 est installé sur votre ordinateur. Pour des instructions d’installation de l’interface de ligne de commande, consultez [Installer Azure CLI 2.0][azure-cli-2].
+2. Installez [Azure CLI 2.0][azure-cli-2].
 
-3. Installez le package npm des [blocs de construction Azure][azbb].
+3. Installez le package npm des [modules Azure][azbb].
 
-4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de la commande ci-dessous et suivez les invites.
+4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de la commande ci-dessous.
 
    ```bash
    az login
    ```
 
-### <a name="deploy-the-simulated-on-premises-datacenter-using-azbb"></a>Déployer le centre de données local simulé à l’aide d’azbb
+### <a name="deploy-the-simulated-on-premises-datacenter"></a>Déployer le centre de données local simulé
 
 Pour déployer le centre de données local simulé en tant que réseau virtuel Azure, procédez comme suit :
 
-1. Accédez au dossier `hybrid-networking\hub-spoke\` pour le dépôt que vous avez téléchargé à l’étape des prérequis ci-dessus.
+1. Accédez au dossier `hybrid-networking/hub-spoke` du référentiel des architectures de référence.
 
-2. Ouvrez le fichier `onprem.json` et entrez un nom d’utilisateur et un mot de passe entre les guillemets aux lignes 36 et 37, comme illustré ci-dessous, puis enregistrez le fichier.
+2. Ouvrez le fichier `onprem.json` . Remplacez les valeurs de `adminUsername` et `adminPassword`.
 
-   ```bash
-   "adminUsername": "XXX",
-   "adminPassword": "YYY",
-   ```
+    ```bash
+    "adminUsername": "<user name>",
+    "adminPassword": "<password>",
+    ```
 
-3. À la ligne 38, pour `osType`, saisissez `Windows` ou `Linux` pour installer le système d’exploitation Windows Server 2016 Datacenter ou Ubuntu 16.04 sur le serveur de rebond.
+3. Pour un déploiement Linux, définissez `osType` sur `Linux` (facultatif).
 
-4. Exécutez `azbb` pour déployer l’environnement local simulé, comme indiqué ci-dessous.
+4. Exécutez la commande suivante :
 
-   ```bash
-   azbb -s <subscription_id> -g onprem-vnet-rg - l <location> -p onoprem.json --deploy
-   ```
-   > [!NOTE]
-   > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `onprem-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
+    ```bash
+    azbb -s <subscription_id> -g onprem-vnet-rg -l <location> -p onprem.json --deploy
+    ```
 
-5. Attendez que le déploiement se termine. Ce déploiement crée un réseau virtuel, une machine virtuelle et une passerelle VPN. La création de la passerelle VPN peut prendre plus de 40 minutes.
+5. Attendez que le déploiement se termine. Ce déploiement crée un réseau virtuel, une machine virtuelle et une passerelle VPN. La création de la passerelle VPN peut prendre environ 40 minutes.
 
-### <a name="azure-hub-vnet"></a>Réseau virtuel hub Azure
+### <a name="deploy-the-hub-vnet"></a>Déployer le réseau virtuel du hub
 
-Pour déployer le réseau virtuel hub et vous connecter au réseau virtuel local simulé créé ci-dessus, effectuez les étapes suivantes.
+Pour déployer réseau virtuel du hub, procédez comme suit.
 
-1. Ouvrez le fichier `hub-vnet.json` et entrez un nom d’utilisateur et un mot de passe entre les guillemets aux lignes 39 et 40, comme illustré ci-dessous.
+1. Ouvrez le fichier `hub-vnet.json` . Remplacez les valeurs de `adminUsername` et `adminPassword`.
 
-   ```bash
-   "adminUsername": "XXX",
-   "adminPassword": "YYY",
-   ```
+    ```bash
+    "adminUsername": "<user name>",
+    "adminPassword": "<password>",
+    ```
 
-2. À la ligne 41, pour `osType`, saisissez `Windows` ou `Linux` pour installer le système d’exploitation Windows Server 2016 Datacenter ou Ubuntu 16.04 sur le serveur de rebond.
+2. Pour un déploiement Linux, définissez `osType` sur `Linux` (facultatif).
 
-3. Saisissez une clé partagée entre les guillemets à la ligne 72, comme illustré ci-dessous, puis enregistrez le fichier.
+3. Pour `sharedKey`, saisissez une clé partagée pour la connexion VPN. 
 
-   ```bash
-   "sharedKey": "",
-   ```
+    ```bash
+    "sharedKey": "",
+    ```
 
-4. Exécutez `azbb` pour déployer l’environnement local simulé, comme indiqué ci-dessous.
+4. Exécutez la commande suivante :
 
-   ```bash
-   azbb -s <subscription_id> -g hub-vnet-rg - l <location> -p hub-vnet.json --deploy
-   ```
-   > [!NOTE]
-   > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `hub-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
+    ```bash
+    azbb -s <subscription_id> -g hub-vnet-rg -l <location> -p hub-vnet.json --deploy
+    ```
 
-5. Attendez que le déploiement se termine. Ce déploiement crée un réseau virtuel, une machine virtuelle, une passerelle VPN et une connexion à la passerelle créée à la section précédente. La création de la passerelle VPN peut prendre plus de 40 minutes.
+5. Attendez que le déploiement se termine. Ce déploiement crée un réseau virtuel, une machine virtuelle, une passerelle VPN et une connexion à la passerelle.  La création de la passerelle VPN peut prendre environ 40 minutes.
 
-### <a name="optional-test-connectivity-from-onprem-to-hub"></a>(Facultatif) Tester la connectivité entre l’instance locale et le hub
+### <a name="test-connectivity-with-the-hub"></a>Tester la connectivité avec le hub
 
-Pour tester la connectivité entre l’environnement local simulé et le réseau virtuel du hub à l’aide de machines virtuelles Windows, procédez comme suit.
+Testez la connectivité entre l’environnement local simulé et le réseau virtuel du hub.
 
-1. À partir du portail Azure, accédez au groupe de ressources `onprem-jb-rg`, puis cliquez sur la ressource de machine virtuelle `jb-vm1`.
+**Déploiement sous Windows**
 
-2. Dans l’angle supérieur gauche du volet de la machine virtuelle, dans le portail, cliquez sur `Connect`, puis suivez les invites afin d’utiliser le Bureau à distance pour vous connecter à la machine virtuelle. Assurez-vous d’utiliser le nom d’utilisateur et le mot de passe spécifiés aux lignes 36 et 37 du fichier `onprem.json`.
+1. Utilisez le portail Azure pour trouver la machine virtuelle appelée `jb-vm1` dans le groupe de ressources `onprem-jb-rg`.
 
-3. Ouvrez une console PowerShell dans la machine virtuelle et utilisez la cmdlet `Test-NetConnection` pour vérifier que vous pouvez vous connecter à la machine virtuelle du serveur de rebond dans le hub, comme indiqué ci-dessous.
+2. Cliquez sur `Connect` pour ouvrir une session Bureau à distance vers la machine virtuelle. Utilisez le mot de passe spécifié dans le fichier de paramètre `onprem.json`.
+
+3. Ouvrez une console PowerShell dans la machine virtuelle et utilisez la cmdlet `Test-NetConnection` pour vérifier que vous pouvez vous connecter à la machine virtuelle du serveur de rebond dans le réseau virtuel du hub.
 
    ```powershell
    Test-NetConnection 10.0.0.68 -CommonTCPPort RDP
    ```
-   > [!NOTE]
-   > Par défaut, les machines virtuelles Windows Server n’autorisent pas les réponses ICMP dans Azure. Si vous souhaitez utiliser `ping` pour tester la connectivité, vous devez activer le trafic ICMP dans le pare-feu Windows avancé et ce, pour chaque machine virtuelle.
+Le résultat doit être semblable à ce qui suit :
 
-Pour tester la connectivité entre l’environnement local simulé et le réseau virtuel du hub à l’aide de machines virtuelles Linux, procédez comme suit :
+```powershell
+ComputerName     : 10.0.0.68
+RemoteAddress    : 10.0.0.68
+RemotePort       : 3389
+InterfaceAlias   : Ethernet 2
+SourceAddress    : 192.168.1.000
+TcpTestSucceeded : True
+```
 
-1. À partir du portail Azure, accédez au groupe de ressources `onprem-jb-rg`, puis cliquez sur la ressource de machine virtuelle `jb-vm1`.
+> [!NOTE]
+> Par défaut, les machines virtuelles Windows Server n’autorisent pas les réponses ICMP dans Azure. Si vous souhaitez utiliser `ping` pour tester la connectivité, vous devez activer le trafic ICMP dans le pare-feu Windows avancé et ce, pour chaque machine virtuelle.
 
-2. Dans l’angle supérieur gauche du panneau de votre machine virtuelle, dans le portail, cliquez sur `Connect`, puis copiez la commande `ssh` affichée sur le portail. 
+**Déploiement sous Linux**
 
-3. À partir d’une invite Linux, exécutez `ssh` pour vous connecter au serveur de rebond de l’environnement local simulé en utilisant les informations copiées à l’étape 2 (ci-dessus), comme indiqué ici.
+1. Utilisez le portail Azure pour trouver la machine virtuelle appelée `jb-vm1` dans le groupe de ressources `onprem-jb-rg`.
 
-   ```bash
-   ssh <your_user>@<public_ip_address>
-   ```
+2. Cliquez sur `Connect` et copiez la commande `ssh` qui s’affiche dans le portail. 
 
-4. Utilisez le mot de passe que vous avez spécifié à la ligne 37 dans le fichier `onprem.json` pour vous connecter à la machine virtuelle.
+3. Depuis un invite Linux, exécutez `ssh` pour vous connecter à l’environnement local simulé. Utilisez le mot de passe spécifié dans le fichier de paramètre `onprem.json`.
 
-5. La commande `ping` vous permet de tester la connectivité au serveur de rebond du hub, comme indiqué ci-dessous.
+4. Utilisez la commande `ping` pour tester la connectivité avec la machine virtuelle du serveur de rebond dans le réseau virtuel du hub :
 
    ```bash
    ping 10.0.0.68
    ```
 
-### <a name="azure-spoke-vnets"></a>Réseaux virtuels spokes Azure
+### <a name="deploy-the-spoke-vnets"></a>Déployer les réseaux virtuels spokes
 
 Pour déployer les réseaux virtuels spokes, procédez comme suit.
 
-1. Ouvrez le fichier `spoke1.json` et entrez un nom d’utilisateur et un mot de passe entre les guillemets aux lignes 47 et 48, comme illustré ci-dessous, puis enregistrez le fichier.
+1. Ouvrez le fichier `spoke1.json` . Remplacez les valeurs de `adminUsername` et `adminPassword`.
+
+    ```bash
+    "adminUsername": "<user name>",
+    "adminPassword": "<password>",
+    ```
+
+2. Pour un déploiement Linux, définissez `osType` sur `Linux` (facultatif).
+
+3. Exécutez la commande suivante :
 
    ```bash
-   "adminUsername": "XXX",
-   "adminPassword": "YYY",
-   ```
-
-2. À la ligne 49, pour `osType`, saisissez `Windows` ou `Linux` pour installer le système d’exploitation Windows Server 2016 Datacenter ou Ubuntu 16.04 sur le serveur de rebond.
-
-3. Exécutez `azbb` pour déployer le premier environnement de réseau virtuel spoke, comme indiqué ci-dessous.
-
-   ```bash
-   azbb -s <subscription_id> -g spoke1-vnet-rg - l <location> -p spoke1.json --deploy
+   azbb -s <subscription_id> -g spoke1-vnet-rg -l <location> -p spoke1.json --deploy
    ```
   
-   > [!NOTE]
-   > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `spoke1-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
+4. Répétez les étapes 1-2 pour le fichier `spoke2.json`.
 
-4. Répétez l’étape 1 ci-dessus pour le fichier `spoke2.json`.
-
-5. Exécutez `azbb` pour déployer le deuxième environnement de réseau virtuel spoke, comme indiqué ci-dessous.
+5. Exécutez la commande suivante :
 
    ```bash
-   azbb -s <subscription_id> -g spoke2-vnet-rg - l <location> -p spoke2.json --deploy
+   azbb -s <subscription_id> -g spoke2-vnet-rg -l <location> -p spoke2.json --deploy
    ```
-   > [!NOTE]
-   > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `spoke2-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
 
-### <a name="azure-hub-vnet-peering-to-spoke-vnets"></a>Appairage de réseaux virtuels hub Azure avec des réseaux virtuels spokes
-
-Procédez comme suit pour créer une connexion d’homologation entre le réseau virtuel du hub et les réseaux virtuels spokes.
-
-1. Ouvrez le fichier `hub-vnet-peering.json` et vérifiez l’exactitude du nom du groupe de ressources et de celui du réseau virtuel de chaque homologation de réseau virtuel, à compter de la ligne 29.
-
-2. Exécutez `azbb` pour déployer le premier environnement de réseau virtuel spoke, comme indiqué ci-dessous.
+6. Exécutez la commande suivante :
 
    ```bash
-   azbb -s <subscription_id> -g hub-vnet-rg - l <location> -p hub-vnet-peering.json --deploy
+   azbb -s <subscription_id> -g hub-vnet-rg -l <location> -p hub-vnet-peering.json --deploy
    ```
-
-   > [!NOTE]
-   > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `hub-vnet-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
 
 ### <a name="test-connectivity"></a>Tester la connectivité
 
-Pour tester la connectivité entre l’environnement local simulé et le réseau virtuel spoke à l’aide de machines virtuelles Windows, procédez comme suit.
+Testez la connectivité entre l’environnement local simulé et les réseaux virtuels spokes.
 
-1. À partir du portail Azure, accédez au groupe de ressources `onprem-jb-rg`, puis cliquez sur la ressource de machine virtuelle `jb-vm1`.
+**Déploiement sous Windows**
 
-2. Dans l’angle supérieur gauche du volet de la machine virtuelle, dans le portail, cliquez sur `Connect`, puis suivez les invites afin d’utiliser le Bureau à distance pour vous connecter à la machine virtuelle. Assurez-vous d’utiliser le nom d’utilisateur et le mot de passe spécifiés aux lignes 36 et 37 du fichier `onprem.json`.
+1. Utilisez le portail Azure pour trouver la machine virtuelle appelée `jb-vm1` dans le groupe de ressources `onprem-jb-rg`.
 
-3. Ouvrez une console PowerShell dans la machine virtuelle et utilisez la cmdlet `Test-NetConnection` pour vérifier que vous pouvez vous connecter à la machine virtuelle du serveur de rebond dans le hub, comme indiqué ci-dessous.
+2. Cliquez sur `Connect` pour ouvrir une session Bureau à distance vers la machine virtuelle. Utilisez le mot de passe spécifié dans le fichier de paramètre `onprem.json`.
+
+3. Ouvrez une console PowerShell dans la machine virtuelle et utilisez la cmdlet `Test-NetConnection` pour vérifier que vous pouvez vous connecter à la machine virtuelle du serveur de rebond dans le réseau virtuel du hub.
 
    ```powershell
    Test-NetConnection 10.1.0.68 -CommonTCPPort RDP
    Test-NetConnection 10.2.0.68 -CommonTCPPort RDP
    ```
 
+**Déploiement sous Linux**
+
 Pour tester la connectivité entre l’environnement local simulé et le réseau virtuel spoke à l’aide de machines virtuelles Linux, procédez comme suit :
 
-1. À partir du portail Azure, accédez au groupe de ressources `onprem-jb-rg`, puis cliquez sur la ressource de machine virtuelle `jb-vm1`.
+1. Utilisez le portail Azure pour trouver la machine virtuelle appelée `jb-vm1` dans le groupe de ressources `onprem-jb-rg`.
 
-2. Dans l’angle supérieur gauche du panneau de votre machine virtuelle, dans le portail, cliquez sur `Connect`, puis copiez la commande `ssh` affichée sur le portail. 
+2. Cliquez sur `Connect` et copiez la commande `ssh` qui s’affiche dans le portail. 
 
-3. À partir d’une invite Linux, exécutez `ssh` pour vous connecter au serveur de rebond de l’environnement local simulé en utilisant les informations copiées à l’étape 2 (ci-dessus), comme indiqué ici.
+3. Depuis un invite Linux, exécutez `ssh` pour vous connecter à l’environnement local simulé. Utilisez le mot de passe spécifié dans le fichier de paramètre `onprem.json`.
 
-   ```bash
-   ssh <your_user>@<public_ip_address>
-   ```
-
-4. Utilisez le mot de passe que vous avez spécifié à la ligne 37 dans le fichier `onprem.json` pour vous connecter à la machine virtuelle.
-
-5. La commande `ping` vous permet de tester la connectivité avec les machines virtuelles du serveur de rebond dans chaque spoke, comme indiqué ci-dessous.
+5. Utilisez la commande `ping` pour tester la connectivité avec les machines virtuelles du serveur de rebond dans chaque spoke :
 
    ```bash
    ping 10.1.0.68
@@ -303,21 +299,20 @@ Pour tester la connectivité entre l’environnement local simulé et le réseau
 
 ### <a name="add-connectivity-between-spokes"></a>Ajouter la connectivité entre les membres spokes
 
-Si vous souhaitez autoriser les spokes à se connecter les uns aux autres, vous devez utiliser une appliance virtuelle réseau en tant que routeur dans le réseau virtuel du hub, et forcer le trafic entre les spokes et le routeur lors de la tentative de connexion à un autre spoke. Pour déployer une appliance virtuelle réseau de base en tant que machine virtuelle unique, ainsi que les itinéraires définis par l’utilisateur qui sont requis pour permettre la connexion des réseaux virtuels spokes, procédez comme suit :
+Cette étape est facultative. Si vous souhaitez autoriser les spokes à se connecter les uns aux autres, vous devez utiliser une appliance virtuelle réseau en tant que routeur dans le réseau virtuel du hub, et forcer le trafic entre les spokes et le routeur lors de la tentative de connexion à un autre spoke. Pour déployer une appliance virtuelle réseau de base en tant que machine virtuelle unique, ainsi que des itinéraires définis par l’utilisateur pour permettre la connexion des réseaux virtuels spokes, procédez comme suit :
 
-1. Ouvrez le fichier `hub-nva.json` et entrez un nom d’utilisateur et un mot de passe entre les guillemets aux lignes 13 et 14, comme illustré ci-dessous, puis enregistrez le fichier.
+1. Ouvrez le fichier `hub-nva.json` . Remplacez les valeurs de `adminUsername` et `adminPassword`.
+
+    ```bash
+    "adminUsername": "<user name>",
+    "adminPassword": "<password>",
+    ```
+
+2. Exécutez la commande suivante :
 
    ```bash
-   "adminUsername": "XXX",
-   "adminPassword": "YYY",
+   azbb -s <subscription_id> -g hub-nva-rg -l <location> -p hub-nva.json --deploy
    ```
-2. Exécutez `azbb` pour déployer la VM de l’appliance virtuelle réseau et les itinéraires définis par l’utilisateur.
-
-   ```bash
-   azbb -s <subscription_id> -g hub-nva-rg - l <location> -p hub-nva.json --deploy
-   ```
-   > [!NOTE]
-   > Si vous décidez d’utiliser un nom de groupe de ressources différent (autre que `hub-nva-rg`), veillez à rechercher tous les fichiers de paramètre qui utilisent ce nom et à les modifier afin qu’ils utilisent votre propre nom de groupe de ressources.
 
 <!-- links -->
 

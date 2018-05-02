@@ -7,11 +7,11 @@ ms.date: 11/28/2016
 pnp.series.next: adds-extend-domain
 pnp.series.prev: ./index
 cardTitle: Integrate on-premises AD with Azure AD
-ms.openlocfilehash: 431de4b2e08c79f70cc9830fda8315e07bf22c64
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 9475d669b2cb8888a7ceabed7e36317fe63681fd
+ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2018
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="integrate-on-premises-active-directory-domains-with-azure-active-directory"></a>Intégrer des domaines Active Directory locaux avec Azure Active Directory
 
@@ -121,7 +121,7 @@ Pour plus d’informations sur ces topologies, consultez [Topologies pour Azure 
 
 Par défaut, le serveur de synchronisation Azure AD Connect configure la synchronisation de mot de passe entre le domaine local et Azure AD, et le service Azure AD suppose que les utilisateurs s’authentifient en fournissant le même mot de passe que celui utilisé localement. Cela est adapté à de nombreuses organisations, mais vous devez prendre en considération les stratégies et l’infrastructure existantes de votre organisation. Par exemple : 
 
-* Il se peut que la stratégie de sécurité de votre organisation empêche la synchronisation des hachages de mot de passe avec le cloud.
+* Il se peut que la stratégie de sécurité de votre organisation empêche la synchronisation des hachages de mot de passe avec le cloud. Si c’est le cas, votre organisation devrait penser à utiliser l’[authentification directe](/azure/active-directory/connect/active-directory-aadconnect-pass-through-authentication).
 * Vous pouvez avoir besoin que les utilisateurs bénéficient d’une authentification unique (SSO) transparente quand ils accèdent aux ressources cloud à partir de machines jointes au domaine sur le réseau d’entreprise.
 * Votre organisation a peut-être déjà déployé des services de fédération Active Directory (AD FS) ou d’un fournisseur de fédération tiers. Vous pouvez configurer Azure AD de manière à utiliser cette infrastructure pour implémenter l’authentification et l’authentification SSO plutôt que de faire appel aux informations de mot de passe stockées dans le cloud.
 

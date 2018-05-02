@@ -3,11 +3,11 @@ title: Récupérer suite à une altération de données ou à une suppression ac
 description: Article dédié à la description de la récupération suite à une corruption de données ou à une suppression accidentelle de données et à la conception d’applications résilientes, hautement disponibles et tolérantes aux pannes, ainsi qu’à la planification de la récupération d’urgence
 author: MikeWasson
 ms.date: 01/10/2018
-ms.openlocfilehash: 76d2f996750d5a67b67bd5dc4977580f3b8abbc3
-ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
+ms.openlocfilehash: b0716de39fe69d607b9a63e51356d28bbcdbfeae
+ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/11/2018
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="recover-from-data-corruption-or-accidental-deletion"></a>Récupérer suite à une altération de données ou à une suppression accidentelle 
 
@@ -23,7 +23,7 @@ Le stockage Azure fournit la résilience des données via des réplicas automati
 
 - **Objets blob de blocs**. Créez un instantané à un point dans le temps de chaque objet blob de blocs. Pour plus d’informations, consultez [Création d’un instantané d’objet blob](/rest/api/storageservices/creating-a-snapshot-of-a-blob). Pour chaque instantané, vous êtes facturé pour le stockage requis pour stocker les différences identifiées sur l’objet blob depuis le dernier état d’instantané. Les instantanés dépendant de l’existence de l’objet blob d’origine sur lequel ils sont basés, nous vous recommandons de copier les données sur un autre objet blob voire sur un autre compte de stockage. Cela garantit la protection des données de sauvegarde contre tout risque de suppression accidentelle. Vous pouvez utiliser [AzCopy](/azure/storage/common/storage-use-azcopy) ou [Azure PowerShell](/azure/storage/common/storage-powershell-guide-full) pour copier les objets blob vers un autre compte de stockage.
 
-- **Fichiers**. Utilisez les [instantanés de partage (préversion)](/azure/storage/files/storage-how-to-use-files-snapshots), AzCopy ou PowerShell pour copier vos fichiers vers un autre compte de stockage.
+- **Fichiers**. Utilisez les [instantanés de partage](/azure/storage/files/storage-snapshots-files), AzCopy ou PowerShell pour copier vos fichiers vers un autre compte de stockage.
 
 - **Tables**. Utilisez AzCopy pour exporter les données de table vers un autre compte de stockage dans une autre région.
 
