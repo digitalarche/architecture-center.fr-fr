@@ -3,11 +3,11 @@ title: Exécuter un serveur Jenkins sur Azure
 description: Cette architecture de référence montre comment déployer et utiliser un serveur Jenkins professionnel et évolutif sur Azure sécurisé avec l’authentification unique (SSO).
 author: njray
 ms.date: 01/21/18
-ms.openlocfilehash: c07a341bbe4d0304087e4535408967c45d36199e
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 5f9c54e71a8750e88de1ae633ccc1316f8375d3a
+ms.sourcegitcommit: 0de300b6570e9990e5c25efc060946cb9d079954
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Exécuter un serveur Jenkins sur Azure
 
@@ -74,7 +74,7 @@ Le modèle de solution pour Jenkins sur Azure installe plusieurs plug-ins Azure.
 
 -   Le [plug-in Azure AD][configure-azure-ad] permet au serveur Jenkins de prendre en charge l’authentification unique pour les utilisateurs basés sur Azure AD.
 
--   Le plug-in [Agents de machine virtuelle Azure][configure-agent] utilise un modèle Azure Resource Manager (ARM) pour créer des agents Jenkins dans les machines virtuelles Azure.
+-   Le plug-in [Agents de machine virtuelle Azure][configure-agent] utilise un modèle Azure Resource Manager pour créer des agents Jenkins dans les machines virtuelles Azure.
 
 -   Le plug-in [Informations d’identification Azure][configure-credential] vous permet de stocker les informations d’identification du principal de service Azure dans Jenkins.
 
@@ -113,13 +113,13 @@ La sélection d’un serveur de taille appropriée dépend de la taille de la ch
 
 ## <a name="availability-considerations"></a>Considérations relatives à la disponibilité
 
-Évaluation des exigences de disponibilité pour votre flux de travail et récupération de l’état Jenkins en cas de panne du serveur Jenkin. Pour évaluer les exigences de disponibilité, tenez compte des deux mesures courantes :
+Dans le contexte d’un serveur Jenkins, la disponibilité signifie être en mesure de récupérer les informations d’état associées à votre flux de travail, telles que les résultats de tests, les bibliothèques que vous avez créées ou d’autres artefacts. Les états ou les artefacts de flux de travail critiques doivent être tenus à jour pour récupérer le flux de travail si le serveur Jenkins tombe en panne. Pour évaluer les exigences de disponibilité, tenez compte des deux mesures courantes :
 
 -   L’objectif de délai de récupération (RTO) spécifie la durée pendant laquelle le fonctionnement peut se poursuivre sans Jenkins.
 
 -   L’objectif de point de récupération (RPO) indique la quantité de données que vous pouvez vous permettre de perdre si une interruption de service affecte Jenkins.
 
-Dans la pratique, le RTO et le RPO impliquent la redondance et la sauvegarde. La disponibilité n’est pas une question de récupération du matériel, qui fait partie d’Azure, mais plutôt de maintien à jour de l’état de votre serveur Jenkins. Cette architecture de référence utilise le [contrat de niveau de service Azure][sla] (SLA), qui garantit la durée de fonctionnement à 99,9 % pour une seule machine virtuelle. Si ce contrat de niveau de service (SLA) ne répond pas à vos exigences de durée de fonctionnement, assurez vous de disposer d’un plan de récupération d’urgence, ou envisagez l’utilisation d’un déploiement de [serveur Jenkins multimaître][multi-master] (non traitée dans ce document).
+Dans la pratique, le RTO et le RPO impliquent la redondance et la sauvegarde. La disponibilité n’est pas une question de récupération du matériel, qui fait partie d’Azure, mais plutôt de maintien à jour de l’état de votre serveur Jenkins. Microsoft propose un [contrat de niveau de service][sla] (SLA) pour les instances de machine virtuelle uniques. Si ce contrat de niveau de service (SLA) ne répond pas à vos exigences de durée de fonctionnement, assurez vous de disposer d’un plan de récupération d’urgence, ou envisagez l’utilisation d’un déploiement de [serveur Jenkins multimaître][multi-master] (non traitée dans ce document).
 
 Envisagez l’utilisation des [scripts][disaster] de récupération d’urgence à l’étape 7 du déploiement pour créer un compte de stockage Azure avec des disques managés pour stocker l’état du serveur Jenkins. Si Jenkins tombe en panne, il peut être restauré à l’état stocké dans ce compte de stockage distinct.
 
@@ -127,7 +127,7 @@ Envisagez l’utilisation des [scripts][disaster] de récupération d’urgence 
 
 Utilisez l’une des approches suivantes pour verrouiller la sécurité sur un serveur de base Jenkins, étant donné qu’il n’est pas sécurisé dans son état de base.
 
--   Définissez un moyen sécurisé d’ouverture de session sur le serveur Jenkin. HTTP n’est pas sécurisé par défaut, cette architecture utilise le protocole HTTP et a une adresse IP publique. Envisagez de configurer [HTTPS sur le serveur Nginx][nginx] utilisé pour une ouverture de session sécurisée.
+-   Configurer un moyen de connexion sécurisé au serveur Jenkins. Cette architecture utilise le protocole HTTP et a une adresse IP publique, mais HTTP n’est pas sécurisé par défaut. Envisagez de configurer [HTTPS sur le serveur Nginx][nginx] utilisé pour une ouverture de session sécurisée.
 
     > [!NOTE]
     > Lors de l’ajout du protocole SSL sur votre serveur, créez une règle de groupe de sécurité réseau (NSG) pour le sous-réseau Jenkins afin d’ouvrir le port 443. Pour plus d’informations, consultez [Guide d’ouverture de ports vers une machine virtuelle avec le portail Azure][port443].
