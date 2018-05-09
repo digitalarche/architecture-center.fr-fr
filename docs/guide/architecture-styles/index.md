@@ -2,11 +2,11 @@
 title: Styles d’architecture
 description: Styles d’architecture courants pour les applications cloud
 layout: LandingPage
-ms.openlocfilehash: 15a316f9ebf7cfe4e72a6992f264a68abb904819
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: e647d1a0f3305e7754859e5ab8a9a3b46c3d4fb6
+ms.sourcegitcommit: d08f6ee27e1e8a623aeee32d298e616bc9bb87ff
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="architecture-styles"></a>Styles d’architecture
 
@@ -65,6 +65,7 @@ Les **[architectures basées sur les événements](./event-driven.md)** utilisen
 Envisagez une architecture basée sur les événements pour les applications qui reçoivent et traitent un gros volume de données avec une latence très faible, telles que les solutions IoT. Le style est également utile lorsque différents sous-systèmes doivent effectuer différents types de traitement sur les mêmes données d’événement.
 
 <br />
+
 ### <a name="big-data-big-compute"></a>Big Data et Big Compute
 
 **[Big Data](./big-data.md)** et **[Big Compute](./big-compute.md)** sont des styles d’architecture spécialisée pour les charges de travail qui correspondent à certains profils spécifiques. Big Data divise un jeu de données très volumineux en plusieurs blocs, exécutant un traitement parallèle sur l’ensemble du jeu de données, permettant l’analyse et la création de rapports. Big compute, également appelé High-Performance Computing, calcul haute performance (HPC), effectue des calculs parallèles sur un grand nombre (des milliers) de cœurs. Les domaines incluent des simulations, des modélisations et un rendu 3D.
