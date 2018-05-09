@@ -3,7 +3,7 @@
 - name: Architectures de référence
   href: index.md
   items:
-    - name: Applications web App Service
+    - name: Application web App Service
       href: app-service-web-app/index.md
       items:
         - name: Application web de base
@@ -44,6 +44,19 @@
           href: identity/adds-forest.md
         - name: Étendre AD FS à Azure
           href: identity/adfs.md
+    - name: Application multi-niveau
+      href: n-tier/index.md
+      items:
+        - name: Application multiniveau avec SQL Server
+          href: n-tier/n-tier-sql-server.md
+        - name: Application multiniveau multirégion
+          href: n-tier/multi-region-sql-server.md
+        - name: Application multiniveau avec Cassandra
+          href: n-tier/n-tier-cassandra.md
+        - name: Déployer une machine virtuelle Linux
+          href: n-tier/linux-vm.md
+        - name: Déployer une machine virtuelle Windows
+          href: n-tier/windows-vm.md
     - name: Zone DMZ réseau
       href: dmz/index.md
       items:
@@ -53,28 +66,6 @@
           href: dmz/secure-vnet-dmz.md
         - name: Appliances réseau virtuelles hautement disponible
           href: dmz/nva-ha.md
-    - name: Charges de travail de machine virtuelle (Linux)
-      href: virtual-machines-linux/index.md
-      items:
-        - name: Machine virtuelle unique
-          href: virtual-machines-linux/single-vm.md
-        - name: Machines virtuelles à charge équilibrée
-          href: virtual-machines-linux/multi-vm.md
-        - name: Application multi-niveau
-          href: virtual-machines-linux/n-tier.md
-        - name: Application multi-région
-          href: virtual-machines-linux/multi-region-application.md
-    - name: Charges de travail de machine virtuelle (Windows)
-      href: virtual-machines-windows/index.md
-      items:
-        - name: Machine virtuelle unique
-          href: virtual-machines-windows/single-vm.md
-        - name: Machines virtuelles à charge équilibrée
-          href: virtual-machines-windows/multi-vm.md
-        - name: Application multi-niveau
-          href: virtual-machines-windows/n-tier.md
-        - name: Application multi-région
-          href: virtual-machines-windows/multi-region-application.md
     - name: Serveur Jenkins
       href: jenkins/index.md
     - name: SAP NetWeaver et SAP HANA
