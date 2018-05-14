@@ -3,11 +3,11 @@ title: Identification des limites de microservice
 description: Identification des limites de microservice
 author: MikeWasson
 ms.date: 12/08/2017
-ms.openlocfilehash: e4f11da9f970724c55ad99824f808a10c4558971
-ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
+ms.openlocfilehash: d35b92ffd97c4fda5d6599340925ce3dfea7f15b
+ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2018
+ms.lasthandoff: 05/06/2018
 ---
 # <a name="designing-microservices-identifying-microservice-boundaries"></a>Conception de microservices : identification des limites de microservice
 
@@ -90,7 +90,7 @@ Un orchestrateur gère les tâches liées au déploiement et à la gestion d’u
 
 - [Service Fabric](/azure/service-fabric/) est une plateforme de systèmes distribués pour le packaging, le déploiement et la gestion de microservices. Les microservices peuvent être déployés vers Service Fabric comme des conteneurs, des exécutables binaires ou des [Reliable Services](/azure/service-fabric/service-fabric-reliable-services-introduction). À l’aide du modèle de programmation des Reliable Services, les services peuvent directement utiliser les API de programmation Service Fabric pour interroger le système, vérifier l’intégrité, recevoir des notifications sur la configuration et les modifications de code, et détecter d’autres services. La singularité de Service Fabric tient au fait qu’il est axé sur la création de services avec état à l’aide de [Reliable Collections](/azure/service-fabric/service-fabric-reliable-services-reliable-collections).
 
-### <a name="containers"></a>Conteneurs
+### <a name="containers"></a>Containers
 
 On fait parfois l’amalgame entre conteneurs et microservices. Or, il s’agit de deux choses différentes &mdash; vous n’avez pas besoin de conteneurs pour générer des microservices &mdash; et les conteneurs ont des avantages particulièrement intéressants pour les microservices, tels que :
 

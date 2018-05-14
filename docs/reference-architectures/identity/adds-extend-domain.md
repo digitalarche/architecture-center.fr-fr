@@ -2,15 +2,15 @@
 title: Étendre Active Directory Domain Services (AD DS) à Azure
 description: Étendre votre domaine local Active Directory à Azure
 author: telmosampaio
-ms.date: 04/13/2018
+ms.date: 05/02/2018
 pnp.series.title: Identity management
 pnp.series.prev: azure-ad
 pnp.series.next: adds-forest
-ms.openlocfilehash: bcd1e2b1b925a5d64665c5651c24589a77e39ec9
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.openlocfilehash: 763fffd321a1b50a562ef462dab59aafae717908
+ms.sourcegitcommit: 0de300b6570e9990e5c25efc060946cb9d079954
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="extend-active-directory-domain-services-ad-ds-to-azure"></a>Étendre Active Directory Domain Services (AD DS) à Azure
 
@@ -105,7 +105,7 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github]. Rem
 ### <a name="prerequisites"></a>Prérequis
 
 
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][ref-arch-repo].
+1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][github].
 
 2. Installez [Azure CLI 2.0][azure-cli-2].
 
@@ -119,34 +119,11 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github]. Rem
 
 ### <a name="deploy-the-simulated-on-premises-datacenter"></a>Déployer le centre de données local simulé
 
-1. Accédez au dossier `identity/adds-extend-domain` du référentiel des architectures de référence.
+1. Accédez au dossier `identity/adds-extend-domain` du dépôt GitHub.
 
-2. Ouvrez le fichier `onprem.json` . Cherchez `adminPassword` et ajoutez les valeurs pour les mots de passe. Il y a trois instances dans le fichier.
+2. Ouvrez le fichier `onprem.json` . Cherchez les instances de `adminPassword` et `Password` et ajoutez les valeurs pour les mots de passe.
 
-    ```bash
-    "adminUsername": "testuser",
-    "adminPassword": "<password>",
-    ```
-
-3. Dans le même fichier, cherchez `protectedSettings` et ajoutez les valeurs pour les mots de passe. Il y a deux instances de `protectedSettings`, une par serveur AD.
-
-    ```bash
-    "protectedSettings": {
-      "configurationArguments": {
-        ...
-        "AdminCreds": {
-          "UserName": "testadminuser",
-          "Password": "<password>"
-        },
-        "SafeModeAdminCreds": {
-          "UserName": "testsafeadminuser",
-          "Password": "<password>"
-        }
-      }
-    }
-    ```
-
-4. Exécutez la commande suivante et attendez que le déploiement se termine :
+3. Exécutez la commande suivante et attendez que le déploiement se termine :
 
     ```bash
     azbb -s <subscription_id> -g <resource group> -l <location> -p onprem.json --deploy
@@ -154,38 +131,15 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github]. Rem
 
 ### <a name="deploy-the-azure-vnet"></a>Déployer le réseau virtuel Azure
 
-1. Ouvrez le fichier `azure.json` .  Cherchez `adminPassword` et ajoutez les valeurs pour les mots de passe. Il y a trois instances dans le fichier.
+1. Ouvrez le fichier `azure.json` .  Cherchez les instances de `adminPassword` et `Password` et ajoutez les valeurs pour les mots de passe. 
 
-    ```bash
-    "adminUsername": "testuser",
-    "adminPassword": "<password>",
-    ```
-
-2. Dans le même fichier, cherchez `protectedSettings` et ajoutez les valeurs pour les mots de passe. Il y a deux instances de `protectedSettings`, une par serveur AD.
-
-    ```bash
-    "protectedSettings": {
-      "configurationArguments": {
-        ...
-        "AdminCreds": {
-          "UserName": "testadminuser",
-          "Password": "<password>"
-        },
-        "SafeModeAdminCreds": {
-          "UserName": "testsafeadminuser",
-          "Password": "<password>"
-        }
-      }
-    }
-    ```
-
-3. Pour `sharedKey`, saisissez une clé partagée pour la connexion VPN. Il y a deux instances de `sharedKey` dans le fichier de paramètre.
+2. Dans le même fichier, recherchez les instances de `sharedKey` et entrez les clés partagées pour la connexion VPN. 
 
     ```bash
     "sharedKey": "",
     ```
 
-4. Exécutez la commande suivante et attendez que le déploiement se termine.
+3. Exécutez la commande suivante et attendez que le déploiement se termine.
 
     ```bash
     azbb -s <subscription_id> -g <resource group> -l <location> -p onoprem.json --deploy
@@ -197,15 +151,17 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github]. Rem
 
 Une fois le déploiement terminé, vous pouvez tester la connectivité entre l’environnement local simulé et le réseau virtuel Azure.
 
-1. Utilisez le portail Azure pour trouver la machine virtuelle appelée `ra-onpremise-mgmt-vm1`.
+1. Utilisez le portail Azure, accédez au groupe de ressources que vous avez créé.
 
-2. Cliquez sur `Connect` pour ouvrir une session Bureau à distance vers la machine virtuelle. Le nom d’utilisateur est `contoso\testuser`, et le mot de passe est celui que vous avez spécifié dans le fichier de paramètre `onprem.json`.
+2. Trouvez la machine virtuelle nommée `ra-onpremise-mgmt-vm1`.
 
-3. Une fois dans votre session Bureau à distance, ouvrez une autre session Bureau à distance vers 10.0.4.4, qui correspond à l’adresse IP de la machine virtuelle appelée `adds-vm1`. Le nom d’utilisateur est `contoso\testuser`, et le mot de passe est celui que vous avez spécifié dans le fichier de paramètre `azure.json`.
+3. Cliquez sur `Connect` pour ouvrir une session Bureau à distance vers la machine virtuelle. Le nom d’utilisateur est `contoso\testuser`, et le mot de passe est celui que vous avez spécifié dans le fichier de paramètre `onprem.json`.
 
-4. Une fois dans la session Bureau à distance pour `adds-vm1`, allez dans **Gestionnaire de serveur** et cliquez sur **Ajouter d’autres serveurs à gérer**. 
+4. Une fois dans votre session Bureau à distance, ouvrez une autre session Bureau à distance vers 10.0.4.4, qui correspond à l’adresse IP de la machine virtuelle appelée `adds-vm1`. Le nom d’utilisateur est `contoso\testuser`, et le mot de passe est celui que vous avez spécifié dans le fichier de paramètre `azure.json`.
 
-5. Dans l’onglet **Active Directory**, cliquez sur **Rechercher maintenant**. Vous devriez voir une liste des machines virtuelles AD, AD DS et web.
+5. Une fois dans la session Bureau à distance pour `adds-vm1`, allez dans **Gestionnaire de serveur** et cliquez sur **Ajouter d’autres serveurs à gérer**. 
+
+6. Dans l’onglet **Active Directory**, cliquez sur **Rechercher maintenant**. Vous devriez voir une liste des machines virtuelles AD, AD DS et web.
 
    ![](./images/add-servers-dialog.png)
 
