@@ -3,11 +3,11 @@ title: Machine Learning à l’échelle
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: a92060008f90f43f71869bd1ad251af150b4a9db
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.openlocfilehash: 4e584da18893ac7405fa00863fe034e45b2e3903
+ms.sourcegitcommit: 7ced70ebc11aa0df0dc0104092d3cc6ad5c28bd6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2018
+ms.lasthandoff: 05/11/2018
 ---
 # <a name="machine-learning-at-scale"></a>Machine Learning à l’échelle
 
@@ -52,7 +52,7 @@ Machine Learning à l’échelle présente quelques défis :
 
 ## <a name="machine-learning-at-scale-in-azure"></a>Machine Learning à l’échelle dans Azure
 
-Avant de choisir les services ML à utiliser pour l’apprentissage et l’opérationnalisme, vous devez vous demander si vous avez besoin de former un modèle ou si un modèle prédéfini peut répondre à vos besoins. Dans de nombreux cas, l’utilisation d’un modèle prédéfini consiste simplement appeler un service web ou à utiliser une bibliothèque ML pour charger un modèle existant. Certaines options incluent : 
+Avant de choisir les services ML à utiliser pour l’apprentissage et l’opérationnalisme, vous devez vous demander si vous avez besoin de former un modèle ou si un modèle prédéfini peut répondre à vos besoins. Dans de nombreux cas, l’utilisation d’un modèle prédéfini consiste simplement à appeler un service web ou à utiliser une bibliothèque ML pour charger un modèle existant. Certaines options incluent : 
 
 - Utiliser les services web fournis par Microsoft Cognitive Services.
 - Utiliser les modèles de réseau neuronal préformés fournis par Cognitive Toolkit.
