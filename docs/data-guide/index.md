@@ -5,11 +5,11 @@ author: zoinerTejada
 ms:date: 02/12/2018
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 0975d056aa971c627ca91c9fc05c4e16e07b6fc0
-ms.sourcegitcommit: d08f6ee27e1e8a623aeee32d298e616bc9bb87ff
+ms.openlocfilehash: 63c1cca45fe9d99b5d0679360ef487c3a42da956
+ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2018
+ms.lasthandoff: 05/21/2018
 ---
 # <a name="azure-data-architecture-guide"></a>Guide d’architecture des données Azure
 
@@ -21,7 +21,7 @@ Le cloud change la façon dont les applications sont conçues, y compris la faç
 
 ## <a name="how-this-guide-is-structured"></a>Structure de ce guide
 
-Ce guide est structuré autour de deux catégories générales de solutions de données, *les charges de travail SGBDR traditionnelles* et les *solutions Big Data*. 
+Ce guide se structure autour de deux catégories de solution de données, les *charges de travail SGBDR traditionnelles* et les *solutions Big Data*. 
 
 **[Charges de travail SGBDR traditionnelles](./relational-data/index.md)**. Ces solutions incluent le traitement transactionnel en ligne (OLTP) et le traitement analytique en ligne (OLAP). Les données dans les systèmes OLTP sont en général des données relationnelles suivant un schéma prédéfini et un ensemble de contraintes afin de maintenir l’intégrité référentielle. Souvent, les données provenant de plusieurs sources dans l’organisation peuvent être consolidées dans un entrepôt de données, à l’aide d’un processus ETL pour déplacer et transformer les données source.
 
