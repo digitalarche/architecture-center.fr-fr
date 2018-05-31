@@ -4,11 +4,12 @@ description: Guide spécifique relatif au service pour définir le mécanisme de
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: d03cc9dd1af92a91bbfab1ebc8c438e6312eeb49
-ms.sourcegitcommit: d08f6ee27e1e8a623aeee32d298e616bc9bb87ff
+ms.openlocfilehash: 65206c5f39a74d228c7eaa0fea0c5b1b0710b22f
+ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2018
+ms.lasthandoff: 05/21/2018
+ms.locfileid: "34423015"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Guide du mécanisme de nouvelle tentative relatif aux différents services
 
@@ -855,7 +856,7 @@ Les tableaux ci-après présentent les paramètres par défaut pour les stratég
 
 | **Paramètre** | **Valeur par défaut** | **Signification** |
 | --- | --- | --- |
-| MaximumExecutionTime | 120 secondes | Durée d’exécution maximale pour la demande, y compris toutes les nouvelles tentatives potentielles. |
+| MaximumExecutionTime | Aucun | Durée d’exécution maximale pour la demande, y compris toutes les nouvelles tentatives potentielles. Si elle n’est pas indiquée, la durée d’exécution autorisée d’une demande est illimitée. En d’autres termes, la demande peut se bloquer. |
 | ServerTimeout | Aucun | Intervalle du délai d’attente du serveur pour la demande (la valeur est arrondie aux secondes). Si non spécifié, il utilisera la valeur par défaut pour toutes les demandes au serveur. En règle générale, la meilleure option consiste à omettre ce paramètre afin que le serveur par défaut soit utilisé. | 
 | LocationMode | Aucun | Si le compte de stockage est créé avec l’option de duplication du stockage géo-redondant avec accès en lecture (RA-GRS), vous pouvez utiliser le mode de d’emplacement pour indiquer l’emplacement devant recevoir la demande. Par exemple, si **PrimaryThenSecondary** est spécifié, les demandes sont dans un premier temps toujours envoyées vers l’emplacement principal. En cas d’échec, la demande est envoyée vers l’emplacement secondaire. |
 | RetryPolicy | ExponentialPolicy | Voir ci-dessous pour obtenir plus d’informations sur chaque option. |
