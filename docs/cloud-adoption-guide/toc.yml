@@ -10,6 +10,8 @@
           items:
             - name: "Explicatif\_: comment fonctionne Azure\_?"
               href: adoption-intro/azure-explainer.md
+            - name: "Explicatif\_: qu’est ce que la gouvernance des ressources cloud"
+              href: adoption-intro/governance-explainer.md
         - name: Présentation de l’identité numérique dans Azure
           items:
             - name: "Explicatif\_: qu’est-ce qu’un abonné Azure Active Directory\_?"
@@ -62,3 +64,8 @@
                   href: /azure/virtual-machines/linux/quick-create-portal?toc=/azure/architecture/cloud-adoption-guide/toc.json
                 - name: "Guide\_: meilleures pratiques pour le déploiement d’une machine virtuelle Linux dans Azure"
                   href: /azure/architecture/reference-architectures/virtual-machines-linux/single-vm?toc=/azure/architecture/cloud-adoption-guide/toc.json
+    - name: Adoption Azure intermédiaire
+      href: intermediate-stage/overview.md
+      items:
+        - name: Guide de conception de gouvernance
+          href: intermediate-stage/governance-design-guide.md
