@@ -37,7 +37,7 @@
       href: reference-architectures/n-tier/index.md
     - name: Zone DMZ réseau
       href: reference-architectures/dmz/index.md
-    - name: SAP NetWeaver et SAP HANA
+    - name: SAP sur Azure
       href: reference-architectures/sap/index.md
     - name: Serveur SharePoint 2016
       href: reference-architectures/sharepoint/index.md
