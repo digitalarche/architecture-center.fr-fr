@@ -2,11 +2,12 @@
 title: 'Adoption d’Azure : phase initiale'
 description: Décrit le niveau de base de connaissances que doit posséder une entreprise pour adopter Azure
 author: petertay
-ms.openlocfilehash: e9421b610e4eb07a3ed37bca56e513b0689484ef
-ms.sourcegitcommit: 9ba82cf84cee06ccba398ec04c51dab0e1ca8974
+ms.openlocfilehash: 3f522d1662849d651423d8022ad152c64692b823
+ms.sourcegitcommit: b3d74d8a89b2224fc796ce0e89cea447af43a0d4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/13/2018
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35290473"
 ---
 # <a name="adopting-azure-foundational"></a>Adoption d’Azure : phase initiale
 
@@ -16,6 +17,7 @@ La liste ci-dessous répertorie les tâches à accomplir durant la phase d’ado
 
 1. Présentation des éléments internes d’Azure :
     - **Explicatif :** [comment fonctionne Azure ?](azure-explainer.md)
+    - **Explicatif :** [qu’est-ce que la gouvernance des ressources cloud ?](governance-explainer.md)
 2. Présentation de l’identité numérique d’entreprise dans Azure :
     - **Explicatif :** [qu’est-ce qu’un locataire Azure Active Directory ?](tenant-explainer.md)
     - **Guide pratique pour** [obtenir un locataire Azure Active Directory](/azure/active-directory/develop/active-directory-howto-tenant?toc=/azure/architecture/cloud-adoption-guide/toc.json)
@@ -33,7 +35,7 @@ La liste ci-dessous répertorie les tâches à accomplir durant la phase d’ado
     - **Guide :** [conventions d’affectation de noms pour les ressources Azure](/azure/architecture/best-practices/naming-conventions?toc=/azure/architecture/cloud-adoption-guide/toc.json)
 5. Déploiement d’une architecture Azure de base :
     - Découvrez-en plus sur les différents types d’options de calcul Azure, tels que IaaS (Infrastructure as a Service) et PaaS (Platform as a Service) dans la [vue d’ensemble des options de calcul Azure](/azure/architecture/guide/technology-choices/compute-overview?toc=/azure/architecture/cloud-adoption-guide/toc.json).
-    - Maintenant que vous connaissez les différents types d’options de calcul Azure, choisissez une application web PaaS ou une machine virtuelle IaaS comme première ressource dans Azure :
+    - Maintenant que vous connaissez les différents types d’options de calcul Azure, choisissez une application web (PaaS) ou une machine virtuelle (IaaS) comme première ressource dans Azure :
     - PaaS : introduction à Platform as a Service :
         - **Guide pratique pour** [déployer une application web de base sur Azure](/azure/app-service/app-service-web-overview?toc=/azure/architecture/cloud-adoption-guide/toc.json)
         - **Guide :** pratiques éprouvées pour le déploiement d’une [application web de base](/azure/architecture/reference-architectures/app-service-web-app/basic-web-app?toc=/azure/architecture/cloud-adoption-guide/toc.json) sur Azure

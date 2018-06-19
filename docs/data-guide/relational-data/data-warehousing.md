@@ -3,11 +3,12 @@ title: Entreposage de données et mini-Data Warehouses
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 552cdfad2d571c93f83bc1e4ff0d09ac12d0b6a4
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 9b90d77ce1a81cd4a7532f5d4230ada8b4991d13
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35252803"
 ---
 # <a name="data-warehousing-and-data-marts"></a>Entreposage de données et mini-Data Warehouses
 
@@ -117,7 +118,7 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 
 ### <a name="general-capabilities"></a>Fonctionnalités générales
 
-| | Base de données SQL Azure | SQL Server (machine virtuelle) | SQL Data Warehouse | Apache Hive sur HDInsight | Hive LLAP sur HDInsight |
+| | Azure SQL Database | SQL Server (machine virtuelle) | SQL Data Warehouse | Apache Hive sur HDInsight | Hive LLAP sur HDInsight |
 | --- | --- | --- | --- | --- | --- | -- |
 | Est un service géré | OUI | Non  | OUI | Oui <sup>1</sup> | Oui<sup>1</sup> |
 | Nécessite l’orchestration des données (conserve une copie des données/données historiques) | Non  | Non  | OUI | OUI | OUI |
@@ -138,18 +139,18 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 
 ### <a name="scalability-capabilities"></a>Fonctionnalités d’évolutivité
 
-| | Base de données SQL Azure | SQL Server (machine virtuelle) |  SQL Data Warehouse | Apache Hive sur HDInsight | Hive LLAP sur HDInsight |
+| | Azure SQL Database | SQL Server (machine virtuelle) |  SQL Data Warehouse | Apache Hive sur HDInsight | Hive LLAP sur HDInsight |
 | --- | --- | --- | --- | --- | --- | -- |
 | Serveurs régionaux redondants pour assurer une haute disponibilité  | OUI | OUI | OUI | Non  | Non  |
 | Prend en charge les requêtes avec montée en charge (requêtes distribuées)  | Non  | Non  | OUI | OUI | OUI |
-| Évolutivité dynamique (montée en puissance)  | OUI | Non  | Oui <sup>1</sup> | Non  | Non  |
+| Évolutivité dynamique | OUI | Non  | Oui <sup>1</sup> | Non  | Non  |
 | Prend en charge la mise en cache en mémoire des données | OUI |  OUI | Non  | OUI | OUI |
 
 [1] SQL Data Warehouse permet de monter ou de descendre en puissance en ajustant le nombre d’unités DWU (Data Warehouse Unit). Voir [Gérer la puissance de calcul dans Azure SQL Data Warehouse](/azure/sql-data-warehouse/sql-data-warehouse-manage-compute-overview).
 
 ### <a name="security-capabilities"></a>Fonctionnalités de sécurité
 
-|                         |           Base de données SQL Azure            |  SQL Server dans une machine virtuelle  | SQL Data Warehouse |   Apache Hive sur HDInsight    |    Hive LLAP sur HDInsight     |
+|                         |           Azure SQL Database            |  SQL Server dans une machine virtuelle  | SQL Data Warehouse |   Apache Hive sur HDInsight    |    Hive LLAP sur HDInsight     |
 |-------------------------|-----------------------------------------|-----------------------------------|--------------------|-------------------------------|-------------------------------|
 |     Authentification      | SQL / Azure Active Directory (Azure AD) | SQL / Azure AD / Active Directory |   SQL / Azure AD   | local / Azure AD<sup>1</sup> | local / Azure AD <sup>1</sup> |
 |      Authorization      |                   OUI                   |                OUI                |        OUI         |              OUI              |       Oui <sup>1</sup>        |

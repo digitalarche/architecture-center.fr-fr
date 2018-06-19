@@ -7,11 +7,12 @@ ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - design-implementation
-ms.openlocfilehash: 85191fc630549559f8a1395e5a8622a7a6140a2d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 6e05a30245fbf5183a4e50a54650505f5a5f2aa8
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35252922"
 ---
 # <a name="compute-resource-consolidation-pattern"></a>Modèle de consolidation des ressources de calcul
 
@@ -68,7 +69,7 @@ Prenez en compte les points suivants lorsque vous implémentez ce modèle :
 > [!NOTE]
 >  Envisagez de consolider des ressources de calcul uniquement pour un système qui a été en production pendant un certain temps, afin que les opérateurs et développeurs puissent surveiller le système et créer une _carte thermique_ qui identifie la façon dont chaque tâche utilise les différentes ressources. Cette carte peut être utilisée pour déterminer les tâches les plus adaptées au partage de ressources de calcul.
 
-**Complexité**. Combiner plusieurs tâches dans une seule unité de calcul complique le code dans l’unité et le rend plus difficile à tester, déboguer et maintenir.
+**Complexité** : Combiner plusieurs tâches dans une seule unité de calcul complique le code dans l’unité et le rend plus difficile à tester, déboguer et maintenir.
 
 **Architecture logique stable**. Concevez et implémentez le code dans chaque tâche de façon à ce qu’il n’ait pas besoin d’être modifié même si l’environnement physique dans lequel la tâche s’exécute change.
 
@@ -80,7 +81,7 @@ Utilisez ce modèle pour les tâches qui ne sont pas rentables si elles s’exé
 
 Ce modèle peut ne pas être adapté pour les tâches qui effectuent des opérations critiques tolérantes aux pannes ou pour les tâches qui traitent des données privées ou extrêmement sensibles et qui nécessitent leur propre contexte de sécurité. Ces tâches doivent s’exécutent dans leur propre environnement isolé, dans une unité de calcul distincte.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Lors de la création d’un service cloud sur Azure, il est possible de consolider le traitement effectué par plusieurs tâches dans un rôle unique. Il s’agit généralement d’un rôle de travail qui exécute des tâches de traitement asynchrone ou en arrière-plan.
 
@@ -88,7 +89,7 @@ Lors de la création d’un service cloud sur Azure, il est possible de consolid
 
 Le rôle est responsable du démarrage et de l’arrêt des tâches. Lorsque le contrôleur de structure Azure charge un rôle, il déclenche l’événement `Start` pour le rôle. Vous pouvez remplacer la méthode `OnStart` de la classe `WebRole` ou `WorkerRole` pour gérer cet événement, par exemple, pour initialiser les données et autres ressources dont les tâches de cette méthode dépendent.
 
-Lorsque la méthode `OnStart ` se termine, le rôle peut commencer à répondre aux requêtes. Vous pouvez obtenir plus d’informations et de conseils sur l’utilisation des méthodes `OnStart` et `Run` dans un rôle en consultant la section [Application Startup Processes](https://msdn.microsoft.com/library/ff803371.aspx#sec16) (Processus de démarrage d’application) dans le guide des pratiques et modèles [Moving Applications to the Cloud](https://msdn.microsoft.com/library/ff728592.aspx) (Déplacer des applications dans le cloud).
+Lorsque la méthode `OnStart` se termine, le rôle peut commencer à répondre aux requêtes. Vous pouvez obtenir plus d’informations et de conseils sur l’utilisation des méthodes `OnStart` et `Run` dans un rôle en consultant la section [Application Startup Processes](https://msdn.microsoft.com/library/ff803371.aspx#sec16) (Processus de démarrage d’application) dans le guide des pratiques et modèles [Moving Applications to the Cloud](https://msdn.microsoft.com/library/ff728592.aspx) (Déplacer des applications dans le cloud).
 
 > Gardez le code de la méthode `OnStart` aussi concis que possible. Azure n’impose aucune limite quant au temps nécessaire pour que cette méthode se termine, mais le rôle ne pourra pas commencer à répondre aux requêtes réseau qui lui sont envoyées tant que cette méthode n’est pas terminée.
 
@@ -237,7 +238,7 @@ private void Stop(TimeSpan timeout)
 
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
-Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
+Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
 
 - [Mise à l’échelle automatique](https://msdn.microsoft.com/library/dn589774.aspx). La mise à l’échelle automatique peut être utilisée pour démarrer et arrêter des instances de service qui hébergent des ressources de calcul, en fonction de la demande prévue pour le traitement.
 

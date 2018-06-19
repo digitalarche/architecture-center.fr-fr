@@ -2,17 +2,18 @@
 title: Piliers de la qualité logicielle
 description: 'Décrit les cinq piliers de la qualité des logiciels : l’extensibilité, la disponibilité, la résilience, la gestion et la sécurité.'
 author: MikeWasson
-ms.openlocfilehash: 1d5e30602cafa0d39f92de3101974e77ae258595
-ms.sourcegitcommit: a7aae13569e165d4e768ce0aaaac154ba612934f
+ms.openlocfilehash: 117706046ca1a9b7f3203a99737347809d0c323f
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/30/2018
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35252785"
 ---
 # <a name="pillars-of-software-quality"></a>Piliers de la qualité logicielle 
 
 Une application cloud réussie se concentrera sur ces cinq piliers de la qualité des logiciels : l’extensibilité, la disponibilité, la résilience, la gestion et la sécurité.
 
-| Pilier | DESCRIPTION |
+| Pilier | Description |
 |--------|-------------|
 | Extensibilité | Capacité d’un système à traiter une charge accrue. |
 | Disponibilité | Durée pendant laquelle le système est fonctionnel et opérationnel. |
