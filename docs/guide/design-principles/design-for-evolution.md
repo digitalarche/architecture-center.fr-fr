@@ -3,11 +3,12 @@ title: Penser la conception des applications en vue de leur évolution
 description: Une conception évolutive est essentielle pour une innovation continue.
 author: MikeWasson
 layout: LandingPage
-ms.openlocfilehash: 35e91228f3fb0a303594ec06f05b6865008e3a4f
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: d05c1813dbc49f3ed8378cac4ea0c584ebdd9ff7
+ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 06/11/2018
+ms.locfileid: "35252888"
 ---
 # <a name="design-for-evolution"></a>Penser la conception des applications en vue de leur évolution
 
