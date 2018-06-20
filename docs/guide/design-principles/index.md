@@ -2,34 +2,34 @@
 title: Principes de conception pour les applications Azure
 description: Principes de conception pour les applications Azure
 author: MikeWasson
-layout: LandingPage
-ms.openlocfilehash: 57b04839e14804ad97fc9c86e1f9c4fe6e0da472
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 462896098c668c0775464ca498925266cd73c6e1
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206798"
 ---
-# <a name="design-principles-for-azure-applications"></a>Principes de conception pour les applications Azure
+# <a name="design-principles-for-azure-applications"></a><span data-ttu-id="1b4e6-103">Principes de conception pour les applications Azure</span><span class="sxs-lookup"><span data-stu-id="1b4e6-103">Design principles for Azure applications</span></span>
 
-Appliquez ces principes de conception pour rendre votre application plus évolutive, résiliente et gérable. 
+<span data-ttu-id="1b4e6-104">Appliquez ces principes de conception pour rendre votre application plus évolutive, résiliente et gérable.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-104">Follow these design principles to make your application more scalable, resilient, and manageable.</span></span> 
 
-**[Penser la conception des applications pour la réparation spontanée](self-healing.md)**. Dans un système distribué, des défaillances peuvent se produire. Concevez votre application pour qu’elle se répare spontanément en cas de défaillance.
+<span data-ttu-id="1b4e6-105">**[Penser la conception des applications pour la réparation spontanée](self-healing.md)**.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-105">**[Design for self healing](self-healing.md)**.</span></span> <span data-ttu-id="1b4e6-106">Dans un système distribué, des défaillances peuvent se produire.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-106">In a distributed system, failures happen.</span></span> <span data-ttu-id="1b4e6-107">Concevez votre application pour qu’elle se répare spontanément en cas de défaillance.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-107">Design your application to be self healing when failures occur.</span></span>
 
-**[Rendre tous les éléments redondant](redundancy.md)**. Intégrez la redondance à votre application, pour éviter les points de défaillance uniques.
+<span data-ttu-id="1b4e6-108">**[Rendre tous les éléments redondant](redundancy.md)**.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-108">**[Make all things redundant](redundancy.md)**.</span></span> <span data-ttu-id="1b4e6-109">Intégrez la redondance à votre application, pour éviter les points de défaillance uniques.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-109">Build redundancy into your application, to avoid having single points of failure.</span></span>
  
-**[Réduire la coordination](minimize-coordination.md)**. Réduisez la coordination entre les services d’application pour atteindre une certaine évolutivité.
+<span data-ttu-id="1b4e6-110">**[Réduire la coordination](minimize-coordination.md)**.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-110">**[Minimize coordination](minimize-coordination.md)**.</span></span> <span data-ttu-id="1b4e6-111">Réduisez la coordination entre les services d’application pour atteindre une certaine évolutivité.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-111">Minimize coordination between application services to achieve scalability.</span></span>
  
-**[Penser la conception des applications pour augmenter la taille des instances](scale-out.md)**. Concevez votre application afin qu’elle puisse évoluer horizontalement, par l’ajout ou la suppression de nouvelles instances en fonction de la demande.
+<span data-ttu-id="1b4e6-112">**[Penser la conception des applications pour augmenter la taille des instances](scale-out.md)**. Concevez votre application afin qu’elle puisse évoluer horizontalement, par l’ajout ou la suppression de nouvelles instances en fonction de la demande.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-112">**[Design to scale out](scale-out.md)**. Design your application so that it can scale horizontally, adding or removing new instances as demand requires.</span></span>
 
-**[Partitionner autour des limites](partition.md)**. Utilisez le partitionnement pour contourner les limites liées à la base de données, au réseau et au calcul.
+<span data-ttu-id="1b4e6-113">**[Partitionner autour des limites](partition.md)**.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-113">**[Partition around limits](partition.md)**.</span></span> <span data-ttu-id="1b4e6-114">Utilisez le partitionnement pour contourner les limites liées à la base de données, au réseau et au calcul.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-114">Use partitioning to work around database, network, and compute limits.</span></span>
 
-**[Penser la conception des applications pour les opérations](design-for-operations.md)**. Concevez votre application pour que l’équipe des opérations dispose des outils dont elle a besoin.
+<span data-ttu-id="1b4e6-115">**[Penser la conception des applications pour les opérations](design-for-operations.md)**.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-115">**[Design for operations](design-for-operations.md)**.</span></span> <span data-ttu-id="1b4e6-116">Concevez votre application pour que l’équipe des opérations dispose des outils dont elle a besoin.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-116">Design your application so that the operations team has the tools they need.</span></span>
 
-**[Utiliser les services managés Azure](managed-services.md)**. Si possible, utilisez platform as a service (PaaS) au lieu de infrastructure as a service (IaaS).
+<span data-ttu-id="1b4e6-117">**[Utiliser les services managés Azure](managed-services.md)**.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-117">**[Use managed services](managed-services.md)**.</span></span> <span data-ttu-id="1b4e6-118">Si possible, utilisez platform as a service (PaaS) au lieu de infrastructure as a service (IaaS).</span><span class="sxs-lookup"><span data-stu-id="1b4e6-118">When possible, use platform as a service (PaaS) rather than infrastructure as a service (IaaS).</span></span>
 
-**[Utiliser la meilleure banque de données pour le travail](use-the-best-data-store.md)**. Choisissez la technologie de stockage la mieux adaptée à vos données et son mode d’utilisation. 
+<span data-ttu-id="1b4e6-119">**[Utiliser la meilleure banque de données pour le travail](use-the-best-data-store.md)**.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-119">**[Use the best data store for the job](use-the-best-data-store.md)**.</span></span> <span data-ttu-id="1b4e6-120">Choisissez la technologie de stockage la mieux adaptée à vos données et son mode d’utilisation.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-120">Pick the storage technology that is the best fit for your data and how it will be used.</span></span> 
  
-**[Penser la conception des applications en vue de leur évolution](design-for-evolution.md)**. Mêmes les applications les plus réussies changent au fil du temps. Une conception évolutive est essentielle une innovation continue.
+<span data-ttu-id="1b4e6-121">**[Penser la conception des applications en vue de leur évolution](design-for-evolution.md)**.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-121">**[Design for evolution](design-for-evolution.md)**.</span></span> <span data-ttu-id="1b4e6-122">Mêmes les applications les plus réussies changent au fil du temps.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-122">All successful applications change over time.</span></span> <span data-ttu-id="1b4e6-123">Une conception évolutive est essentielle une innovation continue.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-123">An evolutionary design is key for continuous innovation.</span></span>
 
-**[Créer pour les besoins de l’entreprise](build-for-business.md)**. Chaque décision de conception doit être justifiée par un besoin de l’entreprise.
+<span data-ttu-id="1b4e6-124">**[Créer pour les besoins de l’entreprise](build-for-business.md)**.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-124">**[Build for the needs of business](build-for-business.md)**.</span></span> <span data-ttu-id="1b4e6-125">Chaque décision de conception doit être justifiée par un besoin de l’entreprise.</span><span class="sxs-lookup"><span data-stu-id="1b4e6-125">Every design decision must be justified by a business requirement.</span></span>
 

@@ -60,4 +60,5 @@
     - name: Piliers de la qualité logicielle
       href: pillars.md
     - name: Modèles de conception
-      href: ../patterns/index.md?toc=/azure/architecture/guide/toc.json
+      href: ../patterns/index.md
+      maintainContext: true
