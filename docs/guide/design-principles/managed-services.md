@@ -2,31 +2,31 @@
 title: Utiliser les services gérés
 description: Dans la mesure du possible, privilégiez l’approche platform as a service (PaaS) plutôt que l’approche infrastructure as a service (IaaS)
 author: MikeWasson
-layout: LandingPage
-ms.openlocfilehash: 7156c073db3e047fb38e031309ddb637a9e44c02
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 6d3cfb2e97b5a9b25bb1afd72059e981ef45c0d8
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206604"
 ---
-# <a name="use-managed-services"></a>Utiliser les services gérés
+# <a name="use-managed-services"></a><span data-ttu-id="af99f-103">Utiliser les services gérés</span><span class="sxs-lookup"><span data-stu-id="af99f-103">Use managed services</span></span>
 
-## <a name="when-possible-use-platform-as-a-service-paas-rather-than-infrastructure-as-a-service-iaas"></a>Dans la mesure du possible, privilégiez l’approche platform as a service (PaaS) plutôt que l’approche infrastructure as a service (IaaS)
+## <a name="when-possible-use-platform-as-a-service-paas-rather-than-infrastructure-as-a-service-iaas"></a><span data-ttu-id="af99f-104">Dans la mesure du possible, privilégiez l’approche platform as a service (PaaS) plutôt que l’approche infrastructure as a service (IaaS)</span><span class="sxs-lookup"><span data-stu-id="af99f-104">When possible, use platform as a service (PaaS) rather than infrastructure as a service (IaaS)</span></span>
 
-L’approche IaaS équivaut à disposer d’un carton rempli de pièces. Vous pouvez construire tout ce que vous voulez, mais vous devez tout assembler vous-même. Les services gérés sont plus faciles à configurer et à administrer. Vous n’avez pas besoin d’approvisionner de machines virtuelles, de gérer les correctifs et les mises à jour, ni de prendre en charge les autres surcoûts inhérents à l’exécution de logiciels sur une machine virtuelle.
+<span data-ttu-id="af99f-105">L’approche IaaS équivaut à disposer d’un carton rempli de pièces.</span><span class="sxs-lookup"><span data-stu-id="af99f-105">IaaS is like having a box of parts.</span></span> <span data-ttu-id="af99f-106">Vous pouvez construire tout ce que vous voulez, mais vous devez tout assembler vous-même.</span><span class="sxs-lookup"><span data-stu-id="af99f-106">You can build anything, but you have to assemble it yourself.</span></span> <span data-ttu-id="af99f-107">Les services gérés sont plus faciles à configurer et à administrer.</span><span class="sxs-lookup"><span data-stu-id="af99f-107">Managed services are easier to configure and administer.</span></span> <span data-ttu-id="af99f-108">Vous n’avez pas besoin d’approvisionner de machines virtuelles, de gérer les correctifs et les mises à jour, ni de prendre en charge les autres surcoûts inhérents à l’exécution de logiciels sur une machine virtuelle.</span><span class="sxs-lookup"><span data-stu-id="af99f-108">You don't need to provision VMs, set up VNets, manage patches and updates, and all of the other overhead associated with running software on a VM.</span></span>
 
-Par exemple, supposons que votre application ait besoin d’une file d’attente de messages. Vous pouvez configurer votre propre service de messagerie sur une machine virtuelle à l’aide d’un logiciel tel que RabbitMQ. Toutefois, Azure Service Bus fournit déjà une messagerie fiable sous la forme d’un service, et se révèle plus simple à configurer. Il vous suffit de créer un espace de noms Service Bus (ce qui peut être effectué dans le cadre d’un script de déploiement), puis d’appeler Service Bus à l’aide du Kit de développement logiciel (SDK) client. 
+<span data-ttu-id="af99f-109">Par exemple, supposons que votre application ait besoin d’une file d’attente de messages.</span><span class="sxs-lookup"><span data-stu-id="af99f-109">For example, suppose your application needs a message queue.</span></span> <span data-ttu-id="af99f-110">Vous pouvez configurer votre propre service de messagerie sur une machine virtuelle à l’aide d’un logiciel tel que RabbitMQ.</span><span class="sxs-lookup"><span data-stu-id="af99f-110">You could set up your own messaging service on a VM, using something like RabbitMQ.</span></span> <span data-ttu-id="af99f-111">Toutefois, Azure Service Bus fournit déjà une messagerie fiable sous la forme d’un service, et se révèle plus simple à configurer.</span><span class="sxs-lookup"><span data-stu-id="af99f-111">But Azure Service Bus already provides reliable messaging as service, and it's simpler to set up.</span></span> <span data-ttu-id="af99f-112">Il vous suffit de créer un espace de noms Service Bus (ce qui peut être effectué dans le cadre d’un script de déploiement), puis d’appeler Service Bus à l’aide du Kit de développement logiciel (SDK) client.</span><span class="sxs-lookup"><span data-stu-id="af99f-112">Just create a Service Bus namespace (which can be done as part of a deployment script) and then call Service Bus using the client SDK.</span></span> 
 
-Bien entendu, il est possible que votre application présente certaines exigences auxquelles une approche IaaS peut répondre de façon plus adéquate. Toutefois, même si votre application repose sur IaaS, recherchez les emplacements où vous pouvez incorporer naturellement des services gérés. Ces emplacements comprennent le cache, les files d’attente et le stockage des données.
+<span data-ttu-id="af99f-113">Bien entendu, il est possible que votre application présente certaines exigences auxquelles une approche IaaS peut répondre de façon plus adéquate.</span><span class="sxs-lookup"><span data-stu-id="af99f-113">Of course, your application may have specific requirements that make an IaaS approach more suitable.</span></span> <span data-ttu-id="af99f-114">Toutefois, même si votre application repose sur IaaS, recherchez les emplacements où vous pouvez incorporer naturellement des services gérés.</span><span class="sxs-lookup"><span data-stu-id="af99f-114">However, even if your application is based on IaaS, look for places where it may be natural to incorporate managed services.</span></span> <span data-ttu-id="af99f-115">Ces emplacements comprennent le cache, les files d’attente et le stockage des données.</span><span class="sxs-lookup"><span data-stu-id="af99f-115">These include cache, queues, and data storage.</span></span>
 
-| Au lieu d’exécuter... | Utilisez plutôt... |
+| <span data-ttu-id="af99f-116">Au lieu d’exécuter...</span><span class="sxs-lookup"><span data-stu-id="af99f-116">Instead of running...</span></span> | <span data-ttu-id="af99f-117">Utilisez plutôt...</span><span class="sxs-lookup"><span data-stu-id="af99f-117">Consider using...</span></span> |
 |-----------------------|-------------|
-| Active Directory | Azure Active Directory Domain Services |
-| Elasticsearch | Recherche Azure |
-| Hadoop | HDInsight |
-| IIS | App Service |
-| MongoDB | Cosmos DB |
-| Redis | Cache Redis Azure |
-| SQL Server | Base de données SQL Azure |
+| <span data-ttu-id="af99f-118">Active Directory</span><span class="sxs-lookup"><span data-stu-id="af99f-118">Active Directory</span></span> | <span data-ttu-id="af99f-119">Azure Active Directory Domain Services</span><span class="sxs-lookup"><span data-stu-id="af99f-119">Azure Active Directory Domain Services</span></span> |
+| <span data-ttu-id="af99f-120">Elasticsearch</span><span class="sxs-lookup"><span data-stu-id="af99f-120">Elasticsearch</span></span> | <span data-ttu-id="af99f-121">Recherche Azure</span><span class="sxs-lookup"><span data-stu-id="af99f-121">Azure Search</span></span> |
+| <span data-ttu-id="af99f-122">Hadoop</span><span class="sxs-lookup"><span data-stu-id="af99f-122">Hadoop</span></span> | <span data-ttu-id="af99f-123">HDInsight</span><span class="sxs-lookup"><span data-stu-id="af99f-123">HDInsight</span></span> |
+| <span data-ttu-id="af99f-124">IIS</span><span class="sxs-lookup"><span data-stu-id="af99f-124">IIS</span></span> | <span data-ttu-id="af99f-125">App Service</span><span class="sxs-lookup"><span data-stu-id="af99f-125">App Service</span></span> |
+| <span data-ttu-id="af99f-126">MongoDB</span><span class="sxs-lookup"><span data-stu-id="af99f-126">MongoDB</span></span> | <span data-ttu-id="af99f-127">Cosmos DB</span><span class="sxs-lookup"><span data-stu-id="af99f-127">Cosmos DB</span></span> |
+| <span data-ttu-id="af99f-128">Redis</span><span class="sxs-lookup"><span data-stu-id="af99f-128">Redis</span></span> | <span data-ttu-id="af99f-129">Cache Redis Azure</span><span class="sxs-lookup"><span data-stu-id="af99f-129">Azure Redis Cache</span></span> |
+| <span data-ttu-id="af99f-130">SQL Server</span><span class="sxs-lookup"><span data-stu-id="af99f-130">SQL Server</span></span> | <span data-ttu-id="af99f-131">Azure SQL Database</span><span class="sxs-lookup"><span data-stu-id="af99f-131">Azure SQL Database</span></span> |
 
 
