@@ -9,6 +9,7 @@ ms.sourcegitcommit: 3426a9c5ed937f097725c487cf3d073ae5e2a347
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 02/01/2018
+ms.locfileid: "28907044"
 ---
 # <a name="background-jobs"></a>Travaux en arrière-plan
 [!INCLUDE [header](../_includes/header.md)]

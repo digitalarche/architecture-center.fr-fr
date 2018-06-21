@@ -9,6 +9,7 @@ ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 02/09/2018
+ms.locfileid: "29059970"
 ---
 # <a name="data-partitioning"></a>Partitionnement des données
 
@@ -26,7 +27,7 @@ Le partitionnement des données présente un certain nombre d’avantages. Par e
 * **Améliorer la disponibilité**. Diviser les données au sein de plusieurs serveurs permet d’éviter un point de défaillance unique. Si un serveur tombe en panne ou est en cours de maintenance planifiée, seules les données présentes au sein de cette partition sont indisponibles. Les opérations intervenant sur les autres partitions peuvent se poursuivre. L’augmentation du nombre de partitions réduit l’impact relatif d’une défaillance sur un serveur unique en réduisant le pourcentage de données qui ne seront pas disponibles. La réplication de chaque partition permet de réduire le risque d’une défaillance de partition unique qui affecterait les opérations. Cela permet aussi de séparer les données critiques qui doivent être hautement disponibles en permanence des données peu importantes, dont les exigences de disponibilité sont moindres (fichiers journaux, par exemple).
 * **Améliorer la sécurité**. Selon la nature des données et la manière dont elles sont partitionnées,les données sensibles et non sensibles peuvent être séparées dans différentes partitions et donc dans différents serveurs ou magasins de données. Il est ensuite possible d’optimiser le sécurité de manière spécifique concernant les données sensibles.
 * **Procurer une flexibilité opérationnelle**. Le partitionnement offre de nombreuses possibilités de réglage des opérations, d’optimisation de l’efficacité de l’administration et de réduction des coûts. Par exemple, vous pouvez définir différentes stratégies de gestion, surveillance, sauvegarde et restauration et autres tâches d’administration en fonction de l’importance des données présentes dans chaque partition.
-* **Faire correspondre le magasin de données au modèle d’utilisation**. Le partitionnement permet le déploiement de chaque partition sur un type de magasin de données différent, en fonction du coût et des fonctionnalités intégrées proposées par le magasin de données. Par exemple, il est possible de stocker les données binaires volumineuses dans un magasin de données blob et de stocker les données plus structurées dans une base de données de documents. Pour plus d’informations, consultez [Création d’une solution polyglotte] dans le guide des modèles et pratiques, et [Accès aux données pour des solutions hautement extensibles : utilisation de la persistance SQL, NoSQL et polyglotte] sur le site web Microsoft.
+* **Faire correspondre le magasin de données au modèle d’utilisation**. Le partitionnement permet le déploiement de chaque partition sur un type de magasin de données différent, en fonction du coût et des fonctionnalités intégrées proposées par le magasin de données. Par exemple, il est possible de stocker les données binaires volumineuses dans un magasin de données blob et de stocker les données plus structurées dans une base de données de documents. Pour plus d’informations, consultez [Building a Polyglot Solution] (Création d’une solution polyglotte) dans le guide des modèles et pratiques, et [Data Access for Highly-Scalable Solutions: Using SQL, NoSQL, and Polyglot Persistence] (Accès aux données pour les solutions hautement évolutives : Utilisation de la persistance SQL, NoSQL et polyglotte) sur le site web Microsoft.
 
 Certains systèmes n’implémentent pas le partitionnement, car cette technique est considérée comme un coût plutôt qu’un avantage. Les arguments courants motivant ce point de vue sont les suivants :
 
@@ -526,7 +527,7 @@ Quand vous étudiez des stratégies d’implémentation de la cohérence des don
 
 * La page [conseils en matière de cohérence des données] sur le site web Microsoft décrit les stratégies de maintien de la cohérence dans un environnement distribué tel que le cloud.
 * La page [Data Partitioning Guidance] sur le site web Microsoft présente une vue d’ensemble de la conception de partitions visant à satisfaire divers critères dans une solution distribuée.
-* Le [schéma de partitionnement] tel que décrit sur le site web Microsoft récapitule certaines stratégies courantes en matière de partitionnement de données.
+* Le [Modèle de partitionnement] tel que décrit sur le site web Microsoft récapitule certaines stratégies courantes en matière de partitionnement de données.
 * Le [modèle de table d’index] tel que décrit sur le site web Microsoft illustre comment créer des index secondaires pour les données. Cette approche permet à une application de récupérer rapidement des données à l’aide de requêtes ne faisant pas référence à la clé primaire d’une collection.
 * Le [modèle d’affichage matérialisé] tel que décrit sur le site web Microsoft illustre comment générer des affichages prédéfinis qui synthétisent les données pour prendre en charge des opérations de requêtes rapides. Cette approche peut s’avérer utile au sein d’un magasin de données partitionnées si les partitions contenant les données synthétisées sont réparties sur plusieurs sites.
 * L’article [Utilisation d’Azure CDN] sur le site web Microsoft fournit des conseils supplémentaires sur la configuration et l’utilisation du réseau de distribution de contenu avec Azure.
@@ -535,8 +536,8 @@ Quand vous étudiez des stratégies d’implémentation de la cohérence des don
 * La page [Présentation d’Azure SQL Database] sur le site web Microsoft présente des informations détaillées sur la création et l’utilisation des bases de données SQL.
 * La page [Vue d’ensemble des fonctionnalités de bases de données élastiques] sur le site web Microsoft dresse une présentation complète de la fonction Base de données élastique.
 * La page [Mise à l’échelle utilisant l’outil de fractionnement et de fusion de bases de données élastiques] sur le site web Microsoft présente des informations sur l’utilisation du service de fractionnement et de fusion pour gérer les partitions de bases de données élastiques.
-* La page [Objectifs de performance et évolutivité d’Azure Storage](https://msdn.microsoft.com/library/azure/dn249410.aspx) sur le site web Microsoft présente les limites actuelles en matière de dimensionnement et de débit d’Azure Storage.
-* La page [Performing entity group transactions] sur le site web Microsoft fournit des informations détaillées sur l’implémentation des opérations transactionnelles relatives à des entités stockées dans le service de stockage de tables Azure.
+* La page [Azure storage scalability and performance targets](https://msdn.microsoft.com/library/azure/dn249410.aspx) (Objectifs de performance et évolutivité d’Azure Storage) sur le site web Microsoft présente les limites actuelles en matière de dimensionnement et de débit d’Azure Storage.
+* La page [Exécution de transactions de groupe d’entités] sur le site web Microsoft fournit des informations détaillées sur l’implémentation des opérations transactionnelles relatives à des entités stockées dans le service de stockage de tables Azure.
 * L’article [Guide de conception de table Azure Storage] sur le site web Microsoft fournit des informations détaillées sur le partitionnement des données dans le service de stockage de tables Azure.
 * La page [Utilisation d’Azure CDN] sur le site web Microsoft décrit comment répliquer des données contenues dans le service de stockage d’objets blob Azure à l’aide du réseau de distribution de contenu Azure.
 * La page [Présentation d’Azure Search] sur le site web Microsoft présente une description complète des fonctionnalités disponibles dans Azure Search.
@@ -551,11 +552,11 @@ Quand vous étudiez des stratégies d’implémentation de la cohérence des don
 [azure-limits]: /azure/azure-subscription-service-limits
 [Vue d’ensemble du réseau de distribution de contenu (CDN) Azure]: /azure/cdn/cdn-overview
 [Cache Redis Azure]: http://azure.microsoft.com/services/cache/
-[Azure Storage Scalability and Performance Targets]: /azure/storage/storage-scalability-targets
-[Azure Storage Table Design Guide]: /azure/storage/storage-table-design-guide
-[Building a Polyglot Solution]: https://msdn.microsoft.com/library/dn313279.aspx (Création d’une solution polyglotte)
+[Objectifs de performance et évolutivité d’Azure Storage]: /azure/storage/storage-scalability-targets
+[Guide de conception de table Azure Storage]: /azure/storage/storage-table-design-guide
+[Building a Polyglot Solution]: https://msdn.microsoft.com/library/dn313279.aspx
 [cosmos-db-ru]: /azure/cosmos-db/request-units
-[Data Access for Highly-Scalable Solutions: Using SQL, NoSQL, and Polyglot Persistence]: https://msdn.microsoft.com/library/dn271399.aspx (Accès aux données pour les solutions hautement évolutives : Utilisation de la persistance SQL, NoSQL et polyglotte)
+[Data Access for Highly-Scalable Solutions: Using SQL, NoSQL, and Polyglot Persistence]: https://msdn.microsoft.com/library/dn271399.aspx
 [conseils en matière de cohérence des données]: http://aka.ms/Data-Consistency-Primer
 [Data Partitioning Guidance]: https://msdn.microsoft.com/library/dn589795.aspx
 [Data Types]: http://redis.io/topics/data-types
@@ -564,13 +565,13 @@ Quand vous étudiez des stratégies d’implémentation de la cohérence des don
 [event-hubs]: /azure/event-hubs
 [Federations Migration Utility]: https://code.msdn.microsoft.com/vstudio/Federations-Migration-ce61e9c1
 [Instructions et recommandations pour les collections fiables dans Azure Service Fabric]: /azure/service-fabric/service-fabric-reliable-services-reliable-collections-guidelines
-[Index Table Pattern]: http://aka.ms/Index-Table-Pattern
-[Materialized View Pattern]: http://aka.ms/Materialized-View-Pattern
+[modèle de table d’index]: http://aka.ms/Index-Table-Pattern
+[modèle d’affichage matérialisé]: http://aka.ms/Materialized-View-Pattern
 [Requête sur plusieurs partitions]: /azure/sql-database/sql-database-elastic-scale-multishard-querying
 [Vue d’ensemble d’Azure Service Fabric]: /azure/service-fabric/service-fabric-overview
 [Partitionnement des services fiables Service Fabric]: /azure/service-fabric/service-fabric-concepts-partitioning
 [Partitioning: how to split data among multiple Redis instances]: http://redis.io/topics/partitioning
-[Performing Entity Group Transactions]: https://msdn.microsoft.com/library/azure/dd894038.aspx
+[Exécution de transactions de groupe d’entités]: https://msdn.microsoft.com/library/azure/dd894038.aspx
 [Redis cluster tutorial]: http://redis.io/topics/cluster-tutorial
 [Running Redis on a CentOS Linux VM in Windows Azure]: http://blogs.msdn.com/b/tconte/archive/2012/06/08/running-redis-on-a-centos-linux-vm-in-windows-azure.aspx
 [Mise à l’échelle utilisant l’outil de fractionnement et de fusion de bases de données élastiques]: /azure/sql-database/sql-database-elastic-scale-overview-split-and-merge

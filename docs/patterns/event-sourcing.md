@@ -13,6 +13,7 @@ ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 03/17/2018
+ms.locfileid: "29963208"
 ---
 # <a name="event-sourcing-pattern"></a>Modèle d'approvisionnement en événements
 

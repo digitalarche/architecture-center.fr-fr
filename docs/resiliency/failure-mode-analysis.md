@@ -10,6 +10,7 @@ ms.sourcegitcommit: d08f6ee27e1e8a623aeee32d298e616bc9bb87ff
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 05/07/2018
+ms.locfileid: "33810497"
 ---
 # <a name="failure-mode-analysis"></a>Analyse du mode d’échec
 [!INCLUDE [header](../_includes/header.md)]

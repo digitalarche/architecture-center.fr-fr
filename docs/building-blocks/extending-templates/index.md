@@ -8,6 +8,7 @@ ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 03/17/2018
+ms.locfileid: "29963191"
 ---
 # <a name="extend-azure-resource-manager-template-functionality"></a>Étend la fonctionnalité des modèles Azure Resource Manager
 

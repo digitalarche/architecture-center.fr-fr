@@ -11,6 +11,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24541463"
 ---
 # <a name="secure-a-backend-web-api"></a>Sécuriser une API web principale
 
@@ -230,7 +231,7 @@ L’intergiciel (middleware) JwtBearer gère les réponses d’autorisation. Par
 
 Cela renvoie un code d’état 401 si l’utilisateur n’est pas authentifié.
 
-Pour restreindre une action de contrôleur en fonction de la stratégie d’autorisation, spécifiez le nom de la stratégie dans l’attribut **[Authorize]** :
+Pour restreindre une action de contrôleur en fonction de la stratégie d’autorisation, spécifiez le nom de la stratégie dans l’attribut **[Authorize]**  :
 
 ```csharp
 [Authorize(Policy = PolicyNames.RequireSurveyCreator)]

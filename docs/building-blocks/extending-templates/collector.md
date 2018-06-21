@@ -8,6 +8,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24538663"
 ---
 # <a name="implement-a-property-transformer-and-collector-in-an-azure-resource-manager-template"></a>Implémenter un transformateur et un collecteur de propriétés dans un modèle Azure Resource Manager
 

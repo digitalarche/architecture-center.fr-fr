@@ -8,6 +8,7 @@ ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 04/03/2018
+ms.locfileid: "30298607"
 ---
 # <a name="working-with-csv-and-json-files-for-data-solutions"></a>Utilisation des fichiers CSV et JSON pour des solutions de données
 

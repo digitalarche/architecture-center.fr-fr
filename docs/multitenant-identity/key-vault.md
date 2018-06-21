@@ -10,6 +10,7 @@ ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 04/16/2018
+ms.locfileid: "31012516"
 ---
 # <a name="use-azure-key-vault-to-protect-application-secrets"></a>Utiliser Azure Key Vault pour protéger les secrets d’application
 
