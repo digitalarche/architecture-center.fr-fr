@@ -11,6 +11,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24541463"
 ---
 # <a name="secure-a-backend-web-api"></a><span data-ttu-id="635be-103">Sécuriser une API web principale</span><span class="sxs-lookup"><span data-stu-id="635be-103">Secure a backend web API</span></span>
 
@@ -230,7 +231,7 @@ public override async Task TokenValidated(TokenValidatedContext context)
 
 <span data-ttu-id="635be-201">Cela renvoie un code d’état 401 si l’utilisateur n’est pas authentifié.</span><span class="sxs-lookup"><span data-stu-id="635be-201">This returns a 401 status code if the user is not authenticated.</span></span>
 
-<span data-ttu-id="635be-202">Pour restreindre une action de contrôleur en fonction de la stratégie d’autorisation, spécifiez le nom de la stratégie dans l’attribut **[Authorize]** :</span><span class="sxs-lookup"><span data-stu-id="635be-202">To restrict a controller action by authorizaton policy, specify the policy name in the **[Authorize]** attribute:</span></span>
+<span data-ttu-id="635be-202">Pour restreindre une action de contrôleur en fonction de la stratégie d’autorisation, spécifiez le nom de la stratégie dans l’attribut **[Authorize]**  :</span><span class="sxs-lookup"><span data-stu-id="635be-202">To restrict a controller action by authorizaton policy, specify the policy name in the **[Authorize]** attribute:</span></span>
 
 ```csharp
 [Authorize(Policy = PolicyNames.RequireSurveyCreator)]

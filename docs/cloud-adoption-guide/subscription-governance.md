@@ -19,6 +19,7 @@ ms.sourcegitcommit: 4ec010846b9b5545c843a32e08293f906e512302
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 05/17/2018
+ms.locfileid: "34299897"
 ---
 # <a name="azure-enterprise-scaffold---prescriptive-subscription-governance"></a><span data-ttu-id="01524-103">Structure d’entreprise Azure : gouvernance normative de l’abonnement</span><span class="sxs-lookup"><span data-stu-id="01524-103">Azure enterprise scaffold - prescriptive subscription governance</span></span>
 <span data-ttu-id="01524-104">Les entreprises adoptent de plus en plus le cloud public en raison de son agilité et de la flexibilité.</span><span class="sxs-lookup"><span data-stu-id="01524-104">Enterprises are increasingly adopting the public cloud for its agility and flexibility.</span></span> <span data-ttu-id="01524-105">Elles utilisent les atouts du cloud pour générer des revenus ou optimiser les ressources de l’entreprise.</span><span class="sxs-lookup"><span data-stu-id="01524-105">They are utilizing the cloud's strengths to generate revenue or optimize resources for the business.</span></span> <span data-ttu-id="01524-106">Microsoft Azure offre une multitude de services que les entreprises peuvent combiner sous forme de blocs de construction pour traiter une large gamme de charges de travail et d’applications.</span><span class="sxs-lookup"><span data-stu-id="01524-106">Microsoft Azure provides a multitude of services that enterprises can assemble like building blocks to address a wide array of workloads and applications.</span></span> 

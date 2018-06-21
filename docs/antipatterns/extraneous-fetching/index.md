@@ -8,6 +8,7 @@ ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 04/06/2018
+ms.locfileid: "30846601"
 ---
 # <a name="extraneous-fetching-antipattern"></a><span data-ttu-id="f8ef4-103">Antimodèle de récupération superflue</span><span class="sxs-lookup"><span data-stu-id="f8ef4-103">Extraneous Fetching antipattern</span></span>
 

@@ -8,6 +8,7 @@ ms.sourcegitcommit: 94c769abc3d37d4922135ec348b5da1f4bbcaa0a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 12/13/2017
+ms.locfileid: "26678728"
 ---
 # <a name="designing-microservices-ingestion-and-workflow"></a><span data-ttu-id="8d376-103">Conception de microservices : ingestion et workflow</span><span class="sxs-lookup"><span data-stu-id="8d376-103">Designing microservices: Ingestion and workflow</span></span>
 

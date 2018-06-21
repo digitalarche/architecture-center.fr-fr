@@ -8,6 +8,7 @@ ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 04/03/2018
+ms.locfileid: "30298627"
 ---
 # <a name="real-time-processing"></a><span data-ttu-id="0b8f7-102">Traitement en temps réel</span><span class="sxs-lookup"><span data-stu-id="0b8f7-102">Real time processing</span></span>
 

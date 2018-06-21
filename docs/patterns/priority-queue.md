@@ -13,6 +13,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24543143"
 ---
 # <a name="priority-queue-pattern"></a><span data-ttu-id="2bea7-104">Modèle de file d’attente avec un ordre de priorité</span><span class="sxs-lookup"><span data-stu-id="2bea7-104">Priority Queue pattern</span></span>
 

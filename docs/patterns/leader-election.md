@@ -13,6 +13,7 @@ ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 04/06/2018
+ms.locfileid: "30846649"
 ---
 # <a name="leader-election-pattern"></a><span data-ttu-id="2e2bb-104">Modèle d’élection du responsable</span><span class="sxs-lookup"><span data-stu-id="2e2bb-104">Leader Election pattern</span></span>
 

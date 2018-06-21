@@ -8,6 +8,7 @@ ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 04/06/2018
+ms.locfileid: "30847207"
 ---
 # <a name="choosing-a-big-data-storage-technology-in-azure"></a><span data-ttu-id="c9835-102">Sélectionner une technologie de stockage de Big Data dans Azure</span><span class="sxs-lookup"><span data-stu-id="c9835-102">Choosing a big data storage technology in Azure</span></span>
 

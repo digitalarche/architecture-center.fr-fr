@@ -9,6 +9,7 @@ ms.sourcegitcommit: 441185360db49cfb3cf39527b68f318d17d4cb3d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 01/19/2018
+ms.locfileid: "27973142"
 ---
 # <a name="caching"></a><span data-ttu-id="e01a6-103">Mise en cache</span><span class="sxs-lookup"><span data-stu-id="e01a6-103">Caching</span></span>
 

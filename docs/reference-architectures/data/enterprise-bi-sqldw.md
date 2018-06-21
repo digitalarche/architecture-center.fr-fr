@@ -8,6 +8,7 @@ ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 04/16/2018
+ms.locfileid: "31012835"
 ---
 # <a name="enterprise-bi-with-sql-data-warehouse"></a><span data-ttu-id="0f927-103">Enterprise BI avec SQL Data Warehouse</span><span class="sxs-lookup"><span data-stu-id="0f927-103">Enterprise BI with SQL Data Warehouse</span></span>
  

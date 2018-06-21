@@ -9,6 +9,7 @@ ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 04/06/2018
+ms.locfileid: "30846401"
 ---
 # <a name="basic-web-application"></a><span data-ttu-id="7fcd7-103">Application web de base</span><span class="sxs-lookup"><span data-stu-id="7fcd7-103">Basic web application</span></span>
 [!INCLUDE [header](../../_includes/header.md)]

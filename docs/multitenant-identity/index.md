@@ -10,6 +10,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24541671"
 ---
 # <a name="manage-identity-in-multitenant-applications"></a><span data-ttu-id="f60ca-103">Gérer l’identité dans les applications multi-locataire</span><span class="sxs-lookup"><span data-stu-id="f60ca-103">Manage Identity in Multitenant Applications</span></span>
 

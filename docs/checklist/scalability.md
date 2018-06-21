@@ -9,6 +9,7 @@ ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 01/11/2018
+ms.locfileid: "27766103"
 ---
 # <a name="scalability-checklist"></a><span data-ttu-id="c17e1-103">Liste de contrôle de l’extensibilité</span><span class="sxs-lookup"><span data-stu-id="c17e1-103">Scalability checklist</span></span>
 

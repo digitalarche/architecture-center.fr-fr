@@ -7,6 +7,7 @@ ms.sourcegitcommit: 2e8b06e9c07875d65b91d5431bfd4bc465a7a242
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 02/09/2018
+ms.locfileid: "29062077"
 ---
 # <a name="what-is-an-azure-resource-group"></a><span data-ttu-id="a424e-103">Qu’est-ce qu’un groupe de ressources Azure ?</span><span class="sxs-lookup"><span data-stu-id="a424e-103">What is an Azure resource group?</span></span>
 

@@ -8,6 +8,7 @@ ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 04/06/2018
+ms.locfileid: "30846880"
 ---
 # <a name="choosing-an-analytical-data-store-in-azure"></a><span data-ttu-id="74b02-102">Sélectionner un magasin de données analytique dans Azure</span><span class="sxs-lookup"><span data-stu-id="74b02-102">Choosing an analytical data store in Azure</span></span>
 

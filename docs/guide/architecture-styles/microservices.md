@@ -7,6 +7,7 @@ ms.sourcegitcommit: 7764a804f000180c37a4f8dbab946b525f784f58
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 01/09/2018
+ms.locfileid: "27717638"
 ---
 # <a name="microservices-architecture-style"></a><span data-ttu-id="77e2b-103">Style d’architecture de microservices</span><span class="sxs-lookup"><span data-stu-id="77e2b-103">Microservices architecture style</span></span>
 

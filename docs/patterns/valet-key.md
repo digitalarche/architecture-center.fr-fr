@@ -13,6 +13,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24542039"
 ---
 # <a name="valet-key-pattern"></a><span data-ttu-id="9631c-104">Modèle de clé de valet</span><span class="sxs-lookup"><span data-stu-id="9631c-104">Valet Key pattern</span></span>
 

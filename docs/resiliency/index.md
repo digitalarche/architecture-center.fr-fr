@@ -10,6 +10,7 @@ ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 04/16/2018
+ms.locfileid: "31012635"
 ---
 # <a name="designing-resilient-applications-for-azure"></a><span data-ttu-id="aa2d0-103">Conception d’applications résilientes pour Azure</span><span class="sxs-lookup"><span data-stu-id="aa2d0-103">Designing resilient applications for Azure</span></span>
 

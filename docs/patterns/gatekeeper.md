@@ -12,6 +12,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24541319"
 ---
 # <a name="gatekeeper-pattern"></a><span data-ttu-id="be95b-104">Modèle d’opérateur de contrôle</span><span class="sxs-lookup"><span data-stu-id="be95b-104">Gatekeeper pattern</span></span>
 

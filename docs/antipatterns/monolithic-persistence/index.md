@@ -8,6 +8,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24538679"
 ---
 # <a name="monolithic-persistence-antipattern"></a><span data-ttu-id="c7911-103">Antimodèle de persistance monolithique</span><span class="sxs-lookup"><span data-stu-id="c7911-103">Monolithic Persistence antipattern</span></span>
 

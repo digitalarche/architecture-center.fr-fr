@@ -7,6 +7,7 @@ ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 02/23/2018
+ms.locfileid: "29478304"
 ---
 # <a name="explainer-what-is-an-azure-subscription"></a><span data-ttu-id="4443b-103">Explicatif : qu’est-ce qu’un abonnement Azure ?</span><span class="sxs-lookup"><span data-stu-id="4443b-103">Explainer: What is an Azure subscription?</span></span>
 

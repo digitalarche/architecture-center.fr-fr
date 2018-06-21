@@ -7,6 +7,7 @@ ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 04/06/2018
+ms.locfileid: "30847246"
 ---
 # <a name="cloud-design-patterns"></a><span data-ttu-id="88c44-104">Modèles de conception de cloud</span><span class="sxs-lookup"><span data-stu-id="88c44-104">Cloud Design Patterns</span></span>
 

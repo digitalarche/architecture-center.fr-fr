@@ -8,6 +8,7 @@ ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 11/14/2017
+ms.locfileid: "24541767"
 ---
 # <a name="sidecar-pattern"></a><span data-ttu-id="0de7e-103">Modèle side-car</span><span class="sxs-lookup"><span data-stu-id="0de7e-103">Sidecar pattern</span></span>
 

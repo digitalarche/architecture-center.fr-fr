@@ -8,6 +8,7 @@ ms.sourcegitcommit: 786bafefc731245414c3c1510fc21027afe303dc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 12/12/2017
+ms.locfileid: "26652992"
 ---
 # <a name="designing-microservices-logging-and-monitoring"></a><span data-ttu-id="0b073-103">Conception de microservices : journalisation et surveillance</span><span class="sxs-lookup"><span data-stu-id="0b073-103">Designing microservices: Logging and monitoring</span></span>
 

@@ -11,6 +11,7 @@ ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 02/23/2018
+ms.locfileid: "29477442"
 ---
 # <a name="federate-with-a-customers-ad-fs"></a><span data-ttu-id="6f9f3-103">Se fédérer avec les services AD FS d’un client</span><span class="sxs-lookup"><span data-stu-id="6f9f3-103">Federate with a customer's AD FS</span></span>
 

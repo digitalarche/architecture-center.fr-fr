@@ -10,6 +10,7 @@ ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 04/06/2018
+ms.locfileid: "30846788"
 ---
 # <a name="management-and-monitoring-patterns"></a><span data-ttu-id="45a06-106">Modèles de gestion et de surveillance</span><span class="sxs-lookup"><span data-stu-id="45a06-106">Management and Monitoring patterns</span></span>
 
