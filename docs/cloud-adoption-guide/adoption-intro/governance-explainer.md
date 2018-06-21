@@ -2,12 +2,12 @@
 title: 'Explicatif : qu’est-ce que la gouvernance cloud ?'
 description: Explique le concept de gouvernance des ressources pour Azure et le cloud
 author: petertay
-ms.openlocfilehash: 63b04089aad5fc736641f8aaa6ff5247ea8ba13e
-ms.sourcegitcommit: b3d74d8a89b2224fc796ce0e89cea447af43a0d4
+ms.openlocfilehash: 3404beaa719177ee7638feed8a8442b5c3b455c6
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35291113"
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206478"
 ---
 # <a name="explainer-what-is-cloud-resource-governance"></a>Explicatif : qu’est-ce que la gouvernance des ressources cloud ?
 
@@ -16,6 +16,8 @@ Dans l’article explicatif [Comment fonctionne Azure ?](azure-explainer.md), vo
 Mais si le fait d’accorder aux développeurs un accès illimité aux ressources les fait considérablement gagner en agilité, une telle approche peut également entraîner des coûts inattendus. Par exemple, une équipe de développement peut être autorisée à déployer un ensemble de ressources à des fins de test mais oublier de les supprimer une fois les tests terminés. Ces ressources continueront d’engendrer des coûts, même si leur utilisation n’est plus nécessaire ou autorisée. 
 
 La **gouvernance** de l’accès aux ressources offre un moyen de résoudre ce problème. La gouvernance consiste à gérer, surveiller et contrôler en continu les ressources Azure afin d’atteindre les objectifs et de satisfaire aux exigences de votre organisation. 
+
+> [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE2ii94] 
 
 Ces objectifs et exigences étant propres à chaque organisation, il est impossible de définir une approche unique de la gouvernance. C’est pourquoi Azure implémente deux principaux outils de gouvernance : le **contrôle d’accès basée sur les ressources (RBAC)** et la **stratégie de ressources**. Il appartient à chaque organisation d’utiliser ces outils pour concevoir son propre modèle de gouvernance.
 

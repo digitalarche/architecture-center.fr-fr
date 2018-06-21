@@ -2,12 +2,12 @@
 title: Penser la conception des applications pour la réparation spontanée
 description: Les applications résilientes peuvent opérer une récupération après un échec sans intervention manuelle.
 author: MikeWasson
-layout: LandingPage
-ms.openlocfilehash: 0782b65b77615f7c006724264ab0ca2d2c7c04e2
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 508341ba428b294cf268e34e922aced9d2d67579
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206572"
 ---
 # <a name="design-for-self-healing"></a>Penser la conception des applications pour la réparation spontanée
 
@@ -29,7 +29,7 @@ En outre, ne pensez pas uniquement aux événements importants tels que les pann
 
 **Relance des opérations ayant échoué**. Les échecs temporaires peuvent se produire en raison d’une perte momentanée de la connectivité réseau, d’une connexion à une base de données interrompue ou d’un délai d’attente lorsqu’un service est occupé. Intégrez une logique de relance à votre application pour gérer les défaillances temporaires. Pour de nombreux services Azure, le Kit de développement logiciel client implémente de nouvelles tentatives automatiques. Pour plus d’informations, consultez les articles [Gestion des erreurs temporaires][transient-fault-handling] et [Modèle Nouvelle tentative][retry].
 
-**Protéger les services distants ayant échoué (Disjoncteur)**. Il est judicieux de lancer de nouvelles tentatives après une défaillance temporaire, mais si le problème persiste, vous pouvez vous retrouver avec un trop grand nombre d’appels vers le service défectueux. Cela peut entraîner des échecs en cascade à mesure que les requêtes sont sauvegardées. Utilisez le [modèle Disjoncteur][circuit-breaker] pour accepter un échec rapide (sans effectuer l’appel à distance) lorsqu’une opération est susceptible d’échouer.  
+**Protéger les services distants ayant échoué (Disjoncteur)**. Il est judicieux de lancer de nouvelles tentatives après une défaillance temporaire, mais si le problème persiste, vous pouvez vous retrouver avec un trop grand nombre d’appels vers le service défectueux. Cela peut entraîner des échecs en cascade à mesure que les requêtes sont sauvegardées. Utilisez le [modèle Disjoncteur][circuit-breaker] pour effectuer un Fail-fast (sans effectuer l’appel à distance) lorsqu’une opération est susceptible d’échouer.  
 
 **Isoler les ressources critiques (Cloisonnement)**. Un sous-système peut parfois être victime de défaillances en cascade. Cela peut se produire si une défaillance empêche que certaines ressources, telles que des threads ou des sockets, ne soient libérées en temps voulu, menant à un épuisement des ressources. Pour éviter ce problème, partitionnez un système en groupes isolés, de manière à ce qu’une défaillance présente dans une partition ne détériore pas l’ensemble du système.  
 
