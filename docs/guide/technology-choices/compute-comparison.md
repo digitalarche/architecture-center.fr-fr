@@ -3,12 +3,13 @@ title: Critères de sélection d’un service de calcul Azure
 description: Comparer les services de calcul Azure sur différents axes
 author: MikeWasson
 layout: LandingPage
-ms.date: 04/21/2018
-ms.openlocfilehash: ff90ec41c56ae0ecb81bc82128f02fd06d02cb32
-ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
+ms.date: 06/13/2018
+ms.openlocfilehash: 29c21c44bdf3a3bfa29f17015565eecf5f86163b
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2018
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206575"
 ---
 # <a name="criteria-for-choosing-an-azure-compute-service"></a>Critères de sélection d’un service de calcul Azure
 
@@ -18,7 +19,7 @@ Le terme *calcul* fait référence au modèle d’hébergement pour les ressourc
 
 | Critères | Virtual Machines | App Service | Service Fabric | Azure Functions | Azure Container Service | Container Instances | Azure Batch |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
-| Composition de l’application | Sans dépendance | APPLICATIONS | Services, exécutables invités, conteneurs | Functions | Containers | Containers | Scheduled jobs  |
+| Composition de l’application | Sans dépendance | Applications, conteneurs | Services, exécutables invités, conteneurs | Fonctions | Containers | Containers | Scheduled jobs  |
 | Densité | Sans dépendance | Plusieurs applications par instance via des plans d’application | Plusieurs services par machine virtuelle | Aucune instance dédiée <a href="#note1"><sup>1</sup></a> | Plusieurs conteneurs par machine virtuelle |Aucune instance dédiée | Plusieurs applications par machine virtuelle |
 | Nombre minimal de nœuds | 1 <a href="#note2"><sup>2</sup></a>  | 1 | 5 <a href="#note3"><sup>3</sup></a> | Aucun nœud dédié <a href="#note1"><sup>1</sup></a> | 3 | Aucun nœud dédié | 1 <a href="#note4"><sup>4</sup></a> |
 | Gestion de l'état | Sans état ou avec état | Sans état | Sans état ou avec état | Sans état | Sans état ou avec état | Sans état | Sans état |
@@ -29,12 +30,12 @@ Le terme *calcul* fait référence au modèle d’hébergement pour les ressourc
 
 Notes
 
-1. <span id="note1">Avec utilisation d’un plan de consommation. Si vous utilisez un plan App Service, les fonctions sont exécutées sur les machines virtuelles allouées dans le cadre de votre plan App Service. Voir [Choisir le plan de service approprié pour Azure Functions][function-plans].</a>
-2. <span id="note2">SLA supérieur avec deux instances ou plus.</a>
-3. <span id="note3">Pour les environnements de production.</a>
-4. <span id="note4">Peut revenir au point d’origine une fois la tâche terminée.</a>
-5. <span id="note5">Nécessite un environnement App Service Environment (ASE).</a>
-6. <span id="note7">Nécessite des connexions hybrides ASE ou BizTalk</a>
+1. <span id="note1">Avec utilisation d’un plan de consommation. Si vous utilisez un plan App Service, les fonctions sont exécutées sur les machines virtuelles allouées dans le cadre de votre plan App Service. Voir [Choisir le plan de service approprié pour Azure Functions][function-plans].</span>
+2. <span id="note2">SLA supérieur avec deux instances ou plus.</span>
+3. <span id="note3">Pour les environnements de production.</span>
+4. <span id="note4">Peut revenir au point d’origine une fois la tâche terminée.</span>
+5. <span id="note5">Nécessite un environnement App Service Environment (ASE).</span>
+6. <span id="note7">Nécessite des connexions hybrides ASE ou BizTalk</span>
 
 ## <a name="devops"></a>DevOps
 
@@ -46,8 +47,8 @@ Notes
 
 Notes
 
-1. <span id="note1b">Les options incluent IIS Express pour ASP.NET ou node.js (iisnode) ; le serveur web PHP ; le kit de ressources Azure pour IntelliJ et le kit de ressources Azure pour Eclipse. App Service prend également en charge le débogage à distance de l’application web déployée.</a>
-2. <span id="note2b">Voir [Fournisseurs, régions, schémas et versions d’API du Gestionnaire des ressources][resource-manager-supported-services]. 
+1. <span id="note1b">Les options incluent IIS Express pour ASP.NET ou node.js (iisnode) ; le serveur web PHP ; le kit de ressources Azure pour IntelliJ et le kit de ressources Azure pour Eclipse. App Service prend également en charge le débogage à distance de l’application web déployée.</span>
+2. <span id="note2b">Voir [Fournisseurs, régions, schémas et versions d’API du Gestionnaire des ressources][resource-manager-supported-services].</span> 
 
 
 ## <a name="scalability"></a>Extensibilité
@@ -56,12 +57,13 @@ Notes
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
 | Mise à l’échelle automatique | Groupes de machines virtuelles identiques (VMSS) | Service intégré | Groupes de machines virtuelles identiques (VMSS) | Service intégré | Non pris en charge | Non pris en charge | N/A |
 | Équilibrage de charge | Azure Load Balancer | Intégré | Azure Load Balancer | Intégré | Azure Load Balancer |  Aucune prise en charge intégrée | Azure Load Balancer |
-| Limite de la mise à l’échelle | Image de plateforme : 1 000 nœuds par VMSS, image personnalisée : 100 nœuds par VMSS | 20 instances, 50 avec App Service Environment | 100 nœuds par VMSS | Infini <a href="#note1c"><sup>1</sup></a> | 100 |20 groupes de conteneurs par abonnement <a href="#note2c"><sup>2</sup></a> | Limite de 20 cœurs par défaut. Contactez le service client pour augmenter la limite. |
+| Limite de la mise à l’échelle | Image de plateforme : 1 000 nœuds par VMSS, image personnalisée : 100 nœuds par VMSS | 20 instances, 50 avec App Service Environment | 100 nœuds par VMSS | Infini <a href="#note1c"><sup>1</sup></a> | 100 <a href="#note2c"><sup>2</sup></a> |20 groupes de conteneurs par abonnement par défaut. Contactez le service client pour augmenter la limite. <a href="#note3c"><sup>3</sup></a> | Limite de 20 cœurs par défaut. Contactez le service client pour augmenter la limite. |
 
 Notes
 
-1. <span id="note1c">Avec utilisation d’un plan de consommation. Si vous utilisez le plan App Service, les limites de mise à l’échelle d’AppService s’appliquent. Voir [Choisir le plan de service approprié pour Azure Functions][function-plans].</a>
-2. <span id="note2c">Consultez [Disponibilité des régions et quotas pour Azure Container Instances](/azure/container-instances/container-instances-quotas).</a>
+1. <span id="note1c">Avec utilisation d’un plan de consommation. Si vous utilisez le plan App Service, les limites de mise à l’échelle d’AppService s’appliquent. Voir [Choisir le plan de service approprié pour Azure Functions][function-plans].</span>
+2. <span id="note2c">Voir [Mettre à l’échelle des nœuds d’agent dans un cluster Container Service][scale-acs]</span>.
+3. <span id="note3c">Consultez [Disponibilité des régions et quotas pour Azure Container Instances](/azure/container-instances/container-instances-quotas).</span>
 
 
 ## <a name="availability"></a>Disponibilité
@@ -75,9 +77,9 @@ Notes
 
 | Critères | Virtual Machines | App Service | Service Fabric | Azure Functions | Azure Container Service | Container Instances | Azure Batch |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
-| SSL | Configuré au niveau de la machine virtuelle | Prise en charge | Prise en charge  | Prise en charge | Configuré au niveau de la machine virtuelle | Non pris en charge | Prise en charge |
+| SSL | Configuré au niveau de la machine virtuelle | Prise en charge | Prise en charge  | Prise en charge | Configuré au niveau de la machine virtuelle | Prise en charge avec un conteneur sidecar | Prise en charge |
 | Coût | [Windows][cost-windows-vm], [Linux][cost-linux-vm] | [Tarification d’App Service][cost-app-service] | [Tarification de Service Fabric][cost-service-fabric] | [Tarification d’Azure Functions][cost-functions] | [Tarification d’Azure Container Service][cost-acs] | [Tarification Container Instances](https://azure.microsoft.com/pricing/details/container-instances/) | [Tarification d’Azure Batch][cost-batch]
-| Styles d’architecture compatibles | Multiniveau, Big Compute (HPC) | Web-File d’attente-Worker | Microservices, architecture basée sur les événements (EDA) | Microservices, EDA | Microservices, EDA | Microservices, automatisation des tâches, programmes de traitement par lots  | Big Compute |
+| Styles d’architecture compatibles | [Multiniveau][n-tier], [Big Compute][big-compute] (HPC) | [Web-File d’attente-Worker][w-q-w] | [Microservices][microservices], [architecture basée sur les événements][event-driven] | [Microservices][microservices], [architecture basée sur les événements][event-driven] | [Microservices][microservices], [architecture basée sur les événements][event-driven] | [Microservices][microservices], automatisation des tâches, programmes de traitement par lots  | [Big Compute][big-compute] (HPC) |
 
 [cost-linux-vm]: https://azure.microsoft.com/pricing/details/virtual-machines/linux/
 [cost-windows-vm]: https://azure.microsoft.com/pricing/details/virtual-machines/windows/
@@ -96,3 +98,12 @@ Notes
 [sla-vm]: https://azure.microsoft.com/support/legal/sla/virtual-machines/
 
 [resource-manager-supported-services]: /azure/azure-resource-manager/resource-manager-supported-services
+[scale-acs]: /azure/container-service/kubernetes/container-service-scale#scaling-considerations
+
+[n-tier]: ../architecture-styles/n-tier.md
+[w-q-w]: ../architecture-styles/web-queue-worker.md
+[microservices]: ../architecture-styles/microservices.md
+[event-driven]: ../architecture-styles/event-driven.md
+[big-date]: ../architecture-styles/big-data.md
+[big-compute]: ../architecture-styles/big-compute.md
+

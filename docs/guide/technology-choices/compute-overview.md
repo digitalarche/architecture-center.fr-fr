@@ -2,16 +2,19 @@
 title: Vue d’ensemble des options de calcul Azure
 description: Vue d’ensemble des options de calcul Azure
 author: MikeWasson
-ms.date: 04/21/2018
-ms.openlocfilehash: 8ee508aaa07d87ac77ef484e20d572fdf2b9fb40
-ms.sourcegitcommit: 3846a0ab2b2b2552202a3c9c21af0097a145ffc6
+ms.date: 06/13/2018
+ms.openlocfilehash: ceb70f8eeff42e6cadb8a63c2f36986f26322201
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2018
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206556"
 ---
 # <a name="overview-of-azure-compute-options"></a>Vue d’ensemble des options de calcul Azure
 
 Le terme *calcul* fait référence au modèle d’hébergement des ressources de calcul utilisées par votre application. 
+
+## <a name="overview"></a>Vue d'ensemble
 
 À l’une des extrémités du spectre se trouve la fonctionnalité **infrastructure as a service** (IaaS). IaaS vous permet d’approvisionner les machines virtuelles dont vous avez besoin, ainsi que les composants de stockage et réseau associés. Ensuite, vous déployez les logiciels et les applications dont vous souhaitez disposer sur ces machines virtuelles. Ce modèle est le plus proche d’un environnement local traditionnel, à ceci près que l’infrastructure est gérée par Microsoft. Vous continuez de gérer les différentes machines virtuelles.  
 
@@ -23,12 +26,15 @@ La fonctionnalité **Functions as a Service** (FaaS) se révèle encore plus com
 
 La fonctionnalité IaaS offre le meilleur niveau de contrôle, de flexibilité et de portabilité. FaaS est un gage de simplicité, de mise à l’échelle élastique et d’économies substantielles, car vous payez uniquement pour le temps pendant lequel votre code s’exécute. La fonctionnalité PaaS se situe quelque part entre les deux. En général, plus un service offre de flexibilité, plus la responsabilité de la configuration et de la gestion des ressources vous revient. Les services FaaS gèrent automatiquement la quasi-totalité des aspects de l’exécution d’une application, alors que les solutions IaaS vous contraignent à approvisionner, configurer et gérer les machines virtuelles et les composants réseau que vous créez.
 
+## <a name="azure-compute-options"></a>Options de calcul Azure
+
 Les principales options de calcul actuellement disponibles dans Azure sont les suivantes :
 
 - [Machines Virtuelles](/azure/virtual-machines/) est un service IaaS qui vous permet de déployer et gérer des machines virtuelles à l’intérieur d’un réseau virtuel (VNet).
-- [App Service](/azure/app-service/app-service-value-prop-what-is) est un service géré pour l’hébergement d’applications web, de serveurs principaux d’applications mobiles, d’API RESTful ou de processus d’entreprise automatisés.
+- [App Service](/azure/app-service/app-service-value-prop-what-is) est une offre PaaS managée pour l’hébergement d’applications web, de serveurs principaux d’applications mobiles, d’API RESTful ou de processus d’entreprise automatisés.
 - [Service Fabric](/azure/service-fabric/service-fabric-overview) est une plateforme de systèmes distribués qui peut s’exécuter dans de nombreux environnements, y compris sur Azure ou localement. Service Fabric est un orchestrateur de microservices sur un cluster de machines. 
 - [Azure Container Service](/azure/container-service/container-service-intro) vous permet de créer, configurer et gérer un cluster de machines virtuelles préconfigurées pour l’exécution d’applications en conteneur.
+- [Azure Container Instances](/azure/container-instances/container-instances-overview) propose la façon la plus simple et rapide qui soit d’exécuter un conteneur dans Azure, sans avoir à configurer des machines virtuelles ni adopter un service de niveau supérieur.
 - [Azure Functions](/azure/azure-functions/functions-overview) est un service FaaS géré.
 - [Azure Batch](/azure/batch/batch-technical-overview) est un service géré qui permet d’exécuter des applications de calcul haute performance (HPC) et parallèles à grande échelle.
 - [Cloud Services](/azure/cloud-services/cloud-services-choose-me) est un service géré permettant d’exécuter des applications cloud. Il utilise un modèle d’hébergement PaaS. 
@@ -42,6 +48,8 @@ Lorsque vous sélectionnez une option de calcul, voici quelques facteurs à pren
 - Coût. Outre le coût du service proprement dit, considérez le coût des opérations de gestion d’une solution reposant sur ce service. Par exemple, les solutions IaaS peuvent augmenter le coût des opérations.
 - Quelles sont les limitations globales de chaque service ? 
 - Quels sont les types d’architectures d’application les mieux adaptés à ce service ? 
+
+## <a name="next-steps"></a>Étapes suivantes
 
 Pour vous aider à sélectionner un service de calcul pour votre application, utilisez l’[Arbre de décision des services de calcul Azure](./compute-decision-tree.md).
 

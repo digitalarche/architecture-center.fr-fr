@@ -2,12 +2,13 @@
 title: Arbre de décision des services de calcul Azure
 description: Un organigramme pour sélectionner un service de calcul
 author: MikeWasson
-ms.date: 04/21/2018
-ms.openlocfilehash: 3dcfbd156d4fced863a56bcc8bb74483aa665f9f
-ms.sourcegitcommit: 7ced70ebc11aa0df0dc0104092d3cc6ad5c28bd6
+ms.date: 06/13/2018
+ms.openlocfilehash: 60bb84d4bf210888d3d43498db043b6e452f6a80
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/11/2018
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206607"
 ---
 # <a name="decision-tree-for-azure-compute-services"></a>Arbre de décision des services de calcul Azure
 
@@ -25,5 +26,20 @@ Azure offre de nombreuses manières d’héberger votre code d’application. Le
 
 Si votre application comprend plusieurs charges de travail, évaluez-les séparément. Une solution complète peut incorporer deux services de calcul ou plus.
 
+## <a name="flowchart"></a>Organigramme
+
 ![](../images/compute-decision-tree.svg)
 
+## <a name="definitions"></a>Définitions
+
+- **Greenfield** décrit un projet de logiciel complètement nouveau et créé à partir de zéro. Il n’inclut pas les codes hérités. 
+
+- **Brownfield** décrit un projet de logiciel qui s’appuie sur une application existante. Il peut hériter d’infrastructures ou de codes hérités.
+
+- L’**opération « lift-and-shift »** est une stratégie visant à migrer une charge de travail vers le cloud sans reconcevoir l’application ou modifier le code. Elle est également appelée *ré-hébergement*. Pour plus d’informations, consultez [Centre de migration Azure](https://azure.microsoft.com/migration/).
+
+- **Optimisé pour le cloud** est une stratégie visant à migrer vers le cloud par la refactorisation d’une application, pour tirer parti des fonctionnalités cloud natives.
+
+## <a name="next-steps"></a>Étapes suivantes
+
+Pour connaître les autres critères à prendre en compte, consultez [Critères de sélection d’un service de calcul Azure](./compute-comparison.md).

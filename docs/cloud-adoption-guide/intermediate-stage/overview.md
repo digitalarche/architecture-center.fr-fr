@@ -2,12 +2,12 @@
 title: 'Adoption d’Azure : niveau intermédiaire'
 description: Décrit le niveau intermédiaire de connaissances que doit posséder une entreprise pour adopter Azure
 author: petertay
-ms.openlocfilehash: 39b98595dd615ba1aa36921e48a0b23797bebaa0
-ms.sourcegitcommit: b3d74d8a89b2224fc796ce0e89cea447af43a0d4
+ms.openlocfilehash: 227d9558647ed8076b2832d95e192f2f0c43b9db
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35291154"
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206359"
 ---
 # <a name="azure-cloud-adoption-guide-intermediate-overview"></a>Guide d’adoption du cloud Azure : vue d’ensemble du niveau intermédiaire
 
@@ -25,7 +25,7 @@ Cette étape du guide s’adresse aux membres suivants de votre organisation :
 
 ## <a name="section-1-azure-concepts-for-multiple-workloads-and-multiple-teams"></a>Section 1 : concepts Azure pour plusieurs charges de travail et plusieurs équipes
 
-Dans la phase d’adoption fondamentale, vous appris certaines notions de base sur les mécanismes internes d’Azure et avez découvert les modalités de création, de lecture, de mise à jour et de suppression des ressources. Vous avez également acquis des connaissances sur la notion d’identité et savez maintenant qu’Azure utilise uniquement Azure Active Directory (AD) pour authentifier et autoriser les utilisateurs qui ont besoin d’accéder à ces ressources.
+Dans la phase d’adoption fondamentale, vous avez appris certaines notions de base sur les mécanismes internes d’Azure et avez découvert les modalités de création, de lecture, de mise à jour et de suppression des ressources. Vous avez également acquis des connaissances sur la notion d’identité et savez maintenant qu’Azure utilise uniquement Azure Active Directory (AD) pour authentifier et autoriser les utilisateurs qui ont besoin d’accéder à ces ressources.
 
 Vous avez également appris à configurer les outils de gouvernance d’Azure pour gérer la manière dont votre organisation utilise les ressources Azure. Pendant la phase fondamentale, nous avons vu comment gérer l’accès d’une seule équipe aux ressources nécessaires au déploiement d’une simple charge de travail. Mais dans la réalité, votre organisation recense plusieurs équipes qui travaillent simultanément sur plusieurs charges de travail. 
 
@@ -53,31 +53,31 @@ Le modèle de gouvernance du cloud de votre organisation représente l’interse
 Procédez comme suit :
 
 1. Créez un [compte Azure](/azure/active-directory/sign-up-organization) si vous n’en avez pas encore. La personne qui s’inscrit pour le compte Azure devient l’administrateur de compte Azure et la direction de votre organisation doit choisir une personne pour assumer ce rôle. Cette personne possède les responsabilités suivantes :
-  * créer des abonnements ;
-  * créer et administrer les locataires [Azure Active Directory (AD)](/azure/active-directory/active-directory-whatis) qui stockent les identités d’utilisateur pour ces abonnements.    
+    * Créer des abonnements ;
+    * Créer et administrer les locataires [Azure Active Directory (AD)](/azure/active-directory/active-directory-whatis) qui stockent les identités d’utilisateur pour ces abonnements.    
 2. L’équipe dirigeante de votre organisation désigne les personnes qui auront les responsabilités suivantes :
-  * Gestion des identités d’utilisateur ; un [locataire Azure AD](/azure/active-directory/develop/active-directory-howto-tenant) est créé par défaut lors de la création du compte Azure de votre organisation et l’administrateur de compte est ajouté en tant [qu’administrateur global Azure AD](/azure/active-directory/active-directory-assign-admin-roles-azure-portal#details-about-the-global-administrator-role) par défaut. Votre organisation peut désigner un autre utilisateur chargé de gérer les identités d’utilisateur en [attribuant à cet utilisateur le rôle d’administrateur global Azure AD](/azure/active-directory/active-directory-users-assign-role-azure-portal). 
-  * Abonnements, ce qui signifie que ces utilisateurs :
-    * gèrent les coûts associés à l’utilisation des ressources dans cet abonnement ;
-    * implémentent et gèrent le modèle d’autorisation de privilège minimal pour accéder aux ressources ; et
-    * effectuent un suivi des limites de service.
-  * Services d’infrastructure partagée (si votre organisation décide d’utiliser ce modèle), ce qui signifie que cet utilisateur est responsable de :
-    * la connectivité entre le réseau local et Azure ; et 
-    * la propriété de la connectivité réseau dans Azure via l’appariement de réseaux virtuels.
-  * Propriétaires de charges de travail. 
+    * Gestion des identités d’utilisateur ; un [locataire Azure AD](/azure/active-directory/develop/active-directory-howto-tenant) est créé par défaut lors de la création du compte Azure de votre organisation et l’administrateur de compte est ajouté en tant [qu’administrateur global Azure AD](/azure/active-directory/active-directory-assign-admin-roles-azure-portal#details-about-the-global-administrator-role) par défaut. Votre organisation peut désigner un autre utilisateur chargé de gérer les identités d’utilisateur en [attribuant à cet utilisateur le rôle d’administrateur global Azure AD](/azure/active-directory/active-directory-users-assign-role-azure-portal). 
+    * Abonnements, ce qui signifie que ces utilisateurs :
+        * Gèrent les coûts associés à l’utilisation des ressources dans cet abonnement ;
+        * Implémentent et gèrent le modèle d’autorisation de privilège minimal pour accéder aux ressources ; et
+        * Effectuent un suivi des limites de service.
+    * Services d’infrastructure partagée (si votre organisation décide d’utiliser ce modèle), ce qui signifie que cet utilisateur est responsable de :
+        * La connectivité entre le réseau local et Azure ; et 
+        * La propriété de la connectivité réseau dans Azure via l’appariement de réseaux virtuels.
+    * Propriétaires de charges de travail. 
 3. L’administrateur global Azure AD crée les [nouveaux comptes d’utilisateur](/azure/active-directory/add-users-azure-active-directory) pour :
-  * la personne qui sera le **propriétaire de l’abonnement** pour chaque abonnement associé à chaque environnement. Notez que cela est nécessaire uniquement si **l’administrateur de services fédérés** de l’abonnement n’est pas chargé de gérer l’accès aux ressources pour chaque abonnement/environnement ;
-  * la personne qui sera **l’utilisateur des opérations réseau** ; et
-  * les personnes qui seront **les propriétaires de charges de travail**.
+    * La personne qui sera le **propriétaire de l’abonnement** pour chaque abonnement associé à chaque environnement. Notez que cela est nécessaire uniquement si **l’administrateur de services fédérés** de l’abonnement n’est pas chargé de gérer l’accès aux ressources pour chaque abonnement/environnement ;
+    * La personne qui sera **l’utilisateur des opérations réseau** ; et
+    * Les personnes qui seront les **propriétaires de charges de travail**.
 4. L’administrateur de compte Azure crée les trois abonnements suivants à l’aide du [portail de compte Azure](https://account.azure.com) :
-  * un abonnement pour l’environnement **d’infrastructure partagée** ;
-  * un abonnement pour l’environnement de **production** ; 
-  * un abonnement pour l’environnement de **développement**. 
+    * Un abonnement pour l’environnement **d’infrastructure partagée** ;
+    * Un abonnement pour l’environnement de **production** ; 
+    * Un abonnement pour l’environnement de **développement**. 
 5. L’administrateur de compte Azure [ajoute le propriétaire de service d’abonnement à chaque abonnement](/azure/billing/billing-add-change-azure-subscription-administrator#add-an-rbac-owner-admin-for-a-subscription-in-azure-portal).
-6. Un processus d’approbation est créé pour permettre aux **propriétaires de charges de travail** de demander la création de groupes de ressources. Le processus d’approbation peut être implémenté de différentes façons (par e-mail par exemple) mais vous pouvez également utiliser un outil de gestion des processus tel que les [flux de travail Sharepoint](https://support.office.com/article/introduction-to-sharepoint-workflow-07982276-54e8-4e17-8699-5056eff4d9e3). Le processus d’approbation peut se dérouler comme suit :
-  1. Le **propriétaire de la charge de travail** prépare une nomenclature pour les ressources Azure nécessaires, dans l’environnement de **développement** et/ou dans l’environnement de **production**, et la soumet au **propriétaire de l’abonnement**.
-  2. Le **propriétaire de l’abonnement** passe en revue la nomenclature et valide les ressources requises pour s’assurer que les ressources demandées sont adaptées à l’utilisation prévue ; par exemple en vérifiant que les [ tailles de machine virtuelle](/azure/virtual-machines/windows/sizes) demandées sont correctes.
-  3. Si la demande n’est pas approuvée, le **propriétaire de la charge de travail** en est informé. Si la demande est approuvée, le **propriétaire de l’abonnement** [crée le groupe de ressources demandé](/azure/azure-resource-manager/resource-group-portal#manage-resource-groups) suivant les [conventions d’affectation de noms](/azure/architecture/best-practices/naming-conventions) de votre organisation, [ajoute le **propriétaire de la charge de travail**](/azure/role-based-access-control/role-assignments-portal#add-access) avec le rôle de [ **contributeur**](/azure/role-based-access-control/built-in-roles#contributor) et envoie une notification au **propriétaire de la charge de travail** pour l’informer de la création du groupe de ressources.
+6. Un processus d’approbation est créé pour permettre aux **propriétaires de charges de travail** de demander la création de groupes de ressources. Le processus d’approbation peut être implémenté de différentes façons (par e-mail par exemple) mais vous pouvez également utiliser un outil de gestion des processus tel que les [flux de travail Sharepoint](https://support.office.com/article/introduction-to-sharepoint-workflow-07982276-54e8-4e17-8699-5056eff4d9e3). Le processus d’approbation peut se dérouler comme suit :  
+    * Le **propriétaire de la charge de travail** prépare une nomenclature pour les ressources Azure nécessaires, dans l’environnement de **développement** et/ou dans l’environnement de **production**, et la soumet au **propriétaire de l’abonnement**.
+    * Le **propriétaire de l’abonnement** passe en revue la nomenclature et valide les ressources requises pour s’assurer que les ressources demandées sont adaptées à l’utilisation prévue ; par exemple en vérifiant que les [ tailles de machine virtuelle](/azure/virtual-machines/windows/sizes) demandées sont correctes.
+    * Si la demande n’est pas approuvée, le **propriétaire de la charge de travail** en est informé. Si la demande est approuvée, le **propriétaire de l’abonnement** [crée le groupe de ressources demandé](/azure/azure-resource-manager/resource-group-portal#manage-resource-groups) suivant les [conventions d’affectation de noms](/azure/architecture/best-practices/naming-conventions) de votre organisation, [ajoute le **propriétaire de la charge de travail**](/azure/role-based-access-control/role-assignments-portal#add-access) avec le rôle de [ **contributeur**](/azure/role-based-access-control/built-in-roles#contributor) et envoie une notification au **propriétaire de la charge de travail** pour l’informer de la création du groupe de ressources.
 7. Un processus d’approbation est créé pour permettre aux propriétaires de charges de travail de demander au propriétaire de l’infrastructure partagée l’établissement d’une connexion pour l’appariement des réseaux virtuels. Comme dans l’étape précédente, ce processus d’approbation peut être implémenté par e-mail ou à l’aide d’un outil de gestion de processus.
 
 Maintenant que vous avez implémenté votre modèle de gouvernance, vous pouvez déployer vos services d’infrastructure partagée.

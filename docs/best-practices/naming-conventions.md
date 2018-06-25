@@ -4,12 +4,12 @@ description: Conventions d’affectation de noms pour les ressources Azure. Comm
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 42d91da3eacdcda66b82dff82ba444170c11d7d1
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.openlocfilehash: a92b6a1a23b35e7379f586d477b6f7cc6ccfc7e1
+ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35253058"
+ms.lasthandoff: 06/19/2018
+ms.locfileid: "36206376"
 ---
 # <a name="naming-conventions"></a>Conventions d’affectation de noms
 
@@ -34,7 +34,7 @@ L’affectation de noms détaillés aux abonnements Azure permet de mieux compre
 `<Company> <Department (optional)> <Product Line (optional)> <Environment>`
 
 * L’entreprise est généralement la même pour chaque abonnement. Cependant, certaines peuvent comporter des sociétés enfant au sein de la structure organisationnelle. Ces sociétés peuvent être gérées par un groupe informatique centralisé. Dans ces cas-là, il est possible de les différencier en utilisant à la fois le nom de l’entreprise parente (*Contoso*) et le nom de la société enfant (*Northwind*).
-* Le service est le nom d’une entité, au sein de l’organisation, où travaille un groupe de personnes. Cet élément dans l’espace de noms est facultatif.
+* Le service est le nom d’une entité, au sein de l’organisation, qui contient un groupe de personnes. Cet élément dans l’espace de noms est facultatif.
 * La gamme de produits est le nom spécifique d’un produit ou d’une fonction réalisé au sein du service. Cet élément est généralement facultatif pour les services et applications internes. En revanche, il est vivement recommandé pour les services destinés au public, qui doivent être faciles à séparer et à identifier (par exemple, pour une séparation claire des enregistrements de facturation).
 * L’environnement est le nom qui décrit le cycle de vie de déploiement des applications ou services, par exemple, Dev, AQ ou Prod.
 
