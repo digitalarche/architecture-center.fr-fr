@@ -4,12 +4,12 @@ description: Comparer les services de calcul Azure sur différents axes
 author: MikeWasson
 layout: LandingPage
 ms.date: 06/13/2018
-ms.openlocfilehash: 29c21c44bdf3a3bfa29f17015565eecf5f86163b
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: 24ef204441d92b5b810da0349063a28beea4b0f1
+ms.sourcegitcommit: ce2fa8ac2d310f7078317cade12f1b89db1ffe06
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206575"
+ms.lasthandoff: 06/23/2018
+ms.locfileid: "36338198"
 ---
 # <a name="criteria-for-choosing-an-azure-compute-service"></a>Critères de sélection d’un service de calcul Azure
 
@@ -20,13 +20,12 @@ Le terme *calcul* fait référence au modèle d’hébergement pour les ressourc
 | Critères | Virtual Machines | App Service | Service Fabric | Azure Functions | Azure Container Service | Container Instances | Azure Batch |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
 | Composition de l’application | Sans dépendance | Applications, conteneurs | Services, exécutables invités, conteneurs | Fonctions | Containers | Containers | Scheduled jobs  |
-| Densité | Sans dépendance | Plusieurs applications par instance via des plans d’application | Plusieurs services par machine virtuelle | Aucune instance dédiée <a href="#note1"><sup>1</sup></a> | Plusieurs conteneurs par machine virtuelle |Aucune instance dédiée | Plusieurs applications par machine virtuelle |
-| Nombre minimal de nœuds | 1 <a href="#note2"><sup>2</sup></a>  | 1 | 5 <a href="#note3"><sup>3</sup></a> | Aucun nœud dédié <a href="#note1"><sup>1</sup></a> | 3 | Aucun nœud dédié | 1 <a href="#note4"><sup>4</sup></a> |
+| Densité | Sans dépendance | Plusieurs applications par instance via des plans App Service | Plusieurs services par machine virtuelle | Serverless <a href="#note1"><sup>1</sup></a> | Plusieurs conteneurs par machine virtuelle |Aucune instance dédiée | Plusieurs applications par machine virtuelle |
+| Nombre minimal de nœuds | 1 <a href="#note2"><sup>2</sup></a>  | 1 | 5 <a href="#note3"><sup>3</sup></a> | Serverless <a href="#note1"><sup>1</sup></a> | 3 | Aucun nœud dédié | 1 <a href="#note4"><sup>4</sup></a> |
 | Gestion de l'état | Sans état ou avec état | Sans état | Sans état ou avec état | Sans état | Sans état ou avec état | Sans état | Sans état |
 | Hébergement web | Sans dépendance | Intégré | Sans dépendance | Non applicable | Sans dépendance | Sans dépendance | Non  |
-| SE | Windows, Linux | Windows, Linux  | Windows, Linux | Non applicable | Windows (version préliminaire), Linux | Windows, Linux | Windows, Linux |
-| Peut être déployé vers le réseau virtuel dédié ? | Prise en charge | Pris en charge <a href="#note5"><sup>5</sup></a> | Prise en charge | Non pris en charge | Prise en charge | Non pris en charge | Prise en charge |
-| Connectivité hybride | Prise en charge | Pris en charge <a href="#note1"><sup>6</sup></a>  | Prise en charge | Non pris en charge | Prise en charge | Non pris en charge | Prise en charge |
+| Peut être déployé vers le réseau virtuel dédié ? | Prise en charge | Pris en charge<a href="#note5"><sup>5</sup></a> | Prise en charge | Pris en charge <a href="#note5"><sup>5</sup></a> | Prise en charge | Non pris en charge | Prise en charge |
+| Connectivité hybride | Prise en charge | Pris en charge <a href="#note6"><sup>6</sup></a>  | Prise en charge | Pris en charge <a href="#node7"><sup>7</sup></a> | Prise en charge | Non pris en charge | Prise en charge |
 
 Notes
 
@@ -35,15 +34,16 @@ Notes
 3. <span id="note3">Pour les environnements de production.</span>
 4. <span id="note4">Peut revenir au point d’origine une fois la tâche terminée.</span>
 5. <span id="note5">Nécessite un environnement App Service Environment (ASE).</span>
-6. <span id="note7">Nécessite des connexions hybrides ASE ou BizTalk</span>
+6. <span id="note6">Utiliser [les connexions hybrides d’Azure App Service][app-service-hybrid].</span>
+7. <span id="note7">Nécessite un plan App Service.</span>
 
 ## <a name="devops"></a>DevOps
 
 | Critères | Virtual Machines | App Service | Service Fabric | Azure Functions | Azure Container Service | Container Instances | Azure Batch |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
-| Débogage local | Sans dépendance | IIS Express, autres <a href="#note1b"><sup>1</sup></a> | Cluster de nœuds local | Interface de ligne de commande Azure Functions | Runtime de conteneurs local | Runtime de conteneurs local | Non pris en charge |
-| Modèle de programmation | Sans dépendance | Application web, WebJobs pour les tâches en arrière-plan | Invité exécutable, modèle de service, modèle d’acteur, conteneurs | Fonctions avec déclencheurs | Sans dépendance | Sans dépendance | Application de ligne de commande |
-| Mise à jour d’application | Aucune prise en charge intégrée | Emplacements de déploiement | Mise à niveau propagée (par service) | Aucune prise en charge intégrée | Dépend de l’orchestrateur. Prise en charge des mises à niveau propagées dans la plupart des cas | Créer une image conteneur | Non applicable |
+| Débogage local | Sans dépendance | IIS Express, autres <a href="#note1b"><sup>1</sup></a> | Cluster de nœuds local | CLI Visual Studio ou Azure Functions | Runtime de conteneurs local | Runtime de conteneurs local | Non pris en charge |
+| Modèle de programmation | Sans dépendance | Applications web et API, WebJobs pour les tâches en arrière-plan | Invité exécutable, modèle de service, modèle d’acteur, conteneurs | Fonctions avec déclencheurs | Sans dépendance | Sans dépendance | Application de ligne de commande |
+| Mise à jour d’application | Aucune prise en charge intégrée | Emplacements de déploiement | Mise à niveau propagée (par service) | Emplacements de déploiement | Dépend de l’orchestrateur. Prise en charge des mises à niveau propagées dans la plupart des cas | Créer une image conteneur | Non applicable |
 
 Notes
 
@@ -57,13 +57,12 @@ Notes
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
 | Mise à l’échelle automatique | Groupes de machines virtuelles identiques (VMSS) | Service intégré | Groupes de machines virtuelles identiques (VMSS) | Service intégré | Non pris en charge | Non pris en charge | N/A |
 | Équilibrage de charge | Azure Load Balancer | Intégré | Azure Load Balancer | Intégré | Azure Load Balancer |  Aucune prise en charge intégrée | Azure Load Balancer |
-| Limite de la mise à l’échelle | Image de plateforme : 1 000 nœuds par VMSS, image personnalisée : 100 nœuds par VMSS | 20 instances, 50 avec App Service Environment | 100 nœuds par VMSS | Infini <a href="#note1c"><sup>1</sup></a> | 100 <a href="#note2c"><sup>2</sup></a> |20 groupes de conteneurs par abonnement par défaut. Contactez le service client pour augmenter la limite. <a href="#note3c"><sup>3</sup></a> | Limite de 20 cœurs par défaut. Contactez le service client pour augmenter la limite. |
+| Limite de la mise à l’échelle | Image de plateforme : 1 000 nœuds par VMSS, image personnalisée : 100 nœuds par VMSS | 20 instances, 100 avec App Service Environment | 100 nœuds par VMSS | 200 instances par application de fonction | 100 <a href="#note2c"><sup>1</sup></a> |20 groupes de conteneurs par abonnement par défaut. Contactez le service client pour augmenter la limite. <a href="#note3c"><sup>2</sup></a> | Limite de 20 cœurs par défaut. Contactez le service client pour augmenter la limite. |
 
 Notes
 
-1. <span id="note1c">Avec utilisation d’un plan de consommation. Si vous utilisez le plan App Service, les limites de mise à l’échelle d’AppService s’appliquent. Voir [Choisir le plan de service approprié pour Azure Functions][function-plans].</span>
-2. <span id="note2c">Voir [Mettre à l’échelle des nœuds d’agent dans un cluster Container Service][scale-acs]</span>.
-3. <span id="note3c">Consultez [Disponibilité des régions et quotas pour Azure Container Instances](/azure/container-instances/container-instances-quotas).</span>
+2. <span id="note1c">Voir [Mettre à l’échelle des nœuds d’agent dans un cluster Container Service][scale-acs]</span>.
+3. <span id="note2c">Consultez [Disponibilité des régions et quotas pour Azure Container Instances](/azure/container-instances/container-instances-quotas).</span>
 
 
 ## <a name="availability"></a>Disponibilité
@@ -79,7 +78,7 @@ Notes
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
 | SSL | Configuré au niveau de la machine virtuelle | Prise en charge | Prise en charge  | Prise en charge | Configuré au niveau de la machine virtuelle | Prise en charge avec un conteneur sidecar | Prise en charge |
 | Coût | [Windows][cost-windows-vm], [Linux][cost-linux-vm] | [Tarification d’App Service][cost-app-service] | [Tarification de Service Fabric][cost-service-fabric] | [Tarification d’Azure Functions][cost-functions] | [Tarification d’Azure Container Service][cost-acs] | [Tarification Container Instances](https://azure.microsoft.com/pricing/details/container-instances/) | [Tarification d’Azure Batch][cost-batch]
-| Styles d’architecture compatibles | [Multiniveau][n-tier], [Big Compute][big-compute] (HPC) | [Web-File d’attente-Worker][w-q-w] | [Microservices][microservices], [architecture basée sur les événements][event-driven] | [Microservices][microservices], [architecture basée sur les événements][event-driven] | [Microservices][microservices], [architecture basée sur les événements][event-driven] | [Microservices][microservices], automatisation des tâches, programmes de traitement par lots  | [Big Compute][big-compute] (HPC) |
+| Styles d’architecture compatibles | [Multiniveau][n-tier], [Big Compute][big-compute] (HPC) | [Web-File d’attente-Worker][w-q-w], [Multiniveau][n-tier] | [Microservices][microservices], [architecture basée sur les événements][event-driven] | [Microservices][microservices], [architecture basée sur les événements][event-driven] | [Microservices][microservices], [architecture basée sur les événements][event-driven] | [Microservices][microservices], automatisation des tâches, programmes de traitement par lots  | [Big Compute][big-compute] (HPC) |
 
 [cost-linux-vm]: https://azure.microsoft.com/pricing/details/virtual-machines/linux/
 [cost-windows-vm]: https://azure.microsoft.com/pricing/details/virtual-machines/windows/
@@ -107,3 +106,4 @@ Notes
 [big-date]: ../architecture-styles/big-data.md
 [big-compute]: ../architecture-styles/big-compute.md
 
+[app-service-hybrid]: /azure/app-service/app-service-hybrid-connections
