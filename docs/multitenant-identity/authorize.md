@@ -6,12 +6,12 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: app-roles
 pnp.series.next: web-api
-ms.openlocfilehash: 03c4d5fa10c75437a7b066534619ba9a123c350c
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 321dc52a3e6f803a032288c2341e490cdba8c20a
+ms.sourcegitcommit: 9a2d56ac7927f0a2bbfee07198d43d9c5cb85755
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30849669"
+ms.lasthandoff: 06/22/2018
+ms.locfileid: "36327651"
 ---
 # <a name="role-based-and-resource-based-authorization"></a>Autorisation basée sur les ressources et les rôles
 
@@ -218,7 +218,7 @@ public class SurveyAuthorizationHandler : AuthorizationHandler<OperationAuthoriz
 }
 ```
 
-Dans une application multilocataire, vous devez vérifier que les autorisations ne sont pas « divulguées » dans les données d’un autre locataire. Dans l’application Surveys, l’autorisation Contributor est autorisée entre les clients (vous pouvez assigner le rôle de contributeur à un utilisateur d’un autre locataire). Les autres types d’autorisation sont limités aux ressources qui appartiennent au locataire de cet utilisateur. Pour appliquer cette condition, le code vérifie l’ID du locataire avant d’accorder l’autorisation. Le code vérifie donc l’ID du locataire avant d’accorder ces types d’autorisations (le champ `TenantId` tel qu’affecté au moment de la création de l’enquête.)
+Dans une application multilocataire, vous devez vérifier que les autorisations ne sont pas « divulguées » dans les données d’un autre locataire. Dans l’application Surveys, l’autorisation Contributor est autorisée entre les locataires &mdash; vous pouvez assigner le rôle de contributeur à un utilisateur d’un autre locataire. Les autres types d’autorisation sont limités aux ressources qui appartiennent au locataire de cet utilisateur. Pour appliquer cette condition, le code vérifie l’ID du locataire avant d’accorder l’autorisation. Le code vérifie donc l’ID du locataire avant d’accorder ces types d’autorisations (le champ `TenantId` tel qu’affecté au moment de la création de l’enquête.)
 
 L’étape suivante consiste à vérifier l’opération (lecture, mise à jour, suppression, etc.) par rapport aux autorisations. L’application Surveys implémente cette étape à l’aide d’une table de choix de fonctions :
 

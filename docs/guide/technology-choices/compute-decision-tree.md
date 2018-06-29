@@ -3,12 +3,12 @@ title: Arbre de décision des services de calcul Azure
 description: Un organigramme pour sélectionner un service de calcul
 author: MikeWasson
 ms.date: 06/13/2018
-ms.openlocfilehash: 60bb84d4bf210888d3d43498db043b6e452f6a80
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: 689ec3f265e563273a75ad98268d03624a7b4536
+ms.sourcegitcommit: ce2fa8ac2d310f7078317cade12f1b89db1ffe06
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206607"
+ms.lasthandoff: 06/23/2018
+ms.locfileid: "36338181"
 ---
 # <a name="decision-tree-for-azure-compute-services"></a>Arbre de décision des services de calcul Azure
 
@@ -25,6 +25,8 @@ Azure offre de nombreuses manières d’héberger votre code d’application. Le
 - [Table de comparaison des calculs](./compute-comparison.md)
 
 Si votre application comprend plusieurs charges de travail, évaluez-les séparément. Une solution complète peut incorporer deux services de calcul ou plus.
+
+Pour plus d’informations sur les options d’hébergement des conteneurs dans Azure, consultez https://azure.microsoft.com/overview/containers/.
 
 ## <a name="flowchart"></a>Organigramme
 

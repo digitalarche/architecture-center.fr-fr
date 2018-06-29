@@ -4,12 +4,12 @@ description: Guide spécifique relatif au service pour définir le mécanisme de
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: f02843f179671da04bc2f09326b58075b432ba95
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.openlocfilehash: 77cf5d90373da2118d34301bd5c790080d3cf63f
+ms.sourcegitcommit: 9a2d56ac7927f0a2bbfee07198d43d9c5cb85755
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35253075"
+ms.lasthandoff: 06/22/2018
+ms.locfileid: "36327685"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Guide du mécanisme de nouvelle tentative relatif aux différents services
 
@@ -57,7 +57,7 @@ Pensez à commencer par les paramètres ci-après pour les opérations liées au
 | **Contexte** | **Exemple de cible E2E<br />latence max** | **Stratégie de nouvelle tentative** | **Paramètres** | **Valeurs** | **Fonctionnement** |
 | --- | --- | --- | --- | --- | --- |
 | Interactif, interface utilisateur,<br />ou premier plan |2 secondes |FixedInterval |Nombre de tentatives<br />Intervalle avant nouvelle tentative<br />Première nouvelle tentative rapide |3<br />500 ms<br />true |Tentative 1 - délai 0 s<br />Tentative 2 - délai 500 ms<br />Tentative 3 - délai 500 ms |
-| Arrière-plan ou <br />lot |60 secondes |ExponentialBackoff |Nombre de tentatives<br />Temporisation min<br />Temporisation max<br />Temporisation delta<br />Première nouvelle tentative rapide |5.<br />0 seconde<br />60 secondes<br />2 secondes<br />false |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~2 s<br />Tentative 3 - délai ~6 s<br />Tentative 4 - délai ~14 s<br />Tentative 5 - délai ~30 s |
+| Arrière-plan ou <br />lot |60 secondes |ExponentialBackoff |Nombre de tentatives<br />Temporisation min<br />Temporisation max<br />Temporisation delta<br />Première nouvelle tentative rapide |5<br />0 seconde<br />60 secondes<br />2 secondes<br />false |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~2 s<br />Tentative 3 - délai ~6 s<br />Tentative 4 - délai ~14 s<br />Tentative 5 - délai ~30 s |
 
 ### <a name="more-information"></a>Plus d’informations
 * [Bibliothèques d’authentification d’Azure Active Directory][adal]
@@ -325,7 +325,7 @@ Service Bus met en œuvre des nouvelles tentatives à l’aide d’implémentati
 * La [classe RetryExponential](http://msdn.microsoft.com/library/microsoft.servicebus.retryexponential.aspx). Elle expose les propriétés qui contrôlent l’intervalle de temporisation, le nombre de nouvelles tentatives et la propriété **TerminationTimeBuffer** utilisée pour limiter la durée totale nécessaire pour terminer l’opération.
 * La [classe NoRetry](http://msdn.microsoft.com/library/microsoft.servicebus.noretry.aspx). Elle est utilisée lorsque de nouvelles tentatives au niveau de l’API Service Bus ne sont pas requises, notamment lorsque les nouvelles tentatives sont gérées par un autre processus dans le cadre d’un lot ou d’une opération en plusieurs étapes.
 
-Les actions de Service Bus peuvent renvoyer une plage d’exceptions, comme celles répertoriées dans [Annexe : Exceptions de messagerie](http://msdn.microsoft.com/library/hh418082.aspx). La liste fournit plus d’informations sur ces exceptions si celles-ci indiquent qu’une nouvelle tentative de l’opération est requise. Par exemple, une exception [ServerBusyException](http://msdn.microsoft.com/library/microsoft.servicebus.messaging.serverbusyexception.aspx) indique que le client doit attendre un certain temps, puis recommencer l’opération. La survenue d’une exception **ServerBusyException** fait également basculer le Service Bus vers un mode différent, dans lequel un délai supplémentaire de 10 secondes est ajouté aux délais de nouvelle tentative calculés. Ce mode est réinitialisé au bout d’une courte période.
+Les actions de Service Bus peuvent renvoyer une plage d’exceptions, comme celles répertoriées dans [Exceptions de messagerie Service Bus](/azure/service-bus-messaging/service-bus-messaging-exceptions). La liste fournit plus d’informations sur ces exceptions si celles-ci indiquent qu’une nouvelle tentative de l’opération est requise. Par exemple, une exception **ServerBusyException** indique que le client doit attendre un certain temps, puis recommencer l’opération. La survenue d’une exception **ServerBusyException** fait également basculer le Service Bus vers un mode différent, dans lequel un délai supplémentaire de 10 secondes est ajouté aux délais de nouvelle tentative calculés. Ce mode est réinitialisé au bout d’une courte période.
 
 Les exceptions renvoyées à partir du Service Bus exposent la propriété **IsTransient** qui indique si le client doit retenter l’opération. La stratégie **RetryExponential** intégrée repose sur la propriété **IsTransient** de la classe **MessagingException**, qui est la classe de base pour toutes les exceptions Service Bus. Si vous créez des implémentations personnalisées de la classe de base **RetryPolicy**, vous pouvez combiner le type d’exception et la propriété **IsTransient** pour permettre un contrôle plus précis des actions liées aux nouvelles tentatives. Par exemple, vous pouvez détecter une exception **QuotaExceededException** et prendre des mesures pour vider la file d’attente avant de tenter de lui renvoyer un message.
 
@@ -542,7 +542,7 @@ Pensez à commencer par les paramètres suivants pour les opérations liées aux
 | **Contexte** | **Exemple de cible E2E<br />latence max** | **Stratégie de nouvelle tentative** | **Paramètres** | **Valeurs** | **Fonctionnement** |
 | --- | --- | --- | --- | --- | --- |
 | Interactif, interface utilisateur,<br />ou premier plan |2 secondes |FixedInterval |Nombre de tentatives<br />Intervalle avant nouvelle tentative<br />Première nouvelle tentative rapide |3<br />500 ms<br />true |Tentative 1 - délai 0 s<br />Tentative 2 - délai 500 ms<br />Tentative 3 - délai 500 ms |
-| Arrière-plan<br />ou lot |30 secondes |ExponentialBackoff |Nombre de tentatives<br />Temporisation min<br />Temporisation max<br />Temporisation delta<br />Première nouvelle tentative rapide |5.<br />0 seconde<br />60 secondes<br />2 secondes<br />false |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~2 s<br />Tentative 3 - délai ~6 s<br />Tentative 4 - délai ~14 s<br />Tentative 5 - délai ~30 s |
+| Arrière-plan<br />ou lot |30 secondes |ExponentialBackoff |Nombre de tentatives<br />Temporisation min<br />Temporisation max<br />Temporisation delta<br />Première nouvelle tentative rapide |5<br />0 seconde<br />60 secondes<br />2 secondes<br />false |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~2 s<br />Tentative 3 - délai ~6 s<br />Tentative 4 - délai ~14 s<br />Tentative 5 - délai ~30 s |
 
 > [!NOTE]
 > Les cibles de latence de bout en bout supposent le délai d’attente par défaut pour les connexions au service. Si vous spécifiez des délais de connexion, la latence de bout en bout sera prolongée de ce temps supplémentaire pour toute nouvelle tentative.
@@ -672,7 +672,7 @@ Le tableau suivant présente les paramètres par défaut pour la stratégie de n
 | Paramètre | Valeur par défaut | Signification |
 |---------|---------------|---------|
 | Stratégie | Exponentielle | Temporisation exponentielle. |
-| MaxRetryCount | 5. | Nombre maximal de nouvelles tentatives. |
+| MaxRetryCount | 5 | Nombre maximal de nouvelles tentatives. |
 | MaxDelay | 30 secondes | Délai maximal entre les nouvelles tentatives. Cette valeur n’affecte pas le mode de calcul de la série de délais. Elle définit uniquement une limite supérieure. |
 | DefaultCoefficient | 1 seconde | Coefficient du calcul de temporisation exponentielle. Cette valeur ne peut pas être modifiée. |
 | DefaultRandomFactor | 1.1 | Multiplicateur utilisé pour l’ajout d’un délai aléatoire pour chaque entrée. Cette valeur ne peut pas être modifiée. |
@@ -691,7 +691,7 @@ Pensez à commencer par les paramètres ci-après pour les opérations liées au
 | **Contexte** | **Exemple de cible E2E<br />latence max** | **Stratégie de nouvelle tentative** | **Paramètres** | **Valeurs** | **Fonctionnement** |
 | --- | --- | --- | --- | --- | --- |
 | Interactif, interface utilisateur,<br />ou premier plan |2 secondes |Exponentielle |MaxRetryCount<br />MaxDelay |3<br />750 ms |Tentative 1 - délai 0 s<br />Tentative 2 - délai 750 ms<br />Tentative 3 - délai 750 ms |
-| Arrière-plan<br /> ou lot |30 secondes |Exponentielle |MaxRetryCount<br />MaxDelay |5.<br />12 secondes |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~1 s<br />Tentative 3 - délai ~3 s<br />Tentative 4 - délai ~7 s<br />Tentative 5 - délai 12 s |
+| Arrière-plan<br /> ou lot |30 secondes |Exponentielle |MaxRetryCount<br />MaxDelay |5<br />12 secondes |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~1 s<br />Tentative 3 - délai ~3 s<br />Tentative 4 - délai ~7 s<br />Tentative 5 - délai 12 s |
 
 > [!NOTE]
 > Les cibles de latence de bout en bout supposent le délai d’attente par défaut pour les connexions au service. Si vous spécifiez des délais de connexion, la latence de bout en bout sera prolongée de ce temps supplémentaire pour toute nouvelle tentative.
@@ -894,7 +894,7 @@ Pensez à commencer par les paramètres suivants pour les opérations liées aux
 | **Contexte** | **Exemple de cible E2E<br />latence max** | **Stratégie de nouvelle tentative** | **Paramètres** | **Valeurs** | **Fonctionnement** |
 | --- | --- | --- | --- | --- | --- |
 | Interactif, interface utilisateur,<br />ou premier plan |2 secondes |Linéaire |maxAttempt<br />deltaBackoff |3<br />500 ms |Tentative 1 - délai 500 ms<br />Tentative 2 - délai 500 ms<br />Tentative 3 - délai 500 ms |
-| Arrière-plan<br />ou lot |30 secondes |Exponentielle |maxAttempt<br />deltaBackoff |5.<br />4 secondes |Tentative 1 - délai ~3 sec<br />Tentative 2 - délai ~7 sec<br />Tentative 3 - délai ~15 sec |
+| Arrière-plan<br />ou lot |30 secondes |Exponentielle |maxAttempt<br />deltaBackoff |5<br />4 secondes |Tentative 1 - délai ~3 sec<br />Tentative 2 - délai ~7 sec<br />Tentative 3 - délai ~15 sec |
 
 ### <a name="telemetry"></a>Télémétrie
 Les nouvelles tentatives sont enregistrées dans un **TraceSource**. Vous devez configurer un **TraceListener** pour capturer les événements et les écrire dans un journal de destination approprié. Vous pouvez utiliser le **TextWriterTraceListener** ou **XmlWriterTraceListener** pour écrire les données dans un fichier journal, le **EventLogTraceListener** pour écrire dans le journal des événements Windows, ou le **EventProviderTraceListener** pour écrire les données de trace dans le sous-système ETW. Vous pouvez également configurer le vidage automatique de la mémoire tampon et le niveau de détail des événements qui seront enregistrés (par exemple, erreur, avertissement, information et informations détaillées). Pour plus d’informations, consultez [Journalisation côté client avec la bibliothèque cliente de stockage .NET](http://msdn.microsoft.com/library/azure/dn782839.aspx).

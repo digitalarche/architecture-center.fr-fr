@@ -2,16 +2,13 @@
 title: Application multiniveau avec SQL Server
 description: Découvrez comment implémenter une architecture multiniveau dans Azure, pour la disponibilité, la sécurité, l’extensibilité et la facilité de gestion.
 author: MikeWasson
-ms.date: 05/03/2018
-pnp.series.title: Windows VM workloads
-pnp.series.next: multi-region-application
-pnp.series.prev: multi-vm
-ms.openlocfilehash: 0f170f2fbcbbfeace53db199cb5d3949415b5546
-ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
+ms.date: 06/23/2018
+ms.openlocfilehash: 050ea9b3104a2dc9af4cdaad3b4540cd75434e9d
+ms.sourcegitcommit: 767c8570d7ab85551c2686c095b39a56d813664b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2018
-ms.locfileid: "33673591"
+ms.lasthandoff: 06/24/2018
+ms.locfileid: "36746670"
 ---
 # <a name="n-tier-application-with-sql-server"></a>Application multiniveau avec SQL Server
 
@@ -43,9 +40,11 @@ Elle comporte les composants suivants :
 
 * **Serveur de rebond (jumpbox).** Également appelée [hôte bastion]. Machine virtuelle sécurisée sur le réseau, utilisée par les administrateurs pour se connecter aux autres machines virtuelles. Le serveur de rebond a un groupe de sécurité réseau qui autorise le trafic distant provenant uniquement d’adresses IP publiques figurant sur une liste verte. Le groupe de sécurité réseau doit autoriser le trafic RDP (Bureau à distance).
 
-* **Groupe de disponibilité SQL Server AlwaysOn.** Fournit une haute disponibilité du niveau Données, en activant la réplication et le basculement.
+* **Groupe de disponibilité SQL Server AlwaysOn.** Fournit une haute disponibilité du niveau Données, en activant la réplication et le basculement. Il utilise la technologie du WSFC (Cluster de basculement Windows Server) pour le basculement.
 
-* **Serveurs AD DS (Active Directory Domain Services)**. Les groupes de disponibilités AlwaysOn de SQL Server sont joints à un domaine, pour activer la technologie de cluster de basculement Windows Server (WSFC) pour le basculement. 
+* **Serveurs AD DS (Active Directory Domain Services)**. Les objets ordinateur pour le cluster de basculement et ses rôles en cluster associés sont créés dans AD DS (Active Directory Domain Services).
+
+* **Témoin de cloud**. Un cluster de basculement nécessite plus de la moitié de ses nœuds pour fonctionner, on dit alors qu’il a un quorum. Si le cluster possède seulement deux nœuds, une partition de réseau peut mener chaque nœud à penser qu’il est le nœud principal. Dans ce cas, vous avez besoin d’un *témoin* pour arbitrer et établir le quorum. Un témoin est une ressource telle qu’un disque partagé qui peut arbitrer pour établir le quorum. Le témoin de cloud est un type de témoin qui utilise le stockage Blob Azure. Pour en savoir plus sur le concept de quorum, consultez [Comprendre les quorums de cluster et de pool](/windows-server/storage/storage-spaces/understand-quorum). Pour plus d’informations sur les témoins de cloud, consultez [Déployer un témoin de cloud pour un cluster de basculement](/windows-server/failover-clustering/deploy-cloud-witness). 
 
 * **Azure DNS**. [Azure DNS][azure-dns] est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS avec les mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.
 
@@ -157,14 +156,13 @@ Chiffrez les données sensibles au repos et utilisez [Azure Key Vault][azure-key
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
-Un déploiement pour cette architecture de référence est disponible sur [GitHub][github-folder]. 
+Un déploiement pour cette architecture de référence est disponible sur [GitHub][github-folder]. Notez que la totalité du déploiement peut prendre jusqu'à deux heures, ce qui inclut l’exécution des scripts pour configurer AD DS, le cluster de basculement Windows Server et le groupe de disponibilité de SQL Server.
 
 ### <a name="prerequisites"></a>Prérequis
 
-
 1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][ref-arch-repo].
 
-2. Vérifiez qu’Azure CLI 2.0 est installé sur votre ordinateur. Pour installer l’interface CLI, suivez les instructions fournies dans [Installer Azure CLI 2.0][azure-cli-2].
+2. Installez [Azure CLI 2.0][azure-cli-2].
 
 3. Installez le package npm des [modules Azure][azbb].
 
@@ -172,32 +170,80 @@ Un déploiement pour cette architecture de référence est disponible sur [GitHu
    npm install -g @mspnp/azure-building-blocks
    ```
 
-4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de l’une des commandes ci-dessous et suivez les invites.
+4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de la commande ci-dessous.
 
    ```bash
    az login
    ```
 
-### <a name="deploy-the-solution-using-azbb"></a>Déployer la solution à l’aide d’azbb
+### <a name="deploy-the-solution"></a>Déployer la solution 
 
-Pour déployer les machines virtuelles Windows pour une architecture de référence d’application multiniveau, procédez comme suit :
+1. Exécutez la commande suivante pour créer un groupe de ressources.
 
-1. Accédez au dossier `virtual-machines\n-tier-windows` pour rechercher le référentiel que vous avez cloné à l’étape 1 des conditions préalables ci-dessus.
+    ```bash
+    az group create --location <location> --name <resource-group-name>
+    ```
 
-2. Le fichier de paramètres spécifie un nom d’utilisateur et un mot de passe administrateur par défaut pour chaque machine virtuelle dans le déploiement. Vous devez les modifier avant de déployer l’architecture de référence. Ouvrez le fichier `n-tier-windows.json` et remplacez chaque champ **adminUsername** et **adminPassword** par vos nouveaux paramètres.
-  
-   > [!NOTE]
-   > Plusieurs scripts s’exécutent pendant ce déploiement, à la fois dans les objets **VirtualMachineExtension** et dans les paramètres **extensions** pour certains des objets **VirtualMachine**. Certains de ces scripts nécessitent le nom d’utilisateur et le mot de passe administrateur que vous venez de modifier. Il est recommandé que vous passiez en revue ces scripts pour vous assurer que vous avez spécifié les bonnes informations d’identification. Le déploiement risque d’échouer si vous n’avez pas spécifié les bonnes informations d’identification.
-   > 
-   > 
+2. Exécutez la commande suivante pour créer un compte de stockage pour le témoin de cloud.
 
-Enregistrez le fichier .
+    ```bash
+    az storage account create --location <location> \
+      --name <storage-account-name> \
+      --resource-group <resource-group-name> \
+      --sku Standard_LRS
+    ```
 
-3. Déployez l’architecture de référence à l’aide de l’outil de ligne de commande **azbb**, comme indiqué ci-dessous.
+3. Accédez au dossier `virtual-machines\n-tier-windows` du référentiel GitHub des architectures de référence.
 
-   ```bash
-   azbb -s <your subscription_id> -g <your resource_group_name> -l <azure region> -p n-tier-windows.json --deploy
-   ```
+4. Ouvrez le fichier `n-tier-windows.json` . 
+
+5. Recherchez toutes les instances de « witnessStorageBlobEndPoint » et remplacez le texte d’espace réservé par le nom du compte de stockage de l’étape 2.
+
+    ```json
+    "witnessStorageBlobEndPoint": "https://[replace-with-storageaccountname].blob.core.windows.net",
+    ```
+
+6. Exécutez la commande suivante pour répertorier les clés de compte pour le compte de stockage.
+
+    ```bash
+    az storage account keys list \
+      --account-name <storage-account-name> \
+      --resource-group <resource-group-name>
+    ```
+
+    La sortie doit se présenter comme suit. Copiez la valeur de `key1`.
+
+    ```json
+    [
+    {
+        "keyName": "key1",
+        "permissions": "Full",
+        "value": "..."
+    },
+    {
+        "keyName": "key2",
+        "permissions": "Full",
+        "value": "..."
+    }
+    ]
+    ```
+
+7. Dans le fichier `n-tier-windows.json`, recherchez toutes les instances de « witnessStorageAccountKey » et collez la clé de compte.
+
+    ```json
+    "witnessStorageAccountKey": "[replace-with-storagekey]"
+    ```
+
+8. Dans le fichier `n-tier-windows.json`, recherchez toutes les instances de `testPassw0rd!23`, `test$!Passw0rd111` et `AweS0me@SQLServicePW`. Remplacez-les par vos propres mots de passe et enregistrez le fichier.
+
+    > [!NOTE]
+    > Si vous modifiez le nom d’utilisateur de l’administrateur, vous devez également mettre à jour les blocs `extensions` dans le fichier JSON. 
+
+9. Exécutez la commande suivante pour déployer l’architecture.
+
+    ```bash
+    azbb -s <your subscription_id> -g <resource_group_name> -l <location> -p n-tier-windows.json --deploy
+    ```
 
 Pour plus d’informations sur le déploiement de cet exemple d’architecture de référence à l’aide des blocs de construction Azure, visitez notre [référentiel GitHub][git].
 
