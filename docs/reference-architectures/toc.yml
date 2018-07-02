@@ -16,6 +16,8 @@
       items:
         - name: Enterprise BI avec SQL Data Warehouse
           href: data/enterprise-bi-sqldw.md
+        - name: BI d’entreprise sécurisée avec SQL Data Warehouse et Data Factory
+          href: data/enterprise-bi-adf.md
     - name: Réseaux hybrides
       href: hybrid-networking/index.md
       items:
