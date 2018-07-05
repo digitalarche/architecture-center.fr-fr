@@ -5,12 +5,12 @@ author: telmosampaio
 ms.date: 04/09/2018
 pnp.series.title: Implement a hub-spoke network topology in Azure
 pnp.series.prev: expressroute
-ms.openlocfilehash: 4ebb0d4df3e1907662537516cae1f077e68e47b4
-ms.sourcegitcommit: f7418f8bdabc8f5ec33ae3551e3fbb466782caa5
+ms.openlocfilehash: 925e0f47cf6b9aa1ad48ffae2c9561a2393bf601
+ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36209574"
+ms.lasthandoff: 07/02/2018
+ms.locfileid: "37142248"
 ---
 # <a name="implement-a-hub-spoke-network-topology-in-azure"></a>Implémenter une topologie de réseau hub-and-spoke dans Azure
 
@@ -125,17 +125,7 @@ Les fichiers de paramètre modèle font référence à ces noms. Si vous les mod
 
 ### <a name="prerequisites"></a>Prérequis
 
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][ref-arch-repo].
-
-2. Installez [Azure CLI 2.0][azure-cli-2].
-
-3. Installez le package npm des [modules Azure][azbb].
-
-4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de la commande ci-dessous.
-
-   ```bash
-   az login
-   ```
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
 ### <a name="deploy-the-simulated-on-premises-datacenter"></a>Déployer le centre de données local simulé
 
@@ -288,7 +278,7 @@ Pour tester la connectivité entre l’environnement local simulé et le réseau
 
 2. Cliquez sur `Connect` et copiez la commande `ssh` qui s’affiche dans le portail. 
 
-3. Depuis une invite Linux, exécutez `ssh` pour vous connecter à l’environnement local simulé. Utilisez le mot de passe spécifié dans le fichier de paramètre `onprem.json`.
+3. Depuis un invite Linux, exécutez `ssh` pour vous connecter à l’environnement local simulé. Utilisez le mot de passe spécifié dans le fichier de paramètre `onprem.json`.
 
 5. Utilisez la commande `ping` pour tester la connectivité avec les machines virtuelles du serveur de rebond dans chaque spoke :
 

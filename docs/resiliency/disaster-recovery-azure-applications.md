@@ -3,12 +3,12 @@ title: Récupération d’urgence des applications Microsoft Azure
 description: Présentations techniques et informations détaillées sur la conception d’applications pour la récupération d’urgence sur Microsoft Azure.
 author: adamglick
 ms.date: 05/26/2017
-ms.openlocfilehash: 7235e752cf1b96e392a700b223d63b07c0f85b66
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 2d890e479e008e03dcfce9b7240f8bcbaf270372
+ms.sourcegitcommit: e8f4786b187697b1bea374e5f35f217c65d2dfe0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/23/2018
-ms.locfileid: "29477772"
+ms.lasthandoff: 07/02/2018
+ms.locfileid: "37343377"
 ---
 # <a name="disaster-recovery-for-azure-applications"></a>Récupération d’urgence des applications Microsoft Azure
 
@@ -278,7 +278,7 @@ Testez vos scripts à plusieurs reprises, du début à la fin. Après avoir vér
 Une meilleure pratique de l’automation consiste à créer un référentiel de scripts PowerShell ou de scripts d’interface de ligne de commande (CLI) de récupération d’urgence Azure. Marquez-les et classez-les clairement pour y accéder rapidement. Désignez une personne principale pour gérer le référentiel et le contrôle de version des scripts. Documentez ces derniers de manière exhaustive avec des explications des paramètres et des exemples d’utilisation de script. Assurez-vous que cette documentation est synchronisée avec vos déploiements Azure. Cela souligne l’importance d’avoir une personne principale responsable de l’ensemble du référentiel.
 
 ## <a name="failure-detection"></a>Détection des défaillances
-Pour gérer correctement les problèmes liés à la disponibilité et à la récupération d’urgence, vous devez être en mesure de détecter et diagnostiquer les défaillances. Vous devez surveiller de manière étendue les serveurs et les déploiements afin de savoir rapidement si un système ou ses composants deviennent indisponibles. Les outils d’analyse qui évaluent l’intégrité globale du service cloud et de ses dépendances peuvent effectuer une partie de ce travail. L’outil Microsoft [System Center 2016](https://www.microsoft.com/server-cloud/products/system-center-2016/) est approprié. Des outils tiers proposent également des fonctionnalités d’analyse. La plupart des solutions d’analyse suivent les principaux compteurs de performance et de disponibilité des services.
+Pour gérer correctement les problèmes liés à la disponibilité et à la récupération d’urgence, vous devez être en mesure de détecter et diagnostiquer les défaillances. Vous devez surveiller de manière étendue les serveurs et les déploiements afin de savoir rapidement si un système ou ses composants deviennent indisponibles. Les outils d’analyse qui évaluent l’intégrité globale du service cloud et de ses dépendances peuvent effectuer une partie de ce travail. L’outil Microsoft [System Center 2016](https://www.microsoft.com/cloud-platform/system-center) est approprié. Des outils tiers proposent également des fonctionnalités d’analyse. La plupart des solutions d’analyse suivent les principaux compteurs de performance et de disponibilité des services.
 
 Bien que ces outils soient essentiels, vous devez planifier la détection des erreurs et la création de rapports au sein d’un service cloud. Vous devez également planifier l’utilisation appropriée des diagnostics Microsoft Azure. Des compteurs de performance personnalisés ou des entrées du journal des événements peuvent également faire partie de la stratégie globale. Cela fournit davantage de données lors des défaillances, ce qui permet de diagnostiquer le problème rapidement et de restaurer l’ensemble des fonctionnalités. Des métriques supplémentaires sont également fournies qui permettent aux outils d’analyse de déterminer l’intégrité de l’application. Pour plus d’informations, consultez la page [Activation des diagnostics Azure dans Azure Cloud Services](/azure/cloud-services/cloud-services-dotnet-diagnostics/). Pour une présentation de la planification d’un « modèle d’intégrité » général, consultez [Failsafe: Guidance for Resilient Cloud Architectures](https://channel9.msdn.com/Series/FailSafe)(Sécurité intégrée : recommandations applicables à la résilience des architectures cloud).
 

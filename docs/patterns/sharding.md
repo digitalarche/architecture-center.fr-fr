@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - performance-scalability
-ms.openlocfilehash: 328483e24c75137f07576104d50dc59d426b8ac4
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: a4e35a19851f4742b5c154197c22bb1fe13de108
+ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24543015"
+ms.lasthandoff: 06/28/2018
+ms.locfileid: "37091102"
 ---
 # <a name="sharding-pattern"></a>Modèle de partitionnement
 
@@ -152,7 +152,7 @@ Utilisez ce modèle quand un magasin de données est susceptible d’avoir besoi
 
 >  Le principal objectif du partitionnement est d’améliorer les performances et l’extensibilité d’un système, mais il peut au passage améliorer la disponibilité selon la répartition des données dans les partitions. Un échec dans une partition n’empêche pas nécessairement une application d’accéder aux données contenues dans les autres partitions. Un opérateur peut exécuter une maintenance ou une récupération sur une ou plusieurs partitions sans rendre inaccessible la totalité des données d’une application. Pour plus d’informations, consultez les [recommandations en matière de partitionnement de données](https://msdn.microsoft.com/library/dn589795.aspx).
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 L’exemple suivant en C# utilise un ensemble de bases de données SQL Server qui agissent en tant que partitions. Chaque base de données contient un sous-ensemble des données utilisées par une application. L’application récupère des données distribuées dans les partitions à l’aide de sa propre logique de partitionnement (il s’agit d’un exemple de requête de distribution ramifiée). Les détails des données situées dans chaque partition sont renvoyés par une méthode appelée `GetShards`. Cette méthode renvoie une liste énumérable d’objets `ShardInformation`, où le type `ShardInformation` contient un identificateur pour chaque partition et la chaîne de connexion SQL Server qu’une application doit utiliser pour se connecter à la partition (les chaînes de connexion ne sont pas visibles dans l’exemple de code).
 
@@ -215,11 +215,10 @@ Trace.TraceInformation("Fanout query complete - Record Count: {0}",
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
 Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
-- [Manuel d’introduction à la cohérence des données](https://msdn.microsoft.com/library/dn589800.aspx). Il peut être nécessaire de maintenir la cohérence des données réparties dans les différentes partitions. Résume les problèmes se rapportant au maintien de la cohérence des données distribuées, et décrit les avantages et les compromis des différents modèles de cohérence.
+- [Data Consistency Primer](https://msdn.microsoft.com/library/dn589800.aspx) (Manuel d’introduction à la cohérence des données). Il peut être nécessaire de maintenir la cohérence des données réparties dans les différentes partitions. Résume les problèmes se rapportant au maintien de la cohérence des données distribuées, et décrit les avantages et les compromis des différents modèles de cohérence.
 - [Conseils sur le partitionnement des données](https://msdn.microsoft.com/library/dn589795.aspx). Le partitionnement d’un magasin de données peut entraîner d’autres problèmes. Décrit ces problèmes liés au partitionnement des magasins de données dans le cloud pour améliorer l’extensibilité, réduire les conflits et optimiser les performances.
 - [Modèle de table d’index](index-table.md). Parfois, il n’est pas possible de prendre entièrement en charge les requêtes uniquement par le biais de la conception de la clé de partition. Permet à une application de récupérer rapidement des données à partir d’un vaste magasin de données en spécifiant une clé autre que la clé de partition.
 - [Modèle de vue matérialisée](materialized-view.md). Pour maintenir les performances de certaines opérations de requête, il est utile de créer des vues matérialisées qui agrègent et synthétisent les données, surtout si ces données reposent sur les informations distribuées dans plusieurs partitions. Décrit comment générer et remplir ces vues.
 - [Leçons sur les partitions](http://www.addsimplicity.com/adding_simplicity_an_engi/2008/08/shard-lessons.html) sur le blog « Adding Simplicity ».
 - [Partitionnement de base de données](http://dbshards.com/database-sharding/) sur le site web CodeFutures.
-- [Manuel d’introduction aux stratégies d’extensibilité : partitionnement de base de données](http://blog.maxindelicato.com/2008/12/scalability-strategies-primer-database-sharding.html) sur le blog de Max Indelicato.
 - [Création des bases de données extensives : avantages et inconvénients de plusieurs schémas de partitionnement de bases de données](http://www.25hoursaday.com/weblog/2009/01/16/BuildingScalableDatabasesProsAndConsOfVariousDatabaseShardingSchemes.aspx) sur le blog de Dare Obasanjo.

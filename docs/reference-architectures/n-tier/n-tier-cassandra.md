@@ -3,12 +3,12 @@ title: Application multiniveau avec Apache Cassandra
 description: Découvrez comment exécuter des machines virtuelles Linux pour une architecture multiniveau dans Microsoft Azure.
 author: MikeWasson
 ms.date: 05/03/2018
-ms.openlocfilehash: 46e9a821a33dd3ea3ae9129ab5ad69172bfcd667
-ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
+ms.openlocfilehash: 7ee14088a2fae3cfc5c1119daf717236c75ecc6a
+ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2018
-ms.locfileid: "33673611"
+ms.lasthandoff: 07/02/2018
+ms.locfileid: "37142231"
 ---
 # <a name="n-tier-application-with-apache-cassandra"></a>Application multiniveau avec Apache Cassandra
 
@@ -28,7 +28,7 @@ Elle comporte les composants suivants :
 
 * **Groupes de sécurité réseau.** Utilisez des [groupes de sécurité réseau][nsg] pour limiter le trafic réseau au sein du réseau virtuel. Par exemple, dans l’architecture à 3 niveaux illustrée ici, le niveau base de données n’accepte pas le trafic en provenance du frontend web, mais uniquement du niveau Business et du sous-réseau de gestion.
 
-* **Machines virtuelles**. Pour obtenir des recommandations sur la configuration des machines virtuelles, consultez [Exécuter une machine virtuelle Windows sur Azure](./windows-vm.md) et [Exécuter une machine virtuelle Linux sur Azure](./linux-vm.md).
+* **Machines virtuelles**. Pour obtenir des suggestions sur la configuration des machines virtuelles, consultez [Exécuter une machine virtuelle Windows sur Azure](./windows-vm.md) et [Exécuter une machine virtuelle Linux sur Azure](./linux-vm.md).
 
 * **Groupes à haute disponibilité.** Créez un [groupe à haute disponibilité][azure-availability-sets] pour chaque niveau et configurez au moins deux machines virtuelles dans chaque niveau. Cela rend les machines virtuelles éligibles pour un [niveau contrat de service (SLA)][vm-sla] plus élevé. 
 
@@ -98,7 +98,7 @@ Pour sécuriser le serveur de rebond, ajoutez une règle de groupe de sécurité
 
 ## <a name="scalability-considerations"></a>Considérations relatives à l’extensibilité
 
-Les [groupes de machines virtuelles identiques][vmss] vous aident à déployer et à gérer un ensemble de machines virtuelles identiques. Les groupes identiques prennent en charge la mise à l’échelle automatique basée sur des métriques de performances. À mesure que la charge sur les machines virtuelles augmente, des machines virtuelles supplémentaires sont ajoutées automatiquement à l’équilibreur de charge. Les groupes identiques sont parfaits si vous devez rapidement faire monter en puissance des machines virtuelles, ou si vous avez besoin d’une mise à l’échelle automatique.
+[Les groupes de machines virtuelles identiques][vmss] vous aident à déployer et à gérer un ensemble de machines virtuelles identiques. Les groupes identiques prennent en charge la mise à l’échelle automatique basée sur des métriques de performances. À mesure que la charge sur les machines virtuelles augmente, des machines virtuelles supplémentaires sont ajoutées automatiquement à l’équilibreur de charge. Les groupes identiques sont parfaits si vous devez rapidement faire monter en puissance des machines virtuelles, ou si vous avez besoin d’une mise à l’échelle automatique.
 
 Il existe deux façons de configurer des machines virtuelles déployées dans un groupe identique :
 
@@ -136,7 +136,7 @@ Pour le trafic Internet entrant, les règles d’équilibreur de charge définis
 
 Ajoutez une appliance virtuelle réseau (NVA) pour créer un réseau de périmètre (DMZ) entre Internet et le réseau virtuel Azure. NVA est un terme générique décrivant une appliance virtuelle qui peut effectuer des tâches liées au réseau, telles que pare-feu, inspection des paquets, audit et routage personnalisé. Pour plus d’informations, consultez [Implémentation d’une zone DMZ entre Azure et Internet][dmz].
 
-Chiffrez les données sensibles au repos et utilisez [Azure Key Vault][azure-key-vault] pour gérer les clés de chiffrement de base de données. Key Vault peut stocker des clés de chiffrement dans des modules de sécurité matériel (HSM). Il est également recommandé pour stocker des secrets de l’application, telles que des chaînes de connexion de base de données, dans le coffre de clés.
+Chiffrez les données sensibles au repos et utilisez [Azure Key Vault][azure-key-vault] pour gérer les clés de chiffrement de base de données. Key Vault peut stocker des clés de chiffrement dans des modules de sécurité matériel (HSM). Il est également recommandé pour stocker des secrets de l’application, comme des chaînes de connexion de base de données, dans le coffre de clés.
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
@@ -144,22 +144,7 @@ Un déploiement pour cette architecture de référence est disponible sur [GitHu
 
 ### <a name="prerequisites"></a>Prérequis
 
-
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][ref-arch-repo].
-
-2. Vérifiez qu’Azure CLI 2.0 est installé sur votre ordinateur. Pour installer l’interface CLI, suivez les instructions fournies dans [Installer Azure CLI 2.0][azure-cli-2].
-
-3. Installez le package npm des [modules Azure][azbb].
-
-   ```bash
-   npm install -g @mspnp/azure-building-blocks
-   ```
-
-4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de l’une des commandes ci-dessous et suivez les invites.
-
-   ```bash
-   az login
-   ```
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
 ### <a name="deploy-the-solution-using-azbb"></a>Déployer la solution à l’aide d’azbb
 

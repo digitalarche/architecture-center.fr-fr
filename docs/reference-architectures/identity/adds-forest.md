@@ -10,12 +10,12 @@ pnp.series.title: Identity management
 pnp.series.prev: adds-extend-domain
 pnp.series.next: adfs
 cardTitle: Create an AD DS forest in Azure
-ms.openlocfilehash: 047ecea41ba30ce4cccf17b8c4964a37ae60150f
-ms.sourcegitcommit: 0de300b6570e9990e5c25efc060946cb9d079954
+ms.openlocfilehash: 105ffc4b329331522529161731b1947f99e02280
+ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2018
-ms.locfileid: "32323905"
+ms.lasthandoff: 07/02/2018
+ms.locfileid: "37142197"
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Créer une forêt de ressources Active Directory Domain Services (AD DS) dans Azure
 
@@ -95,18 +95,7 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github]. Rem
 
 ### <a name="prerequisites"></a>Prérequis
 
-
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][github].
-
-2. Installez [Azure CLI 2.0][azure-cli-2].
-
-3. Installez le package npm des [modules Azure][azbb].
-
-4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de la commande ci-dessous.
-
-   ```bash
-   az login
-   ```
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
 ### <a name="deploy-the-simulated-on-premises-datacenter"></a>Déployer le centre de données local simulé
 

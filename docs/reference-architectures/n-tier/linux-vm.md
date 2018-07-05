@@ -3,12 +3,12 @@ title: Exécuter une machine virtuelle Linux dans Azure
 description: Comment exécuter une machine virtuelle Linux sur Azure, en privilégiant l’évolutivité, la résilience, la gestion et la sécurité.
 author: telmosampaio
 ms.date: 04/03/2018
-ms.openlocfilehash: f29b7225c2e0edbb1569c9e3a55d112d12041af8
-ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
+ms.openlocfilehash: 3d0492d05280e8c296cdfc4157aa0387a70337bf
+ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2018
-ms.locfileid: "33673581"
+ms.lasthandoff: 07/02/2018
+ms.locfileid: "37142316"
 ---
 # <a name="run-a-linux-vm-on-azure"></a>Exécuter une machine virtuelle Linux dans Azure
 
@@ -144,18 +144,7 @@ Un déploiement est disponible [GitHub][github-folder]. Il déploie les élémen
 
 ### <a name="prerequisites"></a>Prérequis
 
-
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][ref-arch-repo].
-
-2. Vérifiez qu’Azure CLI 2.0 est installé sur votre ordinateur. Pour des instructions d’installation de l’interface de ligne de commande, consultez [Installer Azure CLI 2.0][azure-cli-2].
-
-3. Installez le package npm des [modules Azure][azbb].
-
-4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, entrez la commande suivante pour vous connecter à votre compte Azure.
-
-  ```bash
-  az login
-  ```
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
 5. Créez une paire de clés SSH. Pour plus d’informations, consultez [Comment créer et utiliser une paire de clés publique et privée SSH pour les machines virtuelles Linux dans Azure](/azure/virtual-machines/linux/mac-create-ssh-keys).
 

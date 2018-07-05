@@ -5,12 +5,12 @@ author: telmosampaio
 ms.date: 06/19/2018
 pnp.series.title: Implement a hub-spoke network topology with shared services in Azure
 pnp.series.prev: hub-spoke
-ms.openlocfilehash: 5e5029dd7de78c6953229364f9e8ae2789c2b348
-ms.sourcegitcommit: f7418f8bdabc8f5ec33ae3551e3fbb466782caa5
+ms.openlocfilehash: 555d08e5d3792f8699875c6d6aa8a1a42eadd477
+ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36209557"
+ms.lasthandoff: 07/02/2018
+ms.locfileid: "37142350"
 ---
 # <a name="implement-a-hub-spoke-network-topology-with-shared-services-in-azure"></a>Implémentation d’une topologie de réseau hub-and-spoke avec des services partagés dans Azure
 
@@ -106,17 +106,7 @@ Les fichiers de paramètre modèle font référence à ces noms. Si vous les mod
 
 ### <a name="prerequisites"></a>Prérequis
 
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][ref-arch-repo].
-
-2. Installez [Azure CLI 2.0][azure-cli-2].
-
-3. Installez le package npm des [modules Azure][azbb].
-
-4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de la commande ci-dessous.
-
-   ```bash
-   az login
-   ```
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
 ### <a name="deploy-the-simulated-on-premises-datacenter-using-azbb"></a>Déployer le centre de données local simulé à l’aide d’azbb
 

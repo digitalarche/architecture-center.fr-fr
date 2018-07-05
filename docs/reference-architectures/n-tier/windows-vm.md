@@ -3,12 +3,12 @@ title: Exécuter une machine virtuelle Windows dans Azure
 description: Découvrez comment exécuter une machine virtuelle Windows dans Azure, en privilégiant l’extensibilité, la résilience, la facilité de gestion et la sécurité.
 author: telmosampaio
 ms.date: 04/03/2018
-ms.openlocfilehash: 748bcfcf599c7fa0e82691632d14e0f78fd78582
-ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
+ms.openlocfilehash: d790c9a6693dca751e0ba05f1fd3c23756cf53bb
+ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2018
-ms.locfileid: "33673601"
+ms.lasthandoff: 07/02/2018
+ms.locfileid: "37142214"
 ---
 # <a name="run-a-windows-vm-on-azure"></a>Exécuter une machine virtuelle Windows dans Azure
 
@@ -127,18 +127,7 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github-folde
 
 ### <a name="prerequisites"></a>Prérequis
 
-
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence][ref-arch-repo].
-
-2. Vérifiez qu’Azure CLI 2.0 est installé sur votre ordinateur. Pour des instructions d’installation de l’interface de ligne de commande, consultez [Installer Azure CLI 2.0][azure-cli-2].
-
-3. Installez le package npm des [modules Azure][azbb].
-
-4. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, entrez la commande suivante pour vous connecter à votre compte Azure.
-
-  ```bash
-  az login
-  ```
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
 ### <a name="deploy-the-solution-using-azbb"></a>Déployer la solution à l’aide d’azbb
 
