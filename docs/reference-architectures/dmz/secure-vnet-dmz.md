@@ -2,21 +2,21 @@
 title: Implémentation d’une zone DMZ entre Azure et Internet
 description: Comment implémenter une architecture réseau hybride sécurisée avec accès Internet dans Azure.
 author: telmosampaio
-ms.date: 11/23/2016
+ms.date: 07/02/2018
 pnp.series.title: Network DMZ
 pnp.series.next: nva-ha
 pnp.series.prev: secure-vnet-hybrid
 cardTitle: DMZ between Azure and the Internet
-ms.openlocfilehash: c88545b1fcae49b413e7e2b6ac5bd92d3fd3456d
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 7a062d2394ae8b3bd1b17c19cbdf512327f9a766
+ms.sourcegitcommit: 9b459f75254d97617e16eddd0d411d1f80b7fe90
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2018
-ms.locfileid: "30270399"
+ms.lasthandoff: 07/03/2018
+ms.locfileid: "37403145"
 ---
 # <a name="dmz-between-azure-and-the-internet"></a>Zone DMZ entre Azure et Internet
 
-Cette architecture de référence montre un réseau sécurisé hybride qui étend un réseau local sur Azure et accepte également le trafic Internet. 
+Cette architecture de référence montre un réseau sécurisé hybride qui étend un réseau local sur Azure et accepte également le trafic Internet. [**Déployez cette solution**.](#deploy-the-solution)
 
 [![0]][0] 
 
@@ -79,37 +79,70 @@ Cette architecture de référence implémente plusieurs niveaux de sécurité :
 
 Vous devez journaliser toutes les requêtes entrantes sur tous les ports. Effectuez un audit régulier des journaux en accordant une attention particulière aux requêtes qui se trouvent en dehors des paramètres attendus, comme cela peut indiquer des tentatives d’intrusion.
 
-## <a name="solution-deployment"></a>Déploiement de la solution
 
-Un déploiement pour une architecture de référence implémentant ces recommandations est disponible sur [GitHub][github-folder]. L’architecture de référence peut être déployée avec Windows ou les machines virtuelles Linux en procédant comme suit :
+## <a name="deploy-the-solution"></a>Déployer la solution
 
-1. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-dmz%2FvirtualNetwork.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-2. Une fois le lien ouvert dans le portail Azure, vous devez entrer des valeurs pour certains paramètres :
-   * Le nom du **groupe de ressources** est déjà défini dans le fichier de paramètres ; sélectionnez **Créer nouveau** et entrez `ra-public-dmz-network-rg` dans la zone de texte.
-   * Sélectionnez la région à partir de la zone déroulante **Emplacement**.
-   * Ne modifiez pas les zones de texte **Template Root Uri** (Uri racine de modèle) ou **Parameter Root Uri** (Uri racine de paramètre).
-   * Sélectionnez le **type de système d’exploitation** à partir de la zone déroulante, **windows** ou **linux**.
-   * Passez en revue les termes et conditions, puis cochez la case **J’accepte les termes et conditions mentionnés ci-dessus**.
-   * Cliquez sur le bouton **Acheter**.
-3. Attendez la fin du déploiement.
-4. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-dmz%2Fworkload.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-5. Une fois le lien ouvert dans le portail Azure, vous devez entrer des valeurs pour certains paramètres :
-   * Le nom du **groupe de ressources** est déjà défini dans le fichier de paramètres ; sélectionnez **Créer nouveau** et entrez `ra-public-dmz-wl-rg` dans la zone de texte.
-   * Sélectionnez la région à partir de la zone déroulante **Emplacement**.
-   * Ne modifiez pas les zones de texte **Template Root Uri** (Uri racine de modèle) ou **Parameter Root Uri** (Uri racine de paramètre).
-   * Passez en revue les termes et conditions, puis cochez la case **J’accepte les termes et conditions mentionnés ci-dessus**.
-   * Cliquez sur le bouton **Acheter**.
-6. Attendez la fin du déploiement.
-7. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fdmz%2Fsecure-vnet-dmz%2Fsecurity.azuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
-8. Une fois le lien ouvert dans le portail Azure, vous devez entrer des valeurs pour certains paramètres :
-   * Le nom du **Groupe de ressources** est déjà défini dans le fichier de paramètres. Sélectionnez **Existant** et entrez `ra-public-dmz-network-rg` dans la zone de texte.
-   * Sélectionnez la région à partir de la zone déroulante **Emplacement**.
-   * Ne modifiez pas les zones de texte **Template Root Uri** (Uri racine de modèle) ou **Parameter Root Uri** (Uri racine de paramètre).
-   * Passez en revue les termes et conditions, puis cochez la case **J’accepte les termes et conditions mentionnés ci-dessus**.
-   * Cliquez sur le bouton **Acheter**.
-9. Attendez la fin du déploiement.
-10. Les fichiers de paramètres incluent un nom d’utilisateur administrateur et un mot de passe codés en dur pour toutes les machines virtuelles, et il est vivement recommandé de modifier immédiatement ces deux éléments. Pour chaque machine virtuelle du déploiement, sélectionnez-la dans le portail Azure, puis cliquez sur **Réinitialiser le mot de passe** dans le panneau **Support + dépannage**. Sélectionnez **Réinitialiser le mot de passe** dans la zone déroulante **Mode**, puis sélectionnez de nouveaux **Nom d’utilisateur** et **Mot de passe**. Cliquez sur le bouton **Mise à jour** pour enregistrer.
+Un déploiement pour une architecture de référence implémentant ces recommandations est disponible sur [GitHub][github-folder]. 
 
+### <a name="prerequisites"></a>Prérequis
+
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
+
+### <a name="deploy-resources"></a>Déployer des ressources
+
+1. Accédez au dossier `/dmz/secure-vnet-hybrid` du référentiel GitHub des architectures de référence.
+
+2. Exécutez la commande suivante :
+
+    ```bash
+    azbb -s <subscription_id> -g <resource_group_name> -l <region> -p onprem.json --deploy
+    ```
+
+3. Exécutez la commande suivante :
+
+    ```bash
+    azbb -s <subscription_id> -g <resource_group_name> -l <region> -p secure-vnet-hybrid.json --deploy
+    ```
+
+### <a name="connect-the-on-premises-and-azure-gateways"></a>Connecter les passerelles Azure et locales
+
+Lors de cette étape, vous allez connecter les deux passerelles réseau local.
+
+1. Dans le portail Azure, accédez au groupe de ressources que vous avez créé. 
+
+2. Recherchez la ressource appelée `ra-vpn-vgw-pip` et copiez l’adresse IP affichée dans le panneau **Vue d’ensemble**.
+
+3. Recherchez la ressource appelée `onprem-vpn-lgw`.
+
+4. Cliquez sur le panneau **Configuration**. Sous **Adresse IP**, collez l’adresse IP identifiée à l’étape 2.
+
+    ![](./images/local-net-gw.png)
+
+5. Cliquez sur **Enregistrer** et attendez que l’opération soit terminée. Elle peut durer environ 5 minutes.
+
+6. Recherchez la ressource appelée `onprem-vpn-gateway1-pip`. Copiez l’adresse IP indiquée dans le panneau **Vue d’ensemble**.
+
+7. Recherchez la ressource appelée `ra-vpn-lgw`. 
+
+8. Cliquez sur le panneau **Configuration**. Sous **Adresse IP**, collez l’adresse IP identifiée à l’étape 6.
+
+9. Cliquez sur **Enregistrer** et attendez que l’opération soit terminée.
+
+10. Pour vérifier la connexion, accédez au panneau **Connexions** de chaque passerelle. L’état doit être **Connecté**.
+
+### <a name="verify-that-network-traffic-reaches-the-web-tier"></a>Vérifiez que le trafic réseau atteint le niveau web.
+
+1. Dans le portail Azure, accédez au groupe de ressources que vous avez créé. 
+
+2. Recherchez la ressource appelée `pub-dmz-lb`, qui correspond à l’équilibreur de charge placé devant la zone DMZ publique. 
+
+3. Copiez l’adresse IP publique du panneau **Vue d’ensemble** et ouvrez cette adresse dans un navigateur web. Vous devez voir apparaître la page d’accueil du serveur Apache2 par défaut.
+
+4. Recherchez la ressource appelée `int-dmz-lb`, qui correspond à l’équilibreur de charge placé devant la zone DMZ privée. Copiez l’adresse IP privée dans le panneau **Vue d’ensemble**.
+
+5. Trouvez la machine virtuelle nommée `jb-vm1`. Cliquez sur **Connect** et utilisez le Bureau à distance pour vous connecter à la machine virtuelle. Le nom d’utilisateur et le mot de passe sont spécifiés dans le fichier onprem.json.
+
+6. À partir de la session Bureau à distance, ouvrez un navigateur web et accédez à l’adresse IP identifiée à l’étape 4. Vous devez voir apparaître la page d’accueil du serveur Apache2 par défaut.
 
 [availability-set]: /azure/virtual-machines/virtual-machines-windows-manage-availability
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/dmz/secure-vnet-dmz

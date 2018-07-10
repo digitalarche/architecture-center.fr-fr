@@ -4,12 +4,12 @@ description: Architecture recommandée pour une application web basique exécut�
 author: MikeWasson
 ms.date: 12/12/2017
 cardTitle: Basic web application
-ms.openlocfilehash: efd831b1f54fa0662bdfa9874318e7b314172215
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: bc8cf9b5c66fc451d097cbc992ecb9a249645dce
+ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30846401"
+ms.lasthandoff: 06/28/2018
+ms.locfileid: "37091119"
 ---
 # <a name="basic-web-application"></a>Application web de base
 [!INCLUDE [header](../../_includes/header.md)]
@@ -124,7 +124,7 @@ Pour plus d’informations, consultez [Présentation d’Azure Resource Manager]
 ### <a name="deployment"></a>Déploiement
 Le déploiement implique deux étapes :
 
-1. Attribution des ressources Azure. Nous vous recommandons d’utiliser les [modèles de Azure Resource Manager][arm-template] pour cette étape. Les modèles facilitent l’automatisation des déploiements via PowerShell ou l’interface de ligne de commande (CLI) de Azure.
+1. Attribution des ressources Azure. Nous vous recommandons d’utiliser les [modèles Azure Resource Manager][arm-template] pour cette étape. Les modèles facilitent l’automatisation des déploiements via PowerShell ou l’interface de ligne de commande (CLI) de Azure.
 2. Déploiement de l’application (code, binaires et fichiers de contenu). Vous disposez de plusieurs options, notamment le déploiement depuis un référentiel Git local, à l’aide de Visual Studio ou bien un déploiement continu à partir du contrôle de code source dans le cloud. Voir [Déploiement de votre application dans Azure App Service][deploy].  
 
 Une application App Service dispose toujours d’un emplacement de déploiement nommé `production`, représentant le site de production en direct. Nous vous recommandons de créer un emplacement de préproduction pour le déploiement des mises à jour. Voici plusieurs avantages de l’utilisation d’un emplacement de préproduction :
@@ -198,7 +198,7 @@ Certaines limitations de l’authentification App Service :
 * Pour les scénarios d’architecture mutualisée, l’application doit implémenter la logique pour valider l’émetteur du jeton.
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
-Un exemple de modèle Resource Manager pour cette architecture est [disponible sur GitHub][paas-basic-arm-template].
+Un exemple de modèle Resource Manager correspondant à cette architecture est [disponible sur GitHub][paas-basic-arm-template].
 
 Pour déployer le modèle à l’aide de PowerShell, exécutez les commandes suivantes :
 

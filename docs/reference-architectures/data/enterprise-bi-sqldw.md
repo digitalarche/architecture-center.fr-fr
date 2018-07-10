@@ -1,34 +1,40 @@
 ---
 title: Enterprise BI avec SQL Data Warehouse
 description: Utiliser Azure pour obtenir des analyses détaillées des données relationnelles stockées en local
-author: alexbuckgit
-ms.date: 04/13/2018
-ms.openlocfilehash: b5e5aa32fc9cc8c7b8b5a42c9a4fc3e0216b2f72
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+author: MikeWasson
+ms.date: 07/01/2018
+ms.openlocfilehash: e3542e40b4b6d1f604f93bb21528f34ba7f22fc6
+ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2018
-ms.locfileid: "31012835"
+ms.lasthandoff: 07/02/2018
+ms.locfileid: "37142333"
 ---
 # <a name="enterprise-bi-with-sql-data-warehouse"></a>Enterprise BI avec SQL Data Warehouse
- 
+
 Cette architecture de référence implémente un pipeline [ELT](../../data-guide/relational-data/etl.md#extract-load-and-transform-elt) (extract-load-transform) qui déplace des données d’une base de données SQL Server vers SQL Data Warehouse et qui transforme les données pour les analyser. [**Déployez cette solution**.](#deploy-the-solution)
 
 ![](./images/enterprise-bi-sqldw.png)
 
 **Scénario**: Une organisation dispose d’un jeu de données OLTP important stocké dans une base de données SQL Server locale. L’organisation souhaite utiliser SQL Data Warehouse pour réaliser une analyse avec Power BI. 
 
-Cette architecture de référence est conçue pour des tâches uniques ou à la demande. Si vous devez déplacer des données continuellement (toutes les heures ou tous les joueurs), nous vous recommandons d’utiliser Azure Data Factory pour définir un flux de travail automatisé.
+Cette architecture de référence est conçue pour des tâches uniques ou à la demande. Si vous devez déplacer des données continuellement (toutes les heures ou tous les joueurs), nous vous recommandons d’utiliser Azure Data Factory pour définir un flux de travail automatisé. Pour accéder à une architecture de référence qui utilise Data Factory, voir [BI d’entreprise automatisée avec SQL Data Warehouse et Azure Data Factory](./enterprise-bi-adf.md).
 
 ## <a name="architecture"></a>Architecture
 
 L’architecture est constituée des composants suivants.
 
-**SQL Server**. Les données source sont situées dans une base de données SQL Server locale. Pour simuler l’environnement local, les scripts de déploiement de cette architecture approvisionnent une machine virtuelle dans Azure disposant de SQL Server. 
+### <a name="data-source"></a>Source de données
+
+**SQL Server**. Les données source sont situées dans une base de données SQL Server locale. Pour simuler l’environnement local, les scripts de déploiement de cette architecture approvisionnent une machine virtuelle dans Azure disposant de SQL Server. [L’exemple de base de données OLTP Wide World Importers][wwi] est utilisé comme base de données source.
+
+### <a name="ingestion-and-data-storage"></a>Ingestion et stockage de données
 
 **Stockage d'objets blob**. Le stockage d’objets blob est utilisé comme zone de préparation à la copie des données, avant de les charger dans SQL Data Warehouse.
 
 **Azure SQL Data Warehouse**. [SQL Data Warehouse](/azure/sql-data-warehouse/) est un système distribué conçu pour réaliser des analyses sur de grandes quantités de données. Il prend en charge le traitement MPP (Massive Parallel Processing), le rendant ainsi adapté à l’exécution d’analyses hautes performances. 
+
+### <a name="analysis-and-reporting"></a>Analyse et rapports
 
 **Azure Analysis Services**. [Analysis Services](/azure/analysis-services/) est un service entièrement géré qui fournit des capacités de modélisation des données. Utilisez Analysis Services pour créer un modèle sémantique que les utilisateurs peuvent demander. Analysis Services est particulièrement utile dans un scénario de tableau de bord BI. Dans cette architecture, Analysis Services lit les données de l’entrepôt de données pour traiter le modèle sémantique, et délivrer efficacement les requêtes du tableau de bord. Il prend aussi en charge la concurrence élastique, en adaptant les réplicas en vue d’un traitement des requêtes plus rapide.
 
@@ -36,11 +42,13 @@ L’architecture est constituée des composants suivants.
 
 **Power BI**. Power BI est une suite d’outils d’analyse métier pour analyser les données et obtenir des informations métier. Dans cette architecture, il demande le modèle sémantique stockée dans Analysis Services.
 
+### <a name="authentication"></a>Authentification
+
 **Azure Active Directory** (Azure AD) authentifie les utilisateurs qui se connectent au serveur Analysis Services via Power BI.
 
-## <a name="data-pipeline"></a>Data Pipeline
+## <a name="data-pipeline"></a>Pipeline de données
  
-Cette architecture de référence utilise l’exemple de base de données [WorldWideImporters](/sql/sample/world-wide-importers/wide-world-importers-oltp-database) comme source de données. Le pipeline de données comporte les étapes suivantes :
+Cette architecture de référence utilise l’exemple de base de données [WorldWideImporters](/sql/sample/world-wide-importers/wide-world-importers-oltp-database) en tant que source de données. Le pipeline de données comporte les étapes suivantes :
 
 1. Exportez les données de SQL Server vers des fichiers plats (utilitaire BCP).
 2. Copiez les fichiers plats dans le Stockage Blob Azure (AzCopy).
@@ -150,7 +158,7 @@ Azure Analysis Services est conçu pour gérer les exigences de requête d’un 
 
 ## <a name="scalability-considerations"></a>Considérations relatives à l’extensibilité
 
-### <a name="sql-data-warehouse"></a>SQL Data Warehouse
+### <a name="sql-data-warehouse"></a>SQL Data Warehouse
 
 Avec SQL Data Warehouse, vous pouvez augmenter la taille de vos ressources de calcul à la demande. Le moteur de requête optimise les requêtes pour des traitements simultanés basés sur le nombre de nœuds de calcul, et déplace les données entre nœuds si nécessaire. Pour plus d’informations, consultez [Gérer le calcul dans Azure SQL Data Warehouse](/azure/sql-data-warehouse/sql-data-warehouse-manage-compute-overview).
 
@@ -188,22 +196,13 @@ Un déploiement pour cette architecture de référence est disponible sur [GitHu
 
 ### <a name="prerequisites"></a>Prérequis
 
-
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le référentiel GitHub des [architectures de référence Azure][ref-arch-repo].
-
-2. Installez le package des [modules Azure][azbb-wiki] (azbb).
-
-3. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure à l’aide de la commande ci-dessous et suivez les instructions.
-
-  ```bash
-  az login  
-  ```
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
 ### <a name="deploy-the-simulated-on-premises-server"></a>Déployer le serveur local simulé
 
-Tout d’abord, déployez une machine virtuelle comme serveur local simulé, qui inclut SQL Server 2017 et les outils associés. Cette étape charge aussi l’exemple de [base de données OLTP Wide World Importers](/sql/sample/world-wide-importers/wide-world-importers-oltp-database) dans SQL Server.
+Tout d’abord, déployez une machine virtuelle comme serveur local simulé, qui inclut SQL Server 2017 et les outils associés. Cette étape charge aussi la [base de données OLTP Wide World Importers][wwi] dans SQL Server.
 
-1. Accédez au dossier `data\enterprise-bi-sqldw\onprem\templates` du référentiel que vous avez téléchargé à l’étape des prérequis ci-dessus.
+1. Accédez au dossier `data\enterprise_bi_sqldw\onprem\templates` du référentiel.
 
 2. Dans le fichier `onprem.parameters.json`, remplacez les valeurs de `adminUsername` et `adminPassword`. Modifiez aussi les valeurs dans la section `SqlUserCredentials` pour qu’elles correspondent au nom d’utilisateur et au mot de passe. Notez le préfixe `.\\` dans la propriété userName.
     
@@ -217,28 +216,39 @@ Tout d’abord, déployez une machine virtuelle comme serveur local simulé, qui
 3. Exécutez `azbb` comme montré ci-dessous pour déployer le serveur local.
 
     ```bash
-    azbb -s <subscription_id> -g <resource_group_name> -l <location> -p onprem.parameters.json --deploy
+    azbb -s <subscription_id> -g <resource_group_name> -l <region> -p onprem.parameters.json --deploy
     ```
+
+    Spécifiez une région qui prend en charge SQL Data Warehouse et Azure Analysis Services. Voir [Produits Azure par région](https://azure.microsoft.com/global-infrastructure/services/).
 
 4. Le déploiement peut prendre 20 à 30 minutes, en incluant l’exécution du script [DSC](/powershell/dsc/overview) pour installer les outils et restaurer la base de données. Vérifiez le déploiement dans le portail Azure en passant en revue les ressources dans le groupe de ressources. Vous devriez voir la machine virtuelle `sql-vm1` et ses ressources associées.
 
 ### <a name="deploy-the-azure-resources"></a>Déployer les ressources Azure
 
-Cette étape approvisionne Azure SQL Data Warehouse et Azure Analysis Services, ainsi qu’un compte de stockage. Si vous le souhaitez, vous pouvez exécuter cette étape parallèlement à l’étape précédente.
+Cette étape approvisionne SQL Data Warehouse et Azure Analysis Services, ainsi qu’un compte de stockage. Si vous le souhaitez, vous pouvez exécuter cette étape parallèlement à l’étape précédente.
 
-1. Accédez au dossier `data\enterprise-bi-sqldw\azure\templates` du référentiel que vous avez téléchargé à l’étape des prérequis ci-dessus.
+1. Accédez au dossier `data\enterprise_bi_sqldw\azure\templates` du référentiel.
 
-2. Exécutez la commande Azure CLI suivante pour créer un groupe de ressources, en remplaçant les paramètres entre crochets spécifiés. Remarque : vous pouvez déployer dans un groupe de ressource différent de celui utilisé pour le serveur local à l’étape précédente. 
-
-    ```bash
-    az group create --name <resource_group_name> --location <location>  
-    ```
-
-3. Exécutez la commande Azure CLI suivante pour déployer les ressources Azure, en remplaçant les paramètres entre crochets spécifiés. Le paramètre `storageAccountName` doit respecter les [règles d’attribution de noms](../../best-practices/naming-conventions.md#naming-rules-and-restrictions) des comptes de stockage. Pour le paramètre `analysisServerAdmin`, utilisez votre nom d’utilisateur principal (UPN) Azure Active Directory.
+2. Exécutez la commande Azure CLI suivante pour créer un groupe de ressources. Vous pouvez déployer les ressources dans un autre groupe de ressources que celui qu’indique l’étape précédente, mais la région doit être la même. 
 
     ```bash
-    az group deployment create --resource-group <resource_group_name> --template-file azure-resources-deploy.json --parameters "dwServerName"="<server_name>" "dwAdminLogin"="<admin_username>" "dwAdminPassword"="<password>" "storageAccountName"="<storage_account_name>" "analysisServerName"="<analysis_server_name>" "analysisServerAdmin"="user@contoso.com"
+    az group create --name <resource_group_name> --location <region>  
     ```
+
+3. Exécutez la commande Azure CLI suivante pour déployer les ressources Azure. Remplacez les valeurs de paramètres affichées entre crochets. 
+
+    ```bash
+    az group deployment create --resource-group <resource_group_name> \
+     --template-file azure-resources-deploy.json \
+     --parameters "dwServerName"="<server_name>" \
+     "dwAdminLogin"="<admin_username>" "dwAdminPassword"="<password>" \ 
+     "storageAccountName"="<storage_account_name>" \
+     "analysisServerName"="<analysis_server_name>" \
+     "analysisServerAdmin"="user@contoso.com"
+    ```
+
+    - Le paramètre `storageAccountName` doit respecter les [règles d’attribution de noms](../../best-practices/naming-conventions.md#naming-rules-and-restrictions) des comptes de stockage.
+    - Pour le paramètre `analysisServerAdmin`, utilisez votre nom d’utilisateur principal (UPN) Azure Active Directory.
 
 4. Vérifiez le déploiement dans le portail Azure en passant en revue les ressources dans le groupe de ressources. Vous devriez voir un compte de stockage et les instances Azure SQL Data Warehouse et Analysis Services.
 
@@ -262,7 +272,7 @@ Dans cette étape, vous allez exécuter un script PowerShell qui utilise l’uti
 
 3. Dans le portail Azure, vérifiez que les données source sont copiées dans le stockage d’objets blob en accédant au compte de stockage, puis sélectionnez le service Blob et ouvrez le conteneur `wwi`. Vous devriez voir une liste de tables avec le préfixe `WorldWideImporters_Application_*`.
 
-### <a name="execute-the-data-warehouse-scripts"></a>Exécuter les scripts d’entrepôt de données
+### <a name="run-the-data-warehouse-scripts"></a>Exécuter les scripts d’entrepôt de données
 
 1. À partir de votre session Bureau à distance, lancez SQL Server Management Studio (SSMS). 
 
@@ -299,7 +309,7 @@ Dans SSMS, vous devriez voir un ensemble de tables `prd.*` dans la base de donn�
 SELECT TOP 10 * FROM prd.CityDimensions
 ```
 
-### <a name="build-the-azure-analysis-services-model"></a>Créer le modèle Azure Analysis Services
+## <a name="build-the-analysis-services-model"></a>Créer le modèle Analysis Services
 
 Dans cette étape, vous allez créer un modèle tabulaire qui importe des données depuis un entrepôt de données. Vous allez ensuite déployer ce modèle dans Azure Analysis Services.
 
@@ -348,7 +358,7 @@ Dans cette étape, vous allez créer un modèle tabulaire qui importe des donné
 
     ![](./images/analysis-services-models.png)
 
-### <a name="analyze-the-data-in-power-bi-desktop"></a>Analyser les données dans Power BI Desktop
+## <a name="analyze-the-data-in-power-bi-desktop"></a>Analyser les données dans Power BI Desktop
 
 Dans cette étape, vous allez utiliser Power BI pour créer un rapport des données dans Analysis Services.
 
@@ -368,11 +378,11 @@ Dans cette étape, vous allez utiliser Power BI pour créer un rapport des donn�
 
 6. Dans le volet **Champs**, développez **prd.CityDimensions**.
 
-7. Faites glisser **prd.CityDimensions** > **WWI ID Ville** dans la **zone Axe**.
+7. Faites glisser **prd.CityDimensions** > **WWI ID ville** dans la zone **Axe**.
 
 8. Faites glisser **prd.CityDimensions** > **Ville** dans la zone **Légende**.
 
-9. Dans le volet Champs, développez **prd.SalesFact**.
+9. Dans le volet **Champs**, développez **prd.SalesFact**.
 
 10. Faites glisser **prd.SalesFact** > **Hors taxe total** dans la zone **Valeur**.
 
@@ -405,4 +415,4 @@ Pour en savoir plus sur Power BI Desktop, consultez la section [Prise en main de
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/data/enterprise_bi_sqldw
 [ref-arch-repo]: https://github.com/mspnp/reference-architectures
 [ref-arch-repo-folder]: https://github.com/mspnp/reference-architectures/tree/master/data/enterprise_bi_sqldw
-
+[wwi]: /sql/sample/world-wide-importers/wide-world-importers-oltp-database

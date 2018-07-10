@@ -3,12 +3,12 @@ title: Traitement en temps réel
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 8d3497c37d15dc0aa4645ddfce3bd30740217b2c
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.openlocfilehash: 4abb159924f902b5babe0673cc021e80b00c8529
+ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30298627"
+ms.lasthandoff: 06/28/2018
+ms.locfileid: "37090983"
 ---
 # <a name="real-time-processing"></a>Traitement en temps réel
 
@@ -56,7 +56,7 @@ Pour plus d’informations, consultez la page [Stockage de données](../technolo
 
 ### <a name="stream-processing"></a>Traitement des flux de données
 
-- **Azure Stream Analytics**. Azure Stream Analytics peut exécuter des requêtes perpétuelles sur un flux de données non borné. Ces requêtes consomment des flux de données provenant de répartiteurs de messages ou de stockage, filtrent et agrègent les données en fonction de fenêtres temporelles, et écrivent les résultats dans des récepteurs tels que des systèmes de stockage ou des bases de données, ou directement dans des rapports Power BI.
+- **Azure Stream Analytics**. Azure Stream Analytics peut exécuter des requêtes perpétuelles sur un flux de données non borné. Ces requêtes consomment des flux de données provenant de répartiteurs de messages ou de stockage, filtrent et agrègent les données en fonction de fenêtres temporelles, et écrivent les résultats dans des récepteurs tels que des systèmes de stockage ou des bases de données, ou directement dans des rapports Power BI. Stream Analytics utilise un langage de requête SQL qui prend en charge des constructions géospatiales et temporelles, et peut être étendu via JavaScript.
 - **Storm**. Apache Storm est une infrastructure open source de traitement des flux de données qui utilise une topologie Spout et Bolt pour consommer, traiter et générer les résultats à partir de sources de données de diffusion en continu et en temps réel. Il est possible de configurer Storm dans un cluster Azure HDInsight, et d’implémenter une topologie en Java ou en C#.
 - **Spark Streaming**. Apache Spark est une plateforme distribuée open source pour le traitement général des données. Elle comprend l’API Spark Streaming, qui permet d’écrire du code dans n’importe quel langage Spark pris en charge, notamment Java, Scala et Python. Spark 2.0 a introduit l’API Spark Structured Streaming, qui propose un modèle de programmation plus simple et plus cohérent. Spark 2.0 est disponible dans un cluster Azure HDInsight.
 

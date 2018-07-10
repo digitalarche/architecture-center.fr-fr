@@ -7,12 +7,12 @@ ms.date: 11/28/2016
 pnp.series.next: adds-extend-domain
 pnp.series.prev: ./index
 cardTitle: Integrate on-premises AD with Azure AD
-ms.openlocfilehash: ade79f8ebffc15b423ef6ebfb9b19611c9500cd8
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.openlocfilehash: 21a6474db94d34e23f79d1ba0e35943c0cb52966
+ms.sourcegitcommit: d5db5b8ed7429f056130096d0ef4b249b564599a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35252990"
+ms.lasthandoff: 07/01/2018
+ms.locfileid: "37141382"
 ---
 # <a name="integrate-on-premises-active-directory-domains-with-azure-active-directory"></a>Intégrer des domaines Active Directory locaux avec Azure Active Directory
 
@@ -216,7 +216,7 @@ Pour plus d’informations, consultez [Accès conditionnel Azure Active Director
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
-Un déploiement pour une architecture de référence implémentant ces recommandations et considérations est disponible sur GitHub. Cette architecture de référence déploie un réseau local simulé dans Azure que vous pouvez utiliser pour tester et expérimenter différents scénarios. L’architecture de référence peut être déployée avec des machines virtuelles Windows ou Linux en procédant comme suit : 
+Un déploiement pour une architecture de référence implémentant ces recommandations et considérations est disponible sur GitHub. Cette architecture de référence déploie un réseau local simulé dans Azure, que vous pouvez utiliser pour tester et expérimenter différents scénarios. L’architecture de référence peut être déployée avec des machines virtuelles Windows ou Linux en procédant comme suit : 
 
 1. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fidentity%2Fazure-ad%2Fazuredeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>
 2. Une fois le lien ouvert dans le portail Azure, vous devez entrer des valeurs pour certains paramètres : 
