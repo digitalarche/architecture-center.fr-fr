@@ -3,18 +3,20 @@ title: Exécution de SAP HANA sur les grandes instances Azure
 description: Pratiques éprouvées d’exécution de SAP HANA dans un environnement à haute disponibilité sur les grandes instances Azure.
 author: lbrader
 ms.date: 05/16/2018
-ms.openlocfilehash: 7605fa8a0012aaef3f7323c6f88614b640152e3b
-ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
+ms.openlocfilehash: 746161ac51335af5c48a559830d6e0345dcfb7b1
+ms.sourcegitcommit: 86d86d71e392550fd65c4f76320d7ecf0b72e1f6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2018
-ms.locfileid: "34423057"
+ms.lasthandoff: 07/06/2018
+ms.locfileid: "37864519"
 ---
 # <a name="run-sap-hana-on-azure-large-instances"></a>Exécution de SAP HANA sur les grandes instances Azure
 
 Cette architecture de référence présente un ensemble de pratiques éprouvées pour l’exécution de SAP HANA sur Azure (grandes instances) dans un environnement à haute disponibilité et à récupération d’urgence. Appelée Grandes instances HANA, cette offre est déployée sur des serveurs physiques dans des régions Azure. 
 
 ![0][0]
+
+*Téléchargez un [fichier Visio][visio-download] de cette architecture.*
 
 > [!NOTE]
 > Le déploiement de cette architecture de référence requiert une licence appropriée des produits SAP et d’autres technologies non Microsoft.
@@ -94,7 +96,7 @@ Si vous avez déjà des déploiements SAP, SAP fournit des rapports que vous pou
 
 ## <a name="availability-considerations"></a>Considérations relatives à la disponibilité
 
-La redondance des ressources est le thème général dans les solutions d’infrastructure à haute disponibilité. Pour les entreprises ayant un contrat de niveau de service (SLA) moins stricte, les machines virtuelles Azure à instance unique offrent un contrat SLA de durée de fonctionnement. Pour plus d'informations, consultez [Contrat de niveau de service Azure](https://azure.microsoft.com/support/legal/sla/).
+La redondance des ressources constitue le thème général dans les solutions d’infrastructure à haute disponibilité. Pour les entreprises qui présentent un SLA moins strict, les machines virtuelles Azure à instance unique offrent un SLA garantissant un certain temps de disponibilité. Pour plus d'informations, consultez [Contrat de niveau de service Azure](https://azure.microsoft.com/support/legal/sla/).
 
 Collaborez avec SAP, votre intégrateur de systèmes ou Microsoft pour concevoir et implémenter efficacement la stratégie [de haute disponibilité et récupération d’urgence][hli-hadr]. Cette architecture suit le [contrat de niveau de service][sla] (SLA) pour HANA sur Azure (grandes instances). Pour évaluer vos besoins de disponibilité, tenez compte des points de défaillance uniques, du niveau souhaité de disponibilité des services et de ces mesures courantes :
 
@@ -201,3 +203,5 @@ Les communautés peuvent répondre aux questions et vous aider à paramétrer un
 [type]: /azure/virtual-machines/workloads/sap/hana-installation
 [vnet]: /azure/virtual-network/virtual-networks-overview
 [0]: ./images/sap-hana-large-instances.png "Architecture de SAP HANA à l’aide des grandes instances Azure"
+
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/sap-reference-architectures.vsdx

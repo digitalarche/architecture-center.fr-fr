@@ -8,11 +8,11 @@ pnp.series.next: multi-region-web-app
 ms.date: 11/23/2016
 cardTitle: Improve scalability
 ms.openlocfilehash: 6459acebfa25491332e2118b9e8fe51d5fc79ff3
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.sourcegitcommit: 5d99b195388b7cabba383c49a81390ac48f86e8a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30846506"
+ms.lasthandoff: 07/10/2018
+ms.locfileid: "37958804"
 ---
 # <a name="improve-scalability-in-a-web-application"></a>Améliorer la scalabilité dans une application web
 
@@ -84,7 +84,7 @@ Les applications modernes traitent souvent de grandes quantités de données. Af
 | Paires clé/valeur |Données de profil utilisateur recherchées par ID d’utilisateur |Stockage de tables Azure |
 | Messages courts destinés à déclencher un traitement supplémentaire |Demandes de commande |Stockage File d’attente Azure, file d’attente Service Bus ou rubrique Service Bus |
 | Données non relationnelles avec un schéma flexible nécessitant une interrogation de base |Catalogue produits |Base de données de document, comme Azure Cosmos DB, MongoDB ou Apache CouchDB |
-| Données relationnelles nécessitant une prise en charge des requêtes enrichie, un schéma strict et/ou une cohérence forte |Inventaire de produits |Base de données SQL Azure |
+| Données relationnelles nécessitant une prise en charge des requêtes enrichie, un schéma strict et/ou une cohérence forte |Inventaire de produits |Azure SQL Database |
 
 ## <a name="scalability-considerations"></a>Considérations relatives à l’extensibilité
 

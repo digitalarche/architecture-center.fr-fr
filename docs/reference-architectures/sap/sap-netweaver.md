@@ -3,21 +3,23 @@ title: Déployer SAP NetWeaver (Windows) pour AnyDB sur des machines virtuelles 
 description: Pratiques éprouvées d’exécution de SAP S/4HANA dans un environnement Linux sur Azure avec une haute disponibilité.
 author: lbrader
 ms.date: 05/11/2018
-ms.openlocfilehash: 0efe3e78d9e1809fdab52044b75e432742786b79
-ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
+ms.openlocfilehash: 90334e4872bdd15d59aa16286a031d07f3d1bb2f
+ms.sourcegitcommit: 86d86d71e392550fd65c4f76320d7ecf0b72e1f6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2018
-ms.locfileid: "34423064"
+ms.lasthandoff: 07/06/2018
+ms.locfileid: "37864536"
 ---
 # <a name="deploy-sap-netweaver-windows-for-anydb-on-azure-virtual-machines"></a>Déployer SAP NetWeaver (Windows) pour AnyDB sur des machines virtuelles Azure
 
 Cette architecture de référence présente un ensemble de pratiques éprouvées pour l’exécution de SAP NetWeaver dans un environnement Windows sur Azure avec une haute disponibilité. La base de données est AnyDB, le terme SAP pour tout SGBD pris en charge en plus de SAP HANA. Cette architecture est déployée avec des tailles de machine virtuelle spécifiques qui peuvent être modifiées en fonction des besoins de votre organisation.
 
-![](./images/sap-s4hana.png)
- 
+![](./images/sap-netweaver.png)
+
+*Téléchargez un [fichier Visio][visio-download] de cette architecture.*
+
 > [!NOTE] 
-> Le déploiement de produits SAP selon cette architecture de référence exige des licences appropriées pour ces produits et les autres technologies non Microsoft.
+> Le déploiement de cette architecture de référence requiert une licence appropriée des produits SAP et d’autres technologies non Microsoft.
 
 ## <a name="architecture"></a>Architecture
 L’architecture est constituée des composants d’infrastructure et des composants logiciels clés suivants.
@@ -104,7 +106,7 @@ Pour le magasin de données de sauvegarde, nous vous recommandons d’utiliser l
 
 Les serveurs d’applications SAP communiquent constamment avec les serveurs de bases de données. Pour les applications exigeant des performances élevées qui s’exécutent sur une plateforme de base de données de tout type, y compris SAP HANA, vous pouvez activer l’[accélérateur d’écriture](/azure/virtual-machines/linux/how-to-enable-write-accelerator) afin d’améliorer la latence d’écriture du journal. Pour optimiser les communications entre les serveurs, utilisez la [mise en réseau accéléré](https://azure.microsoft.com/blog/linux-and-windows-networking-performance-enhancements-accelerated-networking/). Notez que ces accélérateurs sont disponibles uniquement pour certaines séries de machines virtuelles.
 
-Pour obtenir un débit de bande passante de disque et d’IOPS élevé, les pratiques courantes en matière d’[optimisation des performances](/azure/virtual-machines/windows/premium-storage-performance) des volumes de stockage s’appliquent à la disposition du stockage Azure. Par exemple, la combinaison de plusieurs disques pour créer un volume de disque agrégé par bandes améliore les performances d’E/S. L’activation du cache de lecture sur un contenu de stockage qui change rarement améliore la vitesse de récupération des données.
+Pour obtenir un débit de bande passante de disque et d’ES/S élevé, les pratiques courantes en termes [d’optimisation des performances](/azure/virtual-machines/windows/premium-storage-performance) du volume de stockage s’appliquent à la disposition du stockage Azure. Par exemple, la combinaison de plusieurs disques pour créer un volume de disque agrégé par bandes améliore les performances d’E/S. L’activation du cache de lecture sur un contenu de stockage qui change rarement améliore la vitesse de récupération des données.
 
 Pour SAP sur SQL, l’article de blog [Top 10 Key Considerations for Deploying SAP Applications on Azure](https://blogs.msdn.microsoft.com/saponsqlserver/2015/05/25/top-10-key-considerations-for-deploying-sap-applications-on-azure/) (10 principales considérations pour le déploiement d’applications SAP sur Azure) offre d’excellents conseils sur l’optimisation du stockage Azure pour les charges de travail SAP sur SQL Server.
 
@@ -163,7 +165,7 @@ Pour renforcer la sécurité réseau, vous pouvez implémenter une [zone DMZ ré
 
 Afin de garantir la sécurité de l’infrastructure, les données sont chiffrées en transit et au repos. La section « Considérations de sécurité » du guide [SAP NetWeaver on Azure Virtual Machines (VMs) – Planning and Implementation Guide](/azure/virtual-machines/workloads/sap/planning-guide) (SAP NetWeaver sur les machines virtuelles Azure - Guide de planification et d’implémentation) aborde la question de la sécurité réseau. Le guide spécifie également les ports réseau, que vous devez ouvrir sur les pare-feu pour autoriser la communication de l’application.
 
-[Azure Disk Encryption](/azure/security/azure-security-disk-encryption) permet de chiffrer des disques de machines virtuelles Windows. Ce service exploite la fonctionnalité BitLocker de Windows pour assurer le chiffrement de volume du système d’exploitation et des disques de données. La solution fonctionne également avec Azure Key Vault, ce qui vous permet de contrôler et de gérer les clés et les secrets de chiffrement de disque dans l’abonnement associé à votre coffre de clés. Les données sur les disques de vos machines virtuelles sont chiffrées au repos dans votre stockage Azure.
+[Azure Disk Encryption](/azure/security/azure-security-disk-encryption) permet de chiffrer des disques de machines virtuelles Windows. Ce service exploite la fonctionnalité BitLocker de Windows pour assurer le chiffrement de volume du système d’exploitation et des disques de données. La solution fonctionne également avec Azure Key Vault, ce qui vous permet de contrôler et de gérer les clés et les secrets de chiffrement de disque dans votre abonnement Key Vault. Les données sur les disques de vos machines virtuelles sont chiffrées au repos dans votre stockage Azure.
 
 ## <a name="communities"></a>Communautés
 
@@ -171,6 +173,7 @@ Les communautés peuvent répondre aux questions et vous aider à paramétrer un
 
 - [Blog Running SAP Applications on the Microsoft Platform](https://blogs.msdn.microsoft.com/saponsqlserver/2017/05/04/sap-on-azure-general-update-for-customers-partners-april-2017/) (Exécution d’applications SAP sur la plateforme Microsoft)
 - [Support de la communauté Azure](https://azure.microsoft.com/support/community/)
-- [SAP Community](https://www.sap.com/community.html)
+- [Communauté SAP](https://www.sap.com/community.html)
 - [Dépassement de capacité de la pile](https://stackoverflow.com/tags/sap/)
 
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/sap-reference-architectures.vsdx

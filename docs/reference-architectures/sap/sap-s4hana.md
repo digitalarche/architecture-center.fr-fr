@@ -3,25 +3,26 @@ title: SAP S/4HANA pour machines virtuelles Linux sur Azure
 description: Pratiques éprouvées d’exécution de SAP S/4HANA dans un environnement Linux sur Azure avec une haute disponibilité.
 author: lbrader
 ms.date: 05/11/2018
-ms.openlocfilehash: d24ef6f9e4eae460d0d0dcfff35568c812d09951
-ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
+ms.openlocfilehash: 9635de73ec431e0ac678e4008e0c4835796d47ad
+ms.sourcegitcommit: 86d86d71e392550fd65c4f76320d7ecf0b72e1f6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2018
-ms.locfileid: "34423065"
+ms.lasthandoff: 07/06/2018
+ms.locfileid: "37864502"
 ---
 # <a name="sap-s4hana-for-linux-virtual-machines-on-azure"></a>SAP S/4HANA pour machines virtuelles Linux sur Azure
 
 Cette architecture de référence présente un ensemble de pratiques éprouvées pour l’exécution de S/4HANA dans un environnement à haute disponibilité prenant en charge la reprise après sinistre sur Azure. Cette architecture est déployée avec des tailles de machine virtuelle spécifiques qui peuvent être modifiées en fonction des besoins de votre organisation. 
 
-
 ![](./images/sap-s4hana.png)
+
+*Téléchargez un [fichier Visio][visio-download] de cette architecture.*
+
+> [!NOTE] 
+> Le déploiement de cette architecture de référence requiert une licence appropriée des produits SAP et d’autres technologies non Microsoft.
 
 ## <a name="architecture"></a>Architecture
  
-> [!NOTE] 
-> Le déploiement de produits SAP selon cette architecture de référence exige des licences appropriées pour ces produits et les autres technologies non Microsoft.
-
 Cette architecture de référence décrit un système de production de niveau entreprise. En fonction des besoins de votre entreprise, cette configuration peut être réduite à une seule machine virtuelle. En revanche, les composants suivants sont requis :
 
 **Réseau virtuel**. Le service [Réseau virtuel Azure](/azure/virtual-network/virtual-networks-overview) connecte en toute sécurité les ressources Azure entre elles. Dans cette architecture, le réseau virtuel se connecte à un environnement local via une passerelle déployée dans le hub d’une [topologie hub-and-spoke](../hybrid-networking/hub-spoke.md). Le spoke est le réseau virtuel utilisé pour les applications SAP.
@@ -113,21 +114,21 @@ Pour le magasin de données de sauvegarde, nous vous recommandons d’utiliser [
 
 ## <a name="performance-considerations"></a>Considérations relatives aux performances
 
-Les serveurs d’applications SAP gèrent les communications constantes avec les serveurs de bases de données. Pour les machines virtuelles de base de données HANA, vous pouvez activer [l’accélérateur d’écriture](/azure/virtual-machines/linux/how-to-enable-write-accelerator) pour améliorer la latence d’écriture du journal. Pour optimiser les communications entre les serveurs, utilisez le [réseau accéléré](https://azure.microsoft.com/blog/linux-and-windows-networking-performance-enhancements-accelerated-networking/). Notez que ces accélérateurs sont disponibles uniquement pour certaines séries de machines virtuelles.
+Les serveurs d’applications SAP communiquent constamment avec les serveurs de bases de données. Pour les machines virtuelles de base de données HANA, vous pouvez activer [l’accélérateur d’écriture](/azure/virtual-machines/linux/how-to-enable-write-accelerator) pour améliorer la latence d’écriture du journal. Pour optimiser les communications entre les serveurs, utilisez le [réseau accéléré](https://azure.microsoft.com/blog/linux-and-windows-networking-performance-enhancements-accelerated-networking/). Notez que ces accélérateurs sont disponibles uniquement pour certaines séries de machines virtuelles.
 
 Pour obtenir un débit de bande passante de disque et d’ES/S élevé, les pratiques courantes en termes [d’optimisation des performances](/azure/virtual-machines/linux/premium-storage-performance) du volume de stockage s’appliquent à la disposition du stockage Azure. Par exemple, la combinaison de plusieurs disques pour créer un volume de disque agrégé par bandes améliore les performances d’E/S. L’activation du cache de lecture sur un contenu de stockage qui change rarement améliore la vitesse de récupération des données. Pour plus d’informations sur les exigences en termes de performances, consultez [SAP note 1943937 - Hardware Configuration Check Tool](https://launchpad.support.sap.com/#/notes/1943937) (Note SAP 1943937 - Outil de vérification de la configuration matérielle) (compte SAP Service Marketplace requis pour l’accès).
 
 ## <a name="scalability-considerations"></a>Considérations relatives à l’extensibilité
 
-Au niveau de la couche de l’application SAP, Azure propose un large éventail de tailles de machines virtuelles pour une augmentation ou une diminution de la taille des instances. Consultez la [Note SAP 1928533](https://launchpad.support.sap.com/#/notes/1928533) - SAP Applications on Azure: Supported Products and Azure VM types (Applications SAP sur Azure : produits et types de machines virtuelles pris en charge (compte SAP Service Marketplace pour l’accès). À mesure que nous certifions des types de machines virtuelles supplémentaires, vous pouvez augmenter ou diminuer la taille des instances avec le même déploiement cloud. 
+Au niveau de la couche de l’application SAP, Azure propose un large éventail de tailles de machines virtuelles pour la montée en puissance ou la montée en charge. Consultez la [Note SAP 1928533](https://launchpad.support.sap.com/#/notes/1928533) - SAP Applications on Azure: Supported Products and Azure VM types (Applications SAP sur Azure : produits et types de machines virtuelles pris en charge (compte SAP Service Marketplace pour l’accès). À mesure que nous certifions des types de machines virtuelles supplémentaires, vous pouvez augmenter ou diminuer la taille des instances avec le même déploiement cloud. 
 
 Dans la couche Base de données, cette architecture exécute HANA sur des machines virtuelles. Si votre charge d travail dépasse la taille maximale de machine virtuelle, Microsoft propose également les [Grandes instances Azure](/azure/virtual-machines/workloads/sap/hana-overview-architecture) pour SAP HANA. Ces serveurs physiques sont colocalisés dans le centre de données certifié Microsoft Azure et à ce jour, fournissent jusqu'à 20 To de capacité de mémoire pour une instance unique. Une configuration à plusieurs nœuds est également possible avec une capacité totale de mémoire pouvant atteindre 60 To.
 
 ## <a name="availability-considerations"></a>Considérations relatives à la disponibilité
 
-La redondance des ressources est le thème général dans les solutions d’infrastructure à haute disponibilité. Pour les entreprises ayant un contrat de niveau de service (SLA) moins stricte, les machines virtuelles Azure à instance unique offrent un contrat SLA de durée de fonctionnement. Pour plus d'informations, consultez [Contrat de niveau de service Azure](https://azure.microsoft.com/support/legal/sla/).
+La redondance des ressources constitue le thème général dans les solutions d’infrastructure à haute disponibilité. Pour les entreprises qui présentent un SLA moins strict, les machines virtuelles Azure à instance unique offrent un SLA garantissant un certain temps de disponibilité. Pour plus d’informations, consultez [Contrats de niveau de service Azure](https://azure.microsoft.com/support/legal/sla/).
 
-Dans cette installation distribuée de l’application SAP, l’installation de base est répliquée pour une haute disponibilité. Pour chaque couche de l’architecture, la conception de la haute disponibilité varie. 
+Dans cette installation distribuée de l’application SAP, l’installation de base est répliquée pour assurer une haute disponibilité. Pour chaque couche de l’architecture, la conception mise en œuvre à des fins de haute disponibilité varie. 
 
 ### <a name="application-tier"></a>Couche Application
 
@@ -170,9 +171,9 @@ Contrôlez l’accès aux ressources en utilisant le système centralisé de ges
 
 ### <a name="monitoring"></a>Surveillance
 
-Azure propose plusieurs fonctions d’[analyse et de diagnostics](/azure/architecture/best-practices/monitoring) de l’infrastructure globale. En outre, l’analyse avancée des machines virtuelles Azure (Windows ou Linux) est gérée par Azure Operations Management Suite (OMS). 
+Azure propose plusieurs fonctions de [surveillance et de diagnostic](/azure/architecture/best-practices/monitoring) de l’infrastructure globale. En outre, l’analyse avancée des machines virtuelles Azure (Windows ou Linux) est gérée par Azure Operations Management Suite (OMS). 
 
-Pour assurer une analyse basée sur SAP des ressources et des performances des services de l’infrastructure SAP, vous pouvez utiliser [l’extension d’analyse avancée SAP Azure](/azure/virtual-machines/workloads/sap/deployment-guide#d98edcd3-f2a1-49f7-b26a-07448ceb60ca). Cette extension transmet les statistiques d’analyse Azure à l’application SAP pour les fonctions DBA Cockpit et de surveillance du système d’exploitation. L’analyse avancée SAP est une condition préalable obligatoire pour l’exécution de SAP sur Azure. Pour plus d’informations, consultez la [Note SAP 2191498](https://launchpad.support.sap.com/#/notes/2191498) - SAP on Linux with Azure: Enhanced Monitoring (SAP sur Linux avec Azure : analyse avancée).
+Pour assurer une analyse basée sur SAP des ressources et des performances des services de l’infrastructure SAP, l’extension d’[analyse Azure améliorée pour SAP](/azure/virtual-machines/workloads/sap/deployment-guide#d98edcd3-f2a1-49f7-b26a-07448ceb60ca) est utilisée. Cette extension transmet les statistiques d’analyse Azure à l’application SAP pour les fonctions DBA Cockpit et de surveillance du système d’exploitation. L’analyse avancée SAP est une condition préalable obligatoire pour l’exécution de SAP sur Azure. Pour plus d’informations, consultez la [Note SAP 2191498](https://launchpad.support.sap.com/#/notes/2191498) - SAP on Linux with Azure: Enhanced Monitoring (SAP sur Linux avec Azure : analyse avancée).
 
 ## <a name="security-considerations"></a>Considérations relatives à la sécurité
 
@@ -193,7 +194,9 @@ Pour le chiffrement des données SAP HANA au repos, nous recommandons l’utilis
 
 Les communautés peuvent répondre aux questions et vous aider à paramétrer un déploiement réussi. Tenez compte des éléments suivants :
 
-- [Blog Running SAP Applications on the Microsoft Platform](https://blogs.msdn.microsoft.com/saponsqlserver/2017/05/04/sap-on-azure-general-update-for-customers-partners-april-2017/) (Exécution des applications SAP sur la plateforme Microsoft)
+- [Blog Running SAP Applications on the Microsoft Platform](https://blogs.msdn.microsoft.com/saponsqlserver/2017/05/04/sap-on-azure-general-update-for-customers-partners-april-2017/) (Exécution d’applications SAP sur la plateforme Microsoft)
 - [Support de la communauté Azure](https://azure.microsoft.com/support/community/)
 - [Communauté SAP](https://www.sap.com/community.html)
 - [Dépassement de capacité de la pile](https://stackoverflow.com/tags/sap/)
+
+[visio-download]: https://archcenter.blob.core.windows.net/cdn/sap-reference-architectures.vsdx
