@@ -3,12 +3,12 @@ title: Centre des architectures Azure
 description: Le centre des architectures Azure est le centre officiel pour obtenir des instructions, des schémas, des modèles et les meilleures pratiques pour la création de solutions avec Microsoft Azure. Il est organisé par l’équipe Modèles et pratiques de Microsoft.
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 0ac5dd79f765fe9b649cc2ca83c0213b4ba28544
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 544196faa7156c5636b03d3f402bc48dcc63975f
+ms.sourcegitcommit: 776b8c1efc662d42273a33de3b82ec69e3cd80c5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847728"
+ms.lasthandoff: 07/12/2018
+ms.locfileid: "38987588"
 ---
 # <a name="azure-architecture-center"></a>Centre des architectures Azure
 
@@ -78,8 +78,8 @@ ms.locfileid: "30847728"
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Création de microservices sur Azure</h3>
-                            <p>Cette série en plusieurs parties vous guide tout au long du processus de conception et de création d’une architecture de microservices sur Azure. Elle inclut une implémentation de référence.</p>
+                            <h3>Créer des microservices sur Azure</h3>
+                            <p>Ce guide de conception vous guide tout au long du processus de conception et de création d’une architecture de microservices sur Azure. Elle inclut une implémentation de référence.</p>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ ms.locfileid: "30847728"
                             </div>
                         </div>
                         <div class="cardText">
-                            <h3>Meilleures pratiques pour les applications cloud</h3>
+                            <h3>Meilleures pratiques du cloud</h3>
                             <p>Meilleures pratiques pour les applications cloud, qui couvrent des aspects tels que la mise à l’échelle automatique, la mise en cache, le partitionnement des données, la conception de l’API et autres.</p>
                         </div>
                     </div>
@@ -246,46 +246,6 @@ ms.locfileid: "30847728"
             </div>
         </a>
     </li>
-    <!-- Sharepoint -->
-    <li>
-        <a href="/azure/architecture/reference-architectures/sharepoint">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="/azure/architecture/reference-architectures/sharepoint/images/sharepoint.svg" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Exécutez SharePoint Server 2016 sur Azure</h3>
-                            <p>Déployez et exécutez une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- SAP -->
-    <li>
-        <a href="/azure/architecture/reference-architectures/sap">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="/azure/architecture/reference-architectures/sap/images/sap.svg" width="100%" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Exécutez SAP HANA sur Azure</h3>
-                            <p>Déployez et exécutez SAP NetWeaver et SAP HANA dans un environnement à haute disponibilité dans Azure.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
     <!-- Multitenant identity -->
     <li>
         <a href="/azure/architecture/multitenant-identity">
@@ -300,46 +260,6 @@ ms.locfileid: "30847728"
                         <div class="cardText">
                             <h3>Gestion des identités pour les applications mutualisées</h3>
                             <p>Comprendre les meilleures pratiques pour la mutualisation, lors de l’utilisation de Azure AD pour la gestion des identités.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- AzureCAT blog -->
-    <li>
-        <a href="https://blogs.msdn.microsoft.com/azurecat/">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/azurecat.svg" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Équipe de conseil clientèle Azure</h3>
-                            <p>Blog de l’équipe AzureCAT</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- SQL CAT blog -->
-    <li>
-        <a href="https://blogs.msdn.microsoft.com/sqlcat/">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/sqlcat.svg" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Équipe de conseil clientèle SQL Server</h3>
-                            <p>Blog de l’équipe SQLCAT</p>
                         </div>
                     </div>
                 </div>

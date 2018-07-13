@@ -3,12 +3,12 @@ title: Exécuter une batterie de serveurs SharePoint Server 2016 à haute dispon
 description: Pratiques éprouvées pour la configuration d’une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure.
 author: njray
 ms.date: 08/01/2017
-ms.openlocfilehash: d1e3f0b73c94844ac649bf2abb6917809202fdb7
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: 9fe4fc09cf3babdf3ec8e8f27049f90e0047e9f0
+ms.sourcegitcommit: 776b8c1efc662d42273a33de3b82ec69e3cd80c5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2018
-ms.locfileid: "30270120"
+ms.lasthandoff: 07/12/2018
+ms.locfileid: "38987707"
 ---
 # <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Exécuter une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure
 
@@ -38,7 +38,9 @@ L’architecture est constituée des composants suivants :
 
 - **Passerelle**. La passerelle fournit une connexion entre votre réseau local et le réseau virtuel Azure. Votre connexion peut utiliser une passerelle ExpressRoute ou VPN de site à site. Pour plus d’informations, consultez la section [Connecter un réseau local à Azure][hybrid-ra].
 
-- **Contrôleurs de domaine Windows Server Active Directory (AD)**. Étant donné que SharePoint Server 2016 ne prend pas en charge l’utilisation d’Azure Active Directory Domain Services, vous devez déployer des contrôleurs de domaine Windows Server AD. Ces contrôleurs de domaine s’exécutent dans le réseau virtuel Azure et ont une relation d’approbation avec la forêt locale Windows Server Active Directory. Les requêtes web des clients pour les ressources de la batterie de serveurs SharePoint sont authentifiées sur le réseau virtuel, au lieu d’envoyer le trafic d’authentification via la connexion de passerelle vers le réseau local. Des enregistrements sont créés dans DNS, intranet A ou CNAME, afin que les utilisateurs de l’intranet puissent résoudre le nom de la batterie de serveurs SharePoint à l’adresse IP privée de l’équilibreur de charge interne.
+- **Contrôleurs de domaine Windows Server Active Directory (AD)**. Cette architecture de référence déploie des contrôleurs de domaine Windows Server AD. Ces contrôleurs de domaine s’exécutent dans le réseau virtuel Azure et ont une relation d’approbation avec la forêt locale Windows Server Active Directory. Les requêtes web des clients pour les ressources de la batterie de serveurs SharePoint sont authentifiées sur le réseau virtuel, au lieu d’envoyer le trafic d’authentification via la connexion de passerelle vers le réseau local. Des enregistrements sont créés dans DNS, intranet A ou CNAME, afin que les utilisateurs de l’intranet puissent résoudre le nom de la batterie de serveurs SharePoint à l’adresse IP privée de l’équilibreur de charge interne.
+
+  SharePoint Server 2016 prend également en charge l’utilisation de [Microsoft Azure Active Directory Domain Services](/azure/active-directory-domain-services/). Microsoft Azure AD Domain Services fournit des services de domaine managé, afin que vous n’ayez pas besoin de déployer et de gérer les contrôleurs de domaine dans Azure.
 
 - **Groupe de disponibilité SQL Server Always On**. Pour obtenir une haute disponibilité de la base de données SQL Server, nous vous recommandons les [groupes de disponibilité SQL Server Always On][sql-always-on]. Deux machines virtuelles sont utilisées pour SQL Server. L’une contient le réplica de base de données primaire et l’autre le réplica secondaire. 
 
@@ -201,7 +203,6 @@ Pour déployer l’architecture de façon incrémentielle sans environnement de 
 Pour déployer tous les éléments en une seule étape, utilisez `all`. Notez que l’ensemble du processus peut prendre plusieurs heures.
 
 ### <a name="prerequisites"></a>Prérequis
-
 
 * Installez la dernière version d’[Azure PowerShell][azure-ps].
 
