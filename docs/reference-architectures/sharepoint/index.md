@@ -2,13 +2,13 @@
 title: Exécuter une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure
 description: Pratiques éprouvées pour la configuration d’une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure.
 author: njray
-ms.date: 08/01/2017
-ms.openlocfilehash: 9fe4fc09cf3babdf3ec8e8f27049f90e0047e9f0
-ms.sourcegitcommit: 776b8c1efc662d42273a33de3b82ec69e3cd80c5
+ms.date: 07/14/2018
+ms.openlocfilehash: ff690300cb5f4af301bcfac58ac10b9b3c47f96d
+ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/12/2018
-ms.locfileid: "38987707"
+ms.lasthandoff: 07/14/2018
+ms.locfileid: "39060895"
 ---
 # <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Exécuter une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure
 
@@ -172,78 +172,104 @@ En outre, il est toujours conseillé de planifier le renforcement de la sécurit
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
-Les scripts de déploiement pour cette architecture de référence sont disponibles sur [GitHub][github]. 
+Un déploiement pour cette architecture de référence est disponible sur [GitHub][github]. La totalité du déploiement peut durer plusieurs heures.
 
-Vous pouvez déployer cette architecture de manière incrémentielle ou en une seule fois. La première fois, nous vous recommandons un déploiement incrémentiel, afin que vous puissiez voir ce que fait chaque déploiement. Spécifiez l’incrément à l’aide d’un des paramètres de *mode* suivants.
+Le déploiement crée les groupes de ressources suivants dans votre abonnement :
 
-| Mode           | Résultat                                                                                                            |
-|----------------|-------------------------------------------------------------------------------------------------------------------------|
-| onprem         | (Facultatif) Déploie un environnement réseau local simulé, de test ou d’évaluation. Cette étape n’implique pas la connexion à un réseau local réel. |
-| infrastructure | Déploie l’infrastructure de réseau SharePoint 2016 et la jumpbox vers Azure.                                                |
-| createvpn      | Déploie une passerelle de réseau virtuel pour SharePoint et les réseaux locaux et les connecte. Exécutez cette étape uniquement si vous avez exécuté l’étape `onprem`.                |
-| charge de travail       | Déploie les serveurs SharePoint sur le réseau de SharePoint.                                                               |
-| security       | Déploie le groupe de sécurité réseau sur le réseau de SharePoint.                                                           |
-| tout            | Déploie tous les déploiements précédents.                            
+- ra-onprem-sp2016-rg
+- ra-sp2016-network-rg
 
+Les fichiers de paramètre modèle font référence à ces noms. Si vous les modifiez, mettez à jour les fichiers de paramètres afin qu’ils correspondent. 
 
-Pour déployer l’architecture de façon incrémentielle avec un environnement de réseau local simulé, exécutez les étapes suivantes dans l’ordre :
-
-1. onprem
-2. infrastructure
-3. createvpn
-4. charge de travail
-5. security
-
-Pour déployer l’architecture de façon incrémentielle sans environnement de réseau local simulé, exécutez les étapes suivantes dans l’ordre :
-
-1. infrastructure
-2. charge de travail
-3. security
-
-Pour déployer tous les éléments en une seule étape, utilisez `all`. Notez que l’ensemble du processus peut prendre plusieurs heures.
+Les fichiers de paramètres incluent un mot de passe codé en dur dans divers emplacements. Modifiez ces valeurs avant de déployer.
 
 ### <a name="prerequisites"></a>Prérequis
 
-* Installez la dernière version d’[Azure PowerShell][azure-ps].
+[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
-* Avant de déployer cette architecture de référence, vérifiez que votre abonnement a un quota suffisant : au moins 38 cœurs. Si vous n’en avez pas assez, utilisez le portail Azure pour soumettre une demande de support pour plus de quotas.
+### <a name="deploy-the-solution"></a>Déployer la solution 
 
-* Pour estimer le coût de ce déploiement, consultez la [ Calculatrice de prix Azure][azure-pricing].
+1. Exécutez la commande suivante pour déployer un réseau simulé local.
 
-### <a name="deploy-the-reference-architecture"></a>Déployer l’architecture de référence
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p onprem.json --deploy
+    ```
 
-1.  Téléchargez ou clonez le [Référentiel GitHub][github] sur votre ordinateur local.
+2. Exécutez la commande suivante pour déployer le réseau virtuel et la passerelle VPN Azure.
 
-2.  Ouvrez une fenêtre PowerShell et accédez au dossier `/sharepoint/sharepoint-2016`.
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p connections.json --deploy
+    ```
 
-3.  Exécutez la commande PowerShell suivante. Pour \<subscription id\>, utilisez votre identifiant d’abonnement Azure. Pour \<location\>, spécifiez une région Azure, telle que `eastus` ou `westus`. Pour \<mode\>, spécifiez `onprem`, `infrastructure`, `createvpn`, `workload`, `security`, ou `all`.
+3. Exécutez la commande suivante pour déployer la jumpbox, les contrôleurs de domaine AD et les machines virtuelles SQL Serveur.
+
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure1.json --deploy
+    ```
+
+4. Exécutez la commande suivante pour créer le cluster de basculement et le groupe de disponibilité. 
+
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure2-cluster.json --deploy
+
+5. Run the following command to deploy the remaining VMs.
+
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure3.json --deploy
+    ```
+
+À ce stade, vérifiez que vous pouvez établir une connexion TCP du serveur web frontal à l’équilibreur de charge pour le groupes de disponibilité AlwaysOn SQL Server. Pour ce faire, suivez les étapes suivantes :
+
+1. Utilisez le portail Azure pour trouver la machine virtuelle appelée `ra-sp-jb-vm1` dans le groupe de ressources `ra-sp2016-network-rg`. Il s’agit de la machine virtuelle de la jumpbox.
+
+2. Cliquez sur `Connect` pour ouvrir une session Bureau à distance vers la machine virtuelle. Utilisez le mot de passe spécifié dans le fichier de paramètre `azure1.json`.
+
+3. Depuis la session Bureau à distance, connectez-vous à 10.0.5.4. Il s’agit de l’adresse IP de la machine virtuelle nommée `ra-sp-app-vm1`.
+
+4. Ouvrez une console PowerShell dans la machine virtuelle et utilisez la cmdlet `Test-NetConnection` pour vérifier que vous pouvez vous connecter à l’équilibreur de charge.
 
     ```powershell
-    .\Deploy-ReferenceArchitecture.ps1 <subscription id> <location> <mode>
-    ```   
-4. Lorsque vous y êtes invité, connectez-vous à votre compte Azure. Remplir les scripts de déploiement peut prendre plusieurs heures, selon le mode que vous avez sélectionné.
+    Test-NetConnection 10.0.3.100 -Port 1433
+    ```
 
-5. Lorsque le déploiement est terminé, exécutez les scripts pour configurer les groupes de disponibilité SQL Server Always On. Consultez le fichier [Lisez-moi][readme] pour plus d’informations.
+Le résultat doit être semblable à ce qui suit :
 
-> [!WARNING]
-> Les fichiers de paramètres incluent un mot de passe codé en dur (`AweS0me@PW`) dans divers emplacements. Modifiez ces valeurs avant de déployer.
+```powershell
+ComputerName     : 10.0.3.100
+RemoteAddress    : 10.0.3.100
+RemotePort       : 1433
+InterfaceAlias   : Ethernet 3
+SourceAddress    : 10.0.0.132
+TcpTestSucceeded : True
+```
 
+S’il échoue, utilisez le portail Azure pour redémarrer la machine virtuelle nommée `ra-sp-sql-vm2`. Après son redémarrage, exécutez de nouveau la commande `Test-NetConnection`. Vous devrez peut-être patienter environ une minute après le redémarrage pour que la connexion soit établie. 
 
-## <a name="validate-the-deployment"></a>Valider le déploiement
+Effectuez le déploiement comme suit.
 
-Après avoir déployé cette architecture de référence, les groupes de ressources suivants sont répertoriés sous l’abonnement que vous avez utilisé :
+1. Exécutez la commande suivante pour déployer le nœud principal de la batterie de serveurs SharePoint.
 
-| Groupe de ressources        | Objectif                                                                                         |
-|-----------------------|-------------------------------------------------------------------------------------------------|
-| ra-onprem-sp2016-rg   | Réseau local simulé avec Active Directory, fédéré avec le réseau SharePoint 2016 |
-| ra-sp2016-network-rg  | Infrastructure pour la prise en charge du déploiement SharePoint                                                 |
-| ra-sp2016-workload-rg | SharePoint et les ressources de prise en charge                                                             |
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure4-sharepoint-server.json --deploy
+    ```
 
-### <a name="validate-access-to-the-sharepoint-site-from-the-on-premises-network"></a>Valider l’accès au site SharePoint à partir du réseau local
+2. Exécutez la commande suivante pour déployer le cache, la recherche et le serveur web SharePoint.
 
-1. Dans le [portail Azure][azure-portal], sous **groupes de ressources**, sélectionnez le groupe de ressources `ra-onprem-sp2016-rg`.
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure5-sharepoint-farm.json --deploy
+    ```
 
-2. Dans la liste des ressources, sélectionnez la ressource de machine virtuelle nommée `ra-adds-user-vm1`. 
+3. Exécutez la commande suivante pour créer les règles du groupe de sécurité réseau.
+
+    ```bash
+    azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure6-security.json --deploy
+    ```
+
+### <a name="validate-the-deployment"></a>Valider le déploiement
+
+1. Dans le [portail Azure][azure-portal], accédez au groupe de ressources `ra-onprem-sp2016-rg`.
+
+2. Dans la liste des ressources, sélectionnez la ressource de machine virtuelle nommée `ra-onpr-u-vm1`. 
 
 3. Connectez-vous à la machine virtuelle, comme décrit dans la section [Connexion à la machine virtuelle][connect-to-vm]. Le nom d’utilisateur est `\onpremuser`.
 
@@ -252,38 +278,6 @@ Après avoir déployé cette architecture de référence, les groupes de ressour
 6.  Dans la zone **Sécurité Windows**, connectez-vous au portail SharePoint en utilisant `contoso.local\testuser` pour le nom d’utilisateur.
 
 Cette ouverture de session« tunnèle » du domaine Fabrikam.com utilisé par le réseau local au domaine contoso.local utilisé par le portail SharePoint. Lorsque le site SharePoint s’ouvre, le site de démonstration racine s’affiche.
-
-### <a name="validate-jumpbox-access-to-vms-and-check-configuration-settings"></a>Valider l’accès jumpbox aux machines virtuelles et vérifier les paramètres de configuration
-
-1.  Dans le [portail Azure][azure-portal], sous **groupes de ressources**, sélectionnez le groupe de ressources `ra-sp2016-network-rg`.
-
-2.  Dans la liste des ressources, sélectionnez la ressource de machine virtuelle nommée `ra-sp2016-jb-vm1` située dans la jumpbox.
-
-3. Connectez-vous à la machine virtuelle, comme décrit dans la section [Connexion à la machine virtuelle][connect-to-vm]. Le nom d’utilisateur est `testuser`.
-
-4.  Une fois que vous vous connectez à la jumpbox, ouvrez une session RDP (Remote Desktop Protocol) à partir de la jumpbox. Connectez-vous à une autre machine virtuelle dans le réseau virtuel. Le nom d’utilisateur est `testuser`. Vous pouvez ignorer l’avertissement de certificat de sécurité de l’ordinateur distant.
-
-5.  Lorsque la connexion à distance à l’ordinateur virtuel s’ouvre, passez en revue la configuration et apportez des modifications à l’aide des outils d’administration tels que le Gestionnaire de serveur.
-
-Le tableau suivant présente les ordinateurs virtuels qui sont déployés. 
-
-| Nom de la ressource      | Objectif                                   | Groupe de ressources        | Nom de la machine virtuelle                       |
-|--------------------|-------------------------------------------|-----------------------|-------------------------------|
-| Ra-sp2016-ad-vm1   | Active Directory + DNS                    | Ra-sp2016-network-rg  | Ad1.contoso.local             |
-| Ra-sp2016-ad-vm2   | Active Directory + DNS                    | Ra-sp2016-network-rg  | Ad2.contoso.local             |
-| Ra-sp2016-fsw-vm1  | SharePoint                                | Ra-sp2016-network-rg  | Fsw1.contoso.local            |
-| Ra-sp2016-jb-vm1   | Jumpbox                                   | Ra-sp2016-network-rg  | Jb (utilisez l’adresse IP publique pour vous connecter) |
-| Ra-sp2016-sql-vm1  | SQL Always On - Basculement                  | Ra-sp2016-network-rg  | Sq1.contoso.local             |
-| Ra-sp2016-sql-vm2  | SQL Always On - Primaire                   | Ra-sp2016-network-rg  | Sq2.contoso.local             |
-| Ra-sp2016-app-vm1  | MinRole Application SharePoint 2016       | Ra-sp2016-workload-rg | App1.contoso.local            |
-| Ra-sp2016-app-vm2  | MinRole Application SharePoint 2016       | Ra-sp2016-workload-rg | App2.contoso.local            |
-| RA-sp2016-dch-vm1  | MinRole cache distribué SharePoint 2016 | Ra-sp2016-workload-rg | Dch1.contoso.local            |
-| Ra-sp2016-dch-vm2  | MinRole cache distribué SharePoint 2016 | Ra-sp2016-workload-rg | Dch2.contoso.local            |
-| Ra-sp2016-srch-vm1 | MinRole Recherche SharePoint 2016            | Ra-sp2016-workload-rg | Srch1.contoso.local           |
-| Ra-sp2016-srch-vm2 | MinRole Recherche SharePoint 2016            | Ra-sp2016-workload-rg | Srch2.contoso.local           |
-| Ra-sp2016-wfe-vm1  | MinRole Web frontal SharePoint 2016     | Ra-sp2016-workload-rg | Wfe1.contoso.local            |
-| Ra-sp2016-wfe-vm2  | MinRole Web frontal SharePoint 2016     | Ra-sp2016-workload-rg | Wfe2.contoso.local            |
-
 
 **_Contributeurs à cette architecture de référence_**&mdash; Joe Davies, Bob Fox, Neil Hodgkinson, Paul Stork
 
