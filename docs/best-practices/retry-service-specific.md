@@ -4,12 +4,12 @@ description: Guide spécifique relatif au service pour définir le mécanisme de
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 77cf5d90373da2118d34301bd5c790080d3cf63f
-ms.sourcegitcommit: 9a2d56ac7927f0a2bbfee07198d43d9c5cb85755
+ms.openlocfilehash: 39d342dc96e3d0d923ce159c392d9427359a4639
+ms.sourcegitcommit: f7fa67e3bdbc57d368edb67bac0e1fdec63695d2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/22/2018
-ms.locfileid: "36327685"
+ms.lasthandoff: 07/05/2018
+ms.locfileid: "37843624"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Guide du mécanisme de nouvelle tentative relatif aux différents services
 
@@ -57,7 +57,7 @@ Pensez à commencer par les paramètres ci-après pour les opérations liées au
 | **Contexte** | **Exemple de cible E2E<br />latence max** | **Stratégie de nouvelle tentative** | **Paramètres** | **Valeurs** | **Fonctionnement** |
 | --- | --- | --- | --- | --- | --- |
 | Interactif, interface utilisateur,<br />ou premier plan |2 secondes |FixedInterval |Nombre de tentatives<br />Intervalle avant nouvelle tentative<br />Première nouvelle tentative rapide |3<br />500 ms<br />true |Tentative 1 - délai 0 s<br />Tentative 2 - délai 500 ms<br />Tentative 3 - délai 500 ms |
-| Arrière-plan ou <br />lot |60 secondes |ExponentialBackoff |Nombre de tentatives<br />Temporisation min<br />Temporisation max<br />Temporisation delta<br />Première nouvelle tentative rapide |5<br />0 seconde<br />60 secondes<br />2 secondes<br />false |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~2 s<br />Tentative 3 - délai ~6 s<br />Tentative 4 - délai ~14 s<br />Tentative 5 - délai ~30 s |
+| Arrière-plan ou <br />lot |60 secondes |ExponentialBackoff |Nombre de tentatives<br />Temporisation min<br />Temporisation max<br />Temporisation delta<br />Première nouvelle tentative rapide |5.<br />0 seconde<br />60 secondes<br />2 secondes<br />false |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~2 s<br />Tentative 3 - délai ~6 s<br />Tentative 4 - délai ~14 s<br />Tentative 5 - délai ~30 s |
 
 ### <a name="more-information"></a>Plus d’informations
 * [Bibliothèques d’authentification d’Azure Active Directory][adal]
@@ -383,7 +383,7 @@ Pensez à commencer par les paramètres suivants pour les opérations liées aux
 \* N’inclut pas le délai supplémentaire qui s’ajoute en cas de réception d’une réponse du type Serveur occupé.
 
 ### <a name="telemetry"></a>Télémétrie
-Service Bus enregistre les nouvelles tentatives sous forme d’événements ETW à l’aide d’ **EventSource**. Vous devez associer un élément **EventListener** à la source d’événement pour capturer les événements et les afficher dans la visionneuse de performances ou les écrire dans un journal de destination approprié. Vous pouvez utiliser le [bloc applicatif de journalisation sémantique](http://msdn.microsoft.com/library/dn775006.aspx) pour effectuer cette opération. Les événements de nouvelle tentative se présentent sous la forme suivante :
+Service Bus enregistre les nouvelles tentatives sous forme d’événements ETW à l’aide d’ **EventSource**. Vous devez associer un élément **EventListener** à la source d’événement pour capturer les événements et les afficher dans la visionneuse de performances ou les écrire dans un journal de destination approprié. Les événements de nouvelle tentative se présentent sous la forme suivante :
 
 ```text
 Microsoft-ServiceBus-Client/RetryPolicyIteration
@@ -542,7 +542,7 @@ Pensez à commencer par les paramètres suivants pour les opérations liées aux
 | **Contexte** | **Exemple de cible E2E<br />latence max** | **Stratégie de nouvelle tentative** | **Paramètres** | **Valeurs** | **Fonctionnement** |
 | --- | --- | --- | --- | --- | --- |
 | Interactif, interface utilisateur,<br />ou premier plan |2 secondes |FixedInterval |Nombre de tentatives<br />Intervalle avant nouvelle tentative<br />Première nouvelle tentative rapide |3<br />500 ms<br />true |Tentative 1 - délai 0 s<br />Tentative 2 - délai 500 ms<br />Tentative 3 - délai 500 ms |
-| Arrière-plan<br />ou lot |30 secondes |ExponentialBackoff |Nombre de tentatives<br />Temporisation min<br />Temporisation max<br />Temporisation delta<br />Première nouvelle tentative rapide |5<br />0 seconde<br />60 secondes<br />2 secondes<br />false |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~2 s<br />Tentative 3 - délai ~6 s<br />Tentative 4 - délai ~14 s<br />Tentative 5 - délai ~30 s |
+| Arrière-plan<br />ou lot |30 secondes |ExponentialBackoff |Nombre de tentatives<br />Temporisation min<br />Temporisation max<br />Temporisation delta<br />Première nouvelle tentative rapide |5.<br />0 seconde<br />60 secondes<br />2 secondes<br />false |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~2 s<br />Tentative 3 - délai ~6 s<br />Tentative 4 - délai ~14 s<br />Tentative 5 - délai ~30 s |
 
 > [!NOTE]
 > Les cibles de latence de bout en bout supposent le délai d’attente par défaut pour les connexions au service. Si vous spécifiez des délais de connexion, la latence de bout en bout sera prolongée de ce temps supplémentaire pour toute nouvelle tentative.
@@ -672,7 +672,7 @@ Le tableau suivant présente les paramètres par défaut pour la stratégie de n
 | Paramètre | Valeur par défaut | Signification |
 |---------|---------------|---------|
 | Stratégie | Exponentielle | Temporisation exponentielle. |
-| MaxRetryCount | 5 | Nombre maximal de nouvelles tentatives. |
+| MaxRetryCount | 5. | Nombre maximal de nouvelles tentatives. |
 | MaxDelay | 30 secondes | Délai maximal entre les nouvelles tentatives. Cette valeur n’affecte pas le mode de calcul de la série de délais. Elle définit uniquement une limite supérieure. |
 | DefaultCoefficient | 1 seconde | Coefficient du calcul de temporisation exponentielle. Cette valeur ne peut pas être modifiée. |
 | DefaultRandomFactor | 1.1 | Multiplicateur utilisé pour l’ajout d’un délai aléatoire pour chaque entrée. Cette valeur ne peut pas être modifiée. |
@@ -691,7 +691,7 @@ Pensez à commencer par les paramètres ci-après pour les opérations liées au
 | **Contexte** | **Exemple de cible E2E<br />latence max** | **Stratégie de nouvelle tentative** | **Paramètres** | **Valeurs** | **Fonctionnement** |
 | --- | --- | --- | --- | --- | --- |
 | Interactif, interface utilisateur,<br />ou premier plan |2 secondes |Exponentielle |MaxRetryCount<br />MaxDelay |3<br />750 ms |Tentative 1 - délai 0 s<br />Tentative 2 - délai 750 ms<br />Tentative 3 - délai 750 ms |
-| Arrière-plan<br /> ou lot |30 secondes |Exponentielle |MaxRetryCount<br />MaxDelay |5<br />12 secondes |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~1 s<br />Tentative 3 - délai ~3 s<br />Tentative 4 - délai ~7 s<br />Tentative 5 - délai 12 s |
+| Arrière-plan<br /> ou lot |30 secondes |Exponentielle |MaxRetryCount<br />MaxDelay |5.<br />12 secondes |Tentative 1 - délai 0 s<br />Tentative 2 - délai ~1 s<br />Tentative 3 - délai ~3 s<br />Tentative 4 - délai ~7 s<br />Tentative 5 - délai 12 s |
 
 > [!NOTE]
 > Les cibles de latence de bout en bout supposent le délai d’attente par défaut pour les connexions au service. Si vous spécifiez des délais de connexion, la latence de bout en bout sera prolongée de ce temps supplémentaire pour toute nouvelle tentative.
@@ -894,7 +894,7 @@ Pensez à commencer par les paramètres suivants pour les opérations liées aux
 | **Contexte** | **Exemple de cible E2E<br />latence max** | **Stratégie de nouvelle tentative** | **Paramètres** | **Valeurs** | **Fonctionnement** |
 | --- | --- | --- | --- | --- | --- |
 | Interactif, interface utilisateur,<br />ou premier plan |2 secondes |Linéaire |maxAttempt<br />deltaBackoff |3<br />500 ms |Tentative 1 - délai 500 ms<br />Tentative 2 - délai 500 ms<br />Tentative 3 - délai 500 ms |
-| Arrière-plan<br />ou lot |30 secondes |Exponentielle |maxAttempt<br />deltaBackoff |5<br />4 secondes |Tentative 1 - délai ~3 sec<br />Tentative 2 - délai ~7 sec<br />Tentative 3 - délai ~15 sec |
+| Arrière-plan<br />ou lot |30 secondes |Exponentielle |maxAttempt<br />deltaBackoff |5.<br />4 secondes |Tentative 1 - délai ~3 sec<br />Tentative 2 - délai ~7 sec<br />Tentative 3 - délai ~15 sec |
 
 ### <a name="telemetry"></a>Télémétrie
 Les nouvelles tentatives sont enregistrées dans un **TraceSource**. Vous devez configurer un **TraceListener** pour capturer les événements et les écrire dans un journal de destination approprié. Vous pouvez utiliser le **TextWriterTraceListener** ou **XmlWriterTraceListener** pour écrire les données dans un fichier journal, le **EventLogTraceListener** pour écrire dans le journal des événements Windows, ou le **EventProviderTraceListener** pour écrire les données de trace dans le sous-système ETW. Vous pouvez également configurer le vidage automatique de la mémoire tampon et le niveau de détail des événements qui seront enregistrés (par exemple, erreur, avertissement, information et informations détaillées). Pour plus d’informations, consultez [Journalisation côté client avec la bibliothèque cliente de stockage .NET](http://msdn.microsoft.com/library/azure/dn782839.aspx).
@@ -985,8 +985,8 @@ namespace RetryCodeSamples
 Prenez en compte les éléments suivants lors de l’accès aux services Azure ou tiers :
 
 * Utilisez une approche systématique pour gérer les nouvelles tentatives, peut-être en tant que code réutilisable, afin de pouvoir appliquer une méthodologie cohérente sur tous les clients et toutes les solutions.
-* Envisagez d’utiliser une infrastructure de nouvelle tentative, telle que le bloc applicatif de gestion des erreurs temporaires pour gérer les nouvelles tentatives si le service cible ou le client ne dispose d’aucun mécanisme de nouvelle tentative intégré. Cela vous permettra d’implémenter un comportement cohérent de nouvelle tentative, et peut fournir une stratégie de nouvelle tentative par défaut appropriée pour le service cible. Toutefois, vous devrez peut-être créer un code personnalisé de nouvelle tentative pour les services ne disposant pas d’un comportement standard, qui ne reposent pas sur les exceptions pour indiquer les erreurs temporaires, ou si vous souhaitez utiliser une réponse **Retry-Response** pour gérer le comportement de la nouvelle tentative.
-* La logique de détection temporaire dépend de l’API client réelle utilisée pour appeler les appels REST. Certains clients, tels que la nouvelle classe **HttpClient** , ne lanceront pas d’exceptions pour les demandes terminées avec un code d’état HTTP indiquant un échec. Cela améliore les performances, mais vous empêche d’utiliser le bloc applicatif de gestion des erreurs temporaires. Dans ce cas, vous pourriez encapsuler l’appel à l’API REST avec le code qui génère des exceptions pour les codes d’état HTTP indiquant un échec, qui peuvent ensuite être traités par le bloc. Vous pouvez également utiliser un mécanisme différent pour piloter les nouvelles tentatives.
+* Pensez à utiliser une infrastructure de nouvelle tentative, telle que [Polly][polly] pour gérer les nouvelles tentatives si le service cible ou le client ne dispose d’aucun mécanisme de nouvelle tentative intégré. Cela vous permettra d’implémenter un comportement cohérent de nouvelle tentative, et peut fournir une stratégie de nouvelle tentative par défaut appropriée pour le service cible. Toutefois, vous devrez peut-être créer un code personnalisé de nouvelle tentative pour les services ne disposant pas d’un comportement standard, qui ne reposent pas sur les exceptions pour indiquer les erreurs temporaires, ou si vous souhaitez utiliser une réponse **Retry-Response** pour gérer le comportement de la nouvelle tentative.
+* La logique de détection temporaire dépend de l’API client réelle utilisée pour appeler les appels REST. Certains clients, tels que la nouvelle classe **HttpClient** , ne lanceront pas d’exceptions pour les demandes terminées avec un code d’état HTTP indiquant un échec. 
 * Le code d’état HTTP renvoyé par le service peut permettre d’indiquer si l’échec est temporaire. Vous devrez peut-être examiner les exceptions générées par un client ou l’infrastructure de nouvelle tentative pour accéder au code d’état ou pour déterminer le type d’exception équivalent. Les codes HTTP suivants indiquent habituellement qu’une nouvelle tentative est appropriée :
   * 408 Délai d’expiration de la requête
   * 429 Trop de demandes
@@ -999,7 +999,7 @@ Prenez en compte les éléments suivants lors de l’accès aux services Azure o
   * WebExceptionStatus.ConnectFailure
   * WebExceptionStatus.Timeout
   * WebExceptionStatus.RequestCanceled
-* Dans le cas d’un service à l’état non disponible, le service peut indiquer le délai approprié avant l’exécution d’une nouvelle tentative dans l’en-tête de réponse **Retry-After** ou dans un en-tête personnalisé différent. Les services peuvent également envoyer des informations supplémentaires sous la forme d’en-têtes personnalisés ou en les intégrant au contenu de la réponse. Le bloc applicatif de gestion des erreurs temporaires ne peut pas utiliser les en-têtes « retry-after » personnalisés ou standard.
+* Dans le cas d’un service à l’état non disponible, le service peut indiquer le délai approprié avant l’exécution d’une nouvelle tentative dans l’en-tête de réponse **Retry-After** ou dans un en-tête personnalisé différent. Les services peuvent également envoyer des informations supplémentaires sous la forme d’en-têtes personnalisés ou en les intégrant au contenu de la réponse. 
 * N’effectuez pas de nouvelle tentative pour les codes d’état représentant des erreurs du client (erreurs comprises dans la plage 4xx), excepté pour le code 408 Délai d’expiration de la requête.
 * Testez minutieusement vos stratégies et mécanismes de nouvelle tentative sous différentes conditions, en utilisant différents états de réseau et en variant les charges du système.
 

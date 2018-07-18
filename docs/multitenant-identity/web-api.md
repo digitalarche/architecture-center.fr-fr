@@ -6,18 +6,18 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: authorize
 pnp.series.next: token-cache
-ms.openlocfilehash: 65529280c5849e36ed7ff23de08a0b485034d0d8
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 2d02ff7be04c6ebec888039453fe1ac7e957b301
+ms.sourcegitcommit: f7fa67e3bdbc57d368edb67bac0e1fdec63695d2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541463"
+ms.lasthandoff: 07/05/2018
+ms.locfileid: "37843672"
 ---
 # <a name="secure-a-backend-web-api"></a>Sécuriser une API web principale
 
 [![GitHub](../_images/github.png) Exemple de code][sample application]
 
-L’application [Surveys de Tailspin] utilise une API web de serveur principal pour gérer les opérations CRUD sur les enquêtes. Par exemple, quand un utilisateur clique sur « My Surveys », l’application web envoie une requête HTTP à l’API web :
+L’application [Tailspin Surveys] utilise une API web de serveur principal pour gérer les opérations CRUD sur les enquêtes. Par exemple, quand un utilisateur clique sur « My Surveys », l’application web envoie une requête HTTP à l’API web :
 
 ```
 GET /users/{userId}/surveys
@@ -68,7 +68,7 @@ L’application de Tailspin implémente l’identité d’utilisateur délégué
 Dans les deux approches, l’application web doit obtenir un jeton d’accès, qui correspond aux informations d’identification nécessaires pour appeler l’API web.
 
 * Pour l’identité d’utilisateur délégué, le jeton doit provenir d’un fournisseur d’identité, qui peut émettre un jeton pour le compte de l’utilisateur.
-* Pour les informations d’identification du client, une application peut obtenir le jeton à partir de l’IDP ou héberger son propre serveur de jetons. (Mais n’écrivez pas un serveur de jetons à partir de zéro ; utilisez une infrastructure bien testée comme [IdentityServer3].) Si vous vous authentifiez avec d’Azure AD, il est vivement recommandé pour obtenir le jeton d’accès auprès d’Azure AD, même avec les flux d’informations d’identification du client.
+* Pour les informations d’identification du client, une application peut obtenir le jeton à partir de l’IDP ou héberger son propre serveur de jetons. (Mais n’écrivez pas un serveur de jetons à partir de zéro ; utilisez une infrastructure bien testée comme [IdentityServer4].) Si vous vous authentifiez avec d’Azure AD, il est vivement recommandé pour obtenir le jeton d’accès auprès d’Azure AD, même avec les flux d’informations d’identification du client.
 
 Le reste de cet article part du principe que l’application s’authentifie auprès d’Azure AD.
 
@@ -79,7 +79,7 @@ Pour qu’Azure AD émette un jeton du porteur pour l’API web, vous devez conf
 
 1. Inscrivez l’API web dans Azure AD.
 
-2. Ajoutez l’ID client de l’application web au manifeste d’application de l’API web, dans la propriété `knownClientApplications` . Consultez la page [Update the application manifests].
+2. Ajoutez l’ID client de l’application web au manifeste d’application de l’API web, dans la propriété `knownClientApplications` . Consultez la page [Mettre à jour les manifestes de l’application].
 
 3. Donnez à l’application web l’autorisation d’appeler l’API web. Dans le portail de gestion Azure, vous pouvez définir deux types d’autorisations : les « autorisations d’application » pour l’identité d’application (flux d’informations d’identification du client) ou les « autorisations déléguées » pour l’identité d’utilisateur délégué.
    
@@ -115,7 +115,7 @@ Voici les différents paramètres qui sont nécessaires :
 * `clientSecret`. Clé secrète client de l’application web.
 * `redirectUri`. URI de redirection que vous définissez pour OpenID Connect. Il s’agit de l’endroit où le fournisseur d’identité rappelle avec le jeton.
 * `resourceID`. URI d’ID d’application de l’API web, que vous avez créé quand vous avez inscrit l’API web dans Azure AD.
-* `tokenCache`. Objet qui met en cache les jetons d’accès. Consultez la page [Token caching].
+* `tokenCache`. Objet qui met en cache les jetons d’accès. Consultez la page [Mise en cache de jeton].
 
 Si `AcquireTokenByAuthorizationCodeAsync` réussit, la bibliothèque ADAL met en cache le jeton. Vous pouvez obtenir ultérieurement le jeton à partir du cache en appelant AcquireTokenSilentAsync :
 
@@ -185,7 +185,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, Applicat
 ### <a name="issuer-validation"></a>Validation de l’émetteur
 Validez l’émetteur du jeton dans l’événement **JwtBearerEvents.TokenValidated**. L’émetteur est envoyé dans la revendication « iss ».
 
-Dans l’application Surveys, l’API web ne gère pas [l’inscription du locataire]. Par conséquent, elle vérifie uniquement si l’émetteur se trouve déjà dans la base de données de l’application. Si ce n’est pas le cas, elle lève une exception, ce qui provoque l’échec de l’authentification.
+Dans l’application Surveys, l’API web ne gère pas [Inscription du locataire]. Par conséquent, elle vérifie uniquement si l’émetteur se trouve déjà dans la base de données de l’application. Si ce n’est pas le cas, elle lève une exception, ce qui provoque l’échec de l’authentification.
 
 ```csharp
 public override async Task TokenValidated(TokenValidatedContext context)
@@ -220,7 +220,7 @@ public override async Task TokenValidated(TokenValidatedContext context)
 
 Comme le montre cet exemple, vous pouvez également utiliser l’événement **TokenValidated** pour modifier les revendications. N’oubliez pas que les revendications proviennent directement d’Azure AD. Si l’application web modifie les revendications qu’elle obtient, ces modifications n’apparaîtront pas dans le jeton du porteur reçu par l’API web. Pour plus d’informations, voir [Transformations de revendications][claims-transformation].
 
-## <a name="authorization"></a>Autorisation
+## <a name="authorization"></a>Authorization
 Pour obtenir une description générale de l’autorisation, voir [Autorisation basée sur les ressources et les rôles][Authorization]. 
 
 L’intergiciel (middleware) JwtBearer gère les réponses d’autorisation. Par exemple, pour limiter une action de contrôleur aux seuls utilisateurs authentifiés, utilisez l’attribut **[Authorize]** et spécifiez **JwtBearerDefaults.AuthenticationScheme** en tant que schéma d’authentification :
@@ -270,11 +270,11 @@ public void ConfigureServices(IServiceCollection services)
 [ADAL]: https://msdn.microsoft.com/library/azure/jj573266.aspx
 [JwtBearer]: https://www.nuget.org/packages/Microsoft.AspNet.Authentication.JwtBearer
 
-[Surveys de Tailspin]: tailspin.md
-[IdentityServer3]: https://github.com/IdentityServer/IdentityServer3
-[Update the application manifests]: ./run-the-app.md#update-the-application-manifests
-[Token caching]: token-cache.md
-[l’inscription du locataire]: signup.md
+[Tailspin Surveys]: tailspin.md
+[IdentityServer4]: https://github.com/IdentityServer/IdentityServer4
+[Mettre à jour les manifestes de l’application]: ./run-the-app.md#update-the-application-manifests
+[Mise en cache de jeton]: token-cache.md
+[Inscription du locataire]: signup.md
 [claims-transformation]: claims.md#claims-transformations
 [Authorization]: authorize.md
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance

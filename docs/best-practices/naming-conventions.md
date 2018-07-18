@@ -4,12 +4,12 @@ description: Conventions d’affectation de noms pour les ressources Azure. Comm
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: a92b6a1a23b35e7379f586d477b6f7cc6ccfc7e1
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: b9833654f63dc81ff6d05b9c49897e0c58de2683
+ms.sourcegitcommit: 86d86d71e392550fd65c4f76320d7ecf0b72e1f6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206376"
+ms.lasthandoff: 07/06/2018
+ms.locfileid: "37864553"
 ---
 # <a name="naming-conventions"></a>Conventions d’affectation de noms
 
@@ -61,7 +61,7 @@ Les affixes peuvent faire référence à différents aspects des ressources spé
 | Aspect | Exemples | Notes |
 | --- | --- | --- |
 | Environnement |dev, prod, AQ |Identifie l’environnement de la ressource |
-| Lieu |uw (ouest des États-Unis), ue (est des États-Unis) |Identifie la région dans laquelle la ressource est déployée |
+| Emplacement |uw (ouest des États-Unis), ue (est des États-Unis) |Identifie la région dans laquelle la ressource est déployée |
 | Instance |01, 02 |Pour les ressources possédant plusieurs instances nommées (serveurs web, etc.) |
 | Produit ou service |service |Identifie le produit, l’application ou le service pris en charge par la ressource |
 | Rôle |sql, web, messagerie |Identifie le rôle de la ressource associée |
@@ -122,7 +122,7 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 
 ## <a name="organize-resources-with-tags"></a>Organiser les ressources à l’aide de balises
 
-Azure Resource Manager prend en charge le balisage d’entités avec des chaînes de texte arbitraires pour identifier le contexte et simplifier l’automatisation.  Par exemple, la balise `"sqlVersion: "sql2014ee"` peut identifier les machines virtuelles d’un déploiement exécutant SQL Server 2014 Enterprise Edition pour l’exécution d’un script automatisé sur ces dernières.  Les balises doivent être intégrées aux conventions d’affectation de noms choisies pour préciser ou améliorer le contexte.
+Azure Resource Manager prend en charge le balisage d’entités avec des chaînes de texte arbitraires pour identifier le contexte et simplifier l’automatisation.  Par exemple, la balise `"sqlVersion"="sql2014ee"` peut identifier des machines virtuelles exécutant SQL Server 2014 Enterprise Edition. Les balises doivent être intégrées aux conventions d’affectation de noms choisies pour préciser ou améliorer le contexte.
 
 > [!TIP]
 > Elles offrent également l’avantage de s’étendre sur les groupes de ressources, ce qui vous permet de lier et mettre en corrélation les entités dans des environnements disparates.

@@ -5,12 +5,12 @@ author: telmosampaio
 ms.date: 04/09/2018
 pnp.series.title: Implement a hub-spoke network topology in Azure
 pnp.series.prev: expressroute
-ms.openlocfilehash: 925e0f47cf6b9aa1ad48ffae2c9561a2393bf601
-ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
+ms.openlocfilehash: 9105748f434e5d655b09b1fe0775417f33a912b0
+ms.sourcegitcommit: f7fa67e3bdbc57d368edb67bac0e1fdec63695d2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/02/2018
-ms.locfileid: "37142248"
+ms.lasthandoff: 07/05/2018
+ms.locfileid: "37843590"
 ---
 # <a name="implement-a-hub-spoke-network-topology-in-azure"></a>Implémenter une topologie de réseau hub-and-spoke dans Azure
 
@@ -163,7 +163,7 @@ Pour déployer réseau virtuel du hub, procédez comme suit.
 
 2. Pour un déploiement Linux, définissez `osType` sur `Linux` (facultatif).
 
-3. Pour `sharedKey`, saisissez une clé partagée pour la connexion VPN. 
+3. Recherchez les deux instances de `sharedKey`, puis entrez une clé partagée pour la connexion VPN. Les valeurs doivent correspondre.
 
     ```bash
     "sharedKey": "",
