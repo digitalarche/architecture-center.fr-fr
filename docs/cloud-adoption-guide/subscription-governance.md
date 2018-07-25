@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 03/31/2017
 ms.author: rodend;karlku;tomfitz
-ms.openlocfilehash: 8bc2ed253b951ea04eb25b76f67dcc2092dc94ad
-ms.sourcegitcommit: 4ec010846b9b5545c843a32e08293f906e512302
+ms.openlocfilehash: b0c92667cc7f4cb2349cd87275c0ce63f2604978
+ms.sourcegitcommit: 776b8c1efc662d42273a33de3b82ec69e3cd80c5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/17/2018
-ms.locfileid: "34299897"
+ms.lasthandoff: 07/12/2018
+ms.locfileid: "38987748"
 ---
 # <a name="azure-enterprise-scaffold---prescriptive-subscription-governance"></a>Structure d’entreprise Azure : gouvernance normative de l’abonnement
 Les entreprises adoptent de plus en plus le cloud public en raison de son agilité et de la flexibilité. Elles utilisent les atouts du cloud pour générer des revenus ou optimiser les ressources de l’entreprise. Microsoft Azure offre une multitude de services que les entreprises peuvent combiner sous forme de blocs de construction pour traiter une large gamme de charges de travail et d’applications. 
@@ -140,6 +140,21 @@ Pour voir la manière dont votre environnement fonctionne, vous devez auditer l�
 
 Les journaux d’activité du Resource Manager permettent de déterminer les **opérations** qui ont eu lieu et qui les a exécutées. Les journaux d’activité peuvent être collectés et agrégés à l’aide d’outils tels que Log Analytics.
 
+
+## <a name="resource-group"></a>Groupe de ressources
+Resource Manager vous permet de répartir des ressources dans des groupes explicites pour la gestion, la facturation ou l’affinité naturelle. Comme mentionné précédemment, Azure dispose de deux modèles de déploiement. Dans l’ancien modèle standard, l’unité de base de gestion était l’abonnement. Il était difficile de répartir des ressources au sein d’un abonnement, ce qui entraînait la création d’un grand nombre d’abonnements. Avec le modèle Resource Manager, des groupes de ressources ont été introduits. Les groupes de ressources sont des conteneurs de ressources qui ont un cycle de vie commun ou partagent un attribut tel que « tous les serveurs SQL » ou « Application A ».
+
+Les groupes de ressources ne peuvent pas être contenus les uns dans les autres et les ressources ne peuvent appartenir qu’à un groupe de ressources. Vous pouvez appliquer certaines actions à toutes les ressources dans un groupe de ressources. Par exemple, la suppression d’un groupe de ressources supprime toutes les ressources du groupe de ressources. En règle générale, vous placez une application complète ou un système associé dans le même groupe de ressources. Par exemple, une application à trois niveaux appelée Contoso Web Application contient le serveur web, le serveur d’applications et le serveur SQL dans le même groupe de ressources.
+
+> [!TIP]
+> La façon dont vous organisez vos groupes de ressources peut aller de charges de travail de type « informatique traditionnelle » à des charges de travail de type « informatique agile » :
+> 
+> * Les charges de travail de type « informatique traditionnelle » sont généralement regroupées par éléments au sein du même cycle de vie, par exemple en tant qu’application. Le regroupement par application permet de gestion des applications individuelles.
+> * Les charges de travail de type « agile » ont tendance à se concentrer sur les applications cloud pour les clients externes. Les groupes de ressources doivent refléter les couches de déploiement (par exemple en tant que couche Web ou couche Application) et de gestion.
+> 
+> Comprendre votre charge de travail vous aide à développer une stratégie de groupe de ressources.
+
+
 ## <a name="resource-tags"></a>Balises de ressource
 Comme les utilisateurs de votre organisation ajoutent des ressources à l’abonnement, il devient plus en plus important d’associer des ressources au service, au client et à l’environnement appropriés. Vous pouvez attacher des métadonnées aux ressources par le biais de [balises](/azure/azure-resource-manager/resource-group-using-tags). Vous utilisez des balises pour fournir des informations sur la ressource ou le propriétaire. Les balises vous permettent non seulement d’agréger et de regrouper les ressources de différentes façons, mais également d’utiliser ces données pour les besoins de facturation interne. Vous pouvez baliser des ressources avec jusqu'à 15 paires clé-valeur. 
 
@@ -166,25 +181,14 @@ Pour plus d’exemples de balises, consultez la rubrique [Conventions d’affect
 > 
 > Cette stratégie de balisage identifie les métadonnées nécessaires dans vos abonnements pour l’activité, la finance, la sécurité, la gestion des risques et la gestion globale de l’environnement. 
 
-## <a name="resource-group"></a>Groupe de ressources
-Resource Manager vous permet de répartir des ressources dans des groupes explicites pour la gestion, la facturation ou l’affinité naturelle. Comme mentionné précédemment, Azure dispose de deux modèles de déploiement. Dans l’ancien modèle standard, l’unité de base de gestion était l’abonnement. Il était difficile de répartir des ressources au sein d’un abonnement, ce qui entraînait la création d’un grand nombre d’abonnements. Avec le modèle Resource Manager, des groupes de ressources ont été introduits. Les groupes de ressources sont des conteneurs de ressources qui ont un cycle de vie commun ou partagent un attribut tel que « tous les serveurs SQL » ou « Application A ».
 
-Les groupes de ressources ne peuvent pas être contenus les uns dans les autres et les ressources ne peuvent appartenir qu’à un groupe de ressources. Vous pouvez appliquer certaines actions à toutes les ressources dans un groupe de ressources. Par exemple, la suppression d’un groupe de ressources supprime toutes les ressources du groupe de ressources. En règle générale, vous placez une application complète ou un système associé dans le même groupe de ressources. Par exemple, une application à trois niveaux appelée Contoso Web Application contient le serveur web, le serveur d’applications et le serveur SQL dans le même groupe de ressources.
-
-> [!TIP]
-> La façon dont vous organisez vos groupes de ressources peut aller de charges de travail de type « informatique traditionnelle » à des charges de travail de type « informatique agile » :
-> 
-> * Les charges de travail de type « informatique traditionnelle » sont généralement regroupées par éléments au sein du même cycle de vie, par exemple en tant qu’application. Le regroupement par application permet de gestion des applications individuelles.
-> * Les charges de travail de type « agile » ont tendance à se concentrer sur les applications cloud pour les clients externes. Les groupes de ressources doivent refléter les couches de déploiement (par exemple en tant que couche Web ou couche Application) et de gestion.
-> 
-> Comprendre votre charge de travail vous aide à développer une stratégie de groupe de ressources.
 
 ## <a name="role-based-access-control"></a>Contrôle d’accès en fonction du rôle
 Vous vous demandez probablement « qui doit avoir accès aux ressources ? » et « comment contrôler cet accès ? ». Il est crucial d’autoriser ou non l’accès au portail Azure et de contrôler l’accès aux ressources dans le portail. 
 
 Lorsqu’Azure a été initialement lancé, les contrôles d’accès à un abonnement étaient basiques : administrateur ou coadministrateur. L’accès à un abonnement dans le modèle classique impliquait l’accès à toutes les ressources dans le portail. Ce manque de contrôle précis a conduit à une prolifération d’abonnements afin de fournir un niveau de contrôle d’accès raisonnable pour une inscription Azure.
 
-Cette prolifération d’abonnements n’est plus nécessaire. Avec un contrôle d’accès en fonction du rôle, vous pouvez affecter des utilisateurs aux rôles standard (par exemple, les rôles « lecteur » et « rédacteur » courants). Vous pouvez également définir des rôles personnalisés.
+Cette prolifération d’abonnements n’est plus nécessaire. Avec un [contrôle d’accès en fonction du rôle](/azure/role-based-access-control/overview), vous pouvez affecter des utilisateurs aux rôles standards (par exemple, les rôles « lecteur » et « rédacteur » courants). Vous pouvez également définir des rôles personnalisés.
 
 > [!TIP]
 > Pour implémenter un contrôle d’accès en fonction du rôle :
@@ -229,7 +233,7 @@ L’accès aux ressources peut être interne (dans le réseau de l’entreprise)
 > 
 > Ces conseils vous aident à mettre en œuvre des ressources de mise en réseau sécurisées.
 
-### <a name="automation"></a>Automatisation
+## <a name="automation"></a>Automatisation
 La gestion individuelle des ressources prend du temps et sujette aux erreurs dans certaines opérations. Azure fournit diverses fonctionnalités d’automatisation, notamment Azure Automation, Logic Apps et Azure Functions. [Azure Automation](/azure/automation/automation-intro) permet aux administrateurs de créer et définir des runbooks afin de gérer les travaux courants de gestion des ressources. Vous créez des runbooks à l’aide d’un éditeur de code PowerShell ou d’un éditeur graphique. Vous pouvez générer des flux de travail complexes à plusieurs étapes. Azure Automation est souvent utilisé pour gérer les travaux courants telles que l’arrêt des ressources inutilisées ou la création de ressources en réponse à un déclencheur spécifique sans avoir besoin d’une intervention humaine.
 
 > [!TIP]

@@ -1,26 +1,26 @@
 ---
-title: Bot conversationnel d’Azure pour les réservations d’hôtel
-description: Solution éprouvée pour la création d’un bot conversationnel pour les applications de commerce avec Azure Bot Service, Cognitive Services et LUIS, Azure SQL Database et Application Insights.
+title: Bot conversationnel pour les réservations d’hôtel sur Azure
+description: Scénario éprouvé pour la création d’un bot conversationnel pour les applications de commerce avec Azure Bot Service, Cognitive Services et LUIS, Azure SQL Database et Application Insights.
 author: iainfoulds
 ms.date: 07/05/2018
-ms.openlocfilehash: 85bdc3194961bbbd8d89db34e5c56e4baa8d8599
-ms.sourcegitcommit: 5d99b195388b7cabba383c49a81390ac48f86e8a
+ms.openlocfilehash: b664faf20d806824c2581346aaa592b0d74207da
+ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/06/2018
-ms.locfileid: "37891289"
+ms.lasthandoff: 07/14/2018
+ms.locfileid: "39060861"
 ---
-# <a name="conversational-azure-chatbot-for-hotel-reservations"></a>Bot conversationnel d’Azure pour les réservations d’hôtel
+# <a name="conversational-chatbot-for-hotel-reservations-on-azure"></a>Bot conversationnel pour les réservations d’hôtel sur Azure
 
-Cet exemple de scénario s’applique aux entreprises qui doivent intégrer aux applications un bot conversationnel. Dans cette solution, un bot conversationnel en C# est utilisé pour une chaîne d’hôtels qui permet aux clients de vérifier la disponibilité des chambres et de les réserver via une application web ou mobile.
+Cet exemple de scénario s’applique aux entreprises qui doivent intégrer aux applications un bot conversationnel. Dans ce scénario, un bot conversationnel en C# est utilisé pour une chaîne d’hôtels qui permet aux clients de vérifier la disponibilité des chambres et de les réserver via une application web ou mobile.
 
 Exemples de scénarios : permettre aux clients d’afficher la disponibilité de l’hôtel et de réserver des chambres, consulter le menu à emporter d’un restaurant et passer une commande, ou rechercher et commander des impressions de photos. Traditionnellement, les entreprises devaient embaucher et former des conseillers pour le service client afin de répondre à ces demandes de clients, lesquels devaient patienter jusqu’à ce qu’un agent soit disponible pour leur fournir de l’aide.
 
 En utilisant les services Azure tels que Bot Service et Language Understanding ou API Microsoft Speech, les sociétés peuvent aider les clients et traiter leurs commandes ou leurs réservations à l’aide de bots automatisés, évolutifs.
 
-## <a name="potential-use-cases"></a>Cas d’usage potentiels
+## <a name="related-use-cases"></a>Cas d’usage connexes
 
-Pensez à cette solution pour les cas d’usage suivants :
+Pensez à ce scénario pour les cas d’usage suivants :
 
 * Consulter le menu à emporter d’un restaurant et passer une commande
 * Vérifier la disponibilité d’un hôtel et réserver une chambre
@@ -30,7 +30,7 @@ Pensez à cette solution pour les cas d’usage suivants :
 
 ![Présentation de l’architecture des composants Azure impliqués dans un bot conversationnel][architecture]
 
-Cette solution présente un bot conversationnel qui fonctionne comme le concierge d’un hôtel. Les données circulent dans la solution comme suit :
+Ce scénario présente un bot conversationnel qui fonctionne comme le concierge d’un hôtel. Les données circulent dans le scénario comme suit :
 
 1. Le client accède au bot conversationnel avec une application web ou mobile.
 2. L’utilisateur est authentifié à l’aide d’Azure Active Directory B2C (entreprise-client).
@@ -58,19 +58,19 @@ Cette solution présente un bot conversationnel qui fonctionne comme le concierg
 
 ### <a name="availability"></a>Disponibilité
 
-Cette solution utilise Azure SQL Database pour stocker les réservations de clients. SQL Database inclut des bases de données redondantes dans une zone, des groupes de basculement et la géoréplication. Pour en savoir plus, consultez la section relative aux [fonctionnalités de disponibilité d’Azure SQL Database][sqlavailability-docs].
+Ce scénario utilise Azure SQL Database pour stocker les réservations de clients. SQL Database inclut des bases de données redondantes dans une zone, des groupes de basculement et la géoréplication. Pour en savoir plus, consultez la section relative aux [fonctionnalités de disponibilité d’Azure SQL Database][sqlavailability-docs].
 
-Pour consulter d’autres rubriques relatives à l’extensibilité, consultez la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
+Pour consulter d’autres rubriques relatives à la disponibilité, consultez la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
 
 ### <a name="scalability"></a>Extensibilité
 
-Cette solution utilise Azure App Service. Avec App Service, vous pouvez automatiquement mettre à l’échelle le nombre d’instances qui exécutent votre bot. Cette fonctionnalité vous permet de faire face à la demande de la clientèle pour votre application web et votre bot conversationnel. Pour plus d’informations sur la mise à l’échelle automatique, consultez les [meilleures pratiques de mise à l’échelle automatique][autoscaling] dans le Centre des architectures.
+Ce scénario utilise Azure App Service. Avec App Service, vous pouvez automatiquement mettre à l’échelle le nombre d’instances qui exécutent votre bot. Cette fonctionnalité vous permet de faire face à la demande de la clientèle pour votre application web et votre bot conversationnel. Pour plus d’informations sur la mise à l’échelle automatique, consultez les [meilleures pratiques de mise à l’échelle automatique][autoscaling] dans le Centre des architectures.
 
 Pour consulter d’autres rubriques relatives à l’extensibilité, consultez la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
 
 ### <a name="security"></a>Sécurité
 
-Cette solution utilise Azure Active Directory B2C (entreprise-client) pour authentifier les utilisateurs. Avec AAD B2C, votre bot conversationnel ne stocke pas les informations des comptes clients sensibles ni les informations d’identification. Pour plus d’informations, consultez la [Vue d’ensemble d’Azure Active Directory B2C][aadb2c-docs].
+Ce scénario utilise Azure Active Directory B2C (entreprise-client) pour authentifier les utilisateurs. Avec AAD B2C, votre bot conversationnel ne stocke pas les informations des comptes clients sensibles ni les informations d’identification. Pour plus d’informations, consultez la [Vue d’ensemble d’Azure Active Directory B2C][aadb2c-docs].
 
 Les informations stockées dans Azure SQL Database sont chiffrées au repos avec un chiffrement Transparent Data Encryption (TDE). SQL Database présente également la fonctionnalité Always Encrypted qui chiffre les données durant l’interrogation et le traitement. Pour plus d’informations sur la sécurité de SQL Database, consultez la section relative à la [sécurité et à la conformité d’Azure SQL Database][sqlsecurity-docs].
 
@@ -78,15 +78,15 @@ Pour obtenir des conseils d’ordre général sur la conception de solutions sé
 
 ### <a name="resiliency"></a>Résilience
 
-Cette solution utilise Azure SQL Database pour stocker les réservations de clients. SQL Database inclut des bases de données redondantes dans une zone, des groupes de basculement, la géoréplication et des sauvegardes automatiques. Ces fonctionnalités permettent à votre application de continuer à s’exécuter en cas d’événement de maintenance ou de panne. Pour en savoir plus, consultez la section relative aux [fonctionnalités de disponibilité d’Azure SQL Database][sqlavailability-docs].
+Ce scénario utilise Azure SQL Database pour stocker les réservations de clients. SQL Database inclut des bases de données redondantes dans une zone, des groupes de basculement, la géoréplication et des sauvegardes automatiques. Ces fonctionnalités permettent à votre application de continuer à s’exécuter en cas d’événement de maintenance ou de panne. Pour en savoir plus, consultez la section relative aux [fonctionnalités de disponibilité d’Azure SQL Database][sqlavailability-docs].
 
-Pour surveiller l’intégrité de votre application, cette solution utilise Application Insights. Avec Application Insights, vous pouvez générer des alertes et résoudre les problèmes de performances qui auraient un impact sur l’expérience client et la disponibilité du bot conversationnel. Pour plus d’informations, consultez l’article [Présentation d’Application Insights][appinsights-docs].
+Pour surveiller l’intégrité de votre application, ce scénario utilise Application Insights. Avec Application Insights, vous pouvez générer des alertes et résoudre les problèmes de performances qui auraient un impact sur l’expérience client et la disponibilité du bot conversationnel. Pour plus d’informations, consultez l’article [Présentation d’Application Insights][appinsights-docs].
 
 Pour obtenir des conseils d’ordre général sur la conception de solutions résilientes, consultez l’article [Conception d’applications résilientes pour Azure][resiliency].
 
-## <a name="deploy-the-solution"></a>Déployer la solution
+## <a name="deploy-the-scenario"></a>Déployez le scénario
 
-Cette solution est divisée en trois composants pour vous permettre d’explorer les zones sur lesquelles vous êtes le plus axé :
+Ce scénario est divisé en trois composants pour vous permettre d’explorer les zones sur lesquelles vous êtes le plus axé :
 
 * [Composants d’infrastructure](#deploy-infrastructure-components). Utilisez un modèle Azure Resource Manager pour déployer les composants d’infrastructure de base d’un service App Service, de Web App, d’Application Insights, d’un compte de stockage, de SQL Server et d’une base de données.
 * [Bot conversationnel d’application web](#deploy-web-app-chatbot). Utilisez l’interface de ligne de commande Azure pour déployer un bot avec Bot Service et l’application Language Understanding Intelligent Service (LUIS).
@@ -135,11 +135,11 @@ Un exemple d’application en C# est disponible sur GitHub :
 
 * [Exemple de code C# de bot commercial](https://github.com/Microsoft/AzureBotServices-scenarios/tree/master/CSharp/Commerce/src)
 
-L’exemple d’application inclut les composants d’authentification Azure Active Directory et l’intégration au composant LUIS de Cognitive Services. L’application requiert Visual Studio pour générer et déployer la solution. Vous trouverez des informations supplémentaires sur la configuration d’AAD B2C et de l’application LUIS dans la documentation du référentiel GitHub.
+L’exemple d’application inclut les composants d’authentification Azure Active Directory et l’intégration au composant LUIS de Cognitive Services. L’application requiert Visual Studio pour générer et déployer le scénario. Vous trouverez des informations supplémentaires sur la configuration d’AAD B2C et de l’application LUIS dans la documentation du référentiel GitHub.
 
 ## <a name="pricing"></a>Tarifs
 
-Pour explorer le coût d’exécution de cette solution, tous les services sont préconfigurés dans le calculateur de coûts. Pour pouvoir observer l’évolution de la tarification pour votre cas d’usage particulier, modifiez les variables appropriées en fonction du trafic que vous escomptez.
+Pour explorer le coût d’exécution de ce scénario, tous les services sont préconfigurés dans le calculateur de coûts. Pour pouvoir observer l’évolution de la tarification pour votre cas d’usage particulier, modifiez les variables appropriées en fonction du trafic que vous escomptez.
 
 Nous proposons trois exemples de profils de coût basés sur la quantité de messages que vous vous attendez à voir traiter par votre bot conversationnel :
 

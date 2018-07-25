@@ -5,12 +5,12 @@ author: telmosampaio
 ms.date: 06/19/2018
 pnp.series.title: Implement a hub-spoke network topology with shared services in Azure
 pnp.series.prev: hub-spoke
-ms.openlocfilehash: 555d08e5d3792f8699875c6d6aa8a1a42eadd477
-ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
+ms.openlocfilehash: 283251d5b11f76985405410c5c237e5a64ee98fe
+ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/02/2018
-ms.locfileid: "37142350"
+ms.lasthandoff: 07/14/2018
+ms.locfileid: "39060793"
 ---
 # <a name="implement-a-hub-spoke-network-topology-with-shared-services-in-azure"></a>Implémentation d’une topologie de réseau hub-and-spoke avec des services partagés dans Azure
 
@@ -133,7 +133,7 @@ Cette étape déploie le réseau virtuel hub et le connecte au réseau virtuel l
 
 2. Recherchez `adminPassword` et entrez un nom d’utilisateur et un mot de passe dans les paramètres. 
 
-3. Recherchez toutes les instances de `sharedKey` et entrez une valeur pour une clé partagée. Enregistrez le fichier .
+3. Recherchez toutes les instances de `sharedKey` et entrez une valeur pour une clé partagée. Enregistrez le fichier.
 
    ```bash
    "sharedKey": "abc123",
