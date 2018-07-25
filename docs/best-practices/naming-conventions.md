@@ -4,12 +4,12 @@ description: Conventions d’affectation de noms pour les ressources Azure. Comm
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: b9833654f63dc81ff6d05b9c49897e0c58de2683
-ms.sourcegitcommit: 86d86d71e392550fd65c4f76320d7ecf0b72e1f6
+ms.openlocfilehash: 09bcfa3c0a0c46605f0025adad06f8049f109f1b
+ms.sourcegitcommit: 776b8c1efc662d42273a33de3b82ec69e3cd80c5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/06/2018
-ms.locfileid: "37864553"
+ms.lasthandoff: 07/12/2018
+ms.locfileid: "38987731"
 ---
 # <a name="naming-conventions"></a>Conventions d’affectation de noms
 
@@ -78,7 +78,7 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 
 | Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
 | --- | --- | --- | --- | --- | --- | --- |
-|Groupe de ressources |Abonnement |1-90 |Non-respect de la casse |Alphanumériques, trait de soulignement, parenthèses, trait d’union et point (sauf à la fin) |`<service short name>-<environment>-rg` |`profx-prod-rg` |
+|Groupe de ressources |Abonnement |1-90 |Non-respect de la casse |Alphanumériques, trait de soulignement, parenthèses, trait d’union, point (sauf à la fin) et caractères Unicode |`<service short name>-<environment>-rg` |`profx-prod-rg` |
 |Groupe à haute disponibilité |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait de soulignement et trait d’union |`<service-short-name>-<context>-as` |`profx-sql-as` |
 |Tag |Entité associée |512 (nom), 256 (valeur) |Non-respect de la casse |Alphanumérique |`"key" : "value"` |`"department" : "Central IT"` |
 
