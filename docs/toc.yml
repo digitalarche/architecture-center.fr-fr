@@ -8,7 +8,7 @@
           href: guide/index.md
         - name: Styles d’architecture
           items:
-            - name: Vue d'ensemble
+            - name: Vue d’ensemble
               href: guide/architecture-styles/index.md
             - name: Application multi-niveau
               href: guide/architecture-styles/n-tier.md
@@ -26,7 +26,7 @@
               href: guide/architecture-styles/big-compute.md
         - name: Choisir un service de calcul
           items:
-            - name: Vue d'ensemble
+            - name: Vue d’ensemble
               href: guide/technology-choices/compute-overview.md
             - name: Arbre de décision
               href: guide/technology-choices/compute-decision-tree.md
@@ -34,13 +34,13 @@
               href: guide/technology-choices/compute-comparison.md
         - name: Choisir un magasin de données
           items:
-            - name: Vue d'ensemble
+            - name: Vue d’ensemble
               href: guide/technology-choices/data-store-overview.md
             - name: Comparaison du magasin de données
               href: guide/technology-choices/data-store-comparison.md
         - name: Principes de conception
           items:
-            - name: Vue d'ensemble
+            - name: Vue d’ensemble
               href: guide/design-principles/index.md
             - name: Conception de la réparation spontanée
               href: guide/design-principles/self-healing.md
@@ -94,7 +94,7 @@
           href: data-guide/index.md
         - name: Charges de travail SGBDR traditionnelles
           items:
-            - name: Vue d'ensemble
+            - name: Vue d’ensemble
               href: data-guide/relational-data/index.md
             - name: Traitement transactionnel en ligne (OLTP)
               href: data-guide/relational-data/online-transaction-processing.md
@@ -106,7 +106,7 @@
               href: data-guide/relational-data/etl.md
         - name: Architectures de Big Data
           items:
-            - name: Vue d'ensemble
+            - name: Vue d’ensemble
               href: data-guide/big-data/index.md
             - name: Traitement par lots
               href: data-guide/big-data/batch-processing.md
@@ -166,7 +166,7 @@
               href: data-guide/scenarios/securing-data-solutions.md
     - name: Modèles de conception de cloud
       items:
-        - name: Vue d'ensemble
+        - name: Vue d’ensemble
           href: patterns/index.md
         - name: Catégories
           items:
@@ -252,7 +252,7 @@
           href: patterns/valet-key.md
     - name: Anti-modèles de performance
       items:
-        - name: Vue d'ensemble
+        - name: Vue d’ensemble
           href: antipatterns/index.md
         - name: Base de données occupée
           href: antipatterns/busy-database/index.md
@@ -328,7 +328,7 @@
           href: service-fabric/refactor-migrated-app.md
 - name: Exemples de scénarios
   items:
-    - name: Vue d'ensemble
+    - name: Vue d’ensemble
       href: example-scenario/index.md
     - name: AI
       items:
@@ -360,7 +360,7 @@
           href: example-scenario/infrastructure/video-rendering.md
 - name: Architectures de référence
   items:
-    - name: Vue d'ensemble
+    - name: Vue d’ensemble
       href: reference-architectures/index.md
     - name: Application web App Service
       items:
@@ -378,7 +378,7 @@
           href: reference-architectures/data/enterprise-bi-adf.md
     - name: Réseaux hybrides
       items:
-        - name: Vue d'ensemble
+        - name: Vue d’ensemble
           href: reference-architectures/hybrid-networking/index.md
         - name: VPN
           href: reference-architectures/hybrid-networking/vpn.md
@@ -392,7 +392,7 @@
           href: reference-architectures/hybrid-networking/shared-services.md
     - name: Gestion des identités
       items:
-        - name: Vue d'ensemble
+        - name: Vue d’ensemble
           href: reference-architectures/identity/index.md
         - name: Intégration de l’AD local avec Azure AD
           href: reference-architectures/identity/azure-ad.md
@@ -456,62 +456,33 @@
       href: cloud-adoption-guide/index.md
     - name: Notions fondamentales de l’adoption d’Azure
       items:
-        - name: Vue d'ensemble
+        - name: Vue d’ensemble
           href: cloud-adoption-guide/adoption-intro/overview.md
-        - name: Présentation des mécanismes Azure
+        - name: À propos des éléments internes d’Azure
           items:
-            - name: "Explicatif\_: comment fonctionne Azure\_?"
+            - name: Fonctionnement d’Azure
               href: cloud-adoption-guide/adoption-intro/azure-explainer.md
-            - name: "Explicatif\_: qu’est ce que la gouvernance des ressources cloud"
+            - name: Qu’est-ce que la gouvernance des ressources cloud ?
               href: cloud-adoption-guide/adoption-intro/governance-explainer.md
-        - name: Présentation de l’identité numérique dans Azure
+        - name: À propos de la gouvernance des accès aux ressources Azure
           items:
-            - name: "Explicatif\_: qu’est-ce qu’un abonné Azure Active Directory\_?"
-              href: cloud-adoption-guide/adoption-intro/tenant-explainer.md
-            - name: Obtenir un abonné Azure Active Directory
-              href: /azure/active-directory/develop/active-directory-howto-tenant
-              maintainContext: true
-            - name: "Guide\_: conception d’un abonné Azure\_AD"
-              href: cloud-adoption-guide/adoption-intro/tenant.md
-            - name: Ajouter un utilisateur à un abonné Azure AD
-              href: /azure/active-directory/add-users-azure-active-directory
-              maintainContext: true
-        - name: Présentation des abonnements Azure
-          items:
-            - name: "Explicatif\_: qu’est-ce qu’un abonnement Azure\_?"
-              href: cloud-adoption-guide/adoption-intro/subscription-explainer.md
-            - name: "Guide\_: conception d’un abonnement Azure"
-              href: cloud-adoption-guide/adoption-intro/subscription.md
-        - name: Présentation de la gestion des ressources dans Azure
-          items:
-            - name: "Explicatif\_: qu’est-ce qu’Azure Resource Manager\_?"
-              href: cloud-adoption-guide/adoption-intro/resource-manager-explainer.md
-            - name: "Explicatif\_: qu’est-ce qu’un groupe de ressources Azure\_?"
-              href: cloud-adoption-guide/adoption-intro/resource-group-explainer.md
-            - name: "Explicatif\_: présentation de l’accès aux ressources dans Azure"
-              href: /azure/active-directory/active-directory-understanding-resource-access
-              maintainContext: true
-            - name: Créer un groupe de ressources avec le portail
-              href: /azure/azure-resource-manager/resource-group-portal
-              maintainContext: true
-            - name: "Guide\_: conception d’un groupe de ressources"
-              href: cloud-adoption-guide/adoption-intro/resource-group.md
-            - name: "Guide\_: convention d’affectation de noms de ressources Azure"
-              href: /azure/architecture/best-practices/naming-conventions
-              maintainContext: true
+            - name: Présentation de la gestion des accès aux ressources dans Azure
+              href: cloud-adoption-guide/adoption-intro/azure-resource-access.md
+            - name: Guide de conception de la gouvernance Azure
+              href: cloud-adoption-guide/adoption-intro/governance-how-to.md
         - name: Déploiement d’architectures de base vers Azure
           items:
             - name: Architecture Platform as a Service (PaaS)
               items:
-                - name: Déployer une application web de base vers Azure
+                - name: Déployer une application web de base sur Azure
                   href: /azure/app-service
                   maintainContext: true
-                - name: "Guide\_: meilleures pratiques pour les applications web dans Azure"
+                - name: Meilleures pratiques pour les applications web dans Azure
                   href: /azure/architecture/reference-architectures/app-service-web-app/basic-web-app
                   maintainContext: true
             - name: Infrastructure as a service (IaaS)
               items:
-                - name: "Explicatif\_: qu’est-ce qu’un réseau virtuel Azure\_?"
+                - name: Qu’est un réseau virtuel Azure ?
                   href: /azure/virtual-network/virtual-networks-overview
                   maintainContext: true
                 - name: Déployer un réseau virtuel dans Azure
@@ -520,18 +491,18 @@
                 - name: Déployer une charge de travail IaaS unique de machine virtuelle Windows dans Azure
                   href: /azure/virtual-machines/windows/quick-create-portal
                   maintainContext: true
-                - name: "Guide\_: meilleures pratiques pour le déploiement d’une machine virtuelle Windows dans Azure"
+                - name: Meilleures pratiques pour le déploiement d’une machine virtuelle Windows dans Azure
                   href: /azure/architecture/reference-architectures/virtual-machines-windows/single-vm
                   maintainContext: true
                 - name: Déployer une charge de travail IaaS unique de machine virtuelle Linux dans Azure
                   href: /azure/virtual-machines/linux/quick-create-portal
                   maintainContext: true
-                - name: "Guide\_: meilleures pratiques pour le déploiement d’une machine virtuelle Linux dans Azure"
+                - name: Meilleures pratiques pour le déploiement d’une machine virtuelle Linux dans Azure
                   href: /azure/architecture/reference-architectures/virtual-machines-linux/single-vm
                   maintainContext: true
     - name: Adoption Azure intermédiaire
       items:
-        - name: Vue d'ensemble
+        - name: Vue d’ensemble
           href: cloud-adoption-guide/intermediate-stage/overview.md
         - name: Guide de conception de gouvernance
           href: cloud-adoption-guide/intermediate-stage/governance-design-guide.md
@@ -539,7 +510,7 @@
   href: vdc/index.md
 - name: Azure pour les professionnels AWS
   items:
-    - name: Vue d'ensemble
+    - name: Vue d’ensemble
       href: aws-professional/index.md
     - name: Comparaison des services
       href: aws-professional/services.md
