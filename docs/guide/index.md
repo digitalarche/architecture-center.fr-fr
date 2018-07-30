@@ -1,20 +1,16 @@
 ---
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 80cb7fde0694257a5c413b702505e27f18aed8d3
-ms.sourcegitcommit: d702b4d27e96e7a5a248dc4f2f0e25cf6e82c134
+ms.openlocfilehash: 3a667334be682e7e96c6dd30bd401a7e4c608108
+ms.sourcegitcommit: 8b5fc0d0d735793b87677610b747f54301dcb014
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2018
-ms.locfileid: "31771684"
+ms.lasthandoff: 07/29/2018
+ms.locfileid: "39334264"
 ---
 # <a name="azure-application-architecture-guide"></a>Guide de l’architecture des applications Azure
 
 Ce guide présente une approche structurée pour concevoir des applications sur Azure qui sont évolutives, robustes et hautement disponibles. Il est basé sur des pratiques éprouvées que nous avons apprises au contact des clients.
-
-<br/>
-
-<img src="./images/guide-steps.svg" style="max-width:800px;"/>
 
 ## <a name="introduction"></a>Introduction
 
@@ -62,8 +58,7 @@ Le premier point de décision est le plus fondamental. Quel type d’architectur
 
 En savoir plus :
 
-- [Styles d’architecture][arch-styles]
-- [Architectures de référence Azure][ref-archs]
+- [Styles d’architecture](./architecture-styles/index.md)
 
 ### <a name="technology-choices"></a>Choix de technologie
 
@@ -80,36 +75,14 @@ Nous avons identifié dix principes de conception de haut niveau qui rendront vo
 
 En savoir plus :
 
-- [Principes de conception pour les applications Azure][design-principles]
-- [Meilleures pratiques lors de la génération sur le cloud][best-practices]
+- [Principes de conception](./design-principles/index.md)
+
 
 ### <a name="quality-pillars"></a>Piliers de qualité
 
 Une application cloud réussie se concentrera sur cinq piliers de qualité logicielle : l’extensibilité, la disponibilité, la résilience, la gestion et la sécurité. Utilisez nos checklists de révision de la conception pour passer en revue votre architecture en fonction de ces piliers de qualité.
 
-En savoir plus :
-
-- [Piliers de la qualité logicielle][pillars]
-- [Checklists de révision de la conception][checklists] 
-
-### <a name="cloud-design-patterns"></a>Modèles de conception de cloud
-
-Les modèles de conception sont des solutions générales à des problèmes de conception logicielle courants. Nous avons identifié un ensemble de modèles de conception qui sont particulièrement utiles lors de la conception d’applications distribuées pour le cloud.
-
-En savoir plus :
-
-- [Catalogue de modèles de conception de cloud](../patterns/index.md)
+- [Piliers de qualité](./pillars.md)
 
 
-[arch-styles]: ./architecture-styles/index.md
-[best-practices]: ../best-practices/index.md
-[checklists]: ../checklist/index.md
-[compute-options]: ./technology-choices/compute-comparison.md
-[design-principles]: ./design-principles/index.md
 [ebook]: https://azure.microsoft.com/campaigns/cloud-application-architecture-guide/
-[patterns]: ../patterns/index.md?toc=/azure/architecture/guide/toc.json
-[pillars]: ./pillars.md
-[ref-archs]: ../reference-architectures/index.md
-[storage-options]: ./technology-choices/data-store-comparison.md
-[technology-choices]: ./technology-choices/index.md
-
