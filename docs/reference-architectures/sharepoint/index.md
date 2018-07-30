@@ -3,12 +3,12 @@ title: Exécuter une batterie de serveurs SharePoint Server 2016 à haute dispon
 description: Pratiques éprouvées pour la configuration d’une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure.
 author: njray
 ms.date: 07/14/2018
-ms.openlocfilehash: ff690300cb5f4af301bcfac58ac10b9b3c47f96d
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: 04c69309e9f96e3bf7cd7faabeedd9b6d9da1ebd
+ms.sourcegitcommit: 8b5fc0d0d735793b87677610b747f54301dcb014
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060895"
+ms.lasthandoff: 07/29/2018
+ms.locfileid: "39334128"
 ---
 # <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Exécuter une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure
 
@@ -66,19 +66,21 @@ Le sous-réseau de passerelle doit être nommé *GatewaySubnet*. Attribuez l’e
 
 ### <a name="vm-recommendations"></a>Recommandations pour les machines virtuelles
 
-Selon les tailles de machine virtuelle Standard DSv2, cette architecture nécessite un minimum de 38 cœurs :
+Cette architecture nécessite au moins 44 cœurs :
 
 - 8 serveurs SharePoint sur Standard_DS3_v2 (4 cœurs chacun) = 32 cœurs
 - 2 contrôleurs de domaine Active Directory sur Standard_DS1_v2 (1 cœur chacun) = 2 cœurs
-- 2 machines virtuelles SQL Server sur Standard_DS1_v2 = 2 cœurs
+- 2 machines virtuelles SQL Server sur Standard_DS3_v2 = 8 cœurs
 - 1 nœud majoritaire sur Standard_DS1_v2 = 1 noyau
 - 1 serveur d’administration sur Standard_DS1_v2 = 1 noyau
 
-Le nombre total de cœurs dépend des tailles de machine virtuelle que vous sélectionnez. Pour plus d’informations, consultez la section [Recommandations relatives à SharePoint Server](#sharepoint-server-recommendations) ci-dessous.
-
 Assurez-vous que votre abonnement Azure dispose d’un quota de cœurs de machines virtuelles suffisamment important pour le déploiement ou le déploiement échouera. Consultez l’article [Abonnement Azure et limites, quotas et contraintes de service][quotas]. 
+
+Pour tous les rôles SharePoint, à l’exception de l’indexeur de recherche, l’utilisation de la taille de machine virtuelle [Standard_DS3_v2][vm-sizes-general] est recommandée. L’indexeur de recherche doit être de taille [Standard_DS13_v2][vm-sizes-memory] au minimum. À des fins de test, les fichiers de paramètres pour cette architecture de référence spécifient la plus petite taille DS3_v2 pour le rôle de l’indexeur de recherche. Pour un déploiement de production, mettez à jour les fichiers de paramètres pour utiliser la taille DS13 ou une taille supérieure. Pour plus d’informations, consultez l’article [Configuration matérielle et logicielle requise pour une solution SharePoint Server 2016][sharepoint-reqs]. 
+
+Pour les machines virtuelles SQL Server, nous vous recommandons un minimum de 4 cœurs et 8 Go de RAM. Les fichiers de paramètres pour cette architecture de référence spécifient la taille de DS3_v2. Pour un déploiement de production, vous devrez peut-être spécifier une plus grande taille de machine virtuelle. Pour plus d’informations, consultez l’article [Planification et configuration de la capacité de SQL Server et du stockage (SharePoint Server)](/sharepoint/administration/storage-and-sql-server-capacity-planning-and-configuration#estimate-memory-requirements). 
  
-### <a name="nsg-recommendations"></a>Recommandations pour les groupes de sécurité réseau
+### <a name="nsg-recommendations"></a>Recommandations en matière de groupes de sécurité réseau
 
 Nous vous recommandons d’avoir un groupe de sécurité réseau pour chaque sous-réseau contenant des machines virtuelles, cela permet d’activer l’isolation des sous-réseaux. Si vous souhaitez configurer l’isolation de sous-réseaux, ajoutez des règles de groupe de sécurité réseau qui définissent le trafic entrant ou sortant autorisé ou refusé pour chaque sous-réseau. Pour plus d’informations, consultez l’article [Filtrer le trafic réseau avec les groupes de sécurité réseau][virtual-networks-nsg]. 
 
@@ -109,18 +111,12 @@ Avant de configurer la batterie de serveurs SharePoint, assurez-vous que vous av
 - Compte de super utilisateur de cache
 - Compte de super lecteur de cache
 
-Pour tous les rôles à l’exception de l’indexeur de recherche, l’utilisation de la taille de machine virtuelle [Standard_DS3_v2][vm-sizes-general] est recommandée. L’indexeur de recherche doit être de taille [Standard_DS13_v2][vm-sizes-memory] au minimum. 
-
-> [!NOTE]
-> Le modèle Resource Manager pour cette architecture de référence utilise la taille DS3, plus petite, pour l’indexeur de recherche afin de tester le déploiement. Pour un déploiement de production, utilisez la taille DS13 ou une taille supérieure. 
-
-Pour les charges de travail de production, consultez l’article [Configuration matérielle et logicielle requise pour une solution SharePoint Server 2016][sharepoint-reqs]. 
-
 Pour satisfaire à l’exigence de prise en charge pour un débit de disque de 200 Mo par seconde au minimum, assurez-vous de planifier l’architecture de recherche. Consultez l’article [Planifier l’architecture de recherche d’entreprise dans SharePoint Server 2013][sharepoint-search]. Suivez également les instructions contenues dans l’article [Best practices for crawling in SharePoint Server 2016][sharepoint-crawling] (Meilleures pratiques pour l’analyse dans SharePoint Server 2016).
 
 De plus, stockez les données de composant de recherche sur un volume de stockage distinct ou sur une partition avec des performances élevées. Pour réduire la charge et améliorer le débit, configurez les comptes d’utilisateur de cache d’objets, qui sont requis dans cette architecture. Fractionnez les fichiers de système d’exploitation Windows Server, les fichiers programme SharePoint Server 2016 et les journaux de diagnostic sur trois volumes de stockage distincts ou sur des partitions avec des performances normales. 
 
 Pour plus d’informations sur ces recommandations, consultez l’article [Comptes d’administration et de service de déploiement initial dans SharePoint Server 2016][sharepoint-accounts].
+
 
 ### <a name="hybrid-workloads"></a>Charges de travail hybrides
 
