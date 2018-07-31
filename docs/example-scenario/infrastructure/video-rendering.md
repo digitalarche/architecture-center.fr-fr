@@ -3,12 +3,12 @@ title: Rendu vidéo 3D sur Azure
 description: Exécution des charges de travail HPC natives dans Azure à l’aide du service Azure Batch
 author: adamboeglin
 ms.date: 07/13/2018
-ms.openlocfilehash: b3af0641642d7ec4b022e8c96f51693eeb0adee4
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: e629e2ba0b9490e534057fee33f7bededa9656af
+ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39061000"
+ms.lasthandoff: 07/24/2018
+ms.locfileid: "39229182"
 ---
 # <a name="3d-video-rendering-on-azure"></a>Rendu vidéo 3D sur Azure
 

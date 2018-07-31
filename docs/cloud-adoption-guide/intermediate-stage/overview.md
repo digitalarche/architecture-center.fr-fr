@@ -2,12 +2,12 @@
 title: 'Adoption d’Azure : niveau intermédiaire'
 description: Décrit le niveau intermédiaire de connaissances que doit posséder une entreprise pour adopter Azure
 author: petertay
-ms.openlocfilehash: 227d9558647ed8076b2832d95e192f2f0c43b9db
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: a1f93616f5f1ecf4f395ce39bbb037ef6ab5991b
+ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206359"
+ms.lasthandoff: 07/24/2018
+ms.locfileid: "39229233"
 ---
 # <a name="azure-cloud-adoption-guide-intermediate-overview"></a>Guide d’adoption du cloud Azure : vue d’ensemble du niveau intermédiaire
 
@@ -25,9 +25,9 @@ Cette étape du guide s’adresse aux membres suivants de votre organisation :
 
 ## <a name="section-1-azure-concepts-for-multiple-workloads-and-multiple-teams"></a>Section 1 : concepts Azure pour plusieurs charges de travail et plusieurs équipes
 
-Dans la phase d’adoption fondamentale, vous avez appris certaines notions de base sur les mécanismes internes d’Azure et avez découvert les modalités de création, de lecture, de mise à jour et de suppression des ressources. Vous avez également acquis des connaissances sur la notion d’identité et savez maintenant qu’Azure utilise uniquement Azure Active Directory (AD) pour authentifier et autoriser les utilisateurs qui ont besoin d’accéder à ces ressources.
+Dans la phase d’adoption fondamentale, vous appris certaines notions de base sur les mécanismes internes d’Azure et avez découvert les modalités de création, de lecture, de mise à jour et de suppression des ressources. Vous avez également acquis des connaissances sur la notion d’identité et savez maintenant qu’Azure utilise uniquement Azure Active Directory (AD) pour authentifier et autoriser les utilisateurs qui ont besoin d’accéder à ces ressources.
 
-Vous avez également appris à configurer les outils de gouvernance d’Azure pour gérer la manière dont votre organisation utilise les ressources Azure. Pendant la phase fondamentale, nous avons vu comment gérer l’accès d’une seule équipe aux ressources nécessaires au déploiement d’une simple charge de travail. Mais dans la réalité, votre organisation recense plusieurs équipes qui travaillent simultanément sur plusieurs charges de travail. 
+Vous avez également appris à configurer les outils de gouvernance d’Azure pour gérer la manière dont votre organisation utilise les ressources Azure. Nous avons vu comment gérer l’accès d’une seule équipe aux ressources nécessaires pour déployer une simple charge de travail. Mais dans la réalité, votre organisation recense plusieurs équipes qui travaillent simultanément sur plusieurs charges de travail. 
 
 Avant de commencer, voyons ce que l’on entend précisément par la notion de **charge de travail**. Cette expression définit généralement une unité arbitraire de fonctionnalité, par exemple une application ou un service. Une charge de travail est envisagée sous l’angle des artefacts de code qui sont déployés sur un serveur, ainsi que de tous les autres services (base de données, par exemple) nécessaires. Cette définition se révèle pertinente dans le cas d’une application ou d’un service local(e), mais dans le cloud, elle mérite d’être développée. 
 

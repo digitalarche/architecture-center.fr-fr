@@ -3,12 +3,12 @@ title: Exécution de l’application Surveys
 description: Comment exécuter l’exemple d’application Surveys localement
 author: MikeWasson
 ms:date: 07/21/2017
-ms.openlocfilehash: 28d976374e5d6dbad434873eef149704f26a1f3f
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: d4fa8122794740e6935293147d999b26d9485d90
+ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30848680"
+ms.lasthandoff: 07/24/2018
+ms.locfileid: "39229097"
 ---
 # <a name="run-the-surveys-application"></a>Exécution de l’application Surveys
 
@@ -24,7 +24,6 @@ Voici un résumé des étapes :
 6. Ajoutez des rôles d’application aux utilisateurs.
 
 ## <a name="prerequisites"></a>Prérequis
-
 -   [Visual Studio 2017][VS2017]
 -   Compte [Microsoft Azure](https://azure.microsoft.com)
 
@@ -36,7 +35,7 @@ Tailspin est la société fictive qui héberge l’application Surveys. Tailspin
 
 1. Connectez-vous au [portail Azure][portal].
 
-2. Cliquez sur **Nouveau** > **Sécurité + Identité** > **Azure Active Directory**.
+2. Cliquez sur **+ créer une identité de** > **ressource**  > **Azure Active Directory**.
 
 3. Entrez `Tailspin` comme nom d’organisation et saisissez un nom de domaine. Le nom de domaine a le format `xxxx.onmicrosoft.com` et doit être globalement unique. 
 
@@ -68,7 +67,7 @@ Pour réaliser le scénario de bout en bout, vous aurez besoin d’un second ann
 
 6. Dans le panneau **Inscriptions d’application**, sélectionnez la nouvelle application **Surveys.WebAPI**.
  
-7. Cliquez sur **Propriétés**.
+7. Puis cliquez sur **Paramètres** > **Propriétés**.
 
 8. Dans la zone de texte **URI ID d’application**, entrez `https://<domain>/surveys.webapi`, où `<domain>` est le nom de domaine de l’annuaire. Par exemple : `https://tailspin.onmicrosoft.com/surveys.webapi`
 
@@ -195,7 +194,7 @@ L’application Surveys utilise Redis pour mettre en cache les jetons d’accès
 
 3. Cliquez sur **Créer**.
 
-4. Une fois le cache Redis créé, accédez à la ressource dans le portail.
+4. Une fois le Cache Redis créé, accédez à la ressource dans le portail.
 
 5. Cliquez sur **Clés d’accès** et copiez la clé primaire.
 

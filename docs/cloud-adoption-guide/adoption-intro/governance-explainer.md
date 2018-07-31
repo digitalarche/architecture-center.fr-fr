@@ -1,17 +1,17 @@
 ---
-title: 'Explicatif : qu’est-ce que la gouvernance cloud ?'
-description: Explique le concept de gouvernance des ressources pour Azure et le cloud
+title: Qu’est-ce que la gouvernance cloud ?
+description: Explication du concept de gouvernance des accès aux ressources sur Azure
 author: petertay
-ms.openlocfilehash: 3404beaa719177ee7638feed8a8442b5c3b455c6
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: 3338ed5652296c5cd01277a51be1cb5893320b65
+ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206478"
+ms.lasthandoff: 07/24/2018
+ms.locfileid: "39229199"
 ---
-# <a name="explainer-what-is-cloud-resource-governance"></a>Explicatif : qu’est-ce que la gouvernance des ressources cloud ?
+# <a name="what-is-cloud-resource-governance"></a>Qu’est-ce que la gouvernance des ressources cloud ?
 
-Dans l’article explicatif [Comment fonctionne Azure ?](azure-explainer.md), vous avez appris qu’Azure est une collection de serveurs et d’équipements de mise en réseau sur lesquels fonctionnent du matériel virtualisé et des logiciels pour le compte des utilisateurs. Azure garantit l’agilité des développeurs et des services informatiques de votre organisation en les aidant à créer, lire, mettre à jour et supprimer des ressources en fonction de leurs besoins.
+Dans l’article [Comment fonctionne Azure ?](azure-explainer.md), vous avez appris qu’Azure est une collection de serveurs et d’équipements de mise en réseau sur lesquels fonctionnent du matériel virtualisé et des logiciels pour le compte des utilisateurs. Azure garantit l’agilité des développeurs et des services informatiques de votre organisation en les aidant à créer, lire, mettre à jour et supprimer des ressources en fonction de leurs besoins.
 
 Mais si le fait d’accorder aux développeurs un accès illimité aux ressources les fait considérablement gagner en agilité, une telle approche peut également entraîner des coûts inattendus. Par exemple, une équipe de développement peut être autorisée à déployer un ensemble de ressources à des fins de test mais oublier de les supprimer une fois les tests terminés. Ces ressources continueront d’engendrer des coûts, même si leur utilisation n’est plus nécessaire ou autorisée. 
 
@@ -29,8 +29,4 @@ Lors de la configuration de ces outils, il est important de veiller à garantir 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Les étapes suivantes de votre adoption d’Azure consistent à [comprendre l’identité numérique dans Azure](tenant-explainer.md) et à [créer votre premier utilisateur dans Azure AD][docs-add-users-to-aad].
-
-<!-- Links -->
-
-[docs-add-users-to-aad]: /azure/active-directory/add-users-azure-active-directory?toc=/azure/architecture/cloud-adoption-guide/toc.json
+Maintenant que vous comprenez le concept de gouvernance des ressources cloud, poursuivez pour en savoir plus sur [la gestion de l’accès aux ressources](azure-resource-access.md) dans Azure en vue d’apprendre [comment concevoir un modèle de gouvernance](governance-how-to.md).

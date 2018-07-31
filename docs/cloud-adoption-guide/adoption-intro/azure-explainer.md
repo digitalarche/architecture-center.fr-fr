@@ -1,15 +1,15 @@
 ---
-title: 'Explicatif : comment Azure fonctionne-t-il ?'
-description: Explique le fonctionnement interne d’Azure
+title: Fonctionnement d’Azure
+description: Explication sur le fonctionnement interne d’Azure
 author: petertay
-ms.openlocfilehash: 88514ba01efabe38a1b92d135321c2e44cef004e
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: bf301a05d69ed66aa03727dde3968477c2337790
+ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206461"
+ms.lasthandoff: 07/24/2018
+ms.locfileid: "39228964"
 ---
-# <a name="explainer-how-does-azure-work"></a>Explicatif : comment Azure fonctionne-t-il ?
+# <a name="how-does-azure-work"></a>Fonctionnement d’Azure
 
 Azure est la plateforme de cloud public de Microsoft. Azure offre une grande collection de services, y compris la plateforme en tant que service (PaaS), l’infrastructure en tant que service (IaaS), la base de données en tant que service (DBaaS) et bien d’autres. Mais ce qu’est -ce qu’Azure exactement et comment fonctionne-t-il ?
 
@@ -31,7 +31,7 @@ Par conséquent, tout simplement, Azure est une vaste collection de serveurs et 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Maintenant que vous comprenez le fonctionnement interne d’Azure, découvrez ce que vous devez savoir sur la [gouvernance de l’accès aux ressources](governance-explainer.md). Passez ensuite à la première étape de l’adoption d’Azure, qui consiste à [comprendre l’identité numérique dans Azure](tenant-explainer.md). Une fois cette étape effectuée, vous serez prêt à [créer votre premier utilisateur dans Azure AD][docs-add-users-to-aad].
+* Maintenant que vous comprenez le fonctionnement interne d’Azure, découvrez ce que vous devez savoir sur la [gouvernance de l’accès aux ressources](governance-explainer.md). 
 
 <!-- Links -->
 

@@ -4,12 +4,12 @@ description: Conventions d’affectation de noms pour les ressources Azure. Comm
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 09bcfa3c0a0c46605f0025adad06f8049f109f1b
-ms.sourcegitcommit: 776b8c1efc662d42273a33de3b82ec69e3cd80c5
+ms.openlocfilehash: 6ad71a5ee39b8f1863c51dae0120dbdc7baf1f76
+ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/12/2018
-ms.locfileid: "38987731"
+ms.lasthandoff: 07/24/2018
+ms.locfileid: "39229148"
 ---
 # <a name="naming-conventions"></a>Conventions d’affectation de noms
 
@@ -61,7 +61,7 @@ Les affixes peuvent faire référence à différents aspects des ressources spé
 | Aspect | Exemples | Notes |
 | --- | --- | --- |
 | Environnement |dev, prod, AQ |Identifie l’environnement de la ressource |
-| Emplacement |uw (ouest des États-Unis), ue (est des États-Unis) |Identifie la région dans laquelle la ressource est déployée |
+| Lieu |uw (ouest des États-Unis), ue (est des États-Unis) |Identifie la région dans laquelle la ressource est déployée |
 | Instance |01, 02 |Pour les ressources possédant plusieurs instances nommées (serveurs web, etc.) |
 | Produit ou service |service |Identifie le produit, l’application ou le service pris en charge par la ressource |
 | Rôle |sql, web, messagerie |Identifie le rôle de la ressource associée |
@@ -115,10 +115,17 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 |Groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service short name>-<context>-nsg` |`profx-app-nsg` |
 |Règle de groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`sql-allow` |
 |Adresse IP publique |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<vm or service name>-pip` |`profx-sql1-pip` |
-|Load Balancer |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service or role>-lb` |`profx-lb` |
-|Configuration des règles d’équilibrage de charge |Load Balancer |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`http` |
+|Équilibreur de charge |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service or role>-lb` |`profx-lb` |
+|Configuration des règles d’équilibrage de charge |Équilibreur de charge |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`http` |
 |Azure Application Gateway |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service or role>-agw` |`profx-agw` |
 |Profil Traffic Manager |Groupe de ressources |1-63 |Non-respect de la casse |Alphanumériques, trait d’union et point |`<descriptive context>` |`app1` |
+
+### <a name="containers"></a>Containers
+
+| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
+| --- | --- | --- | --- | --- | --- | --- |
+|Container Registry | Globale |5 à 50 |Non-respect de la casse | Alphanumérique |`<service short name>registry` |`app1registry` |
+
 
 ## <a name="organize-resources-with-tags"></a>Organiser les ressources à l’aide de balises
 
