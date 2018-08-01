@@ -4,13 +4,12 @@ description: Comment créer des applications résilientes dans Azure, pour une h
 author: MikeWasson
 ms.date: 05/26/2017
 ms.custom: resiliency
-pnp.series.title: Design for Resiliency
-ms.openlocfilehash: 9a6bd1332ea59923b32379018060403024b15e10
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.openlocfilehash: c32f093da4c47ef655dfca89b0410f063e9fe212
+ms.sourcegitcommit: 2154e93a0a075e1f7425a6eb11fc3f03c1300c23
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2018
-ms.locfileid: "31012635"
+ms.lasthandoff: 07/30/2018
+ms.locfileid: "39352584"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Conception d’applications résilientes pour Azure
 
@@ -47,11 +46,11 @@ La résilience n’est pas un module complémentaire. Elle doit être conçue da
 4. **Testez** l’implémentation en simulant des erreurs et en déclenchant des basculements forcés. 
 5. **Déployez** l’application en production à l’aide d’un processus fiable et renouvelable. 
 6. **Surveillez** l’application pour détecter les défaillances. En surveillant le système, vous pouvez évaluer la santé de l’application et répondre aux incidents si nécessaire. 
-7. **Répondez** aux incidents qui nécessitent des interventions manuelles.
+7. **Répondez** aux défaillances qui nécessitent des interventions manuelles.
 
 Dans le reste de l’article, nous expliquons plus en détail chacune de ces étapes.
 
-## <a name="defining-your-resiliency-requirements"></a>Définissez vos exigences en matière de résilience
+## <a name="define-your-availability-requirements"></a>Définir vos exigences de disponibilité
 La planification de la résilience démarre avec les besoins de l’entreprise. Voici certaines approches pour aborder la résilience dans ces termes.
 
 ### <a name="decompose-by-workload"></a>Décomposez par charge de travail
@@ -140,34 +139,8 @@ De plus, un échec n’est pas instantané et peut entraîner un temps d’arrê
 
 Le numéro de contrat SLA calculé est une base utile, mais il ne dit pas tout sur la disponibilité. Souvent, il arrive qu’une application se dégrade normalement lorsqu’un chemin d’accès non critique échoue. Imaginez une application qui propose un catalogue de livres. Si l’application ne peut pas récupérer l’image miniature de la couverture, elle affichera une image de substitution. Dans ce cas, le fait que l’application n’ait pas réussi à obtenir l’image ne réduit pas son temps de fonctionnement, mais cela affecte l’expérience utilisateur.  
 
-## <a name="redundancy-and-designing-for-failure"></a>Redondance et conception pour les défaillances
+## <a name="design-for-resiliency"></a>Conception pour la résilience
 
-Les défaillances n’ont pas toutes la même incidence. Certaines défaillances matérielles, comme une panne de disque, peuvent affecter un seul ordinateur hôte. Un commutateur réseau défaillant peut impacter un rack entier de serveurs. Vous déplorerez moins fréquemment des défaillances perturbant un centre de données dans son ensemble, comme une panne d’alimentation. Exceptionnellement, une région entière peut être indisponible.
-
-La redondance est l’un des moyens de rendre une application résiliente. Toutefois, vous devez planifier en fonction de cette redondance lorsque vous concevez l’application. Par ailleurs, le niveau de redondance dont vous avez besoin dépend des exigences de votre entreprise. Toutes les applications ne nécessitent pas une redondance entre les régions à titre de prévention contre les pannes régionales. En général, il existe un compromis entre redondance et fiabilité supérieures d’un côté contre complexité et coûts plus élevés de l’autre.  
-
-Azure offre un certain nombre de fonctionnalités servant à rendre une application redondante à tous les nivaux de défaillances, d’une machine virtuelle unique à une région entière. 
-
-![](./images/redundancy.svg)
-
-**Machine virtuelle unique**. Azure fournit un contrat SLA de durée de fonctionnement pour les machines virtuelles uniques. Bien que vous puissiez obtenir un contrat supérieur en exécutant deux machines virtuelles ou plus, une machine virtuelle unique peut présenter une fiabilité suffisante pour certaines charges de travail. Pour les charges de travail de production, nous vous recommandons d’utiliser au moins deux machines virtuelles pour la redondance. 
-
-**Groupes à haute disponibilité**. Pour vous protéger contre les défaillances matérielles localisées, comme une panne de disque ou de commutateur réseau, déployez au moins deux machines virtuelles dans un groupe à haute disponibilité. Un groupe à haute disponibilité se compose d’au moins deux *domaines d’erreur* qui partagent une source d’alimentation et un commutateur réseau. Les machines virtuelles d’un groupe à haute disponibilité sont distribuées entre les domaines d’erreur. Ainsi, si une défaillance matérielle affecte un domaine d’erreur, le trafic réseau peut toujours être acheminé vers les machines virtuelles des autres domaines d’erreur. Pour plus d’informations sur les groupes à haute disponibilité, consultez la section [Gestion de la disponibilité des machines virtuelles Windows dans Azure](/azure/virtual-machines/windows/manage-availability).
-
-**Zones de disponibilité**.  Une zone de disponibilité est une zone physiquement séparée au sein d’une région Azure. Chaque zone de disponibilité possède une source d’alimentation, un réseau et un système de refroidissement propres. Le déploiement des machines virtuelles entre les zones de disponibilité aide à protéger une application contre les défaillances à l’échelle du centre de données. 
-
-**Régions jumelées**. Pour protéger une application contre une panne régionale, vous pouvez la déployer dans plusieurs régions, en vous appuyant sur Azure Traffic Manager pour distribuer le trafic Internet entre les différentes régions. Chaque région Azure est jumelée à une autre région. Ensemble, elles forment une [paire régionale](/azure/best-practices-availability-paired-regions). Une région se trouve dans la même zone géographique que la région avec laquelle elle est jumelée (à l’exception du Sud du Brésil) pour répondre aux exigences de la résidence de données en termes d’impôts et d’application de la loi.
-
-Lorsque vous concevez une application multirégion, tenez compte du fait que la latence du réseau entre les régions et plus importante qu’au sein d’une région unique. Par exemple, si vous répliquez une base de données pour prendre en charge un basculement, utilisez la réplication des données synchrone au sein d’une région unique, mais la réplication des données asynchrones entre plusieurs régions.
-
-| &nbsp; | Groupe à haute disponibilité | Zone de disponibilité | Région jumelée |
-|--------|------------------|-------------------|---------------|
-| Étendue de la défaillance | Rack | Centre de données | Région |
-| Routage des requêtes | Équilibreur de charge | Équilibreur de charge entre les zones | Traffic Manager |
-| Latence du réseau | Très faible | Faible | Moyenne à élevée |
-| Réseau virtuel  | Réseau virtuel | Réseau virtuel | Homologation de réseaux virtuels entre régions |
-
-## <a name="designing-for-resiliency"></a>Conception pour la résilience
 Pendant la phase de conception, vous devez effectuer une analyse du mode d’échec (FMA). Une analyse FMA vise à identifier les points de défaillance possibles et à définir la manière dont l’application y répondra.
 
 * Comment l’application détectera-t-elle ce type d’échec ?
@@ -186,71 +159,71 @@ Pour plus d’informations sur le processus FMA, avec des recommandations spéci
 | Authentification |HTTP 401 (Non autorisé) |
 | Temps de réponse lent |Délai d’expiration de la requête |
 
-## <a name="resiliency-strategies"></a>Stratégies de résilience
+
+### <a name="redundancy-and-designing-for-failure"></a>Redondance et conception pour les défaillances
+
+Les défaillances n’ont pas toutes la même incidence. Certaines défaillances matérielles, comme une panne de disque, peuvent affecter un seul ordinateur hôte. Un commutateur réseau défaillant peut impacter un rack entier de serveurs. Vous déplorerez moins fréquemment des défaillances perturbant un centre de données dans son ensemble, comme une panne d’alimentation. Exceptionnellement, une région entière peut être indisponible.
+
+La redondance est l’un des moyens de rendre une application résiliente. Toutefois, vous devez planifier en fonction de cette redondance lorsque vous concevez l’application. Par ailleurs, le niveau de redondance dont vous avez besoin dépend des exigences de votre entreprise. Toutes les applications ne nécessitent pas une redondance entre les régions à titre de prévention contre les pannes régionales. En général, il existe un compromis entre redondance et fiabilité supérieures d’un côté contre complexité et coûts plus élevés de l’autre.  
+
+Azure offre un certain nombre de fonctionnalités servant à rendre une application redondante à tous les nivaux de défaillances, d’une machine virtuelle unique à une région entière. 
+
+![](./images/redundancy.svg)
+
+**Machine virtuelle unique**. Azure fournit un contrat SLA de durée de fonctionnement pour les machines virtuelles uniques. Bien que vous puissiez obtenir un contrat supérieur en exécutant deux machines virtuelles ou plus, une machine virtuelle unique peut présenter une fiabilité suffisante pour certaines charges de travail. Pour les charges de travail de production, nous vous recommandons d’utiliser au moins deux machines virtuelles pour la redondance. 
+
+**Groupes à haute disponibilité**. Pour vous protéger contre les défaillances matérielles localisées, comme une panne de disque ou de commutateur réseau, déployez au moins deux machines virtuelles dans un groupe à haute disponibilité. Un groupe à haute disponibilité se compose d’au moins deux *domaines d’erreur* qui partagent une source d’alimentation et un commutateur réseau. Les machines virtuelles d’un groupe à haute disponibilité sont distribuées entre les domaines d’erreur. Ainsi, si une défaillance matérielle affecte un domaine d’erreur, le trafic réseau peut toujours être acheminé vers les machines virtuelles des autres domaines d’erreur. Pour plus d’informations sur les groupes à haute disponibilité, consultez la section [Gestion de la disponibilité des machines virtuelles Windows dans Azure](/azure/virtual-machines/windows/manage-availability).
+
+**Zones de disponibilité**.  Une zone de disponibilité est une zone physiquement séparée au sein d’une région Azure. Chaque zone de disponibilité possède une source d’alimentation, un réseau et un système de refroidissement propres. Le déploiement des machines virtuelles entre les zones de disponibilité aide à protéger une application contre les défaillances à l’échelle du centre de données. 
+
+**Régions jumelées**. Pour protéger une application contre une panne régionale, vous pouvez la déployer dans plusieurs régions, en vous appuyant sur Azure Traffic Manager pour distribuer le trafic Internet entre les différentes régions. Chaque région Azure est jumelée à une autre région. Ensemble, elles forment une [paire régionale](/azure/best-practices-availability-paired-regions). Une région se trouve dans la même zone géographique que la région avec laquelle elle est jumelée (à l’exception de Brésil Sud) pour répondre aux exigences de la résidence de données en termes d’impôts et d’application de la loi.
+
+Lorsque vous concevez une application multirégion, tenez compte du fait que la latence du réseau entre les régions et plus importante qu’au sein d’une région unique. Par exemple, si vous répliquez une base de données pour prendre en charge un basculement, utilisez la réplication des données synchrone au sein d’une région unique, mais la réplication des données asynchrones entre plusieurs régions.
+
+| &nbsp; | Groupe à haute disponibilité | Zone de disponibilité | Région jumelée |
+|--------|------------------|-------------------|---------------|
+| Étendue de la défaillance | Rack | Centre de données | Région |
+| Routage des requêtes | Équilibreur de charge | Équilibreur de charge entre les zones | Traffic Manager |
+| Latence du réseau | Très faible | Faible | Moyenne à élevée |
+| Réseau virtuel  | Réseau virtuel | Réseau virtuel | Homologation de réseaux virtuels entre régions |
+
+## <a name="implement-resiliency-strategies"></a>Implémenter des stratégies de résilience
 Cette section contient une enquête concernant quelques stratégies de résilience courantes. La plupart d’entre elles ne sont pas limitées à une technologie particulière. Les descriptions de cette section résument l’idée générale de chaque technique, avec des liens pour obtenir des informations supplémentaires.
 
-### <a name="retry-transient-failures"></a>Relance des échecs temporaires
-Les échecs temporaires peuvent résulter d’une perte momentanée de la connectivité réseau, d’une connexion à une base de données interrompue ou d’un délai d’attente lorsqu’un service est occupé. Parfois, un échec temporaire peut être résolu simplement en relançant la requête. Pour de nombreux services Azure, le Kit de développement logiciel client implémente des relances automatiques, d’une façon transparente pour l’appelant ; consultez [Guide spécifique relatif au service de relance][retry-service-specific guidance].
+**Relancez des échecs temporaires**. Les échecs temporaires peuvent résulter d’une perte momentanée de la connectivité réseau, d’une connexion à une base de données interrompue ou d’un délai d’attente lorsqu’un service est occupé. Parfois, un échec temporaire peut être résolu simplement en relançant la requête. Pour de nombreux services Azure, le Kit de développement logiciel client implémente des relances automatiques, d’une façon transparente pour l’appelant ; consultez [Guide spécifique relatif au service de relance][retry-service-specific guidance].
 
-Chaque tentative de relance augmente la latence totale. En outre, un trop grand nombre de demandes en échec peut provoquer un goulot d’étranglement, étant donné que les demandes s’accumulent dans la file d’attente. Ces demandes bloquées peuvent contenir des ressources système critiques telles que la mémoire, des threads, les connexions de la base de données, etc. Cela peut provoquer une succession d’échecs. Pour éviter ce problème, augmentez le délai entre chaque relance et limitez le nombre total de demandes en échec.
+Chaque tentative de relance augmente la latence totale. En outre, un trop grand nombre de demandes en échec peut provoquer un goulot d’étranglement, étant donné que les demandes s’accumulent dans la file d’attente. Ces demandes bloquées peuvent contenir des ressources système critiques telles que la mémoire, des threads, les connexions de la base de données, etc. Cela peut provoquer une succession d’échecs. Pour éviter ce problème, augmentez le délai entre chaque relance et limitez le nombre total de demandes en échec. 
 
-![Contrat SLA composite](./images/retry.png)
+![](./images/retry.png)
 
-Pour plus d’informations, consultez [Modèle de relance][retry-pattern].
-
-### <a name="load-balance-across-instances"></a>Équilibrer la charge sur les instances
-Pour l’extensibilité, une application cloud doit être en mesure de monter en charge en ajoutant d’autres instances. Cette approche améliore également la résilience, car des instances défectueuses peuvent être supprimées de la rotation.  
-
-Par exemple : 
+**Équilibrez la charge sur les instances**. Pour l’extensibilité, une application cloud doit être en mesure de monter en charge en ajoutant d’autres instances. Cette approche améliore également la résilience, car des instances défectueuses peuvent être supprimées de la rotation. Par exemple : 
 
 * Placez au moins deux machines virtuelles derrière un équilibreur de charge. L’équilibreur de charge répartit le trafic vers toutes les machines virtuelles. Consultez [Exécuter des machines virtuelles à charge équilibrée à des fins d’extensibilité et de disponibilité][ra-multi-vm].
 * Montez en charge une application Azure App Service à plusieurs instances. App Service équilibre automatiquement la charge entre les instances. Consultez [Application web de base][ra-basic-web].
 * Utilisez [Azure Traffic Manager] [ tm] pour répartir le trafic sur un ensemble de points de terminaison.
 
-### <a name="replicate-data"></a>Réplication des données
-La réplication de données est une stratégie générale pour gérer les échecs non temporaires dans un magasin de données. De nombreuses technologies de stockage fournissent une stratégie de réplication intégrée, y compris Azure SQL Database, Cosmos DB et Apache Cassandra.  
-
-Il est important de tenir compte des chemins d’accès de lecture et d’écriture. Selon la technologie de stockage, vous pouvez trouver plusieurs réplicas accessibles en écriture, ou un seul réplica accessible en écriture et plusieurs réplicas en lecture seule. 
+**Répliquez des données**. La réplication de données est une stratégie générale pour gérer les échecs non temporaires dans un magasin de données. De nombreuses technologies de stockage fournissent une stratégie de réplication intégrée, y compris Azure SQL Database, Cosmos DB et Apache Cassandra. Il est important de tenir compte des chemins d’accès de lecture et d’écriture. Selon la technologie de stockage, vous pouvez trouver plusieurs réplicas accessibles en écriture, ou un seul réplica accessible en écriture et plusieurs réplicas en lecture seule. 
 
 Pour optimiser la disponibilité, les réplicas peuvent être placés dans plusieurs régions. Toutefois, cela augmente la latence lors de la réplication des données. En règle générale, la réplication entre les régions est effectuée de manière asynchrone, ce qui implique un modèle de cohérence éventuel et une perte de données potentielle si un réplica échoue. 
 
-### <a name="degrade-gracefully"></a>Dégradation normale
-Si un service échoue et qu’il n’existe aucun chemin d’accès de basculement, l’application devrait se dégrader normalement, tout en offrant une expérience utilisateur acceptable. Par exemple : 
+**Appliquer une dégradation normale**. Si un service échoue et qu’il n’existe aucun chemin d’accès de basculement, l’application devrait se dégrader normalement, tout en offrant une expérience utilisateur acceptable. Par exemple : 
 
 * Placer un élément de travail dans une file d’attente, pour qu’il soit traité ultérieurement. 
 * Retourner une valeur estimée.
 * Utiliser des données mises en cache localement. 
 * Afficher un message d’erreur pour l’utilisateur. (Cette option est préférable plutôt que l’application cesse de répondre aux demandes.)
 
-### <a name="throttle-high-volume-users"></a>Limiter les utilisateurs à volume important
-Parfois, un petit nombre d’utilisateurs peut créer une charge excessive. Cela peut avoir un impact sur les autres utilisateurs, réduisant ainsi la disponibilité globale de votre application.
+**Limitez les utilisateurs à volume important**. Parfois, un petit nombre d’utilisateurs peut créer une charge excessive. Cela peut avoir un impact sur les autres utilisateurs, réduisant ainsi la disponibilité globale de votre application.
 
 Si un seul client soumet un nombre excessif de demandes, l’application peut limiter le client pendant un certain temps. Pendant la période de limitation, l’application refuse certaines ou toutes les demandes de ce client (en fonction de la stratégie de limitation exacte). Le seuil de limitation peut dépendre du niveau de service du client. 
 
-La limitation n’implique pas que le client agissait à des fins malveillantes, uniquement qu’il a dépassé son quota de service. Dans certains cas, un consommateur peut constamment dépasser son quota, ou bien mal se comporter. Dans ce cas, vous pouvez aller plus loin et bloquer l’utilisateur. En règle générale, cela se fait en bloquant une clé API ou une plage d’adresses IP.
+La limitation n’implique pas que le client agissait à des fins malveillantes, uniquement qu’il a dépassé son quota de service. Dans certains cas, un consommateur peut constamment dépasser son quota, ou bien mal se comporter. Dans ce cas, vous pouvez aller plus loin et bloquer l’utilisateur. En règle générale, cela se fait en bloquant une clé API ou une plage d’adresses IP. Pour en savoir plus, consultez le [Modèle de limitation][throttling-pattern].
 
-Pour en savoir plus, consultez le [Modèle de limitation][throttling-pattern].
+**Utilisez un disjoncteur**. Le modèle [Disjoncteur][circuit-breaker-pattern] peut empêcher qu’une application ne tente d’exécuter à plusieurs reprises une opération qui risque d’échouer. Le disjoncteur inclut dans un wrapper des appels vers un service et suit le nombre d’échecs récents. Si le nombre d’échec dépasse un seuil, le disjoncteur renvoie un code d’erreur sans avoir appelé le service. Le service a ainsi le temps de récupérer. 
 
-### <a name="use-a-circuit-breaker"></a>Utilisation d’un disjoncteur
-Le modèle Disjoncteur peut empêcher qu’une application ne tente d’exécuter à plusieurs reprises une opération qui risque d’échouer. Cela ressemble à un disjoncteur physique, un commutateur qui interrompt le flux de courant lorsqu’un circuit est surchargé.
+**Utilisez le nivellement de charge pour lisser les pics de trafic**. Les applications peuvent rencontrer des pics soudains dans le trafic, ce qui peut surcharger les services sur le serveur principal. Si un serveur principal ne parvient pas à répondre aux demandes assez rapidement, cela peut provoquer un envoi des demandes en file d’attente (sauvegarde) ou une limitation de l’application par le service. Pour éviter ce problème, vous pouvez utiliser une file d’attente en tant que mémoire tampon. Lorsqu’il y a un nouvel élément de travail, au lieu d’appeler le serveur principal immédiatement, l’application met un élément de travail en file d’attente pour qu’il soit exécuté de façon asynchrone. La file d’attente agit comme une mémoire tampon qui lisse des pics de charge. Pour en savoir plus, consultez [Modèle de nivellement de la charge basé sur une file d’attente][load-leveling-pattern].
 
-Le disjoncteur renvoie les appels à un service. Il possède trois états :
-
-* **Fermé**. C’est l’état normal. Le disjoncteur envoie les demandes au service et un compteur effectue le suivi du nombre d’échecs récents. Si le nombre d’échecs dépasse un seuil sur une période donnée, le disjoncteur passe à l’état ouvert. 
-* **Ouvert**. Dans cet état, le disjoncteur annule immédiatement toutes les demandes, sans appeler le service. L’application doit utiliser une mesure d’atténuation, telle que la lecture des données à partir d’un réplica ou simplement retourner une erreur à l’utilisateur. Lorsque le disjoncteur passe à l’état ouvert, un délai se met en marche. Quand le délai expire, le disjoncteur passe à l’état demi-ouvert.
-* **Demi-ouvert**. Dans cet état, le disjoncteur permet à un nombre limité de demandes de passer par le service. Si elles y parviennent, le service est censé être récupéré, et le disjoncteur repasse à l’état fermé. Dans le cas contraire, il revient à l’état ouvert. L’état Demi-ouvert empêche qu’un service en train de récupérer ne soit submergé soudainement de demandes.
-
-Pour plus d’informations, consultez [Modèle Disjoncteur][circuit-breaker-pattern].
-
-### <a name="use-load-leveling-to-smooth-out-spikes-in-traffic"></a>Utiliser le nivellement de charge pour lisser les pics de trafic
-Les applications peuvent rencontrer des pics soudains dans le trafic, ce qui peut surcharger les services sur le serveur principal. Si un serveur principal ne parvient pas à répondre aux demandes assez rapidement, cela peut provoquer un envoi des demandes en file d’attente (sauvegarde) ou une limitation de l’application par le service.
-
-Pour éviter ce problème, vous pouvez utiliser une file d’attente en tant que mémoire tampon. Lorsqu’il y a un nouvel élément de travail, au lieu d’appeler le serveur principal immédiatement, l’application met un élément de travail en file d’attente pour qu’il soit exécuté de façon asynchrone. La file d’attente agit comme une mémoire tampon qui lisse des pics de charge. 
-
-Pour en savoir plus, consultez [Modèle de nivellement de la charge basé sur une file d’attente][load-leveling-pattern].
-
-### <a name="isolate-critical-resources"></a>Isoler les ressources critiques
-Des successions d’échecs peuvent parfois se produire dans un sous-système, provoquant des défaillances dans d’autres parties de l’application. Cela peut se produire si une défaillance empêche que certaines ressources, telles que des threads ou des sockets, ne soient libérées en temps voulu, menant à un épuisement des ressources. 
+**Isolez les ressources critiques**. Des successions d’échecs peuvent parfois se produire dans un sous-système, provoquant des défaillances dans d’autres parties de l’application. Cela peut se produire si une défaillance empêche que certaines ressources, telles que des threads ou des sockets, ne soient libérées en temps voulu, menant à un épuisement des ressources. 
 
 Pour éviter ce problème, vous pouvez partitionner un système en groupes isolés, de manière à ce qu’une défaillance présente dans une partition ne détériore pas l’ensemble du système. Cette technique est parfois appelée le modèle de cloisonnement.
 
@@ -260,19 +233,13 @@ Exemples :
 * Utilisez des pools de threads distincts pour isoler différents services. Cela permet d’éviter les successions d’échecs en cas de défaillance d’un des services. Pour obtenir un exemple, consultez la bibliothèque [Netflix Hystrix][hystrix].
 * Utilisez des [conteneurs][containers] pour limiter les ressources disponibles pour un sous-système spécifique. 
 
-![Contrat SLA composite](./images/bulkhead.png)
+![](./images/bulkhead.png)
 
-### <a name="apply-compensating-transactions"></a>Appliquer des transactions de compensation
-Une transaction de compensation est une transaction qui annule les effets d’une autre transaction terminée.
-
-Dans un système distribué, il est parfois difficile d’obtenir une cohérence transactionnelle élevée. Les transactions de compensation sont un moyen de garantir la cohérence à l’aide d’une série de transactions individuelles plus petites, qui peuvent être annulées à chaque étape.
+**Appliquez des transactions de compensation**. Une [transaction de compensation][compensating-transaction-pattern] est une transaction qui annule les effets d’une autre transaction terminée. Dans un système distribué, il est parfois difficile d’obtenir une cohérence transactionnelle élevée. Les transactions de compensation sont un moyen de garantir la cohérence à l’aide d’une série de transactions individuelles plus petites, qui peuvent être annulées à chaque étape.
 
 Par exemple, pour réserver un voyage, un client peut réserver une voiture, un hôtel et un vol. Si une de ces étapes échoue, l’opération entière échoue. Au lieu de tenter d’utiliser une unique transaction distribuée pour l’intégralité de l’opération, vous pouvez définir une transaction de compensation pour chaque étape. Par exemple, pour annuler la réservation d’une voiture, vous annulez la réservation. Pour exécuter l’ensemble de l’opération, un coordinateur exécute chaque étape. Si une étape échoue, le coordinateur applique des transactions de compensation pour annuler toutes les étapes déjà effectuées. 
 
-Pour en savoir plus, consultez le [Modèle de transaction de compensation][compensating-transaction-pattern]. 
-
-
-## <a name="testing-for-resiliency"></a>Test pour la résilience
+## <a name="test-for-resiliency"></a>Tester la résilience
 En règle générale, vous ne pouvez pas tester la résilience de la même façon que vous testez les fonctionnalités de l’application (en exécutant des tests unitaires, etc). Au lieu de cela, vous devez tester le fonctionnement de la charge de travail de bout en bout dans les conditions d’échec qui ne se produisent que par intermittence.
 
 Les tests sont un processus itératif. Testez l’application, mesurez le résultat, analysez et résolvez tous les échecs résultants, puis répétez le processus.
@@ -294,12 +261,12 @@ C’est une autre raison qui démontre pourquoi il est important d’analyser le
 
 **Test de charge**. Testez la charge de l’application à l’aide d’un outil tel que [Visual Studio Team Services][vsts] ou [Apache JMeter][jmeter]. Le test de charge est essentiel pour identifier les défaillances qui se produisent uniquement lors du chargement, telles que la saturation de la base de données principale ou la limitation du service. Testez la charge maximale à l’aide des données de production ou de données synthétiques qui soient aussi proches que possible des données de production. L’objectif est de voir comment se comporte l’application dans des conditions réelles.   
 
-## <a name="resilient-deployment"></a>Déploiement résilient
+## <a name="deploy-using-reliable-processes"></a>Déployer à l’aide de processus fiables
 Une fois qu’une application est déployée en production, les mises à jour deviennent une source possible d’erreurs. Dans le pire des cas, une mise à jour incorrecte peut entraîner un temps d’arrêt. Pour éviter cela, le processus de déploiement doit être prévisible et renouvelable. Le déploiement inclut l’approvisionnement des ressources Azure, le déploiement du code de l’application, et l’application des paramètres de configuration. Une mise à jour peut impliquer les trois, ou un sous-ensemble. 
 
 Le point essentiel est que les déploiements manuels sont sujets à l’erreur. Par conséquent, il est recommandé d’avoir un processus idempotent automatisé, que vous pouvez exécuter à la demande et exécutez de nouveau si quelque chose échoue. 
 
-* Utilisez les modèles Resource Manager afin d’automatiser l’approvisionnement des ressources Azure.
+* Utilisez les modèles Azure Resource Manager afin d’automatiser l’approvisionnement des ressources Azure.
 * Utilisez la [Configuration de l’état souhaité Azure Automation][dsc] (DSC) pour configurer les machines virtuelles.
 * Utilisez un processus de déploiement automatisé pour le code d’application.
 
@@ -315,7 +282,7 @@ Une autre question qui se pose est comment déployer une mise à jour de l’app
 
 Peu importe l’approche que vous choisissez, assurez-vous que vous pouvez revenir au dernier déploiement correct, au cas où la nouvelle version ne fonctionne pas. En outre, le cas échéant, les journaux d’application doivent indiquer quelle version a provoqué l’erreur. 
 
-## <a name="monitoring-and-diagnostics"></a>Surveillance et diagnostics
+## <a name="monitor-to-detect-failures"></a>Surveiller et détecter des défaillances
 La surveillance et les diagnostics sont cruciaux pour assurer la résilience. En cas de problème, vous devez savoir qu’il y a un échec, et vous devez en comprendre la cause. 
 
 La surveillance d’un système distribué à grande échelle constitue une difficulté importante. Pensez à une application qui s’exécute sur quelques dizaines de machines virtuelles &mdash; il n’est pas pratique de se connecter à chaque machine virtuelle une à une, et d’examiner les fichiers journaux, en essayant de résoudre un problème. De plus, le nombre d’instances de machine virtuelle n’est probablement pas statique. Les machines virtuelles sont ajoutées et supprimées tandis que l’application augmente et diminue la taille des instances. Parfois une instance peut échouer et doit être réapprovisionnée. En outre, une application cloud classique peut utiliser plusieurs banques de données (stockage Azure, SQL Database, Cosmos DB, cache Redis), et une seule action utilisateur peut couvrir plusieurs sous-systèmes. 
@@ -341,7 +308,7 @@ Les journaux d’application sont une source importante de données de diagnosti
 
 Pour plus d’informations sur la surveillance et les diagnostics, consultez [Guide de surveillance et de diagnostics][monitoring-guidance].
 
-## <a name="manual-failure-responses"></a>Réponses d’échec manuelles
+## <a name="respond-to-failures"></a>Répondre aux défaillances
 Les sections précédentes ont porté sur les stratégies de récupération automatique, qui sont critiques pour la haute disponibilité. Toutefois, une intervention manuelle est parfois nécessaire.
 
 * **Alertes**. Surveillez votre application pour trouver des signes précurseurs pouvant nécessiter une intervention proactive. Par exemple, si vous voyez que SQL Database ou Cosmos DB limitent régulièrement votre application, vous devrez peut-être améliorer la capacité de votre base de données ou optimiser vos requêtes. Dans cet exemple, même si l’application peut gérer les erreurs de limitation en toute transparence, votre télémétrie doit toujours déclencher une alerte afin que vous puissiez suivre l’activité.  
