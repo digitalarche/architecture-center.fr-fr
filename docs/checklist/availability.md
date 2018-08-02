@@ -4,12 +4,12 @@ description: Liste de contrôle fournissant des indications relatives aux probl�
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist
-ms.openlocfilehash: 324d8200d822eb1a7dce95ba4b2a7f29b00fb291
-ms.sourcegitcommit: 441185360db49cfb3cf39527b68f318d17d4cb3d
+ms.openlocfilehash: cea5baf8c37bf793c5de60f6c2be809629df072b
+ms.sourcegitcommit: 2154e93a0a075e1f7425a6eb11fc3f03c1300c23
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/19/2018
-ms.locfileid: "27973108"
+ms.lasthandoff: 07/30/2018
+ms.locfileid: "39352625"
 ---
 # <a name="availability-checklist"></a>Liste de contrôle de disponibilité
 
@@ -21,7 +21,7 @@ La disponibilité est la proportion de temps pendant laquelle un système est fo
 
 **Décomposez les charges de travail par objectif de niveau de service.** Si un service est composé de charges de travail critiques et moins critiques, gérez-les de manière distincte et définissez les fonctions de service et le nombre d’instances nécessaires à la satisfaction de leurs exigences de disponibilité.
 
-**Réduisez et comprenez les dépendances de services.** Dans la mesure du possible, réduisez le nombre de services utilisés et assurez-vous de comprendre l’ensemble des dépendances de fonctions et de services existant dans le système. Il s’agit notamment de la nature de ces dépendances et de l’incidence des défaillances ou de la réduction des performances respectives dans l’application. Consultez [Définissez vos exigences en matière de résilience](../resiliency/index.md#defining-your-resiliency-requirements).
+**Réduisez et comprenez les dépendances de services.** Dans la mesure du possible, réduisez le nombre de services utilisés et assurez-vous de comprendre l’ensemble des dépendances de fonctions et de services existant dans le système. Il s’agit notamment de la nature de ces dépendances et de l’incidence des défaillances ou de la réduction des performances respectives dans l’application.
 
 **Concevez des tâches et des messages pour qu’ils soient idempotents lorsque cela est possible**. Une opération est idempotente si elle peut être répétée plusieurs fois et produire le même résultat. L’idempotence peut garantir que les demandes dupliquées ne provoquent pas de problèmes. Les consommateurs de messages et les opérations qu’ils exécutent doivent être idempotents, de manière que la réitération d’une opération exécutée auparavant n’invalide pas les résultats. Cela peut impliquer la détection des messages dupliqués ou la garantie de la cohérence à l’aide d’une approche optimiste de traitement des conflits.
 

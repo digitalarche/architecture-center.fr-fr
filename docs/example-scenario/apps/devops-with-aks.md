@@ -3,12 +3,12 @@ title: Pipeline CI/CD pour les charges de travail basées sur des conteneurs
 description: Scénario éprouvé pour créer un pipeline DevOps pour une application web Node.js qui utilise Jenkins, Azure Container Registry, Azure Kubernetes Service, Cosmos DB et Grafana.
 author: iainfoulds
 ms.date: 07/05/2018
-ms.openlocfilehash: d9f6571234a0c3e67a233cfda1a37f6fb32929a3
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: dceb4ad3c34ec43a54d802772f5817cacdd3929c
+ms.sourcegitcommit: 8b5fc0d0d735793b87677610b747f54301dcb014
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060759"
+ms.lasthandoff: 07/29/2018
+ms.locfileid: "39334213"
 ---
 # <a name="cicd-pipeline-for-container-based-workloads"></a>Pipeline CI/CD pour les charges de travail basées sur des conteneurs
 
@@ -119,7 +119,7 @@ Le déploiement prend 15 à 20 minutes.
 
 ## <a name="pricing"></a>Tarifs
 
-Pour explorer le coût d’exécution de ce scénario, tous les services sont préconfigurés dans le calculateur de coûts. Pour pouvoir observer l’évolution de la tarification pour votre cas d’usage particulier, modifiez les variables appropriées en fonction du trafic que vous escomptez. en fonction du trafic que vous escomptez.
+Pour explorer le coût d’exécution de ce scénario, tous les services sont préconfigurés dans le calculateur de coûts. Pour pouvoir observer l’évolution de la tarification pour votre cas d’usage particulier, modifiez les variables appropriées en fonction du trafic que vous escomptez.
 
 Nous proposons trois exemples de profils de coût basés sur le nombre d’images de conteneur à stocker et les nœuds Kubernetes pour exécuter vos applications.
 

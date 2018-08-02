@@ -4,12 +4,12 @@ description: Guide spécifique relatif au service pour définir le mécanisme de
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 39d342dc96e3d0d923ce159c392d9427359a4639
-ms.sourcegitcommit: f7fa67e3bdbc57d368edb67bac0e1fdec63695d2
+ms.openlocfilehash: 72dfb59c3357c5f14806a33ef5f6cdd3e7937915
+ms.sourcegitcommit: 8b5fc0d0d735793b87677610b747f54301dcb014
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/05/2018
-ms.locfileid: "37843624"
+ms.lasthandoff: 07/29/2018
+ms.locfileid: "39334162"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Guide du mécanisme de nouvelle tentative relatif aux différents services
 
@@ -23,7 +23,7 @@ Le tableau suivant récapitule les fonctionnalités de nouvelle tentative pour l
 | --- | --- | --- | --- | --- |
 | **[Azure Active Directory](#azure-active-directory)** |Native dans la bibliothèque ADAL |Incorporée dans la bibliothèque ADAL |Interne |Aucun |
 | **[Cosmos DB](#cosmos-db)** |Native dans le service |Non configurable |Globale |TraceSource |
-| **[Event Hubs](#azure-event-hubs)** |Native dans le client |Par programme |Client |Aucun |
+| **[Event Hubs](#event-hubs)** |Native dans le client |Par programme |Client |Aucun |
 | **[Cache Redis](#azure-redis-cache)** |Native dans le client |Par programme |Client |TextWriter |
 | **[Recherche](#azure-search)** |Native dans le client |Par programme |Client |ETW ou personnalisé |
 | **[Service Bus](#service-bus)** |Native dans le client |Par programme |Gestionnaire d’espace de noms, fabrique de messagerie et client |ETW |
