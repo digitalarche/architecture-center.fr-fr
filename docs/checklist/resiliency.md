@@ -4,12 +4,12 @@ description: Liste de vérification fournissant des indications relatives aux pr
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: ca4bf77c9348f6c656348d9cd61d3a1241d69ba8
-ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
+ms.openlocfilehash: 883424d5d3535f822cdba61ecb9520ce05f75ec7
+ms.sourcegitcommit: 2154e93a0a075e1f7425a6eb11fc3f03c1300c23
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/08/2018
-ms.locfileid: "29782612"
+ms.lasthandoff: 07/30/2018
+ms.locfileid: "39352642"
 ---
 # <a name="resiliency-checklist"></a>Liste de vérification de résilience
 
@@ -17,7 +17,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 ## <a name="requirements"></a>Configuration requise
 
-**Définissez les exigences de disponibilité de votre client.** Votre client aura des exigences de disponibilité spécifiques pour les composants de votre application, ce qui aura une incidence sur sa conception. Obtenez l’accord de votre client concernant les objectifs de disponibilité de chaque élément de votre application. Sinon, votre conception risque de ne pas répondre à ses attentes. Pour plus d’informations, consultez [Définissez vos exigences en matière de résilience](../resiliency/index.md#defining-your-resiliency-requirements).
+**Définissez les exigences de disponibilité de votre client.** Votre client aura des exigences de disponibilité spécifiques pour les composants de votre application, ce qui aura une incidence sur sa conception. Obtenez l’accord de votre client concernant les objectifs de disponibilité de chaque élément de votre application. Sinon, votre conception risque de ne pas répondre à ses attentes. Pour plus d’informations, consultez l’article [Conception d’applications résilientes pour Azure](../resiliency/index.md).
 
 ## <a name="application-design"></a>Conception des applications
 
@@ -58,7 +58,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Assurez-vous que les services tiers que vous consommez incluent un contrat de niveau de service (SLA).** Si votre application dépend d’un service tiers, mais que ce service tiers n’offre aucune garantie de disponibilité sous la forme d’un contrat SLA, la disponibilité de votre application ne peut pas non plus être garantie. Le niveau de votre contrat SLA repose sur le composant le moins disponible de votre application.
 
-**Implémentez des modèles de résilience pour les opérations distantes si nécessaire.** Si votre application dépend de la communication entre des services distants, suivez les modèles de conception pour traiter les échecs temporaires, par exemple le [modèle Nouvelle tentative][retry-pattern] et le [modèle Disjoncteur][circuit-breaker]. Pour plus d’informations, consultez [Stratégies de résilience](../resiliency/index.md#resiliency-strategies).
+**Implémentez des modèles de résilience pour les opérations distantes si nécessaire.** Si votre application dépend de la communication entre des services distants, suivez les [modèles de conception](../patterns/category/resiliency.md) pour traiter les échecs temporaires, par exemple le [modèle Nouvelle tentative][retry-pattern] et le [modèle Disjoncteur][circuit-breaker]. 
 
 **Implémentez des opérations asynchrones dès que possible.** Les opérations synchrones peuvent monopoliser les ressources et de bloquer les autres opérations pendant que l’appelant attend la fin du processus. Concevez chaque partie de votre application de manière à permettre les opérations asynchrones dès que possible. Pour plus d’informations sur l’implémentation de la programmation asynchrone en C#, consultez [Programmation asynchrone avec async et await][asynchronous-c-sharp].
 
@@ -111,7 +111,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Mesurez les statistiques d’appels distants et mettez ces informations à disposition de l’équipe responsable de l’application.**  Si vous n’effectuez pas de suivi et de rapport des statistiques d’appels distants en temps réel, et que vous n’offrez pas un moyen simple de consulter ces informations, l’équipe ne bénéficiera pas d’une vue instantanée de l’intégrité de votre application. Par ailleurs, si vous mesurez seulement la durée moyenne des appels distants, vous ne disposerez pas d’informations suffisantes pour déceler les problèmes affectant les services. Résumez les mesures liées aux appels distants, telles que la latence, le débit et les erreurs, dans les centiles 99 et 95. Effectuez une analyse statistique sur les mesures pour détecter les erreurs qui se produisent dans chaque centile.
 
-**Suivez le nombre d’exceptions temporaires et de nouvelles tentatives sur une plage de temps appropriée.** Si vous ne suivez et ne surveillez pas les exceptions temporaires et les nouvelles tentatives au fil du temps, il se peut qu’une défaillance ou un problème soient dissimulés par la logique de nouvelle tentative de votre application. Autrement dit, si votre surveillance et votre journalisation montrent uniquement la réussite ou l’échec d’une opération, le fait que l’opération a dû être retentée plusieurs fois en raison d’exceptions sera dissimulé. Une augmentation des exceptions au fil du temps indique que le service rencontre un problème et risque d’échouer. Pour plus d’informations, consultez [Guide spécifique relatif au service de nouvelle tentative][retry-service-guidance].
+**Suivez le nombre d’exceptions temporaires et de nouvelles tentatives sur une plage de temps appropriée.** Si vous ne suivez et ne surveillez pas les exceptions temporaires et les nouvelles tentatives au fil du temps, il se peut qu’une défaillance ou un problème soit dissimulé par la logique de nouvelle tentative de votre application. Autrement dit, si votre surveillance et votre journalisation montrent uniquement la réussite ou l’échec d’une opération, le fait que l’opération a dû être retentée plusieurs fois en raison d’exceptions sera dissimulé. Une augmentation des exceptions au fil du temps indique que le service rencontre un problème et risque d’échouer. Pour plus d’informations, consultez [Guide spécifique relatif au service de nouvelle tentative][retry-service-guidance].
 
 **Implémentez un système d’avertissement anticipé qui alerte un opérateur.** Identifiez les indicateurs de performance clés de l’intégrité de votre application, tels que les exceptions temporaires et la latence des appels distants, et définissez des valeurs de seuil appropriées pour chacun d’eux. Envoyez une alerte à l’équipe chargée des opérations quand une valeur de seuil est atteinte. Définissez ces seuils à des niveaux qui identifient les problèmes avant qu’ils ne deviennent critiques et n’exigent la mise en œuvre d’une récupération.
 
@@ -157,7 +157,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Organisez les groupes de ressources par fonction et cycle de vie.**  En règle générale, un groupe de ressources doit contenir des ressources qui partagent le même cycle de vie. Cela simplifie la gestion des déploiements, la suppression des déploiements de test et l’attribution des droits d’accès, réduisant ainsi le risque de suppression ou de modification accidentelle d’un déploiement de production. Créez des groupes de ressources distincts pour les environnements de production, de développement et de test. Dans un déploiement multirégion, placez les ressources pour chaque région dans des groupes de ressources distincts. Vous pourrez ainsi plus facilement redéployer une région sans affecter les autres régions.
 
-## <a name="next-steps"></a>étapes suivantes
+## <a name="next-steps"></a>Étapes suivantes
 
 - [Liste de vérification de la résilience pour des services Azure spécifiques](./resiliency-per-service.md)
 - [Analyse du mode d’échec](../resiliency/failure-mode-analysis.md)
