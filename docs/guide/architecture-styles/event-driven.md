@@ -2,12 +2,12 @@
 title: Style d’architecture basée sur les événements
 description: Décrit les avantages, les inconvénients et les bonnes pratiques pour les architectures basées sur les événements et les architectures IoT sur Azure
 author: MikeWasson
-ms.openlocfilehash: 3289bf784b02d62e3d0c1a29b4839c9be3501134
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: dbf6be5ed386d06f96c876993ad03e7cb0e3dded
+ms.sourcegitcommit: 8ec48a0e2c080c9e2e0abbfdbc463622b28de2f2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/23/2018
-ms.locfileid: "29478321"
+ms.lasthandoff: 08/18/2018
+ms.locfileid: "43016114"
 ---
 # <a name="event-driven-architecture-style"></a>Style d’architecture basée sur les événements
 
@@ -55,42 +55,9 @@ Dans le diagramme logique ci-dessus, chaque type de consommateur est représent�
 - Transmission non garantie. Dans certains systèmes, surtout dans les scénarios IoT, il est essentiel de garantir la transmission des événements.
 - Traitement des événements dans l’ordre ou une seule fois. Chaque type de consommateur s’exécute généralement dans plusieurs instances à des fins de résilience et de scalabilité. Cela peut être une source de problèmes si les événements doivent être traités dans l’ordre (dans un type de consommateur) ou si la logique de traitement n’est pas idempotent.
 
-## <a name="iot-architecture"></a>Architecture IoT
-
-Les architectures basées sur les événements sont des éléments essentiels dans les solutions IoT. Le diagramme suivant présente une architecture logique possible pour IoT. Le diagramme met en avant les composants de diffusion d’événements de l’architecture.
-
-![](./images/iot.png)
-
-La **passerelle cloud** ingère les événements d’appareils à la limite du cloud en utilisant un système de messagerie fiable et à faible latence.
-
-Les appareils peuvent envoyer les événements directement à la passerelle cloud ou via une **passerelle de champ**. Une passerelle de champ est un appareil ou un logiciel spécialisé, généralement colocalisée avec les appareils, qui reçoit les événements et les transfère à la passerelle cloud. La passerelle de champ peut aussi prétraiter les événements d’appareils bruts, remplissant des fonctions de filtrage, d’agrégation ou de transformation de protocole.
-
-Après ingestion, les événements transitent par un ou plusieurs **processeurs de flux** qui peuvent acheminer les données (par exemple, vers le stockage) ou procéder à l’analytique et autres traitements.
-
-Voici quelques types de traitement courants. (Cette liste n’est certainement pas exhaustive.)
-
-- Écriture de données d’événement dans un stockage froid pour archivage ou traitement analytique par lots.
-
-- Analytique de séquence à chaud (« hot path analytics »), avec une analyse du flux d’événements en (quasi) temps réel, pour détecter les anomalies, reconnaître les modèles dans des fenêtres de temps glissantes ou déclencher des alertes quand une condition spécifique est rencontrée dans le flux. 
-
-- Gestion de types de messages d’appareils non liés à la télémétrie, tels que les notifications et les alarmes. 
-
-- Apprentissage automatique.
-
-Les cadres gris représentent les composants d’un système IoT qui ne sont pas directement liés à la diffusion d’événements, mais qui sont inclus ici par souci d’exhaustivité.
-
-- Le **registre d’appareils** est une base de données qui recense les appareils provisionnés, avec notamment leur ID et les métadonnées associées usuelles, telles que l’emplacement.
-
-- L’**API de provisionnement** est une interface externe commune pour provisionner et inscrire de nouveaux appareils.
-
-- Certaines solutions IoT autorisent l’envoi de **messages de commande et de contrôle** aux appareils.
-
-> Cette section a fourni une vue d’ensemble globale d’IoT et bon nombre de subtilités et d’écueils sont à prendre en considération. Pour obtenir une description et une présentation plus détaillées d’une architecture de référence, consultez [Microsoft Azure IoT Reference Architecture][iot-ref-arch] (PDF téléchargeable).
-
  <!-- links -->
 
 [competing-consumers]: ../../patterns/competing-consumers.md
-[iot-ref-arch]: https://azure.microsoft.com/updates/microsoft-azure-iot-reference-architecture-available/
 [minimize-coordination]: ../design-principles/minimize-coordination.md
 
 
