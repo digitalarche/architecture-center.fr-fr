@@ -4,12 +4,12 @@ description: Guide spécifique relatif au service pour définir le mécanisme de
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 72dfb59c3357c5f14806a33ef5f6cdd3e7937915
-ms.sourcegitcommit: 8b5fc0d0d735793b87677610b747f54301dcb014
+ms.openlocfilehash: 790c933458717f2cb4cde0741b1d22f6ae89cc39
+ms.sourcegitcommit: 8ec48a0e2c080c9e2e0abbfdbc463622b28de2f2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/29/2018
-ms.locfileid: "39334162"
+ms.lasthandoff: 08/18/2018
+ms.locfileid: "43016059"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Guide du mécanisme de nouvelle tentative relatif aux différents services
 
@@ -23,7 +23,9 @@ Le tableau suivant récapitule les fonctionnalités de nouvelle tentative pour l
 | --- | --- | --- | --- | --- |
 | **[Azure Active Directory](#azure-active-directory)** |Native dans la bibliothèque ADAL |Incorporée dans la bibliothèque ADAL |Interne |Aucun |
 | **[Cosmos DB](#cosmos-db)** |Native dans le service |Non configurable |Globale |TraceSource |
+| **Data Lake Store** |Native dans le client |Non configurable |Opérations individuelles |Aucun |
 | **[Event Hubs](#event-hubs)** |Native dans le client |Par programme |Client |Aucun |
+| **[IoT Hub](#iot-hub)** |Natif dans le SDK client |Par programme |Client |Aucun |
 | **[Cache Redis](#azure-redis-cache)** |Native dans le client |Par programme |Client |TextWriter |
 | **[Recherche](#azure-search)** |Native dans le client |Par programme |Client |ETW ou personnalisé |
 | **[Service Bus](#service-bus)** |Native dans le client |Par programme |Gestionnaire d’espace de noms, fabrique de messagerie et client |ETW |
@@ -124,6 +126,25 @@ client.RetryPolicy = RetryPolicy.Default;
 
 ### <a name="more-information"></a>Plus d’informations
 [Bibliothèque de client .NET Standard pour Azure Event Hubs](https://github.com/Azure/azure-event-hubs-dotnet)
+
+## <a name="iot-hub"></a>IoT Hub
+
+Azure IoT Hub est un service de connexion, de surveillance et de gestion des appareils pour le développement d’applications IoT.
+
+### <a name="retry-mechanism"></a>Mécanisme de nouvelle tentative
+
+Azure IoT device SDK peut détecter les erreurs dans le réseau, le protocole ou l’application. Selon le type d’erreur, le Kit de développement logiciel vérifie si une nouvelle tentative doit être effectuée. Si l’erreur est *récupérable*, le Kit de développement lance une nouvelle tentative à l’aide de la stratégie de nouvelle tentative configurée.
+
+La stratégie de nouvelle tentative par défaut est *temporisation exponentielle avec instabilité aléatoire*, mais celle-ci peut être configurée.
+
+### <a name="policy-configuration"></a>Configuration de la stratégie
+
+La configuration de la stratégie diffère selon le langage. Pour plus d’informations, consultez [Configuration de stratégie de nouvelle tentative d’IoT Hub](/azure/iot-hub/iot-hub-reliability-features-in-sdks#retry-policy-apis).
+
+### <a name="more-information"></a>Plus d’informations
+
+* [Stratégie de nouvelle tentative d’IoT Hub](/azure/iot-hub/iot-hub-reliability-features-in-sdks)
+* [Résoudre les problèmes de déconnexion d’appareil IoT Hub](/azure/iot-hub/iot-hub-troubleshoot-connectivity)
 
 ## <a name="azure-redis-cache"></a>Cache Redis Azure
 Cache Redis Azure est un service de cache de faible latence et d’accès aux données rapide basé sur le cache Redis open source connu. Il est sécurisé, géré par Microsoft et accessible à partir de n’importe quelle application dans Azure.

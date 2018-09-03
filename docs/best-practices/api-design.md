@@ -4,12 +4,12 @@ description: Conseils sur la création et la conception efficace d’une API web
 author: dragon119
 ms.date: 01/12/2018
 pnp.series.title: Best Practices
-ms.openlocfilehash: db9784f454e0b52b335d6dff3a054c2c59124c9f
-ms.sourcegitcommit: f7418f8bdabc8f5ec33ae3551e3fbb466782caa5
+ms.openlocfilehash: 68ed3f59e1fd63ae754ceabf27a182daa0de0e5d
+ms.sourcegitcommit: c4106b58ad08f490e170e461009a4693578294ea
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36209608"
+ms.lasthandoff: 08/10/2018
+ms.locfileid: "43016074"
 ---
 # <a name="api-design"></a>Conception d’API
 

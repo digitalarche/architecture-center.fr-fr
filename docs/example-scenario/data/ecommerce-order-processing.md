@@ -3,12 +3,12 @@ title: Traitement évolutif des commandes sur Azure
 description: Exemple de scénario pour la création d’un pipeline de traitement de commande hautement évolutif à l’aide d’Azure Cosmos DB.
 author: alexbuckgit
 ms.date: 07/10/2018
-ms.openlocfilehash: 541b5e9f523c64bc55526e4e2dffc57a5212e67f
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: 9fa0dc7c564270ee811b56169e05f7e743664838
+ms.sourcegitcommit: c4106b58ad08f490e170e461009a4693578294ea
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060980"
+ms.lasthandoff: 08/10/2018
+ms.locfileid: "43016016"
 ---
 # <a name="scalable-order-processing-on-azure"></a>Traitement évolutif des commandes sur Azure
 
@@ -41,7 +41,7 @@ Cette architecture décrit en détail les composants clés d’un pipeline de tr
 
 ### <a name="components"></a>Composants
 
-* [Cosmos DB][docs-cosmos-db] est une base de données multi-modèles et distribuée mondialement de Microsoft qui permet de faire évoluer à votre guise le débit et le stockage de vos solutions sur n’importe quel nombre de régions géographiques. Il offre des garanties en termes de débit, de latence, de disponibilité et de cohérence avec des contrats SLA complets. Ce scénario utilise Cosmos DB pour le stockage de flux d’événements et le stockage de capture instantanée et tire parti des fonctionnalités du flux de modification de Cosmos DB pour fournir une cohérence des données et une récupération après incident. 
+* [Cosmos DB][docs-cosmos-db] est une base de données multi-modèles et distribuée mondialement de Microsoft qui permet de faire évoluer à votre guise le débit et le stockage de vos solutions sur n’importe quel nombre de régions géographiques. Il offre des garanties en termes de débit, de latence, de disponibilité et de cohérence avec des contrats SLA complets. Ce scénario utilise Cosmos DB pour le stockage de flux d’événements et le stockage de capture instantanée et tire parti des fonctionnalités du [flux de modification de Cosmos DB][docs-cosmos-db-change-feed] pour fournir une cohérence des données et une récupération après incident. 
 * [Apache Kafka sur HDInsight][docs-kafka] est une implémentation de service géré d’Apache Kafka, une plateforme de diffusion en continu distribuée en open source pour la création d’applications et de pipelines de diffusion de données en continu et en temps réel. Kafka fournit également des fonctionnalités de courtier de messages semblables à une file d’attente, pour la publication et l’abonnement aux flux de données nommés. Ce scénario utilise Kafka pour traiter les événements entrants et en aval dans le pipeline de traitement des commandes. 
 
 ## <a name="considerations"></a>Considérations
@@ -107,6 +107,7 @@ Les autres ressources liées incluent :
 [architecture-diagram]: ./images/architecture-diagram-cosmos-db.png
 [docs-cosmos-db]: /azure/cosmos-db
 [docs-cosmos-db-change-feed]: /azure/cosmos-db/change-feed
+[docs-cosmos-db-online-backup-and-restore]: /azure/cosmos-db/online-backup-and-restore
 [docs-cosmos-db-regional-failover]: /azure/cosmos-db/regional-failover
 [docs-cosmos-db-guarantees]: /azure/cosmos-db/distribute-data-globally#AvailabilityGuarantees
 [docs-cosmos-db-use-cases]: /azure/cosmos-db/use-cases

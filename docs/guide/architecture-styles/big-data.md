@@ -2,12 +2,12 @@
 title: Style d’architecture Big Data
 description: Décrit les avantages, les inconvénients et les meilleures pratiques relatifs aux architectures Big Data sur Azure.
 author: MikeWasson
-ms.openlocfilehash: 4e8b58d5fa0f6a441d70e05ec7d6a0e668712563
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: d76192cf2fc680497ece0123ef412971c025f9dc
+ms.sourcegitcommit: 8ec48a0e2c080c9e2e0abbfdbc463622b28de2f2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24540887"
+ms.lasthandoff: 08/18/2018
+ms.locfileid: "43016080"
 ---
 # <a name="big-data-architecture-style"></a>Style d’architecture Big Data
 
@@ -69,7 +69,7 @@ Envisagez ce style d’architecture pour répondre aux besoins suivants :
 
 ## <a name="challenges"></a>Défis
 
-- **Complexité**. Les solutions Big Data peuvent être extrêmement complexes, avec nombreux composants pour gérer l’ingestion de données à partir de plusieurs sources de données. Il peut être difficile de générer, tester et dépanner des processus Big Data. En outre, pour optimiser les performances, il faut parfois utiliser de nombreux paramètres de configuration sur plusieurs systèmes.
+- **Complexité** : Les solutions Big Data peuvent être extrêmement complexes, avec nombreux composants pour gérer l’ingestion de données à partir de plusieurs sources de données. Il peut être difficile de générer, tester et dépanner des processus Big Data. En outre, pour optimiser les performances, il faut parfois utiliser de nombreux paramètres de configuration sur plusieurs systèmes.
 - **Compétences**. De nombreuses technologies Big Data sont hautement spécialisées et utilisent des infrastructures et des langues assez rares pour des architectures d’applications plus générales. En revanche, les technologies Big Data font évoluer de nouvelles API qui s’appuient sur plusieurs langages établis. Par exemple, le langage U-SQL dans Azure Data Lake Analytics repose sur une combinaison de Transact-SQL et C#. De même, les API basées sur SQL sont disponibles pour Hive, HBase et Spark.
 - **Maturité de la technologie**. La plupart des technologies utilisées en Big Data sont en pleine évolution. Tandis que les technologies Hadoop de base comme Hive et Pig se sont stabilisées, de nouvelles technologies, telles que Spark, introduisent des modifications et des améliorations importantes à chaque nouvelle version. Les services managés tels qu’Azure Data Lake Analytics et Azure Data Factory sont relativement récents par rapport aux autres services Azure et évolueront probablement au fil du temps.
 - **Sécurité**. Les solutions Big Data s’appuient généralement sur le stockage de toutes les données statiques dans un lac de données centralisé. La sécurisation de l’accès à ces données peut être difficile, en particulier lorsque les données doivent être ingérées et consommées par plusieurs applications et plateformes.
@@ -91,3 +91,39 @@ Envisagez ce style d’architecture pour répondre aux besoins suivants :
 - **Orchestrer l’ingestion de données**. Dans certains cas, les applications métier existantes peuvent écrire des fichiers de données destinés à un traitement par lots directement dans les conteneurs d’objets blob de stockage Azure, où ils peuvent être consommés par HDInsight ou Azure Data Lake Analytics. Toutefois, vous devez souvent orchestrer l’ingestion de données dans le lac de données à partir de sources de données externes ou locales. Utilisez un pipeline ou un workflow d’orchestration, tels que ceux pris en charge par Azure Data Factory ou Oozie, pour effectuer cette opération de manière prévisible et facile à gérer de manière centralisée.
 
 - **Nettoyer les données sensibles tôt**. Le workflow d’ingestion de données doit nettoyer les données sensibles tôt dans le processus pour éviter de les stocker dans le lac de données.
+
+## <a name="iot-architecture"></a>Architecture IoT
+
+L’Internet des objets (IoT) est un sous-ensemble spécialisé des solutions big data. Le diagramme suivant présente une architecture logique possible pour IoT. Le diagramme met en avant les composants de diffusion d’événements de l’architecture.
+
+![](./images/iot.png)
+
+La **passerelle cloud** ingère les événements d’appareils à la limite du cloud en utilisant un système de messagerie fiable et à faible latence.
+
+Les appareils peuvent envoyer les événements directement à la passerelle cloud ou via une **passerelle de champ**. Une passerelle de champ est un appareil ou un logiciel spécialisé, généralement colocalisée avec les appareils, qui reçoit les événements et les transfère à la passerelle cloud. La passerelle de champ peut aussi prétraiter les événements d’appareils bruts, remplissant des fonctions de filtrage, d’agrégation ou de transformation de protocole.
+
+Après ingestion, les événements transitent par un ou plusieurs **processeurs de flux** qui peuvent acheminer les données (par exemple, vers le stockage) ou procéder à l’analytique et autres traitements.
+
+Voici quelques types de traitement courants. (Cette liste n’est certainement pas exhaustive.)
+
+- Écriture de données d’événement dans un stockage froid pour archivage ou traitement analytique par lots.
+
+- Analytique de séquence à chaud (« hot path analytics »), avec une analyse du flux d’événements en (quasi) temps réel, pour détecter les anomalies, reconnaître les modèles dans des fenêtres de temps glissantes ou déclencher des alertes quand une condition spécifique est rencontrée dans le flux. 
+
+- Gestion de types de messages d’appareils non liés à la télémétrie, tels que les notifications et les alarmes. 
+
+- Apprentissage automatique.
+
+Les cadres gris représentent les composants d’un système IoT qui ne sont pas directement liés à la diffusion d’événements, mais qui sont inclus ici par souci d’exhaustivité.
+
+- Le **registre d’appareils** est une base de données qui recense les appareils provisionnés, avec notamment leur ID et les métadonnées associées usuelles, telles que l’emplacement.
+
+- L’**API de provisionnement** est une interface externe commune pour provisionner et inscrire de nouveaux appareils.
+
+- Certaines solutions IoT autorisent l’envoi de **messages de commande et de contrôle** aux appareils.
+
+> Cette section a fourni une vue d’ensemble globale d’IoT et bon nombre de subtilités et d’écueils sont à prendre en considération. Pour obtenir une description et une présentation plus détaillées d’une architecture de référence, consultez [Microsoft Azure IoT Reference Architecture][iot-ref-arch] (PDF téléchargeable).
+
+ <!-- links -->
+
+[iot-ref-arch]: https://azure.microsoft.com/updates/microsoft-azure-iot-reference-architecture-available/

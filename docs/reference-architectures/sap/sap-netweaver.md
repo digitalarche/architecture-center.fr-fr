@@ -3,12 +3,12 @@ title: Déployer SAP NetWeaver (Windows) pour AnyDB sur des machines virtuelles 
 description: Pratiques éprouvées d’exécution de SAP S/4HANA dans un environnement Linux sur Azure avec une haute disponibilité.
 author: lbrader
 ms.date: 05/11/2018
-ms.openlocfilehash: 90334e4872bdd15d59aa16286a031d07f3d1bb2f
-ms.sourcegitcommit: 86d86d71e392550fd65c4f76320d7ecf0b72e1f6
+ms.openlocfilehash: f4a33e7a3f30bdd6d8bdd41599a5e3b47501b874
+ms.sourcegitcommit: c4106b58ad08f490e170e461009a4693578294ea
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/06/2018
-ms.locfileid: "37864536"
+ms.lasthandoff: 08/10/2018
+ms.locfileid: "43016068"
 ---
 # <a name="deploy-sap-netweaver-windows-for-anydb-on-azure-virtual-machines"></a>Déployer SAP NetWeaver (Windows) pour AnyDB sur des machines virtuelles Azure
 
@@ -35,7 +35,7 @@ L’architecture est constituée des composants d’infrastructure et des compos
 - **Jumpbox**. Également appelé hôte bastion. Il s’agit d’une machine virtuelle sécurisée sur le réseau, utilisée par les administrateurs pour se connecter aux autres machines virtuelles.
 - **Contrôleurs de domaine Windows Server Active Directory**. Les contrôleurs de domaine sont utilisés pour l’ensemble des machines virtuelles et des utilisateurs du domaine.
 
-**Équilibreurs de charge** : Les équilibreurs de charge SAP intégrés et [Azure Load Balancer](/azure/load-balancer/load-balancer-overview) sont utilisés pour assurer la haute disponibilité. Les instances Azure Load Balancer servent à distribuer le trafic vers les machines virtuelles du sous-réseau de la couche Application.
+**Équilibreurs de charge** : Les instances [Azure Load Balancer](/azure/load-balancer/load-balancer-overview) servent à distribuer le trafic vers les machines virtuelles du sous-réseau de la couche Application. Il est possible d’obtenir une haute disponibilité au niveau de la couche données à l’aide d’équilibreurs de charge SAP intégrés, Azure Load Balancer, ou d’autres mécanismes, en fonction du système SGBD. Pour plus d’informations, consultez [Déploiement SGBD de machines virtuelles Azure pour SAP NetWeaver](/azure/virtual-machines/workloads/sap/dbms-guide). 
 
 **Groupes à haute disponibilité**. Les machines virtuelles pour les rôles SAP Web Dispatcher, Serveur d’applications SAP et (A)SCS sont réunies dans des [groupes à haute disponibilité](/azure/virtual-machines/windows/tutorial-availability-sets) distincts, et au moins deux machines virtuelles sont approvisionnées pour chaque rôle. Cela rend les machines virtuelles éligibles pour un [contrat de niveau de service](https://azure.microsoft.com/support/legal/sla/virtual-machines) (SLA) plus élevé.
 
