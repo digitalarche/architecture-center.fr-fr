@@ -2,12 +2,13 @@
 title: Style d’architecture CQRS
 description: Décrit les avantages, les inconvénients et les bonnes pratiques relatifs aux architectures CQRS
 author: MikeWasson
-ms.openlocfilehash: dd3da5886587159f57646ff1bfffa2094725f798
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.date: 08/30/2018
+ms.openlocfilehash: ba7af25f940a01e184279c4665f8fce8ebb71b23
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24539863"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43325922"
 ---
 # <a name="cqrs-architecture-style"></a>Style d’architecture CQRS
 
@@ -49,7 +50,7 @@ CQRS n’est pas une architecture de premier niveau qui s’applique à la total
 
 ## <a name="challenges"></a>Défis
 
-- **Complexité**. Le principe de base de CQRS est simple. Toutefois, cette architecture peut compliquer la conception d’applications, notamment si elle inclut le modèle d’approvisionnement en événements.
+- **Complexité** : Le principe de base de CQRS est simple. Toutefois, cette architecture peut compliquer la conception d’applications, notamment si elle inclut le modèle d’approvisionnement en événements.
 
 - **Messagerie**. Bien que CQRS ne nécessite aucune messagerie, il est fréquent d’utiliser une messagerie pour traiter les commandes et pour publier les événements de mise à jour. Dans ce cas, l’application doit gérer les échecs de messages ou les messages en double. 
 

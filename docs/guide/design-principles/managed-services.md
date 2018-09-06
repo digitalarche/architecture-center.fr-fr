@@ -2,12 +2,13 @@
 title: Utiliser les services gérés
 description: Dans la mesure du possible, privilégiez l’approche platform as a service (PaaS) plutôt que l’approche infrastructure as a service (IaaS)
 author: MikeWasson
-ms.openlocfilehash: 6d3cfb2e97b5a9b25bb1afd72059e981ef45c0d8
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.date: 08/30/2018
+ms.openlocfilehash: f6777a19e126a8a7f64be05dfad9bc503d27b1c3
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206604"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43325772"
 ---
 # <a name="use-managed-services"></a>Utiliser les services gérés
 

@@ -2,12 +2,13 @@
 title: Style d’architecture multiniveau
 description: Décrit les avantages, les inconvénients et les bonnes pratiques pour les architectures multiniveaux sur Azure
 author: MikeWasson
-ms.openlocfilehash: 8333b789e03a9da2b021abe7d7c193cd2af8d6bf
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.date: 08/30/2018
+ms.openlocfilehash: 2a113cefec8bd1c6c524030fbc459851094c09d6
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24540375"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43325748"
 ---
 # <a name="n-tier-architecture-style"></a>Style d’architecture multiniveau
 
@@ -47,14 +48,14 @@ Les architectures multiniveaux sont très courantes dans les applications locale
 - Évolution naturelle du modèle d’application classique.
 - Ouverte à un environnement hétérogène (Windows/Linux).
 
-## <a name="challenges"></a>Inconvénients
+## <a name="challenges"></a>Défis
 
 - Il est facile de se retrouver avec un niveau intermédiaire qui effectue uniquement des opérations CRUD sur la base de données, ce qui ajoute une latence supplémentaire pour un intérêt limité. 
 - La conception monolithique interdit tout déploiement indépendant de fonctionnalités.
 - La gestion d’une application IaaS s’avère plus fastidieuse que pour une application utilisant uniquement des services managés. 
 - Il peut être difficile de gérer la sécurité réseau dans un système de grande taille.
 
-## <a name="best-practices"></a>Bonnes pratiques
+## <a name="best-practices"></a>Meilleures pratiques
 
 - Utilisez la mise à l’échelle automatique pour gérer les évolutions au niveau de la charge. Consultez [Bonnes pratiques en matière de mise à l’échelle automatique][autoscaling].
 - Utilisez la messagerie asynchrone pour dissocier les niveaux.

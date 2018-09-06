@@ -2,12 +2,13 @@
 title: Penser la conception des applications pour augmenter la taille des instances
 description: Les applications cloud doivent être conçues pour une mise à l’échelle horizontale.
 author: MikeWasson
-ms.openlocfilehash: 8207f322d4312f6a30a8b0db7328b272c1d82de0
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.date: 08/30/2018
+ms.openlocfilehash: 9b57f4e6a17eece4f5283436e104c286602bb54f
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206608"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43325652"
 ---
 # <a name="design-to-scale-out"></a>Penser la conception des applications pour augmenter la taille des instances
 

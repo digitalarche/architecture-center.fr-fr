@@ -2,12 +2,13 @@
 title: Style d’architecture Web-File d’attente-Worker
 description: Décrit les avantages, les inconvénients et les meilleures pratiques pour les architectures Web-File d’attente-Worker sur Azure.
 author: MikeWasson
-ms.openlocfilehash: 545472e71ffcd43717ad24af0dc9218a221ca910
-ms.sourcegitcommit: 5d99b195388b7cabba383c49a81390ac48f86e8a
+ms.date: 08/30/2018
+ms.openlocfilehash: 0ebcf49c08c74cec3f1820da2d6f30ba95256e81
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37958787"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43325349"
 ---
 # <a name="web-queue-worker-architecture-style"></a>Style d’architecture Web-File d’attente-Worker
 

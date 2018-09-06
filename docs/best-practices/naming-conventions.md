@@ -4,12 +4,12 @@ description: Conventions d’affectation de noms pour les ressources Azure. Comm
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 6ad71a5ee39b8f1863c51dae0120dbdc7baf1f76
-ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
+ms.openlocfilehash: 8aa0b46d9f43107cfa4ae4be3160900249365702
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/24/2018
-ms.locfileid: "39229148"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43326318"
 ---
 # <a name="naming-conventions"></a>Conventions d’affectation de noms
 
@@ -61,7 +61,7 @@ Les affixes peuvent faire référence à différents aspects des ressources spé
 | Aspect | Exemples | Notes |
 | --- | --- | --- |
 | Environnement |dev, prod, AQ |Identifie l’environnement de la ressource |
-| Lieu |uw (ouest des États-Unis), ue (est des États-Unis) |Identifie la région dans laquelle la ressource est déployée |
+| Lieu |uw (USA Ouest), ue (USA Est) |Identifie la région dans laquelle la ressource est déployée |
 | Instance |01, 02 |Pour les ressources possédant plusieurs instances nommées (serveurs web, etc.) |
 | Produit ou service |service |Identifie le produit, l’application ou le service pris en charge par la ressource |
 | Rôle |sql, web, messagerie |Identifie le rôle de la ressource associée |
@@ -111,10 +111,10 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 | --- | --- | --- | --- | --- | --- | --- |
 |Réseau virtuel (VNet) |Groupe de ressources |2-64 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service short name>-vnet` |`profx-vnet` |
 |Sous-réseau |Réseau virtuel parent |2-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`web` |
-|Interface réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<vmname>-nic<num>` |`profx-sql1-nic1` |
+|Interface réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<vmname>-nic<num>` |`profx-sql1-vm1-nic1` |
 |Groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service short name>-<context>-nsg` |`profx-app-nsg` |
 |Règle de groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`sql-allow` |
-|Adresse IP publique |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<vm or service name>-pip` |`profx-sql1-pip` |
+|Adresse IP publique |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<vm or service name>-pip` |`profx-sql1-vm1-pip` |
 |Équilibreur de charge |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service or role>-lb` |`profx-lb` |
 |Configuration des règles d’équilibrage de charge |Équilibreur de charge |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`http` |
 |Azure Application Gateway |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service or role>-agw` |`profx-agw` |
@@ -195,4 +195,4 @@ Vous ne pouvez pas modifier le nom d’un compte de stockage ou d’un conteneur
 
 <!-- links -->
 
-[scaffold]: /azure/azure-resource-manager/resource-manager-subscription-governance
+[scaffold]: /azure/azure-resource-manager/resource-manager-azure-scaffold
