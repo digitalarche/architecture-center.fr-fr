@@ -4,12 +4,12 @@ description: Comment créer des applications résilientes dans Azure, pour une h
 author: MikeWasson
 ms.date: 05/26/2017
 ms.custom: resiliency
-ms.openlocfilehash: c32f093da4c47ef655dfca89b0410f063e9fe212
-ms.sourcegitcommit: 2154e93a0a075e1f7425a6eb11fc3f03c1300c23
+ms.openlocfilehash: b92a26323b4329f3dbe4f941b98da0080e730d65
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/30/2018
-ms.locfileid: "39352584"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389432"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Conception d’applications résilientes pour Azure
 
@@ -259,7 +259,7 @@ Mesurez les temps de récupération et vérifiez qu’ils répondent aux exigenc
 
 C’est une autre raison qui démontre pourquoi il est important d’analyser les points de défaillance possibles pendant la phase de conception. Les résultats de cette analyse doivent être entrés dans votre plan de test.
 
-**Test de charge**. Testez la charge de l’application à l’aide d’un outil tel que [Visual Studio Team Services][vsts] ou [Apache JMeter][jmeter]. Le test de charge est essentiel pour identifier les défaillances qui se produisent uniquement lors du chargement, telles que la saturation de la base de données principale ou la limitation du service. Testez la charge maximale à l’aide des données de production ou de données synthétiques qui soient aussi proches que possible des données de production. L’objectif est de voir comment se comporte l’application dans des conditions réelles.   
+**Test de charge**. Le test de charge est essentiel pour identifier les défaillances qui se produisent uniquement lors du chargement, telles que la saturation de la base de données principale ou la limitation du service. Testez la charge maximale à l’aide des données de production ou de données synthétiques qui soient aussi proches que possible des données de production. L’objectif est de voir comment se comporte l’application dans des conditions réelles.   
 
 ## <a name="deploy-using-reliable-processes"></a>Déployer à l’aide de processus fiables
 Une fois qu’une application est déployée en production, les mises à jour deviennent une source possible d’erreurs. Dans le pire des cas, une mise à jour incorrecte peut entraîner un temps d’arrêt. Pour éviter cela, le processus de déploiement doit être prévisible et renouvelable. Le déploiement inclut l’approvisionnement des ressources Azure, le déploiement du code de l’application, et l’application des paramètres de configuration. Une mise à jour peut impliquer les trois, ou un sous-ensemble. 
@@ -355,4 +355,3 @@ Voici les principaux points de l’article à retenir :
 [tm]: https://azure.microsoft.com/services/traffic-manager/
 [tm-failover]: /azure/traffic-manager/traffic-manager-monitoring
 [tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager/v1_0/
-[vsts]: https://www.visualstudio.com/features/vso-cloud-load-testing-vs.aspx
