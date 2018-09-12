@@ -3,12 +3,12 @@ title: Application multiniveau avec SQL Server
 description: Découvrez comment implémenter une architecture multiniveau dans Azure, pour la disponibilité, la sécurité, l’extensibilité et la facilité de gestion.
 author: MikeWasson
 ms.date: 07/19/2018
-ms.openlocfilehash: 42ba18e9ffef32c6990fbb888cc41e980fb4abea
-ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
+ms.openlocfilehash: fc761e940a25c4667146db9598d944bac2c32496
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/24/2018
-ms.locfileid: "39229131"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43326054"
 ---
 # <a name="n-tier-application-with-sql-server"></a>Application multiniveau avec SQL Server
 
@@ -220,7 +220,7 @@ Un déploiement pour cette architecture de référence est disponible sur [GitHu
     "witnessStorageAccountKey": "[replace-with-storagekey]"
     ```
 
-8. Dans le fichier `n-tier-windows.json`, recherchez toutes les instances de `testPassw0rd!23`, `test$!Passw0rd111` et `AweS0me@SQLServicePW`. Remplacez-les par vos propres mots de passe et enregistrez le fichier.
+8. Dans le fichier `n-tier-windows.json`, recherchez toutes les instances de `[replace-with-password]` et remplacez-les par un mot de passe fort. Enregistrez le fichier .
 
     > [!NOTE]
     > Si vous modifiez le nom d’utilisateur de l’administrateur, vous devez également mettre à jour les blocs `extensions` dans le fichier JSON. 

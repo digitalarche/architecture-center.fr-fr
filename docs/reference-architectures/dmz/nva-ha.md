@@ -6,12 +6,12 @@ ms.date: 12/06/2016
 pnp.series.title: Network DMZ
 pnp.series.prev: secure-vnet-dmz
 cardTitle: Deploy highly available network virtual appliances
-ms.openlocfilehash: fe279eea3f9cb024d6c6c14943013b9b9a87bc9c
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 556ec1e78960d64cce3bf803fc46c9146ce2584d
+ms.sourcegitcommit: f4069cf68456b5c74acb1b890dc4e45e11f12b59
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847745"
+ms.lasthandoff: 09/04/2018
+ms.locfileid: "43675829"
 ---
 # <a name="deploy-highly-available-network-virtual-appliances"></a>Déployer des appliances virtuelles réseau hautement disponibles
 
@@ -92,6 +92,7 @@ L’illustration précédente montre un exemple de cluster [ZooKeeper][zookeeper
 ## <a name="next-steps"></a>Étapes suivantes
 * Découvrez comment [implémenter une zone DMZ située entre Azure et votre centre de données local] [ dmz-on-prem] à l’aide des appliances virtuelles réseau de couche 7.
 * Découvrez comment [implémenter une zone DMZ située entre Azure et Internet][dmz-internet] à l’aide des appliances virtuelles réseau de couche 7.
+* [Problèmes d’appliance virtuelle réseau dans Azure](/azure/virtual-network/virtual-network-troubleshoot-nva)
 
 <!-- links -->
 [cloud-security]: /azure/best-practices-network-security

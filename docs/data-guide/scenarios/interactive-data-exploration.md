@@ -3,12 +3,12 @@ title: Exploration interactive des données
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 20740a8fe912a63526c847416b832941f4ac33ec
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.openlocfilehash: 2e3d61fa5e1903c7fee6ebc84db3fa7c28d515cb
+ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30297953"
+ms.lasthandoff: 08/31/2018
+ms.locfileid: "43325115"
 ---
 # <a name="interactive-data-exploration"></a>Exploration interactive des données
 
@@ -82,6 +82,7 @@ Pour plus d’informations, consultez la section [Magasins de données analytiqu
 ### <a name="analytics-and-reporting"></a>Analytique et création de rapports
 
 - **Jupyter**. Les Notebooks Jupyter offrent une interface sur navigateur pour exécuter du code dans des langages comme R, Python ou Scala. Lorsque R Server ou Spark est utilisé pour traiter les données par lots, ou Spark SQL pour définir un schéma des tables à des fins d’interrogation, Jupyter peut représenter un bon choix pour interroger les données. Si vous utilisez Spark, vous pouvez vous servir de l’API de trame de données Spark standard ou de l’API Spark SQL ainsi que des instructions SQL incorporées pour interroger les données et générer des visualisations.
+- **Drill**. Pour effectuer une exploration de données ad hoc, [Apache Drill](https://drill.apache.org/) est un moteur de requête SQL sans schéma. Puisqu’il n’a pas besoin de schéma, vous pouvez interroger des données issues de diverses sources de données, et le moteur comprendra automatiquement la structure de ces données.
 - **Clients Interactive Hive**. Si vous utilisez un cluster Interactive Hive pour interroger les données, vous pouvez utiliser la vue Hive dans le tableau de bord du cluster Ambari, l’outil de ligne de commande Beeline ou n’importe quel outil ODBC (avec le pilote ODBC de Hive), par exemple, Microsoft Excel ou Power BI.
 
 Pour plus d'informations, consultez la section [Technologies d’analytique des données et de création de rapports](../technology-choices/analysis-visualizations-reporting.md).
