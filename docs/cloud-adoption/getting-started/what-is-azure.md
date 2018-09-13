@@ -2,12 +2,13 @@
 title: 'Adoption du cloud d’entreprise : Fonctionnement d’Azure'
 description: Explication sur le fonctionnement interne d’Azure
 author: petertaylor9999
-ms.openlocfilehash: d98585decf46f81916030017443ff3d0ca986457
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.date: 09/10/2018
+ms.openlocfilehash: 1d9ff8003e97bcfe88121e8231473236f8cfb527
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43327128"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389058"
 ---
 # <a name="enterprise-cloud-adoption-how-does-azure-work"></a>Adoption du cloud d’entreprise : Fonctionnement d’Azure
 

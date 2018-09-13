@@ -2,12 +2,13 @@
 title: 'Adoption du cloud d’entreprise : Gestion de l’accès aux ressources dans Azure'
 description: 'Explication de la structure de gestion de l’accès aux ressources dans Azure : gestion des ressources Azure, abonnements, groupes de ressources et ressources'
 author: petertaylor9999
-ms.openlocfilehash: cd26b73e0327fa15b6ae29492b45331a19b9d6c2
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.date: 09/10/2018
+ms.openlocfilehash: 2e64d8828574ebe216da1e76b19ec3ce5aeda993
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43327789"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389075"
 ---
 # <a name="enterprise-cloud-adoption-resource-access-management-in-azure"></a>Adoption du cloud d’entreprise : Gestion de l’accès aux ressources dans Azure
 

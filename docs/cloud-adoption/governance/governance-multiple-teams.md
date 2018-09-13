@@ -2,19 +2,17 @@
 title: 'Adoption du cloud d’entreprise : Conception de la gouvernance dans Azure pour plusieurs équipes'
 description: Conseils pour configurer les contrôles de gouvernance Azure pour plusieurs équipes, charges de travail et environnements
 author: petertaylor9999
-ms.openlocfilehash: 2ad9fac6604d2766fed1df828f63e65c8a570888
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.date: 09/10/2018
+ms.openlocfilehash: ac2a63ad6ced1039290dc0bf5132b0d87a2c79cf
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43327516"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389415"
 ---
 # <a name="enterprise-cloud-adoption-governance-design-for-multiple-teams"></a>Adoption du cloud d’entreprise : Conception de la gouvernance pour plusieurs équipes
 
 Ce guide a pour but de vous aider à comprendre comment concevoir un modèle de gouvernance des ressources dans Azure, destiné à prendre en plusieurs équipes, charges de travail et environnements.  Nous allons passer en revue plusieurs exigences de gouvernance hypothétiques, puis étudier plusieurs exemples d’implémentation qui répondent à ces exigences.
-
-> [!NOTE]
-> Pour une présentation plus détaillée des **environnements** consultez 
 
 Les conditions requises sont :
 * L’entreprise prévoit d’effectuer la transition de nouveaux rôles cloud et responsabilités vers un ensemble d’utilisateurs et demande par conséquent de gérer les identités de plusieurs équipes avec différents besoins d’accès aux ressources dans Azure. Ce système de gestion des identités est nécessaire pour stocker l’identité des utilisateurs suivants :
