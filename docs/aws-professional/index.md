@@ -5,12 +5,12 @@ keywords: Experts AWS, comparaison de Azure, comparaison de AWS, différences en
 author: lbrader
 ms.date: 03/24/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: 0af0890d383d22db0ed9d3b445cdd5b561b498ae
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.openlocfilehash: f90186ba36f035871ec918c65b05eebe44190ffa
+ms.sourcegitcommit: f1dcc388c8b4fc983549c36d7e6b009fa1f072ba
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2018
-ms.locfileid: "31012618"
+ms.lasthandoff: 09/19/2018
+ms.locfileid: "46329893"
 ---
 # <a name="azure-for-aws-professionals"></a>Azure pour les professionnels AWS
 
@@ -24,7 +24,7 @@ Vous apprendrez ce qui suit :
 
 Azure et AWS ont développé leurs fonctionnalités indépendamment au fil du temps, de sorte qu’ils ont des différences importantes de conception et d’implémentation.
 
-## <a name="overview"></a>Vue d'ensemble
+## <a name="overview"></a>Vue d’ensemble
 
 Comme AWS, Microsoft Azure est construit autour d’un ensemble basique de services de calcul, de stockage, de base de données et de réseau. Dans de nombreux cas, les deux plateformes offrent une équivalence de base entre les produits et services qu’elles proposent. AWS et Azure permettent de concevoir des solutions hautement disponibles basées sur des ordinateurs hôtes Windows ou Linux. Par conséquent, si vous êtes habitué au développement à l’aide de Linux et de la technologie OSS, les deux plateformes peuvent faire le travail.
 
@@ -125,7 +125,7 @@ Le tableau suivant récapitule chaque option.
 
 Pour vous protéger contre les défaillances matérielles localisées, comme une panne de disque ou de commutateur réseau, déployez au moins deux machines virtuelles dans un groupe à haute disponibilité. Un groupe à haute disponibilité se compose d’au moins deux *domaines d’erreur* qui partagent une source d’alimentation et un commutateur réseau. Les machines virtuelles d’un groupe à haute disponibilité sont distribuées entre les domaines d’erreur. Ainsi, si une défaillance matérielle affecte un domaine d’erreur, le trafic réseau peut toujours être acheminé vers les machines virtuelles des autres domaines d’erreur. Pour plus d’informations sur les groupes à haute disponibilité, consultez la section [Gestion de la disponibilité des machines virtuelles Windows dans Azure](/azure/virtual-machines/windows/manage-availability).
 
-Lorsque des instances de machine virtuelle sont ajoutées aux groupes à haute disponibilité, un [domaine de mise à jour](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-manage-availability/) leur est également attribuées. Un domaine de mise à jour est un groupe de machines virtuelles définies pour des événements de maintenance planifiée en même temps. La distribution de machines virtuelles sur plusieurs domaines de mise à jour garantit qu’une mise à jour planifiée et des événements de mise à jour corrective affectent uniquement un sous-ensemble de ces machines virtuelles à un moment donné.
+Lorsque des instances de machine virtuelle sont ajoutées aux groupes à haute disponibilité, un [domaine de mise à jour](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-manage-availability/) leur est également attribué. Un domaine de mise à jour est un groupe de machines virtuelles définies pour des événements de maintenance planifiée en même temps. La distribution de machines virtuelles sur plusieurs domaines de mise à jour garantit qu’une mise à jour planifiée et des événements de mise à jour corrective affectent uniquement un sous-ensemble de ces machines virtuelles à un moment donné.
 
 Les groupes à haute disponibilité devraient être organisés en fonction du rôle de l’instance dans votre application pour garantir qu’une instance de chaque rôle est opérationnelle. Par exemple, dans une application web à trois couches, créez des groupes à haute disponibilité distincts pour les couches frontales, d’application et de données.
 
@@ -137,9 +137,9 @@ Une [zone de disponibilité](/azure/availability-zones/az-overview) est une zone
 
 ### <a name="paired-regions"></a>Régions jumelées
 
-Pour protéger une application contre une panne régionale, vous pouvez la déployer dans plusieurs régions, en vous appuyant sur [Azure Traffic Manager][traffic-manager] pour distribuer le trafic Internet entre les différentes régions. Chaque région Azure est jumelée à une autre région. Ensemble, elles forment une [paire régionale][paired-regions]. Une région se trouve dans la même zone géographique que la région avec laquelle elle est jumelée (à l’exception du Sud du Brésil) pour répondre aux exigences de la résidence de données en termes d’impôts et d’application de la loi.
+Pour protéger une application contre une panne régionale, vous pouvez la déployer dans plusieurs régions, en vous appuyant sur [Azure Traffic Manager][traffic-manager] pour distribuer le trafic Internet entre les différentes régions. Chaque région Azure est jumelée à une autre région. Ensemble, elles forment une [paire régionale][paired-regions]. Une région se trouve dans la même zone géographique que la région avec laquelle elle est jumelée (à l’exception de Brésil Sud) pour répondre aux exigences de la résidence de données en termes d’impôts et d’application de la loi.
 
-Contrairement aux zones de disponibilité, physiquement séparées des centres de données mais pouvant être dans des zones géographiques relativement proches, les régions jumelées associées sont généralement séparées de plusieurs centaines de kilomètres. Cela permet de s’assurer que les sinistres importants n’affectent que l’une des régions jumelées. Les paires voisines peuvent être définies pour synchroniser une base de données et des données de service de stockage, et elle sont configurées de sorte que les mises à jour de plateforme soient déployées sur une région de la paire à la fois.
+Contrairement aux zones de disponibilité, physiquement séparées des centres de données mais pouvant être dans des zones géographiques relativement proches, les régions jumelées associées sont généralement séparées de plusieurs centaines de kilomètres. Cela permet de s’assurer que les sinistres importants n’affectent que l’une des régions jumelées. Les paires voisines peuvent être définies pour synchroniser une base de données et des données de service de stockage, et elles sont configurées de sorte que les mises à jour de plateforme soient déployées sur une région de la paire à la fois.
 
 [Le stockage géo-redondant](https://azure.microsoft.com/documentation/articles/storage-redundancy/#geo-redundant-storage) de Azure est automatiquement sauvegardé vers la région jumelée appropriée. Pour toutes les autres ressources, la création d’une solution entièrement redondante à l’aide de régions jumelées implique la création d’une copie complète de votre solution dans les deux régions.
 
@@ -156,7 +156,7 @@ Contrairement aux zones de disponibilité, physiquement séparées des centres d
 
 ## <a name="services"></a>Services
 
-Consultez la [matrice complète de comparaison des services de AWS et de Azure](https://aka.ms/azure4aws-services) pour avoir une liste complète du mappage des services entre les plateformes.
+Pour obtenir la liste des correspondances des services entre les plateformes, consultez [Comparaison des services AWS et Azure](./services.md).
 
 Tous les produits et les services Azure ne sont pas disponibles dans toutes les régions. Consultez la page [Produits par région](https://azure.microsoft.com/regions/services/) pour plus d’informations. Vous pouvez trouver les garanties de temps d’activité et les stratégies de crédit de temps d’arrêt pour chaque produit ou service Azure sur la page [Contrats de niveau de service](https://azure.microsoft.com/support/legal/sla/).
 
@@ -175,8 +175,6 @@ Bien que les types d’instance de AWS et les tailles de machine virtuelle de Az
 -   [Tailles des machines virtuelles dans Azure (Linux)](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/)
 
 Contrairement à la facturation par seconde de AWS, les machines virtuelles Azure à la demande sont facturées à la minute.
-
-Azure ne possède aucun équivalent aux instances de place EC2 ou aux hôtes dédiés.
 
 #### <a name="ebs-and-azure-storage-for-vm-disks"></a>EBS et stockage Azure pour les disques de machine virtuelle
 
@@ -356,7 +354,7 @@ Simple Queueing Service (SQS) de AWS fournit un système de messagerie pour conn
 
 #### <a name="device-farm"></a>Batterie d’appareils
 
-La batterie d’appareils de AWS fournit des services de tests inter-périphériques. Dans Azure, [Xamarin Test Cloud](https://www.xamarin.com/test-cloud) fournit un test frontal entre les périphériques semblable pour les appareils mobiles.
+La batterie d’appareils de AWS fournit des services de tests inter-périphériques. Dans Azure, [Xamarin Test Cloud](https://www.xamarin.com/test-cloud) fournit un test frontal entre les périphériques semblables pour les appareils mobiles.
 
 En plus des tests frontaux, [Azure DevTest Labs](https://azure.microsoft.com/services/devtest-lab/) fournit des ressources de test principales pour les environnements Linux et Windows.
 
@@ -406,7 +404,7 @@ En plus des tests frontaux, [Azure DevTest Labs](https://azure.microsoft.com/ser
 
 #### <a name="notifications"></a>Notifications
 
-Notification Hubs ne prend pas en charge l’envoi de messages SMS ou de courriers électroniques, des services tiers sont donc nécessaire pour ces types d’envoi.
+Notification Hubs ne prend pas en charge l’envoi de messages SMS ou de courriers électroniques, des services tiers sont donc nécessaires pour ces types d’envoi.
 
 #### <a name="see-also"></a>Voir aussi
 
@@ -428,8 +426,6 @@ Notification Hubs ne prend pas en charge l’envoi de messages SMS ou de courrie
 
 ## <a name="next-steps"></a>Étapes suivantes
 
--   [Matrice complète de comparaison des services de AWS et de Azure](https://aka.ms/azure4aws-services)
-
 -   [Vue d’ensemble interactif de la plateforme Azure](http://azureplatform.azurewebsites.net/)
 
 -   [Prise en main d’Azure](https://azure.microsoft.com/get-started/)
@@ -437,8 +433,6 @@ Notification Hubs ne prend pas en charge l’envoi de messages SMS ou de courrie
 -   [Architectures de solution Azure](https://azure.microsoft.com/solutions/architecture/)
 
 -   [Architectures de référence Azure](https://azure.microsoft.com/documentation/articles/guidance-architecture/)
-
--   [Modèles et pratiques : Recommandations sur Azure](https://azure.microsoft.com/documentation/articles/guidance/)
 
 -   [Cours en ligne gratuit : Microsoft Azure pour les experts de AWS](http://aka.ms/azureforaws)
 
