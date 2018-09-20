@@ -3,12 +3,12 @@ title: Exécuter une machine virtuelle Windows dans Azure
 description: Découvrez comment exécuter une machine virtuelle Windows dans Azure, en privilégiant l’extensibilité, la résilience, la facilité de gestion et la sécurité.
 author: telmosampaio
 ms.date: 04/03/2018
-ms.openlocfilehash: d790c9a6693dca751e0ba05f1fd3c23756cf53bb
-ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
+ms.openlocfilehash: a20359f90e7b20486defce3110b2db6f7e0027ba
+ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/02/2018
-ms.locfileid: "37142214"
+ms.lasthandoff: 09/14/2018
+ms.locfileid: "45584695"
 ---
 # <a name="run-a-windows-vm-on-azure"></a>Exécuter une machine virtuelle Windows dans Azure
 
@@ -115,6 +115,8 @@ Pour vous protéger contre la perte accidentelle de données pendant les opérat
 Utilisez les [journaux d’audit][audit-logs] pour voir les actions d’approvisionnement et d’autres événements concernant la machine virtuelle.
 
 **Chiffrement des données.** Utilisez [Azure Disk Encryption][disk-encryption] si vous devez chiffrer les disques du système d’exploitation et de données. 
+
+**Protection DDOS**. Nous vous recommandons d’activer la [Protection DDos standard](/azure/virtual-network/ddos-protection-overview), qui diminue les risques d’attaques DDoS pour les ressources qui se trouvent dans un réseau virtuel. Bien que la protection DDoS soit automatiquement activée sur la plateforme Azure, la protection DDoS standard offre des capacités d’atténuation des risques spécifiquement adaptées aux ressources de réseau virtuel Azure.  
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 

@@ -3,12 +3,12 @@ title: Exécuter une machine virtuelle Linux dans Azure
 description: Comment exécuter une machine virtuelle Linux sur Azure, en privilégiant l’évolutivité, la résilience, la gestion et la sécurité.
 author: telmosampaio
 ms.date: 04/03/2018
-ms.openlocfilehash: 3d0492d05280e8c296cdfc4157aa0387a70337bf
-ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
+ms.openlocfilehash: b53db016a594bace880aaac4e16f0586fe3057b1
+ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/02/2018
-ms.locfileid: "37142316"
+ms.lasthandoff: 09/14/2018
+ms.locfileid: "45584729"
 ---
 # <a name="run-a-linux-vm-on-azure"></a>Exécuter une machine virtuelle Linux dans Azure
 
@@ -132,6 +132,8 @@ Pour vous protéger contre la perte accidentelle de données pendant les opérat
 Utilisez les [journaux d’audit][audit-logs] pour voir les actions d’approvisionnement et d’autres événements concernant la machine virtuelle.
 
 **Chiffrement des données.** Utilisez [Azure Disk Encryption][disk-encryption] si vous devez chiffrer les disques du système d’exploitation et de données. 
+
+**Protection DDOS**. Nous vous recommandons d’activer la [Protection DDos standard](/azure/virtual-network/ddos-protection-overview), qui diminue les risques d’attaques DDoS pour les ressources qui se trouvent dans un réseau virtuel. Bien que la protection DDoS soit automatiquement activée sur la plateforme Azure, la protection DDoS standard offre des capacités d’atténuation des risques spécifiquement adaptées aux ressources de réseau virtuel Azure.  
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 

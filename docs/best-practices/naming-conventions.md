@@ -4,12 +4,12 @@ description: Conventions d’affectation de noms pour les ressources Azure. Comm
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 8aa0b46d9f43107cfa4ae4be3160900249365702
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.openlocfilehash: 625f672c80b0256e93932b72367768f37c1e72f4
+ms.sourcegitcommit: f1dcc388c8b4fc983549c36d7e6b009fa1f072ba
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43326318"
+ms.lasthandoff: 09/19/2018
+ms.locfileid: "46329876"
 ---
 # <a name="naming-conventions"></a>Conventions d’affectation de noms
 
@@ -45,7 +45,7 @@ L’affectation de noms détaillés aux abonnements Azure permet de mieux compre
 | Contoso |IT |InternalApps |Production |Contoso IT InternalApps Production |
 | Contoso |IT |InternalApps |Dev |Contoso IT InternalApps Dev |
 
-Pour plus d’informations sur la façon d’organiser les abonnements des grandes entreprises, consultez notre article sur la [gouvernance normative de l’abonnement][scaffold].
+Pour plus d’informations sur la façon d’organiser les abonnements des grandes entreprises, consultez [Structure d’entreprise Azure : gouvernance normative de l’abonnement][scaffold].
 
 ## <a name="use-affixes-to-avoid-ambiguity"></a>Utiliser des affixes pour éviter les ambiguïtés
 
@@ -195,4 +195,4 @@ Vous ne pouvez pas modifier le nom d’un compte de stockage ou d’un conteneur
 
 <!-- links -->
 
-[scaffold]: /azure/azure-resource-manager/resource-manager-azure-scaffold
+[scaffold]: /azure/architecture/cloud-adoption/appendix/azure-scaffold

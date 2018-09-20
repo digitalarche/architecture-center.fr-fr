@@ -4,12 +4,12 @@ description: Liste de vérification qui fournit des conseils de résilience pour
 author: petertaylor9999
 ms.date: 03/02/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 25d961d6bb753b1f515fc073e51bbb912cc59db7
-ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
+ms.openlocfilehash: 735d4466f53ff03b67063b49b86f4184bbf1af41
+ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/08/2018
-ms.locfileid: "29783508"
+ms.lasthandoff: 09/14/2018
+ms.locfileid: "45584763"
 ---
 # <a name="resiliency-checklist-for-specific-azure-services"></a>Liste de vérification de la résilience pour des services Azure spécifiques
 
@@ -69,7 +69,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 Si vous utilisez Cache Redis comme un cache de données temporaire et non comme un magasin persistant, ces recommandations peuvent ne pas s’appliquer. 
 
-## <a name="search"></a>action
+## <a name="search"></a>Recherche
 
 **Approvisionnez plusieurs réplicas.** Utilisez au moins deux réplicas pour une haute disponibilité en lecture ou trois pour une haute disponibilité en lecture-écriture.
 
@@ -99,6 +99,10 @@ Si vous utilisez Cache Redis comme un cache de données temporaire et non comme 
 **Utilisez la limite de restauration dans le temps pour récupérer des erreurs humaines.**  La limite de restauration dans le temps permet de revenir à un état antérieur de la base de données. Pour plus d’informations, consultez [Récupérer une base de données SQL Azure à l’aide des sauvegardes automatisées d’une base de données][sql-restore].
 
 **Utilisez la géorestauration pour récupérer d’une panne de service.** La géorestauration assure la restauration d’une base de données à partir d’une sauvegarde géoredondante.  Pour plus d’informations, consultez [Récupérer une base de données SQL Azure à l’aide des sauvegardes automatisées d’une base de données][sql-restore].
+
+## <a name="sql-data-warehouse"></a>SQL Data Warehouse
+
+**Ne désactivez pas la géosauvegarde.** Par défaut, SQL Data Warehouse effectue une sauvegarde complète de vos données toutes les 24 heures en cas de récupération d’urgence. Nous vous recommandons de ne pas désactiver cette fonctionnalité. Pour plus d’informations, consultez [Géosauvegardes](/azure/sql-data-warehouse/backup-and-restore#geo-backups).
 
 ## <a name="sql-server-running-in-a-vm"></a>SQL Server exécuté dans une machine virtuelle
 
