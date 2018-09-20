@@ -3,12 +3,12 @@ title: Récupération d’urgence des applications Microsoft Azure
 description: Présentations techniques et informations détaillées sur la conception d’applications pour la récupération d’urgence sur Microsoft Azure.
 author: adamglick
 ms.date: 05/26/2017
-ms.openlocfilehash: 2d890e479e008e03dcfce9b7240f8bcbaf270372
-ms.sourcegitcommit: e8f4786b187697b1bea374e5f35f217c65d2dfe0
+ms.openlocfilehash: faae658d91ec0cb2dd5dc436e67aa9b494fd4b49
+ms.sourcegitcommit: 46ed67297e6247f9a80027cfe891a5e51ee024b4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/02/2018
-ms.locfileid: "37343377"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45556680"
 ---
 # <a name="disaster-recovery-for-azure-applications"></a>Récupération d’urgence des applications Microsoft Azure
 
@@ -299,7 +299,10 @@ Les rubriques suivantes décrivent les services Azure spécifiques à la récup�
 
 | de diffusion en continu | Rubrique |
 |---------|-------|
+| Azure Database pour MySQL | [Vue d’ensemble de la continuité d’activité avec Azure Database pour MySQL](/azure/mysql/concepts-business-continuity) |
+| Azure Database pour PostgreSQL | [Vue d’ensemble de la continuité d’activité avec Azure Database pour PostgreSQL](/azure/postgresql/concepts-business-continuity)
 | Cloud Services | [Que faire si une interruption de service Azure affecte Azure Cloud Services](/azure/cloud-services/cloud-services-disaster-recovery-guidance) |
+| Cosmos DB | [Basculement régional automatique pour la continuité des activités dans Azure Cosmos DB](/azure/cosmos-db/regional-failover)
 | Key Vault | [Disponibilité et redondance d’Azure Key Vault](/azure/key-vault/key-vault-disaster-recovery-guidance) |
 |Stockage | [Que faire en cas de panne du Stockage Azure](/azure/storage/storage-disaster-recovery-guidance) |
 | Base de données SQL | [Restaurer une base de données SQL Azure ou basculer vers une base de données secondaire](/azure/sql-database/sql-database-disaster-recovery) |

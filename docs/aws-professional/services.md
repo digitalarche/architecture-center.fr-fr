@@ -5,12 +5,12 @@ keywords: comparaison des services cloud, services cloud comparés, multicloud, 
 author: lbrader
 ms.date: 11/30/2017
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: 4c78f45c654a40142ff25736b83a5b6b10591fc6
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.openlocfilehash: e0064e7c8959086da360eedc4ae274af797dbbad
+ms.sourcegitcommit: 46ed67297e6247f9a80027cfe891a5e51ee024b4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43325010"
+ms.lasthandoff: 09/13/2018
+ms.locfileid: "45556697"
 ---
 # <a name="aws-to-azure-services-comparison"></a>Comparaison des services AWS avec les services Azure
 
@@ -44,6 +44,7 @@ Pour une vue d’ensemble d’Azure pour les utilisateurs AWS, consultez [Azure 
 |         <strong>&nbsp;</strong>         |             EC2 Container Registry             |                                                                                                                [Azure Container Registry](https://azure.microsoft.com/services/container-registry/)                                                                                                                 |                                            Permet aux clients de stocker des images Docker formatées. Utilisé pour créer tous les types de déploiements de conteneur sur Azure.                                             |
 | Microservices / orchestrateurs de conteneur | Elastic Container Service for Kubernetes (EKS) |                                                                                                              [Azure Kubernetes Service (AKS)](https://azure.microsoft.com/services/kubernetes-service/)                                                                                                               |                  Permet le déploiement d’applications en conteneurs orchestrés avec Kubernetes. Permet de simplifier la surveillance et la gestion de cluster via des mises à niveau automatiques et une console d’opérations intégrée.                  |
 |                 &nbsp;                  |                                                |                                                                                                                       [Service Fabric](https://azure.microsoft.com/services/service-fabric/)                                                                                                                        |              Service de calcul qui orchestre et gère l’exécution, la durée de vie et la résilience de composants de code complexes reliés, qui peuvent être avec ou sans état.              |
+| &nbsp; | &nbsp; | [Service Fabric Mesh](/azure/service-fabric-mesh/service-fabric-mesh-overview) | Service entièrement géré permettant aux développeurs de déployer des applications de microservices sans gérer les machines virtuelles, le stockage ou les réseaux.
 |                 &nbsp;                  |                                                |                                                                                                                             [Azure Container Service (ACS)](/azure/container-service/)                                                                                                                              |                                                             Permet de déployer rapidement un cluster Kubernetes, DC/OS ou Docker Swarm prêt pour la production.                                                              |
 |               Sans serveur                |                     Lambda                     |                                                                                  [Azure Functions](https://azure.microsoft.com/services/functions/) <br/><br/>[Azure Event Grid](https://azure.microsoft.com/services/event-grid/)                                                                                  |                                       Permet d’intégrer des systèmes et d’exécuter des processus principaux en réponse à des événements ou planifications sans approvisionnement ou gestion de serveurs.                                        |
 |         <strong>&nbsp;</strong>         |                 Lambda @ Edge                  |                                                                                                                       [Fonctionnalités sur Azure IoT Edge](/azure/iot-edge/tutorial-deploy-function)                                                                                                                       |                                                    Exécute les fonctionnalités au bord (directement sur les appareils IoT), même avec une connectivité cloud intermittente.                                                    |

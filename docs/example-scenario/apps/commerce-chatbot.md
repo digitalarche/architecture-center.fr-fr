@@ -3,16 +3,16 @@ title: Bot conversationnel pour les réservations d’hôtel sur Azure
 description: Scénario éprouvé pour la création d’un bot conversationnel pour les applications de commerce avec Azure Bot Service, Cognitive Services et LUIS, Azure SQL Database et Application Insights.
 author: iainfoulds
 ms.date: 07/05/2018
-ms.openlocfilehash: b664faf20d806824c2581346aaa592b0d74207da
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: 95a0fd77a99a348704a1d916de534a98d0b03448
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060861"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389330"
 ---
 # <a name="conversational-chatbot-for-hotel-reservations-on-azure"></a>Bot conversationnel pour les réservations d’hôtel sur Azure
 
-Cet exemple de scénario s’applique aux entreprises qui doivent intégrer aux applications un bot conversationnel. Dans ce scénario, un bot conversationnel en C# est utilisé pour une chaîne d’hôtels qui permet aux clients de vérifier la disponibilité des chambres et de les réserver via une application web ou mobile.
+Cet exemple de scénario s’applique aux entreprises qui souhaitent intégrer aux applications un bot conversationnel. Dans ce scénario, un bot conversationnel en C# est utilisé pour une chaîne d’hôtels qui permet aux clients de vérifier la disponibilité des chambres et de les réserver via une application web ou mobile.
 
 Exemples de scénarios : permettre aux clients d’afficher la disponibilité de l’hôtel et de réserver des chambres, consulter le menu à emporter d’un restaurant et passer une commande, ou rechercher et commander des impressions de photos. Traditionnellement, les entreprises devaient embaucher et former des conseillers pour le service client afin de répondre à ces demandes de clients, lesquels devaient patienter jusqu’à ce qu’un agent soit disponible pour leur fournir de l’aide.
 
@@ -44,7 +44,7 @@ Ce scénario présente un bot conversationnel qui fonctionne comme le concierge 
 * [Azure Active Directory][aad-docs] est le service informatique mutualisé de Microsoft pour la gestion des annuaires et des identités. Azure AD prend en charge un connecteur B2C, ce qui vous permet d’identifier les personnes à l’aide d’ID externes comme un compte Google, Facebook ou Microsoft.
 * [App Service][appservice-docs] vous permet de créer et d’héberger des applications web dans le langage de programmation de votre choix sans gérer l’infrastructure.
 * [Bot Service][botservice-docs] fournit des outils pour créer, tester, déployer et gérer des robots intelligents.
-* [Cognitive Services][cognitive-docs] vous permet d’utiliser des algorithmes intelligents pour voir, écouter, énoncer, comprendre et interpréter les besoins de vos utilisateurs au moyen de méthodes naturelles de communication.
+* [Cognitive Services][cognitive-docs] permet d’utiliser des algorithmes intelligents pour voir, écouter, énoncer, comprendre et interpréter les besoins des utilisateurs selon des modes de communication naturels.
 * [SQL Database][sqldatabase-docs] est un service de base de données cloud relationnelle entièrement géré qui fournit la compatibilité du moteur SQL Server.
 * [Application Insights][appinsights-docs] est un service de gestion des performances des applications (APM) extensible qui vous permet de surveiller les performances des applications, telles que votre bot conversationnel.
 
@@ -64,7 +64,7 @@ Pour consulter d’autres rubriques relatives à la disponibilité, consultez la
 
 ### <a name="scalability"></a>Extensibilité
 
-Ce scénario utilise Azure App Service. Avec App Service, vous pouvez automatiquement mettre à l’échelle le nombre d’instances qui exécutent votre bot. Cette fonctionnalité vous permet de faire face à la demande de la clientèle pour votre application web et votre bot conversationnel. Pour plus d’informations sur la mise à l’échelle automatique, consultez les [meilleures pratiques de mise à l’échelle automatique][autoscaling] dans le Centre des architectures.
+Ce scénario utilise Azure App Service. Avec App Service, vous pouvez automatiquement mettre à l’échelle le nombre d’instances qui exécutent votre bot. Cette fonctionnalité vous permet de faire face à la demande de la clientèle pour votre application web et votre bot conversationnel. Pour plus d’informations sur la mise à l’échelle automatique, voir [Meilleures pratiques de mise à l’échelle automatique][autoscaling] dans le Centre des architectures Azure.
 
 Pour consulter d’autres rubriques relatives à l’extensibilité, consultez la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
 
@@ -78,7 +78,7 @@ Pour obtenir des conseils d’ordre général sur la conception de solutions sé
 
 ### <a name="resiliency"></a>Résilience
 
-Ce scénario utilise Azure SQL Database pour stocker les réservations de clients. SQL Database inclut des bases de données redondantes dans une zone, des groupes de basculement, la géoréplication et des sauvegardes automatiques. Ces fonctionnalités permettent à votre application de continuer à s’exécuter en cas d’événement de maintenance ou de panne. Pour en savoir plus, consultez la section relative aux [fonctionnalités de disponibilité d’Azure SQL Database][sqlavailability-docs].
+Ce scénario utilise Azure SQL Database pour stocker les réservations de clients. SQL Database inclut des bases de données redondantes dans une zone, des groupes de basculement, la géoréplication et des sauvegardes automatiques. Ces fonctionnalités permettent à l’application de continuer à s’exécuter en cas d’événement de maintenance ou de panne. Pour en savoir plus, consultez la section relative aux [fonctionnalités de disponibilité d’Azure SQL Database][sqlavailability-docs].
 
 Pour surveiller l’intégrité de votre application, ce scénario utilise Application Insights. Avec Application Insights, vous pouvez générer des alertes et résoudre les problèmes de performances qui auraient un impact sur l’expérience client et la disponibilité du bot conversationnel. Pour plus d’informations, consultez l’article [Présentation d’Application Insights][appinsights-docs].
 
@@ -141,11 +141,11 @@ L’exemple d’application inclut les composants d’authentification Azure Act
 
 Pour explorer le coût d’exécution de ce scénario, tous les services sont préconfigurés dans le calculateur de coûts. Pour pouvoir observer l’évolution de la tarification pour votre cas d’usage particulier, modifiez les variables appropriées en fonction du trafic que vous escomptez.
 
-Nous proposons trois exemples de profils de coût basés sur la quantité de messages que vous vous attendez à voir traiter par votre bot conversationnel :
+Nous proposons trois exemples de profils de coût selon le nombre de messages que devra traiter le bot conversationnel :
 
-* [Petit][small-pricing] : ce profil correspond au traitement de < 10 000 messages par mois.
-* [Moyen][medium-pricing] : ce profil correspond au traitement de < 500 000 messages par mois.
-* [Grand][large-pricing] : ce profil correspond au traitement de < 10 millions de messages par mois.
+* [Petit][small-pricing] : < 10 000 messages traités par mois.
+* [Moyen][medium-pricing] : < 500 000 messages traités par mois.
+* [Grand][large-pricing] : < 10 000 000 messages traités par mois.
 
 ## <a name="related-resources"></a>Ressources associées
 

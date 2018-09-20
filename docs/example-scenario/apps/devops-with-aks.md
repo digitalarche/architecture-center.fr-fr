@@ -3,12 +3,12 @@ title: Pipeline CI/CD pour les charges de travail basées sur des conteneurs
 description: Scénario éprouvé pour créer un pipeline DevOps pour une application web Node.js qui utilise Jenkins, Azure Container Registry, Azure Kubernetes Service, Cosmos DB et Grafana.
 author: iainfoulds
 ms.date: 07/05/2018
-ms.openlocfilehash: dceb4ad3c34ec43a54d802772f5817cacdd3929c
-ms.sourcegitcommit: 8b5fc0d0d735793b87677610b747f54301dcb014
+ms.openlocfilehash: d659916e3af0caa2128db25faab441a2af8f3f6a
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/29/2018
-ms.locfileid: "39334213"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389381"
 ---
 # <a name="cicd-pipeline-for-container-based-workloads"></a>Pipeline CI/CD pour les charges de travail basées sur des conteneurs
 
@@ -22,7 +22,7 @@ Exemples de scénarios d’applications : fournir un environnement de développe
 
 Pensez à ce scénario pour les cas d’usage suivants :
 
-* Modernisation des pratiques de développement d’applications en approche basée sur les containers et microservices.
+* Modernisation des pratiques de développement d’applications vers une approche basée sur les containers et les microservices.
 * Accélération du développement d’applications et des cycles de vie de déploiement.
 * Automatisation des déploiements pour tester ou accepter les environnements pour la validation.
 
@@ -44,8 +44,8 @@ Ce scénario présente un pipeline DevOps pour une application web Node.js et un
 ### <a name="components"></a>Composants
 
 * [Jenkins][jenkins] est un serveur d’automatisation open source qui peut s’intégrer aux services Azure pour activer l’intégration continue (CI) et le déploiement continu (CD). Dans ce scénario, Jenkins orchestre la création d’images de conteneur basées sur les validations effectuées dans le contrôle de code source, envoie ces images dans Azure Container Registry, puis met à jour les instances des applications dans Azure Kubernetes Service.
-* Des [machines virtuelles Linux Azure][azurevm-docs] sont utilisées pour exécuter les instances Jenkins et Grafana.
-* [Azure Container Registry][azureacr-docs] stocke et gère les images de conteneur qui sont utilisées par le cluster Azure Kubernetes Service. Les images sont stockées en toute sécurité. Elles peuvent être répliquées dans d’autres régions par la plateforme Azure pour accélérer les temps de déploiement.
+* Les [Machines virtuelles Linux Azure][azurevm-docs] constituent la plateforme IaaS utilisée pour exécuter les instances Jenkins et Grafana.
+* [Azure Container Registry][azureacr-docs] stocke et gère les images de conteneur qui sont utilisées par le cluster Azure Kubernetes Service. Les images sont stockées de manière sécurisée. La plateforme Azure peut les répliquer dans d’autres régions pour accélérer les déploiements.
 * [Azure Kubernetes Service][azureaks-docs] est une plateforme Kubernetes managée, qui vous permet de déployer et de gérer des applications en conteneur sans avoir à maîtriser l’orchestration de conteneurs. En tant que service Kubernetes hébergé, Azure gère pour vous des tâches critiques telles que l’analyse de l'intégrité et la maintenance.
 * [Azure Cosmos DB][azurecosmosdb-docs] est une base de données multimodèle mondialement distribuée qui vous permet de choisir parmi différents modèles de base de données et de cohérence en fonction de vos besoins. Avec Cosmos DB, vos données peuvent être répliquées dans le monde entier, et il n’existe aucun composant de réplication ou de gestion de cluster à déployer ou configurer.
 * [Azure Monitor][azuremonitor-docs] vous permet de suivre les performances, de gérer la sécurité et d’identifier des tendances. Les mesures obtenues par Azure Monitor peuvent être utilisées par d’autres ressources et outils, tels que Grafana.
@@ -53,7 +53,7 @@ Ce scénario présente un pipeline DevOps pour une application web Node.js et un
 
 ### <a name="alternatives"></a>Autres solutions
 
-* [Visual Studio Team Services][vsts] et Team Foundation Server vous aident à implémenter un pipeline d’intégration continue (CI), de test et de déploiement continu (CD) pour toute application.
+* [Azure Pipelines][azure-pipelines] permet d’implémenter un pipeline d’intégration continue (CI), de test et de déploiement continu (CD) pour tous types d’applications.
 * La plateforme [Kubernetes][kubernetes] peut être exécutée directement sur des machines virtuelles Azure et non via un service géré si vous souhaitez davantage de contrôle sur le cluster.
 * [Service Fabric][service-fabric] est un autre orchestrateur de conteneurs qui peut remplacer AKS.
 
@@ -63,9 +63,9 @@ Ce scénario présente un pipeline DevOps pour une application web Node.js et un
 
 Pour surveiller les performances de vos applications et créer des rapports sur les problèmes, ce scénario combine Azure Monitor et Grafana pour obtenir des tableaux de bord visuels. Ces outils vous permettent de surveiller et de résoudre les problèmes de performances qui peuvent nécessiter des mises à jour du code, qui peuvent ensuite être déployées avec le pipeline CI/CD.
 
-Partie intégrante du cluster Azure Kubernetes Service, un équilibreur de charge distribue le trafic des applications vers un ou plusieurs conteneurs (pods) qui exécutent votre application. Cette méthode d’exécution des applications en conteneur dans Kubernetes fournit une infrastructure hautement disponible pour vos clients.
+Partie intégrante du cluster Azure Kubernetes Service, un équilibreur de charge distribue le trafic des applications vers un ou plusieurs conteneurs (pods) qui exécutent votre application. Cette méthode d’exécution des applications en conteneur dans Kubernetes assure à vos clients une infrastructure hautement disponible.
 
-Pour consulter d’autres rubriques relatives à la disponibilité, consultez la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
+Pour plus d’informations sur la disponibilité, voir la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
 
 ### <a name="scalability"></a>Extensibilité
 
@@ -73,11 +73,11 @@ Azure Kubernetes Service vous permet de mettre à l’échelle le nombre de nœu
 
 Les données d’application sont stockées dans Azure Cosmos DB, une base de données multimodèle mondialement distribuée qui peut être mise à l’échelle dans le monde entier. Cosmos DB retire de ces données la nécessité de mettre à l’échelle votre infrastructure comme avec les composants de base de données traditionnels. Vous pouvez choisir de répliquer votre instance Cosmos DB dans le monde entier pour répondre aux besoins de vos clients.
 
-Pour consulter d’autres rubriques relatives à l’extensibilité, consultez la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
+Pour plus d’informations sur l’extensibilité, voir la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
 
 ### <a name="security"></a>Sécurité
 
-Pour réduire l’encombrement des attaques, ce scénario n’expose pas l’instance de machine virtuelle Jenkins sur HTTP. Pour les tâches de gestion qui nécessitent votre interaction avec Jenkins, vous allez créer une connexion à distance sécurisée à l’aide d’un tunnel SSH à partir de votre ordinateur local. Seule l’authentification par clé publique SSH est autorisée pour les instances de machines virtuelles Jenkins et Grafana. Les connexions par mot de passe sont désactivées. Pour plus d’informations, consultez l’article [Exécuter un serveur Jenkins sur Azure](../../reference-architectures/jenkins/index.md).
+Pour réduire l’empreinte des attaques, ce scénario n’expose pas l’instance de machine virtuelle Jenkins via HTTP. Pour les tâches de gestion qui nécessitent votre interaction avec Jenkins, vous allez créer une connexion à distance sécurisée à l’aide d’un tunnel SSH à partir de votre ordinateur local. Seule l’authentification par clé publique SSH est autorisée pour les instances de machines virtuelles Jenkins et Grafana. Les connexions par mot de passe sont désactivées. Pour plus d’informations, consultez l’article [Exécuter un serveur Jenkins sur Azure](../../reference-architectures/jenkins/index.md).
 
 Pour assurer la séparation des informations d’identification et des autorisations, ce scénario utilise un principal de service Azure Active Directory (AD) dédié. Les informations d’identification de ce principal de service sont stockées sous la forme d’un objet d’informations d’identification sécurisé dans Jenkins afin qu’elles ne soient pas directement exposées ni visibles dans les scripts ou le pipeline de build.
 
@@ -123,9 +123,9 @@ Pour explorer le coût d’exécution de ce scénario, tous les services sont pr
 
 Nous proposons trois exemples de profils de coût basés sur le nombre d’images de conteneur à stocker et les nœuds Kubernetes pour exécuter vos applications.
 
-* [Petit][small-pricing] : ce profil correspond à 1 000 builds de conteneurs par mois.
-* [Moyen][medium-pricing] : ce profil correspond à 100 000 builds de conteneurs par mois.
-* [Grand][large-pricing] : ce profil correspond à 1000 000 builds de conteneurs par mois.
+* [Petit][small-pricing] : 1 000 builds de conteneurs par mois.
+* [Moyen][medium-pricing] : 100 000 builds de conteneurs par mois.
+* [Grand][large-pricing] : 1 000 000 builds de conteneurs par mois.
 
 ## <a name="related-resources"></a>Ressources associées
 
@@ -149,7 +149,7 @@ Ce scénario a utilisé Azure Container Registry et Azure Kubernetes Service pou
 [security]: /azure/security/
 [scalability]: ../../checklist/scalability.md
 [sshkeydocs]: /azure/virtual-machines/linux/mac-create-ssh-keys
-[vsts]: /vsts/?view=vsts
+[azure-pipelines]: /azure/devops/pipelines
 [kubernetes]: https://kubernetes.io/
 [service-fabric]: /azure/service-fabric/
 

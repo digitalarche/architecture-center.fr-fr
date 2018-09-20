@@ -3,18 +3,18 @@ title: Traitement évolutif des commandes sur Azure
 description: Exemple de scénario pour la création d’un pipeline de traitement de commande hautement évolutif à l’aide d’Azure Cosmos DB.
 author: alexbuckgit
 ms.date: 07/10/2018
-ms.openlocfilehash: 9fa0dc7c564270ee811b56169e05f7e743664838
-ms.sourcegitcommit: c4106b58ad08f490e170e461009a4693578294ea
+ms.openlocfilehash: aa7281263db7cc72781b740941f3b86dad025baa
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/10/2018
-ms.locfileid: "43016016"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389109"
 ---
 # <a name="scalable-order-processing-on-azure"></a>Traitement évolutif des commandes sur Azure
 
 Cet exemple de scénario s’applique aux entreprises ayant besoin d’une architecture hautement évolutive et résiliente pour le traitement de commandes en ligne. Les applications potentielles incluent le e-commerce et les points de vente au détail, le traitement des commandes ainsi que la réservation et le suivi d’un stock. 
 
-Ce scénario prend une approche d’approvisionnement en événements, à l’aide d’un modèle de programmation fonctionnel implémenté par le biais de microservices. Chaque microservice est traité comme un processeur de flux de données, et toute logique métier est implémentée par le biais de microservices. Cette approche permet une disponibilité et une résilience élevées, une géo-réplication et des performances rapides.
+Ce scénario prend une approche d’approvisionnement en événements, à l’aide d’un modèle de programmation fonctionnel implémenté par le biais de microservices. Chaque microservice est traité comme un processeur de flux de données, et toute la logique métier est implémentée au moyen de microservices. Cette approche permet une disponibilité et une résilience élevées, une géo-réplication et des performances rapides.
 
 L’utilisation de services gérés par Azure tels que Cosmos DB et HDInsight peut aider à réduire les coûts en tirant parti de l’expertise de Microsoft dans le stockage et la récupération de données mondialement distribuées à l’échelle du cloud. Ce scénario concerne plus spécialement un scénario de e-commerce ou de vente au détail. Si vous avez d’autres besoins en matière de services de données, vous devez examiner la liste des [services de base de données intelligente entièrement gérée dans Azure][product-category] qui sont disponibles.
 
@@ -41,7 +41,7 @@ Cette architecture décrit en détail les composants clés d’un pipeline de tr
 
 ### <a name="components"></a>Composants
 
-* [Cosmos DB][docs-cosmos-db] est une base de données multi-modèles et distribuée mondialement de Microsoft qui permet de faire évoluer à votre guise le débit et le stockage de vos solutions sur n’importe quel nombre de régions géographiques. Il offre des garanties en termes de débit, de latence, de disponibilité et de cohérence avec des contrats SLA complets. Ce scénario utilise Cosmos DB pour le stockage de flux d’événements et le stockage de capture instantanée et tire parti des fonctionnalités du [flux de modification de Cosmos DB][docs-cosmos-db-change-feed] pour fournir une cohérence des données et une récupération après incident. 
+* [Cosmos DB][docs-cosmos-db] est une base de données multi-modèles et distribuée mondialement de Microsoft qui permet de faire évoluer à votre guise le débit et le stockage de vos solutions sur n’importe quel nombre de régions géographiques. Il offre des garanties en termes de débit, de latence, de disponibilité et de cohérence avec des contrats SLA complets. Ce scénario utilise Cosmos DB pour le stockage de flux d’événements et le stockage de capture instantanée et tire parti des fonctionnalités du [flux de modification de Cosmos DB][docs-cosmos-db-change-feed] pour fournir une cohérence des données et une récupération après incident.
 * [Apache Kafka sur HDInsight][docs-kafka] est une implémentation de service géré d’Apache Kafka, une plateforme de diffusion en continu distribuée en open source pour la création d’applications et de pipelines de diffusion de données en continu et en temps réel. Kafka fournit également des fonctionnalités de courtier de messages semblables à une file d’attente, pour la publication et l’abonnement aux flux de données nommés. Ce scénario utilise Kafka pour traiter les événements entrants et en aval dans le pipeline de traitement des commandes. 
 
 ## <a name="considerations"></a>Considérations
@@ -83,13 +83,13 @@ La devise d’Azure Cosmos DB est l’unité de requête (RU). Avec les unités 
 
 Nous proposons trois exemples de profils de coût basés sur la quantité d’activité que vous escomptez :
 
-* [Petite][small-pricing] : cela correspond à 5 unités de requête réservées avec un magasin de données de 1 To dans Cosmos DB et un petit cluster Kafka (D3 v2).
-* [Moyenne][medium-pricing] : cela correspond à 50 unités de requête réservées avec un magasin de données de 10 To dans Cosmos DB et un cluster Kafka (D4 v2) moyen.
-* [Grande][large-pricing] : cela correspond à 500 unités de requête réservées avec un magasin de données de 30 To dans Cosmos DB et un grand cluster Kafka (D5 v2).
+* [Petite][small-pricing] : 5 unités de requête réservées avec un magasin de données de 1 To dans Cosmos DB et un petit cluster Kafka (D3 v2).
+* [Moyenne][medium-pricing] : 50 unités de requête réservées avec un magasin de données de 10 To dans Cosmos DB et un cluster Kafka de taille moyenne (D4 v2).
+* [Grande][large-pricing] : 500 unités de requête réservées avec un magasin de données de 30 To dans Cosmos DB et un gros cluster Kafka (D5 v2).
 
 ## <a name="related-resources"></a>Ressources associées
 
-Cet exemple de scénario est basé sur une version plus étendue de cette architecture générée par [Jet.com](https://jet.com) pour son pipeline de traitement de commandes de bout en bout. Pour plus d’informations, consultez le [profil de client technique jet.com][source-document] et la [présentation de jet.com au Build 2018][source-presentation]. 
+Cet exemple de scénario est basé sur une version plus étendue de cette architecture générée par [Jet.com](https://jet.com) pour son pipeline de traitement de commandes de bout en bout. Pour plus d’informations, consultez le [profil de client technique jet.com][source-document] et la [présentation de jet.com au Build 2018][source-presentation].
 
 Les autres ressources liées incluent :
 * _[Designing Data-Intensive Applications](https://dataintensive.net/)_ par Martin Kleppmann (O'Reilly Media, 2017).
@@ -104,10 +104,9 @@ Les autres ressources liées incluent :
 [small-pricing]: https://azure.com/e/3d43949ffbb945a88cc0a126dc3a0e6e
 [medium-pricing]: https://azure.com/e/1f1e7bf2a6ad4f7799581211f4369b9b
 [large-pricing]: https://azure.com/e/75207172ece94cf6b5fb354a2252b333
-[architecture-diagram]: ./images/architecture-diagram-cosmos-db.png
+[architecture-diagram]: ./media/architecture-diagram-cosmos-db.png
 [docs-cosmos-db]: /azure/cosmos-db
 [docs-cosmos-db-change-feed]: /azure/cosmos-db/change-feed
-[docs-cosmos-db-online-backup-and-restore]: /azure/cosmos-db/online-backup-and-restore
 [docs-cosmos-db-regional-failover]: /azure/cosmos-db/regional-failover
 [docs-cosmos-db-guarantees]: /azure/cosmos-db/distribute-data-globally#AvailabilityGuarantees
 [docs-cosmos-db-use-cases]: /azure/cosmos-db/use-cases

@@ -3,12 +3,12 @@ title: Classification d’images pour les déclarations de sinistre sur Azure
 description: Scénario éprouvé pour générer le traitement d’images dans vos applications Azure.
 author: david-stanford
 ms.date: 07/05/2018
-ms.openlocfilehash: 361a88234fd9ed918ab7664893f86666b4328b8c
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: 0ca0b46e83219afc5e22c2ac6467bf4be945c97a
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060827"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389160"
 ---
 # <a name="image-classification-for-insurance-claims-on-azure"></a>Classification d’images pour les déclarations de sinistre sur Azure
 
@@ -16,7 +16,7 @@ Cet exemple de scénario s’applique aux entreprises qui doivent traiter des im
 
 Applications potentielles : classification d’images pour un site web de mode, analyse de texte et d’images pour les déclarations de sinistre ou compréhension des données de télémétrie issues des captures d’écran de jeux. Traditionnellement, les entreprises devaient développer une expertise en matière de modèles Machine Learning, effectuer l’apprentissage des modèles et enfin exécuter les images via leur processus personnalisé pour obtenir les données des images.
 
-En utilisant des services Azure tels que l’API Vision par ordinateur et Azure Functions, les sociétés peuvent éliminer la nécessité de gérer des serveurs individuels, tout en réduisant les coûts et en tirant parti de l’expertise que Microsoft a déjà développée en matière de traitement d’images avec Cognitives Services. Ce scénario concerne plus spécialement un scénario de traitement d’images. Si vos besoins en termes d’intelligence artificielle sont variés, pensez à la suite complète de [Cognitive Services][cognitive-docs].
+En utilisant des services Azure tels que l’API Vision par ordinateur et Azure Functions, les sociétés peuvent éliminer la nécessité de gérer des serveurs individuels, tout en réduisant les coûts et en tirant parti de l’expertise que Microsoft a déjà développée en matière de traitement d’images avec Cognitives Services. Cet exemple de scénario concerne plus particulièrement un cas d’usage de traitement d’images. Si vos besoins en termes d’intelligence artificielle sont variés, pensez à la suite complète de [Cognitive Services][cognitive-docs].
 
 ## <a name="related-use-cases"></a>Cas d’usage connexes
 
@@ -63,11 +63,11 @@ Ce scénario couvre les composants principaux d’une application web ou mobile.
 
 ### <a name="scalability"></a>Extensibilité
 
-Pour leur majeure partie, les composants de ce scénario sont des services gérés qui sont mis automatiquement à l’échelle. Deux exceptions notables : la solution Azure Functions est limitée à un maximum de 200 instances. Si vous devez procéder à une mise à l’échelle et atteindre un nombre supérieur d’instances, pensez à utiliser plusieurs régions ou plans d’application.
+La plupart des composants utilisés dans ce scénario sont des services gérés avec mise à l’échelle automatique. Deux exceptions notables : la solution Azure Functions est limitée à un maximum de 200 instances. Si vous avez besoin de plus d’instances, vous pouvez utiliser plusieurs régions ou plans d’application.
 
-Cosmos DB n’effectue pas de mise à l’échelle automatique en termes d’unités de requête approvisionnées (RU).  Pour obtenir des conseils sur l’estimation de vos besoins, consultez la section relative aux [unités de requête][request-units] dans notre documentation. Pour tirer pleinement parti de la mise à l’échelle dans Cosmos DB, vous devez également jeter un coup d’œil sur les [clés de partition][partition-key].
+Cosmos DB n’effectue pas de mise à l’échelle automatique en termes d’unités de requête approvisionnées (RU).  Pour obtenir des conseils sur l’estimation de vos besoins, consultez la section relative aux [unités de requête][request-units] dans notre documentation. Pour tirer pleinement parti de la mise à l’échelle dans Cosmos DB, explorez les [clés de partition][partition-key].
 
-Les bases de données NoSQL échangent fréquemment la cohérence (au sens du théorème CAP) contre la disponibilité, l’extensibilité et la partition.  Toutefois, dans le cas des modèles de données clé-valeur utilisés dans ce scénario, la cohérence des transactions est rarement nécessaire, car la plupart des opérations sont par définition atomiques. Des conseils supplémentaires pour [choisir le magasin de données approprié](../../guide/technology-choices/data-store-overview.md) sont disponibles dans le Centre des architectures.
+Les bases de données NoSQL sacrifient souvent la cohérence (au sens du théorème CAP) au profit de la disponibilité, de l’extensibilité et du partitionnement.  Cet exemple de scénario utilisant un modèle de données clé-valeur, la cohérence des transactions est rarement nécessaire, car la plupart des opérations sont par définition atomiques. Vous trouverez de l’aide pour [Choisir un magasin de données adapté](../../guide/technology-choices/data-store-overview.md) dans le Centre des architectures Azure.
 
 Pour obtenir des conseils d’ordre général sur la conception de solutions évolutives, consultez la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
 
@@ -87,17 +87,17 @@ Pour obtenir des conseils d’ordre général sur la conception de solutions ré
 
 Pour explorer le coût d’exécution de ce scénario, tous les services sont préconfigurés dans le calculateur de coûts. Pour pouvoir observer l’évolution de la tarification pour votre cas d’usage particulier, modifiez les variables appropriées en fonction du trafic que vous escomptez.
 
-Nous proposons trois exemples de profils de coût basés sur la quantité de trafic (nous supposons que toutes les images ont une taille de 100 Ko) :
+Nous proposons trois exemples de profils de coût selon la quantité de trafic (nous supposons que toutes les images font 100 Ko) :
 
-* [Petit][pricing] : ce profil correspond au traitement de &lt; 5 000 images par mois.
-* [Moyen][medium-pricing] : ce profil correspond au traitement de 500 000 images par mois.
-* [Grand][large-pricing] : ce profil correspond au traitement de 50 millions d’images par mois.
+* [Petit][pricing] : &lt; 5 000 images traitées par mois.
+* [Moyen][medium-pricing] : 500 000 images traitées par mois.
+* [Grand][large-pricing] : 50 000 000 images traitées par mois.
 
 ## <a name="related-resources"></a>Ressources associées
 
 Pour un parcours d’apprentissage interactif de ce scénario, consultez l’article [Build a serverless web app in Azure][serverless] (Créer une application web serverless dans Azure).  
 
-Avant de passer à un environnement de production, passez en revue les [meilleures pratiques][functions-best-practices] relatives à Azure Functions.
+Avant de déployer cet exemple de scénario dans un environnement de production, consultez les [meilleures pratiques][functions-best-practices] Azure Functions.
 
 <!-- links -->
 [pricing]: https://azure.com/e/f9b59d238b43423683db73f4a31dc380

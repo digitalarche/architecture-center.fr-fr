@@ -4,12 +4,12 @@ description: Architecture recommandée pour une application web basique exécut�
 author: MikeWasson
 ms.date: 12/12/2017
 cardTitle: Basic web application
-ms.openlocfilehash: bc8cf9b5c66fc451d097cbc992ecb9a249645dce
-ms.sourcegitcommit: 5d99b195388b7cabba383c49a81390ac48f86e8a
+ms.openlocfilehash: e4992564bc4e8a7b71fc7c5f0bf1662f5e13d5c1
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2018
-ms.locfileid: "37958838"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389398"
 ---
 # <a name="basic-web-application"></a>Application web de base
 [!INCLUDE [header](../../_includes/header.md)]
@@ -152,7 +152,7 @@ Activez la [journalisation des diagnostics][diagnostic-logs], y compris le journ
 
 Utiliser un service tel que [New Relic][new-relic] ou [Application Insights][app-insights] pour surveiller les performances et le comportement de l’application sous charge. Soyez conscient des [limites du débit de données][app-insights-data-rate] de Application Insights.
 
-Effectuez un test de charge, à l’aide d’un outil tel que [Visual Studio Team Services][vsts]. Pour obtenir une vue d’ensemble de l’analyse des performances dans les applications cloud, consultez le [Manuel d’analyse de performances][perf-analysis].
+Effectuez un test de charge avec un outil comme [Azure DevOps][azure-devops] ou [Visual Studio Team Foundation Server][tfs]. Pour obtenir une vue d’ensemble de l’analyse des performances dans les applications cloud, consultez le [Manuel d’analyse de performances][perf-analysis].
 
 Conseils de dépannage de votre application :
 
@@ -224,6 +224,7 @@ Pour plus d’informations, consultez [Déployer des ressources à l’aide de m
 [app-service-security]: /azure/app-service-web/web-sites-security
 [app-settings]: /azure/app-service-web/web-sites-configure
 [arm-template]: /azure/azure-resource-manager/resource-group-overview#resource-groups
+[azure-devops]: /azure/devops/
 [azure-dns]: /azure/dns/dns-overview
 [custom-domain-name]: /azure/app-service-web/web-sites-custom-domain-name
 [deploy]: /azure/app-service-web/web-sites-deploy
@@ -252,9 +253,9 @@ Pour plus d’informations, consultez [Déployer des ressources à l’aide de m
 [sql-resource-limits]: /azure/sql-database/sql-database-resource-limits
 [ssl-cert]: /azure/app-service-web/web-sites-purchase-ssl-web-site
 [troubleshoot-blade]: https://azure.microsoft.com/updates/self-service-troubleshooting-for-app-service-web-apps-customers/
+[tfs]: /tfs/index
 [troubleshoot-web-app]: /azure/app-service-web/web-sites-dotnet-troubleshoot-visual-studio
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/app-service-reference-architectures.vsdx
-[vsts]: https://www.visualstudio.com/features/vso-cloud-load-testing-vs.aspx
 [web-app-autoscale]: /azure/app-service-web/web-sites-scale
 [web-app-backup]: /azure/app-service-web/web-sites-backup
 [web-app-log-stream]: /azure/app-service-web/web-sites-enable-diagnostic-log#streamlogs

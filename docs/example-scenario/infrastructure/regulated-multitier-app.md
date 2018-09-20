@@ -3,12 +3,12 @@ title: Sécuriser une application web Windows pour les secteurs industriels rég
 description: Scénario éprouvé pour la conception d’une application web sécurisée, à plusieurs niveaux avec Windows Server sur Azure qui utilise des groupes identiques, Application Gateway et des équilibreurs de charge.
 author: iainfoulds
 ms.date: 07/11/2018
-ms.openlocfilehash: aba714fc1955341645d0faa400768bc09fb8e50b
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: 3572f215d9134a6650d76e1b14458226334c6f42
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060990"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389269"
 ---
 # <a name="secure-windows-web-application-for-regulated-industries"></a>Sécuriser une application web Windows pour les secteurs industriels réglementés
 
@@ -30,9 +30,9 @@ Pensez à ce scénario pour les cas d’usage suivants :
 
 Ce scénario couvre une application à plusieurs niveaux pour les secteurs industriels réglementés utilisant ASP.NET et Microsoft SQL Server. Les données circulent dans le scénario comme suit :
 
-1. Les utilisateurs accèdent à l’application frontale ASP.NET pour les secteurs industriels réglementés via une passerelle d’application Azure.
+1. Les utilisateurs accèdent à l’application frontale ASP.NET pour les secteurs industriels réglementés au moyen d’une passerelle Azure Application Gateway.
 2. La passerelle d’application distribue le trafic vers les instances de machine virtuelle dans un groupe de machines virtuelles identiques Azure.
-3. L’application ASP.NET se connecte au cluster de Microsoft SQL Server dans une couche back-end via un équilibreur de charge Azure. Ces instances de SQL Server principales sont dans un réseau virtuel Azure distinct, sécurisé par des règles de groupe de sécurité réseau qui limitent le flux de trafic.
+3. L’application ASP.NET se connecte au cluster de Microsoft SQL Server dans une couche backend avec un équilibreur de charge Azure Load Balancer. Ces instances de SQL Server principales sont dans un réseau virtuel Azure distinct, sécurisé par des règles de groupe de sécurité réseau qui limitent le flux de trafic.
 4. L’équilibreur de charge répartit le trafic de SQL Server vers les instances de machine virtuelle dans un autre groupe de machines virtuelles identiques.
 5. Stockage Blob Azure agit comme un témoin Cloud pour le cluster SQL Server au niveau backend.  La connexion à partir du réseau virtuel est activée avec un point de terminaison de service de réseau virtuel pour le stockage Azure.
 
@@ -40,16 +40,16 @@ Ce scénario couvre une application à plusieurs niveaux pour les secteurs indus
 
 * [Azure Application Gateway][appgateway-docs] est un équilibreur de charge du trafic web de couche 7, prenant en charge les applications et pouvant distribuer le trafic en fonction de règles de routage spécifiques. App Gateway peut également gérer le déchargement SSL afin d’améliorer les performances du serveur web.
 * [Le réseau virtuel Azure][vnet-docs] permet à de nombreuses ressources, telles que les machines virtuelles de communiquer en toute sécurité entre elles, avec Internet et avec les réseaux locaux. Les réseaux virtuels fournissent un isolement et une segmentation, ils filtrent et acheminent le trafic et ils autorisent une connexion entre des emplacements. Deux réseaux virtuels combinés avec les groupes de sécurité réseau appropriés sont utilisés dans ce scénario pour fournir une [zone démilitarisée][dmz] (DMZ) et une isolation de composants de l’application. L’appairage de réseau virtuel connecte les deux réseaux ensemble.
-* Les [groupes identiques de machines virtuelles Azure][scaleset-docs] vous permettent de créer et de gérer un groupe de machines virtuelles identiques et disposant d’une charge équilibrée. Le nombre d’instances de machine virtuelle peut augmenter ou diminuer automatiquement en fonction d’une demande ou d’un calendrier défini. Deux groupes distincts de machines virtuelles identiques sont utilisés dans ce scénario, un pour les instances d’applications ASP.NET frontend et un autre pour les instances de machine virtuelle du cluster SQL Server backend. La configuration de l’état souhaité (DSC) de PowerShell ou l’extension de script personnalisé Azure peut servir à configurer les instances de machine virtuelle avec les logiciels requis et les paramètres de configuration.
-* Un [groupe de sécurité réseau Azure][nsg-docs] contient une liste de règles de sécurité qui autorisent ou refusent le trafic réseau entrant ou sortant en fonction de l’adresse IP source ou de destination, du port et du protocole. Les réseaux virtuels dans ce scénario sont sécurisés avec des règles de groupe de sécurité réseau qui limitent le flux du trafic entre les composants d’application.
+* Les [groupes identiques de machines virtuelles Azure][scaleset-docs] permettent de créer et de gérer un groupe de machines virtuelles identiques à charge équilibrée. Le nombre d’instances de machine virtuelle peut augmenter ou diminuer automatiquement en fonction d’une demande ou d’un calendrier défini. Deux groupes distincts de machines virtuelles identiques sont utilisés dans ce scénario, un pour les instances d’applications ASP.NET frontend et un autre pour les instances de machine virtuelle du cluster SQL Server backend. La configuration de l’état souhaité (DSC) de PowerShell ou l’extension de script personnalisé Azure peut servir à configurer les instances de machine virtuelle avec les logiciels requis et les paramètres de configuration.
+* Les [groupes de sécurité réseau Azure][nsg-docs] contiennent une liste de règles de sécurité qui autorisent ou refusent le trafic réseau entrant ou sortant en fonction de l’adresse IP source ou de destination, du port et du protocole. Les réseaux virtuels dans ce scénario sont sécurisés avec des règles de groupe de sécurité réseau qui limitent le flux du trafic entre les composants d’application.
 * [Azure Load Balancer][loadbalancer-docs] distribue le trafic entrant en fonction des règles et des sondes d’intégrité. Un équilibreur de charge offre une latence faible et un débit élevé, et peut augmenter l’échelle jusqu’à des millions de flux pour toutes les applications TCP et UDP. Dans ce scénario, un équilibreur de charge interne permet de distribuer le trafic à partir de la couche d’application de serveur frontend vers le cluster de SQL Server back-end.
 * [Stockage Blob Azure][cloudwitness-docs] agit comme un emplacement de témoin Cloud pour le cluster SQL Server. Ce témoin est utilisé pour les opérations de cluster et les décisions nécessitant un vote supplémentaire pour décider du quorum. L’utilisation d’un témoin Cloud supprime la nécessité d’une machine virtuelle supplémentaire d’agir comme un témoin de partage de fichiers traditionnel.
 
 ### <a name="alternatives"></a>Autres solutions
 
-* * nix, Windows peut facilement être remplacé par de nombreux autres systèmes d’exploitation car rien dans l’infrastructure ne dépend du système d’exploitation.
+* *nix, Windows est parfaitement remplaçable par d’autres systèmes d’exploitation, car rien dans l’infrastructure ne dépend du système d’exploitation.
 
-* [SQL Server pour Linux][sql-linux] peut remplacer le magasin de données back-end.
+* [SQL Server pour Linux][sql-linux] peut remplacer le magasin de données backend.
 
 * [Cosmos DB][cosmos] est une autre solution de magasin de données.
 
@@ -86,7 +86,7 @@ Pour obtenir des conseils d’ordre général sur la conception de scénarios r�
 **Prérequis.**
 
 * Vous devez disposer d’un compte Azure existant. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
-* Pour déployer un cluster de SQL Server dans le groupe identique backend, vous avez besoin d’un domaine Active Directory Services.
+* Un domaine dans Azure Active Directory (AD) Domain Services est nécessaire pour déployer un cluster SQL Server dans le groupe identique backend.
 
 Pour déployer l’infrastructure principale pour ce scénario avec un modèle Azure Resource Manager, procédez comme suit.
 
@@ -106,13 +106,13 @@ Pour explorer le coût d’exécution de ce scénario, tous les services sont pr
 
 Nous proposons trois exemples de profils de coût basés sur le nombre d’instances de groupe identique de machines virtuelles exécutant vos applications.
 
-* [Petit][small-pricing] : cela correspond à deux instances de machine virtuelle frontend et deux instances backend.
-* [Moyen][medium-pricing] : cela correspond à 20 instances de machine virtuelle frontend et 5 instances backend.
-* [Grnad][large-pricing] : cela correspond à 100 instances de machine virtuelle frontend et 10 instances backend.
+* [Petit][small-pricing] : 2 instances de machine virtuelle frontend et 2 instances backend.
+* [Moyen][medium-pricing] : 20 instances de machine virtuelle frontend et 5 instances backend.
+* [Grand][large-pricing] : 100 instances de machine virtuelle frontend et 10 instances backend.
 
 ## <a name="related-resources"></a>Ressources associées
 
-Ce scénario a utilisé un groupe de machines virtuelles identiques backend qui exécutent un cluster Microsoft SQL Server. Azure Cosmos DB peut également servir comme une couche Données évolutive et sécurisée pour les données d’application. Un [point de terminaison de service du réseau virtuel Azure][vnetendpoint-docs] permet de sécuriser vos ressources critiques du service Azure pour vos réseaux virtuels uniquement. Dans ce scénario, les points de terminaison de réseau virtuel permettent de sécuriser le trafic entre la couche Application frontend et Cosmos DB. Pour plus d’informations sur Cosmos DB, voir [Vue d’ensemble de Azure Cosmos DB][azurecosmosdb-docs].
+Ce scénario a utilisé un groupe de machines virtuelles identiques backend qui exécutent un cluster Microsoft SQL Server. Azure Cosmos DB peut également servir comme une couche Données évolutive et sécurisée pour les données d’application. Un [point de terminaison de service du réseau virtuel Azure][vnetendpoint-docs] permet de sécuriser vos ressources critiques de service Azure sur vos réseaux virtuels uniquement. Dans ce scénario, les points de terminaison de réseau virtuel permettent de sécuriser le trafic entre la couche Application frontend et Cosmos DB. Pour plus d’informations sur Cosmos DB, voir [Vue d’ensemble de Azure Cosmos DB][azurecosmosdb-docs].
 
 Vous voyez également une [architecture de référence approfondie pour une application multiniveau générique avec SQL Server][ntiersql-ra].
 

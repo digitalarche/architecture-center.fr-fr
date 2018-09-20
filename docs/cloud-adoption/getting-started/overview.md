@@ -2,12 +2,13 @@
 title: 'Adoption du cloud d’entreprise : Prise en main'
 description: Décrit une vue d’ensemble de la première phase de la transformation numérique d’une entreprise pour l’adoption de technologies cloud Azure
 author: petertaylor9999
-ms.openlocfilehash: 25d1afe4d048b07a350dfc1b5c463b1d5425a8a4
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.date: 09/10/2018
+ms.openlocfilehash: b51e834a56f4d9818ca9475f959c3f888bae20bc
+ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43327048"
+ms.lasthandoff: 09/11/2018
+ms.locfileid: "44389288"
 ---
 # <a name="enterprise-cloud-adoption-getting-started"></a>Adoption du cloud d’entreprise : Prise en main 
 
@@ -35,6 +36,8 @@ Par exemple, une équipe de stratégie cloud peut être pilotée par le directeu
 
 Il est également important de former deux autres équipes principales : une équipe dédiée à la gouvernance et une équipe dédiée à la sécurité. Ces équipes sont responsables de la conception, de l’implémentation et de l’audit en cours des stratégies de sécurité et de la gouvernance de l’entreprise. L’équipe dédiée à la gouvernance a besoin de membres ayant travaillé dans les domaines de la protection des ressources, de la gestion des coûts, de la stratégie de groupe et autres sujets associés. L’équipe dédiée à la sécurité requiert des membres qui connaissent bien les normes de sécurité actuelles du secteur, ainsi que les exigences de sécurité de l’entreprise.
 
+![Équipe de stratégie cloud, avec les équipes de sécurité et de gouvernance](../_images/getting-started-overview-1.png)
+
 L’équipe dédiée à la gouvernance est responsable de la conception et de l’implémentation du modèle de gouvernance de l’entreprise dans le cloud, ainsi que du déploiement et du maintien des ressources d’infrastructure partagée qui font partie de la transformation numérique. Ces ressources incluent les ressources cloud, logicielles et matérielles nécessaires pour connecter le réseau local au réseau virtuel dans le cloud.
 
 L’équipe dédiée à la sécurité est responsable de la conception et de l’implémentation de la stratégie de sécurité de l’entreprise dans le cloud et collabore étroitement avec l’équipe dédiée à la gouvernance. L’équipe dédiée à la sécurité possède l’extension de la limite de sécurité du réseau local pour inclure le réseau virtuel dans le cloud. Cela peut consister à posséder et maintenir les pare-feu entrants et sortants sur le réseau virtuel cloud, ainsi qu’à garantir que la stratégie et les outils empêchent le déploiement des ressources non autorisées.
@@ -42,6 +45,8 @@ L’équipe dédiée à la sécurité est responsable de la conception et de l�
 ## <a name="step-2-learn-whats-new-in-the-cloud"></a>Étape 2 : Découvrir les nouveautés dans le cloud
  
 L’étape suivante de la transformation numérique de votre entreprise implique que les membres de l’équipe de stratégie cloud apprennent comment la technologie cloud va changer la méthode de gestion de l’entreprise. Il s’agit de préparer et de planifier les changements qui vont affecter votre activité, votre personnel et vos technologies. Il est essentiel que les membres de l’équipe de stratégie cloud comprennent les nouveautés et les différences entre un environnement cloud et un environnement local.
+
+![Les équipes chargées de la stratégie cloud, de la gouvernance et de la sécurité découvrent les meilleures pratiques d’utilisation du cloud.](../_images/getting-started-overview-2.png)
 
 Pour comprendre le cloud, il faut commencer par se pencher sur le [fonctionnement d’Azure](what-is-azure.md) en général. Ensuite, étudiez les bases de [la gouvernance dans Azure](what-is-governance.md) en préparation de la [compréhension de la gestion des accès aux ressources](azure-resource-access.md).
 
@@ -80,6 +85,8 @@ Une fois tous les écarts de la stratégie métier énumérés et les solutions 
 Maintenant que les objectifs de la transformation numérique ont été énumérés, classés par ordre de priorité et que des solutions principales ont été proposées, l’étape suivante pour l’équipe de stratégie cloud consiste à aligner chaque solution principale avec les équipes d’implémentation et de conception de chaque groupe métier. 
 
 Les équipes récupèrent les listes classées par ordre de priorité et étudient une à une les solutions principales pour concevoir chaque solution. Le processus de conception implique la spécification d’une nouvelle infrastructure et de nouvelles charges de travail. Des modifications peuvent être appliquées aux rôles des personnes et aux processus qu’elles suivent. À ce stade, il est aussi primordial que chaque équipe de conception fasse appel aux équipes dédiées à la sécurité et à la gouvernance pour examiner chaque conception. Toutes les conceptions doivent respecter les stratégies et procédures définies par les équipes dédiées à la sécurité et à la gouvernance, et ces dernières doivent participer à l’approbation finale de chaque conception.
+
+![L’équipe chargée de la stratégie cloud transmet des solutions de haut niveau aux équipes de conception et d’implémentation.](../_images/getting-started-overview-3.png)
 
 La conception de chaque solution n’est pas une tâche anodine, et à mesure de la création des conceptions, celles-ci doivent être imaginées dans le contexte des autres conceptions de solutions des autres équipes. Par exemple, si plusieurs des conceptions entraînent la migration de services et d’applications locaux existants vers le cloud, il peut s’avérer plus efficace de les regrouper et de concevoir une stratégie de migration globale. Dans un autre exemple, il peut être impossible de migrer certains services et applications locaux existants, et la solution pourrait être de les remplacer par un nouveau développement ou des services tiers. Dans ce cas, il peut être plus efficace de les regrouper et de déterminer de quelle façon ils se chevauchent pour identifier si un service tiers peut être utilisé pour plusieurs solutions.
 
