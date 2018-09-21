@@ -2,13 +2,13 @@
 title: Récupération d’urgence des applications Microsoft Azure
 description: Présentations techniques et informations détaillées sur la conception d’applications pour la récupération d’urgence sur Microsoft Azure.
 author: adamglick
-ms.date: 05/26/2017
-ms.openlocfilehash: faae658d91ec0cb2dd5dc436e67aa9b494fd4b49
-ms.sourcegitcommit: 46ed67297e6247f9a80027cfe891a5e51ee024b4
+ms.date: 09/12/2018
+ms.openlocfilehash: 4f879445154e37502bbeeeb90939737b6072e6ec
+ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/13/2018
-ms.locfileid: "45556680"
+ms.lasthandoff: 09/14/2018
+ms.locfileid: "45584797"
 ---
 # <a name="disaster-recovery-for-azure-applications"></a>Récupération d’urgence des applications Microsoft Azure
 
@@ -118,6 +118,9 @@ Vous pouvez également avoir recours à une approche plus manuelle pour la sauve
 
 La redondance intégrée d’Azure Storage crée deux réplicas du fichier de sauvegarde dans la même région. Toutefois, la fréquence d’exécution du processus de sauvegarde détermine votre RPO, c’est-à-dire la quantité de données que vous risquez de perdre dans les scénarios d’urgence. Par exemple, imaginez que vous effectuez une sauvegarde toutes les heures et qu’un incident survient deux minutes avant la nouvelle sauvegarde. Vous perdez ainsi 58 minutes de données enregistrées depuis la dernière sauvegarde. En outre, pour vous protéger contre une interruption de service à l’échelle régionale, vous devez copier les fichiers BACPAC vers une autre région. Vous avez ensuite la possibilité de restaurer ces sauvegardes dans l’autre région. Pour en savoir plus, consultez l’article [Vue d’ensemble : continuité des activités cloud et récupération d’urgence d’une base de données avec SQL Database](/azure/sql-database/sql-database-business-continuity/).
 
+#### <a name="sql-data-warehouse"></a>SQL Data Warehouse
+Pour SQL Data Warehouse, utilisez les [géosauvegardes](/azure/sql-data-warehouse/backup-and-restore#geo-backups) pour restaurer vers une région associée pour la récupération d’urgence. Ces sauvegardes sont effectuées toutes les 24 heures et peuvent être restaurées en l’espace de 20 minutes dans la région associée. Cette fonctionnalité est activée par défaut pour tous les entrepôts de données SQL Data Warehouse. Pour plus d’informations sur la restauration de votre entrepôt de données, consultez [Restaurer à partir d’un région géographique Azure à l’aide de PowerShell](/azure/sql-data-warehouse/sql-data-warehouse-restore#restore-from-an-azure-geographical-region-using-powershell).
+
 #### <a name="azure-storage"></a>Stockage Azure
 Pour le stockage Azure, vous pouvez développer un processus de sauvegarde personnalisé ou utiliser l’un des nombreux outils de sauvegarde tiers. Notez que la plupart des conceptions d’applications comportent des complexités supplémentaires dans la mesure où les ressources de stockage se référencent mutuellement. Prenez l’exemple d’une base de données SQL comportant une colonne liée à un objet blob dans Azure Storage. Si les sauvegardes ne sont pas effectuées simultanément, cela peut être dû à l’absence de sauvegarde du pointeur vers un objet blob de la base de données avant la défaillance. L’application ou le plan de récupération d’urgence doit implémenter des processus pour gérer cette incohérence une fois la récupération effectuée.
 
@@ -127,7 +130,7 @@ D’autres plateformes de données IaaS (Infrastructure-as-a-Service) hébergée
 ### <a name="reference-data-pattern-for-disaster-recovery"></a>Modèle de données de référence pour la récupération d’urgence
 Les données de référence sont des données en lecture seule qui prennent en charge les fonctionnalités de l’application. Celles-ci ne changent pas souvent. La sauvegarde et restauration constitue l’une des méthodes pour gérer des interruptions de service à l’échelle régionale ; cependant, l’objectif de délai de récupération (RTO) est relativement long. Lorsque vous déployez l’application vers une région secondaire, certaines stratégies peuvent améliorer le RTO pour les données de référence.
 
-Étant donné que les données de référence ne changent pas souvent, vous pouvez améliorer le RTO en conservant une copie permanente des données de référence dans la région secondaire. Cela élimine le temps nécessaire à la restauration des sauvegardes en cas de sinistre. Pour répondre aux exigences en matière de récupération d’urgence dans plusieurs régions, vous devez déployer l’application et les données de référence ensemble dans plusieurs régions. Comme indiqué dans la section [Modèle de données de référence pour la haute disponibilité](high-availability-azure-applications.md#reference-data-pattern-for-high-availability), vous pouvez déployer des données de référence vers le rôle lui-même, le stockage externe ou une combinaison des deux.
+Étant donné que les données de référence ne changent pas souvent, vous pouvez améliorer le RTO en conservant une copie permanente des données de référence dans la région secondaire. Cela élimine le temps nécessaire à la restauration des sauvegardes en cas de sinistre. Pour répondre aux exigences en matière de récupération d’urgence dans plusieurs régions, vous devez déployer l’application et les données de référence ensemble dans plusieurs régions. Vous pouvez déployer des données de référence vers le rôle lui-même, le stockage externe ou une combinaison des deux.
 
 Le modèle de déploiement des données de référence au sein des nœuds de calcul répond implicitement aux exigences de récupération d’urgence. Le déploiement des données de référence vers la base de données SQL requiert le déploiement d’une copie de ces données vers chaque région. La même stratégie s’applique à Azure Storage. Vous devez déployer une copie de toutes les données de référence stockées dans Azure Storage vers les régions primaires et secondaires.
 
@@ -153,7 +156,7 @@ L’une des implémentations possibles serait d’utiliser la file d’attente i
 
 > [!NOTE]
 > La majeure partie de ce document porte sur la fonctionnalité PaaS (Platform as a Service). Cependant, d’autres options de réplication et de disponibilité pour les applications hybrides utilisent des machines virtuelles Azure. Ces applications hybrides utilisent la fonctionnalité IaaS (Infrastructure as a Service) pour héberger SQL Server sur des machines virtuelles dans Azure. Cela permet d’avoir des approches de disponibilité traditionnelles dans SQL Server, telles que les groupes de disponibilité AlwaysOn ou la copie des journaux de transaction. Certaines techniques, telles que AlwaysOn, fonctionnent uniquement entre les machines virtuelles Azure et les instances SQL Server. Pour plus d’informations, consultez [Haute disponibilité et récupération d’urgence pour SQL Server dans Azure Virtual Machines](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-high-availability-dr/).
-> 
+>
 > 
 
 #### <a name="reduced-application-functionality-for-transaction-capture"></a>Fonctionnalités réduites des applications pour la capture des transactions
@@ -308,5 +311,4 @@ Les rubriques suivantes décrivent les services Azure spécifiques à la récup�
 | Base de données SQL | [Restaurer une base de données SQL Azure ou basculer vers une base de données secondaire](/azure/sql-database/sql-database-disaster-recovery) |
 | Machines virtuelles | [Que faire si une interruption du service Azure affecte des machines virtuelles Azure ?](/azure/virtual-machines/virtual-machines-disaster-recovery-guidance) |
 | Réseaux virtuels | [Réseau virtuel – Continuité des activités](/azure/virtual-network/virtual-network-disaster-recovery-guidance) |
-
 
