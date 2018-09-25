@@ -337,24 +337,50 @@ items:
       href: example-scenario/ai/intelligent-apps-image-processing.md
   - name: Applications
     items:
+    - name: SaaS d’ingénierie assistée par ordinateur
+      href: example-scenario/apps/hpc-saas.md
+    - name: Confiance décentralisée entre les banques
+      href: example-scenario/apps/decentralized-trust.md
+    - name: Surveillance des applications web
+      href: example-scenario/apps/app-monitoring.md
     - name: Bot pour réservation d’hôtel
       href: example-scenario/apps/commerce-chatbot.md
-    - name: DevOps avec Containers
+    - name: DevOps avec conteneurs
       href: example-scenario/apps/devops-with-aks.md
-    - name: DevOps avec VSTS
+    - name: DevOps avec Azure DevOps
       href: example-scenario/apps/devops-dotnet-webapp.md
-    - name: SAP pour Dev/Test
+    - name: SAP pour le développement et les tests
       href: example-scenario/apps/sap-dev-test.md
+    - name: SAP pour la production
+      href: example-scenario/apps/sap-production.md
     - name: Serveur frontal e-commerce
       href: example-scenario/apps/ecommerce-scenario.md
-  - name: Données et analyses
+    - name: Gestion des API de commerce électronique
+      href: example-scenario/apps/apim-api-scenario.md
+    - name: Recherche de produit de e-commerce
+      href: example-scenario/apps/ecommerce-search.md
+  - name: Données et analyse
     items:
+    - name: IoT pour la construction
+      href: example-scenario/data/big-data-with-iot.md
+    - name: Entreposage des données et analyse
+      href: example-scenario/data/data-warehouse.md
+    - name: Données IOT automobiles
+      href: example-scenario/data/realtime-analytics-vehicle-iot.md
     - name: Détection des fraudes en temps réel
       href: example-scenario/data/fraud-detection.md
     - name: Traitement évolutif des commandes
       href: example-scenario/data/ecommerce-order-processing.md
   - name: Infrastructure
     items:
+    - name: Diagramme de flux cumulé (CFD)
+      href: example-scenario/infrastructure/hpc-cfd.md
+    - name: Bureaux virtuels Linux
+      href: example-scenario/infrastructure/linux-vdi-citrix.md
+    - name: Décomposition des applications monolithiques
+      href: example-scenario/infrastructure/ServiceFabricMicroservices.md
+    - name: WordPress hautement évolutif
+      href: example-scenario/infrastructure/wordpress.md
     - name: Windows multiniveau
       href: example-scenario/infrastructure/regulated-multitier-app.md
     - name: Rendu vidéo HPC
@@ -479,6 +505,12 @@ items:
     items:
     - name: Déployer une charge de travail de base
       href: cloud-adoption/infrastructure/basic-workload.md
+  - name: Opérations
+    items:
+    - name: Vue d’ensemble
+      href: cloud-adoption/operations/overview.md
+    - name: Mettre en place un examen de santé opérationnel
+      href: cloud-adoption/operations/operational-fitness-review.md
   - name: Annexe
     items:
     - name: Structure d’entreprise Azure
@@ -493,9 +525,9 @@ items:
     href: aws-professional/index.md
   - name: Comparaison des services
     href: aws-professional/services.md
-ms.openlocfilehash: f82d3e29047cfca1a6a0d3e2e213b074094cc363
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.openlocfilehash: 804207bfa17a0ef1ef61d5f0729c8e5df6af2089
+ms.sourcegitcommit: b7e521ba317f4fcd3253c80ac0c0a355eaaa56c5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43324838"
+ms.lasthandoff: 09/21/2018
+ms.locfileid: "46533947"
