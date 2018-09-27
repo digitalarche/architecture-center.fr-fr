@@ -7,12 +7,12 @@ pnp.series.title: Connect an on-premises network to Azure
 pnp.series.next: expressroute
 pnp.series.prev: ./index
 cardTitle: VPN
-ms.openlocfilehash: ef89cdd3e2a175f82929b613159a99557560cc7a
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.openlocfilehash: d0966791642ee174d020c960c9fc6e72d8768539
+ms.sourcegitcommit: b38ba378c9d6110da2dfd50b4233fadd94604bb0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43325386"
+ms.lasthandoff: 09/25/2018
+ms.locfileid: "47167436"
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-a-vpn-gateway"></a>Connecter un réseau local à Azure à l’aide d’une passerelle VPN
 
@@ -51,7 +51,7 @@ Les recommandations suivantes s’appliquent à la plupart des scénarios. Suive
 
 Créez un réseau virtuel Azure avec un espace d’adressage suffisant pour toutes les ressources requises. Assurez-vous que l’espace d’adressage du réseau virtuel puisse évoluer au cas où vous auriez besoin de machines virtuelles supplémentaires à l’avenir. L’espace d’adressage du réseau virtuel ne doit pas chevaucher le réseau local. Par exemple, le diagramme ci-dessus utilise l’espace d’adressage 10.20.0.0/16 pour le réseau virtuel.
 
-Créez un sous-réseau nommé *GatewaySubnet*, avec une plage d’adresses de /27. La passerelle de réseau virtuel requiert ce sous-réseau. En allouant 32 adresses à ce sous-réseau, vous devriez éviter les limitations de taille de passerelle. En outre, évitez de placer ce sous-réseau au milieu de l’espace d’adressage. La meilleure pratique consiste à définir l’espace d’adressage du sous-réseau de passerelle à l’extrémité supérieure de l’espace d’adressage du réseau virtuel. L’exemple du diagramme utilise 10.20.255.224/27.  Voici une procédure rapide pour calculer le [CIDR] :
+Créez un sous-réseau nommé *GatewaySubnet*, avec une plage d’adresses de /27. La passerelle de réseau virtuel requiert ce sous-réseau. En allouant 32 adresses à ce sous-réseau, vous devriez éviter les limitations de taille de passerelle. En outre, évitez de placer ce sous-réseau au milieu de l’espace d’adressage. La meilleure pratique consiste à définir l’espace d’adressage du sous-réseau de passerelle à l’extrémité supérieure de l’espace d’adressage du réseau virtuel. L’exemple du diagramme utilise 10.20.255.224/27.  Voici une procédure rapide pour calculer le [CIDR] :
 
 1. Définissez les bits variables dans l’espace d’adressage du réseau virtuel sur 1, jusqu'aux bits utilisés par le sous-réseau de passerelle, puis les bits restants sur 0.
 2. Convertissez les bits obtenus en nombre décimal et exprimez celui-ci sous la forme d’un espace d’adressage dont la longueur de préfixe correspond à la taille du sous-réseau de passerelle.
@@ -486,7 +486,10 @@ Pour déployer la solution, procédez comme suit :
 [vpn-appliances]: /azure/vpn-gateway/vpn-gateway-about-vpn-devices
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/hybrid-network-architectures.vsdx
 [vpn-appliance-ipsec]: /azure/vpn-gateway/vpn-gateway-about-vpn-devices#ipsec-parameters
-<!--[solution-script]: https://github.com/mspnp/reference-architectures/tree/master/guidance-hybrid-network-vpn/Deploy-ReferenceArchitecture.ps1-->
-<!--[solution-script-bash]: https://github.com/mspnp/reference-architectures/tree/master/guidance-hybrid-network-vpn/deploy-reference-architecture.sh-->
-<!--[virtualNetworkGateway-parameters]: https://github.com/mspnp/reference-architectures/tree/master/guidance-hybrid-network-vpn/parameters/virtualNetworkGateway.parameters.json-->
-[azure-cli] : https://azure.microsoft.com/documentation/articles/xplat-cli-install/ [CIDR] : https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing [0] : ./images/vpn.png « Réseau hybride s’étendant sur des infrastructures Azure et locales » [2] : ../_images/guidance-hybrid-network-vpn/audit-logs.png « Journaux d’audit dans le Portail Azure » [3] : ../_images/guidance-hybrid-network-vpn/RRAS-perf-counters.png « Compteur de performances pour la supervision du trafic réseau VPN » [4] : ../_images/guidance-hybrid-network-vpn/RRAS-perf-graph.png « Exemple de graphique de performances de réseau VPN »"
+[virtualNetworkGateway-parameters]: https://github.com/mspnp/hybrid-networking/vpn/parameters/virtualNetworkGateway.parameters.json
+[azure-cli]: https://azure.microsoft.com/documentation/articles/xplat-cli-install/
+[CIDR]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
+[0]: ./images/vpn.png "Réseau hybride incluant les infrastructures Azure et locales"
+[2]: ../_images/guidance-hybrid-network-vpn/audit-logs.png "Journaux d’audit dans le portail Azure"
+[3]: ../_images/guidance-hybrid-network-vpn/RRAS-perf-counters.png "Compteurs de performances pour surveiller le trafic du réseau VPN"
+[4]: ../_images/guidance-hybrid-network-vpn/RRAS-perf-graph.png "Exemple de graphique de performances du réseau VPN"
