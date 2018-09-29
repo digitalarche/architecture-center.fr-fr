@@ -1,24 +1,24 @@
 ---
-title: Gestion des identités pour les applications multi-locataire
+title: Gestion des identités pour les applications mutualisées
 description: Meilleures pratiques pour la gestion de l’authentification, de l’autorisation et de l’identité dans les applications multi-locataires.
 author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.next: tailspin
-ms.openlocfilehash: c363ac01e798b522fa95f39586e28fe3af5fae4a
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 9c2efe9aea9da53177478161b90406d0c2021550
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541671"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429432"
 ---
-# <a name="manage-identity-in-multitenant-applications"></a>Gérer l’identité dans les applications multi-locataire
+# <a name="manage-identity-in-multitenant-applications"></a>Gérer l’identité dans les applications mutualisées
 
 Cette série d’articles décrit les meilleures pratiques pour les applications multi-locataires, lors de l’utilisation d’Azure AD pour l’authentification et la gestion des identités.
 
 [![GitHub](../_images/github.png) Exemple de code][sample application]
 
-Lorsque vous générez une les applications multi-locataire, l’une des premières difficultés est la gestion des identités utilisateur, car désormais chaque utilisateur appartient à un client. Par exemple :
+Lorsque vous générez une les application multi-locataire, l’une des premières difficultés est la gestion des identités utilisateur, car désormais chaque utilisateur appartient à un client. Par exemple : 
 
 * Les utilisateurs se connectent avec les informations d’identification de leur organisation.
 * Les utilisateurs doivent avoir accès aux données de leur organisation, mais pas aux données appartenant à d’autres clients.
@@ -93,7 +93,7 @@ Ce guide ne prend pas en considération les autres aspects d’une architecture 
 
 
 <!-- Links -->
-[ADConnect]: /azure/active-directory/active-directory-aadconnect
+[ADConnect]: /azure/active-directory/hybrid/whatis-hybrid-identity
 [AzureAD]: /azure/active-directory
 
 [Fédération avec les services ADFS d’un client]: adfs.md
