@@ -3,12 +3,12 @@ title: Antimodèle de persistance monolithique
 description: Rassembler toutes les données d’une application dans un magasin de données unique peut dégrader les performances.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 7f04b9f0805c281068b6b2edaf040683773e6f6e
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 8cc67a41adf7ca4e3c5475eea86e38b75dd65d4d
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24538679"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429109"
 ---
 # <a name="monolithic-persistence-antipattern"></a>Antimodèle de persistance monolithique
 
@@ -142,7 +142,7 @@ De même, l’utilisation maximale de la UDBD de la base de données de journaux
 - [Partitionnement des données][DataPartitioningGuidance]
 
 [sample-app]: https://github.com/mspnp/performance-optimization/tree/master/MonolithicPersistence
-[CosmosDB]: http://azure.microsoft.com/services/cosmos-db/
+[CosmosDB]: https://azure.microsoft.com/services/cosmos-db/
 [Azure-cache]: /azure/redis-cache/
 [Data-Access-Guide]: https://msdn.microsoft.com/library/dn271399.aspx
 [DataPartitioningGuidance]: ../../best-practices/data-partitioning.md

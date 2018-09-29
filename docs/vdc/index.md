@@ -3,12 +3,12 @@ title: Centre de données virtuel Azure
 description: Ressources portant sur le centre de données virtuel Microsoft Azure
 keywords: Azure
 layout: LandingPage
-ms.openlocfilehash: 9b82122358085c37f89fb258034a4c9a91ecb054
-ms.sourcegitcommit: 8ec48a0e2c080c9e2e0abbfdbc463622b28de2f2
+ms.openlocfilehash: 5b5b6f58911e39ae1296722194b58c601b9baea8
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/18/2018
-ms.locfileid: "43324757"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428089"
 ---
 # <a name="azure-virtual-datacenter-and-the-enterprise-control-plane"></a>Le centre de données virtuel Azure et le plan de contrôle entreprise
 
@@ -17,9 +17,9 @@ Le centre de données virtuel Azure est une approche permettant de tirer le meil
 ## <a name="resources"></a>Ressources
 <table>
 <tr>
-    <td style="width: 64px; vertical-align: middle;"><a href="http://aka.ms/VDC/Concepts"><img src="../_images/virtual-datacenter.svg" alt="Virtual Datacenter eBook" /></a></td>
+    <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Concepts"><img src="../_images/virtual-datacenter.svg" alt="Virtual Datacenter eBook" /></a></td>
     <td>
-        <h3><a href="http://aka.ms/VDC/Concepts">Azure Virtual Datacenter: Concepts</a> (Centre de données virtuel Azure : Concepts)</h3>
+        <h3><a href="https://aka.ms/VDC/Concepts">Azure Virtual Datacenter: Concepts</a> (Centre de données virtuel Azure : Concepts)</h3>
         <p>Ce livre électronique vous explique comment déployer des charges de travail d’entreprise sur la plateforme cloud Azure tout en respectant vos stratégies de sécurité et de mise en réseau existantes.</p>
     </td>
 </tr>
@@ -31,16 +31,16 @@ Le centre de données virtuel Azure est une approche permettant de tirer le meil
     </td>
 </tr>
 <tr>
-    <td style="width: 64px; vertical-align: middle;"><a href="http://aka.ms/VDC/Lift"><img src="./images/vdc-lift-and-shift.png" alt="Lift and Shift Guide" /></a></td>
+    <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Lift"><img src="./images/vdc-lift-and-shift.png" alt="Lift and Shift Guide" /></a></td>
     <td>
-        <h3><a href="http://aka.ms/VDC/Lift">Azure Virtual Datacenter: Lift and Shift Guide </a> (Centre de données virtuel Azure : guide de la méthode lift and shift)</h3>
+        <h3><a href="https://aka.ms/VDC/Lift">Azure Virtual Datacenter: Lift and Shift Guide </a> (Centre de données virtuel Azure : guide de la méthode lift and shift)</h3>
         <p>Ce livre blanc porte sur le processus sur lequel le personnel des services informatiques et les décisionnaires de l’entreprise peuvent s’appuyer afin d’identifier et de planifier la migration d’applications et de serveurs vers Azure à l’aide de la méthode lift and shift, qui permet de réduire les coûts de développement additionnels tout en optimisant les possibilités d’hébergement cloud.</p>
     </td>
 </tr>
 <tr>
-    <td style="width: 64px; vertical-align: middle;"><a href="http://aka.ms/VDC/Deck"><img src="./images/vdc-deck.png" alt="Presentation Deck" /></a></td>
+    <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Deck"><img src="./images/vdc-deck.png" alt="Presentation Deck" /></a></td>
     <td>
-        <h3><a href="http://aka.ms/VDC/Deck">Azure Virtual Datacenter: Presentation Deck</a> (Centre de données virtuel Azure : Diapositives de présentation)</h3>
+        <h3><a href="https://aka.ms/VDC/Deck">Azure Virtual Datacenter: Presentation Deck</a> (Centre de données virtuel Azure : Diapositives de présentation)</h3>
         <p>Cette présentation propose un tour d’horizon des outils et conseils relatifs au centre de données virtuel Azure. Elle couvre les objectifs du centre de données virtuel, les motivations du client, les régions Azure, les éléments d’une automatisation du centre de données virtuel, les centres de données virtuels Azure performants et de confiance, et elle se termine par un plan d’action centré sur les instructions du directeur informatique. Des informations de support et de formation sont également fournies.</p>
     </td>
 </tr>
@@ -57,4 +57,4 @@ Voici les quatre composants indispensables du centre de données virtuel Azure :
 Dans le modèle de centre de données virtuel Azure, vous pouvez appliquer des stratégies d’isolation, rendre le cloud plus semblable aux centres de données physiques que vous connaissez et atteindre les niveaux de sécurité et de confiance dont vous avez besoin. Quatre composants que toutes les équipes informatiques d’entreprise reconnaîtront rendent cela possible : SDN (Software-Defined Networking), le chiffrement, la gestion des identités ainsi que les standards de conformité et les certifications sous-jacentes de la plateforme Azure. Ces quatre points sont essentiels pour faire d’un centre de données virtuel une extension de confiance de vos investissements d’infrastructure existants.
 
 
-Continuez à lire le livre électronique <a href="http://aka.ms/VDC/eBook">Azure Virtual Datacenter Concepts</a> (Centre de données virtuel Azure : Concepts)
+Continuez à lire le livre électronique <a href="https://aka.ms/VDC/eBook">Azure Virtual Datacenter Concepts</a> (Centre de données virtuel Azure : Concepts)
