@@ -1,18 +1,18 @@
 ---
 title: Consommateurs concurrents
-description: Permettez à plusieurs consommateurs concurrents de traiter les messages reçus sur un même canal de messagerie.
+description: Ce modèle vise à permettre à plusieurs consommateurs concurrents de traiter les messages reçus sur un même canal de messagerie.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - messaging
-ms.openlocfilehash: d72a09ef7613bebe3701634e4eac0716400e471d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: aea172dcdb33c0d8513fb69715f1549b4a20f5e6
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24542407"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428367"
 ---
 # <a name="competing-consumers-pattern"></a>Modèle des consommateurs concurrents
 
@@ -48,7 +48,7 @@ Cette solution offre les avantages suivants :
 
 Prenez en compte les points suivants lorsque vous choisissez comment implémenter ce modèle :
 
-- **Classement des messages** : l’ordre dans lequel les instances du service consommateur reçoivent les messages n’est pas garanti et ne reflète pas nécessairement l’ordre dans lequel les messages ont été créés. Concevez le système de sorte que le traitement des messages soit idempotent. Vous éliminerez ainsi toute dépendance vis-à-vis de l’ordre de traitement des messages. Pour plus d’informations, consultez [Idempotency Patterns](http://blog.jonathanoliver.com/idempotency-patterns/) sur le blog de Jonathan Oliver.
+- **Classement des messages** : l’ordre dans lequel les instances du service consommateur reçoivent les messages n’est pas garanti et ne reflète pas nécessairement l’ordre dans lequel les messages ont été créés. Concevez le système de sorte que le traitement des messages soit idempotent. Vous éliminerez ainsi toute dépendance vis-à-vis de l’ordre de traitement des messages. Pour plus d’informations, consultez [Idempotency Patterns](https://blog.jonathanoliver.com/idempotency-patterns/) sur le blog de Jonathan Oliver.
 
     > Les files d’attente Microsoft Azure Service Bus peuvent implémenter un classement premier entrée premier sorti en utilisant des sessions de messagerie. Pour plus d’informations, consultez [Modèles de messagerie utilisant des sessions](https://msdn.microsoft.com/magazine/jj863132.aspx).
 
@@ -73,7 +73,7 @@ Utilisez ce modèle dans les situations suivantes :
 - le volume de travail est très variable, ce qui nécessite une solution scalable.
 - La solution doit offrir une haute disponibilité et doit être résiliente en cas d’échec du traitement d’une tâche.
 
-Ce modèle peut ne pas avoir d’utilité dans les cas suivants :
+Ce modèle peut ne pas avoir d’utilité dans les cas suivants :
 
 - Il n’est pas facile de séparer la charge de travail d’application en tâches discrètes ou il existe un niveau de dépendance élevé entre les tâches.
 - Les tâches doivent être effectuées de façon synchrone et la logique d’application doit attendre qu’une tâche se termine avant de continuer.
@@ -81,7 +81,7 @@ Ce modèle peut ne pas avoir d’utilité dans les cas suivants :
 
 > Certains systèmes de messagerie prennent en charge les sessions qui permettent à un producteur de regrouper les messages et de veiller à ce qu’ils soient tous gérés par le même consommateur. Ce mécanisme peut être utilisé avec des messages classés par ordre de priorité (s’ils sont pris en charge) pour implémenter une forme de classement de messages qui remet les messages dans l’ordre d’un producteur à un consommateur unique.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Azure propose des files d’attente de stockage et des files d’attente Service Bus qui peuvent servir de mécanisme pour l’implémenter ce modèle. La logique d’application peut poster des messages dans une file d’attente, et les consommateurs implémentés comme tâches dans un ou plusieurs rôles peuvent récupérer les messages de cette file d’attente et les traiter. Pour des besoins de résilience, une file d’attente Service Bus permet à un consommateur d’utiliser le mode `PeekLock` quand il s’agit de récupérer un message dans la file d’attente. Ce mode ne supprime pas réellement le message ; il ne fait que le masquer aux autres consommateurs. Le consommateur d’origine peut supprimer le message à l’issue de son traitement. En cas de défaillance du consommateur, le mode PeekLock expire et le message redevient visible, ce qui permet à un autre consommateur de le récupérer.
 
@@ -180,9 +180,9 @@ Notez que les fonctionnalités de mise à l’échelle automatique, telles que c
 
 Les modèles et les conseils suivants peuvent présenter un intérêt quand il s’agit d’implémenter ce modèle :
 
-- [Notions élémentaires sur la messagerie asynchrone](https://msdn.microsoft.com/library/dn589781.aspx) : les files d’attente de messages sont un mécanisme de communication asynchrone. Si un service consommateur doit envoyer une réponse à une application, il peut être nécessaire d’implémenter une certaine forme de messagerie de réponse. Le document Notions élémentaires sur la messagerie asynchrone fournit des informations sur la façon d’implémenter une messagerie de demande/réponse en utilisant des files d’attente de messages.
+- [Primer de messagerie asynchrone](https://msdn.microsoft.com/library/dn589781.aspx). les files d’attente de messages sont un mécanisme de communication asynchrone. Si un service consommateur doit envoyer une réponse à une application, il peut être nécessaire d’implémenter une certaine forme de messagerie de réponse. Le document Notions élémentaires sur la messagerie asynchrone fournit des informations sur la façon d’implémenter une messagerie de demande/réponse en utilisant des files d’attente de messages.
 
-- [Recommandations en matière de mise à l’échelle automatique](https://msdn.microsoft.com/library/dn589774.aspx) : il est possible de démarrer et d’arrêter des instances d’un service consommateur, car la longueur de la file d’attente dans laquelle les applications postent les messages est variable. La mise à l’échelle automatique peut contribuer à maintenir le débit pendant les périodes d’intense traitement.
+- [Mise à l’échelle automatique](https://msdn.microsoft.com/library/dn589774.aspx). il est possible de démarrer et d’arrêter des instances d’un service consommateur, car la longueur de la file d’attente dans laquelle les applications postent les messages est variable. La mise à l’échelle automatique peut contribuer à maintenir le débit pendant les périodes d’intense traitement.
 
 - [Modèle de consolidation des ressources de calcul](compute-resource-consolidation.md) : il est possible de consolider plusieurs instances d’un service consommateur dans un processus unique pour réduire les coûts et les surcharges de gestion. Le modèle de consolidation des ressources de calcul décrit les avantages et les inconvénients de cette approche.
 

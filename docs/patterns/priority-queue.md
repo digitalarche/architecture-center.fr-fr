@@ -1,6 +1,6 @@
 ---
 title: File d’attente avec un ordre de priorité
-description: Classez par ordre de priorité les demandes envoyées aux services de telle sorte que les demandes à plus haute priorité soient reçues et traitées plus rapidement que celles à plus basse priorité.
+description: Classez par ordre de priorité les requêtes envoyées aux services, de telle sorte que les demandes ayant une priorité plus élevée soient reçues et traitées plus rapidement que celles de moindre priorité.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - messaging
 - performance-scalability
-ms.openlocfilehash: ecfbb38304bb95587e9ca15523ad9594898d9b32
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 400bfbc03cf5640ff32a551636b01d60e6c0ec50
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24543143"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428497"
 ---
 # <a name="priority-queue-pattern"></a>Modèle de file d’attente avec un ordre de priorité
 
@@ -80,7 +80,7 @@ Ce modèle est utile dans les scénarios où :
 
 - différents utilisateurs ou locataires doivent être traités avec une priorité différente.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Microsoft Azure ne propose pas de mécanisme de mise en file d’attente prenant en charge en mode natif la définition automatique de priorités pour les messages via le tri. Cependant, il propose des rubriques et des abonnements Azure Service Bus qui prennent en charge un mécanisme de mise en file d’attente capable de filtrer les messages, avec en outre un large éventail de fonctionnalités flexibles qui en font une solution idéale dans la plupart des implémentations de files d’attente avec un ordre de priorité.
 
@@ -164,11 +164,11 @@ this.queueManager.SendBatchAsync(highMessages).Wait();
 
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
-Les modèles et les conseils suivants peuvent aussi s’avérer intéressants quand il s’agit d’implémenter ce modèle :
+Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
 
 - Un exemple illustrant ce modèle est disponible sur [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/priority-queue).
 
-- [Notions élémentaires sur la messagerie asynchrone](https://msdn.microsoft.com/library/dn589781.aspx) : un service consommateur qui traite une demande peut être amené à envoyer une réponse à l’instance de l’application qui a posté la demande. Fournit des informations sur les stratégies que vous pouvez employer pour implémenter une messagerie demande/réponse.
+- [Primer de messagerie asynchrone](https://msdn.microsoft.com/library/dn589781.aspx). un service consommateur qui traite une demande peut être amené à envoyer une réponse à l’instance de l’application qui a posté la demande. Fournit des informations sur les stratégies que vous pouvez employer pour implémenter une messagerie demande/réponse.
 
 - [Modèle des consommateurs concurrents](competing-consumers.md) : pour accroître le débit des files d’attente, il est possible d’avoir plusieurs consommateurs à l’écoute d’une même file d’attente et de traiter les tâches en parallèle. Ces consommateurs sont en concurrence pour les messages, mais un seul d’entre eux doit pouvoir traiter chaque message. Fournit des informations sur les avantages et les inconvénients de l’implémentation de cette approche.
 
@@ -176,5 +176,5 @@ Les modèles et les conseils suivants peuvent aussi s’avérer intéressants qu
 
 - [Recommandations en matière de mise à l’échelle automatique](https://msdn.microsoft.com/library/dn589774.aspx) : la possibilité ou non d’adapter la taille du pool de processus consommateur gérant une file d’attente dépend de la longueur de celle-ci. Cette stratégie peut contribuer à améliorer les performances, surtout pour les pools qui traitent des messages à haute priorité.
 
-- [Modèles Intégration Entreprise avec Service Bus](http://abhishekrlal.com/2013/01/11/enterprise-integration-patterns-with-service-bus-part-2/) sur le blog d’Abhishek Lal.
+- [Modèles Intégration Entreprise avec Service Bus](https://abhishekrlal.com/2013/01/11/enterprise-integration-patterns-with-service-bus-part-2/) sur le blog d’Abhishek Lal.
 

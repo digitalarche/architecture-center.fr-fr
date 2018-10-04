@@ -5,12 +5,12 @@ author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: client-assertion
-ms.openlocfilehash: d49129a38d0413f6006095f03b817885e1ce6c92
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.openlocfilehash: b6d2e431da85f7c304747df2f804f1714596bfc6
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2018
-ms.locfileid: "31012516"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429177"
 ---
 # <a name="use-azure-key-vault-to-protect-application-secrets"></a>Utiliser Azure Key Vault pour protéger les secrets d’application
 
@@ -174,7 +174,7 @@ Assignez maintenant cet utilisateur comme propriétaire d’abonnement.
    * Redis DNS name = Le nom DNS de votre instance de cache Redis.
    * Redis access key = la clé d’accès pour votre instance de cache Redis.
      
-2. À ce stade, il est judicieux de vérifier si vous avez stocké correctement les clés secrètes dans le coffre de clés. Exécutez la commande PowerShell suivante :
+2. À ce stade, il est judicieux de vérifier si vous avez stocké correctement les clés secrètes dans le coffre de clés. Exécutez la commande PowerShell suivante :
    
     ```
     Get-AzureKeyVaultSecret <<key vault name>> Redis--Configuration | Select-Object *
@@ -299,5 +299,5 @@ Remplacez les entrées entre [crochets] et enregistrez le fichier secrets.json.
 [readme]: ./run-the-app.md
 [Setup-KeyVault]: https://github.com/mspnp/multitenant-saas-guidance/blob/master/scripts/Setup-KeyVault.ps1
 [Surveys]: tailspin.md
-[user-secrets]: http://go.microsoft.com/fwlink/?LinkID=532709
+[user-secrets]: /aspnet/core/security/app-secrets
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance

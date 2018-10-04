@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - design-implementation
 - messaging
-ms.openlocfilehash: 2c17504f594843c10fcfe221f0087f1087a73fb8
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: fd616676f9487bdfe1bf23b3d0fec6c65b97a8f4
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847105"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429568"
 ---
 # <a name="pipes-and-filters-pattern"></a>Modèle de canaux et de filtres
 
@@ -59,7 +59,7 @@ Prenez en compte les points suivants quand vous choisissez comment implémenter 
 
 - **Fiabilité**. Utilisez une infrastructure qui permet de s’assurer que la circulation des données entre les filtres dans un pipeline ne sera pas perdue.
 
-- **Idempotence**. Si un filtre dans un pipeline échoue après la réception d’un message et que le travail est replanifié vers une autre instance du filtre, une partie du travail peut déjà être terminée. Si ce travail met à jour certains aspects de l’état global (par exemple, les informations stockées dans une base de données), cette même mise à jour peut être répétée. Un problème similaire peut se produire si un filtre échoue après la publication de ses résultats dans le filtre suivant dans le pipeline, mais avant d’indiquer qu’il a terminé son travail avec succès. Dans ce cas, le même travail peut être répété par une autre instance du filtre, entraînant ainsi une seconde publication des mêmes résultats. Cela peut entraîner un second traitement des mêmes données par les filtres suivants dans le pipeline. Par conséquent, les filtres dans un pipeline doivent être conçus pour être idempotents. Pour en savoir plus, consultez l’article [Idempotency Patterns](http://blog.jonathanoliver.com/idempotency-patterns/) sur le blog de Jonathan Oliver.
+- **Idempotence**. Si un filtre dans un pipeline échoue après la réception d’un message et que le travail est replanifié vers une autre instance du filtre, une partie du travail peut déjà être terminée. Si ce travail met à jour certains aspects de l’état global (par exemple, les informations stockées dans une base de données), cette même mise à jour peut être répétée. Un problème similaire peut se produire si un filtre échoue après la publication de ses résultats dans le filtre suivant dans le pipeline, mais avant d’indiquer qu’il a terminé son travail avec succès. Dans ce cas, le même travail peut être répété par une autre instance du filtre, entraînant ainsi une seconde publication des mêmes résultats. Cela peut entraîner un second traitement des mêmes données par les filtres suivants dans le pipeline. Par conséquent, les filtres dans un pipeline doivent être conçus pour être idempotents. Pour en savoir plus, consultez l’article [Idempotency Patterns](https://blog.jonathanoliver.com/idempotency-patterns/) sur le blog de Jonathan Oliver.
 
 - **Répétition des messages**. Si un filtre dans un pipeline échoue après la publication d’un message à l’étape suivante du pipeline, une autre instance du filtre peut être exécutée, qui publiera une copie du même message dans le pipeline. Deux instances du même message seraient alors transmises vers le filtre suivant. Pour éviter cela, le pipeline doit détecter et éliminer les messages en double.
 
@@ -282,4 +282,4 @@ Les modèles et les conseils suivants peuvent aussi présenter un intérêt quan
 - [Modèle des consommateurs concurrents](competing-consumers.md). Un pipeline peut contenir plusieurs instances d’un ou plusieurs filtres. Cette approche est utile pour l’exécution d’instances parallèles de filtres lents, permettant au système de répartir la charge et d’améliorer le débit. Chaque instance d’un filtre est en concurrence avec les autres pour l’entrée, deux instances d’un même filtre ne doivent pas être en mesure de traiter les mêmes données. Fournit une explication de cette approche.
 - [Modèle de consolidation des ressources de calcul](compute-resource-consolidation.md). Il est possible de regrouper les filtres qui doivent être mis à l’échelle ensemble dans le même processus. Fournit plus d’informations sur les avantages et les inconvénients de cette stratégie.
 - [Modèle de transaction de compensation](compensating-transaction.md). Un filtre peut être implémenté comme une opération qui peut être inversée ou qui possède une opération de compensation qui rétablit la version antérieure de l’état en cas de défaillance. Explique comment cela peut être implémenté pour maintenir ou garantir la cohérence éventuelle.
-- [Idempotency Patterns](http://blog.jonathanoliver.com/idempotency-patterns/) sur le blog de Jonathan Oliver.
+- [Idempotency Patterns](https://blog.jonathanoliver.com/idempotency-patterns/) sur le blog de Jonathan Oliver.

@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - design-implementation
 - resiliency
-ms.openlocfilehash: 8c8efa0846550557bb53ea81f85ac0e303a77b19
-ms.sourcegitcommit: f19314f18cd794ebe380fa722ca92066b8735b56
+ms.openlocfilehash: 6cc4b19e889cc9fc692e388498cc16ea56b1c981
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/03/2018
-ms.locfileid: "37348267"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429194"
 ---
 # <a name="leader-election-pattern"></a>Modèle d’élection du responsable
 
@@ -43,7 +43,7 @@ Le mécanisme de sélection du responsable proposé par le système doit être f
 Il existe plusieurs stratégies pour élire un responsable parmi différentes tâches au sein d’un environnement distribué, à savoir :
 - Choix de l’instance de tâche dont l’ID de processus ou d’instance est le plus faiblement classé.
 - Course à l’acquisition d’un mutex partagé et distribué. La première instance de tâche qui acquiert le mutex est le responsable. Cependant, le système doit garantir que si le responsable s’arrête ou se déconnecte du reste du système, le mutex est libéré pour permettre à une autre instance de tâche de devenir le responsable.
-- Implémentation de l’un des algorithmes d’élection du responsable courants tels que l’[algorithme du plus fort (Bully)](http://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/BullyExample.html) ou l’[algorithme en anneau (Ring)](http://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/RingElectExample.html). Ces algorithmes considèrent que chaque candidat à l’élection possède un ID unique et qu’il peut communiquer de manière fiable avec les autres candidats.
+- Implémentation de l’un des algorithmes d’élection du responsable courants tels que l’[algorithme du plus fort (Bully)](https://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/BullyExample.html) ou l’[algorithme en anneau (Ring)](https://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/RingElectExample.html). Ces algorithmes considèrent que chaque candidat à l’élection possède un ID unique et qu’il peut communiquer de manière fiable avec les autres candidats.
 
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
@@ -198,7 +198,7 @@ Les recommandations suivantes peuvent aussi s’avérer utiles pendant l’impl�
 - [Mise à l’échelle automatique](https://msdn.microsoft.com/library/dn589774.aspx). il est possible de démarrer et d’arrêter des instances des hôtes de tâche à mesure que la charge varie au niveau de l’application. La mise à l’échelle automatique peut contribuer à maintenir le débit et les performances pendant les périodes d’intense traitement.
 - [Recommandations en matière de partitionnement du calcul](https://msdn.microsoft.com/library/dn589773.aspx) : ces recommandations expliquent comment allouer des tâches aux hôtes d’un service cloud dans l’optique de minimiser les coûts de fonctionnement tout en préservant la scalabilité, les performances, la disponibilité et la sécurité du service.
 - [Modèle asynchrone basé sur des tâches](https://msdn.microsoft.com/library/hh873175.aspx) :
-- exemple illustrant l’[algorithme du plus fort (Bully)](http://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/BullyExample.html).
-- Exemple illustrant l’[algorithme en anneau (Ring)](http://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/RingElectExample.html).
-- [Apache Curator](http://curator.apache.org/), bibliothèque cliente pour Apache ZooKeeper.
+- exemple illustrant l’[algorithme du plus fort (Bully)](https://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/BullyExample.html).
+- Exemple illustrant l’[algorithme en anneau (Ring)](https://www.cs.colostate.edu/~cs551/CourseNotes/Synchronization/RingElectExample.html).
+- [Apache Curator](https://curator.apache.org/), bibliothèque cliente pour Apache ZooKeeper.
 - Article [Lease Blob (API REST)](https://msdn.microsoft.com/library/azure/ee691972.aspx) sur MSDN.

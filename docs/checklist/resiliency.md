@@ -4,12 +4,12 @@ description: Liste de vérification fournissant des indications relatives aux pr
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 883424d5d3535f822cdba61ecb9520ce05f75ec7
-ms.sourcegitcommit: 2154e93a0a075e1f7425a6eb11fc3f03c1300c23
+ms.openlocfilehash: 17612ee08e2329ea648fd21d6764e7bae1ca20e2
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/30/2018
-ms.locfileid: "39352642"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429092"
 ---
 # <a name="resiliency-checklist"></a>Liste de vérification de résilience
 
@@ -81,7 +81,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 ## <a name="security"></a>Sécurité
 
-**Implémentez la protection de niveau application contre les attaques par déni de service distribué (DDoS).** Les services Azure sont protégés contre les attaques DDoS au niveau de la couche réseau. Cependant, Azure ne peut pas assurer une protection contre les attaques de la couche Application, car il est difficile de distinguer les requêtes utilisateur réelles des requêtes utilisateur malveillantes. Pour plus d’informations sur la protection contre les attaques DDoS ciblant la couche Application, consultez la section Protecting against DDoS (Protection contre les attaques DDoS) du document [Microsoft Azure Network Security](http://download.microsoft.com/download/C/A/3/CA3FC5C0-ECE0-4F87-BF4B-D74064A00846/AzureNetworkSecurity_v3_Feb2015.pdf) (Sécurité réseau de Microsoft Azure) (téléchargement au format PDF).
+**Implémentez la protection de niveau application contre les attaques par déni de service distribué (DDoS).** Les services Azure sont protégés contre les attaques DDoS au niveau de la couche réseau. Cependant, Azure ne peut pas assurer une protection contre les attaques de la couche Application, car il est difficile de distinguer les requêtes utilisateur réelles des requêtes utilisateur malveillantes. Pour plus d’informations sur la protection contre les attaques DDoS ciblant la couche Application, consultez la section Protecting against DDoS (Protection contre les attaques DDoS) du document [Microsoft Azure Network Security](https://download.microsoft.com/download/C/A/3/CA3FC5C0-ECE0-4F87-BF4B-D74064A00846/AzureNetworkSecurity_v3_Feb2015.pdf) (Sécurité réseau de Microsoft Azure) (téléchargement au format PDF).
 
 **Implémentez le principe des privilèges minimum pour l’accès aux ressources de l’application.** L’accès par défaut aux ressources de l’application doit être le plus restrictif possible. Accordez des autorisations de niveau supérieur sur approbation. Si vous octroyez par défaut un accès trop permissif aux ressources de votre application, quelqu’un pourrait supprimer des ressources volontairement ou accidentellement. Azure fournit un [contrôle d’accès en fonction du rôle](/azure/active-directory/role-based-access-built-in-roles/) pour gérer les privilèges utilisateur, mais il est important de vérifier les autorisations avec des privilèges minimum pour les autres ressources qui présentent leur propre système d’autorisations, telles que SQL Server.
 
@@ -99,7 +99,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Automatisez le processus de déploiement de votre application.** Si votre personnel chargé des opérations est obligé de déployer manuellement votre application, des erreurs humaines risquent de faire échouer le déploiement. 
 
-**Concevez votre processus de mise en production de manière à optimiser la disponibilité de l’application.** Si votre processus de mise en production nécessite le passage hors connexion des services pendant le déploiement, votre application sera indisponible jusqu’à ce qu’ils soient à nouveau en ligne. Utilisez la technique de déploiement [Blue/Green](http://martinfowler.com/bliki/BlueGreenDeployment.html) ou [de contrôle de validité](http://martinfowler.com/bliki/CanaryRelease.html) pour déployer votre application en production. Ces deux techniques impliquent le déploiement de votre code de mise en production parallèlement au code de production pour que les utilisateurs du code de mise en production puissent être redirigés vers le code de production en cas de défaillance.
+**Concevez votre processus de mise en production de manière à optimiser la disponibilité de l’application.** Si votre processus de mise en production nécessite le passage hors connexion des services pendant le déploiement, votre application sera indisponible jusqu’à ce qu’ils soient à nouveau en ligne. Utilisez la technique de déploiement [Blue/Green](https://martinfowler.com/bliki/BlueGreenDeployment.html) ou [de contrôle de validité](https://martinfowler.com/bliki/CanaryRelease.html) pour déployer votre application en production. Ces deux techniques impliquent le déploiement de votre code de mise en production parallèlement au code de production pour que les utilisateurs du code de mise en production puissent être redirigés vers le code de production en cas de défaillance.
 
 **Consignez et évaluez les déploiements de votre application.** Si vous utilisez des techniques de déploiement intermédiaire telles qu’un déploiement Blue/Green ou de contrôle de validité, plusieurs versions de votre application seront exécutées en production. Si un problème survient, il est essentiel de déterminer quelle version de votre application en est à l’origine. Implémentez une stratégie de journalisation fiable pour capturer le plus d’informations possible concernant la version.
 

@@ -3,13 +3,13 @@ title: Scénarios et exemples de gouvernance d’abonnements
 description: Fournit des exemples montrant comment implémenter la gestion des abonnements Azure pour des scénarios courants.
 author: rdendtler
 ms.date: 01/03/2017
-ms.author: rodend;karlku;tomfitz
-ms.openlocfilehash: 2c10b9a61be0cd7dadff6bfb327d938cc498c935
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.author: rodend
+ms.openlocfilehash: 51be0e1cdbcb3258102c9e4a4790764cada98d1e
+ms.sourcegitcommit: 9eecff565392273d11b8702f1fcecb4d75e27a15
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43327248"
+ms.lasthandoff: 10/03/2018
+ms.locfileid: "48243663"
 ---
 # <a name="examples-of-implementing-azure-enterprise-scaffold"></a>Exemples d’implémentation d’une structure d’entreprise Azure
 Cet article fournit des exemples montrant comment une entreprise peut implémenter les recommandations pour une [structure d’entreprise Azure](azure-scaffold.md). Elle utilise une société fictive nommée Contoso pour illustrer les bonnes pratiques pour des scénarios courants.

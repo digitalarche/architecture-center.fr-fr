@@ -3,12 +3,12 @@ title: Exécution de SAP HANA sur les grandes instances Azure
 description: Pratiques éprouvées d’exécution de SAP HANA dans un environnement à haute disponibilité sur les grandes instances Azure.
 author: lbrader
 ms.date: 05/16/2018
-ms.openlocfilehash: 746161ac51335af5c48a559830d6e0345dcfb7b1
-ms.sourcegitcommit: 86d86d71e392550fd65c4f76320d7ecf0b72e1f6
+ms.openlocfilehash: d9d619dd7fb17c7cf0a66ce73c1e067ec97a2401
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/06/2018
-ms.locfileid: "37864519"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429704"
 ---
 # <a name="run-sap-hana-on-azure-large-instances"></a>Exécution de SAP HANA sur les grandes instances Azure
 
@@ -129,8 +129,6 @@ En fonction de vos exigences professionnelles, choisissez parmi plusieurs option
 | Sauvegarde du journal         | Requis pour la récupération jusqu’à une date et heure.                                                                   |                                                            |
 | Autres outils de sauvegarde | Emplacement de sauvegarde redondant.                                                                             | Coûts de licence supplémentaires.                                |
 
-En outre, SapHanaTutorial.com fournit un article utile, [Comparaison entre les options de sauvegarde HANA][sap-hana-tutorial].
-
 ## <a name="manageability-considerations"></a>Considérations relatives à la facilité de gestion
 Surveillez les ressources des grandes instances HANA telles que le processeur, la mémoire, la bande passante réseau et l’espace de stockage à l’aide de SAP HANA Studio, SAP HANA Cockpit, SAP Solution Manager et d’autres outils Linux natifs. Les grandes instances HANA ne sont pas fournies avec les outils de surveillance intégrés. Microsoft propose des ressources pour vous aider à [dépanner et contrôler][hli-troubleshoot] en fonction des exigences de votre organisation et l’équipe de support de Microsoft peut vous aider à résoudre les problèmes techniques. 
 
@@ -183,7 +181,7 @@ Les communautés peuvent répondre aux questions et vous aider à paramétrer un
 [running-SAP]: https://blogs.msdn.microsoft.com/saponsqlserver/2016/06/07/sap-on-sql-general-update-for-customers-partners-june-2016/
 [region]: https://azure.microsoft.com/global-infrastructure/services/
 [running-sap-blog]: https://blogs.msdn.microsoft.com/saponsqlserver/2017/05/04/sap-on-azure-general-update-for-customers-partners-april-2017/
-[quick-sizer]: http://service.sap.com/quicksizing
+[quick-sizer]: https://service.sap.com/quicksizing
 [sap-1793345]: https://launchpad.support.sap.com/#/notes/1793345
 [sap-1872170]: https://launchpad.support.sap.com/#/notes/1872170
 [sap-2121330]: https://launchpad.support.sap.com/#/notes/2121330
@@ -191,12 +189,11 @@ Les communautés peuvent répondre aux questions et vous aider à paramétrer un
 [sap-1736976]: https://launchpad.support.sap.com/#/notes/1736976
 [sap-2296290]: https://launchpad.support.sap.com/#/notes/2296290
 [sap-community]: https://www.sap.com/community.html
-[sap-hana-tutorial]: http://saphanatutorial.com/comparison-between-hana-backup-options/
 [sap-security]: https://archive.sap.com/documents/docs/DOC-62943
 [scripts]: /azure/virtual-machines/workloads/sap/hana-overview-high-availability-disaster-recovery
 [sku]: /azure/expressroute/expressroute-about-virtual-network-gateways
 [sla]: https://azure.microsoft.com/support/legal/sla/virtual-machines
-[stack-overflow]: http://stackoverflow.com/tags/sap/info
+[stack-overflow]: https://stackoverflow.com/tags/sap/info
 [stonith]: /azure/virtual-machines/workloads/sap/ha-setup-with-stonith
 [subnet]: /azure/virtual-network/virtual-network-manage-subnet
 [swd]: https://help.sap.com/doc/saphelp_nw70ehp2/7.02.16/en-us/48/8fe37933114e6fe10000000a421937/frameset.htm

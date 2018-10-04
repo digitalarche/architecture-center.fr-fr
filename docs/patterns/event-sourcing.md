@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - performance-scalability
-ms.openlocfilehash: 9a0bf170c9b54c3b2ee9cc91d6dcb5c55a13b96a
-ms.sourcegitcommit: ea7108f71dab09175ff69322874d1bcba800a37a
+ms.openlocfilehash: 1cb63b61f5eb97726e266f797dfe13011907c95f
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/17/2018
-ms.locfileid: "29963208"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429330"
 ---
 # <a name="event-sourcing-pattern"></a>Modèle d'approvisionnement en événements
 
@@ -82,7 +82,7 @@ Les applications multithread et plusieurs instances d’applications peuvent sto
 
 Il n’existe aucune approche standard ou mécanismes existants (comme des requêtes SQL) pour lire les événements afin d’obtenir des informations. Un flux d’événements constitue les seules données pouvant être extraites en utilisant comme critère un identificateur d’événement. L’ID d’événement correspond généralement à des entités individuelles. L’état actuel d’une entité peut être déterminé uniquement en relisant tous les événements s’y rapportant par rapport à l’état d’origine de cette entité.
 
-La longueur de chaque flux d’événements a une incidence sur la gestion et la mise à jour du système. Si les flux de données sont volumineux, pensez à créer des instantanés à intervalles réguliers (un nombre spécifié d’événements, par exemple). L’état actuel de l’entité peut être obtenu à partir de l’instantané et en relisant les événements qui se sont produits après ce moment précis. Pour plus d’informations sur la création d’instantanés de données, consultez [Snapshot on Martin Fowler’s Enterprise Application Architecture website](http://martinfowler.com/eaaDev/Snapshot.html) (Instantané du site Web Enterprise Application Architecture de Martin Fowler) et [Master-Subordinate Snapshot Replication](https://msdn.microsoft.com/library/ff650012.aspx) (Réplication de capture instantanée maître-subordonné).
+La longueur de chaque flux d’événements a une incidence sur la gestion et la mise à jour du système. Si les flux de données sont volumineux, pensez à créer des instantanés à intervalles réguliers (un nombre spécifié d’événements, par exemple). L’état actuel de l’entité peut être obtenu à partir de l’instantané et en relisant les événements qui se sont produits après ce moment précis. Pour plus d’informations sur la création d’instantanés de données, consultez [Snapshot on Martin Fowler’s Enterprise Application Architecture website](https://martinfowler.com/eaaDev/Snapshot.html) (Instantané du site Web Enterprise Application Architecture de Martin Fowler) et [Master-Subordinate Snapshot Replication](https://msdn.microsoft.com/library/ff650012.aspx) (Réplication de capture instantanée maître-subordonné).
 
 Même si l’approvisionnement en événements réduit le risque de mises à jour conflictuelles des données, l’application doit rester en mesure de traiter les incohérences résultant de la cohérence éventuelle et de l’absence de transactions. Par exemple, un événement indiquant une réduction dans l’inventaire du stock peut arriver dans le magasin de données alors même qu’une commande pour cet élément est en train d’être passée. Il est alors nécessaire de procéder au rapprochement des deux opérations, soit en en informant le client ou bien en créant une commande différée.
 
@@ -162,5 +162,3 @@ Les modèles et les conseils suivants peuvent aussi présenter un intérêt quan
 - [Data Consistency Primer](https://msdn.microsoft.com/library/dn589800.aspx) (Manuel d’introduction à la cohérence des données). En cas d’utilisation de l’approvisionnement en événements avec un magasin de lecture distinct ou des vues matérialisées, les données de lecture ne sont pas immédiatement cohérentes, mais uniquement cohérentes. Résume les problèmes se rapportant à la conservation de la cohérence des données distribuées.
 
 - [Conseils sur le partitionnement des données](https://msdn.microsoft.com/library/dn589795.aspx). Les données sont souvent partitionnées lorsque vous utilisez l’approvisionnement en événements pour améliorer l’extensibilité, réduire la contention et optimiser les performances. Décrit comment diviser les données en partitions distinctes, et les problèmes pouvant survenir.
-
-- Billet de Greg Young [Pourquoi utiliser l’approvisionnement en événements ?](http://codebetter.com/gregyoung/2010/02/20/why-use-event-sourcing/).

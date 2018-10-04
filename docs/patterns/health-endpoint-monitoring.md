@@ -9,12 +9,12 @@ pnp.pattern.categories:
 - availability
 - management-monitoring
 - resiliency
-ms.openlocfilehash: 3b3bce46b460148af17bfe6064cd052a5f9a6458
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 22a4e47c4dd8dd3dd11a4238e859acbea49f9d1b
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847847"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428973"
 ---
 # <a name="health-endpoint-monitoring-pattern"></a>Modèle Surveillance de point de terminaison
 
@@ -89,7 +89,7 @@ Comment configurer la sécurité des points de terminaison de surveillance pour 
 
      >  Les attaques DoS auront probablement un impact moindre sur un point de terminaison distinct qui effectue des tests fonctionnels de base sans compromettre le fonctionnement de l’application. Dans l’idéal, évitez d’utiliser un test susceptible d’exposer des informations sensibles. Si vous devez retourner des informations qui peuvent être utiles à un agresseur, réfléchissez à la façon dont vous protégerez le point de terminaison et les données contre tout accès non autorisé. Dans ce cas, s’appuyer uniquement sur l’obscurité n’est pas suffisant. Vous devez également envisager l’utilisation d’une connexion HTTPS et le chiffrement des données sensibles, mais cela augmentera la charge sur le serveur.
 
-- Comment accéder à un point de terminaison sécurisé à l’aide de l’authentification. Les outils et frameworks ne peuvent pas tous être configurés pour inclure des informations d’identification avec la demande de vérification de l’intégrité. Par exemple, les fonctionnalités de vérification de l’intégrité intégrées à Microsoft Azure ne peuvent pas fournir d’informations d’identification pour l’authentification. [Pingdom](https://www.pingdom.com/), [Panopta](http://www.panopta.com/), [NewRelic](https://newrelic.com/) et [Statuscake](https://www.statuscake.com/) constituent des solutions alternatives.
+- Comment accéder à un point de terminaison sécurisé à l’aide de l’authentification. Les outils et frameworks ne peuvent pas tous être configurés pour inclure des informations d’identification avec la demande de vérification de l’intégrité. Par exemple, les fonctionnalités de vérification de l’intégrité intégrées à Microsoft Azure ne peuvent pas fournir d’informations d’identification pour l’authentification. [Pingdom](https://www.pingdom.com/), [Panopta](https://www.panopta.com/), [NewRelic](https://newrelic.com/) et [Statuscake](https://www.statuscake.com/) constituent des solutions alternatives.
 
 - Comment vérifier que les performances de l’agent de surveillance sont correctes. Une approche consiste à exposer un point de terminaison qui retourne simplement une valeur à partir de la configuration de l’application ou une valeur aléatoire qui peut être utilisée pour tester l’agent.
 

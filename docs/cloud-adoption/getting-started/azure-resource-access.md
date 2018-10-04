@@ -3,12 +3,12 @@ title: 'Adoption du cloud d’entreprise : Gestion de l’accès aux ressources 
 description: 'Explication de la structure de gestion de l’accès aux ressources dans Azure : gestion des ressources Azure, abonnements, groupes de ressources et ressources'
 author: petertaylor9999
 ms.date: 09/10/2018
-ms.openlocfilehash: 2e64d8828574ebe216da1e76b19ec3ce5aeda993
-ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
+ms.openlocfilehash: c26b01d207bc4eb100653a826a053b394d03d1e6
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44389075"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428701"
 ---
 # <a name="enterprise-cloud-adoption-resource-access-management-in-azure"></a>Adoption du cloud d’entreprise : Gestion de l’accès aux ressources dans Azure
 
@@ -84,7 +84,7 @@ Le contrôle suivant consiste à vérifier que l’utilisateur dispose des autor
 
 Un rôle RBAC spécifie un ensemble d’autorisations qu’un utilisateur peut utiliser pour une ressource spécifique. Lorsque le rôle est attribué à l’utilisateur, ces autorisations s’appliquent. Par exemple, le [rôle de **propriétaire** intégré](/azure/role-based-access-control/built-in-roles#owner) autorise un utilisateur à effectuer une action sur une ressource.
 
-Le contrôle suivant vérifie que la requête est autorisée sous les paramètres spécifiés dans la [stratégie de ressources Azure](/azure/azure-policy/). Les stratégies de ressources Azure spécifient les opérations autorisées pour une ressource spécifique. Par exemple, une stratégie de ressources Azure peut spécifier que les utilisateurs sont uniquement autorisés à déployer un type spécifique de machine virtuelle.
+Le contrôle suivant vérifie que la requête est autorisée sous les paramètres spécifiés dans la [stratégie de ressources Azure](/azure/governance/policy/). Les stratégies de ressources Azure spécifient les opérations autorisées pour une ressource spécifique. Par exemple, une stratégie de ressources Azure peut spécifier que les utilisateurs sont uniquement autorisés à déployer un type spécifique de machine virtuelle.
 
 ![](../_images/governance-1-19.png)   
 *Figure 11 : Stratégie de ressource Azure.*

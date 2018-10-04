@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - messaging
 - resiliency
-ms.openlocfilehash: 03bfe2fe96b3b81d547cfedb075bcf855846b668
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 7914708413d68689e2326df28ced00e5fc3a5dd8
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24542423"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428667"
 ---
 # <a name="scheduler-agent-supervisor-pattern"></a>Modèle de superviseur de l’agent du planificateur
 
@@ -35,7 +35,7 @@ Le modèle de superviseur de l’agent du planificateur définit les acteurs sui
 
 - Le **planificateur** fait en sorte que les étapes qui composent la tâche soient exécutées et orchestre leur opération. Ces étapes peuvent être combinées dans un pipeline ou un flux de travail. Le planificateur est chargé de s’assurer que les étapes de ce flux de travail sont effectuées dans le bon ordre. Lors de l’exécution de chaque étape, le planificateur enregistre l’état du flux de travail, par exemple « step not yet started » (étape pas encore démarrée), « step running » (étape en cours d’exécution) ou « step completed » (étape terminée). Les informations d’état doivent également inclure une limite maximale de temps pour l’exécution de l’étape, appelée heure limite d’achèvement. Si une étape doit pouvoir accéder à une ressource ou un service distant, le planificateur appelle l’agent approprié, en lui transmettant les détails du travail à accomplir. Le planificateur s’appuie généralement sur une messagerie requête/réponse pour communiquer avec un agent. Celle-ci peut être implémentée à l’aide de files d’attente, mais aussi à l’aide des autres technologies de messagerie distribuée.
 
-    > Le planificateur exécute une fonction similaire à celle du gestionnaire de processus dans le [modèle de gestionnaire de processus](http://www.enterpriseintegrationpatterns.com/patterns/messaging/ProcessManager.html). Le flux de travail proprement dit est généralement défini et implémenté par un moteur de flux de travail contrôlé par le planificateur. Cette approche permet de dissocier du planificateur la logique métier incluse dans le flux de travail.
+    > Le planificateur exécute une fonction similaire à celle du gestionnaire de processus dans le [modèle de gestionnaire de processus](https://www.enterpriseintegrationpatterns.com/patterns/messaging/ProcessManager.html). Le flux de travail proprement dit est généralement défini et implémenté par un moteur de flux de travail contrôlé par le planificateur. Cette approche permet de dissocier du planificateur la logique métier incluse dans le flux de travail.
 
 - L’**agent** contient une logique qui encapsule un appel à un service distant ou l’accès à une ressource distante référencée par une étape d’une tâche. Chaque agent inclut généralement dans un wrapper les appels à un service ou une ressource unique, en implémentant la logique de gestion des erreurs ou de nouvelle tentative appropriée (soumise à un délai d’attente limite, comme décrit plus loin dans cet article). Si les étapes du flux de travail exécuté par le planificateur utilisent plusieurs services et ressources pour les différentes étapes, chaque étape peut référencer un autre agent (il s’agit d’un détail d’implémentation du modèle).
 
@@ -86,7 +86,7 @@ Utilisez ce modèle si un processus qui s’exécute dans un environnement distr
 
 Ce modèle peut ne pas être adapté aux tâches qui n’appellent pas de services distants ou qui n’accèdent pas à des ressources distantes.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Une application web qui implémente un système de commerce électronique a été déployée sur Microsoft Azure. Les utilisateurs peuvent exécuter cette application pour parcourir les produits disponibles et passer des commandes. L’interface utilisateur s’exécute comme un rôle Web, et les éléments de traitement des commandes de l’application sont implémentés comme un ensemble de rôles de travail. Une partie de cette logique de traitement des commandes implique l’accès à un service distant, et cet aspect du système peut être sujet à des erreurs temporaires ou de longue durée. Par conséquent, les concepteurs ont utilisé le modèle de superviseur de l’agent du planificateur pour implémenter les éléments de traitement des commandes du système.
 
@@ -135,14 +135,14 @@ Pour permettre le signalement de l’état de la commande, l’application peut 
 
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
-Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
+Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
 - [Modèle Nouvelle tentative][retry-pattern]. Un agent peut utiliser ce modèle pour réessayer de manière transparente une opération qui accède à une ressource ou un service distant ayant échoué précédemment. À utiliser quand la cause de l’échec est considérée comme temporaire et pouvant être corrigée.
 - [Modèle Disjoncteur](circuit-breaker.md). Un agent peut utiliser ce modèle pour gérer les erreurs dont la correction prend un certain temps lors de la connexion à une ressource ou à un service distant.
 - [Modèle de transaction de compensation](compensating-transaction.md). Si le flux de travail exécuté par un planificateur ne peut pas être mené à bien, il peut être nécessaire d’annuler tout le travail qu’il a déjà effectué. Le modèle de transaction de compensation décrit comment le faire pour les opérations qui suivent le modèle de cohérence éventuelle. Ces types d’opérations sont généralement implémentées par un planificateur qui exécute des flux de travail et des processus métier complexes.
 - [Primer de messagerie asynchrone](https://msdn.microsoft.com/library/dn589781.aspx). En général, les composants du modèle de superviseur de l’agent du planificateur s’exécutent indépendamment les uns des autres et communiquent de manière asynchrone. Cet article décrit quelques-unes des approches qui peuvent être utilisées pour implémenter une communication asynchrone basée sur les files d’attente de messages.
 - [Modèle d’élection du responsable](leader-election.md). Il peut être nécessaire de coordonner les actions de plusieurs instances d’un superviseur pour empêcher ces instances de tenter de récupérer le même processus ayant échoué. Le modèle d’élection du responsable décrit comment faire cela.
 - [Architecture cloud : le modèle Planificateur-Agent-Superviseur](https://blogs.msdn.microsoft.com/clemensv/2010/09/27/cloud-architecture-the-scheduler-agent-supervisor-pattern/) sur le blog de Clemens Vasters
-- [Modèle de gestionnaire de processus](http://www.enterpriseintegrationpatterns.com/patterns/messaging/ProcessManager.html)
+- [Modèle de gestionnaire de processus](https://www.enterpriseintegrationpatterns.com/patterns/messaging/ProcessManager.html)
 - [Reference 6: A Saga on Sagas](https://msdn.microsoft.com/library/jj591569.aspx) (Référence 6 : une saga des sagas). Exemple illustrant la manière dont le modèle CQRS utilise un gestionnaire de processus (partie de la documentation relative au projet CQRS Journey).
 - [Microsoft Azure Scheduler](https://azure.microsoft.com/services/scheduler/)
 

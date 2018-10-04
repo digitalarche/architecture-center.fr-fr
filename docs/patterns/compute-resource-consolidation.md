@@ -7,12 +7,12 @@ ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - design-implementation
-ms.openlocfilehash: 6e05a30245fbf5183a4e50a54650505f5a5f2aa8
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.openlocfilehash: bd212b8b4406a08058f811db030843f732e08cdc
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35252922"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428837"
 ---
 # <a name="compute-resource-consolidation-pattern"></a>Modèle de consolidation des ressources de calcul
 
@@ -85,7 +85,7 @@ Ce modèle peut ne pas être adapté pour les tâches qui effectuent des opérat
 
 Lors de la création d’un service cloud sur Azure, il est possible de consolider le traitement effectué par plusieurs tâches dans un rôle unique. Il s’agit généralement d’un rôle de travail qui exécute des tâches de traitement asynchrone ou en arrière-plan.
 
-> Dans certains cas, il est possible d’inclure les tâches de traitement asynchrone ou en arrière-plan dans le rôle Web. Cette technique permet de réduire les coûts et de simplifier le déploiement, même si elle peut avoir un impact sur l’extensibilité et la réactivité de l’interface publique fournie par le rôle Web. L’article [Combining Multiple Azure Worker Roles into an Azure Web Role](http://www.31a2ba2a-b718-11dc-8314-0800200c9a66.com/2012/02/combining-multiple-azure-worker-roles.html) (Associer plusieurs rôles de travail Azure dans un rôle Web Azure) décrit en détail l’implémentation de tâches de traitement asynchrone ou en arrière-plan dans un rôle Web.
+> Dans certains cas, il est possible d’inclure les tâches de traitement asynchrone ou en arrière-plan dans le rôle Web. Cette technique permet de réduire les coûts et de simplifier le déploiement, même si elle peut avoir un impact sur l’extensibilité et la réactivité de l’interface publique fournie par le rôle Web. 
 
 Le rôle est responsable du démarrage et de l’arrêt des tâches. Lorsque le contrôleur de structure Azure charge un rôle, il déclenche l’événement `Start` pour le rôle. Vous pouvez remplacer la méthode `OnStart` de la classe `WebRole` ou `WorkerRole` pour gérer cet événement, par exemple, pour initialiser les données et autres ressources dont les tâches de cette méthode dépendent.
 

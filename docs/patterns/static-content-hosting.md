@@ -9,12 +9,12 @@ pnp.pattern.categories:
 - data-management
 - design-implementation
 - performance-scalability
-ms.openlocfilehash: deb15001bea2598d56a2793be78bbc3e7473bdf3
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 450d0c4c08098c1ba48e4c0dac3d058a46e3709b
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541687"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428208"
 ---
 # <a name="static-content-hosting-pattern"></a>Modèle d’hébergement de contenu statique
 
@@ -70,11 +70,11 @@ Ce modèle peut s’avérer inutile dans les situations suivantes :
 
 - Le volume du contenu statique est très faible. La surcharge liée à la récupération de ce contenu à partir du stockage distinct peut annuler l’avantage en termes de coûts de sa séparation de la ressource de calcul.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Le contenu statique se trouvant dans le stockage d’objets blob Azure est accessible directement via un navigateur web. Azure fournit une interface basée sur HTTP pour le stockage qui peut être exposé publiquement aux clients. Par exemple, le contenu d’un conteneur de stockage d’objets blob Azure est exposé à l’aide d’une URL sous la forme suivante :
 
-`http://[ storage-account-name ].blob.core.windows.net/[ container-name ]/[ file-name ]`
+`https://[ storage-account-name ].blob.core.windows.net/[ container-name ]/[ file-name ]`
 
 
 Lors du chargement du contenu, il est nécessaire de créer un ou plusieurs conteneurs blob pour stocker les fichiers et les documents. Notez que l’autorisation par défaut d’un nouveau conteneur est Privée et que vous devez la remplacer par Publique pour permettre aux clients d’accéder aux contenus. S’il est nécessaire de protéger le contenu des accès anonymes, vous pouvez implémenter le [modèle de clé de valet](valet-key.md), afin que les utilisateurs présentent un jeton valide pour télécharger les ressources.
@@ -89,7 +89,7 @@ Les liens de chaque page spécifieront l’URL de la ressource et le client y ac
 Les liens des pages distribuées au client doivent spécifier l’URL complète de la ressource et du conteneur d’objets blob. Par exemple, une page qui contient un lien vers une image dans un conteneur public peut contenir le code HTML suivant.
 
 ```html
-<img src="http://mystorageaccount.blob.core.windows.net/myresources/image1.png"
+<img src="https://mystorageaccount.blob.core.windows.net/myresources/image1.png"
      alt="My image" />
 ```
 
@@ -169,5 +169,4 @@ Le fichier Index.cshtml dans le dossier Views\Home contient un élément d’ima
 
 - Un exemple illustrant ce modèle est disponible sur [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/static-content-hosting).
 - [Valet Key pattern](valet-key.md) (Modèle de clé de valet). Si les ressources cibles ne sont pas censées être accessibles aux utilisateurs anonymes, il est nécessaire d’implémenter la sécurité sur le magasin qui contient le contenu statique. Décrit l’utilisation d’un jeton ou d’une clé qui fournit aux clients un accès direct limité à une ressource ou un service spécifique comme un service de stockage hébergé sur le cloud.
-- [An efficient way of deploying a static web site on Azure](http://www.infosysblogs.com/microsoft/2010/06/an_efficient_way_of_deploying.html) (Un moyen efficace pour déployer un site web statique sur Azure) sur le blog Infosys.
 - [Blob Service Concepts](https://msdn.microsoft.com/library/azure/dd179376.aspx) (Concepts de service blob)

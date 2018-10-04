@@ -3,12 +3,12 @@ title: Rendre tous les éléments redondants
 description: Évitez les points de défaillance uniques en intégrant la redondance à votre application.
 author: MikeWasson
 ms.date: 08/30/2018
-ms.openlocfilehash: 0df9e0bded9b8719d43b9ba328c2de6a10b37f92
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.openlocfilehash: 18f48ea37f90846e4d337819e6c897d56e472d49
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43325459"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428038"
 ---
 # <a name="make-all-things-redundant"></a>Rendre tous les éléments redondants
 
@@ -46,7 +46,7 @@ Une application résiliente contourne les défaillances. Identifiez les chemins 
 
 [multi-vm-blueprint]: ../../reference-architectures/virtual-machines-windows/multi-vm.md
 
-[cassandra]: http://cassandra.apache.org/
+[cassandra]: https://cassandra.apache.org/
 [cosmosdb-geo-replication]: /azure/cosmos-db/distribute-data-globally
 [sql-always-on]: https://msdn.microsoft.com/library/hh510230.aspx
 [sql-geo-replication]: /azure/sql-database/sql-database-geo-replication-overview

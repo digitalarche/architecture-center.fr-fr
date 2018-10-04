@@ -3,12 +3,12 @@ title: Journalisation et surveillance dans les microservices
 description: Journalisation et surveillance dans les microservices
 author: MikeWasson
 ms.date: 12/08/2017
-ms.openlocfilehash: 1da67047daa9ae87cda5dd7dd581d6081183c428
-ms.sourcegitcommit: 786bafefc731245414c3c1510fc21027afe303dc
+ms.openlocfilehash: b7206e2f35b9f227ff298f077ddafef1c6015b15
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/12/2017
-ms.locfileid: "26652992"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428769"
 ---
 # <a name="designing-microservices-logging-and-monitoring"></a>Conception de microservices : journalisation et surveillance
 
@@ -64,7 +64,7 @@ L’article [Surveillance et diagnostics](../best-practices/monitoring.md) décr
 
 ## <a name="distributed-tracing"></a>Traçage distribué
 
-Comme indiqué précédemment, l’une des difficultés inhérentes aux microservices réside dans la compréhension du flux d’événements dans l’ensemble des services. Une même opération ou transaction peut impliquer des appels adressés à plusieurs services. Pour permettre de reconstruire l’intégralité de la séquence des étapes, chaque service doit propager un *ID de corrélation* faisant office d’identificateur unique pour cette opération. L’ID de corrélation autorise un [traçage distribué](http://microservices.io/patterns/observability/distributed-tracing.html) dans l’ensemble des services.
+Comme indiqué précédemment, l’une des difficultés inhérentes aux microservices réside dans la compréhension du flux d’événements dans l’ensemble des services. Une même opération ou transaction peut impliquer des appels adressés à plusieurs services. Pour permettre de reconstruire l’intégralité de la séquence des étapes, chaque service doit propager un *ID de corrélation* faisant office d’identificateur unique pour cette opération. L’ID de corrélation autorise un [traçage distribué](https://microservices.io/patterns/observability/distributed-tracing.html) dans l’ensemble des services.
 
 Le premier service à recevoir une requête client doit générer l’ID de corrélation. Si le service adresse un appel HTTP à un autre service, il place l’ID de corrélation dans un en-tête de requête. De même, si le service envoie un message asynchrone, il place l’ID de corrélation dans le message. Les services en aval continuent de propager cet ID de corrélation, de sorte que ce dernier transite par la totalité du système. En outre, l’ensemble du code qui écrit des mesures d’application ou des événements de journal doit inclure l’ID de corrélation.
 
@@ -114,7 +114,7 @@ Une autre option consiste à envoyer les fichiers journaux au service Log Analyt
 
 ## <a name="example-logging-with-correlation-ids"></a>Exemple : journalisation avec des ID de corrélation
 
-Pour illustrer certains des points abordés dans cet article, voici un exemple détaillé de la façon dont le service Package implémente la journalisation. Le service Package a été écrit en TypeScript et utilise l’infrastructure web [Koa](http://koajs.com/) pour Node.js. Vous pouvez choisir entre plusieurs bibliothèques de journalisation Node.js. Nous avons choisi [Winston](https://github.com/winstonjs/winston), une bibliothèque de journalisation communément utilisée qui répondait à nos besoins en matière de performances lorsque nous l’avons testée.
+Pour illustrer certains des points abordés dans cet article, voici un exemple détaillé de la façon dont le service Package implémente la journalisation. Le service Package a été écrit en TypeScript et utilise l’infrastructure web [Koa](https://koajs.com/) pour Node.js. Vous pouvez choisir entre plusieurs bibliothèques de journalisation Node.js. Nous avons choisi [Winston](https://github.com/winstonjs/winston), une bibliothèque de journalisation communément utilisée qui répondait à nos besoins en matière de performances lorsque nous l’avons testée.
 
 Pour encapsuler les détails d’implémentation, nous avons défini une interface `ILogger` abstraite :
 

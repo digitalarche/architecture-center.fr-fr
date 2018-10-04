@@ -3,12 +3,12 @@ title: Mettre à jour une ressource dans un modèle Azure Resource Manager
 description: Explique comment étendre les fonctionnalités des modèles Azure Resource Manager afin de mettre à jour une ressource
 author: petertay
 ms.date: 06/09/2017
-ms.openlocfilehash: fc2565819c66ee7695224ef5793e7276e6e552e0
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: f235f0b4d54d65ccc2fa67876916e922d75f6d07
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24538471"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429030"
 ---
 # <a name="update-a-resource-in-an-azure-resource-manager-template"></a>Mettre à jour une ressource dans un modèle Azure Resource Manager
 
@@ -80,7 +80,7 @@ Examinons un exemple de modèle illustrant cette approche. Notre modèle déploi
         "mode": "Incremental",
         "parameters": {},
         "template": {
-          "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+          "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
           "contentVersion": "1.0.0.0",
           "parameters": {},
           "variables": {},

@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - performance-scalability
-ms.openlocfilehash: a4e35a19851f4742b5c154197c22bb1fe13de108
-ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
+ms.openlocfilehash: bc2b6aeb6966d14327a21849adbbfe635eae59df
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/28/2018
-ms.locfileid: "37091102"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428854"
 ---
 # <a name="sharding-pattern"></a>Modèle de partitionnement
 
@@ -219,6 +219,3 @@ Les modèles et les conseils suivants peuvent aussi présenter un intérêt quan
 - [Conseils sur le partitionnement des données](https://msdn.microsoft.com/library/dn589795.aspx). Le partitionnement d’un magasin de données peut entraîner d’autres problèmes. Décrit ces problèmes liés au partitionnement des magasins de données dans le cloud pour améliorer l’extensibilité, réduire les conflits et optimiser les performances.
 - [Modèle de table d’index](index-table.md). Parfois, il n’est pas possible de prendre entièrement en charge les requêtes uniquement par le biais de la conception de la clé de partition. Permet à une application de récupérer rapidement des données à partir d’un vaste magasin de données en spécifiant une clé autre que la clé de partition.
 - [Modèle de vue matérialisée](materialized-view.md). Pour maintenir les performances de certaines opérations de requête, il est utile de créer des vues matérialisées qui agrègent et synthétisent les données, surtout si ces données reposent sur les informations distribuées dans plusieurs partitions. Décrit comment générer et remplir ces vues.
-- [Leçons sur les partitions](http://www.addsimplicity.com/adding_simplicity_an_engi/2008/08/shard-lessons.html) sur le blog « Adding Simplicity ».
-- [Partitionnement de base de données](http://dbshards.com/database-sharding/) sur le site web CodeFutures.
-- [Création des bases de données extensives : avantages et inconvénients de plusieurs schémas de partitionnement de bases de données](http://www.25hoursaday.com/weblog/2009/01/16/BuildingScalableDatabasesProsAndConsOfVariousDatabaseShardingSchemes.aspx) sur le blog de Dare Obasanjo.

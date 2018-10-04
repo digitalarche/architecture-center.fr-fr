@@ -4,12 +4,12 @@ description: Conseils sur la mise en cache pour améliorer les performances et l
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: fde1c3e8c65d357746e4ccaddebeebace943cf9d
-ms.sourcegitcommit: 441185360db49cfb3cf39527b68f318d17d4cb3d
+ms.openlocfilehash: 4db85df7331c805af6acbe0673dbcb993a895e03
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/19/2018
-ms.locfileid: "27973142"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429466"
 ---
 # <a name="caching"></a>Mise en cache
 
@@ -132,7 +132,7 @@ Selon la nature des données et la probabilité de collisions, vous pouvez adopt
 
 Veillez à ne pas introduire de dépendances critiques sur la disponibilité d'un service de cache partagé dans vos solutions. Une application doit pouvoir continuer à fonctionner si le service fournissant le cache partagé n’est pas disponible. L’application ne doit pas se bloquer ou échouer en attendant la reprise de l’exécution du service de cache.
 
-Par conséquent, l'application doit pouvoir détecter la disponibilité du service de cache et revenir au magasin de données d'origine si le cache n'est pas accessible. Le [modèle du disjoncteur](http://msdn.microsoft.com/library/dn589784.aspx) est utile dans ce scénario. Le service qui fournit le cache peut être récupéré et, dès qu’il est disponible, le cache peut être rempli à nouveau à mesure que des données sont lues à partir du magasin de données d’origine, en suivant une stratégie telle que le [mode de type cache-aside](http://msdn.microsoft.com/library/dn589799.aspx).
+Par conséquent, l'application doit pouvoir détecter la disponibilité du service de cache et revenir au magasin de données d'origine si le cache n'est pas accessible. Le [modèle du disjoncteur](../patterns/circuit-breaker.md) est utile dans ce scénario. Le service qui fournit le cache peut être récupéré et, dès qu’il est disponible, le cache peut être rempli à nouveau à mesure que des données sont lues à partir du magasin de données d’origine, en suivant une stratégie telle que le [mode de type cache-aside](../patterns/cache-aside.md).
 
 Toutefois, l’extensibilité du système peut être affectée si l’application revient au magasin de données d’origine lorsque le cache est temporairement indisponible.
 Durant la récupération du magasin de données, le magasin d’origine peut être submergé de demandes de données, ce qui entraîne des délais d’attente et des échecs de connexion.
@@ -148,7 +148,7 @@ Pour prendre en charge des caches volumineux qui contiennent des données à lon
 
 Pour réduire la latence associée à l’écriture vers plusieurs destinations, la réplication vers le serveur secondaire peut se produire en mode asynchrone lors de l’écriture de données dans le cache sur le serveur principal. Cette approche peut entraîner le perte de certaines informations mises en cache en cas de défaillance, mais la proportion de ces données doit être faible par rapport à la taille globale du cache.
 
-Si un cache partagé est volumineux, il peut être avantageux de partitionner les données mises en cache sur des nœuds afin de réduire les risques de contention et d’améliorer l’extensibilité. De nombreux caches partagés prennent en charge la possibilité d'ajouter (et de supprimer) dynamiquement des nœuds et de rééquilibrer les données sur plusieurs partitions. Cette approche peut impliquer un clustering. La collection de nœuds est alors présentée aux applications clientes comme un cache unique transparent. Toutefois, en interne, les données sont réparties sur plusieurs nœuds selon une stratégie de distribution prédéfinie qui équilibre la charge uniformément. Le [document de conseils sur le partitionnement des données](http://msdn.microsoft.com/library/dn589795.aspx), disponible sur le site web de Microsoft, fournit des informations sur les stratégies de partitionnement possibles.
+Si un cache partagé est volumineux, il peut être avantageux de partitionner les données mises en cache sur des nœuds afin de réduire les risques de contention et d’améliorer l’extensibilité. De nombreux caches partagés prennent en charge la possibilité d'ajouter (et de supprimer) dynamiquement des nœuds et de rééquilibrer les données sur plusieurs partitions. Cette approche peut impliquer un clustering. La collection de nœuds est alors présentée aux applications clientes comme un cache unique transparent. Toutefois, en interne, les données sont réparties sur plusieurs nœuds selon une stratégie de distribution prédéfinie qui équilibre la charge uniformément. Le [document de conseils sur le partitionnement des données](https://msdn.microsoft.com/library/dn589795.aspx), disponible sur le site web de Microsoft, fournit des informations sur les stratégies de partitionnement possibles.
 
 Un clustering peut également augmenter la disponibilité du cache. Si un nœud échoue, le reste du cache est toujours accessible.
 Un clustering est fréquemment utilisé conjointement avec une réplication et un basculement. Chaque nœud peut être répliqué, et le réplica peut être mis en ligne rapidement en cas de défaillant du nœud.
@@ -163,7 +163,7 @@ Pour le modèle de type cache-aside, l’instance de l’application qui remplit
 
 Une des instances d'une application peut modifier un élément de données et invalider la version mise en cache de cet élément. Une autre instance de l’application peut tenter de lire cet élément à partir d’un cache, ce qui entraîne l’échec d’une opération dans le cache. Elle lit alors les données du magasin de données et les ajoute au cache. Toutefois, si le magasin de données n’a pas été entièrement synchronisé avec les autres réplicas, l’instance d’application peut lire l’ancienne valeur et remplir le cache avec celle-ci.
 
-Pour plus d’informations sur la gestion de la cohérence des données, consultez l’article [Data consistency primer (Introduction à la cohérence des données)](http://msdn.microsoft.com/library/dn589800.aspx).
+Pour plus d’informations sur la gestion de la cohérence des données, consultez l’article [Data consistency primer (Introduction à la cohérence des données)](https://msdn.microsoft.com/library/dn589800.aspx).
 
 ### <a name="protect-cached-data"></a>Protéger les données mises en cache
 Quel que soit le service de cache que vous utilisez, songez à la manière de protéger les données contenues dans le cache contre un accès non autorisé. Il existe deux problèmes principaux :
@@ -200,29 +200,29 @@ Le cache Redis Azure est une solution de mise en cache très performante qui off
 ### <a name="redis-as-an-in-memory-database"></a>Redis comme base de données en mémoire
 Redis prend en charge les opérations de lecture et d’écriture. Redis permet de protéger les écritures contre une défaillance du système en les stockant régulièrement dans un fichier de capture instantanée local ou dans un fichier journal en mode Ajout uniquement. Cela n’est pas le cas de nombreux caches (qui doivent être considérés des magasins de données temporaires).
 
- Les écritures sont asynchrones et n’empêchent pas les clients de lire et d’écrire des données. Lorsque Redis commence à s’exécuter, il lit les données à partir du fichier journal ou de l'instantané et les utilise pour construire le cache en mémoire. Pour plus d’informations, voir [Persistance Redis](http://redis.io/topics/persistence) sur le site web de Redis.
+ Les écritures sont asynchrones et n’empêchent pas les clients de lire et d’écrire des données. Lorsque Redis commence à s’exécuter, il lit les données à partir du fichier journal ou de l'instantané et les utilise pour construire le cache en mémoire. Pour plus d’informations, voir [Persistance Redis](https://redis.io/topics/persistence) sur le site web de Redis.
 
 > [!NOTE]
-> Redis ne garantit pas l’enregistrement de toutes les écritures en cas de défaillance irrémédiable mais, dans le pire des cas, vous ne perdriez que quelques secondes de données. N'oubliez pas qu'un cache n'est pas destiné à agir comme source de données faisant autorité. Il est responsable des applications qui utilisent le cache pour s’assurer que les données critiques sont correctement enregistrées dans un magasin de données adéquat. Pour plus d'informations, consultez la page [cache-aside pattern](http://msdn.microsoft.com/library/dn589799.aspx).
+> Redis ne garantit pas l’enregistrement de toutes les écritures en cas de défaillance irrémédiable mais, dans le pire des cas, vous ne perdriez que quelques secondes de données. N'oubliez pas qu'un cache n'est pas destiné à agir comme source de données faisant autorité. Il est responsable des applications qui utilisent le cache pour s’assurer que les données critiques sont correctement enregistrées dans un magasin de données adéquat. Pour plus d'informations, consultez la page [cache-aside pattern](../patterns/cache-aside.md).
 > 
 > 
 
 #### <a name="redis-data-types"></a>Types de données Redis
-Redis est un magasin de clés-valeurs, où les valeurs peuvent contenir des types simples ou des structures de données complexes telles que des hachages, des listes et des ensembles. Il prend en charge un ensemble d'opérations atomiques pour ces types de données. Les clés peuvent être permanentes ou marquées avec une durée de vie limitée, qui a pour effet que la clé et la valeur correspondante sont automatiquement supprimées du cache. Pour plus d’informations sur les valeurs et clés Redis, voir la page présentant les [types de données et abstractions Redis](http://redis.io/topics/data-types-intro) sur le site web de Redis.
+Redis est un magasin de clés-valeurs, où les valeurs peuvent contenir des types simples ou des structures de données complexes telles que des hachages, des listes et des ensembles. Il prend en charge un ensemble d'opérations atomiques pour ces types de données. Les clés peuvent être permanentes ou marquées avec une durée de vie limitée, qui a pour effet que la clé et la valeur correspondante sont automatiquement supprimées du cache. Pour plus d’informations sur les valeurs et clés Redis, voir la page présentant les [types de données et abstractions Redis](https://redis.io/topics/data-types-intro) sur le site web de Redis.
 
 #### <a name="redis-replication-and-clustering"></a>Réplication et clustering Redis
 Redis prend en charge la réplication maître/subordonné pour garantir la disponibilité et maintenir le débit. Les opérations d’écriture sur un nœud principal Redis sont répliquées sur un ou plusieurs nœuds subordonnés. Les opérations de lecture peuvent être effectuées par le maître ou l’un des subordonnés.
 
-Dans le cas d'une partition réseau, les subordonnés peuvent continuer à fournir les données, puis se resynchroniser en toute transparence avec le maître lorsque la connexion est rétablie. Pour plus d'informations, visitez la page [Réplication](http://redis.io/topics/replication) sur le site web Redis.
+Dans le cas d'une partition réseau, les subordonnés peuvent continuer à fournir les données, puis se resynchroniser en toute transparence avec le maître lorsque la connexion est rétablie. Pour plus d'informations, visitez la page [Réplication](https://redis.io/topics/replication) sur le site web Redis.
 
 Redis offre également un clustering qui permet de partitionner les données de manière transparente sur des serveurs et de répartir la charge. Cette fonctionnalité améliore l’extensibilité, car de nouveaux serveurs Redis peuvent être ajoutés, et les données réparties à mesure que la taille du cache augmente.
 
-En outre, chaque serveur du cluster peut être répliqué à l’aide d’une réplication maître/subordonné. Cela garantit la disponibilité sur chaque nœud du cluster. Pour plus d’informations sur le clustering et le partitionnement, voir le [didacticiel sur le cluster Redis](http://redis.io/topics/cluster-tutorial) sur le site web de Redis.
+En outre, chaque serveur du cluster peut être répliqué à l’aide d’une réplication maître/subordonné. Cela garantit la disponibilité sur chaque nœud du cluster. Pour plus d’informations sur le clustering et le partitionnement, voir le [didacticiel sur le cluster Redis](https://redis.io/topics/cluster-tutorial) sur le site web de Redis.
 
 ### <a name="redis-memory-use"></a>Utilisation de la mémoire Redis
 Un cache Redis a une taille limitée dépendant des ressources disponibles sur l’ordinateur hôte. Lorsque vous configurez un serveur Redis, vous pouvez spécifier la quantité maximale de mémoire qu'il peut utiliser. Vous pouvez également configurer dans un cache Redis une clé avec un délai d’expiration à l’issue duquel elle est automatiquement supprimée du cache. Cette fonctionnalité peut empêcher le remplissage du cache en mémoire avec des données anciennes ou caduques.
 
-À mesure que la mémoire se remplit, Redis peut automatiquement supprimer les clés et leurs valeurs en suivant un certain nombre de stratégies. La valeur par défaut est Dernier récemment utilisé (LRU), mais vous pouvez également sélectionner d’autres stratégies, telles que l’éviction aléatoire des clés ou la désactivation de l’éviction (auquel cas, les tentatives d’ajout d’éléments au cache échouent si ce dernier est plein). Pour plus d’informations, voir la page [Utilisation de Redis comme cache LRU](http://redis.io/topics/lru-cache) .
+À mesure que la mémoire se remplit, Redis peut automatiquement supprimer les clés et leurs valeurs en suivant un certain nombre de stratégies. La valeur par défaut est Dernier récemment utilisé (LRU), mais vous pouvez également sélectionner d’autres stratégies, telles que l’éviction aléatoire des clés ou la désactivation de l’éviction (auquel cas, les tentatives d’ajout d’éléments au cache échouent si ce dernier est plein). Pour plus d’informations, voir la page [Utilisation de Redis comme cache LRU](https://redis.io/topics/lru-cache) .
 
 ### <a name="redis-transactions-and-batches"></a>Transactions et lots Redis
 Redis permet à une application cliente d’envoyer une série d'opérations qui lisent et écrivent des données dans le cache en tant que transaction atomique. Toutes les commandes de la transaction sont exécutées de façon séquentielle, et aucune commande émise par d’autres clients concurrentiels n’est insérée entre elles.
@@ -231,7 +231,7 @@ Toutefois, il ne s’agit pas de transactions réelles, car une base de données
 
 Pendant la phase d’exécution, Redis exécute successivement chaque commande en file d’attente. En cas d’échec d’une commande au cours de cette phase, Redis passe à la commande en file d’attente suivante, et n’annule pas les effets de commandes déjà exécutées. Cette forme simplifiée de transaction aide à maintenir les performances et à éviter des problèmes de performances résultant d’une contention.
 
-Redis implémente une forme de verrouillage optimiste pour aider à maintenir la cohérence. Pour plus d'informations sur les transactions et le verrouillage avec Redis, visitez la page [Transactions](http://redis.io/topics/transactions) sur le site web de Redis.
+Redis implémente une forme de verrouillage optimiste pour aider à maintenir la cohérence. Pour plus d'informations sur les transactions et le verrouillage avec Redis, visitez la page [Transactions](https://redis.io/topics/transactions) sur le site web de Redis.
 
 Redis prend également en charge le traitement par lots non transactionnel des demandes. Le protocole Redis que les clients utilisent pour envoyer des commandes à un serveur Redis permet à un client d'envoyer une série d'opérations dans le cadre de la même demande. Cela peut aider à réduire la fragmentation des paquets sur le réseau. Lorsque le lot est traité, chaque commande est exécutée. Toute commande incorrecte est rejetée (ce qui ne se produit pas avec une transaction), mais les commandes restantes sont exécutées. Il n’existe aucune garantie quand à l’ordre dans lequel les commandes du lot sont traitées.
 
@@ -244,7 +244,7 @@ Vous pouvez restreindre l’accès aux commandes en les désactivant ou en les r
 
 Redis ne gère pas directement les différentes formes de chiffrement des données. Tout l’encodage doit être effectué par les applications clientes. En outre, Redis ne fournit aucune forme de sécurité du transport. Si vous avez besoin protéger des données transitant sur le réseau, nous vous recommandons d’implémenter un proxy SSL.
 
-Pour plus d’informations, voir la page [Sécurité Redis](http://redis.io/topics/security) sur le site web de Redis.
+Pour plus d’informations, voir la page [Sécurité Redis](https://redis.io/topics/security) sur le site web de Redis.
 
 > [!NOTE]
 > Le cache Redis Azure dispose de sa propre couche de sécurité via laquelle les clients se connectent. Les serveurs Redis sous-jacents ne sont pas exposés au réseau public.
@@ -292,7 +292,7 @@ Le cache Redis Azure agit comme façade devant les serveurs Redis sous-jacents. 
 
 Il s’agit d’un processus potentiellement complexe, car vous devrez peut-être créer plusieurs machines virtuelles faisant office de nœuds principaux et subordonnés si vous souhaitez implémenter une réplication. En outre, si vous souhaitez créer un cluster, vous avez besoin de plusieurs serveurs maîtres et subordonnés. Une topologie de réplication en cluster minimale offrant un niveau élevé de disponibilité et d’évolutivité comprend au moins six machines virtuelles organisées sous la forme de trois paires de serveurs maître/subordonné (un cluster devant contenir au moins trois nœuds principaux).
 
-Chaque paire maître/subordonné doit être proche pour réduire la latence. Toutefois, chaque ensemble de paires peut s’exécuter dans différents centres de données Azure situés dans différentes régions, si vous souhaitez rechercher des données mises en cache à proximité des applications les plus susceptibles de les utiliser.  Pour découvrir un exemple de création et de configuration d’un nœud Redis s’exécutant en tant que machine virtuelle Azure, consultez l’article [Running Redis on a CentOS Linux VM in Azure (Exécution de Redis sur une machine virtuelle Linux CentOS dans Azure)](http://blogs.msdn.com/b/tconte/archive/2012/06/08/running-redis-on-a-centos-linux-vm-in-windows-azure.aspx).
+Chaque paire maître/subordonné doit être proche pour réduire la latence. Toutefois, chaque ensemble de paires peut s’exécuter dans différents centres de données Azure situés dans différentes régions, si vous souhaitez rechercher des données mises en cache à proximité des applications les plus susceptibles de les utiliser.  Pour découvrir un exemple de création et de configuration d’un nœud Redis s’exécutant en tant que machine virtuelle Azure, consultez l’article [Running Redis on a CentOS Linux VM in Azure (Exécution de Redis sur une machine virtuelle Linux CentOS dans Azure)](https://blogs.msdn.microsoft.com/tconte/2012/06/08/running-redis-on-a-centos-linux-vm-in-windows-azure/).
 
 > [!NOTE]
 > Notez que si vous implémentez votre propre cache Redis de cette façon, vous êtes responsable de la surveillance, de la gestion et de la sécurisation du service.
@@ -306,15 +306,15 @@ Le partitionnement du cache implique le fractionnement du cache sur plusieurs or
 * Répartition de la charge entre les serveurs, ce qui améliore les performances et l'extensibilité.
 * Géolocalisation des données à proximité des utilisateurs qui y accèdent, ce qui réduit la latence.
 
-Pour un cache, la forme la plus courante est le partitionnement. Dans le cadre de cette stratégie, chaque partition est un cache Redis à part entière. Les données sont dirigées vers une partition spécifique à l'aide de la logique de partitionnement, qui peut utiliser plusieurs méthodes. Le [modèle de partitionnement](http://msdn.microsoft.com/library/dn589797.aspx) fournit des informations supplémentaires sur l’implémentation du partitionnement.
+Pour un cache, la forme la plus courante est le partitionnement. Dans le cadre de cette stratégie, chaque partition est un cache Redis à part entière. Les données sont dirigées vers une partition spécifique à l'aide de la logique de partitionnement, qui peut utiliser plusieurs méthodes. Le [modèle de partitionnement](../patterns/sharding.md) fournit des informations supplémentaires sur l’implémentation du partitionnement.
 
 Pour implémenter le partitionnement dans un cache Redis, vous pouvez adopter l’une des approches suivantes :
 
-* *Routage des demandes côté serveur.* Dans cette technique, une application cliente envoie une demande à un des serveurs Redis qui composent le cache (probablement le serveur le plus proche). Chaque serveur Redis stocke les métadonnées décrivant la partition qu’il contient, et contient également les informations relatives aux partitions présentes sur d’autres serveurs. Le serveur Redis examine la demande du client. Si elle peut être résolue localement, il effectue l’opération demandée. Dans le cas contraire, il transfère la demande au serveur approprié. Ce modèle est mis en œuvre à l’aide du clustering Redis et est décrit plus en détail dans le [didacticiel sur les clusters Redis](http://redis.io/topics/cluster-tutorial) sur le site web de Redis. Le clustering Redis est transparent pour les applications clientes et il est possible d’ajouter des serveurs Redis supplémentaires au cluster (et aux données repartitionnées) sans devoir reconfigurer les clients.
+* *Routage des demandes côté serveur.* Dans cette technique, une application cliente envoie une demande à un des serveurs Redis qui composent le cache (probablement le serveur le plus proche). Chaque serveur Redis stocke les métadonnées décrivant la partition qu’il contient, et contient également les informations relatives aux partitions présentes sur d’autres serveurs. Le serveur Redis examine la demande du client. Si elle peut être résolue localement, il effectue l’opération demandée. Dans le cas contraire, il transfère la demande au serveur approprié. Ce modèle est mis en œuvre à l’aide du clustering Redis et est décrit plus en détail dans le [didacticiel sur les clusters Redis](https://redis.io/topics/cluster-tutorial) sur le site web de Redis. Le clustering Redis est transparent pour les applications clientes et il est possible d’ajouter des serveurs Redis supplémentaires au cluster (et aux données repartitionnées) sans devoir reconfigurer les clients.
 * *Partitionnement côté client.* Dans ce modèle, l'application cliente contient la logique (éventuellement sous la forme d'une bibliothèque) qui achemine les demandes vers le serveur Redis approprié. Cette approche peut être utilisée avec un cache Redis Azure. Créez plusieurs caches Redis Azure (un par partition de données) et implémentez la logique côté client qui achemine les demandes vers le cache adéquat. Si le schéma de partitionnement change (par exemple, si des caches Redis Azure supplémentaires sont créés), il se peut que des applications clientes doivent être reconfigurées.
 * *Partitionnement assisté par un proxy.* Dans ce schéma, les applications clientes envoient des demandes à un service proxy intermédiaire qui comprend la façon dont les données sont partitionnées puis achemine la demande ver le serveur Redis approprié. Cette approche est également valable avec un cache Redis Azure. Le service proxy peut être implémenté en tant que service cloud Azure. Cette approche nécessite un niveau supplémentaire de complexité pour implémenter le service, et l’exécution des demandes peut prendre plus de temps qu’en utilisant un partitionnement côté client.
 
-La page sur le [partitionnement et le fractionnement des données entre plusieurs instances Redis](http://redis.io/topics/partitioning) sur le site web de Redis fournit des informations supplémentaires concernant la mise en œuvre du partitionnement avec Redis.
+La page sur le [partitionnement et le fractionnement des données entre plusieurs instances Redis](https://redis.io/topics/partitioning) sur le site web de Redis fournit des informations supplémentaires concernant la mise en œuvre du partitionnement avec Redis.
 
 ### <a name="implement-redis-cache-client-applications"></a>Implémenter des applications clientes de cache Redis
 Redis prend en charge les applications clientes écrites dans plusieurs langages de programmation. Si vous générez de nouvelles applications à l'aide de .NET Framework, l'approche recommandée consiste à utiliser la bibliothèque cliente StackExchange.Redis. Cette bibliothèque fournit un modèle objet .NET Framework qui résume les détails de connexion à un serveur Redis, l'envoi de commandes et la réception des réponses. Elle est disponible dans Visual Studio comme package NuGet. Vous pouvez utiliser cette bibliothèque pour vous connecter à un cache Redis Azure ou à un cache Redis personnalisé hébergé sur une machine virtuelle.
@@ -325,7 +325,7 @@ Vous pouvez spécifier les paramètres de connexion, tels que l'adresse de l'hô
 
 Une fois que vous vous êtes connecté au serveur Redis, vous pouvez obtenir un handle sur la base de données Redis qui agit comme cache. La connexion Redis fournit la méthode `GetDatabase` correspondante. Vous pouvez ensuite récupérer les éléments dans le cache et stocker des données dans le cache à l'aide des méthodes `StringGet` et `StringSet`. Ces méthodes attendent une clé en tant que paramètre. Elles renvoient l’élément du cache ayant une valeur correspondante (`StringGet`) ou ajoutent l’élément au cache avec cette clé (`StringSet`).
 
-Selon l’emplacement du serveur Redis, de nombreuses opérations peuvent entraîner une latence pendant la transmission d’une demande au serveur et le renvoi d’une réponse au client. La bibliothèque StackExchange fournit des versions asynchrones de la plupart des méthodes qu'elle expose pour aider les applications clientes à rester réactives. Ces méthodes prennent en charge le [modèle asynchrone basé sur des tâches](http://msdn.microsoft.com/library/hh873175.aspx) dans .NET Framework.
+Selon l’emplacement du serveur Redis, de nombreuses opérations peuvent entraîner une latence pendant la transmission d’une demande au serveur et le renvoi d’une réponse au client. La bibliothèque StackExchange fournit des versions asynchrones de la plupart des méthodes qu'elle expose pour aider les applications clientes à rester réactives. Ces méthodes prennent en charge le [modèle asynchrone basé sur des tâches](/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap) dans .NET Framework.
 
 L’extrait de code suivant illustre une méthode nommée `RetrieveItem`. Il illustre une implémentation du modèle de type cache-aside basée sur Redis et la bibliothèque StackExchange. La méthode accepte une valeur de clé de type chaîne, et tente de récupérer l’élément correspondant à partir du cache Redis en appelant la méthode `StringGetAsync` (version asynchrone de `StringGet`).
 
@@ -476,7 +476,7 @@ Notez que ces clés contiennent également des données non interprétées, afin
 
 Par exemple, utilisez des clés structurées telles que « client:100 » pour représenter la clé pour le client avec l'ID 100 plutôt que simplement « 100 ». Ce schéma permet de facilement faire la différence entre les valeurs qui stockent les différents types de données. Par exemple, vous pouvez également utiliser la clé « orders:100 » pour représenter la clé pour la commande avec l'ID 100.
 
-Indépendamment des chaînes binaires unidimensionnelles, une valeur d’une paire clé/valeur Redis peut également contenir des informations plus structurées, dont des listes, des ensembles (triés et non triés) et des hachages. Redis fournit un ensemble de commandes complet qui permet de manipuler ces types. Bon nombre de ces commandes sont accessibles par les applications .NET Framework via une bibliothèque cliente telle que StackExchange. La page [Présentation des types de données et abstractions Redis](http://redis.io/topics/data-types-intro) du site web de Redis fournit une vue plus détaillée de ces types et des commandes que vous pouvez utiliser pour les manipuler.
+Indépendamment des chaînes binaires unidimensionnelles, une valeur d’une paire clé/valeur Redis peut également contenir des informations plus structurées, dont des listes, des ensembles (triés et non triés) et des hachages. Redis fournit un ensemble de commandes complet qui permet de manipuler ces types. Bon nombre de ces commandes sont accessibles par les applications .NET Framework via une bibliothèque cliente telle que StackExchange. La page [Présentation des types de données et abstractions Redis](https://redis.io/topics/data-types-intro) du site web de Redis fournit une vue plus détaillée de ces types et des commandes que vous pouvez utiliser pour les manipuler.
 
 Cette section récapitule quelques utilisations habituelles de ces types de données et commandes.
 
@@ -859,43 +859,42 @@ Voici certaines options à prendre en considération :
 
 - [Apache Avro](https://avro.apache.org/) offre des fonctionnalités comparables à Protocol Buffers et à Thrift, mais ne comporte pas d’étape de compilation. À la place, les données sérialisées incluent toujours un schéma qui décrit la structure. 
 
-- [JSON](http://json.org/) est une norme ouverte qui utilise des champs de texte explicites. Ce format offre une prise en charge multiplateforme étendue. JSON n’utilise pas de schémas de message. Étant donné que ce format repose sur du texte, il ne se révèle pas très efficace sur le réseau. Toutefois, vous pouvez parfois renvoyer directement à un client des éléments mis en cache par le biais du protocole HTTP ; dans ce cas, le stockage de données JSON permet d’économiser les coûts de désérialisation à partir d’un autre format et de sérialisation vers JSON.
+- [JSON](https://json.org/) est une norme ouverte qui utilise des champs de texte explicites. Ce format offre une prise en charge multiplateforme étendue. JSON n’utilise pas de schémas de message. Étant donné que ce format repose sur du texte, il ne se révèle pas très efficace sur le réseau. Toutefois, vous pouvez parfois renvoyer directement à un client des éléments mis en cache par le biais du protocole HTTP ; dans ce cas, le stockage de données JSON permet d’économiser les coûts de désérialisation à partir d’un autre format et de sérialisation vers JSON.
 
 - [BSON](http://bsonspec.org/) est un format de sérialisation binaire qui utilise une structure analogue à JSON. BSON a été conçu pour offrir un format plus léger, plus facile à analyser et plus rapidement sérialisable et désérialisable que JSON. Ses charges utiles présentent une taille comparable à celles du format JSON. Selon les données, une charge utile BSON peut être plus modeste ou plus volumineuse qu’une charge utile JSON. BSON comporte certains types de données supplémentaires qui ne sont pas disponibles au format JSON, en particulier BinData (pour les tableaux d’octets) et Date.
 
-- [MessagePack](http://msgpack.org/) est un format de sérialisation binaire conçu pour se révéler compact dans le cadre des transmissions sur le réseau. Il ne comporte aucun schéma de message ni contrôle du type de message.
+- [MessagePack](https://msgpack.org/) est un format de sérialisation binaire conçu pour se révéler compact dans le cadre des transmissions sur le réseau. Il ne comporte aucun schéma de message ni contrôle du type de message.
 
 - [Bond](https://microsoft.github.io/bond/) est une infrastructure multiplateforme permettant d’utiliser des données schématisées. Il prend en charge la sérialisation et la désérialisation interlangage. Les différences notables entre Bond et les autres systèmes répertoriés ici concernent la prise en charge de l’héritage, des alias de type et des génériques. 
 
-- [gRPC](http://www.grpc.io/) est un système RPC open source développé par Google. Par défaut, il utilise Protocol Buffers comme langage de définition et format d’échange de messages sous-jacent.
+- [gRPC](https://www.grpc.io/) est un système RPC open source développé par Google. Par défaut, il utilise Protocol Buffers comme langage de définition et format d’échange de messages sous-jacent.
 
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
 Le modèle suivant peut également être pertinent dans votre cas si vous implémentez une mise en cache dans vos applications :
 
-* [Modèle de type cache-aside](http://msdn.microsoft.com/library/dn589799.aspx): ce modèle décrit comment charger des données à la demande dans un cache à partir d’un magasin de données. Il permet également de maintenir la cohérence entre les données en cache et les données du magasin de données d’origine.
-* Le [modèle de partitionnement](http://msdn.microsoft.com/library/dn589797.aspx) fournit des informations sur l’implémentation d’un partitionnement horizontal pour vous aider à améliorer l’extensibilité lors du stockage de grands volumes de données et de l’accès à ceux-ci.
+* [Modèle de type cache-aside](../patterns/cache-aside.md): ce modèle décrit comment charger des données à la demande dans un cache à partir d’un magasin de données. Il permet également de maintenir la cohérence entre les données en cache et les données du magasin de données d’origine.
+* Le [modèle de partitionnement](../patterns/sharding.md) fournit des informations sur l’implémentation d’un partitionnement horizontal pour vous aider à améliorer l’extensibilité lors du stockage de grands volumes de données et de l’accès à ceux-ci.
 
 ## <a name="more-information"></a>Plus d’informations
-* Page relative à la [classe MemoryCache](http://msdn.microsoft.com/library/system.runtime.caching.memorycache.aspx) sur le site web de Microsoft
+* Page relative à la [classe MemoryCache](/dotnet/api/system.runtime.caching.memorycache) sur le site web de Microsoft
 * Page de [documentation concernant le cache Redis Azure](https://azure.microsoft.com/documentation/services/cache/) sur le site web de Microsoft.
 * Page du [forum aux questions concernant le cache Redis Azure](/azure/redis-cache/cache-faq) sur le site web de Microsoft.
-* Page relative au [modèle de configuration](http://msdn.microsoft.com/library/windowsazure/hh914149.aspx) sur le site web de Microsoft.
-* Page relative au [modèle asynchrone basé sur les tâches](http://msdn.microsoft.com/library/hh873175.aspx) sur le site web de Microsoft.
+* Page relative au [modèle asynchrone basé sur les tâches](/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap) sur le site web de Microsoft.
 * Page relative aux [pipelines et multiplexeurs](https://stackexchange.github.io/StackExchange.Redis/PipelinesMultiplexers) sur le dépôt GitHub StackExchange.Redis.
-* Page relative à la [persistance Redis](http://redis.io/topics/persistence) sur le site web de Redis.
-* Page relative à la [réplication](http://redis.io/topics/replication) sur le site web de Redis.
-* Page du [didacticiel du cluster Redis](http://redis.io/topics/cluster-tutorial) sur le site web de Redis.
-* Page relative au [partitionnement et à la manière de fractionner des données entre plusieurs instances Redis](http://redis.io/topics/partitioning) sur le site web de Redis.
-* Page relative à l’ [utilisation de Redis en tant que cache LRU](http://redis.io/topics/lru-cache) sur le site web de Redis.
-* Page relative aux [transactions](http://redis.io/topics/transactions) sur le site web de Redis.
-* Page relative à la [sécurité de Redis](http://redis.io/topics/security) sur le site web de Redis.
+* Page relative à la [persistance Redis](https://redis.io/topics/persistence) sur le site web de Redis.
+* Page relative à la [réplication](https://redis.io/topics/replication) sur le site web de Redis.
+* Page du [didacticiel du cluster Redis](https://redis.io/topics/cluster-tutorial) sur le site web de Redis.
+* Page relative au [partitionnement et à la manière de fractionner des données entre plusieurs instances Redis](https://redis.io/topics/partitioning) sur le site web de Redis.
+* Page relative à l’ [utilisation de Redis en tant que cache LRU](https://redis.io/topics/lru-cache) sur le site web de Redis.
+* Page relative aux [transactions](https://redis.io/topics/transactions) sur le site web de Redis.
+* Page relative à la [sécurité de Redis](https://redis.io/topics/security) sur le site web de Redis.
 * Page relative de [présentation du cache Redis Azure](https://azure.microsoft.com/blog/2014/06/04/lap-around-azure-redis-cache-preview/) sur le blog Azure.
-* Page relative à l’ [exécution de Redis sur une machine virtuelle Linux CentOS dans Azure](http://blogs.msdn.com/b/tconte/archive/2012/06/08/running-redis-on-a-centos-linux-vm-in-windows-azure.aspx) sur le site web de Microsoft.
+* Page relative à l’ [exécution de Redis sur une machine virtuelle Linux CentOS dans Azure](https://blogs.msdn.microsoft.com/tconte/2012/06/08/running-redis-on-a-centos-linux-vm-in-windows-azure/) sur le site web de Microsoft.
 * Page relative au [fournisseur d’état de session ASP.NET pour Cache Redis Azure](/azure/redis-cache/cache-aspnet-session-state-provider) sur le site web de Microsoft.
 * Page relative au [fournisseur de caches de sortie ASP.NET pour Cache Redis Azure](/azure/redis-cache/cache-aspnet-output-cache-provider) sur le site web de Microsoft.
-* Page d’ [An introduction aux types de données et abstractions Redis](http://redis.io/topics/data-types-intro) sur le site web de Redis.
+* Page d’ [An introduction aux types de données et abstractions Redis](https://redis.io/topics/data-types-intro) sur le site web de Redis.
 * Page relative à l’ [utilisation de base](https://stackexchange.github.io/StackExchange.Redis/Basics) sur le site web StackExchange.Redis.
 * Page relative aux [transactions dans Redis](https://stackexchange.github.io/StackExchange.Redis/Transactions) dans le référentiel StackExchange.Redis.
-* [Guide de partitionnement des données](http://msdn.microsoft.com/library/dn589795.aspx) sur le site web de Microsoft.
+* [Guide de partitionnement des données](https://msdn.microsoft.com/library/dn589795.aspx) sur le site web de Microsoft.
 

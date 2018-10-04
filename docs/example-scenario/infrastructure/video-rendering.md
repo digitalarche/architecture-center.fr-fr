@@ -3,12 +3,12 @@ title: Rendu vidéo 3D sur Azure
 description: Exécution des charges de travail HPC natives dans Azure à l’aide du service Azure Batch
 author: adamboeglin
 ms.date: 07/13/2018
-ms.openlocfilehash: 1d51a9812c890a4877ec0edfdcbf344b27049812
-ms.sourcegitcommit: b7e521ba317f4fcd3253c80ac0c0a355eaaa56c5
+ms.openlocfilehash: 67dc8496656a75eab8f5d0ce45d00f8b1f4ea03f
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/21/2018
-ms.locfileid: "46533930"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428055"
 ---
 # <a name="3d-video-rendering-on-azure"></a>Rendu vidéo 3D sur Azure
 
@@ -114,7 +114,7 @@ Le modèle déploiera :
 * Le pool de nœuds ne contient initialement aucune machine virtuelle ; une mise à l’échelle manuelle sera nécessaire pour en ajouter
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Fhpc%2Fbatchcreatewithpools.json" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png"/>
+    <img src="https://azuredeploy.net/deploybutton.png"/>
 </a>
 
 [Plus d’informations sur les modèles Resource Manager][azure-arm-templates]

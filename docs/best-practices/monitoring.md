@@ -4,12 +4,12 @@ description: Meilleures pratiques pour la surveillance des applications distribu
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 8dd3979233b03db800bd9514263d9c6fedefa074
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 4de9ce80a17a0ad429166ac2aa7f7f7f66c26db1
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24539015"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429670"
 ---
 # <a name="monitoring-and-diagnostics"></a>Surveillance et diagnostics
 [!INCLUDE [header](../_includes/header.md)]
@@ -495,7 +495,7 @@ Pour les applications et services Azure, les diagnostics Azure fournissent une s
 
 * Journaux IIS
 * Journaux d’échecs de demande IIS
-* Journaux d’événements Windows
+* Journaux des événements Windows
 * Compteurs de performances
 * Vidages sur incident
 * Journaux d’infrastructure de diagnostics Azure  
@@ -503,7 +503,7 @@ Pour les applications et services Azure, les diagnostics Azure fournissent une s
 * .NET EventSource
 * Suivi d’événements pour Windows basé sur les manifestes
 
-Pour plus d’informations, voir l’article [Azure: Telemetry Basics and Troubleshooting](http://social.technet.microsoft.com/wiki/contents/articles/18146.windows-azure-telemetry-basics-and-troubleshooting.aspx)(Azure : Concepts de base de la télémétrie et résolution des problèmes).
+Pour plus d’informations, voir l’article [Azure: Telemetry Basics and Troubleshooting](https://social.technet.microsoft.com/wiki/contents/articles/18146.windows-azure-telemetry-basics-and-troubleshooting.aspx)(Azure : Concepts de base de la télémétrie et résolution des problèmes).
 
 ### <a name="strategies-for-collecting-instrumentation-data"></a>Stratégies de collecte des données d’instrumentation
 Considérant la nature évolutive du cloud et pour éviter la nécessité de récupérer manuellement les données de télémétrie de chaque nœud du système, vous devez faire en sorte que les données soient transférées vers un emplacement central et consolidé. Dans un système qui s’étend sur plusieurs centres de données, il peut être utile de commencer par collecter, consolider et stocker des données sur une base régionale, puis d’agréger les données régionales dans un système central unique.
@@ -548,7 +548,7 @@ Les données d’instrumentation récupérées par le service de collecte des do
 ### <a name="storing-instrumentation-data"></a>Stockage des données d’instrumentation
 Les discussions précédentes ont représenté une vue assez simple du mode de stockage des données d’instrumentation. En réalité, il peut être judicieux de stocker les différents types d’informations à l’aide des technologies les plus appropriées au mode d’utilisation de chacun des types.
 
-Par exemple, le stockage de table et le stockage d’objets blob Azure présentent certaines similitudes dans leur mode d’accès. Néanmoins, elles connaissent des restrictions dans les opérations que vous pouvez effectuer en les utilisant, et la granularité des données qu’elles conservent est assez différente. Si vous devez effectuer plusieurs opérations analytiques ou si vous avez besoin de fonctionnalités de recherche en texte intégral sur les données, il peut être plus pertinent d’utiliser le stockage de données qui fournit des fonctionnalités optimisées pour des types spécifiques de requêtes et d’accès aux données. Par exemple :
+Par exemple, le stockage de table et le stockage d’objets blob Azure présentent certaines similitudes dans leur mode d’accès. Néanmoins, elles connaissent des restrictions dans les opérations que vous pouvez effectuer en les utilisant, et la granularité des données qu’elles conservent est assez différente. Si vous devez effectuer plusieurs opérations analytiques ou si vous avez besoin de fonctionnalités de recherche en texte intégral sur les données, il peut être plus pertinent d’utiliser le stockage de données qui fournit des fonctionnalités optimisées pour des types spécifiques de requêtes et d’accès aux données. Par exemple : 
 
 * Les données des compteurs de performances peuvent être stockées dans une base de données SQL pour activer l’analyse ad hoc.
 * Azure Cosmos DB peut se révéler mieux adapté au stockage des journaux de suivi.
@@ -602,7 +602,7 @@ Certains types de surveillance génèrent des données à plus long terme. Cette
 Un opérateur peut également utiliser l’analyse à froid pour fournir les données pour l’analyse prédictive de l’intégrité. Il peut collecter les informations historiques sur une période spécifiée et les utiliser conjointement avec les données d’intégrité actuelles (récupérées à partir du chemin réactif) pour identifier les tendances qui peuvent provoquer rapidement des problèmes d’intégrité. Dans ces cas, il peut être nécessaire de déclencher une alerte afin que des mesures correctives puissent être prises.
 
 ### <a name="correlating-data"></a>Corrélation des données
-Les données capturées par l’instrumentation peuvent fournir un instantané de l’état du système, mais l’objectif de l’analyse est de rendre ces données exploitables. Par exemple :
+Les données capturées par l’instrumentation peuvent fournir un instantané de l’état du système, mais l’objectif de l’analyse est de rendre ces données exploitables. Par exemple : 
 
 * Quelle est la cause d’un chargement d’E/S intense au niveau du système à un moment spécifique ?
 * Est-il le résultat d’un grand nombre d’opérations de base de données ?
@@ -688,7 +688,7 @@ Dans de nombreux cas, les traitements par lots peuvent générer des rapports en
 
 ## <a name="more-information"></a>Plus d’informations
 * [Analyser, diagnostiquer et dépanner Microsoft Azure Storage](/azure/storage/storage-monitoring-diagnosing-troubleshooting)
-* [Azure: Telemetry Basics and Troubleshooting (Azure : Concepts de base de la télémétrie et résolution des problèmes)](http://social.technet.microsoft.com/wiki/contents/articles/18146.windows-azure-telemetry-basics-and-troubleshooting.aspx)
+* [Azure: Telemetry Basics and Troubleshooting (Azure : Concepts de base de la télémétrie et résolution des problèmes)](https://social.technet.microsoft.com/wiki/contents/articles/18146.windows-azure-telemetry-basics-and-troubleshooting.aspx)
 * [Activation de Diagnostics dans les services cloud et les machines virtuelles Azure](/azure/cloud-services/cloud-services-dotnet-diagnostics)
 * [Cache Redis Azure](https://azure.microsoft.com/services/cache/), [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/) et [HDInsight](https://azure.microsoft.com/services/hdinsight/)
 * [Utilisation des files d’attente Service Bus](/azure/service-bus-messaging/service-bus-dotnet-get-started-with-queues)

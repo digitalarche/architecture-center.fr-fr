@@ -4,12 +4,12 @@ description: Conventions d’affectation de noms pour les ressources Azure. Comm
 author: telmosampaio
 ms.date: 05/18/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 625f672c80b0256e93932b72367768f37c1e72f4
-ms.sourcegitcommit: f1dcc388c8b4fc983549c36d7e6b009fa1f072ba
+ms.openlocfilehash: 96402b86b9dc0c57599aae585b41d0d03581c333
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/19/2018
-ms.locfileid: "46329876"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429653"
 ---
 # <a name="naming-conventions"></a>Conventions d’affectation de noms
 
@@ -176,7 +176,7 @@ Il existe deux principaux cas d’utilisation de comptes de stockage : sauvegar
 
 Vous pouvez configurer un nom de domaine personnalisé pour accéder à des données blob dans votre compte de stockage Azure. Le point de terminaison par défaut du service BLOB est https://\<nom\>.blob.core.windows.net.
 
-Cependant, si vous mappez un domaine personnalisé (tel que www.contoso.com) au point de terminaison des objets blob de votre compte de stockage, vous pouvez également accéder aux données d’objets blob de votre compte de stockage à l’aide de ce domaine. Par exemple, avec un nom de domaine personnalisé, `http://mystorage.blob.core.windows.net/mycontainer/myblob` devient accessible en tant que `http://www.contoso.com/mycontainer/myblob`.
+Cependant, si vous mappez un domaine personnalisé (tel que www.contoso.com) au point de terminaison des objets blob de votre compte de stockage, vous pouvez également accéder aux données d’objets blob de votre compte de stockage à l’aide de ce domaine. Par exemple, avec un nom de domaine personnalisé, `https://mystorage.blob.core.windows.net/mycontainer/myblob` devient accessible en tant que `https://www.contoso.com/mycontainer/myblob`.
 
 Pour plus d’informations sur la configuration de cette fonctionnalité, consultez l’article [Configurer un nom de domaine personnalisé pour un point de terminaison de stockage Blob](/azure/storage/storage-custom-domain-name/).
 

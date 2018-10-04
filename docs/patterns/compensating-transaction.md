@@ -7,12 +7,12 @@ ms.date: 06/23/2017
 pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - resiliency
-ms.openlocfilehash: a822de990d6ce933024207073b110e98f8da40bf
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: 3d58537d9c77b97332bcabf762b9af7ed2f20421
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2017
-ms.locfileid: "26359399"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428140"
 ---
 # <a name="compensating-transaction-pattern"></a>Modèle de transaction de compensation
 
@@ -38,9 +38,9 @@ La solution consiste à implémenter une transaction de compensation. Les étape
 
 Une approche courante consiste à utiliser un flux de travail pour implémenter une opération cohérente qui nécessite une compensation. Au cours de l’exécution de l’opération d’origine, le système enregistre des informations sur chaque étape et identifie la manière dont le travail effectué par l’étape en cours peut être annulé. Si l’opération échoue à un moment donné, le flux de travail effectue un retour en arrière sur les étapes effectuées et annule chacune de ces étapes. Notez qu’une transaction de compensation n’annule pas forcément les étapes dans l’ordre où elles ont été effectuées dans l’opération d’origine et qu’il est possible d’effectuer certaines des étapes d’annulation en parallèle.
 
-> Cette approche est similaire à la stratégie Sagas présentée sur [le blog de Clemens Vasters](http://vasters.com/clemensv/2012/09/01/Sagas.aspx).
+> Cette approche est similaire à la stratégie Sagas présentée sur [le blog de Clemens Vasters](https://vasters.com/clemensv/2012/09/01/Sagas.aspx).
 
-Une transaction de compensation est également une opération de cohérence éventuelle qui peut échouer. Le système doit être en mesure de relancer la transaction de compensation à partir du point de défaillance et de poursuivre son exécution. Il peut être nécessaire de répéter une étape qui a échoué. Les étapes d’une transaction de compensation doivent donc être définies en tant que commandes idempotentes. Pour plus d’informations, consultez l’article [Idempotency Patterns](http://blog.jonathanoliver.com/idempotency-patterns/) sur le blog de Jonathan Oliver.
+Une transaction de compensation est également une opération de cohérence éventuelle qui peut échouer. Le système doit être en mesure de relancer la transaction de compensation à partir du point de défaillance et de poursuivre son exécution. Il peut être nécessaire de répéter une étape qui a échoué. Les étapes d’une transaction de compensation doivent donc être définies en tant que commandes idempotentes. Pour plus d’informations, consultez l’article [Idempotency Patterns](https://blog.jonathanoliver.com/idempotency-patterns/) sur le blog de Jonathan Oliver.
 
 Dans certains cas, il n’est pas possible de reprendre l’opération à partir d’une étape qui a échoué, sauf via une intervention manuelle. Dans ces situations, le système doit générer une alerte et fournir autant d’informations que possible sur la raison de l’échec.
 
@@ -70,7 +70,7 @@ Envisagez d’utiliser la logique de nouvelle tentative qui est généralement p
 
 Utilisez ce modèle uniquement pour les opérations qui doivent être annulées si elles échouent. Si possible, concevez vos solutions de manière à ne pas avoir à gérer la complexité liée aux transactions de compensation.
 
-## <a name="example"></a>exemples
+## <a name="example"></a>Exemples
 
 Prenons l’exemple d’un site web sur lequel les clients peuvent réserver leur itinéraire de voyage. Un seul itinéraire peut comprendre plusieurs vols et hôtels. Un client qui part de Seattle en direction de Londres, puis de Paris, pourrait suivre les étapes suivantes pour créer son itinéraire :
 

@@ -3,12 +3,12 @@ title: Conception d’API
 description: Conception d’API pour les microservices
 author: MikeWasson
 ms.date: 12/08/2017
-ms.openlocfilehash: d85407f3092ddb5f77aacfea8def2784c4741eb9
-ms.sourcegitcommit: 786bafefc731245414c3c1510fc21027afe303dc
+ms.openlocfilehash: e3524fca177d8c15b280d0f8a706539369c1773a
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/12/2017
-ms.locfileid: "26653196"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429126"
 ---
 # <a name="designing-microservices-api-design"></a>Conception de microservices : conception d’API
 
@@ -121,13 +121,13 @@ Par exemple :
 
 Lorsque vous concevez vos API, pensez à la façon dont elles expriment le modèle de domaine ; ne considérez pas uniquement les données à l’intérieur du modèle, mais également les opérations d’entreprise et les contraintes sur les données.
 
-| Concept de conception pilotée par le domaine | Équivalent REST | exemples | 
+| Concept de conception pilotée par le domaine | Équivalent REST | Exemples | 
 |-------------|-----------------|---------|
 | Agrégat | Ressource | `{ "1":1234, "status":"pending"... }` | 
-| Identité | URL | `http://delivery-service/deliveries/1` |
+| Identité | URL | `https://delivery-service/deliveries/1` |
 | Entités enfants | Liens | `{ "href": "/deliveries/1/confirmation" }` |
-| Mise à jour des objets de valeur | PUT ou PATCH | `PUT http://delivery-service/deliveries/1/dropoff` |
-| Référentiel | Collection | `http://delivery-service/deliveries?status=pending` |
+| Mise à jour des objets de valeur | PUT ou PATCH | `PUT https://delivery-service/deliveries/1/dropoff` |
+| Référentiel | Collection | `https://delivery-service/deliveries?status=pending` |
 
 
 ## <a name="api-versioning"></a>Contrôle de version d’API

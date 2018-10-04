@@ -3,12 +3,12 @@ title: Modèle de services principaux destinés aux frontaux
 description: Créez différents services principaux destinés à être consommés par des applications ou interfaces frontales spécifiques.
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 2991d7a3e05b3ce6cd5148a552bae6d4ba8f7c4c
-ms.sourcegitcommit: c441fd165e6bebbbbbc19854ec6f3676be9c3b25
+ms.openlocfilehash: a0dbc9ab58aa218f6faf40b70dad1bdc22d71458
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2018
-ms.locfileid: "30270017"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428786"
 ---
 # <a name="backends-for-frontends-pattern"></a>Modèle de services principaux destinés aux frontaux
 
@@ -34,7 +34,7 @@ Créez un service principal par interface utilisateur. Ajustez le comportement e
 
 Étant donné que chaque service principal est propre à une interface, il peut être optimisé pour cette dernière. Par conséquent, il sera moins volumineux, moins complexe et probablement plus rapide qu’un service principal générique qui tente de répondre aux exigences de toutes les interfaces. Chaque équipe d’interface a la possibilité de contrôler son propre service principal et ne dépend pas d’une équipe de développement de service principal centralisée. L’équipe d’interface dispose ainsi d’une réelle flexibilité en matière de sélection de langue, de cadence de mise en production, de hiérarchisation des charges de travail et d’intégration de fonctionnalités à son service principal.
 
-Pour plus d’informations, consultez [Pattern: Backends For Frontends](http://samnewman.io/patterns/architectural/bff/) (Modèle : Services principaux destinés aux frontaux).
+Pour plus d’informations, consultez [Pattern: Backends For Frontends](https://samnewman.io/patterns/architectural/bff/) (Modèle : Services principaux destinés aux frontaux).
 
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 

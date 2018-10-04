@@ -3,12 +3,12 @@ title: Application multiniveau avec SQL Server
 description: Découvrez comment implémenter une architecture multiniveau dans Azure, pour la disponibilité, la sécurité, l’extensibilité et la facilité de gestion.
 author: MikeWasson
 ms.date: 07/19/2018
-ms.openlocfilehash: 3a291b9492c94450a42de96bea2135190c163fe7
-ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
+ms.openlocfilehash: d5f46570464916af892afcf492127402181a5df5
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2018
-ms.locfileid: "45584746"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429143"
 ---
 # <a name="n-tier-application-with-sql-server"></a>Application multiniveau avec SQL Server
 
@@ -267,8 +267,8 @@ Pour plus d’informations sur le déploiement de cet exemple d’architecture d
 [vnet faq]: /azure/virtual-network/virtual-networks-faq
 [wsfc-whats-new]: https://technet.microsoft.com/windows-server-docs/failover-clustering/whats-new-in-failover-clustering
 [Nagios]: https://www.nagios.org/
-[Zabbix]: http://www.zabbix.com/
-[Icinga]: http://www.icinga.org/
+[Zabbix]: https://www.zabbix.com/
+[Icinga]: https://www.icinga.org/
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [0]: ./images/n-tier-sql-server.png "Architecture multiniveau à l’aide de Microsoft Azure"
 [resource-manager-overview]: /azure/azure-resource-manager/resource-group-overview 
