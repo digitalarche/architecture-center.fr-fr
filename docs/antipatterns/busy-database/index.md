@@ -85,7 +85,7 @@ ORDER BY soh.[TotalDue] DESC
 FOR XML PATH ('Order'), ROOT('Orders')
 ```
 
-Il s’agit clairement d’une requête complexe. Comme nous le verrons plus tard, il s’avère qu'un nombre important de sont consommées sur le serveur de base de données.
+Il s’agit clairement d’une requête complexe. Comme nous le verrons plus tard, il s’avère qu'un nombre important de ressources de traitement sont consommées sur le serveur de base de données.
 
 ## <a name="how-to-fix-the-problem"></a>Comment corriger le problème
 
