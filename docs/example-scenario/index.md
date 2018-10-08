@@ -5,228 +5,79 @@ author: david-stanford
 ms:date: 08/01/2018
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 8783a49b8b93a117563e5507ef41e5ad100ca5a6
-ms.sourcegitcommit: 20953a7bed708713e4c972d390a2910505e80f08
+ms.openlocfilehash: 63a566126168dba382792967b3625bd6e085c054
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/06/2018
-ms.locfileid: "44040398"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48818834"
 ---
 # <a name="azure-example-scenarios"></a>Exemples de scénarios Azure
 
-Ces exemples de scénarios sont basés sur des exemples client réels. Ils ont pour but d’accélérer et de faciliter la création de votre propre cas d’usage. Chaque solution contient un diagramme de l’architecture et une tarification brute, et explore des solutions que vous pouvez échanger pour répondre à vos besoins.  La plupart des solutions contient une méthode de déploiement simple dans votre compte Azure.
+Les exemples de scénarios détaillent étape par étape le processus de résolution de problèmes architecturaux et d’entreprise spécifiques sur Azure.  Chaque scénario est basé sur un exemple de client réel et a pour but de fournir des conseils faciles à lire rapidement pour aider à accélérer votre propre implémentation.
 
-Passer à : [Scénarios liés à l’IA](#ai-scenarios) | [Scénarios liés aux applications](#application-scenarios) | [Scénarios liés aux données](#data-scenarios) | [Scénarios liés aux infrastructures](#infrastructure-scenarios) 
+Dans chaque scénario, vous trouverez un diagramme d’architecture, des flux de données et les détails de tous les composants.  Vous pouvez également découvrir des technologies alternatives qui peuvent mieux s’adapter à vos besoins professionnels et à la tarification brute de la solution, ainsi qu’aux considérations lors de l’exécution de la solution en production.  Plusieurs solutions contiennent une méthode de déploiement simple dans votre compte Azure.
 
-## <a name="ai-scenarios"></a>Scénarios liés à l’IA
+Passer à : [Scénarios liés à l’IA](#ai-scenarios) | [Scénarios liés aux applications](#application-scenarios) | [Scénarios liés aux données](#data-scenarios) | [Scénarios liés aux infrastructures](#infrastructure-scenarios)
 
-<ul  class="panelContent cardsF">
-<!-- SQL Data Warehouse -->
-<li style="display: flex; flex-direction: column;">
-    <a href="./ai/intelligent-apps-image-processing.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
+<ul class="panelContent cardsL">
+    <li>
+        <div class="cardSize">
+            <div class="cardPadding">
                 <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="../_images/icons/cognitive.png" />
-                        </div>
-                    </div>
                     <div class="cardText">
-                        <h3>Traitement des images</h3>
-                        <p>Analysez des images à l’aide de services cognitifs axés sur le domaine des assurances.</p>
+                        <h3>Nouveaux scénarios</h3>
+                        <a class="barLink" href="/azure/architecture/example-scenario/apps/decentralized-trust" data-linktype="absolute-path">Confiance décentralisé entre les banques sur Azure</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/infrastructure/wordpress" data-linktype="absolute-path">Site web WordPress hautement évolutif et sécurisé</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/data/data-warehouse" data-linktype="absolute-path">Entreposage et analyse des données pour les ventes et le marketing</a>
                     </div>
                 </div>
             </div>
         </div>
-    </a>
-</li>
+    </li>
+    <li>
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardText">
+                        <h3>Meilleurs scenarios</h3>
+                        <a class="barLink" href="/azure/architecture/example-scenario/ai/intelligent-apps-image-processing" data-linktype="absolute-path">Classification d’images pour les demandes d’indemnisation</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/apps/commerce-chatbot" data-linktype="absolute-path">Bot conversationnel pour les réservations d’hôtel</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/infrastructure/regulated-multitier-app" data-linktype="absolute-path">Sécuriser une application web Windows pour les secteurs industriels réglementés</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardText">
+                        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbRy0ZnoKOXdVBqaBz653YPElUNjlNMEpPMDNSSU1aWEIxMFNFNlY2T0E3NC4u" data-linktype="external">
+                            <div class="cardSize cardsF">
+                                <div class="cardPadding">
+                                    <div class="card">
+                                        <div class="cardImageOuter">
+                                            <div class="cardImage">
+                                                <img src="https://docs.microsoft.com/en-us/media/common/i_feedback.svg" alt="" data-linktype="external">
+                                            </div>
+                                        </div>
+                                        <div class="cardText">
+                                            <h3 class="x-hidden-focus">Soumettre votre idée pour un nouveau scénario</h3>
+                                            <p>Avez-vous un scénario que vous aimeriez nous voir créer ?</p>
+                                            <p>Voulez-vous en générer un ?</p>
+                                            <p>Soumettez votre idée ici!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
 </ul>
 
-## <a name="application-scenarios"></a>Scénarios d’application
-
-<ul  class="panelContent cardsF">
-<li style="display: flex; flex-direction: column;">
-    <a href="./apps/commerce-chatbot.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="../_images/icons/app-service.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>Bot conversationnel commercial</h3>
-                        <p>Bot conversationnel fonctionnant comme le concierge d’un hôtel.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="./apps/devops-dotnet-webapp.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="../_images/icons/app-service.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>DevOps avec VSTS</h3>
-                        <p>Pipeline DevOps reposant sur VSTS. </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="./apps/devops-with-aks.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="../_images/icons/jenkins.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>DevOps avec AKS</h3>
-                        <p>Pipeline DevOps reposant sur des conteneurs et jenkins.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="./apps/ecommerce-scenario.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="../_images/icons/app-service.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>Serveur frontal e-commerce</h3>
-                        <p>Serveur frontal e-commerce pour acheter des tickets.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="./apps/sap-dev-test.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="../_images/icons/sap.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>SAP pour un environnement de développement/test</h3>
-                        <p>Déploiement SAP pour un environnement de développement/test.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-</ul>
-
-## <a name="data-scenarios"></a>Scénarios liés aux données
-
-<ul  class="panelContent cardsF">
-<li style="display: flex; flex-direction: column;">
-    <a href="./data/ecommerce-order-processing.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="../_images/icons/data-guide.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>Traitement des commandes e-commerce</h3>
-                        <p>Pipeline de traitement évolutif des commandes.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<!-- ExpressRoute -->
-<li style="display: flex; flex-direction: column;">
-    <a href="./data/fraud-detection.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="../_images/icons/data-guide.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>Détection des fraudes</h3>
-                        <p>Détection des fraudes en temps réel qui analyse les métadonnées du téléphone mobile.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-</ul>
-
-## <a name="infrastructure-scenarios"></a>Scénarios liés aux infrastructures
-
-<ul class="panelContent cardsF">
-<!-- Azure AD -->
-<li style="display: flex; flex-direction: column;">
-    <a href="./infrastructure/regulated-multitier-app.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="../_images/icons/windows.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>Application multiniveau réglementée</h3>
-                        <p>Sécurisation des applications multiniveau pour les secteurs industriels réglementés.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
-    <a href="./infrastructure/video-rendering.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="../_images/icons/linux-penguin.svg" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>Rendu vidéo HPC</h3>
-                        <p>Rendu 3D à l’aide d’une solution HPC.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-</ul>
+[!INCLUDE [notes](./articles.md)]
