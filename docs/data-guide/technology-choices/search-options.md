@@ -3,12 +3,12 @@ title: Choisir un magasin de données de recherche
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: ead07e307e96696faa5ddf48505eee378027523c
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.openlocfilehash: 9576bbba9609a04ccc7851d55dd28853ffc6b701
+ms.sourcegitcommit: f6be2825bf2d37dfe25cfab92b9e3973a6b51e16
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30848612"
+ms.lasthandoff: 10/08/2018
+ms.locfileid: "48858178"
 ---
 # <a name="choosing-a-search-data-store-in-azure"></a>Choisir un magasin de données de recherche dans Azure
 
@@ -16,7 +16,7 @@ Cet article compare les choix technologiques pour les magasins de données de re
 
 ## <a name="what-are-your-options-when-choosing-a-search-data-store"></a>Quelles sont vos options lors du choix d’un magasin de données de recherche ?
 Dans Azure, tous les magasins de données suivants respectent les exigences principales pour la recherche sur des données de texte de forme libre en fournissant un index de recherche :
-- [Recherche Azure](/azure/search/search-what-is-azure-search)
+- [Azure Search](/azure/search/search-what-is-azure-search)
 - [Elasticsearch](https://azuremarketplace.microsoft.com/marketplace/apps/elastic.elasticsearch?tab=Overview)
 - [HDInsight avec Solr](/azure/hdinsight/hdinsight-hadoop-solr-install-linux)
 - [Azure SQL Database avec recherche en texte intégral](/sql/relational-databases/search/full-text-search)
@@ -46,35 +46,35 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 | | Recherche Azure | Elasticsearch | HDInsight avec Solr | Base de données SQL | 
 | --- | --- | --- | --- | --- | 
-| Est un service géré | OUI | Non  | OUI | OUI |  
-| de l’API REST | OUI | OUI | OUI | Non  |
+| Est un service géré | Oui | Non  | OUI | Oui |  
+| API REST | Oui | OUI | Oui | Non  |
 | Programmabilité | .NET | Java | Java | T-SQL | 
-| Indexeurs de documents pour les types de fichiers courants (PDF, DOCX, TXT, etc.) | OUI | Non  | OUI | Non  |
+| Indexeurs de documents pour les types de fichiers courants (PDF, DOCX, TXT, etc.) | Oui | Non  | Oui | Non  |
 
 ### <a name="manageability-capabilities"></a>Fonctionnalités de facilité de gestion
 
 | | Recherche Azure | Elasticsearch | HDInsight avec Solr | Base de données SQL | 
 | --- | --- | --- | --- | --- |
-| Schéma pouvant être mis à jour | Non  | OUI | OUI | OUI |
-| Prend en charge la montée en puissance  | OUI | OUI | OUI | Non  |
+| Schéma pouvant être mis à jour | Non  | OUI | OUI | Oui |
+| Prend en charge la montée en puissance  | Oui | OUI | Oui | Non  |
 
 ### <a name="analytic-workload-capabilities"></a>Fonctionnalités de la charge de travail analytique
 
-| | Recherche Azure | Elasticsearch | HDInsight avec Solr | SQL Databash | 
+| | Recherche Azure | Elasticsearch | HDInsight avec Solr | Base de données SQL | 
 | --- | --- | --- | --- | --- | 
-| Prend en charge l’analytique au-delà de la recherche en texte intégral | Non  | OUI | OUI | OUI |
+| Prend en charge l’analytique au-delà de la recherche en texte intégral | Non  | OUI | OUI | Oui |
 | Fait partie d’une pile d’analytique des journaux | Non  | Oui (ELK) |  Non  | Non  |
-| Prend en charge la recherche sémantique | Oui (rechercher uniquement les documents similaires) | OUI | OUI | OUI | 
+| Prend en charge la recherche sémantique | Oui (rechercher uniquement les documents similaires) | Oui | OUI | Oui | 
 
 ### <a name="security-capabilities"></a>Fonctionnalités de sécurité
 
-| | Recherche Azure | Elasticsearch | HDInsight avec Solr | SQL Databash | 
+| | Recherche Azure | Elasticsearch | HDInsight avec Solr | Base de données SQL | 
 | --- | --- | --- | --- | --- | 
-| Sécurité au niveau des lignes | Partielle (requête d’application requise pour filtrer par ID de groupe) | Partielle (requête d’application requise pour filtrer par ID de groupe) | OUI | OUI | 
-| Chiffrement transparent des données | Non  | Non  | Non  | OUI |  
-| Restreindre l’accès à des adresses IP spécifiques | Non  | OUI | OUI | OUI |   
-| Restreindre l’accès pour autoriser l’accès au réseau virtuel uniquement | Non  | OUI | OUI | OUI |  
-| Authentification Active Directory (authentification intégrée) | Non  | Non  | Non  | OUI | 
+| Sécurité au niveau des lignes | Partielle (requête d’application requise pour filtrer par ID de groupe) | Partielle (requête d’application requise pour filtrer par ID de groupe) | Oui | Oui | 
+| Chiffrement transparent des données | Non  | Non  | Non  | Oui |  
+| Restreindre l’accès à des adresses IP spécifiques | Non  | OUI | OUI | Oui |   
+| Restreindre l’accès pour autoriser l’accès au réseau virtuel uniquement | Non  | OUI | OUI | Oui |  
+| Authentification Active Directory (authentification intégrée) | Non  | Non  | Non  | Oui | 
 
 ## <a name="see-also"></a>Voir aussi
 

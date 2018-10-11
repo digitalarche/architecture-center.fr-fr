@@ -4,12 +4,12 @@ description: Liste de vérification fournissant des indications relatives aux pr
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 17612ee08e2329ea648fd21d6764e7bae1ca20e2
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 15ad749c12dc8a45c9e7e08376452685d8ad7c9b
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429092"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48819021"
 ---
 # <a name="resiliency-checklist"></a>Liste de vérification de résilience
 
@@ -39,7 +39,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Utilisez l’équilibrage de charge pour distribuer les requêtes.** L’équilibrage de charge distribue les requêtes de votre application à des instances de service intègres en supprimant les instances non intègres de la rotation. Si votre service utilise Azure App Service ou Azure Cloud Services, sa charge est déjà équilibrée pour vous. Cependant, si votre application utilise Machines virtuelles Azure, vous devez approvisionner un équilibreur de charge. Pour plus d’informations, consultez la [vue d’ensemble d’Azure Load Balancer](/azure/load-balancer/load-balancer-overview/).
 
-**Configurez les passerelles Azure Application Gateway de manière à utiliser plusieurs instances.** Selon les exigences de votre application, une passerelle [Azure Application Gateway](/azure/application-gateway/application-gateway-introduction/) peut être mieux adaptée pour distribuer les requêtes aux services de votre application. Cependant, les instances uniques du service Application Gateway ne sont pas garanties par un contrat de niveau de service (SLA). Par conséquent, il se peut que votre application échoue en cas d’échec de l’instance Application Gateway. Approvisionnez plusieurs instances Application Gateway moyennes ou grandes pour garantir la disponibilité du service selon les conditions du [SLA](https://azure.microsoft.com/support/legal/sla/application-gateway/v1_0/).
+**Configurez les passerelles Azure Application Gateway de manière à utiliser plusieurs instances.** Selon les exigences de votre application, une passerelle [Azure Application Gateway](/azure/application-gateway/application-gateway-introduction/) peut être mieux adaptée pour distribuer les requêtes aux services de votre application. Cependant, les instances uniques du service Application Gateway ne sont pas garanties par un contrat de niveau de service (SLA). Par conséquent, il se peut que votre application échoue en cas d’échec de l’instance Application Gateway. Approvisionnez plusieurs instances Application Gateway moyennes ou grandes pour garantir la disponibilité du service selon les conditions du [SLA](https://azure.microsoft.com/support/legal/sla/application-gateway/).
 
 **Utilisez des groupes à haute disponibilité pour chaque couche Application.** Le placement des instances dans un [groupe à haute disponibilité][availability-sets] permet de bénéficier d’un [SLA](https://azure.microsoft.com/support/legal/sla/virtual-machines/) supérieur. 
 

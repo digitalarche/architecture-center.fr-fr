@@ -5,12 +5,12 @@ author: MikeWasson
 ms.date: 07/19/2018
 pnp.series.title: Windows VM workloads
 pnp.series.prev: n-tier
-ms.openlocfilehash: a8dafab9ce8312004e99f0f19d06d6b47b6b19d8
-ms.sourcegitcommit: c704d5d51c8f9bbab26465941ddcf267040a8459
+ms.openlocfilehash: 34dd47175e7fd0002cba577ad6c1034968ed4098
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/24/2018
-ms.locfileid: "39229250"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48819123"
 ---
 # <a name="multi-region-n-tier-application-for-high-availability"></a>Application multiniveau multirégion pour une haute disponibilité
 
@@ -54,7 +54,7 @@ Cette architecture de référence est axée sur le mode actif/passif avec serveu
 
 ### <a name="regional-pairing"></a>Association régionale
 
-Chaque région Azure est associée à une autre région de la même zone géographique. En général, vous devez choisir des régions de la même paire régionale (par exemple, Est des États-Unis 2 et Centre des États-Unis). Cette approche offre les avantages suivants :
+Chaque région Azure est associée à une autre région de la même zone géographique. En général, vous devez choisir des régions de la même paire régionale (par exemple, USA Est 2 et USA Centre). Cette approche offre les avantages suivants :
 
 * En cas d’interruption de service générale, la récupération d’au moins une région de chaque paire est prioritaire.
 * Les mises à jour planifiées du système Azure sont déployées dans les régions associées de manière séquentielle, afin de minimiser les temps d’arrêt possibles.
@@ -182,8 +182,8 @@ Mesurez les temps de récupération et vérifiez qu’ils répondent aux besoins
 [tm-configure-failover]: /azure/traffic-manager/traffic-manager-configure-failover-routing-method
 [tm-monitoring]: /azure/traffic-manager/traffic-manager-monitoring
 [tm-routing]: /azure/traffic-manager/traffic-manager-routing-methods
-[tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager/v1_0/
-[traffic-manager]: https://azure.microsoft.com/services/traffic-manager/
+[tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager
+[traffic-manager]: https://azure.microsoft.com/services/traffic-manager
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/vm-reference-architectures.vsdx
 [vnet-dns]: /azure/virtual-network/manage-virtual-network#change-dns-servers
 [vnet-to-vnet]: /azure/vpn-gateway/vpn-gateway-vnet-vnet-rm-ps
