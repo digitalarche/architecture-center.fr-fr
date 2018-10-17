@@ -6,12 +6,12 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: authenticate
 pnp.series.next: signup
-ms.openlocfilehash: 61788d9759715b21ef1bdda59c5b54d923fd8f62
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 46c43c9bfa4514f206b5e7eabd9223ad4c61628b
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541911"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429366"
 ---
 # <a name="work-with-claims-based-identities"></a>Utilisation d’identités basées sur les revendications
 
@@ -36,12 +36,12 @@ Voici quelques-unes des revendications d’AAD auxquelles une application peut g
 | aud |Pour qui le jeton a été émis. Il s’agit de l’ID client de l’application. En général, vous n’avez pas à vous soucier de cette revendication, car le middleware la valide automatiquement. Exemple : `"91464657-d17a-4327-91f3-2ed99386406f"` |
 | groups |Liste de groupes AAD dont l’utilisateur est membre. Exemple : `["93e8f556-8661-4955-87b6-890bc043c30f", "fc781505-18ef-4a31-a7d5-7d931d7b857e"]` |
 | iss |[Émetteur] du jeton OIDC. Exemple : `https://sts.windows.net/b9bd2162-77ac-4fb2-8254-5c36e9c0a9c4/` |
-| name |Nom d’affichage de l’utilisateur. Exemple : `"Alice A."` |
+| Nom |Nom d’affichage de l’utilisateur. Exemple : `"Alice A."` |
 | oid |Identificateur d’objet pour l’utilisateur dans AAD. Cette valeur est l’identificateur non modifiable et non réutilisable de l’utilisateur. Utilisez cette valeur, et non pas l’adresse de messagerie, comme identificateur unique pour les utilisateurs ; en effet, les adresses de messagerie peuvent changer. Si vous utilisez l’API Azure AD Graph dans votre application, l’ID objet est cette valeur utilisée pour demander des informations de profil. Exemple : `"59f9d2dc-995a-4ddf-915e-b3bb314a7fa4"` |
 | roles |Liste des rôles d’application pour l’utilisateur.    Exemple : `["SurveyCreator"]` |
-| tid |ID de locataire. Cette valeur est un identificateur unique pour le client dans Azure AD. Exemple : `"b9bd2162-77ac-4fb2-8254-5c36e9c0a9c4"` |
+| tid |ID de locataire. Cette valeur est un identificateur unique pour le client dans Azure AD. Exemple : `"b9bd2162-77ac-4fb2-8254-5c36e9c0a9c4"` |
 | unique_name |Nom d’affichage explicite de l’utilisateur. Exemple : `"alice@contoso.com"` |
-| upn |Nom d’utilisateur principal. Exemple : `"alice@contoso.com"` |
+| upn |Nom d’utilisateur principal. Exemple : `"alice@contoso.com"` |
 
 Ce tableau répertorie les types de revendications tels qu’ils apparaissent dans le jeton d’ID. Dans ASP.NET Core, le middleware OpenID Connect convertit certains des types de revendications quand il remplit la collection de revendications pour le nom principal de l’utilisateur :
 
@@ -51,7 +51,7 @@ Ce tableau répertorie les types de revendications tels qu’ils apparaissent da
 * upn > `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn`
 
 ## <a name="claims-transformations"></a>Transformations de revendication
-Pendant le flux d’authentification, vous pouvez modifier les revendications que vous obtenez du fournisseur d’identité. Dans ASP.NET Core, vous pouvez effectuer une transformation des revendications à l’intérieur de l’événement **AuthenticationValidated** à partir du middleware OpenID Connect. (Consultez la page [Authentication events].)
+Pendant le flux d’authentification, vous pouvez modifier les revendications que vous obtenez du fournisseur d’identité. Dans ASP.NET Core, vous pouvez effectuer une transformation des revendications à l’intérieur de l’événement **AuthenticationValidated** à partir du middleware OpenID Connect. (Consultez la page [Événements d’authentification].)
 
 Toutes les revendications que vous ajoutez pendant **AuthenticationValidated** sont stockées dans le cookie d’authentification de session. Elles ne font pas l’objet d’une transmission de type push à Azure AD.
 
@@ -117,10 +117,10 @@ Pour en savoir plus, consultez [Autorisation basée sur les ressources et les r�
 
 <!-- Links -->
 
-[paramètre d’étendue]: http://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/
+[paramètre d’étendue]: https://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/
 [Types de jeton et de revendication pris en charge]: /azure/active-directory/active-directory-token-and-claims/
-[Émetteur]: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
-[Authentication events]: authenticate.md#authentication-events
+[Émetteur]: https://openid.net/specs/openid-connect-core-1_0.html#IDToken
+[Événements d’authentification]: authenticate.md#authentication-events
 [signup]: signup.md
 [Claims-Based Authorization]: /aspnet/core/security/authorization/claims
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance
