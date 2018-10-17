@@ -6,18 +6,18 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: token-cache
 pnp.series.next: client-assertion
-ms.openlocfilehash: 08bf567085a940287de310f61b9f447d0ce5d5ec
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.openlocfilehash: 4b54f031d13449e4d87075af5606967da8b5d3df
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/23/2018
-ms.locfileid: "29477442"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428922"
 ---
 # <a name="federate-with-a-customers-ad-fs"></a>Se fédérer avec les services AD FS d’un client
 
 Il décrit comment une application SaaS mutualisée peut prendre en charge l’authentification via Active Directory Federation Services (AD FS), afin de se fédérer avec les services AD FS d’un client.
 
-## <a name="overview"></a>Vue d'ensemble
+## <a name="overview"></a>Vue d’ensemble
 Azure Active Directory (Azure AD) vous permet de connecter des utilisateurs à partir de clients Azure AD, y compris de clients Office 365 et Dynamics CRM Online. Mais qu’en est-il des clients qui utilisent Active Directory localement sur un intranet d’entreprise ?
 
 Pour eux, l’une des possibilités consiste à synchroniser leur Active Directory local avec Azure AD, à l’aide d’ [Azure AD Connect]. Cependant, certains clients sont parfois dans l’incapacité d’utiliser cette approche, à cause d’une stratégie informatique de l’entreprise ou d’autres raisons. Dans ce cas, l’autre possibilité consiste à assurer une fédération à l’aide d’Active Directory Federation Services (AD FS).
@@ -56,7 +56,7 @@ Pour obtenir un exemple d’utilisation de WS-Federation avec ASP.NET 4, consul
 ## <a name="limitations"></a>Limites
 Par défaut, l’application par partie de confiance ne reçoit qu’un ensemble fixe de revendications disponibles dans id_token, comme le montre le tableau suivant. Avec AD FS 2016, vous pouvez personnaliser id_token dans les scénarios OpenID Connect. Pour plus d’informations, consultez [Jetons d’ID personnalisés dans AD FS](/windows-server/identity/ad-fs/development/customize-id-token-ad-fs-2016).
 
-| Revendication | DESCRIPTION |
+| Revendication | Description |
 | --- | --- |
 | aud |Audience. L’application pour laquelle les revendications ont été émises. |
 | AuthenticationInstant |[Moment d’authentification]. Heure à laquelle l’authentification s’est produite. |
@@ -180,15 +180,15 @@ Le client doit effectuer les opérations suivantes :
 
 
 <!-- Links -->
-[Azure AD Connect]: /azure/active-directory/active-directory-aadconnect/
+[Azure AD Connect]: /azure/active-directory/hybrid/whatis-hybrid-identity
 [approbation de fédération]: https://technet.microsoft.com/library/cc770993(v=ws.11).aspx
 [partenaire du compte]: https://technet.microsoft.com/library/cc731141(v=ws.11).aspx
 [partenaire de ressources]: https://technet.microsoft.com/library/cc731141(v=ws.11).aspx
 [Moment d’authentification]: https://msdn.microsoft.com/library/system.security.claims.claimtypes.authenticationinstant%28v=vs.110%29.aspx
-[Délai d’expiration]: http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25#section-4.1.
+[Délai d’expiration]: https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25#section-4.1.
 [Identificateur de nom]: https://msdn.microsoft.com/library/system.security.claims.claimtypes.nameidentifier(v=vs.110).aspx
 [active-directory-on-azure]: https://msdn.microsoft.com/library/azure/jj156090.aspx
-[billet de blog]: http://www.cloudidentity.com/blog/2015/08/21/OPENID-CONNECT-WEB-SIGN-ON-WITH-ADFS-IN-WINDOWS-SERVER-2016-TP3/
+[billet de blog]: https://www.cloudidentity.com/blog/2015/08/21/OPENID-CONNECT-WEB-SIGN-ON-WITH-ADFS-IN-WINDOWS-SERVER-2016-TP3/
 [Personnalisation des pages de connexion AD FS]: https://technet.microsoft.com/library/dn280950.aspx
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance
 [client assertion]: client-assertion.md

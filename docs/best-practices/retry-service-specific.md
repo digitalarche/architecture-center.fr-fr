@@ -4,12 +4,12 @@ description: Guide spécifique relatif au service pour définir le mécanisme de
 author: dragon119
 ms.date: 07/13/2016
 pnp.series.title: Best Practices
-ms.openlocfilehash: 790c933458717f2cb4cde0741b1d22f6ae89cc39
-ms.sourcegitcommit: 8ec48a0e2c080c9e2e0abbfdbc463622b28de2f2
+ms.openlocfilehash: c5a9bc99c4693f35c38dabcf07b3465add6a8cb1
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/18/2018
-ms.locfileid: "43016059"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429540"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Guide du mécanisme de nouvelle tentative relatif aux différents services
 
@@ -31,9 +31,9 @@ Le tableau suivant récapitule les fonctionnalités de nouvelle tentative pour l
 | **[Service Bus](#service-bus)** |Native dans le client |Par programme |Gestionnaire d’espace de noms, fabrique de messagerie et client |ETW |
 | **[Service Fabric](#service-fabric)** |Native dans le client |Par programme |Client |Aucun | 
 | **[Base de données SQL avec ADO.NET](#sql-database-using-adonet)** |[Polly](#transient-fault-handling-with-polly) |Déclarative et par programme |Instructions uniques ou blocs de code |Personnalisée |
-| **[Base de données SQL avec Entity Framework](#sql-database-using-entity-framework-6)** |Native dans le client |Par programme |Globale par domaine d’application |Aucun |
-| **[SQL Database avec Entity Framework Core](#sql-database-using-entity-framework-core)** |Native dans le client |Par programme |Globale par domaine d’application |Aucun |
-| **[Stockage](#azure-storage)** |Native dans le client |Par programme |Opérations individuelles et du client |TraceSource |
+| **[Base de données SQL avec Entity Framework](#sql-database-using-entity-framework-6)** |Native dans le client |Par programmation |Globale par domaine d’application |Aucun |
+| **[SQL Database avec Entity Framework Core](#sql-database-using-entity-framework-core)** |Native dans le client |Par programmation |Globale par domaine d’application |Aucun |
+| **[Stockage](#azure-storage)** |Native dans le client |Par programmation |Opérations individuelles et du client |TraceSource |
 
 > [!NOTE]
 > Pour la plupart des mécanismes de nouvelle tentative intégrés Azure, il n’existe actuellement aucune manière d’appliquer une autre stratégie de nouvelle tentative selon le type d’erreur ou d’exception. Vous devez configurer une stratégie qui fournit les performances et la disponibilité moyennes optimales. Une façon d’ajuster la stratégie consiste à analyser les fichiers journaux pour déterminer le type d’erreurs temporaires qui se produisent. 
@@ -149,7 +149,7 @@ La configuration de la stratégie diffère selon le langage. Pour plus d’infor
 ## <a name="azure-redis-cache"></a>Cache Redis Azure
 Cache Redis Azure est un service de cache de faible latence et d’accès aux données rapide basé sur le cache Redis open source connu. Il est sécurisé, géré par Microsoft et accessible à partir de n’importe quelle application dans Azure.
 
-Les instructions de cette section sont basées sur l’utilisation du client StackExchange.Redis pour accéder au cache. Vous trouverez une liste des autres clients appropriés sur le [site web de Redis](http://redis.io/clients), qui peuvent avoir des mécanismes de nouvelle tentative différents.
+Les instructions de cette section sont basées sur l’utilisation du client StackExchange.Redis pour accéder au cache. Vous trouverez une liste des autres clients appropriés sur le [site web de Redis](https://redis.io/clients), qui peuvent avoir des mécanismes de nouvelle tentative différents.
 
 Notez que le client StackExchange.Redis utilise le multiplexage via une connexion unique. L’utilisation recommandée consiste à créer une instance du client au démarrage de l’application et à utiliser cette instance pour toutes les opérations sur le cache. Pour cette raison, la connexion au cache est effectuée une seule fois. Ainsi, toutes les instructions de cette section sont associées à la stratégie de nouvelle tentative pour cette connexion initiale et non pour chaque opération qui accède au cache.
 
@@ -161,7 +161,7 @@ Le client StackExchange.Redis utilise une classe de gestionnaire de connexions q
 - **ConnectTimeout**. Temps d’attente maximal en millisecondes.
 
 ### <a name="policy-configuration"></a>Configuration de la stratégie
-Les stratégies de nouvelle tentative sont configurées par programme en définissant les options pour le client avant de se connecter au cache. Cela peut être effectué en créant une instance de la classe **ConfigurationOptions**, en remplissant ses propriétés et en la transmettant à la méthode **Connect**.
+Les stratégies de nouvelle tentative sont configurées par programmation en définissant les options pour le client avant de se connecter au cache. Cela peut être effectué en créant une instance de la classe **ConfigurationOptions**, en remplissant ses propriétés et en la transmettant à la méthode **Connect**.
 
 Les classes intégrées prennent en charge un délai linéaire (constant) et une interruption exponentielle avec des intervalles avant nouvelle tentative aléatoires. Vous pouvez également créer une stratégie de nouvelle tentative personnalisée en implémentant l’interface **IReconnectRetryPolicy**.
 
@@ -202,7 +202,7 @@ Le tableau suivant présente les paramètres par défaut pour la stratégie de n
 | ConfigurationOptions |ConnectRetry<br /><br />ConnectTimeout<br /><br />SyncTimeout<br /><br />ReconnectRetryPolicy |3<br /><br />5 000 ms maximum plus SyncTimeout<br />1 000<br /><br />LinearRetry 5 000 ms |Le nombre de répétitions de tentatives de connexion pendant l’opération de connexion initiale.<br />Délai d’attente (ms) pour les opérations de connexion. Pas un délai entre chaque tentative.<br />Temps (ms) pour permettre des opérations synchrones.<br /><br />Nouvelle tentative toutes les 5 000 ms.|
 
 > [!NOTE]
-> Dans le cas des opérations synchrones, le paramètre `SyncTimeout` peut augmenter la latence de bout en bout, mais la définition d’une valeur trop faible risque d’entraîner des délais d’expiration excessifs. Consultez l’article [Résolution des problèmes du cache Redis Azure][redis-cache-troubleshoot]. En règle générale, utilisez des opérations asynchrones plutôt que des opérations synchrones. Pour plus d’informations, consultez [Pipelines et multiplexeurs](http://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/PipelinesMultiplexers.md).
+> Dans le cas des opérations synchrones, le paramètre `SyncTimeout` peut augmenter la latence de bout en bout, mais la définition d’une valeur trop faible risque d’entraîner des délais d’expiration excessifs. Consultez l’article [Résolution des problèmes du cache Redis Azure][redis-cache-troubleshoot]. En règle générale, utilisez des opérations asynchrones plutôt que des opérations synchrones. Pour plus d’informations, consultez [Pipelines et multiplexeurs](https://github.com/StackExchange/StackExchange.Redis/blob/master/docs/PipelinesMultiplexers.md).
 >
 >
 
@@ -323,10 +323,10 @@ namespace RetryCodeSamples
 }
 ```
 
-Pour plus d’exemples, consultez [Configuration](http://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Configuration.md#configuration) sur le site web de projet.
+Pour plus d’exemples, consultez [Configuration](https://github.com/StackExchange/StackExchange.Redis/blob/master/docs/Configuration.md) sur le site web de projet.
 
 ### <a name="more-information"></a>Plus d’informations
-* [Site web Redis](http://redis.io/)
+* [Site web Redis](https://redis.io/)
 
 ## <a name="azure-search"></a>Recherche Azure
 Azure Search permet d’ajouter des fonctionnalités de recherche puissantes et sophistiquées à un site web ou une application, d’ajuster rapidement et aisément les résultats de recherche, et de construire des modèles de classement enrichis et optimisés.
@@ -341,17 +341,17 @@ Effectuez le suivi avec ETW ou via l’inscription d’un fournisseur de suivi p
 Service Bus est une plate-forme de messagerie cloud qui propose l’échange de messages d’une façon faiblement couplée avec une amélioration de la mise à l’échelle et de la résilience pour les composants d’une application, si cette dernière est hébergée dans le cloud ou sur site.
 
 ### <a name="retry-mechanism"></a>Mécanisme de nouvelle tentative
-Service Bus met en œuvre des nouvelles tentatives à l’aide d’implémentations de la classe de base [RetryPolicy](http://msdn.microsoft.com/library/microsoft.servicebus.retrypolicy.aspx) . Tous les clients Service Bus exposent une propriété **RetryPolicy** qui peut être définie sur une des implémentations de la classe de base **RetryPolicy**. Les implémentations intégrées sont :
+Service Bus met en œuvre des nouvelles tentatives à l’aide d’implémentations de la classe de base [RetryPolicy](/dotnet/api/microsoft.servicebus.retrypolicy) . Tous les clients Service Bus exposent une propriété **RetryPolicy** qui peut être définie sur une des implémentations de la classe de base **RetryPolicy**. Les implémentations intégrées sont :
 
-* La [classe RetryExponential](http://msdn.microsoft.com/library/microsoft.servicebus.retryexponential.aspx). Elle expose les propriétés qui contrôlent l’intervalle de temporisation, le nombre de nouvelles tentatives et la propriété **TerminationTimeBuffer** utilisée pour limiter la durée totale nécessaire pour terminer l’opération.
-* La [classe NoRetry](http://msdn.microsoft.com/library/microsoft.servicebus.noretry.aspx). Elle est utilisée lorsque de nouvelles tentatives au niveau de l’API Service Bus ne sont pas requises, notamment lorsque les nouvelles tentatives sont gérées par un autre processus dans le cadre d’un lot ou d’une opération en plusieurs étapes.
+* La [classe RetryExponential](/dotnet/api/microsoft.servicebus.retryexponential). Elle expose les propriétés qui contrôlent l’intervalle de temporisation, le nombre de nouvelles tentatives et la propriété **TerminationTimeBuffer** utilisée pour limiter la durée totale nécessaire pour terminer l’opération.
+* La [classe NoRetry](/dotnet/api/microsoft.servicebus.noretry). Elle est utilisée lorsque de nouvelles tentatives au niveau de l’API Service Bus ne sont pas requises, notamment lorsque les nouvelles tentatives sont gérées par un autre processus dans le cadre d’un lot ou d’une opération en plusieurs étapes.
 
 Les actions de Service Bus peuvent renvoyer une plage d’exceptions, comme celles répertoriées dans [Exceptions de messagerie Service Bus](/azure/service-bus-messaging/service-bus-messaging-exceptions). La liste fournit plus d’informations sur ces exceptions si celles-ci indiquent qu’une nouvelle tentative de l’opération est requise. Par exemple, une exception **ServerBusyException** indique que le client doit attendre un certain temps, puis recommencer l’opération. La survenue d’une exception **ServerBusyException** fait également basculer le Service Bus vers un mode différent, dans lequel un délai supplémentaire de 10 secondes est ajouté aux délais de nouvelle tentative calculés. Ce mode est réinitialisé au bout d’une courte période.
 
 Les exceptions renvoyées à partir du Service Bus exposent la propriété **IsTransient** qui indique si le client doit retenter l’opération. La stratégie **RetryExponential** intégrée repose sur la propriété **IsTransient** de la classe **MessagingException**, qui est la classe de base pour toutes les exceptions Service Bus. Si vous créez des implémentations personnalisées de la classe de base **RetryPolicy**, vous pouvez combiner le type d’exception et la propriété **IsTransient** pour permettre un contrôle plus précis des actions liées aux nouvelles tentatives. Par exemple, vous pouvez détecter une exception **QuotaExceededException** et prendre des mesures pour vider la file d’attente avant de tenter de lui renvoyer un message.
 
 ### <a name="policy-configuration"></a>Configuration de la stratégie
-Les stratégies de nouvelle tentative sont définies par programme et peuvent être considérées comme stratégie par défaut pour un **NamespaceManager** et un **MessagingFactory**, ou individuellement pour chaque client de messagerie. Pour définir la stratégie de nouvelle tentative par défaut pour une session de messagerie, vous définissez la propriété **RetryPolicy** de l’élément **NamespaceManager**.
+Les stratégies de nouvelle tentative sont définies par programmation et peuvent être considérées comme stratégie par défaut pour un **NamespaceManager** et un **MessagingFactory**, ou individuellement pour chaque client de messagerie. Pour définir la stratégie de nouvelle tentative par défaut pour une session de messagerie, vous définissez la propriété **RetryPolicy** de l’élément **NamespaceManager**.
 
 ```csharp
 namespaceManager.Settings.RetryPolicy = new RetryExponential(minBackoff: TimeSpan.FromSeconds(0.1),
@@ -392,7 +392,7 @@ Le tableau suivant présente les paramètres par défaut pour la stratégie de n
 Respectez les consignes suivantes lors de l’utilisation de Service Bus :
 
 * Lors de l’utilisation de l’implémentation intégrée de l’élément **RetryExponential** , ne mettez pas en œuvre d’opération de secours dès que la stratégie réagit aux exceptions liées à un serveur occupé et bascule automatiquement vers un mode de nouvelle tentative approprié
-* Service Bus prend en charge une fonctionnalité appelée Espaces de noms associés, qui met en œuvre le basculement automatique vers une file d’attente de sauvegarde dans un espace de noms séparé en cas d’échec de la file d’attente dans l’espace de noms principal. Les messages de la file d’attente secondaire peuvent être renvoyés à la file d’attente principale lors de la récupération Cette fonctionnalité permet de traiter les erreurs temporaires. Pour plus d’informations, consultez [Modèles de messagerie asynchrone et haute disponibilité](http://msdn.microsoft.com/library/azure/dn292562.aspx).
+* Service Bus prend en charge une fonctionnalité appelée Espaces de noms associés, qui met en œuvre le basculement automatique vers une file d’attente de sauvegarde dans un espace de noms séparé en cas d’échec de la file d’attente dans l’espace de noms principal. Les messages de la file d’attente secondaire peuvent être renvoyés à la file d’attente principale lors de la récupération Cette fonctionnalité permet de traiter les erreurs temporaires. Pour plus d’informations, consultez [Modèles de messagerie asynchrone et haute disponibilité](/azure/service-bus-messaging/service-bus-async-messaging).
 
 Pensez à commencer par les paramètres suivants pour les opérations liées aux nouvelles tentatives. Il s’agit de paramètres généraux. Vous devez par conséquent surveiller les opérations et optimiser les valeurs en fonction de votre propre scénario.
 
@@ -510,7 +510,7 @@ namespace RetryCodeSamples
 ```
 
 ### <a name="more-information"></a>Plus d’informations
-* [Modèles de messagerie asynchrone et haute disponibilité](http://msdn.microsoft.com/library/azure/dn292562.aspx)
+* [Modèles de messagerie asynchrone et haute disponibilité](/azure/service-bus-messaging/service-bus-async-messaging)
 
 ## <a name="service-fabric"></a>Service Fabric
 
@@ -551,10 +551,10 @@ Vous pouvez utiliser la bibliothèque Polly afin d’implémenter le mécanisme 
 Respectez les consignes suivantes lorsque vous accédez à la base de données SQL à l’aide d’ADO.NET :
 
 * Choisissez l’option de service appropriée (partagée ou premium). Une instance partagée peut être soumise à des délais de connexion plus longs que d’ordinaire et à des limitations en raison de l’utilisation du serveur partagé par d’autres locataires. Si des performances prévisibles et des opérations fiables à faible latence sont requises, pensez à choisir l’option premium.
-* Veillez à effectuer de nouvelles tentatives au niveau ou à l’étendue qui convient pour éviter les opérations non idempotent à l’origine d’une incohérence dans les données. Idéalement, toutes les opérations doivent être idempotent afin qu’elles puissent être répétées sans entraîner d’incohérence. Lorsque cela n’est pas le cas, la nouvelle tentative doit être effectuée à un niveau ou à une étendue qui autorise l’annulation de toutes les modifications associées en cas d’échec d’une opération ; par exemple, depuis une étendue transactionnelle. Pour plus d’informations, consultez [Couche d’accès aux données de Cloud Service Fundamentals - Gestion des erreurs temporaires](http://social.technet.microsoft.com/wiki/contents/articles/18665.cloud-service-fundamentals-data-access-layer-transient-fault-handling.aspx#Idempotent_Guarantee).
+* Veillez à effectuer de nouvelles tentatives au niveau ou à l’étendue qui convient pour éviter les opérations non idempotent à l’origine d’une incohérence dans les données. Idéalement, toutes les opérations doivent être idempotent afin qu’elles puissent être répétées sans entraîner d’incohérence. Lorsque cela n’est pas le cas, la nouvelle tentative doit être effectuée à un niveau ou à une étendue qui autorise l’annulation de toutes les modifications associées en cas d’échec d’une opération ; par exemple, depuis une étendue transactionnelle. Pour plus d’informations, consultez [Couche d’accès aux données de Cloud Service Fundamentals - Gestion des erreurs temporaires](https://social.technet.microsoft.com/wiki/contents/articles/18665.cloud-service-fundamentals-data-access-layer-transient-fault-handling.aspx#Idempotent_Guarantee).
 * Une stratégie d’intervalle fixe n’est pas recommandée pour une utilisation avec la base de données SQL Azure à l’exception des scénarios interactifs comportant seulement quelques nouvelles tentatives à intervalles très courts. Envisagez plutôt d’utiliser une stratégie de temporisation exponentielle pour la majorité des scénarios.
 * Choisissez une valeur appropriée pour les délais d’attente de connexion et de commande lors de la définition des connexions. Un délai d’attente trop court peut entraîner des échecs de connexion prématurés lorsque la base de données est occupée. Un délai d’attente trop long peut empêcher la logique de nouvelle tentative de fonctionner correctement en attendant trop longtemps avant la détection d’un échec de connexion. La valeur du délai d’attente est un composant de la latence de bout en bout ; Il est en fait ajouté au délai de nouvelle tentative spécifié dans la stratégie de nouvelle tentative pour chaque nouvelle tentative.
-* Fermez la connexion après un certain nombre de nouvelles tentatives, même lorsque vous utilisez une logique de nouvelle tentative à temporisation exponentielle et renouvelez l’opération sur une nouvelle connexion. Le fait d’effectuer la même opération à plusieurs reprises sur la même connexion peut être un facteur entraînant des problèmes de connexion. Pour voir un exemple de cette technique, consultez [Couche d’accès aux données de Cloud Service Fundamentals - Gestion des erreurs temporaires](http://social.technet.microsoft.com/wiki/contents/articles/18665.cloud-service-fundamentals-data-access-layer-transient-fault-handling.aspx).
+* Fermez la connexion après un certain nombre de nouvelles tentatives, même lorsque vous utilisez une logique de nouvelle tentative à temporisation exponentielle et renouvelez l’opération sur une nouvelle connexion. Le fait d’effectuer la même opération à plusieurs reprises sur la même connexion peut être un facteur entraînant des problèmes de connexion. Pour voir un exemple de cette technique, consultez [Couche d’accès aux données de Cloud Service Fundamentals - Gestion des erreurs temporaires](https://social.technet.microsoft.com/wiki/contents/articles/18665.cloud-service-fundamentals-data-access-layer-transient-fault-handling.aspx).
 * Lorsque le regroupement de connexions est en cours d’utilisation (par défaut), il est probable que la même connexion sera choisie à partir du pool, même après la fermeture et la réouverture d’une connexion. Si c’est le cas, une technique permettant de résoudre ce problème consiste à appeler la méthode **ClearPool** de la classe **SqlConnection** pour marquer la connexion comme n’étant pas réutilisable. Toutefois, vous ne devez effectuer cette opération qu’après l’échec de plusieurs tentatives de connexion, et uniquement lorsque vous rencontrez la classe spécifique d’erreurs temporaires, relative notamment à des délais d’attente SQL (code d’erreur -2) liés à des connexions défectueuses.
 * Si le code d’accès aux données utilise des transactions lancées en tant qu’instances **TransactionScope** , la logique de nouvelle tentative doit ouvrir de nouveau la connexion et lancer une nouvelle étendue de transaction. Pour cette raison, le bloc de code renouvelable doit englober l’ensemble de la portée de la transaction.
 
@@ -614,15 +614,15 @@ using (var reader = await sqlCommand.ExecuteReaderWithRetryAsync())
 ```
 
 ### <a name="more-information"></a>Plus d’informations
-* [Couche d’accès aux données de Cloud Service Fundamentals - Gestion des erreurs temporaires](http://social.technet.microsoft.com/wiki/contents/articles/18665.cloud-service-fundamentals-data-access-layer-transient-fault-handling.aspx)
+* [Couche d’accès aux données de Cloud Service Fundamentals - Gestion des erreurs temporaires](https://social.technet.microsoft.com/wiki/contents/articles/18665.cloud-service-fundamentals-data-access-layer-transient-fault-handling.aspx)
 
-Pour obtenir des conseils généraux sur le moyen de tirer le meilleur parti de SQL Database, consultez l’article [Azure SQL Database Performance and Elasticity Guide (Guide relatif à l’élasticité et aux performances d’Azure SQL Database)](http://social.technet.microsoft.com/wiki/contents/articles/3507.windows-azure-sql-database-performance-and-elasticity-guide.aspx).
+Pour obtenir des conseils généraux sur le moyen de tirer le meilleur parti de SQL Database, consultez l’article [Azure SQL Database Performance and Elasticity Guide (Guide relatif à l’élasticité et aux performances d’Azure SQL Database)](https://social.technet.microsoft.com/wiki/contents/articles/3507.windows-azure-sql-database-performance-and-elasticity-guide.aspx).
 
 ## <a name="sql-database-using-entity-framework-6"></a>Base de données SQL utilisant Entity Framework 6
 La base de données SQL est une base de données SQL hébergée disponible en différentes tailles et sous forme de service standard (partagé) et premium (non partagé). Entity Framework est un mappeur relationnel objet qui permet aux développeurs .NET de travailler avec des données relationnelles à l’aide d’objets spécifiques de domaine. Il élimine le recours à la plupart du code d’accès aux données que les développeurs doivent généralement écrire.
 
 ### <a name="retry-mechanism"></a>Mécanisme de nouvelle tentative
-La prise en charge de la fonctionnalité de nouvelle tentative est assurée lors de l’accès à la base de données SQL à l’aide d’Entity Framework 6.0 et version supérieure via un mécanisme appelé [Résilience des connexions/logique de nouvelle tentative](http://msdn.microsoft.com/data/dn456835.aspx). Les principales fonctionnalités de ce mécanisme sont :
+La prise en charge de la fonctionnalité de nouvelle tentative est assurée lors de l’accès à la base de données SQL à l’aide d’Entity Framework 6.0 et version supérieure via un mécanisme appelé [Résilience des connexions/logique de nouvelle tentative](/ef/ef6/fundamentals/connection-resiliency/retry-logic). Les principales fonctionnalités de ce mécanisme sont :
 
 * L’abstraction principale est l’interface **IDbExecutionStrategy** . Cette interface :
   * Définit les méthodes synchrones et asynchrones **Execute** \*.
@@ -637,7 +637,7 @@ La prise en charge de la fonctionnalité de nouvelle tentative est assurée lors
 * Si le nombre de tentatives spécifié est dépassé, les résultats sont inclus dans une nouvelle exception. Il ne se propage pas dans l’exception en cours.
 
 ### <a name="policy-configuration"></a>Configuration de la stratégie
-La prise en charge de la nouvelle tentative est assurée lors de l’accès à la base de données SQL à l’aide d’Entity Framework 6.0 et versions ultérieures. Les stratégies de nouvelle tentative sont configurées par programme. La configuration ne peut pas être modifiée opération par opération.
+La prise en charge de la nouvelle tentative est assurée lors de l’accès à la base de données SQL à l’aide d’Entity Framework 6.0 et versions ultérieures. Les stratégies de nouvelle tentative sont configurées par programmation. La configuration ne peut pas être modifiée opération par opération.
 
 Lorsque vous configurez une stratégie sur le contexte comme stratégie par défaut, vous définissez une fonction qui crée une nouvelle stratégie à la demande. Le code suivant montre comment vous pouvez créer une classe de configuration de nouvelle tentative qui étend la classe de base **DbConfiguration** .
 
@@ -666,7 +666,7 @@ Vous pouvez spécifier la classe de configuration de nouvelle tentative pour un 
 public class BloggingContext : DbContext
 ```
 
-Si vous devez utiliser des stratégies de nouvelle tentative différentes pour des opérations spécifiques ou désactiver des nouvelles tentatives pour des opérations spécifiques, vous pouvez créer une classe de configuration qui vous permet de suspendre ou d’échanger des stratégies en définissant un indicateur dans le **CallContext**. La classe de configuration peut utiliser cet indicateur pour changer de stratégie ou désactiver la stratégie indiquée et utilisée comme stratégie par défaut. Pour plus d’informations, consultez [Suspendre la stratégie d’exécution](http://msdn.microsoft.com/dn307226#transactions_workarounds) dans la page de Restrictions liées aux stratégies d’exécution de nouvelle tentative (Entity Framework 6 et versions supérieures).
+Si vous devez utiliser des stratégies de nouvelle tentative différentes pour des opérations spécifiques ou désactiver des nouvelles tentatives pour des opérations spécifiques, vous pouvez créer une classe de configuration qui vous permet de suspendre ou d’échanger des stratégies en définissant un indicateur dans le **CallContext**. La classe de configuration peut utiliser cet indicateur pour changer de stratégie ou désactiver la stratégie indiquée et utilisée comme stratégie par défaut. Pour plus d’informations, consultez [Suspendre la stratégie d’exécution](/ef/ef6/fundamentals/connection-resiliency/retry-logic#workaround-suspend-execution-strategy) (Entity Framework 6 et versions ultérieures).
 
 Une autre technique d’utilisation de stratégies de nouvelle tentative spécifiques pour des opérations individuelles consiste à créer une instance de la classe de stratégie requise et à fournir la configuration requise au moyen de paramètres. Vous pouvez ensuite faire appel à sa méthode **ExecuteAsync** .
 
@@ -686,7 +686,7 @@ var blogs = await executionStrategy.ExecuteAsync(
 
 La façon la plus simple d’utiliser une classe **DbConfiguration** consiste à la localiser dans le même assembly que la classe **DbContext**. Toutefois, cela n’est pas approprié lorsque le même contexte est requis dans différents scénarios, comme dans le cas de stratégies de nouvelle tentative en arrière-plan et interactives. Si les différents contextes s’exécutent dans un AppDomain séparé, vous pouvez utiliser la prise en charge intégrée pour spécifier des classes de configuration dans le fichier de configuration ou la définir explicitement à l’aide de code. Si les différents contextes doivent s’exécuter dans le même AppDomain, une solution personnalisée sera nécessaire.
 
-Pour plus d’informations, consultez [Configuration basée sur le code (Entity Framework 6 et versions supérieures)](http://msdn.microsoft.com/data/jj680699.aspx).
+Pour plus d’informations, consultez [Configuration basée sur le code](/ef/ef6/fundamentals/configuring/code-based) (Entity Framework 6 et versions supérieures).
 
 Le tableau suivant présente les paramètres par défaut pour la stratégie de nouvelle tentative intégrée lors de l’utilisation d’Entity Framework 6.
 
@@ -705,7 +705,7 @@ Respectez les consignes suivantes lorsque vous accédez à la base de données S
 * Choisissez l’option de service appropriée (partagée ou premium). Une instance partagée peut être soumise à des délais de connexion plus longs que d’ordinaire et à des limitations en raison de l’utilisation du serveur partagé par d’autres locataires. Si des performances prévisibles et des opérations fiables à faible latence sont requises, pensez à choisir l’option premium.
 * Une stratégie d’intervalle fixe n’est pas recommandée pour une utilisation avec la base de données SQL Azure. Utilisez plutôt une stratégie de temporisation exponentielle car le service peut être surchargé et des délais plus longs laissent davantage de temps de récupération.
 * Choisissez une valeur appropriée pour les délais d’attente de connexion et de commande lors de la définition des connexions. Basez le délai d’attente à la fois sur la conception de la logique métier et sur les tests. Vous devrez peut-être modifier cette valeur au fil du temps en fonction de l’évolution des volumes de données ou des processus d’entreprise. Un délai d’attente trop court peut entraîner des échecs de connexion prématurés lorsque la base de données est occupée. Un délai d’attente trop long peut empêcher la logique de nouvelle tentative de fonctionner correctement en attendant trop longtemps avant la détection d’un échec de connexion. La valeur d’expiration est un composant de la latence de bout en bout, bien que vous ne puissiez pas aisément déterminer le nombre de commandes qui seront exécutées lors de l’enregistrement du contexte. Vous pouvez modifier le délai d’attente par défaut en définissant la propriété **CommandTimeout** de l’instance **DbContext**.
-* Entity Framework prend en charge les configurations de nouvelle tentative définies dans les fichiers de configuration. Toutefois, pour une flexibilité maximale sur Azure, vous devez envisager la création de la configuration par programme au sein de l’application. Les paramètres spécifiques pour les stratégies de nouvelle tentative, tels que le nombre de nouvelles tentatives et les intervalles, peuvent être stockés dans le fichier de configuration du service et être utilisés en cours d’exécution pour créer les stratégies appropriées. Cela permet de modifier les paramètres sans avoir à redémarrer l’application.
+* Entity Framework prend en charge les configurations de nouvelle tentative définies dans les fichiers de configuration. Toutefois, pour une flexibilité maximale sur Azure, vous devez envisager la création de la configuration par programmation au sein de l’application. Les paramètres spécifiques pour les stratégies de nouvelle tentative, tels que le nombre de nouvelles tentatives et les intervalles, peuvent être stockés dans le fichier de configuration du service et être utilisés en cours d’exécution pour créer les stratégies appropriées. Cela permet de modifier les paramètres sans avoir à redémarrer l’application.
 
 Pensez à commencer par les paramètres ci-après pour les opérations liées aux nouvelles tentatives. Vous ne pouvez pas spécifier le délai entre chaque nouvelle tentative (il est fixe et généré sous la forme d’une séquence exponentielle). Vous ne pouvez spécifier que les valeurs maximales, comme indiqué ici, sauf si vous créez une stratégie de nouvelle tentative personnalisée. Il s’agit de paramètres généraux. Vous devez par conséquent surveiller les opérations et optimiser les valeurs en fonction de votre propre scénario.
 
@@ -765,10 +765,10 @@ namespace RetryCodeSamples
 }
 ```
 
-Vous trouverez plusieurs exemples d’utilisation du mécanisme de nouvelle tentative d’Entity Framework dans [Résilience des connexions/logique de nouvelle tentative](http://msdn.microsoft.com/data/dn456835.aspx).
+Vous trouverez plusieurs exemples d’utilisation du mécanisme de nouvelle tentative d’Entity Framework dans [Résilience des connexions/logique de nouvelle tentative](/ef/ef6/fundamentals/connection-resiliency/retry-logic).
 
 ### <a name="more-information"></a>Plus d’informations
-* [Guide relatif à l’élasticité et aux performances de la base de données SQL Azure](http://social.technet.microsoft.com/wiki/contents/articles/3507.windows-azure-sql-database-performance-and-elasticity-guide.aspx)
+* [Guide relatif à l’élasticité et aux performances de la base de données SQL Azure](https://social.technet.microsoft.com/wiki/contents/articles/3507.windows-azure-sql-database-performance-and-elasticity-guide.aspx)
 
 ## <a name="sql-database-using-entity-framework-core"></a>Base de données SQL utilisant Entity Framework Core
 [Entity Framework Core](/ef/core/) est un mappeur Objet Relationnel qui permet aux développeurs .NET Core de travailler avec des données à l’aide d’objets spécifiques du domaine. Il élimine le recours à la plupart du code d’accès aux données que les développeurs doivent généralement écrire. Cette version d’Entity Framework a été écrite à partir de zéro et n’hérite pas automatiquement de toutes les fonctionnalités d’EF6.x.
@@ -803,10 +803,10 @@ using (var db = new BloggingContext())
     {
         using (var transaction = db.Database.BeginTransaction())
         {
-            db.Blogs.Add(new Blog { Url = "http://blogs.msdn.com/dotnet" });
+            db.Blogs.Add(new Blog { Url = "https://blogs.msdn.com/dotnet" });
             db.SaveChanges();
 
-            db.Blogs.Add(new Blog { Url = "http://blogs.msdn.com/visualstudio" });
+            db.Blogs.Add(new Blog { Url = "https://blogs.msdn.com/visualstudio" });
             db.SaveChanges();
 
             transaction.Commit();
@@ -819,13 +819,13 @@ using (var db = new BloggingContext())
 Les services de stockage Azure incluent le stockage des tables et des objets blob, les fichiers et les files d’attente de stockage.
 
 ### <a name="retry-mechanism"></a>Mécanisme de nouvelle tentative
-Les nouvelles tentatives se produisent au niveau de chaque opération REST et font partie intégrante de l’implémentation de l’API client. Le kit de développement logiciel (SDK) de stockage client utilise des classes qui implémentent l’ [interface IExtendedRetryPolicy](http://msdn.microsoft.com/library/microsoft.windowsazure.storage.retrypolicies.iextendedretrypolicy.aspx).
+Les nouvelles tentatives se produisent au niveau de chaque opération REST et font partie intégrante de l’implémentation de l’API client. Le kit de développement logiciel (SDK) de stockage client utilise des classes qui implémentent l’ [interface IExtendedRetryPolicy](/dotnet/api/microsoft.windowsazure.storage.retrypolicies.iextendedretrypolicy).
 
 Il existe différentes implémentations de l’interface. Les clients de stockage peuvent choisir parmi les stratégies spécialement conçues pour l’accès à des tables, des objets BLOB et des files d’attente. Chaque implémentation utilise une stratégie de nouvelle tentative différente qui définit essentiellement l’intervalle avant une nouvelle tentative et d’autres détails.
 
 Les classes intégrées prennent en charge la stratégie linéaire (délai constant) et exponentielle avec répartition aléatoire des intervalles entre chaque nouvelle tentative. Il n’existe également aucune stratégie de nouvelle tentative à utiliser lorsqu’un autre processus gère les nouvelles tentatives à un niveau supérieur. Toutefois, vous pouvez implémenter vos propres classes de nouvelle tentative si vous avez des exigences spécifiques non fournies par les classes intégrées.
 
-Les autres alternatives passent d’un emplacement de service de stockage principal à un emplacement de service de stockage secondaire si vous utilisez le stockage géo-redondant avec accès en lecture (RA-GRS) et que le résultat de la demande est une erreur renouvelable. Pour plus d’informations, consultez [Options de redondance du stockage Azure](http://msdn.microsoft.com/library/azure/dn727290.aspx) .
+Les autres alternatives passent d’un emplacement de service de stockage principal à un emplacement de service de stockage secondaire si vous utilisez le stockage géo-redondant avec accès en lecture (RA-GRS) et que le résultat de la demande est une erreur renouvelable. Pour plus d’informations, consultez [Options de redondance du stockage Azure](/azure/storage/common/storage-redundancy) .
 
 ### <a name="policy-configuration"></a>Configuration de la stratégie
 Les stratégies de nouvelle tentative sont configurées par programme. Une procédure classique consiste à créer et remplir une instance **TableRequestOptions**, **BlobRequestOptions**, **FileRequestOptions** ou **QueueRequestOptions**.
@@ -872,7 +872,7 @@ context.RequestCompleted += (sender, args) =>
 var stats = await client.GetServiceStatsAsync(null, context);
 ```
 
-En plus d’indiquer si un échec donne droit à une nouvelle tentative, les stratégies de nouvelle tentative étendues renvoient un objet **RetryContext** indiquant le nombre de nouvelles tentatives, les résultats de la dernière demande, et si la tentative suivante se déroulera dans l’emplacement principal ou secondaire (voir le tableau ci-dessous pour plus d’informations). Les propriétés de l’objet **RetryContext** peuvent être utilisées pour décider de l’éventualité d’une nouvelle tentative et du moment où elle doit se dérouler. Pour plus d’informations, reportez-vous à la [méthode IExtendedRetryPolicy.Evaluate](http://msdn.microsoft.com/library/microsoft.windowsazure.storage.retrypolicies.iextendedretrypolicy.evaluate.aspx).
+En plus d’indiquer si un échec donne droit à une nouvelle tentative, les stratégies de nouvelle tentative étendues renvoient un objet **RetryContext** indiquant le nombre de nouvelles tentatives, les résultats de la dernière demande, et si la tentative suivante se déroulera dans l’emplacement principal ou secondaire (voir le tableau ci-dessous pour plus d’informations). Les propriétés de l’objet **RetryContext** peuvent être utilisées pour décider de l’éventualité d’une nouvelle tentative et du moment où elle doit se dérouler. Pour plus d’informations, reportez-vous à la [méthode IExtendedRetryPolicy.Evaluate](/dotnet/api/microsoft.windowsazure.storage.retrypolicies.iextendedretrypolicy.evaluate).
 
 Les tableaux ci-après présentent les paramètres par défaut pour les stratégies de nouvelle tentative intégrées.
 
@@ -918,9 +918,9 @@ Pensez à commencer par les paramètres suivants pour les opérations liées aux
 | Arrière-plan<br />ou lot |30 secondes |Exponentielle |maxAttempt<br />deltaBackoff |5.<br />4 secondes |Tentative 1 - délai ~3 sec<br />Tentative 2 - délai ~7 sec<br />Tentative 3 - délai ~15 sec |
 
 ### <a name="telemetry"></a>Télémétrie
-Les nouvelles tentatives sont enregistrées dans un **TraceSource**. Vous devez configurer un **TraceListener** pour capturer les événements et les écrire dans un journal de destination approprié. Vous pouvez utiliser le **TextWriterTraceListener** ou **XmlWriterTraceListener** pour écrire les données dans un fichier journal, le **EventLogTraceListener** pour écrire dans le journal des événements Windows, ou le **EventProviderTraceListener** pour écrire les données de trace dans le sous-système ETW. Vous pouvez également configurer le vidage automatique de la mémoire tampon et le niveau de détail des événements qui seront enregistrés (par exemple, erreur, avertissement, information et informations détaillées). Pour plus d’informations, consultez [Journalisation côté client avec la bibliothèque cliente de stockage .NET](http://msdn.microsoft.com/library/azure/dn782839.aspx).
+Les nouvelles tentatives sont enregistrées dans un **TraceSource**. Vous devez configurer un **TraceListener** pour capturer les événements et les écrire dans un journal de destination approprié. Vous pouvez utiliser le **TextWriterTraceListener** ou **XmlWriterTraceListener** pour écrire les données dans un fichier journal, le **EventLogTraceListener** pour écrire dans le journal des événements Windows, ou le **EventProviderTraceListener** pour écrire les données de trace dans le sous-système ETW. Vous pouvez également configurer le vidage automatique de la mémoire tampon et le niveau de détail des événements qui seront enregistrés (par exemple, erreur, avertissement, information et informations détaillées). Pour plus d’informations, consultez [Journalisation côté client avec la bibliothèque cliente de stockage .NET](/rest/api/storageservices/Client-side-Logging-with-the-.NET-Storage-Client-Library).
 
-Les opérations peuvent recevoir une instance **OperationContext**, qui expose un événement **Retrying** pouvant être utilisé pour associer la logique personnalisée de télémétrie. Pour plus d’informations, consultez [OperationContext.Retrying Event](http://msdn.microsoft.com/library/microsoft.windowsazure.storage.operationcontext.retrying.aspx).
+Les opérations peuvent recevoir une instance **OperationContext**, qui expose un événement **Retrying** pouvant être utilisé pour associer la logique personnalisée de télémétrie. Pour plus d’informations, consultez [OperationContext.Retrying Event](/dotnet/api/microsoft.windowsazure.storage.operationcontext.retrying).
 
 ### <a name="examples"></a>Exemples
 L’exemple de code suivant montre comment créer deux instances **TableRequestOptions** avec des paramètres de nouvelle tentative différents ; une pour les demandes interactives et une pour les demandes d’arrière-plan. L’exemple définit ensuite ces deux jeux stratégies de nouvelle tentative sur le client de sorte qu’elles s’appliquent à toutes les demandes et définit également la stratégie interactive sur une demande spécifique afin qu’elle remplace les paramètres par défaut appliqués au client.
@@ -1000,7 +1000,7 @@ namespace RetryCodeSamples
 
 ### <a name="more-information"></a>Plus d’informations
 * [Recommandations de stratégie de nouvelle tentative de Bibliothèque cliente de stockage Azure](https://azure.microsoft.com/blog/2014/05/22/azure-storage-client-library-retry-policy-recommendations/)
-* [Bibliothèque cliente de stockage 2.0 - Mise en œuvre de stratégies de nouvelle tentative](http://gauravmantri.com/2012/12/30/storage-client-library-2-0-implementing-retry-policies/)
+* [Bibliothèque cliente de stockage 2.0 - Mise en œuvre de stratégies de nouvelle tentative](https://gauravmantri.com/2012/12/30/storage-client-library-2-0-implementing-retry-policies/)
 
 ## <a name="general-rest-and-retry-guidelines"></a>Instructions générales relatives aux nouvelles tentatives et à REST
 Prenez en compte les éléments suivants lors de l’accès aux services Azure ou tiers :

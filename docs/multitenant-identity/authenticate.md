@@ -6,12 +6,12 @@ ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: tailspin
 pnp.series.next: claims
-ms.openlocfilehash: e85817626675cec4d126921c19a31a0983ecd62d
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.openlocfilehash: 70f4a96369c207740400b9dfe72e1e964507f729
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2017
-ms.locfileid: "26359253"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47428123"
 ---
 # <a name="authenticate-using-azure-ad-and-openid-connect"></a>S’authentifier avec Azure AD et OpenID Connect
 
@@ -61,7 +61,7 @@ app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions {
 Notez que certains paramètres sont tirés des options de configuration du runtime. Les options du middleware ont la signification suivante :
 
 * **ClientId**. ID client de l’application que vous avez obtenu lors de l’inscription de l’application dans Azure AD.
-* **Authority**. Pour une application mutualisée, définissez ce paramètre sur `https://login.microsoftonline.com/common/`. Il s’agit de l’URL du point de terminaison commun d’Azure AD, qui permet aux utilisateurs de n’importe quel client Azure AD de se connecter. Pour plus d’informations sur le point de terminaison commun, consultez [ce billet de blog](http://www.cloudidentity.com/blog/2014/08/26/the-common-endpoint-walks-like-a-tenant-talks-like-a-tenant-but-is-not-a-tenant/).
+* **Authority**. Pour une application mutualisée, définissez ce paramètre sur `https://login.microsoftonline.com/common/`. Il s’agit de l’URL du point de terminaison commun d’Azure AD, qui permet aux utilisateurs de n’importe quel client Azure AD de se connecter. Pour plus d’informations sur le point de terminaison commun, consultez [ce billet de blog](https://www.cloudidentity.com/blog/2014/08/26/the-common-endpoint-walks-like-a-tenant-talks-like-a-tenant-but-is-not-a-tenant/).
 * Dans **TokenValidationParameters**, définissez **ValidateIssuer** avec la valeur false. Cela signifie que l’application sera chargée de valider la valeur de l’émetteur dans le jeton d’ID. (Le middleware continue de valider le jeton proprement dit.) Pour plus d’informations sur la validation de l’émetteur, consultez [Validation de l’émetteur](claims.md#issuer-validation).
 * **PostLogoutRedirectUri**. Spécifiez une URL de redirection des utilisateurs après leur déconnexion. Il doit s’agir d’une page qui autorise les demandes anonymes (en règle générale, la page d’accueil).
 * **SignInScheme**. Définissez cette propriété sur `CookieAuthenticationDefaults.AuthenticationScheme`. Ce paramètre signifie qu’une fois que l’utilisateur est authentifié, les revendications d’utilisateur sont stockées localement dans un cookie. Ce cookie représente la façon dont l’utilisateur reste connecté pendant la session de navigateur.

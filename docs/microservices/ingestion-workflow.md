@@ -3,12 +3,12 @@ title: Ingestion et workflow dans les microservices
 description: Ingestion et workflow dans les microservices
 author: MikeWasson
 ms.date: 12/08/2017
-ms.openlocfilehash: 6477c3f2b0cc6d37dcd4637dc0dde4f7a6e3cc74
-ms.sourcegitcommit: 94c769abc3d37d4922135ec348b5da1f4bbcaa0a
+ms.openlocfilehash: 1851d979ed23b35046474f299128064d1abb375e
+ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/13/2017
-ms.locfileid: "26678728"
+ms.lasthandoff: 09/28/2018
+ms.locfileid: "47429483"
 ---
 # <a name="designing-microservices-ingestion-and-workflow"></a>Conception de microservices : ingestion et workflow
 
@@ -58,7 +58,7 @@ Dans le cadre de l’utilisation d’une file d’attente, un consommateur spéc
 
 En revanche, Event Hubs utilise une sémantique de diffusion en continu. Les consommateurs lisent le flux de manière indépendante à leur propre rythme. Chaque consommateur est chargé d’assurer le suivi de sa position actuelle dans le flux. Un consommateur doit écrire sa position actuelle dans le stockage persistant à intervalle régulier prédéfini. De cette façon, si le consommateur rencontre une erreur (par exemple, blocage du consommateur ou échec de l’hôte), une nouvelle instance peut reprendre la lecture du flux à partir de la dernière position enregistrée. Ce processus est désigné sous le terme de *création de points de contrôle*. 
 
-Pour des raisons de performances, un consommateur ne crée généralement pas de point de contrôle après chaque message. À la place, il effectue cette opération à intervalle régulier, par exemple après le traitement de *n* messages, ou toutes les *n* secondes. Par conséquent, en cas d’échec d’un consommateur, il est possible que certains événements soient traités deux fois, car une nouvelle instance repart toujours du dernier point de contrôle. Cette approche implique de trouver un juste équilibre : des points de contrôle fréquents peuvent nuire aux performances, mais des points de contrôle trop rares nécessiteront la relecture d’un plus grand nombre d’événements après un échec.  
+Pour des raisons de performances, un consommateur ne crée généralement pas de point de contrôle après chaque message. À la place, il effectue cette opération à intervalle régulier, par exemple après le traitement de *n* messages ou toutes les *n* secondes. Par conséquent, en cas d’échec d’un consommateur, il est possible que certains événements soient traités deux fois, car une nouvelle instance repart toujours du dernier point de contrôle. Cette approche implique de trouver un juste équilibre : des points de contrôle fréquents peuvent nuire aux performances, mais des points de contrôle trop rares nécessiteront la relecture d’un plus grand nombre d’événements après un échec.  
 
 ![](./images/stream-semantics.png)
  
@@ -83,7 +83,7 @@ Dans l’application de livraison par drone, un lot de messages peut être trait
 
 ### <a name="iothub-react"></a>IotHub React 
 
-[IotHub React](https://github.com/Azure/toketi-iothubreact) est une bibliothèque Akka Streams pour la lecture d’événements issus d’Event Hubs. Akka Streams est une infrastructure de programmation basée sur des flux qui implémente la spécification [Reactive Streams](http://www.reactive-streams.org/). Elle permet de générer des pipelines de diffusion en continu efficaces, dans le cadre desquels toutes les opérations de diffusion en continu sont exécutées de manière asynchrone, et où les pipelines gèrent la régulation de flux de manière appropriée. Une régulation de flux se produit lorsqu’une source d’événements produit des événements plus rapidement que les consommateurs en aval ne peuvent les recevoir &mdash; ce qui est précisément le cas lorsque le système de livraison par drone rencontre un pic de trafic. Si les services principaux fonctionnent moins rapidement, IoTHub React ralentira. Si la capacité est accrue, IoTHub React transmettra (push) davantage de messages par le biais du pipeline.
+[IotHub React](https://github.com/Azure/toketi-iothubreact) est une bibliothèque Akka Streams pour la lecture d’événements issus d’Event Hubs. Akka Streams est une infrastructure de programmation basée sur des flux qui implémente la spécification [Reactive Streams](https://www.reactive-streams.org/). Elle permet de générer des pipelines de diffusion en continu efficaces, dans le cadre desquels toutes les opérations de diffusion en continu sont exécutées de manière asynchrone, et où les pipelines gèrent la régulation de flux de manière appropriée. Une régulation de flux se produit lorsqu’une source d’événements produit des événements plus rapidement que les consommateurs en aval ne peuvent les recevoir &mdash; ce qui est précisément le cas lorsque le système de livraison par drone rencontre un pic de trafic. Si les services principaux fonctionnent moins rapidement, IoTHub React ralentira. Si la capacité est accrue, IoTHub React transmettra (push) davantage de messages par le biais du pipeline.
 
 Akka Streams constitue également un modèle de programmation très naturel pour la diffusion en continu d’événements à partir d’Event Hubs. Au lieu d’effectuer une boucle sur un lot d’événements, vous définissez un ensemble d’opérations qui seront appliquées à chaque événement, et vous laissez Akka Streams gérer la diffusion en continu. Akka Streams définit un pipeline de diffusion en continu en termes de *sources*, de *flux* et de *récepteurs*. Une source génère un flux de sortie, un flux traite un flux d’entrée et produit un flux de sortie, et un récepteur consomme un flux sans produire de sortie.
 
