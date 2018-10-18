@@ -3,12 +3,12 @@ title: BI d’entreprise automatisée avec SQL Data Warehouse et Azure Data Fact
 description: Automatiser un flux de travail ELT sur Azure à l’aide d’Azure Data Factory
 author: MikeWasson
 ms.date: 07/01/2018
-ms.openlocfilehash: ffd75ba8c57a9afbc6abad61f21f738c644c9bc8
-ms.sourcegitcommit: 58d93e7ac9a6d44d5668a187a6827d7cd4f5a34d
+ms.openlocfilehash: f004c02da93335e74b07b9720236832ad7f744db
+ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/02/2018
-ms.locfileid: "37142271"
+ms.lasthandoff: 10/09/2018
+ms.locfileid: "48876900"
 ---
 # <a name="automated-enterprise-bi-with-sql-data-warehouse-and-azure-data-factory"></a>BI d’entreprise automatisée avec SQL Data Warehouse et Azure Data Factory
 
@@ -29,7 +29,7 @@ L’architecture est constituée des composants suivants.
 
 ### <a name="data-sources"></a>Sources de données
 
-**Serveur SQL Server local**. Les données source sont situées dans une base de données SQL Server locale. Pour simuler l’environnement local, les scripts de déploiement de cette architecture approvisionnent une machine virtuelle dans Azure disposant de SQL Server. [L’exemple de base de données OLTP Wide World Importers] [wwi] est utilisé comme base de données source.
+**Serveur SQL Server local**. Les données sources sont situées dans une base de données SQL Server locale. Pour simuler l’environnement local, les scripts de déploiement de cette architecture approvisionnent une machine virtuelle dans Azure disposant de SQL Server. [L’exemple de base de données OLTP Wide World Importers] [wwi] est utilisé comme base de données source.
 
 **Données externes**. Un scénario courant de gestion des entrepôts de données consiste à intégrer plusieurs sources de données. Cette architecture de référence charge un jeu de données externe qui contient la population par ville et par année, et l’intègre dans les données de la base de données OLTP. Vous pouvez utiliser ces données pour répondre à des questions du type : « La croissance des ventes dans chaque région correspond-elle, voire dépasse-t-elle la croissance de la population ? »
 
@@ -45,7 +45,7 @@ L’architecture est constituée des composants suivants.
 
 **Azure Analysis Services**. [Analysis Services](/azure/analysis-services/) est un service entièrement géré qui fournit des capacités de modélisation des données. Le modèle sémantique est chargé dans Analysis Services.
 
-**Power BI**. Power BI est une suite d’outils d’analyse métier pour analyser les données et obtenir des informations métier. Dans cette architecture, il demande le modèle sémantique stockée dans Analysis Services.
+**Power BI**. Power BI est une suite d’outils d’analyse métier pour analyser les données et obtenir des informations métier. Dans cette architecture, il demande le modèle sémantique stocké dans Analysis Services.
 
 ### <a name="authentication"></a>Authentification
 
@@ -174,7 +174,7 @@ Pour renforcer la sécurité, vous pouvez utiliser des [points de terminaison de
 
 Grâce à cette approche, vous créez un réseau virtuel dans Azure, puis créez des points de terminaison de service privés pour les services Azure. Ces services sont ensuite limités au trafic à partir de ce réseau virtuel. Vous pouvez également y accéder à partir de votre réseau local, via une passerelle.
 
-Soyez conscient des limitations suivantes :
+Notez les limitations suivantes :
 
 - Au moment où cette architecture de référence a été créée, les points de terminaison de service de réseau virtuel étaient pris en charge pour le stockage Azure et Azure SQL Data Warehouse, mais non pour le service Azure Analysis. Vérifiez l’état le plus récent [ici](https://azure.microsoft.com/updates/?product=virtual-network). 
 

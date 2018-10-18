@@ -1,22 +1,22 @@
 ---
 title: Rendu vidéo 3D sur Azure
-description: Exécution des charges de travail HPC natives dans Azure à l’aide du service Azure Batch
+description: Exécutez des charges de travail HPC natives dans Azure à l’aide du service Azure Batch.
 author: adamboeglin
 ms.date: 07/13/2018
-ms.openlocfilehash: 67dc8496656a75eab8f5d0ce45d00f8b1f4ea03f
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 1206fa7d931fca635118929d433abe232ec5ca9a
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428055"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48818619"
 ---
 # <a name="3d-video-rendering-on-azure"></a>Rendu vidéo 3D sur Azure
 
-Le rendu 3D est un processus qui prend beaucoup de temps et nécessitant une quantité importante de temps processeur pour être terminé.  Sur une seule machine, le processus de génération d’un fichier vidéo à partir de ressources statiques peut prendre plusieurs heures, voire plusieurs jours selon la longueur et la complexité de la vidéo que vous générez.  De nombreuses entreprises achètent des ordinateurs haut de gamme coûteux pour effectuer ces tâches, ou bien elles investissent dans des groupes de rendu volumineux auxquels ils peuvent envoyer des travaux.  Toutefois, en tirant parti d’Azure Batch, cette puissance est disponible lorsque vous en avez besoin et s’arrête lorsqu’elle n’est plus nécessaire, tout cela sans avoir à ne consentir aucun investissement.
+Le rendu vidéo 3D est un processus qui prend beaucoup de temps et nécessitant une quantité importante de temps processeur pour être terminé. Sur une seule machine, le processus de génération d’un fichier vidéo à partir de ressources statiques peut prendre plusieurs heures, voire plusieurs jours selon la longueur et la complexité de la vidéo que vous générez. De nombreuses entreprises achètent des ordinateurs haut de gamme coûteux pour effectuer ces tâches, ou bien elles investissent dans des groupes de rendu volumineux auxquels ils peuvent envoyer des travaux. Toutefois, en tirant parti d’Azure Batch, cette puissance est disponible lorsque vous en avez besoin et s’arrête lorsqu’elle n’est plus nécessaire, tout cela sans avoir à ne consentir aucun investissement.
 
 Batch fournit une expérience cohérente de gestion et de planification des travaux pour les nœuds de calcul Windows Server ou Linux. Avec Batch, vous pouvez utiliser vos applications Windows ou Linux existantes, notamment AutoDesk Maya et Blender, pour exécuter des travaux de rendu à grande échelle dans Azure.
 
-## <a name="related-use-cases"></a>Cas d’usage connexes
+## <a name="relevant-use-cases"></a>Cas d’utilisation appropriés
 
 Pensez à ce scénario pour ces cas d’usage similaires :
 
@@ -29,14 +29,14 @@ Pensez à ce scénario pour ces cas d’usage similaires :
 
 ![Présentation de l’architecture des composants impliqués dans une solution HPC native Cloud à l’aide d’Azure Batch][architecture]
 
-Cet exemple de scénario décrit le flux de travail lors de l’utilisation d’Azure Batch, les données circulent comme suit :
+Ce scénario présente un flux de travail qui utilise Azure Batch. Les données circulent comme suit :
 
-1. Charger les fichiers d’entrée et les applications nécessaires pour le traitement des fichiers dans votre compte Stockage Azure
+1. Charger les fichiers d’entrée et les applications nécessaires pour le traitement des fichiers dans votre compte Stockage Azure.
 2. Créer un pool Batch de nœuds de calcul dans votre compte Batch, un travail pour exécuter la charge de travail sur le pool et des tâches dans le travail.
-3. Télécharger des fichiers d’entrée et des applications vers Azure Batch
-4. Surveiller l’exécution d’une tâche
-5. Charger les sorties des tâches
-6. Télécharger les fichiers de sortie
+3. Télécharger des fichiers d’entrée et des applications vers Azure Batch.
+4. Surveiller l’exécution d’une tâche.
+5. Charger les sorties des tâches.
+6. Télécharger les fichiers de sortie.
 
 Pour simplifier ce processus, vous pouvez également utiliser les [plug-ins de Batch pour Maya et 3ds Max][batch-plugins]
 
@@ -44,10 +44,9 @@ Pour simplifier ce processus, vous pouvez également utiliser les [plug-ins de B
 
 Azure Batch s’appuie sur les technologies Azure suivantes :
 
-* Les [groupes de ressources][resource-groups] sont des conteneurs logiques pour des ressources Azure.
-* Les [réseaux virtuels][vnet] sont utilisés pour le nœud principal et les ressources de calcul
-* Les comptes de [stockage][storage] sont utilisés pour la synchronisation et la conservation des données
-* Les [groupes de machines virtuelles identiques][vmss] sont utilisés par CycleCloud pour les ressources de calcul
+* Les [réseaux virtuels](/azure/virtual-network/virtual-networks-overview) sont utilisés pour le nœud principal et les ressources de calcul.
+* Les [comptes de stockage Azure](/azure/storage/common/storage-introduction) sont utilisés pour la synchronisation et la conservation des données.
+* Les [Microsoft Azure Virtual Machine Scale Sets][vmss] sont utilisés par CycleCloud pour les ressources de calcul.
 
 ## <a name="considerations"></a>Considérations
 
@@ -58,11 +57,11 @@ Bien que la plupart des clients optent pour des ressources qui possèdent une gr
 * L’application qui s’exécute est-elle memory-bound ?
 * A-t-elle besoin d’utiliser des GPU ? 
 * Les types de travaux sont-ils extrêmement parallèles ? Réclament-ils une connectivité InfiniBand pour les travaux étroitement couplés ?
-* Des E/S rapides vers le stockage sur les nœuds de calcul sont-elles nécessaires ?
+* Nécessitent des E/S rapides pour accéder au stockage sur les nœuds de calcul.
 
 Azure propose un large éventail de tailles de machine virtuelle qui répondent à chacune des exigences des applications ci-dessus ; certaines sont spécifiquement adaptées au calcul haute performance (HPC), mais même les plus petites tailles peuvent être utilisées pour fournir une implémentation de grille efficace :
 
-* [Tailles de machine virtuelle HPC][compute-hpc] Le rendu étant CPU-bound, Microsoft suggère généralement les machines virtuelles Azure de série H.  Les machines virtuelles de ce type, spécialement conçues pour les besoins élevés de calcul, proposent des processeurs virtuels de 8 ou 16 cœurs, une mémoire DDR4, du stockage temporaire SSD et la technologie Intel Haswell E5.
+* [Tailles de machine virtuelle HPC][compute-hpc] Le rendu étant CPU-bound, Microsoft suggère généralement les machines virtuelles Azure de série H. Les machines virtuelles de ce type, spécialement conçues pour les besoins élevés de calcul, proposent des processeurs virtuels de 8 ou 16 cœurs, une mémoire DDR4, du stockage temporaire SSD et la technologie Intel Haswell E5.
 * [Tailles de machine virtuelle de GPU][compute-gpu] Les tailles de machine virtuelle au GPU optimisé sont des machines virtuelles spécialisées disponibles avec des GPU NVIDIA uniques ou multiples. Ces tailles sont conçues pour des charges de travail de visualisation, mais également de calcul et d’affichage graphique intensifs.
 * Les tailles des cœurs NC, NCv2, NCv3 et ND sont optimisées pour les applications nécessitant des ressources réseau et de calcul importantes, les algorithmes, notamment les applications et simulations CUDA et OpenCL, l’intelligence artificielle et le Deep Learning. Les tailles des cœurs NV sont optimisées et conçues pour la visualisation à distance, la diffusion en continu, les jeux, le codage et les scénarios VDI utilisant des infrastructures comme OpenGL et DirectX.
 * [Tailles de machine virtuelle à mémoire optimisée][compute-memory] Lorsque le besoin de mémoire augmente, les tailles de machines virtuelles à mémoire optimisée offrent un rapport mémoire/processeur supérieur.
@@ -99,11 +98,11 @@ Il n’existe pour le moment aucune fonctionnalité de basculement dans Azure Ba
 
 ### <a name="creating-an-azure-batch-account-and-pools-manually"></a>Création manuelle d’un compte Azure Batch et des pools
 
-Cet exemple de scénario aide à apprendre le fonctionnement d’Azure Batch tout en présentant Azure Batch Labs comme un exemple de solution SaaS que vous pouvez développer pour vos propres clients :
+Ce scénario illustre le fonctionnement d’Azure Batch tout en présentant Azure Batch Labs comme un exemple de solution SaaS que vous pouvez développer pour vos propres clients :
 
 [Azure Batch Masterclass][batch-labs-masterclass]
 
-### <a name="deploying-the-sample-scenario-using-an-azure-resource-manager-template"></a>Déploiement de l’exemple de scénario suivant un modèle Azure Resource Manager
+### <a name="deploying-the-example-scenario-using-an-azure-resource-manager-template"></a>Déploiement de l’exemple de scénario suivant un modèle Azure Resource Manager
 
 Le modèle déploiera :
 
@@ -134,14 +133,15 @@ Voici quelques exemples des coûts qui pourraient être engagés pour une tâche
   50 H16m (16 cœurs, 225 Go de RAM, 512 Go de Stockage Premium), 2 To de Stockage Blob, 1 To de sortie
 
 * 10 machines virtuelles avec processeur hautes performances : [Devis estimatif][hpc-est-low]
-  
+
   10 H16m (16 cœurs, 225 Go de RAM, 512 Go de Stockage Premium), 2 To de Stockage Blob, 1 To de sortie
 
-### <a name="low-priority-vm-pricing"></a>Prix des machines virtuelles basse priorité
+### <a name="pricing-for-low-priority-vms"></a>Tarification des machines virtuelles de faible priorité
 
-Azure Batch prend également en charge les machines virtuelles basse priorité* dans les pools de nœuds, qui peuvent représenter des économies substantielles. Pour plus d’informations sur les machines virtuelles basse priorité, et notamment une comparaison de prix avec les machines virtuelles standard, voir [Prix Batch][batch-pricing].
+Azure Batch prend également en charge les machines virtuelles basse priorité dans les pools de nœuds, qui peuvent représenter des économies substantielles. Pour plus d’informations, notamment sur la comparaison des prix entre les machines virtuelles standard et les machines virtuelles de faible priorité, consultez [Azure Batch Pricing][batch-pricing].
 
-\* Veuillez noter que les machines virtuelles basse priorité ne sont adaptées qu’à certaines applications et charges de travail.
+> [!NOTE] 
+> Les machines virtuelles de faible priorité ne conviennent qu’à certaines applications et charges de travail.
 
 ## <a name="related-resources"></a>Ressources associées
 
@@ -152,13 +152,12 @@ Azure Batch prend également en charge les machines virtuelles basse priorité* 
 [Utilisation des conteneurs Docker sur Azure Batch][batch-containers]
 
 <!-- links -->
-[architecture]: ./media/native-hpc-ref-arch.png
+[architecture]: ./media/architecture-video-rendering.png
 [resource-groups]: /azure/azure-resource-manager/resource-group-overview
 [security]: /azure/security/
 [resiliency]: /azure/architecture/resiliency/
 [scalability]: /azure/architecture/checklist/scalability
 [vmss]: /azure/virtual-machine-scale-sets/overview
-[vnet]: /azure/virtual-network/virtual-networks-overview
 [storage]: https://azure.microsoft.com/services/storage/
 [batch]: https://azure.microsoft.com/services/batch/
 [batch-arch]: https://azure.microsoft.com/solutions/architecture/big-compute-with-azure-batch/
@@ -177,7 +176,7 @@ Azure Batch prend également en charge les machines virtuelles basse priorité* 
 [batch-scaling]: /azure/batch/batch-automatic-scaling
 [hpc-alt-solutions]: /azure/virtual-machines/linux/high-performance-computing?toc=%2fazure%2fbatch%2ftoc.json
 [batch-monitor]: /azure/batch/monitoring-overview
-[batch-pricing]: https://azure.microsoft.com/en-gb/pricing/details/batch/
+[batch-pricing]: https://azure.microsoft.com/pricing/details/batch/
 [batch-doc]: /azure/batch/
 [batch-overview]: https://azure.microsoft.com/services/batch/
 [batch-containers]: https://github.com/Azure/batch-shipyard

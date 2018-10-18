@@ -4,12 +4,12 @@ description: Architecture recommandée pour une application web à haute disponi
 author: MikeWasson
 ms.date: 11/23/2016
 cardTitle: Run in multiple regions
-ms.openlocfilehash: 2efcc591695e1c592053ea32832fe15e624df2e1
-ms.sourcegitcommit: c4106b58ad08f490e170e461009a4693578294ea
+ms.openlocfilehash: 5493deea871f25fb6ea3531a22d92d83916930b1
+ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/10/2018
-ms.locfileid: "43016079"
+ms.lasthandoff: 10/09/2018
+ms.locfileid: "48876813"
 ---
 # <a name="run-a-web-application-in-multiple-regions"></a>Exécuter une application web dans plusieurs régions
 [!INCLUDE [header](../../_includes/header.md)]
@@ -96,7 +96,7 @@ Traffic Manager procède à un basculement automatique si la région primaire n�
 
 Pour plus d’informations, consultez l’article [À propos de la surveillance avec Traffic Manager][tm-monitoring].
 
-Traffic Manager est un point de défaillance possible dans le système. Si le service échoue, les clients ne peuvent plus accéder à votre application pendant le temps d’arrêt. Examinez le [Contrat de niveau de service (SLA) pour Traffic Manager][tm-sla] et déterminez si Traffic Manager peut à lui seul répondre à vos exigences métiers en matière de haute disponibilité. Si tel n’est pas le cas, envisagez d’ajouter une autre solution de gestion du trafic en guise de restauration automatique. Si le service Azure Traffic Manager échoue, modifiez vos enregistrements de nom canonique (CNAME) dans DNS pour les faire pointer vers l’autre service de gestion du trafic. Cette opération doit être effectuée manuellement, et votre application reste inaccessible tant que ces modifications DNS n’ont pas été propagées.
+Traffic Manager est un point de défaillance possible dans le système. Si le service échoue, les clients ne peuvent plus accéder à votre application pendant le temps d’arrêt. Examinez le [Contrat de niveau de service (SLA) pour Traffic Manager][tm-sla] et déterminez si Traffic Manager peut à lui seul répondre à vos exigences métiers en matière de haute disponibilité. Si tel n’est pas le cas, pensez à ajouter une autre solution de gestion du trafic en guise de procédure de secours. Si le service Azure Traffic Manager échoue, modifiez vos enregistrements de nom canonique (CNAME) dans DNS pour les faire pointer vers l’autre service de gestion du trafic. Cette opération doit être effectuée manuellement, et votre application reste inaccessible tant que ces modifications DNS n’ont pas été propagées.
 
 ### <a name="sql-database"></a>Base de données SQL
 L’objectif de point de récupération (RPO) et le temps de récupération estimé (ERT) pour SQL Database sont décrits dans l’article [Vue d’ensemble de la continuité de l’activité avec la base de données Azure SQL][sql-rpo]. 
@@ -165,6 +165,6 @@ Si la base de données primaire est défaillante, effectuez un basculement manue
 [tm-monitoring]: /azure/traffic-manager/traffic-manager-monitoring
 [tm-ps]: /powershell/module/azurerm.trafficmanager
 [tm-routing]: /azure/traffic-manager/traffic-manager-routing-methods
-[tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager/v1_0/
-[traffic-manager]: https://azure.microsoft.com/services/traffic-manager/
+[tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager
+[traffic-manager]: https://azure.microsoft.com/services/traffic-manager
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/app-service-reference-architectures.vsdx

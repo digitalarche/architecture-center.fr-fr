@@ -3,12 +3,12 @@ title: Application multiniveau avec Apache Cassandra
 description: Découvrez comment exécuter des machines virtuelles Linux pour une architecture multiniveau dans Microsoft Azure.
 author: MikeWasson
 ms.date: 05/03/2018
-ms.openlocfilehash: 9c186527a7f7980a5232186a52f9b0089612226f
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 2c5a80309e5d4d180cc83422de0b462c8dffcd90
+ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429036"
+ms.lasthandoff: 10/09/2018
+ms.locfileid: "48876917"
 ---
 # <a name="n-tier-application-with-apache-cassandra"></a>Application multiniveau avec Apache Cassandra
 
@@ -154,7 +154,7 @@ Pour déployer les machines virtuelles Linux pour une architecture de référenc
 
 1. Accédez au dossier `virtual-machines\n-tier-linux` pour rechercher le référentiel que vous avez cloné à l’étape 1 des conditions préalables ci-dessus.
 
-2. Le fichier de paramètres spécifie un nom d’utilisateur et un mot de passe administrateur par défaut pour chaque machine virtuelle dans le déploiement. Vous devez les modifier avant de déployer l’architecture de référence. Ouvrez le fichier `n-tier-linux.json` et remplacez chaque champ **adminUsername** et **adminPassword** par vos nouveaux paramètres.   Enregistrez le fichier .
+2. Le fichier de paramètres spécifie un nom d’utilisateur et un mot de passe administrateur par défaut pour chaque machine virtuelle du déploiement. Vous devez les modifier avant de déployer l’architecture de référence. Ouvrez le fichier `n-tier-linux.json` et remplacez chaque champ **adminUsername** et **adminPassword** par vos nouveaux paramètres.   Enregistrez le fichier .
 
 3. Déployez l’architecture de référence à l’aide de l’outil de ligne de commande **azbb**, comme indiqué ci-dessous.
 

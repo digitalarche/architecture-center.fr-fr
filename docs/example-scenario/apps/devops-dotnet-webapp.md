@@ -1,35 +1,35 @@
 ---
-title: Pipeline CI/CD avec VSTS
-description: Un exemple de compilation et de publication d’une application .NET sur Azure Web Apps
+title: Pipeline CI/CD avec Azure DevOps
+description: Générez et publiez une application .NET sur Azure Web Apps à l’aide d’Azure DevOps.
 author: christianreddington
 ms.date: 07/11/18
-ms.openlocfilehash: aea757087f4a505a8c52658abe1841c5455977cc
-ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
+ms.openlocfilehash: 80890784d4c97aac418cef4e49f9075dbef10b8a
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44389264"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48818936"
 ---
-# <a name="cicd-pipeline-with-vsts"></a>Pipeline CI/CD avec VSTS
+# <a name="cicd-pipeline-with-azure-devops"></a>Pipeline CI/CD avec Azure DevOps
 
 DevOps est l’intégration du développement, de l’assurance qualité et des opérations informatiques. DevOps nécessite une culture unifiée et un ensemble solide de processus pour la distribution de logiciels.
 
-Cet exemple de scénario illustre comment les équipes de développement peuvent utiliser Visual Studio Team Services pour déployer une application web .NET de deux couches sur Azure App Service. L’application web dépend des services PaaS (platform as a service) Azure en aval. Ce document souligne également quelques considérations que vous devez avoir lors de la conception d’un tel scénario à l’aide de la plateforme Azure as a service (PaaS).
+Cet exemple de scénario démontre la manière dont les équipes de développement peuvent utiliser Azure DevOps pour déployer une application web .NET à deux niveaux sur Azure App Service. L’application web dépend des services PaaS (platform as a service) Azure en aval. Ce document souligne également quelques points dont vous tenir compte lorsque vous concevez un scénario de ce type à l’aide d’Azure PaaS.
 
-L’approche moderne du développement d’applications que représentent l’intégration continue (CI) et le déploiement continu (CD) aide à offrir plus vite de la valeur ajoutée aux utilisateurs par l’intermédiaire d’un service robuste de conception, de test, de déploiement et de monitoring. En utilisant une plateforme telle que Visual Studio Team Services en plus des services Azure tels que App Service, les organisations peuvent s’assurer de rester concentrées sur le développement de leur scénario, plus que la gestion de l’infrastructure pour l’activer.
+L’approche moderne en matière de développement d’applications que constituent l’intégration continue et le déploiement continu (CI/CD) vous aide à offrir plus rapidement une valeur ajoutée aux utilisateurs par l’intermédiaire d’un service robuste de compilation, de test, de déploiement et de supervision. En combinant l’utilisation d’une plateforme telle qu’Azure DevOps et de services Azure comme App Service, les organisations peuvent se focaliser sur le développement de leur scénario, plutôt que sur la gestion de l’infrastructure sous-jacente.
 
-## <a name="related-use-cases"></a>Cas d’usage connexes
+## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
 Pensez à DevOps pour les cas d’usage suivants :
 
-* Accélération du développement d’applications et des cycles de vie de déploiement
+* Accélération du développement d’applications et des cycles de vie de développement
 * Qualité et cohérence de la construction dans un processus de compilation et de mise en production automatisé
 
 ## <a name="architecture"></a>Architecture
 
-![Présentation de l’architecture des composants Azure impliqués dans un scénario DevOps utilisant Visual Studio Team Services et Azure App Service][architecture]
+![Présentation de l’architecture des composants Azure impliqués dans un scénario DevOps utilisant Azure DevOps et Azure App Service][architecture]
 
-Ce scénario couvre un pipeline DevOps pour une application web .NET à l’aide de Visual Studio Team Services (VSTS). Les données circulent dans le scénario comme suit :
+Ce scénario porte sur un pipeline CI/CD pour une application web .NET utilisant Azure DevOps. Les données circulent dans le scénario comme suit :
 
 1. Changer le code source de l’application.
 2. Valider le code de l’application et le fichier web.config de l’application web.
@@ -41,52 +41,45 @@ Ce scénario couvre un pipeline DevOps pour une application web .NET à l’aide
 
 ### <a name="components"></a>Composants
 
-* Les [groupes de ressources][resource-groups] constituent un conteneur logique pour les ressources Azure et fournissent également une limite de contrôle d’accès pour le plan de gestion, considérez un groupe de ressources comme représentant une « unité de déploiement ».
-* [Visual Studio Team Services (VSTS)][vsts] est un service qui vous permet de gérer votre cycle de vie de développement de bout en bout, depuis la planification et la gestion du projet jusqu’à la gestion du code, en passant par la compilation et la mise en production.
-* [Azure Web Apps][web-apps] est un service PaaS (platform as a service) d’hébergement d’applications web, d’API REST et de backends mobiles. Bien que cet article se concentre sur .NET, il existe plusieurs options de plateforme de développement supplémentaires prises en charge.
+* [Azure DevOps][vsts] est un service qui vous permet de gérer votre cycle de vie de développement de bout en bout, depuis la planification et la gestion du projet jusqu’à la compilation et la mise en production, en passant par la gestion du code.
+* [Azure Web Apps][web-apps] est un service PaaS pour l’hébergement d’applications web, d’API REST et de back ends mobiles. Bien que cet article se concentre sur .NET, il existe plusieurs options de plateforme de développement supplémentaires prises en charge.
 * [Application Insights][application-insights] est un service interne extensible de gestion des performances des applications (APM) destiné aux développeurs web sur de multiples plateformes.
 
 ### <a name="alternative-devops-tooling-options"></a>Autres options d’outils DevOps
 
-Alors que cet article se concentre sur Visual Studio Team Services, [Team Foundation Server][team-foundation-server] peut être utilisé comme un substitut local. Sinon, vous pouvez également trouver une collection de technologies utilisées ensemble pour un pipeline de développement Open Source en tirant parti de [Jenkins][jenkins-on-azure].
+Bien que cet article se concentre sur Azure DevOps, [Team Foundation Server][team-foundation-server] peut faire office de substitut local. Une autre possibilité consiste à utiliser un ensemble de technologies pour un pipeline de développement open source à l’aide de [Jenkins][jenkins-on-azure].
 
-Dans une perspective IaC (infrastructure as code), les [modèles Azure Resource Manager][arm-templates] sont inclus dans le projet Azure DevOps, mais vous pouvez éventuellement utiliser [Terraform][terraform] ou [Chef][chef] si vous avez investi dedans. Si vous préférez un déploiement IaaS (infrastructure as a service) et que vous avez besoin d’une gestion de la configuration, tournez-vous vers [Azure Automation State Configuration][desired-state-configuration], [Ansible][ansible] ou [Chef][chef].
+Dans une perspective IaC (infrastructure as code), les [modèles Azure Resource Manager][arm-templates] sont inclus dans le projet Azure DevOps, mais vous pouvez éventuellement utiliser [Terraform][terraform] ou [Chef][chef]. Si vous préférez un déploiement IaaS (infrastructure as a service) et que vous avez besoin d’une gestion de la configuration, tournez-vous vers [Azure Automation State Configuration][desired-state-configuration], [Ansible][ansible] ou [Chef][chef].
 
-### <a name="alternatives-to-web-app-hosting"></a>Alternatives à l’hébergement Web App
+### <a name="alternatives-to-azure-web-apps"></a>Alternatives à Azure Web Apps
 
-Alternatives à l’hébergement dans Azure Web Apps :
+Examinez ci-après les alternatives possibles à l’hébergement dans Azure Web Apps :
 
-* [Machine virtuelle][compare-vm-hosting] : pour les charges de travail qui réclament un degré élevé de contrôle ou dépendent de services/composants du système d’exploitation qui ne sont pas possibles avec Web Apps (par exemple, GAC Windows ou COM).
-* [Hébergement de conteneur][azure-containers] : où il existe des dépendances de système d’exploitation et une portabilité d’hébergement, ou une densité d’hébergement, sont également des exigences.
-* [Service Fabric][service-fabric] : une bonne option si l’architecture de la charge de travail est concentrée autour des composants distribués qui bénéficient d’un déploiement et d’une exécution sur un cluster avec un degré élevé de contrôle. Service Fabric peut également être utilisé pour héberger des conteneurs.
-* [Fonctions Serverless Azure][azure-functions] : une bonne option si l’architecture de la charge de travail est centrée sur des composants distribués affinés , nécessitant des dépendances minimales, où les composants individuels doivent uniquement être exécutés à la demande (pas de façon continue) et où l’orchestration des composants n’est pas obligatoire.
+* [Machines virtuelles Azure][compare-vm-hosting] : pour les charges de travail qui exigent un degré de contrôle élevé ou qui dépendent de services et de composants du système d’exploitation non utilisables avec Web Apps (par exemple, GAC Windows ou COM).
+* [Service Fabric][service-fabric] : option appropriée si l’architecture de la charge de travail s’articule autour de composants distribués qui tirent avantage d’un déploiement et d’une exécution sur un cluster avec un haut degré de contrôle. Service Fabric peut également être utilisé pour héberger des conteneurs.
+* [Azure Functions][azure-functions] : approche serverless efficace si l’architecture de la charge de travail s’articule autour de composants distribués de granularité fine, nécessitant des dépendances minimales, où les différents composants doivent uniquement être exécutés à la demande (et non de façon continue) et où l’orchestration des composants n’est pas obligatoire.
+
+Cet [arbre de décision](/azure/architecture/guide/technology-choices/compute-decision-tree) peut vous aider lors du choix de la voie à suivre pour une migration.
 
 ### <a name="devops"></a>DevOps
 
-L’**[Intégration continue (CI)][continuous-integration]** doit viser à illustrer une version stable, avec plusieurs développeurs (individuels ou en équipe) validant en permanence des modifications fréquentes sur la base de code partagée.
-Vous devez effectuer les opérations suivantes dans le cadre de votre pipeline d’intégration continue :
+**[L’intégration continue (CI)][continuous-integration]** garantit un build stable, car plusieurs développeurs valident régulièrement les modifications mineures fréquemment apportées au codebase partagé. Dans le cadre de votre pipeline d’intégration continue, vous devez :
+* Valider fréquemment les modifications de code mineures. Évitez le traitement par lot des modifications plus importantes ou plus complexes dont la fusion peut se révéler plus difficile.
+* Exécuter le test unitaire des composants de votre application avec une couverture du code suffisante, incluant le test des chemins d’accès incorrects.
+* Garantir l’exécution du build sur la branche maîtresse (ou jonction) partagée. Cette branche doit être stable et maintenue comme « déploiement prêt ». Les modifications incomplètes ou en cours doivent être isolées dans une branche distincte avec de fréquentes fusions « intégration en aval » pour éviter les conflits ultérieurs.
 
-* Archiver fréquemment de petites quantités de code (éviter la mise en lots des modifications plus grandes ou plus complexes car il est possible qu’elles soient plus difficiles à fusionner)
-* Faire le test unitaire des composants de votre application avec une couverture suffisante du code (y compris les chemins d’accès mécontents)
-* Garantir que la version est exécutée sur la branche partagée, principale (ou jonction). Cette branche doit être stable et maintenue comme « déploiement prêt ». Les modifications incomplètes ou en cours doivent être isolées dans une branche distincte avec des fusions « intégration en amont » fréquentes pour éviter des conflits ultérieures.
-
-La **[livraison continue (CD)][continuous-delivery]** doit viser à montrer non seulement une version stable, mais également un déploiement stable. Cela rend la livraison continue un peu plus difficile ; une configuration propre à l’environnement est requise, ainsi qu’un mécanisme permettant de définir correctement ces valeurs.
-
-En outre, une couverture suffisante des tests d’intégration est exigée pour assurer que les différents composants sont configurés et fonctionnent correctement de bout en bout.
-
-Il peut également se révéler nécessaire de configurer et de réinitialiser les données spécifiques de l’environnement et de gérer les versions du schéma de la base de données.
-
-La livraison continue peut également s’étendre aux environnements de test de charge et d’acceptation utilisateur.
-
-La livraison continue tire parti de la surveillance continue, dans l’idéal, au sein de tous les environnements.
-L’automatisation, par le biais de scripts, de la création et de la configuration de l’infrastructure d’hébergement améliore la cohérence et la fiabilité des déploiements et des tests d’intégration dans les différents environnements (ce qui est beaucoup plus facile pour les charges de travail cloud) ; c’est ce que l’on nomme [IaC, pour « infrastructure as code »][infra-as-code].
-
-* Démarrez la diffusion en continu dès que possible dans le cycle de vie du projet. Plus vous la démarrez tard, plus ce sera difficile.
-* Les tests d’intégration et unitaires doivent avoir la même priorité que les fonctionnalités du projet
+La **[livraison continue (CD)][continuous-delivery]** garantit aussi bien la stabilité du build que celle du déploiement. La mise en œuvre de cette approche se révèle un peu plus ardue, car elle nécessite une configuration propre à l’environnement, ainsi qu’un mécanisme permettant de définir correctement ces valeurs. Voici les autres points à prendre en compte en matière de livraison continue :
+* Une couverture suffisante des tests d’intégration est requise pour garantir la configuration correcte et le bon fonctionnement de bout en bout des différents composants.
+* La livraison continue peut également nécessiter la configuration et la réinitialisation des données propres à l’environnement, ainsi que la gestion des versions du schéma de la base de données.
+* La livraison continue doit également s’étendre aux environnements de test de charge et d’acceptation utilisateur.
+* La livraison continue tire profit d’une supervision continue, au sein de tous les environnements dans l’idéal.
+* L’automatisation, par le biais de scripts, de la création et de la configuration de l’infrastructure d’hébergement améliore la cohérence et la fiabilité des déploiements et des tests d’intégration dans les différents environnements. Cette tâche se révèle considérablement plus simple pour les charges de travail cloud. Pour plus d’informations, consultez l’article [Infrastructure as Code][infra-as-code].
+* Commencez à appliquer la livraison continue dès que possible dans le cycle de vie du projet. Plus vous tarderez à la mettre en œuvre, plus il vous sera difficile de l’incorporer.
+* Les tests d’intégration et unitaires doivent avoir la même priorité que les fonctionnalités d’application.
 * Utilisez des packages de déploiement indépendants de l’environnement et gérez la configuration spécifique de l’environnement par le biais du processus de mise en production.
-* Protégez une configuration sensible au sein des outils de gestion des mises en production ou en appelant un module de sécurité matériel (HSM), ou un [coffre de clés][azure-key-vault], au cours du processus de mise en production. Ne stockez pas de configuration sensible au sein du contrôle de code source.
+* Protégez la configuration sensible à l’aide des outils de gestion des mises en production, ou en appelant un module de sécurité matériel (HSM) ou le service [Azure Key Vault][azure-key-vault] au cours du processus de mise en production. Ne stockez pas de configuration sensible au sein du contrôle de code source.
 
-**Apprentissage continu** : la surveillance la plus efficace d’un environnement CD est fournie par les outils Application-Performance-Monitoring (APM), par exemple [Application Insights][application-insights] de Microsoft. Une profondeur suffisante de surveillance pour une charge de travail d’application est essentielle pour comprendre les bogues et les performances en charge. [App Insights peut être intégré dans VSTS pour activer la surveillance continue du pipeline CD][app-insights-cd-monitoring]. Cela peut être utilisé pour permettre la progression automatique à l’étape suivante, sans intervention humaine ou restauration si une alerte est détectée.
+**Apprentissage continu**. La supervision la plus efficace d’un environnement de livraison continue (CD) est assurée par les outils d’analyse des performances d’application (APM), par exemple [Application Insights][application-insights]. Un niveau de supervision suffisant pour une charge de travail d’application est essentiel à la compréhension des bogues ou des performances en charge. Il est possible d’intégrer Application Insights à VSTS pour assurer la [supervision continue du pipeline CD][app-insights-cd-monitoring]. Cela peut être utilisé pour permettre la progression automatique à l’étape suivante, sans intervention humaine ou restauration si une alerte est détectée.
 
 ## <a name="considerations"></a>Considérations
 
@@ -127,47 +120,48 @@ Pour obtenir des conseils d’ordre général sur la conception de solutions ré
 ### <a name="prerequisites"></a>Prérequis
 
 * Vous devez disposer d’un compte Azure existant. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit][azure-free-account] avant de commencer.
-* Vous devez disposer d’un compte Visual Studio Team Services (VSTS) existant. Découvrez plus d’informations sur la [création d’un compte Visual Studio Team Services (VSTS)][vsts-account-create].
+* Vous devez inscrire une organisation Azure DevOps. Pour plus d’informations, consultez l’article [Quickstart: Create your organization][vsts-account-create] (Démarrage rapide : Créer une organisation dans Azure DevOps).
 
-### <a name="walk-through"></a>Procédure
+### <a name="walk-through"></a>Procédure pas à pas
 
-Dans ce scénario, vous utiliserez un projet Azure DevOps pour créer votre pipeline CI/CD.
+Dans ce scénario, vous allez utiliser le projet Azure DevOps pour créer votre pipeline CI/CD.
 
-Le projet DevOps déploiera automatiquement un plan App Service, App Service et une ressource App Insights, et configurera le projet Visual Studio Team Services.
+Le projet Azure DevOps déploie automatiquement un plan App Service, une instance App Service ainsi qu’une ressource App Insights, et configure le projet Azure DevOps à votre intention.
 
-Une fois le projet DevOps déployé et généré, vérifiez les modifications du code, les éléments de travail et les résultats des tests associés. Vous remarquerez qu'aucun résultat de test n’est affiché, car le code ne contient aucun test à exécuter.
+Une fois le projet Azure DevOps déployé et la compilation effectuée, vérifiez les modifications du code, les éléments de travail et les résultats des tests associés. Vous remarquerez qu’aucun résultat de test n’est affiché, car le code ne contient aucun test à exécuter.
 
-Revoyez les définitions de mise en production. Notez qu’un pipeline de mise en production a été configuré, libérant notre application dans Dev. Observez qu’il y a un **déclencheur de déploiement continu** défini à partir de l’artefact de version **Drop**, avec des versions automatiques dans les environnements de développement. Dans le cadre d’un processus de déploiement continu, vous pouvez voir les versions s’étendre sur plusieurs environnements. Une version peut s’étendre sur chaque infrastructure (avec des techniques comme l’infrastructure en tant que code) et également déployer les packages d’application requis, ainsi que toutes les tâches de post-configuration.
+Examinez les définitions de mise en production. Notez qu’un pipeline de mise en production a été configuré, entraînant le déploiement de notre application dans l’environnement de développement. Vous pouvez observer qu’un **déclencheur de déploiement continu** est défini à partir de l’artefact de build **Drop**, avec des mises en production automatiques dans l’environnement de développement. Dans le cadre d’un processus de déploiement continu, il est possible que les mises en production couvrent plusieurs environnements. Une mise en production peut s’étendre sur chaque infrastructure (à l’aide de techniques telles qu’IaC) et peut également déployer les packages d’application requis en même temps que toutes les tâches de post-configuration.
 
-**Considérations supplémentaires.**
+## <a name="additional-considerations"></a>Considérations supplémentaires
 
-* Envisagez l’utilisation de l’une des [tâches de création de jetons][vsts-tokenization] disponibles dans la place de marché VSTS.
-* Envisagez l’utilisation de la tâche VSTS [Déployer : Azure Key Vault][download-keyvault-secrets] pour télécharger les secrets depuis un coffre de clés Azure vers votre version. Vous pouvez ensuite utiliser ces secrets comme variables dans le cadre de la définition de votre version et vous ne devez pas les stocker dans le contrôle de code source.
-* Envisagez d’utiliser des [variables de mise en production][vsts-release-variables] dans vos définitions de mise en production pour piloter les changements de configuration de vos environnements. Les variables de mise en production peuvent être étendues à toute une version ou à un environnement donné. Si vous utilisez des variables pour les informations secrètes, veillez à sélectionner l’icône de cadenas.
-* Envisagez d’utiliser des [portes de déploiement][vsts-deployment-gates] dans votre pipeline de mise en production. Vous pourrez ainsi tirer parti des données de monitoring en les combinant avec des systèmes externes (par exemple, la gestion des incidents ou d’autres systèmes sur mesure) pour déterminer s’il faut promouvoir une nouvelle version.
+* Envisagez de tirer profit de l’une des [tâches de création de jetons][vsts-tokenization] disponibles sur VSTS marketplace.
+* Envisagez d’utiliser la tâche VSTS [Déployer : Azure Key Vault][download-keyvault-secrets] pour télécharger les secrets d’une ressource Azure Key Vault dans votre mise en production. Vous pouvez ensuite utiliser ces secrets en tant que variables dans votre définition de mise en production, ce qui vous évite d’avoir à les stocker dans le contrôle de code source.
+* Envisagez d’utiliser des [variables de mise en production][vsts-release-variables] dans vos définitions de mise en production pour piloter les changements de configuration de vos environnements. Les variables de mise en production peuvent être étendues à toute une version ou à un environnement donné. Si vous utilisez des variables pour les informations de secret, veillez à sélectionner l’icône en forme de cadenas.
+* Envisagez d’utiliser des [portes de déploiement][vsts-deployment-gates] dans votre pipeline de mise en production. Vous pourrez ainsi tirer profit des données de supervision en les combinant avec des systèmes externes (par exemple, systèmes de gestion des incidents ou d’autres systèmes sur mesure) pour déterminer s’il faut promouvoir une mise en production.
 * Lorsqu’une intervention manuelle dans un pipeline de mise en production est requise, envisagez d’utiliser la fonctionnalité [approbations][vsts-approvals].
-* Envisagez d’utiliser [Application Insights][application-insights] et des outils de surveillance supplémentaires dès que possible dans votre pipeline de mise en production. La plupart des organisations commencent seulement à surveiller leur environnement de production, même si vous pouvez identifier les éventuels bogues plus tôt dans le processus et éviter un impact sur vos utilisateurs en production.
+* Envisagez d’utiliser [Application Insights][application-insights] et des outils de supervision supplémentaires dès que possible dans votre pipeline de mise en production. La plupart des organisations se contentent de superviser leur environnement de production. La supervision de vos autres environnements vous permet d’identifier les éventuels bogues plus tôt dans le processus de développement et d’éviter ainsi l’apparition de problèmes dans votre environnement de production.
 
 ## <a name="pricing"></a>Tarifs
 
-Votre évaluation des coûts de Visual Studio Team Services varie en fonction du nombre d’utilisateurs dans votre organisation nécessitant un accès, en plus des facteurs tels que le numéro de build/versions simultanés requis et le nombre d’utilisateurs de test. Ils sont détaillés plus loin sur la [page de tarification VSTS][vsts-pricing-page].
+Les coûts d’Azure DevOps varient selon le nombre d’utilisateurs de votre organisation qui nécessitent un accès, ainsi qu’en fonction d’autres facteurs tels que le nombre de builds/mises en production simultanés requis et le nombre d’utilisateurs de test. Pour plus d’informations, consultez la page [Tarification Azure DevOps][vsts-pricing-page].
 
-* [Visual Studio Team Services (VSTS)][vsts-pricing-calculator] est un service qui vous permet de gérer votre cycle de vie de développement et qui est payé par utilisateur et de façon mensuelle. Il peut y avoir des frais supplémentaires en fonction des pipelines simultanés nécessaires, en plus des utilisateurs de test supplémentaires et des licences de base utilisateur.
+* [Azure DevOps][vsts-pricing-calculator] est un service vous permettant de gérer votre cycle de vie de développement. Il est facturé par utilisateur et par mois. Des frais supplémentaires peuvent s’appliquer en fonction des pipelines simultanés requis, ainsi que de l’ajout d’utilisateurs de test et de licences de base utilisateur.
 
 ## <a name="related-resources"></a>Ressources associées
 
 * [Qu’est DevOps ?][devops-whatis]
-* [DevOps chez Microsoft - Comment nous collaborons avec Visual Studio Team Services][devops-microsoft]
-* [Didacticiels pas à pas : DevOps avec Visual Studio Team Services][devops-with-vsts]
+* [DevOps at Microsoft - How we work with Azure DevOps][devops-microsoft] (DevOps chez Microsoft - Comment nous travaillons avec Azure DevOps)
+* [Didacticiels pas à pas : DevOps avec Azure DevOps][devops-with-vsts]
+* [Liste de contrôle DevOps][devops-checklist]
 * [Créer un pipeline CI/CD pour .NET avec Azure DevOps Project][devops-project-create]
 
 <!-- links -->
 [ansible]: /azure/ansible/
 [application-insights]: /azure/application-insights/app-insights-overview
-[app-service-reference-architecture]: /azure/architecture/reference-architectures/app-service-web-app/
+[app-service-reference-architecture]: ../../reference-architectures/app-service-web-app/basic-web-app.md
 [azure-free-account]: https://azure.microsoft.com/free/?WT.mc_id=A261C142F
 [arm-templates]: /azure/azure-resource-manager/resource-group-overview#template-deployment
-[architecture]: ./media/devops-dotnet-webapp/architecture-devops-dotnet-webapp.png
+[architecture]: ./media/architecture-devops-dotnet-webapp.png
 [availability]: /azure/architecture/checklist/availability
 [chef]: /azure/chef/
 [design-patterns-availability]: /azure/architecture/patterns/category/availability
@@ -177,7 +171,8 @@ Votre évaluation des coûts de Visual Studio Team Services varie en fonction du
 [desired-state-configuration]: /azure/automation/automation-dsc-overview
 [devops-microsoft]: /azure/devops/devops-at-microsoft/
 [devops-with-vsts]: https://almvm.azurewebsites.net/labs/vsts/
-[application-insights]: https://azure.microsoft.com/en-gb/services/application-insights/
+[devops-checklist]: /azure/architecture/checklist/dev-ops
+[application-insights]: https://azure.microsoft.com/services/application-insights/
 [cloud-based-load-testing]: https://visualstudio.microsoft.com/team-services/cloud-load-testing/
 [cloud-based-load-testing-on-premises]: /vsts/test/load-test/clt-with-private-machines?view=vsts
 [jenkins-on-azure]: /azure/jenkins/
@@ -192,23 +187,23 @@ Votre évaluation des coûts de Visual Studio Team Services varie en fonction du
 [continuous-delivery]: /azure/devops/what-is-continuous-delivery
 [web-apps]: /azure/app-service/app-service-web-overview
 [terraform]: /azure/terraform/
-[vsts-account-create]: /vsts/organizations/accounts/create-account-msa-or-work-student?view=vsts
+[vsts-account-create]: /azure/devops/organizations/accounts/create-organization-msa-or-work-student?view=vsts
 [vsts-approvals]: /vsts/pipelines/release/approvals/approvals?view=vsts
 [devops-project]: https://portal.azure.com/?feature.customportal=false#create/Microsoft.AzureProject
 [vsts-deployment-gates]: /vsts/pipelines/release/approvals/gates?view=vsts
 [vsts-pricing-calculator]: https://azure.com/e/498aa024454445a8a352e75724f900b1
-[vsts-pricing-page]: https://azure.microsoft.com/en-us/pricing/details/visual-studio-team-services/
+[vsts-pricing-page]: https://azure.microsoft.com/pricing/details/visual-studio-team-services/
 [vsts-release-variables]: /vsts/pipelines/release/variables?view=vsts&tabs=batch
 [vsts-tokenization]: https://marketplace.visualstudio.com/search?term=token&target=VSTS&category=All%20categories&sortBy=Relevance
 [azure-key-vault]: /azure/key-vault/key-vault-overview
 [infra-as-code]: https://blogs.msdn.microsoft.com/mvpawardprogram/2018/02/13/infrastructure-as-code/
 [team-foundation-server]: https://visualstudio.microsoft.com/tfs/
 [infra-as-code]: https://blogs.msdn.microsoft.com/mvpawardprogram/2018/02/13/infrastructure-as-code/
-[service-fabric]:/azure/service-fabric/
-[azure-functions]:/azure/azure-functions/
-[azure-containers]:https://azure.microsoft.com/en-us/overview/containers/
-[compare-vm-hosting]:/azure/app-service/choose-web-site-cloud-service-vm
-[app-insights-cd-monitoring]:/azure/application-insights/app-insights-vsts-continuous-monitoring
-[azure-region-pair-bcdr]:/azure/best-practices-availability-paired-regions
-[devops-project-create]: /vsts/pipelines/apps/cd/azure/azure-devops-project-aspnetcore?view=vsts
+[service-fabric]: /azure/service-fabric/
+[azure-functions]: /azure/azure-functions/
+[azure-containers]: https://azure.microsoft.com/overview/containers/
+[compare-vm-hosting]: /azure/app-service/choose-web-site-cloud-service-vm
+[app-insights-cd-monitoring]: /azure/application-insights/app-insights-vsts-continuous-monitoring
+[azure-region-pair-bcdr]: /azure/best-practices-availability-paired-regions
+[devops-project-create]: /azure/devops-project/azure-devops-project-aspnet-core
 [security]: /azure/security/

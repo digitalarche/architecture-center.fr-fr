@@ -4,12 +4,12 @@ description: Liste de vérification qui fournit des conseils de résilience pour
 author: petertaylor9999
 ms.date: 03/02/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 735d4466f53ff03b67063b49b86f4184bbf1af41
-ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
+ms.openlocfilehash: 50808a837132e905cc89c3c43d40852a04f4885c
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2018
-ms.locfileid: "45584763"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48819191"
 ---
 # <a name="resiliency-checklist-for-specific-azure-services"></a>Liste de vérification de la résilience pour des services Azure spécifiques
 
@@ -39,11 +39,11 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Créez un compte de stockage distinct pour les journaux.** N’utilisez pas le même compte de stockage pour les journaux et les données d’application. Cela permet d’empêcher la journalisation de dégrader les performances de l’application.
 
-**Analysez les performances.** Utilisez un service d’analyse des performances tel que [New Relic](http://newrelic.com/) ou [Application Insights](/azure/application-insights/app-insights-overview/) pour analyser les performances et le comportement de l’application sous charge.  L’analyse des performances vous offre des renseignements en temps réel sur l’application. Elle vous permet de diagnostiquer les problèmes et d’effectuer une analyse des causes premières des échecs.
+**Analysez les performances.** Utilisez un service d’analyse des performances tel que [New Relic](https://newrelic.com/) ou [Application Insights](/azure/application-insights/app-insights-overview/) pour analyser les performances et le comportement de l’application sous charge.  L’analyse des performances vous offre des renseignements en temps réel sur l’application. Elle vous permet de diagnostiquer les problèmes et d’effectuer une analyse des causes premières des échecs.
 
 ## <a name="application-gateway"></a>Application Gateway
 
-**Approvisionnez au moins deux instances.** Déployez une passerelle Application Gateway avec au moins deux instances. Une seule instance constitue un point de défaillance unique. Utilisez deux instances ou plus à des fins de redondance et d’extensibilité. Afin d’être éligible au [SLA](https://azure.microsoft.com/support/legal/sla/application-gateway/v1_0/), vous devez approvisionner au moins deux instances moyennes ou grandes.
+**Approvisionnez au moins deux instances.** Déployez une passerelle Application Gateway avec au moins deux instances. Une seule instance constitue un point de défaillance unique. Utilisez deux instances ou plus à des fins de redondance et d’extensibilité. Afin d’être éligible au [SLA](https://azure.microsoft.com/support/legal/sla/application-gateway), vous devez approvisionner au moins deux instances moyennes ou grandes.
 
 ## <a name="cosmos-db"></a>Cosmos DB
 
@@ -77,6 +77,21 @@ Si vous utilisez Cache Redis comme un cache de données temporaire et non comme 
 
   * Si la source de données est géorépliquée, vous devez généralement pointer chaque indexeur de chaque service Recherche Azure sur son réplica de source de données local. Cependant, cette approche n’est pas recommandée pour les jeux de données volumineux stockés dans Azure SQL Database. En effet, Recherche Azure peut effectuer une indexation incrémentielle à partir des réplicas SQL Database principaux, mais pas à partir des réplicas secondaires. Pointez tous les indexeurs sur le réplica principal à la place. Après un basculement, pointez les indexeurs Recherche Azure sur le nouveau réplica principal.  
   * Si la source de données n’est pas géorépliquée, pointez plusieurs indexeurs sur la même source de données afin que les services Recherche Azure de plusieurs régions effectuent une indexation continue et indépendante à partir de la source de données. Pour plus d’informations, consultez [Considérations sur les performances et l’optimisation de Recherche Azure][search-optimization].
+
+## <a name="service-bus"></a>Service Bus
+
+**Utilisez le niveau Premium pour les charges de travail de production**. [Service Bus Premium Messaging](/azure/service-bus-messaging/service-bus-premium-messaging) met à disposition des ressources de traitement dédiées et réservées, ainsi qu’une capacité mémoire permettant de prendre en charge des performances et des débits prévisibles. Le niveau Premium Messaging donne également accès à de nouvelles fonctionnalités réservées dans un premier temps aux clients Premium. Vous pouvez décider du nombre d’unités de messagerie en fonction de la charge de travail prévue.
+
+**Gérer les messages en double**. Si un serveur de publication échoue immédiatement après l’envoi d’un message, ou s’il rencontre des problèmes de réseau ou de système, il peut par erreur ne pas enregistrer que le message a été livré et envoyer deux fois le même message au système. La messagerie Service Bus peut gérer ce problème en permettant de détecter les doublons. Pour en savoir plus, consultez [Détection des doublons](/azure/service-bus-messaging/duplicate-detection).
+
+**Gérer les exceptions**. Les API de messagerie génèrent des exceptions lorsqu’une erreur utilisateur, une erreur de configuration ou toute autre erreur se produit. Le code client (expéditeur et destinataire) doit traiter ces exceptions dans son code. Ce point est particulièrement important dans le traitement par lots, où la gestion des exceptions permet d’éviter de perdre la totalité d’un lot de messages. Pour plus d’informations, consultez [Exceptions de la messagerie Service Bus](/azure/service-bus-messaging/service-bus-messaging-exceptions).
+
+**Stratégie de nouvelle tentative**. La messagerie Service Bus permet de choisir la meilleure stratégie de nouvelle tentative pour vos applications. La stratégie par défaut consiste à autoriser un maximum de 9 nouvelles tentatives et à attendre 30 secondes, mais ce délai peut être modifié ultérieurement. Pour en savoir plus, consultez [Stratégie de nouvelle tentative : messagerie Service Bus](/azure/architecture/best-practices/retry-service-specific#service-bus).
+
+**Utiliser une file d’attente de lettres mortes**. Si un message ne peut pas être traité ou transmis à un destinataire après plusieurs tentatives, il est placé dans une file d’attente de lettres mortes. Implémentez un processus permettant de lire les messages de la file d’attente des lettres mortes, de les inspecter et de remédier au problème. Selon le scénario, vous pouvez effectuer une nouvelle tentative de message tel quel, apporter des modifications et effectuer une nouvelle tentative, ou ignorer le message. Pour en savoir plus, consultez [Vue d’ensemble des files d’attente de lettres mortes Service Bus](/azure/service-bus-messaging/service-bus-dead-letter-queues).
+
+**Utiliser la géorécupération d’urgence**. La géorécupération d’urgence permet de s’assurer que le traitement des données continue à fonctionner dans une autre région ou un autre centre de données si toute une région Azure ou tout un centre de données Azure n’est plus accessible suite à une urgence. Pour plus d’informations, consultez [Géorécupération d’urgence Azure Service Bus](/azure/service-bus-messaging/service-bus-geo-dr).
+
 
 ## <a name="storage"></a>Stockage
 

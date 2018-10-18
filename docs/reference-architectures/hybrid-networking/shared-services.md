@@ -5,12 +5,12 @@ author: telmosampaio
 ms.date: 06/19/2018
 pnp.series.title: Implement a hub-spoke network topology with shared services in Azure
 pnp.series.prev: hub-spoke
-ms.openlocfilehash: 283251d5b11f76985405410c5c237e5a64ee98fe
-ms.sourcegitcommit: 71cbef121c40ef36e2d6e3a088cb85c4260599b9
+ms.openlocfilehash: 0238c5d6f28bacbc32268d4586b30395de36384b
+ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39060793"
+ms.lasthandoff: 10/09/2018
+ms.locfileid: "48876866"
 ---
 # <a name="implement-a-hub-spoke-network-topology-with-shared-services-in-azure"></a>Implémentation d’une topologie de réseau hub-and-spoke avec des services partagés dans Azure
 
@@ -116,7 +116,7 @@ Cette étape déploie le centre de données local simulé en tant que réseau vi
 
 2. Ouvrez le fichier `onprem.json` . 
 
-3. Recherchez toutes les instances de `Password` et `adminPassword`. Dans les paramètres, entrez des valeurs pour le nom d’utilisateur et le mot de passe, et enregistrez le fichier. 
+3. Recherchez toutes les instances de `UserName`, `adminUserName`, `Password` et `adminPassword`. Dans les paramètres, entrez des valeurs pour le nom d’utilisateur et le mot de passe, et enregistrez le fichier. 
 
 4. Exécutez la commande suivante :
 
@@ -133,7 +133,7 @@ Cette étape déploie le réseau virtuel hub et le connecte au réseau virtuel l
 
 2. Recherchez `adminPassword` et entrez un nom d’utilisateur et un mot de passe dans les paramètres. 
 
-3. Recherchez toutes les instances de `sharedKey` et entrez une valeur pour une clé partagée. Enregistrez le fichier.
+3. Recherchez toutes les instances de `sharedKey` et entrez une valeur pour une clé partagée. Enregistrez le fichier .
 
    ```bash
    "sharedKey": "abc123",

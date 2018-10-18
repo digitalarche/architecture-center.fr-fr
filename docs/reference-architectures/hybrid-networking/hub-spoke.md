@@ -5,12 +5,12 @@ author: telmosampaio
 ms.date: 04/09/2018
 pnp.series.title: Implement a hub-spoke network topology in Azure
 pnp.series.prev: expressroute
-ms.openlocfilehash: abe9d6a58f3deeab388c20471c5559d63ef2f245
-ms.sourcegitcommit: c4106b58ad08f490e170e461009a4693578294ea
+ms.openlocfilehash: fcdbb7ca8d02745d4d9ab82f0bce79ab378d843c
+ms.sourcegitcommit: f6be2825bf2d37dfe25cfab92b9e3973a6b51e16
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/10/2018
-ms.locfileid: "43016060"
+ms.lasthandoff: 10/08/2018
+ms.locfileid: "48858195"
 ---
 # <a name="implement-a-hub-spoke-network-topology-in-azure"></a>Implémenter une topologie de réseau hub-and-spoke dans Azure
 
@@ -52,7 +52,7 @@ L’architecture est constituée des composants suivants.
 
 * **Réseaux virtuels spokes**. Un ou plusieurs réseaux virtuels Azure qui sont utilisés comme membres spokes dans la topologie hub-and-spoke. Les membres spokes peuvent servir à isoler les charges de travail dans leurs propres réseaux virtuels, qui sont alors gérées séparément des autres membres spokes. Chaque charge de travail peut inclure plusieurs niveaux, avec plusieurs sous-réseaux connectés à l’aide d’équilibreurs de charge Azure. Pour plus d’informations sur l’infrastructure d’application, consultez [Running Windows VM workloads][windows-vm-ra] (Exécution de charges de travail de machine virtuelle Windows) et [Exécution de charges de travail de machine virtuelle Linux][linux-vm-ra].
 
-* **Appairage de réseaux virtuels**. Deux réseaux virtuels dans la même région Azure peuvent être connectés à l’aide d’une [connexion d’appairage][vnet-peering]. Les connexions d’appairage sont des connexions non transitives et à faible latence entre des réseaux virtuels. Une fois appairés, les réseaux virtuels échangent le trafic à l’aide de la dorsale principale d’Azure, sans avoir besoin d’un routeur. Dans une topologie de réseau hub-and-spoke, vous utilisez l’appairage de réseaux virtuels pour connecter le hub à chaque membre spoke.
+* **Appairage de réseaux virtuels**. Deux réseaux virtuels peuvent être connectés à l’aide d’une [connexion d’appairage][vnet-peering]. Les connexions d’appairage sont des connexions non transitives et à faible latence entre des réseaux virtuels. Une fois appairés, les réseaux virtuels échangent le trafic à l’aide de la dorsale principale d’Azure, sans avoir besoin d’un routeur. Dans une topologie de réseau hub-and-spoke, vous utilisez l’appairage de réseaux virtuels pour connecter le hub à chaque membre spoke. Vous pouvez appairer des réseaux virtuels dans la même région ou dans différentes régions. Pour plus d’informations, consultez la [configuration requise et les contraintes][vnet-peering-requirements].
 
 > [!NOTE]
 > Cet article couvre uniquement les déploiements [Resource Manager](/azure/azure-resource-manager/resource-group-overview), mais vous pouvez également connecter un réseau virtuel classique à un réseau virtuel Resource Manager dans un même abonnement. De cette façon, vos membres spokes peuvent héberger des déploiements classiques tout en tirant parti des services partagés dans le hub.
@@ -63,7 +63,7 @@ Les recommandations suivantes s’appliquent à la plupart des scénarios. Suive
 
 ### <a name="resource-groups"></a>Groupes de ressources
 
-Le réseau virtuel hub et chaque réseau virtuel spoke peuvent être implémentés dans différents groupes de ressources, voire dans différents abonnements, tant qu’ils appartiennent au même locataire Azure Active Directory (Azure AD) dans la même région Azure. Cela permet de décentraliser la gestion de chaque charge de travail, tout en partageant les services gérés dans le réseau virtuel hub.
+Le réseau virtuel hub et chaque réseau virtuel spoke peuvent être implémentés dans des groupes de ressources et différentes, voire dans des abonnements différents. Quand vous appairez des réseaux virtuels de différents abonnements, les deux abonnements peuvent être associés au même locataire Azure Active Directory ou à un locataire différent. Cela permet de décentraliser la gestion de chaque charge de travail, tout en partageant les services gérés dans le réseau virtuel hub. 
 
 ### <a name="vnet-and-gatewaysubnet"></a>Réseau virtuel et sous réseau GatewaySubnet
 
@@ -319,6 +319,7 @@ Cette étape est facultative. Si vous souhaitez autoriser les spokes à se conne
 [resource-manager-overview]: /azure/azure-resource-manager/resource-group-overview
 [vnet-peering]: /azure/virtual-network/virtual-network-peering-overview
 [vnet-peering-limit]: /azure/azure-subscription-service-limits#networking-limits
+[vnet-peering-requirements]: /azure/virtual-network/virtual-network-manage-peering#requirements-and-constraints
 [vpn-appliance]: /azure/vpn-gateway/vpn-gateway-about-vpn-devices
 [windows-vm-ra]: ../virtual-machines-windows/index.md
 

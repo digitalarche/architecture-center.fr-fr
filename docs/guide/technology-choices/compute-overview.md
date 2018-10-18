@@ -3,22 +3,22 @@ title: Vue d’ensemble des options de calcul Azure
 description: Vue d’ensemble des options de calcul Azure
 author: MikeWasson
 ms.date: 06/13/2018
-ms.openlocfilehash: ceb70f8eeff42e6cadb8a63c2f36986f26322201
-ms.sourcegitcommit: 26b04f138a860979aea5d253ba7fecffc654841e
+ms.openlocfilehash: cb59c4472b183d9a14031497f0b6db673938c9a9
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36206556"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48818817"
 ---
 # <a name="overview-of-azure-compute-options"></a>Vue d’ensemble des options de calcul Azure
 
 Le terme *calcul* fait référence au modèle d’hébergement des ressources de calcul utilisées par votre application. 
 
-## <a name="overview"></a>Vue d'ensemble
+## <a name="overview"></a>Vue d’ensemble
 
 À l’une des extrémités du spectre se trouve la fonctionnalité **infrastructure as a service** (IaaS). IaaS vous permet d’approvisionner les machines virtuelles dont vous avez besoin, ainsi que les composants de stockage et réseau associés. Ensuite, vous déployez les logiciels et les applications dont vous souhaitez disposer sur ces machines virtuelles. Ce modèle est le plus proche d’un environnement local traditionnel, à ceci près que l’infrastructure est gérée par Microsoft. Vous continuez de gérer les différentes machines virtuelles.  
 
-La fonctionnalité **platform as a Service** (PaaS) offre un environnement d’hébergement géré, dans lequel vous pouvez déployer votre application sans avoir à gérer de machines virtuelles ni de ressources réseau. Par exemple, plutôt que de créer des machines virtuelles individuelles, vous spécifiez un nombre d’instances, et le service approvisionne, configure et gère les ressources nécessaires. Azure App Service constitue un exemple de service PaaS.
+La fonctionnalité **Platform as a Service** (PaaS) offre un environnement d’hébergement géré, dans lequel vous pouvez déployer votre application sans avoir à gérer de machines virtuelles ni de ressources réseau. Par exemple, plutôt que de créer des machines virtuelles individuelles, vous spécifiez un nombre d’instances, et le service approvisionne, configure et gère les ressources nécessaires. Azure App Service constitue un exemple de service PaaS.
 
 Il existe toute une gamme de services entre IaaS et le modèle PaaS pur. Par exemple, les machines virtuelles Azure peuvent faire l’objet d’une mise à l’échelle automatique à l’aide de VM Scale Sets. Cette fonctionnalité de mise à l’échelle automatique n’est pas strictement PaaS, mais ce type de fonctionnalité de gestion peut figurer dans un service PaaS.
 

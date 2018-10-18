@@ -3,12 +3,12 @@ title: Refactoriser une application Azure Service Fabric migrée depuis Azure Cl
 description: Comment refactoriser une application Azure Service Fabric existante migrée depuis Azure Cloud Services
 author: petertay
 ms.date: 01/30/2018
-ms.openlocfilehash: 08ef3af68b8eaba36a5b871449f0aba764fe5a04
-ms.sourcegitcommit: 2123c25b1a0b5501ff1887f98030787191cf6994
+ms.openlocfilehash: 7b5c115acdbfca0c105e2b861af9a8049b890dca
+ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/08/2018
-ms.locfileid: "29782544"
+ms.lasthandoff: 10/05/2018
+ms.locfileid: "48819072"
 ---
 # <a name="refactor-an-azure-service-fabric-application-migrated-from-azure-cloud-services"></a>Refactoriser une application Azure Service Fabric migrée depuis Azure Cloud Services
 
@@ -18,7 +18,7 @@ Cet article décrit la refactorisation d’une application Azure Service Fabric 
 
 ## <a name="scenario"></a>Scénario
 
-Comme indiqué dans l’article précédent, [Migration d’une application Azure Cloud Services vers Azure Service Fabric][migrate-from-cloud-services], l’équipe Patterns & Practices a écrit un livre en 2012, décrivant le processus de conception et d’implémentation d’une application Cloud Services dans Azure. Ce manuel décrit une société fictive nommée Tailspin souhaitant créer une application Cloud Services nommée **Surveys**. L’application Surveys permet aux utilisateurs de créer et de publier des enquêtes auxquelles le public peut répondre. Le diagramme suivant illustre l’architecture de cette version de l’application Surveys :
+Comme indiqué dans l’article précédent, [Migration d’une application Azure Cloud Services vers Azure Service Fabric][migrate-from-cloud-services], l’équipe Patterns & Practices a écrit un livre en 2012, décrivant le processus de conception et d’implémentation d’une application Cloud Services dans Azure. Ce manuel décrit une société fictive nommée Tailspin souhaitant créer une application Cloud Services nommée **Surveys**. L’application Surveys permet aux utilisateur de créer et de publier des enquêtes auxquelles le public peut répondre. Le diagramme suivant illustre l’architecture de cette version de l’application Surveys :
 
 ![](./images/tailspin01.png)
 
@@ -44,7 +44,7 @@ Le service **Tailspin.Web.Survey.Public** est porté à partir du rôle web *Tai
 Le service **Tailspin.AnswerAnalysisService** est porté à partir du rôle de travail *Tailspin.AnswerAnalysisService* d’origine.
 
 > [!NOTE] 
-> Alors que les modifications apportées au code des rôles web et de travail ont été minimes, **Tailspin.Web** et **Tailspin.Web.Survey.Public** ont été modifiés pour auto-héberger un serveur web [Kestrel]. L’application Surveys antérieure est une application ASP.Net qui était hébergée par Interet Information Services (IIS), mais il est impossible d’exécuter IIS en tant que service dans Service Fabric. Par conséquent, n’importe quel serveur web doit pouvoir être auto-hébergé, comme [Kestrel]. Dans certaines situations, il est possible d’exécuter IIS à l’intérieur d’un conteneur dans Service Fabric. Voir [Scénarios d’utilisation des conteneurs][container-scenarios] pour plus d’informations.  
+> Alors que les modifications apportées au code des rôles web et de travail ont été minimes, **Tailspin.Web** et **Tailspin.Web.Survey.Public** ont été modifiés pour auto-héberger un serveur web [Kestrel]. L’application Surveys antérieure est une application ASP.NET qui était hébergée par Internet Information Services (IIS), mais il est impossible d’exécuter IIS en tant que service dans Service Fabric. Par conséquent, n’importe quel serveur web doit pouvoir être auto-hébergé, comme [Kestrel]. Dans certaines situations, il est possible d’exécuter IIS à l’intérieur d’un conteneur dans Service Fabric. Voir [Scénarios d’utilisation des conteneurs][container-scenarios] pour plus d’informations.  
 
 Maintenant, Tailspin refactorise l’application Surveys en une architecture plus granulaire. La motivation de Tailspin pour la refactorisation est de faciliter le développement, la compilation et le déploiement de l’application Surveys. En décomposant les rôles web et de travail en une architecture plus granulaire, Tailspin souhaite supprimer les dépendances de données et les communications existantes étroitement couplées entre ces rôles.
 
@@ -80,17 +80,17 @@ Le diagramme suivant illustre l’architecture de l’application Surveys refact
 Azure Service Fabric prend en charge les modèles de programmation suivants :
 * Le modèle exécutable invité permet d’empaqueter n’importe quel fichier exécutable comme un service et de le déployer dans un cluster Service Fabric. Service Fabric orchestre et gère l’exécution de l’exécutable invité.
 * Le modèle de conteneur permet le déploiement des services dans les images de conteneur. Service Fabric prend en charge la création et la gestion de conteneurs placés sur des conteneurs de noyau Linux et Windows Server. 
-* Le modèle de programmation de services fiables permet la création de services sans état ou avec état s’intégrant à toutes les fonctionnalités de la plateforme Service Fabric. Les services avec état permettent de stocker un état répliqué dans le cluster Service Fabric. Les services sans état ne le permettent pas.
+* Le modèle de programmation de services fiables permet la création de services sans état ou avec état s’intègrant à toutes les fonctionnalités de la plateforme Service Fabric. Les services avec état permettent de stocker un état répliqué dans le cluster Service Fabric. Les services sans état ne le permettent pas.
 * Le modèle de programmation des acteurs fiables permet la création de services qui implémentent le modèle d’acteur virtuel.
 
 Tous les services de l’application Surveys sont des services sans état fiables, à l’exception du service *Tailspin.SurveyResponseService*. Ce service implémente un [ReliableConcurrentQueue][reliable-concurrent-queue] pour traiter les réponses d’enquête une fois reçues. Les réponses dans le ReliableConcurrentQueue sont enregistrées dans le Stockage Blob Azure et passées au *Tailspin.SurveyAnalysisService* pour analyse. Tailspin choisit un ReliableConcurrentQueue, car les réponses ne nécessitent pas un ordre premier entré, premier sorti (FIFO) strict fourni par une file d’attente comme Azure Service Bus. Un ReliableConcurrentQueue est également conçu pour fournir un débit élevé et une faible latence pour les opérations de mise en file d’attente et de retrait.
 
-Notez que les opérations pour conserver les éléments retirés d’une file d’attente à partir d’un ReliableConcurrentQueue doivent idéalement être idempotentes. Si une exception est levée pendant le traitement d’un élément à partir de la file d’attente, le même élément est susceptible d’être traité plusieurs fois. Dans l’application Surveys, l’opération de fusion des réponses d’enquête répond que le *Tailspin.SurveyAnalysisService* n’est pas idempotente car Tailspin a décidé que les données d’analyse d’enquête sont seulement une capture instantanée des données d’analyse et n’ont pas besoin d’être cohérentes. Les réponses d’enquête enregistrées dans le Stockage Blob Azure sont finalement cohérentes, de sorte que l’analyse finale de l’enquête peut toujours être recalculée correctement à partir de ces données.
+Notez que les opérations pour conserver les éléments retirés d’une file d’attente à partir d’un ReliableConcurrentQueue doivent idéalement être idempotente. Si une exception est levée pendant le traitement d’un élément à partir de la file d’attente, le même élément est susceptible d’être traité plusieurs fois. Dans l’application Surveys, l’opération de fusion des réponses d’enquête répond que le *Tailspin.SurveyAnalysisService* n’est pas idempotente car Tailspin a décidé que les données d’analyse d’enquête sont seulement une capture instantanée des données d’analyse et n’ont pas besoin d’être cohérentes. Les réponses d’enquête enregistrées dans le Stockage Blob Azure sont finalement cohérentes, de sorte que l’analyse finale de l’enquête peut toujours être recalculée correctement à partir de ces données.
 
 ## <a name="communication-framework"></a>Infrastructure de communication
 
-Chaque service dans l’application Surveys communique à l’aide d’une API web RESTful. Les API RESTful offrent les avantages suivants :
-* Facilité d’utilisation : chaque service est généré à l’aide de ASP.Net Core MVC, qui prend nativement en charge la création d’API web.
+Chaque service dans l’application Surveys communique à l’aide d’une API web RESTful. Les API RESTful offre les avantages suivants :
+* Facilité d’utilisation : chaque service est généré à l’aide d’ASP.NET Core MVC, qui prend nativement en charge la création d’API web.
 * Sécurité : alors que chaque service ne requiert pas SSL, Tailspin peut demander à chaque service de le demander. 
 * Contrôle de version : les clients peuvent être écrits et testés par rapport à une version spécifique d’une API web.
 
@@ -142,10 +142,10 @@ L’application Surveys refactorisée est composée de cinq services sans état 
 Tailspin déploie le cluster à l’aide du portail Azure. Le type de ressource du cluster Service Fabric déploie toute l’infrastructure nécessaire, y compris les groupes de machines virtuelles identiques et un équilibreur de charge. Les tailles recommandées des machines virtuelles sont affichées dans le portail Azure pendant le processus d’approvisionnement pour le cluster Service Fabric. Notez qu’étant donné que les machines virtuelles sont déployées dans un groupe de machines virtuelles identiques, elles peuvent être mises à l’échelle en fonction de la charge de l’utilisateur.
 
 > [!NOTE]
-> Comme indiqué précédemment, dans la version migrée de l’application Surveys, les deux serveurs web frontaux étaient auto-hébergés à l’aide d’ASP.Net Core et de Kestrel comme un serveur web. Alors que la version migrée de l’application Surveys n’utilise pas un proxy inverse, il est fortement recommandé d’en utiliser un, comme IIS, Nginx ou Apache. Pour plus d’informations, consultez [Introduction à l’implémentation du serveur web Kestrel dans ASP.NET Core][kestrel-intro].
-> Dans l’application Surveys refactorisée, les deux serveurs web frontaux sont auto-hébergés à l’aide d’ASP.Net Core avec [WebListener][weblistener] comme un serveur web de sorte que le proxy inverse n’est pas nécessaire.
+> Comme indiqué précédemment, dans la version migrée de l’application Surveys, les deux serveurs web frontaux étaient auto-hébergés à l’aide d’ASP.NET Core et de Kestrel en tant que serveur web. Alors que la version migrée de l’application Surveys n’utilise pas un proxy inverse, il est fortement recommandé d’en utiliser un, comme IIS, Nginx ou Apache. Pour plus d’informations, consultez [Introduction à l’implémentation du serveur web Kestrel dans ASP.NET Core][kestrel-intro].
+> Dans l’application Surveys refactorisée, les deux serveurs web frontaux sont auto-hébergés à l’aide d’ASP.NET Core avec [WebListener][weblistener] en tant que serveur web de sorte que le proxy inverse n’est pas nécessaire.
 
-## <a name="next-steps"></a>étapes suivantes
+## <a name="next-steps"></a>Étapes suivantes
 
 Le code de l’application Surveys est disponible sur [GitHub][sample-code].
 
