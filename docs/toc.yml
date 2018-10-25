@@ -351,6 +351,10 @@ items:
       href: reference-architectures/data/enterprise-bi-adf.md
     - name: Traitement de flux de données avec Azure Stream Analytics
       href: reference-architectures/data/stream-processing-stream-analytics.md
+  - name: Intégration d’entreprise
+    items:
+    - name: Intégration d’entreprise simple
+      href: reference-architectures/enterprise-integration/simple-enterprise-integration.md
   - name: Réseaux hybrides
     items:
     - name: Vue d’ensemble
@@ -537,9 +541,9 @@ items:
       href: cloud-adoption/appendix/azure-scaffold.md
     - name: Implémentation d’une structure d’entreprise Azure
       href: cloud-adoption/appendix/azure-scaffold-examples.md
-ms.openlocfilehash: a79c29c0673de7eb14371d60377dd589cdf78720
-ms.sourcegitcommit: 42797fffb82bbbf86f6deb1da52c61d456be631e
+ms.openlocfilehash: bb4f5188f3f85561a08331a15c797a15c375157f
+ms.sourcegitcommit: 2ae794de13c45cf24ad60d4f4dbb193c25944eff
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/13/2018
-ms.locfileid: "49313197"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50001913"

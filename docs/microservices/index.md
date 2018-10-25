@@ -2,13 +2,13 @@
 title: Conception, génération et exploitation de microservices sur Azure avec Kubernetes
 description: Conception, génération et exploitation de microservices sur Azure
 author: MikeWasson
-ms.date: 12/08/2017
-ms.openlocfilehash: 857e91a8eeefec18b459f2e66fde9a4f8bbe7b21
-ms.sourcegitcommit: 744ad1381e01bbda6a1a7eff4b25e1a337385553
+ms.date: 10/23/2018
+ms.openlocfilehash: cac16c9212432c72aeaecac1a578828a00838431
+ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2018
-ms.locfileid: "27701100"
+ms.lasthandoff: 10/24/2018
+ms.locfileid: "49962770"
 ---
 # <a name="designing-building-and-operating-microservices-on-azure"></a>Conception, génération et exploitation de microservices sur Azure
 
@@ -85,7 +85,7 @@ Ce scénario implique un domaine assez complexe. Certaines entreprises veulent p
 > [!NOTE]
 > Pour éclairer votre choix entre une architecture de microservices et d’autres styles d’architecture, consultez le [Guide de l’architecture des applications Azure](../guide/index.md).
 
-Notre implémentation de référence utilise Kubernetes avec [Azure Container Service (ACS)](/azure/container-service/kubernetes/). Toutefois, la plupart des principaux défis et décisions architecturales s’appliquent à n’importe quel orchestrateur de conteneur, y compris [Azure Service Fabric](/azure/service-fabric/). 
+Notre implémentation de référence utilise Kubernetes avec [Azure Kubernetes Service](/azure/aks/) (AKS). Toutefois, la plupart des principaux défis et décisions architecturales s’appliquent à n’importe quel orchestrateur de conteneur, y compris [Azure Service Fabric](/azure/service-fabric/). 
 
 > [!div class="nextstepaction"]
 > [Analyse de domaine](./domain-analysis.md)
