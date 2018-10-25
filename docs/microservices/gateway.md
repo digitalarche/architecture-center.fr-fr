@@ -2,13 +2,13 @@
 title: Passerelles d’API
 description: Passerelles d’API dans les microservices
 author: MikeWasson
-ms.date: 12/08/2017
-ms.openlocfilehash: 6483d416363e24f4084d6b856847a740bf4054d9
-ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
+ms.date: 10/23/2018
+ms.openlocfilehash: 41554e6abf4db61d1fa6e501419425d331495afc
+ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/29/2017
-ms.locfileid: "27549176"
+ms.lasthandoff: 10/24/2018
+ms.locfileid: "49962821"
 ---
 # <a name="designing-microservices-api-gateways"></a>Conception de microservices : passerelles d’API
 
@@ -57,7 +57,7 @@ Voici quelques options justifiant l’implémentation d’une passerelle d’API
 
 - [Azure Application Gateway](/azure/application-gateway/) : Application Gateway est un service managé d’équilibrage de charge qui peut exécuter un routage de couche 7et un arrêt SSL. Il fournit également un pare-feu d’application web (WAF).
 
-- [Azure API Management](/azure/api-management/) : API Management est une solution clé en main pour la publication d’API à destination des clients internes et externes. Elle fournit des fonctionnalités utiles pour gérer une API publique, y compris la limitation du débit, la liste verte d’adresses IP et l’authentification à l’aide d’Azure Active Directory ou d’autres fournisseurs d’identité. API Management n’effectue aucun équilibrage de charge. Par conséquent, elle doit être utilisée conjointement à un équilibreur de charge, tel qu’Application Gateway ou un proxy inverse.
+- [Azure API Management](/azure/api-management/) : API Management est une solution clé en main pour la publication d’API à destination des clients internes et externes. Elle fournit des fonctionnalités utiles pour gérer une API publique, y compris la limitation du débit, la liste verte d’adresses IP et l’authentification à l’aide d’Azure Active Directory ou d’autres fournisseurs d’identité. API Management n’effectue aucun équilibrage de charge. Par conséquent, elle doit être utilisée conjointement à un équilibreur de charge, tel qu’Application Gateway ou un proxy inverse. Pour plus d’informations sur l’utilisation d’API Management avec Application Gateway, voir [Intégration de la gestion des API dans un réseau virtuel interne avec Application Gateway](/azure/api-management/api-management-howto-integrate-internal-vnet-appgateway).
 
 Lors du choix d’une technologie de passerelle, considérez les points suivants :
 
@@ -67,15 +67,11 @@ Lors du choix d’une technologie de passerelle, considérez les points suivants
 
 **Gestion** : lors de l’ajout ou de la mise à jour de services, les règles de routage de passerelle peuvent nécessiter une mise à jour. Envisagez le mode de gestion de ce processus. Des considérations similaires s’appliquent à la gestion des certificats SSL, des listes vertes d’adresses IP et d’autres aspects de la configuration.
 
-## <a name="deployment-considerations"></a>Points à prendre en considération pour le déploiement
-
-### <a name="deploying-nginx-or-haproxy-to-kubernetes"></a>Déploiement Nginx ou HAProxy vers Kubernetes
+## <a name="deploying-nginx-or-haproxy-to-kubernetes"></a>Déploiement Nginx ou HAProxy vers Kubernetes
 
 Vous pouvez déployer Nginx ou HAProxy sur Kubernetes en tant que [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/) ou [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) qui spécifie l’image de conteneur Nginx ou HAProxy. Utilisez un élément ConfigMap pour stocker le fichier de configuration du proxy et montez l’élément ConfigMap en tant que volume. Créez un service de type LoadBalancer pour exposer la passerelle via un équilibreur de charge Azure. 
 
-<!-- - Configure a readiness probe that serves a static file from the gateway (rather than routing to another service). -->
-
-Une alternative consiste à créer un contrôleur d’entrée. Un contrôleur d’entrée est une ressource Kubernetes qui déploie un équilibreur de charge ou un serveur proxy inverse. Plusieurs implémentations existent, y compris Nginx et HAProxy. Une ressource séparée appelée « entrée » définit des paramètres pour le contrôleur d’entrée, tels que des règles de routage et des certificats TLS. De cette façon, vous n’avez pas besoin de gérer des fichiers de configuration complexes propres à une technologie de serveur proxy spécifique. Les contrôleurs d’entrée sont encore une fonctionnalité bêta de Kubernetes au moment de la rédaction de cet article et continueront d’évoluer.
+Une alternative consiste à créer un contrôleur d’entrée. Un contrôleur d’entrée est une ressource Kubernetes qui déploie un équilibreur de charge ou un serveur proxy inverse. Plusieurs implémentations existent, y compris Nginx et HAProxy. Une ressource séparée appelée « entrée » définit des paramètres pour le contrôleur d’entrée, tels que des règles de routage et des certificats TLS. De cette façon, vous n’avez pas besoin de gérer des fichiers de configuration complexes propres à une technologie de serveur proxy spécifique.
 
 La passerelle est un point de défaillance unique ou un goulot d’étranglement potentiel dans le système. Déployez donc toujours au moins deux réplicas pour une haute disponibilité. Vous devrez peut-être mettre à l’échelle les réplicas, en fonction de la charge. 
 
@@ -86,35 +82,6 @@ Envisagez également d’exécuter la passerelle sur un ensemble dédié de nœu
 - Configuration stable : si la passerelle est mal configurée, l’application entière peut devenir indisponible. 
 
 - Les performances. vous pouvez utiliser une configuration de machine virtuelle spécifique pour la passerelle pour des raisons de performances.
-
-<!-- - Load balancing. You can configure the external load balancer so that requests always go to a gateway node. That can save a network hop, which would otherwise happen whenever a request lands on a node that isn't running a gateway pod. This consideration applies mainly to large clusters, where the gateway runs on a relatively small fraction of the total nodes. In Azure Container Service (ACS), this approach currently requires [ACS Engine](https://github.com/Azure/acs-engine)) which allows you to create multiple agent pools. Then you can deploy the gateway as a DaemonSet to the front-end pool. -->
-
-### <a name="azure-application-gateway"></a>Azure Application Gateway
-
-Pour connecter Application Gateway à un cluster Kubernetes dans Azure :
-
-1. Créez un sous-réseau vide dans le réseau virtuel du cluster.
-2. Déployez Application Gateway.
-3. Créez un service Kubernetes avec type=[NodePort](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport). Cela expose le service sur chaque nœud afin qu’il soit accessible depuis l’extérieur du cluster. Cela ne crée pas d’équilibreur de charge.
-5. Obtenez le numéro de port attribué au service.
-6. Ajoutez une règle Application Gateway où :
-    - Le pool principal contient les machines virtuelles d’agent.
-    - Le paramètre HTTP spécifie le numéro de port de service.
-    - Le processus d’écoute de la passerelle écoute sur les ports 80/443.
-    
-Définissez le nombre d’instances sur 2 ou plus pour la haute disponibilité.
-
-### <a name="azure-api-management"></a>Gestion des API Azure 
-
-Pour connecter API Management à un cluster Kubernetes dans Azure :
-
-1. Créez un sous-réseau vide dans le réseau virtuel du cluster.
-2. Déployez API Management vers ce sous-réseau.
-3. Créez un service Kubernetes de type LoadBalancer. Utilisez l’annotation d’[équilibreur de charge interne](https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer) pour créer un équilibreur de charge interne, au lieu d’un équilibreur de charge connecté à Internet, qui est l’option par défaut.
-4. Recherchez l’adresse IP privée de l’équilibreur de charge interne, à l’aide de kubectl ou de l’interface de ligne de commande Azure.
-5. Utilisez API Management pour créer une API qui mène à l’adresse IP privée de l’équilibreur de charge.
-
-Vous pouvez combiner API Management avec un proxy inverse : Nginx, HAProxy ou Azure Application Gateway. Pour plus d’informations sur l’utilisation d’API Management avec Application Gateway, voir [Intégration de la gestion des API dans un réseau virtuel interne avec Application Gateway](/azure/api-management/api-management-howto-integrate-internal-vnet-appgateway).
 
 > [!div class="nextstepaction"]
 > [Enregistrement et surveillance](./logging-monitoring.md)

@@ -2,13 +2,13 @@
 title: Communication interservice dans les microservices
 description: Communication interservice dans les microservices
 author: MikeWasson
-ms.date: 12/08/2017
-ms.openlocfilehash: aff2fb7b2be25ca32d6224cee15363880cfb1488
-ms.sourcegitcommit: a8453c4bc7c870fa1a12bb3c02e3b310db87530c
+ms.date: 10/23/2018
+ms.openlocfilehash: 19a54ffc362a1fc88c3255c9346bd697a319b143
+ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/29/2017
-ms.locfileid: "27549125"
+ms.lasthandoff: 10/24/2018
+ms.locfileid: "49962957"
 ---
 # <a name="designing-microservices-interservice-communication"></a>Conception de microservices : communication interservice
 
@@ -99,7 +99,7 @@ Une *maille de services* est une couche logicielle qui gère les communications 
 > [!NOTE]
 > La maille de services consiste un exemple du [modèle Ambassadeur](../patterns/ambassador.md), un service d’assistance qui envoie des requêtes réseau au nom de l’application. 
 
-Pour l’instant, les principales options de maille de services dans Kubernetes sont [linkerd](https://linkerd.io/) et [Istio](https://istio.io/). Ces deux technologies évoluent rapidement. Au moment où nous avons écrit ce guide, la dernière version d’Istio correspondait à la version 0.2 ; il s’agit donc d’une technologie très récente. Toutefois, voici certaines des fonctionnalités que linkerd et Istio ont en commun : 
+Pour l’instant, les principales options de maille de services dans Kubernetes sont [linkerd](https://linkerd.io/) et [Istio](https://istio.io/). Ces deux technologies évoluent rapidement. Toutefois, voici certaines des fonctionnalités que linkerd et Istio ont en commun : 
 
 - Équilibrage de charge au niveau session, basé sur les latences observées ou sur le nombre de requêtes en attente. Cette fonctionnalité peut améliorer les performances par rapport à l’équilibrage de charge de type Couche 4 fourni par Kubernetes. 
 

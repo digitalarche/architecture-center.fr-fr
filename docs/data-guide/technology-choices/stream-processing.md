@@ -3,12 +3,12 @@ title: Sélectionner une technologie de traitement de flux
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: fd93418c62b584e79f229e9f42703d148aeb0eca
-ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
+ms.openlocfilehash: b78ebe253e927eece38930ba7f6186f485a956f7
+ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/28/2018
-ms.locfileid: "37091061"
+ms.lasthandoff: 10/24/2018
+ms.locfileid: "49962910"
 ---
 # <a name="choosing-a-stream-processing-technology-in-azure"></a>Sélectionner une technologie de traitement de flux dans Azure
 
@@ -60,13 +60,12 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 | | Azure Stream Analytics | HDInsight avec Spark Streaming | Apache Spark dans Azure Databricks | HDInsight avec Storm | Azure Functions | Azure App Service WebJobs |
 | --- | --- | --- | --- | --- | --- | --- | 
-| Prise en charge temporelle/fenêtrage intégrée | OUI | OUI | OUI | OUI | Non  | Non  |
+| Prise en charge temporelle/fenêtrage intégrée | Oui | OUI | OUI | Oui | Non  | Non  |
 | Formats de données d’entrée | Avro, JSON ou CSV, encodage UTF-8 | Tout format à base de code personnalisé | Tout format à base de code personnalisé | Tout format à base de code personnalisé | Tout format à base de code personnalisé | Tout format à base de code personnalisé |
 | Extensibilité | [Interroger des partitions](/azure/stream-analytics/stream-analytics-parallelization) | Limitée par la taille du cluster | Limitée par la configuration de la mise à l’échelle du cluster Databricks | Limitée par la taille du cluster | Jusqu'à 200 instances d’application de fonction traitées en parallèle | Limitée par la capacité du plan App Service | 
-| Prise en charge de l’arrivée tardive et de la gestion des événements de manière désordonnée | OUI | OUI | OUI | OUI | Non  | Non  |
+| Prise en charge de l’arrivée tardive et de la gestion des événements de manière désordonnée | Oui | OUI | OUI | Oui | Non  | Non  |
 
 Voir aussi :
 
 - [Choisir une technologie d’ingestion de messages en temps réel](./real-time-ingestion.md)
-- [Comparaison d’Apache Storm et d’Azure Stream Analytics](/azure/stream-analytics/stream-analytics-comparison-storm)
 - [Traitement en temps réel](../big-data/real-time-processing.md)
