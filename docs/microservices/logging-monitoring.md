@@ -2,13 +2,13 @@
 title: Journalisation et surveillance dans les microservices
 description: Journalisation et surveillance dans les microservices
 author: MikeWasson
-ms.date: 12/08/2017
-ms.openlocfilehash: b7206e2f35b9f227ff298f077ddafef1c6015b15
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.date: 10/23/2018
+ms.openlocfilehash: c2a935f51c57936977fb4402de2113938351069c
+ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428769"
+ms.lasthandoff: 10/24/2018
+ms.locfileid: "49962872"
 ---
 # <a name="designing-microservices-logging-and-monitoring"></a>Conception de microservices : journalisation et surveillance
 
@@ -18,19 +18,19 @@ Dans toute application complexe, il arrive toujours un moment où quelque chose 
 
 Dans une architecture de microservices, l’identification de la cause précise des erreurs ou des goulots d’étranglement des performances peut se révéler particulièrement ardue. Une même opération utilisateur peut s’étendre sur plusieurs services. Il est possible que des services atteignent les limites d’E/S réseau au sein du cluster. Une chaîne d’appels entre les services peut engendrer une régulation de flux dans le système, entraînant ainsi une latence élevée ou des échecs en cascade. En outre, vous ignorez généralement dans quel nœud un conteneur spécifique s’exécutera. Les conteneurs placés sur le même nœud peuvent entrer en concurrence pour bénéficier de ressources processeur ou mémoire limitées. 
 
-Pour faciliter la compréhension du déroulement des opérations, l’application doit émettre des événements de télémétrie. Vous pouvez classer ces événements en mesures et en journaux textuels. 
+Pour faciliter la compréhension du déroulement des opérations, vous devez collecter des données de télémétrie à partir de l’application.  Les données de télémétrie peuvent être divisées en *journaux* et *métriques*. [Azure Monitor](/azure/monitoring-and-diagnostics/monitoring-overview) collecte des journaux et des métriques sur la plateforme Azure.
 
-Les *mesures* sont des valeurs numériques qui peuvent être analysées. Vous pouvez les utiliser pour observer le système en temps réel (ou quasiment en temps réel) ou pour analyser les tendances des performances au fil du temps. Les mesures disponibles sont les suivantes :
+Les **journaux** sont des enregistrements textuels des événements qui surviennent pendant l’exécution de l’application. Ils comprennent des éléments tels que les journaux d’application (déclarations de trace) ou les journaux de serveur web. Les journaux se révèlent particulièrement utiles pour la forensique et l’analyse de la cause racine. 
 
-- Mesures système de niveau nœud, comprenant l’utilisation de l’UC, de la mémoire, du réseau, du disque et du système de fichiers. Les mesures système vous aident à comprendre l’allocation des ressources pour chacun des nœuds du cluster et à corriger les valeurs hors norme.
- 
-- Mesures Kubernetes. Étant donné que les services s’exécutent dans des conteneurs, vous devez collecter les mesures au niveau du conteneur, et non simplement au niveau de la machine virtuelle. Dans Kubernetes, cAdvisor (Container Advisor) est l’agent qui collecte les statistiques relatives aux ressources processeur, mémoire, système de fichiers et réseau utilisées par chaque conteneur. Le démon kubelet collecte les statistiques de ressources recueillies par cAdvisor et les expose par le biais d’une API REST.
-   
-- Mesures d’application. Ces dernières englobent toutes les mesures qui permettent de comprendre le comportement d’un service. Il s’agit par exemple du nombre de requêtes HTTP entrantes en file d’attente, de la latence des requêtes, de la longueur de la file d’attente de messages ou du nombre de transactions traitées par seconde.
+Les **mesures** sont des valeurs numériques qui peuvent être analysées. Vous pouvez les utiliser pour observer le système en temps réel (ou quasiment en temps réel) ou pour analyser les tendances des performances au fil du temps. Les métriques peuvent être davantage sous-catégorisées comme suit :
 
-- Mesures des services dépendants. Les services au sein du cluster peuvent appeler des services externes situés en dehors du cluster, tels que des services PaaS gérés. Vous pouvez surveiller les services Azure à l’aide de la plateforme [Azure Monitor](/azure/monitoring-and-diagnostics/monitoring-overview). Les services tiers peuvent ou non fournir des mesures. Si ce n’est pas le cas, vous devrez vous appuyer sur vos propres mesures d’application pour effectuer le suivi des statistiques relatives aux taux de latence et d’erreurs.
+- Mesures de **niveau nœud**, comprenant l’utilisation de l’UC, de la mémoire, du réseau, du disque et du système de fichiers. Les mesures système vous aident à comprendre l’allocation des ressources pour chacun des nœuds du cluster et à corriger les valeurs hors norme.
 
-Les *journaux* sont des enregistrements des événements qui surviennent pendant l’exécution de l’application. Ils comprennent des éléments tels que les journaux d’application (déclarations de trace) ou les journaux de serveur web. Les journaux se révèlent particulièrement utiles pour la forensique et l’analyse de la cause racine. 
+- Métriques des **conteneurs**. Si des services sont exécutés dans des conteneurs, vous devez collecter les mesures au niveau du conteneur, et non simplement au niveau de la machine virtuelle. Vous pouvez configurer Azure Monitor pour surveiller les charges de travail de conteneur dans Azure Kubernetes Service (ACS). Pour plus d’informations, voir [Vue d’ensemble de Azure Monitor pour les conteneurs](/azure/monitoring/monitoring-container-insights-overview). Pour d’autres orchestrateurs de conteneur, utilisez la [solution Container Monitoring dans Log Analytics](/azure/log-analytics/log-analytics-containers).
+
+- Mesures **d’application**. Ces dernières englobent toutes les mesures qui permettent de comprendre le comportement d’un service. Il s’agit par exemple du nombre de requêtes HTTP entrantes en file d’attente, de la latence des requêtes ou de la longueur de la file d’attente de messages. Les applications peuvent également créer des mesures personnalisées spécifiques au domaine, comme le nombre de transactions commerciales traitées par minute. Utilisez [Application Insights](/azure/application-insights/app-insights-overview) pour activer les métriques d’application. 
+
+- Mesures des **services dépendants**. Les services peuvent appeler des services ou des points de terminaison externes, tels que les services PaaS gérés ou les services SaaS. Les services tiers peuvent ou non fournir des mesures. Si ce n’est pas le cas, vous devrez vous appuyer sur vos propres mesures d’application pour effectuer le suivi des statistiques relatives aux taux de latence et d’erreurs.
 
 ## <a name="considerations"></a>Considérations
 

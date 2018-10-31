@@ -4,12 +4,12 @@ description: Liste de contrôle fournissant des indications relatives aux probl�
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist
-ms.openlocfilehash: cea5baf8c37bf793c5de60f6c2be809629df072b
-ms.sourcegitcommit: 2154e93a0a075e1f7425a6eb11fc3f03c1300c23
+ms.openlocfilehash: a09a8f77865bf127ae0a73e0da7e1d3fb8508826
+ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/30/2018
-ms.locfileid: "39352625"
+ms.lasthandoff: 10/24/2018
+ms.locfileid: "49962889"
 ---
 # <a name="availability-checklist"></a>Liste de contrôle de disponibilité
 

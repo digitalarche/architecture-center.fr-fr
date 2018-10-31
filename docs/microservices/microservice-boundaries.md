@@ -2,13 +2,13 @@
 title: Identification des limites de microservice
 description: Identification des limites de microservice
 author: MikeWasson
-ms.date: 12/08/2017
-ms.openlocfilehash: d35b92ffd97c4fda5d6599340925ce3dfea7f15b
-ms.sourcegitcommit: a5e549c15a948f6fb5cec786dbddc8578af3be66
+ms.date: 10/23/2018
+ms.openlocfilehash: 679696818d50b70a5116916bd9198a390abfd7fe
+ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2018
-ms.locfileid: "33673400"
+ms.lasthandoff: 10/24/2018
+ms.locfileid: "49962787"
 ---
 # <a name="designing-microservices-identifying-microservice-boundaries"></a>Conception de microservices : identification des limites de microservice
 
@@ -35,7 +35,7 @@ Nous sommes maintenant prêts à passer du modèle de domaine à la conception d
 
 4. Enfin, tenez compte des exigences non fonctionnelles. Examinez les facteurs tels que la taille de l’équipe, les types de données, les technologies, ainsi que les exigences d’extensibilité, de disponibilité et de sécurité. Ces facteurs peuvent vous amener à décomposer un microservice en plusieurs services plus petits ou, à l’inverse, à combiner plusieurs microservices en un seul. 
 
-Après avoir identifié le microservices dans votre application, vérifiez la conception en vous aidant des critères suivants :
+Après avoir identifié le microservice dans votre application, vérifiez la conception en vous aidant des critères suivants :
 
 - Chaque service a une seule responsabilité.
 - Il n’existe aucun appel bavard entre les services. Si le fractionnement des fonctionnalités entre deux services entraîne trop de bavardage, cela peut indiquer que ces fonctions appartiennent au même service.
@@ -83,13 +83,18 @@ Bien qu’il ne s’agisse pas des seules options, ce sont deux approches éprou
 
 ### <a name="service-orchestrators"></a>Orchestrateurs de services
 
-Un orchestrateur gère les tâches liées au déploiement et à la gestion d’un ensemble de services. Ces tâches incluent le placement des services sur des nœuds, la surveillance de l’intégrité des services, le redémarrage des services non intègres, l’équilibrage de charge du trafic réseau entre les instances de service, la détection des services, la mise à l’échelle du nombre d’instances d’un service et l’application des mises à jour de configuration. Les orchestrateurs les plus courants sont Kubernetes, DC/OS, Docker Swarm et Service Fabric. 
+Un orchestrateur gère les tâches liées au déploiement et à la gestion d’un ensemble de services. Ces tâches incluent le placement des services sur des nœuds, la surveillance de l’intégrité des services, le redémarrage des services non intègres, l’équilibrage de charge du trafic réseau entre les instances de service, la détection des services, la mise à l’échelle du nombre d’instances d’un service et l’application des mises à jour de configuration. Les orchestrateurs les plus courants sont Kubernetes, Service Fabric, DC/OS et Docker Swarm.
 
-- [Azure Container Service](/azure/container-service/) (ACS) est un service Azure qui permet de déployer un cluster Kubernetes, DC/OS ou Docker Swarm prêt pour la production.
+Sur la plateforme Azure, envisagez les options suivantes :
 
-- [AKS (Azure Container Service)](/azure/aks/) est un service managé Kubernetes. AKS configure Kubernetes et expose les points de terminaison d’API Kubernetes, mais il héberge et gère le plan de contrôle Kubernetes, en exécutant les mises à niveau automatisées, l’application automatisée de correctifs, la mise à l’échelle automatique et d’autres tâches de gestion. Vous pouvez considérer AKS comme « des API Kubernetes en tant que service ». Au moment de la rédaction de ce document, AKS est toujours en version préliminaire. Toutefois, AKS devrait devenir la méthode à privilégier pour exécuter Kubernetes dans Azure. 
+- [Azure Kubernetes Service](/azure/aks/) (AKS) est un service Kubernetes géré. AKS configure Kubernetes et expose les points de terminaison d’API Kubernetes, mais il héberge et gère le plan de contrôle Kubernetes, en exécutant les mises à niveau automatisées, l’application automatisée de correctifs, la mise à l’échelle automatique et d’autres tâches de gestion. Vous pouvez considérer AKS comme « des API Kubernetes en tant que service ». 
 
 - [Service Fabric](/azure/service-fabric/) est une plateforme de systèmes distribués pour le packaging, le déploiement et la gestion de microservices. Les microservices peuvent être déployés vers Service Fabric comme des conteneurs, des exécutables binaires ou des [Reliable Services](/azure/service-fabric/service-fabric-reliable-services-introduction). À l’aide du modèle de programmation des Reliable Services, les services peuvent directement utiliser les API de programmation Service Fabric pour interroger le système, vérifier l’intégrité, recevoir des notifications sur la configuration et les modifications de code, et détecter d’autres services. La singularité de Service Fabric tient au fait qu’il est axé sur la création de services avec état à l’aide de [Reliable Collections](/azure/service-fabric/service-fabric-reliable-services-reliable-collections).
+
+- [Azure Container Service](/azure/container-service/) (ACS) est un service Azure qui vous permet de déployer un cluster Kubernetes, DC/OS ou Docker Swarm prêt pour la production. 
+
+  > [!NOTE]
+  > Bien que Kubernetes soit pris en charge par ACS, nous recommandons AKS pour exécuter Kubernetes sur Azure. AKS offre des fonctionnalités de gestion améliorées et permet de faire des économies.
 
 ### <a name="containers"></a>Containers
 
@@ -103,7 +108,7 @@ On fait parfois l’amalgame entre conteneurs et microservices. Or, il s’agit 
 
 ### <a name="serverless-functions-as-a-service"></a>Sans serveur (fonctions en tant que service)
 
-Avec une architecture sans serveur, vous ne gérez ni les machines virtuelles, ni l’infrastructure de réseau virtuel. Par contre, vous déployez le code et le service d’hébergement se charge de placer ce code sur une machine virtuelle et de l’exécuter. Cette approche a tendance à favoriser les petites fonctions granulaires coordonnées à l’aide de déclencheurs d’événements. Par exemple, un message placé dans une file d’attente peut déclencher une fonction qui lit le contenu de la file d’attente et traite le message.
+Avec une architecture [sans serveur](https://azure.microsoft.com/solutions/serverless/), vous ne gérez ni les machines virtuelles, ni l’infrastructure de réseau virtuel. Par contre, vous déployez le code et le service d’hébergement se charge de placer ce code sur une machine virtuelle et de l’exécuter. Cette approche a tendance à favoriser les petites fonctions granulaires coordonnées à l’aide de déclencheurs d’événements. Par exemple, un message placé dans une file d’attente peut déclencher une fonction qui lit le contenu de la file d’attente et traite le message.
 
 [Azure Functions][functions] est un service de calcul sans serveur qui prend en charge plusieurs déclencheurs de fonction, y compris les requêtes HTTP, les files d’attente Service Bus et les événements Event Hubs. Pour obtenir la liste complète, voir [Concepts des déclencheurs et liaisons Azure Functions][functions-triggers]. Envisagez également [Azure Event Grid][event-grid], un service de routage d’événement managé dans Azure.
 

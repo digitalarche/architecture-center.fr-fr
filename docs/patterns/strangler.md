@@ -3,12 +3,12 @@ title: Modèle d’étranglement
 description: Faites migrer un système hérité de façon incrémentielle en remplaçant progressivement des parties spécifiques des fonctionnalités par de nouveaux services et applications.
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: d03e8a1ef9077b6e00ea5a17423bf7e09b68111a
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 0bf0b76a69f947419da83edd894a04dbea02371b
+ms.sourcegitcommit: 2ae794de13c45cf24ad60d4f4dbb193c25944eff
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24540983"
+ms.lasthandoff: 10/25/2018
+ms.locfileid: "50001879"
 ---
 # <a name="strangler-pattern"></a>Modèle d’étranglement
 
@@ -40,13 +40,14 @@ Ce modèle contribue à minimiser les risques liés à la migration et à étale
 
 Utilisez ce modèle lorsque vous faites migrer progressivement une application principale vers une nouvelle architecture.
 
-Ce modèle peut ne pas convenir dans les cas suivants :
+Ce modèle peut ne pas convenir :
 
 - lorsque les requêtes adressées au système principal ne peuvent pas être interceptées ;
 - pour les systèmes plus modestes dont le remplacement global présente peu de difficultés.
 
 ## <a name="related-guidance"></a>Aide connexe
 
+- Billet de blog de Martin Fowler sur [StranglerApplication](https://www.martinfowler.com/bliki/StranglerApplication.html)
 - [Anti-Corruption Layer pattern (Modèle de couche de lutte contre la corruption)](./anti-corruption-layer.md)
 - [Gateway Routing pattern (Modèle de routage de passerelle)](./gateway-routing.md)
 
