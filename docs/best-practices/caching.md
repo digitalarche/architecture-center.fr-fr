@@ -4,12 +4,12 @@ description: Conseils sur la mise en cache pour améliorer les performances et l
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: 4db85df7331c805af6acbe0673dbcb993a895e03
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: e1c47c735bd618fc46fef3f1ee234f83d3b15bdf
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429466"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251989"
 ---
 # <a name="caching"></a>Mise en cache
 
@@ -288,7 +288,7 @@ Pour plus d’informations, consultez l’article [Fournisseur d’état de sess
 De même, le fournisseur de caches de sortie pour le cache Redis Azure vous permet d’enregistrer les réponses HTTP générées par une application web ASP.NET. L’utilisation du fournisseur de caches de sortie avec le cache Redis Azure peut améliorer les temps de réponse d’applications qui restituent une sortie HTML complexe. Des instances d’application qui génèrent des réponses similaires peuvent faire usage des fragments de sortie partagés dans le cache au lieu de générer entièrement cette sortie HTML. Pour plus d’informations, consultez l’article [Fournisseur de caches de sortie ASP.NET pour le Cache Redis Azure](/azure/redis-cache/cache-aspnet-output-cache-provider/).
 
 ## <a name="building-a-custom-redis-cache"></a>Création d'un cache Redis personnalisé
-Le cache Redis Azure agit comme façade devant les serveurs Redis sous-jacents. Actuellement, il prend en charge un ensemble fixe de configurations, mais ne fournit pas le clustering Redis. Si vous avez besoin d’une configuration avancée non couverte par le cache Redis Azure (par exemple, d’un cache supérieur à 53 Go), vous pouvez créer et héberger vos propres serveurs Redis à l’aide de machines virtuelles Azure.
+Le cache Redis Azure agit comme façade devant les serveurs Redis sous-jacents. Si vous avez besoin d’une configuration avancée non couverte par le cache Redis Azure (par exemple, d’un cache supérieur à 53 Go), vous pouvez créer et héberger vos propres serveurs Redis à l’aide de machines virtuelles Azure.
 
 Il s’agit d’un processus potentiellement complexe, car vous devrez peut-être créer plusieurs machines virtuelles faisant office de nœuds principaux et subordonnés si vous souhaitez implémenter une réplication. En outre, si vous souhaitez créer un cluster, vous avez besoin de plusieurs serveurs maîtres et subordonnés. Une topologie de réplication en cluster minimale offrant un niveau élevé de disponibilité et d’évolutivité comprend au moins six machines virtuelles organisées sous la forme de trois paires de serveurs maître/subordonné (un cluster devant contenir au moins trois nœuds principaux).
 

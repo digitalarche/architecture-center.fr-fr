@@ -4,12 +4,12 @@ description: Conseils portant sur l’exécution de tâches en arrière-plan ind
 author: dragon119
 ms.date: 05/24/2017
 pnp.series.title: Best Practices
-ms.openlocfilehash: fa5c6352da289591d92b9427c44b8ba9f01245aa
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 57fd7a6cc400b53e51e08fb5a1377dce4ae61327
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429619"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251921"
 ---
 # <a name="background-jobs"></a>Travaux en arrière-plan
 [!INCLUDE [header](../_includes/header.md)]
@@ -238,10 +238,10 @@ Si vous implémentez des tâches en arrière-plan dans un rôle Web ou de travai
     var freeze = CloudConfigurationManager.GetSetting("Freeze");
     if (freeze != null)
     {
-     if (Boolean.Parse(freeze))
-       {
-         Thread.Sleep(System.Threading.Timeout.Infinite);
-     }
+      if (Boolean.Parse(freeze))
+      {
+        Thread.Sleep(System.Threading.Timeout.Infinite);
+      }
     }
     ```
     
@@ -321,7 +321,7 @@ Les tâches en arrière-plan doivent offrir des performances suffisantes pour é
 * [Exécution de tâches en arrière-plan](https://msdn.microsoft.com/library/ff803365.aspx)
 * [Azure Cloud Services Role Lifecycle](https://channel9.msdn.com/Series/Windows-Azure-Cloud-Services-Tutorials/Windows-Azure-Cloud-Services-Role-Lifecycle) (vidéo)
 * [Présentation du Kit de développement logiciel (SDK) Azure WebJobs](https://docs.microsoft.com/azure/app-service-web/websites-dotnet-webjobs-sdk)
-* [Exécuter des tâches en arrière-plan avec WebJobs](https://docs.microsoft.com/azure/app-service-web/web-sites-create-web-jobs)
+* [Exécuter des tâches en arrière-plan avec les tâches web](https://docs.microsoft.com/azure/app-service-web/web-sites-create-web-jobs)
 * [Files d’attente Azure et files d’attente Service Bus - comparaison et différences](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted)
 * [Activation des diagnostics dans un service cloud](https://docs.microsoft.com/azure/cloud-services/cloud-services-dotnet-diagnostics)
 

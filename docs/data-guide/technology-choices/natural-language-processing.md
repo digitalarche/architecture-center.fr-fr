@@ -3,12 +3,12 @@ title: Choisir une technologie de traitement du langage naturel
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: dacf7bf9cf3e9efed212f34da93c1470954965cf
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: bac0318a587a944c104360eb31223cc8755c1860
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/14/2018
-ms.locfileid: "29288851"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251768"
 ---
 # <a name="choosing-a-natural-language-processing-technology-in-azure"></a>Choisir une technologie de traitement du langage naturel dans Azure
 
@@ -19,7 +19,8 @@ Le traitement de texte de forme libre est effectué sur des documents contenant 
 Dans Azure, les services suivants fournissent des fonctionnalités de traitement du langage naturel (NLP) :
 
 - [Azure HDInsight avec Spark et Spark MLlib](/azure/hdinsight/spark/apache-spark-overview)
-- [Microsoft Cognitive Services](/azure/#pivot=products&panel=cognitive)
+- [Azure Databricks](/azure/azure-databricks/what-is-azure-databricks)
+- [Microsoft Cognitive Services](/azure/cognitive-services/welcome)
 
 ## <a name="key-selection-criteria"></a>Critères de sélection principaux
 
@@ -41,10 +42,10 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 | | Azure HDInsight | Microsoft Cognitive Services |
 | --- | --- | --- |
-| Fournit des modèles préformés en tant que service | Non  | OUI |
-| de l’API REST | OUI | OUI |
+| Fournit des modèles préformés en tant que service | Non  | Oui |
+| API REST | Oui | Oui |
 | Programmabilité | Python, Scala, Java | C#, Java, Node.js, Python, PHP, Ruby |
-| Prend en charge le traitement des jeux de données et des documents volumineux | OUI | Non  |
+| Prend en charge le traitement des jeux de données et des documents volumineux | Oui | Non  |
 
 ### <a name="low-level-natural-language-processing-capabilities"></a>Capacités de traitement du langage naturel de bas niveau
 
@@ -72,4 +73,4 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 ## <a name="see-also"></a>Voir aussi
 
-[Traitement de langage naturel](../scenarios/natural-language-processing.md)
+[Traitement en langage naturel](../scenarios/natural-language-processing.md)
