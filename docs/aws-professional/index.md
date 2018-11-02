@@ -3,14 +3,14 @@ title: Azure pour les professionnels AWS
 description: Apprenez les principes fondamentaux des comptes, plateforme et services de Microsoft Azure. Découvrez également les similitudes et les différences clés entre les plateformes AWS et Azure. Tirez parti de votre expérience AWS dans Azure.
 keywords: Experts AWS, comparaison de Azure, comparaison de AWS, différences entre Azure et AWS, Azure et AWS
 author: lbrader
-ms.date: 03/24/2017
+ms.date: 09/19/2018
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: 04157b9a647779ae47ad0aff8132289a30544acf
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 0735d24b223a5e5cab6030774280c038c28f35e6
+ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429636"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "50916683"
 ---
 # <a name="azure-for-aws-professionals"></a>Azure pour les professionnels AWS
 
@@ -117,7 +117,7 @@ Le tableau suivant récapitule chaque option.
 | &nbsp; | Groupe à haute disponibilité | Zone de disponibilité | Région jumelée |
 |--------|------------------|-------------------|---------------|
 | Étendue de la défaillance | Rack | Centre de données | Région |
-| Routage des requêtes | Équilibreur de charge | Équilibreur de charge entre les zones | Traffic Manager |
+| Routage des requêtes | Load Balancer | Équilibreur de charge entre les zones | Traffic Manager |
 | Latence du réseau | Très faible | Faible | Moyenne à élevée |
 | Réseau virtuel  | Réseau virtuel | Réseau virtuel | Homologation de réseaux virtuels entre régions |
 

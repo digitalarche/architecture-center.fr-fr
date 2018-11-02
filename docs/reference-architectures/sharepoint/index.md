@@ -2,13 +2,13 @@
 title: Exécuter une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure
 description: Pratiques éprouvées pour la configuration d’une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure.
 author: njray
-ms.date: 07/14/2018
-ms.openlocfilehash: 6141c73dc8e71f5546395c12421c470e2d16cf78
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.date: 07/26/2018
+ms.openlocfilehash: 1e44c2817a02cda919bfa94e0b8f07b73b35531f
+ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428990"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "50916496"
 ---
 # <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Exécuter une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure
 

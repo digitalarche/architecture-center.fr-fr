@@ -2,14 +2,14 @@
 title: Conception d’applications résilientes pour Azure
 description: Comment créer des applications résilientes dans Azure, pour une haute disponibilité et une récupération d’urgence.
 author: MikeWasson
-ms.date: 05/26/2017
+ms.date: 07/29/2018
 ms.custom: resiliency
-ms.openlocfilehash: 55e54347953dc9967ab8ccf67490757e1d58e143
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: b925748e1d3d4a8d490bbd5d7cb76f3961ffcfb2
+ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48819208"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "50916598"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Conception d’applications résilientes pour Azure
 
@@ -183,7 +183,7 @@ Lorsque vous concevez une application multirégion, tenez compte du fait que la 
 | &nbsp; | Groupe à haute disponibilité | Zone de disponibilité | Région jumelée |
 |--------|------------------|-------------------|---------------|
 | Étendue de la défaillance | Rack | Centre de données | Région |
-| Routage des requêtes | Équilibreur de charge | Équilibreur de charge entre les zones | Traffic Manager |
+| Routage des requêtes | Load Balancer | Équilibreur de charge entre les zones | Traffic Manager |
 | Latence du réseau | Très faible | Faible | Moyenne à élevée |
 | Réseau virtuel  | Réseau virtuel | Réseau virtuel | Homologation de réseaux virtuels entre régions |
 
