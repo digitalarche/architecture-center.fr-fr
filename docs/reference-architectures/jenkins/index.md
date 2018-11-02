@@ -2,13 +2,13 @@
 title: Exécuter un serveur Jenkins sur Azure
 description: Cette architecture de référence montre comment déployer et utiliser un serveur Jenkins professionnel et évolutif sur Azure sécurisé avec l’authentification unique (SSO).
 author: njray
-ms.date: 01/21/18
-ms.openlocfilehash: 5f9c54e71a8750e88de1ae633ccc1316f8375d3a
-ms.sourcegitcommit: 0de300b6570e9990e5c25efc060946cb9d079954
+ms.date: 04/30/2018
+ms.openlocfilehash: 89839b0f1c9624176a7b51dca53713070c88b154
+ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2018
-ms.locfileid: "32323922"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "50916378"
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Exécuter un serveur Jenkins sur Azure
 
@@ -169,7 +169,6 @@ Pour plus de meilleures pratiques de la communauté Jenkins, visitez [meilleures
 Pour déployer cette architecture, suivez les étapes ci-dessous pour installer le [modèle de solution pour Jenkins sur Azure][azure-market], puis installez les scripts de récupération d’urgence et de surveillance dans les étapes ci-dessous.
 
 ### <a name="prerequisites"></a>Prérequis
-
 
 - Cette architecture de référence requiert un abonnement Azure. 
 - Pour créer un principal de service Azure, vous devez disposer des droits d’administrateur pour le locataire Azure AD qui est associé au serveur Jenkins déployé.
