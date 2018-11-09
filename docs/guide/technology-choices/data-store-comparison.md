@@ -2,12 +2,13 @@
 title: Critères de sélection d’une banque de données
 description: Vue d’ensemble des options de calcul Azure
 author: MikeWasson
-ms.openlocfilehash: 70f746f80c29623004620d83eb38747777df7f84
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.date: 06/01/2018
+ms.openlocfilehash: f8996cdeb937a28b3f3056da3921a3f89dd36b1a
+ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35252871"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "50916428"
 ---
 # <a name="criteria-for-choosing-a-data-store"></a>Critères de sélection d’une banque de données
 

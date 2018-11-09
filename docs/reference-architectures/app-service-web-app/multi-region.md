@@ -2,14 +2,14 @@
 title: Application web multirégion
 description: Architecture recommandée pour une application web à haute disponibilité s’exécutant dans Microsoft Azure.
 author: MikeWasson
-ms.date: 11/23/2016
+ms.date: 10/25/2018
 cardTitle: Run in multiple regions
-ms.openlocfilehash: 5493deea871f25fb6ea3531a22d92d83916930b1
-ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
+ms.openlocfilehash: 1ed69f4f7e79fe2025e2a10d50e851ac4c02f1a6
+ms.sourcegitcommit: 065fa8ecb37c8be1827da861243ad6a33c75c99d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48876813"
+ms.lasthandoff: 10/26/2018
+ms.locfileid: "50136656"
 ---
 # <a name="run-a-web-application-in-multiple-regions"></a>Exécuter une application web dans plusieurs régions
 [!INCLUDE [header](../../_includes/header.md)]
@@ -70,9 +70,7 @@ En revanche, n’utilisez pas la sonde d’intégrité pour vérifier des servic
 Utilisez la [géoréplication active][sql-replication] pour créer un réplica secondaire lisible dans une autre région. Vous pouvez posséder jusqu’à quatre réplicas secondaires lisibles. Basculez vers une base de données secondaire si votre base de données primaire est défaillante ou doit être mise hors connexion. La géoréplication active peut être configurée pour toute base de données faisant partie d’un pool de bases de données élastique.
 
 ### <a name="cosmos-db"></a>Cosmos DB
-Cosmos DB prend en charge la géoréplication entre régions. L’une des régions est désignée comme étant accessible en écriture, tandis que les autres régions sont des réplicas en lecture seule.
-
-Dans l’éventualité d’une interruption de service régionale, vous pouvez procéder à un basculement en désignant une autre région comme étant accessible en écriture. Le Kit de développement logiciel (SDK) client envoie automatiquement des requêtes d’écriture à la région accessible en écriture ; vous n’avez donc pas besoin de mettre à jour la configuration du client après un basculement. Pour en savoir plus, voir [Comment distribuer des données mondialement avec Azure Cosmos DB][cosmosdb-geo].
+Cosmos DB prend en charge la géoréplication entre les régions avec une configuration multimaître (plusieurs régions d’écriture). Vous pouvez également désigner une région en tant que région accessible en écriture et les autres régions en tant que réplicas en lecture seule. Dans l’éventualité d’une interruption de service régionale, vous pouvez procéder à un basculement en désignant une autre région comme étant accessible en écriture. Le Kit de développement logiciel (SDK) client envoie automatiquement des requêtes d’écriture à la région accessible en écriture ; vous n’avez donc pas besoin de mettre à jour la configuration du client après un basculement. Pour en savoir plus, consultez [Distribution de données mondiale avec Azure Cosmos DB][cosmosdb-geo].
 
 > [!NOTE]
 > Tous les réplicas appartiennent au même groupe de ressources.
@@ -136,10 +134,11 @@ Set-AzureRmTrafficManagerEndpoint -TrafficManagerEndpoint $endpoint
 
 Pour plus d’informations, consultez l’article [Applets de commande Azure Traffic Manager][tm-ps].
 
-**Interface de ligne de commande Azure (CLI)**
+**Interface de ligne de commande Azure**
 
 ```bat
-azure network traffic-manager endpoint set --name <endpoint> --profile-name <profile> --resource-group <resource-group> --type AzureEndpoints --priority 3
+az network traffic-manager endpoint update --resource-group <resource-group> --profile-name <profile> \
+    --name <endpoint-name> --type azureEndpoints --priority 3
 ```    
 
 ### <a name="sql-database"></a>Base de données SQL

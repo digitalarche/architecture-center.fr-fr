@@ -5,12 +5,12 @@ author: MikeWasson
 ms:date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: client-assertion
-ms.openlocfilehash: b6d2e431da85f7c304747df2f804f1714596bfc6
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: a47b8835df1c970ac7c50af78aae73116d6a12b4
+ms.sourcegitcommit: d59e2631fb08665bc30f6b65bfc7e1b75935cbd5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429177"
+ms.lasthandoff: 11/05/2018
+ms.locfileid: "51021948"
 ---
 # <a name="use-azure-key-vault-to-protect-application-secrets"></a>Utiliser Azure Key Vault pour protéger les secrets d’application
 
@@ -221,25 +221,25 @@ Assignez maintenant cet utilisateur comme propriétaire d’abonnement.
 ### <a name="update-the-user-secrets"></a>Mise à jour des données secrètes de l’utilisateur
 Dans l’Explorateur de solutions, cliquez avec le bouton droit sur le projet Tailspin.Surveys.Web, puis sélectionnez **Gérer les données secrètes de l’utilisateur**. Dans le fichier secrets.json, supprimez le script JSON existant et collez les éléments suivants :
 
-    ```
-    {
-      "AzureAd": {
-        "ClientId": "[Surveys web app client ID]",
-        "ClientSecret": "[Surveys web app client secret]",
-        "PostLogoutRedirectUri": "https://localhost:44300/",
-        "WebApiResourceId": "[App ID URI of your Surveys.WebAPI application]",
-        "Asymmetric": {
-          "CertificateThumbprint": "[certificate thumbprint. Example: 105b2ff3bc842c53582661716db1b7cdc6b43ec9]",
-          "StoreName": "My",
-          "StoreLocation": "CurrentUser",
-          "ValidationRequired": "false"
-        }
-      },
-      "KeyVault": {
-        "Name": "[key vault name]"
-      }
+```json
+{
+  "AzureAd": {
+    "ClientId": "[Surveys web app client ID]",
+    "ClientSecret": "[Surveys web app client secret]",
+    "PostLogoutRedirectUri": "https://localhost:44300/",
+    "WebApiResourceId": "[App ID URI of your Surveys.WebAPI application]",
+    "Asymmetric": {
+      "CertificateThumbprint": "[certificate thumbprint. Example: 105b2ff3bc842c53582661716db1b7cdc6b43ec9]",
+      "StoreName": "My",
+      "StoreLocation": "CurrentUser",
+      "ValidationRequired": "false"
     }
-    ```
+  },
+  "KeyVault": {
+    "Name": "[key vault name]"
+  }
+}
+```
 
 Remplacez les entrées entre [crochets] par les valeurs correctes.
 
@@ -258,7 +258,7 @@ Enregistrez le fichier secrets.json mis à jour.
 
 Dans l’Explorateur de solutions, cliquez avec le bouton droit sur le projet Tailspin.Surveys.WebApi, puis sélectionnez **Gérer les données secrètes de l’utilisateur**. Supprimez le script JSON existant et collez les éléments suivants :
 
-```
+```json
 {
   "AzureAd": {
     "ClientId": "[Surveys.WebAPI client ID]",

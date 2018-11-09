@@ -3,12 +3,12 @@ title: Application web serverless
 description: Architecture de référence qui montre une application web serverless et l’API web
 author: MikeWasson
 ms.date: 10/16/2018
-ms.openlocfilehash: c2b46a60a57381ac3fd3f77cffe53b2dab2dacd6
-ms.sourcegitcommit: 113a7248b9793c670b0f2d4278d30ad8616abe6c
+ms.openlocfilehash: d1af03811bda6267fd40ee17823ac8357829f988
+ms.sourcegitcommit: 949b9d3e5a9cdee1051e6be700ed169113e914ae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/16/2018
-ms.locfileid: "49349953"
+ms.lasthandoff: 11/05/2018
+ms.locfileid: "50983394"
 ---
 # <a name="serverless-web-application"></a>Application web serverless 
 
@@ -113,7 +113,7 @@ En utilisant des liaisons, vous n’avez pas besoin d’écrire un code qui comm
 
 **Fonctions**. Pour le plan de consommation, le déclencheur HTTP met à l’échelle en fonction du trafic. Il existe une limite au nombre d’instances de fonction simultanées, mais chaque instance peut traiter plusieurs requêtes à la fois. Pour un plan App Service, le déclencheur HTTP met à l’échelle en fonction du nombre d’instances de machine virtuelle, qui peut être une valeur fixe ou une mise à l’échelle automatique basée sur un ensemble de règles de mise à l’échelle automatique. Pour plus d’informations, consultez [Échelle et hébergement dans Azure Functions][functions-scale]. 
 
-**Cosmos DB**. La capacité de débit pour Cosmos DB est mesurée en [Unité de requête][ru] (RU). Un débit de 1 RU correspond au besoin d’un débit de la requête GET d’un document de 1 Ko. Pour mettre à l’échelle un conteneur Cosmos DB au-delà de 10 000 RU, vous devez spécifier une [clé de partition][partition-key] lorsque vous créez le conteneur, puis inclure la clé de partition dans chaque document que vous créez. Pour plus d’informations sur les clés de partition, voir [Partition et mise à l’échelle dans Azure Cosmos DB][cosmosdb-scale].
+**Cosmos DB**. La capacité de débit pour Cosmos DB est mesurée en [unités de requête][ru] (RU). Un débit de 1 RU correspond au besoin d’un débit de la requête GET d’un document de 1 Ko. Pour mettre à l’échelle un conteneur Cosmos DB au-delà de 10 000 RU, vous devez spécifier une [clé de partition][partition-key] lorsque vous créez le conteneur, puis inclure la clé de partition dans chaque document que vous créez. Pour plus d’informations sur les clés de partition, voir [Partition et mise à l’échelle dans Azure Cosmos DB][cosmosdb-scale].
 
 **Gestion des API**. Gestion des API peut augmenter la taille des instances et prend en charge la mise à l’échelle basée sur une règle. Notez que le processus de mise à l’échelle prend au moins 20 minutes. Si votre trafic est en rafale, vous devez configurer pour la rafale de trafic maximale que vous attendez. Toutefois, la mise à échelle automatique est utile pour la gestion des variations horaires ou quotidienne du trafic. Pour en savoir plus, voir [Mise à l’échelle automatique d’une instance de gestion des API Azure][apim-scale].
 
@@ -148,20 +148,13 @@ Pour configurer l’authentification :
 
 - Activer l’authentification Azure AD à l’intérieur de l’application de fonction. Pour plus d’informations, consultez [Authentification et autorisation dans Azure App Service][app-service-auth].
 
-- Ajoutez une stratégie de gestion des API pour l’autorisation préalable de la requête en validant le jeton d’accès :
-
-    ```xml
-    <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Access token is missing or invalid.">
-        <openid-config url="https://login.microsoftonline.com/[Azure AD tenant ID]/.well-known/openid-configuration" />
-        <required-claims>
-            <claim name="aud">
-                <value>[Application ID]</value>
-            </claim>
-        </required-claims>
-    </validate-jwt>
-    ```
+- Ajoutez la [stratégie validate-jwt][apim-validate-jwt] à Gestion des API pour autoriser la requête au préalable en validant le jeton d’accès.
 
 Pour plus d’informations, consultez le [fichier readme de GitHub][readme].
+
+Il est recommandé de créer des inscriptions d’application distinctes dans Azure AD pour l’application cliente et l’API back-end. Donnez à l’application cliente l’autorisation d’appeler l’API. Cette approche permet de définir plusieurs API et clients et de contrôler les autorisations pour chacun. 
+
+Au sein d’une API, utilisez les [étendues][scopes] pour offrir aux applications un contrôle précis sur les autorisations requises auprès d’un utilisateur. Par exemple, une API peut présenter des étendues `Read` et `Write`, et une application cliente spécifique peut demander à l’utilisateur d’autoriser uniquement les autorisations `Read`.
 
 ### <a name="authorization"></a>Authorization
 
@@ -275,11 +268,21 @@ Ou bien, vous pouvez stocker des secrets d’application dans Key Vault. Cela vo
 
 ## <a name="devops-considerations"></a>Considérations relatives à DevOps
 
+### <a name="deployment"></a>Déploiement
+
+Pour déployer l’application de fonction, nous vous recommandons d’utiliser les [fichiers de package] [ functions-run-from-package] (Run from package (Exécuter à partir du package)). Avec cette approche, vous chargez un fichier zip vers un conteneur Stockage Blob, alors que le runtime Functions monte le fichier zip en tant que système de fichiers en lecture seule. Il s’agit d’une opération atomique. Elle réduit le risque qu’un déploiement ayant échoué laisse l’application dans un état incohérent. Cette approche peut également améliorer les temps de démarrage à froid, en particulier pour les applications Node.js, car tous les fichiers sont échangés en même temps.
+
 ### <a name="api-versioning"></a>Contrôle de version d’API
 
-Une API est un contrat entre un service et des clients ou des consommateurs de ce service. Prenez en charge le contrôle de version dans votre contrat d’API. Si vous introduisez une modification d’API entraînant un arrêt, proposez une nouvelle version de l’API. Déployez la nouvelle version côte à côte avec la version d’origine, dans une application de fonction distincte. Cela vous permet de migrer des clients existants vers la nouvelle API sans interrompre les applications clientes. Finalement, vous pouvez désapprouver la version précédente. Pour plus d’informations sur le contrôle de version d’API, consultez [Contrôle de version d’une API web RESTful][api-versioning].
+Une API est un contrat entre un service et des clients. Dans cette architecture, le contrat d’API est défini au niveau de la couche Gestion des API. Gestion des API prend en charge deux concepts de [contrôle de version distincts, mais complémentaires ][apim-versioning]:
 
-Pour les mises à jour qui n’interrompent pas de modifications de l’API, déployez la nouvelle version à un emplacement de préproduction dans la même application de fonction. Vérifiez si le déploiement a réussi, puis remplacez la version de préproduction par la version de production.
+- Les *versions* offrent aux consommateurs d’API la possibilité de choisir une version d’API en fonction de leurs besoins, par exemple v1 ou v2. 
+
+- Les *révisions* permettent aux administrateurs d’API d’apporter des modifications mineures dans une API et de déployer ces modifications, ainsi que d’un journal des modifications pour informer les consommateurs de l’API des modifications.
+
+Si vous modifiez radicalement une API, publiez une nouvelle version dans Gestion des API. Déployez la nouvelle version côte à côte avec la version d’origine, dans une application de fonction distincte. Cela vous permet de migrer des clients existants vers la nouvelle API sans interrompre les applications clientes. Finalement, vous pouvez désapprouver la version précédente. Gestion des API prend en charge plusieurs [schémas de contrôle de version][apim-versioning-schemes] : chemin d’URL, en-tête HTTP ou chaîne de requête. Pour plus d’informations sur le contrôle de version d’API en règle générale, consultez [Contrôle de version d’une API web RESTful][api-versioning].
+
+Pour les mises à jour qui n’interrompent pas de modifications de l’API, déployez la nouvelle version à un emplacement de préproduction dans la même application de fonction. Vérifiez si le déploiement a réussi, puis remplacez la version de préproduction par la version de production. Publiez une révision dans Gestion des API.
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
@@ -292,6 +295,9 @@ Pour déployer cette architecture de référence, affichez le [fichier readme de
 [apim-ip]: /azure/api-management/api-management-faq#is-the-api-management-gateway-ip-address-constant-can-i-use-it-in-firewall-rules
 [api-geo]: /azure/api-management/api-management-howto-deploy-multi-region
 [apim-scale]: /azure/api-management/api-management-howto-autoscale
+[apim-validate-jwt]: /azure/api-management/api-management-access-restriction-policies#ValidateJWT
+[apim-versioning]: /azure/api-management/api-management-get-started-publish-versions
+[apim-versioning-schemes]: /azure/api-management/api-management-get-started-publish-versions#choose-a-versioning-scheme
 [app-service-auth]: /azure/app-service/app-service-authentication-overview
 [app-service-ip-restrictions]: /azure/app-service/app-service-ip-restrictions
 [app-service-security]: /azure/app-service/app-service-security
@@ -310,9 +316,11 @@ Pour déployer cette architecture de référence, affichez le [fichier readme de
 [functions-bindings]: /azure/azure-functions/functions-triggers-bindings
 [functions-cold-start]: https://blogs.msdn.microsoft.com/appserviceteam/2018/02/07/understanding-serverless-cold-start/
 [functions-https]: /azure/app-service/app-service-web-tutorial-custom-ssl#enforce-https
-[functions-proxy]: /azure-functions/functions-proxies
+[functions-proxy]: /azure/azure-functions/functions-proxies
+[functions-run-from-package]: /azure/azure-functions/run-functions-from-deployment-package
 [functions-scale]: /azure/azure-functions/functions-scale
 [functions-timeout]: /azure/azure-functions/functions-scale#consumption-plan
+[functions-zip-deploy]: /azure/azure-functions/deployment-zip-push
 [graph]: https://developer.microsoft.com/graph/docs/concepts/overview
 [key-vault-web-app]: /azure/key-vault/tutorial-web-application-keyvault
 [microservices-domain-analysis]: ../../microservices/domain-analysis.md
@@ -321,6 +329,7 @@ Pour déployer cette architecture de référence, affichez le [fichier readme de
 [partition-key]: /azure/cosmos-db/partition-data
 [pipelines]: /azure/devops/pipelines/index
 [ru]: /azure/cosmos-db/request-units
+[scopes]: /azure/active-directory/develop/v2-permissions-and-consent
 [static-hosting]: /azure/storage/blobs/storage-blob-static-website
 [static-hosting-preview]: https://azure.microsoft.com/blog/azure-storage-static-web-hosting-public-preview/
 [storage-https]: /azure/storage/common/storage-require-secure-transfer

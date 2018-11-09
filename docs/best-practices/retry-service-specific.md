@@ -2,14 +2,14 @@
 title: Guide spécifique relatif au service de nouvelle tentative
 description: Guide spécifique relatif au service pour définir le mécanisme de nouvelle tentative.
 author: dragon119
-ms.date: 07/13/2016
+ms.date: 08/13/2018
 pnp.series.title: Best Practices
-ms.openlocfilehash: c5a9bc99c4693f35c38dabcf07b3465add6a8cb1
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 801bcc6e7a296cc9d68a46231461a6b37ebd7de5
+ms.sourcegitcommit: ca5283af555189e830eed7884c83d058fa7ebaa0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429540"
+ms.lasthandoff: 11/01/2018
+ms.locfileid: "50757805"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Guide du mécanisme de nouvelle tentative relatif aux différents services
 
@@ -31,9 +31,9 @@ Le tableau suivant récapitule les fonctionnalités de nouvelle tentative pour l
 | **[Service Bus](#service-bus)** |Native dans le client |Par programme |Gestionnaire d’espace de noms, fabrique de messagerie et client |ETW |
 | **[Service Fabric](#service-fabric)** |Native dans le client |Par programme |Client |Aucun | 
 | **[Base de données SQL avec ADO.NET](#sql-database-using-adonet)** |[Polly](#transient-fault-handling-with-polly) |Déclarative et par programme |Instructions uniques ou blocs de code |Personnalisée |
-| **[Base de données SQL avec Entity Framework](#sql-database-using-entity-framework-6)** |Native dans le client |Par programmation |Globale par domaine d’application |Aucun |
-| **[SQL Database avec Entity Framework Core](#sql-database-using-entity-framework-core)** |Native dans le client |Par programmation |Globale par domaine d’application |Aucun |
-| **[Stockage](#azure-storage)** |Native dans le client |Par programmation |Opérations individuelles et du client |TraceSource |
+| **[Base de données SQL avec Entity Framework](#sql-database-using-entity-framework-6)** |Native dans le client |Par programme |Globale par domaine d’application |Aucun |
+| **[SQL Database avec Entity Framework Core](#sql-database-using-entity-framework-core)** |Native dans le client |Par programme |Globale par domaine d’application |Aucun |
+| **[Stockage](#azure-storage)** |Native dans le client |Par programme |Opérations individuelles et du client |TraceSource |
 
 > [!NOTE]
 > Pour la plupart des mécanismes de nouvelle tentative intégrés Azure, il n’existe actuellement aucune manière d’appliquer une autre stratégie de nouvelle tentative selon le type d’erreur ou d’exception. Vous devez configurer une stratégie qui fournit les performances et la disponibilité moyennes optimales. Une façon d’ajuster la stratégie consiste à analyser les fichiers journaux pour déterminer le type d’erreurs temporaires qui se produisent. 
@@ -161,7 +161,7 @@ Le client StackExchange.Redis utilise une classe de gestionnaire de connexions q
 - **ConnectTimeout**. Temps d’attente maximal en millisecondes.
 
 ### <a name="policy-configuration"></a>Configuration de la stratégie
-Les stratégies de nouvelle tentative sont configurées par programmation en définissant les options pour le client avant de se connecter au cache. Cela peut être effectué en créant une instance de la classe **ConfigurationOptions**, en remplissant ses propriétés et en la transmettant à la méthode **Connect**.
+Les stratégies de nouvelle tentative sont configurées par programme en définissant les options pour le client avant de se connecter au cache. Cela peut être effectué en créant une instance de la classe **ConfigurationOptions**, en remplissant ses propriétés et en la transmettant à la méthode **Connect**.
 
 Les classes intégrées prennent en charge un délai linéaire (constant) et une interruption exponentielle avec des intervalles avant nouvelle tentative aléatoires. Vous pouvez également créer une stratégie de nouvelle tentative personnalisée en implémentant l’interface **IReconnectRetryPolicy**.
 
@@ -351,7 +351,7 @@ Les actions de Service Bus peuvent renvoyer une plage d’exceptions, comme cell
 Les exceptions renvoyées à partir du Service Bus exposent la propriété **IsTransient** qui indique si le client doit retenter l’opération. La stratégie **RetryExponential** intégrée repose sur la propriété **IsTransient** de la classe **MessagingException**, qui est la classe de base pour toutes les exceptions Service Bus. Si vous créez des implémentations personnalisées de la classe de base **RetryPolicy**, vous pouvez combiner le type d’exception et la propriété **IsTransient** pour permettre un contrôle plus précis des actions liées aux nouvelles tentatives. Par exemple, vous pouvez détecter une exception **QuotaExceededException** et prendre des mesures pour vider la file d’attente avant de tenter de lui renvoyer un message.
 
 ### <a name="policy-configuration"></a>Configuration de la stratégie
-Les stratégies de nouvelle tentative sont définies par programmation et peuvent être considérées comme stratégie par défaut pour un **NamespaceManager** et un **MessagingFactory**, ou individuellement pour chaque client de messagerie. Pour définir la stratégie de nouvelle tentative par défaut pour une session de messagerie, vous définissez la propriété **RetryPolicy** de l’élément **NamespaceManager**.
+Les stratégies de nouvelle tentative sont définies par programme et peuvent être considérées comme stratégie par défaut pour un **NamespaceManager** et un **MessagingFactory**, ou individuellement pour chaque client de messagerie. Pour définir la stratégie de nouvelle tentative par défaut pour une session de messagerie, vous définissez la propriété **RetryPolicy** de l’élément **NamespaceManager**.
 
 ```csharp
 namespaceManager.Settings.RetryPolicy = new RetryExponential(minBackoff: TimeSpan.FromSeconds(0.1),
@@ -637,7 +637,7 @@ La prise en charge de la fonctionnalité de nouvelle tentative est assurée lors
 * Si le nombre de tentatives spécifié est dépassé, les résultats sont inclus dans une nouvelle exception. Il ne se propage pas dans l’exception en cours.
 
 ### <a name="policy-configuration"></a>Configuration de la stratégie
-La prise en charge de la nouvelle tentative est assurée lors de l’accès à la base de données SQL à l’aide d’Entity Framework 6.0 et versions ultérieures. Les stratégies de nouvelle tentative sont configurées par programmation. La configuration ne peut pas être modifiée opération par opération.
+La prise en charge de la nouvelle tentative est assurée lors de l’accès à la base de données SQL à l’aide d’Entity Framework 6.0 et versions ultérieures. Les stratégies de nouvelle tentative sont configurées par programme. La configuration ne peut pas être modifiée opération par opération.
 
 Lorsque vous configurez une stratégie sur le contexte comme stratégie par défaut, vous définissez une fonction qui crée une nouvelle stratégie à la demande. Le code suivant montre comment vous pouvez créer une classe de configuration de nouvelle tentative qui étend la classe de base **DbConfiguration** .
 
@@ -705,7 +705,7 @@ Respectez les consignes suivantes lorsque vous accédez à la base de données S
 * Choisissez l’option de service appropriée (partagée ou premium). Une instance partagée peut être soumise à des délais de connexion plus longs que d’ordinaire et à des limitations en raison de l’utilisation du serveur partagé par d’autres locataires. Si des performances prévisibles et des opérations fiables à faible latence sont requises, pensez à choisir l’option premium.
 * Une stratégie d’intervalle fixe n’est pas recommandée pour une utilisation avec la base de données SQL Azure. Utilisez plutôt une stratégie de temporisation exponentielle car le service peut être surchargé et des délais plus longs laissent davantage de temps de récupération.
 * Choisissez une valeur appropriée pour les délais d’attente de connexion et de commande lors de la définition des connexions. Basez le délai d’attente à la fois sur la conception de la logique métier et sur les tests. Vous devrez peut-être modifier cette valeur au fil du temps en fonction de l’évolution des volumes de données ou des processus d’entreprise. Un délai d’attente trop court peut entraîner des échecs de connexion prématurés lorsque la base de données est occupée. Un délai d’attente trop long peut empêcher la logique de nouvelle tentative de fonctionner correctement en attendant trop longtemps avant la détection d’un échec de connexion. La valeur d’expiration est un composant de la latence de bout en bout, bien que vous ne puissiez pas aisément déterminer le nombre de commandes qui seront exécutées lors de l’enregistrement du contexte. Vous pouvez modifier le délai d’attente par défaut en définissant la propriété **CommandTimeout** de l’instance **DbContext**.
-* Entity Framework prend en charge les configurations de nouvelle tentative définies dans les fichiers de configuration. Toutefois, pour une flexibilité maximale sur Azure, vous devez envisager la création de la configuration par programmation au sein de l’application. Les paramètres spécifiques pour les stratégies de nouvelle tentative, tels que le nombre de nouvelles tentatives et les intervalles, peuvent être stockés dans le fichier de configuration du service et être utilisés en cours d’exécution pour créer les stratégies appropriées. Cela permet de modifier les paramètres sans avoir à redémarrer l’application.
+* Entity Framework prend en charge les configurations de nouvelle tentative définies dans les fichiers de configuration. Toutefois, pour une flexibilité maximale sur Azure, vous devez envisager la création de la configuration par programme au sein de l’application. Les paramètres spécifiques pour les stratégies de nouvelle tentative, tels que le nombre de nouvelles tentatives et les intervalles, peuvent être stockés dans le fichier de configuration du service et être utilisés en cours d’exécution pour créer les stratégies appropriées. Cela permet de modifier les paramètres sans avoir à redémarrer l’application.
 
 Pensez à commencer par les paramètres ci-après pour les opérations liées aux nouvelles tentatives. Vous ne pouvez pas spécifier le délai entre chaque nouvelle tentative (il est fixe et généré sous la forme d’une séquence exponentielle). Vous ne pouvez spécifier que les valeurs maximales, comme indiqué ici, sauf si vous créez une stratégie de nouvelle tentative personnalisée. Il s’agit de paramètres généraux. Vous devez par conséquent surveiller les opérations et optimiser les valeurs en fonction de votre propre scénario.
 

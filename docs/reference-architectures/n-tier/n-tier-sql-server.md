@@ -2,13 +2,13 @@
 title: Application multiniveau avec SQL Server
 description: Découvrez comment implémenter une architecture multiniveau dans Azure, pour la disponibilité, la sécurité, l’extensibilité et la facilité de gestion.
 author: MikeWasson
-ms.date: 07/19/2018
-ms.openlocfilehash: d5f46570464916af892afcf492127402181a5df5
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.date: 09/13/2018
+ms.openlocfilehash: 6ddad853240b9a51ac904c06783a5c0b56dedec5
+ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429143"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "50916513"
 ---
 # <a name="n-tier-application-with-sql-server"></a>Application multiniveau avec SQL Server
 

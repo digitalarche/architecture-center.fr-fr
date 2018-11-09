@@ -3,12 +3,12 @@ title: Traitement des fichiers CSV et JSON
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 02e684d562cfe555f9e3596ad0a2f1a00d05c7a7
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.openlocfilehash: b9a0deae5499a4df4e43e15914490b89e0e3a50c
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30298607"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251802"
 ---
 # <a name="working-with-csv-and-json-files-for-data-solutions"></a>Utilisation des fichiers CSV et JSON pour des solutions de données
 
@@ -44,6 +44,8 @@ Les formats de fichiers CSV et JSON facilitent tous les deux les échanges des d
 ## <a name="working-with-csv-and-json-data-in-azure"></a>Utilisation des données CSV et JSON dans Azure
 
 Azure offre plusieurs solutions pour l’utilisation des fichiers CSV et JSON, en fonction de vos besoins. L’emplacement de lancement principale de ces fichiers est le stockage Azure ou Azure Data Lake Store. La plupart des services Azure qui fonctionnent avec ces fichiers et autres fichiers texte s’intègrent à un des services de stockage d’objets. Toutefois, dans certaines situations, vous pouvez opter pour importer directement les données dans Azure SQL ou un autre magasin de données. SQL Server dispose d’une prise en charge native pour le stockage et l’utilisation de documents JSON, ce qui simplifie [l’importation et le traitement de ces types de fichiers](/sql/relational-databases/json/import-json-documents-into-sql-server). Vous pouvez utiliser un utilitaire tel que l’importation en bloc SQL pour [importer des fichiers CSV](/sql/relational-databases/json/import-json-documents-into-sql-server) facilement.
+
+Vous pouvez également interroger les fichiers JSON directement à partir de Stockage Blob Azure sans les importer dans SQL Azure. Pour obtenir un exemple complet de cette approche, consultez [Work with JSON files with Azure SQL (Utilisation de fichiers JSON avec SQL Azure)](https://medium.com/@mauridb/work-with-json-files-with-azure-sql-8946f066ddd4). Actuellement, cette option n’est pas disponible pour les fichiers CSV.
 
 Selon le scénario, vous pouvez effectuer le [traitement par lots](../big-data/batch-processing.md) ou le [traitement en temps réel](../big-data/real-time-processing.md) des données.
 

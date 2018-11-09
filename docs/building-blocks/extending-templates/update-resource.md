@@ -2,13 +2,13 @@
 title: Mettre à jour une ressource dans un modèle Azure Resource Manager
 description: Explique comment étendre les fonctionnalités des modèles Azure Resource Manager afin de mettre à jour une ressource
 author: petertay
-ms.date: 06/09/2017
-ms.openlocfilehash: f235f0b4d54d65ccc2fa67876916e922d75f6d07
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.date: 10/31/2018
+ms.openlocfilehash: dc97534e658c9728ac617b4e52031e2553600458
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429030"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251819"
 ---
 # <a name="update-a-resource-in-an-azure-resource-manager-template"></a>Mettre à jour une ressource dans un modèle Azure Resource Manager
 
@@ -122,16 +122,13 @@ Commençons par examiner l’objet de ressource relatif à notre ressource `firs
 
 ## <a name="try-the-template"></a>Essayer le modèle
 
-Si vous souhaitez effectuer des tests avec ce modèle, procédez comme suit :
+Un exemple de modèle est disponible sur [GitHub][github]. Pour déployer le modèle, exécutez les commandes [Azure CLI][cli] suivantes :
 
-1.  Accédez au portail Azure, sélectionnez l’icône **+**, puis recherchez le type de ressource **déploiement de modèle** et sélectionnez-le.
-2.  Accédez à la page **déploiement de modèle**, puis sélectionnez le bouton **créer**. Ce bouton ouvre le panneau **déploiement personnalisé**.
-3.  Sélectionnez l’icône **éditer**.
-4.  Supprimez le modèle vide.
-5.  Copiez et collez l’exemple de modèle dans le volet de droite.
-6.  Sélectionnez le bouton **enregistrer**.
-7.  Vous revenez au volet **déploiement personnalisé**, mais cette fois-ci, certaines zones de liste déroulante apparaissent. Sélectionnez votre abonnement, créez un nouveau groupe de ressources ou utilisez un groupe de ressources existant, puis sélectionnez un emplacement. Passez en revue les Conditions générales, puis sélectionnez le bouton **J’accepte**.
-8.  Sélectionnez le bouton **acheter**.
+```bash
+az group create --location <location> --name <resource-group-name>
+az group deployment create -g <resource-group-name> \
+    --template-uri https://raw.githubusercontent.com/mspnp/template-examples/master/example1-update/deploy.json
+```
 
 Une fois le déploiement terminé, ouvrez le groupe de ressources que vous avez spécifié dans le portail. Vous voyez un réseau virtuel nommé `firstVNet` et une interface de réseau virtuel appelée `nic1`. Cliquez sur `firstVNet`, puis sur `subnets`. Vous voyez `firstSubnet` qui a été créé à l’origine et vous voyez `secondSubnet` qui a été ajouté dans la ressource `updateVNet`. 
 
@@ -145,4 +142,7 @@ Le `firstVNet` d’origine a été mis à jour au lieu d’être recréé. Si `f
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Cette technique est implémentée dans le [projet de blocs de construction de modèle](https://github.com/mspnp/template-building-blocks) et dans les [architectures de référence Azure](/azure/architecture/reference-architectures/). Vous pouvez utiliser ces derniers pour créer votre propre architecture ou déployer l’une de nos architectures de référence.
+* Découvrez comment déployer une ressource basée sur une condition, par exemple en fonction de la présence d’une valeur de paramètre. Consultez [Déployer une ressource de manière conditionnelle dans un modèle Azure Resource Manager](./conditional-deploy.md).
+
+[cli]: /cli/azure/?view=azure-cli-latest
+[github]: https://github.com/mspnp/template-examples

@@ -2,13 +2,13 @@
 title: Récupérer suite à une altération de données ou à une suppression accidentelle
 description: Article dédié à la description de la récupération suite à une corruption de données ou à une suppression accidentelle de données et à la conception d’applications résilientes, hautement disponibles et tolérantes aux pannes, ainsi qu’à la planification de la récupération d’urgence
 author: MikeWasson
-ms.date: 01/10/2018
-ms.openlocfilehash: b0716de39fe69d607b9a63e51356d28bbcdbfeae
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.date: 11/11/2018
+ms.openlocfilehash: 1f3dd448ac6172727481c437fb8a113f25d83464
+ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2018
-ms.locfileid: "31012424"
+ms.lasthandoff: 11/02/2018
+ms.locfileid: "50916266"
 ---
 # <a name="recover-from-data-corruption-or-accidental-deletion"></a>Récupérer suite à une altération de données ou à une suppression accidentelle 
 
@@ -30,7 +30,7 @@ Le stockage Azure fournit la résilience des données via des réplicas automati
 
 ## <a name="database"></a>Base de données
 
-### <a name="azure-sql-database"></a>Base de données SQL Azure 
+### <a name="azure-sql-database"></a>Azure SQL Database 
 
 SQL Database effectue automatiquement une combinaison de sauvegardes de bases de données complètes (toutes les semaines), de sauvegardes de bases de données différentielles (toutes les heures), et de sauvegardes de journaux de transactions (toutes les cinq à dix minutes) pour protéger votre entreprise contre la perte de données. Utilisez la restauration dans le temps pour restaurer une base de données à une heure antérieure. Pour plus d'informations, consultez les pages suivantes :
 

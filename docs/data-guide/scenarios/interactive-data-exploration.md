@@ -3,12 +3,12 @@ title: Exploration interactive des données
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 2e3d61fa5e1903c7fee6ebc84db3fa7c28d515cb
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.openlocfilehash: be27df79d445cf9949318e4483ce0f95c26b6e09
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43325115"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251870"
 ---
 # <a name="interactive-data-exploration"></a>Exploration interactive des données
 
@@ -82,7 +82,7 @@ Pour plus d’informations, consultez la section [Magasins de données analytiqu
 ### <a name="analytics-and-reporting"></a>Analytique et création de rapports
 
 - **Jupyter**. Les Notebooks Jupyter offrent une interface sur navigateur pour exécuter du code dans des langages comme R, Python ou Scala. Lorsque R Server ou Spark est utilisé pour traiter les données par lots, ou Spark SQL pour définir un schéma des tables à des fins d’interrogation, Jupyter peut représenter un bon choix pour interroger les données. Si vous utilisez Spark, vous pouvez vous servir de l’API de trame de données Spark standard ou de l’API Spark SQL ainsi que des instructions SQL incorporées pour interroger les données et générer des visualisations.
-- **Drill**. Pour effectuer une exploration de données ad hoc, [Apache Drill](https://drill.apache.org/) est un moteur de requête SQL sans schéma. Puisqu’il n’a pas besoin de schéma, vous pouvez interroger des données issues de diverses sources de données, et le moteur comprendra automatiquement la structure de ces données.
+- **Drill**. Pour effectuer une exploration de données ad hoc, [Apache Drill](https://drill.apache.org/) est un moteur de requête SQL sans schéma. Puisqu’il n’a pas besoin de schéma, vous pouvez interroger des données issues de diverses sources de données, et le moteur comprendra automatiquement la structure de ces données.  Vous pouvez utiliser l’option Drill with Azure Blob Storage (Explorer avec Stockage Blob Azure) par le biais du [plug-in Stockage Blob Azure](https://drill.apache.org/docs/azure-blob-storage-plugin/). Cela vous permet d’exécuter des requêtes sur les données dans Stockage Blob sans déplacer les données. 
 - **Clients Interactive Hive**. Si vous utilisez un cluster Interactive Hive pour interroger les données, vous pouvez utiliser la vue Hive dans le tableau de bord du cluster Ambari, l’outil de ligne de commande Beeline ou n’importe quel outil ODBC (avec le pilote ODBC de Hive), par exemple, Microsoft Excel ou Power BI.
 
 Pour plus d'informations, consultez la section [Technologies d’analytique des données et de création de rapports](../technology-choices/analysis-visualizations-reporting.md).

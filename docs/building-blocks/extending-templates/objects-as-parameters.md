@@ -2,13 +2,13 @@
 title: Utiliser un objet en tant que paramètre dans un modèle Azure Resource Manager
 description: Explique comment étendre les fonctionnalités des modèles Azure Resource Manager afin d’utiliser des objets en tant que paramètres
 author: petertay
-ms.date: 06/09/2017
-ms.openlocfilehash: dd53c55a26b2452c375d8d1e1a98886b15febaeb
-ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
+ms.date: 10/30/2018
+ms.openlocfilehash: c1955823b3474efa0abea1d9634add5f13d02eda
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48876753"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251887"
 ---
 # <a name="use-an-object-as-a-parameter-in-an-azure-resource-manager-template"></a>Utiliser un objet en tant que paramètre dans un modèle Azure Resource Manager
 
@@ -301,25 +301,21 @@ Examinons de plus près la façon dont nous spécifions nos valeurs de propriét
 
 ## <a name="try-the-template"></a>Essayer le modèle
 
-Si vous souhaitez effectuer des tests avec ce modèle, procédez comme suit : 
+Un exemple de modèle est disponible sur [GitHub][github]. Pour déployer le modèle, clonez le référentiel et exécutez les commandes [Azure CLI][cli] suivantes :
 
-1.  Accédez au portail Azure, sélectionnez l’icône **+**, puis recherchez le type de ressource **déploiement de modèle** et sélectionnez-le.
-2.  Accédez à la page **déploiement de modèle**, puis sélectionnez le bouton **créer**. Ce bouton ouvre le panneau **déploiement personnalisé**.
-3.  Sélectionnez le bouton **modifier un modèle**.
-4.  Supprimez le modèle vide. 
-5.  Copiez et collez l’exemple de modèle dans le volet de droite.
-6.  Sélectionnez le bouton **enregistrer**.
-7.  Lorsque vous revenez au volet **déploiement personnalisé**, sélectionnez le bouton **modifier les paramètres**.
-8.  Dans le panneau **modifier les paramètres**, supprimez le modèle existant.
-9.  Copiez et collez l’exemple de modèle de paramètres ci-dessus.
-10. Sélectionnez le bouton **enregistrer** qui vous renvoie au panneau **déploiement personnalisé**.
-11. Dans le panneau **déploiement personnalisé**, sélectionnez votre abonnement, créez un groupe de ressources ou utilisez un groupe de ressources existant, puis sélectionnez un emplacement. Passez en revue les conditions générales, puis cochez la case **J’accepte**.
-12. Sélectionnez le bouton **acheter**.
+```bash
+git clone https://github.com/mspnp/template-examples.git
+cd template-examples/example3-object-param
+az group create --location <location> --name <resource-group-name>
+az group deployment create -g <resource-group-name> \
+    --template-uri https://raw.githubusercontent.com/mspnp/template-examples/master/example3-object-param/deploy.json \
+    --parameters deploy.parameters.json
+```
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Vous pouvez prolonger ces techniques afin d’implémenter un [transformateur et un collecteur d’objets de propriété](./collector.md). Les techniques de transformateur et de collecteur sont plus générales et peuvent être liées à partir de vos modèles.
-* Cette technique est également implémentée dans le [projet de blocs de construction de modèle](https://github.com/mspnp/template-building-blocks) et dans les [architectures de référence Azure](/azure/architecture/reference-architectures/). Vous pouvez consulter nos modèles pour découvrir comment nous avons implémenté cette technique.
+- Découvrez comment créer un modèle qui effectue une itération dans un tableau d’objets et le transforme en schéma JSON. Voir [Implémenter un transformateur et un collecteur de propriétés dans un modèle Azure Resource Manager](./collector.md)
+
 
 <!-- links -->
 [azure-resource-manager-authoring-templates]: /azure/azure-resource-manager/resource-group-authoring-templates
@@ -327,3 +323,5 @@ Si vous souhaitez effectuer des tests avec ce modèle, procédez comme suit :
 [azure-resource-manager-create-multiple-instances]: /azure/azure-resource-manager/resource-group-create-multiple
 [azure-resource-manager-functions]: /azure/azure-resource-manager/resource-group-template-functions-resource
 [nsg]: /azure/virtual-network/virtual-networks-nsg
+[cli]: /cli/azure/?view=azure-cli-latest
+[github]: https://github.com/mspnp/template-examples

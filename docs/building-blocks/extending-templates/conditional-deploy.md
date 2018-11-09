@@ -2,23 +2,23 @@
 title: Déployer une ressource de manière conditionnelle dans un modèle Azure Resource Manager
 description: Explique comment étendre les fonctionnalités des modèles Azure Resource Manager au déploiement conditionnel d’une ressource en fonction de la valeur d’un paramètre
 author: petertay
-ms.date: 06/09/2017
-ms.openlocfilehash: e911e7dc41b4f71ebfaf13a00f8cdbb5b4e2578b
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.date: 10/30/2018
+ms.openlocfilehash: 2c74e17a5f38f9225b696640a23b55b1285276bb
+ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24538391"
+ms.lasthandoff: 10/30/2018
+ms.locfileid: "50251836"
 ---
 # <a name="conditionally-deploy-a-resource-in-an-azure-resource-manager-template"></a>Déployer une ressource de manière conditionnelle dans un modèle Azure Resource Manager
 
 Certains scénarios nécessitent que vous conceviez votre modèle pour le déploiement d’une ressource reposant sur une condition spécifique, telle que la présence ou l’absence d’une valeur de paramètre. Par exemple, votre modèle peut déployer un réseau virtuel et inclure des paramètres pour spécifier d’autres réseaux virtuels à des fins d’homologation. Si vous n’avez spécifié aucune valeur de paramètre pour l’homologation, vous ne souhaitez pas que Resource Manager déploie la ressource d’homologation.
 
-Pour effectuer cette opération, utilisez [l’élément `condition`][azure-resource-manager-condition] dans la ressource afin de tester la longueur de votre tableau de paramètres. Si cette longueur est égale à zéro, renvoyez la valeur `false` pour empêcher le déploiement ; pour toutes les longueurs supérieures à zéro, renvoyez la valeur `true` afin d’autoriser le déploiement.
+Pour effectuer cette opération, utilisez l’[élément condition][azure-resource-manager-condition] dans la ressource afin de tester la longueur de votre tableau de paramètres. Si cette longueur est égale à zéro, renvoyez la valeur `false` pour empêcher le déploiement ; pour toutes les longueurs supérieures à zéro, renvoyez la valeur `true` afin d’autoriser le déploiement.
 
 ## <a name="example-template"></a>Exemple de modèle
 
-Examinons un exemple de modèle illustrant cette approche. Notre modèle utilise [l’élément `condition`][azure-resource-manager-condition] pour contrôler le déploiement de la ressource `Microsoft.Network/virtualNetworks/virtualNetworkPeerings`. Cette ressource crée une homologation entre deux réseaux virtuels Azure dans la même région.
+Examinons un exemple de modèle illustrant cette approche. Notre modèle utilise l’[élément condition][azure-resource-manager-condition] pour contrôler le déploiement de la ressource `Microsoft.Network/virtualNetworks/virtualNetworkPeerings`. Cette ressource crée une homologation entre deux réseaux virtuels Azure dans la même région.
 
 Examinons chaque section du modèle.
 
@@ -40,12 +40,15 @@ Notre paramètre `virtualNetworkPeerings` est un `array` et présente le schéma
 ```json
 "virtualNetworkPeerings": [
     {
-        "remoteVirtualNetwork": {
-            "name": "my-other-virtual-network"
-        },
-        "allowForwardedTraffic": true,
-        "allowGatewayTransit": true,
-        "useRemoteGateways": false
+      "name": "firstVNet/peering1",
+      "properties": {
+          "remoteVirtualNetwork": {
+              "id": "[resourceId('Microsoft.Network/virtualNetworks','secondVNet')]"
+          },
+          "allowForwardedTraffic": true,
+          "allowGatewayTransit": true,
+          "useRemoteGateways": false
+      }
     }
 ]
 ```
@@ -60,7 +63,7 @@ Les propriétés de notre paramètre spécifient les [paramètres associés à l
       "name": "[concat('vnp-', copyIndex())]",
       "condition": "[greater(length(parameters('virtualNetworkPeerings')), 0)]",
       "dependsOn": [
-        "virtualNetworks"
+        "firstVNet", "secondVNet"
       ],
       "copy": {
           "name": "iterator",
@@ -113,17 +116,29 @@ Ensuite, nous spécifions notre boucle `copy`. Il s’agit d’une boucle `seria
   },
 ```
 
-Notre variable `workaround` inclut deux propriétés, `true` et `false`. La propriété `true` prend la valeur du tableau de paramètres `virtualNetworkPeerings`. La propriété `false` prend la valeur d’un objet vide incluant les propriétés nommées qui sont attendues par Resource Manager &mdash; notez que `false` correspond réellement à un tableau, tout comme notre paramètre `virtualNetworkPeerings`, ce qui entraînera la réussite de la validation. 
+Notre variable `workaround` inclut deux propriétés, `true` et `false`. La propriété `true` prend la valeur du tableau de paramètres `virtualNetworkPeerings`. La propriété `false` prend la valeur d’un objet vide incluant les propriétés nommées qui sont attendues par Resource Manager &mdash; notez que `false` correspond réellement à un tableau, tout comme notre paramètre `virtualNetworkPeerings`, ce qui entraîne la réussite de la validation. 
 
 Notre variable `peerings` utilise notre variable `workaround` en vérifiant de nouveau si la longueur du tableau de paramètres `virtualNetworkPeerings` est supérieure à zéro. Si tel est le cas, l’élément `string` prend la valeur `true`, et la variable `workaround` prend la valeur du tableau de paramètres `virtualNetworkPeerings`. Dans le cas contraire, l’élément prend la valeur `false`, et la variable `workaround` prend la valeur de notre objet vide dans le premier élément du tableau.
 
 À présent que nous avons contourné le problème de validation, nous pouvons nous contenter de spécifier le déploiement de la ressource `Microsoft.Network/virtualNetworks/virtualNetworkPeerings` dans le modèle imbriqué en transmettant les éléments `name` et `properties` de notre tableau de paramètres `virtualNetworkPeerings`. Vous pouvez observer ceci dans l’élément `template` imbriqué dans l’élément `properties` de notre ressource.
 
+## <a name="try-the-template"></a>Essayer le modèle
+
+Un exemple de modèle est disponible sur [GitHub][github]. Pour déployer le modèle, exécutez les commandes [Azure CLI][cli] suivantes :
+
+```bash
+az group create --location <location> --name <resource-group-name>
+az group deployment create -g <resource-group-name> \
+    --template-uri https://raw.githubusercontent.com/mspnp/template-examples/master/example2-conditional/deploy.json
+```
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Cette technique est implémentée dans le [projet de blocs de construction de modèle](https://github.com/mspnp/template-building-blocks) et dans les [architectures de référence Azure](/azure/architecture/reference-architectures/). Vous pouvez utiliser ces derniers pour créer votre propre architecture ou déployer l’une de nos architectures de référence.
+* Utilisez des objets au lieu de valeurs scalaires comme paramètres de modèle. Consultez [Utiliser un objet en tant que paramètre dans un modèle Azure Resource Manager](./objects-as-parameters.md)
 
 <!-- links -->
 [azure-resource-manager-condition]: /azure/azure-resource-manager/resource-group-authoring-templates#resources
 [azure-resource-manager-variable]: /azure/azure-resource-manager/resource-group-authoring-templates#variables
 [vnet-peering-resource-schema]: /azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings
+[cli]: /cli/azure/?view=azure-cli-latest
+[github]: https://github.com/mspnp/template-examples
