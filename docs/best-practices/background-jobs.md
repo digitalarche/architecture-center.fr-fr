@@ -2,17 +2,15 @@
 title: Conseils sur les travaux en arrière-plan
 description: Conseils portant sur l’exécution de tâches en arrière-plan indépendamment de l’interface utilisateur.
 author: dragon119
-ms.date: 05/24/2017
-pnp.series.title: Best Practices
-ms.openlocfilehash: 57fd7a6cc400b53e51e08fb5a1377dce4ae61327
-ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
+ms.date: 11/05/2018
+ms.openlocfilehash: 0c48121a0d5cff33893a8f242c70f4a275c46f73
+ms.sourcegitcommit: d59e2631fb08665bc30f6b65bfc7e1b75935cbd5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/30/2018
-ms.locfileid: "50251921"
+ms.lasthandoff: 11/05/2018
+ms.locfileid: "51021931"
 ---
 # <a name="background-jobs"></a>Travaux en arrière-plan
-[!INCLUDE [header](../_includes/header.md)]
 
 Plusieurs types d’applications requièrent des tâches en arrière-plan qui s’exécutent indépendamment de l’interface utilisateur. Citons, par exemple, les traitements par lots, les tâches de traitement intensif et les processus de longue durée, comme les workflows. Les travaux en arrière-plan peuvent être exécutés sans nécessiter l’intervention de l’utilisateur. L’application peut démarrer le travail et continuer à traiter les demandes interactives des utilisateurs. Ce processus peut favoriser la réduction de la charge sur l’interface utilisateur de l’application, ce qui peut améliorer la disponibilité et limiter les temps de réponse interactifs.
 
@@ -74,8 +72,7 @@ Vous pouvez héberger des tâches en arrière-plan à l’aide de différents se
 * [**Azure Web Apps et WebJobs**](#azure-web-apps-and-webjobs). Vous pouvez utiliser WebJobs pour exécuter des tâches personnalisées basées sur différents types de scripts ou de programmes exécutables dans le contexte de l’application web.
 * [**Azure Virtual Machines**](#azure-virtual-machines). Si vous utilisez un service Windows ou souhaitez utiliser le Planificateur de tâches de Windows, une pratique courante consiste à héberger les tâches en arrière-plan sur une machine virtuelle dédiée.
 * [**Azure Batch**](#azure-batch). Batch est un service de plateforme qui planifie l’exécution des travaux nécessitant beaucoup de ressources système sur une collection gérée de machines virtuelles. Il peut automatiquement mettre à l’échelle les ressources de calcul.
-* [**Azure Container Service**](#azure-container-service). Azure Container Service fournit un environnement d’hébergement de conteneurs sur Azure. 
-* [**Azure Cloud Services**](#azure-cloud-services). Vous pouvez écrire du code dans un rôle qui s’exécute en tant que tâche en arrière-plan.
+* [**Azure Kubernetes Service**](#azure-kubernetes-service) (AKS). Azure Kubernetes Service fournit un environnement d’hébergement géré pour Kubernetes sur Azure. 
 
 Les sections suivantes décrivent chacune de ces options plus en détail, en ajoutant des informations qui vous permettront de choisir l’action la plus appropriée.
 
@@ -110,11 +107,8 @@ Les tâches web Azure présentent les caractéristiques suivantes :
 * Par défaut, WebJobs est mis à l’échelle par rapport à l’application web. Toutefois, vous pouvez configurer les tâches pour qu’elles s’exécutent sur une instance unique, en définissant la propriété de configuration **is_singleton** sur la valeur **true**. Les tâches web d’une instance unique sont utiles pour les tâches que vous ne voulez pas mettre à l’échelle ou exécuter en tant qu’instances multiples simultanées (par exemple, la réindexation, l’analyse des données et autres tâches similaires).
 * Pour réduire l’impact des travaux sur les performances de l’application web, envisagez de créer une instance vide de l’application web Azure dans un nouveau plan de service d’application, pour y héberger les tâches web de longue durée ou nécessitant beaucoup de ressources.
 
-### <a name="more-information"></a>Plus d’informations
-* [Ressources recommandées pour Azure WebJobs](/azure/app-service-web/websites-webjobs-resources) répertorie un grand nombre de ressources, d’éléments à télécharger et d’exemples utiles pour WebJobs.
-
 ### <a name="azure-virtual-machines"></a>Machines virtuelles Azure
-Vous pouvez implémenter des tâches en arrière-plan pour ne pas qu’elles soient déployées sur Azure Web Apps ou Cloud Services, ou parce que ce n’est peut-être pas pratique. Les services Windows, ainsi que les utilitaires et programmes exécutables tiers, en sont des exemples typiques. Il peut également s’agir des programmes écrits pour un environnement d’exécution différent de celui qui héberge l’application. C’est, par exemple, un programme Unix ou Linux que vous souhaitez exécuter à partir d’une application Windows ou .NET Vous avez le choix entre plusieurs systèmes d’exploitation pour une machine virtuelle Azure. Vous pouvez ensuite exécuter votre service ou programme exécutable sur cette machine virtuelle.
+Vous pouvez implémenter des tâches en arrière-plan de façon à ce qu’elles ne soient pas déployées sur Azure Web Apps, ou parce que ce n’est peut-être pas pratique. Les services Windows, ainsi que les utilitaires et programmes exécutables tiers, en sont des exemples typiques. Il peut également s’agir des programmes écrits pour un environnement d’exécution différent de celui qui héberge l’application. C’est, par exemple, un programme Unix ou Linux que vous souhaitez exécuter à partir d’une application Windows ou .NET Vous avez le choix entre plusieurs systèmes d’exploitation pour une machine virtuelle Azure. Vous pouvez ensuite exécuter votre service ou programme exécutable sur cette machine virtuelle.
 
 Pour savoir quand utiliser Virtual Machines, consultez [Comparaison entre Azure App Service, Azure Cloud Services et Azure Virtual Machines](/azure/app-service-web/choose-web-site-cloud-service-vm/). Pour plus d’informations sur les options disponibles pour les machines virtuelles, consultez [Tailles des machines virtuelles dans Azure](/azure/virtual-machines/windows/sizes). Pour plus d’informations sur les systèmes d’exploitation et les images préconfigurées disponibles pour Virtual Machines, consultez le [Marketplace de machines virtuelles Azure](https://azure.microsoft.com/gallery/virtual-machines/).
 
@@ -133,8 +127,9 @@ Si vous envisagez de déployer des tâches en arrière-plan sur une machine virt
 * Il n’existe pas d’outil de suivi des tâches dans le portail Azure, ni de fonctionnalité de redémarrage automatique des tâches ayant échoué, mais vous pouvez surveiller l’état de base de la machine virtuelle et le gérer au moyen des [applets de commande Azure Resource Manager](https://msdn.microsoft.com/library/mt125356.aspx). Toutefois, il n’existe aucune fonction permettant de contrôler les processus et threads dans les nœuds de calcul. En règle générale, l’utilisation d’une machine virtuelle nécessite des efforts supplémentaires pour implémenter un mécanisme afin de collecter des données d’instrumentation dans la tâche et de rassembler les données du système d’exploitation sur l’ordinateur virtuel. Pour ce faire, essayez d’utiliser le composant [System Center Management Pack pour Azure](https://www.microsoft.com/download/details.aspx?id=50013).
 * Vous pouvez envisager de créer des sondes de surveillance exposées via des points de terminaison HTTP. Le code de ces sondes peut effectuer des contrôles d’intégrité, collecter des statistiques et des informations opérationnelles ou collecter les informations sur les erreurs et les renvoyer à une application de gestion. Pour en savoir plus, voir [Modèle de surveillance de point de terminaison d’intégrité](../patterns/health-endpoint-monitoring.md).
 
-#### <a name="more-information"></a>Plus d’informations
-* [Machines virtuelles](https://azure.microsoft.com/services/virtual-machines/) sur Azure
+Pour plus d'informations, consultez les pages suivantes :
+
+* [Machines virtuelles](https://azure.microsoft.com/services/virtual-machines/)
 * [FAQ sur les machines virtuelles Azure](/azure/virtual-machines/virtual-machines-linux-classic-faq?toc=%2fazure%2fvirtual-machines%2flinux%2fclassic%2ftoc.json)
 
 ### <a name="azure-batch"></a>Azure Batch 
@@ -149,15 +144,15 @@ Le service Batch offre de bons résultats avec les charges de travail intrinsèq
 
 Un travail Azure Batch s’exécute sur un pool de nœuds (machines virtuelles). Une approche possible consiste à allouer un pool uniquement lorsque cela se révèle nécessaire, puis à le supprimer une fois le travail terminé. Cette approche optimise l’utilisation, car les nœuds ne sont pas inactifs, mais le travail doit attendre que des nœuds soient alloués. Une autre possibilité consiste à créer un pool à l’avance. Cette approche réduit le temps nécessaire au démarrage d’un travail, mais peut entraîner l’existence de nœuds inactifs. Pour plus d’informations, consultez la section [Durée de vie de nœud de pool et de calcul](/azure/batch/batch-api-basics#pool-and-compute-node-lifetime).
 
-#### <a name="more-information"></a>Plus d’informations 
+Pour plus d'informations, consultez les pages suivantes :
 
-* [Exécuter des charges de travail intrinsèquement parallèles avec Batch](/azure/batch/batch-technical-overview) 
+* [Présentation d’Azure Batch](/azure/batch/batch-technical-overview) 
 * [Développer des solutions de calcul parallèles à grande échelle avec Batch](/azure/batch/batch-api-basics) 
 * [Solutions Batch et HPC pour les charges de travail de calcul à grande échelle](/azure/batch/batch-hpc-solutions)
 
-### <a name="azure-container-service"></a>Azure Container Service 
+### <a name="azure-kubernetes-service"></a>Azure Kubernetes Service
 
-Azure Container Service vous permet de configurer et gérer un cluster de machines virtuelles dans Azure pour l’exécution d’applications en conteneur. Il propose un choix entre Docker Swarm, DC/OS et Kubernetes pour l’orchestration. 
+Azure Kubernetes Service (AKS) gère votre environnement Kubernetes hébergé, ce qui vous permet de déployer et de gérer facilement des applications en conteneur. 
 
 Les conteneurs peuvent se révéler utiles pour l’exécution de travaux en arrière-plan. Voici certains des avantages obtenus : 
 
@@ -168,92 +163,15 @@ Les conteneurs peuvent se révéler utiles pour l’exécution de travaux en arr
 
 #### <a name="considerations"></a>Considérations
 
-- Cette approche nécessite une bonne compréhension de la procédure d’utilisation d’un orchestrateur de conteneurs. Selon les compétences dont dispose votre équipe DevOps, ceci peut ou non constituer un problème.  
-- Container Service s’exécute dans un environnement IaaS. Il approvisionne un cluster de machines virtuelles dans un réseau virtuel dédié. 
+- Cette approche nécessite une bonne compréhension de la procédure d’utilisation d’un orchestrateur de conteneurs. Selon les compétences dont dispose votre équipe DevOps, ceci peut ou non constituer un problème.
 
-#### <a name="more-information"></a>Plus d’informations 
+Pour plus d'informations, consultez les pages suivantes :
 
-* [Introduction aux solutions d’hébergement de conteneur Docker avec Azure Container Service](/azure/container-service/container-service-intro) 
+* [Vue d’ensemble des conteneurs dans Azure](https://azure.microsoft.com/overview/containers/) 
 * [Présentation des registres de conteneurs Docker privés](/azure/container-registry/container-registry-intro) 
 
-### <a name="azure-cloud-services"></a>Services cloud Azure 
-Vous pouvez exécuter des tâches en arrière-plan dans un rôle web ou dans un rôle de travail distinct. Si vous envisagez d’utiliser un rôle de travail, prenez en compte les éléments suivants : les exigences en matière d’extensibilité et d’élasticité, la durée de vie des tâches, la cadence de publication, la sécurité, la tolérance de panne, la contention, la complexité et l’architecture logique. Pour en savoir plus, voir [Modèle de consolidation des ressources de calcul](../patterns/compute-resource-consolidation.md).
-
-Vous pouvez implémenter des tâches en arrière-plan dans un rôle Cloud Services de différentes manières :
-
-* Créez une implémentation de la classe **RoleEntryPoint** dans le rôle et utilisez ses méthodes pour exécuter des tâches en arrière-plan. Les tâches s’exécutent dans le contexte de WaIISHost.exe. Elles peuvent utiliser la méthode **GetSetting** de la classe **CloudConfigurationManager** pour charger les paramètres de configuration. Pour en savoir plus, consultez [Cycle de vie](#lifecycle).
-* Utilisez les tâches de démarrage pour exécuter des tâches en arrière-plan lorsque l’application démarre. Pour forcer les tâches à continuer leur exécution en arrière-plan, définissez la propriété **taskType** sur **background** (sinon, le processus de démarrage de l’application s’arrête et attend la fin de la tâche). Pour plus d’informations, consultez [Exécuter des tâches de démarrage dans Azure](/azure/cloud-services/cloud-services-startup-tasks).
-* Utilisez le Kit de développement logiciel (SDK) WebJobs pour implémenter des tâches en arrière-plan, telles que des tâches web lancées comme une tâche de démarrage. Pour plus d’informations, consultez l’article [Créer une tâche web .NET dans Azure App Service](/azure/app-service-web/websites-dotnet-webjobs-sdk-get-started).
-* Utilisez une tâche de démarrage pour installer un service Windows qui exécute une ou plusieurs tâches en arrière-plan. Vous devez définir la propriété **taskType** sur **background**, afin que le service s’exécute en arrière-plan. Pour plus d’informations, consultez [Exécuter des tâches de démarrage dans Azure](/azure/cloud-services/cloud-services-startup-tasks).
-
-Le principal avantage lié à l’exécution des tâches en arrière-plan dans le rôle web est la réduction des coûts d’hébergement, car il n’est pas nécessaire de déployer des rôles supplémentaires.
-
-Le fait d’exécuter des tâches en arrière-plan dans un rôle de travail présente plusieurs avantages :
-
-* Cela vous permet de gérer la mise à l’échelle de chaque type de rôle, de manière séparée. Par exemple, vous aurez peut-être besoin d’un plus grand nombre d’instances du rôle web pour gérer la charge actuelle, mais d’un nombre moins important d’instances du rôle de travail qui exécute les tâches en arrière-plan. En effectuant une mise à l’échelle des instances de calcul des tâches en arrière-plan séparément des rôles de l’interface utilisateur, vous diminuez les coûts d’hébergement, tout en garantissant des performances acceptables.
-* Cela permet de décharger la charge de traitement des tâches en arrière-plan du rôle web. Le rôle web qui fournit l’interface utilisateur peut rester réactif, ce qui peut se traduire par un nombre moins important d’instances requises pour gérer un volume donné de demandes de la part des utilisateurs.
-* Cela vous permet d’implémenter la séparation des intérêts. Chaque type de rôle peut implémenter un ensemble spécifique de tâches clairement définies et associées. Ainsi, la conception et la gestion du code sont plus simples, car l’interdépendance entre le code et les fonctionnalités est moins appuyée entre les rôles.
-* Cela peut faciliter l’isolation des données et processus sensibles. Par exemple, les rôles web qui implémentent l’interface utilisateur n’ont pas nécessairement besoin d’un accès aux données gérées et contrôlées par un rôle de travail. Cela peut contribuer à renforcer la sécurité, notamment quand vous utilisez un modèle tel que le [modèle d’opérateur de contrôle d’appels](../patterns/gatekeeper.md).  
-
-#### <a name="considerations"></a>Considérations
-Tenez compte des points suivants lorsque vous choisissez la méthode et l’emplacement de déploiement des tâches en arrière-plan via l’utilisation des rôles de travail et web de Cloud Services :
-
-* L’hébergement des tâches en arrière-plan dans un rôle web existant peut permettre d’éviter les coûts liés à l’exécution d’un rôle de travail distinct pour ces seules tâches. Toutefois, cette méthode risque de diminuer les performances et la disponibilité de l’application en cas de contention du traitement et d’autres ressources. L’utilisation d’un rôle de travail distinct protège le rôle web des effets de l’exécution de tâches en arrière-plan de longue durée ou nécessitant beaucoup de ressources.
-* Si vous hébergez des tâches en arrière-plan à l’aide de la classe **RoleEntryPoint** , vous pouvez facilement déplacer cette classe vers un autre rôle. Par exemple, si vous créez la classe dans un rôle web, puis choisissez ensuite d’exécuter les tâches dans un rôle de travail, déplacez l’implémentation de la classe **RoleEntryPoint** vers le rôle de travail.
-* Les tâches de démarrage sont conçues pour exécuter un programme ou un script. Le déploiement d’un travail en arrière-plan en tant que programme exécutable peut être plus compliqué à faire, surtout si cela implique aussi de déployer des assemblys dépendants. Quand vous utilisez des tâches de démarrage, il est souvent plus simple de déployer et d’utiliser un script pour définir un travail en arrière-plan.
-* Les exceptions qui provoquent l’échec d’une tâche en arrière-plan ont un impact variable selon leur mode d’hébergement :
-  * Si vous utilisez la méthode reposant sur la classe **RoleEntryPoint** , l’échec d’une tâche entraîne le redémarrage du rôle ; la tâche redémarre automatiquement. Cela peut affecter la disponibilité de l’application. Pour éviter ce problème, veillez à inclure une fonction robuste de gestion des exceptions dans la classe **RoleEntryPoint** et dans toutes les tâches en arrière-plan. Utilisez du code pour redémarrer des tâches ayant échoué lorsque cela s’applique, et lancez l’exception pour redémarrer le rôle uniquement si vous ne pouvez effectuer une récupération normale suite à l’échec dans votre code.
-  * Si vous utilisez des tâches de démarrage, vous êtes chargé de gérer l’exécution des tâches et de vérifier si elles échouent.
-* Dans ce cas, les opérations de gestion et de surveillance des tâches de démarrage s’avèrent plus complexes qu’au moyen de la classe **RoleEntryPoint** . Toutefois, le Kit de développement logiciel (SDK) Azure WebJobs inclut un tableau de bord pour faciliter la gestion de tâches web que vous lancez via des tâches de démarrage.
-
-#### <a name="lifecycle"></a>Cycle de vie 
- Si vous décidez d’implémenter des travaux en arrière-plan pour les applications Cloud Services utilisant des rôles web ou de travail en recourant à la classe **RoleEntryPoint** , vous devez être capable d’appréhender le cycle de vie de cette classe, afin de pouvoir l’utiliser correctement.
-
-Les rôles web et de travail passent par un ensemble de phases distinctes lorsqu’elles démarrent, s’exécutent et s’arrêtent. La classe **RoleEntryPoint** expose une série d’événements qui indiquent que ces phases sont en cours. Vous les utilisez pour lancer, exécuter et arrêter vos tâches en arrière-plan. Voici le cycle complet :
-
-* Azure charge l’assembly de rôle et effectue une recherche portant sur une classe dérivée de la classe **RoleEntryPoint**dans cet assembly.
-* S’il la trouve, il appelle la méthode **RoleEntryPoint.OnStart()**. Vous substituez cette méthode pour lancer vos tâches en arrière-plan.
-* Une fois la méthode **OnStart** exécutée, Azure appelle la méthode **Application_Start()** dans le fichier global de l’application, s’il est présent (par exemple, le fichier Global.asax dans un rôle web exécutant ASP.NET).
-* Microsoft Azure appelle la méthode **RoleEntryPoint.Run()** sur un nouveau thread au premier plan qui s’exécute en parallèle avec la méthode **OnStart()**. Vous substituez cette méthode pour démarrer vos tâches en arrière-plan.
-* Lorsque la méthode Run termine son exécution, Azure commence par appeler la méthode **Application_End()** dans le fichier global de l’application (s’il est présent), puis appelle la méthode **RoleEntryPoint.OnStop()**. Vous substituez la méthode **OnStop** pour arrêter vos tâches en arrière-plan, nettoyer les ressources, supprimer les objets et fermer les connexions que les tâches sont susceptibles d’avoir utilisées.
-* Le processus hôte du rôle de travail Azure est arrêté. À ce stade, ce rôle est recyclé et redémarre.
-
-Pour en savoir plus et consulter un exemple d’utilisation des méthodes de la classe **RoleEntryPoint** , voir [Modèle de consolidation des ressources de calcul](../patterns/compute-resource-consolidation.md).
-
-#### <a name="implementation-considerations"></a>Considérations relatives à l'implémentation
-
-Si vous implémentez des tâches en arrière-plan dans un rôle Web ou de travail, tenez compte des points suivants :
-
-* L’implémentation par défaut de la méthode **Run** dans la classe **RoleEntryPoint** contient un appel à l’élément **Thread.Sleep(Timeout.Infinite)** qui permet au rôle de rester actif indéfiniment. Si vous remplacez la méthode **Run** (qui est généralement nécessaire pour exécuter des tâches en arrière-plan), vous ne devez pas autoriser votre code à quitter cette méthode, sauf si vous voulez recycler l’instance du rôle.
-* Une implémentation classique de la méthode **Run** inclut du code pour démarrer chaque tâche en arrière-plan, ainsi qu’une construction en boucle qui vérifie périodiquement l’état de toutes les tâches en arrière-plan. Elle peut redémarrer toute tâche en échec ou détecter la présence de jetons d’annulation qui signalent les travaux terminés.
-* Si une tâche en arrière-plan lève une exception non gérée, cette tâche doit être recyclée alors que toutes les autres tâches en arrière-plan du rôle doivent être autorisées à se poursuivre. Toutefois, si l’exception est provoquée par l’endommagement d’objets en dehors de la tâche, tels que le stockage partagé, cette exception doit être gérée par votre classe **RoleEntryPoint**, toutes les tâches doivent être annulées et la méthode **Run** doit être autorisée à se terminer. Ensuite, Microsoft Azure redémarre le rôle.
-* Utilisez la méthode **OnStop** pour suspendre ou arrêter les tâches en arrière-plan et nettoyer les ressources. Cela peut impliquer l’arrêt des tâches de longue durée ou à plusieurs étapes. Il est essentiel de savoir comment y parvenir sans entraîner d’incohérence des données. Si une instance de rôle s’arrête pour une raison quelconque (autre qu’un arrêt initié par l’utilisateur), le code exécutant la méthode **OnStop** doit se terminer dans les cinq minutes. Autrement, son arrêt est forcé. Assurez-vous que votre code peut s’exécuter dans le délai prévu ou qu’il accepte d’être arrêté avant la fin de son exécution.  
-* L’équilibreur de charge Azure commence à diriger le trafic vers l’instance de rôle quand la méthode **RoleEntryPoint.OnStart** renvoie la valeur **true**. Par conséquent, vous pouvez envisager de placer l’ensemble de votre code d’initialisation dans la méthode **OnStart** , afin que les instances de rôle qui ne s’initialisent pas correctement ne reçoivent aucun trafic.
-* Vous pouvez utiliser des tâches de démarrage en plus des méthodes de la classe **RoleEntryPoint** . Pour initialiser des paramètres à modifier dans l’équilibreur de charge Azure, utilisez des tâches de démarrage, car ces tâches sont exécutées avant que le rôle reçoive une demande. Pour plus d’informations, consultez [Exécuter des tâches de démarrage dans Azure](/azure/cloud-services/cloud-services-startup-tasks/).
-* Si une tâche de démarrage contient une erreur, cela peut obliger le rôle à redémarrer continuellement. Vous ne pourrez alors peut-être pas faire un échange d’adresses virtuelles IP (VIP) vers une version intermédiaire précédente, car l’échange nécessite un accès exclusif au rôle, ce qui est impossible pendant le redémarrage du rôle. Pour résoudre ce problème :
-  
-  * Ajoutez le code suivant au début des méthodes **OnStart** et **Run**, dans votre rôle :
-    
-    ```C#
-    var freeze = CloudConfigurationManager.GetSetting("Freeze");
-    if (freeze != null)
-    {
-      if (Boolean.Parse(freeze))
-      {
-        Thread.Sleep(System.Threading.Timeout.Infinite);
-      }
-    }
-    ```
-    
-  * Ajoutez la définition du paramètre **Freeze** en tant que valeur booléenne dans les fichiers ServiceDefinition.csdef et ServiceConfiguration.\*.cscfg du rôle, puis définissez ce paramètre sur la valeur **false**. Si le rôle entre dans un mode de redémarrage répété, vous pouvez redéfinir ce paramètre sur la valeur **true** pour geler l’exécution du rôle et permettre son échange avec une version précédente.
-
-#### <a name="more-information"></a>Plus d’informations
-* [Modèle de consolidation des ressources de calcul](../patterns/compute-resource-consolidation.md)
-* [Prise en main du Kit de développement logiciel (SDK) Azure WebJobs](/azure/app-service-web/websites-dotnet-webjobs-sdk-get-started/)
-
-
 ## <a name="partitioning"></a>Partitionnement
-Si vous décidez d’inclure des tâches en arrière-plan dans une instance de calcul existante (par exemple, une application web, un rôle web, un rôle de travail existant ou une machine virtuelle), vous devez déterminer l’effet de cette opération sur les attributs de qualité de l’instance de calcul et de la tâche en arrière-plan elle-même. Ces facteurs vous aident à décider s’il faut colocaliser les tâches avec l’instance de calcul existante, ou les séparer dans une instance de calcul distincte :
+Si vous décidez d’inclure des tâches en arrière-plan dans une instance de calcul existante, vous devez déterminer l’effet de cette opération sur les attributs de qualité de l’instance de calcul et de la tâche en arrière-plan elle-même. Ces facteurs vous aident à décider s’il faut colocaliser les tâches avec l’instance de calcul existante, ou les séparer dans une instance de calcul distincte :
 
 * **Disponibilité**: les tâches en arrière-plan n’ont pas nécessairement besoin du même niveau de disponibilité que d’autres parties de l’application, comme c’est le cas pour l’interface utilisateur et d’autres composants intervenant directement dans les interactions des utilisateurs. Par ailleurs, les tâches en arrière-plan peuvent être plus tolérantes envers un problème de latence ou l’échec d’une nouvelle tentative de connexion, voire d’autres facteurs affectant la disponibilité, car les opérations peuvent être mises en file d’attente. Toutefois, la capacité doit être suffisante pour empêcher la sauvegarde de demandes susceptibles de bloquer les files d’attente et d’affecter l’application dans son ensemble.
 * **Extensibilité** : les tâches en arrière-plan n’ont souvent pas les mêmes exigences d’extensibilité que l’interface utilisateur et les éléments interactifs de l’application. Il peut être nécessaire de mettre l’interface utilisateur à l’échelle pour qu’elle puisse gérer les pics de demande. Les tâches en arrière-plan en attente peuvent alors être exécutées pendant les périodes moins chargées par un nombre plus réduit d’instances de calcul.
@@ -285,9 +203,8 @@ La coordination de plusieurs étapes ou tâches peut s’avérer délicate, mais
 ## <a name="resiliency-considerations"></a>Remarques relatives à la résilience
 Les tâches en arrière-plan doivent être assez résilientes pour pouvoir fournir des services fiables à l’application. Quand vous planifiez et créez des tâches en arrière-plan, tenez compte des points suivants :
 
-* Les tâches en arrière-plan doivent être en mesure de gérer correctement le redémarrage d’un rôle ou d’un service, sans corrompre les données ni introduire d’incohérences dans l’application. Pour les tâches de longue durée ou à plusieurs étapes, envisagez d’utiliser des *points de contrôle*, en enregistrant l’état des travaux dans le stockage persistant ou en tant que messages dans une file d’attente, le cas échéant. Par exemple, vous pouvez conserver les informations d’état dans un message placé en file d’attente, et mettre à jour ces informations de manière incrémentielle en parallèle avec la progression de la tâche. Cette tâche peut ainsi être traitée à partir du dernier point de contrôle au lieu d’être réexécutée depuis le début. Lorsque vous utilisez des files d’attente Azure Service Bus, vous pouvez recourir à des sessions de messages pour activer le même scénario. Les sessions vous permettent d’enregistrer et de récupérer l’état de traitement de l’application (à l’aide des méthodes [SetState](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.messagesession.setstate?view=azureservicebus-4.0.0) et [GetState](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.messagesession.getstate?view=azureservicebus-4.0.0)). Pour plus d’informations sur la conception de processus et workflows à plusieurs étapes fiables, consultez [Scheduler Agent Supervisor Pattern](../patterns/scheduler-agent-supervisor.md) (Modèle de superviseur de l’agent du planificateur).
-* Quand vous utilisez des rôles web ou de travail pour héberger plusieurs tâches en arrière-plan, concevez le remplacement de la méthode **Run** pour effectuer le suivi des tâches interrompues ou en échec, et les redémarrer. Si cette opération n’est pas pratique, et si vous utilisez un rôle de travail, obligez ce dernier à redémarrer en quittant la méthode **Run** .
-* Quand vous utilisez des files d’attente pour communiquer avec les tâches en arrière-plan, ces files peuvent jouer le rôle de mémoire tampon pour stocker les demandes qui sont envoyées aux tâches à un moment où l’application connaît une surcharge. Ainsi, les tâches peuvent se mettre au même niveau que l’interface utilisateur lorsque l’activité baisse. Cela signifie également que le recyclage du rôle ne bloquera pas l’interface utilisateur. Pour en savoir plus, voir [Modèle de nivellement de la charge basé sur une file d’attente](../patterns/queue-based-load-leveling.md). Si certaines tâches sont plus importantes que d’autres, vous pouvez envisager d’implémenter le [modèle de file d’attente prioritaire](../patterns/priority-queue.md) pour vous assurer que ces tâches s’exécutent avant les autres.
+* Les tâches en arrière-plan doivent être en mesure de gérer correctement les redémarrages, sans corrompre les données ni introduire d’incohérences dans l’application. Pour les tâches de longue durée ou à plusieurs étapes, envisagez d’utiliser des *points de contrôle*, en enregistrant l’état des travaux dans le stockage persistant ou en tant que messages dans une file d’attente, le cas échéant. Par exemple, vous pouvez conserver les informations d’état dans un message placé en file d’attente, et mettre à jour ces informations de manière incrémentielle en parallèle avec la progression de la tâche. Cette tâche peut ainsi être traitée à partir du dernier point de contrôle au lieu d’être réexécutée depuis le début. Lorsque vous utilisez des files d’attente Azure Service Bus, vous pouvez recourir à des sessions de messages pour activer le même scénario. Les sessions vous permettent d’enregistrer et de récupérer l’état de traitement de l’application (à l’aide des méthodes [SetState](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.messagesession.setstate?view=azureservicebus-4.0.0) et [GetState](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.messagesession.getstate?view=azureservicebus-4.0.0)). Pour plus d’informations sur la conception de processus et workflows à plusieurs étapes fiables, consultez [Scheduler Agent Supervisor Pattern](../patterns/scheduler-agent-supervisor.md) (Modèle de superviseur de l’agent du planificateur).
+* Quand vous utilisez des files d’attente pour communiquer avec les tâches en arrière-plan, ces files peuvent jouer le rôle de mémoire tampon pour stocker les demandes qui sont envoyées aux tâches à un moment où l’application connaît une surcharge. Ainsi, les tâches peuvent se mettre au même niveau que l’interface utilisateur lorsque l’activité baisse. Cela signifie également que les redémarrages ne bloqueront pas l’interface utilisateur. Pour en savoir plus, voir [Modèle de nivellement de la charge basé sur une file d’attente](../patterns/queue-based-load-leveling.md). Si certaines tâches sont plus importantes que d’autres, vous pouvez envisager d’implémenter le [modèle de file d’attente prioritaire](../patterns/priority-queue.md) pour vous assurer que ces tâches s’exécutent avant les autres.
 * Les tâches en arrière-plan qui sont lancées par des messages ou qui traitent des messages doivent être conçues pour gérer les incohérences, comme les messages qui arrivent dans le désordre, les messages qui entraînent une erreur de manière récurrente (souvent appelés *messages incohérents*) et les messages qui sont remis plusieurs fois. Tenez compte des éléments suivants :
   * Les messages devant être traités dans un ordre spécifique, comme ceux qui modifient les données sur la base de la valeur des données existante (par exemple, en ajoutant une valeur à une valeur existante), risquent de ne pas arriver dans le même ordre que lors de leur envoi. Ils peuvent aussi être gérés par différentes instances d’une tâche en arrière-plan et selon un ordre différent en raison des charges variables sur chaque instance. Les messages devant être traités dans un ordre spécifique doivent inclure un numéro, une clé ou tout autre indicateur de séquence que les tâches en arrière-plan peuvent utiliser pour garantir leur traitement dans l’ordre adéquat. Si vous utilisez Microsoft Azure Service Bus, vous pouvez utiliser des sessions de messagerie afin de garantir un ordre de livraison adéquat. Toutefois, la conception d’un processus ne tenant pas compte de l’ordre des messages, quand cela possible, est généralement plus efficace.
   * En règle générale, une tâche en arrière-plan obtient un aperçu des messages de la file d’attente, ce qui les masque aux autres consommateurs de messages pendant un temps. Elle supprime ensuite les messages dont le traitement est terminé. Si une tâche en arrière-plan échoue à traiter un message, ce dernier réapparaît dans la file d’attente après expiration du délai de l’aperçu. Le message sera traité par une autre instance de la tâche ou lors du prochain cycle de traitement de cette instance. Si ce message provoque une erreur répétée dans le consommateur, il bloque la tâche, la file d’attente, voire l’application elle-même lorsque la file d’attente est saturée. Pour cette raison, il est essentiel de détecter et de supprimer les messages incohérents de la file d’attente. Si vous utilisez Microsoft Azure Service Bus, vous pouvez déplacer les messages entraînant une erreur (manuellement ou automatiquement) vers une file d’attente de lettres mortes associée.
@@ -297,31 +214,20 @@ Les tâches en arrière-plan doivent être assez résilientes pour pouvoir fourn
 ## <a name="scaling-and-performance-considerations"></a>Remarques relatives à la mise à l’échelle et aux performances
 Les tâches en arrière-plan doivent offrir des performances suffisantes pour éviter de bloquer l’application ou entraîner des incohérences, suite à une opération en retard lorsque le système est soumis à une charge. En général, vous améliorez les performances lorsque vous mettez à l’échelle les instances de calcul qui hébergent les tâches en arrière-plan. Quand vous planifiez et créez des tâches en arrière-plan, tenez compte des points suivants en matière de performances et d’extensibilité :
 
-* Azure prend en charge la mise à l’échelle automatique (augmentation et diminution de la taille des instances) en fonction de la demande et de la charge actuelles, ou selon une planification prédéfinie, aussi bien pour Web Apps, les rôles de travail et web Cloud Services, et les déploiements hébergés par les machines virtuelles. Cette fonctionnalité permet de garantir que l’application dans son ensemble offre des performances acceptables, tout en réduisant les coûts d’exécution.
-* Si les tâches en arrière-plan présentent des performances différentes de celles d’autres éléments de l’application Cloud Services (par exemple, l’interface utilisateur ou des composants comme la couche d’accès aux données), l’hébergement des tâches en arrière-plan dans un rôle de travail distinct permet aux rôles des tâches en arrière-plan et de l’interface utilisateur d’être mis à l’échelle de manière indépendante, afin de gérer la charge. Si plusieurs tâches en arrière-plan présentent des performances très différentes, envisagez de les séparer dans des rôles de travail distincts et de mettre chaque type de rôle à l’échelle de manière indépendante. Notez toutefois que cette approche peut s’avérer plus coûteuse que la combinaison de l’ensemble des tâches dans un nombre plus réduit de rôles.
-* Une simple mise à l’échelle des rôles peut être insuffisante pour empêcher une baisse des performances en cas de charge élevée. Vous devrez peut-être aussi mettre à l’échelle les files d’attente de stockage et d’autres ressources pour empêcher la formation d’un goulot d’étranglement au niveau d’un point donné de la chaîne de traitement. Tenez également compte d’autres limitations comme le débit maximal du stockage et d’autres services sur lesquels reposent l’application et les tâches en arrière-plan.
+* Azure prend en charge la mise à l’échelle automatique (augmentation et diminution de la taille des instances) en fonction de la demande et de la charge actuelles, ou selon une planification prédéfinie, pour Web Apps et les déploiements hébergés par les machines virtuelles. Cette fonctionnalité permet de garantir que l’application dans son ensemble offre des performances acceptables, tout en réduisant les coûts d’exécution.
+* Si les tâches en arrière-plan présentent des performances différentes de celles d’autres éléments de l’application (par exemple, l’interface utilisateur ou des composants comme la couche d’accès aux données), l’hébergement des tâches en arrière-plan dans un service de calcul distinct permet aux tâches en arrière-plan et à l’interface utilisateur d’être mis à l’échelle de manière indépendante, afin de gérer la charge. Si plusieurs tâches en arrière-plan présentent des performances très différentes, envisagez de les séparer et de mettre chaque type de tâches à l’échelle de manière indépendante. Néanmoins, veuillez noter que cela peut s’avérer plus coûteux.
+* Une simple mise à l’échelle des ressources de calcul peut se révéler insuffisante pour empêcher une baisse des performances en cas de charge élevée. Vous devrez peut-être aussi mettre à l’échelle les files d’attente de stockage et d’autres ressources pour empêcher la formation d’un goulot d’étranglement au niveau d’un point donné de la chaîne de traitement. Tenez également compte d’autres limitations comme le débit maximal du stockage et d’autres services sur lesquels reposent l’application et les tâches en arrière-plan.
 * La conception des tâches en arrière-plan doit prévoir une mise à l’échelle. Ainsi, elles doivent être en mesure de détecter, de manière dynamique, le nombre de files d’attente de stockage utilisées, afin de pouvoir écouter ou envoyer les messages à la file d’attente appropriée.
 * Par défaut, les tâches web sont mises à l’échelle en fonction de l’instance d’application web Azure associée. Cependant, si vous souhaitez qu’une tâche web s’exécute uniquement en tant qu’instance unique, vous pouvez créer un fichier Settings.job qui contient les données JSON **{ "is_singleton": true }**. Cela oblige Azure à exécuter une seule instance de la tâche web, même s’il existe plusieurs instances de l’application web associée. Cela peut être utile pour les tâches planifiées devant s’exécuter en tant qu’instances uniques.
 
 ## <a name="related-patterns"></a>Modèles associés
-* [Primer de messagerie asynchrone](https://msdn.microsoft.com/library/dn589781.aspx)
-* [Recommandations en matière de mise à l’échelle automatique](https://msdn.microsoft.com/library/dn589774.aspx)
 * [Modèle de transaction de compensation](../patterns/compensating-transaction.md)
 * [Modèle des consommateurs récurrents](../patterns/competing-consumers.md)
 * [Recommandations en matière de partitionnement du calcul](https://msdn.microsoft.com/library/dn589773.aspx)
-* [Modèle de consolidation des ressources de calcul](https://msdn.microsoft.com/library/dn589778.aspx)
 * [Modèle d’opérateur de contrôle d’appels](../patterns/gatekeeper.md)
 * [Modèle de choix de l’instance responsable](../patterns/leader-election.md)
 * [Modèle des canaux et filtres](../patterns/pipes-and-filters.md)
 * [Modèle de file d’attente prioritaire](../patterns/priority-queue.md)
 * [Modèle de nivellement de la charge basé sur une file d’attente](../patterns/queue-based-load-leveling.md)
 * [Modèle de superviseur de l’agent du planificateur](../patterns/scheduler-agent-supervisor.md)
-
-## <a name="more-information"></a>Plus d’informations
-* [Exécution de tâches en arrière-plan](https://msdn.microsoft.com/library/ff803365.aspx)
-* [Azure Cloud Services Role Lifecycle](https://channel9.msdn.com/Series/Windows-Azure-Cloud-Services-Tutorials/Windows-Azure-Cloud-Services-Role-Lifecycle) (vidéo)
-* [Présentation du Kit de développement logiciel (SDK) Azure WebJobs](https://docs.microsoft.com/azure/app-service-web/websites-dotnet-webjobs-sdk)
-* [Exécuter des tâches en arrière-plan avec les tâches web](https://docs.microsoft.com/azure/app-service-web/web-sites-create-web-jobs)
-* [Files d’attente Azure et files d’attente Service Bus - comparaison et différences](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-azure-and-service-bus-queues-compared-contrasted)
-* [Activation des diagnostics dans un service cloud](https://docs.microsoft.com/azure/cloud-services/cloud-services-dotnet-diagnostics)
 

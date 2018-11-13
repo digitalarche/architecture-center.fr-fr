@@ -2,17 +2,19 @@
 title: BI d’entreprise automatisée avec SQL Data Warehouse et Azure Data Factory
 description: Automatiser un flux de travail ELT sur Azure à l’aide d’Azure Data Factory
 author: MikeWasson
-ms.date: 07/01/2018
-ms.openlocfilehash: f004c02da93335e74b07b9720236832ad7f744db
-ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
+ms.date: 11/06/2018
+ms.openlocfilehash: 39089d80047b584ac590d285097020212ab72911
+ms.sourcegitcommit: 02ecd259a6e780d529c853bc1db320f4fcf919da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48876900"
+ms.lasthandoff: 11/07/2018
+ms.locfileid: "51263727"
 ---
 # <a name="automated-enterprise-bi-with-sql-data-warehouse-and-azure-data-factory"></a>BI d’entreprise automatisée avec SQL Data Warehouse et Azure Data Factory
 
-Cette architecture de référence indique comment effectuer un chargement incrémentiel dans un pipeline [ELT](../../data-guide/relational-data/etl.md#extract-load-and-transform-elt) (Extract-Load-Transform). Elle utilise Azure Data Factory pour automatiser le pipeline ELT. Ce pipeline déplace de façon incrémentielle les données OLTP les plus récentes d’une base de données SQL Server locale vers une instance SQL Data Warehouse. Les données transactionnelles sont transformées en un modèle tabulaire à des fins d’analyse. [**Déployez cette solution**.](#deploy-the-solution)
+Cette architecture de référence indique comment effectuer un chargement incrémentiel dans un pipeline [ELT](../../data-guide/relational-data/etl.md#extract-load-and-transform-elt) (Extract-Load-Transform). Elle utilise Azure Data Factory pour automatiser le pipeline ELT. Ce pipeline déplace de façon incrémentielle les données OLTP les plus récentes d’une base de données SQL Server locale vers une instance SQL Data Warehouse. Les données transactionnelles sont transformées en un modèle tabulaire à des fins d’analyse. 
+
+Une implémentation de référence pour cette architecture est disponible sur [GitHub][github].
 
 ![](./images/enterprise-bi-sqldw-adf.png)
 
@@ -29,7 +31,7 @@ L’architecture est constituée des composants suivants.
 
 ### <a name="data-sources"></a>Sources de données
 
-**Serveur SQL Server local**. Les données sources sont situées dans une base de données SQL Server locale. Pour simuler l’environnement local, les scripts de déploiement de cette architecture approvisionnent une machine virtuelle dans Azure disposant de SQL Server. [L’exemple de base de données OLTP Wide World Importers] [wwi] est utilisé comme base de données source.
+**Serveur SQL Server local**. Les données sources sont situées dans une base de données SQL Server locale. Pour simuler l’environnement local, les scripts de déploiement de cette architecture approvisionnent une machine virtuelle dans Azure disposant de SQL Server. [L’exemple de base de données OLTP Wide World Importers][wwi] est utilisé comme base de données source.
 
 **Données externes**. Un scénario courant de gestion des entrepôts de données consiste à intégrer plusieurs sources de données. Cette architecture de référence charge un jeu de données externe qui contient la population par ville et par année, et l’intègre dans les données de la base de données OLTP. Vous pouvez utiliser ces données pour répondre à des questions du type : « La croissance des ventes dans chaque région correspond-elle, voire dépasse-t-elle la croissance de la population ? »
 
@@ -39,7 +41,7 @@ L’architecture est constituée des composants suivants.
 
 **Azure SQL Data Warehouse**. [SQL Data Warehouse](/azure/sql-data-warehouse/) est un système distribué conçu pour réaliser des analyses sur de grandes quantités de données. Il prend en charge le traitement MPP (Massive Parallel Processing), le rendant ainsi adapté à l’exécution d’analyses hautes performances. 
 
-**Azure Data Factory**. [Data Factory] [adf] est un service géré qui orchestre et automatise le déplacement et la transformation des données. Dans cette architecture, il coordonne les différentes étapes du processus ELT.
+**Azure Data Factory**. [Data Factory][adf] est un service géré qui orchestre et automatise le déplacement et la transformation des données. Dans cette architecture, il coordonne les différentes étapes du processus ELT.
 
 ### <a name="analysis-and-reporting"></a>Analyse et rapports
 
@@ -55,7 +57,7 @@ Data Factory peut également utiliser Azure AD pour s’authentifier auprès de 
 
 ## <a name="data-pipeline"></a>Pipeline de données
 
-Dans [Azure Data Factory] [adf], un pipeline est un regroupement logique d’activités qui permet de coordonner une tâche. Dans ce cas, il s’agit du chargement et de la transformation des données dans SQL Data Warehouse. 
+Dans [Azure Data Factory][adf], un pipeline est un regroupement logique d’activités qui permet de coordonner une tâche &mdash;. Dans ce cas, il s’agit du chargement et de la transformation des données dans SQL Data Warehouse. 
 
 Cette architecture de référence définit un pipeline principal qui exécute une suite de pipelines enfants. Chaque pipeline enfant charge les données dans une ou plusieurs tables d’entrepôt de données.
 
@@ -186,7 +188,7 @@ Notez les limitations suivantes :
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
-Un déploiement de cette architecture de référence est disponible sur [GitHub][ref-arch-repo-folder]. Il déploie les éléments suivants :
+Pour déployer et exécuter l’implémentation de référence, suivez les étapes du [fichier Readme de GitHub][github]. Il déploie les éléments suivants :
 
   * Une machine virtuelle pour simuler un serveur de base de données local. Sont inclus SQL Server 2017 et les outils associés, et Power BI Desktop.
   * Un compte de stockage Azure qui fournit le stockage d’objets blob pour conserver des données exportées de la base de données SQL Server.
@@ -194,327 +196,8 @@ Un déploiement de cette architecture de référence est disponible sur [GitHub]
   * Une instance Azure Analysis Services.
   * Azure Data Factory et le pipeline Data Factory associé au travail ELT.
 
-### <a name="prerequisites"></a>Prérequis
-
-[!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
-
-### <a name="variables"></a>variables
-
-Les étapes qui suivent incluent des variables définies par l’utilisateur. Vous devez les remplacer par les valeurs que vous définissez.
-
-- `<data_factory_name>`. Nom de l’instance Data Factory.
-- `<analysis_server_name>`. Nom du serveur Analysis Services.
-- `<active_directory_upn>`. Votre nom d’utilisateur principal (UPN) Azure Active Directory. Par exemple : `user@contoso.com`.
-- `<data_warehouse_server_name>`. Nom du serveur SQL Data Warehouse.
-- `<data_warehouse_password>`. Mot de passe administrateur de SQL Data Warehouse.
-- `<resource_group_name>`. Nom du groupe de ressources.
-- `<region>`. Région Azure dans laquelle les ressources seront déployées.
-- `<storage_account_name>`. Nom du compte de stockage. Il doit respecter les [règles de dénomination](../../best-practices/naming-conventions.md#naming-rules-and-restrictions) des comptes de stockage.
-- `<sql-db-password>`. Mot de passe de connexion SQL Server.
-
-### <a name="deploy-azure-data-factory"></a>Déployer Azure Data Factory
-
-1. Accédez au dossier `data\enterprise_bi_sqldw_advanced\azure\templates` du [référentiel GitHub][ref-arch-repo].
-
-2. Exécutez la commande Azure CLI suivante pour créer un groupe de ressources.  
-
-    ```bash
-    az group create --name <resource_group_name> --location <region>  
-    ```
-
-    Spécifiez une région qui prend en charge SQL Data Warehouse, Azure Analysis Services et Data Factory version 2. Voir [Produits Azure par région](https://azure.microsoft.com/global-infrastructure/services/).
-
-3. Exécutez la commande suivante
-
-    ```
-    az group deployment create --resource-group <resource_group_name> \
-        --template-file adf-create-deploy.json \
-        --parameters factoryName=<data_factory_name> location=<location>
-    ```
-
-Ensuite, utilisez le portail Azure pour obtenir la clé d’authentification du [runtime d’intégration](/azure/data-factory/concepts-integration-runtime) Azure Data Factory, comme suit :
-
-1. Dans le [portail Azure](https://portal.azure.com/), accédez à l’instance Data Factory.
-
-2. Dans le panneau Data Factory, cliquez sur **Créer et surveiller**. Le portail Azure Data Factory s’ouvre dans une autre fenêtre du navigateur.
-
-    ![](./images/adf-blade.png)
-
-3. Dans le portail Azure Data Factory, sélectionnez l’icône de crayon (« Author »). 
-
-4. Cliquez sur **Connexions**, puis sélectionnez **Runtimes d’intégration**.
-
-5. Sous **sourceIntegrationRuntime**, cliquez sur l’icône de crayon (« Modifier »).
-
-    > [!NOTE]
-    > Le portail affiche l’état « Non disponible ». Ce comportement est attendu tant que vous n’avez pas déployé le serveur local.
-
-6. Recherchez le paramètre **Key1** et copiez la valeur de la clé d’authentification.
-
-Il vous faut la clé d’authentification pour l’étape suivante.
-
-### <a name="deploy-the-simulated-on-premises-server"></a>Déployer le serveur local simulé
-
-Cette étape déploie une machine virtuelle en tant que serveur local simulé, qui inclut SQL Server 2017 et les outils associés. Elle charge également [l’exemple de base de données OLTP Wide World Importers][wwi] dans SQL Server.
-
-1. Accédez au dossier `data\enterprise_bi_sqldw_advanced\onprem\templates` du référentiel.
-
-2. Dans le fichier `onprem.parameters.json`, recherchez `adminPassword`. Il s’agit du mot de passe vous permettant de vous connecter à la machine virtuelle SQL Server. Remplacez la valeur par un autre mot de passe.
-
-3. Dans le même fichier, recherchez l’élément `SqlUserCredentials`. Cette propriété spécifie les informations d’identification du compte SQL Server. Remplacez le mot de passe par une autre valeur.
-
-4. Dans le même fichier, collez la clé d’authentification du runtime d’intégration dans le paramètre `IntegrationRuntimeGatewayKey`, comme indiqué ci-dessous :
-
-    ```json
-    "protectedSettings": {
-        "configurationArguments": {
-            "SqlUserCredentials": {
-                "userName": ".\\adminUser",
-                "password": "<sql-db-password>"
-            },
-            "IntegrationRuntimeGatewayKey": "<authentication key>"
-        }
-    ```
-
-5. Exécutez la commande ci-dessous.
-
-    ```bash
-    azbb -s <subscription_id> -g <resource_group_name> -l <region> -p onprem.parameters.json --deploy
-    ```
-
-Cette étape peut prendre 20 à 30 minutes. Elle inclut l’exécution d’un script [DSC](/powershell/dsc/overview) pour installer les outils et restaurer la base de données. 
-
-### <a name="deploy-azure-resources"></a>Déployer des ressources Azure
-
-Cette étape déploie SQL Data Warehouse, Azure Analysis Services et Data Factory.
-
-1. Accédez au dossier `data\enterprise_bi_sqldw_advanced\azure\templates` du [référentiel GitHub][ref-arch-repo].
-
-2. Exécutez la commande d’interface de ligne de commande Azure suivante. Remplacez les valeurs de paramètres affichées entre crochets.
-
-    ```bash
-    az group deployment create --resource-group <resource_group_name> \
-     --template-file azure-resources-deploy.json \
-     --parameters "dwServerName"="<data_warehouse_server_name>" \
-     "dwAdminLogin"="adminuser" "dwAdminPassword"="<data_warehouse_password>" \ 
-     "storageAccountName"="<storage_account_name>" \
-     "analysisServerName"="<analysis_server_name>" \
-     "analysisServerAdmin"="<user@contoso.com>"
-    ```
-
-    - Le paramètre `storageAccountName` doit respecter les [règles d’attribution de noms](../../best-practices/naming-conventions.md#naming-rules-and-restrictions) des comptes de stockage. 
-    - Pour le paramètre `analysisServerAdmin`, utilisez votre nom d’utilisateur principal (UPN) Azure Active Directory.
-
-3. Exécutez la commande Azure CLI suivante pour obtenir la clé d’accès du compte de stockage. Vous aurez besoin de cette clé lors de l’étape suivante.
-
-    ```bash
-    az storage account keys list -n <storage_account_name> -g <resource_group_name> --query [0].value
-    ```
-
-4. Exécutez la commande d’interface de ligne de commande Azure suivante. Remplacez les valeurs de paramètres affichées entre crochets. 
-
-    ```bash
-    az group deployment create --resource-group <resource_group_name> \
-    --template-file adf-pipeline-deploy.json \
-    --parameters "factoryName"="<data_factory_name>" \
-    "sinkDWConnectionString"="Server=tcp:<data_warehouse_server_name>.database.windows.net,1433;Initial Catalog=wwi;Persist Security Info=False;User ID=adminuser;Password=<data_warehouse_password>;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" \
-    "blobConnectionString"="DefaultEndpointsProtocol=https;AccountName=<storage_account_name>;AccountKey=<storage_account_key>;EndpointSuffix=core.windows.net" \
-    "sourceDBConnectionString"="Server=sql1;Database=WideWorldImporters;User Id=adminuser;Password=<sql-db-password>;Trusted_Connection=True;"
-    ```
-
-    Les chaînes de connexion incluent des sous-chaînes affichées entre crochets, qui doivent être remplacées. Pour le paramètre `<storage_account_key>`, utilisez la clé que vous avez obtenue à l’étape précédente. Pour l’élément `<sql-db-password>`, utilisez le mot de passe du compte SQL Server que vous avez précédemment spécifié dans le fichier `onprem.parameters.json`.
-
-### <a name="run-the-data-warehouse-scripts"></a>Exécuter les scripts d’entrepôt de données
-
-1. Dans le [portail Azure](https://portal.azure.com/), recherchez la machine virtuelle locale, appelée `sql-vm1`. Le nom d’utilisateur et le mot de passe de la machine virtuelle sont spécifiés dans le fichier `onprem.parameters.json`.
-
-2. Cliquez sur **Connect** et utilisez le Bureau à distance pour vous connecter à la machine virtuelle.
-
-3. À partir de votre session Bureau à distance, ouvrez une invite de commandes et accédez au dossier suivant sur la machine virtuelle :
-
-    ```
-    cd C:\SampleDataFiles\reference-architectures\data\enterprise_bi_sqldw_advanced\azure\sqldw_scripts
-    ```
-
-4. Exécutez la commande suivante :
-
-    ```
-    deploy_database.cmd -S <data_warehouse_server_name>.database.windows.net -d wwi -U adminuser -P <data_warehouse_password> -N -I
-    ```
-
-    Pour les éléments `<data_warehouse_server_name>` et `<data_warehouse_password>`, utilisez le nom et le mot de passe du serveur de l’entrepôt de données précédemment utilisés.
-
-Vous pouvez utiliser SQL Server Management Studio (SSMS) pour vous connecter à une base de données Azure SQL Data Warehouse afin de vérifier cette étape. Vous devez voir apparaître les schémas de table de base de données.
-
-### <a name="run-the-data-factory-pipeline"></a>Exécuter le pipeline Data Factory
-
-1. À partir de la même session Bureau à distance, ouvrez une fenêtre PowerShell.
-
-2. Exécutez la commande PowerShell suivante. Cliquez sur **Oui** lorsque vous y êtes invité.
-
-    ```powershell
-    Install-Module -Name AzureRM -AllowClobber
-    ```
-
-3. Exécutez la commande PowerShell suivante. À l’invite, entrez vos informations d’identification Azure.
-
-    ```powershell
-    Connect-AzureRmAccount 
-    ```
-
-4. Exécutez les commandes PowerShell suivantes. Remplacez les valeurs figurant entre crochets.
-
-    ```powershell
-    Set-AzureRmContext -SubscriptionId <subscription id>
-
-    Invoke-AzureRmDataFactoryV2Pipeline -DataFactory <data-factory-name> -PipelineName "MasterPipeline" -ResourceGroupName <resource_group_name>
-
-5. In the Azure Portal, navigate to the Data Factory instance that was created earlier.
-
-6. In the Data Factory blade, click **Author & Monitor**. This opens the Azure Data Factory portal in another browser window.
-
-    ![](./images/adf-blade.png)
-
-7. In the Azure Data Factory portal, click the **Monitor** icon. 
-
-8. Verify that the pipeline completes successfully. It can take a few minutes.
-
-    ![](./images/adf-pipeline-progress.png)
-
-
-## Build the Analysis Services model
-
-In this step, you will create a tabular model that imports data from the data warehouse. Then you will deploy the model to Azure Analysis Services.
-
-**Create a new tabular project**
-
-1. From your Remote Desktop session, launch SQL Server Data Tools 2015.
-
-2. Select **File** > **New** > **Project**.
-
-3. In the **New Project** dialog, under **Templates**, select  **Business Intelligence** > **Analysis Services** > **Analysis Services Tabular Project**. 
-
-4. Name the project and click **OK**.
-
-5. In the **Tabular model designer** dialog, select **Integrated workspace**  and set **Compatibility level** to `SQL Server 2017 / Azure Analysis Services (1400)`. 
-
-6. Click **OK**.
-
-
-**Import data**
-
-1. In the **Tabular Model Explorer** window, right-click the project and select **Import from Data Source**.
-
-2. Select **Azure SQL Data Warehouse** and click **Connect**.
-
-3. For **Server**, enter the fully qualified name of your Azure SQL Data Warehouse server. You can get this value from the Azure Portal. For **Database**, enter `wwi`. Click **OK**.
-
-4. In the next dialog, choose **Database** authentication and enter your Azure SQL Data Warehouse user name and password, and click **OK**.
-
-5. In the **Navigator** dialog, select the checkboxes for the **Fact.\*** and **Dimension.\*** tables.
-
-    ![](./images/analysis-services-import-2.png)
-
-6. Click **Load**. When processing is complete, click **Close**. You should now see a tabular view of the data.
-
-**Create measures**
-
-1. In the model designer, select the **Fact Sale** table.
-
-2. Click a cell in the the measure grid. By default, the measure grid is displayed below the table. 
-
-    ![](./images/tabular-model-measures.png)
-
-3. In the formula bar, enter the following and press ENTER:
-
-    ```
-    Total des ventes :=SUM('Fact Sale'[total incluant les taxes])
-    ```
-
-4. Repeat these steps to create the following measures:
-
-    ```
-    Nombre d’années =(MAX('Fact CityPopulation'[NumAnnée])-MIN('Fact CityPopulation'[NumAnnée]))+1
-    
-    Population de départ :=CALCULATE(SUM('Fact CityPopulation'[Population]),FILTER('Fact CityPopulation','Fact CityPopulation'[NumAnnée]=MIN('Fact CityPopulation'[NumAnnée])))
-    
-    Population finale :=CALCULATE(SUM('Fact CityPopulation'[Population]),FILTER('Fact CityPopulation','Fact CityPopulation'[NumAnnée]=MIN('Fact CityPopulation'[NumAnnée])))
-    
-    Croissance :=IFERROR((([Population finale]/[Population de départ])^(1/[Nombre d’années]))-1,0)
-    ```
-
-    ![](./images/analysis-services-measures.png)
-
-For more information about creating measures in SQL Server Data Tools, see [Measures](/sql/analysis-services/tabular-models/measures-ssas-tabular).
-
-**Create relationships**
-
-1. In the **Tabular Model Explorer** window, right-click the project and select **Model View** > **Diagram View**.
-
-2. Drag the **[Fact Sale].[City Key]** field to the **[Dimension City].[City Key]** field to create a relationship.  
-
-3. Drag the **[Face CityPopulation].[City Key]** field to the **[Dimension City].[City Key]** field.  
-
-    ![](./images/analysis-services-relations-2.png)
-
-**Deploy the model**
-
-1. From the **File** menu, choose **Save All**.
-
-2. In **Solution Explorer**, right-click the project and select **Properties**. 
-
-3. Under **Server**, enter the URL of your Azure Analysis Services instance. You can get this value from the Azure Portal. In the portal, select the Analysis Services resource, click the Overview pane, and look for the **Server Name** property. It will be similar to `asazure://westus.asazure.windows.net/contoso`. Click **OK**.
-
-    ![](./images/analysis-services-properties.png)
-
-4. In **Solution Explorer**, right-click the project and select **Deploy**. Sign into Azure if prompted. When processing is complete, click **Close**.
-
-5. In the Azure portal, view the details for your Azure Analysis Services instance. Verify that your model appears in the list of models.
-
-    ![](./images/analysis-services-models.png)
-
-## Analyze the data in Power BI Desktop
-
-In this step, you will use Power BI to create a report from the data in Analysis Services.
-
-1. From your Remote Desktop session, launch Power BI Desktop.
-
-2. In the Welcome Scren, click **Get Data**.
-
-3. Select **Azure** > **Azure Analysis Services database**. Click **Connect**
-
-    ![](./images/power-bi-get-data.png)
-
-4. Enter the URL of your Analysis Services instance, then click **OK**. Sign into Azure if prompted.
-
-5. In the **Navigator** dialog, expand the tabular project, select the model, and click **OK**.
-
-2. In the **Visualizations** pane, select the **Table** icon. In the Report view, resize the visualization to make it larger.
-
-6. In the **Fields** pane, expand **Dimension City**.
-
-7. From **Dimension City**, drag **City** and **State Province** to the **Values** well.
-
-9. In the **Fields** pane, expand **Fact Sale**.
-
-10. From **Fact Sale**, drag **CAGR**, **Ending Population**,  and **Total Sales** to the **Value** well.
-
-11. Under **Visual Level Filters**, select **Ending Population**. Set the filter to "is greater than 100000" and click **Apply filter**.
-
-12. Under **Visual Level Filters**, select **Total Sales**. Set the filter to "is 0" and click **Apply filter**.
-
-![](./images/power-bi-report-2.png)
-
-The table now shows cities with population greater than 100,000 and zero sales. CAGR  stands for Compounded Annual Growth Rate and measures the rate of population growth per city. You could use this value to find cities with high growth rates, for example. However, note that the values for CAGR in the model aren't accurate, because they are derived from sample data.
-
-To learn more about Power BI Desktop, see [Getting started with Power BI Desktop](/power-bi/desktop-getting-started).
-
-
 [adf]: //azure/data-factory
-[azure-cli-2]: //azure/install-azure-cli
-[azbb-repo]: https://github.com/mspnp/template-building-blocks
-[azbb-wiki]: https://github.com/mspnp/template-building-blocks/wiki/Install-Azure-Building-Blocks
+[github]: https://github.com/mspnp/reference-architectures/tree/master/data/enterprise_bi_sqldw_advanced
 [MergeLocation]: https://github.com/mspnp/reference-architectures/blob/master/data/enterprise_bi_sqldw_advanced/azure/sqldw_scripts/city/%5BIntegration%5D.%5BMergeLocation%5D.sql
-[ref-arch-repo]: https://github.com/mspnp/reference-architectures
-[ref-arch-repo-folder]: https://github.com/mspnp/reference-architectures/tree/master/data/enterprise_bi_sqldw_advanced
 [wwi]: //sql/sample/world-wide-importers/wide-world-importers-oltp-database
+

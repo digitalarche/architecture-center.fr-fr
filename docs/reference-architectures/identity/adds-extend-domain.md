@@ -6,12 +6,12 @@ ms.date: 05/02/2018
 pnp.series.title: Identity management
 pnp.series.prev: azure-ad
 pnp.series.next: adds-forest
-ms.openlocfilehash: 1e19d03998a18d997c2840f573e7bc79b24efbbc
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: a96f13f8c7f3e79c6e5d50f17e662176257fdab3
+ms.sourcegitcommit: 02ecd259a6e780d529c853bc1db320f4fcf919da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47427970"
+ms.lasthandoff: 11/07/2018
+ms.locfileid: "51263710"
 ---
 # <a name="extend-active-directory-domain-services-ad-ds-to-azure"></a>Étendre Active Directory Domain Services (AD DS) à Azure
 
@@ -46,7 +46,7 @@ Les recommandations suivantes s’appliquent à la plupart des scénarios. Suive
 
 Déterminez la [taille de machine virtuelle][vm-windows-sizes] requise en fonction du volume attendu de demandes d’authentification. Utilisez les spécifications des machines hébergeant AD DS localement comme point de départ et mettez-les en correspondance avec les tailles des machines virtuelles Azure. Une fois le déploiement effectué, surveillez l’utilisation et procédez à un ajustement d’échelle en fonction de la charge réelle qui pèse sur les machines virtuelles. Pour plus d’informations sur le dimensionnement des contrôleurs de domaine AD DS, consultez [Capacity Planning for Active Directory Domain Services][capacity-planning-for-adds] (Planification de la capacité pour Active Directory Domain Services).
 
-Créez un disque de données virtuel distinct pour le stockage de la base de données, des journaux et de SYSVOL pour Active Directory. Ne stockez pas ces éléments sur le même disque que le système d’exploitation. Par défaut, les disques de données qui sont attachés à une machine virtuelle utilisent le cache à double écriture. Toutefois, cette forme de mise en cache peut entrer en conflit avec les exigences d’AD DS. Vous devez donc, sur le disque de données, définir le paramètre *Préférences de cache d’hôte* sur *Aucun*. Pour plus d’informations, consultez [Emplacement de la base de données Windows Server AD DS et de SYSVOL][adds-data-disks].
+Créez un disque de données virtuel distinct pour le stockage de la base de données, des journaux et de SYSVOL pour Active Directory. Ne stockez pas ces éléments sur le même disque que le système d’exploitation. Par défaut, les disques de données qui sont attachés à une machine virtuelle utilisent le cache à double écriture. Toutefois, cette forme de mise en cache peut entrer en conflit avec les exigences d’AD DS. Vous devez donc, sur le disque de données, définir le paramètre *Préférences de cache d’hôte* sur *Aucun*. Pour plus d’informations, consultez [Recommandations en matière de déploiement de Windows Server Active Directory sur des machines virtuelles Azure][adds-data-disks].
 
 Déployez au moins deux machines virtuelles exécutant AD DS en tant que contrôleurs de domaine et ajoutez-les à un [groupe à haute disponibilité][availability-set].
 
@@ -169,7 +169,7 @@ Une fois le déploiement terminé, vous pouvez tester la connectivité entre l�
 [implementing-a-secure-hybrid-network-architecture]: ../dmz/secure-vnet-hybrid.md
 [implementing-a-secure-hybrid-network-architecture-with-internet-access]: ../dmz/secure-vnet-dmz.md
 
-[adds-data-disks]: https://msdn.microsoft.com/library/azure/jj156090.aspx#BKMK_PlaceDB
+[adds-data-disks]: https://msdn.microsoft.com/en-us/library/mt674703.aspx
 [ad-ds-operations-masters]: https://technet.microsoft.com/library/cc779716(v=ws.10).aspx
 [ad-ds-ports]: https://technet.microsoft.com/library/dd772723(v=ws.11).aspx
 [availability-set]: /azure/virtual-machines/virtual-machines-windows-create-availability-set
