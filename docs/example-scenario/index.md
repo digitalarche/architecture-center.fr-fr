@@ -1,22 +1,22 @@
 ---
-title: Exemple de scénario Azure
-description: Exemples de scénarios résolvant des cas d’usage métiers spécifiques
+title: Exemples de scénarios Azure
+description: Exemples de scénarios pour des cas d’usage métiers spécifiques
 author: david-stanford
-ms:date: 08/01/2018
+ms:date: 11/01/2018
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 63a566126168dba382792967b3625bd6e085c054
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 01b2db150c66eaa7f8911361dd39786f53c39c07
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818834"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610496"
 ---
 # <a name="azure-example-scenarios"></a>Exemples de scénarios Azure
 
-Les exemples de scénarios détaillent étape par étape le processus de résolution de problèmes architecturaux et d’entreprise spécifiques sur Azure.  Chaque scénario est basé sur un exemple de client réel et a pour but de fournir des conseils faciles à lire rapidement pour aider à accélérer votre propre implémentation.
+Exemples de scénarios montrant comment résoudre des problématiques commerciales ou techniques spécifiques à l’aide d’Azure. Chaque scénario est basé sur un exemple de client réel et fournit des conseils faciles à lire rapidement pour accélérer votre propre implémentation.
 
-Dans chaque scénario, vous trouverez un diagramme d’architecture, des flux de données et les détails de tous les composants.  Vous pouvez également découvrir des technologies alternatives qui peuvent mieux s’adapter à vos besoins professionnels et à la tarification brute de la solution, ainsi qu’aux considérations lors de l’exécution de la solution en production.  Plusieurs solutions contiennent une méthode de déploiement simple dans votre compte Azure.
+Dans chaque scénario, vous trouverez un diagramme d’architecture, des flux de données et les détails des composants techniques. Vous découvrirez également des considérations liées à l’exécution de la solution en production, les facteurs coût pour la solution et d’autres options pour la résolution de problèmes similaires. De nombreux scénarios permettent de déployer facilement la solution dans votre propre abonnement Azure.
 
 Passer à : [Scénarios liés à l’IA](#ai-scenarios) | [Scénarios liés aux applications](#application-scenarios) | [Scénarios liés aux données](#data-scenarios) | [Scénarios liés aux infrastructures](#infrastructure-scenarios)
 
