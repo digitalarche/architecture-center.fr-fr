@@ -3,12 +3,12 @@ title: Traitement évolutif des commandes sur Azure
 description: Créez un pipeline de traitement de commande hautement évolutif à l’aide d’Azure Cosmos DB.
 author: alexbuckgit
 ms.date: 07/10/2018
-ms.openlocfilehash: fe642ffde733914389c36c5be50f35d242a22edf
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 1c3bb2cc33be74f5ff8ee0513de4c3f7df70aa37
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818511"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610853"
 ---
 # <a name="scalable-order-processing-on-azure"></a>Traitement évolutif des commandes sur Azure
 
@@ -20,7 +20,7 @@ L’utilisation de services gérés par Azure tels que Cosmos DB et HDInsight pe
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Pensez à ce scénario pour les cas d’usage suivants :
+Les autres cas d’usage appropriés sont les suivants :
 
 * Systèmes principaux de e-commerce ou de point de vente au détail.
 * Systèmes de gestion des stocks.

@@ -3,16 +3,14 @@ title: Application web de base
 description: Architecture recommandée pour une application web basique exécutée dans Microsoft Azure.
 author: MikeWasson
 ms.date: 12/12/2017
-cardTitle: Basic web application
-ms.openlocfilehash: 570ee23341bb956a4430f1dc91f30b5194d4b4f0
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 06c37d5d87befa553a9efbe14acea24db57ae8f8
+ms.sourcegitcommit: 877777094b554559dc9cb1f0d9214d6d38197439
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429035"
+ms.lasthandoff: 11/11/2018
+ms.locfileid: "51527726"
 ---
-# <a name="basic-web-application"></a>Application web de base
-[!INCLUDE [header](../../_includes/header.md)]
+# <a name="basic-web-application-in-azure"></a>Application web de base dans Azure
 
 Cette architecture de référence présente un ensemble de pratiques éprouvées pour une application web utilisant [Azure App Service][app-service] et [Azure SQL Database][sql-db]. [**Déployez cette solution.**](#deploy-the-solution)
 

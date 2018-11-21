@@ -3,12 +3,12 @@ title: Un service d’ingénierie assistée par ordinateur sur Azure
 description: Offrez une plateforme de software as a service (SaaS) pour l’ingénierie assistée par ordinateur (IAO) sur Azure.
 author: alexbuckgit
 ms.date: 08/22/2018
-ms.openlocfilehash: d17ac218052c5b98e8790f1386be035618a2d957
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 8bdf7198223f7194d0cd717949699bb3a508674e
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818681"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610547"
 ---
 # <a name="a-computer-aided-engineering-service-on-azure"></a>Un service d’ingénierie assistée par ordinateur sur Azure
 
@@ -26,7 +26,7 @@ Les objectifs de l’entreprise sont les suivants :
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Autres scénarios possibles s’appuyant sur cette architecture :
+Les autres cas d’usage appropriés sont les suivants :
 
 * Recherche sur le génome
 * Simulation météorologique

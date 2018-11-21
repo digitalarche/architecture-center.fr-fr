@@ -3,12 +3,12 @@ title: Classification d’images pour les déclarations de sinistre sur Azure
 description: Générer le traitement d’images dans vos applications Azure.
 author: david-stanford
 ms.date: 07/05/2018
-ms.openlocfilehash: 31d328f8e5e27ea255024b7f461f2bfaeffc3ca7
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 9640f8b5454891ed00f669bada9f7c9c69b89734
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818529"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610530"
 ---
 # <a name="image-classification-for-insurance-claims-on-azure"></a>Classification d’images pour les déclarations de sinistre sur Azure
 
@@ -20,10 +20,10 @@ En utilisant des services Azure tels que l’API Vision par ordinateur et Azure 
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Pensez à ce scénario pour les cas d’usage suivants :
+Les autres cas d’usage appropriés sont les suivants :
 
-* Classer des images sur un site web de mode
-* Classer des données de télémétrie provenant de captures d’écran de jeux
+* Classification des images sur un site web de mode.
+* Classification des données de télémétrie provenant de captures d’écran de jeux.
 
 ## <a name="architecture"></a>Architecture
 
@@ -58,7 +58,7 @@ La plupart des composants utilisés dans ce scénario sont des services gérés 
 
 Cosmos DB n’effectue pas de mise à l’échelle automatique en termes d’unités de requête approvisionnées (RU). Pour obtenir des conseils sur l’estimation de vos besoins, consultez la section relative aux [unités de requête](/azure/cosmos-db/request-units) dans notre documentation. Pour tirer pleinement parti de la mise à l’échelle dans Cosmos DB, découvrez le fonctionnement des [clés de partition](/azure/cosmos-db/partition-data) dans Cosmos DB.
 
-Les bases de données NoSQL sacrifient souvent la cohérence (au sens du théorème CAP) au profit de la disponibilité, de l’extensibilité et du partitionnement. Cet exemple de scénario utilisant un modèle de données clé-valeur, la cohérence des transactions est rarement nécessaire, car la plupart des opérations sont par définition atomiques. Vous trouverez de l’aide pour [Choisir un magasin de données adapté](../../guide/technology-choices/data-store-overview.md) dans le Centre des architectures Azure.  Si votre implémentation nécessite une cohérence élevée, vous pouvez [choisir votre niveau de cohérence](/azure/cosmos-db/consistency-levels) dans Cosmos DB.
+Les bases de données NoSQL sacrifient souvent la cohérence (au sens du théorème CAP) au profit de la disponibilité, de l’extensibilité et du partitionnement. Cet exemple de scénario utilisant un modèle de données clé-valeur, la cohérence des transactions est rarement nécessaire, car la plupart des opérations sont par définition atomiques. Vous trouverez de l’aide pour [Choisir un magasin de données adapté](../../guide/technology-choices/data-store-overview.md) dans le Centre des architectures Azure. Si votre implémentation nécessite une cohérence élevée, vous pouvez [choisir votre niveau de cohérence](/azure/cosmos-db/consistency-levels) dans Cosmos DB.
 
 Pour obtenir des conseils d’ordre général sur la conception de solutions évolutives, consultez la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
 
@@ -86,9 +86,9 @@ Nous proposons trois exemples de profils de coût selon la quantité de trafic (
 
 ## <a name="related-resources"></a>Ressources associées
 
-Pour un parcours d’apprentissage interactif de ce scénario, consultez l’article [Build a serverless web app in Azure][serverless] (Créer une application web serverless dans Azure).
+Pour un parcours d’apprentissage interactif, consultez l’article [Créer une application web serverless dans Azure][serverless].
 
-Avant de déployer cet exemple de scénario dans un environnement de production, consultez les [meilleures pratiques][functions-best-practices] Azure Functions.
+Avant de déployer cet exemple de scénario dans un environnement de production, passez en revue les pratiques recommandées pour [l’optimisation des performances et de la fiabilité d’Azure Functions][functions-best-practices].
 
 <!-- links -->
 [architecture]: ./media/architecture-intelligent-apps-image-processing.png

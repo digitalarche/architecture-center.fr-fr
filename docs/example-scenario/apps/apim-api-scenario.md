@@ -3,12 +3,12 @@ title: Migration d’une application web héritée vers une architecture basée 
 description: Utilisez Gestion des API Azure pour moderniser une application web héritée.
 author: begim
 ms.date: 09/13/2018
-ms.openlocfilehash: 1aa7ea6dc895146e13677dd9867fb2530f0a8f04
-ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
+ms.openlocfilehash: f468b3c6dc1c58e03555613b152882316ae2a017
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48876783"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610581"
 ---
 # <a name="migrating-a-legacy-web-application-to-an-api-based-architecture-on-azure"></a>Migration d’une application web héritée vers une architecture basée sur les API sur Azure
 
@@ -20,7 +20,7 @@ Les objectifs du projet incluent le traitement de la dette technique, l’améli
 * L’équipe de développement interne va écrire de nouvelles fonctionnalités métier, exposées sur les nouvelles API HTTP.
 * Une équipe de développement externe va créer une nouvelle interface utilisateur basée sur un navigateur et hébergée sur Azure.
 
-Les nouvelles fonctionnalités de l’application seront proposées au fur et à mesure. Elles vont *progressivement remplacer* la fonctionnalité existante d’interface utilisateur du serveur client basée sur un navigateur (hébergée en local) qui joue un rôle essentiel dans l’entreprise d’e-commerce à ce jour.
+Les nouvelles fonctionnalités de l’application seront proposées au fur et à mesure. Ces fonctionnalités vont progressivement remplacer la fonctionnalité existante d’interface utilisateur du serveur client basée sur un navigateur (hébergée en local) qui joue un rôle essentiel dans l’entreprise d’e-commerce à ce jour.
 
 L’équipe de direction ne souhaite pas effectuer de modernisations inutiles. En outre, elle veut garder le contrôle sur l’étendue et les coûts. Pour ce faire, elle a décidé de conserver ses services HTTP SOAP existants. Elle souhaite aussi ne pas apporter trop de modifications à l’interface utilisateur en place. Le service [Gestion des API Azure ][apim] peut être utilisé pour traiter la plupart des exigences et contraintes du projet.
 
@@ -85,7 +85,8 @@ Pour afficher les coûts prévus et effectuer une personnalisation en fonction d
 
 ## <a name="related-resources"></a>Ressources associées
 
-Consultez l’intégralité des [articles de référence et de la documentation][apim] sur le service Gestion des API Azure.
+Passez en revue l’intégralité des [articles de référence et de la documentation][apim] sur le service Gestion des API Azure.
+
 
 <!-- links -->
 [architecture]: ./media/architecture-apim-api-scenario.png

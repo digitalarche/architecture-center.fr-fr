@@ -3,12 +3,12 @@ title: Bureaux virtuels Linux avec Citrix
 description: Générez un environnement VDI pour les bureaux Linux à l’aide de Citrix sur Azure.
 author: miguelangelopereira
 ms.date: 09/12/2018
-ms.openlocfilehash: 374d59f7a528bd89870baa601a49a30ea00a08f1
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 383642b05926c5a09abf0b2f95fef10539d95aec
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48819140"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610649"
 ---
 # <a name="linux-virtual-desktops-with-citrix"></a>Bureaux virtuels Linux avec Citrix
 
@@ -96,7 +96,7 @@ Pour en savoir plus sur le déploiement, consultez la [documentation officielle 
 
 ## <a name="pricing"></a>Tarifs
 
-- Les licences Citrix XenDestop ne sont pas incluses dans les frais de service Azure.
+- Les licences Citrix XenDesktop ne sont pas incluses dans les frais de service Azure.
 - La licence Citrix NetScaler est incluse dans un modèle de paiement à l’utilisation.
 - L’utilisation d’instances réservées réduit considérablement les coûts de calcul de la solution.
 - Les coûts liés à ExpressRoute ne sont pas inclus.

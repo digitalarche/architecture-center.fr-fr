@@ -3,12 +3,12 @@ title: Sites web WordPress hautement évolutifs et sécurisés sur Azure
 description: Créez un site web WordPress hautement évolutif et sécurisé pour les événements multimédias.
 author: david-stanford
 ms.date: 09/18/2018
-ms.openlocfilehash: f7dd73524b2b63cd7d38e8e03bfd4b8edac251a9
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 6ff39d09fa301c8c68ce2a644cc489c0e87a22fa
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818477"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610599"
 ---
 # <a name="highly-scalable-and-secure-wordpress-website"></a>Sites web WordPress hautement évolutifs et sécurisés
 
@@ -16,7 +16,7 @@ Cet exemple de scénario s’applique aux entreprises qui ont besoin d’une ins
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Pensez à ce scénario pour les cas d’usage suivants :
+Les autres cas d’usage appropriés sont les suivants :
 
 * événements multimédias qui entraînent des pics de trafic ;
 * blogs qui utilisent WordPress comme système de gestion de contenu ;

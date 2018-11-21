@@ -3,12 +3,12 @@ title: Exécution des simulations de diagramme de flux cumulé (CFD) sur Azure
 description: Exécutez des simulations de diagramme de flux cumulé (CFD) sur Azure.
 author: mikewarr
 ms.date: 09/20/2018
-ms.openlocfilehash: 5734e6fe707e3beb5e23f2ad2b4344ba289803bb
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: f32e055838d6c62584130f61a0d92b06cc46ec63
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818568"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610632"
 ---
 # <a name="running-computational-fluid-dynamics-cfd-simulations-on-azure"></a>Exécution des simulations de diagramme de flux cumulé (CFD) sur Azure
 
@@ -20,7 +20,7 @@ Afin de simplifier la création, la gestion et l’optimisation des clusters HPC
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Considérez ce scénario dans le cas des secteurs d’activité ci-après qui sont susceptibles d’utiliser des applications CFD :
+Voici plusieurs autres secteurs d’activité utilisant le CFD :
 
 * Aéronautique
 * Industrie automobile

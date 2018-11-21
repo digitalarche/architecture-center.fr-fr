@@ -3,12 +3,12 @@ title: Exécution des charges de travail de production SAP à l’aide d’une b
 description: Exécutez un déploiement de production SAP dans Azure à l’aide d’une base de données Oracle.
 author: DharmeshBhagat
 ms.date: 9/12/2018
-ms.openlocfilehash: 4c0e054a9024cd50581acd5b472a09d6e98d2bed
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 75942b4d9b18b7bbe7a162826bcf4fe9ece22dce
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818564"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610904"
 ---
 # <a name="running-sap-production-workloads-using-an-oracle-database-on-azure"></a>Exécution des charges de travail de production SAP à l’aide d’Oracle Database sur Azure
 
@@ -20,7 +20,7 @@ Cet exemple de scénario illustre un déploiement SAP sur des machines virtuelle
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Placez cet exemple dans le contexte des scénarios suivants :
+Les autres cas d’usage appropriés sont les suivants :
 
 * Charges de travail stratégiques s’exécutant sur SAP.
 * Charges de travail SAP non stratégiques.

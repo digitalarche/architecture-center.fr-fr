@@ -3,14 +3,14 @@ title: Enterprise BI avec SQL Data Warehouse
 description: Utiliser Azure pour obtenir des analyses détaillées des données relationnelles stockées en local
 author: MikeWasson
 ms.date: 11/06/2018
-ms.openlocfilehash: d5b680346267a17b5016b8897dc03ddcf18a7fe9
-ms.sourcegitcommit: 02ecd259a6e780d529c853bc1db320f4fcf919da
+ms.openlocfilehash: 2822cf6d2a75d521f182c267f4bf2bac462d2b7f
+ms.sourcegitcommit: 877777094b554559dc9cb1f0d9214d6d38197439
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/07/2018
-ms.locfileid: "51263811"
+ms.lasthandoff: 11/11/2018
+ms.locfileid: "51527709"
 ---
-# <a name="enterprise-bi-with-sql-data-warehouse"></a>Enterprise BI avec SQL Data Warehouse
+# <a name="enterprise-bi-in-azure-with-sql-data-warehouse"></a>Enterprise BI dans Azure avec SQL Data Warehouse
 
 Cette architecture de référence implémente un pipeline [ELT](../../data-guide/relational-data/etl.md#extract-load-and-transform-elt) (extract-load-transform) qui déplace des données d’une base de données SQL Server vers SQL Data Warehouse et qui transforme les données pour les analyser. 
 
@@ -189,7 +189,7 @@ Pour en savoir plus, consultez [Gérer les rôles et les utilisateurs de bases d
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
-Pour déployer et exécuter l’implémentation de référence, suivez les étapes de le [fichier Readme de GitHub][github-folder]. Il déploie les éléments suivants :
+Pour déployer et exécuter l’implémentation de référence, suivez les étapes du [fichier Readme de GitHub][github-folder]. Il déploie les éléments suivants :
 
   * Une machine virtuelle pour simuler un serveur de base de données local. Sont inclus SQL Server 2017 et les outils associés, et Power BI Desktop.
   * Un compte de stockage Azure qui fournit le stockage d’objets blob pour conserver des données exportées de la base de données SQL Server.
@@ -199,7 +199,7 @@ Pour déployer et exécuter l’implémentation de référence, suivez les étap
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Utilisez Azure Data Factory pour automatiser le pipeline ELT. Consultez [BI d’entreprise automatisée avec SQL Data Warehouse et Azure Data Factory][adf=ra].
+- Utilisez Azure Data Factory pour automatiser le pipeline ELT. Voir [BI d’entreprise automatisée avec SQL Data Warehouse et Azure Data Factory][adf-ra].
 
 <!-- links -->
 

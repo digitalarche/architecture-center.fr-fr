@@ -3,12 +3,12 @@ title: Moteur de recherche de produit intelligent pour l’e-commerce
 description: Offrez une expérience de recherche de haute qualité dans une application d’e-commerce.
 author: jelledruyts
 ms.date: 09/14/2018
-ms.openlocfilehash: f18e9fd3705c24da71da747c46ab42f263fd06af
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: a57477c26665b4560671550f6fdd81c2d9505e71
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818750"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610666"
 ---
 # <a name="intelligent-product-search-engine-for-e-commerce"></a>Moteur de recherche de produit intelligent pour l’e-commerce
 
@@ -20,7 +20,7 @@ Imaginez une application web de commerce électronique classique avec des donné
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Ces autres cas d’usage ont des modèles de conception similaires :
+Les autres cas d’usage appropriés sont les suivants :
 
 * Recherche d’annonces immobilières ou d’agences proches de l’emplacement physique de l’utilisateur.
 * Recherche d’articles sur un site d’actualités ou de résultats sportifs, avec une préférence pour des informations plus _récentes_.
@@ -42,7 +42,7 @@ Ce scénario couvre une solution de commerce électronique dans laquelle les cli
 
 ### <a name="components"></a>Composants
 
-* [App Services - Web Apps][docs-webapps] héberge des applications web permettant une mise à l'échelle automatique et une haute disponibilité sans avoir à gérer l’infrastructure.
+* [App Services - Web Apps][docs-webapps] héberge des applications web permettant une mise à l’échelle automatique et une haute disponibilité sans avoir à gérer l’infrastructure.
 * [SQL Database][docs-sql-database] est un service administré de bases de données relationnelles à usage général de Microsoft Azure qui prend en charge des structures telles que les données relationnelles, JSON, les données spatiales et XML.
 * La [Recherche Azure][docs-search] est une solution cloud de recherche en tant que service, qui offre une expérience de recherche riche concernant du contenu privé et hétérogène dans les applications web, mobiles et d’entreprise.
 * [Bot Service][docs-botservice] fournit des outils pour créer, tester, déployer et gérer des robots intelligents.

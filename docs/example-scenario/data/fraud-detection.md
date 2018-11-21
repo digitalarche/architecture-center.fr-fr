@@ -3,12 +3,12 @@ title: Détection des fraudes en temps réel dans Azure
 description: Détectez les activités frauduleuses en temps réel à l’aide d’Azure Event Hubs et de Stream Analytics.
 author: alexbuckgit
 ms.date: 07/05/2018
-ms.openlocfilehash: 4de988731aa1c5b0e4c0ba06fa5aed59e2bb7d81
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: bd9eb4d572651c4e57a0043226860623cd8d17e1
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818664"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610605"
 ---
 # <a name="real-time-fraud-detection-on-azure"></a>Détection des fraudes en temps réel dans Azure
 
@@ -22,7 +22,7 @@ Cet exemple représente une partie d’une stratégie et d’une architecture de
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Pensez à ce scénario pour les cas d’usage suivants :
+Les autres cas d’usage appropriés sont les suivants :
 
 * Détection d’appels douteux via un téléphone mobile dans les scénarios de télécommunications.
 * Identification de transactions frauduleuses par carte de crédit pour les établissements bancaires.
@@ -63,7 +63,7 @@ Pour voir d’autres considérations relatives à la disponibilité, consultez l
 
 Les composants de ce scénario sont conçus pour une ingestion à très grande échelle et une analyse en temps réel parallèle. Azure Event Hubs est un service très évolutif, capable de recevoir et de traiter des millions d’événements par seconde avec une faible latence. Event Hubs peut effectuer [automatiquement une montée en puissance](/azure/event-hubs/event-hubs-auto-inflate) en augmentant le nombre d’unités de débit pour répondre aux besoins d’utilisation. Azure Stream Analytics est capable d’analyser des volumes élevés de données de diffusion en continu provenant de nombreuses sources. Vous pouvez monter en puissance Stream Analytics en augmentant le nombre [d’unités de streaming](/azure/stream-analytics/stream-analytics-streaming-unit-consumption) allouées pour exécuter votre travail de diffusion en continu.
 
-Pour obtenir des conseils d’ordre général sur la conception de scénarios évolutifs, consultez la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
+Pour obtenir des conseils d’ordre général sur la conception de solutions évolutives, consultez la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
 
 ### <a name="security"></a>Sécurité
 

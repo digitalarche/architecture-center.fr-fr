@@ -3,12 +3,12 @@ title: Serveur frontal e-commerce sur Azure
 description: Hébergez un site d’e-commerce sur Azure.
 author: masonch
 ms.date: 7/13/18
-ms.openlocfilehash: 6ca85665a5bf63bf71f5badc16406db5df2a34c2
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 7baaf4d2986a00ab72b60a540bcd9d864893b109
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48819089"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610819"
 ---
 # <a name="an-e-commerce-front-end-on-azure"></a>Serveur frontal e-commerce sur Azure
 
@@ -18,7 +18,7 @@ Ce document vous aide à découvrir les différents composants PaaS Azure et les
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Pensez à ce scénario pour les cas d’usage suivants :
+Les autres cas d’usage appropriés sont les suivants :
 
 * La création d’une application nécessitant une mise à l’échelle élastique pour gérer les pics d’utilisateurs à des moments différents.
 * La création d’une application conçue pour fonctionner avec une haute disponibilité dans différentes régions Azure du monde entier.
@@ -45,7 +45,7 @@ Ce scénario couvre l’achat de tickets à partir d’un site de e-commerce, le
 
 * [Azure CDN][docs-cdn] fournit le contenu statique, mis en cache à partir d’emplacements proches des utilisateurs pour réduire la latence.
 * [Azure Traffic Manager][docs-traffic-manager] contrôle la distribution du trafic utilisateur pour les points de terminaison de service dans différentes régions Azure.
-* [App Services - Web Apps][docs-webapps] héberge des applications web permettant une mise à l'échelle automatique et une haute disponibilité sans avoir à gérer l’infrastructure.
+* [App Services - Web Apps][docs-webapps] héberge des applications web permettant une mise à l’échelle automatique et une haute disponibilité sans avoir à gérer l’infrastructure.
 * [Azure Active Directory - B2C][docs-b2c] est un service de gestion des identités qui vous permet de personnaliser et de contrôler la façon dont les clients s’inscrivent, se connectent et gèrent leurs profils dans une application.
 * [Files d’attente de stockage][docs-storage-queues] stocke un grand nombre de messages de file d’attente accessibles par une application.
 * [Functions][docs-functions] constitue les options de calcul sans serveur qui permettent aux applications d’être exécutées à la demande sans avoir à gérer l’infrastructure.

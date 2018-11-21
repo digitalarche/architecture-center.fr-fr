@@ -3,12 +3,12 @@ title: Confiance décentralisée entre les banques sur Azure
 description: Établissez un environnement de confiance pour communiquer et partager des informations sans avoir recours à une base de données centralisée.
 author: vitoc
 ms.date: 09/09/2018
-ms.openlocfilehash: fe27f885635ce5ae4ce368992affa1a85d7af416
-ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
+ms.openlocfilehash: bc472bc5bafc3eb20e583f41d71ed783725a039e
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48876752"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610564"
 ---
 # <a name="decentralized-trust-between-banks-on-azure"></a>Confiance décentralisée entre les banques sur Azure
 
@@ -22,13 +22,13 @@ Cet exemple vous montre comment les services Azure tels que les groupes de machi
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Ces autres cas d’usage ont des modèles de conception similaires :
+Les autres cas d’usage appropriés sont les suivants :
 
 * Déplacement des budgets alloués entre les différentes divisions d’une multinationale
 * Paiements transfrontaliers
 * Scénarios de financement commercial
 * Systèmes de fidélisation impliquant différentes sociétés
-* Écosystèmes de chaîne d’approvisionnement et bien plus encore
+* Écosystèmes de chaîne d’approvisionnement
 
 ## <a name="architecture"></a>Architecture
 
@@ -44,7 +44,7 @@ Ce scénario couvre les composants principaux nécessaires pour créer un résea
 
 ### <a name="components"></a>Composants
 
-* Les machines virtuelles au sein de Virtual Machine Scale Sets fournissent la fonctionnalité de calcul à la demande pour héberger les processus de validateur de la blockchain
+* Les machines virtuelles au sein de groupes de machines virtuelles identiques fournissent la fonctionnalité de calcul à la demande pour héberger les processus de validateur de la blockchain
 * Key Vault est utilisé en tant que fonctionnalité de stockage sécurisé pour les clés privées de chaque validateur
 * Load Balancer répartit les requêtes de RPC, de peering et de Governance DApp
 * Stockage héberge les informations réseau persistantes et coordonne les baux
@@ -70,9 +70,9 @@ Pour consulter d’autres rubriques relatives à la disponibilité, consultez la
 
 ### <a name="scalability"></a>Extensibilité
 
-Un problème courant des blockchains est le nombre de transactions qu’une blockchain peut inclure dans une durée prédéfinie. Ce scénario utilise PoA (Proof-of-Authority) quand une telle extensibilité peut être mieux gérée qu’avec PoW (Proof-of-Work). Dans les réseaux basés sur PoA, les participants au consensus sont connus et gérés, ce qui est plus approprié pour une blockchain privée destinée à un consortium d’organisations qui se connaissent entre elles. Les paramètres tels que la durée de bloc moyenne, les transactions par minute et la consommation des ressources de calcul peuvent être facilement surveillées via le tableau de bord personnalisé. Les ressources peuvent ensuite être ajustées en fonction des exigences de mise à l’échelle.
+Un problème courant des blockchains est le nombre de transactions qu’une blockchain peut inclure dans une durée prédéfinie. Ce scénario utilise PoA (Proof-of-Authority) quand une telle extensibilité peut être mieux gérée qu’avec PoW (Proof-of-Work). Dans les réseaux basés &ndash;sur PoA, les participants au consensus sont connus et gérés, ce qui est plus approprié pour une blockchain privée destinée à un consortium d’organisations qui se connaissent entre elles. Les paramètres tels que la durée de bloc moyenne, les transactions par minute et la consommation des ressources de calcul peuvent être facilement surveillées via le tableau de bord personnalisé. Les ressources peuvent ensuite être ajustées en fonction des exigences de mise à l’échelle.
 
-Pour obtenir des conseils d’ordre général sur la conception de scénarios évolutifs, consultez la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
+Pour obtenir des conseils d’ordre général sur la conception de solutions évolutives, consultez la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
 
 ### <a name="security"></a>Sécurité
 
@@ -82,7 +82,7 @@ Pour obtenir des conseils d’ordre général sur la conception de solutions sé
 
 ### <a name="resiliency"></a>Résilience
 
-La blockchain Ethereum PoA peut offrir un certain degré de résilience puisque les nœuds de validateur peuvent être déployés dans différentes régions. Azure permet d’effectuer des déploiements dans plus de 54 régions du monde entier. Une blockchain comme celle de notre exemple offre des possibilités uniques et nouvelles de coopération pour accroître la résilience. La résilience du réseau n’est pas fournie uniquement pour une seule partie centralisée, mais pour tous les membres du consortium. Une blockchain basée sur PoA permet d’obtenir une résilience réseau plus planifiée et délibérée.
+La blockchain Ethereum PoA peut offrir un certain degré de résilience puisque les nœuds de validateur peuvent être déployés dans différentes régions. Azure permet d’effectuer des déploiements dans plus de 54 régions du monde entier. Une blockchain comme celle de notre exemple offre des possibilités uniques et nouvelles de coopération pour accroître la résilience. La résilience du réseau n’est pas fournie uniquement pour une seule partie centralisée, mais pour tous les membres du consortium. Une blockchain basée&ndash;sur PoA permet d’obtenir une résilience réseau plus planifiée et délibérée.
 
 Pour obtenir des conseils d’ordre général sur la conception de solutions résilientes, consultez l’article [Conception d’applications résilientes pour Azure][resiliency].
 
@@ -100,7 +100,7 @@ Les tarifs ci-dessus sont donnés pour un membre du consortium qui souhaite mett
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour voir un exemple de ce scénario, déployez [l’application de démonstration de blockchain Ethereum PoA][deploy] sur Azure, puis parcourez le [fichier README du code source du scénario][source].
+Pour voir un exemple de ce scénario, déployez [l’application de démonstration de blockchain Ethereum PoA][deploy] sur Azure. Passez ensuite en revue le [fichier README du code source du scénario][source].
 
 ## <a name="related-resources"></a>Ressources associées
 

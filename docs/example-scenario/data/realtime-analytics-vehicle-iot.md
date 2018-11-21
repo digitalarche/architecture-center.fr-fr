@@ -1,14 +1,14 @@
 ---
 title: Ingestion et traitement de données IoT automobiles en temps réel
 description: Ingérez et traitez les données de véhicule en temps réel à l’aide de l’IoT.
-author: meeral
+author: msdpalam
 ms.date: 09/12/2018
-ms.openlocfilehash: 663332185f64987215384a1d4af4b7ed9b50847c
-ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
+ms.openlocfilehash: 6562e3277e6b6eb38993132284ad43542ef4c0d3
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48876883"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610734"
 ---
 # <a name="ingestion-and-processing-of-real-time-automotive-iot-data"></a>Ingestion et traitement de données IoT automobiles en temps réel
 
@@ -21,9 +21,9 @@ Dans cet exemple d’illustration, une entreprise de construction automobile sou
 * Analyser les messages pour comprendre l’emplacement des véhicules et d’autres informations provenant de différents types de capteurs (comme les capteurs liés au moteur et aux conditions environnementales).
 * Stocker les données après analyse en vue de traitements ultérieurs afin de fournir des informations exploitables (par exemple, les agences d’assurance peuvent souhaiter savoir ce qui s’est passé au cours d’un accident)
 
-## <a name="relevant-use-cases"></a>Cas d’utilisation appropriés
+## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Lorsque vous créez un système d’ingestion et de traitement télématique, tenez compte de ce scénario pour les cas d’utilisation suivants, ainsi que des objectifs susmentionnés :
+Les autres cas d’usage appropriés sont les suivants :
 
 * Rappels et alertes de maintenance des véhicules.
 * Services basés sur l’emplacement des passagers du véhicule (c’est-à-dire, secours).
@@ -83,7 +83,7 @@ Consultez la [tarification Azure Databricks](https://azure.microsoft.com/pricing
 * [Azure Databricks](https://azure.microsoft.com/services/databricks) offre deux charges de travail distinctes sur plusieurs [instances de machines virtuelles](https://azure.microsoft.com/pricing/details/databricks/#instances) adaptées à votre flux de travail Analytique données. Avec la charge de travail Engineering données, les ingénieurs de données peuvent facilement créer et exécuter des travaux. De plus, la charge de travail Analytique données aide les scientifiques des données à explorer, à visualiser, à manipuler et à partager facilement des données et informations de façon interactive.
 * [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db) garantit des latences en millisecondes à un chiffre au 99e centile partout dans le monde, offre de [multiples modèles de cohérence bien définis](/azure/cosmos-db/consistency-levels) afin d’affiner les performances, et garantit une haute disponibilité grâce à des fonctionnalités d’hébergement multiple, le tout régi par des [contrats SLA](https://azure.microsoft.com/support/legal/sla/cosmos-db) comptant parmi les plus complets et les plus pertinents du secteur.
 * [Azure SQL Data Warehouse](https://azure.microsoft.com/pricing/details/sql-data-warehouse/gen2) vous permet de mettre à l’échelle vos niveaux de calcul et de stockage de façon indépendante. Les ressources de calcul sont facturées à l’heure, et vous pouvez mettre ces ressources à l’échelle ou en pause à la demande. Les ressources de stockage sont facturées au téraoctet. Vos coûts augmentent donc en fonction du volume de données ingéré.
-* [Analysis Services](https://azure.microsoft.com/pricing/details/analysis-services) est disponible pour les niveaux développeur, de base et standard. La tarification des instances est établie en fonction des unités de traitement des requêtes (QPU) et de la mémoire disponible. Pour réduire vos coûts, minimisez le nombre de requêtes exécutées, la quantité de données traitées et leur fréquence d’exécution.
+* [Analysis Services](https://azure.microsoft.com/pricing/details/analysis-services) est disponible pour les niveaux développeur, de base et standard. La tarification des instances est établie en fonction des unités de traitement des requêtes (QPU) et de la mémoire disponible. Pour diminuer vos coûts, réduisez le nombre de requêtes exécutées, la quantité de données traitées et leur fréquence d’exécution.
 * [Power BI](https://powerbi.microsoft.com/pricing) offre différentes options de produit selon les besoins. [Power BI Embedded](https://azure.microsoft.com/pricing/details/power-bi-embedded) offre une option Azure permettant d’intégrer la fonctionnalité Power BI dans vos applications. L’exemple de tarification ci-dessus comprend une instance Power BI Embedded.
 
 ## <a name="next-steps"></a>Étapes suivantes

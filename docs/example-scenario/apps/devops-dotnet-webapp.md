@@ -3,12 +3,12 @@ title: Pipeline CI/CD avec Azure DevOps
 description: Générez et publiez une application .NET sur Azure Web Apps à l’aide d’Azure DevOps.
 author: christianreddington
 ms.date: 07/11/18
-ms.openlocfilehash: 80890784d4c97aac418cef4e49f9075dbef10b8a
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 97f16b2d3d9c15bc6f5db6fad4c9d8097243ad3d
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818936"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610785"
 ---
 # <a name="cicd-pipeline-with-azure-devops"></a>Pipeline CI/CD avec Azure DevOps
 
@@ -109,7 +109,7 @@ Pour obtenir des conseils d’ordre général sur la conception de solutions sé
 
 ### <a name="resiliency"></a>Résilience
 
-Examinez les [modèles de conception standards pour la résilience][design-patterns-resiliency] et envisagez de les implémenter le cas échéant.
+Envisagez l’implémentation de [modèles de conception standards pour la résilience][design-patterns-resiliency] le cas échéant.
 
 Vous trouverez différentes [pratiques recommandées pour App Service][resiliency-app-service] dans le Centre des architectures Azure.
 

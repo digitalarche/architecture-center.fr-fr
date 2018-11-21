@@ -3,12 +3,12 @@ title: Entreposage et analyse des données pour les ventes et le marketing
 description: Consolidez les données provenant de plusieurs sources et optimisez l’analyse des données.
 author: alexbuckgit
 ms.date: 09/15/2018
-ms.openlocfilehash: f9ca9785b65f18098a91aedc1f3157f49456a6e1
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: e4c0a37f61f3edfb1f29d26df546f02d31fd40f7
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818647"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610700"
 ---
 # <a name="data-warehousing-and-analytics-for-sales-and-marketing"></a>Entreposage et analyse des données pour les ventes et le marketing
 
@@ -24,7 +24,7 @@ L’entreprise recherche une approche moderne en matière de données d’analys
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Vous pouvez également utiliser cette approche pour accomplir les tâches suivantes :
+Cette approche peut également servir à :
 
 * établir un entrepôt de données pour qu’il soit une source unique et fiable de vos données ;
 * intégrer des sources de données relationnelles à d’autres jeux de données non structurées ;
@@ -55,7 +55,7 @@ Les données sont chargées à partir de ces différentes sources de données à
 * [Data Factory](/azure/data-factory) orchestre la transformation des données mises en lots en une structure commune dans SQL Data Warehouse. Data Factory [utilise PolyBase lors du chargement des données dans SQL Data Warehouse](/azure/data-factory/connector-azure-sql-data-warehouse#use-polybase-to-load-data-into-azure-sql-data-warehouse) pour optimiser le débit. 
 * [SQL Data Warehouse](/azure/sql-data-warehouse/sql-data-warehouse-overview-what-is) est un système distribué permettant de stocker et d’analyser des jeux de données volumineux. Son recours à un traitement parallèle massif (MPP) lui permet d’exécuter des analyses hautes performances. SQL Data Warehouse peut utiliser [PolyBase](/sql/relational-databases/polybase/polybase-guide) pour charger rapidement des données à partir du stockage d’objets blob.
 * [Analysis Services](/azure/analysis-services) fournit un modèle sémantique de vos données. Ce composant permet également d’augmenter les performances du système lors de l’analyse de vos données. 
-* [Power BI](/power-bi) est une suite d’outils d’analyse métier pour analyser les données et partager les informations. Power BI peut interroger un modèle sémantique stocké dans Analysis Services ou directement SQL Data Warehouse.
+* [Power BI](/power-bi) est une suite d’outils d’analyse métier pour analyser les données et partager les informations. Power BI peut interroger un modèle sémantique stocké dans Analysis Services ou interroger directement SQL Data Warehouse.
 * [Azure Active Directory (Azure AD)](/azure/active-directory) authentifie les utilisateurs qui se connectent au serveur Analysis Services via Power BI. Data Factory peut également utiliser Azure AD pour s’authentifier auprès de SQL Data Warehouse via un principal de service ou une [identité managée pour des ressources Azure](/azure/active-directory/managed-identities-azure-resources/overview).
 
 ### <a name="alternatives"></a>Autres solutions

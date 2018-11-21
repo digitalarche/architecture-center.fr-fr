@@ -3,12 +3,12 @@ title: L’IoT et l’analyse de données dans le secteur de la construction
 description: Utilisez des appareils IoT et l’analyse des données pour fournir une gestion et une opération complètes des projets de construction.
 author: alexbuckgit
 ms.date: 08/29/2018
-ms.openlocfilehash: 7ab0de50b0eba1ab420e450f3408fe5dc45f04ac
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: 74868191687e63a54a69fdacb7276983d98faf74
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818494"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610921"
 ---
 # <a name="iot-and-data-analytics-in-the-construction-industry"></a>L’IoT et l’analyse de données dans le secteur de la construction
 
@@ -29,7 +29,7 @@ L’utilisation des services Azure gérés tels qu’IoT Hub et HDInsight permet
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Pensez à cette solution pour les cas d’usage suivants :
+Les autres cas d’usage appropriés sont les suivants :
 
 * scénarios de construction, d’extraction ou de fabrication d’équipements ;
 * collecte de données d’appareil à grande échelle à des fins de stockage et d’analyse ;
@@ -47,7 +47,7 @@ Les données circulent dans la solution comme suit :
 4. Les données brutes collectées sont envoyées directement par IoT Hub au service Stockage Blob Azure et sont alors immédiatement consultables et analysables.
 5. Les données collectées par le biais du service IoT Hub sont traitées en quasi temps réel par un travail Azure Stream Analytics et sont stockées dans une base de données Azure SQL Database.
 6. Les analystes et les utilisateurs finals peuvent accéder à l’application web de construction intelligente basée sur le cloud (Smart Construction Cloud) afin de visualiser et d’analyser les données de capteur et l’imagerie. 
-7. Les utilisateurs de l’application web lancent des programmes de traitement par lots à la demande. Ces programmes s’exécutent dans Apache Spark sur HDInsight et analysent les nouvelles données stockées dans le cluster Cassandra. 
+7. Les utilisateurs de l’application web lancent des programmes de traitement par lots à la demande. Ces programmes s’exécutent dans Apache Spark sur HDInsight et analysent les nouvelles données stockées dans le cluster Cassandra. 
 
 ### <a name="components"></a>Composants
 

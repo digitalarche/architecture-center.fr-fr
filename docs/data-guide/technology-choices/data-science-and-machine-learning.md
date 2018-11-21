@@ -3,12 +3,12 @@ title: Sélectionner une technologie Machine Learning
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 995349c795066ec3067b20ad2615e40b0fb152db
-ms.sourcegitcommit: 90cf2de795e50571d597cfcb9b302e48933e7f18
+ms.openlocfilehash: 50167bafa49f8e6016f6ec12680db016830e2b81
+ms.sourcegitcommit: 9293350ab66fb5ed042ff363f7a76603bf68f568
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/14/2018
-ms.locfileid: "29288931"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51577155"
 ---
 # <a name="choosing-a-machine-learning-technology-in-azure"></a>Sélectionner une technologie Machine Learning dans Azure
 
@@ -109,6 +109,10 @@ Principaux avantages :
 Considérations :
 
 * Spark s’exécute dans un cluster HDinsght qui entraîne des frais pendant toute la durée de son exécution. Si le service Machine Learning ne sera utilisé qu’occasionnellement, cela peut entraîner des frais inutiles.
+
+### <a name="azure-databricks"></a>Azure Databricks
+
+[Azure Databricks](/azure/azure-databricks/) est une plateforme d’analyse basée sur Apache Spark. Celle-ci peut-être considérée comme « Spark en tant que service ». Il s’agit du moyen le plus simple d’utiliser Spark sur la plateforme Azure. Pour l’apprentissage, vous pouvez utiliser [MLFlow](https://www.mlflow.org/), [Databricks Runtime ML](https://docs.azuredatabricks.net/user-guide/clusters/mlruntime.html), Apache Spark MLlib et d’autres. Pour plus d’informations, voir [Azure Databricks : Machine Learning](https://docs.azuredatabricks.net/spark/latest/mllib/index.html). 
 
 ### <a name="web-service-in-a-container"></a>Service web dans un conteneur
 

@@ -3,12 +3,12 @@ title: Environnements de développement/test pour les charges de travail SAP sur
 description: Créez un environnement de développement/test pour les charges de travail SAP.
 author: AndrewDibbins
 ms.date: 7/11/18
-ms.openlocfilehash: b47e4cb527d3e4ecd74bee7bcf08f2794da56d6c
-ms.sourcegitcommit: 62945777e519d650159f0f963a2489b6bb6ce094
+ms.openlocfilehash: 1cfd15b0287a1979ae5ad60e41a0b1627a2e115c
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/09/2018
-ms.locfileid: "48876787"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610802"
 ---
 # <a name="devtest-environments-for-sap-workloads-on-azure"></a>Environnements de développement/test pour les charges de travail SAP sur Azure
 
@@ -20,9 +20,9 @@ Pour les cas d'usage de production, examinez les architectures de référence SA
 * [SAP S/4HANA][sap-hana]
 * [SAP sur des Instances de grande taille Azure][sap-large]
 
-## <a name="relevant-use-cases"></a>Cas d’utilisation appropriés
+## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Pensez à ce scénario pour les cas d’usage suivants :
+Les autres cas d’usage appropriés sont les suivants :
 
 * Charges de travail SAP non productives non critiques (bac à sable, développement, test, assurance qualité)
 * Charges de travail SAP Business non critiques
@@ -78,7 +78,7 @@ grand|32000|E32s_v3|3xP20, 1xP10|[Grande](https://azure.com/e/ada2e849d68b41c383
 Très grande|64 000|M64s|4xP20, 1xP10|[Très grande](https://azure.com/e/975fb58a965c4fbbb54c5c9179c61cef)|
 
 > [!NOTE]
-> Cette tarification, fournie à titre informatif, indique uniquement les coûts relatifs au stockage et aux machines virtuelles. Elle ne tient pas compte de la mise en réseau, du stockage de sauvegarde et des frais d’entrée/de sortie de données.
+> Cette tarification, fournie à titre informatif, indique uniquement les coûts relatifs au stockage et aux machines virtuelles. Elle ne tient pas compte des frais associés à la mise en réseau, au stockage de sauvegarde et à l’entrée/la sortie des données.
 
 * [Petit](https://azure.com/e/9d26b9612da9466bb7a800eab56e71d1) : machine virtuelle de type D8s_v3 avec 8 processeurs virtuels, 32 Go de RAM et 200 Go de stockage temporaire, en plus de deux disques de Stockage Premium de 512 Go et un de 128 Go.
 * [Moyen](https://azure.com/e/465bd07047d148baab032b2f461550cd) : machine virtuelle de type D16s_v3 avec 16 processeurs virtuels, 64 Go de RAM et 400 Go de stockage temporaire, en plus de trois disques de Stockage Premium de 512 Go et un de 128 Go.
