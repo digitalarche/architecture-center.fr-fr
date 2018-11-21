@@ -3,22 +3,22 @@ title: Supervision des applications web sur Azure
 description: Surveillez une application web hébergée dans Azure App Service.
 author: adamboeglin
 ms.date: 09/12/2018
-ms.openlocfilehash: ea57ba50f4e9390d5527587752c3bebad01b6139
-ms.sourcegitcommit: 42797fffb82bbbf86f6deb1da52c61d456be631e
+ms.openlocfilehash: ba008035c37d1d4e2d2f823463344e4941c0b4c4
+ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/13/2018
-ms.locfileid: "49313214"
+ms.lasthandoff: 11/13/2018
+ms.locfileid: "51610751"
 ---
 # <a name="web-application-monitoring-on-azure"></a>Supervision des applications web sur Azure
 
-Les offres de plateforme en tant que service (PaaS) sur Azure gèrent pour vous les ressources de calcul et ont un certain impact sur la manière dont vous surveillez les déploiements. Azure inclut plusieurs services de supervision, qui ont chacun un rôle spécifique. Ensemble, ces services fournissent une solution complète pour la collecte, l’analyse et l’action sur les données de télémétrie de vos applications et des ressources Azure qu’elles utilisent.
+Les offres de plateforme Azure en tant que service (PaaS) gèrent pour vous les ressources de calcul et impactent la manière dont vous surveillez les déploiements. Azure inclut plusieurs services de supervision, qui ont chacun un rôle spécifique. Ensemble, ces services fournissent une solution complète pour la collecte, l’analyse et l’action sur les données de télémétrie de vos applications et des ressources Azure qu’elles consomment.
 
 Ce scénario traite des services de supervision que vous pouvez utiliser et décrit un modèle de flux de données à utiliser avec plusieurs sources de données. En ce qui concerne la supervision, des nombreux outils et services peuvent être utilisés avec les déploiements Azure. Dans ce scénario, nous choisissons des services justement disponibles parce qu’ils sont faciles à utiliser. D’autres options de supervision sont abordées plus loin dans cet article.
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Pensez à ce scénario pour les cas d’usage suivants :
+Les autres cas d’usage appropriés sont les suivants :
 
 - Instrumentation d’une application web pour la supervision des données de télémétrie.
 - Collecte de données de télémétrie frontales et principales pour une application déployée sur Azure.
@@ -48,7 +48,7 @@ Ce scénario utilise un environnement Azure managé pour héberger une applicati
 
 ## <a name="considerations"></a>Considérations
 
-Une meilleure pratique consiste à ajouter Application Insights à votre code lors du développement à l’aide des [Kits de développement logiciel (SDK) Application Insights][Application Insights SDKs] et à personnaliser par application. Ces Kits de développement logiciel (SDK) open source sont disponibles pour la plupart des infrastructures d’application. Pour enrichir et contrôler les données que vous collectez, intégrez l’utilisation des Kits de développement logiciel (SDK) des déploiements de test et de production dans votre processus de développement. La principale exigence implique que l’application doit disposer d’une visibilité directe ou indirecte sur le point de terminaison d’ingestion Applications Insights hébergé avec une adresse Internet. Vous pouvez ensuite ajouter des données de télémétrie ou enrichir une collection de données de télémétrie existante.
+Une pratique recommandée consiste à ajouter Application Insights à votre code au cours du développement à l’aide des [Kits de développement logiciel (SDK) Application Insights][Application Insights SDKs] et à personnaliser par application. Ces Kits de développement logiciel (SDK) open source sont disponibles pour la plupart des infrastructures d’application. Pour enrichir et contrôler les données que vous collectez, intégrez l’utilisation des Kits de développement logiciel (SDK) des déploiements de test et de production dans votre processus de développement. La principale exigence implique que l’application doit disposer d’une visibilité directe ou indirecte sur le point de terminaison d’ingestion Applications Insights hébergé avec une adresse Internet. Vous pouvez ensuite ajouter des données de télémétrie ou enrichir une collection de données de télémétrie existante.
 
 La supervision du runtime est une autre méthode de prise en main simple. Les données de télémétrie collectées doivent être contrôlées par le biais de fichiers de configuration. Par exemple, vous pouvez inclure des méthodes de runtime qui permettent à des outils tels qu’[Application Insights Status Monitor][Application Insights Status Monitor] de déployer les Kits de développement logiciel (SDK) dans le dossier approprié et d’ajouter les configurations qui conviennent pour commencer la supervision.
 
@@ -60,7 +60,7 @@ Azure Monitor, Application Insights et Log Analytics envoient tous les trois des
 
 ### <a name="alternatives"></a>Autres solutions
 
-Cet article décrit les options de supervision facilement disponibles avec les fonctionnalités populaires, mais de nombreuses options s’offrent à vous, notamment la possibilité de créer vos propres mécanismes de journalisation. Une meilleure pratique consiste à ajouter des services de supervision lorsque vous générez des niveaux dans une solution. Voici certaines extensions et alternatives possibles :
+Cet article décrit les options de supervision facilement disponibles avec les fonctionnalités populaires, mais de nombreuses options s’offrent à vous, notamment la possibilité de créer vos propres mécanismes de journalisation. Une pratique recommandée consiste à ajouter des services de supervision lorsque vous générez des niveaux dans une solution. Voici certaines extensions et alternatives possibles :
 
 - Consolidez les métriques Azure Monitor et Application Insights dans Grafana à l’aide d[Azure Monitor Data Source For Grafana][Azure Monitor Data Source For Grafana].
 - [Data Dog][data-dog] comprend un connecteur pour Azure Monitor
@@ -72,7 +72,7 @@ Cet article décrit les options de supervision facilement disponibles avec les f
 
 Ce scénario se concentre sur des solutions PaaS pour la supervision, principalement du fait qu’elles gèrent pour vous de manière pratique la disponibilité et l’extensibilité et qu’elles s’appuient sur des contrats de niveau de service (SLA). Par exemple, App Services fournit un [SLA][SLA] garanti pour sa disponibilité.
 
-Application Insights [limite][app-insights-limits] le nombre de requêtes pouvant être traitées par seconde. Si vous dépassez la limite de requêtes, vous pouvez rencontrer une limitation des messages. Pour éviter ce problème, implémentez un [filtrage][message-filtering] ou un [échantillonnage][message-sampling] afin de réduire le débit de données
+Application Insights [limite][app-insights-limits] le nombre de requêtes pouvant être traitées par seconde. Si vous dépassez la limite de requêtes, vous pouvez rencontrer une limitation des messages. Pour éviter cette limitation, implémentez un [filtrage][message-filtering] ou un [échantillonnage][message-sampling] afin de réduire le débit de données
 
 Toutefois, les considérations relatives à la haute disponibilité de l’application que vous exécutez sont de la responsabilité du développeur. Pour plus d’informations sur la mise à l’échelle, par exemple, consultez la section des [considérations relatives à l’extensibilité](#scalability-considerations) dans l’architecture de référence d’application web de base. Lorsqu’une application est déployée, vous pouvez configurer des tests pour [surveiller sa disponibilité][monitor its availability] à l’aide d’Application Insights.
 
@@ -97,7 +97,7 @@ Pour vous aider à commencer, utilisez la [calculatrice de prix][pricing] pour e
 
 Les données d’Application Insights sont envoyées au portail Azure pendant le débogage et une fois que vous avez publié votre application. À des fins de test et pour éviter des frais, un volume limité de données de télémétrie est instrumenté. Pour ajouter d’autres indicateurs, vous pouvez augmenter la limite de données de télémétrie. Pour un contrôle plus précis, consultez l’article [Échantillonnage dans Application Insights][Sampling in Application Insights].
 
-Après le déploiement, vous pouvez observer un [Flux de métriques temps réel][Live Metrics Stream] des indicateurs de performance. Ces données ne sont pas stockées (vous affichez des métriques en temps réel), mais les données de télémétrie peuvent être collectées et analysées ultérieurement. Aucun frais n’est lié aux données Flux de métriques temps réel.
+Après le déploiement, vous pouvez observer un [Flux de métriques temps réel][Live Metrics Stream] des indicateurs de performance. Ces données ne sont pas stockées &mdash; vous affichez des métriques en temps réel &mdash;, mais les données de télémétrie peuvent être collectées et analysées ultérieurement. Aucun frais n’est lié aux données Flux de métriques temps réel.
 
 Log Analytics est facturé par Go de données ingéré dans le service. Les 5 premiers Go de données ingérés dans le service Azure Log Analytics chaque mois sont gratuits, et les données sont conservées sans frais pendant les 31 premiers jours dans votre espace de travail Log Analytics. 
 
