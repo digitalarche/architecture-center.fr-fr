@@ -3,12 +3,12 @@ title: Choisir une solution pour connecter un réseau local à Azure
 description: Comparatif des architectures de référence pour connecter un réseau local à Azure.
 author: telmosampaio
 ms.date: 07/02/2018
-ms.openlocfilehash: 0cc07d3b7d45accf9f99ce32914b0ef065d62f32
-ms.sourcegitcommit: 776b8c1efc662d42273a33de3b82ec69e3cd80c5
+ms.openlocfilehash: a9e2a212d65530e714635bbfae3a57766e77c3a6
+ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/12/2018
-ms.locfileid: "38987476"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52295483"
 ---
 # <a name="connect-an-on-premises-network-to-azure"></a>Connecter un réseau local à Azure
 
@@ -28,7 +28,7 @@ Cette architecture est idéale pour les applications hybrides avec un trafic peu
 
 - Vous avez besoin d’un appareil VPN local.
 - Même si Microsoft garantit une disponibilité de 99,9 % pour chaque passerelle VPN, ce contrat [SLA](https://azure.microsoft.com/support/legal/sla/vpn-gateway/) couvre uniquement la passerelle VPN, et non votre connexion réseau à la passerelle.
-- Une connexion VPN via la passerelle VPN Azure prend actuellement en charge une bande passante maximale de 200 Mbits/s. Vous devrez peut-être partitionner votre réseau virtuel Azure sur plusieurs connexions VPN si vous pensez dépasser ce débit.
+- Une connexion VPN via la passerelle VPN Azure prend actuellement en charge une bande passante maximale de 1,25 Mbits/s. Vous devrez peut-être partitionner votre réseau virtuel Azure sur plusieurs connexions VPN si vous pensez dépasser ce débit.
 
 **Architecture de référence**
 

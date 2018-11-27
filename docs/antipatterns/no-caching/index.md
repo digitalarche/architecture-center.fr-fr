@@ -3,12 +3,12 @@ title: Absence d’antimodèle de mise en cache
 description: Extraire plusieurs fois les mêmes données peut réduire les performances et l’évolutivité.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: f94a9f3f9166e87949a0e60af818cd89796dc3e2
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: ec19cde567fb63248c121328322e834d99c841e8
+ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428944"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52295580"
 ---
 # <a name="no-caching-antipattern"></a>Absence d’antimodèle de mise en cache
 
@@ -59,7 +59,7 @@ La stratégie de mise en cache la plus populaire est la stratégie *à la demand
 - Lors de la lecture, l’application tente de lire les données à partir du cache. Si les données ne sont pas dans le cache, l’application les récupère à partir de la source de données et les ajoute au cache.
 - Lors de l’écriture, l’application écrit la modification directement dans la source de données et supprime l’ancienne valeur du cache. Elle est récupérée et ajoutée au cache dès qu’elle est nécessaire.
 
-Cette approche est appropriée pour les données changeant fréquemment. Voici l’exemple précédent mis à jour pour utiliser le modèle [Cache-Aside][cache-aside].  
+Cette approche est appropriée pour les données changeant fréquemment. Voici l’exemple précédent mis à jour pour utiliser le modèle [Cache-Aside][cache-aside-pattern].  
 
 ```csharp
 public class CachedPersonRepository : IPersonRepository

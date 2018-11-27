@@ -4,12 +4,12 @@ description: Comment créer des applications résilientes dans Azure, pour une h
 author: MikeWasson
 ms.date: 07/29/2018
 ms.custom: resiliency
-ms.openlocfilehash: b925748e1d3d4a8d490bbd5d7cb76f3961ffcfb2
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.openlocfilehash: 73600650dc96fe85ad59e286079a3523ef25d055
+ms.sourcegitcommit: 1b5411f07d74f0a0680b33c266227d24014ba4d1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916598"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52305959"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Conception d’applications résilientes pour Azure
 
@@ -166,7 +166,7 @@ Les défaillances n’ont pas toutes la même incidence. Certaines défaillances
 
 La redondance est l’un des moyens de rendre une application résiliente. Toutefois, vous devez planifier en fonction de cette redondance lorsque vous concevez l’application. Par ailleurs, le niveau de redondance dont vous avez besoin dépend des exigences de votre entreprise. Toutes les applications ne nécessitent pas une redondance entre les régions à titre de prévention contre les pannes régionales. En général, il existe un compromis entre redondance et fiabilité supérieures d’un côté contre complexité et coûts plus élevés de l’autre.  
 
-Azure offre un certain nombre de fonctionnalités servant à rendre une application redondante à tous les nivaux de défaillances, d’une machine virtuelle unique à une région entière. 
+Azure offre un certain nombre de fonctionnalités servant à rendre une application redondante à tous les niveaux de défaillances, d’une machine virtuelle unique à une région entière. 
 
 ![](./images/redundancy.svg)
 
@@ -174,7 +174,9 @@ Azure offre un certain nombre de fonctionnalités servant à rendre une applicat
 
 **Groupes à haute disponibilité**. Pour vous protéger contre les défaillances matérielles localisées, comme une panne de disque ou de commutateur réseau, déployez au moins deux machines virtuelles dans un groupe à haute disponibilité. Un groupe à haute disponibilité se compose d’au moins deux *domaines d’erreur* qui partagent une source d’alimentation et un commutateur réseau. Les machines virtuelles d’un groupe à haute disponibilité sont distribuées entre les domaines d’erreur. Ainsi, si une défaillance matérielle affecte un domaine d’erreur, le trafic réseau peut toujours être acheminé vers les machines virtuelles des autres domaines d’erreur. Pour plus d’informations sur les groupes à haute disponibilité, consultez la section [Gestion de la disponibilité des machines virtuelles Windows dans Azure](/azure/virtual-machines/windows/manage-availability).
 
-**Zones de disponibilité**.  Une zone de disponibilité est une zone physiquement séparée au sein d’une région Azure. Chaque zone de disponibilité possède une source d’alimentation, un réseau et un système de refroidissement propres. Le déploiement des machines virtuelles entre les zones de disponibilité aide à protéger une application contre les défaillances à l’échelle du centre de données. 
+**Zones de disponibilité**.  Une zone de disponibilité est une zone physiquement séparée au sein d’une région Azure. Chaque zone de disponibilité possède une source d’alimentation, un réseau et un système de refroidissement propres. Le déploiement des machines virtuelles entre les zones de disponibilité aide à protéger une application contre les défaillances à l’échelle du centre de données.
+
+**Azure Site Recovery**.  Répliquez des machines virtuelles Azure dans une autre région Azure pour couvrir les besoins en termes de continuité d’activité et de reprise d’activité. Vous pouvez effectuer régulièrement des exercices de reprise d’activité pour garantir que vous répondez aux besoins de conformité. La machine virtuelle est répliquée avec les paramètres spécifiés dans la région sélectionnée afin que vous puissiez récupérer vos applications en cas de panne dans la région source. Pour plus d’informations, consultez [Replicate Azure VMs using ASR][site-recovery] (Répliquer des machines virtuelles Azure à l’aide d’ASR).
 
 **Régions jumelées**. Pour protéger une application contre une panne régionale, vous pouvez la déployer dans plusieurs régions, en vous appuyant sur Azure Traffic Manager pour distribuer le trafic Internet entre les différentes régions. Chaque région Azure est jumelée à une autre région. Ensemble, elles forment une [paire régionale](/azure/best-practices-availability-paired-regions). Une région se trouve dans la même zone géographique que la région avec laquelle elle est jumelée (à l’exception de Brésil Sud) pour répondre aux exigences de la résidence de données en termes d’impôts et d’application de la loi.
 
@@ -202,9 +204,11 @@ Chaque tentative de relance augmente la latence totale. En outre, un trop grand 
 * Montez en charge une application Azure App Service à plusieurs instances. App Service équilibre automatiquement la charge entre les instances. Consultez [Application web de base][ra-basic-web].
 * Utilisez [Azure Traffic Manager] [ tm] pour répartir le trafic sur un ensemble de points de terminaison.
 
-**Répliquez des données**. La réplication de données est une stratégie générale pour gérer les échecs non temporaires dans un magasin de données. De nombreuses technologies de stockage fournissent une stratégie de réplication intégrée, y compris Azure SQL Database, Cosmos DB et Apache Cassandra. Il est important de tenir compte des chemins d’accès de lecture et d’écriture. Selon la technologie de stockage, vous pouvez trouver plusieurs réplicas accessibles en écriture, ou un seul réplica accessible en écriture et plusieurs réplicas en lecture seule. 
+**Répliquez des données**. La réplication de données est une stratégie générale pour gérer les échecs non temporaires dans un magasin de données. De nombreuses technologies de stockage fournissent une stratégie de réplication intégrée, y compris Azure SQL Database, Cosmos DB et Apache Cassandra. Il est important de tenir compte des chemins d’accès de lecture et d’écriture. Selon la technologie de stockage, vous pouvez trouver plusieurs réplicas accessibles en écriture, ou un seul réplica accessible en écriture et plusieurs réplicas en lecture seule.
 
-Pour optimiser la disponibilité, les réplicas peuvent être placés dans plusieurs régions. Toutefois, cela augmente la latence lors de la réplication des données. En règle générale, la réplication entre les régions est effectuée de manière asynchrone, ce qui implique un modèle de cohérence éventuel et une perte de données potentielle si un réplica échoue. 
+Pour optimiser la disponibilité, les réplicas peuvent être placés dans plusieurs régions. Toutefois, cela augmente la latence lors de la réplication des données. En règle générale, la réplication entre les régions est effectuée de manière asynchrone, ce qui implique un modèle de cohérence éventuel et une perte de données potentielle si un réplica échoue.
+
+Vous pouvez utiliser [Azure Site Recovery][site-recovery] pour répliquer des machines virtuelles Azure d’une région vers une autre. Site Recovery réplique les données en continu dans la région cible. En cas de panne au niveau de votre site principal, vous basculez vers l’emplacement secondaire.
 
 **Appliquer une dégradation normale**. Si un service échoue et qu’il n’existe aucun chemin d’accès de basculement, l’application devrait se dégrader normalement, tout en offrant une expérience utilisateur acceptable. Par exemple : 
 
@@ -355,3 +359,4 @@ Voici les principaux points de l’article à retenir :
 [tm]: https://azure.microsoft.com/services/traffic-manager/
 [tm-failover]: /azure/traffic-manager/traffic-manager-monitoring
 [tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager
+[site-recovery]:/azure/site-recovery/azure-to-azure-quickstart/
