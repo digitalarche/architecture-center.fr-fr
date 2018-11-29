@@ -7,12 +7,12 @@ ms.date: 11/28/2016
 pnp.series.next: adds-extend-domain
 pnp.series.prev: ./index
 cardTitle: Integrate on-premises AD with Azure AD
-ms.openlocfilehash: 5bb0fb990418a28170a8baeffd22e480fb664fda
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: c265870b9a664afbde561d324ae42fd3a2d9a87e
+ms.sourcegitcommit: 1287d635289b1c49e94f839b537b4944df85111d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818953"
+ms.lasthandoff: 11/27/2018
+ms.locfileid: "52332355"
 ---
 # <a name="integrate-on-premises-active-directory-domains-with-azure-active-directory"></a>Intégrer des domaines Active Directory locaux avec Azure Active Directory
 
@@ -218,7 +218,7 @@ Pour plus d’informations, consultez [Accès conditionnel Azure Active Director
 
 Un déploiement pour une architecture de référence implémentant ces recommandations et considérations est disponible sur GitHub. Cette architecture de référence déploie un réseau local simulé dans Azure, que vous pouvez utiliser pour tester et expérimenter différents scénarios. L’architecture de référence peut être déployée avec des machines virtuelles Windows ou Linux en procédant comme suit : 
 
-1. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fidentity%2Fazure-ad%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
+1. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fidentity-reference-architectures%2Fmaster%2Fazure-ad%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
 2. Une fois le lien ouvert dans le portail Azure, vous devez entrer des valeurs pour certains paramètres : 
    * Le nom du **groupe de ressources** est déjà défini dans le fichier de paramètres ; sélectionnez **Créer nouveau** et entrez `ra-aad-onpremise-rg` dans la zone de texte.
    * Sélectionnez la région à partir de la zone déroulante **Emplacement**.
