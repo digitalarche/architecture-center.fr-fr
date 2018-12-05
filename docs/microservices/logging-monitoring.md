@@ -3,12 +3,12 @@ title: Journalisation et surveillance dans les microservices
 description: Journalisation et surveillance dans les microservices
 author: MikeWasson
 ms.date: 10/23/2018
-ms.openlocfilehash: c2a935f51c57936977fb4402de2113938351069c
-ms.sourcegitcommit: fdcacbfdc77370532a4dde776c5d9b82227dff2d
+ms.openlocfilehash: 9d385a141edb34b2b0f4badb7dfcaf53baac2666
+ms.sourcegitcommit: 1b5411f07d74f0a0680b33c266227d24014ba4d1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/24/2018
-ms.locfileid: "49962872"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52305908"
 ---
 # <a name="designing-microservices-logging-and-monitoring"></a>Conception de microservices : journalisation et surveillance
 

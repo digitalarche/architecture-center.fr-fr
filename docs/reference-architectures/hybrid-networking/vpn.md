@@ -7,12 +7,12 @@ pnp.series.title: Connect an on-premises network to Azure
 pnp.series.next: expressroute
 pnp.series.prev: ./index
 cardTitle: VPN
-ms.openlocfilehash: 6e705c40663eff421e79067f916a1ebad6e72822
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.openlocfilehash: a494ff952dd6c8be3b38c2ca7f6740a44b5b30e1
+ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916547"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52295665"
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-a-vpn-gateway"></a>Connecter un réseau local à Azure à l’aide d’une passerelle VPN
 
@@ -413,7 +413,7 @@ Les recommandations suivantes sont utiles pour déterminer s’il existe un prob
 
     ![[3]][3]
 
-    Vous devez comparer les résultats à la bande passante disponible pour la passerelle VPN (100 Mbits/s pour les références SKU basiques et standard, et 200 Mbits/s pour la référence SKU hautes performances) :
+    Vous devez comparer les résultats à la bande passante disponible pour la passerelle VPN (de 100 Mbits/s pour les références de base à 1,25 Gbits/s pour la référence VpnGw3) :
 
     ![[4]][4]
 

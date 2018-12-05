@@ -3,12 +3,12 @@ title: Traitement en temps réel
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 4abb159924f902b5babe0673cc021e80b00c8529
-ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
+ms.openlocfilehash: 1499fecc20dcbf51472b92bb588b91db0fb58a7f
+ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/28/2018
-ms.locfileid: "37090983"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52295597"
 ---
 # <a name="real-time-processing"></a>Traitement en temps réel
 
@@ -76,3 +76,8 @@ Pour plus d'informations, consultez la section [Analytique et création de rappo
 
 Dans une solution entièrement en temps réel, la majeure partie de l’orchestration est gérée par les composants d’ingestion de messages et de traitement des flux de données. Toutefois, dans une architecture lambda qui combine le traitement par lots et le traitement en temps réel, il vous faudra peut-être utiliser une infrastructure d’orchestration comme Azure Data Factory ou Apache Oozie et Sqoop pour gérer les workflows de traitement par lots des données capturées en temps réel.
 
+## <a name="next-steps"></a>Étapes suivantes
+
+L’architecture de référence suivante présente un pipeline de traitement de flux de bout en bout :
+
+- [Traitement de flux avec Azure Stream Analytics](../../reference-architectures/data/stream-processing-stream-analytics.md)

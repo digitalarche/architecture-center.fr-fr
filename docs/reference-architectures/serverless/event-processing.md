@@ -3,16 +3,16 @@ title: Traitement d’événements serverless à l’aide d’Azure Functions
 description: Architecture de référence qui montre le traitement et l’ingestion d’événements serverless
 author: MikeWasson
 ms.date: 10/16/2018
-ms.openlocfilehash: 2bb7600fbed95e4b9368cf342c0bc6a75c5f8755
-ms.sourcegitcommit: 113a7248b9793c670b0f2d4278d30ad8616abe6c
+ms.openlocfilehash: 76c8b9c1244c987c96e38e50ecad7814cc49cd88
+ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/16/2018
-ms.locfileid: "49349936"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52295648"
 ---
 # <a name="serverless-event-processing-using-azure-functions"></a>Traitement d’événements serverless à l’aide d’Azure Functions
 
-Cette architecture de référence montre une architecture serverless pilotée par événements qui ingère un flux de données, traite les données et écrit les résultats dans une base de données principale. Une implémentation de référence pour cette architecture est disponible sur [GitHub][github].
+Cette architecture de référence montre une architecture [serverless](https://azure.microsoft.com/solutions/serverless/) basée sur des événements qui ingère un flux de données, traite les données et écrit les résultats dans une base de données back-end. Une implémentation de référence pour cette architecture est disponible sur [GitHub][github].
 
 ![](./_images/serverless-event-processing.png)
 

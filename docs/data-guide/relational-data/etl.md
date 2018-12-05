@@ -3,12 +3,12 @@ title: Extraire, transformer et charger (ETL)
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: 1879b649fa3dfdf5c00f8ee30e53b83f7139fbf0
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.openlocfilehash: b10b0cb3cbc98ff9fadda6915b01b6f6564c4d00
+ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30298637"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52295546"
 ---
 # <a name="extract-transform-and-load-etl"></a>Extraire, transformer et charger (ETL)
 
@@ -20,7 +20,7 @@ Au fil des années, différents outils, services et processus ont été dévelop
 
 ETL est un pipeline de données utilisé pour collecter des données provenant de différentes sources, transformer les données en fonction des règles métier et charger les données dans un magasin de données de destination. Le travail de transformation dans ETL a lieu dans un moteur spécialisé et implique souvent l’utilisation de tables intermédiaires pour conserver temporairement les données lors de leur transformation et leur chargement final vers leur destination.
 
-La transformation des données qui a lieu implique généralement plusieurs opérations, comme le filtrage, le tri, l’agrégation, la jointure des données, le nettoyage des données, la déduplication et la validation des données.
+La transformation des données qui a lieu implique généralement plusieurs opérations, comme le filtrage, le tri, l’agrégation, la jonction des données, le nettoyage des données, la déduplication et la validation des données.
 
 ![Processus ETL (Extraire-transformer-charger)](../images/etl.png)
 
@@ -79,3 +79,10 @@ Autres outils :
 - [Magasins de données de traitement analytique en ligne (OLAP)](./online-analytical-processing.md#olap-in-azure)
 - [Entrepôts de données](./data-warehousing.md)
 - [Orchestration de pipeline](../technology-choices/pipeline-orchestration-data-movement.md)
+
+## <a name="next-steps"></a>Étapes suivantes
+
+Les architectures de référence suivantes présentent des pipelines ELT de bout en bout sur Azure :
+
+- [BI d’entreprise dans Azure avec SQL Data Warehouse](../../reference-architectures/data/enterprise-bi-sqldw.md)
+- [BI d’entreprise automatisée avec SQL Data Warehouse et Azure Data Factory](../../reference-architectures/data/enterprise-bi-adf.md)

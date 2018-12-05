@@ -3,12 +3,12 @@ title: Style d’architecture Big Data
 description: Décrit les avantages, les inconvénients et les meilleures pratiques relatifs aux architectures Big Data sur Azure.
 author: MikeWasson
 ms.date: 08/30/2018
-ms.openlocfilehash: 073a1a88f1aaca7f09bd1f47ba79216b0727ca24
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.openlocfilehash: 107ea7ad4e97a891236596291b0cee41a72eb865
+ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43325369"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52295563"
 ---
 # <a name="big-data-architecture-style"></a>Style d’architecture Big Data
 
@@ -124,6 +124,10 @@ Les cadres gris représentent les composants d’un système IoT qui ne sont pas
 - Certaines solutions IoT autorisent l’envoi de **messages de commande et de contrôle** aux appareils.
 
 > Cette section a fourni une vue d’ensemble globale d’IoT et bon nombre de subtilités et d’écueils sont à prendre en considération. Pour obtenir une description et une présentation plus détaillées d’une architecture de référence, consultez [Microsoft Azure IoT Reference Architecture][iot-ref-arch] (PDF téléchargeable).
+
+## <a name="next-steps"></a>Étapes suivantes
+
+- En savoir plus sur les [architectures big data](../../data-guide/big-data/index.md).
 
  <!-- links -->
 

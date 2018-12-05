@@ -4,12 +4,12 @@ description: Liste de vérification fournissant des indications relatives aux pr
 author: petertaylor9999
 ms.date: 01/10/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 15ad749c12dc8a45c9e7e08376452685d8ad7c9b
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.openlocfilehash: ce538a0b234a5b120415980e983096f567f9cf86
+ms.sourcegitcommit: 1b5411f07d74f0a0680b33c266227d24014ba4d1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48819021"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52305942"
 ---
 # <a name="resiliency-checklist"></a>Liste de vérification de résilience
 
@@ -43,6 +43,8 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Utilisez des groupes à haute disponibilité pour chaque couche Application.** Le placement des instances dans un [groupe à haute disponibilité][availability-sets] permet de bénéficier d’un [SLA](https://azure.microsoft.com/support/legal/sla/virtual-machines/) supérieur. 
 
+**Répliquez les machines virtuelles à l’aide d’Azure Site Recovery.** Quand vous répliquez des machines virtuelles Azure à l’aide de [Site Recovery][site-recovery], tous les disques de machine virtuelle sont répliqués en continu sur la région cible en mode asynchrone. Les points de récupération sont créés à intervalle de quelques minutes. Cela vous donne un objectif de point de récupération (RPO) de l’ordre de quelques minutes.
+
 **Envisagez de déployer votre application dans plusieurs régions.** Si votre application est déployée dans une seule région, si la région entière devient indisponible (éventualité hautement improbable), votre application sera elle aussi indisponible. Il se peut que cette situation soit inacceptable au regard des conditions du SLA de votre application. Si c’est le cas, envisagez de déployer votre application et ses services dans plusieurs régions. Un déploiement dans plusieurs régions peut s’appuyer sur un modèle actif (répartissant les requêtes entre plusieurs instances actives) ou sur un modèle actif/passif (conservant une instance active en réserve en cas d’échec de l’instance principale). Nous vous recommandons de déployer plusieurs instances des services de votre application sur des paires régionales. Pour plus d’informations, consultez [Continuité des activités et récupération d’urgence (BCDR) : régions jumelées d’Azure](/azure/best-practices-availability-paired-regions).
 
 **Utilisez Azure Traffic Manager pour acheminer le trafic de votre application vers des régions différentes.**  [Azure Traffic Manager][ traffic-manager] effectue un équilibrage de charge au niveau du DNS et achemine le trafic vers des régions différentes en fonction de la méthode de [routage du trafic][ traffic-manager-routing] que vous spécifiez et de l’intégrité des points de terminaison de votre application. Sans Traffic Manager, vous êtes limité à une seule région pour votre déploiement, ce qui limite la mise à l’échelle, augmente la latence pour certains utilisateurs et entraîne l’arrêt de l’application en cas d’interruption de service à l’échelle de la région.
@@ -64,7 +66,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 ## <a name="data-management"></a>Gestion des données
 
-**Étudiez les méthodes de réplication pour les sources de données de votre application.** Vos données d’application seront stockées dans des sources de données différentes et présenteront des exigences de disponibilité distinctes. Évaluer les méthodes de réplication pour chaque type de stockage de données dans Azure, y compris la [réplication Stockage Azure](/azure/storage/storage-redundancy/) et [géoréplication active de SQL Database](/azure/sql-database/sql-database-geo-replication-overview/), pour vous assurer que les exigences de votre application en matière de données sont satisfaites.
+**Étudiez les méthodes de réplication pour les sources de données de votre application.** Vos données d’application seront stockées dans des sources de données différentes et présenteront des exigences de disponibilité distinctes. Évaluer les méthodes de réplication pour chaque type de stockage de données dans Azure, y compris la [réplication Stockage Azure](/azure/storage/storage-redundancy/) et [géoréplication active de SQL Database](/azure/sql-database/sql-database-geo-replication-overview/), pour vous assurer que les exigences de votre application en matière de données sont satisfaites. Si vous répliquez des machines virtuelles Azure à l’aide de [Site Recovery][site-recovery], tous les disques de machine virtuelle sont répliqués en continu sur la région cible en mode asynchrone. Les points de récupération sont créés à intervalle de quelques minutes. 
 
 **Assurez-vous qu’aucun compte d’utilisateur n’a accès à la fois aux données de production et aux données de sauvegarde.** Si un même compte d’utilisateur est autorisé à écrire dans les sources de production et de sauvegarde, vos sauvegardes de données risquent d’être compromises. En effet, un utilisateur malveillant pourrait supprimer volontairement toutes vos données, tandis qu’un utilisateur normal pourrait les supprimer accidentellement. Concevez votre application de manière à limiter les autorisations de chaque compte d’utilisateur afin que seuls les utilisateurs qui ont besoin d’un accès en écriture disposent d’un tel accès, et que celui-ci ne s’applique qu’aux données de production ou de sauvegarde.
 
@@ -87,7 +89,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 ## <a name="testing"></a>Test
 
-**Effectuez des tests de basculement et de restauration automatique pour votre application.** Si vous n’avez pas entièrement testé le basculement et la restauration automatique, vous n’avez aucune garantie que les services dépendants de votre application redeviendront actifs de manière synchronisée au cours de la récupération d’urgence. Assurez-vous que les services dépendants de votre application sont basculés et restaurés dans l’ordre correct.
+**Effectuez des tests de basculement et de restauration automatique pour votre application.** Si vous n’avez pas entièrement testé le basculement et la restauration automatique, vous n’avez aucune garantie que les services dépendants de votre application redeviendront actifs de manière synchronisée au cours de la récupération d’urgence. Assurez-vous que les services dépendants de votre application sont basculés et restaurés dans l’ordre correct. Si vous utilisez [Azure Site Recovery][site-recovery] pour répliquer des machines virtuelles, exécutez périodiquement des exercices de reprise d’activité après sinistre en effectuant un basculement de test. Pour plus d’informations, consultez [Effectuer un exercice de reprise d’activité sur Azure][site-recovery-test].
 
 **Effectuez des tests d’injection d’erreurs pour votre application.** Votre application peut échouer pour de nombreuses raisons : expiration de certificat, épuisement des ressources système d’une machine virtuelle, défaillances de stockage, etc. Testez votre application dans un environnement aussi proche que possible de l’environnement de production, en simulant ou en déclenchant des échecs réels. Par exemple, supprimez des certificats, consommez artificiellement les ressources système ou supprimez une source de stockage. Vérifiez la capacité de votre application à récupérer des erreurs de tout type, qu’elles surviennent de façon isolée ou simultanée. Assurez-vous que les erreurs ne se propagent pas ou ne se produisent pas de manière successive dans votre système.
 
@@ -176,6 +178,8 @@ La résilience est la capacité d’un système à récupérer après des défai
 [resource-manager]: /azure/azure-resource-manager/resource-group-overview/
 [retry-pattern]: ../patterns/retry.md
 [retry-service-guidance]: ../best-practices/retry-service-specific.md
+[site-recovery]: /azure/site-recovery/
+[site-recovery-test]: /azure/site-recovery/site-recovery-test-failover-to-azure
 [traffic-manager]: /azure/traffic-manager/traffic-manager-overview/
 [traffic-manager-routing]: /azure/traffic-manager/traffic-manager-routing-methods/
 [vmss-autoscale]: /azure/virtual-machine-scale-sets/virtual-machine-scale-sets-autoscale-overview/

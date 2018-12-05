@@ -4,12 +4,12 @@ description: Liste de vérification qui fournit des conseils de résilience pour
 author: petertaylor9999
 ms.date: 03/02/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 50808a837132e905cc89c3c43d40852a04f4885c
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.openlocfilehash: 53a37595bd6e70fa3a43e9a72b2ae47d2225009f
+ms.sourcegitcommit: 1b5411f07d74f0a0680b33c266227d24014ba4d1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916700"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52305925"
 ---
 # <a name="resiliency-checklist-for-specific-azure-services"></a>Liste de vérification de la résilience pour des services Azure spécifiques
 
@@ -139,6 +139,8 @@ Si vous utilisez Cache Redis comme un cache de données temporaire et non comme 
 
 **Placez chaque couche Application dans un groupe à haute disponibilité distinct.** Dans une application multiniveau, ne placez pas de machines virtuelles de niveaux différents dans le même groupe à haute disponibilité. Les machines virtuelles d’un groupe à haute disponibilité sont réparties dans des domaines d’erreur et des domaines de mise à jour. Toutefois, pour tirer parti de la redondance des domaines d’erreur et des domaines de mise à jour, chaque machine virtuelle du groupe à haute disponibilité doit être en mesure de gérer les mêmes requêtes de clients.
 
+**Répliquez les machines virtuelles à l’aide d’Azure Site Recovery.** Quand vous répliquez des machines virtuelles Azure à l’aide de [Site Recovery][site-recovery], tous les disques de machine virtuelle sont répliqués en continu sur la région cible en mode asynchrone. Les points de récupération sont créés à intervalle de quelques minutes. Cela vous donne un objectif de point de récupération (RPO) de l’ordre de quelques minutes. Vous pouvez effectuer des exercices de reprise d’activité autant de fois que vous le souhaitez sans impacter l’application de production ou la réplication en cours. Pour plus d’informations, consultez [Effectuer un exercice de reprise d’activité sur Azure][site-recovery-test].
+
 **Choisissez la taille de machine virtuelle appropriée en fonction des exigences de performances.** Quand vous déplacez une charge de travail existante vers Azure, commencez par choisir la taille de machine virtuelle qui correspond le mieux à vos serveurs locaux. Mesurez ensuite les performances de votre charge de travail réelle en termes de processeur, de mémoire et d’IOPS de disque, puis ajustez la taille si nécessaire. Vous aurez ainsi l’assurance que l’application se comportera comme prévu dans un environnement cloud. En outre, si vous avez besoin de plusieurs cartes réseau, tenez compte de la limite de la carte réseau pour chaque taille.
 
 **Utilisez le service Managed Disks pour les disques durs virtuels.** Le service [Managed Disks][managed-disks] augmente la fiabilité des machines virtuelles dans un groupe à haute disponibilité en isolant suffisamment les disques les uns des autres pour éviter les points de défaillance uniques. Par ailleurs, les disques Managed Disks ne sont pas soumis aux limites d’IOPS des disques durs virtuels créés dans un compte de stockage. Pour plus d’informations, consultez [Gérer la disponibilité des machines virtuelles Windows dans Azure][vm-manage-availability].
@@ -166,6 +168,8 @@ Si vous utilisez Cache Redis comme un cache de données temporaire et non comme 
 [diagnostics-logs]: /azure/monitoring-and-diagnostics/monitoring-overview-of-diagnostic-logs/
 [managed-disks]: /azure/storage/storage-managed-disks-overview
 [search-optimization]: /azure/search/search-performance-optimization/
+[site-recovery]: /azure/site-recovery/
+[site-recovery-test]: /azure/site-recovery/site-recovery-test-failover-to-azure
 [sql-backup]: /azure/sql-database/sql-database-automated-backups/
 [sql-restore]: /azure/sql-database/sql-database-recovery-using-backups/
 [vm-manage-availability]: /azure/virtual-machines/windows/manage-availability#use-managed-disks-for-vms-in-an-availability-set

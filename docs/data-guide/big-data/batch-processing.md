@@ -3,12 +3,12 @@ title: Traitement par lots
 description: ''
 author: zoinerTejada
 ms:date: 02/12/2018
-ms.openlocfilehash: d6843bf4e20c3eb26e61cfa09300ad533e969c2e
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.openlocfilehash: eecee13e9b22b0382a0128e1c6ab8b960cbd4fea
+ms.sourcegitcommit: 16bc6a91b6b9565ca3bcc72d6eb27c2c4ae935e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30298657"
+ms.lasthandoff: 11/28/2018
+ms.locfileid: "52550476"
 ---
 # <a name="batch-processing"></a>Traitement par lots
 
@@ -75,7 +75,7 @@ Pour plus d’informations, consultez la section [Magasins de données analytiqu
 
 ### <a name="analytics-and-reporting"></a>Analytique et création de rapports
 
-- **Azure Analysis Services**. De nombreuses solutions de Big Data émulent des architectures d’informatique décisionnelle d’entreprise classiques en intégrant un modèle de données OLAP (traitement analytique en ligne) centralisé (communément appelé cube) qui peut servir de base aux rapports, aux tableaux de bord et à l’analyse interactive par permutation d'axes. Azure Analysis Services prend en charge la création de modèles multidimensionnels et tabulaires pour répondre à ce besoin.
+- **Azure Analysis Services**. De nombreuses solutions de Big Data émulent des architectures d’informatique décisionnelle d’entreprise classiques en intégrant un modèle de données OLAP (traitement analytique en ligne) centralisé (communément appelé cube) qui peut servir de base aux rapports, aux tableaux de bord et à l’analyse interactive par permutation d'axes. Azure Analysis Services prend en charge la création de modèles tabulaires pour répondre à ce besoin.
 - **Power BI**. Power BI permet aux analystes de données de créer des visualisations de données interactives sur la base de modèles de données dans un modèle OLAP ou directement à partir d’un magasin de données analytiques.
 - **Microsoft Excel**. Microsoft Excel est l’une des applications logicielles les plus largement utilisées dans le monde ; elle offre un large éventail de fonctionnalités d’analyse et de visualisation de données. Les analystes de données peuvent se servir d’Excel pour générer des modèles de données de documents à partir de magasins de données analytiques, ou pour récupérer des données provenant de modèles de données OLAP dans des graphiques et des tableaux croisés dynamiques interactifs.
 

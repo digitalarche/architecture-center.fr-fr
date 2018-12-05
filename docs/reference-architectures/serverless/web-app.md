@@ -3,16 +3,16 @@ title: Application web serverless
 description: Architecture de référence qui montre une application web serverless et l’API web
 author: MikeWasson
 ms.date: 10/16/2018
-ms.openlocfilehash: d1af03811bda6267fd40ee17823ac8357829f988
-ms.sourcegitcommit: 949b9d3e5a9cdee1051e6be700ed169113e914ae
+ms.openlocfilehash: 9263c8bec794e4b2bb9f397289b23307eb02f0c7
+ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/05/2018
-ms.locfileid: "50983394"
+ms.lasthandoff: 11/26/2018
+ms.locfileid: "52295682"
 ---
 # <a name="serverless-web-application"></a>Application web serverless 
 
-Cette architecture de référence montre une application web serverless. L’application gère le contenu statique à partir de Stockage Blob Azure et implémente une API à l’aide d’Azure Functions. L’API lit les données à partir de Cosmos DB et renvoie les résultats à l’application web. Une implémentation de référence pour cette architecture est disponible sur [GitHub][github].
+Cette architecture de référence montre une application web [serverless](https://azure.microsoft.com/solutions/serverless/). L’application gère le contenu statique à partir de Stockage Blob Azure et implémente une API à l’aide d’Azure Functions. L’API lit les données à partir de Cosmos DB et renvoie les résultats à l’application web. Une implémentation de référence pour cette architecture est disponible sur [GitHub][github].
 
 ![](./_images/serverless-web-app.png)
  
