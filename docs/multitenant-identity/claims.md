@@ -2,16 +2,16 @@
 title: Utilisation d’identités basées sur les revendications dans les applications multi-locataires
 description: Comment utiliser des revendications pour la validation de l’émetteur et l’autorisation
 author: MikeWasson
-ms:date: 07/21/2017
+ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: authenticate
 pnp.series.next: signup
-ms.openlocfilehash: 46c43c9bfa4514f206b5e7eabd9223ad4c61628b
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 3ed6c7c9a48f3617f82112e76878c770099fde3e
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429366"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902406"
 ---
 # <a name="work-with-claims-based-identities"></a>Utilisation d’identités basées sur les revendications
 
@@ -51,7 +51,7 @@ Ce tableau répertorie les types de revendications tels qu’ils apparaissent da
 * upn > `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn`
 
 ## <a name="claims-transformations"></a>Transformations de revendication
-Pendant le flux d’authentification, vous pouvez modifier les revendications que vous obtenez du fournisseur d’identité. Dans ASP.NET Core, vous pouvez effectuer une transformation des revendications à l’intérieur de l’événement **AuthenticationValidated** à partir du middleware OpenID Connect. (Consultez la page [Événements d’authentification].)
+Pendant le flux d’authentification, vous pouvez modifier les revendications que vous obtenez du fournisseur d’identité. Dans ASP.NET Core, vous pouvez effectuer une transformation des revendications à l’intérieur de l’événement **AuthenticationValidated** à partir du middleware OpenID Connect. (Consultez la page [Authentication events].)
 
 Toutes les revendications que vous ajoutez pendant **AuthenticationValidated** sont stockées dans le cookie d’authentification de session. Elles ne font pas l’objet d’une transmission de type push à Azure AD.
 
@@ -120,7 +120,7 @@ Pour en savoir plus, consultez [Autorisation basée sur les ressources et les r�
 [paramètre d’étendue]: https://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/
 [Types de jeton et de revendication pris en charge]: /azure/active-directory/active-directory-token-and-claims/
 [Émetteur]: https://openid.net/specs/openid-connect-core-1_0.html#IDToken
-[Événements d’authentification]: authenticate.md#authentication-events
+[Authentication events]: authenticate.md#authentication-events
 [signup]: signup.md
 [Claims-Based Authorization]: /aspnet/core/security/authorization/claims
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance

@@ -2,22 +2,22 @@
 title: Sécurisation d’une API web de serveur principal dans une application multi-locataire
 description: Comment sécuriser une API web de serveur principal
 author: MikeWasson
-ms:date: 07/21/2017
+ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: authorize
 pnp.series.next: token-cache
-ms.openlocfilehash: 2d02ff7be04c6ebec888039453fe1ac7e957b301
-ms.sourcegitcommit: f7fa67e3bdbc57d368edb67bac0e1fdec63695d2
+ms.openlocfilehash: e738eb94b5978efa4e7a4bebcc72daa7968ac904
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/05/2018
-ms.locfileid: "37843672"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52901590"
 ---
 # <a name="secure-a-backend-web-api"></a>Sécuriser une API web principale
 
 [![GitHub](../_images/github.png) Exemple de code][sample application]
 
-L’application [Tailspin Surveys] utilise une API web de serveur principal pour gérer les opérations CRUD sur les enquêtes. Par exemple, quand un utilisateur clique sur « My Surveys », l’application web envoie une requête HTTP à l’API web :
+L’application [Surveys de Tailspin] utilise une API web de serveur principal pour gérer les opérations CRUD sur les enquêtes. Par exemple, quand un utilisateur clique sur « My Surveys », l’application web envoie une requête HTTP à l’API web :
 
 ```
 GET /users/{userId}/surveys
@@ -185,7 +185,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, Applicat
 ### <a name="issuer-validation"></a>Validation de l’émetteur
 Validez l’émetteur du jeton dans l’événement **JwtBearerEvents.TokenValidated**. L’émetteur est envoyé dans la revendication « iss ».
 
-Dans l’application Surveys, l’API web ne gère pas [Inscription du locataire]. Par conséquent, elle vérifie uniquement si l’émetteur se trouve déjà dans la base de données de l’application. Si ce n’est pas le cas, elle lève une exception, ce qui provoque l’échec de l’authentification.
+Dans l’application Surveys, l’API web ne gère pas l’[inscription du locataire]. Par conséquent, elle vérifie uniquement si l’émetteur se trouve déjà dans la base de données de l’application. Si ce n’est pas le cas, elle lève une exception, ce qui provoque l’échec de l’authentification.
 
 ```csharp
 public override async Task TokenValidated(TokenValidatedContext context)
@@ -270,11 +270,11 @@ public void ConfigureServices(IServiceCollection services)
 [ADAL]: https://msdn.microsoft.com/library/azure/jj573266.aspx
 [JwtBearer]: https://www.nuget.org/packages/Microsoft.AspNet.Authentication.JwtBearer
 
-[Tailspin Surveys]: tailspin.md
+[Surveys de Tailspin]: tailspin.md
 [IdentityServer4]: https://github.com/IdentityServer/IdentityServer4
 [Mettre à jour les manifestes de l’application]: ./run-the-app.md#update-the-application-manifests
 [Mise en cache de jeton]: token-cache.md
-[Inscription du locataire]: signup.md
+[inscription du locataire]: signup.md
 [claims-transformation]: claims.md#claims-transformations
 [Authorization]: authorize.md
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance

@@ -2,16 +2,16 @@
 title: Utiliser une assertion du client pour obtenir des jetons d’accès d’Azure AD
 description: Utilisation d’une assertion du client pour obtenir des jetons d’accès d’Azure AD.
 author: MikeWasson
-ms:date: 07/21/2017
+ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: adfs
 pnp.series.next: key-vault
-ms.openlocfilehash: 9fe1ee2ec5a540edc41c3a310476507f8d862f0c
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 58eed82c982fe1c6cba0f04b237d92d117a26fd4
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24540279"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902261"
 ---
 # <a name="use-client-assertion-to-get-access-tokens-from-azure-ad"></a>Utiliser une assertion du client pour obtenir des jetons d’accès d’Azure AD
 
@@ -41,7 +41,7 @@ La clé secrète n’est qu’une simple chaîne. Veillez donc à ne pas communi
 
 Toutefois, toute personne ayant accès à l’abonnement Azure peut afficher les paramètres d’application. De plus, il est toujours tentant de vérifier les clés secrètes dans le contrôle de code source (par exemple, dans les scripts de déploiement), de les partager par courrier électronique, etc.
 
-Pour renforcer la sécurité, vous pouvez utiliser l’[assertion du client] au lieu d’une clé secrète client. Avec l’assertion du client, le client utilise un certificat X.509 pour prouver que la demande de jeton provient de lui. Le certificat client est installé sur le serveur web. En général, il est plus facile de restreindre l’accès au certificat que de garantir que personne ne révèle par inadvertance une clé secrète client. Pour en savoir plus sur la configuration de certificats dans une application web, consultez [Using Certificates in Azure Websites Applications][using-certs-in-websites].
+Pour renforcer la sécurité, vous pouvez utiliser l’ [assertion du client] au lieu d’une clé secrète client. Avec l’assertion du client, le client utilise un certificat X.509 pour prouver que la demande de jeton provient de lui. Le certificat client est installé sur le serveur web. En général, il est plus facile de restreindre l’accès au certificat que de garantir que personne ne révèle par inadvertance une clé secrète client. Pour en savoir plus sur la configuration de certificats dans une application web, consultez [Using Certificates in Azure Websites Applications][using-certs-in-websites].
 
 Voici une requête de jeton utilisant l’assertion du client :
 

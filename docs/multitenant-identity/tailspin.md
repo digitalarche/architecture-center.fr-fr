@@ -2,16 +2,16 @@
 title: À propos de l’application Tailspin Surveys
 description: Présentation de l’application Tailspin Surveys
 author: MikeWasson
-ms:date: 07/21/2017
+ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: index
 pnp.series.next: authenticate
-ms.openlocfilehash: 028f7940d2e3cd7e8e629554f8af290ec5fdd184
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: a1c357bd1b5306d1255c66aaea96d86be55e7b77
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24540055"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902066"
 ---
 # <a name="the-tailspin-scenario"></a>Le scénario Tailspin
 
@@ -24,7 +24,7 @@ Tailspin est une société fictive qui développe une application SaaS nommée S
 * Les utilisateurs peuvent créer, modifier et publier des enquêtes.
 
 > [!NOTE]
-> Pour vous familiariser avec l’application, consultez [Run the Surveys application] (Exécution de l’application Surveys).
+> Pour vous familiariser avec l’application, consultez [Exécution de l’application Surveys].
 > 
 > 
 
@@ -55,7 +55,7 @@ Lorsqu’Alice se connecte, elle voit l’enquête répertoriée sous « Survey
 Notez qu’Alice se connecte à son propre locataire et non en tant qu’invité du locataire Contoso. Alice a des autorisations de contributeur uniquement pour cette enquête &mdash; elle ne peut pas consulter les autres enquêtes du locataire Contoso.
 
 ## <a name="architecture"></a>Architecture
-L’application Surveys se compose d’un serveur web frontal et d’un serveur principal d’API web. Les deux sont implémentés à l’aide [d’ASP.NET Core].
+L’application Surveys se compose d’un serveur web frontal et d’un serveur principal d’API web. Les deux sont implémentés à l’aide d’[ASP.NET Core].
 
 L’application web utilise Azure Active Directory (Azure AD) pour authentifier les utilisateurs. L’application web appelle également Azure AD pour obtenir des jetons d’accès OAuth 2 pour l’API web. Les jetons d’accès sont mis en cache dans le Cache Redis Azure. Le cache permet à plusieurs instances de partager le même cache de jeton (par exemple, dans une batterie de serveurs).
 
@@ -67,6 +67,6 @@ L’application web utilise Azure Active Directory (Azure AD) pour authentifier 
 
 [authentication]: authenticate.md
 
-[Run the Surveys application]: ./run-the-app.md
-[d’ASP.NET Core]: /aspnet/core
+[Exécution de l’application Surveys]: ./run-the-app.md
+[ASP.NET Core]: /aspnet/core
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance

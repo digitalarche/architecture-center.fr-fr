@@ -2,13 +2,13 @@
 title: Choisir une technologie de transfert de données
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 53dcf8a69ad8ae100dbdbb230a9280efd419342a
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.date: 02/12/2018
+ms.openlocfilehash: d5fbdc3a49ab16be2626b772ffd1af782963a2f0
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35252751"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902678"
 ---
 # <a name="transferring-data-to-and-from-azure"></a>Transférer des données vers et à partir d’Azure
 
@@ -84,9 +84,9 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 | | Service Azure Import/Export | Azure Data Box |
 | --- | --- | --- |
 | Facteur de forme | Disques durs ou SSD SATA internes | Appliance matérielle unique, sécurisée et inviolable |
-| Microsoft gère la logistique d’expédition | Non  | OUI |
-| S’intègre avec les produits partenaires | Non  | OUI |
-| Appliance personnalisée | Non  | OUI |
+| Microsoft gère la logistique d’expédition | Non  | Oui |
+| S’intègre avec les produits partenaires | Non  | Oui |
+| Appliance personnalisée | Non  | Oui |
 
 ### <a name="command-line-tools"></a>Outils en ligne de commande
 
@@ -94,13 +94,13 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 
 | | Distcp | Sqoop | Interface CLI Hadoop |
 | --- | --- | --- | --- |
-| Optimisé pour le Big Data | OUI | OUI |  OUI |
-| Copie vers une base de données relationnelle |  Non  | OUI | Non  |
-| Copie à partir d’une base de données relationnelle |  Non  | OUI | Non  |
-| Copie vers le Stockage Blob |  OUI | OUI | OUI |
-| Copie à partir du Stockage Blob | OUI |  OUI | Non  |
-| Copie vers Data Lake Store | OUI | OUI | OUI |
-| Copie à partir de Data Lake Store | OUI | OUI | Non  |
+| Optimisé pour le Big Data | Oui | OUI |  Oui |
+| Copie vers une base de données relationnelle |  Non  | Oui | Non  |
+| Copie à partir d’une base de données relationnelle |  Non  | Oui | Non  |
+| Copie vers le Stockage Blob |  Oui | OUI | Oui |
+| Copie à partir du Stockage Blob | Oui |  Oui | Non  |
+| Copie vers Data Lake Store | Oui | OUI | Oui |
+| Copie à partir de Data Lake Store | Oui | Oui | Non  |
 
 **Autres**
 
@@ -108,12 +108,12 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Plateformes compatibles | Linux, OS X, Windows | Linux, Windows | Windows | Linux, OS X, Windows | SQL Server, Azure SQL Data Warehouse | 
 | Optimisé pour le Big Data | Non  | Non  | Non  | Oui <sup>1</sup> | Oui<sup>2</sup> |
-| Copie vers une base de données relationnelle | Non  | Non  | Non  | Non  | OUI | 
-| Copie à partir d’une base de données relationnelle | Non  | Non  | Non  | Non  | OUI | 
-| Copie vers le Stockage Blob | OUI | OUI | OUI | Non  | OUI | 
-| Copie à partir du Stockage Blob | OUI | OUI | OUI | OUI | OUI |
-| Copie vers Data Lake Store | Non  | Non  | OUI | OUI |  OUI | 
-| Copie à partir de Data Lake Store | Non  | Non  | OUI | OUI | OUI | 
+| Copie vers une base de données relationnelle | Non  | Non  | Non  | Non  | Oui | 
+| Copie à partir d’une base de données relationnelle | Non  | Non  | Non  | Non  | Oui | 
+| Copie vers le Stockage Blob | Oui | OUI | Oui | Non  | Oui | 
+| Copie à partir du Stockage Blob | Oui | OUI | OUI | OUI | Oui |
+| Copie vers Data Lake Store | Non  | Non  | OUI | OUI |  Oui | 
+| Copie à partir de Data Lake Store | Non  | Non  | OUI | OUI | Oui | 
 
 
 [1] AdlCopy est optimisé pour le transfert de données volumineuses lorsqu’il est utilisé avec un compte Data Lake Analytics.
@@ -124,17 +124,17 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 
 | | Explorateur de stockage Azure | Portail Azure* | Azure Data Factory |
 | --- | --- | --- | --- |
-| Optimisé pour le Big Data | Non  | Non  | OUI | 
-| Copie vers une base de données relationnelle | Non  | Non  | OUI |
-| Copie vers une base de données relationnelle | Non  | Non  | OUI |
-| Copie vers le Stockage Blob | OUI | Non  | OUI |
-| Copie à partir du Stockage Blob | OUI | Non  | OUI |
-| Copie vers Data Lake Store | Non  | Non  | OUI |
-| Copie à partir de Data Lake Store | Non  | Non  | OUI |
-| Chargement vers le Stockage Blob | OUI | OUI | OUI |
-| Chargement vers Data Lake Store | OUI | OUI | OUI |
-| Orchestration des transferts de données | Non  | Non  | OUI |
-| Transformations de données personnalisées | Non  | Non  | OUI |
+| Optimisé pour le Big Data | Non  | Non  | Oui | 
+| Copie vers une base de données relationnelle | Non  | Non  | Oui |
+| Copie vers une base de données relationnelle | Non  | Non  | Oui |
+| Copie vers le Stockage Blob | Oui | Non  | Oui |
+| Copie à partir du Stockage Blob | Oui | Non  | Oui |
+| Copie vers Data Lake Store | Non  | Non  | Oui |
+| Copie à partir de Data Lake Store | Non  | Non  | Oui |
+| Chargement vers le Stockage Blob | Oui | OUI | Oui |
+| Chargement vers Data Lake Store | Oui | OUI | Oui |
+| Orchestration des transferts de données | Non  | Non  | Oui |
+| Transformations de données personnalisées | Non  | Non  | Oui |
 | Modèle de tarification | Gratuit | Gratuit | Paiement à l’utilisation |
 
 \* Le Portail Azure signifie dans ce cas utiliser les outils web d’exploration pour le Stockage Blob et Data Lake Store.
