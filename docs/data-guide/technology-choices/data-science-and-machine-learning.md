@@ -2,13 +2,13 @@
 title: Sélectionner une technologie Machine Learning
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 50167bafa49f8e6016f6ec12680db016830e2b81
-ms.sourcegitcommit: 9293350ab66fb5ed042ff363f7a76603bf68f568
+ms.date: 02/12/2018
+ms.openlocfilehash: 507d343ca7bc0a3f161602c50e6b96e921276374
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51577155"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902357"
 ---
 # <a name="choosing-a-machine-learning-technology-in-azure"></a>Sélectionner une technologie Machine Learning dans Azure
 

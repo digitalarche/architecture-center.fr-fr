@@ -2,13 +2,13 @@
 title: Extraire, transformer et charger (ETL)
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: b10b0cb3cbc98ff9fadda6915b01b6f6564c4d00
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.date: 02/12/2018
+ms.openlocfilehash: 6f56da72bd7a93ecd40b0be2a19e93d9062038fb
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295546"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52901539"
 ---
 # <a name="extract-transform-and-load-etl"></a>Extraire, transformer et charger (ETL)
 
@@ -20,7 +20,7 @@ Au fil des années, différents outils, services et processus ont été dévelop
 
 ETL est un pipeline de données utilisé pour collecter des données provenant de différentes sources, transformer les données en fonction des règles métier et charger les données dans un magasin de données de destination. Le travail de transformation dans ETL a lieu dans un moteur spécialisé et implique souvent l’utilisation de tables intermédiaires pour conserver temporairement les données lors de leur transformation et leur chargement final vers leur destination.
 
-La transformation des données qui a lieu implique généralement plusieurs opérations, comme le filtrage, le tri, l’agrégation, la jonction des données, le nettoyage des données, la déduplication et la validation des données.
+La transformation des données qui a lieu implique généralement plusieurs opérations, comme le filtrage, le tri, l’agrégation, la jointure des données, le nettoyage des données, la déduplication et la validation des données.
 
 ![Processus ETL (Extraire-transformer-charger)](../images/etl.png)
 

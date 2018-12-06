@@ -2,16 +2,16 @@
 title: Se fédérer avec les services AD FS d’un client
 description: Comment effectuer la fédération avec les services AD FS d’un client dans une application mutualisée
 author: MikeWasson
-ms:date: 07/21/2017
+ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: token-cache
 pnp.series.next: client-assertion
-ms.openlocfilehash: 4b54f031d13449e4d87075af5606967da8b5d3df
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: fec10ca0e067b3b51bf9dba70d66ceb12423787d
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428922"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902695"
 ---
 # <a name="federate-with-a-customers-ad-fs"></a>Se fédérer avec les services AD FS d’un client
 
@@ -144,7 +144,7 @@ Le client doit effectuer les opérations suivantes :
 2. Dans l’arborescence de la console, sous **AD FS**, cliquez avec le bouton droit sur **Approbations de partie de confiance**. Sélectionnez **Ajouter une approbation de partie de confiance**.
 3. Sélectionnez **Prise en charge des revendications**, puis cliquez sur **Démarrer**.
 4. Dans la page **Sélectionner la source de données** page, sélectionnez l’option « Importer des données sur le fournisseur de revendications publiées en ligne ou sur un réseau local ». Entrez l’URI du point de terminaison des métadonnées de fédération du fournisseur SaaS.
-   ![Assistant Ajout d’approbation de partie de confiance](./images/add-rp-trust.png)
+   ![Assistant Ajouter une approbation de partie de confiance](./images/add-rp-trust.png)
 5. Dans la page **Indiquer le nom complet** , entrez le nom de votre choix.
 6. Dans la page **Choisir la stratégie de contrôle d’accès** , choisissez une stratégie. Vous pouvez autoriser tout le monde dans l’organisation ou choisir un groupe de sécurité.
    ![Assistant Ajout d’approbation de partie de confiance](./images/add-rp-trust2.png)

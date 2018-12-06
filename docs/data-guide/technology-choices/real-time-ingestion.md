@@ -2,13 +2,13 @@
 title: Choisir une technologie d’ingestion de messages en temps réel
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 5eaac023e28fc502e5a4e6ebc17e32832f7557c0
-ms.sourcegitcommit: bb348bd3a8a4e27ef61e8eee74b54b07b65dbf98
+ms.date: 02/12/2018
+ms.openlocfilehash: 64d6fca0a8ffac45f605e90a11cd2b3e53db287f
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2018
-ms.locfileid: "34422981"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52901615"
 ---
 # <a name="choosing-a-real-time-message-ingestion-technology-in-azure"></a>Choisir une technologie d’ingestion de messages en temps réel dans Azure
 
@@ -63,8 +63,8 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 | | IoT Hub | Event Hubs | Kafka sur HDInsight |
 | --- | --- | --- | --- |
-| Communications cloud-à-appareil | OUI | Non  | Non  |
-| Chargement de fichiers initié par l’appareil | OUI | Non  | Non  |
+| Communications cloud-à-appareil | Oui | Non  | Non  |
+| Chargement de fichiers initié par l’appareil | Oui | Non  | Non  |
 | Informations d’état de l’appareil | [Représentations d’appareil physique](/azure/iot-hub/iot-hub-devguide-device-twins) | Non  | Non  |
 | Prise en charge du protocole | MQTT, AMQP, HTTPS <sup>1</sup> | AMQP, HTTPS | [Kafka Protocol](https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol) |
 | Sécurité | Identité par appareil ; contrôle d’accès révocable. | Stratégies d’accès partagé ; révocation limitée par le biais des stratégies de l’éditeur. | Authentification via SASL ; autorisation enfichable ; intégration avec des services d’authentification externes prise en charge. |

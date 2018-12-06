@@ -1,65 +1,65 @@
 ---
-title: Machine Learning à grande échelle
+title: Machine Learning à l’échelle
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: f2d35f7344a1e760fc6d3ce2292f33b8d3dd7df7
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.date: 02/12/2018
+ms.openlocfilehash: 3c2c494337e4c2f703a70d4d63b2965d3b49dec8
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295485"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52901998"
 ---
-# <a name="machine-learning-at-scale"></a>Machine Learning à grande échelle
+# <a name="machine-learning-at-scale"></a>Machine Learning à l’échelle
 
-Le Machine Learning (ML) est une technique utilisée pour entraîner des modèles prédictifs en se basant sur des algorithmes mathématiques. Le Machine Learning analyse les relations entre les champs de données pour prédire des valeurs inconnues.
+Machine Learning (ML) est une technique utilisée pour l’apprentissage des modèles prédictifs basé sur des algorithmes mathématiques. Machine Learning analyse les relations entre les champs de données pour prédire des valeurs inconnues.
 
 La création et le déploiement d’un modèle Machine Learning constituent un processus itératif :
 
-* Les scientifiques des données explorent les données sources pour déterminer les relations entre les *caractéristiques* et les *étiquettes* prédites.
-* Les scientifiques des données entraînent et valident des modèles à l’aide d’algorithmes appropriés afin de rechercher le modèle optimal pour la prédiction.
+* Les scientifiques de données explorent les données sources pour déterminer les relations entre les *fonctionnalités* et les *étiquettes* prédites.
+* Les scientifiques de données forment et valident des modèles à l’aide d’algorithmes appropriés afin de rechercher le modèle optimal pour la prédiction.
 * Le modèle optimal est déployé en production, en tant que service web ou autre fonction encapsulée.
-* Lorsque de nouvelles données sont collectées, le modèle est régulièrement réentraîné pour améliorer son efficacité.
+* Lorsque de nouvelles données sont collectées, le modèle est régulièrement reformé pour améliorer son efficacité.
 
-Le Machine Learning à grande échelle traite deux problèmes de scalabilité différents. Le premier est l’entraînement d’un modèle sur des jeux de données volumineux qui nécessitent les fonctionnalités de scale-out d’un cluster à entraîner. Le deuxième est l’opérationnalisation du modèle entraîné d’une façon qui peut évoluer pour répondre aux demandes des applications qui le consomme. En général, cela est accompli en déployant les fonctionnalités prédictives en tant que service web qui peut ensuite être monté en puissance.
+Machine Learning à l’échelle traite deux problèmes d’évolutivité différents. Le premier est l’apprentissage d’un modèle sur des jeux de données volumineux qui nécessitent les fonctionnalités de montée en puissance (scale-out) d’un cluster à former. Le deuxième est l’opérationnisme du modèle formé d’une façon qui peut évoluer pour répondre aux demandes des applications qui le consomme. En général, cela est accompli en déployant les fonctionnalités prédictives en tant que service web qui peut ensuite être monté en puissance.
 
-Le Machine Learning à grande échelle présente l’avantage qu’il peut produire des fonctionnalités prédictives, puissantes, car les modèles plus efficaces résultent généralement de davantage de données. Une fois qu’un modèle est entraîné, il peut être déployé en tant que service web de scale-out sans état très performant. 
+Machine Learning à l’échelle présente l’avantage qu’il peut produire des fonctionnalités prédictives, puissantes, car les modèles plus efficaces résultent généralement de davantage de données. Une fois qu’un modèle est formé, il peut être déployé en tant que service web sans état, très performant, capable de monter en puissance. 
 
-## <a name="model-preparation-and-training"></a>Préparation et entraînement des modèles
+## <a name="model-preparation-and-training"></a>Préparation et formation du modèle
 
-Pendant la phase de préparation et d’entraînement des modèles, les scientifiques des données explorent les données de manière interactive à l’aide de langages tels que Python et R pour :
+Pendant la phase de préparation et de formation du modèle, les scientifiques de données explorent les données de manière interactive à l’aide de langages tels que Python et R pour :
 
 * Extraire des exemples à partir d’entrepôts de données volumineux.
 * Rechercher et traiter les valeurs hors norme, les doublons et les valeurs manquantes pour nettoyer les données.
 * Déterminer les corrélations et les relations dans les données via l’analyse statistique et la visualisation.
 * Générer de nouvelles fonctionnalités calculées qui améliorent la prévisibilité des relations statistiques.
-* Entraîner des modèles ML à l’aide d’algorithmes prédictifs.
-* Valider les modèles entraînés à l’aide de données retenues pendant l’entraînement.
+* Former des modèles ML à l’aide d’algorithmes prédictifs.
+* Valider les modèles formés à l’aide de données retenues pendant la formation.
 
-Pour prendre en charge cette phase d’analyse interactive et de modélisation, la plateforme de données doit permettre aux scientifiques des données d’explorer les données à l’aide de divers outils. De plus, l’entraînement d’un modèle Machine Learning complexe peut nécessiter le traitement intensif de grands volumes de données, donc il est essentiel de disposer de ressources suffisantes pour le scale-out de l’entrainement du modèle.
+Pour prendre en charge cette phase d’analyse interactive et de modélisation, la plateforme de données doit permettre aux scientifiques de données d’explorer les données à l’aide de divers outils. En outre, l’apprentissage d’un modèle Machine Learning complexe peut nécessiter le traitement intensif de grands volumes de données, donc il est essentiel de disposer de ressources suffisantes pour la montée en puissance de l’apprentissage du modèle.
 
 ## <a name="model-deployment-and-consumption"></a>Déploiement et consommation du modèle
 
-Lorsqu’un modèle est prêt à être déployé, il peut être encapsulé en tant que service web et déployé sur le cloud, dans un appareil de périphérie ou au sein d’un environnement d’exécution ML d’entreprise. Ce processus de déploiement est appelé opérationnalisation.
+Lorsqu’un modèle est prêt à être déployé, il peut être encapsulé en tant que service web et déployé sur le cloud, dans un appareil de périphérie ou au sein d’un environnement d’exécution ML d’entreprise. Ce processus de déploiement est appelé opérationnalisme.
 
 ## <a name="challenges"></a>Défis
 
-Le Machine Learning à l’échelle présente quelques défis :
+Machine Learning à l’échelle présente quelques défis :
 
-- Vous avez généralement besoin d’une grande quantité de données pour entraîner un modèle, en particulier pour les modèles d’apprentissage profond.
-- Vous devez préparer ces jeux de données volumineux avant même de pouvoir commencer à entraîner votre modèle.
-- La phase d’entraînement du modèle doit accéder aux magasins de données volumineux. Il est courant d’effectuer l’entraînement du modèle à l’aide du même cluster de données volumineux, comme Spark, que celui utilisé pour la préparation des données. 
-- Pour les scénarios comme l’apprentissage profond, vous aurez non seulement besoin d’un cluster qui peut fournir un scale-out sur les GPU, mais aussi d’un cluster composé de nœuds GPU.
+- Vous avez généralement besoin d’une grande quantité de données pour former un modèle, en particulier pour les modèles d’apprentissage profond.
+- Vous devez préparer ces jeux de données volumineux avant même de pouvoir commencer à former votre modèle.
+- La phase de formation du modèle doit accéder aux magasins de données volumineux. Il est courant d’effectuer l’apprentissage du modèle à l’aide du même cluster de données volumineux, comme Spark, que celui utilisé pour la préparation des données. 
+- Pour les scénarios comme l’apprentissage profond, vous aurez non seulement besoin d’un cluster qui peut fournir la montée en puissance sur des unités centrales, mais votre cluster devra aussi se composer de nœuds GPU.
 
-## <a name="machine-learning-at-scale-in-azure"></a>Machine Learning à grande échelle dans Azure
+## <a name="machine-learning-at-scale-in-azure"></a>Machine Learning à l’échelle dans Azure
 
-Avant de choisir les services ML à utiliser pour l’entraînement et l’opérationnalisation, vous devez vous demander si vous avez besoin d’entraîner un modèle ou si un modèle prédéfini peut répondre à vos besoins. Dans de nombreux cas, l’utilisation d’un modèle prédéfini consiste simplement à appeler un service web ou à utiliser une bibliothèque ML pour charger un modèle existant. Certaines options incluent : 
+Avant de choisir les services ML à utiliser pour l’apprentissage et l’opérationnalisme, vous devez vous demander si vous avez besoin de former un modèle ou si un modèle prédéfini peut répondre à vos besoins. Dans de nombreux cas, l’utilisation d’un modèle prédéfini consiste simplement appeler un service web ou à utiliser une bibliothèque ML pour charger un modèle existant. Certaines options incluent : 
 
 - Utiliser les services web fournis par Microsoft Cognitive Services.
-- Utiliser les modèles de réseau neuronal préentraînés fournis par Cognitive Toolkit.
+- Utiliser les modèles de réseau neuronal préformés fournis par Cognitive Toolkit.
 - Incorporer les modèles sérialisés fournis par Core ML pour les applications iOS. 
 
-Si un modèle prédéfini ne correspond pas à vos données ou à votre scénario, les options Azure incluent Azure Machine Learning, HDInsight avec Spark MLlib et MMLSpark, Azure Databricks, Cognitive Toolkit et SQL Machine Learning Services. Si vous décidez d’utiliser un modèle personnalisé, vous devez créer un pipeline qui inclut l’entraînement et l’opérationnalisation du modèle. 
+Si un modèle prédéfini ne correspond pas à vos données ou à votre scénario, les options Azure incluent Azure Machine Learning, HDInsight avec Spark MLlib et MMLSpark, Azure Databricks, Cognitive Toolkit et SQL Machine Learning Services. Si vous décidez d’utiliser un modèle personnalisé, vous devez créer un pipeline qui inclut l’apprentissage et l’opérationnalisme du modèle. 
 
 ![Options de modèle dans Azure](./images/machine-learning-model-training-and-deployment.png)
 

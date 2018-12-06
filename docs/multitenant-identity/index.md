@@ -2,15 +2,15 @@
 title: Gestion des identités pour les applications mutualisées
 description: Meilleures pratiques pour la gestion de l’authentification, de l’autorisation et de l’identité dans les applications multi-locataires.
 author: MikeWasson
-ms:date: 07/21/2017
+ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.next: tailspin
-ms.openlocfilehash: 9c2efe9aea9da53177478161b90406d0c2021550
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 24e09720d3257cbfae350995fa5238663da1d26e
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429432"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902049"
 ---
 # <a name="manage-identity-in-multitenant-applications"></a>Gérer l’identité dans les applications mutualisées
 
@@ -46,7 +46,7 @@ Exemple : Tailspin vend des abonnements à son application SaaS. Contoso et Fab
 Ce guide vous explique comment gérer des identités d’utilisateurs dans une application multi-locataire, en utilisant [Azure Active Directory][AzureAD] (Azure AD) pour gérer la connexion et l’authentification.
 
 ## <a name="what-is-multitenancy"></a>Qu’est-ce que l’architecture mutualisée ?
-Un *locataire* est un groupe d’utilisateurs. Dans une application SaaS, le locataire est un abonné ou un client de l’application. Une *architecture mutualisée* est une architecture où plusieurs locataires partagent la même instance physique de l’application. Bien que les locataires partagent des ressources physiques (par exemple, les machines virtuelles ou le stockage), chaque locataire obtient sa propre instance logique de l’application.
+Un *locataire* est un groupe d’utilisateurs. Dans une application SaaS, le locataire est un abonné ou un client de l’application. *architecture mutualisée* est une architecture où plusieurs locataires partagent la même instance physique de l’application. Bien que les locataires partagent des ressources physiques (par exemple, les machines virtuelles ou le stockage), chaque locataire obtient sa propre instance logique de l’application.
 
 Normalement, les données d’application sont partagées entre les utilisateurs d’un locataire, mais pas avec d’autres locataires.
 

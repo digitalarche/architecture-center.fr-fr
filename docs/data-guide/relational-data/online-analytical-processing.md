@@ -2,13 +2,13 @@
 title: Traitement analytique en ligne (OLAP)
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 92b71934f2081e95c3c9b0d4dc9edeb3885b12e8
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.date: 02/12/2018
+ms.openlocfilehash: beed0d642e85096efc0b6fe492181b8dcd771d2d
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30846805"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902596"
 ---
 # <a name="online-analytical-processing-olap"></a>Traitement analytique en ligne (OLAP)
 
@@ -127,13 +127,13 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 | | Azure Analysis Services | SQL Server Analysis Services | SQL Server avec index Columnstore | SQL Database Azure avec des index Columnstore |
 | --- | --- | --- | --- | --- |
-| Est un service géré | OUI | Non  | Non  | OUI |
-| Prend en charge des cubes multidimensionnels | Non  | OUI | Non  | Non  |
-| Prend en charge les modèles sémantiques tabulaires | OUI | OUI | Non  | Non  |
-| Intègre facilement plusieurs sources de données | OUI | OUI | Nonn <sup>1</sup> | Nonn <sup>1</sup> |
-| Prend en charge l’analytique en temps réel | Non  | Non  | OUI | OUI |
-| Exige un processus pour copier des données à partir de sources | OUI | OUI | Non  | Non  |
-| Intégration Azure AD | OUI | Non  | Non<sup>2</sup> | OUI |
+| Est un service géré | Oui | Non  | Non  | Oui |
+| Prend en charge des cubes multidimensionnels | Non  | Oui | Non  | Non  |
+| Prend en charge les modèles sémantiques tabulaires | Oui | Oui | Non  | Non  |
+| Intègre facilement plusieurs sources de données | Oui | Oui | Nonn <sup>1</sup> | Nonn <sup>1</sup> |
+| Prend en charge l’analytique en temps réel | Non  | Non  | OUI | Oui |
+| Exige un processus pour copier des données à partir de sources | Oui | Oui | Non  | Non  |
+| Intégration Azure AD | Oui | Non  | Non<sup>2</sup> | Oui |
 
 [1] bien que SQL Server et SQL Database Azure ne peuvent pas être utilisés pour interroger et intégrer plusieurs sources de données externes, vous pouvez toujours créer un pipeline qui effectue cette opération à l’aide de [SSIS](/sql/integration-services/sql-server-integration-services) ou [Azure Data Factory](/azure/data-factory/). SQL Server hébergé dans une machine virtuelle Azure, propose des options supplémentaires, telles que les serveurs liés et [PolyBase](/sql/relational-databases/polybase/polybase-guide). Pour plus d’informations, consultez [Orchestration, flux de contrôle et déplacement des données de pipeline](../technology-choices/pipeline-orchestration-data-movement.md).
 
@@ -143,7 +143,7 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 |                                                  | Azure Analysis Services | SQL Server Analysis Services | SQL Server avec index Columnstore | SQL Database Azure avec des index Columnstore |
 |--------------------------------------------------|-------------------------|------------------------------|-------------------------------------|---------------------------------------------|
-| Serveurs régionaux redondants pour assurer une haute disponibilité |           OUI           |              Non               |                 OUI                 |                     OUI                     |
-|             Prend en charge l’augmentation de la taille des instances de la requête             |           OUI           |              Non               |                 OUI                 |                     Non                       |
-|          Évolutivité dynamique (montée en puissance)          |           OUI           |              Non               |                 OUI                 |                     Non                       |
+| Serveurs régionaux redondants pour assurer une haute disponibilité |           Oui           |              Non               |                 OUI                 |                     Oui                     |
+|             Prend en charge l’augmentation de la taille des instances de la requête             |           Oui           |              Non               |                 Oui                 |                     Non                       |
+|          Évolutivité dynamique (montée en puissance)          |           Oui           |              Non               |                 Oui                 |                     Non                       |
 

@@ -2,13 +2,13 @@
 title: Données non relationnelles et NoSQL
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 2c284099bd7e8bbb85f1252a24d699d9fca09eae
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.date: 02/12/2018
+ms.openlocfilehash: f5655f7245b7150941969b1bc7917d540ab84343
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30298667"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902748"
 ---
 # <a name="non-relational-data-and-nosql"></a>Données non relationnelles et NoSQL
 
@@ -72,7 +72,7 @@ Un magasin de clés/valeurs unique peut être extrêmement évolutif, étant don
 Services Azure appropriés :  
 - [API Table d’Azure Cosmos DB](/azure/cosmos-db/table-introduction)  
 - [Cache Redis Azure](https://azure.microsoft.com/services/cache/)  
-- [Stockage Table Azure](https://azure.microsoft.com/services/storage/tables/)
+- [Stockage de tables Azure](https://azure.microsoft.com/services/storage/tables/)
 
 ## <a name="graph-data-stores"></a>Magasins de données de graphes
 Un magasin de données de graphes gère deux types d’informations, les nœuds et les bords. Les nœuds représentent des entités et les bords définissent les relations entre ces entités. Les nœuds et les bords peuvent avoir des propriétés fournissant des informations sur ce nœud ou ce bord, semblables aux colonnes dans une table. Les bords peuvent également avoir un sens indiquant la nature de la relation.  
@@ -147,8 +147,8 @@ La liste suivante compare la configuration requise pour chaque magasin de donné
 | Modèle d’accès | Accès aléatoire | Agrégats sur données hautes/larges | Accès aléatoire | Accès aléatoire |
 | Indexation | Index primaires et secondaires | Index primaires et secondaires | Index primaire uniquement | Index primaires et secondaires | 
 | Forme des données | Document | Tabulaire avec familles de colonnes contenant des colonnes | Clé et valeur | Graphe contenant des bords et des sommets | 
-| Partiellement alloué | OUI | OUI | OUI | Non  | 
-| Large (un grand nombre de colonnes et d’attributs) | OUI | OUI | Non  | Non  |  
+| Partiellement alloué | Oui | OUI | Oui | Non  | 
+| Large (un grand nombre de colonnes et d’attributs) | Oui | Oui | Non  | Non  |  
 | Taille de donnée | Petite (Ko) à moyenne (faible Mo) | Moyenne (Mo) à grande (faible Go) | Petite (Ko) | Petite (Ko) | 
 | Échelle maximale globale | Très grande (Po) | Très grande (Po) | Très grande (Po) | Grande (To) | 
 
@@ -163,7 +163,7 @@ La liste suivante compare la configuration requise pour chaque magasin de donné
 | Indexation | Index primaires et secondaires | Index primaire uniquement | N/A |
 | Forme des données | Tabulaire | Blob et métadonnées | Document |
 | Partiellement alloué | Non  | N/A | Non  | 
-| Large (un grand nombre de colonnes et d’attributs) |  Non  | OUI | OUI |  
+| Large (un grand nombre de colonnes et d’attributs) |  Non  | OUI | Oui |  
 | Taille de donnée | Petite (Ko) | Grande (Go) à très grande (To) | Petite (Ko) |
 | Échelle maximale globale | Grande (faible To)  | Très grande (Po) | Grande (faible To) | 
 

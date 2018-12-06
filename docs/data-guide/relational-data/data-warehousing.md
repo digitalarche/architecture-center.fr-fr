@@ -2,13 +2,13 @@
 title: Entreposage de données et mini-Data Warehouses
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 9b90d77ce1a81cd4a7532f5d4230ada8b4991d13
-ms.sourcegitcommit: 85334ab0ccb072dac80de78aa82bcfa0f0044d3f
+ms.date: 02/12/2018
+ms.openlocfilehash: 92f8ab8d828dd4b30c43a07e15959e5670852195
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/11/2018
-ms.locfileid: "35252803"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902780"
 ---
 # <a name="data-warehousing-and-data-marts"></a>Entreposage de données et mini-Data Warehouses
 
@@ -54,7 +54,7 @@ Il existe plusieurs façons d’implémenter un entrepôt de données dans Azure
 
 SMP :
 
-- [Azure SQL Database](/azure/sql-database/)
+- [Base de données SQL Azure](/azure/sql-database/)
 - [SQL Server dans une machine virtuelle](/sql/sql-server/sql-server-technical-documentation)
 
 MPP :
@@ -118,15 +118,15 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 
 ### <a name="general-capabilities"></a>Fonctionnalités générales
 
-| | Azure SQL Database | SQL Server (machine virtuelle) | SQL Data Warehouse | Apache Hive sur HDInsight | Hive LLAP sur HDInsight |
+| | Azure SQL Database | SQL Server (machine virtuelle) | SQL Data Warehouse | Apache Hive sur HDInsight | Hive LLAP sur HDInsight |
 | --- | --- | --- | --- | --- | --- | -- |
-| Est un service géré | OUI | Non  | OUI | Oui <sup>1</sup> | Oui<sup>1</sup> |
-| Nécessite l’orchestration des données (conserve une copie des données/données historiques) | Non  | Non  | OUI | OUI | OUI |
-| Intègre facilement plusieurs sources de données | Non  | Non  | OUI | OUI | OUI |
-| Prend en charge l’interruption du calcul | Non  | Non  | OUI | Non<sup>2</sup> | Non<sup>2</sup> |
-| Magasin de données relationnel | OUI | OUI |  OUI | Non  | Non  |
-| Rapports en temps réel | OUI | OUI | Non  | Non  | OUI |
-| Points de restauration de sauvegarde flexibles | OUI | OUI | Non<sup>3</sup> | Oui<sup>4</sup> | Oui<sup>4</sup> |
+| Est un service géré | Oui | Non  | Oui | Oui <sup>1</sup> | Oui<sup>1</sup> |
+| Nécessite l’orchestration des données (conserve une copie des données/données historiques) | Non  | Non  | OUI | OUI | Oui |
+| Intègre facilement plusieurs sources de données | Non  | Non  | OUI | OUI | Oui |
+| Prend en charge l’interruption du calcul | Non  | Non  | Oui | Non<sup>2</sup> | Non<sup>2</sup> |
+| Magasin de données relationnel | Oui | OUI |  Oui | Non  | Non  |
+| Rapports en temps réel | Oui | Oui | Non  | Non  | Oui |
+| Points de restauration de sauvegarde flexibles | Oui | Oui | Non<sup>3</sup> | Oui<sup>4</sup> | Oui<sup>4</sup> |
 | SMP/MPP | SMP | SMP | MPP | MPP | MPP |
 
 [1] Mise à l’échelle et configuration manuelles.
@@ -139,26 +139,26 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 
 ### <a name="scalability-capabilities"></a>Fonctionnalités d’évolutivité
 
-| | Azure SQL Database | SQL Server (machine virtuelle) |  SQL Data Warehouse | Apache Hive sur HDInsight | Hive LLAP sur HDInsight |
+| | Azure SQL Database | SQL Server (machine virtuelle) |  SQL Data Warehouse | Apache Hive sur HDInsight | Hive LLAP sur HDInsight |
 | --- | --- | --- | --- | --- | --- | -- |
-| Serveurs régionaux redondants pour assurer une haute disponibilité  | OUI | OUI | OUI | Non  | Non  |
-| Prend en charge les requêtes avec montée en charge (requêtes distribuées)  | Non  | Non  | OUI | OUI | OUI |
-| Évolutivité dynamique | OUI | Non  | Oui <sup>1</sup> | Non  | Non  |
-| Prend en charge la mise en cache en mémoire des données | OUI |  OUI | Non  | OUI | OUI |
+| Serveurs régionaux redondants pour assurer une haute disponibilité  | Oui | OUI | Oui | Non  | Non  |
+| Prend en charge les requêtes avec montée en charge (requêtes distribuées)  | Non  | Non  | OUI | OUI | Oui |
+| Évolutivité dynamique | Oui | Non  | Oui <sup>1</sup> | Non  | Non  |
+| Prend en charge la mise en cache en mémoire des données | Oui |  Oui | Non  | OUI | Oui |
 
 [1] SQL Data Warehouse permet de monter ou de descendre en puissance en ajustant le nombre d’unités DWU (Data Warehouse Unit). Voir [Gérer la puissance de calcul dans Azure SQL Data Warehouse](/azure/sql-data-warehouse/sql-data-warehouse-manage-compute-overview).
 
 ### <a name="security-capabilities"></a>Fonctionnalités de sécurité
 
-|                         |           Azure SQL Database            |  SQL Server dans une machine virtuelle  | SQL Data Warehouse |   Apache Hive sur HDInsight    |    Hive LLAP sur HDInsight     |
+|                         |           Azure SQL Database            |  SQL Server dans une machine virtuelle  | SQL Data Warehouse |   Apache Hive sur HDInsight    |    Hive LLAP sur HDInsight     |
 |-------------------------|-----------------------------------------|-----------------------------------|--------------------|-------------------------------|-------------------------------|
 |     Authentification      | SQL / Azure Active Directory (Azure AD) | SQL / Azure AD / Active Directory |   SQL / Azure AD   | local / Azure AD<sup>1</sup> | local / Azure AD <sup>1</sup> |
-|      Authorization      |                   OUI                   |                OUI                |        OUI         |              OUI              |       Oui <sup>1</sup>        |
-|        Audit         |                   OUI                   |                OUI                |        OUI         |              OUI              |       Oui <sup>1</sup>        |
+|      Authorization      |                   Oui                   |                OUI                |        OUI         |              Oui              |       Oui <sup>1</sup>        |
+|        Audit         |                   Oui                   |                OUI                |        OUI         |              Oui              |       Oui <sup>1</sup>        |
 | Chiffrement des données au repos |            Oui <sup>2</sup>             |         Oui<sup>2</sup>          |  Oui<sup>2</sup>  |       Oui <sup>2</sup>        |       Oui <sup>1</sup>        |
-|   Sécurité au niveau des lignes    |                   OUI                   |                OUI                |        OUI         |              Non                |       Oui <sup>1</sup>        |
-|   Prend en charge les pare-feu    |                   OUI                   |                OUI                |        OUI         |              OUI              |       Oui <sup>3</sup>        |
-|  Masquage des données dynamiques   |                   OUI                   |                OUI                |        OUI         |              Non                |       Oui <sup>1</sup>        |
+|   Sécurité au niveau des lignes    |                   Oui                   |                OUI                |        Oui         |              Non                |       Oui <sup>1</sup>        |
+|   Prend en charge les pare-feu    |                   Oui                   |                OUI                |        OUI         |              Oui              |       Oui <sup>3</sup>        |
+|  Masquage des données dynamiques   |                   Oui                   |                OUI                |        Oui         |              Non                |       Oui <sup>1</sup>        |
 
 [1] Suppose d’utiliser un [cluster HDInsight joint à un domaine](/azure/hdinsight/domain-joined/apache-domain-joined-introduction).
 

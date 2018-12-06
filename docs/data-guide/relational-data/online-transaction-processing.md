@@ -2,13 +2,13 @@
 title: Traitement transactionnel en ligne (OLTP)
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 8650b919fc1a59240343015493a1fe41c8729a72
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.date: 02/12/2018
+ms.openlocfilehash: be24bc173359539785385de4a188e7536f6d2ffe
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30848697"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902754"
 ---
 # <a name="online-transaction-processing-oltp"></a>Traitement transactionnel en ligne (OLTP)
 
@@ -34,10 +34,10 @@ Les données transactionnelles ont tendance à présenter les caractéristiques 
 | Schéma | Schéma lors de l’écriture, fortement appliqué|
 | Cohérence | Cohérence forte, garanties ACID |
 | Intégrité | Intégrité élevée |
-| Utilisent des transactions | OUI |
+| Utilisent des transactions | Oui |
 | Stratégie de verrouillage | Pessimiste ou optimiste|
-| Peut être mise à jour | OUI |
-| Modifiable | OUI |
+| Peut être mise à jour | Oui |
+| Modifiable | Oui |
 | Charge de travail | Haut volume d’écriture, volume de lecture modéré |
 | Indexation | Index primaires et secondaires |
 | Taille de donnée | Petite à moyenne taille |
@@ -67,7 +67,7 @@ Dans la pratique, la plupart des charges de travail ne sont pas purement OLTP. G
 
 Dans Azure, tous les magasins de données suivants répondront aux principales exigences du traitement OLTP et de la gestion des données transactionnelles :
 
-- [Azure SQL Database](/azure/sql-database/)
+- [Base de données SQL Azure](/azure/sql-database/)
 - [SQL Server sur une machine virtuelle Azure](/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-server-iaas-overview?toc=%2Fazure%2Fvirtual-machines%2Fwindows%2Ftoc.json)
 - [Azure Database pour MySQL](/azure/mysql/)
 - [Base de données Azure pour PostgreSQL](/azure/postgresql/)
@@ -96,9 +96,9 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 ### <a name="general-capabilities"></a>Fonctionnalités générales 
 
-|                              | Base de données SQL Azure | SQL Server sur une machine virtuelle Azure | Base de données Azure pour MySQL | Base de données Azure pour PostgreSQL |
+|                              | Azure SQL Database | SQL Server sur une machine virtuelle Azure | Azure Database pour MySQL | Azure Database pour PostgreSQL |
 |------------------------------|--------------------|----------------------------------------|--------------------------|-------------------------------|
-|      Est un service géré      |        OUI         |                   Non                    |           OUI            |              OUI              |
+|      Est un service géré      |        Oui         |                   Non                    |           OUI            |              Oui              |
 |       S’exécute sur la plateforme       |        N/A         |         Windows, Linux, Docker         |           N/A            |              N/A              |
 | Programmabilité <sup>1</sup> |   T-SQL, .NET, R   |         T-SQL, .NET, R, Python         |  T-SQL, .NET, R, Python  |              SQL              |
 
@@ -106,43 +106,43 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 ### <a name="scalability-capabilities"></a>Fonctionnalités d’évolutivité
 
-| | Base de données SQL Azure | SQL Server sur une machine virtuelle Azure| Base de données Azure pour MySQL | Base de données Azure pour PostgreSQL|
+| | Azure SQL Database | SQL Server sur une machine virtuelle Azure| Azure Database pour MySQL | Azure Database pour PostgreSQL|
 | --- | --- | --- | --- | --- | --- |
 | Taille maximale de l’instance de la base de données | [4 To](/azure/sql-database/sql-database-resource-limits) | 256 To | [1 To](/azure/mysql/concepts-limits) | [1 To](/azure/postgresql/concepts-limits) |
-| Prend en charge les pools de capacité  | OUI | OUI | Non  | Non  |
-| Prend en charge la mise à l’échelle des clusters  | Non  | OUI | Non  | Non  |
-| Évolutivité dynamique (montée en puissance)  | OUI | Non  | OUI | OUI |
+| Prend en charge les pools de capacité  | Oui | Oui | Non  | Non  |
+| Prend en charge la mise à l’échelle des clusters  | Non  | Oui | Non  | Non  |
+| Évolutivité dynamique (montée en puissance)  | Oui | Non  | OUI | Oui |
 
 ### <a name="analytic-workload-capabilities"></a>Fonctionnalités de la charge de travail analytique
 
-| | Base de données SQL Azure | SQL Server sur une machine virtuelle Azure| Base de données Azure pour MySQL | Base de données Azure pour PostgreSQL|
+| | Azure SQL Database | SQL Server sur une machine virtuelle Azure| Azure Database pour MySQL | Azure Database pour PostgreSQL|
 | --- | --- | --- | --- | --- | --- | 
-| Tables temporelles | OUI | OUI | Non  | Non  |
-| Tables en mémoire (optimisées en mémoire) | OUI | OUI | Non  | Non  |
-| Prise en charge de ColumnStore | OUI | OUI | Non  | Non  |
-| Traitement adaptatif des requêtes | OUI | OUI | Non  | Non  |
+| Tables temporelles | Oui | Oui | Non  | Non  |
+| Tables en mémoire (optimisées en mémoire) | Oui | Oui | Non  | Non  |
+| Prise en charge de ColumnStore | OUI | Oui | Non  | Non  |
+| Traitement adaptatif des requêtes | Oui | Oui | Non  | Non  |
 
 ### <a name="availability-capabilities"></a>Fonctionnalités de disponibilité
 
-| | Base de données SQL Azure | SQL Server sur une machine virtuelle Azure| Base de données Azure pour MySQL | Base de données Azure pour PostgreSQL|
+| | Azure SQL Database | SQL Server sur une machine virtuelle Azure| Azure Database pour MySQL | Azure Database pour PostgreSQL|
 | --- | --- | --- | --- | --- | --- | 
-| Bases de données secondaires accessibles en lecture | OUI | OUI | Non  | Non  | 
-| Réplication géographique | OUI | OUI | Non  | Non  | 
-| Basculement automatique vers la base de données secondaire | OUI | Non  | Non  | Non |
-| Limite de restauration dans le temps | OUI | OUI | OUI | OUI |
+| Bases de données secondaires accessibles en lecture | Oui | Oui | Non  | Non  | 
+| Réplication géographique | Oui | Oui | Non  | Non  | 
+| Basculement automatique vers la base de données secondaire | Oui | Non  | Non  | Non |
+| Limite de restauration dans le temps | Oui | OUI | OUI | Oui |
 
 ### <a name="security-capabilities"></a>Fonctionnalités de sécurité
 
-|                                                                                                             | Base de données SQL Azure | SQL Server sur une machine virtuelle Azure | Base de données Azure pour MySQL | Base de données Azure pour PostgreSQL |
+|                                                                                                             | Azure SQL Database | SQL Server sur une machine virtuelle Azure | Azure Database pour MySQL | Azure Database pour PostgreSQL |
 |-------------------------------------------------------------------------------------------------------------|--------------------|----------------------------------------|--------------------------|-------------------------------|
-|                                             Sécurité au niveau des lignes                                              |        OUI         |                  OUI                   |           OUI            |              OUI              |
-|                                                Masquage de données                                                 |        OUI         |                  OUI                   |            Non             |              Non                |
-|                                         Chiffrement transparent des données                                         |        OUI         |                  OUI                   |           OUI            |              OUI              |
-|                                  Restreindre l’accès à des adresses IP spécifiques                                   |        OUI         |                  OUI                   |           OUI            |              OUI              |
-|                                  Restreindre l’accès pour autoriser l’accès au seul réseau virtuel                                  |        OUI         |                  OUI                   |            Non             |              Non                |
-|                                    Authentification Azure Active Directory                                    |        OUI         |                  OUI                   |            Non             |              Non                |
-|                                       Authentification Active Directory                                       |         Non          |                  OUI                   |            Non             |              Non                |
-|                                         Authentification multifacteur                                         |        OUI         |                  OUI                   |            Non             |              Non                |
-| Prend en charge [Always Encrypted](/sql/relational-databases/security/encryption/always-encrypted-database-engine) |        OUI         |                  OUI                   |           OUI            |              Non                |
-|                                                 IP privée                                                  |         Non          |                  OUI                   |           OUI            |              Non                |
+|                                             Sécurité au niveau des lignes                                              |        Oui         |                  OUI                   |           OUI            |              Oui              |
+|                                                Masquage de données                                                 |        Oui         |                  Oui                   |            Non             |              Non                |
+|                                         Chiffrement transparent des données                                         |        Oui         |                  OUI                   |           OUI            |              Oui              |
+|                                  Restreindre l’accès à des adresses IP spécifiques                                   |        Oui         |                  OUI                   |           OUI            |              Oui              |
+|                                  Restreindre l’accès pour autoriser l’accès au seul réseau virtuel                                  |        Oui         |                  Oui                   |            Non             |              Non                |
+|                                    Authentification Azure Active Directory                                    |        Oui         |                  Oui                   |            Non             |              Non                |
+|                                       Authentification Active Directory                                       |         Non          |                  Oui                   |            Non             |              Non                |
+|                                         Authentification multifacteur                                         |        Oui         |                  Oui                   |            Non             |              Non                |
+| Prend en charge [Always Encrypted](/sql/relational-databases/security/encryption/always-encrypted-database-engine) |        Oui         |                  OUI                   |           Oui            |              Non                |
+|                                                 IP privée                                                  |         Non          |                  OUI                   |           Oui            |              Non                |
 

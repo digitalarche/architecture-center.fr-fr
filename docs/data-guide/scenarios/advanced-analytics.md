@@ -2,13 +2,13 @@
 title: Analytique avancée
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 31ba357fe37b1de35a6eea324d2d1d6766e172e5
-ms.sourcegitcommit: 51f49026ec46af0860de55f6c082490e46792794
+ms.date: 02/12/2018
+ms.openlocfilehash: cba2efe04e9588874d1dab7f96f39b6b35fbe8d8
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2018
-ms.locfileid: "30298687"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52901692"
 ---
 # <a name="advanced-analytics"></a>Analytique avancée
 
@@ -56,7 +56,7 @@ Services Azure appropriés :
 
 ## <a name="deep-learning"></a>Apprentissage approfondi
 
-Les modèles d’apprentissage automatique basés sur des techniques telles que la régression linéaire ou logistique existent depuis un certain temps. Depuis peu, l’utilisation de techniques *d’apprentissage approfondi* basées sur des réseaux neuronaux ne cesse d’augmenter. Cela s’explique en partie par la disponibilité de systèmes de traitement hautement évolutifs qui réduisent le temps nécessaire à l’apprentissage de modèles complexes. En outre, l’importance croissante du Big Data facilite l’apprentissage des modèles d’apprentissage approfondi dans différents domaines.
+Les modèles d’apprentissage automatique basés sur des techniques telles que la régression linéaire ou logistique existent depuis un certain temps. Depuis peu, l’utilisation de techniques d *’apprentissage approfondi* basées sur des réseaux neuronaux ne cesse d’augmenter. Cela s’explique en partie par la disponibilité de systèmes de traitement hautement évolutifs qui réduisent le temps nécessaire à l’apprentissage de modèles complexes. En outre, l’importance croissante du Big Data facilite l’apprentissage des modèles d’apprentissage approfondi dans différents domaines.
 
 Lorsque vous concevez une architecture cloud d’analytique avancée, vous devez envisager la possibilité d’inclure un traitement de modèles d’apprentissage approfondi à grande échelle. Ces modèles peuvent être fournis via des plateformes de traitement distribué comme Apache Spark et la dernière génération de machines virtuelles permettant d’accéder au matériel GPU.
 

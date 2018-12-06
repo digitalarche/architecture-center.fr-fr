@@ -2,13 +2,13 @@
 title: Sélectionner un magasin de données analytique
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 3cf7dc533cc6ae3e6d7e2326852b585da8613e18
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.date: 02/12/2018
+ms.openlocfilehash: 166361c73a3a9c812e07445f6b039e843e5e32f8
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428871"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902329"
 ---
 # <a name="choosing-an-analytical-data-store-in-azure"></a>Sélectionner un magasin de données analytique dans Azure
 
@@ -23,7 +23,7 @@ Il n’existe pas de choix optimal pour la gestion des données de toutes les t�
 Il existe plusieurs options pour le stockage de service des données dans Azure, en fonction de vos besoins :
 
 - [SQL Data Warehouse](/azure/sql-data-warehouse/sql-data-warehouse-overview-what-is)
-- [Azure SQL Database](/azure/sql-database/)
+- [Base de données SQL Azure](/azure/sql-database/)
 - [SQL Server dans les machines virtuelles Azure](/sql/sql-server/sql-server-technical-documentation)
 - [HBase/Phoenix sur HDInsight](/azure/hdinsight/hbase/apache-hbase-overview)
 - [Hive LLAP sur HDInsight](/azure/hdinsight/interactive-query/apache-interactive-query-get-started)

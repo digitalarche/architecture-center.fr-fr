@@ -2,13 +2,13 @@
 title: Sélectionner une technologie Cognitive Services
 description: ''
 author: zoinerTejada
-ms:date: 02/12/2018
-ms.openlocfilehash: 055769188fbd6742b94094ee18766293812849fa
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.date: 02/12/2018
+ms.openlocfilehash: 0551bf05cb47cb3972b0d5f2e5226e23cbdacc68
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847779"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902544"
 ---
 # <a name="choosing-a-microsoft-cognitive-services-technology"></a>Sélectionner une technologie Cognitive Services Microsoft
 
@@ -76,20 +76,20 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 |               API Recherche de vidéos Bing               |       Texte (requête de recherche sur le Web)       |                                                                            Rechercher des vidéos.                                                                             |
 |                API Recherche Web Bing                |       Texte (requête de recherche sur le Web)       |                                                        Obtenez des informations de recherche améliorées à partir de milliards de documents Web.                                                        |
 |                  API Reconnaissance vocale Bing                  |           Texte ou Speech            |                                                                  Convertissez de la voix en texte et inversement.                                                                   |
-|              API Reconnaissance de l’orateur              |               Microsoft Speech                |                                                       Utilisez Speech pour identifier et authentifier les orateurs individuels.                                                        |
-|               API de traduction de conversation Translator Speech               |               Microsoft Speech                |                                                                   Effectuez des traductions vocales en temps réel.                                                                   |
+|              API Reconnaissance de l’orateur              |               Speech                |                                                       Utilisez Speech pour identifier et authentifier les orateurs individuels.                                                        |
+|               API de traduction de conversation Translator Speech               |               Speech                |                                                                   Effectuez des traductions vocales en temps réel.                                                                   |
 |                API Vision par ordinateur                |    Images (ou trames de vidéo)    | Distillez des informations utilisables à partir d’images, créez automatiquement la description de photos, dérivez des balises, reconnaissez des célébrités, extrayez du texte et créez des miniatures exactes. |
 |                 Content Moderator                 |        Texte, images ou vidéo        |                                                               Modération automatisée des images, textes et vidéos.                                                                |
 |                    API Émotion                    | Images (photos avec sujets humains) |                                                              Identifiez la plage d’émotions des sujets humains.                                                               |
 |                     API Visage                      | Images (photos avec sujets humains) |                                                       Détectez, identifiez, analysez, organisez et balisez des visages sur des photos.                                                       |
-|                   Indexeur de vidéo                   |                Vidéo                |                        Enregistrez en vidéo des informations telles que des sentiments, transcrivez des messages, reconnaissez des visages et des émotions et extrayez des mots clés.                         |
+|                   Video Indexer                   |                Vidéo                |                        Enregistrez en vidéo des informations telles que des sentiments, transcrivez des messages, reconnaissez des visages et des émotions et extrayez des mots clés.                         |
 
 ### <a name="trained-with-custom-data-you-provide"></a>Formé avec les données personnalisées fournies
 
 | | Type d’entrée | Avantage clé |
 | --- | --- | --- |
-| Service de vision personnalisé | Images (ou trames de vidéo) | Personnalisez vos propres modèles de vision par ordinateur. |
-| Service vocal personnalisé | Microsoft Speech | Surmontez les obstacles de la reconnaissance vocale, tels que le style d’élocution, le fond sonore et le vocabulaire. | 
-| Service de décision personnalisé | Contenu Web (par exemple, les flux RSS) | Utiliser le Machine Learning pour sélectionner automatiquement le contenu approprié pour votre page d’accueil |
+| Service Vision personnalisée | Images (ou trames de vidéo) | Personnalisez vos propres modèles de vision par ordinateur. |
+| Custom Speech Service | Speech | Surmontez les obstacles de la reconnaissance vocale, tels que le style d’élocution, le fond sonore et le vocabulaire. | 
+| Service Décision personnalisée | Contenu Web (par exemple, les flux RSS) | Utiliser le Machine Learning pour sélectionner automatiquement le contenu approprié pour votre page d’accueil |
 | API Recherche personnalisée Bing | Texte (requête de recherche sur le Web) | Outil de recherche de la qualité commerciale. |
 
