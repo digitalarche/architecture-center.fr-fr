@@ -2,18 +2,18 @@
 title: Conception d’applications résilientes pour Azure
 description: Comment créer des applications résilientes dans Azure, pour une haute disponibilité et une récupération d’urgence.
 author: MikeWasson
-ms.date: 07/29/2018
+ms.date: 11/26/2018
 ms.custom: resiliency
-ms.openlocfilehash: 73600650dc96fe85ad59e286079a3523ef25d055
-ms.sourcegitcommit: 1b5411f07d74f0a0680b33c266227d24014ba4d1
+ms.openlocfilehash: a97a26928002b8248344a239159fe7defa99931c
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52305959"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53005052"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Conception d’applications résilientes pour Azure
 
-Dans un système distribué, des défaillances peuvent se produire. Le matériel peut être défaillant. Le réseau peut subir des échecs temporaires. Exceptionnellement, un service ou une région entiers peuvent rencontrer des interruptions, mais même ces dernières doivent être planifiées. 
+Dans un système distribué, des défaillances peuvent se produire. Le matériel peut être défaillant. Le réseau peut subir des échecs temporaires. Exceptionnellement, un service ou une région entiers peuvent rencontrer des interruptions, mais même ces dernières doivent être planifiées.
 
 La création d’une application fiable dans le cloud est différente de la création d’une application fiable dans un environnement d’entreprise. Si par le passé vous avez acheté du matériel haut de gamme pour gagner en puissance, dans un environnement de cloud vous devez augmenter vos performances de manière horizontale, et pas verticale. Les coûts pour les environnements de cloud restent faibles via l’utilisation d’un matériel standard. Au lieu de se concentrer sur la prévention des pannes et l’optimisation du « délai moyen entre les pannes », dans ce nouvel environnement l’attention est mise sur le « délai moyen de restauration. » L’objectif est de réduire les effets d’une défaillance.
 
@@ -31,21 +31,21 @@ Une façon d’associer la haute disponibilité et la récupération d’urgence
 
 Lorsque vous concevez la résilience, vous devez comprendre vos exigences en matière de disponibilité. Quel temps d’arrêt maximal est acceptable ? Cela dépend en partie du coût. Combien les temps d’arrêt vont-ils coûter à votre entreprise ? Combien devriez-vous investir pour rendre l’application hautement disponible ? Vous devez également définir ce que cela signifie que l’application soit disponible. Par exemple, l’application est-elle « inactive » si un client peut envoyer une commande mais que le système ne peut pas la traiter dans les délais d’exécution habituels ? Envisagez également la probabilité qu’un type particulier de défaillance se produise, et si une stratégie d’atténuation est économique.
 
-Un autre terme courant est la **continuité de l’activité**. Il s’agit de la capacité d’effectuer des fonctions opérationnelles essentielles pendant et après des conditions défavorables, comme une catastrophe naturelle ou la panne d’un service. La continuité de l’activité couvre l’intégralité des opérations de l’entreprise, y compris les installations physiques, les personnes, les communications, le transport, et l’informatique. Cet article se concentre sur les applications cloud, mais la planification de résilience doit être effectuée dans le contexte des exigences globales de continuité de l’activité. 
+Un autre terme courant est la **continuité de l’activité**. Il s’agit de la capacité d’effectuer des fonctions opérationnelles essentielles pendant et après des conditions défavorables, comme une catastrophe naturelle ou la panne d’un service. La continuité de l’activité couvre l’intégralité des opérations de l’entreprise, y compris les installations physiques, les personnes, les communications, le transport, et l’informatique. Cet article se concentre sur les applications cloud, mais la planification de résilience doit être effectuée dans le contexte des exigences globales de continuité de l’activité.
 
-La **sauvegarde des données** est une composante essentielle de la récupération d’urgence. Si les composants sans état d’une application subissent une défaillance, vous avez toujours la possibilité de les redéployer. Cependant, si des données sont perdues, le système ne peut retrouver sa stabilité. Les données doivent être sauvegardées, idéalement dans une région différente, ceci pour éviter tout risque en cas d’incident se produisant à l’échelle régionale. 
+La **sauvegarde des données** est une composante essentielle de la récupération d’urgence. Si les composants sans état d’une application subissent une défaillance, vous avez toujours la possibilité de les redéployer. Cependant, si des données sont perdues, le système ne peut retrouver sa stabilité. Les données doivent être sauvegardées, idéalement dans une région différente, ceci pour éviter tout risque en cas d’incident se produisant à l’échelle régionale.
 
-La sauvegarde et la **réplication des données** sont deux processus distincts. La réplication des données consiste en leur copie quasiment en temps réel, de manière à ce que le système puisse basculer rapidement vers un réplica. De nombreux systèmes de bases de données prennent en charge la réplication. Par exemple, SQL Server prend en charge les groupes de disponibilité SQL Server AlwaysOn. La réplication des données peut réduire les intervalles de récupération après une panne, en garantissant la conservation permanente d’un réplica des données. Toutefois, la réplication des données ne vous protège pas contre les erreurs humaines. Les données corrompues en raison d’une erreur humaine sont elles aussi copiées sur les réplicas. Par conséquent, il vous faut intégrer une stratégie de sauvegarde à long terme dans votre stratégie de récupération d’urgence. 
+La sauvegarde et la **réplication des données** sont deux processus distincts. La réplication des données consiste en leur copie quasiment en temps réel, de manière à ce que le système puisse basculer rapidement vers un réplica. De nombreux systèmes de bases de données prennent en charge la réplication. Par exemple, SQL Server prend en charge les groupes de disponibilité SQL Server AlwaysOn. La réplication des données peut réduire les intervalles de récupération après une panne, en garantissant la conservation permanente d’un réplica des données. Toutefois, la réplication des données ne vous protège pas contre les erreurs humaines. Les données corrompues en raison d’une erreur humaine sont elles aussi copiées sur les réplicas. Par conséquent, il vous faut intégrer une stratégie de sauvegarde à long terme dans votre stratégie de récupération d’urgence.
 
 ## <a name="process-to-achieve-resiliency"></a>Processus pour obtenir la résilience
 La résilience n’est pas un module complémentaire. Elle doit être conçue dans le système et mise en pratique opérationnelle. Voici un modèle général à suivre :
 
 1. **Définissez** vos exigences en matière de disponibilité, en fonction des besoins de l’entreprise.
 2. **Concevez** l’application pour assurer la résilience. Démarrez avec une architecture qui suit des pratiques éprouvées, puis identifiez les points de défaillance possibles de cette architecture.
-3. **Implémentez** des stratégies pour détecter les défaillances et récupérer en cas de panne. 
-4. **Testez** l’implémentation en simulant des erreurs et en déclenchant des basculements forcés. 
-5. **Déployez** l’application en production à l’aide d’un processus fiable et renouvelable. 
-6. **Surveillez** l’application pour détecter les défaillances. En surveillant le système, vous pouvez évaluer la santé de l’application et répondre aux incidents si nécessaire. 
+3. **Implémentez** des stratégies pour détecter les défaillances et récupérer en cas de panne.
+4. **Testez** l’implémentation en simulant des erreurs et en déclenchant des basculements forcés.
+5. **Déployez** l’application en production à l’aide d’un processus fiable et renouvelable.
+6. **Surveillez** l’application pour détecter les défaillances. En surveillant le système, vous pouvez évaluer la santé de l’application et répondre aux incidents si nécessaire.
 7. **Répondez** aux défaillances qui nécessitent des interventions manuelles.
 
 Dans le reste de l’article, nous expliquons plus en détail chacune de ces étapes.
@@ -69,21 +69,21 @@ Deux métriques importantes sont à prendre en considération : les objectifs d
 
 * L’**objectif de délai de récupération** (RTO) est la durée maximale acceptable pendant laquelle une application peut être indisponible après un incident. Si votre objectif RTO est de 90 minutes, vous devez être en mesure de remettre l’application en état de fonctionnement dans les 90 minutes à partir du début d’une panne. Si vous avez un objectif RTO très faible, vous pouvez conserver un deuxième déploiement fonctionnant de manière continue en veille, pour vous protéger contre une panne régionale.
 
-* L’**objectif de point de récupération** (RPO) est la durée maximale de perte de données acceptable pendant une panne. Par exemple, si vous stockez des données dans une base de données unique, sans aucune réplication vers d’autres bases de données, et effectuez des sauvegardes toutes les heures, vous risquez de perdre jusqu’à une heure de données. 
+* L’**objectif de point de récupération** (RPO) est la durée maximale de perte de données acceptable pendant une panne. Par exemple, si vous stockez des données dans une base de données unique, sans aucune réplication vers d’autres bases de données, et effectuez des sauvegardes toutes les heures, vous risquez de perdre jusqu’à une heure de données.
 
-Les objectifs RTO et RPO sont des exigences de l’entreprise. Procéder à une évaluation des risques peut vous aider à définir les objectifs RTO et RPO de l’application. Une autre métrique commune est le **temps moyen de récupération** (MTTR), qui est la durée moyenne nécessaire à la restauration de l’application après une panne. La métrique MTTR est un fait empirique concernant un système. Si la métrique MTTR dépasse celle de l’objectif RTO, une défaillance du système entraînera une interruption inacceptable des opérations, car il ne sera pas possible de restaurer le système au sein de l’objectif RTO défini. 
+Les objectifs RTO et RPO sont des exigences de l’entreprise. Procéder à une évaluation des risques peut vous aider à définir les objectifs RTO et RPO de l’application. Une autre métrique commune est le **temps moyen de récupération** (MTTR), qui est la durée moyenne nécessaire à la restauration de l’application après une panne. La métrique MTTR est un fait empirique concernant un système. Si la métrique MTTR dépasse celle de l’objectif RTO, une défaillance du système entraînera une interruption inacceptable des opérations, car il ne sera pas possible de restaurer le système au sein de l’objectif RTO défini.
 
 ### <a name="slas"></a>Contrats SLA
 Dans Azure, les [contrats de niveau de service][sla] (SLA) décrivent les engagements de Microsoft en matière de temps de fonctionnement et de connectivité. Si le contrat SLA pour un service particulier est de 99,9 %, cela signifie que le service doit être disponible 99,9 % du temps.
 
 > [!NOTE]
-> Le contrat SLA Azure comprend également des dispositions permettant d’obtenir un crédit de service si le contrat SLA n’est pas rempli, ainsi que des définitions spécifiques de « disponibilité » pour chaque service. Cet aspect du contrat SLA agit comme une stratégie d’application. 
-> 
-> 
+> Le contrat SLA Azure comprend également des dispositions permettant d’obtenir un crédit de service si le contrat SLA n’est pas rempli, ainsi que des définitions spécifiques de « disponibilité » pour chaque service. Cet aspect du contrat SLA agit comme une stratégie d’application.
+>
+>
 
-Vous devez définir vos propres contrats SLA cibles pour chaque charge de travail dans votre solution. Un contrat SLA permet d’évaluer si l’architecture répond aux exigences de l’entreprise. Par exemple, si une charge de travail requiert une disponibilité de 99,99 %, mais dépend d’un service avec un contrat SLA de 99,9 %, ce service ne peut pas être un point de défaillance unique dans le système. Une solution consiste à posséder un chemin d’accès de secours en cas d’échec du service, ou à prendre d’autres mesures pour récupérer suite à un échec dans ce service. 
+Vous devez définir vos propres contrats SLA cibles pour chaque charge de travail dans votre solution. Un contrat SLA permet d’évaluer si l’architecture répond aux exigences de l’entreprise. Par exemple, si une charge de travail requiert une disponibilité de 99,99 %, mais dépend d’un service avec un contrat SLA de 99,9 %, ce service ne peut pas être un point de défaillance unique dans le système. Une solution consiste à posséder un chemin d’accès de secours en cas d’échec du service, ou à prendre d’autres mesures pour récupérer suite à un échec dans ce service.
 
-Le tableau suivant présente les temps d’arrêt cumulatifs potentiels pour différents niveaux de contrat SLA. 
+Le tableau suivant présente les temps d’arrêt cumulatifs potentiels pour différents niveaux de contrat SLA.
 
 | Contrat SLA | Temps d’arrêt par semaine | Temps d’arrêt par mois | Temps d’arrêt par an |
 | --- | --- | --- | --- |
@@ -93,13 +93,13 @@ Le tableau suivant présente les temps d’arrêt cumulatifs potentiels pour dif
 | 99,99 % |1,01 minute |4,32 minutes |52,56 minutes |
 | 99, 999 % |6 secondes |25,9 secondes |5,26 minutes |
 
-Bien entendu, une plus grande disponibilité est préférable, tout le reste étant égal. Mais si vous cherchez à obtenir davantage de 9, le coût et la complexité nécessaires pour atteindre ce niveau augmenteront. Une disponibilité de 99,99 % se traduit par environ 5 minutes de temps d’arrêt total par mois. L’augmentation du coût et de la complexité en vaut-elle la peine pour atteindre cinq 9 (99,999 %) de disponibilité ? La réponse dépend des exigences de l’entreprise. 
+Bien entendu, une plus grande disponibilité est préférable, tout le reste étant égal. Mais si vous cherchez à obtenir davantage de 9, le coût et la complexité nécessaires pour atteindre ce niveau augmenteront. Une disponibilité de 99,99 % se traduit par environ 5 minutes de temps d’arrêt total par mois. L’augmentation du coût et de la complexité en vaut-elle la peine pour atteindre cinq 9 (99,999 %) de disponibilité ? La réponse dépend des exigences de l’entreprise.
 
 Voici quelques autres considérations à prendre en compte lors de la définition d’un contrat SLA :
 
-* Pour obtenir les quatre 9 (99,99 %), vous ne pouvez probablement pas avoir recours à une intervention manuelle pour récupérer en cas de défaillances. L’application doit pouvoir effectuer des diagnostics et se réparer elle-même. 
+* Pour obtenir les quatre 9 (99,99 %), vous ne pouvez probablement pas avoir recours à une intervention manuelle pour récupérer en cas de défaillances. L’application doit pouvoir effectuer des diagnostics et se réparer elle-même.
 * Au-delà de quatre 9, il devient difficile de détecter les pannes assez rapidement pour respecter les engagements du contrat SLA.
-* Pensez à la fenêtre de temps contre laquelle est mesuré votre contrat SLA. Plus la fenêtre est petite, plus les tolérances seront strictes. Cela n’a pas de sens de définir votre contrat SLA en termes de temps de fonctionnement par heure ou par jour. 
+* Pensez à la fenêtre de temps contre laquelle est mesuré votre contrat SLA. Plus la fenêtre est petite, plus les tolérances seront strictes. Cela n’a pas de sens de définir votre contrat SLA en termes de temps de fonctionnement par heure ou par jour.
 
 ### <a name="composite-slas"></a>Contrats SLA composites
 Envisagez une application web App Service qui écrit à Azure SQL Database. Au moment de la rédaction, ces services Azure possèdent les contrats SLA suivants :
@@ -109,7 +109,7 @@ Envisagez une application web App Service qui écrit à Azure SQL Database. Au m
 
 ![Contrat SLA composite](./images/sla1.png)
 
-Quel est le temps d’arrêt maximal attendu pour cette application ? En cas d’échec d’un service, l’application entière échoue. En règle générale, la probabilité d’échec de chaque service est indépendante, par conséquent le contrat SLA composite pour cette application est de 99,95 % &times; 99,99 % = 99,94 %. Ce taux est inférieur aux contrats SLA individuels, ce qui n’est pas surprenant, car une application qui repose sur plusieurs services possède davantage de points de défaillance potentiels. 
+Quel est le temps d’arrêt maximal attendu pour cette application ? En cas d’échec d’un service, l’application entière échoue. En règle générale, la probabilité d’échec de chaque service est indépendante, par conséquent le contrat SLA composite pour cette application est de 99,95 % &times; 99,99 % = 99,94 %. Ce taux est inférieur aux contrats SLA individuels, ce qui n’est pas surprenant, car une application qui repose sur plusieurs services possède davantage de points de défaillance potentiels.
 
 En revanche, vous pouvez améliorer le contrat SLA composite en créant des chemins d’accès de secours indépendants. Par exemple, si SQL Database n’est pas disponible, placez des transactions dans une file d’attente pour un traitement ultérieur.
 
@@ -125,7 +125,7 @@ Le contrat SLA composite total est de :
 
 Mais il existe des compromis à cette approche. La logique d’application est plus complexe, vous payez pour la file d’attente, et il peut y avoir des problèmes de cohérence des données à prendre en compte.
 
-**Contrat SLA pour déploiement multi-région**. Une autre technique de haute disponibilité consiste à déployer l’application dans plusieurs régions, et à utiliser Azure Traffic Manager pour basculer au cas où l’application échoue dans une région. Pour un déploiement dans deux régions, le contrat SLA composite est calculé comme suit. 
+**Contrat SLA pour déploiement multi-région**. Une autre technique de haute disponibilité consiste à déployer l’application dans plusieurs régions, et à utiliser Azure Traffic Manager pour basculer au cas où l’application échoue dans une région. Pour un déploiement dans deux régions, le contrat SLA composite est calculé comme suit.
 
 Considérons *N* comme le contrat SLA composite pour l’application déployée dans une région. Les risques que l’application échoue dans les deux régions en même temps sont de (1 &minus; N) &times; (1 &minus; N). Par conséquent :
 
@@ -145,7 +145,7 @@ Pendant la phase de conception, vous devez effectuer une analyse du mode d’éc
 
 * Comment l’application détectera-t-elle ce type d’échec ?
 * Comment l’application répondra-t-elle à ce type d’échec ?
-* Comment enregistrerez-vous et surveillerez-vous ce type d’échec ? 
+* Comment enregistrerez-vous et surveillerez-vous ce type d’échec ?
 
 Pour plus d’informations sur le processus FMA, avec des recommandations spécifiques pour Azure, consultez le [Guide de résilience Azure : analyse du mode d’échec][fma].
 
@@ -166,11 +166,11 @@ Les défaillances n’ont pas toutes la même incidence. Certaines défaillances
 
 La redondance est l’un des moyens de rendre une application résiliente. Toutefois, vous devez planifier en fonction de cette redondance lorsque vous concevez l’application. Par ailleurs, le niveau de redondance dont vous avez besoin dépend des exigences de votre entreprise. Toutes les applications ne nécessitent pas une redondance entre les régions à titre de prévention contre les pannes régionales. En général, il existe un compromis entre redondance et fiabilité supérieures d’un côté contre complexité et coûts plus élevés de l’autre.  
 
-Azure offre un certain nombre de fonctionnalités servant à rendre une application redondante à tous les niveaux de défaillances, d’une machine virtuelle unique à une région entière. 
+Azure offre un certain nombre de fonctionnalités servant à rendre une application redondante à tous les nivaux de défaillances, d’une machine virtuelle unique à une région entière.
 
 ![](./images/redundancy.svg)
 
-**Machine virtuelle unique**. Azure fournit un contrat SLA de durée de fonctionnement pour les machines virtuelles uniques. Bien que vous puissiez obtenir un contrat supérieur en exécutant deux machines virtuelles ou plus, une machine virtuelle unique peut présenter une fiabilité suffisante pour certaines charges de travail. Pour les charges de travail de production, nous vous recommandons d’utiliser au moins deux machines virtuelles pour la redondance. 
+**Machine virtuelle unique**. Azure fournit un contrat SLA de durée de fonctionnement pour les machines virtuelles uniques. Bien que vous puissiez obtenir un contrat supérieur en exécutant deux machines virtuelles ou plus, une machine virtuelle unique peut présenter une fiabilité suffisante pour certaines charges de travail. Pour les charges de travail de production, nous vous recommandons d’utiliser au moins deux machines virtuelles pour la redondance.
 
 **Groupes à haute disponibilité**. Pour vous protéger contre les défaillances matérielles localisées, comme une panne de disque ou de commutateur réseau, déployez au moins deux machines virtuelles dans un groupe à haute disponibilité. Un groupe à haute disponibilité se compose d’au moins deux *domaines d’erreur* qui partagent une source d’alimentation et un commutateur réseau. Les machines virtuelles d’un groupe à haute disponibilité sont distribuées entre les domaines d’erreur. Ainsi, si une défaillance matérielle affecte un domaine d’erreur, le trafic réseau peut toujours être acheminé vers les machines virtuelles des autres domaines d’erreur. Pour plus d’informations sur les groupes à haute disponibilité, consultez la section [Gestion de la disponibilité des machines virtuelles Windows dans Azure](/azure/virtual-machines/windows/manage-availability).
 
@@ -182,7 +182,7 @@ Azure offre un certain nombre de fonctionnalités servant à rendre une applicat
 
 Lorsque vous concevez une application multirégion, tenez compte du fait que la latence du réseau entre les régions et plus importante qu’au sein d’une région unique. Par exemple, si vous répliquez une base de données pour prendre en charge un basculement, utilisez la réplication des données synchrone au sein d’une région unique, mais la réplication des données asynchrones entre plusieurs régions.
 
-| &nbsp; | Groupe à haute disponibilité | Zone de disponibilité | Région jumelée |
+| &nbsp; | Groupe à haute disponibilité | Zone de disponibilité | Azure Site Recovery/Région jumelée |
 |--------|------------------|-------------------|---------------|
 | Étendue de la défaillance | Rack | Centre de données | Région |
 | Routage des requêtes | Load Balancer | Équilibreur de charge entre les zones | Traffic Manager |
@@ -194,7 +194,7 @@ Cette section contient une enquête concernant quelques stratégies de résilien
 
 **Relancez des échecs temporaires**. Les échecs temporaires peuvent résulter d’une perte momentanée de la connectivité réseau, d’une connexion à une base de données interrompue ou d’un délai d’attente lorsqu’un service est occupé. Parfois, un échec temporaire peut être résolu simplement en relançant la requête. Pour de nombreux services Azure, le Kit de développement logiciel client implémente des relances automatiques, d’une façon transparente pour l’appelant ; consultez [Guide spécifique relatif au service de relance][retry-service-specific guidance].
 
-Chaque tentative de relance augmente la latence totale. En outre, un trop grand nombre de demandes en échec peut provoquer un goulot d’étranglement, étant donné que les demandes s’accumulent dans la file d’attente. Ces demandes bloquées peuvent contenir des ressources système critiques telles que la mémoire, des threads, les connexions de la base de données, etc. Cela peut provoquer une succession d’échecs. Pour éviter ce problème, augmentez le délai entre chaque relance et limitez le nombre total de demandes en échec. 
+Chaque tentative de relance augmente la latence totale. En outre, un trop grand nombre de demandes en échec peut provoquer un goulot d’étranglement, étant donné que les demandes s’accumulent dans la file d’attente. Ces demandes bloquées peuvent contenir des ressources système critiques telles que la mémoire, des threads, les connexions de la base de données, etc. Cela peut provoquer une succession d’échecs. Pour éviter ce problème, augmentez le délai entre chaque relance et limitez le nombre total de demandes en échec.
 
 ![](./images/retry.png)
 
@@ -212,22 +212,23 @@ Vous pouvez utiliser [Azure Site Recovery][site-recovery] pour répliquer des ma
 
 **Appliquer une dégradation normale**. Si un service échoue et qu’il n’existe aucun chemin d’accès de basculement, l’application devrait se dégrader normalement, tout en offrant une expérience utilisateur acceptable. Par exemple : 
 
-* Placer un élément de travail dans une file d’attente, pour qu’il soit traité ultérieurement. 
+* Placer un élément de travail dans une file d’attente, pour qu’il soit traité ultérieurement.
 * Retourner une valeur estimée.
-* Utiliser des données mises en cache localement. 
+* Utiliser des données mises en cache localement.
 * Afficher un message d’erreur pour l’utilisateur. (Cette option est préférable plutôt que l’application cesse de répondre aux demandes.)
 
 **Limitez les utilisateurs à volume important**. Parfois, un petit nombre d’utilisateurs peut créer une charge excessive. Cela peut avoir un impact sur les autres utilisateurs, réduisant ainsi la disponibilité globale de votre application.
 
-Si un seul client soumet un nombre excessif de demandes, l’application peut limiter le client pendant un certain temps. Pendant la période de limitation, l’application refuse certaines ou toutes les demandes de ce client (en fonction de la stratégie de limitation exacte). Le seuil de limitation peut dépendre du niveau de service du client. 
+Si un seul client soumet un nombre excessif de demandes, l’application peut limiter le client pendant un certain temps. Pendant la période de limitation, l’application refuse certaines ou toutes les demandes de ce client (en fonction de la stratégie de limitation exacte). Le seuil de limitation peut dépendre du niveau de service du client.
 
 La limitation n’implique pas que le client agissait à des fins malveillantes, uniquement qu’il a dépassé son quota de service. Dans certains cas, un consommateur peut constamment dépasser son quota, ou bien mal se comporter. Dans ce cas, vous pouvez aller plus loin et bloquer l’utilisateur. En règle générale, cela se fait en bloquant une clé API ou une plage d’adresses IP. Pour en savoir plus, consultez le [Modèle de limitation][throttling-pattern].
 
-**Utilisez un disjoncteur**. Le modèle [Disjoncteur][circuit-breaker-pattern] peut empêcher qu’une application ne tente d’exécuter à plusieurs reprises une opération qui risque d’échouer. Le disjoncteur inclut dans un wrapper des appels vers un service et suit le nombre d’échecs récents. Si le nombre d’échec dépasse un seuil, le disjoncteur renvoie un code d’erreur sans avoir appelé le service. Le service a ainsi le temps de récupérer. 
+**Utilisez un disjoncteur**. Le modèle [Disjoncteur][circuit-breaker-pattern] peut empêcher qu’une application ne tente d’exécuter à plusieurs reprises une opération qui risque d’échouer. Le disjoncteur inclut dans un wrapper des appels vers un service et suit le nombre d’échecs récents. Si le nombre d’échec dépasse un seuil, le disjoncteur renvoie un code d’erreur sans avoir appelé le service. Le service a ainsi le temps de récupérer.
 
-**Utilisez le nivellement de charge pour lisser les pics de trafic**. Les applications peuvent rencontrer des pics soudains dans le trafic, ce qui peut surcharger les services sur le serveur principal. Si un serveur principal ne parvient pas à répondre aux demandes assez rapidement, cela peut provoquer un envoi des demandes en file d’attente (sauvegarde) ou une limitation de l’application par le service. Pour éviter ce problème, vous pouvez utiliser une file d’attente en tant que mémoire tampon. Lorsqu’il y a un nouvel élément de travail, au lieu d’appeler le serveur principal immédiatement, l’application met un élément de travail en file d’attente pour qu’il soit exécuté de façon asynchrone. La file d’attente agit comme une mémoire tampon qui lisse des pics de charge. Pour en savoir plus, consultez [Modèle de nivellement de la charge basé sur une file d’attente][load-leveling-pattern].
+**Utilisez le nivellement de charge pour lisser les pics de trafic**.
+Les applications peuvent rencontrer des pics soudains dans le trafic, ce qui peut surcharger les services sur le serveur principal. Si un serveur principal ne parvient pas à répondre aux demandes assez rapidement, cela peut provoquer un envoi des demandes en file d’attente (sauvegarde) ou une limitation de l’application par le service. Pour éviter ce problème, vous pouvez utiliser une file d’attente en tant que mémoire tampon. Lorsqu’il y a un nouvel élément de travail, au lieu d’appeler le serveur principal immédiatement, l’application met un élément de travail en file d’attente pour qu’il soit exécuté de façon asynchrone. La file d’attente agit comme une mémoire tampon qui lisse des pics de charge. Pour en savoir plus, consultez [Modèle de nivellement de la charge basé sur une file d’attente][load-leveling-pattern].
 
-**Isolez les ressources critiques**. Des successions d’échecs peuvent parfois se produire dans un sous-système, provoquant des défaillances dans d’autres parties de l’application. Cela peut se produire si une défaillance empêche que certaines ressources, telles que des threads ou des sockets, ne soient libérées en temps voulu, menant à un épuisement des ressources. 
+**Isolez les ressources critiques**. Des successions d’échecs peuvent parfois se produire dans un sous-système, provoquant des défaillances dans d’autres parties de l’application. Cela peut se produire si une défaillance empêche que certaines ressources, telles que des threads ou des sockets, ne soient libérées en temps voulu, menant à un épuisement des ressources.
 
 Pour éviter ce problème, vous pouvez partitionner un système en groupes isolés, de manière à ce qu’une défaillance présente dans une partition ne détériore pas l’ensemble du système. Cette technique est parfois appelée le modèle de cloisonnement.
 
@@ -235,13 +236,13 @@ Exemples :
 
 * Partitionnez une base de données (par exemple, par le client) et affectez un pool distinct d’instances de serveur web pour chaque partition.  
 * Utilisez des pools de threads distincts pour isoler différents services. Cela permet d’éviter les successions d’échecs en cas de défaillance d’un des services. Pour obtenir un exemple, consultez la bibliothèque [Netflix Hystrix][hystrix].
-* Utilisez des [conteneurs][containers] pour limiter les ressources disponibles pour un sous-système spécifique. 
+* Utilisez des [conteneurs][containers] pour limiter les ressources disponibles pour un sous-système spécifique.
 
 ![](./images/bulkhead.png)
 
 **Appliquez des transactions de compensation**. Une [transaction de compensation][compensating-transaction-pattern] est une transaction qui annule les effets d’une autre transaction terminée. Dans un système distribué, il est parfois difficile d’obtenir une cohérence transactionnelle élevée. Les transactions de compensation sont un moyen de garantir la cohérence à l’aide d’une série de transactions individuelles plus petites, qui peuvent être annulées à chaque étape.
 
-Par exemple, pour réserver un voyage, un client peut réserver une voiture, un hôtel et un vol. Si une de ces étapes échoue, l’opération entière échoue. Au lieu de tenter d’utiliser une unique transaction distribuée pour l’intégralité de l’opération, vous pouvez définir une transaction de compensation pour chaque étape. Par exemple, pour annuler la réservation d’une voiture, vous annulez la réservation. Pour exécuter l’ensemble de l’opération, un coordinateur exécute chaque étape. Si une étape échoue, le coordinateur applique des transactions de compensation pour annuler toutes les étapes déjà effectuées. 
+Par exemple, pour réserver un voyage, un client peut réserver une voiture, un hôtel et un vol. Si une de ces étapes échoue, l’opération entière échoue. Au lieu de tenter d’utiliser une unique transaction distribuée pour l’intégralité de l’opération, vous pouvez définir une transaction de compensation pour chaque étape. Par exemple, pour annuler la réservation d’une voiture, vous annulez la réservation. Pour exécuter l’ensemble de l’opération, un coordinateur exécute chaque étape. Si une étape échoue, le coordinateur applique des transactions de compensation pour annuler toutes les étapes déjà effectuées.
 
 ## <a name="test-for-resiliency"></a>Tester la résilience
 En règle générale, vous ne pouvez pas tester la résilience de la même façon que vous testez les fonctionnalités de l’application (en exécutant des tests unitaires, etc). Au lieu de cela, vous devez tester le fonctionnement de la charge de travail de bout en bout dans les conditions d’échec qui ne se produisent que par intermittence.
@@ -265,10 +266,12 @@ C’est une autre raison qui démontre pourquoi il est important d’analyser le
 
 **Test de charge**. Le test de charge est essentiel pour identifier les défaillances qui se produisent uniquement lors du chargement, telles que la saturation de la base de données principale ou la limitation du service. Testez la charge maximale à l’aide des données de production ou de données synthétiques qui soient aussi proches que possible des données de production. L’objectif est de voir comment se comporte l’application dans des conditions réelles.   
 
-## <a name="deploy-using-reliable-processes"></a>Déployer à l’aide de processus fiables
-Une fois qu’une application est déployée en production, les mises à jour deviennent une source possible d’erreurs. Dans le pire des cas, une mise à jour incorrecte peut entraîner un temps d’arrêt. Pour éviter cela, le processus de déploiement doit être prévisible et renouvelable. Le déploiement inclut l’approvisionnement des ressources Azure, le déploiement du code de l’application, et l’application des paramètres de configuration. Une mise à jour peut impliquer les trois, ou un sous-ensemble. 
+**Exercices de reprise d’activité après sinistre**. La mise en place d’un plan de reprise d’activité après sinistre, aussi bon soit-il, ne suffit pas. Vous devez le tester régulièrement pour vérifier son bon fonctionnement dans une situation critique. Pour les machines virtuelles Azure, vous pouvez utiliser [Azure Site Recovery] [site-recovery] pour répliquer et [effectuer des exercices de reprise d’activité après sinistre] [site-recovery-test-failover] sans impacter les applications de production ni la réplication continue.
 
-Le point essentiel est que les déploiements manuels sont sujets à l’erreur. Par conséquent, il est recommandé d’avoir un processus idempotent automatisé, que vous pouvez exécuter à la demande et exécutez de nouveau si quelque chose échoue. 
+## <a name="deploy-using-reliable-processes"></a>Déployer à l’aide de processus fiables
+Une fois qu’une application est déployée en production, les mises à jour deviennent une source possible d’erreurs. Dans le pire des cas, une mise à jour incorrecte peut entraîner un temps d’arrêt. Pour éviter cela, le processus de déploiement doit être prévisible et renouvelable. Le déploiement inclut l’approvisionnement des ressources Azure, le déploiement du code de l’application, et l’application des paramètres de configuration. Une mise à jour peut impliquer les trois, ou un sous-ensemble.
+
+Le point essentiel est que les déploiements manuels sont sujets à l’erreur. Par conséquent, il est recommandé d’avoir un processus idempotent automatisé, que vous pouvez exécuter à la demande et exécutez de nouveau si quelque chose échoue.
 
 * Utilisez les modèles Azure Resource Manager afin d’automatiser l’approvisionnement des ressources Azure.
 * Utilisez la [Configuration de l’état souhaité Azure Automation][dsc] (DSC) pour configurer les machines virtuelles.
@@ -277,19 +280,19 @@ Le point essentiel est que les déploiements manuels sont sujets à l’erreur. 
 Voici deux concepts liés au déploiement résilient : *l’infrastructure en tant que code* et *l’infrastructure immuable*.
 
 * **L’infrastructure en tant que code** consiste à utiliser un code pour gérer et configurer l’infrastructure. L’infrastructure en tant que code peut utiliser une approche déclarative ou une approche impérative (ou une combinaison des deux). Les modèles Resource Manager sont un exemple d’approche déclarative. Les scripts PowerShell sont un exemple d’approche impérative.
-* **L’infrastructure immuable** est le principe selon lequel vous ne devez pas modifier l’infrastructure après son déploiement en production. Dans le cas contraire, vous pouvez parvenir à un état dans lequel les modifications ad hoc ont été appliquées. Il est alors difficile de savoir avec exactitude ce qui a changé et de raisonner sur le système. 
+* **L’infrastructure immuable** est le principe selon lequel vous ne devez pas modifier l’infrastructure après son déploiement en production. Dans le cas contraire, vous pouvez parvenir à un état dans lequel les modifications ad hoc ont été appliquées. Il est alors difficile de savoir avec exactitude ce qui a changé et de raisonner sur le système.
 
 Une autre question qui se pose est comment déployer une mise à jour de l’application. Nous vous recommandons des techniques telles que le déploiement bleu-vert ou les versions de contrôle de validité, qui envoient les mises à jour de manière hautement contrôlée, afin de limiter les conséquences possibles d’un déploiement incorrect.
 
 * [le déploiement bleu-vert][blue-green] est une technique dans laquelle une mise à jour est déployée dans un environnement de production distinct de l’application en temps réel. Après avoir validé le déploiement, passez le routage du trafic vers la version mise à jour. Cela est permis, par exemple, par les applications web Azure App Service avec des emplacements de préproduction.
 * [Les versions de contrôle de validité][canary-release] sont similaires aux déploiements bleu-vert. Au lieu de passer tout le trafic vers la version mise à jour, vous déployez la mise à jour pour un petit pourcentage d’utilisateurs, en routant une partie du trafic vers le nouveau déploiement. Si un problème se produit, arrêtez et revenez à l’ancien déploiement. Dans le cas contraire, routez davantage du trafic vers la nouvelle version, jusqu’à ce qu’elle obtienne 100 % du trafic.
 
-Peu importe l’approche que vous choisissez, assurez-vous que vous pouvez revenir au dernier déploiement correct, au cas où la nouvelle version ne fonctionne pas. En outre, le cas échéant, les journaux d’application doivent indiquer quelle version a provoqué l’erreur. 
+Peu importe l’approche que vous choisissez, assurez-vous que vous pouvez revenir au dernier déploiement correct, au cas où la nouvelle version ne fonctionne pas. En outre, le cas échéant, les journaux d’application doivent indiquer quelle version a provoqué l’erreur.
 
 ## <a name="monitor-to-detect-failures"></a>Surveiller et détecter des défaillances
-La surveillance et les diagnostics sont cruciaux pour assurer la résilience. En cas de problème, vous devez savoir qu’il y a un échec, et vous devez en comprendre la cause. 
+La surveillance et les diagnostics sont cruciaux pour assurer la résilience. En cas de problème, vous devez savoir qu’il y a un échec, et vous devez en comprendre la cause.
 
-La surveillance d’un système distribué à grande échelle constitue une difficulté importante. Pensez à une application qui s’exécute sur quelques dizaines de machines virtuelles &mdash; il n’est pas pratique de se connecter à chaque machine virtuelle une à une, et d’examiner les fichiers journaux, en essayant de résoudre un problème. De plus, le nombre d’instances de machine virtuelle n’est probablement pas statique. Les machines virtuelles sont ajoutées et supprimées tandis que l’application augmente et diminue la taille des instances. Parfois une instance peut échouer et doit être réapprovisionnée. En outre, une application cloud classique peut utiliser plusieurs banques de données (stockage Azure, SQL Database, Cosmos DB, cache Redis), et une seule action utilisateur peut couvrir plusieurs sous-systèmes. 
+La surveillance d’un système distribué à grande échelle constitue une difficulté importante. Pensez à une application qui s’exécute sur quelques dizaines de machines virtuelles &mdash; il n’est pas pratique de se connecter à chaque machine virtuelle une à une, et d’examiner les fichiers journaux, en essayant de résoudre un problème. De plus, le nombre d’instances de machine virtuelle n’est probablement pas statique. Les machines virtuelles sont ajoutées et supprimées tandis que l’application augmente et diminue la taille des instances. Parfois une instance peut échouer et doit être réapprovisionnée. En outre, une application cloud classique peut utiliser plusieurs banques de données (stockage Azure, SQL Database, Cosmos DB, cache Redis), et une seule action utilisateur peut couvrir plusieurs sous-systèmes.
 
 Vous pouvez considérer le processus de surveillance et de diagnostics comme un pipeline avec plusieurs étapes distinctes :
 
@@ -300,7 +303,7 @@ Vous pouvez considérer le processus de surveillance et de diagnostics comme un 
 * **Analyse et diagnostic**. Une fois que les données sont consolidées, elles peuvent être analysées pour résoudre les problèmes et fournir une vue d’ensemble de l’intégrité de l’application.
 * **Visualisation et alertes**. Dans cette étape, les données de télémétrie sont présentées de manière à ce qu’un opérateur puisse repérer rapidement les problèmes ou les tendances. Les exemples comprennent des tableaux de bord ou des alertes par courrier électronique.  
 
-La surveillance est différente de la détection de défaillance. Par exemple, votre application peut détecter un échec temporaire et réessayer, n’entraînant aucun temps d’arrêt. Mais il doit également connecter l’opération de relance pour que vous puissiez surveiller le taux d’échec, afin d’obtenir une vue d’ensemble de l’intégrité de l’application. 
+La surveillance est différente de la détection de défaillance. Par exemple, votre application peut détecter un échec temporaire et réessayer, n’entraînant aucun temps d’arrêt. Mais il doit également connecter l’opération de relance pour que vous puissiez surveiller le taux d’échec, afin d’obtenir une vue d’ensemble de l’intégrité de l’application.
 
 Les journaux d’application sont une source importante de données de diagnostic. Les meilleures pratiques pour la journalisation de l’application sont :
 
@@ -308,7 +311,7 @@ Les journaux d’application sont une source importante de données de diagnosti
 * Journalisation des événements au niveau des limites de service. Vous devez inclure un ID de corrélation qui franchit les limites de service. Si une transaction passe par plusieurs services et que l’un d’entre eux échoue, l’ID de corrélation vous aidera à déterminer la raison pour laquelle la transaction a échoué.
 * Utilisez la journalisation sémantique, également appelée journalisation structurée. Les journaux non structurés rendent difficile l’automatisation de la consommation et de l’analyse des données du journal, qui est nécessaire à l’échelle du cloud.
 * Utilisez la journalisation asynchrone. Dans le cas contraire, le système de journalisation peut provoquer l’échec de l’application en provoquant la sauvegarde des demandes, comme elles sont bloquées en attendant d’écrire un événement de Journalisation.
-* La journalisation de l’application est différente de l’audit. L’audit peut être effectué pour des raisons réglementaires ou de conformité. Par conséquent, les enregistrements d’audit doivent être complets, et il n’est pas acceptable d’en supprimer lors du traitement des transactions. Si une application nécessite un audit, il doit être maintenu séparé de la journalisation des diagnostics. 
+* La journalisation de l’application est différente de l’audit. L’audit peut être effectué pour des raisons réglementaires ou de conformité. Par conséquent, les enregistrements d’audit doivent être complets, et il n’est pas acceptable d’en supprimer lors du traitement des transactions. Si une application nécessite un audit, il doit être maintenu séparé de la journalisation des diagnostics.
 
 Pour plus d’informations sur la surveillance et les diagnostics, consultez [Guide de surveillance et de diagnostics][monitoring-guidance].
 
@@ -316,20 +319,20 @@ Pour plus d’informations sur la surveillance et les diagnostics, consultez [Gu
 Les sections précédentes ont porté sur les stratégies de récupération automatique, qui sont critiques pour la haute disponibilité. Toutefois, une intervention manuelle est parfois nécessaire.
 
 * **Alertes**. Surveillez votre application pour trouver des signes précurseurs pouvant nécessiter une intervention proactive. Par exemple, si vous voyez que SQL Database ou Cosmos DB limitent régulièrement votre application, vous devrez peut-être améliorer la capacité de votre base de données ou optimiser vos requêtes. Dans cet exemple, même si l’application peut gérer les erreurs de limitation en toute transparence, votre télémétrie doit toujours déclencher une alerte afin que vous puissiez suivre l’activité.  
-* **Basculement manuel**. Certains systèmes ne peuvent pas basculer automatiquement et nécessitent un basculement manuel. 
+* **Basculement manuel**. Certains systèmes ne peuvent pas basculer automatiquement et nécessitent un basculement manuel. Pour les machines virtuelles Azure configurées avec [Azure Site Recovery][site-recovery], vous pouvez [effectuer un basculement][site-recovery-failover] et récupérer vos machines virtuelles dans une autre région en quelques minutes.
 * **Test de disponibilité opérationnelle**. Si votre application bascule dans une région secondaire, vous devez effectuer un test de disponibilité opérationnelle avant de basculer vers la région principale. Le test permet de vérifier que la région principale est intègre et de nouveau prête à recevoir du trafic.
-* **Vérification de la cohérence des données**. Si une défaillance se produit dans un magasin de données, des incohérences de données pourront être trouvées lorsque le magasin sera de nouveau disponible, en particulier si les données ont été répliquées. 
+* **Vérification de la cohérence des données**. Si une défaillance se produit dans un magasin de données, des incohérences de données pourront être trouvées lorsque le magasin sera de nouveau disponible, en particulier si les données ont été répliquées.
 * **Restauration à partir de la sauvegarde**. Par exemple, si SQL Database subit une panne régionale, vous pouvez effectuer une géo-restauration de la base de données à partir de la dernière sauvegarde.
 
-Documentez et testez votre plan de récupération d’urgence. Évaluez l’impact commercial des défaillances d’application. Automatisez le processus autant que possible et documentez toutes les étapes manuelles, telles que le basculement manuel ou la restauration des données à partir des sauvegardes. Testez régulièrement votre processus de récupération d’urgence pour valider et améliorer le plan. 
+Documentez et testez votre plan de récupération d’urgence. Évaluez l’impact commercial des défaillances d’application. Automatisez le processus autant que possible et documentez toutes les étapes manuelles, telles que le basculement manuel ou la restauration des données à partir des sauvegardes. Testez régulièrement votre processus de récupération d’urgence pour valider et améliorer le plan.
 
 ## <a name="summary"></a>Résumé
 Cet article décrit la résilience d’un point de vue global, en mettant en évidence certains des défis uniques du cloud. Ceux-ci incluent la nature distribuée du cloud computing, l’utilisation de matériel standard, et la présence des défaillances réseau temporaires.
 
 Voici les principaux points de l’article à retenir :
 
-* La résilience entraîne une plus grande disponibilité et une réduction du délai moyen pour récupérer en cas de panne. 
-* L’obtention de la résilience dans le cloud requiert un ensemble de techniques diverses à partir de solutions traditionnelles locales. 
+* La résilience entraîne une plus grande disponibilité et une réduction du délai moyen pour récupérer en cas de panne.
+* L’obtention de la résilience dans le cloud requiert un ensemble de techniques diverses à partir de solutions traditionnelles locales.
 * La résilience ne se produit pas par accident. Elle doit être conçue et intégrée dès le début.
 * La résilience touche chaque partie du cycle de vie de l’application, depuis la planification et le codage jusqu’aux opérations.
 * Testez et surveillez !
@@ -360,3 +363,5 @@ Voici les principaux points de l’article à retenir :
 [tm-failover]: /azure/traffic-manager/traffic-manager-monitoring
 [tm-sla]: https://azure.microsoft.com/support/legal/sla/traffic-manager
 [site-recovery]:/azure/site-recovery/azure-to-azure-quickstart/
+[site-recovery-test-failover]:/azure/site-recovery/azure-to-azure-tutorial-dr-drill/
+[site-recovery-failover]:/azure/site-recovery/azure-to-azure-tutorial-failover-failback/
