@@ -1,20 +1,22 @@
 ---
-title: Exécuter une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure
-description: Pratiques éprouvées pour la configuration d’une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure.
+title: Exécuter une batterie de serveurs SharePoint Server 2016 hautement disponible dans Azure
+titleSuffix: Azure Reference Architectures
+description: Architecture recommandée pour déployer une batterie de serveurs SharePoint Server 2016 à haute disponibilité sur Azure.
 author: njray
 ms.date: 07/26/2018
-ms.openlocfilehash: 5db146956134f9b297b520d666d8dabbc8793caf
-ms.sourcegitcommit: 77d62f966d910cd5a3d11ade7ae5a73234e093f2
+ms.custom: seodec18
+ms.openlocfilehash: 6cc8255f95cb4944ff3ef138ad5edf2e5bbea4b4
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/09/2018
-ms.locfileid: "51293259"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120099"
 ---
-# <a name="run-a-high-availability-sharepoint-server-2016-farm-in-azure"></a>Exécuter une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure
+# <a name="run-a-highly-available-sharepoint-server-2016-farm-in-azure"></a>Exécuter une batterie de serveurs SharePoint Server 2016 hautement disponible dans Azure
 
-Cette architecture de référence présente un ensemble de pratiques éprouvées pour configurer une batterie de serveurs SharePoint Server 2016 à haute disponibilité dans Azure, à l’aide de la topologie MinRole et de groupes de disponibilité Always On SQL Server. La batterie de serveurs SharePoint est déployée dans un réseau virtuel sécurisé sans aucun point de terminaison ou présence exposé à Internet. [**Déployer cette solution**.](#deploy-the-solution) 
+Cette architecture de référence présente des pratiques éprouvées pour déployer une batterie de serveurs SharePoint Server 2016 hautement disponible sur Azure à l’aide de la topologie MinRole et de groupes de disponibilité Always On SQL Server. La batterie de serveurs SharePoint est déployée dans un réseau virtuel sécurisé sans aucun point de terminaison ou présence exposé à Internet. [**Déployez cette solution**](#deploy-the-solution).
 
-![](./images/sharepoint-ha.png)
+![Architecture de référence d’une batterie de serveurs SharePoint Server 2016 hautement disponible dans Azure](./images/sharepoint-ha.png)
 
 *Téléchargez un [fichier Visio][visio-download] de cette architecture.*
 
@@ -26,15 +28,15 @@ L’architecture est constituée des composants suivants :
 
 - **Groupe de ressources**. Un [groupe de ressources][resource-group] est un conteneur qui héberge les ressources Azure associées. Un groupe de ressources est utilisé pour les serveurs SharePoint et un autre groupe de ressources est utilisé pour les composants d’infrastructure qui sont indépendants des machines virtuelles, tels que le réseau virtuel et les équilibreurs de charge.
 
-- **Réseau virtuel**. Les ordinateurs virtuels sont déployés dans un réseau virtuel avec un espace d’adressage intranet unique. Le réseau virtuel est en outre subdivisé en sous-réseaux. 
+- **Réseau virtuel**. Les ordinateurs virtuels sont déployés dans un réseau virtuel avec un espace d’adressage intranet unique. Le réseau virtuel est en outre subdivisé en sous-réseaux.
 
 - **Machines virtuelles (VM)**. Les machines virtuelles sont déployées dans le réseau virtuel, les adresses IP statiques privées sont affectées à toutes les machines virtuelles. Les adresses IP statiques sont recommandées pour les machines virtuelles exécutant SQL Server et SharePoint Server 2016, afin d’éviter les problèmes liés à la mise en cache des adresses IP et les changements d’adresses après un redémarrage.
 
-- **Groupes à haute disponibilité**. Placez les machines virtuelles pour chaque rôle SharePoint dans différents [groupes à haute disponibilité][availability-set] et configurez au moins deux machines virtuelles (VM) pour chaque rôle. Cela rend les machines virtuelles éligibles à un contrat de niveau de service (SLA) plus élevé. 
+- **Groupes à haute disponibilité**. Placez les machines virtuelles pour chaque rôle SharePoint dans différents [groupes à haute disponibilité][availability-set] et configurez au moins deux machines virtuelles (VM) pour chaque rôle. Cela rend les machines virtuelles éligibles à un contrat de niveau de service (SLA) plus élevé.
 
-- **Équilibreur de charge interne**. L’[équilibrage de charge][load-balancer] distribue le trafic de requête SharePoint du réseau local aux serveurs web frontaux de la batterie de serveurs SharePoint. 
+- **Équilibreur de charge interne**. L’[équilibrage de charge][load-balancer] distribue le trafic de requête SharePoint du réseau local aux serveurs web frontaux de la batterie de serveurs SharePoint.
 
-- **Groupes de sécurité réseau (NSG)**. Pour chaque sous-réseau contenant des ordinateurs virtuels, un [groupe de sécurité réseau][nsg] est créé. Utilisez les groupes de sécurité réseau pour limiter le trafic au sein du réseau virtuel, afin d’isoler les sous-réseaux. 
+- **Groupes de sécurité réseau (NSG)**. Pour chaque sous-réseau contenant des ordinateurs virtuels, un [groupe de sécurité réseau][nsg] est créé. Utilisez les groupes de sécurité réseau pour limiter le trafic au sein du réseau virtuel, afin d’isoler les sous-réseaux.
 
 - **Passerelle**. La passerelle fournit une connexion entre votre réseau local et le réseau virtuel Azure. Votre connexion peut utiliser une passerelle ExpressRoute ou VPN de site à site. Pour plus d’informations, consultez la section [Connecter un réseau local à Azure][hybrid-ra].
 
@@ -42,11 +44,11 @@ L’architecture est constituée des composants suivants :
 
   SharePoint Server 2016 prend également en charge l’utilisation de [Microsoft Azure Active Directory Domain Services](/azure/active-directory-domain-services/). Microsoft Azure AD Domain Services fournit des services de domaine managé, afin que vous n’ayez pas besoin de déployer et de gérer les contrôleurs de domaine dans Azure.
 
-- **Groupe de disponibilité SQL Server Always On**. Pour obtenir une haute disponibilité de la base de données SQL Server, nous vous recommandons les [groupes de disponibilité SQL Server Always On][sql-always-on]. Deux machines virtuelles sont utilisées pour SQL Server. L’une contient le réplica de base de données primaire et l’autre le réplica secondaire. 
+- **Groupe de disponibilité SQL Server Always On**. Pour obtenir une haute disponibilité de la base de données SQL Server, nous vous recommandons les [groupes de disponibilité SQL Server Always On][sql-always-on]. Deux machines virtuelles sont utilisées pour SQL Server. L’une contient le réplica de base de données primaire et l’autre le réplica secondaire.
 
 - **Machine virtuelle du nœud majoritaire**. Cette machine virtuelle permet au cluster de basculement d’établir le quorum. Pour plus d’informations, consultez l’article [Présentation des configurations de quorum dans un cluster de basculement][sql-quorum].
 
-- **Serveurs SharePoint**. Les serveurs SharePoint effectuent le service web frontal, la mise en cache, l’application et la recherche des rôles. 
+- **Serveurs SharePoint**. Les serveurs SharePoint effectuent le service web frontal, la mise en cache, l’application et la recherche des rôles.
 
 - **Jumpbox**. Également appelée [hôte bastion][bastion-host]. Il s’agit d’une machine virtuelle sécurisée sur le réseau, utilisée par les administrateurs pour se connecter aux autres machines virtuelles. La jumpbox a un groupe de sécurité réseau qui autorise le trafic distant provenant uniquement d’adresses IP publiques figurant sur une liste verte. Le groupe de sécurité réseau doit autoriser le trafic RDP (Bureau à distance).
 
@@ -60,7 +62,7 @@ Nous vous recommandons de séparer les groupes de ressources en fonction du rôl
 
 ### <a name="virtual-network-and-subnet-recommendations"></a>Recommandations pour les réseaux virtuels et les sous-réseaux
 
-Utilisez un sous-réseau pour chaque rôle SharePoint, ainsi qu’un sous-réseau pour la passerelle et un autre pour la jumpbox. 
+Utilisez un sous-réseau pour chaque rôle SharePoint, ainsi qu’un sous-réseau pour la passerelle et un autre pour la jumpbox.
 
 Le sous-réseau de passerelle doit être nommé *GatewaySubnet*. Attribuez l’espace d’adressage du sous-réseau passerelle à partir de la dernière partie de l’espace d’adressage du réseau virtuel. Pour plus d’informations, consultez l’article [Connect an on-premises network to Azure using a VPN gateway][hybrid-vpn-ra] (Connecter un réseau local à Azure à l’aide d’une passerelle VPN).
 
@@ -74,28 +76,28 @@ Cette architecture nécessite au moins 44 cœurs :
 - 1 nœud majoritaire sur Standard_DS1_v2 = 1 noyau
 - 1 serveur d’administration sur Standard_DS1_v2 = 1 noyau
 
-Assurez-vous que votre abonnement Azure dispose d’un quota de cœurs de machines virtuelles suffisamment important pour le déploiement ou le déploiement échouera. Consultez l’article [Abonnement Azure et limites, quotas et contraintes de service][quotas]. 
+Assurez-vous que votre abonnement Azure dispose d’un quota de cœurs de machines virtuelles suffisamment important pour le déploiement ou le déploiement échouera. Consultez l’article [Abonnement Azure et limites, quotas et contraintes de service][quotas].
 
-Pour tous les rôles SharePoint, à l’exception de l’indexeur de recherche, l’utilisation de la taille de machine virtuelle [Standard_DS3_v2][vm-sizes-general] est recommandée. L’indexeur de recherche doit être de taille [Standard_DS13_v2][vm-sizes-memory] au minimum. À des fins de test, les fichiers de paramètres pour cette architecture de référence spécifient la plus petite taille DS3_v2 pour le rôle de l’indexeur de recherche. Pour un déploiement de production, mettez à jour les fichiers de paramètres pour utiliser la taille DS13 ou une taille supérieure. Pour plus d’informations, consultez l’article [Configuration matérielle et logicielle requise pour une solution SharePoint Server 2016][sharepoint-reqs]. 
+Pour tous les rôles SharePoint, à l’exception de l’indexeur de recherche, l’utilisation de la taille de machine virtuelle [Standard_DS3_v2][vm-sizes-general] est recommandée. L’indexeur de recherche doit être de taille [Standard_DS13_v2][vm-sizes-memory] au minimum. À des fins de test, les fichiers de paramètres pour cette architecture de référence spécifient la plus petite taille DS3_v2 pour le rôle de l’indexeur de recherche. Pour un déploiement de production, mettez à jour les fichiers de paramètres pour utiliser la taille DS13 ou une taille supérieure. Pour plus d’informations, consultez l’article [Configuration matérielle et logicielle requise pour une solution SharePoint Server 2016][sharepoint-reqs].
 
-Pour les machines virtuelles SQL Server, nous vous recommandons un minimum de 4 cœurs et 8 Go de RAM. Les fichiers de paramètres pour cette architecture de référence spécifient la taille de DS3_v2. Pour un déploiement de production, vous devrez peut-être spécifier une plus grande taille de machine virtuelle. Pour plus d’informations, consultez l’article [Planification et configuration de la capacité de SQL Server et du stockage (SharePoint Server)](/sharepoint/administration/storage-and-sql-server-capacity-planning-and-configuration#estimate-memory-requirements). 
- 
+Pour les machines virtuelles SQL Server, nous vous recommandons un minimum de 4 cœurs et 8 Go de RAM. Les fichiers de paramètres pour cette architecture de référence spécifient la taille de DS3_v2. Pour un déploiement de production, vous devrez peut-être spécifier une plus grande taille de machine virtuelle. Pour plus d’informations, consultez l’article [Planification et configuration de la capacité de SQL Server et du stockage (SharePoint Server)](/sharepoint/administration/storage-and-sql-server-capacity-planning-and-configuration#estimate-memory-requirements).
+
 ### <a name="nsg-recommendations"></a>Recommandations en matière de groupes de sécurité réseau
 
-Nous vous recommandons d’avoir un groupe de sécurité réseau pour chaque sous-réseau contenant des machines virtuelles, cela permet d’activer l’isolation des sous-réseaux. Si vous souhaitez configurer l’isolation de sous-réseaux, ajoutez des règles de groupe de sécurité réseau qui définissent le trafic entrant ou sortant autorisé ou refusé pour chaque sous-réseau. Pour plus d’informations, consultez l’article [Filtrer le trafic réseau avec les groupes de sécurité réseau][virtual-networks-nsg]. 
+Nous vous recommandons d’avoir un groupe de sécurité réseau pour chaque sous-réseau contenant des machines virtuelles, cela permet d’activer l’isolation des sous-réseaux. Si vous souhaitez configurer l’isolation de sous-réseaux, ajoutez des règles de groupe de sécurité réseau qui définissent le trafic entrant ou sortant autorisé ou refusé pour chaque sous-réseau. Pour plus d’informations, consultez l’article [Filtrer le trafic réseau avec les groupes de sécurité réseau][virtual-networks-nsg].
 
-N’affectez pas un groupe de sécurité réseau au sous-réseau de passerelle, ou la passerelle cessera de fonctionner. 
+N’affectez pas un groupe de sécurité réseau au sous-réseau de passerelle, ou la passerelle cessera de fonctionner.
 
 ### <a name="storage-recommendations"></a>Recommandations de stockage
 
 La configuration du stockage des machines virtuelles dans la batterie de serveurs doit correspondre aux meilleures pratiques appropriées, utilisées pour les déploiements locaux. Les serveurs SharePoint doivent avoir un disque distinct pour les journaux. Les serveurs SharePoint hébergeant les rôles des index de recherche nécessitent un espace disque supplémentaire pour stocker l’index de recherche. Pour SQL Server, la pratique courante consiste à séparer les données et les journaux. Ajoutez davantage de disques pour le stockage de sauvegarde de base de données et utilisez un disque distinct pour [tempdb][tempdb].
 
-Pour une meilleure fiabilité, nous recommandons l’utilisation d’[Azure Managed Disks][managed-disks]. Les disques gérés assurent que les disques des machines virtuelles au sein d’un groupe à haute disponibilité sont isolés afin d’éviter des points de défaillance uniques. 
+Pour une meilleure fiabilité, nous recommandons l’utilisation d’[Azure Managed Disks][managed-disks]. Les disques gérés assurent que les disques des machines virtuelles au sein d’un groupe à haute disponibilité sont isolés afin d’éviter des points de défaillance uniques.
 
 > [!NOTE]
 > Actuellement, le modèle Resource Manager de cette architecture de référence n’utilise pas de disques gérés. Nous avons l’intention de mettre à jour le modèle pour utiliser des disques gérés.
 
-Utilisez des disques gérés Premium pour toutes les machines virtuelles SQL Server et SharePoint. Vous pouvez utiliser des disques gérés standard pour le serveur de nœud majoritaire, les contrôleurs de domaine et le serveur d’administration. 
+Utilisez des disques gérés Premium pour toutes les machines virtuelles SQL Server et SharePoint. Vous pouvez utiliser des disques gérés standard pour le serveur de nœud majoritaire, les contrôleurs de domaine et le serveur d’administration.
 
 ### <a name="sharepoint-server-recommendations"></a>Recommandations relatives à SharePoint Server
 
@@ -113,10 +115,9 @@ Avant de configurer la batterie de serveurs SharePoint, assurez-vous que vous av
 
 Pour satisfaire à l’exigence de prise en charge pour un débit de disque de 200 Mo par seconde au minimum, assurez-vous de planifier l’architecture de recherche. Consultez l’article [Planifier l’architecture de recherche d’entreprise dans SharePoint Server 2013][sharepoint-search]. Suivez également les instructions contenues dans l’article [Best practices for crawling in SharePoint Server 2016][sharepoint-crawling] (Meilleures pratiques pour l’analyse dans SharePoint Server 2016).
 
-De plus, stockez les données de composant de recherche sur un volume de stockage distinct ou sur une partition avec des performances élevées. Pour réduire la charge et améliorer le débit, configurez les comptes d’utilisateur de cache d’objets, qui sont requis dans cette architecture. Fractionnez les fichiers de système d’exploitation Windows Server, les fichiers programme SharePoint Server 2016 et les journaux de diagnostic sur trois volumes de stockage distincts ou sur des partitions avec des performances normales. 
+De plus, stockez les données de composant de recherche sur un volume de stockage distinct ou sur une partition avec des performances élevées. Pour réduire la charge et améliorer le débit, configurez les comptes d’utilisateur de cache d’objets, qui sont requis dans cette architecture. Fractionnez les fichiers de système d’exploitation Windows Server, les fichiers programme SharePoint Server 2016 et les journaux de diagnostic sur trois volumes de stockage distincts ou sur des partitions avec des performances normales.
 
 Pour plus d’informations sur ces recommandations, consultez l’article [Comptes d’administration et de service de déploiement initial dans SharePoint Server 2016][sharepoint-accounts].
-
 
 ### <a name="hybrid-workloads"></a>Charges de travail hybrides
 
@@ -132,11 +133,11 @@ Nous recommandons également l’ajout d’une adresse IP d’écouteur au clust
 
 Pour les tailles de machine virtuelle recommandées et d’autres recommandations relatives aux performances pour SQL Server s’exécutant dans Azure, consultez l’article [Meilleures pratiques relatives aux performances de SQL Server dans les machines virtuelles Azure][sql-performance]. Suivez également les recommandations de l’article [Meilleures pratiques pour SQL Server dans une batterie de serveurs SharePoint Server 2016][sql-sharepoint-best-practices].
 
-Le serveur de nœud majoritaire devrait se trouver sur un ordinateur distinct des partenaires de réplication. Le serveur permet au serveur du partenaire de réplication secondaire dans une session de mode haute sécurité, de déterminer s’il faut initier un basculement automatique. Contrairement aux deux partenaires, le serveur de nœud majoritaire ne sert pas la base de données, mais au lieu de cela, il prend en charge le basculement automatique. 
+Le serveur de nœud majoritaire devrait se trouver sur un ordinateur distinct des partenaires de réplication. Le serveur permet au serveur du partenaire de réplication secondaire dans une session de mode haute sécurité, de déterminer s’il faut initier un basculement automatique. Contrairement aux deux partenaires, le serveur de nœud majoritaire ne sert pas la base de données, mais au lieu de cela, il prend en charge le basculement automatique.
 
 ## <a name="scalability-considerations"></a>Considérations relatives à l’extensibilité
 
-Pour mettre à l’échelle les serveurs existants, modifiez simplement la taille de machine virtuelle. 
+Pour mettre à l’échelle les serveurs existants, modifiez simplement la taille de machine virtuelle.
 
 Avec la fonctionnalité [MinRoles][minroles] dans SharePoint Server 2016, vous pouvez mettre à niveau les serveurs basés sur le rôle de serveur et supprimer des serveurs à partir d’un rôle. Lorsque vous ajoutez des serveurs à un rôle, vous pouvez spécifier les rôles uniques ou l’un des rôles combinés. Si vous ajoutez des serveurs au rôle de recherche, toutefois, vous devez également reconfigurer la topologie de recherche à l’aide de PowerShell. Vous pouvez également convertir des rôles à l’aide de MinRoles. Pour plus d’informations, consultez l’article [Gestion d’une batterie de serveurs MinRole dans SharePoint Server 2016][sharepoint-minrole].
 
@@ -152,7 +153,7 @@ Pour vous protéger contre une panne régionale, créez une batterie de serveurs
 
 Pour exploiter et maintenir les serveurs, les batteries de serveurs et les sites, suivez les pratiques recommandées pour les opérations SharePoint. Pour plus d’informations, consultez l’article [Opérations pour SharePoint Server 2016][sharepoint-ops].
 
-Les tâches à prendre en compte lors de la gestion de SQL Server dans un environnement SharePoint peuvent différer de celles généralement prises en compte pour une application de base de données. Une bonne pratique consiste à sauvegarder toutes les bases de données SQL chaque semaine avec des sauvegardes incrémentielles nocturnes. Sauvegardez les journaux des transactions toutes les 15 minutes. Une autre pratique consiste à implémenter des tâches de maintenance de SQL Server sur les bases de données lors de la désactivation de celles intégrées à SharePoint. Pour plus d’informations, consultez l’article [Planification et configuration de la capacité de SQL Server et du stockage][sql-server-capacity-planning]. 
+Les tâches à prendre en compte lors de la gestion de SQL Server dans un environnement SharePoint peuvent différer de celles généralement prises en compte pour une application de base de données. Une bonne pratique consiste à sauvegarder toutes les bases de données SQL chaque semaine avec des sauvegardes incrémentielles nocturnes. Sauvegardez les journaux des transactions toutes les 15 minutes. Une autre pratique consiste à implémenter des tâches de maintenance de SQL Server sur les bases de données lors de la désactivation de celles intégrées à SharePoint. Pour plus d’informations, consultez l’article [Planification et configuration de la capacité de SQL Server et du stockage][sql-server-capacity-planning].
 
 ## <a name="security-considerations"></a>Considérations relatives à la sécurité
 
@@ -175,7 +176,7 @@ Le déploiement crée les groupes de ressources suivants dans votre abonnement :
 - ra-onprem-sp2016-rg
 - ra-sp2016-network-rg
 
-Les fichiers de paramètre modèle font référence à ces noms. Si vous les modifiez, mettez à jour les fichiers de paramètres afin qu’ils correspondent. 
+Les fichiers de paramètre modèle font référence à ces noms. Si vous les modifiez, mettez à jour les fichiers de paramètres afin qu’ils correspondent.
 
 Les fichiers de paramètres incluent un mot de passe codé en dur dans divers emplacements. Modifiez ces valeurs avant de déployer.
 
@@ -183,7 +184,7 @@ Les fichiers de paramètres incluent un mot de passe codé en dur dans divers em
 
 [!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
-### <a name="deploy-the-solution"></a>Déployer la solution 
+### <a name="deployment-steps"></a>Étapes du déploiement
 
 1. Exécutez la commande suivante pour déployer un réseau simulé local.
 
@@ -203,12 +204,13 @@ Les fichiers de paramètres incluent un mot de passe codé en dur dans divers em
     azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure1.json --deploy
     ```
 
-4. Exécutez la commande suivante pour créer le cluster de basculement et le groupe de disponibilité. 
+4. Exécutez la commande suivante pour créer le cluster de basculement et le groupe de disponibilité.
 
     ```bash
     azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure2-cluster.json --deploy
+    ```
 
-5. Run the following command to deploy the remaining VMs.
+5. Exécutez la commande suivante pour déployer les machines virtuelles restantes.
 
     ```bash
     azbb -s <subscription_id> -g ra-onprem-sp2016-rg -l <location> -p azure3.json --deploy
@@ -230,7 +232,7 @@ Les fichiers de paramètres incluent un mot de passe codé en dur dans divers em
 
 Le résultat doit être semblable à ce qui suit :
 
-```powershell
+```console
 ComputerName     : 10.0.3.100
 RemoteAddress    : 10.0.3.100
 RemotePort       : 1433
@@ -239,7 +241,7 @@ SourceAddress    : 10.0.0.132
 TcpTestSucceeded : True
 ```
 
-S’il échoue, utilisez le portail Azure pour redémarrer la machine virtuelle nommée `ra-sp-sql-vm2`. Après son redémarrage, exécutez de nouveau la commande `Test-NetConnection`. Vous devrez peut-être patienter environ une minute après le redémarrage pour que la connexion soit établie. 
+S’il échoue, utilisez le portail Azure pour redémarrer la machine virtuelle nommée `ra-sp-sql-vm2`. Après son redémarrage, exécutez de nouveau la commande `Test-NetConnection`. Vous devrez peut-être patienter environ une minute après le redémarrage pour que la connexion soit établie.
 
 Effectuez le déploiement comme suit.
 
@@ -265,17 +267,17 @@ Effectuez le déploiement comme suit.
 
 1. Dans le [portail Azure][azure-portal], accédez au groupe de ressources `ra-onprem-sp2016-rg`.
 
-2. Dans la liste des ressources, sélectionnez la ressource de machine virtuelle nommée `ra-onpr-u-vm1`. 
+2. Dans la liste des ressources, sélectionnez la ressource de machine virtuelle nommée `ra-onpr-u-vm1`.
 
 3. Connectez-vous à la machine virtuelle, comme décrit dans la section [Connexion à la machine virtuelle][connect-to-vm]. Le nom d’utilisateur est `\onpremuser`.
 
-5.  Lorsque la connexion à distance à la machine virtuelle est établie, ouvrez un navigateur sur l’ordinateur virtuel et accédez à `http://portal.contoso.local`.
+4. Lorsque la connexion à distance à la machine virtuelle est établie, ouvrez un navigateur sur l’ordinateur virtuel et accédez à `http://portal.contoso.local`.
 
-6.  Dans la zone **Sécurité Windows**, connectez-vous au portail SharePoint en utilisant `contoso.local\testuser` pour le nom d’utilisateur.
+5. Dans la zone **Sécurité Windows**, connectez-vous au portail SharePoint en utilisant `contoso.local\testuser` pour le nom d’utilisateur.
 
 Cette ouverture de session« tunnèle » du domaine Fabrikam.com utilisé par le réseau local au domaine contoso.local utilisé par le portail SharePoint. Lorsque le site SharePoint s’ouvre, le site de démonstration racine s’affiche.
 
-**_Contributeurs à cette architecture de référence_**&mdash; Joe Davies, Bob Fox, Neil Hodgkinson, Paul Stork
+**_Contributeurs à cette architecture de référence_** &mdash; Joe Davies, Bob Fox, Neil Hodgkinson, Paul Stork
 
 <!-- links -->
 

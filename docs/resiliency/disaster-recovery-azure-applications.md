@@ -3,12 +3,12 @@ title: Récupération d’urgence des applications Microsoft Azure
 description: Présentations techniques et informations détaillées sur la conception d’applications pour la récupération d’urgence sur Microsoft Azure.
 author: adamglick
 ms.date: 09/12/2018
-ms.openlocfilehash: 4f879445154e37502bbeeeb90939737b6072e6ec
-ms.sourcegitcommit: 25bf02e89ab4609ae1b2eb4867767678a9480402
+ms.openlocfilehash: ff5da8a3d2612d7c122ec8ed87979eddf778dbf0
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2018
-ms.locfileid: "45584797"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902848"
 ---
 # <a name="disaster-recovery-for-azure-applications"></a>Récupération d’urgence des applications Microsoft Azure
 
@@ -16,7 +16,7 @@ La récupération d’urgence (DR) se concentre sur la récupération des foncti
 
 Les chefs d’entreprises et les propriétaires de technologie doivent déterminer les fonctionnalités requises en cas d’incident. Le niveau de fonctionnalité peut prendre plusieurs formes : complètement indisponible, partiellement disponible (fonctionnalité réduite ou traitement différé) ou entièrement disponible.
 
-Les stratégies de résilience et de haute disponibilité sont conçues pour faciliter la gestion des conditions de défaillance temporaire.  La mise en œuvre de ce plan implique des personnes, des processus et la prise en charge d’applications permettant au système de continuer à fonctionner. Pour être parfaitement fiable, votre plan doit inclure une préparation aux conditions de panne et des essais de récupération des bases de données. 
+Les stratégies de résilience et de haute disponibilité sont conçues pour gérer les conditions de défaillance temporaire.  La mise en œuvre de ce plan implique des personnes, des processus et la prise en charge d’applications permettant au système de continuer à fonctionner. Pour être parfaitement fiable, votre plan doit inclure une préparation aux conditions de panne et des essais de récupération des bases de données. 
 
 ## <a name="azure-disaster-recovery-features"></a>Fonctionnalités de la récupération d’urgence Azure
 
@@ -27,7 +27,7 @@ Azure exploite des centres de données dans plusieurs régions à l’échelle i
 
 ## <a name="azure-site-recovery"></a>Azure Site Recovery
 
-[Azure Site Recovery](/azure/site-recovery/) fournit un moyen simple de répliquer des machines virtuelles Azure d’une région à une autre. Il a une charge de gestion minimale, car vous n’avez pas besoin de configurer de ressources supplémentaires dans la région secondaire. Quand vous activez la réplication, Site Recovery crée automatiquement les ressources nécessaires dans la région cible en fonction des paramètres de la machine virtuelle source. Il fournit une réplication continue automatisée et vous permet d’effectuer le basculement d’application avec un seul clic. Vous pouvez effectuer des exercices de récupération d’urgence avec des tests de basculement, sans effet sur vos charges de travail de production ni la réplication continue. 
+[Azure Site Recovery](/azure/site-recovery/) fournit un moyen simple de répliquer des machines virtuelles Azure d’une région à une autre. Il a une charge de gestion minimale, car vous n’avez pas besoin de provisionner des ressources supplémentaires dans la région secondaire. Quand vous activez la réplication, Site Recovery crée automatiquement les ressources nécessaires dans la région cible en fonction des paramètres de la machine virtuelle source. Il fournit une réplication continue automatisée et vous permet d’effectuer le basculement d’application avec un seul clic. Vous pouvez effectuer des exercices de récupération d’urgence avec des tests de basculement, sans effet sur vos charges de travail de production ni la réplication continue. 
 
 ## <a name="azure-traffic-manager"></a>Azure Traffic Manager
 En cas de défaillance spécifique à une région, vous devez rediriger le trafic vers les services ou les déploiements dans une autre région. Il est préférable de gérer cette situation via des services tels qu’Azure Traffic Manager, qui automatise le basculement du trafic utilisateur en cas de défaillance dans la région principale. La compréhension des principes de base de Traffic Manager est essentielle pour concevoir une stratégie efficace de récupération d’urgence.
@@ -305,7 +305,7 @@ Les rubriques suivantes décrivent les services Azure spécifiques à la récup�
 | Azure Database pour MySQL | [Vue d’ensemble de la continuité d’activité avec Azure Database pour MySQL](/azure/mysql/concepts-business-continuity) |
 | Azure Database pour PostgreSQL | [Vue d’ensemble de la continuité d’activité avec Azure Database pour PostgreSQL](/azure/postgresql/concepts-business-continuity)
 | Cloud Services | [Que faire si une interruption de service Azure affecte Azure Cloud Services](/azure/cloud-services/cloud-services-disaster-recovery-guidance) |
-| Cosmos DB | [Basculement régional automatique pour la continuité des activités dans Azure Cosmos DB](/azure/cosmos-db/regional-failover)
+| Cosmos DB | [Basculement régional automatique pour la continuité d’activité dans Azure Cosmos DB](/azure/cosmos-db/regional-failover)
 | Key Vault | [Disponibilité et redondance d’Azure Key Vault](/azure/key-vault/key-vault-disaster-recovery-guidance) |
 |Stockage | [Que faire en cas de panne du Stockage Azure](/azure/storage/storage-disaster-recovery-guidance) |
 | Base de données SQL | [Restaurer une base de données SQL Azure ou basculer vers une base de données secondaire](/azure/sql-database/sql-database-disaster-recovery) |

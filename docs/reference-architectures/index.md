@@ -4,12 +4,12 @@ description: Architectures de référence, schémas et des recommandations préc
 layout: LandingPage
 ms.topic: landing-page
 ms.date: 08/30/2018
-ms.openlocfilehash: e7bbd797ba4b8bfc193b146f080cedf299dd47b4
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.openlocfilehash: 5b117ce308fcc47cae68bb83166ada71b75f6ce7
+ms.sourcegitcommit: 7d21aec9d9de0004ac777c1d1e364f53aac2350d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295512"
+ms.lasthandoff: 12/09/2018
+ms.locfileid: "53120767"
 ---
 # <a name="azure-reference-architectures"></a>Architectures de référence Azure
 
@@ -333,6 +333,26 @@ Passer à : [AI](#ai-and-machine-learning) | [Big Data](#big-data-solutions) | 
         </div>
     </a>
 </li>
+<!-- HA NVA -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./dmz/nva-ha.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/vnet.svg" height="140px" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Appliances réseau virtuelles hautement disponible</h3>
+                        <p>Déployez un ensemble d’appliances virtuelles réseau pour la haute disponibilité dans Azure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
 </ul>
 
 ## <a name="vm-workloads"></a>Charges de travail de machine virtuelle
@@ -493,7 +513,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big Data](#big-data-solutions) | 
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>SAP HANA sur des Instances de grande taille Azure</h3>
+                        <h3>SAP HANA sur Azure (grandes instances)</h3>
                         <p>Les grandes instances HANA sont déployées sur des serveurs physiques dans des régions Azure.</p>
                     </div>
                 </div>

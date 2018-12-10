@@ -1,22 +1,22 @@
 ---
-title: Traitement de flux avec Azure Databricks
+title: Traitement de flux de données avec Azure Databricks
 description: Créer un pipeline de traitement de flux de bout en bout dans Azure à l’aide d’Azure Databricks
 author: petertaylor9999
-ms.date: 11/01/2018
-ms.openlocfilehash: a7e9df57572c9b3a3b0e4f418f148449aa40b04c
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.date: 11/30/2018
+ms.openlocfilehash: 0640e900c212d2b75cc9cdd5bec3a4f7c050490d
+ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295736"
+ms.lasthandoff: 12/05/2018
+ms.locfileid: "52902831"
 ---
-# <a name="stream-processing-with-azure-databricks"></a>Traitement de flux avec Azure Databricks
+# <a name="stream-processing-with-azure-databricks"></a>Traitement de flux de données avec Azure Databricks
 
 Cette architecture de référence présente un pipeline de [traitement de flux](/azure/architecture/data-guide/big-data/real-time-processing) de bout en bout. Ce type de pipeline comprend quatre étapes : ingestion, traitement, stockage, analyse et création de rapports. Pour cette architecture de référence, le pipeline ingère des données issues de deux sources, effectue une jonction sur les enregistrements apparentés de chaque flux, enrichit le résultat et calcule une moyenne en temps réel. Les résultats sont stockés en vue d’une analyse plus approfondie. [**Déployez cette solution**.](#deploy-the-solution)
 
 ![](./images/stream-processing-databricks.png)
 
-**Scénario** : une compagnie de taxis collecte des données sur chaque trajet effectué en taxi. Pour ce scénario, nous partons du principe que deux appareils distincts envoient des données. Le taxi est équipé d’un compteur qui envoie les informations suivantes sur chaque course : durée, distance et lieux de prise en charge et de dépose. Un autre appareil accepte les paiements des clients et envoie des données sur les tarifs. Afin de déterminer les tendances des usagers, la compagnie de taxis souhaite calculer le pourboire moyen par mile parcouru, en temps réel, pour chaque quartier.
+**Scénario** : une compagnie de taxis collecte des données sur chaque trajet effectué en taxi. Pour ce scénario, nous partons du principe que deux périphériques distincts envoient des données. Le taxi est équipé d’un compteur qui envoie les informations suivantes sur chaque course : durée, distance et lieux de prise en charge et de dépose. Un autre périphérique accepte les paiements des clients et envoie des données sur les tarifs. Afin de déterminer les tendances des usagers, la compagnie de taxis souhaite calculer le pourboire moyen par mile parcouru, en temps réel, pour chaque quartier.
 
 ## <a name="architecture"></a>Architecture
 
@@ -24,7 +24,7 @@ L’architecture est constituée des composants suivants.
 
 **Sources de données**. Dans cette architecture, deux sources de données génèrent des flux de données en temps réel. Le premier flux de données contient des informations sur les courses, tandis que le second contient des informations sur les tarifs. L’architecture de référence comprend un générateur de données simulées qui lit le contenu d’un ensemble de fichiers statiques et envoie (push) les données vers Event Hubs. Les sources de données dans une application réelle seraient les appareils installés dans les taxis.
 
-**Azure Event Hubs**. [Event Hubs](/azure/event-hubs/) est un service d’ingestion d’événements. Cette architecture utilise deux instances de hub d’événements, à savoir une par source de données. Chaque source de données envoie un flux de données au hub d’événements associé.
+**Azure Event Hubs**. [Event Hubs](/azure/event-hubs/) est un service d’ingestion d’événements. Cette architecture utilise deux instances d’Event Hub, à savoir une par source de données. Chaque source de données envoie un flux de données à l’Event Hub associé.
 
 **Azure Databricks**. [Databricks](/azure/azure-databricks/) est une plateforme d’analytique basée sur Apache Spark et optimisée pour la plateforme de services cloud Microsoft Azure. Databricks est utilisé pour mettre en corrélation les données de courses et de tarifs des taxis, mais aussi pour enrichir les données mises en corrélation avec les données de quartiers stockées dans le système de fichiers Databricks.
 
@@ -84,7 +84,7 @@ using (var client = pool.GetObject())
 
 ### <a name="event-hubs"></a>Event Hubs
 
-La capacité de débit du service Event Hubs est mesurée par les [unités de débit](/azure/event-hubs/event-hubs-features#throughput-units). Vous pouvez mettre automatiquement à l’échelle un hub d’événements en activant [l’augmentation automatique](/azure/event-hubs/event-hubs-auto-inflate), qui ajuste automatiquement les unités de débit en fonction du trafic, jusqu’à la limite configurée. 
+La capacité de débit du service Event Hubs est mesurée par les [unités de débit](/azure/event-hubs/event-hubs-features#throughput-units). Vous pouvez mettre automatiquement à l’échelle un Event Hub en activant [l’augmentation automatique](/azure/event-hubs/event-hubs-auto-inflate), qui ajuste automatiquement les unités de débit en fonction du trafic, jusqu’à la limite configurée. 
 
 ## <a name="stream-processing"></a>Traitement des flux de données
 
@@ -224,7 +224,7 @@ databricks secrets put --scope "azure-databricks-job" --key "taxi-ride"
 Dans le code, les secrets sont accessibles via les [utilitaires de secrets](https://docs.databricks.com/user-guide/dev-tools/dbutils.html#secrets-utilities) Azure Databricks.
 
 
-## <a name="monitoring-considerations"></a>Éléments à prendre en compte sur la supervision
+## <a name="monitoring-considerations"></a>Surveillance - Éléments à prendre en compte
 
 Azure Databricks est basé sur Apache Spark et tous deux utilisent [log4j](https://logging.apache.org/log4j/2.x/) comme bibliothèque standard pour la journalisation. En plus de la journalisation par défaut fournie par Apache Spark, cette architecture de référence envoie des journaux et des métriques à [Azure Log Analytics](/azure/log-analytics/).
 
@@ -269,7 +269,7 @@ Les méthodes contenues dans StreamingMetricsListener sont appelées par le runt
 
 ### <a name="latency-and-throughput-for-streaming-queries"></a>Latence et débit pour les requêtes de streaming 
 
-```
+```shell
 taxijob_CL
 | where TimeGenerated > startofday(datetime(<date>)) and TimeGenerated < endofday(datetime(<date>))
 | project  mdc_inputRowsPerSecond_d, mdc_durationms_triggerExecution_d  
@@ -277,7 +277,7 @@ taxijob_CL
 ``` 
 ### <a name="exceptions-logged-during-stream-query-execution"></a>Exceptions journalisées pendant l’exécution de requête de flux
 
-```
+```shell
 taxijob_CL
 | where TimeGenerated > startofday(datetime(<date>)) and TimeGenerated < endofday(datetime(<date>))
 | where Level contains "Error" 
@@ -285,7 +285,7 @@ taxijob_CL
 
 ### <a name="accumulation-of-malformed-fare-and-ride-data"></a>Accumulation de données de course et de tarif mal formées
 
-```
+```shell
 SparkMetric_CL 
 | where TimeGenerated > startofday(datetime(<date>)) and TimeGenerated < endofday(datetime(<date>))
 | render timechart 
@@ -298,7 +298,8 @@ SparkMetric_CL
 ```
 
 ### <a name="job-execution-to-trace-resiliency"></a>Exécution du travail pour tracer la résilience
-```
+
+```shell
 SparkMetric_CL 
 | where TimeGenerated > startofday(datetime(<date>)) and TimeGenerated < endofday(datetime(<date>))
 | render timechart 
@@ -307,11 +308,11 @@ SparkMetric_CL
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
-Un déploiement de cette architecture de référence est disponible sur [GitHub](https://github.com/mspnp/reference-architectures/tree/master/data). 
+Un déploiement de cette architecture de référence est disponible sur [GitHub](https://github.com/mspnp/azure-databricks-streaming-analytics). 
 
 ### <a name="prerequisites"></a>Prérequis
 
-1. Clonez, dupliquez ou téléchargez le fichier zip pour le dépôt GitHub des [architectures de référence](https://github.com/mspnp/reference-architectures).
+1. Clonez, dupliquez (fork) ou téléchargez le dépôt GitHub de [traitement de flux avec Azure Databricks](https://github.com/mspnp/azure-databricks-streaming-analytics).
 
 2. Installez [Docker](https://www.docker.com/) pour exécuter le générateur de données.
 
@@ -320,7 +321,7 @@ Un déploiement de cette architecture de référence est disponible sur [GitHub]
 4. Installez l’interface [CLI Databricks](https://docs.databricks.com/user-guide/dev-tools/databricks-cli.html).
 
 5. À partir d’une invite de commandes, d’une invite bash ou de l’invite de commandes PowerShell, connectez-vous à votre compte Azure, comme suit :
-    ```
+    ```shell
     az login
     ```
 6. Installez un IDE Java, avec les ressources suivantes :
@@ -330,7 +331,7 @@ Un déploiement de cette architecture de référence est disponible sur [GitHub]
 
 ### <a name="download-the-new-york-city-taxi-and-neighborhood-data-files"></a>Télécharger les fichiers de données sur les taxis et les quartiers de New York
 
-1. Créez un répertoire nommé `DataFile` sous le répertoire `data/streaming_azuredatabricks` dans votre système de fichiers local.
+1. Créez un répertoire nommé `DataFile` à la racine du dépôt GitHub cloné dans votre système de fichiers local.
 
 2. Ouvrez un navigateur web et accédez à https://uofi.app.box.com/v/NYCtaxidata/folder/2332219935.
 
@@ -341,17 +342,15 @@ Un déploiement de cette architecture de référence est disponible sur [GitHub]
     > [!NOTE]
     > Ce fichier zip contient d’autres fichiers zip. N’extrayez pas les fichiers zip enfants.
 
-    La structure de répertoire doit ressembler à ce qui suit :
+    La structure des répertoires doit se présenter comme ceci :
 
-    ```
-    /data
-        /streaming_azuredatabricks
-            /DataFile
-                /FOIL2013
-                    trip_data_1.zip
-                    trip_data_2.zip
-                    trip_data_3.zip
-                    ...
+    ```shell
+    /DataFile
+        /FOIL2013
+            trip_data_1.zip
+            trip_data_2.zip
+            trip_data_3.zip
+            ...
     ```
 
 5. Ouvrez un navigateur web et accédez à https://www.zillow.com/howto/api/neighborhood-boundaries.htm. 
@@ -368,10 +367,10 @@ Un déploiement de cette architecture de référence est disponible sur [GitHub]
     az login
     ```
 
-2. Accédez au dossier `data/streaming_azuredatabricks` du dépôt GitHub.
+2. Accédez au dossier nommé `azure` dans le dépôt GitHub :
 
     ```bash
-    cd data/streaming_azuredatabricks
+    cd azure
     ```
 
 3. Exécutez les commandes suivantes pour déployer les ressources Azure :
@@ -390,7 +389,7 @@ Un déploiement de cette architecture de référence est disponible sur [GitHub]
 
     # Deploy resources
     az group deployment create --resource-group $resourceGroup \
-        --template-file ./azure/deployresources.json --parameters \
+        --template-file deployresources.json --parameters \
         eventHubNamespace=$eventHubNamespace \
         databricksWorkspaceName=$databricksWorkspaceName \
         cosmosDatabaseAccount=$cosmosDatabaseAccount \
@@ -439,7 +438,7 @@ Ces valeurs correspondent aux secrets qui seront ajoutés aux secrets Databricks
 4. Dans la section **enter CQL command to create the table** (entrer la commande CQL pour créer la table), entrez `neighborhoodstats` dans la zone de texte en regard de `newyorktaxi`.
 
 5. Dans la zone de texte ci-dessous, entrez ce qui suit :
-```
+```shell
 (neighborhood text, window_end timestamp, number_of_rides bigint,total_fare_amount double, primary key(neighborhood, window_end))
 ```
 6. Dans la zone de texte **Throughput (1,000 - 1,000,000 RU/s)** (Débit (1 000 - 1 000 000 de RU/s)), entrez la valeur `4000`.
@@ -451,17 +450,17 @@ Ces valeurs correspondent aux secrets qui seront ajoutés aux secrets Databricks
 Pour commencer, entrez les secrets pour EventHub :
 
 1. À partir de l’interface **CLI Azure Databricks** installée à l’étape 2 des prérequis, créez l’étendue des secrets Azure Databricks :
-    ```
+    ```shell
     databricks secrets create-scope --scope "azure-databricks-job"
     ```
 2. Ajoutez le secret pour le hub d’événements des courses de taxis (taxi-ride) :
-    ```
+    ```shell
     databricks secrets put --scope "azure-databricks-job" --key "taxi-ride"
     ```
     Une fois exécutée, cette commande ouvre l’éditeur vi. Entrez la valeur de **taxi-tour-eh** de la section de sortie **eventHubs** de l’étape 4 de la section *Déployer les ressources Azure*. Enregistrez et quittez vi.
 
 3. Ajoutez le secret pour le hub d’événements des tarifs de taxi (taxi-fare) :
-    ```
+    ```shell
     databricks secrets put --scope "azure-databricks-job" --key "taxi-fare"
     ```
     Une fois exécutée, cette commande ouvre l’éditeur vi. Entrez la valeur de **taxi-fare-eh** de la section de sortie **eventHubs** de l’étape 4 de la section *Déployer les ressources Azure*. Enregistrez et quittez vi.
@@ -471,13 +470,13 @@ Ensuite, entrez les secrets pour Cosmos DB :
 1. Ouvrez le portail Azure, puis accédez au groupe de ressources spécifié à l’étape 3 de la section **Déployer les ressources Azure**. Cliquez sur le compte Azure Cosmos DB.
 
 2. À partir de l’interface **CLI Azure Databricks**, ajoutez le secret pour le nom d’utilisateur Cosmos DB :
-    ```
+    ```shell
     databricks secrets put --scope azure-databricks-job --key "cassandra-username"
     ```
 Une fois exécutée, cette commande ouvre l’éditeur vi. Entrez la valeur de **username** de la section de sortie **CosmosDb** de l’étape 4 de la section *Déployer les ressources Azure*. Enregistrez et quittez vi.
 
 3. Ensuite, ajoutez le secret pour le mot de passe Cosmos DB :
-    ```
+    ```shell
     databricks secrets put --scope azure-databricks-job --key "cassandra-password"
     ```
 
@@ -493,7 +492,7 @@ Une fois exécutée, cette commande ouvre l’éditeur vi. Entrez la valeur de *
     dbfs mkdirs dbfs:/azure-databricks-jobs
     ```
 
-2. Accédez à data/streaming_azuredatabricks/DateFile et entrez ce qui suit :
+2. Accédez au répertoire `DataFile` et entrez les informations suivantes :
     ```bash
     dbfs cp ZillowNeighborhoods-NY.zip dbfs:/azure-databricks-jobs
     ```
@@ -502,37 +501,37 @@ Une fois exécutée, cette commande ouvre l’éditeur vi. Entrez la valeur de *
 
 Pour cette section, vous avez besoin de l’ID et de la clé primaire de l’espace de travail Log Analytics. L’ID de l’espace de travail est la valeur de **workspaceId** dans la section de sortie **logAnalytics** de l’étape 4 de la section *Déployer les ressources Azure*. La clé primaire est le **secret** de la section de sortie. 
 
-1. Pour configurer la journalisation log4j, ouvrez data\streaming_azuredatabricks\azure\AzureDataBricksJob\src\main\resources\com\microsoft\pnp\azuredatabricksjob\log4j.properties. Modifiez les deux valeurs suivantes :
-    ```
+1. Pour configurer la journalisation log4j, ouvrez `\azure\AzureDataBricksJob\src\main\resources\com\microsoft\pnp\azuredatabricksjob\log4j.properties`. Modifiez les deux valeurs suivantes :
+    ```shell
     log4j.appender.A1.workspaceId=<Log Analytics workspace ID>
     log4j.appender.A1.secret=<Log Analytics primary key>
     ```
 
-2. Pour configurer la journalisation personnalisée, ouvrez data\streaming_azuredatabricks\azure\azure-databricks-monitoring\scripts\metrics.properties. Modifiez les deux valeurs suivantes :
-    ``` 
+2. Pour configurer une journalisation personnalisée, ouvrez `\azure\azure-databricks-monitoring\scripts\metrics.properties`. Modifiez les deux valeurs suivantes :
+    ```shell
     *.sink.loganalytics.workspaceId=<Log Analytics workspace ID>
     *.sink.loganalytics.secret=<Log Analytics primary key>
     ```
 
 ### <a name="build-the-jar-files-for-the-databricks-job-and-databricks-monitoring"></a>Générer les fichiers .jar pour le travail Databricks et la supervision Databricks
 
-1. Utilisez votre environnement de développement Java pour importer le fichier projet Maven nommé **pom.xml** situé à la racine du répertoire **data/streaming_azuredatabricks**. 
+1. Utilisez votre IDE Java pour importer le fichier projet Maven nommé **pom.xml** qui se trouve dans le répertoire racine. 
 
 2. Optez pour une build propre. La sortie de cette build correspond aux fichiers nommés **azure-databricks-job-1.0-SNAPSHOT.jar** et **azure-databricks-monitoring-0.9.jar**. 
 
 ### <a name="configure-custom-logging-for-the-databricks-job"></a>Configurer la journalisation personnalisée pour le travail Databricks
 
 1. Copiez le fichier **azure-databricks-surveillance-0.9.jar** dans le système de fichiers Databricks en entrant la commande suivante dans l’interface **CLI Databricks** :
-    ```
+    ```shell
     databricks fs cp --overwrite azure-databricks-monitoring-0.9.jar dbfs:/azure-databricks-job/azure-databricks-monitoring-0.9.jar
     ```
 
-2. Copiez les propriétés de journalisation personnalisée de data\streaming_azuredatabricks\azure\azure-databricks-monitoring\scripts\metrics.properties vers le système de fichiers Databricks en entrant la commande suivante :
-    ```
+2. Copiez les propriétés de la journalisation personnalisée depuis `\azure\azure-databricks-monitoring\scripts\metrics.properties` vers le système de fichiers Databricks en entrant la commande suivante :
+    ```shell
     databricks fs cp --overwrite metrics.properties dbfs:/azure-databricks-job/metrics.properties
     ```
 
-3. À ce stade, vous n’avez pas encore nommé votre cluster Databricks ; attribuez-lui un nom maintenant. Vous devez entrer le nom ci-dessous dans le chemin du système de fichiers Databricks de votre cluster. Copiez le script d’initialisation de data\streaming_azuredatabricks\azure\azure-databricks-monitoring\scripts\sparks.properties vers le système de fichiers Databricks en entrant la commande suivante :
+3. À ce stade, vous n’avez pas encore nommé votre cluster Databricks ; attribuez-lui un nom maintenant. Vous devez entrer le nom ci-dessous dans le chemin du système de fichiers Databricks de votre cluster. Copiez le script d’initialisation depuis `\azure\azure-databricks-monitoring\scripts\spark.metrics` vers le système de fichiers Databricks en entrant la commande suivante :
     ```
     databricks fs cp --overwrite spark-metrics.sh dbfs:/databricks/init/<cluster-name>/spark-metrics.sh
     ```
@@ -559,7 +558,7 @@ Pour cette section, vous avez besoin de l’ID et de la clé primaire de l’esp
 
 10. Entrez **dbfs:/databricks/init/<cluster-name>/spark-metrics.sh** en remplaçant <cluster-name> par le nom de cluster créé à l’étape 1.
 
-11. Cliquez sur le bouton **Add**.
+11. Cliquez sur le bouton **Add** .
 
 12. Cliquez sur le bouton **Create Cluster**.
 
@@ -576,7 +575,7 @@ Pour cette section, vous avez besoin de l’ID et de la clé primaire de l’esp
 5. Entrez **com.microsoft.pnp.TaxiCabReader** dans le champ **Main Class** (Classe principale).
 
 6. Dans le champ arguments, entrez ce qui suit :
-    ```
+    ```shell
     -n jar:file:/dbfs/azure-databricks-jobs/ZillowNeighborhoods-NY.zip!/ZillowNeighborhoods-NY.shp --taxi-ride-consumer-group taxi-ride-eh-cg --taxi-fare-consumer-group taxi-fare-eh-cg --window-interval "1 minute" --cassandra-host <Cosmos DB Cassandra host name from above> 
     ``` 
 
@@ -629,11 +628,11 @@ Pour cette section, vous avez besoin de l’ID et de la clé primaire de l’esp
 
 ### <a name="run-the-data-generator"></a>Exécuter le générateur de données
 
-1. Accédez au répertoire `data/streaming_azuredatabricks/onprem` dans le dépôt GitHub.
+1. Accédez au répertoire nommé `onprem` dans le dépôt GitHub.
 
 2. Mettez à jour les valeurs du fichier **main.env** comme suit :
 
-    ```
+    ```shell
     RIDE_EVENT_HUB=[Connection string for the taxi-ride event hub]
     FARE_EVENT_HUB=[Connection string for the taxi-fare event hub]
     RIDE_DATA_FILE_PATH=/DataFile/FOIL2013
@@ -648,7 +647,7 @@ Pour cette section, vous avez besoin de l’ID et de la clé primaire de l’esp
     docker build --no-cache -t dataloader .
     ```
 
-4. Revenez vers le répertoire parent, `data/stream_azuredatabricks`.
+4. Revenez au répertoire parent.
 
     ```bash
     cd ..

@@ -1,16 +1,17 @@
 ---
-title: Choisir une solution pour connecter un réseau local à Azure
+title: Connecter un réseau local à Azure
+titleSuffix: Azure Reference Architectures
 description: Comparatif des architectures de référence pour connecter un réseau local à Azure.
 author: telmosampaio
 ms.date: 07/02/2018
-ms.openlocfilehash: a9e2a212d65530e714635bbfae3a57766e77c3a6
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.openlocfilehash: de509b6d95805f4fc871f6dbd76a87d2c0bec6f1
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295483"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53119912"
 ---
-# <a name="connect-an-on-premises-network-to-azure"></a>Connecter un réseau local à Azure
+# <a name="choose-a-solution-for-connecting-an-on-premises-network-to-azure"></a>Choisir une solution pour connecter un réseau local à Azure
 
 Cet article compare les options disponibles pour connecter un réseau local à un réseau virtuel (VNet) Azure. Pour chaque option, une architecture de référence plus détaillée est disponible.
 
@@ -75,11 +76,9 @@ Cette architecture est idéale pour les applications hybrides qui nécessitent u
 
 - [Réseau hybride avec ExpressRoute et basculement du VPN](./expressroute-vpn-failover.md)
 
-
 ## <a name="hub-spoke-network-topology"></a>Topologie de réseau hub-and-spoke
 
 Une topologie de réseau hub-and-spoke consiste à isoler des charges de travail tout en partageant des services tels que l’identité et la sécurité. Le hub est un réseau virtuel (VNet) dans Azure qui centralise la connectivité à votre réseau local. Les rayons sont des réseaux virtuels qui s’associent au hub. Les services partagés sont déployés dans le hub, tandis que les charges de travail individuelles sont déployées en tant que rayons.
-
 
 **Architectures de référence**
 
