@@ -407,7 +407,7 @@ items:
       href: reference-architectures/sap/sap-netweaver.md
     - name: SAP S/4HANA
       href: reference-architectures/sap/sap-s4hana.md
-    - name: SAP HANA sur des Instances de grande taille Azure
+    - name: SAP HANA sur Azure (grandes instances)
       href: reference-architectures/sap/hana-large-instances.md
   - name: Sans serveur
     items:
@@ -527,6 +527,26 @@ items:
       href: cloud-adoption/getting-started/what-is-governance.md
     - name: Gouvernance des accès aux ressources dans Azure
       href: cloud-adoption/getting-started/azure-resource-access.md
+  - name: Justification professionnelle
+    items:
+    - name: Création d’une analyse de rentabilisation d’une migration cloud
+      href: cloud-adoption/business-strategy/cloud-migration-business-case.md
+    - name: Présentation des modèles financiers
+      href: cloud-adoption/business-strategy/financial-models.md
+  - name: Patrimoine numérique
+    items:
+    - name: Les 5 R de la rationalisation
+      href: cloud-adoption/digital-estate/5-rs-of-rationalization.md
+    - name: Qu’est-ce qu’un patrimoine numérique ?
+      href: cloud-adoption/digital-estate/overview.md
+    - name: Approches de la planification du patrimoine numérique
+      href: cloud-adoption/digital-estate/approach.md
+    - name: Collecter les données de stock
+      href: cloud-adoption/digital-estate/inventory.md
+    - name: Rationaliser le patrimoine numérique
+      href: cloud-adoption/digital-estate/rationalize.md
+    - name: Prévoir les coûts du cloud
+      href: cloud-adoption/digital-estate/calculate.md
   - name: Gouvernance
     items:
     - name: Vue d’ensemble
@@ -547,13 +567,15 @@ items:
       href: cloud-adoption/operations/operational-fitness-review.md
   - name: Annexe
     items:
+    - name: Centre de données virtuel (VDC)
+      href: vdc/index.md
     - name: Structure d’entreprise Azure
       href: cloud-adoption/appendix/azure-scaffold.md
     - name: Implémentation d’une structure d’entreprise Azure
       href: cloud-adoption/appendix/azure-scaffold-examples.md
-ms.openlocfilehash: 79bb5441b72d85f410d57b0f030772ac34a6e2b3
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 6e20f9e9212191109faf5a7ca09fcf5ac991a821
+ms.sourcegitcommit: e7f8676bbffe500fc4d6deb603b7c0b7ba1884a6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902797"
+ms.lasthandoff: 12/10/2018
+ms.locfileid: "53179312"
