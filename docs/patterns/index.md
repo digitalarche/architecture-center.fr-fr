@@ -2,13 +2,13 @@
 title: Modèles de conception de cloud
 description: Modèles de conception de cloud pour Microsoft Azure
 keywords: Azure
-ms.date: 06/23/2017
-ms.openlocfilehash: 308e9bc784fc791d04adcecaae64bf258edeb20b
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.date: 12/10/2018
+ms.openlocfilehash: 26ee59ef15fc63bb5e823cd85f610cd9ad01177a
+ms.sourcegitcommit: 9a15af3a25f25b8730968d32cbb006434b183e18
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43326195"
+ms.lasthandoff: 12/11/2018
+ms.locfileid: "53234048"
 ---
 # <a name="cloud-design-patterns"></a>Modèles de conception de cloud
 
@@ -104,6 +104,7 @@ Chaque modèle décrit le problème traité par le modèle, les aspects à prend
 |              [Vue matérialisée](./materialized-view.md)              |                                        Générez des vues préremplies sur les données d’un ou de plusieurs magasins de données lorsque les données ne sont pas adéquatement formatées pour les opérations de requête requises.                                        |
 |              [Canaux et filtres](./pipes-and-filters.md)              |                                                        Divisez une tâche qui exécute un traitement complexe en une série d’éléments séparés qui peuvent être réutilisés.                                                        |
 |                 [File d’attente de priorité](./priority-queue.md)                 |                                 Classez par ordre de priorité les requêtes envoyées aux services, de telle sorte que les demandes ayant une priorité plus élevée soient reçues et traitées plus rapidement que celles de moindre priorité.                                  |
+| [Serveur de publication/abonné](./publisher-subscriber.md) | Activez une application pour annoncer des événements à plusieurs consommateurs intéressés de manière asynchrone, sans coupler les expéditeurs aux destinataires. |
 |      [Nivellement de la charge basé sur une file d’attente](./queue-based-load-leveling.md)      |                                               Utilisez une file d’attente qui agit comme mémoire tampon entre une tâche et un service qu’elle appelle, afin d’atténuer les surcharges intermittentes.                                               |
 |                          [Nouvelle tentative](./retry.md)                          |               Permettez à une application de gérer les défaillances temporaires anticipées quand elle tente de se connecter à un service ou à une ressource réseau en réessayant d’exécuter en toute transparence une opération qui a échoué précédemment.                |
 |     [Superviseur de l’agent du planificateur](./scheduler-agent-supervisor.md)     |                                                              Coordonnez un ensemble d’actions sur un ensemble distribué de services et d’autres ressources à distance.                                                               |
