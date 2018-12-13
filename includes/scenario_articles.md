@@ -110,11 +110,11 @@
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="./apps/media/architecture-devops-dotnet-webapp.png" height="140px" />
+                            <img src="./apps/media/architecture-devops-dotnet-webapp.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Pipeline CI/CD avec Azure DevOps</h3>
+                        <h3>Conception d’un pipeline CI/CD à l’aide d’Azure DevOps</h3>
                         <p>Générez et publiez une application .NET sur Azure Web Apps à l’aide d’Azure DevOps.</p>
                     </div>
                 </div>
@@ -411,8 +411,8 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Application web à plusieurs niveaux développée pour la haute disponibilité et la récupération d’urgence sur Azure</h3>
-                        <p>Créer une application web à plusieurs niveaux développée pour la haute disponibilité et la récupération d’urgence sur Azure à l’aide de machines virtuelles et de zones de disponibilité Azure, d’Azure Site Recovery et d’Azure Traffic Manager</p>
+                        <h3>Application web multiniveau développée pour la haute disponibilité et la reprise d’activité sur Azure</h3>
+                        <p>Créer une application web multiniveau développée pour la haute disponibilité et la reprise d’activité sur Azure à l’aide de machines virtuelles Azure, de groupes à haute disponibilité, de zones de disponibilité, d’Azure Site Recovery et d’Azure Traffic Manager</p>
                     </div>
                 </div>
             </div>
@@ -430,7 +430,7 @@
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>Sécuriser une application web Windows pour les secteurs industriels réglementés</h3>
+                        <h3>Création d’applications web sécurisées avec des machines virtuelles Windows Azure</h3>
                         <p>Créez une application web sécurisée, à plusieurs niveaux avec Windows Server sur Azure à l’aide de groupes identiques, d’Application Gateway et d’équilibreurs de charge.</p>
                     </div>
                 </div>
