@@ -1,58 +1,59 @@
 ---
-title: Implémentation d’une topologie de réseau hub-and-spoke dans Azure
-description: Comment implémenter une topologie de réseau hub-and-spoke dans Azure.
+title: Implémenter une topologie de réseau hub-and-spoke dans Azure
+titleSuffix: Azure Reference Architectures
+description: Implémentez une topologie de réseau hub-and-spoke dans Azure.
 author: telmosampaio
 ms.date: 10/08/2018
+ms.custom: seodec18
 pnp.series.title: Implement a hub-spoke network topology in Azure
 pnp.series.prev: expressroute
-ms.openlocfilehash: e14abb5526b6ecd8637fb89c4ef7154d3b26f7a4
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.openlocfilehash: 23821353fe943d3e389ed89ca26b946ff6afeed3
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916342"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120289"
 ---
 # <a name="implement-a-hub-spoke-network-topology-in-azure"></a>Implémenter une topologie de réseau hub-and-spoke dans Azure
 
-Cette architecture de référence montre comment implémenter une topologie hub-and-spoke dans Azure. Le *hub* est un réseau virtuel (VNet) dans Azure qui centralise la connectivité à votre réseau local. Les *membres spokes* sont des réseaux virtuels appairés avec le hub et qui peuvent être utilisés pour isoler les charges de travail. Le trafic circule entre le centre de données local et le hub via une connexion de passerelle ExpressRoute ou VPN.  [**Déployez cette solution**](#deploy-the-solution).
+Cette architecture de référence montre comment implémenter une topologie hub-and-spoke dans Azure. Le *hub* est un réseau virtuel (VNet) dans Azure qui centralise la connectivité à votre réseau local. Les *membres spokes* sont des réseaux virtuels appairés avec le hub et qui peuvent être utilisés pour isoler les charges de travail. Le trafic circule entre le centre de données local et le hub via une connexion de passerelle ExpressRoute ou VPN. [**Déployez cette solution**](#deploy-the-solution).
 
 ![[0]][0]
 
 *Téléchargez un [fichier Visio][visio-download] de cette architecture.*
 
-
 Cette topologie présente les avantages suivants :
 
-* **Réduction les coûts** en centralisant les services qui peuvent être partagés par plusieurs charges de travail, comme les appliances virtuelles réseau et les serveurs DNS.
-* **Surmonter les limites des abonnements** en appairant les réseaux virtuels de différents abonnements avec le hub central.
-* **Séparation des préoccupations** entre le service informatique central (SecOps, InfraOps) et les charges de travail (DevOps).
+- **Réduction les coûts** en centralisant les services qui peuvent être partagés par plusieurs charges de travail, comme les appliances virtuelles réseau et les serveurs DNS.
+- **Surmonter les limites des abonnements** en appairant les réseaux virtuels de différents abonnements avec le hub central.
+- **Séparation des préoccupations** entre le service informatique central (SecOps, InfraOps) et les charges de travail (DevOps).
 
 Utilisations courantes de cette architecture :
 
-* Charges de travail déployées sur des environnements différents, tels que les environnements de développement, de test et de production, qui requièrent des services partagés tels que DNS, IDS, NTP ou AD DS. Les services partagés sont placés dans le réseau virtuel hub, tandis que chaque environnement est déployé sur un membre spoke pour garantir l’isolation.
-* Charges de travail ne nécessitant pas de connectivité entre elles, mais nécessitant un accès aux services partagés.
-* Entreprises nécessitant un contrôle centralisé des aspects de la sécurité, tel qu’un pare-feu dans le hub en tant que zone DMZ et une gestion séparée des charges de travail dans chaque membre spoke.
+- Charges de travail déployées sur des environnements différents, tels que les environnements de développement, de test et de production, qui requièrent des services partagés tels que DNS, IDS, NTP ou AD DS. Les services partagés sont placés dans le réseau virtuel hub, tandis que chaque environnement est déployé sur un membre spoke pour garantir l’isolation.
+- Charges de travail ne nécessitant pas de connectivité entre elles, mais nécessitant un accès aux services partagés.
+- Entreprises nécessitant un contrôle centralisé des aspects de la sécurité, tel qu’un pare-feu dans le hub en tant que zone DMZ et une gestion séparée des charges de travail dans chaque membre spoke.
 
 ## <a name="architecture"></a>Architecture
 
 L’architecture est constituée des composants suivants.
 
-* **Réseau local**. Un réseau local privé qui s’exécute au sein d’une organisation.
+- **Réseau local**. Un réseau local privé qui s’exécute au sein d’une organisation.
 
-* **Périphérique VPN**. Périphérique ou service qui assure la connectivité externe au réseau local. Le périphérique VPN peut être un périphérique matériel ou une solution logicielle telle que le service RRAS (Routing and Remote Access Service) dans Windows Server 2012. Pour obtenir la liste des périphériques VPN pris en charge et des informations sur la configuration de certains périphériques VPN pour la connexion à Azure, consultez [À propos des périphériques VPN pour les connexions de la passerelle VPN de site à site][vpn-appliance].
+- **Périphérique VPN**. Périphérique ou service qui assure la connectivité externe au réseau local. Le périphérique VPN peut être un périphérique matériel ou une solution logicielle telle que le service RRAS (Routing and Remote Access Service) dans Windows Server 2012. Pour obtenir la liste des périphériques VPN pris en charge et des informations sur la configuration de certains périphériques VPN pour la connexion à Azure, consultez [À propos des périphériques VPN pour les connexions de la passerelle VPN de site à site][vpn-appliance].
 
-* **Passerelle de réseau virtuel VPN ou passerelle ExpressRoute**. La passerelle de réseau virtuel permet au réseau virtuel de se connecter au périphérique VPN, ou circuit ExpressRoute, utilisé pour la connectivité avec votre réseau local. Pour plus d’informations, consultez [Connecter un réseau local à Microsoft Azure Virtual Network][connect-to-an-Azure-vnet].
+- **Passerelle de réseau virtuel VPN ou passerelle ExpressRoute**. La passerelle de réseau virtuel permet au réseau virtuel de se connecter au périphérique VPN, ou circuit ExpressRoute, utilisé pour la connectivité avec votre réseau local. Pour plus d’informations, consultez [Connecter un réseau local à Microsoft Azure Virtual Network][connect-to-an-Azure-vnet].
 
 > [!NOTE]
 > Les scripts de déploiement pour cette architecture de référence utilisent une passerelle VPN pour la connectivité et un réseau virtuel dans Azure pour simuler votre réseau local.
 
-* **Réseau virtuel hub**. Réseau virtuel Azure utilisé comme hub dans la topologie hub-and-spoke. Le hub est le point central de la connectivité à votre réseau local et un emplacement pour héberger les services que peuvent utiliser les différentes charges de travail hébergées dans les réseaux virtuels spokes.
+- **Réseau virtuel hub**. Réseau virtuel Azure utilisé comme hub dans la topologie hub-and-spoke. Le hub est le point central de la connectivité à votre réseau local et un emplacement pour héberger les services que peuvent utiliser les différentes charges de travail hébergées dans les réseaux virtuels spokes.
 
-* **Sous-réseau de passerelle**. Les passerelles de réseau virtuel sont conservées dans le même sous-réseau.
+- **Sous-réseau de passerelle**. Les passerelles de réseau virtuel sont conservées dans le même sous-réseau.
 
-* **Réseaux virtuels spokes**. Un ou plusieurs réseaux virtuels Azure qui sont utilisés comme membres spokes dans la topologie hub-and-spoke. Les membres spokes peuvent servir à isoler les charges de travail dans leurs propres réseaux virtuels, qui sont alors gérées séparément des autres membres spokes. Chaque charge de travail peut inclure plusieurs niveaux, avec plusieurs sous-réseaux connectés à l’aide d’équilibreurs de charge Azure. Pour plus d’informations sur l’infrastructure d’application, consultez [Running Windows VM workloads][windows-vm-ra] (Exécution de charges de travail de machine virtuelle Windows) et [Exécution de charges de travail de machine virtuelle Linux][linux-vm-ra].
+- **Réseaux virtuels spokes**. Un ou plusieurs réseaux virtuels Azure qui sont utilisés comme membres spokes dans la topologie hub-and-spoke. Les membres spokes peuvent servir à isoler les charges de travail dans leurs propres réseaux virtuels, qui sont alors gérées séparément des autres membres spokes. Chaque charge de travail peut inclure plusieurs niveaux, avec plusieurs sous-réseaux connectés à l’aide d’équilibreurs de charge Azure. Pour plus d’informations sur l’infrastructure d’application, consultez [Running Windows VM workloads][windows-vm-ra] (Exécution de charges de travail de machine virtuelle Windows) et [Exécution de charges de travail de machine virtuelle Linux][linux-vm-ra].
 
-* **Appairage de réseaux virtuels**. Deux réseaux virtuels peuvent être connectés à l’aide d’une [connexion d’appairage][vnet-peering]. Les connexions d’appairage sont des connexions non transitives et à faible latence entre des réseaux virtuels. Une fois appairés, les réseaux virtuels échangent le trafic à l’aide de la dorsale principale d’Azure, sans avoir besoin d’un routeur. Dans une topologie de réseau hub-and-spoke, vous utilisez l’appairage de réseaux virtuels pour connecter le hub à chaque membre spoke. Vous pouvez appairer des réseaux virtuels dans la même région ou dans différentes régions. Pour plus d’informations, consultez la [configuration requise et les contraintes][vnet-peering-requirements].
+- **Appairage de réseaux virtuels**. Deux réseaux virtuels peuvent être connectés à l’aide d’une [connexion d’appairage][vnet-peering]. Les connexions d’appairage sont des connexions non transitives et à faible latence entre des réseaux virtuels. Une fois appairés, les réseaux virtuels échangent le trafic à l’aide de la dorsale principale d’Azure, sans avoir besoin d’un routeur. Dans une topologie de réseau hub-and-spoke, vous utilisez l’appairage de réseaux virtuels pour connecter le hub à chaque membre spoke. Vous pouvez appairer des réseaux virtuels dans la même région ou dans différentes régions. Pour plus d’informations, consultez la [configuration requise et les contraintes][vnet-peering-requirements].
 
 > [!NOTE]
 > Cet article couvre uniquement les déploiements [Resource Manager](/azure/azure-resource-manager/resource-group-overview), mais vous pouvez également connecter un réseau virtuel classique à un réseau virtuel Resource Manager dans un même abonnement. De cette façon, vos membres spokes peuvent héberger des déploiements classiques tout en tirant parti des services partagés dans le hub.
@@ -63,7 +64,7 @@ Les recommandations suivantes s’appliquent à la plupart des scénarios. Suive
 
 ### <a name="resource-groups"></a>Groupes de ressources
 
-Le réseau virtuel hub et chaque réseau virtuel spoke peuvent être implémentés dans des groupes de ressources et différentes, voire dans des abonnements différents. Quand vous appairez des réseaux virtuels de différents abonnements, les deux abonnements peuvent être associés au même locataire Azure Active Directory ou à un locataire différent. Cela permet de décentraliser la gestion de chaque charge de travail, tout en partageant les services gérés dans le réseau virtuel hub. 
+Le réseau virtuel hub et chaque réseau virtuel spoke peuvent être implémentés dans des groupes de ressources et différentes, voire dans des abonnements différents. Quand vous appairez des réseaux virtuels de différents abonnements, les deux abonnements peuvent être associés au même locataire Azure Active Directory ou à un locataire différent. Cela permet de décentraliser la gestion de chaque charge de travail, tout en partageant les services gérés dans le réseau virtuel hub.
 
 ### <a name="vnet-and-gatewaysubnet"></a>Réseau virtuel et sous réseau GatewaySubnet
 
@@ -76,7 +77,7 @@ Pour plus d’informations sur la configuration de la passerelle, consultez les 
 
 Pour accroître la disponibilité, vous pouvez utiliser ExpressRoute et un VPN pour le basculement. Consultez [Connecter un réseau local à Azure à l’aide d’ExpressRoute avec basculement VPN][hybrid-ha].
 
-Une topologie hub-and-spoke peut également être utilisée sans passerelle, si vous n’avez pas besoin de connectivité avec votre réseau local. 
+Une topologie hub-and-spoke peut également être utilisée sans passerelle, si vous n’avez pas besoin de connectivité avec votre réseau local.
 
 ### <a name="vnet-peering"></a>Homologation de réseaux virtuels
 
@@ -86,9 +87,9 @@ Toutefois, cette situation vous prive très rapidement de connexions d’appaira
 
 Vous pouvez également configurer les membres spokes afin qu’ils utilisent la passerelle de réseau virtuel hub pour communiquer avec des réseaux distants. Pour que le trafic de la passerelle circule entre le membre spoke et le hub, puis se connecte à des réseaux distants, vous devez effectuer les opérations suivantes :
 
-  - Configurer la connexion d’appairage de réseaux virtuels dans le hub pour **autoriser le transit par passerelle**.
-  - Configurer la connexion d’appairage de réseaux virtuels dans chaque membre spoke pour **utiliser des passerelles distantes**.
-  - Configurer toutes les connexions d’appairages de réseaux virtuels pour **autoriser le trafic transféré**.
+- Configurer la connexion d’appairage de réseaux virtuels dans le hub pour **autoriser le transit par passerelle**.
+- Configurer la connexion d’appairage de réseaux virtuels dans chaque membre spoke pour **utiliser des passerelles distantes**.
+- Configurer toutes les connexions d’appairages de réseaux virtuels pour **autoriser le trafic transféré**.
 
 ## <a name="considerations"></a>Considérations
 
@@ -135,7 +136,7 @@ Pour déployer le centre de données local simulé en tant que réseau virtuel A
 
 2. Ouvrez le fichier `onprem.json` . Remplacez les valeurs de `adminUsername` et `adminPassword`.
 
-    ```bash
+    ```json
     "adminUsername": "<user name>",
     "adminPassword": "<password>",
     ```
@@ -156,7 +157,7 @@ Pour déployer réseau virtuel du hub, procédez comme suit.
 
 1. Ouvrez le fichier `hub-vnet.json` . Remplacez les valeurs de `adminUsername` et `adminPassword`.
 
-    ```bash
+    ```json
     "adminUsername": "<user name>",
     "adminPassword": "<password>",
     ```
@@ -165,7 +166,7 @@ Pour déployer réseau virtuel du hub, procédez comme suit.
 
 3. Recherchez les deux instances de `sharedKey`, puis entrez une clé partagée pour la connexion VPN. Les valeurs doivent correspondre.
 
-    ```bash
+    ```json
     "sharedKey": "",
     ```
 
@@ -192,6 +193,7 @@ Testez la connectivité entre l’environnement local simulé et le réseau virt
    ```powershell
    Test-NetConnection 10.0.0.68 -CommonTCPPort RDP
    ```
+
 Le résultat doit être semblable à ce qui suit :
 
 ```powershell
@@ -216,7 +218,7 @@ TcpTestSucceeded : True
 
 4. Utilisez la commande `ping` pour tester la connectivité avec la machine virtuelle du serveur de rebond dans le réseau virtuel du hub :
 
-   ```bash
+   ```shell
    ping 10.0.0.68
    ```
 
@@ -226,7 +228,7 @@ Pour déployer les réseaux virtuels spokes, procédez comme suit.
 
 1. Ouvrez le fichier `spoke1.json` . Remplacez les valeurs de `adminUsername` et `adminPassword`.
 
-    ```bash
+    ```json
     "adminUsername": "<user name>",
     "adminPassword": "<password>",
     ```
@@ -238,7 +240,7 @@ Pour déployer les réseaux virtuels spokes, procédez comme suit.
    ```bash
    azbb -s <subscription_id> -g spoke1-vnet-rg -l <location> -p spoke1.json --deploy
    ```
-  
+
 4. Répétez les étapes 1-2 pour le fichier `spoke2.json`.
 
 5. Exécutez la commande suivante :
@@ -276,11 +278,11 @@ Pour tester la connectivité entre l’environnement local simulé et le réseau
 
 1. Utilisez le portail Azure pour trouver la machine virtuelle appelée `jb-vm1` dans le groupe de ressources `onprem-jb-rg`.
 
-2. Cliquez sur `Connect` et copiez la commande `ssh` qui s’affiche dans le portail. 
+2. Cliquez sur `Connect` et copiez la commande `ssh` qui s’affiche dans le portail.
 
 3. Depuis un invite Linux, exécutez `ssh` pour vous connecter à l’environnement local simulé. Utilisez le mot de passe spécifié dans le fichier de paramètre `onprem.json`.
 
-5. Utilisez la commande `ping` pour tester la connectivité avec les machines virtuelles du serveur de rebond dans chaque spoke :
+4. Utilisez la commande `ping` pour tester la connectivité avec les machines virtuelles du serveur de rebond dans chaque spoke :
 
    ```bash
    ping 10.1.0.68
@@ -293,7 +295,7 @@ Cette étape est facultative. Si vous souhaitez autoriser les spokes à se conne
 
 1. Ouvrez le fichier `hub-nva.json` . Remplacez les valeurs de `adminUsername` et `adminPassword`.
 
-    ```bash
+    ```json
     "adminUsername": "<user name>",
     "adminPassword": "<password>",
     ```
@@ -322,9 +324,9 @@ Cette étape est facultative. Si vous souhaitez autoriser les spokes à se conne
 [vnet-peering-requirements]: /azure/virtual-network/virtual-network-manage-peering#requirements-and-constraints
 [vpn-appliance]: /azure/vpn-gateway/vpn-gateway-about-vpn-devices
 [windows-vm-ra]: ../virtual-machines-windows/index.md
-
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/hybrid-network-hub-spoke.vsdx
 [ref-arch-repo]: https://github.com/mspnp/reference-architectures
+
 [0]: ./images/hub-spoke.png "Topologie hub-and-spoke dans Azure"
 [1]: ./images/hub-spoke-gateway-routing.svg "Topologie hub-and-spoke dans Azure avec routage transitif"
 [2]: ./images/hub-spoke-no-gateway-routing.svg "Topologie hub-and-spoke dans Azure avec routage transitif utilisant une appliance virtuelle réseau"

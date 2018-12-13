@@ -1,47 +1,44 @@
 ---
 title: Connecter un réseau local à Azure à l’aide d’un VPN
-description: Comment implémenter une architecture réseau de site à site sécurisée qui s’étend sur un réseau virtuel Azure et un réseau local connecté à l’aide d’un VPN.
+titleSuffix: Azure Reference Architectures
+description: Implémentez une architecture réseau de site à site sécurisée qui s’étend sur un réseau virtuel Azure et un réseau local connecté à l’aide d’un VPN.
 author: RohitSharma-pnp
 ms.date: 10/22/2018
-pnp.series.title: Connect an on-premises network to Azure
-pnp.series.next: expressroute
-pnp.series.prev: ./index
-cardTitle: VPN
-ms.openlocfilehash: a494ff952dd6c8be3b38c2ca7f6740a44b5b30e1
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.openlocfilehash: a1bb2e250cb261e1a56abfb58b099fd078c068e5
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295665"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120439"
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-a-vpn-gateway"></a>Connecter un réseau local à Azure à l’aide d’une passerelle VPN
 
-Cette architecture de référence montre comment étendre un réseau local à Azure à l’aide d’un réseau privé virtuel (VPN) site à site. Le trafic circule entre le réseau local et un réseau virtuel Azure (VNet) via un tunnel VPN IPSec. [**Déployez cette solution**.](#deploy-the-solution)
+Cette architecture de référence montre comment étendre un réseau local à Azure à l’aide d’un réseau privé virtuel (VPN) site à site. Le trafic circule entre le réseau local et un réseau virtuel Azure (VNet) via un tunnel VPN IPSec. [**Déployez cette solution**](#deploy-the-solution).
 
-![[0]][0]
+![Réseau hybride incluant les infrastructures Azure et locales](./images/vpn.png)
 
 *Téléchargez un [fichier Visio][visio-download] de cette architecture.*
 
-## <a name="architecture"></a>Architecture 
+## <a name="architecture"></a>Architecture
 
 L’architecture est constituée des composants suivants.
 
-* **Réseau local**. Un réseau local privé s’exécutant au sein d’une organisation.
+- **Réseau local**. Un réseau local privé s’exécutant au sein d’une organisation.
 
-* **Appliance VPN**. Périphérique ou service qui assure la connectivité externe au réseau local. L’appliance VPN peut être un périphérique matériel ou une solution logicielle telle que le service RRAS (Routing and Remote Access Service) dans Windows Server 2012. Pour obtenir la liste des appareils VPN pris en charge et des informations sur la configuration pour les connecter à une passerelle VPN Azure, consultez les instructions pour l’appareil sélectionné dans l’article [À propos des périphériques VPN pour les connexions de la passerelle VPN de site à site][vpn-appliance].
+- **Appliance VPN**. Périphérique ou service qui assure la connectivité externe au réseau local. L’appliance VPN peut être un périphérique matériel ou une solution logicielle telle que le service RRAS (Routing and Remote Access Service) dans Windows Server 2012. Pour obtenir la liste des appareils VPN pris en charge et des informations sur la configuration pour les connecter à une passerelle VPN Azure, consultez les instructions pour l’appareil sélectionné dans l’article [À propos des périphériques VPN pour les connexions de la passerelle VPN de site à site][vpn-appliance].
 
-* **Réseau virtuel**. L’application cloud et les composants de la passerelle VPN Azure résident dans le même [réseau virtuel][azure-virtual-network].
+- **Réseau virtuel**. L’application cloud et les composants de la passerelle VPN Azure résident dans le même [réseau virtuel][azure-virtual-network].
 
-* **Passerelle VPN Azure**. Le service de [passerelle VPN][azure-vpn-gateway] vous permet de connecter le réseau virtuel au réseau local via une appliance VPN. Pour plus d’informations, consultez [Connecter un réseau local à Microsoft Azure Virtual Network][connect-to-an-Azure-vnet]. La passerelle VPN inclut les éléments suivants :
-  
-  * **Passerelle de réseau virtuel**. Ressource qui fournit une appliance VPN virtuelle pour le réseau virtuel. Elle achemine le trafic du réseau local vers le réseau virtuel.
-  * **Passerelle de réseau local**. Abstraction de l’appliance VPN locale. Le trafic réseau allant de l’application cloud au réseau local est acheminé via cette passerelle.
-  * **Connexion**. La connexion a des propriétés qui spécifient le type de connexion (IPSec) et la clé partagée avec l’appliance VPN locale pour chiffrer le trafic.
-  * **Sous-réseau de passerelle**. La passerelle de réseau virtuel est conservée dans son propre sous-réseau, qui est soumis à des exigences diverses, décrites dans la section Recommandations ci-dessous.
+- **Passerelle VPN Azure**. Le service de [passerelle VPN][azure-vpn-gateway] vous permet de connecter le réseau virtuel au réseau local via une appliance VPN. Pour plus d’informations, consultez [Connecter un réseau local à Microsoft Azure Virtual Network][connect-to-an-Azure-vnet]. La passerelle VPN inclut les éléments suivants :
 
-* **Application cloud**. L’application hébergée dans Azure. Elle peut inclure plusieurs niveaux, avec plusieurs sous-réseaux connectés à l’aide d’équilibreurs de charge Azure. Pour plus d’informations sur l’infrastructure d’application, consultez [Running Windows VM workloads][windows-vm-ra] (Exécution de charges de travail de machine virtuelle Windows) et [Exécution de charges de travail de machine virtuelle Linux][linux-vm-ra].
+  - **Passerelle de réseau virtuel**. Ressource qui fournit une appliance VPN virtuelle pour le réseau virtuel. Elle achemine le trafic du réseau local vers le réseau virtuel.
+  - **Passerelle de réseau local**. Abstraction de l’appliance VPN locale. Le trafic réseau allant de l’application cloud au réseau local est acheminé via cette passerelle.
+  - **Connexion**. La connexion a des propriétés qui spécifient le type de connexion (IPSec) et la clé partagée avec l’appliance VPN locale pour chiffrer le trafic.
+  - **Sous-réseau de passerelle**. La passerelle de réseau virtuel est conservée dans son propre sous-réseau, qui est soumis à des exigences diverses, décrites dans la section Recommandations ci-dessous.
 
-* **Équilibreur de charge interne**. Le trafic réseau de la passerelle VPN est acheminé vers l’application cloud via un équilibreur de charge interne. L’équilibreur de charge se trouve dans le sous-réseau frontal de l’application.
+- **Application cloud**. L’application hébergée dans Azure. Elle peut inclure plusieurs niveaux, avec plusieurs sous-réseaux connectés à l’aide d’équilibreurs de charge Azure. Pour plus d’informations sur l’infrastructure d’application, consultez [Running Windows VM workloads][windows-vm-ra] (Exécution de charges de travail de machine virtuelle Windows) et [Exécution de charges de travail de machine virtuelle Linux][linux-vm-ra].
+
+- **Équilibreur de charge interne**. Le trafic réseau de la passerelle VPN est acheminé vers l’application cloud via un équilibreur de charge interne. L’équilibreur de charge se trouve dans le sous-réseau frontal de l’application.
 
 ## <a name="recommendations"></a>Recommandations
 
@@ -56,12 +53,11 @@ Créez un sous-réseau nommé *GatewaySubnet*, avec une plage d’adresses de /2
 1. Définissez les bits variables dans l’espace d’adressage du réseau virtuel sur 1, jusqu'aux bits utilisés par le sous-réseau de passerelle, puis les bits restants sur 0.
 2. Convertissez les bits obtenus en nombre décimal et exprimez celui-ci sous la forme d’un espace d’adressage dont la longueur de préfixe correspond à la taille du sous-réseau de passerelle.
 
-Par exemple, pour un réseau virtuel avec une plage d’adresses IP de 10.20.0.0/16, l’étape 1 ci-dessus donne le résultat 10.20.0b11111111.0b11100000.  La conversion en nombre décimal et l’expression sous la forme d’un espace d’adressage génère 10.20.255.224/27. 
+Par exemple, pour un réseau virtuel avec une plage d’adresses IP de 10.20.0.0/16, l’étape 1 ci-dessus donne le résultat 10.20.0b11111111.0b11100000.  La conversion en nombre décimal et l’expression sous la forme d’un espace d’adressage génère 10.20.255.224/27.
 
 > [!WARNING]
 > Ne déployez pas de machines virtuelles pour le sous-réseau de passerelle. N’affectez pas non plus de groupe de sécurité réseau à ce sous-réseau, car la passerelle cesserait de fonctionner.
-> 
-> 
+>
 
 ### <a name="virtual-network-gateway"></a>Passerelle de réseau virtuel
 
@@ -77,15 +73,13 @@ Pour obtenir la liste des appliances VPN prises en charge, voir [À propos des 
 
 > [!NOTE]
 > Si vous souhaitez changer de type de passerelle une fois celle-ci créée, il vous faudra la supprimer et en recréer une autre.
-> 
-> 
+>
 
 Sélectionnez la référence SKU de passerelle VPN Azure qui correspond le mieux à vos besoins en débit. Pour plus d’informations, consultez [SKU de passerelle][azure-gateway-skus]
 
 > [!NOTE]
 > La référence SKU de base n’est pas compatible avec Azure ExpressRoute. Vous pouvez [modifier la référence SKU][changing-SKUs] une fois la passerelle créée.
-> 
-> 
+>
 
 Le coût facturé est calculé en fonction de la durée pendant laquelle une passerelle est configurée et disponible. Voir la [tarification de la passerelle VPN][azure-gateway-charges].
 
@@ -103,9 +97,9 @@ Ouvrez les ports requis par l’application cloud dans le réseau local.
 
 Testez la connexion pour vérifier les points suivants :
 
-* L’appliance VPN locale achemine correctement le trafic vers l’application cloud via la passerelle VPN Azure.
-* Le réseau virtuel réachemine correctement le trafic vers le réseau local.
-* Le trafic interdit dans les deux directions est correctement bloqué.
+- L’appliance VPN locale achemine correctement le trafic vers l’application cloud via la passerelle VPN Azure.
+- Le réseau virtuel réachemine correctement le trafic vers le réseau local.
+- Le trafic interdit dans les deux directions est correctement bloqué.
 
 ## <a name="scalability-considerations"></a>Considérations relatives à l’extensibilité
 
@@ -123,7 +117,7 @@ Si vous devez vous assurer que le réseau local reste disponible pour la passere
 
 Si votre organisation possède plusieurs sites locaux, créez des [connexions multisites][vpn-gateway-multi-site] vers un ou plusieurs réseaux virtuels Azure. Cette approche requiert un routage dynamique (basé sur des itinéraires). Veillez donc à ce que la passerelle VPN locale prenne en charge cette fonctionnalité.
 
-Pour plus d’informations sur les contrats de niveau de service, voir le [contrat de niveau de service pour la passerelle VPN][sla-for-vpn-gateway]. 
+Pour plus d’informations sur les contrats de niveau de service, voir le [contrat de niveau de service pour la passerelle VPN][sla-for-vpn-gateway].
 
 ## <a name="manageability-considerations"></a>Considérations relatives à la facilité de gestion
 
@@ -133,7 +127,7 @@ Utilisez les [diagnostics de la passerelle VPN Azure][gateway-diagnostic-logs] 
 
 Analysez les journaux des opérations de la passerelle VPN Azure à l’aide des journaux d’audit disponibles dans le portail Azure. Des journaux distincts sont disponibles pour la passerelle de réseau local, la passerelle de réseau Azure et la connexion. Ces informations permettent de suivre toutes les modifications apportées à la passerelle et peuvent être utiles si une passerelle cesse de fonctionner pour une raison quelconque.
 
-![[2]][2]
+![Journaux d’audit dans le portail Azure](../_images/guidance-hybrid-network-vpn/audit-logs.png)
 
 Contrôlez la connectivité et suivez les événements d’échec de connectivité. Vous pouvez utiliser un package de contrôle comme [Nagios][nagios] pour capturer ces informations et les consigner dans des rapports.
 
@@ -143,8 +137,7 @@ Générez une clé partagée différente pour chaque passerelle VPN. Utilisez u
 
 > [!NOTE]
 > Actuellement, vous ne pouvez pas utiliser Azure Key Vault afin de prépartager des clés pour la passerelle VPN Azure.
-> 
-> 
+>
 
 Assurez-vous que l’appliance VPN locale utilise une méthode de chiffrement [compatible avec la passerelle VPN Azure][vpn-appliance-ipsec]. Pour le routage basé sur des stratégies, la passerelle VPN Azure prend en charge les algorithmes de chiffrement AES256, AES128 et 3DES. Les passerelles basées sur des itinéraires prennent en charge AES256 et 3DES.
 
@@ -154,11 +147,9 @@ Si l’application du réseau virtuel envoie des données à Internet, envisagez
 
 > [!NOTE]
 > Le tunneling forcé peut influer sur la connectivité aux services Azure (le service de stockage, par exemple) et le gestionnaire de licences de Windows.
-> 
-> 
+>
 
-
-## <a name="troubleshooting"></a>Résolution de problèmes 
+## <a name="troubleshooting"></a>Résolution de problèmes
 
 Pour obtenir des informations générales sur la résolution des problèmes courants liés au VPN, voir la page correspondante ([Troubleshooting common VPN related errors][troubleshooting-vpn-errors]).
 
@@ -176,7 +167,7 @@ Les recommandations suivantes sont utiles pour déterminer si votre appliance V
 
         - Inability to connect, possibly due to an incorrect IP address specified for the Azure VPN gateway in the RRAS VPN network interface configuration.
 
-        ```
+        ```console
         EventID            : 20111
         MachineName        : on-prem-vm
         Data               : {41, 3, 0, 0}
@@ -208,7 +199,7 @@ Les recommandations suivantes sont utiles pour déterminer si votre appliance V
 
         - The wrong shared key being specified in the RRAS VPN network interface configuration.
 
-        ```
+        ```console
         EventID            : 20111
         MachineName        : on-prem-vm
         Data               : {233, 53, 0, 0}
@@ -232,15 +223,15 @@ Les recommandations suivantes sont utiles pour déterminer si votre appliance V
         Container          :
         ```
 
-    Vous pouvez également obtenir des informations de journal des événements sur les tentatives de connexion via le service RRAS à l’aide de la commande PowerShell suivante : 
+    Vous pouvez également obtenir des informations de journal des événements sur les tentatives de connexion via le service RRAS à l’aide de la commande PowerShell suivante :
 
-    ```
+    ```powershell
     Get-EventLog -LogName Application -Source RasClient | Format-List -Property *
     ```
 
     En cas d’échec de connexion, ce fichier journal contient des erreurs semblables à ce qui suit :
 
-    ```
+    ```console
     EventID            : 20227
     MachineName        : on-prem-vm
     Data               : {}
@@ -264,13 +255,13 @@ Les recommandations suivantes sont utiles pour déterminer si votre appliance V
 
     L’appliance VPN n’achemine peut-être pas correctement le trafic via la passerelle VPN Azure. Utilisez un outil tel que [PsPing][psping] pour vérifier la connectivité et le routage sur la passerelle VPN. Par exemple, pour tester la connectivité d’un ordinateur local à un serveur web situé sur le réseau virtuel, exécutez la commande suivante (en remplaçant `<<web-server-address>>` par l’adresse du serveur web) :
 
-    ```
+    ```console
     PsPing -t <<web-server-address>>:80
     ```
 
     Si l’ordinateur local peut acheminer le trafic vers le serveur web, vous devriez obtenir une sortie de ce type :
 
-    ```
+    ```console
     D:\PSTools>psping -t 10.20.0.5:80
 
     PsPing v2.01 - PsPing - ping, latency, bandwidth measurement utility
@@ -290,7 +281,7 @@ Les recommandations suivantes sont utiles pour déterminer si votre appliance V
 
     Si l’ordinateur local ne peut pas communiquer avec la destination spécifiée, vous verrez des messages de ce type :
 
-    ```
+    ```console
     D:\PSTools>psping -t 10.20.1.6:80
 
     PsPing v2.01 - PsPing - ping, latency, bandwidth measurement utility
@@ -320,7 +311,7 @@ Les recommandations suivantes sont utiles pour déterminer s’il existe un prob
 
     Vous pouvez afficher la clé partagée stockée par la passerelle VPN Azure à l’aide de la commande CLI Azure suivante :
 
-    ```
+    ```azurecli
     azure network vpn-connection shared-key show <<resource-group>> <<vpn-connection-name>>
     ```
 
@@ -330,13 +321,13 @@ Les recommandations suivantes sont utiles pour déterminer s’il existe un prob
 
     Vous pouvez afficher les détails du sous-réseau à l’aide de la commande CLI Azure suivante :
 
-    ```
+    ```azurecli
     azure network vnet subnet show -g <<resource-group>> -e <<vnet-name>> -n GatewaySubnet
     ```
 
     Vérifiez qu’il n’existe aucun champ de données nommé *Network Security Group id*. L’exemple suivant montre les résultats pour une instance du sous-réseau *GatewaySubnet* à laquelle est affectée un groupe de sécurité réseau (*VPN-Gateway-Group*). Cela peut empêcher la passerelle de fonctionner correctement si les règles sont définies pour ce groupe de sécurité réseau.
 
-    ```
+    ```console
     C:\>azure network vnet subnet show -g profx-prod-rg -e profx-vnet -n GatewaySubnet
         info:    Executing command network vnet subnet show
         + Looking up virtual network "profx-vnet"
@@ -353,7 +344,7 @@ Les recommandations suivantes sont utiles pour déterminer s’il existe un prob
 
     Vérifiez toutes les règles du groupe de sécurité réseau associées aux sous-réseaux contenant ces machines virtuelles. Vous pouvez afficher toutes les règles du groupe de sécurité réseau à l’aide de la commande CLI Azure suivante :
 
-    ```
+    ```azurecli
     azure network nsg show -g <<resource-group>> -n <<nsg-name>>
     ```
 
@@ -361,13 +352,13 @@ Les recommandations suivantes sont utiles pour déterminer s’il existe un prob
 
     Vous pouvez utiliser la commande Azure PowerShell suivante pour vérifier l’état actuel de la connexion VPN Azure. Le paramètre `<<connection-name>>` est le nom de la connexion VPN Azure qui relie la passerelle du réseau virtuel et la passerelle locale.
 
-    ```
+    ```powershell
     Get-AzureRmVirtualNetworkGatewayConnection -Name <<connection-name>> - ResourceGroupName <<resource-group>>
     ```
 
     Les extraits de code suivants montrent la sortie générée si la passerelle est connectée (premier exemple) et déconnectée (second exemple) :
 
-    ```
+    ```powershell
     PS C:\> Get-AzureRmVirtualNetworkGatewayConnection -Name profx-gateway-connection -ResourceGroupName profx-prod-rg
 
     AuthorizationKey           :
@@ -385,7 +376,7 @@ Les recommandations suivantes sont utiles pour déterminer s’il existe un prob
     ...
     ```
 
-    ```
+    ```powershell
     PS C:\> Get-AzureRmVirtualNetworkGatewayConnection -Name profx-gateway-connection2 -ResourceGroupName profx-prod-rg
 
     AuthorizationKey           :
@@ -411,11 +402,11 @@ Les recommandations suivantes sont utiles pour déterminer s’il existe un prob
 
     La façon de vérifier cela dépend de l’appliance VPN exécutée localement. Par exemple, avec RRAS sur Windows Server 2012, vous pouvez utiliser l’Analyseur de performances pour suivre le volume de données reçues et transmises sur la connexion VPN. À l’aide de l’objet *RAS Total*, sélectionnez les compteurs d’*octets reçus par seconde* et d’*octets transmis par seconde* :
 
-    ![[3]][3]
+    ![Compteurs de performances pour superviser le trafic du réseau VPN](../_images/guidance-hybrid-network-vpn/RRAS-perf-counters.png)
 
     Vous devez comparer les résultats à la bande passante disponible pour la passerelle VPN (de 100 Mbits/s pour les références de base à 1,25 Gbits/s pour la référence VpnGw3) :
 
-    ![[4]][4]
+    ![Exemple de graphique de performances du réseau VPN](../_images/guidance-hybrid-network-vpn/RRAS-perf-graph.png)
 
 - **Vérifiez que vous avez déployé le nombre approprié de machines virtuelles, avec la taille correcte, pour votre charge applicative.**
 
@@ -427,21 +418,22 @@ Les recommandations suivantes sont utiles pour déterminer s’il existe un prob
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
-
-**Configuration requise.** Vous devez disposer d’une infrastructure locale existante déjà configurée avec une appliance réseau appropriée.
+**Conditions préalables**. Vous devez disposer d’une infrastructure locale existante déjà configurée avec une appliance réseau appropriée.
 
 Pour déployer la solution, procédez comme suit :
 
+<!-- markdownlint-disable MD033 -->
+
 1. Cliquez sur le bouton ci-dessous :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fhybrid-networking%2Fvpn%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
-2. Attendez que le lien s’ouvre dans le portail Azure, puis procédez comme suit : 
-   * Le nom du **groupe de ressources** est déjà défini dans le fichier de paramètres ; sélectionnez **Créer nouveau** et entrez `ra-hybrid-vpn-rg` dans la zone de texte.
-   * Sélectionnez la région à partir de la zone déroulante **Emplacement**.
-   * Ne modifiez pas les zones de texte **Template Root Uri** (Uri racine de modèle) ou **Parameter Root Uri** (Uri racine de paramètre).
-   * Passez en revue les termes et conditions, puis cochez la case **J’accepte les termes et conditions mentionnés ci-dessus**.
-   * Cliquez sur le bouton **Acheter**.
+2. Attendez que le lien s’ouvre dans le portail Azure, puis procédez comme suit :
+   - Le nom du **groupe de ressources** est déjà défini dans le fichier de paramètres ; sélectionnez **Créer nouveau** et entrez `ra-hybrid-vpn-rg` dans la zone de texte.
+   - Sélectionnez la région à partir de la zone déroulante **Emplacement**.
+   - Ne modifiez pas les zones de texte **Template Root Uri** (Uri racine de modèle) ou **Parameter Root Uri** (Uri racine de paramètre).
+   - Passez en revue les termes et conditions, puis cochez la case **J’accepte les termes et conditions mentionnés ci-dessus**.
+   - Cliquez sur le bouton **Acheter**.
 3. Attendez la fin du déploiement.
 
-
+<!-- markdownlint-enable MD033 -->
 
 <!-- links -->
 
@@ -489,7 +481,3 @@ Pour déployer la solution, procédez comme suit :
 [virtualNetworkGateway-parameters]: https://github.com/mspnp/hybrid-networking/vpn/parameters/virtualNetworkGateway.parameters.json
 [azure-cli]: https://azure.microsoft.com/documentation/articles/xplat-cli-install/
 [CIDR]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
-[0]: ./images/vpn.png "Réseau hybride incluant les infrastructures Azure et locales"
-[2]: ../_images/guidance-hybrid-network-vpn/audit-logs.png "Journaux d’audit dans le portail Azure"
-[3]: ../_images/guidance-hybrid-network-vpn/RRAS-perf-counters.png "Compteurs de performances pour surveiller le trafic du réseau VPN"
-[4]: ../_images/guidance-hybrid-network-vpn/RRAS-perf-graph.png "Exemple de graphique de performances du réseau VPN"

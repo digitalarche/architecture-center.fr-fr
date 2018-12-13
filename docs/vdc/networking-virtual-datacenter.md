@@ -386,7 +386,7 @@ Découvrez plus en détail les fonctionnalités suivantes présentées dans cet 
 
 <!--Image References-->
 [0]: ./images/networking-redundant-equipment.png "Exemples de chevauchement de composants" 
-[1]: ./images/networking-vdc-high-level.png "Exemple de haut niveau de VDC hub-and-spoke" (réseau en étoile)
+[1]: ./images/networking-vdc-high-level.png "Exemple de haut niveau de VDC hub-and-spoke (réseau en étoile)"
 [2]: ./images/networking-hub-spokes-cluster.png "Cluster de concentrateurs et de rayons"
 [3]: ./images/networking-spoke-to-spoke.png "Rayon à rayon"
 [4]: ./images/networking-vdc-block-level-diagram.png "Diagramme de niveau bloc du VDC"
