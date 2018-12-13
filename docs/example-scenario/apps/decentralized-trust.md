@@ -3,12 +3,13 @@ title: Confiance décentralisée entre les banques sur Azure
 description: Établissez un environnement de confiance pour communiquer et partager des informations sans avoir recours à une base de données centralisée.
 author: vitoc
 ms.date: 09/09/2018
-ms.openlocfilehash: bc472bc5bafc3eb20e583f41d71ed783725a039e
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.custom: csa-team
+ms.openlocfilehash: 91c41f7bd6bd6f4eb8cd00859f7ce9065f8a86be
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610564"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004718"
 ---
 # <a name="decentralized-trust-between-banks-on-azure"></a>Confiance décentralisée entre les banques sur Azure
 

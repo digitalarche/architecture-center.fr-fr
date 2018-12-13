@@ -1,15 +1,16 @@
 ---
 title: Liste de vérification de la résilience pour les services Azure
+titleSuffix: Azure Design Review Framework
 description: Liste de vérification qui fournit des conseils de résilience pour divers services Azure.
 author: petertaylor9999
-ms.date: 03/02/2018
+ms.date: 11/26/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 53a37595bd6e70fa3a43e9a72b2ae47d2225009f
-ms.sourcegitcommit: 1b5411f07d74f0a0680b33c266227d24014ba4d1
+ms.openlocfilehash: 55f17d3b24af4be4f313c66923f4153296041545
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52305925"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307178"
 ---
 # <a name="resiliency-checklist-for-specific-azure-services"></a>Liste de vérification de la résilience pour des services Azure spécifiques
 
@@ -19,15 +20,15 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Utilisez le niveau Standard ou Premium.** Ces niveaux prennent en charge les emplacements de préproduction et les sauvegardes automatisées. Pour plus d’informations, consultez la rubrique [Présentation détaillée des plans Azure App Service](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview/)
 
-**Évitez de monter ou de descendre en puissance.** À la place, sélectionnez un niveau et une taille d’instance répondant à vos besoins de performances sous une charge normale, puis [augmentez la taille des instances](/azure/app-service-web/web-sites-scale/) pour gérer les changements dans le volume de trafic. Le fait de monter ou de descendre en puissance peut déclencher un redémarrage de l’application.  
+**Évitez de monter ou de descendre en puissance.** À la place, sélectionnez un niveau et une taille d’instance répondant à vos besoins de performances sous une charge normale, puis [augmentez la taille des instances](/azure/app-service-web/web-sites-scale/) pour gérer les changements dans le volume de trafic. Le fait de monter ou de descendre en puissance peut déclencher un redémarrage de l’application.
 
 **Stockez la configuration en tant que paramètres de l’application.** Utilisez les paramètres de l’application pour conserver les paramètres de configuration en tant que paramètres de l’application. Définissez les paramètres dans vos modèles Resource Manager ou à l’aide de PowerShell afin de pouvoir les appliquer dans le cadre d’un processus de déploiement/mise à jour automatisé, ce qui est plus fiable. Pour plus d’informations, consultez [Configurer des applications web dans Azure App Service](/azure/app-service-web/web-sites-configure/).
 
-**Créez des plans App Service distincts pour la production et les tests.** N’utilisez pas les emplacements de votre déploiement de production pour les tests.  Toutes les applications qui se trouvent dans un même plan App Service partagent les mêmes instances de machines virtuelles. Si vous placez des déploiements de production et de test dans le même plan, cela peut avoir un impact négatif sur le déploiement de production. Par exemple, des tests de charge peuvent dégrader le site de production réelle. En plaçant les déploiements de test dans un plan séparé, vous les isolez de la version de production.  
+**Créez des plans App Service distincts pour la production et les tests.** N’utilisez pas les emplacements de votre déploiement de production pour les tests.  Toutes les applications qui se trouvent dans un même plan App Service partagent les mêmes instances de machines virtuelles. Si vous placez des déploiements de production et de test dans le même plan, cela peut avoir un impact négatif sur le déploiement de production. Par exemple, des tests de charge peuvent dégrader le site de production réelle. En plaçant les déploiements de test dans un plan séparé, vous les isolez de la version de production.
 
 **Séparez les applications web des API web.** Si votre solution présente à la fois un serveur web frontal et une API web, envisagez de les décomposer en applications App Service distinctes. Cette conception facilite la décomposition de la solution par charge de travail. Vous pouvez exécuter l’application web et l’API dans des plans App Service distincts et donc les mettre à l’échelle indépendamment l’une de l’autre. Si vous n’avez pas besoin de ce niveau d’extensibilité au départ, vous pouvez déployer les applications dans le même plan et les déplacer ultérieurement dans des plans distincts si nécessaire.
 
-**Évitez d’utiliser la fonctionnalité de sauvegarde d’App Service pour sauvegarder des bases de données SQL Azure.** Utilisez les [sauvegardes automatisées SQL Database][sql-backup] à la place. La fonctionnalité de sauvegarde d’App Service exporte la base de données dans un fichier .bacpac SQL, ce qui consomme des DTU.  
+**Évitez d’utiliser la fonctionnalité de sauvegarde d’App Service pour sauvegarder des bases de données SQL Azure.** Utilisez les [sauvegardes automatisées SQL Database][sql-backup] à la place. La fonctionnalité de sauvegarde d’App Service exporte la base de données dans un fichier .bacpac SQL, ce qui consomme des DTU.
 
 **Tirez parti d’un emplacement de préproduction pour vos déploiements.** Créez un emplacement de déploiement pour la préproduction. Déployez les mises à jour de l’application dans l’emplacement de préproduction et vérifiez le déploiement avant de le basculer en production. Cela réduit le risque de déploiement d’une mise à jour incorrecte en production. De plus, toutes les instances seront ainsi préparées avant d’être basculées en production. Un grand nombre d’applications présentent un temps de préparation et de démarrage à froid important. Pour plus d’informations, consultez [Configurer des environnements intermédiaires pour les applications web dans Azure App Service](/azure/app-service-web/web-sites-staged-publishing/).
 
@@ -57,7 +58,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Traiter les exceptions**. En règle générale, un consommateur d’événements traite un lot de messages dans une boucle. Vous devez gérer les exceptions au sein de cette boucle de traitement, afin d’éviter de perdre un lot de messages entier lorsqu’un seul message provoque une exception.
 
-**Utiliser une file d’attente de lettres mortes.** Si le traitement d’un message entraîne une défaillance non temporaire, placez le message dans une file d’attente de lettres mortes, afin de pouvoir suivre l’état. Selon le scénario, vous pourrez ultérieurement essayer de traiter le message une nouvelle fois, appliquer une transaction de compensation ou exécuter une autre action. Notez qu’un hub Event Hubs n’inclut aucune fonctionnalité de file d’attente de lettres mortes intégrée. Vous pouvez utiliser le Stockage File d’attente Azure ou Service Bus pour implémenter une file d’attente de lettres mortes, ou utiliser Azure Functions ou tout autre mécanisme d’événement.  
+**Utiliser une file d’attente de lettres mortes.** Si le traitement d’un message entraîne une défaillance non temporaire, placez le message dans une file d’attente de lettres mortes, afin de pouvoir suivre l’état. Selon le scénario, vous pourrez ultérieurement essayer de traiter le message une nouvelle fois, appliquer une transaction de compensation ou exécuter une autre action. Notez qu’un hub Event Hubs n’inclut aucune fonctionnalité de file d’attente de lettres mortes intégrée. Vous pouvez utiliser le Stockage File d’attente Azure ou Service Bus pour implémenter une file d’attente de lettres mortes, ou utiliser Azure Functions ou tout autre mécanisme d’événement.
 
 **Implémenter la récupération d’urgence via le basculement vers un espace de noms Event Hubs secondaire.** Pour en savoir plus, voir [Géorécupération d’urgence Azure Event Hubs](/azure/event-hubs/event-hubs-geo-dr).
 
@@ -67,7 +68,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Configurez la persistance des données.** La persistance Redis vous permet de conserver les données stockées dans Redis. Vous pouvez également prendre des instantanés et sauvegarder les données que vous pouvez charger en cas de défaillance matérielle. Pour plus d’informations, consultez [Comment configurer la persistance des données pour un Cache Redis Azure Premium](/azure/redis-cache/cache-how-to-premium-persistence).
 
-Si vous utilisez Cache Redis comme un cache de données temporaire et non comme un magasin persistant, ces recommandations peuvent ne pas s’appliquer. 
+Si vous utilisez Cache Redis comme un cache de données temporaire et non comme un magasin persistant, ces recommandations peuvent ne pas s’appliquer.
 
 ## <a name="search"></a>Recherche
 
@@ -75,8 +76,9 @@ Si vous utilisez Cache Redis comme un cache de données temporaire et non comme 
 
 **Configurez des indexeurs pour les déploiements multirégions.** Si vous disposez d’un déploiement multirégion, prenez en considération vos options pour la continuité de l’indexation.
 
-  * Si la source de données est géorépliquée, vous devez généralement pointer chaque indexeur de chaque service Recherche Azure sur son réplica de source de données local. Cependant, cette approche n’est pas recommandée pour les jeux de données volumineux stockés dans Azure SQL Database. En effet, Recherche Azure peut effectuer une indexation incrémentielle à partir des réplicas SQL Database principaux, mais pas à partir des réplicas secondaires. Pointez tous les indexeurs sur le réplica principal à la place. Après un basculement, pointez les indexeurs Recherche Azure sur le nouveau réplica principal.  
-  * Si la source de données n’est pas géorépliquée, pointez plusieurs indexeurs sur la même source de données afin que les services Recherche Azure de plusieurs régions effectuent une indexation continue et indépendante à partir de la source de données. Pour plus d’informations, consultez [Considérations sur les performances et l’optimisation de Recherche Azure][search-optimization].
+- Si la source de données est géorépliquée, vous devez généralement pointer chaque indexeur de chaque service Recherche Azure sur son réplica de source de données local. Cependant, cette approche n’est pas recommandée pour les jeux de données volumineux stockés dans Azure SQL Database. En effet, Recherche Azure peut effectuer une indexation incrémentielle à partir des réplicas SQL Database principaux, mais pas à partir des réplicas secondaires. Pointez tous les indexeurs sur le réplica principal à la place. Après un basculement, pointez les indexeurs Recherche Azure sur le nouveau réplica principal.
+
+- Si la source de données n’est pas géorépliquée, pointez plusieurs indexeurs sur la même source de données afin que les services Recherche Azure de plusieurs régions effectuent une indexation continue et indépendante à partir de la source de données. Pour plus d’informations, consultez [Considérations sur les performances et l’optimisation de Recherche Azure][search-optimization].
 
 ## <a name="service-bus"></a>Service Bus
 
@@ -92,14 +94,13 @@ Si vous utilisez Cache Redis comme un cache de données temporaire et non comme 
 
 **Utiliser la géorécupération d’urgence**. La géorécupération d’urgence permet de s’assurer que le traitement des données continue à fonctionner dans une autre région ou un autre centre de données si toute une région Azure ou tout un centre de données Azure n’est plus accessible suite à une urgence. Pour plus d’informations, consultez [Géorécupération d’urgence Azure Service Bus](/azure/service-bus-messaging/service-bus-geo-dr).
 
-
 ## <a name="storage"></a>Stockage
 
 **Pour les données d’application, utilisez le stockage géographiquement redondant avec accès en lecture (RA-GRS).** Le stockage RA-GRS réplique les données vers une région secondaire et offre un accès en lecture seule à partir de la région secondaire. En cas de panne de stockage dans la région primaire, l’application peut lire les données à partir de la région secondaire. Pour plus d’informations, consultez l’article [Réplication de Stockage Azure](/azure/storage/storage-redundancy/).
 
 **Pour les disques de machine virtuelle, utilisez Managed Disks.** Le service [Managed Disks][managed-disks] augmente la fiabilité des machines virtuelles dans un groupe à haute disponibilité en isolant suffisamment les disques les uns des autres pour éviter les points de défaillance uniques. Par ailleurs, les disques Managed Disks ne sont pas soumis aux limites d’IOPS des disques durs virtuels créés dans un compte de stockage. Pour plus d’informations, consultez [Gérer la disponibilité des machines virtuelles Windows dans Azure][vm-manage-availability].
 
-**Pour le service Stockage File d’attente, créez une file d’attente de sauvegarde dans une autre région.** Pour le service Stockage File d’attente, un réplica en lecture seule présente peu d’utilité, car vous ne pouvez pas mettre des éléments en file d’attente ou les en enlever. Créez une file d’attente de sauvegarde dans une autre région à la place. En cas de panne de stockage, l’application peut utiliser la file d’attente de sauvegarde jusqu’à ce que la région primaire redevienne disponible. De cette façon, l’application peut continuer à traiter les nouvelles requêtes.  
+**Pour le service Stockage File d’attente, créez une file d’attente de sauvegarde dans une autre région.** Pour le service Stockage File d’attente, un réplica en lecture seule présente peu d’utilité, car vous ne pouvez pas mettre des éléments en file d’attente ou les en enlever. Créez une file d’attente de sauvegarde dans une autre région à la place. En cas de panne de stockage, l’application peut utiliser la file d’attente de sauvegarde jusqu’à ce que la région primaire redevienne disponible. De cette façon, l’application peut continuer à traiter les nouvelles requêtes.
 
 ## <a name="sql-database"></a>Base de données SQL
 
@@ -115,7 +116,7 @@ Si vous utilisez Cache Redis comme un cache de données temporaire et non comme 
 
 **Utilisez la géorestauration pour récupérer d’une panne de service.** La géorestauration assure la restauration d’une base de données à partir d’une sauvegarde géoredondante.  Pour plus d’informations, consultez [Récupérer une base de données SQL Azure à l’aide des sauvegardes automatisées d’une base de données][sql-restore].
 
-## <a name="sql-data-warehouse"></a>SQL Data Warehouse
+## <a name="sql-data-warehouse"></a>SQL Data Warehouse
 
 **Ne désactivez pas la géosauvegarde.** Par défaut, SQL Data Warehouse effectue une sauvegarde complète de vos données toutes les 24 heures en cas de récupération d’urgence. Nous vous recommandons de ne pas désactiver cette fonctionnalité. Pour plus d’informations, consultez [Géosauvegardes](/azure/sql-data-warehouse/backup-and-restore#geo-backups).
 
@@ -155,7 +156,7 @@ Si vous utilisez Cache Redis comme un cache de données temporaire et non comme 
 
 ## <a name="virtual-network"></a>Réseau virtuel
 
-**Pour mettre sur liste verte ou bloquer des adresses IP publiques, ajoutez un groupe de sécurité réseau (NSG) au sous-réseau.** Bloquez l’accès aux utilisateurs malveillants ou autorisez l’accès uniquement aux utilisateurs qui disposent du privilège requis pour accéder à l’application.  
+**Pour mettre sur liste verte ou bloquer des adresses IP publiques, ajoutez un groupe de sécurité réseau (NSG) au sous-réseau.** Bloquez l’accès aux utilisateurs malveillants ou autorisez l’accès uniquement aux utilisateurs qui disposent du privilège requis pour accéder à l’application.
 
 **Créez une sonde d’intégrité personnalisée.** Les sondes d’intégrité de Load Balancer peuvent tester le protocole TCP ou HTTP. Si une machine virtuelle exécute un serveur HTTP, la sonde HTTP est un meilleur indicateur de l’état d’intégrité qu’une sonde TCP. Pour une sonde HTTP, utilisez un point de terminaison personnalisé qui signale l’intégrité globale de l’application, y compris toutes les dépendances critiques. Pour plus d’informations, consultez [Vue d’ensemble de Azure Load Balancer](/azure/load-balancer/load-balancer-overview/).
 
