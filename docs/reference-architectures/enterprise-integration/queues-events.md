@@ -1,23 +1,24 @@
 ---
-title: Intégration d’entreprise avec des files d’attente de messages et des événements - Azure Integration Services
-description: Cette référence d’architecture vous montre comment implémenter un modèle d’intégration d’entreprise avec Azure Logic Apps, Gestion des API Azure, Azure Service Bus et Azure Event Grid.
+title: Intégration d’entreprise avec des files d’attente de messages et des événements
+titleSuffix: Azure Reference Architectures
+description: Architecture recommandée pour implémenter un modèle d’intégration d’entreprise avec Azure Logic Apps, Gestion des API Azure, Azure Service Bus et Azure Event Grid.
 author: mattfarm
-ms.author: mattfarm
 ms.reviewer: jonfan, estfan, LADocs
 ms.topic: article
 ms.date: 12/03/2018
-ms.openlocfilehash: 6a4d7ce81dfae48f760693a4fc875d5ad59abe3a
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.custom: integration-services
+ms.openlocfilehash: 6357cb5015c8f10c0f4a8aa1b310ddbb38367004
+ms.sourcegitcommit: a0a9981e7586bed8d876a54e055dea1e392118f8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52919086"
+ms.lasthandoff: 12/11/2018
+ms.locfileid: "53233861"
 ---
 # <a name="enterprise-integration-on-azure-using-message-queues-and-events"></a>Intégration d’entreprise sur Azure avec des files d’attente de messages et des événements
 
-Cette architecture intègre des systèmes back-end d’entreprise, avec des files d’attente de messages et des événements, pour découpler les services et obtenir ainsi une scalabilité et une fiabilité supérieures. Les systèmes principaux peuvent inclure des systèmes SaaS (Logiciel en tant que service), des services Azure et des services web existants dans votre entreprise.
+Cette architecture de référence intègre des systèmes back-end d’entreprise, avec des files d’attente de messages et des événements, pour découpler les services et obtenir ainsi une scalabilité et une fiabilité supérieures. Les systèmes principaux peuvent inclure des systèmes SaaS (Logiciel en tant que service), des services Azure et des services web existants dans votre entreprise.
 
-![Diagramme de l’architecture – Intégration d’entreprise avec files d’attente et événements](./_images/enterprise-integration-queues-events.png)
+![Architecture de référence pour l’intégration d’entreprise avec des files d’attente et des événements](./_images/enterprise-integration-queues-events.png)
 
 ## <a name="architecture"></a>Architecture
 
@@ -25,9 +26,9 @@ L’architecture illustrée ici s’appuie sur une architecture plus simple, qui
 
 Cette version de l’architecture ajoute deux composants qui permettent de rendre le système plus fiable et plus scalable :
 
-- **[Azure Service Bus][service-bus]**. Service Bus est un courtier de messages sécurisé et fiable.  
+- **[Azure Service Bus][service-bus]**. Service Bus est un courtier de messages sécurisé et fiable.
 
-- **[Azure Event Grid][event-grid]**. Event Grid est un service de routage d’événements. Il utilise un modèle de gestion des événements publication/abonnement.
+- **[Azure Event Grid][event-grid]**. Event Grid est un service de routage d’événements. Il utilise un modèle de gestion des événements [publication/abonnement](../../patterns/publisher-subscriber.md) (pub/sub).
 
 La communication asynchrone avec un courtier de messages offre plusieurs avantages par rapport aux appels synchrones, directs à des services back-end :
 
@@ -39,21 +40,21 @@ La communication asynchrone avec un courtier de messages offre plusieurs avantag
 
 Event Grid permet aux différents composants du système de réagir aux événements au fur et à mesure qu’ils se produisent, au lieu de s’appuyer sur l’interrogation ou sur des tâches planifiées. Comme avec une file d’attente de messages, il permet de découpler les applications et les services. Une application ou un service peut publier des événements : les abonnés intéressés en sont alors avertis. De nouveaux abonnés peuvent être ajoutés sans mettre à jour l’expéditeur.
 
-De nombreux services Azure prennent en charge l’envoi d’événements à Event Grid. Par exemple, une application logique peut être à l’écoute d’un événement, par exemple quand de nouveaux fichiers sont ajoutés à un magasin d’objets blob. Ce modèle permet des workflows réactifs, où le chargement d’un fichier ou le placement d’un message dans une file d’attente lance une série de processus. Les processus peuvent être exécutés en parallèle ou dans une séquence spécifique. 
+De nombreux services Azure prennent en charge l’envoi d’événements à Event Grid. Par exemple, une application logique peut être à l’écoute d’un événement, par exemple quand de nouveaux fichiers sont ajoutés à un magasin d’objets blob. Ce modèle permet des workflows réactifs, où le chargement d’un fichier ou le placement d’un message dans une file d’attente lance une série de processus. Les processus peuvent être exécutés en parallèle ou dans une séquence spécifique.
 
 ## <a name="recommendations"></a>Recommandations
 
 Les recommandations décrites dans [Intégration d’entreprise de base][basic-enterprise-integration] s’appliquent à cette architecture. Les recommandations suivantes s’appliquent également :
 
-### <a name="service-bus"></a>Service Bus 
+### <a name="service-bus"></a>Service Bus
 
-Service Bus a deux modes de remise, *extraction (pull)* et *envoi (push)*. Dans le modèle d’extraction, le récepteur interroge de façon continue pour déterminer s’il y a de nouveaux messages. L’interrogation peut être inefficace, surtout si vous avez de nombreuses files d’attente qui reçoivent chacune quelques messages, ou si l’intervalle de temps entre les messages est important. Dans le modèle d’envoi, Service Bus envoie un événement via Event Grid quand il y a des nouveaux messages. Le destinataire s’abonne à l’événement. Quand l’événement est déclenché, le destinataire extrait de Service Bus le lot de messages suivant. 
+Service Bus a deux modes de remise, *extraction (pull)* et *envoi (push)*. Dans le modèle d’extraction, le récepteur interroge de façon continue pour déterminer s’il y a de nouveaux messages. L’interrogation peut être inefficace, surtout si vous avez de nombreuses files d’attente qui reçoivent chacune quelques messages, ou si l’intervalle de temps entre les messages est important. Dans le modèle d’envoi, Service Bus envoie un événement via Event Grid quand il y a des nouveaux messages. Le destinataire s’abonne à l’événement. Quand l’événement est déclenché, le destinataire extrait de Service Bus le lot de messages suivant.
 
 Quand vous créez une application logique pour consommer des messages Service Bus, nous recommandons d’utiliser le modèle d’envoi avec intégration d’Event Grid. Il est souvent plus économique, car l’application logique n’a pas besoin d’interroger Service Bus. Pour plus d’informations, consultez [Vue d’ensemble de l’intégration d’Azure Service Bus à Event Grid](/azure/service-bus-messaging/service-bus-to-event-grid-integration-concept). Actuellement, le [niveau Premium](https://azure.microsoft.com/pricing/details/service-bus/) de Service Bus est nécessaire pour les notifications Event Grid.
 
 Utilisez [PeekLock](/azure/service-bus-messaging/service-bus-messaging-overview#queues) pour accéder à un groupe de messages. Lorsque vous utilisez PeekLock, l’application logique peut suivre des étapes pour valider chaque message avant de terminer ou d’abandonner le message. Cette approche protège contre la perte accidentelle de messages.
 
-### <a name="event-grid"></a>Event Grid 
+### <a name="event-grid"></a>Event Grid
 
 Quand un déclencheur Event Grid est activé, cela signifie *qu’au moins un* événement s’est produit. Par exemple, quand une application logique reçoit un déclencheur Event Grid pour un message Service Bus, elle doit supposer que plusieurs messages peuvent être disponibles pour être traités.
 
@@ -81,7 +82,6 @@ Pour sécuriser Service Bus, utilisez une signature d’accès partagé. Par exe
 Si vous devez exposer une file d’attente Service Bus en tant que point de terminaison HTTP (pour la publication de nouveaux messages, par exemple), utilisez Gestion des API pour la sécuriser en exposant le point de terminaison. Vous pouvez alors sécuriser le point de terminaison avec des certificats ou une authentification OAuth si besoin. Le moyen le plus simple de sécuriser un point de terminaison consiste à utiliser une application logique avec un déclencheur de requête/réponse HTTP comme intermédiaire.
 
 Le service Event Grid sécurise la distribution des événements au moyen d’un code de validation. Si vous utilisez Logic Apps pour consommer l’événement, la validation est automatiquement effectuée. Pour en savoir plus, consultez la page [Sécurité et authentification pour Event Grid](/azure/event-grid/security-authentication).
-
 
 [apim]: /azure/api-management
 [apim-sla]: https://azure.microsoft.com/support/legal/sla/api-management/

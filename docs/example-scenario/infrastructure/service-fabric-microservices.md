@@ -3,12 +3,13 @@ title: Utilisation de Service Fabric pour décomposer des applications monolithi
 description: Décomposez une grande application monolithique en microservices.
 author: timomta
 ms.date: 09/20/2018
-ms.openlocfilehash: 9194ddd53a6d78f49fea2f7bb36fbc8721a502ea
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.custom: fasttrack
+ms.openlocfilehash: 438d2eabff39356a7593f2da798a74eebe94553a
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48819636"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004625"
 ---
 # <a name="using-service-fabric-to-decompose-monolithic-applications"></a>Utilisation de Service Fabric pour décomposer des applications monolithiques
 
@@ -42,7 +43,7 @@ Dans la figure ci-dessus, nous avons décomposé toutes les parties d’une appl
 - Un service de routage ou de passerelle qui accepte les requêtes de navigateur entrantes, les analyses pour déterminer le service qui doit les traiter, puis les transfère vers ce service.
 - Quatre applications ASP.NET Core qui correspondaient auparavant à des répertoires virtuels sous le site IIS unique s’exécutant en tant qu’applications ASP.NET. Ces applications ont été divisées en microservices indépendants propres à chacune d’elles. En conséquence, elles peuvent faire l’objet de modifications, d’un contrôle des versions et de mises à niveau séparément. Dans cet exemple, nous avons réécrit chaque application à l’aide de .Net Core et d’ASP.NET Core sous forme de [Reliable Services](/azure/service-fabric/service-fabric-reliable-services-introduction), ce qui leur permet d’accéder en mode natif à l’intégralité des fonctionnalités et avantages de la plateforme Service Fabric (services de communication, rapports d’intégrité, notifications, etc.).
 - Un service Windows appelé *service Indexation*, placé dans un conteneur Windows afin qu’il n’apporte plus de modifications directes au registre du serveur sous-jacent, mais qu’il soit exécutable de manière autonome et déployable avec toutes ses dépendances comme une seule unité.
-- Un service Archive, qui est un simple exécutable dont les exécutions sont planifiées et qui accomplit certaines tâches pour les sites. Ce service est directement hébergé sous la forme d’un exécutable autonome, car nous avons déterminé qu’il joue parfaitement son rôle tel quel, et qu’il n’est donc pas utile de le modifier.
+- Un service Archive, qui est un simple exécutable dont les exécutions sont planifiées et qui accomplit certaines tâches pour les sites. Il est directement hébergé sous la forme d’un exécutable autonome, car nous avons déterminé qu’il joue parfaitement son rôle tel quel et qu’il ne vaut pas la peine de le modifier.
 
 ## <a name="considerations"></a>Considérations
 
@@ -80,13 +81,13 @@ Dans le cas d’un cluster Service Fabric hébergé sur Azure, l’essentiel du 
 
 Les autres éléments de coût correspondent aux frais de stockage des disques virtuels de chaque nœud et aux frais de sortie des E/S réseau à partir d’Azure (par exemple, l’acheminement du trafic réseau d’Azure vers le navigateur de l’utilisateur).
 
-Pour vous permettre de vous faire une idée du coût, nous avons créé un exemple utilisant certaines valeurs par défaut pour la taille du cluster, la mise en réseau et le stockage : consultez la page [Calculatrice de prix](https://azure.com/e/52dea096e5844d5495a7b22a9b2ccdde). N’hésitez pas à remplacer les valeurs par défaut de cette calculatrice par celles qui sont adaptées à votre situation.
+Pour vous permettre de vous faire une idée du coût, nous avons créé un exemple utilisant certaines valeurs par défaut pour la taille du cluster, le réseau et le stockage : Ouvrez la [calculatrice de prix](https://azure.com/e/52dea096e5844d5495a7b22a9b2ccdde). N’hésitez pas à remplacer les valeurs par défaut de cette calculatrice par celles qui sont adaptées à votre situation.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Prenez le temps de vous familiariser avec la plateforme en parcourant la [documentation](/azure/service-fabric/service-fabric-overview) et en examinant les différents [scénarios d’application](/azure/service-fabric/service-fabric-application-scenarios) de Service Fabric. La documentation décrit les éléments constitutifs d’un cluster, les environnements dans lesquels il peut s’exécuter, l’architecture logicielle et la procédure de maintenance correspondante.
 
-Pour découvrir une démonstration de Service Fabric pour une application .NET existante, déployez le [démarrage rapide](/azure/service-fabric/service-fabric-quickstart-dotnet) Service Fabric.
+Pour voir une démonstration de Service Fabric sur une application .NET existante, déployez le [démarrage rapide](/azure/service-fabric/service-fabric-quickstart-dotnet) Service Fabric.
 
 En ce qui concerne votre application actuelle, commencez à réfléchir à ses différentes fonctions. Choisissez-en une et étudiez la manière dont vous pouvez la séparer du reste de l’application. Ne considérez qu’une seule unité discrète et compréhensible à la fois.
 

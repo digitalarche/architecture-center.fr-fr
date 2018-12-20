@@ -1,23 +1,24 @@
 ---
 title: Guide de conception d’API
-description: Conseils sur la création et la conception efficace d’une API web.
+titleSuffix: Best practices for cloud applications
+description: Aide sur la création et la conception efficace d’une API web.
 author: dragon119
 ms.date: 01/12/2018
-pnp.series.title: Best Practices
-ms.openlocfilehash: 1bd53a7ccc54d086978891f1df5fdc2e25a5d638
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 9a9345e5ec8869b70e5abef45a637e742c61ca88
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429370"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307433"
 ---
 # <a name="api-design"></a>Conception d’API
 
 Les applications web plus modernes exposent les API que les clients peuvent utiliser pour interagir avec l’application. Une API web bien conçue doit prendre en charge les capacités suivantes :
 
-* **Indépendance de la plateforme**. Tous les clients doivent être en mesure d’appeler l’API, quelle que soit la façon dont l’API est implémentée en interne. Cela requiert l’utilisation de protocoles standard et un mécanisme où le client et le service web peuvent convenir du format des données à échanger.
+- **Indépendance de la plateforme**. Tous les clients doivent être en mesure d’appeler l’API, quelle que soit la façon dont l’API est implémentée en interne. Cela requiert l’utilisation de protocoles standard et un mécanisme où le client et le service web peuvent convenir du format des données à échanger.
 
-* **Évolution des services**. L’API web doit être en mesure d’évoluer et ses fonctionnalités doivent pouvoir être ajoutées indépendamment des applications clientes. À mesure que l’API évolue, les applications clientes existantes doivent continuer de fonctionner sans modifications. Toutes les fonctionnalités doivent être détectables, de sorte que les applications clientes puissent les utiliser pleinement.
+- **Évolution des services**. L’API web doit être en mesure d’évoluer et ses fonctionnalités doivent pouvoir être ajoutées indépendamment des applications clientes. À mesure que l’API évolue, les applications clientes existantes doivent continuer de fonctionner sans modifications. Toutes les fonctionnalités doivent être détectables, de sorte que les applications clientes puissent les utiliser pleinement.
 
 Ce guide décrit les problèmes à prendre en compte lorsque vous concevez une API web.
 
@@ -29,26 +30,26 @@ L’un des principaux avantages de REST par rapport à HTTP est qu’il utilise 
 
 Voici quelques-uns des principes de conception clés d’API RESTful à l’aide de HTTP :
 
-- Les API REST sont conçues autour de *ressources*, qui peuvent être tout type d’objet, de données ou de service accessibles par le client. 
+- Les API REST sont conçues autour de *ressources*, qui peuvent être tout type d’objet, de données ou de service accessibles par le client.
 
-- Une ressource possède un *identificateur*, qui est un URI qui identifie de façon unique cette ressource. Par exemple, l’URI d’une commande client spécifique peut être : 
- 
-    ```http
+- Une ressource possède un *identificateur*, qui est un URI qui identifie de façon unique cette ressource. Par exemple, l’URI d’une commande client spécifique peut être :
+
+    ```HTTP
     https://adventure-works.com/orders/1
     ```
- 
+
 - Les clients interagissent avec un service en échangeant des *représentations* de ressources. De nombreuses API web utilisent JSON comme format d’échange. Par exemple, une requête GET envoyée à l’URI ci-dessus peut renvoyer ce corps de réponse :
 
     ```json
     {"orderId":1,"orderValue":99.90,"productId":1,"quantity":1}
     ```
 
-- Les API REST utilisent une interface uniforme, ce qui vous permet de séparer les implémentations du client et du service. Pour les API REST qui reposent sur HTTP, l’interface uniforme inclut l’utilisation de verbes HTTP standard pour effectuer des opérations sur les ressources. Les opérations les plus courantes sont GET, POST, PUT, PATCH et DELETE. 
+- Les API REST utilisent une interface uniforme, ce qui vous permet de séparer les implémentations du client et du service. Pour les API REST qui reposent sur HTTP, l’interface uniforme inclut l’utilisation de verbes HTTP standard pour effectuer des opérations sur les ressources. Les opérations les plus courantes sont GET, POST, PUT, PATCH et DELETE.
 
 - Les API REST utilisent un modèle de requête sans état. Les requêtes HTTP doivent être indépendantes et peuvent être générées dans n’importe quel ordre. Par conséquent, les informations d’état temporaires entre les requêtes ne peuvent pas être conservées. Les ressources elles-mêmes représentent l’unique emplacement de stockage de ces informations. Chaque requête doit être une opération atomique. Cette contrainte permet aux services web d’être extrêmement évolutifs, car il est inutile de conserver des affinités entre les clients et les serveurs spécifiques. Tous les serveurs peuvent gérer des demandes provenant de n’importe quel client. Cela étant dit, d’autres facteurs peuvent limiter l’extensibilité. Par exemple, de nombreux services web écrivent dans un magasin de données principal, dont vous pouvez difficilement augmenter la taille des instances. (L’article [Partitionnement des données](./data-partitioning.md) décrit les stratégies d’augmentation de la taille des instances d’un magasin de données.)
 
-- Les API REST sont pilotées par des liens hypermédias qui figurent dans la représentation. L’exemple suivant montre une représentation JSON d’une commande. Il contient des liens permettant d’obtenir ou de mettre à jour le client associé à la commande. 
- 
+- Les API REST sont pilotées par des liens hypermédias qui figurent dans la représentation. L’exemple suivant montre une représentation JSON d’une commande. Il contient des liens permettant d’obtenir ou de mettre à jour le client associé à la commande.
+
     ```json
     {
         "orderID":3,
@@ -57,24 +58,23 @@ Voici quelques-uns des principes de conception clés d’API RESTful à l’aide
         "orderValue":16.60,
         "links": [
             {"rel":"product","href":"https://adventure-works.com/customers/3", "action":"GET" },
-            {"rel":"product","href":"https://adventure-works.com/customers/3", "action":"PUT" } 
+            {"rel":"product","href":"https://adventure-works.com/customers/3", "action":"PUT" }
         ]
-    } 
+    }
     ```
-
 
 C’est en 2008 que Leonard Richardson a proposé le [ modèle de maturité](https://martinfowler.com/articles/richardsonMaturityModel.html) suivant pour les API web :
 
-- Niveau 0 : Définir un URI, et toutes les opérations sont des requêtes POST envoyées à cet URI.
-- Niveau 1 : Créer des URI distincts pour des ressources individuelles.
-- Niveau 2 : Utiliser des méthodes HTTP pour définir des opérations sur des ressources.
-- Niveau 3 : Utiliser l’hypermédia (HATEOAS, décrit ci-dessous).
+- Niveau 0 : Définir un URI et toutes les opérations sont des requêtes POST envoyées à cet URI.
+- Niveau 1 : Créer des URI distincts pour des ressources individuelles.
+- Niveau 2 : Utiliser des méthodes HTTP pour définir des opérations sur des ressources.
+- Niveau 3 : Utiliser l’hypermédia (HATEOAS, décrit ci-dessous).
 
-Le niveau 3 correspond à une véritable API RESTful, telle que définie par Roy Fielding. Dans la pratique, un grand nombre d’API web publiées se trouvent quelque part autour du niveau 2.  
+Le niveau 3 correspond à une véritable API RESTful, telle que définie par Roy Fielding. Dans la pratique, un grand nombre d’API web publiées se trouvent quelque part autour du niveau 2.
 
 ## <a name="organize-the-api-around-resources"></a>Organiser l’API autour des ressources
 
-Concentrez-vous sur les entités métier exposées par l’API web. Par exemple, dans un système d’e-commerce, les entités principales peuvent être des clients et des commandes. La création d’une commande peut être obtenue en envoyant une requête POST HTTP qui contient les informations de la commande. La réponse HTTP indique si la commande a été passée avec succès ou non. Lorsque cela est possible, les URI de ressource doivent être basées sur des noms (la ressource) et non sur des verbes (les opérations sur la ressource). 
+Concentrez-vous sur les entités métier exposées par l’API web. Par exemple, dans un système d’e-commerce, les entités principales peuvent être des clients et des commandes. La création d’une commande peut être obtenue en envoyant une requête POST HTTP qui contient les informations de la commande. La réponse HTTP indique si la commande a été passée avec succès ou non. Lorsque cela est possible, les URI de ressource doivent être basées sur des noms (la ressource) et non sur des verbes (les opérations sur la ressource).
 
 ```HTTP
 https://adventure-works.com/orders // Good
@@ -84,13 +84,13 @@ https://adventure-works.com/create-order // Avoid
 
 Une ressource ne doit pas nécessairement être basée sur un élément de données physique unique. Par exemple, une ressource de commande peut être implémentée en interne sous la forme de plusieurs tables d’une base de données relationnelle, mais présentée au client comme une entité unique. Évitez de créer des API qui reflètent simplement la structure interne d’une base de données. L’objectif de REST est de modéliser des entités et les opérations qu’une application peut effectuer sur ces entités. Un client ne doit pas être exposé à l’implémentation interne.
 
-Les entités sont souvent regroupées dans des collections (commandes, clients). Une collection est une ressource distincte de l’élément dans la collection et doit avoir son propre URI. Par exemple, l’URI suivant peut représenter la collection de commandes : 
+Les entités sont souvent regroupées dans des collections (commandes, clients). Une collection est une ressource distincte de l’élément dans la collection et doit avoir son propre URI. Par exemple, l’URI suivant peut représenter la collection de commandes :
 
 ```HTTP
 https://adventure-works.com/orders
 ```
 
-L’envoi d’une requête GET HTTP à l’URI de la collection récupère une liste d’éléments dans la collection. Chaque élément de la collection possède également son propre URI unique. Une requête GET HTTP envoyée à l’URI de l’élément renvoie les détails de cet élément. 
+L’envoi d’une requête GET HTTP à l’URI de la collection récupère une liste d’éléments dans la collection. Chaque élément de la collection possède également son propre URI unique. Une requête GET HTTP envoyée à l’URI de l’élément renvoie les détails de cet élément.
 
 Adoptez une convention d’affectation de noms cohérente pour les URI. En général, il est recommandé d’utiliser des noms au pluriel pour les URI qui référencent des collections. Il est judicieux d’organiser les URI pour les collections et les éléments dans une hiérarchie. Par exemple, `/customers` est le chemin d’accès à la collection des clients, et `/customers/5` est le chemin d’accès au client avec un ID égal à 5. Cette approche contribue à préserver l’intuitivité de l’API web. En outre, plusieurs infrastructures d’API web peuvent acheminer les requêtes en fonction de chemins d’accès paramétrables pour que vous puissiez définir un itinéraire pour le chemin d’accès `/customers/{id}`.
 
@@ -111,11 +111,11 @@ Enfin, il n’est pas toujours possible de mapper chaque opération implémenté
 
 Le protocole HTTP définit un certain nombre de méthodes qui affectent une signification sémantique à une requête. Les méthodes HTTP utilisées par la plupart des API web RESTful sont les suivantes :
 
-* **GET** récupère une représentation de la ressource à l’URI spécifié. Le corps du message de réponse contient les détails de la ressource demandée.
-* **POST** crée une ressource à l’URI spécifié. Le corps du message de requête fournit les détails de la nouvelle ressource. Notez que POST permet également de déclencher des opérations qui ne créent pas réellement de ressources.
-* **PUT** crée ou remplace la ressource à l’URI spécifié. Le corps du message de requête spécifie la ressource à créer ou mettre à jour.
-* **PATCH** effectue une mise à jour partielle d’une ressource. Le corps de la requête spécifie l’ensemble de modifications à appliquer à la ressource.
-* **DELETE** supprime la ressource à l’URI spécifié.
+- **GET** récupère une représentation de la ressource à l’URI spécifié. Le corps du message de réponse contient les détails de la ressource demandée.
+- **POST** crée une ressource à l’URI spécifié. Le corps du message de requête fournit les détails de la nouvelle ressource. Notez que POST permet également de déclencher des opérations qui ne créent pas réellement de ressources.
+- **PUT** crée ou remplace la ressource à l’URI spécifié. Le corps du message de requête spécifie la ressource à créer ou mettre à jour.
+- **PATCH** effectue une mise à jour partielle d’une ressource. Le corps de la requête spécifie l’ensemble de modifications à appliquer à la ressource.
+- **DELETE** supprime la ressource à l’URI spécifié.
 
 L’effet d’une requête spécifique sera différent, selon que la ressource est une collection ou un élément individuel. Le tableau suivant résume les conventions courantes adoptées par la plupart des implémentations RESTful suivant l’exemple du commerce électronique. Notez que certaines de ces requêtes ne peuvent pas être implémentées ; cela dépend du scénario spécifique.
 
@@ -131,7 +131,7 @@ Les différences entre POST, PUT et PATCH peuvent prêter à confusion.
 
 - Une requête PUT crée une ressource *ou* met à jour une ressource existante. Le client spécifie l’URI de la ressource. Le corps de la requête contient une représentation complète de la ressource. Si une ressource avec cet URI existe déjà, elle est remplacée. Sinon, une ressource est créée si le serveur peut prendre en charge cette opération. Les requêtes PUT sont plus fréquemment appliquées à des ressources qui sont des éléments individuels, par exemple un client spécifique, plutôt qu’à des collections. Un serveur peut prendre en charge les mises à jour, mais pas la création via la méthode PUT. Prendre en charge la création via la méthode PUT dépend de la capacité du client à assigner de façon explicite un URI à une ressource avant qu’elle existe. S’il n’est pas en mesure de le faire, utilisez la méthode POST pour créer des ressources et les méthodes PUT ou PATCH pour effectuer une mise à jour.
 
-- Une requête PATCH effectue une *mise à jour partielle* vers une ressource existante. Le client spécifie l’URI de la ressource. Le corps de la requête spécifie un ensemble de *modifications* à appliquer à la ressource. Cela peut être plus efficace que l’utilisation de la méthode PUT, étant donné que le client envoie uniquement les modifications, et non pas la représentation entière de la ressource. Techniquement, la méthode PATCH peut également créer une ressource (en spécifiant un ensemble de mises à jour vers une ressource « null »), si le serveur prend en charge cette opération. 
+- Une requête PATCH effectue une *mise à jour partielle* vers une ressource existante. Le client spécifie l’URI de la ressource. Le corps de la requête spécifie un ensemble de *modifications* à appliquer à la ressource. Cela peut être plus efficace que l’utilisation de la méthode PUT, étant donné que le client envoie uniquement les modifications, et non pas la représentation entière de la ressource. Techniquement, la méthode PATCH peut également créer une ressource (en spécifiant un ensemble de mises à jour vers une ressource « null »), si le serveur prend en charge cette opération.
 
 Les requêtes PUT doivent être idempotentes. Si un client envoie la même requête PUT plusieurs fois, les résultats doivent toujours être identiques (la même ressource sera modifiée avec les mêmes valeurs). Le caractère idempotent des requêtes POST et PATCH n’est pas garanti.
 
@@ -143,7 +143,7 @@ Cette section décrit certaines considérations classiques liées à la concepti
 
 Comme mentionné précédemment, les clients et les serveurs échangent des représentations de ressources. Par exemple, dans une requête POST, le corps de la requête contient une représentation de la ressource à créer. Dans une requête GET, le corps de la réponse contient une représentation de la ressource extraite.
 
-Dans le protocole HTTP, les formats sont spécifiés à l’aide de *types de médias*, également appelés types MIME. Pour les données non binaires, la plupart des API web prennent en charge JSON (type de média = application/json) et éventuellement XML (type de média = application/xml). 
+Dans le protocole HTTP, les formats sont spécifiés à l’aide de *types de médias*, également appelés types MIME. Pour les données non binaires, la plupart des API web prennent en charge JSON (type de média = application/json) et éventuellement XML (type de média = application/xml).
 
 L’en-tête Content-Type dans une requête ou une réponse spécifie le format de la représentation. Voici un exemple d’une requête POST qui comprend des données JSON :
 
@@ -164,7 +164,7 @@ GET https://adventure-works.com/orders/2 HTTP/1.1
 Accept: application/json
 ```
 
-Si le serveur ne trouve pas de correspondances avec l’un des types de médias répertoriés, il doit renvoyer le code d’état HTTP 406 (Non acceptable). 
+Si le serveur ne trouve pas de correspondances avec l’un des types de médias répertoriés, il doit renvoyer le code d’état HTTP 406 (Non acceptable).
 
 ### <a name="get-methods"></a>Méthodes GET
 
@@ -180,7 +180,7 @@ Si le client place des données non valides dans la requête, le serveur doit re
 
 ### <a name="put-methods"></a>Méthodes PUT
 
-Si une méthode PUT crée une ressource, elle renvoie le code d’état HTTP 201 (Créé), comme pour la méthode POST. Si la méthode met à jour une ressource existante, elle renvoie 200 (OK) ou 204 (Pas de contenu). Dans certains cas, mettre à jour une ressource existante peut se révéler impossible. Dans ce cas, envisagez de renvoyer le code d’état HTTP 409 (Conflit). 
+Si une méthode PUT crée une ressource, elle renvoie le code d’état HTTP 201 (Créé), comme pour la méthode POST. Si la méthode met à jour une ressource existante, elle renvoie 200 (OK) ou 204 (Pas de contenu). Dans certains cas, mettre à jour une ressource existante peut se révéler impossible. Dans ce cas, envisagez de renvoyer le code d’état HTTP 409 (Conflit).
 
 Envisagez d’implémenter des opérations HTTP PUT en bloc, qui peuvent regrouper des mises à jour destinées à plusieurs ressources d’une collection. La requête PUT doit spécifier l’URI de la collection, et le corps de la requête doit spécifier les détails des ressources à modifier. Cette approche peut aider à réduire les échanges excessifs et à améliorer les performances.
 
@@ -195,7 +195,7 @@ Le correctif de fusion JSON est un peu plus simple. Le document de correctif a l
 Par exemple, supposons que la ressource d’origine ait la représentation JSON suivante :
 
 ```json
-{ 
+{
     "name":"gizmo",
     "category":"widgets",
     "color":"blue",
@@ -206,16 +206,16 @@ Par exemple, supposons que la ressource d’origine ait la représentation JSON 
 Voici un correctif de fusion JSON possible pour cette ressource :
 
 ```json
-{ 
+{
     "price":12,
     "color":null,
     "size":"small"
 }
 ```
 
-Cela indique au serveur de mettre à jour « price », de supprimer « color » et d’ajouter « size ». « Name » et « category » ne sont pas modifiés. Pour des informations plus précises sur le correctif de fusion JSON, consultez [RFC 7396](https://tools.ietf.org/html/rfc7396). Le type de média pour le correctif de fusion JSON est « application/merge-patch+json ».
+Celui-ci indique au serveur de mettre à jour `price`, de supprimer `color` et d’ajouter `size` &mdash; `name` et `category` ne sont pas modifiés. Pour des informations plus précises sur le correctif de fusion JSON, consultez [RFC 7396](https://tools.ietf.org/html/rfc7396). Le type de média pour le correctif de fusion JSON est `application/merge-patch+json`.
 
-Le correctif de fusion n’est pas adapté si la ressource d’origine peut contenir des valeurs null explicites, en raison du sens particulier de `null` dans le document de correctif. En outre, le document de correctif ne spécifie pas l’ordre selon lequel le serveur doit appliquer les mises à jour. Cela peut, ou non, avoir son importance, selon le domaine et les données concernées. Le correctif JSON, défini dans [RFC 6902](https://tools.ietf.org/html/rfc6902), est plus souple. Il spécifie les modifications comme une séquence d’opérations à appliquer. Les opérations incluent l’ajout, la suppression, le remplacement, la copie et le test (pour valider les valeurs). Le type de média pour le correctif JSON est « application/json-patch+json ».
+Le correctif de fusion n’est pas adapté si la ressource d’origine peut contenir des valeurs null explicites, en raison du sens particulier de `null` dans le document de correctif. En outre, le document de correctif ne spécifie pas l’ordre selon lequel le serveur doit appliquer les mises à jour. Cela peut, ou non, avoir son importance, selon le domaine et les données concernées. Le correctif JSON, défini dans [RFC 6902](https://tools.ietf.org/html/rfc6902), est plus souple. Il spécifie les modifications comme une séquence d’opérations à appliquer. Les opérations incluent l’ajout, la suppression, le remplacement, la copie et le test (pour valider les valeurs). Le type de média pour le correctif JSON est `application/json-patch+json`.
 
 Vous trouverez ci-dessous des états d’erreur classiques pouvant être rencontrés lors du traitement d’une requête PATCH, accompagnés du code d’état HTTP approprié.
 
@@ -231,18 +231,18 @@ Si l’opération de suppression est réussie, le serveur web doit répondre ave
 
 ### <a name="asynchronous-operations"></a>Opérations asynchrones
 
-Parfois, un processus de traitement un peu long peut avoir lieu pour une opération POST, PUT, PATCH ou DELETE. Si vous attendez la fin du traitement avant d’envoyer une réponse au client, cela peut entraîner une latence inacceptable. Dans ce cas, envisagez de rendre l’opération asynchrone. Renvoyez le code d’état HTTP 202 (Accepté) pour indiquer que la requête a été acceptée pour traitement, mais que celui-ci n’est pas terminé. 
+Parfois, un processus de traitement un peu long peut avoir lieu pour une opération POST, PUT, PATCH ou DELETE. Si vous attendez la fin du traitement avant d’envoyer une réponse au client, cela peut entraîner une latence inacceptable. Dans ce cas, envisagez de rendre l’opération asynchrone. Renvoyez le code d’état HTTP 202 (Accepté) pour indiquer que la requête a été acceptée pour traitement, mais que celui-ci n’est pas terminé.
 
 Vous devez exposer un point de terminaison qui renvoie l’état d’une requête asynchrone ; le client peut ainsi surveiller l’état en interrogeant le point de terminaison de l’état. Ajoutez l’URI du point de terminaison de l’état dans l’en-tête Location de la réponse 202. Par exemple : 
 
-```http
+```HTTP
 HTTP/1.1 202 Accepted
 Location: /api/status/12345
 ```
 
-Si le client envoie une requête GET à ce point de terminaison, la réponse doit contenir l’état actuel de la requête. Sinon, elle peut également inclure une durée estimée pour la fin du traitement ou un lien permettant d’annuler l’opération. 
+Si le client envoie une requête GET à ce point de terminaison, la réponse doit contenir l’état actuel de la requête. Sinon, elle peut également inclure une durée estimée pour la fin du traitement ou un lien permettant d’annuler l’opération.
 
-```http
+```HTTP
 HTTP/1.1 200 OK
 Content-Type: application/json
 
@@ -254,7 +254,7 @@ Content-Type: application/json
 
 Si l’opération asynchrone crée une ressource, le point de terminaison d’état doit renvoyer le code d’état 303 (See Other) (Voir autre) une fois l’opération terminée. Dans la réponse 303, ajoutez un en-tête Location qui spécifie l’URI de la nouvelle ressource :
 
-```http
+```HTTP
 HTTP/1.1 303 See Other
 Location: /api/orders/12345
 ```
@@ -265,25 +265,25 @@ Pour plus d’informations, consultez [Asynchronous operations in REST](https://
 
 L’exposition d’une collection de ressources par le biais d’un seul URI peut conduire les applications à extraire d’importantes quantités de données alors que seul un sous-ensemble d’informations est requis. Par exemple, imaginons qu’une application cliente ait besoin de rechercher toutes les commandes dont le coût est supérieur à une valeur spécifique. Elle peut récupérer toutes les commandes à partir de l’URI */commandes*, puis filtrer ces commandes sur le côté client. Clairement, ce processus est très peu efficace. Il gaspille la bande passante réseau et la puissance de traitement du serveur hébergeant l’API web.
 
-Au lieu de cela, l’API peut autoriser la transmission d’un filtre dans la chaîne de requête de l’URI, tel que */orders?minCost=n*. L’API web est alors responsable de l’analyse et de la gestion du paramètre `minCost` dans la chaîne de requête et du renvoi des résultats filtrés sur le côté serveur. 
+Au lieu de cela, l’API peut autoriser la transmission d’un filtre dans la chaîne de requête de l’URI, tel que */orders?minCost=n*. L’API web est alors responsable de l’analyse et de la gestion du paramètre `minCost` dans la chaîne de requête et du renvoi des résultats filtrés sur le côté serveur.
 
 Les requêtes GET sur les ressources de la collection peuvent renvoyer un grand nombre d’éléments. Vous devez concevoir une API web pour limiter la quantité de données renvoyées par chaque requête. Envisagez de prendre en charge les chaînes de requête qui spécifient le nombre maximal d’éléments à récupérer et un décalage de départ dans la collection. Par exemple : 
 
-```
+```HTTP
 /orders?limit=25&offset=50
 ```
 
-Envisagez également d’imposer une limite supérieure du nombre d’éléments renvoyés, afin d’empêcher les attaques par déni de service. Pour aider les applications clientes, les requêtes GET qui renvoient les données paginées doivent également inclure des métadonnées qui indiquent le nombre total de ressources disponibles dans la collection. 
+Envisagez également d’imposer une limite supérieure du nombre d’éléments renvoyés, afin d’empêcher les attaques par déni de service. Pour aider les applications clientes, les requêtes GET qui renvoient les données paginées doivent également inclure des métadonnées qui indiquent le nombre total de ressources disponibles dans la collection.
 
 Vous pouvez utiliser une stratégie similaire pour trier les données au fil de leur extraction en fournissant un paramètre de tri qui utilise un nom de champ comme valeur, tel que */orders?sort=ProductID*. Toutefois, cette approche peut avoir un effet négatif sur la mise en cache puisque les paramètres de chaîne de requête font partie de l’identificateur de ressource utilisé par de nombreuses implémentations de cache comme clé pour les données mises en cache.
 
-Vous pouvez étendre cette approche pour limiter les champs renvoyés pour chaque élément, si ceux-ci contiennent une grande quantité de données. Vous pouvez notamment utiliser un paramètre de chaîne de requête qui accepte une liste de champs séparés par des virgules, par exemple */orders?fields=ProductID,Quantity*. 
+Vous pouvez étendre cette approche pour limiter les champs renvoyés pour chaque élément, si ceux-ci contiennent une grande quantité de données. Vous pouvez notamment utiliser un paramètre de chaîne de requête qui accepte une liste de champs séparés par des virgules, par exemple */orders?fields=ProductID,Quantity*.
 
 Affectez des valeurs par défaut significatives à tous les paramètres facultatifs des chaînes de requête. Par exemple, définissez le paramètre `limit` sur 10 et le paramètre `offset` sur 0 si vous implémentez la pagination, définissez le paramètre de tri sur la clé de la ressource si vous implémentez le classement et définissez le paramètre `fields` pour tous les champs de la ressource si vous prenez en charge des projections.
 
 ## <a name="support-partial-responses-for-large-binary-resources"></a>Prendre en charge des réponses partielles pour les ressources binaires volumineuses
 
-Une ressource peut contenir des champs binaires volumineux, tels que des fichiers ou des images. Pour remédier aux problèmes provoqués par des connexions non fiables et intermittentes et pour améliorer les temps de réponse, envisagez la récupération de ces ressources en blocs. Pour ce faire, l’API web doit prendre en charge l’en-tête Accept-Ranges pour les requêtes GET en présence de ressources volumineuses. Cet en-tête indique que l’opération GET prend en charge les requêtes partielles. L’application cliente peut envoyer des requêtes GET qui renvoient un sous-ensemble d’une ressource, spécifié sous la forme d’une plage d’octets. 
+Une ressource peut contenir des champs binaires volumineux, tels que des fichiers ou des images. Pour remédier aux problèmes provoqués par des connexions non fiables et intermittentes et pour améliorer les temps de réponse, envisagez la récupération de ces ressources en blocs. Pour ce faire, l’API web doit prendre en charge l’en-tête Accept-Ranges pour les requêtes GET en présence de ressources volumineuses. Cet en-tête indique que l’opération GET prend en charge les requêtes partielles. L’application cliente peut envoyer des requêtes GET qui renvoient un sous-ensemble d’une ressource, spécifié sous la forme d’une plage d’octets.
 
 En outre, envisagez d’implémenter les requêtes HEAD HTTP pour ces ressources. Une requête HEAD est similaire à une requête GET, à ceci près qu’elle renvoie uniquement des en-têtes HTTP qui décrivent la ressource et un corps de message vide. Une application cliente peut émettre une requête HEAD pour déterminer s’il faut extraire une ressource à l’aide de requêtes GET partielles. Par exemple : 
 
@@ -291,7 +291,7 @@ En outre, envisagez d’implémenter les requêtes HEAD HTTP pour ces ressources
 HEAD https://adventure-works.com/products/10?fields=productImage HTTP/1.1
 ```
 
-Voici un exemple de message de réponse : 
+Voici un exemple de message de réponse :
 
 ```HTTP
 HTTP/1.1 200 OK
@@ -329,10 +329,8 @@ L’utilisation de REST est principalement motivée par la possibilité de navig
 
 > [!NOTE]
 > Il n’existe actuellement aucune norme ou spécification définissant comment modéliser le principe HATEOAS. Les exemples présentés dans cette section illustrent une solution possible.
->
->
 
-Par exemple, pour gérer la relation entre une commande et un client, la représentation d’une commande peut inclure des liens qui identifient les opérations disponibles pour le client de la commande. Voici une représentation possible : 
+Par exemple, pour gérer la relation entre une commande et un client, la représentation d’une commande peut inclure des liens qui identifient les opérations disponibles pour le client de la commande. Voici une représentation possible :
 
 ```json
 {
@@ -343,13 +341,13 @@ Par exemple, pour gérer la relation entre une commande et un client, la représ
   "links":[
     {
       "rel":"customer",
-      "href":"https://adventure-works.com/customers/3", 
+      "href":"https://adventure-works.com/customers/3",
       "action":"GET",
-      "types":["text/xml","application/json"] 
+      "types":["text/xml","application/json"]
     },
     {
       "rel":"customer",
-      "href":"https://adventure-works.com/customers/3", 
+      "href":"https://adventure-works.com/customers/3",
       "action":"PUT",
       "types":["application/x-www-form-urlencoded"]
     },
@@ -361,26 +359,26 @@ Par exemple, pour gérer la relation entre une commande et un client, la représ
     },
     {
       "rel":"self",
-      "href":"https://adventure-works.com/orders/3", 
+      "href":"https://adventure-works.com/orders/3",
       "action":"GET",
       "types":["text/xml","application/json"]
     },
     {
       "rel":"self",
-      "href":"https://adventure-works.com/orders/3", 
+      "href":"https://adventure-works.com/orders/3",
       "action":"PUT",
       "types":["application/x-www-form-urlencoded"]
     },
     {
       "rel":"self",
-      "href":"https://adventure-works.com/orders/3", 
+      "href":"https://adventure-works.com/orders/3",
       "action":"DELETE",
       "types":[]
     }]
 }
 ```
 
-Dans cet exemple, le tableau `links` présente un ensemble de liens. Chaque lien correspond à une opération sur une entité associée. Les données de chaque lien incluent la relation (« customer »), l’URI (`https://adventure-works.com/customers/3`), la méthode HTTP et les types MIME pris en charge. Il s’agit de toutes les informations nécessaires à une application cliente pour être en mesure d’appeler l’opération. 
+Dans cet exemple, le tableau `links` présente un ensemble de liens. Chaque lien correspond à une opération sur une entité associée. Les données de chaque lien incluent la relation (« customer »), l’URI (`https://adventure-works.com/customers/3`), la méthode HTTP et les types MIME pris en charge. Il s’agit de toutes les informations nécessaires à une application cliente pour être en mesure d’appeler l’opération.
 
 Le tableau `links` inclut également des informations avec référence circulaire sur la ressource qui a été récupérée. La relation de ces éléments est *self*.
 
@@ -393,9 +391,10 @@ Il est très improbable qu’une API web reste statique. Au fil de l’évolutio
 Le contrôle de version permet à une API web d’indiquer les fonctionnalités et ressources qu’elle expose. Une application cliente peut alors envoyer des requêtes destinées à une version spécifique d’une fonctionnalité ou d’une ressource. Les sections suivantes décrivent différentes approches présentant chacune des avantages et des inconvénients.
 
 ### <a name="no-versioning"></a>Aucun contrôle de version
-Il s’agit de l’approche la plus simple. Elle peut être acceptable pour certaines API internes. De nouvelles ressources ou de nouveaux liens peuvent représenter des changements importants.  L’ajout de contenu à des ressources existantes ne représente pas nécessairement une modification avec rupture, dans la mesure où les applications clientes qui n’attendent pas ce contenu l’ignoreront simplement.
 
-Par exemple, une requête à l’URI *https://adventure-works.com/customers/3* doit renvoyer les détails d’un client unique contenant les champs `id`, `name` et `address` attendus par l’application cliente :
+Il s’agit de l’approche la plus simple. Elle peut être acceptable pour certaines API internes. De nouvelles ressources ou de nouveaux liens peuvent représenter des changements importants. L’ajout de contenu à des ressources existantes ne représente pas nécessairement une modification avec rupture, dans la mesure où les applications clientes qui n’attendent pas ce contenu l’ignoreront simplement.
+
+Par exemple, une requête à l’URI `https://adventure-works.com/customers/3` doit renvoyer les détails d’un client unique contenant les champs `id`, `name` et `address` attendus par l’application cliente :
 
 ```HTTP
 HTTP/1.1 200 OK
@@ -406,8 +405,6 @@ Content-Type: application/json; charset=utf-8
 
 > [!NOTE]
 > À des fins de simplicité, les exemples de réponses présentés dans cette section n’incluent pas les liens HATEOAS.
->
->
 
 Si le champ `DateCreated` est ajouté au schéma de la ressource du client, la réponse se présentera comme suit :
 
@@ -421,9 +418,10 @@ Content-Type: application/json; charset=utf-8
 Les applications clientes existantes peuvent continuer à fonctionner correctement si elles peuvent ignorer les champs non reconnus. Les nouvelles applications clientes peuvent être conçues pour gérer ce nouveau champ. Cependant, des modifications plus importantes affectant le schéma des ressources (par exemple, la suppression ou la modification de nom de champs), ou un changement des relations entre les ressources peuvent constituer des modifications avec rupture empêchant les applications clientes existantes de fonctionner correctement. Dans ces situations, vous devez envisager l’une des approches suivantes.
 
 ### <a name="uri-versioning"></a>Contrôle de version d’URI
+
 Dès lors que vous modifiez l’API web ou le schéma des ressources, vous ajoutez un numéro de version à l’URI pour chaque ressource. Les URI existants doivent continuer à fonctionner comme avant et à renvoyer les ressources conformes à leur schéma d’origine.
 
-Si l’on étend l’exemple précédent, si le champ `address` est restructuré dans des sous-champs contenant chaque partie de l’adresse (par exemple, `streetAddress`, `city`, `state` et `zipCode`), cette version de la ressource peut être exposée par le biais d’un URI qui contient un numéro de version, tel que https://adventure-works.com/v2/customers/3:
+Si l’on étend l’exemple précédent, si le champ `address` est restructuré dans des sous-champs contenant chaque partie de l’adresse (par exemple, `streetAddress`, `city`, `state` et `zipCode`), cette version de la ressource peut être exposée par le biais d’un URI qui contient un numéro de version, tel que `https://adventure-works.com/v2/customers/3` :
 
 ```HTTP
 HTTP/1.1 200 OK
@@ -435,16 +433,16 @@ Content-Type: application/json; charset=utf-8
 Ce mécanisme de contrôle de version est très simple, mais dépend du routage de la requête par le serveur au point de terminaison approprié. Toutefois, il peut devenir complexe à mesure que l’API web arrive à maturité par le biais de plusieurs itérations et que le nombre de versions différentes prises en charge par le serveur évolue. En outre, d’un point de vue puriste, les applications clientes extraient les mêmes données (client 3) dans tous les cas. L’URI ne devrait donc pas être différent selon la version. Ce modèle complique également l’implémentation de HATEOAS, dans la mesure où tous les liens devront inclure le numéro de version dans leurs URI.
 
 ### <a name="query-string-versioning"></a>Contrôle de version de chaîne de requête
-Plutôt que de fournir plusieurs URI, vous pouvez spécifier la version de la ressource en utilisant un paramètre dans la chaîne de requête ajoutée à la requête HTTP, par exemple *https://adventure-works.com/customers/3?version=2*. La valeur par défaut du paramètre de version doit être significative, par exemple 1, s’il est omis par des applications clientes plus anciennes.
+
+Plutôt que de fournir plusieurs URI, vous pouvez spécifier la version de la ressource en utilisant un paramètre dans la chaîne de requête ajoutée à la requête HTTP, par exemple `https://adventure-works.com/customers/3?version=2`. La valeur par défaut du paramètre de version doit être significative, par exemple 1, s’il est omis par des applications clientes plus anciennes.
 
 D’un point de vue sémantique, cette approche présente l’avantage suivant : la même ressource est toujours extraite du même URI, mais cela dépend du code qui gère la demande d’analyse de la chaîne de requête et de renvoi de la réponse HTTP appropriée. D’autre part, cette approche présente les mêmes inconvénients que le mécanisme de contrôle de version d’URI concernant l’implémentation de HATEOAS.
 
 > [!NOTE]
 > Certains proxys et navigateurs web anciens ne mettent pas en cache les réponses aux requêtes qui incluent une chaîne de requête dans l’URI. Cela peut avoir un impact négatif sur les performances des applications web qui utilisent une API web et qui s’exécutent à partir des navigateurs web.
->
->
 
 ### <a name="header-versioning"></a>Contrôle de version d’en-tête
+
 Plutôt que d’ajouter le numéro de version en tant que paramètre dans la chaîne de requête, vous pouvez implémenter un en-tête personnalisé qui indique la version de la ressource. Cette approche nécessite que l’application cliente ajoute l’en-tête approprié à toutes les requêtes, même si le code qui gère la requête client peut utiliser une valeur par défaut (version 1) si l’en-tête de version est omis. Les exemples suivants utilisent un en-tête personnalisé nommé *Custom-Header*. La valeur de cet en-tête indique la version de l’API web.
 
 Version 1 :
@@ -478,6 +476,7 @@ Content-Type: application/json; charset=utf-8
 Notez que, comme avec les deux approches précédentes, l’implémentation de HATEOAS nécessite l’inclusion de l’en-tête personnalisé approprié dans tous les liens.
 
 ### <a name="media-type-versioning"></a>Contrôle de version du type de média
+
 Lorsqu’une application cliente envoie une requête HTTP GET à un serveur web, elle doit indiquer le format du contenu qu’elle peut traiter à l’aide d’un en-tête Accept, comme décrit précédemment dans ce guide. Souvent, l’en-tête *Accept* a pour rôle de permettre à l’application cliente de spécifier si le corps de la réponse doit être au format XML ou JSON, ou dans un autre format courant que le client peut analyser. Toutefois, il est possible de définir des types de médias personnalisés qui incluent des informations permettant à l’application cliente d’indiquer la version de ressource attendue. L’exemple suivant illustre une requête qui spécifie un en-tête *Accept* avec la valeur *application/vnd.adventure-works.v1+json*. L’élément *vnd.adventure-works.v1* indique au serveur web qu’il doit renvoyer la version 1 de la ressource, tandis que l’élément *json* spécifie que le format du corps de la réponse doit être JSON :
 
 ```HTTP
@@ -502,19 +501,23 @@ Cette approche représente sans doute le mécanisme de contrôle de version le p
 > Lorsque vous choisissez une stratégie de contrôle de version, vous devez également tenir compte des implications sur les performances et en particulier de la mise en cache sur le serveur web. À cet égard, les modèles de contrôle de version d’URI et de chaîne de requête sont particulièrement efficaces, dans la mesure où la même combinaison URI/chaîne de requête fait référence aux mêmes données à chaque fois.
 >
 > Les mécanismes de contrôle de version d’en-tête et de type de média requièrent généralement une logique supplémentaire pour examiner les valeurs dans l’en-tête personnalisé ou l’en-tête Accept. Dans un environnement à grande échelle, l’utilisation de différentes versions d’une API web par de nombreux clients peut entraîner une quantité importante de données dupliquées dans un cache côté serveur. Ce problème peut s’aggraver si une application cliente communique avec un serveur web par l’intermédiaire d’un proxy qui implémente la mise en cache et qui transmet une requête au serveur web uniquement s’il ne contient pas une copie des données demandées dans son cache.
->
->
 
 ## <a name="open-api-initiative"></a>Open API Initiative
+
 Le programme [Open API Initiative](https://www.openapis.org/) a été créé par un consortium industriel afin de normaliser les descriptions d’API REST entre les différents fournisseurs. Dans le cadre de ce programme, la spécification Swagger 2.0 a été renommée en spécification OpenAPI (OAS) et placée sous le programme Open API Initiative.
 
 Vous pouvez adopter la spécification OpenAPI pour vos API Web. Éléments à prendre en considération :
 
 - La spécification OpenAPI est fournie avec un ensemble de consignes strictes sur la façon dont une API REST doit être conçue. Ceci présente des avantages en termes d’interopérabilité, mais nécessite un surcroît d’attention de votre part lorsque vous concevez votre API pour qu’elle soit conforme à la spécification.
-- OpenAPI promeut une approche qui commence par le contrat plutôt que par l’implémentation. Cela signifie que vous commencez par concevoir le contrat d’API (l’interface), puis que vous écrivez le code qui implémente ce contrat. 
+
+- OpenAPI promeut une approche qui commence par le contrat plutôt que par l’implémentation. Cela signifie que vous commencez par concevoir le contrat d’API (l’interface), puis que vous écrivez le code qui implémente ce contrat.
+
 - Des outils tels que Swagger peuvent générer des bibliothèques clientes ou une documentation à partir des contrats d’API. Par exemple, consultez l’article [ASP.NET Web API Help Pages using Swagger (Pages d’aide sur l’API Web ASP.NET à l’aide de Swagger)](/aspnet/core/tutorials/web-api-help-pages-using-swagger).
 
 ## <a name="more-information"></a>Plus d’informations
-* [Microsoft REST API Guidelines](https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md) (Directives relatives aux API REST Microsoft). Recommandations détaillées pour la conception d’API REST publiques.
-* [Web API Checklist](https://mathieu.fenniak.net/the-api-checklist/) (Liste de contrôle pour les API web). Une liste d’éléments à prendre en compte lors de la conception et de l’implémentation d’une API web.
-* [Open API Initiative](https://www.openapis.org/). Documentation et informations d’implémentation sur Open API.
+
+- [Microsoft REST API Guidelines](https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md) (Directives relatives aux API REST Microsoft). Recommandations détaillées pour la conception d’API REST publiques.
+
+- [Web API Checklist](https://mathieu.fenniak.net/the-api-checklist/) (Liste de contrôle pour les API web). Une liste d’éléments à prendre en compte lors de la conception et de l’implémentation d’une API web.
+
+- [Open API Initiative](https://www.openapis.org/). Documentation et informations d’implémentation sur Open API.

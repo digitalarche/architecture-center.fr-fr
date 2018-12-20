@@ -1,25 +1,26 @@
 ---
-title: Scoring par lots dans Azure pour les modèles d’apprentissage profond
-description: Cette architecture de référence montre comment appliquer un transfert de style neuronal à une vidéo à l’aide d’Azure Batch AI
+title: Scoring par lots pour les modèles d’apprentissage profond
+titleSuffix: Azure Reference Architectures
+description: Cette architecture de référence montre comment appliquer un transfert de style neuronal à une vidéo à l’aide d’Azure Batch AI.
 author: jiata
 ms.date: 10/02/2018
-ms.author: jiata
-ms.openlocfilehash: 1f3f3d3882b2b30eb29acd26c9eab9ff128028e2
-ms.sourcegitcommit: 9eecff565392273d11b8702f1fcecb4d75e27a15
+ms.custom: azcat-ai
+ms.openlocfilehash: 0396903a39d00a4131df65872a63f4b3fde8dce7
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/03/2018
-ms.locfileid: "48243717"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53119878"
 ---
 # <a name="batch-scoring-on-azure-for-deep-learning-models"></a>Scoring par lots dans Azure pour les modèles d’apprentissage profond
 
 Cette architecture de référence montre comment appliquer un transfert de style neuronal à une vidéo à l’aide d’Azure Batch AI. Le *transfert de style* est une technique d’apprentissage profond (« deep learning ») qui compose une image existante dans le style d’une autre image. Cette architecture peut être généralisée à un scénario qui utilise le scoring par lots avec l’apprentissage profond. [**Déployez cette solution**](#deploy-the-solution).
- 
-![](./_images/batch-ai-deep-learning.png)
 
-**Scénario** : un média souhaite changer le style d’une vidéo pour qu’elle ressemble à une peinture spécifique. L’objectif est d’appliquer ce style à toutes les images de la vidéo en temps voulu et de façon automatisée. Pour plus d’informations sur les algorithmes de transfert de style neuronal, consultez le document [Image Style Transfer Using Convolutional Neural Networks][image-style-transfer] (PDF).
+![Diagramme d’architecture pour les modèles d’apprentissage profond avec Azure Batch AI](./_images/batch-ai-deep-learning.png)
 
-| Image du style : | Vidéo d’entrée/contenu : | Vidéo de sortie : | 
+**Scénario** : une société de multimédia souhaite changer le style d’une vidéo pour qu’elle ressemble à une peinture spécifique. L’objectif est d’appliquer ce style à toutes les images de la vidéo en temps voulu et de façon automatisée. Pour plus d’informations sur les algorithmes de transfert de style neuronal, consultez le document [Image Style Transfer Using Convolutional Neural Networks][image-style-transfer] (PDF).
+
+| Image du style : | Vidéo d’entrée/contenu : | Vidéo de sortie : |
 |--------|--------|---------|
 | <img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/style_image.jpg" width="300"> | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video.mp4 "Vidéo d’entrée") *cliquer pour voir la vidéo* | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video.mp4 "Vidéo de sortie") *cliquer pour voir la vidéo* |
 
@@ -35,6 +36,7 @@ Cette architecture de référence a été conçue pour les charges de travail qu
 1. Téléchargez les images générées, puis réincorporez-les dans une vidéo.
 
 ## <a name="architecture"></a>Architecture
+
 Cette architecture est constituée des composants suivants.
 
 ### <a name="compute"></a>Calcul
@@ -62,7 +64,7 @@ Cette architecture de référence utilise la séquence vidéo d’un orang-outan
 3. Utilisez FFmpeg pour découper la vidéo en images individuelles. Les images seront traitées indépendamment, en parallèle.
 4. Utilisez AzCopy pour copier les images individuelles dans votre conteneur d’objets blob.
 
-À ce stade, la séquence vidéo se trouve dans un format utilisable pour le transfert de style neuronal. 
+À ce stade, la séquence vidéo se trouve dans un format utilisable pour le transfert de style neuronal.
 
 ## <a name="performance-considerations"></a>Considérations relatives aux performances
 
@@ -74,7 +76,7 @@ Les GPU ne sont pas compatibles par défaut dans toutes les régions. Veillez à
 
 ### <a name="parallelizing-across-vms-vs-cores"></a>Parallélisation dans les machines virtuelles et les cœurs
 
-Quand vous exécutez un processus de transfert de style en tant que traitement par lots, les tâches qui s’exécutent principalement sur les GPU doivent être parallélisées dans toutes les machines virtuelles. Deux approches sont possibles : vous pouvez soit créer un cluster plus grand contenant des machines virtuelles avec un seul GPU, soit créer un cluster plus petit contenant des machines virtuelles avec un grand nombre de GPU. 
+Quand vous exécutez un processus de transfert de style en tant que traitement par lots, les tâches qui s’exécutent principalement sur les GPU doivent être parallélisées dans toutes les machines virtuelles. Deux approches sont possibles : vous pouvez soit créer un cluster plus grand contenant des machines virtuelles avec un seul GPU, soit créer un cluster plus petit contenant des machines virtuelles avec un grand nombre de GPU.
 
 Pour cette charge de travail, ces deux options offrent des performances comparables. Le fait d’utiliser moins de machines virtuelles avec plus de GPU par machine virtuelle peut contribuer à réduire le déplacement de données. Cependant, le volume de données par tâche pour cette charge de travail n’étant pas très important, la limitation imposée par Stockage Blob n’est pas significative.
 
@@ -96,7 +98,7 @@ Dans les scénarios faisant intervenir des données plus sensibles, veillez à c
 
 ### <a name="data-encryption-and-data-movement"></a>Chiffrement des données et déplacement des données
 
-Cette architecture de référence utilise le transfert de style comme exemple de processus de scoring par lots. Pour les scénarios avec des données plus sensibles, les données contenues dans le stockage doivent être chiffrées au repos. Chaque fois que des données sont déplacées d’un emplacement à l’autre, utilisez SSL pour sécuriser le transfert de données. Pour plus d’informations, consultez le [guide de sécurité Stockage Azure][storage-security]. 
+Cette architecture de référence utilise le transfert de style comme exemple de processus de scoring par lots. Pour les scénarios avec des données plus sensibles, les données contenues dans le stockage doivent être chiffrées au repos. Chaque fois que des données sont déplacées d’un emplacement à l’autre, utilisez SSL pour sécuriser le transfert de données. Pour plus d’informations, consultez le [guide de sécurité Stockage Azure][storage-security].
 
 ### <a name="securing-data-in-a-virtual-network"></a>Sécurisation des données dans un réseau virtuel
 
@@ -108,26 +110,25 @@ Dans les scénarios à plusieurs utilisateurs, veillez à ce que les données se
 
 - Utilisez RBAC pour limiter l’accès des utilisateurs aux seules ressources dont ils ont besoin.
 - Provisionnez deux comptes de stockage distincts. Stockez les données d’entrée et de sortie dans le premier compte. L’accès à ce compte peut être octroyé à des utilisateurs externes. Stockez les scripts exécutables et les fichiers journaux de sortie dans l’autre compte. Les utilisateurs externes ne doivent pas avoir accès à ce compte. Ainsi, les utilisateurs externes ne pourront pas modifier les fichiers exécutables (pour injecter du code malveillant) ni accéder aux fichiers journaux, qui peuvent contenir des informations sensibles.
-- Les utilisateurs malveillants peuvent lancer une attaque DDOS à l’encontre de la file d’attente des travaux ou injecter dans celle-ci des messages incohérents mal formés, entraînant ainsi le blocage du système ou des erreurs de retrait de la file d’attente. 
+- Les utilisateurs malveillants peuvent lancer une attaque DDOS à l’encontre de la file d’attente des travaux ou injecter dans celle-ci des messages incohérents mal formés, entraînant ainsi le blocage du système ou des erreurs de retrait de la file d’attente.
 
-## <a name="monitoring-and-logging"></a>Supervision et journalisation
+## <a name="monitoring-and-logging"></a>Surveillance et journalisation
 
 ### <a name="monitoring-batch-ai-jobs"></a>Supervision des tâches Batch AI
 
-Pendant que vous exécutez votre tâche, il est important de superviser la progression et de vérifier que tout fonctionne comme prévu. Cependant, superviser un cluster de nœuds actifs peut s’avérer ardu. 
+Pendant que vous exécutez votre tâche, il est important de superviser la progression et de vérifier que tout fonctionne comme prévu. Cependant, superviser un cluster de nœuds actifs peut s’avérer ardu.
 
-Pour vous faire une idée de l’état global du cluster, accédez au panneau Batch AI du portail Azure pour inspecter l’état des nœuds du cluster. Si un nœud est inactif ou si une tâche a échoué, les journaux d’erreurs sont enregistrés dans Stockage Blob et sont aussi accessibles dans le panneau Tâches du portail Azure. 
+Pour vous faire une idée de l’état global du cluster, accédez au panneau Batch AI du portail Azure pour inspecter l’état des nœuds du cluster. Si un nœud est inactif ou si une tâche a échoué, les journaux d’erreurs sont enregistrés dans Stockage Blob et sont aussi accessibles dans le panneau Tâches du portail Azure.
 
 La supervision peut encore être enrichie en connectant les journaux à Application Insights ou en exécutant des processus distincts pour demander l’état du cluster Batch AI et de ses tâches.
 
 ### <a name="logging-in-batch-ai"></a>Journalisation dans Batch AI
 
-Batch AI journalise automatiquement tous les stdout/stderr dans le compte Stockage Blob associé. L’utilisation d’un outil de navigation de stockage comme l’Explorateur Stockage facilite nettement l’expérience de navigation dans les fichiers journaux. 
+Batch AI journalise automatiquement tous les stdout/stderr dans le compte Stockage Blob associé. L’utilisation d’un outil de navigation de stockage comme l’Explorateur Stockage facilite nettement l’expérience de navigation dans les fichiers journaux.
 
-Les étapes de déploiement pour cette architecture de référence montrent aussi comment configurer un système de journalisation plus simple, de sorte que tous les journaux des différentes tâches soient enregistrés dans un même répertoire de votre conteneur d’objets blob, comme illustré ci-dessous.
-Ces journaux s’avèrent utiles pour superviser la durée de traitement de chaque tâche et de chaque image. Vous pouvez ainsi vous faire une idée plus précise de la façon de mieux optimiser le processus.
+Les étapes de déploiement pour cette architecture de référence montrent aussi comment configurer un système de journalisation plus simple, de sorte que tous les journaux des différentes tâches soient enregistrés dans un même répertoire de votre conteneur d’objets blob, comme illustré ci-dessous. Ces journaux s’avèrent utiles pour superviser la durée de traitement de chaque tâche et de chaque image. Vous pouvez ainsi vous faire une idée plus précise de la façon de mieux optimiser le processus.
 
-![](./_images/batch-ai-logging.png)
+![Capture d’écran de la journalisation pour Azure Batch AI](./_images/batch-ai-logging.png)
 
 ## <a name="cost-considerations"></a>Considérations relatives au coût
 
@@ -142,6 +143,8 @@ La mise à l’échelle peut ne pas convenir pour les tâches Batch trop rapproc
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
 Pour déployer cette architecture de référence, suivez les étapes décrites dans le [dépôt GitHub][deployment].
+
+<!-- links -->
 
 [azcopy]: /azure/storage/common/storage-use-azcopy-linux
 [batch-ai]: /azure/batch-ai/

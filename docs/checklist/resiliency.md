@@ -1,15 +1,16 @@
 ---
 title: Liste de vérification de résilience
+titleSuffix: Azure Design Review Framework
 description: Liste de vérification fournissant des indications relatives aux problématiques de résilience durant la conception.
 author: petertaylor9999
-ms.date: 01/10/2018
+ms.date: 11/26/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: ce538a0b234a5b120415980e983096f567f9cf86
-ms.sourcegitcommit: 1b5411f07d74f0a0680b33c266227d24014ba4d1
+ms.openlocfilehash: 1201e2045c6a5f7be9c8286cd192559a8d66d169
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52305942"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307450"
 ---
 # <a name="resiliency-checklist"></a>Liste de vérification de résilience
 
@@ -23,50 +24,52 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Effectuez une analyse du mode d’échec pour votre application.** L’analyse du mode d’échec est un processus qui permet d’intégrer la résilience dans une application au début de la phase de conception. Pour plus d’informations, consultez [Analyse du mode d’échec][fma]. Les objectifs d’une analyse du mode d’échec incluent :  
 
-* Identifier les types d’échecs qu’une application peut rencontrer.
-* Déterminer les effets et l’impact potentiels de chaque type d’échec sur l’application.
-* Identifier les stratégies de récupération.
+- Identifier les types d’échecs qu’une application peut rencontrer.
+- Déterminer les effets et l’impact potentiels de chaque type d’échec sur l’application.
+- Identifier les stratégies de récupération.
   
-
-**Déployez plusieurs instances des services.** Si votre application repose sur une seule instance unique d’un service, cela crée un point de défaillance unique. L’approvisionnement de plusieurs instances améliore à la fois la résilience et l’extensibilité. Pour [Azure App Service](/azure/app-service/app-service-value-prop-what-is/), sélectionnez un [plan App Service](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview/) qui offre plusieurs instances. Pour les Azure Cloud Services, configurez chacun de vos rôles de manière à utiliser [plusieurs instances](/azure/cloud-services/cloud-services-choose-me/#scaling-and-management). Pour [Machines virtuelles Azure](/azure/virtual-machines/virtual-machines-windows-about/?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json), assurez-vous que votre architecture de machine virtuelle inclut plusieurs machines virtuelles et que chaque machine virtuelle est incluse dans un [groupe à haute disponibilité][availability-sets].   
+**Déployez plusieurs instances des services.** Si votre application repose sur une seule instance unique d’un service, cela crée un point de défaillance unique. L’approvisionnement de plusieurs instances améliore à la fois la résilience et l’extensibilité. Pour [Azure App Service](/azure/app-service/app-service-value-prop-what-is/), sélectionnez un [plan App Service](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview/) qui offre plusieurs instances. Pour les Azure Cloud Services, configurez chacun de vos rôles de manière à utiliser [plusieurs instances](/azure/cloud-services/cloud-services-choose-me/#scaling-and-management). Pour [Machines virtuelles Azure](/azure/virtual-machines/virtual-machines-windows-about/?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json), assurez-vous que votre architecture de machine virtuelle inclut plusieurs machines virtuelles et que chaque machine virtuelle est incluse dans un [groupe à haute disponibilité][availability-sets].
 
 **Utilisez la mise à l’échelle automatique pour répondre aux augmentations de charge.** Si votre application n’est pas configurée pour augmenter automatiquement la taille des instances quand la charge augmente, les services de votre application risquent d’échouer s’ils sont saturés de requêtes utilisateur. Pour plus d’informations, consultez les articles suivants :
 
-* Informations générales : [Liste de contrôle de l’extensibilité](./scalability.md)
-* Azure App Service : [Mise à l’échelle manuelle ou automatique du nombre d’instances][app-service-autoscale]
-* Services cloud : [Mise à l’échelle automatique d’un service cloud][cloud-service-autoscale]
-* Machines virtuelles : [Mise à l’échelle automatique et groupes de machines virtuelles identiques][vmss-autoscale]
+- Général : [Liste de contrôle d’évolutivité](./scalability.md)
+- Azure App Service : [Ajustement manuel ou automatique du nombre d’instances][app-service-autoscale]
+- Services cloud : [Mise à l’échelle automatique d’un service cloud][cloud-service-autoscale]
+- Machines virtuelles : [Mise à l’échelle automatique et groupes de machines virtuelles identiques][vmss-autoscale]
 
 **Utilisez l’équilibrage de charge pour distribuer les requêtes.** L’équilibrage de charge distribue les requêtes de votre application à des instances de service intègres en supprimant les instances non intègres de la rotation. Si votre service utilise Azure App Service ou Azure Cloud Services, sa charge est déjà équilibrée pour vous. Cependant, si votre application utilise Machines virtuelles Azure, vous devez approvisionner un équilibreur de charge. Pour plus d’informations, consultez la [vue d’ensemble d’Azure Load Balancer](/azure/load-balancer/load-balancer-overview/).
 
 **Configurez les passerelles Azure Application Gateway de manière à utiliser plusieurs instances.** Selon les exigences de votre application, une passerelle [Azure Application Gateway](/azure/application-gateway/application-gateway-introduction/) peut être mieux adaptée pour distribuer les requêtes aux services de votre application. Cependant, les instances uniques du service Application Gateway ne sont pas garanties par un contrat de niveau de service (SLA). Par conséquent, il se peut que votre application échoue en cas d’échec de l’instance Application Gateway. Approvisionnez plusieurs instances Application Gateway moyennes ou grandes pour garantir la disponibilité du service selon les conditions du [SLA](https://azure.microsoft.com/support/legal/sla/application-gateway/).
 
-**Utilisez des groupes à haute disponibilité pour chaque couche Application.** Le placement des instances dans un [groupe à haute disponibilité][availability-sets] permet de bénéficier d’un [SLA](https://azure.microsoft.com/support/legal/sla/virtual-machines/) supérieur. 
+**Utilisez des groupes à haute disponibilité pour chaque couche Application.** Le placement des instances dans un [groupe à haute disponibilité][availability-sets] permet de bénéficier d’un [SLA](https://azure.microsoft.com/support/legal/sla/virtual-machines/) supérieur.
 
 **Répliquez les machines virtuelles à l’aide d’Azure Site Recovery.** Quand vous répliquez des machines virtuelles Azure à l’aide de [Site Recovery][site-recovery], tous les disques de machine virtuelle sont répliqués en continu sur la région cible en mode asynchrone. Les points de récupération sont créés à intervalle de quelques minutes. Cela vous donne un objectif de point de récupération (RPO) de l’ordre de quelques minutes.
 
-**Envisagez de déployer votre application dans plusieurs régions.** Si votre application est déployée dans une seule région, si la région entière devient indisponible (éventualité hautement improbable), votre application sera elle aussi indisponible. Il se peut que cette situation soit inacceptable au regard des conditions du SLA de votre application. Si c’est le cas, envisagez de déployer votre application et ses services dans plusieurs régions. Un déploiement dans plusieurs régions peut s’appuyer sur un modèle actif (répartissant les requêtes entre plusieurs instances actives) ou sur un modèle actif/passif (conservant une instance active en réserve en cas d’échec de l’instance principale). Nous vous recommandons de déployer plusieurs instances des services de votre application sur des paires régionales. Pour plus d’informations, consultez [Continuité des activités et récupération d’urgence (BCDR) : régions jumelées d’Azure](/azure/best-practices-availability-paired-regions).
+**Envisagez de déployer votre application dans plusieurs régions.** Si votre application est déployée dans une seule région, si la région entière devient indisponible (éventualité hautement improbable), votre application sera elle aussi indisponible. Il se peut que cette situation soit inacceptable au regard des conditions du SLA de votre application. Si c’est le cas, envisagez de déployer votre application et ses services dans plusieurs régions. Un déploiement dans plusieurs régions peut s’appuyer sur un modèle actif (répartissant les requêtes entre plusieurs instances actives) ou sur un modèle actif/passif (conservant une instance active en réserve en cas d’échec de l’instance principale). Nous vous recommandons de déployer plusieurs instances des services de votre application sur des paires régionales. Pour plus d’informations, consultez l’article [Continuité des activités et récupération d’urgence (BCDR) : régions jumelées d’Azure](/azure/best-practices-availability-paired-regions).
 
 **Utilisez Azure Traffic Manager pour acheminer le trafic de votre application vers des régions différentes.**  [Azure Traffic Manager][ traffic-manager] effectue un équilibrage de charge au niveau du DNS et achemine le trafic vers des régions différentes en fonction de la méthode de [routage du trafic][ traffic-manager-routing] que vous spécifiez et de l’intégrité des points de terminaison de votre application. Sans Traffic Manager, vous êtes limité à une seule région pour votre déploiement, ce qui limite la mise à l’échelle, augmente la latence pour certains utilisateurs et entraîne l’arrêt de l’application en cas d’interruption de service à l’échelle de la région.
 
 **Configurez et testez les sondes d’intégrité pour vos équilibreurs de charge et vos gestionnaires de trafic.** Assurez-vous que votre logique d’intégrité vérifie les composants critiques du système et répond correctement aux sondes d’intégrité.
 
-* Les sondes d’intégrité pour [Azure Traffic Manager][traffic-manager] et [Azure Load Balancer][load-balancer] remplissent une fonction spécifique. Pour Traffic Manager, la sonde d’intégrité détermine si un basculement vers une autre région est nécessaire. Pour un équilibreur de charge, elle détermine s’il faut supprimer une machine virtuelle de la rotation.      
-* Pour une sonde de Traffic Manager, votre point de terminaison d’intégrité doit vérifier les dépendances critiques qui sont déployées dans la même région et dont l’échec devrait déclencher un basculement vers une autre région.  
-* Pour un équilibreur de charge, le point de terminaison d’intégrité doit établir un rapport de l’intégrité de la machine virtuelle. N’incluez pas d’autres niveaux ou de services externes. Autrement, si un échec se produit en dehors de la machine virtuelle, l’équilibreur de charge supprimera la machine virtuelle de la rotation.
-* Pour savoir comment implémenter la surveillance de l’intégrité dans votre application, consultez [Modèle Surveillance de point de terminaison](https://msdn.microsoft.com/library/dn589789.aspx).
+- Les sondes d’intégrité pour [Azure Traffic Manager][traffic-manager] et [Azure Load Balancer][load-balancer] remplissent une fonction spécifique. Pour Traffic Manager, la sonde d’intégrité détermine si un basculement vers une autre région est nécessaire. Pour un équilibreur de charge, elle détermine s’il faut supprimer une machine virtuelle de la rotation.
+
+- Pour une sonde de Traffic Manager, votre point de terminaison d’intégrité doit vérifier les dépendances critiques qui sont déployées dans la même région et dont l’échec devrait déclencher un basculement vers une autre région.
+
+- Pour un équilibreur de charge, le point de terminaison d’intégrité doit établir un rapport de l’intégrité de la machine virtuelle. N’incluez pas d’autres niveaux ou de services externes. Autrement, si un échec se produit en dehors de la machine virtuelle, l’équilibreur de charge supprimera la machine virtuelle de la rotation.
+
+- Pour savoir comment implémenter la surveillance de l’intégrité dans votre application, consultez [Modèle Surveillance de point de terminaison](../patterns/health-endpoint-monitoring.md).
 
 **Surveillez les services tiers.** Si votre application présente des dépendances vis-à-vis de services tiers, identifiez où et comment ces services tiers peuvent échouer et les effets que ces échecs auront sur votre application. Un service tiers peut ne pas inclure de surveillance et de diagnostics. Par conséquent, il est important que vous journalisiez vos appels de ces services et que vous les mettiez en corrélation avec la journalisation de l’intégrité et des diagnostics de votre application à l’aide d’un identificateur unique. Pour plus d’informations sur les pratiques éprouvées en matière de surveillance et de diagnostics, consultez [Guide de surveillance et de diagnostics][monitoring-and-diagnostics-guidance].
 
 **Assurez-vous que les services tiers que vous consommez incluent un contrat de niveau de service (SLA).** Si votre application dépend d’un service tiers, mais que ce service tiers n’offre aucune garantie de disponibilité sous la forme d’un contrat SLA, la disponibilité de votre application ne peut pas non plus être garantie. Le niveau de votre contrat SLA repose sur le composant le moins disponible de votre application.
 
-**Implémentez des modèles de résilience pour les opérations distantes si nécessaire.** Si votre application dépend de la communication entre des services distants, suivez les [modèles de conception](../patterns/category/resiliency.md) pour traiter les échecs temporaires, par exemple le [modèle Nouvelle tentative][retry-pattern] et le [modèle Disjoncteur][circuit-breaker]. 
+**Implémentez des modèles de résilience pour les opérations distantes si nécessaire.** Si votre application dépend de la communication entre des services distants, suivez les [modèles de conception](../patterns/category/resiliency.md) pour gérer les échecs temporaires, par exemple le [modèle Nouvelle tentative](../patterns/retry.md) et le [modèle Disjoncteur](../patterns/circuit-breaker.md).
 
 **Implémentez des opérations asynchrones dès que possible.** Les opérations synchrones peuvent monopoliser les ressources et de bloquer les autres opérations pendant que l’appelant attend la fin du processus. Concevez chaque partie de votre application de manière à permettre les opérations asynchrones dès que possible. Pour plus d’informations sur l’implémentation de la programmation asynchrone en C#, consultez [Programmation asynchrone avec async et await][asynchronous-c-sharp].
 
 ## <a name="data-management"></a>Gestion des données
 
-**Étudiez les méthodes de réplication pour les sources de données de votre application.** Vos données d’application seront stockées dans des sources de données différentes et présenteront des exigences de disponibilité distinctes. Évaluer les méthodes de réplication pour chaque type de stockage de données dans Azure, y compris la [réplication Stockage Azure](/azure/storage/storage-redundancy/) et [géoréplication active de SQL Database](/azure/sql-database/sql-database-geo-replication-overview/), pour vous assurer que les exigences de votre application en matière de données sont satisfaites. Si vous répliquez des machines virtuelles Azure à l’aide de [Site Recovery][site-recovery], tous les disques de machine virtuelle sont répliqués en continu sur la région cible en mode asynchrone. Les points de récupération sont créés à intervalle de quelques minutes. 
+**Étudiez les méthodes de réplication pour les sources de données de votre application.** Vos données d’application seront stockées dans des sources de données différentes et présenteront des exigences de disponibilité distinctes. Évaluer les méthodes de réplication pour chaque type de stockage de données dans Azure, y compris la [réplication Stockage Azure](/azure/storage/storage-redundancy/) et [géoréplication active de SQL Database](/azure/sql-database/sql-database-geo-replication-overview/), pour vous assurer que les exigences de votre application en matière de données sont satisfaites. Si vous répliquez des machines virtuelles Azure à l’aide de [Site Recovery][site-recovery], tous les disques de machine virtuelle sont répliqués en continu sur la région cible en mode asynchrone. Les points de récupération sont créés à intervalle de quelques minutes.
 
 **Assurez-vous qu’aucun compte d’utilisateur n’a accès à la fois aux données de production et aux données de sauvegarde.** Si un même compte d’utilisateur est autorisé à écrire dans les sources de production et de sauvegarde, vos sauvegardes de données risquent d’être compromises. En effet, un utilisateur malveillant pourrait supprimer volontairement toutes vos données, tandis qu’un utilisateur normal pourrait les supprimer accidentellement. Concevez votre application de manière à limiter les autorisations de chaque compte d’utilisateur afin que seuls les utilisateurs qui ont besoin d’un accès en écriture disposent d’un tel accès, et que celui-ci ne s’applique qu’aux données de production ou de sauvegarde.
 
@@ -77,9 +80,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 **Envisagez d’utiliser un type de compte de stockage géoredondant.** Les données stockées dans un compte Stockage Azure sont toujours répliquées localement. Cependant, plusieurs stratégies de réplication sont proposées lors du provisionnement d’un compte de stockage. Sélectionnez [Stockage géo-redondant avec accès en lecture (RA-GRS)](/azure/storage/storage-redundancy/#read-access-geo-redundant-storage) pour que vos données d’application soient protégées dans l’éventualité peu probable où une région entière deviendrait indisponible.
 
 > [!NOTE]
-> Pour les machines virtuelles, ne vous appuyez pas sur la réplication RA-GRS pour restaurer les disques de machine virtuelle (fichiers VHD). Utilisez le service [Sauvegarde Azure][azure-backup] à la place.   
->
->
+> Pour les machines virtuelles, ne vous appuyez pas sur la réplication RA-GRS pour restaurer les disques de machine virtuelle (fichiers VHD). Utilisez le service [Sauvegarde Azure][azure-backup] à la place.
 
 ## <a name="security"></a>Sécurité
 
@@ -97,15 +98,15 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 ## <a name="deployment"></a>Déploiement
 
-**Documentez le processus de mise en production de votre application.** Sans documentation détaillée du processus de mise en production, un opérateur risque de déployer une mise à jour incorrecte ou de mal configurer les paramètres de votre application. Définissez et documentez clairement votre processus de mise en production et assurez-vous que toute l’équipe chargée des opérations a accès à cette documentation. 
+**Documentez le processus de mise en production de votre application.** Sans documentation détaillée du processus de mise en production, un opérateur risque de déployer une mise à jour incorrecte ou de mal configurer les paramètres de votre application. Définissez et documentez clairement votre processus de mise en production et assurez-vous que toute l’équipe chargée des opérations a accès à cette documentation.
 
-**Automatisez le processus de déploiement de votre application.** Si votre personnel chargé des opérations est obligé de déployer manuellement votre application, des erreurs humaines risquent de faire échouer le déploiement. 
+**Automatisez le processus de déploiement de votre application.** Si votre personnel chargé des opérations est obligé de déployer manuellement votre application, des erreurs humaines risquent de faire échouer le déploiement.
 
 **Concevez votre processus de mise en production de manière à optimiser la disponibilité de l’application.** Si votre processus de mise en production nécessite le passage hors connexion des services pendant le déploiement, votre application sera indisponible jusqu’à ce qu’ils soient à nouveau en ligne. Utilisez la technique de déploiement [Blue/Green](https://martinfowler.com/bliki/BlueGreenDeployment.html) ou [de contrôle de validité](https://martinfowler.com/bliki/CanaryRelease.html) pour déployer votre application en production. Ces deux techniques impliquent le déploiement de votre code de mise en production parallèlement au code de production pour que les utilisateurs du code de mise en production puissent être redirigés vers le code de production en cas de défaillance.
 
 **Consignez et évaluez les déploiements de votre application.** Si vous utilisez des techniques de déploiement intermédiaire telles qu’un déploiement Blue/Green ou de contrôle de validité, plusieurs versions de votre application seront exécutées en production. Si un problème survient, il est essentiel de déterminer quelle version de votre application en est à l’origine. Implémentez une stratégie de journalisation fiable pour capturer le plus d’informations possible concernant la version.
 
-**Mettez en place un plan de restauration pour le déploiement.** Le déploiement de votre application peut échouer et provoquer l’indisponibilité de votre application. Concevez un processus de restauration pour revenir à la dernière version valide connue et réduire le temps d’arrêt. 
+**Mettez en place un plan de restauration pour le déploiement.** Le déploiement de votre application peut échouer et provoquer l’indisponibilité de votre application. Concevez un processus de restauration pour revenir à la dernière version valide connue et réduire le temps d’arrêt.
 
 ## <a name="operations"></a>Opérations
 
@@ -121,7 +122,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Assurez-vous que votre application ne se heurte pas aux [limites d’abonnement Azure](/azure/azure-subscription-service-limits/).** Les abonnements Azure présentent des limites pour certains types de ressources, par exemple le nombre de groupes de ressources, le nombre de cœurs et le nombre de comptes de stockage.  Si les exigences de votre application dépassent les limites d’abonnement Azure, créez un autre abonnement Azure et approvisionnez des ressources suffisantes pour celui-ci.
 
-**Assurez-vous que votre application ne se heurte pas aux [limites par service](/azure/azure-subscription-service-limits/).** Les services Azure individuels présentent des limites en termes de consommation, telles que des limites sur le stockage, le débit, le nombre de connexions, les requêtes par seconde et d’autres mesures. Si votre application tente d’utiliser des ressources au-delà de ces limites, elle échouera. Cela donnera lieu à une limitation du service et potentiellement à un temps d’arrêt pour les utilisateurs touchés. Selon le service spécifique et les exigences de votre application, vous pouvez souvent éviter ces limites en montant en puissance (par exemple, en choisissant un autre niveau tarifaire) ou en montant en charge (en ajoutant de nouvelles instances).  
+**Assurez-vous que votre application ne se heurte pas aux [limites par service](/azure/azure-subscription-service-limits/).** Les services Azure individuels présentent des limites en termes de consommation, telles que des limites sur le stockage, le débit, le nombre de connexions, les requêtes par seconde et d’autres mesures. Si votre application tente d’utiliser des ressources au-delà de ces limites, elle échouera. Cela donnera lieu à une limitation du service et potentiellement à un temps d’arrêt pour les utilisateurs touchés. Selon le service spécifique et les exigences de votre application, vous pouvez souvent éviter ces limites en montant en puissance (par exemple, en choisissant un autre niveau tarifaire) ou en montant en charge (en ajoutant de nouvelles instances).
 
 **Concevez votre application de telle sorte que ses exigences de stockage soient inférieures ou égales aux objectifs d’extensibilité et de performance du stockage Azure.** Le stockage Azure étant conçu pour fonctionner selon des objectifs d’extensibilité et de performance prédéfinis, vous devez concevoir votre application de manière à ce que son utilisation du stockage soit inférieure ou égale à ces objectifs. Si vous dépassez ces objectifs, le stockage de votre application sera limité. Pour résoudre ce problème, approvisionnez des comptes de stockage supplémentaires. Si vous vous heurtez à la limite des comptes de stockage, approvisionnez des abonnements Azure supplémentaires, puis approvisionnez-y des comptes de stockage supplémentaires. Pour plus d'informations, consultez [Objectifs d'extensibilité et de performances d'Azure Storage](/azure/storage/storage-scalability-targets/).
 
@@ -129,7 +130,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Déterminez si la charge de travail de votre application est stable ou fluctue au fil du temps.** Si votre charge de travail fluctue au fil du temps, utilisez les groupes de machines virtuelles identiques Azure pour mettre automatiquement à l’échelle le nombre d’instances de machines virtuelles. Autrement, vous devrez augmenter ou diminuer manuellement le nombre de machines virtuelles. Pour plus d’informations, consultez [Présentation des groupes de machines virtuelles identiques Azure](/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-overview/).
 
-**Sélectionnez le niveau de service approprié pour Azure SQL Database.** Si votre application utilise Azure SQL Database, assurez-vous que vous avez choisi le niveau de service approprié. Si vous sélectionnez un niveau qui ne permet pas de gérer les exigences de votre application en matière d’unités de transaction de base de données (DTU), votre utilisation de données sera limitée. Pour plus d’informations sur la sélection du plan de service approprié, consultez [Options et performances de SQL Database : comprendre ce qui est disponible dans chaque niveau de service](/azure/sql-database/sql-database-service-tiers/).
+**Sélectionnez le niveau de service approprié pour Azure SQL Database.** Si votre application utilise Azure SQL Database, assurez-vous que vous avez choisi le niveau de service approprié. Si vous sélectionnez un niveau qui ne permet pas de gérer les exigences de votre application en matière d’unités de transaction de base de données (DTU), votre utilisation de données sera limitée. Pour plus d’informations sur la sélection du plan de service approprié, consultez [Options et performances de SQL Database : comprendre les éléments disponibles dans chaque niveau de service](/azure/sql-database/sql-database-service-tiers/).
 
 **Créez un processus pour l’interaction avec le support Azure.** Si le processus de contact du [support Azure](https://azure.microsoft.com/support/plans/) n’est pas défini avant qu’il soit nécessaire de contacter ce dernier, le temps d’arrêt sera prolongé du fait de l’accès au processus de support pour la première fois. Incluez le processus pour contacter le support et faire remonter les problèmes dans le cadre de la résilience de votre application dès le début.
 
@@ -155,7 +156,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Utilisez les verrous de ressources pour les ressources critiques, telles que les machines virtuelles.** Les verrous de ressources empêchent un opérateur de supprimer accidentellement une ressource. Pour plus d’informations, consultez [Verrouiller des ressources avec Azure Resource Manager](/azure/azure-resource-manager/resource-group-lock-resources/).
 
-**Choisissez des paires régionales.** En cas de déploiement dans deux régions, choisissez des régions de la même paire régionale. En cas de panne étendue, la récupération d’une région est hiérarchisée pour chaque paire. Certains services de stockage géoredondant fournissent une réplication automatique vers la région jumelée. Pour plus d’informations, consultez [Continuité des activités et récupération d’urgence (BCDR) : régions jumelées d’Azure](/azure/best-practices-availability-paired-regions).
+**Choisissez des paires régionales.** En cas de déploiement dans deux régions, choisissez des régions de la même paire régionale. En cas de panne étendue, la récupération d’une région est hiérarchisée pour chaque paire. Certains services de stockage géoredondant fournissent une réplication automatique vers la région jumelée. Pour plus d’informations, consultez l’article [Continuité des activités et récupération d’urgence (BCDR) : régions jumelées d’Azure](/azure/best-practices-availability-paired-regions)
 
 **Organisez les groupes de ressources par fonction et cycle de vie.**  En règle générale, un groupe de ressources doit contenir des ressources qui partagent le même cycle de vie. Cela simplifie la gestion des déploiements, la suppression des déploiements de test et l’attribution des droits d’accès, réduisant ainsi le risque de suppression ou de modification accidentelle d’un déploiement de production. Créez des groupes de ressources distincts pour les environnements de production, de développement et de test. Dans un déploiement multirégion, placez les ressources pour chaque région dans des groupes de ressources distincts. Vous pourrez ainsi plus facilement redéployer une région sans affecter les autres régions.
 
@@ -163,7 +164,6 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 - [Liste de vérification de la résilience pour des services Azure spécifiques](./resiliency-per-service.md)
 - [Analyse du mode d’échec](../resiliency/failure-mode-analysis.md)
-
 
 <!-- links -->
 [app-service-autoscale]: /azure/monitoring-and-diagnostics/insights-how-to-scale/
@@ -176,7 +176,6 @@ La résilience est la capacité d’un système à récupérer après des défai
 [load-balancer]: /azure/load-balancer/load-balancer-overview/
 [monitoring-and-diagnostics-guidance]: ../best-practices/monitoring.md
 [resource-manager]: /azure/azure-resource-manager/resource-group-overview/
-[retry-pattern]: ../patterns/retry.md
 [retry-service-guidance]: ../best-practices/retry-service-specific.md
 [site-recovery]: /azure/site-recovery/
 [site-recovery-test]: /azure/site-recovery/site-recovery-test-failover-to-azure

@@ -1,19 +1,20 @@
 ---
 title: Liste de contrôle de disponibilité
+titleSuffix: Azure Design Review Framework
 description: Liste de contrôle fournissant des indications relatives aux problématiques de disponibilité durant la conception.
 author: dragon119
-ms.date: 01/10/2018
+ms.date: 11/26/2018
 ms.custom: checklist
-ms.openlocfilehash: 5a819c5612fba9623c239bcc43f9004cd97dfb76
-ms.sourcegitcommit: 1b5411f07d74f0a0680b33c266227d24014ba4d1
+ms.openlocfilehash: 37e61b35d73007b9bac1ebaecfbf42792ae3903b
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52305891"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307229"
 ---
 # <a name="availability-checklist"></a>Liste de contrôle de disponibilité
 
-La disponibilité est la proportion de temps pendant laquelle un système est fonctionnel ; elle est l’un des [piliers de la qualité logicielle](../guide/pillars.md). Utilisez cette liste de vérification pour passer en revue l’architecture de votre application en termes de disponibilité. 
+La disponibilité est la proportion de temps pendant laquelle un système est fonctionnel ; elle est l’un des [piliers de la qualité logicielle](../guide/pillars.md). Utilisez cette liste de vérification pour passer en revue l’architecture de votre application en termes de disponibilité.
 
 ## <a name="application-design"></a>Conception des applications
 
@@ -29,7 +30,7 @@ La disponibilité est la proportion de temps pendant laquelle un système est fo
 
 **Concevez des applications pour appliquer une dégradation normale.** La charge sur une application peut dépasser la capacité d’une ou de plusieurs portions, ce qui entraîne une réduction de la disponibilité et la mise en échec des connexions. La mise à l’échelle peut aider à pallier ces problématiques, mais vous pouvez vous heurter à des restrictions de disponibilité de ressources ou de coûts. Lorsqu’une application atteint une limite de ressource, elle doit agir en conséquence pour minimiser l’impact de l’utilisateur. Par exemple, dans un système d’e-commerce, si le sous-système de traitement des commandes est sous contrainte ou échoue, vous pouvez le désactiver temporairement, tout en permettant l’exécution d’une autre fonctionnalité telle que la consultation du catalogue de produits. Il peut être utile de reporter les requêtes dirigées vers un sous-système défaillant. Par exemple, vous pouvez permettre aux clients de soumettre des commandes et enregistrer ces dernières en vue de les traiter quand le sous-système est de nouveau disponible.
 
-**Traitez de manière appropriée les événements de rafales rapides.** La plupart des applications doivent gérer des charges de travail variables au fil du temps. La mise à l’échelle automatique peut aider à traiter la charge, mais la mise en ligne des instances supplémentaires dédiées au traitement des requêtes peut prendre un certain temps. Empêchez les rafales soudaines et imprévues d’activité de surcharger l’application. Concevez l’application de sorte que les requêtes soient mises en file d’attente dans les services qu’elle utilise et qu’elle se dégrade de manière appropriée quand la capacité maximale des files d’attente est proche d’être atteinte. Veillez à conserver des niveaux appropriés de performances et de capacité dans des conditions normales, afin de traiter efficacement les files et de gérer les requêtes en attente. Pour en savoir plus, consultez le [Modèle de nivellement de charge basé sur la file d’attente](https://msdn.microsoft.com/library/dn589783.aspx).
+**Traitez de manière appropriée les événements de rafales rapides.** La plupart des applications doivent gérer des charges de travail variables au fil du temps. La mise à l’échelle automatique peut aider à traiter la charge, mais la mise en ligne des instances supplémentaires dédiées au traitement des requêtes peut prendre un certain temps. Empêchez les rafales soudaines et imprévues d’activité de surcharger l’application. Concevez l’application de sorte que les requêtes soient mises en file d’attente dans les services qu’elle utilise et qu’elle se dégrade de manière appropriée quand la capacité maximale des files d’attente est proche d’être atteinte. Veillez à conserver des niveaux appropriés de performances et de capacité dans des conditions normales, afin de traiter efficacement les files et de gérer les requêtes en attente. Pour plus d’informations, consultez [Modèle de nivellement de charge basé sur une file d’attente](../patterns/queue-based-load-leveling.md).
 
 ## <a name="deployment-and-maintenance"></a>Déploiement et maintenance
 
@@ -55,7 +56,7 @@ La disponibilité est la proportion de temps pendant laquelle un système est fo
 
 **Utilisez la sauvegarde périodique et la limite de restauration dans le temps**. Sauvegardez de manière régulière et automatique les données qui ne sont conservées à aucun emplacement et vérifiez que vous pouvez récupérer les données et l’application en cas de défaillance. Assurez-vous que les sauvegardes respectent votre objectif de point de récupération. La réplication des données n’est pas une fonctionnalité de sauvegarde, car des erreurs humaines ou des opérations nuisibles peuvent endommager les données sur tous les réplicas. Le processus de sauvegarde doit être sécurisé afin de protéger les données stockées et en transit. Les bases de données ou portions de magasins de données peuvent habituellement être récupérées à un point dans le temps, à l’aide de journaux de transactions. Pour plus d’informations, consultez [Guide technique de la résilience Azure : récupération suite à une altération de données ou à une suppression accidentelle](../resiliency/recovery-data-corruption.md)
 
-**Répliquez des disques de machine virtuelle à l’aide d’Azure Site Recovery.** Quand vous répliquez des machines virtuelles Azure à l’aide de [Site Recovery][site-recovery], tous les disques de machine virtuelle sont répliqués en continu sur la région cible en mode asynchrone. Les points de récupération sont créés à intervalle de quelques minutes. Cela vous donne un RPO de l’ordre de quelques minutes. 
+**Répliquez des disques de machine virtuelle à l’aide d’Azure Site Recovery.** Quand vous répliquez des machines virtuelles Azure à l’aide de [Site Recovery][site-recovery], tous les disques de machine virtuelle sont répliqués en continu sur la région cible en mode asynchrone. Les points de récupération sont créés à intervalle de quelques minutes. Cela vous donne un RPO de l’ordre de quelques minutes.
 
 ## <a name="errors-and-failures"></a>Erreurs et défaillances
 
@@ -79,7 +80,7 @@ La disponibilité est la proportion de temps pendant laquelle un système est fo
 
 **Testez les systèmes de surveillance.**  Les systèmes automatisés de basculement et de secours, et la visualisation manuelle de l’intégrité et des performances du système à l’aide de tableaux de bord sont tributaires du bon fonctionnement des systèmes et des instruments de surveillance. Si ces éléments subissent des défaillances, laissent échapper des informations critiques ou signalent des données inexactes, l’opérateur peut ne pas avoir connaissance du défaut d’intégrité ou de la défaillance du système.
 
-**Suivez la progression des longs flux de travail et réessayez en cas d’échec.** Les longs workflows sont souvent composés de plusieurs étapes. Veillez à ce que chaque étape soit indépendante et puisse être recommencée individuellement afin d’éviter la restauration de l’intégralité du workflow ou l’exécution de plusieurs transactions de compensation. Surveillez et gérez la progression des longs workflows en implémentant un modèle tel que [Scheduler Agent Supervisor Pattern](../patterns/scheduler-agent-supervisor.md).
+**Suivez la progression des longs flux de travail et réessayez en cas d’échec.** Les longs workflows sont souvent composés de plusieurs étapes. Veillez à ce que chaque étape soit indépendante et puisse être recommencée individuellement afin d’éviter la restauration de l’intégralité du workflow ou l’exécution de plusieurs transactions de compensation. Surveillez et gérez la progression des longs workflows en implémentant un modèle comme [Modèle de superviseur de l’agent du planificateur](../patterns/scheduler-agent-supervisor.md).
 
 **Plan de récupération d’urgence.** Créez un plan de récupération accepté et entièrement testé pour faire face à tout type de défaillance susceptible d’affecter la disponibilité du système. Choisissez une architecture de récupération d’urgence multisite pour toutes les applications stratégiques. Identifiez un propriétaire spécifique du plan de récupération d’urgence, incluant des phases d’automatisation et de test. Assurez-vous que le plan est suffisamment documenté et automatisez le processus autant que possible. Établissez une stratégie de sauvegarde pour toutes les données de référence et transactionnelles, et testez régulièrement la restauration de ces sauvegardes. Formez l’équipe des opérations à l’exécution du plan et effectuez des simulations d’urgence régulières pour valider et améliorer le plan. Si vous utilisez [Azure Site Recovery][site-recovery] pour répliquer des machines virtuelles, créez un plan de récupération entièrement automatisé pour basculer l’application entière en quelques minutes.
 
@@ -87,4 +88,3 @@ La disponibilité est la proportion de temps pendant laquelle un système est fo
 [availability-sets]:/azure/virtual-machines/virtual-machines-windows-manage-availability/
 [site-recovery]: /azure/site-recovery/
 [site-recovery-test]: /azure/site-recovery/site-recovery-test-failover-to-azure
-

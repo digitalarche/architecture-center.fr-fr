@@ -3,18 +3,19 @@ title: Application web multiniveau développée pour la haute disponibilité et 
 description: Créer une application web multiniveau développée pour la haute disponibilité et la reprise d’activité sur Azure à l’aide de machines virtuelles Azure, de groupes à haute disponibilité, de zones de disponibilité, d’Azure Site Recovery et d’Azure Traffic Manager
 author: sujayt
 ms.date: 11/16/2018
-ms.openlocfilehash: 28593c680746dc5ac8f7f25641faa57569dcc53f
-ms.sourcegitcommit: 16bc6a91b6b9565ca3bcc72d6eb27c2c4ae935e4
+ms.custom: product-team
+ms.openlocfilehash: 71534dc095d5fba137a0e610d4e725c2efc6b432
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/28/2018
-ms.locfileid: "52579464"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004598"
 ---
 # <a name="multitier-web-application-built-for-high-availability-and-disaster-recovery-on-azure"></a>Application web multiniveau développée pour la haute disponibilité et la reprise d’activité sur Azure
 
 Cet exemple de scénario s’applique à tout secteur d’activité ayant besoin de déployer des applications multiniveaux résilientes conçues pour la haute disponibilité et la reprise d’activité. Dans ce scénario, l’application se compose de trois couches.
 
-- Couche web : couche supérieure, y compris l’interface utilisateur. Cette couche analyse les interactions utilisateur et transmet les actions à la couche suivante pour le traitement.
+- Couche web : couche supérieure comprenant l’interface utilisateur. Cette couche analyse les interactions utilisateur et transmet les actions à la couche suivante pour le traitement.
 - Couche métier : traite les interactions utilisateur et prend des décisions logiques concernant les étapes suivantes. Cette couche relie la couche web et la couche données.
 - Couche données : stocke les données d’application. Vous utilisez généralement une base de données, un stockage d’objets ou un stockage de fichiers.
 
@@ -62,11 +63,11 @@ Ce scénario présente une application multiniveau qui utilise ASP.NET et Micros
 
 ## <a name="other-considerations"></a>Autres points à considérer
 
-### <a name="scalability"></a>Scalabilité
+### <a name="scalability"></a>Extensibilité
 
 Vous pouvez ajouter ou supprimer des machines virtuelles dans chaque niveau selon vos besoins de mise à l’échelle. Comme ce scénario utilise des équilibreurs de charge, vous pouvez ajouter davantage de machines virtuelles à un niveau sans affecter la durée de fonctionnement des applications.
 
-Pour d’autres rubriques sur la scalabilité, consultez la [liste de contrôle de la scalabilité][scalability] dans le Centre des architectures Azure.
+Pour consulter d’autres rubriques relatives à l’extensibilité, consultez la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
 
 ### <a name="security"></a>Sécurité
 

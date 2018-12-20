@@ -1,33 +1,35 @@
 ---
 title: SAP S/4HANA pour machines virtuelles Linux sur Azure
+titleSuffix: Azure Reference Architectures
 description: Pratiques éprouvées d’exécution de SAP S/4HANA dans un environnement Linux sur Azure avec une haute disponibilité.
 author: lbrader
 ms.date: 05/11/2018
-ms.openlocfilehash: ab056a01f05bde9e9dc7a4439baed367ee663f93
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 356b80c79aeb13ac951654350eafa904ff5e5ec1
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429585"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120235"
 ---
-# <a name="sap-s4hana-for-linux-virtual-machines-on-azure"></a>SAP S/4HANA pour machines virtuelles Linux sur Azure
+# <a name="sap-s4hana-for-linux-virtual-machines-on-azure"></a>SAP S/4HANA pour machines virtuelles Linux sur Azure
 
-Cette architecture de référence présente un ensemble de pratiques éprouvées pour l’exécution de S/4HANA dans un environnement à haute disponibilité prenant en charge la reprise après sinistre sur Azure. Cette architecture est déployée avec des tailles de machine virtuelle spécifiques qui peuvent être modifiées en fonction des besoins de votre organisation. 
+Cette architecture de référence présente un ensemble de pratiques éprouvées pour l’exécution de S/4HANA dans un environnement à haute disponibilité prenant en charge la reprise après sinistre sur Azure. Cette architecture est déployée avec des tailles de machine virtuelle spécifiques qui peuvent être modifiées en fonction des besoins de votre organisation.
 
-![](./images/sap-s4hana.png)
+![Architecture de référence SAP S/4HANA pour machines virtuelles Linux sur Azure](./images/sap-s4hana.png)
 
 *Téléchargez un [fichier Visio][visio-download] de cette architecture.*
 
-> [!NOTE] 
+> [!NOTE]
 > Le déploiement de cette architecture de référence requiert une licence appropriée des produits SAP et d’autres technologies non Microsoft.
 
 ## <a name="architecture"></a>Architecture
- 
+
 Cette architecture de référence décrit un système de production de niveau entreprise. En fonction des besoins de votre entreprise, cette configuration peut être réduite à une seule machine virtuelle. En revanche, les composants suivants sont requis :
 
 **Réseau virtuel**. Le service [Réseau virtuel Azure](/azure/virtual-network/virtual-networks-overview) connecte en toute sécurité les ressources Azure entre elles. Dans cette architecture, le réseau virtuel se connecte à un environnement local via une passerelle déployée dans le hub d’une [topologie hub-and-spoke](../hybrid-networking/hub-spoke.md). Le spoke est le réseau virtuel utilisé pour les applications SAP.
 
-**Sous-réseaux**. Le réseau virtuel est subdivisé en [sous-réseaux](/azure/virtual-network/virtual-network-manage-subnet) distincts pour chaque niveau : passerelle, application, base de données et services partagés. 
+**Sous-réseaux**. Le réseau virtuel est subdivisé en [sous-réseaux](/azure/virtual-network/virtual-network-manage-subnet) distincts pour chaque niveau : passerelle, application, base de données et services partagés.
 
 **Machines virtuelles**. Cette architecture utilise des machines virtuelles exécutant Linux regroupées comme suit pour les couches Application et Base de données :
 
@@ -38,15 +40,15 @@ Cette architecture de référence décrit un système de production de niveau en
 
 **Équilibreurs de charge** : Les équilibreurs de charge SAP intégrés et [Azure Load Balancer](/azure/load-balancer/load-balancer-overview) sont utilisés pour assurer la haute disponibilité. Les instances Azure Load Balancer servent à distribuer le trafic vers les machines virtuelles du sous-réseau de la couche Application.
 
-**Groupes à haute disponibilité**. Les machines virtuelles de tous les pools et clusters (SAP Web Dispatcher, serveurs d’applications SAP, services centraux, NFS et HANA) sont réunies dans des [groupes à haute disponibilité](/azure/virtual-machines/windows/tutorial-availability-sets) distincts, et au moins deux machines virtuelles sont approvisionnées pour chaque rôle. Cela rend les machines virtuelles éligibles pour un [contrat de niveau de service](https://azure.microsoft.com/support/legal/sla/virtual-machines) (SLA) plus élevé. 
+**Groupes à haute disponibilité**. Les machines virtuelles de tous les pools et clusters (SAP Web Dispatcher, serveurs d’applications SAP, services centraux, NFS et HANA) sont réunies dans des [groupes à haute disponibilité](/azure/virtual-machines/windows/tutorial-availability-sets) distincts, et au moins deux machines virtuelles sont approvisionnées pour chaque rôle. Cela rend les machines virtuelles éligibles pour un [contrat de niveau de service](https://azure.microsoft.com/support/legal/sla/virtual-machines) (SLA) plus élevé.
 
 **Cartes réseau**. Les [cartes réseau](/azure/virtual-network/virtual-network-network-interface) assurent l’ensemble des communications des machines virtuelles sur un réseau virtuel.
 
 **Groupes de sécurité réseau**. Pour limiter le trafic entrant, sortant et intra-sous-réseau dans le réseau virtuel, vous pouvez utiliser des [groupes de sécurité réseau](/azure/virtual-network/virtual-networks-nsg) (NSG).
 
-**Passerelle**. Une passerelle étend votre réseau local au réseau virtuel Azure. [ExpressRoute](/azure/architecture/reference-architectures/hybrid-networking/expressroute) est le service Azure recommandé pour la création de connexions privées qui ne passent pas par l’Internet public, mais il est également possible d’utiliser une connexion [site à site](/azure/vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-portal). 
+**Passerelle**. Une passerelle étend votre réseau local au réseau virtuel Azure. [ExpressRoute](/azure/architecture/reference-architectures/hybrid-networking/expressroute) est le service Azure recommandé pour la création de connexions privées qui ne passent pas par l’Internet public, mais il est également possible d’utiliser une connexion [site à site](/azure/vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-portal).
 
-**Stockage Azure**. Pour bénéficier d’un stockage permanent du disque dur virtuel d’une machine virtuelle, le service [Stockage Azure](/azure/storage/) est requis. 
+**Stockage Azure**. Pour bénéficier d’un stockage permanent du disque dur virtuel d’une machine virtuelle, le service [Stockage Azure](/azure/storage/) est requis.
 
 ## <a name="recommendations"></a>Recommandations
 
@@ -56,11 +58,11 @@ Cette architecture décrit un petit déploiement d’entreprise de niveau produc
 
 Dans les pools et les clusters de serveurs d’applications, ajustez le nombre de machines virtuelles en fonction de vos besoins. Le [guide de planification et implémentation de machines virtuelles Azure](/azure/virtual-machines/workloads/sap/planning-guide) inclut des informations sur l’exécution de SAP NetWeaver sur des machines virtuelles, qui s’appliquent également à SAP S/4HANA.
 
-Pour plus d’informations sur la prise en charge SAP en fonction des types de machine virtuelle Azure et des mesures de débit (SAP), consultez la [Note SAP 1928533](https://launchpad.support.sap.com/#/notes/1928533). 
+Pour plus d’informations sur la prise en charge SAP en fonction des types de machine virtuelle Azure et des mesures de débit (SAP), consultez la [Note SAP 1928533](https://launchpad.support.sap.com/#/notes/1928533).
 
 ### <a name="sap-web-dispatcher-pool"></a>Pool SAP Web Dispatcher
 
-Le composant Web Dispatcher sert d’équilibreur de charge pour le trafic SAP entre les serveurs d’applications SAP. Pour assurer la haute disponibilité du composant Web Dispatcher, Azure Load Balancer est utilisé pour implémenter l’installation Web Dispatcher parallèle dans une configuration de tourniquet pour la distribution du trafic HTTP(S) parmi les Web Dispatchers disponibles dans le pool back-end des équilibreurs. 
+Le composant Web Dispatcher sert d’équilibreur de charge pour le trafic SAP entre les serveurs d’applications SAP. Pour assurer la haute disponibilité du composant Web Dispatcher, Azure Load Balancer est utilisé pour implémenter l’installation Web Dispatcher parallèle dans une configuration de tourniquet pour la distribution du trafic HTTP(S) parmi les Web Dispatchers disponibles dans le pool back-end des équilibreurs.
 
 ### <a name="fiori-front-end-server"></a>Fiori Front-end Server
 
@@ -68,7 +70,7 @@ Fiori Front-end Server utilise une [passerelle NetWeaver](https://help.sap.com/d
 
 ### <a name="application-servers-pool"></a>Pool de serveurs d’applications
 
-Pour gérer les groupes de connexion des serveurs d’applications ABAP, la transaction SMLG est utilisée. Elle s’appuie sur la fonction d’équilibrage de charge au sein du serveur de messages des services centraux pour répartir la charge de travail entre le pool de serveurs d’applications pour le trafic des clients SAP GUI et RFC. La connexion des serveurs d’applications aux services centraux hautement disponibles se fait via le nom du réseau virtuel du cluster. De cette façon, il est inutile de modifier le profil du serveur d’applications pour la connectivité des services centraux après un basculement local. 
+Pour gérer les groupes de connexion des serveurs d’applications ABAP, la transaction SMLG est utilisée. Elle s’appuie sur la fonction d’équilibrage de charge au sein du serveur de messages des services centraux pour répartir la charge de travail entre le pool de serveurs d’applications pour le trafic des clients SAP GUI et RFC. La connexion des serveurs d’applications aux services centraux hautement disponibles se fait via le nom du réseau virtuel du cluster. De cette façon, il est inutile de modifier le profil du serveur d’applications pour la connectivité des services centraux après un basculement local.
 
 ### <a name="sap-central-services-cluster"></a>Cluster des services centraux SAP
 
@@ -98,13 +100,13 @@ Consultez également [Planification et conception de la passerelle VPN](/azure/v
 
 ### <a name="load-balancers"></a>Équilibreurs de charge
 
-[SAP Web Dispatcher](https://help.sap.com/doc/saphelp_nw73ehp1/7.31.19/en-US/48/8fe37933114e6fe10000000a421937/frameset.htm) gère l’équilibrage de charge du trafic HTTP(S), y compris les applications de style Fiori, à destination d’un pool de serveurs d’applications SAP. 
+[SAP Web Dispatcher](https://help.sap.com/doc/saphelp_nw73ehp1/7.31.19/en-US/48/8fe37933114e6fe10000000a421937/frameset.htm) gère l’équilibrage de charge du trafic HTTP(S), y compris les applications de style Fiori, à destination d’un pool de serveurs d’applications SAP.
 
-Pour le trafic en provenance de clients SAP GUI se connectant à un serveur SAP via DIAG ou RFC (Remote Function Call), le serveur de messages des services centraux équilibre la charge par l’intermédiaire des [groupes de connexion](https://wiki.scn.sap.com/wiki/display/SI/ABAP+Logon+Group+based+Load+Balancing) des serveurs d’applications. Par conséquent, aucun équilibreur de charge supplémentaire n’est nécessaire. 
+Pour le trafic en provenance de clients SAP GUI se connectant à un serveur SAP via DIAG ou RFC (Remote Function Call), le serveur de messages des services centraux équilibre la charge par l’intermédiaire des [groupes de connexion](https://wiki.scn.sap.com/wiki/display/SI/ABAP+Logon+Group+based+Load+Balancing) des serveurs d’applications. Par conséquent, aucun équilibreur de charge supplémentaire n’est nécessaire.
 
 ### <a name="azure-storage"></a>Stockage Azure
 
-Nous recommandons l’utilisation du Stockage Premium Azure pour les machines virtuelles du serveur de bases de données. Le stockage Premium offre une latence de lecture/écriture homogène. Pour des informations sur l’utilisation du stockage Premium pour les disques de système d’exploitation et de données d’une machine virtuelle à instance unique, consultez [SLA pour Machines virtuelles](https://azure.microsoft.com/support/legal/sla/virtual-machines/). 
+Nous recommandons l’utilisation du Stockage Premium Azure pour les machines virtuelles du serveur de bases de données. Le stockage Premium offre une latence de lecture/écriture homogène. Pour des informations sur l’utilisation du stockage Premium pour les disques de système d’exploitation et de données d’une machine virtuelle à instance unique, consultez [SLA pour Machines virtuelles](https://azure.microsoft.com/support/legal/sla/virtual-machines/).
 
 Pour tous les systèmes SAP de production, nous vous recommandons d’utiliser [Azure Managed Disks](/azure/storage/storage-managed-disks-overview) Premium. Des disques managés sont utilisés pour gérer les fichiers VHD pour les disques, pour des questions de fiabilité. Ils assurent également l’isolement des disques des machines virtuelles au sein d’un groupe à haute disponibilité afin d’éviter les points de défaillance uniques.
 
@@ -120,7 +122,7 @@ Pour obtenir un débit de bande passante de disque et d’ES/S élevé, les prat
 
 ## <a name="scalability-considerations"></a>Considérations relatives à l’extensibilité
 
-Au niveau de la couche de l’application SAP, Azure propose un large éventail de tailles de machines virtuelles pour la montée en puissance ou la montée en charge. Consultez la [Note SAP 1928533](https://launchpad.support.sap.com/#/notes/1928533) - SAP Applications on Azure: Supported Products and Azure VM types (Applications SAP sur Azure : produits et types de machines virtuelles pris en charge (compte SAP Service Marketplace pour l’accès). À mesure que nous certifions des types de machines virtuelles supplémentaires, vous pouvez augmenter ou diminuer la taille des instances avec le même déploiement cloud. 
+Au niveau de la couche de l’application SAP, Azure propose un large éventail de tailles de machines virtuelles pour la montée en puissance ou la montée en charge. Pour obtenir une liste exhaustive, consultez la [note SAP 1928533](https://launchpad.support.sap.com/#/notes/1928533) - SAP Applications on Azure: Supported Products and Azure VM Types (Applications SAP sur Azure : compte SAP Service Marketplace requis pour l’accès). À mesure que nous certifions des types de machines virtuelles supplémentaires, vous pouvez augmenter ou diminuer la taille des instances avec le même déploiement cloud.
 
 Dans la couche Base de données, cette architecture exécute HANA sur des machines virtuelles. Si votre charge d travail dépasse la taille maximale de machine virtuelle, Microsoft propose également les [Grandes instances Azure](/azure/virtual-machines/workloads/sap/hana-overview-architecture) pour SAP HANA. Ces serveurs physiques sont colocalisés dans le centre de données certifié Microsoft Azure et à ce jour, fournissent jusqu'à 20 To de capacité de mémoire pour une instance unique. Une configuration à plusieurs nœuds est également possible avec une capacité totale de mémoire pouvant atteindre 60 To.
 
@@ -128,7 +130,7 @@ Dans la couche Base de données, cette architecture exécute HANA sur des machin
 
 La redondance des ressources constitue le thème général dans les solutions d’infrastructure à haute disponibilité. Pour les entreprises qui présentent un SLA moins strict, les machines virtuelles Azure à instance unique offrent un SLA garantissant un certain temps de disponibilité. Pour plus d’informations, consultez [Contrats de niveau de service Azure](https://azure.microsoft.com/support/legal/sla/).
 
-Dans cette installation distribuée de l’application SAP, l’installation de base est répliquée pour assurer une haute disponibilité. Pour chaque couche de l’architecture, la conception mise en œuvre à des fins de haute disponibilité varie. 
+Dans cette installation distribuée de l’application SAP, l’installation de base est répliquée pour assurer une haute disponibilité. Pour chaque couche de l’architecture, la conception mise en œuvre à des fins de haute disponibilité varie.
 
 ### <a name="application-tier"></a>Couche Application
 
@@ -142,20 +144,21 @@ Dans cette installation distribuée de l’application SAP, l’installation de 
 Cette architecture de référence représente un système de base de données SAP HANA à haute disponibilité composée de deux machines virtuelles Azure. La fonctionnalité de réplication du système natif de la couche Base de données assure un basculement manuel ou automatique entre les nœuds répliqués :
 
 - Pour le basculement manuel, déployez plusieurs instances HAN et utilisez la Réplication de système HANA (HSR).
-- Pour le basculement automatique, utilisez les fonctionnalités HSR et Linux HAE (High Availability Extension) pour votre distribution Linux. Linux HAE fournit des services de cluster aux ressources HANA, détectant les événements d’échec et orchestrant le basculement des services errants vers le nœud sain. 
+- Pour le basculement automatique, utilisez les fonctionnalités HSR et Linux HAE (High Availability Extension) pour votre distribution Linux. Linux HAE fournit des services de cluster aux ressources HANA, détectant les événements d’échec et orchestrant le basculement des services errants vers le nœud sain.
 
 Consultez [Certifications et configurations SAP en cours sur Microsoft Azure](/azure/virtual-machines/workloads/sap/sap-certifications).
 
 ### <a name="disaster-recovery-considerations"></a>Considérations relatives à la récupération d’urgence
+
 Chaque couche utilise une stratégie différente pour assurer une protection par récupération d’urgence.
 
 - **Couche Serveurs d’applications**. Les serveurs d’applications SAP ne contiennent pas de données d’entreprise. Sur Azure, une stratégie de récupération d’urgence simple consiste à créer des serveurs d’applications SAP dans la région secondaire, puis à les arrêter. En cas de modification de la configuration ou de mise à jour du noyau sur le serveur d’applications principal, les mêmes modifications doivent être appliquées aux machines virtuelles dans la région secondaire. Par exemple, copiez les exécutables du noyau SAP vers les machines virtuelles de récupération d’urgence. Pour la réplication automatique des serveurs d’applications vers une région secondaire, [Azure Site Recovery](/azure/site-recovery/site-recovery-overview) est la solution recommandée. Au moment d’écrire cet article, ASR ne prend pas encore en charge la réplication des paramètres de configuration du réseau accéléré dans les machines virtuelles Azure.
 
-- **Services centraux**. Ce composant de la pile d’applications SAP ne conserve également aucune donnée d’entreprise. Vous pouvez créer une machine virtuelle dans la région secondaire pour exécuter le rôle Services centraux. Le seul contenu du nœud Services centraux principal à synchroniser est le contenu de partage /sapmnt. En outre, en cas de modification de la configuration ou de mise à jour du noyau sur les serveurs principaux des services centraux, celles-ci doivent être répétées sur la machine virtuelle dans la région secondaire exécutant des services centraux. Pour synchroniser les deux serveurs, vous pouvez utiliser Azure Site Recovery pour répliquer les nœuds de cluster ou simplement utiliser une copie planifiée régulièrement pour copier /sapmnt du côté de la récupération d’urgence. Pour plus d’informations sur le processus de génération, de copie et de basculement du test, téléchargez [SAP NetWeaver: Building a Hyper-V and Microsoft Azure–based Disaster Recovery Solution](https://download.microsoft.com/download/9/5/6/956FEDC3-702D-4EFB-A7D3-2DB7505566B6/SAP%20NetWeaver%20-%20Building%20an%20Azure%20based%20Disaster%20Recovery%20Solution%20V1_5%20.docx) (SAP NetWeaver : créer une solution de récupération d’urgence basée sur Hyper-V et Microsoft Azure) et reportez-vous à la section 4.3 « SAP SPOF layer (ASCS) ». Ce document s’applique à NetWeaver exécuté sur Windows, mais vous pouvez créer la configuration équivalente pour Linux. Pour les services centraux, utilisez [Azure Site Recovery](/en-us/azure/site-recovery/site-recovery-overview) pour répliquer les nœuds de cluster et le stockage. Pour Linux, créez un géo-cluster à trois nœuds à l’aide d’une fonctionnalité High Availability Extension. 
+- **Services centraux**. Ce composant de la pile d’applications SAP ne conserve également aucune donnée d’entreprise. Vous pouvez créer une machine virtuelle dans la région secondaire pour exécuter le rôle Services centraux. Le seul contenu du nœud Services centraux principal à synchroniser est le contenu de partage /sapmnt. En outre, en cas de modification de la configuration ou de mise à jour du noyau sur les serveurs principaux des services centraux, celles-ci doivent être répétées sur la machine virtuelle dans la région secondaire exécutant des services centraux. Pour synchroniser les deux serveurs, vous pouvez utiliser Azure Site Recovery pour répliquer les nœuds de cluster ou simplement utiliser une copie planifiée régulièrement pour copier /sapmnt du côté de la récupération d’urgence. Pour plus d’informations sur le processus de génération, de copie et de test de basculement, téléchargez [SAP NetWeaver: Building a Hyper-V and Microsoft Azure–based Disaster Recovery Solution](https://download.microsoft.com/download/9/5/6/956FEDC3-702D-4EFB-A7D3-2DB7505566B6/SAP%20NetWeaver%20-%20Building%20an%20Azure%20based%20Disaster%20Recovery%20Solution%20V1_5%20.docx) et lisez la section 4.3, « SAP SPOF layer (ASCS) ». Ce document s’applique à NetWeaver exécuté sur Windows, mais vous pouvez créer la configuration équivalente pour Linux. Pour les services centraux, utilisez [Azure Site Recovery](/en-us/azure/site-recovery/site-recovery-overview) pour répliquer les nœuds de cluster et le stockage. Pour Linux, créez un géo-cluster à trois nœuds à l’aide d’une fonctionnalité High Availability Extension.
 
 - **Couche Base de données SAP**. Utilisez HSR pour la réplication prise en charge par HANA. Outre une installation locale haute disponibilité à deux nœuds, HSR prend en charge la réplication à plusieurs niveaux, où un troisième nœud d’une région Azure distincte agit comme une entité étrangère, extérieure au cluster, et s’enregistre sur le réplica secondaire de la paire HSR en cluster en tant que cible de réplication. Il en résulte une configuration en chaîne de la réplication. Le basculement vers le nœud de récupération d’urgence est un processus manuel.
 
-Pour utiliser Azure Site Recovery pour générer automatiquement un site de production entièrement répliqué de votre déploiement original, vous devez exécuter [des scripts de déploiement](/azure/site-recovery/site-recovery-runbook-automation) personnalisés. Site Recovery déploie d’abord les machines virtuelles dans des groupes à haute disponibilité, puis exécute des scripts pour ajouter des ressources telles que les équilibreurs de charge. 
+Pour utiliser Azure Site Recovery pour générer automatiquement un site de production entièrement répliqué de votre déploiement original, vous devez exécuter [des scripts de déploiement](/azure/site-recovery/site-recovery-runbook-automation) personnalisés. Site Recovery déploie d’abord les machines virtuelles dans des groupes à haute disponibilité, puis exécute des scripts pour ajouter des ressources telles que les équilibreurs de charge.
 
 ## <a name="manageability-considerations"></a>Considérations relatives à la facilité de gestion
 
@@ -165,15 +168,15 @@ SAP HANA comporte une fonctionnalité de sauvegarde qui utilise l’infrastructu
 
 Contrôlez l’accès aux ressources en utilisant le système centralisé de gestion des identités à tous les niveaux :
 
-- Fournissez l’accès aux ressources Azure via [le contrôle d’accès en fonction du rôle](/azure/active-directory/role-based-access-control-what-is) (RBAC). 
-- Accordez l’accès aux machines virtuelles Azure via LDAP, Azure Active Directory, Kerberos ou un autre système. 
-- Prenez en charge l’accès dans les applications elles-mêmes via les services fournis par SAP ou utilisez [OAuth 2.0 et Azure Active Directory](/azure/active-directory/develop/active-directory-protocols-oauth-code). 
+- Fournissez l’accès aux ressources Azure via [le contrôle d’accès en fonction du rôle](/azure/active-directory/role-based-access-control-what-is) (RBAC).
+- Accordez l’accès aux machines virtuelles Azure via LDAP, Azure Active Directory, Kerberos ou un autre système.
+- Prenez en charge l’accès dans les applications elles-mêmes via les services fournis par SAP ou utilisez [OAuth 2.0 et Azure Active Directory](/azure/active-directory/develop/active-directory-protocols-oauth-code).
 
 ### <a name="monitoring"></a>Surveillance
 
-Azure propose plusieurs fonctions de [surveillance et de diagnostic](/azure/architecture/best-practices/monitoring) de l’infrastructure globale. En outre, l’analyse avancée des machines virtuelles Azure (Windows ou Linux) est gérée par Azure Operations Management Suite (OMS). 
+Azure propose plusieurs fonctions de [surveillance et de diagnostic](/azure/architecture/best-practices/monitoring) de l’infrastructure globale. En outre, l’analyse avancée des machines virtuelles Azure (Windows ou Linux) est gérée par Azure Operations Management Suite (OMS).
 
-Pour assurer une analyse basée sur SAP des ressources et des performances des services de l’infrastructure SAP, l’extension d’[analyse Azure améliorée pour SAP](/azure/virtual-machines/workloads/sap/deployment-guide#d98edcd3-f2a1-49f7-b26a-07448ceb60ca) est utilisée. Cette extension transmet les statistiques d’analyse Azure à l’application SAP pour les fonctions DBA Cockpit et de surveillance du système d’exploitation. L’analyse avancée SAP est une condition préalable obligatoire pour l’exécution de SAP sur Azure. Pour plus d’informations, consultez la [Note SAP 2191498](https://launchpad.support.sap.com/#/notes/2191498) - SAP on Linux with Azure: Enhanced Monitoring (SAP sur Linux avec Azure : analyse avancée).
+Pour assurer une analyse basée sur SAP des ressources et des performances des services de l’infrastructure SAP, l’extension d’[analyse Azure améliorée pour SAP](/azure/virtual-machines/workloads/sap/deployment-guide#d98edcd3-f2a1-49f7-b26a-07448ceb60ca) est utilisée. Cette extension transmet les statistiques d’analyse Azure à l’application SAP pour les fonctions DBA Cockpit et de surveillance du système d’exploitation. L’analyse avancée SAP est une condition préalable obligatoire pour l’exécution de SAP sur Azure. Pour plus d’informations, consultez la [Note SAP 2191498](https://launchpad.support.sap.com/#/notes/2191498), « SAP on Linux with Azure: Enhanced Monitoring ».
 
 ## <a name="security-considerations"></a>Considérations relatives à la sécurité
 
@@ -181,11 +184,11 @@ SAP possède son propre moteur de gestion des utilisateurs (UME) pour contrôler
 
 Pour une sécurité réseau supplémentaire, envisagez d’implémenter une [zone DMZ réseau](/azure/architecture/reference-architectures/dmz/secure-vnet-hybrid), qui utilise une appliance virtuelle réseau pour créer un pare-feu devant le sous-réseau des pools Web Dispatcher et Fiori Front-End Server.
 
-Les données sont chiffrées en transit et au repos à des fins de sécurité de l’infrastructure. La section « Considérations de sécurité » de [SAP NetWeaver on Azure Virtual Machines (VMs) – Planning and Implementation Guide](/azure/virtual-machines/workloads/sap/planning-guide) (SAP NetWeaver sur les machines virtuelles Azure - Guide de planification et d’implémentation) commence à traiter la sécurité réseau et s’applique à S/4HANA. Le guide spécifie également les ports réseau, que vous devez ouvrir sur les pare-feu pour autoriser la communication de l’application. 
+Les données sont chiffrées en transit et au repos à des fins de sécurité de l’infrastructure. La section « Considérations de sécurité » de [SAP NetWeaver on Azure Virtual Machines (VMs) – Planning and Implementation Guide](/azure/virtual-machines/workloads/sap/planning-guide) (SAP NetWeaver sur les machines virtuelles Azure - Guide de planification et d’implémentation) commence à traiter la sécurité réseau et s’applique à S/4HANA. Le guide spécifie également les ports réseau, que vous devez ouvrir sur les pare-feu pour autoriser la communication de l’application.
 
 [Azure Disk Encryption](/azure/security/azure-security-disk-encryption) permet de chiffrer des disques de machines virtuelles Linux IaaS. Ce service exploite la fonctionnalité DM-Crypt de Linux pour assurer le chiffrement de volume du système d’exploitation et des disques de données. La solution fonctionne également avec Azure Key Vault, ce qui vous permet de contrôler et de gérer les clés et les secrets de chiffrement de disque dans votre abonnement Key Vault. Les données sur les disques de vos machines virtuelles sont chiffrées au repos dans votre stockage Azure.
 
-Pour le chiffrement des données SAP HANA au repos, nous recommandons l’utilisation de la technologie de chiffrement native SAP HANA. 
+Pour le chiffrement des données SAP HANA au repos, nous recommandons l’utilisation de la technologie de chiffrement native SAP HANA.
 
 > [!NOTE]
 > N’utilisez pas le chiffrement des données au repos HANA avec Azure Disk Encryption sur le même serveur. Pour HANA, utilisez uniquement le chiffrement des données HANA.

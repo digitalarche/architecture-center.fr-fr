@@ -1,33 +1,31 @@
 ---
 title: Créer une forêt de ressources AD DS dans Azure
+titleSuffix: Azure Reference Architectures
 description: >-
   Comment créer un domaine Active Directory approuvé dans Azure.
 
   conseils, passerelle vpn, expressroute, équilibreur de charge, réseau virtuel, active directory
 author: telmosampaio
 ms.date: 05/02/2018
-pnp.series.title: Identity management
-pnp.series.prev: adds-extend-domain
-pnp.series.next: adfs
-cardTitle: Create an AD DS forest in Azure
-ms.openlocfilehash: 0bbf8aff91aaec8718e44f4450711ff96cfc1878
-ms.sourcegitcommit: 1287d635289b1c49e94f839b537b4944df85111d
+ms.custom: seodec18
+ms.openlocfilehash: e8ad2efd24286f23698bb8e294b15d88232c1166
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/27/2018
-ms.locfileid: "52332321"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120371"
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Créer une forêt de ressources Active Directory Domain Services (AD DS) dans Azure
 
-Cette architecture de référence montre comment créer, dans Azure, un domaine Active Directory distinct approuvé par les domaines de votre forêt AD locale. [**Déployez cette solution**.](#deploy-the-solution)
+Cette architecture de référence montre comment créer, dans Azure, un domaine Active Directory distinct approuvé par les domaines de votre forêt AD locale. [**Déployez cette solution**](#deploy-the-solution).
 
-[![0]][0] 
+![Architecture réseau hybride sécurisée avec des domaines Active Directory distincts](./images/adds-forest.png)
 
 *Téléchargez un [fichier Visio][visio-download] de cette architecture.*
 
-Active Directory Domain Services (AD DS) stocke des informations d’identité dans une structure hiérarchique. Le nœud supérieur de la structure hiérarchique est appelé « forêt ». Une forêt contient des domaines, qui à leur tour contiennent d’autres types d’objets. Cette architecture de référence crée une forêt AD DS dans Azure avec une relation d’approbation à sens unique sortante avec un domaine local. La forêt dans Azure contient un domaine qui n’existe pas localement. En raison de la relation d’approbation, les ouvertures de session effectuées dans les domaines locaux peuvent être approuvées pour l’accès aux ressources dans le domaine Azure distinct. 
+Active Directory Domain Services (AD DS) stocke des informations d’identité dans une structure hiérarchique. Le nœud supérieur de la structure hiérarchique est appelé « forêt ». Une forêt contient des domaines, qui à leur tour contiennent d’autres types d’objets. Cette architecture de référence crée une forêt AD DS dans Azure avec une relation d’approbation à sens unique sortante avec un domaine local. La forêt dans Azure contient un domaine qui n’existe pas localement. En raison de la relation d’approbation, les ouvertures de session effectuées dans les domaines locaux peuvent être approuvées pour l’accès aux ressources dans le domaine Azure distinct.
 
-Parmi les utilisations courantes de cette architecture figurent la conservation d’une séparation de sécurité pour les objets et les identités contenus dans le cloud et la migration de domaines individuels depuis l’environnement local vers le cloud. 
+Parmi les utilisations courantes de cette architecture figurent la conservation d’une séparation de sécurité pour les objets et les identités contenus dans le cloud et la migration de domaines individuels depuis l’environnement local vers le cloud.
 
 Pour plus d’informations, consultez [Choisir une solution pour intégrer l’environnement Active Directory local à Azure][considerations]. 
 
@@ -35,17 +33,17 @@ Pour plus d’informations, consultez [Choisir une solution pour intégrer l’e
 
 L’architecture possède les composants suivants :
 
-* **Réseau local**. Le réseau local contient ses propres forêt et domaines Active Directory.
-* **Serveurs Active Directory**. Il s’agit de contrôleurs de domaine qui implémentent des services de domaine s’exécutant en tant que machines virtuelles dans le cloud. Ces serveurs hébergent une forêt qui contient un ou plusieurs domaines, distincts de ceux situés dans l’environnement local.
-* **Relation d’approbation à sens unique**. L’exemple dans le diagramme montre une approbation à sens unique entre le domaine dans Azure et le domaine local. Cette relation permet aux utilisateurs locaux d’accéder aux ressources du domaine dans Azure, mais pas l’inverse. Il est possible de créer une approbation bidirectionnelle, si les utilisateurs du cloud requièrent également l’accès à des ressources locales.
-* **Sous-réseau Active Directory**. Les serveurs AD DS sont hébergés dans un sous-réseau distinct. Des règles de groupe de sécurité réseau (NSG) protègent les serveurs AD DS et fournissent un pare-feu contre le trafic en provenance de sources inconnues.
-* **Passerelle Azure**. La passerelle Azure fournit une connexion entre le réseau local et le réseau virtuel Azure. Il peut s’agir d’une [connexion VPN][azure-vpn-gateway] ou [d’Azure ExpressRoute][azure-expressroute]. Pour plus d’informations, consultez [Implémentation d’une architecture réseau hybride sécurisée dans Azure][implementing-a-secure-hybrid-network-architecture].
+- **Réseau local**. Le réseau local contient ses propres forêt et domaines Active Directory.
+- **Serveurs Active Directory**. Il s’agit de contrôleurs de domaine qui implémentent des services de domaine s’exécutant en tant que machines virtuelles dans le cloud. Ces serveurs hébergent une forêt qui contient un ou plusieurs domaines, distincts de ceux situés dans l’environnement local.
+- **Relation d’approbation à sens unique**. L’exemple dans le diagramme montre une approbation à sens unique entre le domaine dans Azure et le domaine local. Cette relation permet aux utilisateurs locaux d’accéder aux ressources du domaine dans Azure, mais pas l’inverse. Il est possible de créer une approbation bidirectionnelle, si les utilisateurs du cloud requièrent également l’accès à des ressources locales.
+- **Sous-réseau Active Directory**. Les serveurs AD DS sont hébergés dans un sous-réseau distinct. Des règles de groupe de sécurité réseau (NSG) protègent les serveurs AD DS et fournissent un pare-feu contre le trafic en provenance de sources inconnues.
+- **Passerelle Azure**. La passerelle Azure fournit une connexion entre le réseau local et le réseau virtuel Azure. Il peut s’agir d’une [connexion VPN][azure-vpn-gateway] ou [d’Azure ExpressRoute][azure-expressroute]. Pour plus d’informations, consultez [Implémentation d’une architecture réseau hybride sécurisée dans Azure][implementing-a-secure-hybrid-network-architecture].
 
 ## <a name="recommendations"></a>Recommandations
 
 Pour obtenir des recommandations spécifiques sur l’implémentation d’Active Directory dans Azure, consultez les articles suivants :
 
-- [Extension d’Active Directory Domain Services (AD DS) à Azure][adds-extend-domain]. 
+- [Extension d’Active Directory Domain Services (AD DS) à Azure][adds-extend-domain].
 - [Recommandations pour déployer Windows Server Active Directory sur des machines virtuelles Azure][ad-azure-guidelines].
 
 ### <a name="trust"></a>Trust
@@ -56,8 +54,8 @@ Vous pouvez établir des approbations au niveau forêt, en [créant des approbat
 
 Les approbations peuvent être unidirectionnelles (à sens unique) ou bidirectionnelles :
 
-* Une approbation à sens unique permet aux utilisateurs d’une forêt ou domaine (forêt ou domaine *entrant*) d’accéder aux ressources contenues dans une autre forêt ou domaine (forêt ou domaine *sortant*).
-* Une approbation bidirectionnelle permet aux utilisateurs de l’un des domaines ou forêts d’accéder aux ressources contenues dans l’autre domaine ou forêt.
+- Une approbation à sens unique permet aux utilisateurs d’une forêt ou domaine (forêt ou domaine *entrant*) d’accéder aux ressources contenues dans une autre forêt ou domaine (forêt ou domaine *sortant*).
+- Une approbation bidirectionnelle permet aux utilisateurs de l’un des domaines ou forêts d’accéder aux ressources contenues dans l’autre domaine ou forêt.
 
 Le tableau suivant récapitule les configurations d’approbation pour certains scénarios simples :
 
@@ -79,8 +77,8 @@ Envisagez également de désigner un ou plusieurs serveurs dans chaque domaine e
 
 ## <a name="manageability-considerations"></a>Considérations relatives à la facilité de gestion
 
-Pour plus d’informations sur les considérations relatives à la gestion et à la surveillance, consultez [Extension d’Active Directory à Azure][adds-extend-domain]. 
- 
+Pour plus d’informations sur les considérations relatives à la gestion et à la surveillance, consultez [Extension d’Active Directory à Azure][adds-extend-domain].
+
 Pour plus d’informations, consultez [Surveillance d’Active Directory][monitoring_ad]. Vous pouvez installer des outils tels que [Microsoft Systems Center][microsoft_systems_center] sur un serveur de surveillance dans le sous-réseau de gestion pour effectuer ces tâches.
 
 ## <a name="security-considerations"></a>Considérations relatives à la sécurité
@@ -113,9 +111,9 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github]. Rem
 
 1. Ouvrez le fichier `azure.json` . Cherchez les instances de `adminPassword` et `Password` et ajoutez les valeurs pour les mots de passe.
 
-2. Dans le même fichier, recherchez les instances de `sharedKey` et entrez les clés partagées pour la connexion VPN. 
+2. Dans le même fichier, recherchez les instances de `sharedKey` et entrez les clés partagées pour la connexion VPN.
 
-    ```bash
+    ```json
     "sharedKey": "",
     ```
 
@@ -127,30 +125,28 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github]. Rem
 
    Déployez dans le même groupe de ressource que le réseau virtuel local.
 
-
 ### <a name="test-the-ad-trust-relation"></a>Tester la relation d’approbation AD
 
 1. Utilisez le portail Azure, accédez au groupe de ressources que vous avez créé.
 
 2. Utilisez le portail Azure pour trouver la machine virtuelle appelée `ra-adt-mgmt-vm1`.
 
-2. Cliquez sur `Connect` pour ouvrir une session Bureau à distance vers la machine virtuelle. Le nom d’utilisateur est `contoso\testuser`, et le mot de passe est celui que vous avez spécifié dans le fichier de paramètre `onprem.json`.
+3. Cliquez sur `Connect` pour ouvrir une session Bureau à distance vers la machine virtuelle. Le nom d’utilisateur est `contoso\testuser`, et le mot de passe est celui que vous avez spécifié dans le fichier de paramètre `onprem.json`.
 
-3. Une fois dans votre session Bureau à distance, ouvrez une autre session Bureau à distance vers 192.168.0.4, qui correspond à l’adresse IP de la machine virtuelle appelée `ra-adtrust-onpremise-ad-vm1`. Le nom d’utilisateur est `contoso\testuser`, et le mot de passe est celui que vous avez spécifié dans le fichier de paramètre `azure.json`.
+4. Une fois dans votre session Bureau à distance, ouvrez une autre session Bureau à distance vers 192.168.0.4, qui correspond à l’adresse IP de la machine virtuelle appelée `ra-adtrust-onpremise-ad-vm1`. Le nom d’utilisateur est `contoso\testuser`, et le mot de passe est celui que vous avez spécifié dans le fichier de paramètre `azure.json`.
 
-4. Une fois dans la session Bureau à distance pour `ra-adtrust-onpremise-ad-vm1`, allez dans **Gestionnaire de serveur** et cliquez sur **Outils** > **Domaines Active Directory et approbations**. 
+5. Une fois dans la session Bureau à distance pour `ra-adtrust-onpremise-ad-vm1`, allez dans **Gestionnaire de serveur** et cliquez sur **Outils** > **Domaines Active Directory et approbations**.
 
-5. Dans le volet gauche, faites un clic droit sur contoso.com, puis sélectionnez **Propriétés**.
+6. Dans le volet gauche, faites un clic droit sur contoso.com, puis sélectionnez **Propriétés**.
 
-6. Cliquez sur l’onglet **Approbation**. Vous devez voir treyresearch.net répertorié comme une approbation entrante.
+7. Cliquez sur l’onglet **Approbation**. Vous devez voir treyresearch.net répertorié comme une approbation entrante.
 
-![](./images/ad-forest-trust.png)
-
+![Capture d’écran de la boîte de dialogue d’approbation Forêt Active Directory](./images/ad-forest-trust.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Découvrez les bonnes pratiques pour [étendre votre domaine AD DS local à Azure][adds-extend-domain].
-* Découvrez les bonnes pratiques pour [créer une infrastructure AD FS][adfs] dans Azure.
+- Découvrez les bonnes pratiques pour [étendre votre domaine AD DS local à Azure][adds-extend-domain].
+- Découvrez les bonnes pratiques pour [créer une infrastructure AD FS][adfs] dans Azure.
 
 <!-- links -->
 [adds-extend-domain]: adds-extend-domain.md
@@ -179,4 +175,3 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github]. Rem
 [outgoing-trust]: https://raw.githubusercontent.com/mspnp/identity-reference-architectures/master/adds-forest/extensions/outgoing-trust.ps1
 [verify-a-trust]: https://technet.microsoft.com/library/cc753821.aspx
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/identity-architectures.vsdx
-[0]: ./images/adds-forest.png "Architecture réseau hybride sécurisée avec des domaines Active Directory distincts"

@@ -3,12 +3,13 @@ title: Bureaux virtuels Linux avec Citrix
 description: Générez un environnement VDI pour les bureaux Linux à l’aide de Citrix sur Azure.
 author: miguelangelopereira
 ms.date: 09/12/2018
-ms.openlocfilehash: 383642b05926c5a09abf0b2f95fef10539d95aec
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.custom: fasttrack
+ms.openlocfilehash: d48163638da05fa075814d3a255ca783610741f8
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610649"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004775"
 ---
 # <a name="linux-virtual-desktops-with-citrix"></a>Bureaux virtuels Linux avec Citrix
 
@@ -44,13 +45,13 @@ Cet exemple de scénario illustre comment permettre au réseau d’entreprise d�
 
 Dans ce scénario, les références SKU suivantes sont utilisées :
 
-- Citrix ADC (NetScaler) : 2 x D4sv3 avec [image Paiement à l’utilisation de NetScaler 12.0 VPX Standard Edition 200 MBPS ](https://azuremarketplace.microsoft.com/pt-br/marketplace/apps/citrix.netscalervpx-120?tab=PlansAndPrice)
-- Citrix License Server : 1 x D2s v3
-- Citrix VDA : 4 x D8s v3
-- Citrix StoreFront : 2 x D2s v3
-- Citrix Delivery Controller : 2 x D2s v3
-- Contrôleurs de domaine : 2 x D2sv3
-- Serveurs de fichiers Azure : 2 x D2sv3
+- Citrix ADC (NetScaler) : 2 x D4sv3 avec [image Paiement à l’utilisation de NetScaler 12.0 VPX Standard Edition 200 Mbits/s ](https://azuremarketplace.microsoft.com/pt-br/marketplace/apps/citrix.netscalervpx-120?tab=PlansAndPrice)
+- Citrix License Server : 1 x D2s v3
+- Citrix VDA : 4 x D8s v3
+- Citrix StoreFront : 2 x D2s v3
+- Citrix Delivery Controller : 2 x D2s v3
+- Contrôleurs de domaine : 2 x D2sv3
+- Serveurs de fichiers Azure : 2 x D2sv3
 
 > [!NOTE]
 > Toutes les licences (autres que NetScaler) sont sous licence BYOL (apportez votre propre licence)

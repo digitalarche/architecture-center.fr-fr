@@ -1,40 +1,41 @@
 ---
-title: Sécuriser une application web Windows pour les secteurs industriels réglementés
+title: Création d’applications web sécurisées avec des machines virtuelles Windows Azure
 description: Créez une application web sécurisée, à plusieurs niveaux avec Windows Server sur Azure à l’aide de groupes identiques, d’Application Gateway et d’équilibreurs de charge.
 author: iainfoulds
-ms.date: 07/11/2018
-ms.openlocfilehash: c7137988bd9b5e26718b4fe0955a3dca3dc638b8
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.date: 12/06/2018
+ms.custom: seodec18
+ms.openlocfilehash: 4e4d2117fbc46eda46f7ef276a71739e3a79270e
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610717"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307059"
 ---
-# <a name="secure-windows-web-application-for-regulated-industries"></a>Sécuriser une application web Windows pour les secteurs industriels réglementés
+# <a name="building-secure-web-applications-with-windows-virtual-machines-on-azure"></a>Création d’applications web sécurisées avec des machines virtuelles Windows Azure
 
-Cet exemple de scénario s’applique aux secteurs industriels réglementés qui ont besoin de sécuriser des applications à plusieurs niveaux. Dans ce scénario, une application ASP.NET frontale se connecte en toute sécurité à un cluster principal protégé de Microsoft SQL Server.
+Ce scénario fournit des conseils de conception et d’architecture pour l’exécution d’applications web sécurisées multiniveaux sur Microsoft Azure. Dans cet exemple, une application ASP.NET se connecte de manière sécurisée à un cluster back-end protégé de Microsoft SQL Server à l’aide de machines virtuelles.
 
-Les exemples de scénarios d’application incluent l’exécution d’applications de salle d’opération, la conservation des rendez-vous et des dossiers des patients ou bien le remplissage ou la commande des prescriptions. En règle générale, les organisations devaient maintenir les applications et les services hérités en local pour ces scénarios. Avec un moyen sécurisé et une méthode évolutive pour déployer ces applications de Windows Server dans Azure, les organisations peuvent moderniser leurs déploiements et réduire leurs coûts d’exploitation locaux et leurs surcharges de gestion.
+En règle générale, les organisations devaient maintenir les applications et les services hérités localement afin de fournir une infrastructure sécurisée. En déployant ces applications Windows Server dans Azure de manière sécurisée, les organisations peuvent moderniser leurs déploiements ainsi que réduire leurs coûts d’exploitation locaux et leurs frais de gestion.
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
-Les autres cas d’usage appropriés sont les suivants :
+Voici quelques exemples où ce scénario peut être appliqué :
 
 * Modernisation des déploiements d’application dans un environnement cloud sécurisé.
-* Réduction de la gestion des applications et services hérités en local.
+* Réduction des frais liés à la gestion des applications et des services hérités locaux.
 * Amélioration des soins et de l’expérience du patient avec de nouvelles plateformes d’application.
 
 ## <a name="architecture"></a>Architecture
 
 ![Présentation de l’architecture des composants Azure impliqués dans les applications de Windows Server à plusieurs niveaux pour les secteurs industriels réglementés][architecture]
 
-Ce scénario couvre une application à plusieurs niveaux pour les secteurs industriels réglementés utilisant ASP.NET et Microsoft SQL Server. Les données circulent dans le scénario comme suit :
+Ce scénario montre une application web front-end qui se connecte à une base de données back-end, les deux s’exécutant sur Windows Server 2016. Les données circulent dans le scénario comme suit :
 
-1. Les utilisateurs accèdent à l’application frontale ASP.NET pour les secteurs industriels réglementés via une passerelle d’application Azure.
+1. Les utilisateurs accèdent à l’application ASP.NET front-end via Azure Application Gateway.
 2. La passerelle d’application distribue le trafic vers les instances de machine virtuelle dans un groupe de machines virtuelles identiques Azure.
-3. L’application ASP.NET se connecte au cluster de Microsoft SQL Server dans une couche back-end via un équilibreur de charge Azure. Ces instances SQL Server principales sont situées dans un réseau virtuel Azure distinct, sécurisé par des règles de groupe de sécurité réseau qui limitent le flux de trafic.
+3. L’application se connecte au cluster Microsoft SQL Server dans une couche back-end via un équilibreur de charge Azure. Ces instances SQL Server principales sont situées dans un réseau virtuel Azure distinct, sécurisé par des règles de groupe de sécurité réseau qui limitent le flux de trafic.
 4. L’équilibreur de charge répartit le trafic de SQL Server vers les instances de machine virtuelle dans un autre groupe de machines virtuelles identiques.
-5. Stockage Blob Azure agit comme un témoin cloud pour le cluster SQL Server au niveau principal. La connexion à partir du réseau virtuel est activée avec un point de terminaison de service de réseau virtuel pour le stockage Azure.
+5. Le Stockage Blob Azure fait office de [témoin cloud][cloud-witness] pour le cluster SQL Server dans le niveau back-end. La connexion à partir du réseau virtuel est activée avec un point de terminaison de service de réseau virtuel pour le stockage Azure.
 
 ### <a name="components"></a>Composants
 
@@ -47,7 +48,7 @@ Ce scénario couvre une application à plusieurs niveaux pour les secteurs indus
 
 ### <a name="alternatives"></a>Autres solutions
 
-* *nix, Windows est parfaitement remplaçable par d’autres systèmes d’exploitation, car rien dans l’infrastructure ne dépend du système d’exploitation.
+* Vous pouvez utiliser indifféremment Linux ou Windows dans la mesure où l’infrastructure n’est pas dépendante du système d’exploitation.
 
 * [SQL Server pour Linux][sql-linux] peut remplacer le magasin de données back-end.
 
@@ -61,7 +62,7 @@ Dans ce scénario, les instances de machine virtuelle sont déployées sur des z
 
 La couche Données peut être configurée pour utiliser des groupes de disponibilité Always On. Avec cette configuration de SQL Server, une base de données primaire au sein d’un cluster est configurée avec un maximum de huit bases de données secondaires. En cas de problème avec la base de données primaire, le cluster bascule sur l’une des bases de données secondaires, ce qui permet à l’application de rester disponible. Pour plus d’informations, consultez [Vue d’ensemble des groupes de disponibilité AlwaysOn pour SQL Server][sqlalwayson-docs].
 
-Pour consulter d’autres rubriques relatives à la disponibilité, consultez la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
+Pour obtenir d’autres conseils sur la disponibilité, consultez la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
 
 ### <a name="scalability"></a>Extensibilité
 
@@ -112,9 +113,9 @@ Nous proposons trois exemples de profils de coût basés sur le nombre d’insta
 
 ## <a name="related-resources"></a>Ressources associées
 
-Ce scénario a utilisé un groupe de machines virtuelles identiques principales qui exécutent un cluster Microsoft SQL Server. Cosmos DB peut également servir de couche Données évolutive et sécurisée pour les données d’application. Un [point de terminaison de service du réseau virtuel Azure][vnetendpoint-docs] permet de sécuriser vos ressources critiques de service Azure sur vos réseaux virtuels uniquement. Dans ce scénario, les points de terminaison de réseau virtuel permettent de sécuriser le trafic entre la couche Application frontale et Cosmos DB. Pour en savoir plus, consultez la [page d’accueil d’Azure Cosmos DB][docs-cosmos-db](/azure/cosmos-db/introduction).
+Ce scénario a utilisé un groupe de machines virtuelles identiques principales qui exécutent un cluster Microsoft SQL Server. Cosmos DB peut également servir de couche Données évolutive et sécurisée pour les données d’application. Un [point de terminaison de service du réseau virtuel Azure][vnetendpoint-docs] permet de sécuriser vos ressources critiques de service Azure sur vos réseaux virtuels uniquement. Dans ce scénario, les points de terminaison de réseau virtuel permettent de sécuriser le trafic entre la couche Application frontale et Cosmos DB. Pour plus d’informations, consultez la [présentation d’Azure Cosmos DB](/azure/cosmos-db/introduction).
 
-Vous pouvez également afficher une [architecture de référence détaillée pour une application multiniveau générique avec SQL Server][ntiersql-ra].
+Pour obtenir un guide d’implémentation plus détaillé, consultez l’[architecture de référence pour les applications multiniveaux qui utilisent SQL Server][ntiersql-ra].
 
 <!-- links -->
 [appgateway-docs]: /azure/application-gateway/overview
@@ -137,7 +138,7 @@ Vous pouvez également afficher une [architecture de référence détaillée pou
 [pci-dss]: /azure/security/blueprints/pcidss-iaaswa-overview
 [dmz]: /azure/virtual-network/virtual-networks-dmz-nsg
 [sql-linux]: /sql/linux/sql-server-linux-overview?view=sql-server-linux-2017
-
+[cloud-witness]: /windows-server/failover-clustering/deploy-cloud-witness
 [small-pricing]: https://azure.com/e/711bbfcbbc884ef8aa91cdf0f2caff72
 [medium-pricing]: https://azure.com/e/b622d82d79b34b8398c4bce35477856f
 [large-pricing]: https://azure.com/e/1d99d8b92f90496787abecffa1473a93

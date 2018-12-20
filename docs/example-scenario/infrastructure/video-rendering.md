@@ -3,12 +3,13 @@ title: Rendu vidéo 3D sur Azure
 description: Exécutez des charges de travail HPC natives dans Azure à l’aide du service Azure Batch.
 author: adamboeglin
 ms.date: 07/13/2018
-ms.openlocfilehash: 1ffdaa5467fec73a01b8caa18b71c2bc4e49abbe
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.custom: fasttrack
+ms.openlocfilehash: 7dacefd5179c426912dd97af9af7b5a39505392d
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610683"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004827"
 ---
 # <a name="3d-video-rendering-on-azure"></a>Rendu vidéo 3D sur Azure
 
@@ -124,15 +125,15 @@ Le coût d’utilisation d’Azure Batch varie selon les tailles de machine virt
 
 Voici quelques exemples des coûts qui pourraient être engagés pour une tâche se terminant en 8 heures à l’aide de différents nombres de serveurs :
 
-* 100 machines virtuelles avec processeur hautes performances : [Devis estimatif][hpc-est-high]
+* 100 machines virtuelles avec processeur hautes performances : [Estimation du coût][hpc-est-high]
 
   100 H16m (16 cœurs, 225 Go de RAM, 512 Go de Stockage Premium), 2 To de Stockage Blob, 1 To de sortie
 
-* 50 machines virtuelles avec processeur hautes performances : [Devis estimatif][hpc-est-med]
+* 50 machines virtuelles avec processeur hautes performances : [Estimation du coût][hpc-est-med]
 
   50 H16m (16 cœurs, 225 Go de RAM, 512 Go de Stockage Premium), 2 To de Stockage Blob, 1 To de sortie
 
-* 10 machines virtuelles avec processeur hautes performances : [Devis estimatif][hpc-est-low]
+* 10 machines virtuelles avec processeur hautes performances : [Estimation du coût][hpc-est-low]
 
   10 H16m (16 cœurs, 225 Go de RAM, 512 Go de Stockage Premium), 2 To de Stockage Blob, 1 To de sortie
 

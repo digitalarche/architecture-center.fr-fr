@@ -3,12 +3,13 @@ title: Exécution des charges de travail de production SAP à l’aide d’une b
 description: Exécutez un déploiement de production SAP dans Azure à l’aide d’une base de données Oracle.
 author: DharmeshBhagat
 ms.date: 9/12/2018
-ms.openlocfilehash: 75942b4d9b18b7bbe7a162826bcf4fe9ece22dce
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.custom: fasttrack
+ms.openlocfilehash: e345760c69c4d3cc26fe6d4d7cb8a93d183a5818
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610904"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004976"
 ---
 # <a name="running-sap-production-workloads-using-an-oracle-database-on-azure"></a>Exécution des charges de travail de production SAP à l’aide d’Oracle Database sur Azure
 
@@ -48,7 +49,7 @@ Cet exemple inclut une configuration à haute disponibilité pour une base de do
 
 ### <a name="alternatives"></a>Autres solutions
 
-SAP fournit des options flexibles pour différentes combinaisons de système d’exploitation, de gestionnaire de bases de données et de types de machines virtuelles dans un environnement Azure. Pour plus d’informations, consultez la [note SAP n° 1928533](https://launchpad.support.sap.com/#/notes/1928533), « SAP Applications on Azure: Supported Products and Azure VM Types » (Applications SAP sur Azure : produits et types de machines virtuelles Azure pris en charge).
+SAP fournit des options flexibles pour différentes combinaisons de système d’exploitation, de gestionnaire de bases de données et de types de machines virtuelles dans un environnement Azure. Pour plus d’informations, consultez la [note SAP 1928533](https://launchpad.support.sap.com/#/notes/1928533) « SAP Applications on Azure: Supported Products and Azure VM Types (Applications SAP sur Azure : produits et types de machines virtuelles pris en charge).
 
 ## <a name="considerations"></a>Considérations
 
@@ -75,13 +76,13 @@ Très grande|250 000|M64s|6xP30, 1xP30|DS11_v2|1x P10|10x DS14_v2|1x P10|[Très
 > [!NOTE]
 > Cette tarification est fournie à titre informatif et indique uniquement les coûts relatifs au stockage et aux machines virtuelles. Elle ne tient pas compte des frais associés à la mise en réseau, au stockage de sauvegarde et à l’entrée/la sortie des données.
 
-* [Petit](https://azure.com/e/45880ba0bfdf47d497851a7cf2650c7c) : un petit système se compose d’une machine virtuelle de type DS13_v2 pour le serveur de base de données avec 8 processeurs virtuels, 56 Go de RAM et 112 Go de stockage temporaire, en plus de cinq disques de stockage Premium de 512 Go. Un serveur d’instance centrale SAP utilisant une machine virtuelle de type DS11_v2 avec 2 processeurs virtuels, 14 Go de RAM et 28 Go de stockage temporaire. Une machine virtuelle de type DS13_v2 pour le serveur d’application SAP avec 8 processeurs virtuels, 56 Go de RAM et 400 Go de stockage temporaire, en plus d’un disque de stockage Premium de 128 Go.
+* [Petit](https://azure.com/e/45880ba0bfdf47d497851a7cf2650c7c) : Un petit système se compose d’une machine virtuelle de type DS13_v2 pour le serveur de base de données avec 8 processeurs virtuels, 56 Go de RAM et 112 Go de stockage temporaire, en plus de cinq disques de stockage Premium de 512 Go. Un serveur d’instance centrale SAP utilisant une machine virtuelle de type DS11_v2 avec 2 processeurs virtuels, 14 Go de RAM et 28 Go de stockage temporaire. Une machine virtuelle de type DS13_v2 pour le serveur d’application SAP avec 8 processeurs virtuels, 56 Go de RAM et 400 Go de stockage temporaire, en plus d’un disque de stockage Premium de 128 Go.
 
-* [Moyen](https://azure.com/e/9a523f79591347ca9a48c3aaa1406f8a) : un système moyen se compose d’une machine virtuelle de type DS14_v2 pour le serveur de base de données avec 16 processeurs virtuels, 112 Go de RAM et 800 Go de stockage temporaire, en plus de sept disques de stockage Premium de 512 Go. Un serveur d’instance centrale SAP utilisant une machine virtuelle de type DS11_v2 avec 2 processeurs virtuels, 14 Go de RAM et 28 Go de stockage temporaire. Quatre machines virtuelles de type DS13_v2 pour le serveur d’application SAP avec 8 processeurs virtuels, 56 Go de RAM et 400 Go de stockage temporaire, en plus d’un disque de stockage Premium de 128 Go.
+* [Moyen](https://azure.com/e/9a523f79591347ca9a48c3aaa1406f8a) : Un système moyen se compose d’une machine virtuelle de type DS14_v2 pour le serveur de base de données avec 16 processeurs virtuels, 112 Go de RAM et 800 Go de stockage temporaire, en plus de sept disques de stockage Premium de 512 Go. Un serveur d’instance centrale SAP utilisant une machine virtuelle de type DS11_v2 avec 2 processeurs virtuels, 14 Go de RAM et 28 Go de stockage temporaire. Quatre machines virtuelles de type DS13_v2 pour le serveur d’application SAP avec 8 processeurs virtuels, 56 Go de RAM et 400 Go de stockage temporaire, en plus d’un disque de stockage Premium de 128 Go.
 
-* [Grand](https://azure.com/e/f70fccf571e948c4b37d4fecc07cbf42) : un grand système se compose d’une machine virtuelle de type E32s_v3 pour le serveur de base de données avec 32 processeurs virtuels, 256 Go de RAM et 800 Go de stockage temporaire, en plus de trois disques de stockage Premium de 512 Go et d’un disque de stockage Premium de 128 Go. Un serveur d’instance centrale SAP utilisant une machine virtuelle de type DS11_v2 avec 2 processeurs virtuels, 14 Go de RAM et 28 Go de stockage temporaire. Six machines virtuelles de type DS14_v2 pour les serveurs d’application SAP avec 16 processeurs virtuels, 112 Go de RAM et 224 Go de stockage temporaire, en plus de six disques de stockage Premium de 128 Go.
+* [Grand](https://azure.com/e/f70fccf571e948c4b37d4fecc07cbf42) : Un grand système se compose d’une machine virtuelle de type E32s_v3 pour le serveur de base de données avec 32 processeurs virtuels, 256 Go de RAM et 800 Go de stockage temporaire, en plus de trois disques de stockage Premium de 512 Go et d’un disque de stockage Premium de 128 Go. Un serveur d’instance centrale SAP utilisant une machine virtuelle de type DS11_v2 avec 2 processeurs virtuels, 14 Go de RAM et 28 Go de stockage temporaire. Six machines virtuelles de type DS14_v2 pour les serveurs d’application SAP avec 16 processeurs virtuels, 112 Go de RAM et 224 Go de stockage temporaire, en plus de six disques de stockage Premium de 128 Go.
 
-* [Très grand](https://azure.com/e/58c636922cf94faf9650f583ff35e97b) : un très grand système se compose d’une machine virtuelle de type M64s pour le serveur de base de données avec 64 processeurs virtuels, 1 024 Go de RAM et 2 000 Go de stockage temporaire, en plus de sept disques de stockage Premium de 1 024 Go. Un serveur d’instance centrale SAP utilisant une machine virtuelle de type DS11_v2 avec 2 processeurs virtuels, 14 Go de RAM et 28 Go de stockage temporaire. 10 machines virtuelles de type DS14_v2 pour les serveurs d’application SAP avec 16 processeurs virtuels, 112 Go de RAM et 224 Go de stockage temporaire, en plus de dix disques de stockage Premium de 128 Go.
+* [Très grand](https://azure.com/e/58c636922cf94faf9650f583ff35e97b) : Un très grand système se compose d’une machine virtuelle de type M64s pour le serveur de base de données avec 64 processeurs virtuels, 1 024 Go de RAM et 2 000 Go de stockage temporaire, en plus de sept disques de stockage Premium de 1 024 Go. Un serveur d’instance centrale SAP utilisant une machine virtuelle de type DS11_v2 avec 2 processeurs virtuels, 14 Go de RAM et 28 Go de stockage temporaire. 10 machines virtuelles de type DS14_v2 pour les serveurs d’application SAP avec 16 processeurs virtuels, 112 Go de RAM et 224 Go de stockage temporaire, en plus de dix disques de stockage Premium de 128 Go.
 
 ## <a name="deployment"></a>Déploiement
 

@@ -3,12 +3,13 @@ title: Environnements de développement/test pour les charges de travail SAP sur
 description: Créez un environnement de développement/test pour les charges de travail SAP.
 author: AndrewDibbins
 ms.date: 7/11/18
-ms.openlocfilehash: 1cfd15b0287a1979ae5ad60e41a0b1627a2e115c
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.custom: fasttrack
+ms.openlocfilehash: 84665bfeb6ada568c631e1db72b97269d79f2e60
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610802"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004679"
 ---
 # <a name="devtest-environments-for-sap-workloads-on-azure"></a>Environnements de développement/test pour les charges de travail SAP sur Azure
 
@@ -80,10 +81,10 @@ Très grande|64 000|M64s|4xP20, 1xP10|[Très grande](https://azure.com/e/975fb58
 > [!NOTE]
 > Cette tarification, fournie à titre informatif, indique uniquement les coûts relatifs au stockage et aux machines virtuelles. Elle ne tient pas compte des frais associés à la mise en réseau, au stockage de sauvegarde et à l’entrée/la sortie des données.
 
-* [Petit](https://azure.com/e/9d26b9612da9466bb7a800eab56e71d1) : machine virtuelle de type D8s_v3 avec 8 processeurs virtuels, 32 Go de RAM et 200 Go de stockage temporaire, en plus de deux disques de Stockage Premium de 512 Go et un de 128 Go.
-* [Moyen](https://azure.com/e/465bd07047d148baab032b2f461550cd) : machine virtuelle de type D16s_v3 avec 16 processeurs virtuels, 64 Go de RAM et 400 Go de stockage temporaire, en plus de trois disques de Stockage Premium de 512 Go et un de 128 Go.
-* [Grand](https://azure.com/e/ada2e849d68b41c3839cc976000c6931) : machine virtuelle de type E32s_v3 avec 32 processeurs virtuels, 256 Go de RAM et 512 Go de stockage temporaire, en plus de trois disques de Stockage Premium de 512 Go et un de 128 Go.
-* [Très grand](https://azure.com/e/975fb58a965c4fbbb54c5c9179c61cef) : machine virtuelle de type M64s avec 64 processeurs virtuels, 1 024 Go de RAM et 2 000 Go de stockage temporaire, en plus de quatre disques de Stockage Premium de 512 Go et un de 128 Go.
+* [Petit](https://azure.com/e/9d26b9612da9466bb7a800eab56e71d1) : machine virtuelle de type D8s_v3 avec 8 processeurs virtuels, 32 Go de RAM et 200 Go de stockage temporaire, en plus de deux disques de Stockage Premium de 512 Go et un de 128 Go.
+* [Moyen](https://azure.com/e/465bd07047d148baab032b2f461550cd) : machine virtuelle de type D16s_v3 avec 16 processeurs virtuels, 64 Go de RAM et 400 Go de stockage temporaire, en plus de trois disques de Stockage Premium de 512 Go et un de 128 Go.
+* [Grand](https://azure.com/e/ada2e849d68b41c3839cc976000c6931) : machine virtuelle de type E32s_v3 avec 32 processeurs virtuels, 256 Go de RAM et 512 Go de stockage temporaire, en plus de trois disques de Stockage Premium de 512 Go et un de 128 Go.
+* [Très grand](https://azure.com/e/975fb58a965c4fbbb54c5c9179c61cef) : machine virtuelle de type M64s avec 64 processeurs virtuels, 1 024 Go de RAM et 2 000 Go de stockage temporaire, en plus de quatre disques de Stockage Premium de 512 Go et un de 128 Go.
 
 ## <a name="deployment"></a>Déploiement
 

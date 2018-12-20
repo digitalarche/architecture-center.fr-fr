@@ -1,14 +1,15 @@
 ---
-title: ETL hybride avec des instances SSIS locales existantes et Azure Data Factory
+title: ETL hybride avec une instance SSIS locale existante et Azure Data Factory
 description: ETL hybride avec des déploiements de SQL Server Integration Services (SSIS) locaux existants et Azure Data Factory
 author: alhieng
 ms.date: 9/20/2018
-ms.openlocfilehash: c4c0cfd63ef1d6c620eb36e16622ad9ffb7b5d80
-ms.sourcegitcommit: 16bc6a91b6b9565ca3bcc72d6eb27c2c4ae935e4
+ms.custom: tsp-team
+ms.openlocfilehash: cc6c2bfe85dc0d1eb8ad29e044611f1e435810c3
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/28/2018
-ms.locfileid: "52579461"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53306787"
 ---
 # <a name="hybrid-etl-with-existing-on-premises-ssis-and-azure-data-factory"></a>ETL hybride avec des instances SSIS locales existantes et Azure Data Factory
 
@@ -29,7 +30,7 @@ Plusieurs cas d’usage locaux potentiels sont listés ci-dessous :
 * Chargement des journaux de routeur réseau dans une base de données pour analyse.
 * Préparation des données d’emploi des ressources humaines pour les rapports analytiques.
 * Chargement des données de produit et de ventes dans un entrepôt de données pour la prévision des ventes.
-* Automatisation du chargement ou magasin de données opérationnels ou entrepôts de données pour la finance et la comptabilité.
+* Automatisation du chargement des magasins de données opérationnelles ou des entrepôts de données pour la finance et la comptabilité.
 
 ## <a name="architecture"></a>Architecture
 

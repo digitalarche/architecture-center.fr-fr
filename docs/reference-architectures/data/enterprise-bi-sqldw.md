@@ -1,24 +1,26 @@
 ---
-title: Enterprise BI avec SQL Data Warehouse
-description: Utiliser Azure pour obtenir des analyses détaillées des données relationnelles stockées en local
+title: Décisionnel d’entreprise
+titleSuffix: Azure Reference Architectures
+description: Utiliser Azure pour obtenir des insights détaillés à partir de données relationnelles stockées localement
 author: MikeWasson
 ms.date: 11/06/2018
-ms.openlocfilehash: 2822cf6d2a75d521f182c267f4bf2bac462d2b7f
-ms.sourcegitcommit: 877777094b554559dc9cb1f0d9214d6d38197439
+ms.custom: seodec18
+ms.openlocfilehash: 656bf6f1bd342856fd8a2d2aa0b62a9dd4d4f87f
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/11/2018
-ms.locfileid: "51527709"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120082"
 ---
 # <a name="enterprise-bi-in-azure-with-sql-data-warehouse"></a>Enterprise BI dans Azure avec SQL Data Warehouse
 
-Cette architecture de référence implémente un pipeline [ELT](../../data-guide/relational-data/etl.md#extract-load-and-transform-elt) (extract-load-transform) qui déplace des données d’une base de données SQL Server vers SQL Data Warehouse et qui transforme les données pour les analyser. 
+Cette architecture de référence implémente un pipeline [ELT](../../data-guide/relational-data/etl.md#extract-load-and-transform-elt) (extract-load-transform) qui déplace des données d’une base de données SQL Server vers SQL Data Warehouse et qui transforme les données pour les analyser.
 
-Une implémentation de référence pour cette architecture est disponible sur [GitHub][github-folder]
+Une implémentation de référence pour cette architecture est disponible sur [GitHub][github-folder].
 
-![](./images/enterprise-bi-sqldw.png)
+![Diagramme d’architecture du décisionnel d’entreprise dans Azure avec SQL Data Warehouse](./images/enterprise-bi-sqldw.png)
 
-**Scénario**: Une organisation dispose d’un jeu de données OLTP important stocké dans une base de données SQL Server locale. L’organisation souhaite utiliser SQL Data Warehouse pour réaliser une analyse avec Power BI. 
+**Scénario** : Une organisation dispose d’un jeu de données OLTP volumineux stocké dans une base de données SQL Server locale. L’organisation souhaite utiliser SQL Data Warehouse pour réaliser une analyse avec Power BI.
 
 Cette architecture de référence est conçue pour des tâches uniques ou à la demande. Si vous devez déplacer des données continuellement (toutes les heures ou tous les jours), nous vous recommandons d’utiliser Azure Data Factory pour définir un flux de travail automatisé. Pour accéder à une architecture de référence qui utilise Data Factory, consultez [BI d’entreprise automatisée avec SQL Data Warehouse et Azure Data Factory][adf-ra].
 
@@ -34,7 +36,7 @@ L’architecture est constituée des composants suivants.
 
 **Stockage d'objets blob**. Le stockage d’objets blob est utilisé comme zone de préparation à la copie des données, avant de les charger dans SQL Data Warehouse.
 
-**Azure SQL Data Warehouse**. [SQL Data Warehouse](/azure/sql-data-warehouse/) est un système distribué conçu pour réaliser des analyses sur de grandes quantités de données. Il prend en charge le traitement MPP (Massive Parallel Processing), le rendant ainsi adapté à l’exécution d’analyses hautes performances. 
+**Azure SQL Data Warehouse**. [SQL Data Warehouse](/azure/sql-data-warehouse/) est un système distribué conçu pour réaliser des analyses sur de grandes quantités de données. Il prend en charge le traitement MPP (Massive Parallel Processing), le rendant ainsi adapté à l’exécution d’analyses hautes performances.
 
 ### <a name="analysis-and-reporting"></a>Analyse et rapports
 
@@ -46,10 +48,10 @@ L’architecture est constituée des composants suivants.
 
 ### <a name="authentication"></a>Authentification
 
-**Azure Active Directory** (Azure AD) authentifie les utilisateurs qui se connectent au serveur Analysis Services via Power BI.
+**Azure Active Directory (Azure AD)** authentifie les utilisateurs qui se connectent au serveur Analysis Services via Power BI.
 
 ## <a name="data-pipeline"></a>Pipeline de données
- 
+
 Cette architecture de référence utilise l’exemple de base de données [WorldWideImporters](/sql/sample/world-wide-importers/wide-world-importers-oltp-database) en tant que source de données. Le pipeline de données comporte les étapes suivantes :
 
 1. Exportez les données de SQL Server vers des fichiers plats (utilitaire BCP).
@@ -58,10 +60,11 @@ Cette architecture de référence utilise l’exemple de base de données [World
 4. Transformez les données en schéma en étoile (T-SQL).
 5. Chargez un modèle sémantique dans Analysis Services (SQL Server Data Tools).
 
-![](./images/enterprise-bi-sqldw-pipeline.png)
- 
+![Diagramme du pipeline de décisionnel d’entreprise](./images/enterprise-bi-sqldw-pipeline.png)
+
 > [!NOTE]
-> Pour les étapes 1 &ndash; 3, préférez l’utilisation de Redgate Data Platform Studio. Data Platform Studio applique les correctifs de compatibilité et optimisations les plus appropriés. Il s’agit donc du moyen le plus rapide pour vous familiariser avec SQL Data Warehouse. Pour en savoir plus, consultez [Chargement de données avec Redgate Data Platform Studio](/azure/sql-data-warehouse/sql-data-warehouse-load-with-redgate). 
+> Pour les étapes 1 &ndash; 3, préférez l’utilisation de Redgate Data Platform Studio. Data Platform Studio applique les correctifs de compatibilité et optimisations les plus appropriés. Il s’agit donc du moyen le plus rapide pour vous familiariser avec SQL Data Warehouse. Pour en savoir plus, consultez [Chargement de données avec Redgate Data Platform Studio](/azure/sql-data-warehouse/sql-data-warehouse-load-with-redgate).
+>
 
 Les sections suivantes décrivent ces étapes plus en détail.
 
@@ -71,7 +74,7 @@ L’utilitaire [BCP](/sql/tools/bcp-utility) (programme de copie en bloc) consti
 
 **Recommandations**
 
-Si possible, prévoyez l’extraction des données lors des heures creuses afin de minimiser la contention des ressources dans l’environnement de production. 
+Si possible, prévoyez l’extraction des données lors des heures creuses afin de minimiser la contention des ressources dans l’environnement de production.
 
 N’exécutez pas l’utilitaire BCP sur le serveur de base de données. À la place, exécutez-le depuis une autre machine. Écrivez les fichiers sur un disque local. Veillez à disposer de suffisamment de ressources d’E/S pour gérer les écritures simultanées. Pour de meilleures performances, exportez les fichiers vers des disques de stockage rapides dédiés.
 
@@ -83,11 +86,11 @@ L’utilitaire [AzCopy](/azure/storage/common/storage-use-azcopy) est conçu pou
 
 **Recommandations**
 
-Créez un compte de stockage dans une région proche de l’emplacement des données source. Déployez le compte de stockage et l’instance SQL Data Warehouse dans la même région. 
+Créez un compte de stockage dans une région proche de l’emplacement des données source. Déployez le compte de stockage et l’instance SQL Data Warehouse dans la même région.
 
-N’exécutez pas AzCopy sur la machine qui exécute vos charges de travail de production, car l’unité centrale et la consommation d’E/S peuvent interférer avec elles. 
+N’exécutez pas AzCopy sur la machine qui exécute vos charges de travail de production, car l’unité centrale et la consommation d’E/S peuvent interférer avec elles.
 
-Testez le chargement afin de déterminer la vitesse. Vous pouvez utiliser l’option /NC dans AzCopy pour spécifier le nombre d’opérations de copie simultanées. Commencez par la valeur par défaut, puis expérimentez avec ce paramètre pour ajuster les performances. Remarque : un trop grand nombre d’opérations simultanées dans un environnement à faible bande passante peut surcharger la connexion réseau et entraver la réussite des opérations.  
+Testez le chargement afin de déterminer la vitesse. Vous pouvez utiliser l’option /NC dans AzCopy pour spécifier le nombre d’opérations de copie simultanées. Commencez par la valeur par défaut, puis expérimentez avec ce paramètre pour ajuster les performances. Remarque : un trop grand nombre d’opérations simultanées dans un environnement à faible bande passante peut surcharger la connexion réseau et entraver la réussite des opérations.
 
 AzCopy déplace les données vers le stockage via l’Internet public. Si ce n’est pas assez rapide, envisagez la configuration d’un circuit [ExpressRoute](/azure/expressroute/). ExpressRoute est un service qui achemine vos données via une connexion privée dédiée vers Azure. Si votre connexion réseau est trop lente, une autre option consiste à envoyer les données physiquement sur disque vers un centre de données Azure. Pour plus d’informations, consultez l’article [Transférer des données vers et à partir d’Azure](/azure/architecture/data-guide/scenarios/data-transfer).
 
@@ -95,7 +98,7 @@ Lors d’une opération de copie, AzCopy crée un fichier journal temporaire, qu
 
 ### <a name="load-data-into-sql-data-warehouse"></a>Chargement de données dans SQL Data Warehouse
 
-Utilisez [PolyBase](/sql/relational-databases/polybase/polybase-guide) pour charger des fichiers du stockage d’objets blob vers l’entrepôt de données. PolyBase est conçu pour tirer parti de l’architecture MPP (Massively Parallel Processing) de SQL Data Warehouse, ce qui en fait le moyen le plus rapide pour y charger des données. 
+Utilisez [PolyBase](/sql/relational-databases/polybase/polybase-guide) pour charger des fichiers du stockage d’objets blob vers l’entrepôt de données. PolyBase est conçu pour tirer parti de l’architecture MPP (Massively Parallel Processing) de SQL Data Warehouse, ce qui en fait le moyen le plus rapide pour y charger des données.
 
 Le chargement des données est un processus en deux étapes :
 
@@ -114,7 +117,7 @@ PolyBase peut lire les fichiers compressés au format Gzip. Toutefois, seul un l
 
 Notez les limitations suivantes :
 
-- PolyBase prend en charge une taille de colonne maximale de `varchar(8000)`, `nvarchar(4000)` ou `varbinary(8000)`. Si vos données dépassent ces limites, une option consiste à les diviser au moment de les exporter, puis de les réassembler après les avoir importées. 
+- PolyBase prend en charge une taille de colonne maximale de `varchar(8000)`, `nvarchar(4000)` ou `varbinary(8000)`. Si vos données dépassent ces limites, une option consiste à les diviser au moment de les exporter, puis de les réassembler après les avoir importées.
 
 - PolyBase utilise un terminateur de ligne fixe \n ou un renvoi à la ligne. Cela peut entraîner des problèmes si les caractères de renvoi à la ligne apparaissent dans les données source.
 
@@ -154,13 +157,13 @@ Nous vous recommandons l’option Connexion active car elle ne nécessite pas de
 
 **Recommandations**
 
-N’exécutez pas des requêtes de tableau de bord BI directement dans l’entrepôt de données. Les tableaux de bord BI nécessitent des temps de réponse très lents. Les requêtes directes dans l’entrepôt de données peuvent ne pas être adaptées. De plus, l’actualisation du tableau de bord comptera dans le nombre de requêtes simultanées, ce qui peut impacter les performances. 
+N’exécutez pas des requêtes de tableau de bord BI directement dans l’entrepôt de données. Les tableaux de bord BI nécessitent des temps de réponse très lents. Les requêtes directes dans l’entrepôt de données peuvent ne pas être adaptées. De plus, l’actualisation du tableau de bord comptera dans le nombre de requêtes simultanées, ce qui peut impacter les performances.
 
 Azure Analysis Services est conçu pour gérer les exigences de requête d’un tableau de bord BI. Il est donc recommandé d’effectuer des requêtes Analysis Services depuis Power BI.
 
 ## <a name="scalability-considerations"></a>Considérations relatives à l’extensibilité
 
-### <a name="sql-data-warehouse"></a>SQL Data Warehouse
+### <a name="sql-data-warehouse"></a>SQL Data Warehouse
 
 Avec SQL Data Warehouse, vous pouvez augmenter la taille de vos ressources de calcul à la demande. Le moteur de requête optimise les requêtes pour des traitements simultanés basés sur le nombre de nœuds de calcul, et déplace les données entre nœuds si nécessaire. Pour plus d’informations, consultez [Gérer le calcul dans Azure SQL Data Warehouse](/azure/sql-data-warehouse/sql-data-warehouse-manage-compute-overview).
 
@@ -168,7 +171,7 @@ Avec SQL Data Warehouse, vous pouvez augmenter la taille de vos ressources de ca
 
 Pour les charges de travail de production, nous recommandons le niveau Standard pour Azure Analysis Services, car il prend en charge le partitionnement et DirectQuery. Dans un niveau, la taille de l’instance détermine la mémoire et la puissance de traitement. La puissance de traitement se mesure en QPU (Unité de traitement des requêtes). Surveillez votre utilisation QPU pour sélectionner la taille appropriée. Pour plus d’informations, voir [Surveiller les mesures du serveur](/azure/analysis-services/analysis-services-monitor).
 
-Sous une charge importante, les performances de requête peuvent se dégrader en raison de la simultanéité des requêtes. Vous pouvez augmenter la taille d’Analyse Services en créant un pool de réplicas pour traiter des requêtes, dans le but de pouvoir réaliser plus de requêtes simultanément. Le traitement du modèle des données se fait toujours sur le serveur principal. Par défaut, le serveur principal gère aussi les requêtes. Optionnellement, vous pouvez désigner le serveur principal pour qu’il n’exécute que le traitement, afin que le pool de requêtes gère toutes les requêtes. Si vous avez des exigences de traitement élevées, vous devriez séparer le traitement et le pool de requêtes. Si vous avez des charges de requêtes importantes, et un traitement relativement léger, vous pouvez inclure le serveur principal dans le pool de requêtes. Pour en savoir plus, consultez [Extensibilité d’Azure Analysis Services](/azure/analysis-services/analysis-services-scale-out). 
+Sous une charge importante, les performances de requête peuvent se dégrader en raison de la simultanéité des requêtes. Vous pouvez augmenter la taille d’Analyse Services en créant un pool de réplicas pour traiter des requêtes, dans le but de pouvoir réaliser plus de requêtes simultanément. Le traitement du modèle des données se fait toujours sur le serveur principal. Par défaut, le serveur principal gère aussi les requêtes. Optionnellement, vous pouvez désigner le serveur principal pour qu’il n’exécute que le traitement, afin que le pool de requêtes gère toutes les requêtes. Si vous avez des exigences de traitement élevées, vous devriez séparer le traitement et le pool de requêtes. Si vous avez des charges de requêtes importantes, et un traitement relativement léger, vous pouvez inclure le serveur principal dans le pool de requêtes. Pour en savoir plus, consultez [Extensibilité d’Azure Analysis Services](/azure/analysis-services/analysis-services-scale-out).
 
 Pour réduire la quantité de traitement inutile, préférez utiliser des partitions pour diviser le modèle tabulaire en plusieurs parties logiques. Chaque partition peut être traitée séparément. Pour plus d'informations, consultez [Partitions](/sql/analysis-services/tabular-models/partitions-ssas-tabular).
 
@@ -191,11 +194,10 @@ Pour en savoir plus, consultez [Gérer les rôles et les utilisateurs de bases d
 
 Pour déployer et exécuter l’implémentation de référence, suivez les étapes du [fichier Readme de GitHub][github-folder]. Il déploie les éléments suivants :
 
-  * Une machine virtuelle pour simuler un serveur de base de données local. Sont inclus SQL Server 2017 et les outils associés, et Power BI Desktop.
-  * Un compte de stockage Azure qui fournit le stockage d’objets blob pour conserver des données exportées de la base de données SQL Server.
-  * Une instance Azure SQL Data Warehouse.
-  * Une instance Azure Analysis Services.
-
+- Une machine virtuelle pour simuler un serveur de base de données local. Sont inclus SQL Server 2017 et les outils associés, et Power BI Desktop.
+- Un compte de stockage Azure qui fournit le stockage d’objets blob pour conserver des données exportées de la base de données SQL Server.
+- Une instance Azure SQL Data Warehouse.
+- Une instance Azure Analysis Services.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -206,4 +208,3 @@ Pour déployer et exécuter l’implémentation de référence, suivez les étap
 [adf-ra]: ./enterprise-bi-adf.md
 [github-folder]: https://github.com/mspnp/reference-architectures/tree/master/data/enterprise_bi_sqldw
 [wwi]: /sql/sample/world-wide-importers/wide-world-importers-oltp-database
-

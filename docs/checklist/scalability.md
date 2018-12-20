@@ -1,19 +1,20 @@
 ---
 title: Liste de contrôle de l’extensibilité
+titleSuffix: Azure Design Review Framework
 description: Liste de contrôle de l’extensibilité et recommandations concernant les problématiques de conception pour la mise à l’échelle automatique d’Azure.
 author: dragon119
 ms.date: 01/10/2018
 ms.custom: checklist
-ms.openlocfilehash: c3eaf41a038dbdd963f54d6c7cff8a8a772f8c48
-ms.sourcegitcommit: 3d6dba524cc7661740bdbaf43870de7728d60a01
+ms.openlocfilehash: 8bb31e8176238fb32bdf4424aa733b812b5eeb68
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/11/2018
-ms.locfileid: "27766103"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307144"
 ---
 # <a name="scalability-checklist"></a>Liste de contrôle de l’extensibilité
 
-L’extensibilité est la capacité d’un système à traiter une charge accrue ; elle fait partie des [piliers de la qualité logicielle](../guide/pillars.md). Utilisez cette liste de vérification pour passer en revue l’architecture de votre application en termes d’extensibilité. 
+L’extensibilité est la capacité d’un système à traiter une charge accrue ; elle fait partie des [piliers de la qualité logicielle](../guide/pillars.md). Utilisez cette liste de vérification pour passer en revue l’architecture de votre application en termes d’extensibilité.
 
 ## <a name="application-design"></a>Conception des applications
 
@@ -29,7 +30,7 @@ L’extensibilité est la capacité d’un système à traiter une charge accrue
 
 **Déchargez les tâches utilisant l’UC et les E/S de manière intensive en tant que tâches en arrière-plan**. Si vous vous attendez à ce qu’une demande à un service mette beaucoup de temps à être exécutée ou absorbe des ressources considérables, déchargez le traitement de cette demande vers une tâche distincte. Utilisez des rôles de travail ou des travaux en arrière-plan (selon la plate-forme d’hébergement) pour exécuter ces tâches. Cette stratégie permet au service de continuer à recevoir des demandes et de rester réactif.  Pour plus d’informations, consultez le [Guide relatif aux travaux en arrière-plan](../best-practices/background-jobs.md).
 
-**Distribuez la charge de travail pour les tâches en arrière-plan**. Quand les tâches en arrière-plan sont nombreuses ou nécessitent beaucoup de temps ou de ressources, répartissez la charge de travail entre plusieurs unités de calcul (par exemple, des rôles de travail ou des travaux en arrière-plan). Le [modèle des Consommateurs concurrents](https://msdn.microsoft.com/library/dn568101.aspx) offre une solution possible.
+**Distribuez la charge de travail pour les tâches en arrière-plan**. Quand les tâches en arrière-plan sont nombreuses ou nécessitent beaucoup de temps ou de ressources, répartissez la charge de travail entre plusieurs unités de calcul (par exemple, des rôles de travail ou des travaux en arrière-plan). Le [modèle des Consommateurs concurrents](../patterns/competing-consumers.md) offre une solution possible.
 
 **Envisagez de procéder à une migration vers une architecture *sans* partage**. Une architecture sans partage utilise des nœuds indépendants et autonomes qui n’ont aucun point de contention (tel que des services partagés ou du stockage). En théorie, un tel système peut être mis à l’échelle presque indéfiniment. Bien qu’une approche sans le moindre partage ne soit généralement pas pratique pour la plupart des applications, elle peut offrir des opportunités de conception avec une meilleure extensibilité. Par exemple, éviter l’utilisation de l’état de session, de l’affinité du client et du partitionnement des données côté serveur est un bon exemple de migration vers une architecture sans partage.
 
@@ -41,7 +42,7 @@ L’extensibilité est la capacité d’un système à traiter une charge accrue
 
 **Réduisez les interactions impliquant de nombreux échanges entre les composants et les services**. Évitez de concevoir des interactions dans lesquelles une application doit effectuer plusieurs appels à un service (chaque appel renvoyant une petite quantité de données) plutôt qu’un appel unique pouvant renvoyer l’ensemble des données. Si possible, associez plusieurs opérations connexes dans une seule demande lorsque l’appel effectué est à destination d’un service ou d’un composant présentant une latence importante. Cela simplifie la surveillance des performances et l’optimisation des opérations complexes. Par exemple, utilisez des procédures stockées dans les bases de données pour encapsuler une logique complexe et réduire le nombre d’allers et retours et le verrouillage de ressources.
 
-**Utilisez des files d’attente afin de niveler la charge pour les écritures de données à haute vitesse**. Les pics de demande pour un service peuvent surcharger ce service et provoquer des défaillances toujours plus importantes. Pour éviter ce problème, envisagez d’implémenter le [modèle de nivellement de charge basé sur la file d’attente](https://msdn.microsoft.com/library/dn589783.aspx). Utilisez une file d’attente qui agit comme mémoire tampon entre une tâche et un service qu’elle appelle. Cela permet d’atténuer les surcharges intermittentes qui pourraient autrement entraîner la défaillance du service ou l’expiration de la tâche.
+**Utilisez des files d’attente afin de niveler la charge pour les écritures de données à haute vitesse**. Les pics de demande pour un service peuvent surcharger ce service et provoquer des défaillances toujours plus importantes. Pour éviter ce problème, essayez d’implémenter le [modèle de nivellement de charge basé sur une file d’attente](../patterns/queue-based-load-leveling.md). Utilisez une file d’attente qui agit comme mémoire tampon entre une tâche et un service qu’elle appelle. Cela permet d’atténuer les surcharges intermittentes qui pourraient autrement entraîner la défaillance du service ou l’expiration de la tâche.
 
 **Réduisez la charge sur le magasin de données**. Le magasin de données constitue généralement un goulot d’étranglement, une ressource coûteuse et s’avère souvent complexe à monter en charge. Si possible, supprimez la logique (telle que le traitement des documents XML ou des objets JSON) du magasin de données et effectuez le traitement dans l’application. Par exemple, au lieu de transmettre le XML à la base de données (autrement que comme une chaîne opaque pour le stockage), sérialisez ou désérialisez le XML dans la couche application et transmettez-le dans un format natif au magasin de données. Il est généralement plus facile de monter en charge une application que le magasin de données. Ainsi, vous devez essayer d’effectuer la plus grande partie du traitement nécessitant beaucoup de ressources au sein de l’application.
 
@@ -67,7 +68,7 @@ L’extensibilité est la capacité d’un système à traiter une charge accrue
 
 **Passez en revue les anti-modèles de performance**. Consultez [Anti-modèles de performance pour les applications cloud](../antipatterns/index.md) pour découvrir les pratiques courantes susceptibles de causer des problèmes d’extensibilité lorsqu’une application est sous pression.
 
-**Utilisez des appels asynchrones**. Utilisez autant que possible du code asynchrone lors de l’accès à des ressources ou des services susceptibles d’être limités par les E/S ou la bande passante réseau, ou qui présentent une latence importance, pour éviter le verrouillage du thread appelant. 
+**Utilisez des appels asynchrones**. Utilisez autant que possible du code asynchrone lors de l’accès à des ressources ou des services susceptibles d’être limités par les E/S ou la bande passante réseau, ou qui présentent une latence importance, pour éviter le verrouillage du thread appelant.
 
 **Évitez le verrouillage des ressources et utilisez plutôt une approche optimiste**. Ne verrouillez jamais l’accès aux ressources telles que le stockage ou d’autres services présentant une latence importante, car il s’agit d’une des principales causes de faibles performances. Utilisez toujours des approches optimistes pour la gestion des opérations simultanées, telles que l’écriture dans le stockage. Utilisez les fonctionnalités de la couche de stockage pour gérer les conflits. Dans les applications distribuées, il se peut que les données ne soient cohérentes qu’à la fin.
 
@@ -79,8 +80,6 @@ L’extensibilité est la capacité d’un système à traiter une charge accrue
   
 > [!NOTE]
 > Les API de certains services réutilisent automatiquement les connexions, à condition que les directives propres aux services soient suivies. Il est important de comprendre les conditions qui permettent la réutilisation de la connexion pour chaque service utilisé par votre application.
-> 
-> 
 
 **Envoyez des demandes par lots pour optimiser l’utilisation du réseau**. Par exemple, envoyez et lisez des messages par lots lorsque vous accédez à une file d’attente et effectuez plusieurs lectures ou écritures par lot lors de l’accès au stockage ou à un cache. Cela peut contribuer à optimiser l’efficacité des services et des magasins de données en réduisant le nombre d’appels sur le réseau.
 
@@ -90,12 +89,11 @@ L’extensibilité est la capacité d’un système à traiter une charge accrue
 
 **Créez des dépendances de ressources lors du déploiement ou au démarrage de l’application**. Évitez les appels répétés à des méthodes qui testent l’existence d’une ressource puis créent la ressource si elle n’existe pas. Des méthodes telles que *CloudTable.CreateIfNotExists* et *CloudQueue.CreateIfNotExists* dans la bibliothèque cliente de stockage Azure suivent ce modèle. Ces méthodes peuvent imposer une surcharge considérable si elles sont appelées avant chaque accès à une table de stockage ou à une file d’attente de stockage. Au lieu de cela :
 
-* Créez les ressources nécessaires quand l’application est déployée ou lors de son premier démarrage (un seul appel à *CreateIfNotExists* pour chaque ressource dans le code de démarrage pour un rôle de travail ou web est acceptable). Veillez toutefois à gérer les exceptions qui peuvent se présenter si votre code tente d’accéder à une ressource inexistante. En pareil cas, vous devez consigner l’exception et potentiellement prévenir un opérateur qu’il manque une ressource.
-* Dans certaines circonstances, il peut être judicieux de créer la ressource manquante dans le code de gestion des exceptions, mais vous devez adopter cette approche avec précaution, car l’inexistence de la ressource peut être symptomatique d’une erreur de programmation (un nom de ressource mal orthographié, par exemple) ou d’un autre problème au niveau de l’infrastructure.
+- Créez les ressources nécessaires quand l’application est déployée ou lors de son premier démarrage (un seul appel à *CreateIfNotExists* pour chaque ressource dans le code de démarrage pour un rôle de travail ou web est acceptable). Veillez toutefois à gérer les exceptions qui peuvent se présenter si votre code tente d’accéder à une ressource inexistante. En pareil cas, vous devez consigner l’exception et potentiellement prévenir un opérateur qu’il manque une ressource.
+- Dans certaines circonstances, il peut être judicieux de créer la ressource manquante dans le code de gestion des exceptions, mais vous devez adopter cette approche avec précaution, car l’inexistence de la ressource peut être symptomatique d’une erreur de programmation (un nom de ressource mal orthographié, par exemple) ou d’un autre problème au niveau de l’infrastructure.
 
 **Utilisez des infrastructures légères**. Choisissez soigneusement les API et les infrastructures que vous utilisez afin de réduire l’utilisation des ressources, le délai d’exécution et la charge globale sur l’application. Par exemple, l’utilisation de l’API web pour gérer les demandes de service peut réduire l’encombrement des applications et accélérer l’exécution, mais il se peut qu’elle ne convienne pas pour des scénarios avancés où les fonctionnalités supplémentaires de Windows Communication Foundation sont nécessaires.
 
 **Envisagez de réduire le nombre de comptes de service**. Par exemple, utilisez un compte spécifique pour accéder aux ressources ou services qui imposent un nombre limite de connexions ou offrent de meilleures performances avec un nombre réduit de connexions simultanées. Cette approche est courante pour les services tels que les bases de données, mais elle peut affecter la capacité à vérifier avec précision les opérations en raison de l’emprunt d’identité de l’utilisateur d’origine.
 
 **Procédez au profilage des performances et au test de charge** pendant le développement, dans le cadre des routines de test et avant la publication de la version finale pour vous assurer que l’application fonctionne et est mise à l’échelle en fonction des besoins. Ce test doit être exécuté sur le même type de matériel que la plateforme de production et avec les mêmes types et quantités de données et de charge utilisateur que l’application rencontrera en production. Pour plus d’informations, consultez [Test des performances d’un service cloud](/azure/vs-azure-tools-performance-profiling-cloud-services/).
-

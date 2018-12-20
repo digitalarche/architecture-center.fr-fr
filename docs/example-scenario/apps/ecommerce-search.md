@@ -3,12 +3,13 @@ title: Moteur de recherche de produit intelligent pour l’e-commerce
 description: Offrez une expérience de recherche de haute qualité dans une application d’e-commerce.
 author: jelledruyts
 ms.date: 09/14/2018
-ms.openlocfilehash: a57477c26665b4560671550f6fdd81c2d9505e71
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.custom: fasttrack
+ms.openlocfilehash: 5eabdb94b9345e73b21526681e0dbd6ae859d7be
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610666"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004890"
 ---
 # <a name="intelligent-product-search-engine-for-e-commerce"></a>Moteur de recherche de produit intelligent pour l’e-commerce
 
@@ -98,9 +99,9 @@ Pour explorer le coût d’exécution de ce scénario, tous les services mention
 
 Nous proposons trois exemples de profils de coût basés sur la quantité de trafic que vous escomptez :
 
-* [Petit][small-pricing] : dans ce profil, nous utilisons une seule application web `Standard S1` pour héberger le site web, le niveau gratuit du service Azure Bot, un seul service Recherche Azure `Basic` et une base de données `Standard S2` SQL Database.
-* [Moyen][medium-pricing] : ici, nous augmentons l’application web à deux instances du niveau `Standard S3`, mettons à niveau le Search Service à un niveau `Standard S1` et utilisons une base de données `Standard S6` SQL Database.
-* [Grand][large-pricing] : dans le profil le plus grand, nous utilisons quatre instances d’une application web `Premium P2V2`, mettons à niveau le service Azure Bot au niveau `Standard S1` (avec 1 000 000 de messages dans les canaux Premium), utilisons 2 unités du service Recherche Azure `Standard S3` et une base de données `Premium P6` SQL Database.
+* [Petit][small-pricing] : dans ce profil, nous utilisons une seule application web `Standard S1` pour héberger le site web, le niveau gratuit du service Azure Bot, un seul service Recherche Azure `Basic` et une base de données SQL Database `Standard S2`.
+* [Moyen][medium-pricing] : ici, nous effectuons un scale-up de l’application web vers deux instances du niveau `Standard S3`, nous mettons à niveau Search Service vers le niveau `Standard S1` et nous utilisons une base de données SQL Database `Standard S6`.
+* [Grand][large-pricing] : dans le profil le plus grand, nous utilisons quatre instances d’une application web `Premium P2V2`, nous mettons à niveau le service Azure Bot vers le niveau `Standard S1` (avec 1 000 000 messages dans les canaux Premium), nous utilisons deux unités du service Recherche Azure `Standard S3` ainsi qu’une base de données SQL Database `Premium P6`.
 
 ## <a name="related-resources"></a>Ressources associées
 

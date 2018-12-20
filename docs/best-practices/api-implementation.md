@@ -1,15 +1,16 @@
 ---
 title: Recommandations relatives à l’implémentation de l’API
+titleSuffix: Best practices for cloud applications
 description: Conseils sur l’implémentation d’une API.
 author: dragon119
 ms.date: 07/13/2016
-pnp.series.title: Best Practices
-ms.openlocfilehash: fff377d347ce93e9fb83fff1f5a44fe1c7b4dbea
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: edbb214c8b582e334a851da79370844da4762a76
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429398"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307399"
 ---
 # <a name="api-implementation"></a>Implémentation de l’API
 
@@ -25,7 +26,6 @@ Le code qui implémente ces requêtes ne doit entraîner aucun effet collatéral
 
 > [!NOTE]
 > L’article [Idempotency Patterns](https://blog.jonathanoliver.com/idempotency-patterns/) (Modèles d’idempotence) du blog de Jonathan Oliver propose un aperçu de l’idempotence, et lie ce concept aux opérations de gestion de données.
->
 
 ### <a name="post-actions-that-create-new-resources-should-not-have-unrelated-side-effects"></a>Les actions POST qui créent des ressources ne doivent pas entraîner d’effets secondaires sans lien
 
@@ -37,15 +37,15 @@ Prenez en charge les requêtes POST, PUT et DELETE sur les collections de ressou
 
 La prise en charge d’OData incluse dans l’API 2 Web ASP.NET permet de regrouper les requêtes. Une application cliente peut rassembler plusieurs requêtes d’API Web et les envoyer au serveur en une seule requête HTTP. Par la suite, elle reçoit une réponse HTTP unique, qui contient les informations associées à l’ensemble des requêtes. Pour plus d’informations, consultez l’article [Introducing Batch Support in Web API and Web API OData (Introduction de la prise en charge de lots dans l’API Web et l’API Web OData)](https://blogs.msdn.microsoft.com/webdev/2013/11/01/introducing-batch-support-in-web-api-and-web-api-odata/).
 
-### <a name="follow-the-http-specification-when-sending-a-response"></a>Suivez la spécification HTTP lors de l’envoi d’une réponse 
+### <a name="follow-the-http-specification-when-sending-a-response"></a>Suivez la spécification HTTP lors de l’envoi d’une réponse
 
-Une API Web doit renvoyer des messages contenant le code de statut HTTP approprié, ce qui permet au client de décider de la manière dont il va traiter les résultats. Les messages doivent également contenir les en-têtes HTTP appropriés, de manière à ce que le client comprenne la nature des valeurs et présenter un corps mis en forme de manière à faciliter leur analyse. 
+Une API Web doit renvoyer des messages contenant le code de statut HTTP approprié, ce qui permet au client de décider de la manière dont il va traiter les résultats. Les messages doivent également contenir les en-têtes HTTP appropriés, de manière à ce que le client comprenne la nature des valeurs et présenter un corps mis en forme de manière à faciliter leur analyse.
 
 Par exemple, une opération POST doit renvoyer le code d’état 201 (Créé), et le message de réponse doit inclure l’URI de la ressource nouvellement créée dans son en-tête d’emplacement.
 
 ### <a name="support-content-negotiation"></a>Prenez en charge la négociation de contenu
 
-Le corps d’un message de réponse peut contenir des réponses sous différents formats. Par exemple, une requête HTTP GET peut renvoyer les données au format JSON ou XML. Lorsque le client transmet une requête, il peut inclure un en-tête Accept définissant les formats de données pouvant être traités. Ces formats sont spécifiés en tant que types de média. Par exemple, un client qui transmet une requête GET qui récupère une image peut définir un en-tête Accept qui répertorie les types de média pouvant être traités par le client, comme « image/jpeg, image/gif, image/png ».  Lorsque l’API Web renvoie le résultat, elle doit formater les données à l’aide d’un des types de média et définir le format dans l’en-tête du type de contenu de la réponse.
+Le corps d’un message de réponse peut contenir des réponses sous différents formats. Par exemple, une requête HTTP GET peut renvoyer les données au format JSON ou XML. Lorsque le client transmet une requête, il peut inclure un en-tête Accept définissant les formats de données pouvant être traités. Ces formats sont spécifiés en tant que types de média. Par exemple, un client qui transmet une requête GET qui récupère une image peut définir un en-tête Accept qui répertorie les types de média pouvant être traités par le client, comme `image/jpeg, image/gif, image/png`. Lorsque l’API Web renvoie le résultat, elle doit formater les données à l’aide d’un des types de média et définir le format dans l’en-tête du type de contenu de la réponse.
 
 Si le client ne définit pas d’en-tête Accept, utilisez un format par défaut pour le corps de la réponse. Par exemple, l’infrastructure de l’API Web ASP.NET est définie par défaut sur le format JSON pour les données textuelles.
 
@@ -113,18 +113,18 @@ public class Link
 
 L’opération HTTP GET récupère les données du client à partir de l’espace de stockage et construit un objet `Customer`, avant de remplir la collection `Links`. Le résultat est mis en forme sous forme de message de réponse JSON. Chaque lien comprend les champs suivants :
 
-* La relation entre l’objet renvoyé et l’objet décrit par le lien. Ici, « self » indique que le lien est une référence à l’objet (similaire à un pointeur `this` dans de nombreux langages orientés objets), et « orders » est le nom d’une collection contenant les informations sur la commande associée.
-* Le lien hypertexte (`Href`) associé à l’objet décrit par le lien, sous la forme d’une URI.
-* Le type de requête HTTP (`Action`) qui peut être envoyée à cette URI.
-* Le format des données (`Types`) qui doit être fourni dans la requête HTTP ou qui peut être renvoyé dans la réponse, en fonction du type de la requête.
+- La relation entre l’objet renvoyé et l’objet décrit par le lien. Ici, `self` indique que le lien est une référence à l’objet (similaire à un pointeur `this` dans de nombreux langages orientés objets) et `orders` est le nom d’une collection contenant les informations sur la commande associée.
+- Le lien hypertexte (`Href`) associé à l’objet décrit par le lien, sous la forme d’une URI.
+- Le type de requête HTTP (`Action`) qui peut être envoyée à cette URI.
+- Le format des données (`Types`) qui doit être fourni dans la requête HTTP ou qui peut être renvoyé dans la réponse, en fonction du type de la requête.
 
 Les liens HATEOAS représentés dans l’exemple de réponse HTTP indiquent qu’une application cliente peut exécuter les opérations suivantes :
 
-* Une requête HTTP GET dirigée vers l’URI `https://adventure-works.com/customers/2` afin de récupérer (de nouveau) les détails du client. Les données peuvent être renvoyées au format XML ou JSON.
-* Une requête HTTP PUT dirigée vers l’URI `https://adventure-works.com/customers/2` afin de modifier les détails du client. Les nouvelles données doivent être fournies dans le message de la requête au format x-www-form-urlencoded.
-* Une requête HTTP DELETE dirigée vers l’URI `https://adventure-works.com/customers/2` pour supprimer le client. La requête n’attend aucune information supplémentaire ni données renvoyées dans le corps du message de réponse.
-* Une requête HTTP GET dirigée vers l’URI `https://adventure-works.com/customers/2/orders` pour rechercher toutes les commandes du client. Les données peuvent être renvoyées au format XML ou JSON.
-* Une requête HTTP PUT dirigée vers l’URI `https://adventure-works.com/customers/2/orders` pour créer une commande pour ce client. Les données doivent être fournies dans le message de requête, sous le format x-www-form-urlencoded.
+- Une requête HTTP GET dirigée vers l’URI `https://adventure-works.com/customers/2` afin de récupérer (de nouveau) les détails du client. Les données peuvent être renvoyées au format XML ou JSON.
+- Une requête HTTP PUT dirigée vers l’URI `https://adventure-works.com/customers/2` afin de modifier les détails du client. Les nouvelles données doivent être fournies dans le message de la requête au format x-www-form-urlencoded.
+- Une requête HTTP DELETE dirigée vers l’URI `https://adventure-works.com/customers/2` pour supprimer le client. La requête n’attend aucune information supplémentaire ni données renvoyées dans le corps du message de réponse.
+- Une requête HTTP GET dirigée vers l’URI `https://adventure-works.com/customers/2/orders` pour rechercher toutes les commandes du client. Les données peuvent être renvoyées au format XML ou JSON.
+- Une requête HTTP PUT dirigée vers l’URI `https://adventure-works.com/customers/2/orders` pour créer une commande pour ce client. Les données doivent être fournies dans le message de requête, sous le format x-www-form-urlencoded.
 
 ## <a name="handling-exceptions"></a>Gestion des exceptions
 
@@ -181,16 +181,17 @@ public IHttpActionResult DeleteCustomer(int id)
 > N’incluez pas d’informations qui permettraient à un attaquant de s’introduire dans votre API.
   
 De nombreux serveurs Web interceptent eux-mêmes les conditions avant qu’elles n’atteignent l’API Web. Par exemple, si vous configurez l’authentification d’un site Web et que l’utilisateur ne communique pas les informations d’identification appropriées, le serveur Web doit transmettre un code de statut 401 (Non autorisé). Une fois que le client a été authentifié, votre code doit effectuer ses propres vérifications afin de vérifier que le client est en mesure d’accéder à la ressource demandée. Si l’autorisation échoue, vous devez renvoyer le code de statut 403 (Interdit).
- 
+
 ### <a name="handle-exceptions-consistently-and-log-information-about-errors"></a>Gérez les exceptions de manière cohérente et consignez les informations sur les erreurs
 
-Pour gérer les exceptions de manière cohérente, envisagez d’implémenter une stratégie globale de traitement des erreurs sur l’ensemble de l’infrastructure d’API Web. Vous devez également intégrer un journal d’erreurs qui consigne l’ensemble des détails des exceptions. Ce journal d’erreurs ne doit en aucun cas être rendu accessible aux clients sur le Web. 
+Pour gérer les exceptions de manière cohérente, envisagez d’implémenter une stratégie globale de traitement des erreurs sur l’ensemble de l’infrastructure d’API Web. Vous devez également intégrer un journal d’erreurs qui consigne l’ensemble des détails des exceptions. Ce journal d’erreurs ne doit en aucun cas être rendu accessible aux clients sur le Web.
 
 ### <a name="distinguish-between-client-side-errors-and-server-side-errors"></a>Différenciez les erreurs côté client des erreurs côté serveur
 
 Le protocole HTTP fait la distinction entre les erreurs qui sont provoquées par l’application cliente (codes de statut HTTP 4xx) et les erreurs qui sont causées par un dysfonctionnement du serveur (codes de statut HTTP 5xx). Veillez à respecter cette convention dans l’ensemble des messages d’erreur.
 
 ## <a name="optimizing-client-side-data-access"></a>Optimisation de l’accès aux données côté client
+
 Au sein d’un environnement distribué, comme ceux comportant un serveur Web et des applications clientes, l’une des problématiques prioritaires est le réseau. Il peut agir comme un véritable goulot d’étranglement, en particulier si une application cliente envoie fréquemment des requêtes ou reçoit régulièrement des données. Par conséquent, vous devez veiller à réduire le volume de trafic sur le réseau. Lorsque vous implémentez le code pour récupérer et conserver les données, tenez compte des points suivants :
 
 ### <a name="support-client-side-caching"></a>Prenez en charge la mise en cache côté client
@@ -274,8 +275,6 @@ public class OkResultWithCaching<T> : OkNegotiatedContentResult<T>
 
 > [!NOTE]
 > Le protocole HTTP définit également la directive *no-cache* associée à l’en-tête Cache-Control. À l’appellation trompeuse, cette directive ne signifie pas « ne pas mettre en cache » mais plutôt « revalider les informations mises en cache auprès du serveur avant de les renvoyer ». Les données peuvent toujours être mises en cache, mais elles font l’objet d’un contrôle d’actualisation à chaque utilisation.
->
->
 
 Si elle est implémentée correctement, la gestion du cache, qui doit être prise en charge par l’application cliente ou le serveur intermédiaire, permet d’économiser de la bande passante et d’améliorer les performances en éliminant le recours à la récupération des données déjà récupérées.
 
@@ -285,7 +284,6 @@ La valeur *max-age* de l’en-tête Cache-Control est une simple indication, qui
 > La plupart des navigateurs Web modernes prennent en charge la mise en cache côté client, via l’ajout d’en-têtes Cache-control appropriés sur les requêtes et l’examen des en-têtes de résultats, tel que décrit. Toutefois, certains navigateurs plus anciens ne mettent pas en cache les valeurs renvoyées d’une URL comportant une chaîne de requêtes. Cela ne représente généralement pas un problème pour les applications clientes personnalisées, qui implémentent leur propre stratégie de mise en cache suivant le protocole évoqué ici.
 >
 > Quelques proxys antérieurs, qui affichent un comportement identique, peuvent ne pas mettre en cache les requêtes basées sur des URL comportant des chaînes de requêtes. Cela peut constituer un obstacle pour les applications clientes personnalisés qui se connectent à un serveur Web par l’intermédiaire d’un tel proxy.
->
 
 ### <a name="provide-etags-to-optimize-query-processing"></a>Fournissez des éléments ETag afin d’optimiser le traitement des requêtes
 
@@ -331,26 +329,28 @@ Content-Length: ...
 
 > [!TIP]
 > Pour des raisons de sécurité, n’autorisez pas la mise en cache des données sensibles ou des données renvoyées via une connexion authentifiée (HTTPS).
->
->
 
 Une application cliente peut émettre une requête GET par la suite, afin de récupérer cette ressource à tout moment. Si la ressource a été modifiée (élément ETag différent), la version mise en cache doit être ignorée et la nouvelle version doit être ajoutée au cache. Si une ressource est volumineuse et que sa transmission vers le client nécessite une bande passante importante, les requêtes réitérées destinées à récupérer les mêmes données peuvent devenir inefficaces. Pour remédier à ce problème, le protocole HTTP définit le processus suivant dédié à l’optimisation des requêtes GET que vous devez prendre en charge dans une API Web :
 
-* Le client élabore une requête GET contenant l’élément ETag associé à la version actuellement mise en cache de la ressource référencée dans un en-tête HTTP If-None-Match :
+- Le client élabore une requête GET contenant l’élément ETag associé à la version actuellement mise en cache de la ressource référencée dans un en-tête HTTP If-None-Match :
 
     ```HTTP
     GET https://adventure-works.com/orders/2 HTTP/1.1
     If-None-Match: "2147483648"
     ```
-* L’opération GET de l’API Web récupère l’élément ETag actuel pour les données demandées (order 2 dans l’exemple ci-dessous) et le compare à la valeur de l’en-tête If-None-Match.
-* Si l’élément ETag actuel des données demandées correspond à l’élément ETag fourni par la requête, la ressource n’a pas été modifiée et l’API Web doit renvoyer une réponse HTTP comportant un corps de message vide et un code de statut 304 (Non modifié).
-* Si l’élément ETag actuel des données demandées ne correspond pas à l’élément ETag fourni par la requête, cela signifie que les données ont été modifiées et que l’API Web doit renvoyer une réponse HTTP comportant les nouvelles données dans le corps du message et un code de statut 200 (OK).
-* Si les données demandées n’existent plus, l’API Web doit renvoyer une réponse HTTP comportant le code de statut 404 (Non trouvé).
-* Le client utilise le code de statut pour conserver le cache. Si les données n’ont pas été modifiées (code de statut 304), l’objet peut être conservé dans le cache et l’application cliente doit continuer à utiliser cette version de l’objet. Si les données ont été modifiées (code de statut 200), l’objet mis en cache doit être retiré et le nouveau doit être inséré. Si les données ne sont plus disponibles (code de statut 404), l’objet doit être supprimé du cache.
+
+- L’opération GET de l’API Web récupère l’élément ETag actuel pour les données demandées (order 2 dans l’exemple ci-dessous) et le compare à la valeur de l’en-tête If-None-Match.
+
+- Si l’élément ETag actuel des données demandées correspond à l’élément ETag fourni par la requête, la ressource n’a pas été modifiée et l’API Web doit renvoyer une réponse HTTP comportant un corps de message vide et un code de statut 304 (Non modifié).
+
+- Si l’élément ETag actuel des données demandées ne correspond pas à l’élément ETag fourni par la requête, cela signifie que les données ont été modifiées et que l’API Web doit renvoyer une réponse HTTP comportant les nouvelles données dans le corps du message et un code de statut 200 (OK).
+
+- Si les données demandées n’existent plus, l’API Web doit renvoyer une réponse HTTP comportant le code de statut 404 (Non trouvé).
+
+- Le client utilise le code de statut pour conserver le cache. Si les données n’ont pas été modifiées (code de statut 304), l’objet peut être conservé dans le cache et l’application cliente doit continuer à utiliser cette version de l’objet. Si les données ont été modifiées (code de statut 200), l’objet mis en cache doit être retiré et le nouveau doit être inséré. Si les données ne sont plus disponibles (code de statut 404), l’objet doit être supprimé du cache.
 
 > [!NOTE]
 > Si la réponse comporte l’en-tête Cache-Control et que la valeur no -store lui est attribuée, l’objet doit toujours être retiré du cache, quel que soit le code de statut HTTP.
->
 
 Le code ci-dessous représente la méthode `FindOrderByID` étendue pour prendre en charge l’en-tête If-None-Match. Si l’en-tête If-None-Match est omis, l’ordre spécifié est toujours récupéré :
 
@@ -442,14 +442,13 @@ public class EmptyResultWithCaching : IHttpActionResult
 ```
 
 > [!TIP]
-> Dans cet exemple, l’élément ETag associé aux données est généré en hachant les données récupérées de la couche de données sous-jacente. Si l’élément ETag peut être calculé d’une autre manière, le processus peut être davantage optimisé et les données ne doivent être récupérées de la source de données uniquement si elles ont été modifiées.  Cette approche s’avère particulièrement utile si le volume de données est important ou si l’accès aux ressources est de nature à provoquer une latence considérable (par exemple, si la source de données est une base de données distante).
->
+> Dans cet exemple, l’élément ETag associé aux données est généré en hachant les données récupérées de la couche de données sous-jacente. Si l’élément ETag peut être calculé d’une autre manière, le processus peut être davantage optimisé et les données ne doivent être récupérées de la source de données uniquement si elles ont été modifiées. Cette approche s’avère particulièrement utile si le volume de données est important ou si l’accès aux ressources est de nature à provoquer une latence considérable (par exemple, si la source de données est une base de données distante).
 
 ### <a name="use-etags-to-support-optimistic-concurrency"></a>Utilisez des éléments ETag pour prendre en charge l’accès concurrentiel optimiste
 
 Pour permettre les mises à jour des données ultérieurement mises en cache, le protocole HTTP prend en charge une stratégie d’accès concurrentiel optimiste. Si, après la récupération et la mise en cache d’une ressource, l’application cliente transmet une requête PUT ou DELETE pour modifier ou supprimer la ressource, elle doit comporter un en-tête If-Match qui référence l’élément ETag. L’API Web peut ensuite utiliser ces informations afin de déterminer si la ressource a déjà été modifiée par un autre utilisateur depuis sa récupération et renvoyer une réponse appropriée à l’application cliente :
 
-* Le client élabore une requête PUT contenant les nouveaux détails de la ressource et de l’élément ETag associés à la version actuellement mise en cache de la ressource référencée dans un en-tête HTTP If-Match. L’exemple suivant représente une requête PUT qui met une commande à jour :
+- Le client élabore une requête PUT contenant les nouveaux détails de la ressource et de l’élément ETag associés à la version actuellement mise en cache de la ressource référencée dans un en-tête HTTP If-Match. L’exemple suivant représente une requête PUT qui met une commande à jour :
 
     ```HTTP
     PUT https://adventure-works.com/orders/1 HTTP/1.1
@@ -458,11 +457,16 @@ Pour permettre les mises à jour des données ultérieurement mises en cache, le
     Content-Length: ...
     productID=3&quantity=5&orderValue=250
     ```
-* L’opération PUT de l’API Web récupère l’élément ETag actuel pour les données demandées (order 1 dans l’exemple ci-dessus) et le compare à la valeur de l’en-tête If-Match.
-* Si l’élément ETag actuel associé aux données demandées correspond à l’élément ETag fourni par la requête, la ressource n’a pas été modifiée et l’API Web doit effectuer la mise à jour. Si l’opération réussit, elle renvoie un message présentant le code de statut HTTP 204 (Aucun contenu). La réponse peut comporter les en-têtes Cache-Control et ETag pour la version mise à jour de la ressource. La réponse doit toujours inclure l’en-tête Location qui référence l’URI de la ressource nouvellement mise à jour.
-* Si l’élément ETag actuel des données demandées ne correspond pas à l’élément ETag fourni par la requête, les données ont été modifiées par un autre utilisateur depuis leur récupération et l’API Web doit renvoyer une réponse HTTP avec un corps de message vide et un code de statut HTTP 412 (Précondition échouée).
-* Si la ressource à mettre à jour n’existe plus, l’API Web doit renvoyer une réponse HTTP présentant le code de statut 404 (Non trouvé).
-* Le client utilise le code de statut et les en-têtes de la réponse pour conserver le cache. Si les données ont été mises à jour (code de statut 204), l’objet peut être conservé dans le cache (sous réserve que l’en-tête Cache-Control ne soit pas défini sur la valeur no-store), mais l’élément ETag doit être mis à jour. Si les données ont été modifiées par un autre utilisateur (code de statut 412) ou n’ont pas été trouvées (code de statut 404), l’objet mis en cache doit être ignoré.
+
+- L’opération PUT de l’API Web récupère l’élément ETag actuel pour les données demandées (order 1 dans l’exemple ci-dessus) et le compare à la valeur de l’en-tête If-Match.
+
+- Si l’élément ETag actuel associé aux données demandées correspond à l’élément ETag fourni par la requête, la ressource n’a pas été modifiée et l’API Web doit effectuer la mise à jour. Si l’opération réussit, elle renvoie un message présentant le code de statut HTTP 204 (Aucun contenu). La réponse peut comporter les en-têtes Cache-Control et ETag pour la version mise à jour de la ressource. La réponse doit toujours inclure l’en-tête Location qui référence l’URI de la ressource nouvellement mise à jour.
+
+- Si l’élément ETag actuel des données demandées ne correspond pas à l’élément ETag fourni par la requête, les données ont été modifiées par un autre utilisateur depuis leur récupération et l’API Web doit renvoyer une réponse HTTP avec un corps de message vide et un code de statut HTTP 412 (Précondition échouée).
+
+- Si la ressource à mettre à jour n’existe plus, l’API Web doit renvoyer une réponse HTTP présentant le code de statut 404 (Non trouvé).
+
+- Le client utilise le code de statut et les en-têtes de la réponse pour conserver le cache. Si les données ont été mises à jour (code de statut 204), l’objet peut être conservé dans le cache (sous réserve que l’en-tête Cache-Control ne soit pas défini sur la valeur no-store), mais l’élément ETag doit être mis à jour. Si les données ont été modifiées par un autre utilisateur (code de statut 412) ou n’ont pas été trouvées (code de statut 404), l’objet mis en cache doit être ignoré.
 
 L’exemple de code suivant représente une implémentation de l’opération PUT associée au contrôleur Orders :
 
@@ -538,17 +542,16 @@ public class OrdersController : ApiController
 
 > [!TIP]
 > L’utilisation de l’en-tête If-Match est entièrement facultative. S’il est omis, l’API Web tentera toujours de mettre à jour la commande spécifiée, en écrasant éventuellement à l’aveuglette une mise à jour effectuée par un autre utilisateur. Pour éviter les problèmes associés aux pertes de mises à jour, proposez toujours un en-tête If-Match.
->
->
 
 ## <a name="handling-large-requests-and-responses"></a>Gestion des requêtes et des réponses de taille importante
+
 Il peut arriver qu’une application cliente doive émettre des requêtes qui envoient ou reçoivent des données présentant une taille de plusieurs mégaoctets (ou supérieure). Il est possible que l’application cliente, soumise au délai d’attente lié à la transmission de ce volume de données, ne réponde pas. Lorsque vous devez traiter des requêtes comportant des volumes importants de données, tenez compte des points suivants :
 
 ### <a name="optimize-requests-and-responses-that-involve-large-objects"></a>Optimisez les requêtes et les réponses impliquant des objets volumineux
 
 Certaines ressources peuvent être de gros objets ou inclure des champs de taille importante, comme des images graphiques ou d’autres types de données binaires. Une API Web doit prendre en charge la diffusion en continu et ainsi optimiser le chargement et le téléchargement de ces ressources.
 
-Le protocole HTTP fournit un mécanisme de chiffrement de transfert de blocs permettant de transmettre des objets de données de taille importante au client. Lorsque le client envoie une requête HTTP GET pour un objet de taille importante, l’API web peut renvoyer une réponse sous la forme de *blocs* fragmentaires par le biais d’une connexion HTTP. La longueur des données de la réponse peut être initialement inconnue (en cas de génération). Aussi, le serveur hébergeant l’API Web doit envoyer un message de réponse présentant l’en-tête Transfer-Encoding: Chunked, non pas Content-Length, avec chaque bloc. L’application cliente peut recevoir chaque bloc successivement afin d’élaborer la réponse complète. Le transfert de données se termine lorsque le serveur envoie un bloc final présentant une taille nulle. 
+Le protocole HTTP fournit un mécanisme de chiffrement de transfert de blocs permettant de transmettre des objets de données de taille importante au client. Lorsque le client envoie une requête HTTP GET pour un objet de taille importante, l’API web peut renvoyer une réponse sous la forme de *blocs* fragmentaires par le biais d’une connexion HTTP. La longueur des données dans la réponse n’est peut-être pas connue initialement (elle est peut-être générée). Aussi, le serveur hébergeant l’API web doit envoyer un message de réponse présentant l’en-tête Transfer-Encoding: Chunked, non pas Content-Length, avec chaque bloc. L’application cliente peut recevoir chaque bloc successivement afin d’élaborer la réponse complète. Le transfert de données se termine lorsque le serveur envoie un bloc final présentant une taille nulle.
 
 Une seule requête peut a priori générer un objet de taille importante qui consomme un volume considérable de ressources. Si, pendant le processus de diffusion en continu, l’API Web détermine que la taille du volume de données est excessive, l’opération peut être annulée et l’API peut renvoyer un message de réponse présentant le code de statut HTTP 413 (Entité de requête trop volumineuse).
 
@@ -564,9 +567,9 @@ Les requêtes HTTP HEAD et les réponses partielles sont décrites plus en déta
 
 ### <a name="avoid-sending-unnecessary-100-continue-status-messages-in-client-applications"></a>Évitez d’envoyer des messages d’état 100-Continue inutiles dans les applications clientes
 
-Une application cliente sur le point d’envoyer un volume important de données au serveur peut déterminer dans un premier temps si le serveur va accepter la requête. Avant d’envoyer les données, l’application cliente peut soumettre une requête HTTP présentant un en-tête Expect: 100-Continue, un en-tête Content-Length qui indique la taille des données, mais également un corps de message vide. Si le serveur est prêt à traiter la requête, il doit répondre par un message spécifiant le statut HTTP 100 (Continuer). L’application cliente peut alors poursuivre le processus et envoyer la requête complète comportant les données dans le corps du message.
+Une application cliente sur le point d’envoyer un volume important de données au serveur peut déterminer dans un premier temps si le serveur va accepter la requête. Avant d’envoyer les données, l’application cliente peut soumettre une requête HTTP avec un en-tête Expect: 100-Continue, un en-tête Content-Length qui indique la taille des données, mais un corps de message vide. Si le serveur est prêt à traiter la requête, il doit répondre par un message spécifiant le statut HTTP 100 (Continuer). L’application cliente peut alors poursuivre le processus et envoyer la requête complète comportant les données dans le corps du message.
 
-Si vous hébergez un service à l’aide d’IIS, le pilote HTTP.sys détecte et traite automatiquement les en-têtes Expect: 100-Continue avant de transmettre les requêtes à votre application Web. Cela signifie que vous avez peu de chances de voir ces en-têtes s’afficher dans le code de votre application, et vous pouvez partir du principe qu’IIS a déjà filtré les messages inappropriés ou dont la taille est jugée trop importante.
+Si vous hébergez un service à l’aide d’IIS, le pilote HTTP.sys détecte et gère automatiquement les en-têtes Expect: 100-Continue avant de transmettre des requêtes à votre application web. Cela signifie que vous avez peu de chances de voir ces en-têtes s’afficher dans le code de votre application, et vous pouvez partir du principe qu’IIS a déjà filtré les messages inappropriés ou dont la taille est jugée trop importante.
 
 Si vous concevez des applications clientes à l’aide de Microsoft .NET Framework, l’ensemble des messages POST et PUT commenceront par envoyer des messages présentant par défaut l’en-tête Expect: 100-Continue. Du côté du serveur, le processus est géré de manière transparente par Microsoft .NET Framework. Néanmoins, ce processus entraîne deux allers-retours vers le serveur pour chaque requête POST et PUT, même pour les plus modestes d’entre elles. Si votre application n’envoie pas de requêtes comportant de gros volumes de données, vous pouvez désactiver cette fonction en utilisant la classe `ServicePointManager` pour créer des objets `ServicePoint` dans l’application cliente. Un objet `ServicePoint` traite les connexions effectuées par le client sur le serveur en fonction des fragments de schéma et d’hôte des URI identifiant les ressources sur le serveur. Vous pouvez définir la propriété `Expect100Continue` de l’objet `ServicePoint` sur false. L’ensemble des requêtes POST et PUT suivantes émises par le client via une URI correspondant aux fragments de schéma et d’hôte de l’objet `ServicePoint` seront envoyées sans l’en-tête Expect: 100-Continue. Le code suivant montre comment configurer un objet `ServicePoint` qui configure l’ensemble des requêtes envoyées aux URI avec un schéma de `http` et un hôte de `www.contoso.com`.
 
@@ -576,7 +579,7 @@ ServicePoint sp = ServicePointManager.FindServicePoint(uri);
 sp.Expect100Continue = false;
 ```
 
-Vous pouvez également définir la propriété statique `Expect100Continue` de la classe `ServicePointManager` pour spécifier la valeur par défaut de cette propriété pour l’ensemble des objets `ServicePoint` créés par la suite. Pour plus d’informations, consultez l’article [ServicePoint Class (Classe ServicePoint)](https://msdn.microsoft.com/library/system.net.servicepoint.aspx).
+Vous pouvez également définir la propriété statique `Expect100Continue` de la classe `ServicePointManager` pour spécifier la valeur par défaut de cette propriété pour l’ensemble des objets [ServicePoint]](/dotnet/api/system.net.servicepoint) créés par la suite.
 
 ### <a name="support-pagination-for-requests-that-may-return-large-numbers-of-objects"></a>Prenez en charge la pagination pour les requêtes qui peuvent renvoyer de très nombreux objets
 
@@ -605,10 +608,9 @@ Une application cliente peut émettre une requête destinée à récupérer 30 c
 
 > [!TIP]
 > Évitez de configurer les applications clientes pour qu’elles définissent des chaînes de recherche résultant en une URI qui présente plus de 2 000 caractères. De nombreux clients et serveurs Web ne peuvent pas prendre en charge les URI de cette longueur.
->
->
 
 ## <a name="maintaining-responsiveness-scalability-and-availability"></a>Maintien de la réactivité, de l’extensibilité et de la disponibilité
+
 Une API Web peut être utilisée par de nombreuses applications clientes de différentes zones géographiques. Il est important de s’assurer que l’API Web implémentée garantisse une réactivité appropriée en cas de charge importante, puisse prendre en charge une charge de travail hautement évolutive et maintienne une disponibilité adéquate pour les clients exécutant des opérations critiques. Lorsque vous déterminez la manière appropriée de répondre à ces exigences, tenez compte des points suivants :
 
 ### <a name="provide-asynchronous-support-for-long-running-requests"></a>Offrez une prise en charge asynchrone pour les requêtes de longue durée
@@ -649,152 +651,164 @@ Le maintien d’une connexion ouverte peut contribuer à l’amélioration de la
 
 > [!NOTE]
 > Les connexions HTTP persistantes représentent une fonction facultative destinée à alléger la charge du réseau associée à l’établissement répété de canaux de communication. L’API Web et l’application cliente ne doivent pas dépendre de la disponibilité d’une connexion HTTP persistante. N’utilisez pas de connexions HTTP persistantes pour implémenter les systèmes de notification de type Comet. Au lieu de cela, vous devez employer des sockets (ou des sockets Web si disponibles) sur la couche TCP. Enfin, notez que les en-têtes Keep-Alive présentent une utilisation limitée si une application cliente communique avec un serveur via un proxy ; seule la connexion avec le client et le proxy sera persistante.
->
->
 
 ## <a name="publishing-and-managing-a-web-api"></a>Publication et gestion d’une API web
+
 Pour rendre une API Web disponible pour les applications clientes, vous devez la déployer au sein d’un environnement d’hôte. Il s’agit généralement d’un serveur Web, mais vous pouvez également utiliser un autre type de processus hôte. Lorsque vous publiez une API Web, vous devez tenir compte des points suivants :
 
-* Toutes les requêtes doivent être authentifiées et autorisées, et le niveau approprié de contrôle d’accès doit être appliqué.
-* Une API Web commerciale peut faire l’objet de diverses garanties de qualité concernant les temps de réponse. Vous devez impérativement garantir que l’environnement hôte est évolutif si la charge est susceptible de varier de manière significative au fil du temps.
-* Il peut se révéler nécessaire de mesurer les requêtes à des fins de monétisation.
-* Il vous faudra éventuellement réguler le flux de trafic dirigé vers l’API Web et implémenter une fonctionnalité de limitation pour des clients spécifiques qui ont atteint leurs quotas.
-* Les exigences réglementaires peuvent requérir la consignation et l’audit de l’ensemble des requêtes et des réponses.
-* Pour garantir la disponibilité, vous devrez éventuellement contrôler l’intégrité du serveur hébergeant l’API Web et le redémarrer, si nécessaire.
+- Toutes les requêtes doivent être authentifiées et autorisées, et le niveau approprié de contrôle d’accès doit être appliqué.
+- Une API Web commerciale peut faire l’objet de diverses garanties de qualité concernant les temps de réponse. Vous devez impérativement garantir que l’environnement hôte est évolutif si la charge est susceptible de varier de manière significative au fil du temps.
+- Il peut se révéler nécessaire de mesurer les requêtes à des fins de monétisation.
+- Il vous faudra éventuellement réguler le flux de trafic dirigé vers l’API Web et implémenter une fonctionnalité de limitation pour des clients spécifiques qui ont atteint leurs quotas.
+- Les exigences réglementaires peuvent requérir la consignation et l’audit de l’ensemble des requêtes et des réponses.
+- Pour garantir la disponibilité, vous devrez éventuellement contrôler l’intégrité du serveur hébergeant l’API Web et le redémarrer, si nécessaire.
 
 Il est utile de pouvoir séparer ces problématiques des dysfonctionnements techniques relatifs à l’implémentation de l’API Web. Pour cette raison, envisagez de créer une [façade](https://en.wikipedia.org/wiki/Facade_pattern), qui s’exécute en tant que processus distinct et route les requêtes vers l’API Web. La façade peut assurer les opérations de gestion et rediriger les requêtes validées vers l’API Web. L’utilisation d’une façade procure de nombreux avantages fonctionnels :
 
-* apport d’un point d’intégration pour plusieurs API Web ;
-* transformation des messages et traduction des protocoles de communication pour les clients développés à l’aide de technologies diverses ;
-* mise en cache des requêtes et des réponses afin de réduire la charge sur le serveur hébergeant l’API Web.
+- apport d’un point d’intégration pour plusieurs API Web ;
+- transformation des messages et traduction des protocoles de communication pour les clients développés à l’aide de technologies diverses ;
+- mise en cache des requêtes et des réponses afin de réduire la charge sur le serveur hébergeant l’API Web.
 
 ## <a name="testing-a-web-api"></a>Test d’une API web
-Une API Web doit être testée aussi minutieusement qu’une toute autre composante logicielle. Vous devez envisager de créer des tests unitaires afin de valider la fonctionnalité de chaque opération. Chaque API Web doit faire l’objet de vérifications supplémentaires de son bon fonctionnement. Vous devez prêter une attention particulière aux points suivants :
 
-* Testez l’ensemble des itinéraires afin de vérifier qu’ils invoquent les opérations appropriées. Accordez une attention particulière au code de statut HTTP 405 (Méthode non autorisée). Lorsqu’il est renvoyé de manière imprévue, cela peut indiquer un écart entre un itinéraire et les méthodes HTTP (GET, POST, PUT, DELETE) qui peuvent être réparties sur cet itinéraire.
+Une API Web doit être testée aussi minutieusement qu’une toute autre composante logicielle. Vous devez envisager de créer des tests unitaires afin de valider la fonctionnalité.
+
+Chaque API Web doit faire l’objet de contrôles spécifiques de vérification de son bon fonctionnement. Vous devez prêter une attention particulière aux points suivants :
+
+- Testez l’ensemble des itinéraires afin de vérifier qu’ils invoquent les opérations appropriées. Accordez une attention particulière au code de statut HTTP 405 (Méthode non autorisée). Lorsqu’il est renvoyé de manière imprévue, cela peut indiquer un écart entre un itinéraire et les méthodes HTTP (GET, POST, PUT, DELETE) qui peuvent être réparties sur cet itinéraire.
 
     Envoyez des requêtes HTTP sur des itinéraires qui ne les prennent pas en charge. Vous pouvez par exemple transmettre une requête HTTP à une ressource spécifique (les requêtes POST doivent être envoyées uniquement aux collections de ressources). Dans ces situations, la seule réponse valide *doit* être le code d’état 405 (Non autorisé).
-* Vérifiez que l’ensemble des itinéraires sont correctement protégés et font l’objet des contrôles d’autorisation et d’authentification appropriés.
+
+- Vérifiez que l’ensemble des itinéraires sont correctement protégés et font l’objet des contrôles d’autorisation et d’authentification appropriés.
 
   > [!NOTE]
   > Certains aspects de sécurité comme l’authentification des utilisateurs sont davantage susceptibles d’être la responsabilité de l’environnement hôte, non de l’API Web. Toutefois, il est tout de même nécessaire d’intégrer des tests de sécurité dans le processus de déploiement.
   >
   >
-* Testez le traitement des exceptions effectué par chaque opération et vérifiez qu’une réponse HTTP appropriée et pertinente est transmise à l’application cliente.
-* Vérifiez que les requêtes et les messages de réponse sont correctement composés. Par exemple, si une requête HTTP POST contient les données associées à une nouvelle ressource sous le format x-www-form-urlencoded, assurez-vous que l’opération correspondante analyse correctement les données, crée les ressources et renvoie une réponse comportant les détails de la nouvelle ressource, notamment l’en-tête Location adéquat.
-* Vérifiez l’ensemble des liens et des URI des messages de réponse. Par exemple, un message HTTP POST doit renvoyer l’URI de la ressource nouvellement créée. Tous les liens HATEOAS doivent être valides.
 
-* Assurez-vous que chaque opération renvoie les codes de statut appropriés pour différentes combinaisons d’entrée. Par exemple : 
+- Testez le traitement des exceptions effectué par chaque opération et vérifiez qu’une réponse HTTP appropriée et pertinente est transmise à l’application cliente.
 
-  * Si une requête est réussie, elle doit renvoyer le code de statut 200 (OK).
-  * Si une ressource est introuvable, l’opération doit renvoyer le code de statut HTTP 404 (Non trouvé).
-  * Si le client transmet une requête qui supprime une ressource, le code de statut 204 doit être renvoyé (Aucun contenu).
-  * Si le client transmet une requête qui crée une ressource, le code de statut 201 doit être renvoyé (Créé).
+- Vérifiez que les requêtes et les messages de réponse sont correctement composés. Par exemple, si une requête HTTP POST contient les données associées à une nouvelle ressource sous le format x-www-form-urlencoded, assurez-vous que l’opération correspondante analyse correctement les données, crée les ressources et renvoie une réponse comportant les détails de la nouvelle ressource, notamment l’en-tête Location adéquat.
+
+- Vérifiez l’ensemble des liens et des URI des messages de réponse. Par exemple, un message HTTP POST doit renvoyer l’URI de la ressource nouvellement créée. Tous les liens HATEOAS doivent être valides.
+
+- Assurez-vous que chaque opération renvoie les codes de statut appropriés pour différentes combinaisons d’entrée. Par exemple : 
+
+  - Si une requête est réussie, elle doit renvoyer le code de statut 200 (OK).
+  - Si une ressource est introuvable, l’opération doit renvoyer le code de statut HTTP 404 (Non trouvé).
+  - Si le client transmet une requête qui supprime une ressource, le code de statut 204 doit être renvoyé (Aucun contenu).
+  - Si le client transmet une requête qui crée une ressource, le code de statut 201 doit être renvoyé (Créé).
 
 Méfiez-vous des codes de statut de réponse inattendus, situés dans la plage 5xx. Ces messages sont généralement signalés par le serveur hôte pour indiquer qu’il n’a pas été en mesure de répondre à une requête valide.
 
-* Testez les différentes combinaisons d’en-têtes de requêtes pouvant être définies par une application cliente et vérifiez que l’API Web renvoie les informations appropriées dans les messages de réponses transmis.
-* Testez les chaînes de recherche. Si une opération accepte les paramètres facultatifs (comme les requêtes de pagination), testez les différentes combinaisons et ordres de paramètres.
-* Vérifiez que les opérations asynchrones s’effectuent correctement Si l’API Web prend en charge la diffusion en continu pour les requêtes renvoyant des objets binaires de taille importante (comme l’audio ou la vidéo), assurez-vous que les requêtes des clients ne sont pas bloquées pendant la diffusion des données. Si l’API Web implémente une fonctionnalité d’interrogation des opérations de modification de données de longue durée, vérifiez que les opérations signalent correctement leur statut au cours de l’exécution.
+- Testez les différentes combinaisons d’en-têtes de requêtes pouvant être définies par une application cliente et vérifiez que l’API Web renvoie les informations appropriées dans les messages de réponses transmis.
+
+- Testez les chaînes de recherche. Si une opération accepte les paramètres facultatifs (comme les requêtes de pagination), testez les différentes combinaisons et ordres de paramètres.
+
+- Vérifiez que les opérations asynchrones s’effectuent correctement Si l’API Web prend en charge la diffusion en continu pour les requêtes renvoyant des objets binaires de taille importante (comme l’audio ou la vidéo), assurez-vous que les requêtes des clients ne sont pas bloquées pendant la diffusion des données. Si l’API Web implémente une fonctionnalité d’interrogation des opérations de modification de données de longue durée, vérifiez que les opérations signalent correctement leur statut au cours de l’exécution.
 
 Vous devez également créer et exécuter des tests de performances afin de vérifier que l’API Web fonctionne correctement sous contraintes. Pour développer un projet de test de chargement et de performances Web, utilisez Visual Studio Ultimate. Pour plus d’informations, consultez l’article [Exécuter des tests de performances sur votre application](https://msdn.microsoft.com/library/dn250793.aspx).
 
-## <a name="using-azure-api-management"></a>Utilisation de Gestion des API Azure 
+## <a name="using-azure-api-management"></a>Utilisation de Gestion des API Azure
 
-Sur Azure, envisagez d’utiliser [Gestion des API Azure](https://azure.microsoft.com/documentation/services/api-management/) pour publier et gérer une API web. À l’aide de cette fonctionnalité, vous générez un service utilisé comme façade pour une ou plusieurs API Web. Il s’agit d’un service pouvant être créé et configuré à l’aide du portail de gestion Microsoft Azure. Il peut être mis à profit pour publier et gérer une API Web comme suit :
+Sur Azure, envisagez d’utiliser [Gestion des API Azure](/azure/api-management//services/api-management/) pour publier et gérer une API web. À l’aide de cette fonctionnalité, vous générez un service utilisé comme façade pour une ou plusieurs API Web. Il s’agit d’un service pouvant être créé et configuré à l’aide du portail de gestion Microsoft Azure. Il peut être mis à profit pour publier et gérer une API Web comme suit :
 
 1. Déployez l’API Web sur un site Web, un service cloud Microsoft Azure ou une machine virtuelle Microsoft Azure.
+
 2. Connectez le service de gestion des API à l’API Web. Les requêtes envoyées à l’URL de l’API de gestion sont mappées sur les URI de l’API Web. Un service de gestion des API peut router les requêtes vers plusieurs API Web. Cela vous permet d’agréger plusieurs API Web au sein d’un service unique de gestion. De la même manière, une API Web peut être référencée à partir de plusieurs services de gestion des API si vous devez restreindre ou partitionner la fonctionnalité accessible par différentes applications.
 
-   > [!NOTE]
-   > Les URI des liens HATEOAS générées dans la réponse aux requêtes HTTP GET doivent référencer l’URL du service de gestion des API, non le serveur Web hébergeant l’API Web.
-   >
-   >
+     > [!NOTE]
+     > Les URI des liens HATEOAS générées dans la réponse aux requêtes HTTP GET doivent référencer l’URL du service de gestion des API, non le serveur Web hébergeant l’API Web.
+
 3. Pour chaque API Web, spécifiez les opérations HTTP exposées avec les paramètres facultatifs acceptés en tant qu’entrées par les opérations. Vous pouvez également configurer la mise en cache, par le service de gestion des API, de la réponse transmise par l’API Web afin d’optimiser les requêtes répétées pour des données identiques. Enregistrez les détails des réponses HTTP pouvant être générées par chaque opération. Ces informations étant utilisées pour générer la documentation destinée aux développeurs, il est important qu’elles soient précises et exhaustives.
 
-   Pour définir les opérations, vous procédez manuellement à l’aide des assistants du portail de gestion Microsoft Azure ou vous les importez à partir d’un fichier comportant les définitions aux formats WADL ou Swagger.
+    Pour définir les opérations, vous procédez manuellement à l’aide des assistants du portail de gestion Microsoft Azure ou vous les importez à partir d’un fichier comportant les définitions aux formats WADL ou Swagger.
+
 4. Configurez les paramètres de sécurité des communications entre le service de gestion des API et le serveur Web hébergeant l’API Web. Le service de gestion des API prend actuellement en charge l’authentification de base et l’authentification mutuelle à l’aide de certificats et l’autorisation utilisateur OAuth 2.0.
+
 5. Créez un produit. Un produit est une unité de publication. Vous ajoutez les API Web que vous avez préalablement connectées au service de gestion et au produit. Une fois que le produit est publié, les API Web sont rendues disponibles aux développeurs.
 
-   > [!NOTE]
-   > Avant de publier un produit, vous pouvez également définir des groupes d’utilisateurs disposant d’un accès au produit, et ajouter des utilisateurs à ces groupes. Cela vous octroie un contrôle sur les développeurs et les applications qui peuvent utiliser l’API Web. Si une API Web nécessite une approbation, un développeur souhaitant y accéder doit envoyer une requête à l’administrateur des produits. L’administrateur peut accorder ou refuser l’accès au développeur. Si les circonstances sont modifiées, l’administrateur est en mesure de bloquer des développeurs existants.
-   >
-   >
+    > [!NOTE]
+    > Avant de publier un produit, vous pouvez également définir des groupes d’utilisateurs disposant d’un accès au produit, et ajouter des utilisateurs à ces groupes. Cela vous octroie un contrôle sur les développeurs et les applications qui peuvent utiliser l’API Web. Si une API Web nécessite une approbation, un développeur souhaitant y accéder doit envoyer une requête à l’administrateur des produits. L’administrateur peut accorder ou refuser l’accès au développeur. Si les circonstances sont modifiées, l’administrateur est en mesure de bloquer des développeurs existants.
+
 6. Configurez les stratégies associées à chaque API Web. Les stratégies régissent différents aspects, comme l’autorisation des appels interdomaines, la méthode d’authentification des clients, la conversion transparente entre les formats XML et JSON, la restriction des appels provenant d’une plage d’IP considérée, les quotas d’utilisation et la limitation du débit des appels. Les stratégies peuvent être appliquées globalement sur l’ensemble du produit, sur une API Web d’un produit ou sur des opérations individuelles d’une API Web.
 
-Pour plus d’informations, consultez la page [Documentation Gestion des API](/azure/api-management/). 
+Pour plus d’informations, consultez la page [Documentation Gestion des API](/azure/api-management/).
 
 > [!TIP]
-> Microsoft Azure fournit Traffic Manager, à l’aide duquel vous implémentez les fonctionnalités de basculement et d’équilibrage de charge et réduisez la latence sur de multiples instances d’un site Web hébergées dans différentes zones géographiques. Vous pouvez utiliser Microsoft Azure Manager conjointement avec le service de gestion des API, qui peut router les requêtes vers des instances d’un site Web via Microsoft Azure Manager, le cas échéant.  Pour plus d’informations, consultez l’article [Méthodes de routage de Traffic Manager](/azure/traffic-manager/traffic-manager-routing-methods/).
+> Microsoft Azure fournit Traffic Manager, à l’aide duquel vous implémentez les fonctionnalités de basculement et d’équilibrage de charge et réduisez la latence sur de multiples instances d’un site Web hébergées dans différentes zones géographiques. Vous pouvez utiliser Microsoft Azure Manager conjointement avec le service de gestion des API, qui peut router les requêtes vers des instances d’un site Web via Microsoft Azure Manager, le cas échéant. Pour plus d’informations, consultez l’article [Méthodes de routage de Traffic Manager](/azure/traffic-manager/traffic-manager-routing-methods/).
 >
 > Dans cette structure, si vous utilisez des noms DNS personnalisés pour vos sites Web, vous devez configurer l’enregistrement CNAME approprié afin que chaque site Web pointe sur le nom DNS du site Web Microsoft Azure Traffic Manager.
->
 
 ## <a name="supporting-client-side-developers"></a>Prise en charge des développeurs côté client
+
 Les développeurs d’applications clientes ont généralement besoin d’informations relatives à l’accès à l’API Web et d’une documentation relatives aux paramètres, aux types de données, aux types de renvoi et aux codes de renvoi associés aux différentes requêtes et réponses échangées entre le service Web et l’application cliente.
 
 ### <a name="document-the-rest-operations-for-a-web-api"></a>Documentez les opérations REST associées à une API Web
+
 Le service de gestion des API Microsoft Azure comprend un portail dédié aux développeurs qui décrit les opérations REST exposées par une API Web. Une fois qu’un produit a été publié, il apparaît sur ce portail. Les développeurs peuvent requérir un accès sur ce portail. Par la suite, l’administrateur approuve ou refuse la requête. Si elle est approuvée, les développeurs se voient allouer une clé d’abonnement qui est utilisée pour authentifier les appels provenant des applications clientes qu’ils développent. Cette clé est à fournir à chaque appel d’API Web, sans quoi l’émetteur essuie un refus.
 
 Ce portail fournit également les éléments suivants :
 
-* la documentation sur le produit, répertoriant les opérations exposées, les paramètres requis et les différentes réponses pouvant être renvoyées. Ces informations sont générées à partir des détails fournis à l’étape 3 de la liste de la section Publication d’une API web à l’aide du service de gestion des API Microsoft Azure ;
-* les extraits de code indiquant comment invoquer des opérations de langages différents, notamment JavaScript, C#, Java, Ruby, Python et PHP ;
-* une console de développeur, à partir de laquelle ce dernier peut envoyer une requête HTTP afin de tester chaque opération dans le produit et afficher les résultats ;
-* une page sur laquelle le développeur peut consigner les problèmes identifiés ;
+- la documentation sur le produit, répertoriant les opérations exposées, les paramètres requis et les différentes réponses pouvant être renvoyées. Ces informations sont générées à partir des détails fournis à l’étape 3 de la liste de la section Publication d’une API web à l’aide du service de gestion des API Microsoft Azure ;
+- les extraits de code indiquant comment invoquer des opérations de langages différents, notamment JavaScript, C#, Java, Ruby, Python et PHP ;
+- une console de développeur, à partir de laquelle ce dernier peut envoyer une requête HTTP afin de tester chaque opération dans le produit et afficher les résultats ;
+- une page sur laquelle le développeur peut consigner les problèmes identifiés ;
 
 Le portail de gestion Microsoft Azure vous permet de personnaliser le portail dédié aux développeurs, par exemple en modifiant le style et la présentation en fonction de la représentation de votre entreprise.
 
 ### <a name="implement-a-client-sdk"></a>Implémentez un Kit de développement logiciel (SDK) client
+
 Le développement d’une application invoquant des requêtes REST pour accéder à une API Web nécessite l’écriture d’un volume considérable de code. Ce code sert à élaborer et à formater de manière appropriée les requêtes, à envoyer la requête au serveur hébergeant le service Web, à analyser la réponse utilisée pour déterminer si la requête a abouti ou échoué et à extraire les éventuelles données renvoyées. Pour protéger l’application cliente contre ces problématiques, vous avez tout intérêt à vous doter d’un kit de développement logiciel qui encapsule l’interface REST et replace ces détails de niveau inférieur au sein d’un ensemble de méthodes plus fonctionnel. Une application cliente valorise ces méthodes, qui convertissent de manière transparente les appels en requêtes REST, puis les réponses en valeurs renvoyées de méthode. C’est une technique courante qui est implémentée par de nombreux services, dont Microsoft Azure SDK.
 
 La création d’une solution SDK côté client est une tâche considérable, dans la mesure où l’implémentation doit être cohérente est soigneusement testée. Toutefois, la majorité de ce processus peut être mécanisée ; de nombreux fournisseurs proposent des outils dédiés à l’automatisation de beaucoup des tâches associées.
 
 ## <a name="monitoring-a-web-api"></a>Surveillance d’une API Web
+
 Selon la façon dont vous avez publié et déployé votre API Web, vous pouvez la surveiller directement ou collecter les informations d’utilisation et d’intégrité en analysant le trafic qui transite via le service de gestion des API.
 
 ### <a name="monitoring-a-web-api-directly"></a>Surveillance directe d’une API Web
+
 Si vous avez implémenté votre API Web à l’aide du modèle d’API Web ASP.NET (soit en tant que projet d’API Web ou en tant que rôle Web dans un service cloud Microsoft Azure) et Visual Studio 2013, vous pouvez collecter les données de disponibilité, de performances et d’utilisation à l’aide d’Application Insights ASP.NET. Application Insights est un package qui suit et consigne de manière transparente les informations sur les requêtes et les réponses lorsque l’API Web est déployée dans le cloud. Une fois que le package est installé et configuré, vous n’avez pas besoin de modifier le code de votre API Web pour l’utiliser. Lorsque vous déployez l’API Web sur un site Web Microsoft Azure, l’ensemble du trafic est examiné et les statistiques suivantes sont collectées :
 
-* temps de réponse du serveur ;
-* nombre de requêtes vers le serveur et les détails sur chacune d’entre elles ;
-* les requêtes les plus lentes, relativement au temps de réponse moyen ;
-* les informations détaillées sur les requêtes mises en échec ;
-* le nombre de sessions ouvertes par différents navigateurs et agents utilisateurs ;
-* les pages les plus fréquemment consultées (informations essentiellement utiles pour les applications Web, pas pour les API Web) ;
-* les différents rôles d’utilisateur accédant à l’API Web.
+- temps de réponse du serveur ;
+- nombre de requêtes vers le serveur et les détails sur chacune d’entre elles ;
+- les requêtes les plus lentes, relativement au temps de réponse moyen ;
+- les informations détaillées sur les requêtes mises en échec ;
+- le nombre de sessions ouvertes par différents navigateurs et agents utilisateurs ;
+- les pages les plus fréquemment consultées (informations essentiellement utiles pour les applications Web, pas pour les API Web) ;
+- les différents rôles d’utilisateur accédant à l’API Web.
 
 Vous pouvez afficher ces données en temps réel, à partir du portail de gestion Microsoft Azure. Vous pouvez également créer des tests Web contrôlant l’intégrité de l’API Web. Un test Web transmet une requête périodique à une URI spécifiée dans l’API Web, et collecte la réponse. Vous pouvez spécifier la définition d’une réponse probante (comme un code de statut HTTP 200) et si la requête ne renvoie pas cette réponse, vous pouvez configurer l’envoi d’une alerte à un administrateur. Si nécessaire, l’administrateur peut redémarrer le serveur hébergeant l’API Web, en cas d’échec.
 
 Pour plus d’informations, consultez l’article [Application Insights - Prise en main d’ASP.NET](/azure/application-insights/app-insights-asp-net/).
 
 ### <a name="monitoring-a-web-api-through-the-api-management-service"></a>Surveillance d’une API Web via le service de gestion des API
+
 Si vous avez publié votre API Web à l’aide du service de gestion des API, la page Gestion des API du portail de gestion Microsoft Azure contient un tableau de bord qui vous donne accès aux performances globales du service. La page d’analyse vous procure des informations plus détaillées sur l’utilisation du produit. Cette page comporte les onglets suivants :
 
-* **Utilisation**. Cet onglet fournit des informations sur le nombre d’appels de l’API et sur la bande passante utilisée pour traiter ces appels au fil du temps. Vous pouvez filtrer les détails d’utilisation par produit, API et opération.
-* **Intégrité**. Cet onglet vous permet de visualiser les résultats des requêtes d’API (codes d’état HTTP renvoyés), l’efficacité de la stratégie de mise en cache, le temps de réponse de l’API et le temps de réponse du service. Là aussi, vous pouvez filtrer les données d’intégrité par produit, API et opération.
-* **Activité**. Cet onglet comporte une synthèse récapitulant le nombre total d’appels ayant abouti, d’appels ayant échoué et d’appels bloqués, le temps de réponse moyen, ainsi que les temps de réponse pour chaque produit, API Web et opération. Cette page répertorie également le nombre d’appels effectués par chaque développeur.
-* **Aperçu**. Cet onglet fournit un résumé des données de performance, notamment sur les développeurs à l’origine des appels d’API, sur les produits, les API Web et les opérations destinataires de ces appels.
+- **Utilisation**. Cet onglet fournit des informations sur le nombre d’appels de l’API et sur la bande passante utilisée pour traiter ces appels au fil du temps. Vous pouvez filtrer les détails d’utilisation par produit, API et opération.
+- **Intégrité**. Cet onglet vous permet de visualiser les résultats des requêtes d’API (codes d’état HTTP renvoyés), l’efficacité de la stratégie de mise en cache, le temps de réponse de l’API et le temps de réponse du service. Là aussi, vous pouvez filtrer les données d’intégrité par produit, API et opération.
+- **Activité**. Cet onglet comporte une synthèse récapitulant le nombre total d’appels ayant abouti, d’appels ayant échoué et d’appels bloqués, le temps de réponse moyen, ainsi que les temps de réponse pour chaque produit, API Web et opération. Cette page répertorie également le nombre d’appels effectués par chaque développeur.
+- **Aperçu**. Cet onglet fournit un résumé des données de performance, notamment sur les développeurs à l’origine des appels d’API, sur les produits, les API Web et les opérations destinataires de ces appels.
 
 Ces informations peuvent être mises à profit pour déterminer si une API Web ou une opération spécifique provoque un goulot d’étranglement, et si nécessaire mettre à l’échelle l’environnement hôte et ajouter davantage de serveurs. Vous pouvez également vérifier si une ou plusieurs applications utilisent un volume disproportionné de ressources et appliquer les stratégies appropriées pour définir des quotas et limiter les débits d’appels.
 
 > [!NOTE]
 > Vous pouvez modifier les détails associés à un produit publié ; le cas échéant, les modifications sont appliquées immédiatement. Par exemple, vous pouvez ajouter ou retirer une opération d’une API Web sans qu’il ne vous soit nécessaire de republier le produit contenant l’API Web.
->
->
 
 ## <a name="more-information"></a>Plus d’informations
-* La page consacrée à [l’API Web OData ASP.NET](https://www.asp.net/web-api/overview/odata-support-in-aspnet-web-api) contient des exemples et des informations détaillées sur l’implémentation d’une API Web OData à l’aide d’ASP.NET.
-* L’article [Introducing Batch Support in Web API and Web API OData (Introduction de la prise en charge de lots dans l’API Web et l’API Web OData)](https://blogs.msdn.microsoft.com/webdev/2013/11/01/introducing-batch-support-in-web-api-and-web-api-odata/) décrit comment implémenter des opérations par lot dans une API Web à l’aide d’OData.
-* L’article [Idempotency Patterns (Modèles d’idempotence)](https://blog.jonathanoliver.com/idempotency-patterns/) du blog de Jonathan Oliver propose un aperçu de l’idempotence et lie ce concept aux opérations de gestion de données.
-* La page [Status Code Definitions (Définitions des codes d’état)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) du site web de l’organisme W3C contient la liste exhaustive des codes d’état HTTP et leur description.
-* L’article [Exécuter des tâches en arrière-plan avec WebJobs](/azure/app-service-web/web-sites-create-web-jobs/) fournit des informations et des exemples sur l’utilisation de WebJobs pour effectuer des opérations d’arrière-plan.
-* L’article [Notification des utilisateurs via Azure Notification Hubs](/azure/notification-hubs/notification-hubs-aspnet-backend-windows-dotnet-wns-notification/) vous indique comment utiliser un Azure Notification Hub pour transmettre des réponses asynchrones aux applications clientes.
-* La page [Gestion des API](https://azure.microsoft.com/services/api-management/) décrit comment publier un produit procurant un accès contrôlé et sécurisé à une API Web.
-* La page d’informations de référence sur l’API REST [Gestion des API Azure](https://msdn.microsoft.com/library/azure/dn776326.aspx) vous décrit comment utiliser l’API REST Gestion des API pour développer des applications de gestion personnalisées.
-* L’article [Méthodes de routage de Traffic Manager](/azure/traffic-manager/traffic-manager-routing-methods/) décrit succinctement la façon dont Azure Traffic Manager permet d’équilibrer la charge des requêtes entre plusieurs instances d’un site web hébergeant une API Web.
-* L’article [Application Insights - Prise en main d’ASP.NET](/azure/application-insights/app-insights-asp-net/) fournit des informations détaillées sur l’installation et la configuration d’Application Insights dans un projet d’API Web ASP.NET.
 
+- La page consacrée à [l’API Web OData ASP.NET](https://www.asp.net/web-api/overview/odata-support-in-aspnet-web-api) contient des exemples et des informations détaillées sur l’implémentation d’une API Web OData à l’aide d’ASP.NET.
+- L’article [Introducing batch support in Web API and Web API OData](https://blogs.msdn.microsoft.com/webdev/2013/11/01/introducing-batch-support-in-web-api-and-web-api-odata/) décrit comment implémenter des opérations par lot dans une API web à l’aide d’OData.
+- L’article [Idempotency patterns (Modèles d’idempotence)](https://blog.jonathanoliver.com/idempotency-patterns/) du blog de Jonathan Oliver propose un aperçu de l’idempotence et lie ce concept aux opérations de gestion de données.
+- La page [Status Code Definitions (Définitions des codes d’état)](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) du site web de l’organisme W3C contient la liste exhaustive des codes d’état HTTP et leur description.
+- L’article [Exécuter des tâches en arrière-plan avec WebJobs](/azure/app-service-web/web-sites-create-web-jobs/) fournit des informations et des exemples sur l’utilisation de WebJobs pour effectuer des opérations d’arrière-plan.
+- L’article [Notification des utilisateurs via Azure Notification Hubs](/azure/notification-hubs/notification-hubs-aspnet-backend-windows-dotnet-wns-notification/) vous indique comment utiliser un Azure Notification Hub pour transmettre des réponses asynchrones aux applications clientes.
+- La page [Gestion des API](https://azure.microsoft.com/services/api-management/) décrit comment publier un produit procurant un accès contrôlé et sécurisé à une API Web.
+- La [page d’informations de référence sur l’API REST Gestion des API Azure](https://msdn.microsoft.com/library/azure/dn776326.aspx) décrit comment utiliser l’API REST Gestion des API pour développer des applications de gestion personnalisées.
+- L’article [Méthodes de routage de Traffic Manager](/azure/traffic-manager/traffic-manager-routing-methods/) décrit succinctement la façon dont Azure Traffic Manager permet d’équilibrer la charge des requêtes entre plusieurs instances d’un site web hébergeant une API web.
+- L’article [Application Insights - Prise en main d’ASP.NET](/azure/application-insights/app-insights-asp-net/) fournit des informations détaillées sur l’installation et la configuration d’Application Insights dans un projet d’API Web ASP.NET.
 
 <!-- links -->
 

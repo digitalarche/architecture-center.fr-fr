@@ -3,12 +3,13 @@ title: Serveur frontal e-commerce sur Azure
 description: Hébergez un site d’e-commerce sur Azure.
 author: masonch
 ms.date: 7/13/18
-ms.openlocfilehash: 7baaf4d2986a00ab72b60a540bcd9d864893b109
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.custom: fasttrack
+ms.openlocfilehash: e48f7607fcef6e5048c57f4f8f63b2f6bdd4f183
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610819"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004859"
 ---
 # <a name="an-e-commerce-front-end-on-azure"></a>Serveur frontal e-commerce sur Azure
 
@@ -69,7 +70,7 @@ Les autres options pour la couche Web et les fonctions incluent :
 
 D’autres options pour la couche Données incluent :
 
-* [Cosmos DB](/azure/cosmos-db/introduction) : service de base de données multimodèle mondialement distribué de Microsoft. Cette plateforme permet d’exécuter d’autres modèles de données comme des données MongoDB, Cassandra ou Graph, ou un Stockage Table simple.
+* [Cosmos DB](/azure/cosmos-db/introduction) : base de données multimodèle de Microsoft distribuée à l’échelle mondiale. Cette plateforme permet d’exécuter d’autres modèles de données comme des données MongoDB, Cassandra ou Graph, ou un Stockage Table simple.
 
 ## <a name="considerations"></a>Considérations
 
@@ -110,9 +111,9 @@ Explorez le coût d’exécution de ce scénario, tous les services sont précon
 
 Nous proposons trois exemples de profils de coût basés sur la quantité de trafic que vous escomptez :
 
-* [Petit][small-pricing] : les composants nécessaires pour générer la sortie pour une instance d’un niveau de production minimal. Nous supposons ici la présence d’un petit nombre d’utilisateurs, de l’ordre de quelques milliers par mois. L’application utilise une seule instance d’une application web standard, suffisante pour permettre une mise à l’échelle automatique. Tous les autres composants sont mis à l’échelle à un niveau de base qui, pour un coût minimal, assure le respect du contrat de niveau de service et une capacité suffisante pour gérer une charge de travail de production.
-* [Moyen][medium-pricing] : les composants représentatifs d’un déploiement de taille moyenne. Ici, nous estimons environ 100 000 utilisateurs du système au cours d’un mois. Le trafic attendu est géré dans une instance de service d’application unique avec un niveau standard modéré. En outre, des niveaux modérés des services Cognitive et de recherche sont ajoutés à la calculatrice.
-* [Grand][large-pricing] : une application destinée à un déploiement à grande échelle, de l’ordre de plusieurs millions d’utilisateurs par mois et de plusieurs téraoctets de données. À ce niveau de performances d’utilisation élevées, un niveau Premium est requis pour les applications web déployées dans plusieurs régions exposées par Traffic Manager. Les données incluent : le stockage, les bases de données et un réseau de distribution de contenu, qui sont configurés pour plusieurs téraoctets de données.
+* [Petit][small-pricing] : cet exemple de tarifs correspond aux composants qui sont nécessaires à la génération d’une sortie pour une instance d’un niveau de production minimal. Nous supposons ici la présence d’un petit nombre d’utilisateurs, de l’ordre de quelques milliers par mois. L’application utilise une seule instance d’une application web standard, suffisante pour permettre une mise à l’échelle automatique. Tous les autres composants sont mis à l’échelle à un niveau de base qui, pour un coût minimal, assure le respect du contrat de niveau de service et une capacité suffisante pour gérer une charge de travail de production.
+* [Moyen][medium-pricing] : cet exemple de tarifs correspond aux composants représentatifs d’un déploiement de taille moyenne. Ici, nous estimons environ 100 000 utilisateurs du système au cours d’un mois. Le trafic attendu est géré dans une instance de service d’application unique avec un niveau standard modéré. En outre, des niveaux modérés des services Cognitive et de recherche sont ajoutés à la calculatrice.
+* [Grand][large-pricing] : cet exemple de tarifs correspond à une application destinée à un déploiement à grande échelle, de l’ordre de plusieurs millions d’utilisateurs par mois déplaçant plusieurs téraoctets de données. À ce niveau de performances d’utilisation élevées, un niveau Premium est requis pour les applications web déployées dans plusieurs régions exposées par Traffic Manager. Les données incluent : le stockage, les bases de données et un réseau de distribution de contenu, qui sont configurés pour plusieurs téraoctets de données.
 
 ## <a name="related-resources"></a>Ressources associées
 

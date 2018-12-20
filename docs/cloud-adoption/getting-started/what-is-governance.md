@@ -1,16 +1,16 @@
 ---
-title: 'Adoption du cloud d’entreprise : Qu’est-ce que la gouvernance de ressources cloud ?'
+title: 'Adoption du cloud d’entreprise : Qu’est-ce que la gouvernance des ressources cloud ?'
 description: Explication du concept de gouvernance des accès aux ressources sur Azure
 author: petertaylor9999
 ms.date: 09/10/2018
-ms.openlocfilehash: 14c26cbccdbea524a7c7220b3bb98ed2a118c30d
-ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
+ms.openlocfilehash: fb01b2e2823c16e32f8ded696de0b6faf1d2e610
+ms.sourcegitcommit: e7f8676bbffe500fc4d6deb603b7c0b7ba1884a6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44389211"
+ms.lasthandoff: 12/10/2018
+ms.locfileid: "53179278"
 ---
-# <a name="enterprise-cloud-adoption-what-is-cloud-resource-governance"></a>Adoption du cloud d’entreprise : Qu’est-ce que la gouvernance de ressources cloud ?
+# <a name="enterprise-cloud-adoption-what-is-cloud-resource-governance"></a>Adoption du cloud d’entreprise : Qu’est-ce que la gouvernance des ressources cloud ?
 
 Dans l’article [Comment fonctionne Azure ?](what-is-azure.md), vous avez appris qu’Azure est une collection de serveurs et d’équipements de mise en réseau sur lesquels fonctionnent du matériel virtualisé et des logiciels pour le compte des utilisateurs. Azure garantit l’agilité des développeurs et des services informatiques de votre organisation en les aidant à créer, lire, mettre à jour et supprimer des ressources en fonction de leurs besoins.
 
@@ -20,7 +20,7 @@ La **gouvernance** de l’accès aux ressources offre un moyen de résoudre ce p
 
 > [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE2ii94] 
 
-Ces objectifs et exigences étant propres à chaque organisation, il est impossible de définir une approche unique de la gouvernance. C’est pourquoi Azure implémente deux principaux outils de gouvernance : le **contrôle d’accès basée sur les ressources (RBAC)** et la **stratégie de ressources**. Il appartient à chaque organisation d’utiliser ces outils pour concevoir son propre modèle de gouvernance.
+Ces objectifs et exigences étant propres à chaque organisation, il est impossible de définir une approche unique de la gouvernance. C’est pourquoi Azure implémente deux principaux outils de gouvernance : le **contrôle d’accès en fonction du rôle (RBAC)** et la **stratégie de ressources**. Il appartient à chaque organisation d’utiliser ces outils pour concevoir son propre modèle de gouvernance.
 
 Le RBAC définit des rôles, qui eux-mêmes définissent les fonctionnalités dont dispose un utilisateur à qui est attribué le rôle. Par exemple, le rôle de **propriétaire** active toutes les fonctionnalités (création, lecture, mise à jour et suppression) pour une ressource, tandis que les rôles de **lecteur** activent uniquement la fonction de lecture. Les rôles peuvent couvrir une vaste étendue qui s’applique à de nombreux types de ressources. Ils peuvent aussi avoir une portée étroite qui s’applique à seulement quelques ressources. 
 

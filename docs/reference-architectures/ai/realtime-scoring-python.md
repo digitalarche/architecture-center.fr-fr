@@ -1,14 +1,16 @@
 ---
-title: Scoring en temps réel des modèles Python Scikit-Learn et Apprentissage profond sur Azure
+title: Scoring en temps réel des modèles de Python
+titleSuffix: Azure Reference Architectures
 description: Cette architecture de référence montre comment déployer des modèles Python en tant que services web sur Azure pour élaborer des prédictions en temps réel.
 author: njray
 ms.date: 11/09/2018
-ms.openlocfilehash: ff385e232c69e46b0afc6b15e73983bd856b9b2b
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.custom: azcat-ai
+ms.openlocfilehash: e2312d1d1d2444f9915f4e6aa067c1487e096d3e
+ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902576"
+ms.lasthandoff: 12/08/2018
+ms.locfileid: "53120354"
 ---
 # <a name="real-time-scoring-of-python-scikit-learn-and-deep-learning-models-on-azure"></a>Scoring en temps réel des modèles Python Scikit-Learn et Apprentissage profond sur Azure
 
@@ -16,45 +18,45 @@ Cette architecture de référence montre comment déployer des modèles Python e
 
 Deux implémentations de référence pour cette architecture sont disponibles sur GitHub, une pour [les modèles Python standards][github-python] et l’autre pour [les modèles d’apprentissage profond][github-dl].
 
-![](./_images/python-model-architecture.png)
+![Diagramme d’architecture pour le scoring en temps réel des modèles Python sur Azure](./_images/python-model-architecture.png)
 
 ## <a name="scenarios"></a>Scénarios
 
 Les implémentations de référence montrent deux scénarios à l’aide de cette architecture.
 
-**Scénario 1 : correspondance des questions fréquentes (FAQ)**. Ce scénario montre comment déployer un modèle de correspondance des questions fréquentes (FAQ) comme un service web pour fournir des prédictions pour les questions de l’utilisateur. Pour ce scénario, la mention « Entrée de données » dans le diagramme d’architecture fait référence aux chaînes de texte contenant les questions de l’utilisateur à faire correspondre avec une liste des questions fréquentes. Ce scénario est conçu pour la bibliothèque de Machine Learning [scikit-learn][scikit] pour Python, mais il peut être étendu à n’importe quel scénario utilisant des modèles Python pour effectuer des prédictions en temps réel.
+**Scénario 1 : Correspondance du Forum aux questions**. Ce scénario montre comment déployer un modèle de correspondance des questions fréquentes (FAQ) comme un service web pour fournir des prédictions pour les questions de l’utilisateur. Pour ce scénario, la mention « Entrée de données » dans le diagramme d’architecture fait référence aux chaînes de texte contenant les questions de l’utilisateur à faire correspondre avec une liste des questions fréquentes. Ce scénario est conçu pour la bibliothèque de Machine Learning [scikit-learn][scikit] pour Python, mais il peut être étendu à n’importe quel scénario utilisant des modèles Python pour effectuer des prédictions en temps réel.
 
 Ce scénario utilise un sous-ensemble de données de question Stack Overflow qui comprend des questions d’origine marquées comme JavaScript, leurs questions dupliquées et leurs réponses. Il effectue l’apprentissage d’un pipeline scikit-learn pour prédire la probabilité de correspondance d’une question dupliquée avec chacune des questions d’origine. Ces prédictions sont faites en temps réel à l’aide d’un point de terminaison API REST.
 
 Le flux d’application pour cette architecture est le suivant :
 
-1.  Le client envoie une requête HTTP POST avec les données encodées de la question.
+1. Le client envoie une requête HTTP POST avec les données encodées de la question.
 
-2.  L’application Flask extrait la question à partir de la requête.
+2. L’application Flask extrait la question à partir de la requête.
 
-3.  La question est envoyée au modèle de pipeline scikit-learn pour la personnalisation et le scoring.
+3. La question est envoyée au modèle de pipeline scikit-learn pour la personnalisation et le scoring.
 
-4.  Les questions fréquentes correspondantes avec leurs scores sont transmises dans un objet JSON et retournées au client.
+4. Les questions fréquentes correspondantes avec leurs scores sont transmises dans un objet JSON et retournées au client.
 
 Voici une capture d’écran de l’exemple d’application qui consomme les résultats :
 
-![](./_images/python-faq-matches.png)
+![Capture d’écran de l’exemple d’application](./_images/python-faq-matches.png)
 
-**Scénario 2 : Classification d’image.** Ce scénario montre comment déployer un modèle de réseau de neurones convolutifs (CNN) comme un service web pour fournir des prévisions sur des images. Pour ce scénario, la mention « Entrée de données » dans le diagramme d’architecture fait référence aux fichiers d’image. Les CNN sont très efficaces dans la vision par ordinateur pour des tâches telles que la classification d’images et la détection d’objets. Ce scénario est conçu pour les infrastructures TensorFlow, Keras (avec le serveur principal TensorFlow) et PyTorch. Toutefois, il peut être généralisé aux scénarios utilisant des modèles d’apprentissage profond pour effectuer des prédictions en temps réel.
+**Scénario 2 : Classification d’image**. Ce scénario montre comment déployer un modèle de réseau de neurones convolutifs (CNN) comme un service web pour fournir des prévisions sur des images. Pour ce scénario, la mention « Entrée de données » dans le diagramme d’architecture fait référence aux fichiers d’image. Les CNN sont très efficaces dans la vision par ordinateur pour des tâches telles que la classification d’images et la détection d’objets. Ce scénario est conçu pour les infrastructures TensorFlow, Keras (avec le serveur principal TensorFlow) et PyTorch. Toutefois, il peut être généralisé aux scénarios utilisant des modèles d’apprentissage profond pour effectuer des prédictions en temps réel.
 
 Ce scénario utilise un modèle ResNet-152 préentraîné formé sur un jeu de données ImageNet-1 K (1 000 classes) pour prédire la catégorie (voir la figure ci-dessous) à laquelle appartient une image. Ces prédictions sont faites en temps réel à l’aide d’un point de terminaison API REST.
 
-![](./_images/python-example-predictions.png)
+![Exemple de prédictions](./_images/python-example-predictions.png)
 
 Le flux d’application pour le modèle d’apprentissage profond est comme suit :
 
-1.  Le client envoie une requête HTTP POST avec les données encodées de l’image.
+1. Le client envoie une requête HTTP POST avec les données encodées de l’image.
 
-2.  L’application Flask extrait l’image à partir de la requête.
+2. L’application Flask extrait l’image à partir de la requête.
 
-3.  L’image est prétraitée et envoyée au modèle pour le scoring.
+3. L’image est prétraitée et envoyée au modèle pour le scoring.
 
-4.  Le résultat du scoring est transmis dans un objet JSON et retourné au client.
+4. Le résultat du scoring est transmis dans un objet JSON et retourné au client.
 
 ## <a name="architecture"></a>Architecture
 
@@ -70,7 +72,7 @@ Cette architecture est constituée des composants suivants.
 
 ## <a name="performance-considerations"></a>Considérations relatives aux performances
 
-Pour les architectures de scoring en temps réel, les performances de débit constituent un facteur important. Pour les modèles Python standards, il est généralement admis que les processeurs sont suffisants pour gérer la charge de travail. 
+Pour les architectures de scoring en temps réel, les performances de débit constituent un facteur important. Pour les modèles Python standards, il est généralement admis que les processeurs sont suffisants pour gérer la charge de travail.
 
 Toutefois pour les charges de travail d’apprentissage profond, où la vitesse constitue un goulot d’étranglement, les GPU offrent généralement de meilleures [performances][gpus-vs-cpus] par rapport aux processeurs. Pour faire correspondre les performances de GPU en utilisant des processeurs, un cluster disposant d’un grand nombre de processeurs est généralement nécessaire.
 
@@ -90,11 +92,11 @@ Pour visualiser les performances de AKS, utilisez la fonctionnalité [Azure Moni
 
 Lors du déploiement de votre application, surveillez le cluster AKS pour vous assurer qu’il fonctionne comme prévu, tous les nœuds sont opérationnels, et tous les pods sont en cours d’exécution. Bien que vous puissiez utiliser l’outil en ligne de commande [kubectl][kubectl] pour récupérer l’état du pod, Kubernetes comprend également un tableau de bord web pour la surveillance de l’état du cluster et la gestion de base.
 
-![](./_images/python-kubernetes-dashboard.png)
+![Capture d’écran du tableau de bord Kubernetes](./_images/python-kubernetes-dashboard.png)
 
 Pour afficher l’état global du cluster et des nœuds, accédez à la section **Nœuds** du tableau de bord Kubernetes. Si un nœud est inactif ou a échoué, vous pouvez afficher les journaux d’erreurs à partir de cette page. De même, accédez aux sections **Pods** et **Déploiements** pour plus d’informations sur le nombre de pods et l’état de votre déploiement.
 
-### <a name="aks-logs"></a>Journaux AKS 
+### <a name="aks-logs"></a>Journaux AKS
 
 AKS enregistre automatiquement tous les stdout/stderr au sein des journaux des pods dans le cluster. Utilisez kubectl pour les voir, de même que les événements et les journaux au niveau du nœud. Pour plus d’informations, consultez les étapes de déploiement.
 
@@ -120,10 +122,12 @@ Utilisez le contrôle [RBAC][rbac] pour contrôler l’accès aux ressources Azu
 
 ## <a name="deployment"></a>Déploiement
 
-Pour déployer cette architecture de référence, suivez les étapes décrites dans les dépôts GitHub : 
+Pour déployer cette architecture de référence, suivez les étapes décrites dans les dépôts GitHub :
 
-  - [Modèles Python standards][github-python]
-  - [Modèles d’apprentissage profond][github-dl]
+- [Modèles Python standards][github-python]
+- [Modèles d’apprentissage profond][github-dl]
+
+<!-- links -->
 
 [aad-auth]: /azure/aks/aad-integration
 [acr]: /azure/container-registry/
@@ -150,4 +154,3 @@ Pour déployer cette architecture de référence, suivez les étapes décrites d
 [scikit]: https://pypi.org/project/scikit-learn/
 [security-center]: /azure/security-center/security-center-intro
 [vm]: /azure/virtual-machines/
-

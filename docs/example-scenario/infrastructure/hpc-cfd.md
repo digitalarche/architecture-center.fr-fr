@@ -3,12 +3,13 @@ title: Exécution des simulations de diagramme de flux cumulé (CFD) sur Azure
 description: Exécutez des simulations de diagramme de flux cumulé (CFD) sur Azure.
 author: mikewarr
 ms.date: 09/20/2018
-ms.openlocfilehash: f32e055838d6c62584130f61a0d92b06cc46ec63
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.custom: fasttrack
+ms.openlocfilehash: 42921122d74d07bf890f55be61b04c7e9a4f4e87
+ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610632"
+ms.lasthandoff: 12/06/2018
+ms.locfileid: "53004659"
 ---
 # <a name="running-computational-fluid-dynamics-cfd-simulations-on-azure"></a>Exécution des simulations de diagramme de flux cumulé (CFD) sur Azure
 
@@ -89,12 +90,12 @@ Les coûts d’exécution d’une implémentation HPC avec un serveur CycleCloud
 
 Ce scénario indique comment exécuter des applications CFD dans Azure. Par conséquent, les machines virtuelles nécessitent la fonctionnalité RDMA, qui est uniquement disponible sur des tailles de machine virtuelle spécifiques. Vous trouverez ci-après des exemples de coûts induits par l’utilisation d’un groupe identique alloué en continu huit heures par jour pendant un mois, avec une sortie de données de 1 To. La tarification du serveur Azure CycleCloud et de l’installation d’Avere vFXT pour Azure est également incluse :
 
-* Région : Europe Nord
-* Serveur Azure CycleCloud : 1 x Standard D3 (4 UC, 14 Go de mémoire, HDD Standard 32 Go)
-* Serveur maître Azure CycleCloud : 1 x Standard D12 v (4 UC, 28 Go de mémoire, HDD Standard 32 Go)
-* Tableau de nœuds Azure CycleCloud : 10 x Standard H16r (16 UC, 112 Go de mémoire)
-* Avere vFXT sur cluster Azure : 3 x D16s v3 (système d’exploitation de 200 Go, disque de données SSD Premium 1 To)
-* Sortie de données : 1 To
+* Région : Europe Nord
+* Serveur Azure CycleCloud : 1 x Standard D3 (4 UC, 14 Go de mémoire, HDD Standard 32 Go)
+* Serveur maître Azure CycleCloud : 1 x Standard D12 (4 UC, 28 Go de mémoire, HDD Standard 32 Go)
+* Tableau de nœuds Azure CycleCloud : 10 x Standard H16r (16 UC, 112 Go de mémoire)
+* Avere vFXT sur un cluster Azure : 3 x D16s v3 (système d’exploitation avec 200 Go, 1 disque SSD Premium de 1 To)
+* Sortie de données : 1 To
 
 Examinez cette [estimation de prix][pricing] pour le matériel répertorié ci-dessus.
 

@@ -6,12 +6,12 @@ ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: app-roles
 pnp.series.next: web-api
-ms.openlocfilehash: bbf702fe6651625a1aeceff7e4e321dd08c38544
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 8ff2317eb85197ed93e048b6a2d836405436cc17
+ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902491"
+ms.lasthandoff: 12/12/2018
+ms.locfileid: "53307161"
 ---
 # <a name="role-based-and-resource-based-authorization"></a>Autorisation basée sur les ressources et les rôles
 
@@ -167,7 +167,7 @@ L’application définit également un ensemble d’opérations possibles sur le
 * Mettre à jour
 * Supprimer
 * Publish
-* Annuler la publication
+* Dépublier
 
 Le code suivant crée une liste d’autorisations pour un utilisateur et une enquête particuliers. Notez que ce code examine aussi bien les rôles d’application de l’utilisateur que les champs du propriétaire/collaborateur dans l’enquête.
 
