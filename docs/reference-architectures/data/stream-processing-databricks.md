@@ -5,12 +5,12 @@ description: Créez un pipeline de traitement de flux de bout en bout dans Azure
 author: petertaylor9999
 ms.date: 11/30/2018
 ms.custom: seodec18
-ms.openlocfilehash: ceea89b554e11619823b2065a7f03919527b21fa
-ms.sourcegitcommit: 8d951fd7e9534054b160be48a1881ae0857561ef
+ms.openlocfilehash: f7364334f889388ad432efadd46362a9fa82fe8b
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/13/2018
-ms.locfileid: "53329413"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53644119"
 ---
 # <a name="create-a-stream-processing-pipeline-with-azure-databricks"></a>Créer un pipeline de traitement de flux avec Azure Databricks
 
@@ -36,9 +36,13 @@ L’architecture est constituée des composants suivants.
 
 ## <a name="data-ingestion"></a>Ingestion de données
 
+<!-- markdownlint-disable MD033 -->
+
 Pour simuler une source de données, cette architecture de référence utilise les [données des taxis de la ville de New York](https://uofi.app.box.com/v/NYCtaxidata/folder/2332218797) <sup>[[1]](#note1)</sup>. Ce jeu de données contient des données sur les courses de taxis à New York sur une période de quatre ans (2010 &ndash; 2013). Il contient deux types d’informations : Données de course et données de tarif. Les premières incluent la durée du trajet, la distance et les lieux de prise en charge et de dépose. Les secondes incluent le montant des tarifs des courses, des taxes et des pourboires. Les champs communs aux deux types d’enregistrement sont le numéro de médaillon (« taxi jaune »), le permis spécial et l’ID fournisseur. Ensemble ces trois champs identifient un taxi ainsi qu’un chauffeur. Les données sont stockées au format CSV.
 
-> [1] <span id="note1">Donovan, Brian; Work, Dan (2016) : Données de trajet des taxis de New York (2010-2013). Université de l’Illinois, Urbana-Champaign. https://doi.org/10.13012/J8PN93H8
+> [1] <span id="note1">Donovan, Brian; Work, Dan (2016) : Données de trajet des taxis de New York (2010-2013). Université de l’Illinois, Urbana-Champaign. <https://doi.org/10.13012/J8PN93H8>
+
+<!-- markdownlint-enable MD033 -->
 
 Le générateur de données est une application .NET Core qui lit les enregistrements et les envoie à Azure Event Hubs. Le générateur envoie les données des courses au format JSON et les données relatives aux tarifs au format CSV.
 
@@ -313,4 +317,3 @@ SparkMetric_CL
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
 Pour déployer et exécuter l’implémentation de référence, suivez les étapes du [fichier Readme de GitHub](https://github.com/mspnp/azure-databricks-streaming-analytics).
-

@@ -1,15 +1,16 @@
 ---
-title: Confiance décentralisée entre les banques sur Azure
+title: Confiance décentralisée entre les banques
+titleSuffix: Azure Example Scenarios
 description: Établissez un environnement de confiance pour communiquer et partager des informations sans avoir recours à une base de données centralisée.
 author: vitoc
 ms.date: 09/09/2018
 ms.custom: csa-team
-ms.openlocfilehash: 91c41f7bd6bd6f4eb8cd00859f7ce9065f8a86be
-ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
+ms.openlocfilehash: bd38986a86055305cec97db7a3f3f3e75ff600b0
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/06/2018
-ms.locfileid: "53004718"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643698"
 ---
 # <a name="decentralized-trust-between-banks-on-azure"></a>Confiance décentralisée entre les banques sur Azure
 
@@ -25,11 +26,11 @@ Cet exemple vous montre comment les services Azure tels que les groupes de machi
 
 Les autres cas d’usage appropriés sont les suivants :
 
-* Déplacement des budgets alloués entre les différentes divisions d’une multinationale
-* Paiements transfrontaliers
-* Scénarios de financement commercial
-* Systèmes de fidélisation impliquant différentes sociétés
-* Écosystèmes de chaîne d’approvisionnement
+- Déplacement des budgets alloués entre les différentes divisions d’une multinationale
+- Paiements transfrontaliers
+- Scénarios de financement commercial
+- Systèmes de fidélisation impliquant différentes sociétés
+- Écosystèmes de chaîne d’approvisionnement
 
 ## <a name="architecture"></a>Architecture
 
@@ -45,11 +46,11 @@ Ce scénario couvre les composants principaux nécessaires pour créer un résea
 
 ### <a name="components"></a>Composants
 
-* Les machines virtuelles au sein de groupes de machines virtuelles identiques fournissent la fonctionnalité de calcul à la demande pour héberger les processus de validateur de la blockchain
-* Key Vault est utilisé en tant que fonctionnalité de stockage sécurisé pour les clés privées de chaque validateur
-* Load Balancer répartit les requêtes de RPC, de peering et de Governance DApp
-* Stockage héberge les informations réseau persistantes et coordonne les baux
-* Operations Management Suite (un regroupement de plusieurs services Azure) fournit des insights sur les nœuds disponibles, les transactions par minute et les membres du consortium
+- Les machines virtuelles au sein de groupes de machines virtuelles identiques fournissent la fonctionnalité de calcul à la demande pour héberger les processus de validateur de la blockchain
+- Key Vault est utilisé en tant que fonctionnalité de stockage sécurisé pour les clés privées de chaque validateur
+- Load Balancer répartit les requêtes de RPC, de peering et de Governance DApp
+- Stockage héberge les informations réseau persistantes et coordonne les baux
+- Operations Management Suite (un regroupement de plusieurs services Azure) fournit des insights sur les nœuds disponibles, les transactions par minute et les membres du consortium
 
 ### <a name="alternatives"></a>Autres solutions
 
@@ -57,15 +58,15 @@ L’approche Ethereum PoA est choisie pour cet exemple, car il s’agit d’un b
 
 Pour d’autres scénarios étendus ou différents, des problèmes relatifs à la confidentialité des transactions peuvent se poser. Par exemple, dans un scénario de transfert de titres, les membres d’un consortium ne souhaitent peut-être pas que leurs transactions soient visibles par les autres membres. Des alternatives à l’approche Ethereum PoA répondant à ces problèmes existent :
 
-* Corda
-* Quorum
-* Hyperledger
+- Corda
+- Quorum
+- Hyperledger
 
 ## <a name="considerations"></a>Considérations
 
 ### <a name="availability"></a>Disponibilité
 
-[Azure Monitor][monitor] est utilisé pour surveiller en permanence le réseau de blockchain et ainsi garantir la disponibilité. Un lien vers un tableau de bord de supervision personnalisé basé sur Azure Monitor vous est envoyé après le déploiement du modèle de solution de blockchain utilisé dans ce scénario. Le tableau de bord affiche les nœuds qui signalent des pulsations au cours des 30 dernières minutes, ainsi que d’autres statistiques utiles. 
+[Azure Monitor][monitor] est utilisé pour surveiller en permanence le réseau de blockchain et ainsi garantir la disponibilité. Un lien vers un tableau de bord de supervision personnalisé basé sur Azure Monitor vous est envoyé après le déploiement du modèle de solution de blockchain utilisé dans ce scénario. Le tableau de bord affiche les nœuds qui signalent des pulsations au cours des 30 dernières minutes, ainsi que d’autres statistiques utiles.
 
 Pour consulter d’autres rubriques relatives à la disponibilité, consultez la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
 
@@ -93,9 +94,9 @@ Pour explorer le coût d’exécution de ce scénario, tous les services sont pr
 
 Nous proposons trois exemples de profils de coût basés sur le nombre d’instances de groupe identique de machines virtuelles exécutant vos applications (les instances peuvent se trouver dans différentes régions).
 
-* [Petit][small-pricing] : 2 machines virtuelles par mois avec la supervision désactivée
-* [Moyen][medium-pricing] : 7 machines virtuelles par mois avec la supervision activée
-* [Grand][large-pricing] : 15 machines virtuelles par mois avec la supervision activée
+- [Petit][small-pricing] : 2 machines virtuelles par mois avec la supervision désactivée
+- [Moyen][medium-pricing] : 7 machines virtuelles par mois avec la supervision activée
+- [Grand][large-pricing] : 15 machines virtuelles par mois avec la supervision activée
 
 Les tarifs ci-dessus sont donnés pour un membre du consortium qui souhaite mettre en place ou rejoindre un réseau de blockchain. En général, dans un consortium regroupant plusieurs entreprises ou organisations, chaque membre bénéficie de son propre abonnement Azure.
 
