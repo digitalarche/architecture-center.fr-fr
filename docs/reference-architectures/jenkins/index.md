@@ -5,12 +5,12 @@ description: Cette architecture recommandée montre comment déployer et utilise
 author: njray
 ms.date: 04/30/2018
 ms.custom: seodec18
-ms.openlocfilehash: 9dc4eb27f6c2bc8896770a2d0cd01b738c18c593
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 26bf9cadc8db0cd4fcc61023619ca61bb7b87855
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120269"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53644153"
 ---
 # <a name="run-a-jenkins-server-on-azure"></a>Exécuter un serveur Jenkins sur Azure
 
@@ -174,7 +174,7 @@ Pour déployer cette architecture, suivez les étapes ci-dessous pour installer 
 - Pour créer un principal de service Azure, vous devez disposer des droits d’administrateur pour le locataire Azure AD qui est associé au serveur Jenkins déployé.
 - Ces instructions supposent que l’administrateur Jenkins est également un utilisateur Azure avec au moins des privilèges de collaborateur.
 
-### <a name="step-1-deploy-the-jenkins-server"></a>Étape 1 : déployer le serveur Jenkins
+### <a name="step-1-deploy-the-jenkins-server"></a>Étape 1 : Déployer le serveur Jenkins
 
 1. Ouvrez l’[image de place de marché Azure pour Jenkins][azure-market] dans votre navigateur web et cliquez sur **OBTENIR MAINTENANT** sur le côté gauche de la page.
 
@@ -182,39 +182,45 @@ Pour déployer cette architecture, suivez les étapes ci-dessous pour installer 
 
 Pour obtenir des instructions détaillées, consultez [Créer un serveur Jenkins sur une machine virtuelle Linux Azure à partir du portail Azure][create-jenkins]. Pour cette architecture de référence, il suffit de rendre le serveur opérationnel avec l’ouverture de session d’administrateur. Vous pouvez ensuite le configurer pour utiliser divers autres services.
 
-### <a name="step-2-set-up-sso"></a>Étape 2 : configurer l’authentification unique
+### <a name="step-2-set-up-sso"></a>Étape 2 : Configurer l’authentification unique
 
 L’étape est exécutée par l’administrateur Jenkins, qui doit également disposer d’un compte utilisateur dans le répertoire d’abonnement Azure AD et doit avoir le rôle Collaborateur.
 
 Utilisez le [plug-in Azure AD][configure-azure-ad] à partir du centre de mise à jour Jenkins sur le serveur Jenkins et suivez les instructions pour configurer l’authentification unique.
 
-### <a name="step-3-provision-jenkins-server-with-azure-vm-agent-plugin"></a>Étape 3 : configurer le serveur Jenkins avec le plug-in Agent de machine virtuelle Azure
+### <a name="step-3-provision-jenkins-server-with-azure-vm-agent-plugin"></a>Étape 3 : Provisionner le serveur Jenkins avec le plug-in Agent de machine virtuelle Azure
 
 L’étape est exécutée par l’administrateur Jenkins pour configurer le plug-in Agent de machine virtuelle Azure, qui est déjà installé.
 
 [Pour configurer le plug-in, procédez comme suit][configure-agent]. Pour obtenir un didacticiel sur la configuration des principaux de service pour le plug-in, consultez [Mettre à l’échelle vos déploiements Jenkins pour répondre à la demande avec des agents de machines virtuelles Azure][scale-agent].
 
-### <a name="step-4-provision-jenkins-server-with-azure-storage"></a>Étape 4 : configurer le serveur Jenkins avec Stockage Azure
+### <a name="step-4-provision-jenkins-server-with-azure-storage"></a>Étape 4 : Provisionner le serveur Jenkins avec Stockage Azure
 
 L’étape est exécutée par l’administrateur Jenkins qui configure le plug-in Stockage Microsoft Azure, qui est déjà installé.
 
 [Pour configurer le plug-in, procédez comme suit][configure-storage].
 
-### <a name="step-5-provision-jenkins-server-with-azure-credential-plugin"></a>Étape 5 : configurer le serveur Jenkins avec le plug-in Informations d’identification Azure
+### <a name="step-5-provision-jenkins-server-with-azure-credential-plugin"></a>Étape 5 : Provisionner le serveur Jenkins avec le plug-in Informations d’identification Azure
 
 L’étape est exécutée par l’administrateur Jenkins pour configurer le plug-in Informations d’identification Azure, qui est déjà installé.
 
 [Pour configurer le plug-in, procédez comme suit][configure-credential].
 
-### <a name="step-6-provision-jenkins-server-for-monitoring-by-the-azure-monitor-service"></a>Étape 6 : configurer le serveur Jenkins pour l’analyse par le service Azure Monitor
+### <a name="step-6-provision-jenkins-server-for-monitoring-by-the-azure-monitor-service"></a>Étape 6 : Provisionner le serveur Jenkins pour la supervision par le service Azure Monitor
 
 Pour configurer la surveillance de votre serveur Jenkins, suivez les instructions de [Création d’alertes de métrique dans Azure Monitor pour les services Azure][create-metric].
 
-### <a name="step-7-provision-jenkins-server-with-managed-disks-for-disaster-recovery"></a>Étape 7 : configurer le serveur Jenkins avec des disques managés pour la récupération d’urgence
+### <a name="step-7-provision-jenkins-server-with-managed-disks-for-disaster-recovery"></a>Étape 7 : Provisionner le serveur Jenkins avec Managed Disks pour la reprise d’activité
 
 Le groupe de produits Microsoft Jenkins a créé des scripts de récupération d’urgence qui génèrent un disque managé utilisé pour enregistrer l’état de Jenkins. Si le serveur tombe en panne, il peut être restauré à son état le plus récent.
 
 Télécharger et exécuter des scripts de récupération d’urgence à partir de [GitHub][disaster].
+
+Vous pouvez consulter l’[exemple de scénario Azure](/azure/architecture/example-scenario) suivant qui décrit des solutions spécifiques à l’aide des mêmes technologies :
+
+- [Pipeline CI/CD pour les charges de travail basées sur des conteneurs](/azure/architecture/example-scenario/apps/devops-with-aks)
+
+<!-- links -->
 
 [acs]: https://aka.ms/azjenkinsacs
 [ad-sp]: /azure/active-directory/develop/active-directory-integrating-applications

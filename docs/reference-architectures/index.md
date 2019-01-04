@@ -4,12 +4,12 @@ description: Architectures de référence, schémas et des recommandations préc
 layout: LandingPage
 ms.topic: landing-page
 ms.date: 08/30/2018
-ms.openlocfilehash: 6a86256c504737b5f747a690d27fdf178ac8b4fe
-ms.sourcegitcommit: 8d951fd7e9534054b160be48a1881ae0857561ef
+ms.openlocfilehash: 173698aee0a67578beaa806a59e1c7b0265cdd61
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/13/2018
-ms.locfileid: "53329379"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011801"
 ---
 # <a name="azure-reference-architectures"></a>Architectures de référence Azure
 
@@ -17,10 +17,32 @@ Nos architectures de référence sont organisées par scénario, avec les archit
 
 Passer à : [AI](#ai-and-machine-learning) | [Big Data](#big-data-solutions) | [Serverless](#serverless-applications) | [Réseaux virtuels](#virtual-networks)  |  [Charges de travail de machine virtuelle](#vm-workloads) | [SAP](#sap) | [Applications web](#web-applications) | [Active Directory](#extend-on-premises-active-directory-to-azure)
 
+<!-- markdownlint-disable MD033 -->
+
 ## <a name="ai-and-machine-learning"></a>IA et Machine Learning
 
 <!-- markdownlint-disable MD033 -->
 <ul  class="panelContent cardsF">
+<!-- Batch scoring of Python models -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./ai/batch-scoring-python.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/python-powered-h.svg" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Scoring par lots des modèles Python</h3>
+                        <p>Effectuez un scoring par lots de nombreux modèles Python en parallèle selon une planification à l’aide d’Azure Batch AI.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
 <!-- Batch scoring for deep learning models -->
 <li style="display: flex; flex-direction: column;">
     <a href="./ai/batch-scoring-deep-learning.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
@@ -41,7 +63,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big Data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Batch scoring for deep learning models -->
+<!-- Real-time scoring of Python models -->
 <li style="display: flex; flex-direction: column;">
     <a href="./ai/realtime-scoring-python.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -61,7 +83,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big Data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Batch scoring for R models -->
+<!-- Real-time scoring of R models -->
 <li style="display: flex; flex-direction: column;">
     <a href="./ai/realtime-scoring-r.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -75,6 +97,26 @@ Passer à : [AI](#ai-and-machine-learning) | [Big Data](#big-data-solutions) | 
                     <div class="cardText">
                         <h3>Scoring en temps réel des modèles Machine Learning R</h3>
                         <p>Implémentez un service de prédiction en temps réel en R en exécutant Microsoft Machine Learning Server dans Azure Kubernetes Service (ACS).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+<!-- Real-time Recommendation API -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./ai/real-time-recommendation.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/machine-learning.svg" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>API de recommandation en temps réel</h3>
+                        <p>Entraînez un modèle de recommandation à l’aide d’Azure Databricks et déployez-le comme API à l’aide d’Azure Machine Learning.</p>
                     </div>
                 </div>
             </div>
@@ -710,3 +752,4 @@ Passer à : [AI](#ai-and-machine-learning) | [Big Data](#big-data-solutions) | 
 </li>
 </ul>
 
+<!-- markdownlint-disable MD033 -->

@@ -2,24 +2,25 @@
 title: Conception d’applications résilientes pour Azure
 description: Comment créer des applications résilientes dans Azure, pour une haute disponibilité et une récupération d’urgence.
 author: MikeWasson
-ms.date: 11/26/2018
+ms.date: 12/18/2018
 ms.custom: resiliency
-ms.openlocfilehash: a97a26928002b8248344a239159fe7defa99931c
-ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
+ms.openlocfilehash: 1638bc84b436d3d826f8ad9497ddb5a1310c14da
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/06/2018
-ms.locfileid: "53005052"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53644255"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Conception d’applications résilientes pour Azure
 
 Dans un système distribué, des défaillances peuvent se produire. Le matériel peut être défaillant. Le réseau peut subir des échecs temporaires. Exceptionnellement, un service ou une région entiers peuvent rencontrer des interruptions, mais même ces dernières doivent être planifiées.
 
-La création d’une application fiable dans le cloud est différente de la création d’une application fiable dans un environnement d’entreprise. Si par le passé vous avez acheté du matériel haut de gamme pour gagner en puissance, dans un environnement de cloud vous devez augmenter vos performances de manière horizontale, et pas verticale. Les coûts pour les environnements de cloud restent faibles via l’utilisation d’un matériel standard. Au lieu de se concentrer sur la prévention des pannes et l’optimisation du « délai moyen entre les pannes », dans ce nouvel environnement l’attention est mise sur le « délai moyen de restauration. » L’objectif est de réduire les effets d’une défaillance.
+La création d’une application fiable dans le cloud est différente de la création d’une application fiable dans un environnement d’entreprise. Si par le passé vous avez acheté du matériel haut de gamme pour gagner en puissance, dans un environnement de cloud vous devez augmenter vos performances de manière horizontale, et pas verticale. Les coûts pour les environnements de cloud restent faibles via l’utilisation d’un matériel standard. Au lieu d’essayer d’éviter tous les échecs, l’objectif est de réduire les effets d’un échec au sein du système.
 
 Cet article fournit une vue d’ensemble de la création d’applications résilientes dans Microsoft Azure. Il commence par une définition du terme *résilience* et de concepts associés. Il décrit ensuite un processus pour atteindre une résilience, à l’aide d’une approche structurée pendant la durée de vie d’une application, depuis la conception et l’implémentation jusqu’au déploiement et aux opérations.
 
 ## <a name="what-is-resiliency"></a>Qu’est-ce que la résilience ?
+
 **La résilience** est la capacité d’un système à récupérer après des défaillances et à continuer de fonctionner. Il ne s’agit pas d’*éviter* les défaillances, mais d’y *répondre* en évitant les temps d’arrêt ou la perte de données. L’objectif de la résilience est que l’application retrouve un état entièrement fonctionnel suite à une défaillance.
 
 Deux aspects importants de la résilience sont la haute disponibilité et la récupération d’urgence.
@@ -38,6 +39,7 @@ La **sauvegarde des données** est une composante essentielle de la récupérati
 La sauvegarde et la **réplication des données** sont deux processus distincts. La réplication des données consiste en leur copie quasiment en temps réel, de manière à ce que le système puisse basculer rapidement vers un réplica. De nombreux systèmes de bases de données prennent en charge la réplication. Par exemple, SQL Server prend en charge les groupes de disponibilité SQL Server AlwaysOn. La réplication des données peut réduire les intervalles de récupération après une panne, en garantissant la conservation permanente d’un réplica des données. Toutefois, la réplication des données ne vous protège pas contre les erreurs humaines. Les données corrompues en raison d’une erreur humaine sont elles aussi copiées sur les réplicas. Par conséquent, il vous faut intégrer une stratégie de sauvegarde à long terme dans votre stratégie de récupération d’urgence.
 
 ## <a name="process-to-achieve-resiliency"></a>Processus pour obtenir la résilience
+
 La résilience n’est pas un module complémentaire. Elle doit être conçue dans le système et mise en pratique opérationnelle. Voici un modèle général à suivre :
 
 1. **Définissez** vos exigences en matière de disponibilité, en fonction des besoins de l’entreprise.
@@ -51,34 +53,47 @@ La résilience n’est pas un module complémentaire. Elle doit être conçue da
 Dans le reste de l’article, nous expliquons plus en détail chacune de ces étapes.
 
 ## <a name="define-your-availability-requirements"></a>Définir vos exigences de disponibilité
+
 La planification de la résilience démarre avec les besoins de l’entreprise. Voici certaines approches pour aborder la résilience dans ces termes.
 
 ### <a name="decompose-by-workload"></a>Décomposez par charge de travail
+
 De nombreuses solutions cloud sont constituées de plusieurs charges de travail d’application. Le terme « charge de travail » dans ce contexte renvoie à une fonctionnalité discrète ou une tâche informatique, qui peut être séparée logiquement des autres tâches, en termes de logique métier et de besoins de stockage des données. Par exemple, une application e-commerce peut inclure les charges de travail suivantes :
 
 * Parcourir et rechercher un catalogue de produits.
 * Créer et suivre des commandes.
 * Afficher les recommandations.
 
-Ces charges de travail peuvent avoir des exigences différentes concernant la disponibilité, l’extensibilité, la cohérence des données, la récupération d’urgence, etc. Là encore, il s’agit de décisions commerciales.
+Ces charges de travail peuvent avoir des exigences différentes concernant la disponibilité, la scalabilité, la cohérence des données et la reprise d’activité. L’entreprise doit choisir si elle préfère privilégier les coûts par rapport aux risques ou inversement.
 
-Envisagez également des modèles d’utilisation. Y a-t-il certaines périodes critiques durant lesquelles le système doit être disponible ? Par exemple, un service de déclaration d’impôts ne peut pas s’arrêter juste avant la date limite de dépôt, un service de diffusion de vidéo en continu doit continuer de fonctionner pendant un événement sportif important, etc. Pendant les périodes critiques, vous pouvez avoir des déploiements redondants dans plusieurs régions. L’application pourrait donc rencontrer un échec en cas de défaillance d’une région. Toutefois, un déploiement multi-région étant plus coûteux, durant les périodes moins critiques, vous pouvez exécuter l’application dans une seule région.
+Envisagez également des modèles d’utilisation. Y a-t-il certaines périodes critiques durant lesquelles le système doit être disponible ? Par exemple, un service de déclaration d’impôts ne peut pas s’arrêter juste avant la date limite de dépôt, un service de diffusion de vidéo en continu doit continuer de fonctionner pendant un événement sportif important, etc. Pendant les périodes critiques, vous pouvez avoir des déploiements redondants dans plusieurs régions. L’application pourrait donc rencontrer un échec en cas de défaillance d’une région. Toutefois, comme un déploiement multirégion est plus coûteux, durant les périodes moins critiques, vous pouvez exécuter l’application dans une seule région. Dans certains cas, les dépenses supplémentaires peuvent être atténuées avec des techniques serverless modernes, qui utilisent une facturation basée sur la consommation pour ne pas vous facturer les ressources de calcul sous-utilisées.
 
 ### <a name="rto-and-rpo"></a>RTO et RPO
-Deux métriques importantes sont à prendre en considération : les objectifs de délai de récupération et de point de récupération.
 
-* L’**objectif de délai de récupération** (RTO) est la durée maximale acceptable pendant laquelle une application peut être indisponible après un incident. Si votre objectif RTO est de 90 minutes, vous devez être en mesure de remettre l’application en état de fonctionnement dans les 90 minutes à partir du début d’une panne. Si vous avez un objectif RTO très faible, vous pouvez conserver un deuxième déploiement fonctionnant de manière continue en veille, pour vous protéger contre une panne régionale.
+Deux métriques importantes sont à prendre en considération : l’objectif de délai de récupération et l’objectif de point de récupération, puisqu’ils entrent dans le cadre de la reprise d’activité.
+
+* L’**objectif de délai de récupération** (RTO) est la durée maximale acceptable pendant laquelle une application peut être indisponible après un incident. Si votre objectif RTO est de 90 minutes, vous devez être en mesure de remettre l’application en état de fonctionnement dans les 90 minutes à partir du début d’une panne. Si vous avez un objectif RTO très bas, vous pouvez conserver un deuxième déploiement régional exécuté sur une configuration active/passive en veille, pour vous protéger d’une panne régionale. Dans certains cas, vous pouvez déployer une configuration active/active pour obtenir un RTO encore plus bas.
 
 * L’**objectif de point de récupération** (RPO) est la durée maximale de perte de données acceptable pendant une panne. Par exemple, si vous stockez des données dans une base de données unique, sans aucune réplication vers d’autres bases de données, et effectuez des sauvegardes toutes les heures, vous risquez de perdre jusqu’à une heure de données.
 
-Les objectifs RTO et RPO sont des exigences de l’entreprise. Procéder à une évaluation des risques peut vous aider à définir les objectifs RTO et RPO de l’application. Une autre métrique commune est le **temps moyen de récupération** (MTTR), qui est la durée moyenne nécessaire à la restauration de l’application après une panne. La métrique MTTR est un fait empirique concernant un système. Si la métrique MTTR dépasse celle de l’objectif RTO, une défaillance du système entraînera une interruption inacceptable des opérations, car il ne sera pas possible de restaurer le système au sein de l’objectif RTO défini.
+Les objectifs RTO et RPO sont des exigences non opérationnelles d’un système et doivent être définis selon les besoins de l’entreprise. Pour dériver ces valeurs, évaluez les risques ainsi que le coût d’une perte de données et d’un temps d’arrêt.
+
+### <a name="mttr-and-mtbf"></a>MTTR et MTBF
+
+Deux autres mesures courantes de la disponibilité sont le temps moyen de récupération (MTTR) et le temps moyen entre échecs (MTBF). Ces mesures sont généralement utilisées en interne par les fournisseurs de services pour déterminer les services cloud pour lesquels ajouter la redondance et les contrats SLA à fournir aux clients.
+
+Le **temps moyen de récupération** (MTTR) est la durée moyenne nécessaire à la restauration d’un composant après un échec. Le MTTR est un fait empirique concernant un système. À partir du MTTR de chaque composant, vous pouvez estimer le MTTR d’une application entière. Une application créée à partir de plusieurs composants avec des valeurs MTTR basses est une application avec un MTTR général bas, c’est-à-dire qu’elle récupère rapidement après un échec.
+
+Le **temps moyen entre échecs** (MTBF) est la durée d’exécution raisonnable d’un composant entre les pannes. Cette métrique peut vous aider à calculer la fréquence à laquelle un service devient indisponible. Un composant non fiable a un MTBF bas, ce qui entraîne un chiffre de contrat SLA bas pour ce composant. Toutefois, un MTBF bas peut être atténué en déployant plusieurs instances du composant qui peuvent être basculées l’une sur l’autre.
+
+> [!NOTE]
+> Si UNE valeur MTTR des composants d’une configuration à haute disponibilité dépasse le RTO du système, un échec dans le système entraîne une interruption inacceptable de l’activité. Le système ne peut alors pas être restauré dans l’objectif RTO défini.
 
 ### <a name="slas"></a>Contrats SLA
 Dans Azure, les [contrats de niveau de service][sla] (SLA) décrivent les engagements de Microsoft en matière de temps de fonctionnement et de connectivité. Si le contrat SLA pour un service particulier est de 99,9 %, cela signifie que le service doit être disponible 99,9 % du temps.
 
 > [!NOTE]
 > Le contrat SLA Azure comprend également des dispositions permettant d’obtenir un crédit de service si le contrat SLA n’est pas rempli, ainsi que des définitions spécifiques de « disponibilité » pour chaque service. Cet aspect du contrat SLA agit comme une stratégie d’application.
->
 >
 
 Vous devez définir vos propres contrats SLA cibles pour chaque charge de travail dans votre solution. Un contrat SLA permet d’évaluer si l’architecture répond aux exigences de l’entreprise. Par exemple, si une charge de travail requiert une disponibilité de 99,99 %, mais dépend d’un service avec un contrat SLA de 99,9 %, ce service ne peut pas être un point de défaillance unique dans le système. Une solution consiste à posséder un chemin d’accès de secours en cas d’échec du service, ou à prendre d’autres mesures pour récupérer suite à un échec dans ce service.
@@ -100,6 +115,7 @@ Voici quelques autres considérations à prendre en compte lors de la définitio
 * Pour obtenir les quatre 9 (99,99 %), vous ne pouvez probablement pas avoir recours à une intervention manuelle pour récupérer en cas de défaillances. L’application doit pouvoir effectuer des diagnostics et se réparer elle-même.
 * Au-delà de quatre 9, il devient difficile de détecter les pannes assez rapidement pour respecter les engagements du contrat SLA.
 * Pensez à la fenêtre de temps contre laquelle est mesuré votre contrat SLA. Plus la fenêtre est petite, plus les tolérances seront strictes. Cela n’a pas de sens de définir votre contrat SLA en termes de temps de fonctionnement par heure ou par jour.
+* Utilisez les mesures MTBF et MTTR. Plus votre SLA est bas, moins le service sera indisponible et plus vite il récupèrera.
 
 ### <a name="composite-slas"></a>Contrats SLA composites
 Envisagez une application web App Service qui écrit à Azure SQL Database. Au moment de la rédaction, ces services Azure possèdent les contrats SLA suivants :
@@ -111,7 +127,7 @@ Envisagez une application web App Service qui écrit à Azure SQL Database. Au m
 
 Quel est le temps d’arrêt maximal attendu pour cette application ? En cas d’échec d’un service, l’application entière échoue. En règle générale, la probabilité d’échec de chaque service est indépendante, par conséquent le contrat SLA composite pour cette application est de 99,95 % &times; 99,99 % = 99,94 %. Ce taux est inférieur aux contrats SLA individuels, ce qui n’est pas surprenant, car une application qui repose sur plusieurs services possède davantage de points de défaillance potentiels.
 
-En revanche, vous pouvez améliorer le contrat SLA composite en créant des chemins d’accès de secours indépendants. Par exemple, si SQL Database n’est pas disponible, placez des transactions dans une file d’attente pour un traitement ultérieur.
+En revanche, vous pouvez améliorer le contrat SLA composite en créant des chemins d’accès de secours indépendants. Par exemple, si SQL Database n’est pas disponible, placez des transactions dans une file d’attente pour un traitement ultérieur. 
 
 ![Contrat SLA composite](./images/sla2.png)
 
@@ -125,17 +141,18 @@ Le contrat SLA composite total est de :
 
 Mais il existe des compromis à cette approche. La logique d’application est plus complexe, vous payez pour la file d’attente, et il peut y avoir des problèmes de cohérence des données à prendre en compte.
 
-**Contrat SLA pour déploiement multi-région**. Une autre technique de haute disponibilité consiste à déployer l’application dans plusieurs régions, et à utiliser Azure Traffic Manager pour basculer au cas où l’application échoue dans une région. Pour un déploiement dans deux régions, le contrat SLA composite est calculé comme suit.
+**Contrat SLA pour déploiement multi-région**. Une autre technique de haute disponibilité consiste à déployer l’application dans plusieurs régions, et à utiliser Azure Traffic Manager pour basculer au cas où l’application échoue dans une région. Pour un déploiement multirégion, le contrat SLA composite est calculé comme suit.
 
-Considérons *N* comme le contrat SLA composite pour l’application déployée dans une région. Les risques que l’application échoue dans les deux régions en même temps sont de (1 &minus; N) &times; (1 &minus; N). Par conséquent :
+*N* est le contrat SLA composite de l’application déployée dans une région, et *R* est le nombre de régions où l’application est déployée. Le risque que l’application échoue dans toutes les régions en même temps est ((1 &minus N) ^ R).
 
-* Contrat SLA combiné pour les deux régions = 1 &minus; (1 &minus; N) (1 &minus; N) = N + (1 &minus; N) N
+Par exemple, si le contrat SLA d’une seule région est 99,95 %,
 
-Enfin, vous devez factoriser dans le [contrat SLA pour Traffic Manager][tm-sla]. Au moment de la rédaction, le contrat SLA pour Traffic Manager est de 99,99 %.
+* le contrat SLA combiné des deux régions = (1 &minus; (0,9995 ^ 2)) = 99,999975 %
+* le contrat SLA combiné pour quatre régions = (1 &minus; (0,9995 ^ 4)) = 99,999999 %
 
-* Contrat SLA combiné = 99.99 % &times; (contrat SLA combiné pour les deux régions)
+Vous devez aussi prendre en compte le [contrat SLA pour Traffic Manager][tm-sla]. Au moment de la rédaction, le contrat SLA pour Traffic Manager est de 99,99 %.
 
-De plus, un échec n’est pas instantané et peut entraîner un temps d’arrêt durant un basculement. Consultez [Surveillance et basculement des points de terminaison Traffic Manager][tm-failover].
+Par ailleurs, le basculement n’est pas instantané dans les configurations actives-passives, ce qui peut entraîner un temps d’arrêt pendant le basculement. Consultez [Surveillance et basculement des points de terminaison Traffic Manager][tm-failover].
 
 Le numéro de contrat SLA calculé est une base utile, mais il ne dit pas tout sur la disponibilité. Souvent, il arrive qu’une application se dégrade normalement lorsqu’un chemin d’accès non critique échoue. Imaginez une application qui propose un catalogue de livres. Si l’application ne peut pas récupérer l’image miniature de la couverture, elle affichera une image de substitution. Dans ce cas, le fait que l’application n’ait pas réussi à obtenir l’image ne réduit pas son temps de fonctionnement, mais cela affecte l’expérience utilisateur.  
 
@@ -147,10 +164,10 @@ Pendant la phase de conception, vous devez effectuer une analyse du mode d’éc
 * Comment l’application répondra-t-elle à ce type d’échec ?
 * Comment enregistrerez-vous et surveillerez-vous ce type d’échec ?
 
-Pour plus d’informations sur le processus FMA, avec des recommandations spécifiques pour Azure, consultez le [Guide de résilience Azure : analyse du mode d’échec][fma].
+Pour plus d’informations sur le processus FMA, avec des recommandations spécifiques pour Azure, consultez [Guide de résilience Azure : Analyse du mode d’échec][fma].
 
 ### <a name="example-of-identifying-failure-modes-and-detection-strategy"></a>Exemple d’identification des modes d’échec et de stratégie de détection
-**Point de défaillance :** appel à un service web externe / API.
+**Point d’échec :** Appel à un service web externe / une API.
 
 | Mode d’échec | Stratégie de détection |
 | --- | --- |
@@ -158,7 +175,6 @@ Pour plus d’informations sur le processus FMA, avec des recommandations spéci
 | Limitation |HTTP 429 (Trop de demandes) |
 | Authentification |HTTP 401 (Non autorisé) |
 | Temps de réponse lent |Délai d’expiration de la requête |
-
 
 ### <a name="redundancy-and-designing-for-failure"></a>Redondance et conception pour les défaillances
 
@@ -168,19 +184,21 @@ La redondance est l’un des moyens de rendre une application résiliente. Toute
 
 Azure offre un certain nombre de fonctionnalités servant à rendre une application redondante à tous les nivaux de défaillances, d’une machine virtuelle unique à une région entière.
 
-![](./images/redundancy.svg)
+![Fonctionnalités de résilience Azure](./images/redundancy.svg)
 
-**Machine virtuelle unique**. Azure fournit un contrat SLA de durée de fonctionnement pour les machines virtuelles uniques. Bien que vous puissiez obtenir un contrat supérieur en exécutant deux machines virtuelles ou plus, une machine virtuelle unique peut présenter une fiabilité suffisante pour certaines charges de travail. Pour les charges de travail de production, nous vous recommandons d’utiliser au moins deux machines virtuelles pour la redondance.
+**Machine virtuelle unique**. Azure fournit un [contrat SLA de durée de fonctionnement](https://azure.microsoft.com/support/legal/sla/virtual-machines) pour les machines virtuelles individuelles. (La machine virtuelle doit utiliser le stockage Premium pour tous les disques de système d’exploitation et disques de données). Bien que vous puissiez obtenir un contrat supérieur en exécutant deux machines virtuelles ou plus, une machine virtuelle unique peut présenter une fiabilité suffisante pour certaines charges de travail. Toutefois, pour les charges de travail de production, nous vous recommandons d’utiliser au moins deux machines virtuelles pour la redondance.
 
 **Groupes à haute disponibilité**. Pour vous protéger contre les défaillances matérielles localisées, comme une panne de disque ou de commutateur réseau, déployez au moins deux machines virtuelles dans un groupe à haute disponibilité. Un groupe à haute disponibilité se compose d’au moins deux *domaines d’erreur* qui partagent une source d’alimentation et un commutateur réseau. Les machines virtuelles d’un groupe à haute disponibilité sont distribuées entre les domaines d’erreur. Ainsi, si une défaillance matérielle affecte un domaine d’erreur, le trafic réseau peut toujours être acheminé vers les machines virtuelles des autres domaines d’erreur. Pour plus d’informations sur les groupes à haute disponibilité, consultez la section [Gestion de la disponibilité des machines virtuelles Windows dans Azure](/azure/virtual-machines/windows/manage-availability).
 
-**Zones de disponibilité**.  Une zone de disponibilité est une zone physiquement séparée au sein d’une région Azure. Chaque zone de disponibilité possède une source d’alimentation, un réseau et un système de refroidissement propres. Le déploiement des machines virtuelles entre les zones de disponibilité aide à protéger une application contre les défaillances à l’échelle du centre de données.
+**Zones de disponibilité**.  Une zone de disponibilité est une zone physiquement séparée au sein d’une région Azure. Chaque zone de disponibilité possède une source d’alimentation, un réseau et un système de refroidissement propres. Le déploiement des machines virtuelles entre les zones de disponibilité aide à protéger une application contre les défaillances à l’échelle du centre de données. Les régions ne prennent pas toutes en charge les zones de disponibilité. Pour obtenir la liste des régions et services pris en charge, consultez [Que sont les zones de disponibilité dans Azure ?](/azure/availability-zones/az-overview).
 
-**Azure Site Recovery**.  Répliquez des machines virtuelles Azure dans une autre région Azure pour couvrir les besoins en termes de continuité d’activité et de reprise d’activité. Vous pouvez effectuer régulièrement des exercices de reprise d’activité pour garantir que vous répondez aux besoins de conformité. La machine virtuelle est répliquée avec les paramètres spécifiés dans la région sélectionnée afin que vous puissiez récupérer vos applications en cas de panne dans la région source. Pour plus d’informations, consultez [Replicate Azure VMs using ASR][site-recovery] (Répliquer des machines virtuelles Azure à l’aide d’ASR).
+Si vous envisagez d’utiliser des zones de disponibilité dans votre déploiement, commencez par vérifier que votre architecture d’application et votre base de code peuvent prendre en charge cette configuration. Si vous déployez des logiciels du commerce, consultez le fournisseur des logiciels et effectuez des tests avant de les déployer en production. Une application doit être en mesure de maintenir son état et d’éviter la perte de données en cas de panne dans la zone configurée. L’application doit prendre en charge l’exécution dans une infrastructure distribuée élastique sans composant d’infrastructure codé en dur spécifié dans la base de code. 
+
+**Azure Site Recovery**.  Répliquez des machines virtuelles Azure dans une autre région Azure pour couvrir les besoins en termes de continuité d’activité et de reprise d’activité. Vous pouvez effectuer régulièrement des exercices de reprise d’activité pour garantir que vous répondez aux besoins de conformité. La machine virtuelle est répliquée avec les paramètres spécifiés dans la région sélectionnée afin que vous puissiez récupérer vos applications en cas de panne dans la région source. Pour plus d’informations, consultez [Replicate Azure VMs using ASR][site-recovery] (Répliquer des machines virtuelles Azure à l’aide d’ASR). Prenez en compte les chiffres de RTO et RPO pour votre solution ici et vérifiez pendant les tests que le point de récupération et le temps de récupération sont adaptés à vos besoins.
 
 **Régions jumelées**. Pour protéger une application contre une panne régionale, vous pouvez la déployer dans plusieurs régions, en vous appuyant sur Azure Traffic Manager pour distribuer le trafic Internet entre les différentes régions. Chaque région Azure est jumelée à une autre région. Ensemble, elles forment une [paire régionale](/azure/best-practices-availability-paired-regions). Une région se trouve dans la même zone géographique que la région avec laquelle elle est jumelée (à l’exception de Brésil Sud) pour répondre aux exigences de la résidence de données en termes d’impôts et d’application de la loi.
 
-Lorsque vous concevez une application multirégion, tenez compte du fait que la latence du réseau entre les régions et plus importante qu’au sein d’une région unique. Par exemple, si vous répliquez une base de données pour prendre en charge un basculement, utilisez la réplication des données synchrone au sein d’une région unique, mais la réplication des données asynchrones entre plusieurs régions.
+Lorsque vous concevez une application multirégion, tenez compte du fait que la latence du réseau entre les régions et plus importante qu’au sein d’une région unique. Par exemple, si vous répliquez une base de données pour prendre en charge un basculement, utilisez la réplication des données synchrone au sein d’une région unique, mais la réplication des données asynchrones entre plusieurs régions. 
 
 | &nbsp; | Groupe à haute disponibilité | Zone de disponibilité | Azure Site Recovery/Région jumelée |
 |--------|------------------|-------------------|---------------|
@@ -204,7 +222,7 @@ Chaque tentative de relance augmente la latence totale. En outre, un trop grand 
 * Montez en charge une application Azure App Service à plusieurs instances. App Service équilibre automatiquement la charge entre les instances. Consultez [Application web de base][ra-basic-web].
 * Utilisez [Azure Traffic Manager] [ tm] pour répartir le trafic sur un ensemble de points de terminaison.
 
-**Répliquez des données**. La réplication de données est une stratégie générale pour gérer les échecs non temporaires dans un magasin de données. De nombreuses technologies de stockage fournissent une stratégie de réplication intégrée, y compris Azure SQL Database, Cosmos DB et Apache Cassandra. Il est important de tenir compte des chemins d’accès de lecture et d’écriture. Selon la technologie de stockage, vous pouvez trouver plusieurs réplicas accessibles en écriture, ou un seul réplica accessible en écriture et plusieurs réplicas en lecture seule.
+**Répliquez des données**. La réplication de données est une stratégie générale pour gérer les échecs non temporaires dans un magasin de données. De nombreuses technologies de stockage fournissent une réplication intégrée, notamment Stockage Azure, Azure SQL Database, Cosmos DB et Apache Cassandra. Il est important de tenir compte des chemins d’accès de lecture et d’écriture. Selon la technologie de stockage, vous pouvez trouver plusieurs réplicas accessibles en écriture, ou un seul réplica accessible en écriture et plusieurs réplicas en lecture seule.
 
 Pour optimiser la disponibilité, les réplicas peuvent être placés dans plusieurs régions. Toutefois, cela augmente la latence lors de la réplication des données. En règle générale, la réplication entre les régions est effectuée de manière asynchrone, ce qui implique un modèle de cohérence éventuel et une perte de données potentielle si un réplica échoue.
 

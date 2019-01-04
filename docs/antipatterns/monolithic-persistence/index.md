@@ -1,14 +1,16 @@
 ---
 title: Antimodèle de persistance monolithique
+titleSuffix: Performance antipatterns for cloud apps
 description: Rassembler toutes les données d’une application dans un magasin de données unique peut dégrader les performances.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 8cc67a41adf7ca4e3c5475eea86e38b75dd65d4d
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: c54a99dd0754cb2cb6cf4ad85b23a518c14a978b
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429109"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010254"
 ---
 # <a name="monolithic-persistence-antipattern"></a>Antimodèle de persistance monolithique
 
@@ -16,12 +18,12 @@ Rassembler toutes les données d’une application dans un magasin de données u
 
 ## <a name="problem-description"></a>Description du problème
 
-Historiquement, les applications ont souvent utilisé un magasin de données unique, quels que soit les types de données qu’elles devaient stocker. Généralement, le but était de simplifier la conception de l’application, ou bien de s’adapter aux compétences de l’équipe de développement. 
+Historiquement, les applications ont souvent utilisé un magasin de données unique, quels que soit les types de données qu’elles devaient stocker. Généralement, le but était de simplifier la conception de l’application, ou bien de s’adapter aux compétences de l’équipe de développement.
 
 Les systèmes cloud modernes ont souvent des exigences fonctionnelles et non fonctionnelles supplémentaires et ils doivent stocker de nombreux types de données hétérogènes, tels que des documents, des images, des données mises en cache, des messages en attente, des journaux d’applications et des données de télémétrie. Suivre l’approche traditionnelle et placer toutes ces informations dans un même magasin de données peut nuire aux performances, principalement pour deux raisons :
 
 - Stocker et récupérer de grandes quantités de données non liées dans le même magasin de données peut provoquer des conflits, conduisant à un ralentissement du temps de réponse et à des échecs de connexion.
-- Quel que soit le magasin de données choisi, il est possible qu’il ne soit le plus adapté à tous les types de données, ou bien il peut ne pas être optimisé pour les opérations réalisées par l’application. 
+- Quel que soit le magasin de données choisi, il est possible qu’il ne soit le plus adapté à tous les types de données, ou bien il peut ne pas être optimisé pour les opérations réalisées par l’application.
 
 L’exemple suivant montre un contrôleur d’API Web ASP.NET qui ajoute un nouvel enregistrement à une base de données et enregistre également le résultat dans un journal. Le journal est conservé dans la même base de données que les données d’entreprise. Vous pouvez trouver l’exemple complet [ici][sample-app].
 
@@ -43,7 +45,7 @@ La vitesse à laquelle les enregistrements de journal sont générés va probabl
 
 ## <a name="how-to-fix-the-problem"></a>Comment corriger le problème
 
-Séparez les données en fonction de leur utilisation. Pour chaque jeu de données, sélectionnez un magasin de données correspondant le mieux à leur future utilisation. Dans l’exemple précédent, l’application doit se connecter à un magasin distinct de la base de données contenant les données d’entreprise : 
+Séparez les données en fonction de leur utilisation. Pour chaque jeu de données, sélectionnez un magasin de données correspondant le mieux à leur future utilisation. Dans l’exemple précédent, l’application doit se connecter à un magasin distinct de la base de données contenant les données d’entreprise :
 
 ```csharp
 public class PolyController : ApiController
@@ -76,10 +78,10 @@ Il est probable que le système ralentisse considérablement et échoue, car il 
 Vous pouvez procédez de la manière suivante pour identifier la cause.
 
 1. Instrumentez le système pour enregistrer les statistiques de performance clés. Capturez les informations de minutage pour chaque opération, ainsi que les points où l’application lit et écrit des données.
-1. Si possible, surveillez le système en cours d’exécution pendant quelques jours dans un environnement de production pour obtenir une vision réelle de l’utilisation du système. Si ce n’est pas possible, exécutez des tests de charge scriptés avec un volume réaliste d’utilisateurs virtuels exécutant une série classique d’opérations.
-2. Utilisez les données de télémétrie pour identifier les périodes présentant des problèmes de performance.
-3. Identifiez les magasins de données consultés durant ces périodes.
-4. Identifiez les ressources de stockage de données pouvant rencontrer des problèmes de contention.
+2. Si possible, surveillez le système en cours d’exécution pendant quelques jours dans un environnement de production pour obtenir une vision réelle de l’utilisation du système. Si ce n’est pas possible, exécutez des tests de charge scriptés avec un volume réaliste d’utilisateurs virtuels exécutant une série classique d’opérations.
+3. Utilisez les données de télémétrie pour identifier les périodes présentant des problèmes de performance.
+4. Identifiez les magasins de données consultés durant ces périodes.
+5. Identifiez les ressources de stockage de données pouvant rencontrer des problèmes de contention.
 
 ## <a name="example-diagnosis"></a>Exemple de diagnostic
 
@@ -107,7 +109,7 @@ Le graphique suivant illustre l’utilisation des unités de débit de base de d
 
 ### <a name="examine-the-telemetry-for-the-data-stores"></a>Examiner les données de télémétrie pour les magasins de données
 
-Instrumentez les magasins de données pour capturer les détails de bas niveau de l’activité. Dans l’exemple d’application, les statistiques d’accès aux données ont montré un grand nombre d’opérations d’insertion effectuées sur les tables `PurchaseOrderHeader` et `MonoLog`. 
+Instrumentez les magasins de données pour capturer les détails de bas niveau de l’activité. Dans l’exemple d’application, les statistiques d’accès aux données ont montré un grand nombre d’opérations d’insertion effectuées sur les tables `PurchaseOrderHeader` et `MonoLog`.
 
 ![Les statistiques d’accès aux données pour l’exemple d’application][MonolithicDataAccessStats]
 
@@ -133,12 +135,11 @@ De même, l’utilisation maximale de la UDBD de la base de données de journaux
 
 ![La surveillance de la base de données dans le portail Azure classique montrant l’utilisation des ressources de la base de données dans le scénario polyglotte][LogDatabaseUtilization]
 
-
 ## <a name="related-resources"></a>Ressources associées
 
 - [Choisir le magasin de données correct][data-store-overview]
 - [Critères de sélection d’un magasin de données][data-store-comparison]
-- [Accès aux données pour les solutions hautement évolutives : Utilisation de la persistance SQL, NoSQL et polyglotte][Data-Access-Guide]
+- [Accès aux données pour les solutions hautement scalables : utilisation de SQL, NoSQL et la persistance polyglotte][Data-Access-Guide]
 - [Partitionnement des données][DataPartitioningGuidance]
 
 [sample-app]: https://github.com/mspnp/performance-optimization/tree/master/MonolithicPersistence

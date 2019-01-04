@@ -1,14 +1,16 @@
 ---
 title: Anti-modèle E/S synchrone
+titleSuffix: Performance antipatterns for cloud apps
 description: Bloquer le thread appelant lorsque l’E/S se termine peut réduire les performances et affecter l’extensibilité verticale.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 961eacb82344ec7e71aaa96fb4cd8bc530721e96
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 209295cfc911ae168bca2f1c64dc930a27a9a4ba
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429007"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009336"
 ---
 # <a name="synchronous-io-antipattern"></a>Anti-modèle E/S synchrone
 
@@ -27,9 +29,9 @@ Voici quelques exemples courants d’E/S :
 
 Cet antimodèle survient généralement pour les raisons suivantes :
 
-- Cela semble être la manière la plus intuitive d’effectuer une opération. 
+- Cela semble être la manière la plus intuitive d’effectuer une opération.
 - L’application requiert une réponse d’une requête.
-- L’application utilise une bibliothèque qui fournit uniquement des méthodes synchrones pour E/S. 
+- L’application utilise une bibliothèque qui fournit uniquement des méthodes synchrones pour E/S.
 - Une bibliothèque externe effectue les opérations d’E/S synchrones en interne. Un seul appel d’E/S synchrone peut bloquer une chaîne d’appel entière.
 
 Le code suivant télécharge un fichier vers le stockage d’objets blob Azure. Il existe deux emplacements où les blocs de code sont en attente d’E/S synchrones, la méthode `CreateIfNotExists` et la méthode `UploadFromStream`.
@@ -77,7 +79,7 @@ Vous pouvez trouver le code complet pour ces deux exemples [ici][sample-app].
 
 ## <a name="how-to-fix-the-problem"></a>Comment corriger le problème
 
-Remplacez les opérations d’E/S synchrones avec des opérations asynchrones. Cela libère le thread actuel pour continuer à effectuer un travail pertinent plutôt que de le bloquer et contribue à améliorer l’utilisation des ressources de calcul. L’exécution d’E/S de façon asynchrone est particulièrement efficace pour gérer un bond inattendu du nombre de demandes des applications clientes. 
+Remplacez les opérations d’E/S synchrones avec des opérations asynchrones. Cela libère le thread actuel pour continuer à effectuer un travail pertinent plutôt que de le bloquer et contribue à améliorer l’utilisation des ressources de calcul. L’exécution d’E/S de façon asynchrone est particulièrement efficace pour gérer un bond inattendu du nombre de demandes des applications clientes.
 
 De nombreuses bibliothèques fournissent des versions synchrones et asynchrones des méthodes. Lorsque c’est possible, utilisez les versions asynchrones. Voici la version asynchrone de l’exemple précédent qui télécharge un fichier sur le stockage d’objets blob Azure.
 
@@ -123,7 +125,7 @@ public class AsyncController : ApiController
 }
 ```
 
-Pour les bibliothèques qui ne fournissent pas de versions asynchrones des opérations, il peut être possible de créer des wrappers asynchrones autour des méthodes synchrones sélectionnées. Suivez cette approche avec précaution. Bien qu’elle puisse améliorer les temps de réponse sur le thread qui appelle le wrapper asynchrone, elle consomme réellement davantage de ressources. Un thread supplémentaire peut être créé, résultant en une surcharge associée à la synchronisation du travail effectué par ce thread. Certains inconvénients sont présentés dans ce billet de blog : [Should I expose asynchronous wrappers for synchronous methods?][async-wrappers] (Dois-je exposer les wrappers asynchrones pour les méthodes synchrones ?)
+Pour les bibliothèques qui ne fournissent pas de versions asynchrones des opérations, il peut être possible de créer des wrappers asynchrones autour des méthodes synchrones sélectionnées. Suivez cette approche avec précaution. Bien qu’elle puisse améliorer les temps de réponse sur le thread qui appelle le wrapper asynchrone, elle consomme réellement davantage de ressources. Un thread supplémentaire peut être créé, résultant en une surcharge associée à la synchronisation du travail effectué par ce thread. Certains inconvénients sont présentés dans ce billet de blog : [Should I expose asynchronous wrappers for synchronous methods?][async-wrappers]
 
 Voici un exemple d’un wrapper asynchrone autour d’une méthode synchrone.
 
@@ -193,16 +195,10 @@ Le graphique suivant affiche les résultats du test de charge de la version asyn
 
 Le débit est beaucoup plus élevé. Sur la même durée que le test précédent, le système gère correctement un débit presque dix fois supérieur, exprimé en nombre de requêtes par seconde. En outre, le temps de réponse moyen est relativement constant et reste environ 25 fois plus court que pour le test précédent.
 
-
 [sample-app]: https://github.com/mspnp/performance-optimization/tree/master/SynchronousIO
-
-
 [async-wrappers]: https://blogs.msdn.microsoft.com/pfxteam/2012/03/24/should-i-expose-asynchronous-wrappers-for-synchronous-methods/
 [performance-counters]: /azure/cloud-services/cloud-services-dotnet-diagnostics-performance-counters
 [web-sites-monitor]: /azure/app-service-web/web-sites-monitor
 
 [sync-performance]: _images/SyncPerformance.jpg
 [async-performance]: _images/AsyncPerformance.jpg
-
-
-

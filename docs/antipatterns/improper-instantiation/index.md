@@ -1,25 +1,27 @@
 ---
 title: Antimodèle d’instanciation incorrect
+titleSuffix: Performance antipatterns for cloud apps
 description: Évitez de créer continuellement de nouvelles instances d’un objet destiné à être créé une seule fois, puis partagé.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 4d5ef9ad9e675b46df94b51e81d7a4bd4c1b25e9
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.custom: seodec18
+ms.openlocfilehash: b92ae5f5e79a0ababf44d7aa2d771d4d72900cae
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/23/2018
-ms.locfileid: "29477578"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009916"
 ---
 # <a name="improper-instantiation-antipattern"></a>Antimodèle d’instanciation incorrect
 
-Le fait de créer continuellement de nouvelles instances d’un objet destiné à être créé une seule fois, puis partagé, peut affecter les performances. 
+Le fait de créer continuellement de nouvelles instances d’un objet destiné à être créé une seule fois, puis partagé, peut affecter les performances.
 
 ## <a name="problem-description"></a>Description du problème
 
 De nombreuses bibliothèques fournissent des abstractions de ressources externes. En interne, ces classes gèrent généralement leurs propres connexions à la ressource, en agissant comme des répartiteurs que les clients peuvent utiliser pour accéder à la ressource. Voici quelques exemples de classes de répartiteurs appropriées pour les applications Azure :
 
 - `System.Net.Http.HttpClient`. Communique avec un service web à l’aide du protocole HTTP.
-- `Microsoft.ServiceBus.Messaging.QueueClient`. Publie et reçoit des messages sur une file d’attente Service Bus. 
+- `Microsoft.ServiceBus.Messaging.QueueClient`. Publie et reçoit des messages sur une file d’attente Service Bus.
 - `Microsoft.Azure.Documents.Client.DocumentClient`. Se connecte à une instance Cosmos DB
 - `StackExchange.Redis.ConnectionMultiplexer`. Se connecte à Redis, y compris le Cache Redis Azure.
 
@@ -100,15 +102,17 @@ public class SingleHttpClientInstanceController : ApiController
 
 - Les objets que vous partagez sur plusieurs requêtes *doivent* être thread-safe. La classe `HttpClient` est conçue pour être utilisée de cette manière, mais les autres classes ne peuvent pas en charge des requêtes simultanées. Par conséquent, reportez-vous à la documentation disponible.
 
+- Attention lors de la définition des propriétés sur les objets partagés, car cette opération peut entraîner des conditions de concurrence. Par exemple, la définition de `DefaultRequestHeaders` sur la classe `HttpClient` avant chaque demande peut créer une condition de concurrence. Définissez ces propriétés une seule fois (par exemple, au démarrage) et créez des instances distinctes, si vous avez besoin de configurer des paramètres différents.
+
 - Certains types de ressources sont rares et ne doivent pas y être conservés, comme les connexions de base de données. Le maintien d’une connexion de base de données qui n’est pas requise peut empêcher les autres utilisateurs simultanés d’accéder à la base de données.
 
-- Dans le .NET Framework, de nombreux objets établissant des connexions à des ressources externes sont créés à l’aide de méthodes de fabrique statiques d’autres classes qui gèrent ces connexions. Ces objets de fabrique sont destinés à être enregistrés et réutilisés, plutôt que supprimés et recréés. Par exemple, dans Microsoft Azure Service Bus, l’objet `QueueClient` est créé via un objet `MessagingFactory`. En interne, `MessagingFactory` gère les connexions. Pour plus d’informations, consultez [Meilleures pratiques relatives aux améliorations de performances à l’aide de la messagerie Service Bus][service-bus-messaging].
+- Dans le .NET Framework, de nombreux objets établissant des connexions à des ressources externes sont créés à l’aide de méthodes de fabrique statiques d’autres classes qui gèrent ces connexions. Ces objets sont destinés à être enregistrés et réutilisés, plutôt que supprimés et recréés. Par exemple, dans Microsoft Azure Service Bus, l’objet `QueueClient` est créé via un objet `MessagingFactory`. En interne, `MessagingFactory` gère les connexions. Pour plus d’informations, consultez [Meilleures pratiques relatives aux améliorations de performances à l’aide de la messagerie Service Bus][service-bus-messaging].
 
 ## <a name="how-to-detect-the-problem"></a>Comment détecter le problème
 
-Ce problème inclut une baisse de débit et une augmentation du taux d’erreur, ainsi qu’un ou plusieurs symptômes parmi les suivants : 
+Ce problème inclut une baisse de débit et une augmentation du taux d’erreur, ainsi qu’un ou plusieurs symptômes parmi les suivants :
 
-- Une augmentation des exceptions indiquant l’insuffisance de ressources, telles que les sockets, les connexions de base de données, les descripteurs de fichiers etc. 
+- Une augmentation des exceptions indiquant l’insuffisance de ressources, telles que les sockets, les connexions de base de données, les descripteurs de fichiers etc.
 - Une utilisation de la mémoire et un nettoyage de la mémoire accrus.
 - Une augmentation de l’activité du réseau, du disque ou de la base de données.
 
@@ -119,7 +123,7 @@ Vous pouvez procéder de la manière suivante pour identifier ce problème :
 3. Effectuez un test de charge de chaque opération suspectée au sein d’un environnement de test contrôlé plutôt que dans le système de production.
 4. Passez en revue le code source et examinez la façon dont les objets du répartiteur sont gérés.
 
-Examinez l’arborescence des appels de procédure pour les opérations lentes ou celles qui génèrent des exceptions lorsque le système est sous charge. Ces informations peuvent aider à identifier la manière dont ces opérations utilisent les ressources. Les exceptions peuvent permettre de déterminer si les erreurs sont provoquées par l’épuisement des ressources partagées. 
+Examinez l’arborescence des appels de procédure pour les opérations lentes ou celles qui génèrent des exceptions lorsque le système est sous charge. Ces informations peuvent aider à identifier la manière dont ces opérations utilisent les ressources. Les exceptions peuvent permettre de déterminer si les erreurs sont provoquées par l’épuisement des ressources partagées.
 
 ## <a name="example-diagnosis"></a>Exemple de diagnostic
 
@@ -127,7 +131,7 @@ Les sections suivantes appliquent ces étapes à l’exemple d’application dé
 
 ### <a name="identify-points-of-slow-down-or-failure"></a>Identifier les points de ralentissement ou d’échec
 
-L’illustration suivante montre les résultats générés à l’aide de l’[APM New Relic][new-relic], affichant les opérations dont le temps de réponse est médiocre. Dans ce cas, la méthode `GetProductAsync` du contrôleur `NewHttpClientInstancePerRequest` mérite un examen plus approfondi. Notez que le taux d’erreur augmente également lorsque ces opérations sont en cours d’exécution. 
+L’illustration suivante montre les résultats générés à l’aide de l’[APM New Relic][new-relic], affichant les opérations dont le temps de réponse est médiocre. Dans ce cas, la méthode `GetProductAsync` du contrôleur `NewHttpClientInstancePerRequest` mérite un examen plus approfondi. Notez que le taux d’erreur augmente également lorsque ces opérations sont en cours d’exécution.
 
 ![Tableau de bord d’analyse New Relic montrant l’exemple d’application créant une nouvelle instance d’un objet HttpClient pour chaque requête][dashboard-new-HTTPClient-instance]
 
@@ -143,7 +147,7 @@ Pour simuler les opérations courantes que les utilisateurs peuvent effectuer, u
 
 ![Débit de l’exemple d’application créant une nouvelle instance d’un objet HttpClient pour chaque requête][throughput-new-HTTPClient-instance]
 
-Dans un premier temps, le volume des requêtes traitées par seconde augmente à mesure que la charge de travail s’accroît. Toutefois, à environ 30 utilisateurs, le volume des requêtes réussies atteint une limite et le système commence à générer des exceptions. Dès lors, le volume d’exceptions augmente progressivement avec la charge utilisateur. 
+Dans un premier temps, le volume des requêtes traitées par seconde augmente à mesure que la charge de travail s’accroît. Toutefois, à environ 30 utilisateurs, le volume des requêtes réussies atteint une limite et le système commence à générer des exceptions. Dès lors, le volume d’exceptions augmente progressivement avec la charge utilisateur.
 
 Le test de charge a signalé ces échecs sous forme d’erreurs HTTP 500 (serveur interne). L’examen de la télémétrie a montré que ces erreurs ont été causées par l’exécution du système en dehors des ressources de socket, au fur et à mesure de l’augmentation du nombre d’objets `HttpClient` créés.
 
@@ -163,11 +167,9 @@ Après avoir changé la méthode `GetProductAsync` pour partager une seule insta
 
 ![Profileur de thread New Relic montrant l’exemple d’application créant une seule instance d’un objet HttpClient pour toutes les requêtes][thread-profiler-single-HTTPClient-instance]
 
-Le graphique suivant montre un test de charge similaire utilisant une instance partagée de l’objet `ExpensiveToCreateService`. Là encore, le volume de requêtes traitées augmente en fonction de la charge utilisateur, tandis que le temps de réponse moyen reste faible. 
+Le graphique suivant montre un test de charge similaire utilisant une instance partagée de l’objet `ExpensiveToCreateService`. Là encore, le volume de requêtes traitées augmente en fonction de la charge utilisateur, tandis que le temps de réponse moyen reste faible.
 
 ![Débit de l’exemple d’application réutilisant la même instance d’un objet HttpClient pour chaque requête][throughput-single-ExpensiveToCreateService-instance]
-
-
 
 [sample-app]: https://github.com/mspnp/performance-optimization/tree/master/ImproperInstantiation
 [service-bus-messaging]: /azure/service-bus-messaging/service-bus-performance-improvements

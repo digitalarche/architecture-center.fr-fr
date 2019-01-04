@@ -1,18 +1,20 @@
 ---
 title: Absence d’antimodèle de mise en cache
+titleSuffix: Performance antipatterns for cloud apps
 description: Extraire plusieurs fois les mêmes données peut réduire les performances et l’évolutivité.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: ec19cde567fb63248c121328322e834d99c841e8
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.custom: seodec18
+ms.openlocfilehash: c2a5cdbb8863f87b8928558c8237e8659032ac32
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295580"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011597"
 ---
 # <a name="no-caching-antipattern"></a>Absence d’antimodèle de mise en cache
 
-Dans une application cloud gérant de nombreuses requêtes simultanées, l’extraction répétée de mêmes données peut réduire l’évolutivité et les performances. 
+Dans une application cloud gérant de nombreuses requêtes simultanées, l’extraction répétée de mêmes données peut réduire l’évolutivité et les performances.
 
 ## <a name="problem-description"></a>Description du problème
 
@@ -46,7 +48,7 @@ Vous trouverez l’exemple complet [ici][sample-app].
 
 Cet antimodèle survient généralement pour les raisons suivantes :
 
-- Le fait de ne pas utiliser de cache est plus simple à implémenter et fonctionne bien en cas de faible charge. La mise en cache rend le code plus complexe. 
+- Le fait de ne pas utiliser de cache est plus simple à implémenter et fonctionne bien en cas de faible charge. La mise en cache rend le code plus complexe.
 - Les avantages et les inconvénients liés à l’utilisation d’un cache ne sont pas clairement compris.
 - Un problème se pose quant à la surcharge liée à la gestion de l’exactitude et de l’actualisation des données mises en cache.
 - Une application a été migrée depuis un système local, où la latence du réseau n’était pas un problème. De plus, le système s’exécutait sur un matériel coûteux très performant, si bien que la mise en cache n’a pas été prise en compte dans de la conception d’origine.
@@ -59,7 +61,7 @@ La stratégie de mise en cache la plus populaire est la stratégie *à la demand
 - Lors de la lecture, l’application tente de lire les données à partir du cache. Si les données ne sont pas dans le cache, l’application les récupère à partir de la source de données et les ajoute au cache.
 - Lors de l’écriture, l’application écrit la modification directement dans la source de données et supprime l’ancienne valeur du cache. Elle est récupérée et ajoutée au cache dès qu’elle est nécessaire.
 
-Cette approche est appropriée pour les données changeant fréquemment. Voici l’exemple précédent mis à jour pour utiliser le modèle [Cache-Aside][cache-aside-pattern].  
+Cette approche est appropriée pour les données changeant fréquemment. Voici l’exemple précédent mis à jour pour utiliser le modèle [Cache-Aside][cache-aside-pattern].
 
 ```csharp
 public class CachedPersonRepository : IPersonRepository
@@ -100,7 +102,7 @@ public class CacheService
 }
 ```
 
-Notez que la méthode `GetAsync` appelle désormais la classe `CacheService` au lieu d’appeler directement la base de données. La classe `CacheService` tente d’abord d’obtenir l’élément à partir du Cache Redis Microsoft Azure. Si la valeur est introuvable dans le Cache Redis, la méthode `CacheService` appelle une fonction lambda qui lui a été transmise par l’appelant. La fonction lambda est responsable de la récupération des données à partir de la base de données. Cette implémentation dissocie le référentiel à partir de la solution de mise en cache spécifique et l’élément `CacheService` de la base de données. 
+Notez que la méthode `GetAsync` appelle désormais la classe `CacheService` au lieu d’appeler directement la base de données. La classe `CacheService` tente d’abord d’obtenir l’élément à partir du Cache Redis Microsoft Azure. Si la valeur est introuvable dans le Cache Redis, la méthode `CacheService` appelle une fonction lambda qui lui a été transmise par l’appelant. La fonction lambda est responsable de la récupération des données à partir de la base de données. Cette implémentation dissocie le référentiel à partir de la solution de mise en cache spécifique et l’élément `CacheService` de la base de données.
 
 ## <a name="considerations"></a>Considérations
 
@@ -112,11 +114,11 @@ Notez que la méthode `GetAsync` appelle désormais la classe `CacheService` au 
 
 - Vous n’êtes pas obligé de mettre en cache des entités complètes. Si la majeure partie d’une entité est statique, et que seule une petite partie est modifiée fréquemment, mettez en cache les éléments statiques et récupérez les éléments dynamiques de la source de données. Cette approche peut contribuer à réduire le volume d’E/S en cours d’exécution par rapport à la source de données.
 
-- Dans certains cas, si des données volatiles sont de courte durée, il peut être utile de les mettre en cache. Prenons par exemple un appareil qui envoie continuellement des mises à jour. Il peut être judicieux de mettre en cache ces informations dès leur arrivée et de ne pas les écrire dans un magasin persistant.  
+- Dans certains cas, si des données volatiles sont de courte durée, il peut être utile de les mettre en cache. Prenons par exemple un appareil qui envoie continuellement des mises à jour. Il peut être judicieux de mettre en cache ces informations dès leur arrivée et de ne pas les écrire dans un magasin persistant.
 
 - Pour empêcher les données de devenir obsolètes, de nombreuses solutions de mise en cache prennent en charge des périodes d’expiration configurables, afin que les données soient supprimées automatiquement du cache après un intervalle spécifique. Vous devrez peut-être régler l’heure d’expiration de votre scénario. Les données hautement statiques peuvent rester dans le cache plus longtemps que les données volatiles qui deviennent rapidement obsolètes.
 
-- Si la solution de mise en cache ne propose pas d’expiration intégrée, vous devrez peut-être implémenter un processus en arrière-plan qui balaie occasionnellement le cache et l’empêche de croître sans limite. 
+- Si la solution de mise en cache ne propose pas d’expiration intégrée, vous devrez peut-être implémenter un processus en arrière-plan qui balaie occasionnellement le cache et l’empêche de croître sans limite.
 
 - Outre la mise en cache des données à partir d’une source de données externe, vous pouvez utiliser la mise en cache pour enregistrer les résultats de calculs complexes. Avant cela, il convient toutefois d’instrumenter l’application pour déterminer si elle est réellement liée à l’UC.
 
@@ -130,16 +132,15 @@ Notez que la méthode `GetAsync` appelle désormais la classe `CacheService` au 
 
 Vous pouvez effectuer les étapes suivantes afin de déterminer si l’absence de mise en cache est à l’origine des problèmes de performances :
 
-1. Vérifiez la conception de l’application. Effectuez un inventaire de tous les magasins de données utilisés par l’application. Pour chacun, déterminez si l’application utilise un cache. Si possible, déterminez la fréquence à laquelle les données sont modifiées. Les données qui évoluent lentement et les données de référence statiques fréquemment lues sont dans un premier temps de bonnes candidates à la mise en cache. 
+1. Vérifiez la conception de l’application. Effectuez un inventaire de tous les magasins de données utilisés par l’application. Pour chacun, déterminez si l’application utilise un cache. Si possible, déterminez la fréquence à laquelle les données sont modifiées. Les données qui évoluent lentement et les données de référence statiques fréquemment lues sont dans un premier temps de bonnes candidates à la mise en cache.
 
 2. Instrumentez l’application et analysez le système pour déterminer la fréquence à laquelle l’application récupère des données ou calcule des informations.
 
 3. Profilez l’application dans un environnement de test pour capturer des métriques de bas niveau concernant la surcharge associée aux opérations d’accès aux données ou aux calculs effectués fréquemment.
 
-4. Effectuez un test de charge dans un environnement de test pour identifier la manière dont le système répond sous une charge de travail normale et sous une charge importante. Le test de charge doit simuler le modèle d’accès aux données observé dans l’environnement de production à l’aide de charges de travail réalistes. 
+4. Effectuez un test de charge dans un environnement de test pour identifier la manière dont le système répond sous une charge de travail normale et sous une charge importante. Le test de charge doit simuler le modèle d’accès aux données observé dans l’environnement de production à l’aide de charges de travail réalistes.
 
-5. Examinez les statistiques d’accès aux données pour les magasins de données sous-jacents et vérifiez la fréquence à laquelle les mêmes requêtes de données sont répétées. 
-
+5. Examinez les statistiques d’accès aux données pour les magasins de données sous-jacents et vérifiez la fréquence à laquelle les mêmes requêtes de données sont répétées.
 
 ## <a name="example-diagnosis"></a>Exemple de diagnostic
 
@@ -147,17 +148,17 @@ Les sections suivantes appliquent ces étapes à l’exemple d’application dé
 
 ### <a name="instrument-the-application-and-monitor-the-live-system"></a>Instrumenter l’application et analyser le système dynamique
 
-Instrumentez l’application et analysez-la pour obtenir des informations sur les requêtes spécifiques effectuées par les utilisateurs lorsque l’application est en production. 
+Instrumentez l’application et analysez-la pour obtenir des informations sur les requêtes spécifiques effectuées par les utilisateurs lorsque l’application est en production.
 
 L’illustration suivante montre les données d’analyse capturées par [New Relic] [ NewRelic] pendant un test de charge. Dans ce cas, la seule opération HTTP GET effectuée est `Person/GetAsync`. Toutefois, dans un environnement de production dynamique, le fait de connaître la fréquence relative à laquelle chaque requête est effectuée peut vous donner un aperçu des ressources à mettre en cache.
 
 ![New Relic montrant des requêtes de serveur pour l’application CachingDemo][NewRelic-server-requests]
 
-Si vous avez besoin d’une analyse plus approfondie, vous pouvez utiliser un générateur de profils pour capturer les données dont les performances sont faibles dans un environnement de test (et non le système de production). Examinez les métriques, telles que le taux de demandes d’E/S, l’utilisation de la mémoire et du processeur. Ces dernières peuvent montrer un grand nombre de requêtes vers un magasin de données ou un service ou un traitement répété qui effectue le même calcul. 
+Si vous avez besoin d’une analyse plus approfondie, vous pouvez utiliser un générateur de profils pour capturer les données dont les performances sont faibles dans un environnement de test (et non le système de production). Examinez les métriques, telles que le taux de demandes d’E/S, l’utilisation de la mémoire et du processeur. Ces dernières peuvent montrer un grand nombre de requêtes vers un magasin de données ou un service ou un traitement répété qui effectue le même calcul.
 
 ### <a name="load-test-the-application"></a>Effectuer un test de charge de l’application
 
-Le graphique suivant montre les résultats du test de charge de l’exemple d’application. Le test de charge simule une charge par étape pouvant atteindre 800 utilisateurs effectuant une série classique d’opérations. 
+Le graphique suivant montre les résultats du test de charge de l’exemple d’application. Le test de charge simule une charge par étape pouvant atteindre 800 utilisateurs effectuant une série classique d’opérations.
 
 ![Résultats du test de charge portant sur les performances pour le scénario de non mise en cache][Performance-Load-Test-Results-Uncached]
 
@@ -178,7 +179,7 @@ La colonne `UseCount` dans les résultats indique la fréquence d’exécution d
 
 ![Résultats de l’interrogation des vues de gestion dynamique dans SQL Server Management Server][Dynamic-Management-Views]
 
-Voici la requête SQL à l’origine des si nombreuses requêtes de base de données : 
+Voici la requête SQL à l’origine des si nombreuses requêtes de base de données :
 
 ```SQL
 (@p__linq__0 int)SELECT TOP (2)
@@ -197,12 +198,12 @@ Après avoir intégré un cache, répétez les tests de charge et comparez les r
 
 ![Résultats du test de charge portant sur les performances pour le scénario de mise en cache][Performance-Load-Test-Results-Cached]
 
-Le volume de tests réussis se stabilise, mais à une charge utilisateur plus élevée. Le taux de requêtes à cette charge est beaucoup plus important que le précédent. La durée moyenne du test augmente sans cesse avec la charge, toutefois le temps de réponse maximal est de 0,05 ms, comparé à 1 ms précédemment &mdash;, soit une amélioration de 20&times;. 
+Le volume de tests réussis se stabilise, mais à une charge utilisateur plus élevée. Le taux de requêtes à cette charge est beaucoup plus important que le précédent. La durée moyenne du test augmente sans cesse avec la charge, toutefois le temps de réponse maximal est de 0,05 ms, comparé à 1 ms précédemment &mdash;, soit une amélioration de 20&times;.
 
 ## <a name="related-resources"></a>Ressources associées
 
 - [Meilleures pratiques de mise en œuvre des API][api-implementation]
-- [Modèle de type cache-Aside][cache-aside-pattern]
+- [Modèle Cache-Aside][cache-aside-pattern]
 - [Meilleures pratiques en matière de mise en cache][caching-guidance]
 - [Modèle Disjoncteur][circuit-breaker]
 

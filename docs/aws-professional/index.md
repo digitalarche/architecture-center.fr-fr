@@ -5,12 +5,12 @@ keywords: Experts AWS, comparaison de Azure, comparaison de AWS, différences en
 author: lbrader
 ms.date: 09/19/2018
 pnp.series.title: Azure for AWS Professionals
-ms.openlocfilehash: 0735d24b223a5e5cab6030774280c038c28f35e6
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.openlocfilehash: e6077349a285df56d234f3cc2a14dc0d0d33da55
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916683"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011665"
 ---
 # <a name="azure-for-aws-professionals"></a>Azure pour les professionnels AWS
 
@@ -63,7 +63,7 @@ Ces limites peuvent être augmentées jusqu’à la limite maximale grâce au [d
 
 Le terme « ressource » dans Azure est utilisé de la même façon que dans AWS, référant à n’importe quel objet de stockage, instance de calcul, périphérique réseau ou toute autre entité que vous pouvez créer ou configurer au sein de la plateforme.
 
-Les ressources Azure sont déployées et gérées à partir de l’un des deux modèles suivants : [Azure Resource Manager](/azure/azure-resource-manager/resource-group-overview) ou le [modèle de déploiement classique Azure](/azure/azure-resource-manager/resource-manager-deployment-model) plus ancien.
+Les ressources Azure sont déployées et gérées à l’aide de l’un des deux modèles : [Azure Resource Manager](/azure/azure-resource-manager/resource-group-overview) ou le [modèle de déploiement Azure Classic](/azure/azure-resource-manager/resource-manager-deployment-model), plus ancien.
 Chaque nouvelle ressource est créée à l’aide du modèle de gestionnaire des ressources.
 
 ### <a name="resource-groups"></a>Groupes de ressources
@@ -174,7 +174,7 @@ Bien que les types d’instance de AWS et les tailles de machine virtuelle de Az
 
 -   [Tailles des machines virtuelles dans Azure (Linux)](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/)
 
-Contrairement à la facturation par seconde de AWS, les machines virtuelles Azure à la demande sont facturées à la minute.
+À l’image de la facturation par seconde d’AWS, les machines virtuelles Azure à la demande sont aussi facturées à la seconde.
 
 #### <a name="ebs-and-azure-storage-for-vm-disks"></a>EBS et stockage Azure pour les disques de machine virtuelle
 
@@ -217,11 +217,11 @@ Azure offre plusieurs services de calcul qui n’ont pas d’équivalents direct
 
 -   [Création d’une machine virtuelle Linux sur Azure à l’aide du portail](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-quick-create-portal/)
 
--   [Architectures de référence Azure : exécution d’une machine virtuelle Linux sur Azure](https://azure.microsoft.com/documentation/articles/guidance-compute-single-vm-linux/)
+-   [Architecture de référence Azure : Exécution d’une machine virtuelle Linux sur Azure](https://azure.microsoft.com/documentation/articles/guidance-compute-single-vm-linux/)
 
 -   [Prise en main des applications web Node.js dans Azure App Service](https://azure.microsoft.com/documentation/articles/app-service-web-nodejs-get-started/)
 
--   [Architecture de référence Azure : application web de base](https://azure.microsoft.com/documentation/articles/guidance-web-apps-basic/)
+-   [Architecture de référence Azure : Application web de base](https://azure.microsoft.com/documentation/articles/guidance-web-apps-basic/)
 
 -   [Créer votre première fonction Azure](https://azure.microsoft.com/documentation/articles/functions-create-first-azure-function/)
 
@@ -258,7 +258,7 @@ Dans le cas des données qui sont peu consultées mais qui doivent être immédi
 
 -   [Guide de sécurité du Stockage Azure](https://azure.microsoft.com/documentation/articles/storage-security-guide/)
 
--   [Modèles et pratique : Aide relative au réseau de distribution de contenu (CDN)](https://azure.microsoft.com/documentation/articles/best-practices-cdn/)
+-   [Meilleures pratiques : Réseaux de distribution de contenu (CDN)](https://azure.microsoft.com/documentation/articles/best-practices-cdn/)
 
 ### <a name="networking"></a>Mise en réseau
 
@@ -310,7 +310,7 @@ Les coûts pour RDS de AWS sont déterminés par la quantité de ressources mat�
 
 -   [Configurer la géoréplication pour Azure SQL Database avec le portail Azure](https://azure.microsoft.com/documentation/articles/sql-database-geo-replication-portal/)
 
--   [Présentation de Cosmos DB : une base de données NoSQL JSON](/azure/cosmos-db/sql-api-introduction)
+-   [Introduction à Cosmos DB : Base de données NoSQL JSON](/azure/cosmos-db/sql-api-introduction)
 
 -   [Utilisation du stockage Table Azure à partir de Node.js](https://azure.microsoft.com/documentation/articles/storage-nodejs-how-to-use-table-storage/)
 

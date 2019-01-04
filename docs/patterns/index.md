@@ -1,14 +1,14 @@
 ---
 title: Modèles de conception de cloud
-description: Modèles de conception de cloud pour Microsoft Azure
+description: Modèles de conception cloud pour développer des applications fiables, scalables et sécurisées dans le cloud
 keywords: Azure
 ms.date: 12/10/2018
-ms.openlocfilehash: 26ee59ef15fc63bb5e823cd85f610cd9ad01177a
-ms.sourcegitcommit: 9a15af3a25f25b8730968d32cbb006434b183e18
+ms.openlocfilehash: 6965f4ba19bb465c4afc0e0c355b32bde8944823
+ms.sourcegitcommit: fb22348f917a76e30a6c090fcd4a18decba0b398
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/11/2018
-ms.locfileid: "53234048"
+ms.lasthandoff: 12/16/2018
+ms.locfileid: "53450851"
 ---
 # <a name="cloud-design-patterns"></a>Modèles de conception de cloud
 
