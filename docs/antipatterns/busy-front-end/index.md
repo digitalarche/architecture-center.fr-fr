@@ -1,14 +1,16 @@
 ---
 title: Antimodèle Serveur frontal occupé
+titleSuffix: Performance antipatterns for cloud apps
 description: L’exécution d’un travail asynchrone sur un grand nombre de threads d’arrière-plan peut priver les tâches de premier plan de ressources.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 89a2d6c41af1e19ca1b9b6a0a5dceac615afd60a
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: f52cedde5a17f098fb9218c48479fae981a2c7df
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428293"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011495"
 ---
 # <a name="busy-front-end-antipattern"></a>Antimodèle Serveur frontal occupé
 
@@ -62,11 +64,11 @@ La principale préoccupation concerne les besoins en ressources de la méthode `
 
 ## <a name="how-to-fix-the-problem"></a>Comment corriger le problème
 
-Déplacez les processus qui consomment de nombreuses ressources sur un serveur principal distinct. 
+Déplacez les processus qui consomment de nombreuses ressources sur un serveur principal distinct.
 
 Avec cette approche, le serveur frontal place les tâches nécessitant de nombreuses ressources dans une file d’attente. Le serveur principal récupère les tâches à des fins de traitement asynchrone. La file d’attente assure également le nivellement de la charge, mettant les requêtes en tampon pour le serveur principal. Si la file d’attente devient trop longue, vous pouvez configurer la mise à l’échelle automatique pour augmenter la taille des instances du serveur principal.
 
-Voici une version révisée du code précédent. Dans cette version, la méthode `Post` place un message dans une file d’attente Service Bus. 
+Voici une version révisée du code précédent. Dans cette version, la méthode `Post` place un message dans une file d’attente Service Bus.
 
 ```csharp
 public class WorkInBackgroundController : ApiController
@@ -121,7 +123,7 @@ public async Task RunAsync(CancellationToken cancellationToken)
 - Cette approche rend l’application un peu plus complexe. Vous devez gérer la mise en file d’attente et le retrait de la file d’attente de manière sûre pour éviter la perte de requêtes en cas de défaillance.
 - L’application devient dépendante d’un service supplémentaire pour la file d’attente de messages.
 - L’environnement de traitement doit être suffisamment évolutif pour gérer la charge de travail attendue et atteindre les objectifs de débit requis.
-- Même si cette approche devrait normalement améliorer la réactivité globale, l’exécution des tâches déplacées sur le serveur principal peut prendre plus de temps. 
+- Même si cette approche devrait normalement améliorer la réactivité globale, l’exécution des tâches déplacées sur le serveur principal peut prendre plus de temps.
 
 ## <a name="how-to-detect-the-problem"></a>Comment détecter le problème
 
@@ -130,12 +132,12 @@ Les symptômes d’un serveur frontal occupé incluent une latence élevée pend
 Vous pouvez procéder de la manière suivante pour identifier ce problème :
 
 1. Analysez le processus du système de production afin d’identifier les points où les temps de réponse augmentent.
-2. Examinez les données de télémétrie enregistrées à ces points pour déterminer les opérations exécutées en même temps et les ressources utilisées. 
+2. Examinez les données de télémétrie enregistrées à ces points pour déterminer les opérations exécutées en même temps et les ressources utilisées.
 3. Recherchez les corrélations entre les temps de réponse médiocres et les volumes et combinaisons d’opérations observés à ces moments-là.
-4. Procédez à un test de charge de chaque opération suspectée pour identifier les opérations qui consomment de nombreuses ressources et nuisent ainsi aux autres opérations. 
+4. Procédez à un test de charge de chaque opération suspectée pour identifier les opérations qui consomment de nombreuses ressources et nuisent ainsi aux autres opérations.
 5. Révisez le code source de ces opérations afin de déterminer les raisons potentielles de cette consommation excessive de ressources.
 
-## <a name="example-diagnosis"></a>Exemple de diagnostic 
+## <a name="example-diagnosis"></a>Exemple de diagnostic
 
 Les sections suivantes appliquent ces étapes à l’exemple d’application décrit précédemment.
 
@@ -155,18 +157,17 @@ L’image suivante illustre quelques-unes des mesures collectées pour surveille
 
 À ce stade, la méthode `Post` dans le contrôleur `WorkInFrontEnd` semble être un candidat de choix pour un examen plus approfondi. Un travail supplémentaire dans un environnement contrôlé est nécessaire pour confirmer cette hypothèse.
 
-### <a name="perform-load-testing"></a>Effectuer des tests de charge 
+### <a name="perform-load-testing"></a>Effectuer des tests de charge
 
 L’étape suivante consiste à effectuer des tests dans un environnement contrôlé. Par exemple, vous pouvez exécuter une série de tests de charge qui incluent puis omettent successivement chaque requête pour observer les effets.
 
-Le graphique ci-dessous montre les résultats d’un test de charge effectué sur un déploiement identique du service cloud utilisé dans les tests précédents. Pour ce test, une charge constante de 500 utilisateurs exécutant l’opération `Get` dans le contrôleur `UserProfile` et une charge progressive d’utilisateurs exécutant l’opération `Post` dans le contrôleur `WorkInFrontEnd` ont été utilisées. 
+Le graphique ci-dessous montre les résultats d’un test de charge effectué sur un déploiement identique du service cloud utilisé dans les tests précédents. Pour ce test, une charge constante de 500 utilisateurs exécutant l’opération `Get` dans le contrôleur `UserProfile` et une charge progressive d’utilisateurs exécutant l’opération `Post` dans le contrôleur `WorkInFrontEnd` ont été utilisées.
 
 ![Résultats initiaux du test de charge pour le contrôleur WorkInFrontEnd][Initial-Load-Test-Results-Front-End]
 
 Au départ, la charge progressive est de 0, ce qui signifie que les seuls utilisateurs actifs envoient des requêtes `UserProfile`. Le système est capable de répondre à environ 500 requêtes par seconde. Après 60 secondes, une charge de 100 utilisateurs supplémentaires, qui commencent à envoyer des requêtes POST au contrôleur `WorkInFrontEnd`, est ajoutée. Presque immédiatement, la charge de travail envoyée au contrôleur `UserProfile` descend à environ 150 requêtes par seconde. Cela est dû au mode de fonctionnement de l’exécuteur de tests de charge. Celui-ci attend une réponse avant d’envoyer la requête suivante. Par conséquent, plus la réponse met de temps à arriver, plus le taux de requêtes est faible.
 
 À mesure que des utilisateurs supplémentaires envoient des requêtes POST au contrôleur `WorkInFrontEnd`, le taux de requêtes du contrôleur `UserProfile` continue à diminuer. Cependant, vous remarquerez que le volume de requêtes traitées par le contrôleur `WorkInFrontEnd` reste relativement constant. La saturation du système devient apparente à mesure que le taux global des deux requêtes tend vers une limite constante mais faible.
-
 
 ### <a name="review-the-source-code"></a>Réviser le code source
 
@@ -175,11 +176,11 @@ La dernière étape consiste à examiner le code source. L’équipe de dévelop
 Cependant, le travail exécuté par cette méthode consomme toujours des ressources processeur, mémoire et autres. Permettre l’exécution asynchrone de ce processus est en fait susceptible de dégrader les performances, car les utilisateurs peuvent déclencher un grand nombre de ces opérations simultanément, de manière non contrôlée. Le nombre de threads qu’un serveur peut exécuter est limité. Au-delà de cette limite, l’application risque d’obtenir une exception en essayant de démarrer un nouveau thread.
 
 > [!NOTE]
-> Vous ne devez pas pour autant éviter les opérations asynchrones. L’exécution d’une opération await asynchrone sur un appel réseau est une pratique recommandée (voir l’antimodèle [E/S synchrones][sync-io]). Le problème ici est que le travail nécessitant une utilisation importante du processeur a été engendré sur un autre thread. 
+> Vous ne devez pas pour autant éviter les opérations asynchrones. L’exécution d’une opération await asynchrone sur un appel réseau est une pratique recommandée (voir l’antimodèle [E/S synchrones][sync-io]). Le problème ici est que le travail nécessitant une utilisation importante du processeur a été engendré sur un autre thread.
 
 ### <a name="implement-the-solution-and-verify-the-result"></a>Implémenter la solution et vérifier le résultat
 
-L’image suivante montre l’analyse des performances après l’implémentation de la solution. La charge était similaire à celle illustrée précédemment, mais les temps de réponse pour le contrôleur `UserProfile` sont maintenant beaucoup plus courts. Sur la même durée, le volume de requêtes est passé de 2 759 à 23 565. 
+L’image suivante montre l’analyse des performances après l’implémentation de la solution. La charge était similaire à celle illustrée précédemment, mais les temps de réponse pour le contrôleur `UserProfile` sont maintenant beaucoup plus courts. Sur la même durée, le volume de requêtes est passé de 2 759 à 23 565.
 
 ![Volet des transactions commerciales d’AppDynamics illustrant l’effet de l’utilisation du contrôleur WorkInBackground sur les temps de réponse de l’ensemble des requêtes][AppDynamics-Transactions-Background-Requests]
 
@@ -218,5 +219,3 @@ Le graphique suivant présente les résultats d’un test de charge. Le volume t
 [AppDynamics-Transactions-Background-Requests]: ./_images/AppDynamicsBackgroundPerformanceStats.jpg
 [AppDynamics-Metrics-Background-Requests]: ./_images/AppDynamicsBackgroundMetrics.jpg
 [Load-Test-Results-Background]: ./_images/LoadTestResultsBackground.jpg
-
-

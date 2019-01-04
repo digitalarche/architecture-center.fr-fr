@@ -1,18 +1,20 @@
 ---
 title: Antimodèle de récupération superflue
+titleSuffix: Performance antipatterns for cloud apps
 description: Récupérer plus de données que nécessaire pour une opération d’entreprise peut provoquer une surcharge d’E/S inutile et réduire les temps de réponse.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 7a72bfd3e4b2e206f3266a046fac2083224ecb4f
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.custom: seodec18
+ms.openlocfilehash: dac1b4c1422b447b8a0a9ebe317d5ac246c38da5
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30846601"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010237"
 ---
 # <a name="extraneous-fetching-antipattern"></a>Antimodèle de récupération superflue
 
-Récupérer plus de données que nécessaire pour une opération d’entreprise peut provoquer une surcharge d’E/S inutile et réduire les temps de réponse. 
+Récupérer plus de données que nécessaire pour une opération d’entreprise peut provoquer une surcharge d’E/S inutile et réduire les temps de réponse.
 
 ## <a name="problem-description"></a>Description du problème
 
@@ -52,7 +54,7 @@ public async Task<IHttpActionResult> AggregateOnClientAsync()
 }
 ```
 
-L’exemple suivant montre un problème subtil, provoqué par la façon dont Entity Framework utilise LINQ to Entities. 
+L’exemple suivant montre un problème subtil, provoqué par la façon dont Entity Framework utilise LINQ to Entities.
 
 ```csharp
 var query = from p in context.Products.AsEnumerable()
@@ -62,13 +64,13 @@ var query = from p in context.Products.AsEnumerable()
 List<Product> products = query.ToList();
 ```
 
-L’application essaie de trouver les produits avec une `SellStartDate` de plus d’une semaine. Dans la plupart des cas, LINQ to Entities traduit une clause `where` pour une instruction SQL qui est exécutée par la base de données. Dans ce cas, toutefois, LINQ to Entities ne peut pas mapper la méthode `AddDays` à SQL. Au lieu de cela, chaque ligne à partir de la table `Product` est retournée et les résultats sont filtrés dans la mémoire. 
+L’application essaie de trouver les produits avec une `SellStartDate` de plus d’une semaine. Dans la plupart des cas, LINQ to Entities traduit une clause `where` pour une instruction SQL qui est exécutée par la base de données. Dans ce cas, toutefois, LINQ to Entities ne peut pas mapper la méthode `AddDays` à SQL. Au lieu de cela, chaque ligne à partir de la table `Product` est retournée et les résultats sont filtrés dans la mémoire.
 
-L’appel à `AsEnumerable` est une indication qu’il existe un problème. Cette méthode convertit les résultats en une interface `IEnumerable`. Bien que `IEnumerable` prend en charge le filtrage, le filtrage est effectué côté *client* et non côté base de données. Par défaut, LINQ to Entities utilise `IQueryable`, qui passe la responsabilité de filtrage à la source de données. 
+L’appel à `AsEnumerable` est une indication qu’il existe un problème. Cette méthode convertit les résultats en une interface `IEnumerable`. Bien que `IEnumerable` prend en charge le filtrage, le filtrage est effectué côté *client* et non côté base de données. Par défaut, LINQ to Entities utilise `IQueryable`, qui passe la responsabilité de filtrage à la source de données.
 
 ## <a name="how-to-fix-the-problem"></a>Comment corriger le problème
 
-Évitez l’extraction de grands volumes de données qui peuvent rapidement devenir obsolètes ou peuvent être ignorées et n’extrayez que les données nécessaires pour l’opération en cours. 
+Évitez l’extraction de grands volumes de données qui peuvent rapidement devenir obsolètes ou peuvent être ignorées et n’extrayez que les données nécessaires pour l’opération en cours.
 
 Au lieu d’obtenir toutes les colonnes d’une table, puis de les filtrer, sélectionnez les colonnes dont vous avez besoin à partir de la base de données.
 
@@ -103,7 +105,7 @@ public async Task<IHttpActionResult> AggregateOnDatabaseAsync()
 Lorsque vous utilisez Entity Framework, vérifiez que les requêtes LINQ sont résolues à l’aide de l’interface `IQueryable` et non `IEnumerable`. Vous devrez peut-être ajuster la requête pour utiliser uniquement les fonctions qui peuvent être mappées à la source de données. L’exemple précédent peut être refactorisé pour supprimer la méthode `AddDays` de la requête, ce qui permet d’effectuer le filtrage depuis la base de données.
 
 ```csharp
-DateTime dateSince = DateTime.Now.AddDays(-7); // AddDays has been factored out. 
+DateTime dateSince = DateTime.Now.AddDays(-7); // AddDays has been factored out.
 var query = from p in context.Products
             where p.SellStartDate < dateSince // This criterion can be passed to the database by LINQ to Entities
             select ...;
@@ -117,22 +119,21 @@ List<Product> products = query.ToList();
 
 - Pour les opérations qui doivent prendre en charge les requêtes non liées, implémentez la pagination et n’extrayez qu’un nombre limité d’entités à la fois. Par exemple, si un client parcourt un catalogue de produits, vous pouvez afficher une page de résultats à la fois.
 
-- Lorsque cela est possible, tirez parti des fonctionnalités intégrées dans le magasin de données. Par exemple, les bases de données SQL fournissent généralement des fonctions d’agrégation. 
+- Lorsque cela est possible, tirez parti des fonctionnalités intégrées dans le magasin de données. Par exemple, les bases de données SQL fournissent généralement des fonctions d’agrégation.
 
 - Si vous utilisez un magasin de données qui ne prend pas en charge une fonction particulière, telle que l’agrégation, vous pouvez stocker le résultat calculé ailleurs et mettre à jour les valeurs lorsque les enregistrements sont ajoutés ou mis à jour, afin que l’application n’ait pas à recalculer la valeur chaque fois que cela est nécessaire.
 
-- Si vous voyez que les demandes extraient un grand nombre de champs, examinez le code source pour déterminer si tous ces champs sont réellement nécessaires. Parfois, ces requêtes sont le résultat de requêtes `SELECT *` de mauvaise conception. 
+- Si vous voyez que les demandes extraient un grand nombre de champs, examinez le code source pour déterminer si tous ces champs sont réellement nécessaires. Parfois, ces requêtes sont le résultat de requêtes `SELECT *` de mauvaise conception.
 
-- De même, les requêtes qui récupèrent un grand nombre d’entités peuvent démontrer que l’application ne filtre pas correctement les données. Vérifiez que toutes ces entités sont réellement nécessaires. Utilisez le filtrage côté base de données dans la mesure du possible, par exemple, à l’aide de clauses `WHERE` dans SQL. 
+- De même, les requêtes qui récupèrent un grand nombre d’entités peuvent démontrer que l’application ne filtre pas correctement les données. Vérifiez que toutes ces entités sont réellement nécessaires. Utilisez le filtrage côté base de données dans la mesure du possible, par exemple, à l’aide de clauses `WHERE` dans SQL.
 
 - Le déchargement du traitement sur la base de données n’est pas toujours la meilleure option. N’utilisez cette stratégie que lorsque la base de données est conçue ou optimisée pour cela. La plupart des systèmes de base de données sont optimisés pour certaines fonctions, mais ne sont pas conçus pour servir de moteurs d’applications à usage général. Pour plus d’informations, consultez l’article [Antimodèle de base de données occupé][BusyDatabase].
-
 
 ## <a name="how-to-detect-the-problem"></a>Comment détecter le problème
 
 Une récupération superflue se traduit par une latence élevée et un débit faible. Si les données sont récupérées à partir d’un magasin de données, une contention accrue est également probable. Les utilisateurs finals sont susceptibles de signaler des temps de réponse plus longs que d’habitude ou des échecs causés par l’expiration du délai d’attente des services. Ces échecs peuvent renvoyer des erreurs HTTP 500 (serveur interne) ou HTTP 503 (service indisponible). Examinez les journaux d’événements du serveur web, qui contiennent probablement des informations plus détaillées sur les causes et les circonstances de ces erreurs.
 
-Les symptômes de cet antimodèle ainsi qu’une partie de la télémétrie obtenue peuvent être très similaires à ceux de l’[antimodèle de persistance monolithique][MonolithicPersistence]. 
+Les symptômes de cet antimodèle ainsi qu’une partie de la télémétrie obtenue peuvent être très similaires à ceux de l’[antimodèle de persistance monolithique][MonolithicPersistence].
 
 Vous pouvez procédez de la manière suivante pour identifier la cause :
 
@@ -140,8 +141,8 @@ Vous pouvez procédez de la manière suivante pour identifier la cause :
 2. Observez les modèles de comportement exposés par le système. Existe-t-il des limites particulières en termes de transactions par seconde ou de volume d’utilisateurs ?
 3. Mettez en corrélation les instances des charges de travail lentes avec les modèles de comportement.
 4. Identifiez les banques de données utilisées. Pour chaque source de données, exécutez les données de télémétrie de niveau inférieur pour observer le comportement des opérations.
-6. Identifiez les requêtes à exécution lente qui font référence à ces sources de données.
-7. Effectuez une analyse de ressource spécifique des requêtes à exécution lente et déterminez comment les données sont utilisées et consommées.
+5. Identifiez les requêtes à exécution lente qui font référence à ces sources de données.
+6. Effectuez une analyse de ressource spécifique des requêtes à exécution lente et déterminez comment les données sont utilisées et consommées.
 
 Recherchez la présence des symptômes suivants :
 
@@ -150,13 +151,13 @@ Recherchez la présence des symptômes suivants :
 - Opération qui reçoit fréquemment des volumes importants de données sur le réseau.
 - Applications et services attendant longtemps que les E/S se terminent.
 
-## <a name="example-diagnosis"></a>Exemple de diagnostic    
+## <a name="example-diagnosis"></a>Exemple de diagnostic
 
 Les sections suivantes appliquent ces étapes pour les exemples précédents.
 
 ### <a name="identify-slow-workloads"></a>Identifier les charges de travail lentes
 
-Ce graphique montre les résultats de performances d’un test de charge simulant jusqu’à 400 utilisateurs simultanés exécutant la méthode `GetAllFieldsAsync` illustrée précédemment. Le débit diminue lentement à mesure que la charge augmente. Le temps de réponse moyen augmente à mesure que la charge de travail augmente. 
+Ce graphique montre les résultats de performances d’un test de charge simulant jusqu’à 400 utilisateurs simultanés exécutant la méthode `GetAllFieldsAsync` illustrée précédemment. Le débit diminue lentement à mesure que la charge augmente. Le temps de réponse moyen augmente à mesure que la charge de travail augmente.
 
 ![Résultats de test de charge pour la méthode GetAllFieldsAsync][Load-Test-Results-Client-Side1]
 
@@ -174,7 +175,7 @@ Une opération lente n’est pas nécessairement un problème, si elle n’est p
 
 ### <a name="identify-data-sources-in-slow-workloads"></a>Identifier les sources de données dans les charges de travail lentes
 
-Si vous pensez qu’un service est médiocre en raison de la façon dont il récupère les données, examinez la façon dont l’application interagit avec les référentiels qu’elle utilise. Analysez le système réel pour voir quelles sources sont accessibles pendant les périodes de performance médiocre. 
+Si vous pensez qu’un service est médiocre en raison de la façon dont il récupère les données, examinez la façon dont l’application interagit avec les référentiels qu’elle utilise. Analysez le système réel pour voir quelles sources sont accessibles pendant les périodes de performance médiocre.
 
 Pour chaque source de données, instrumentez le système afin de capturer les éléments suivants :
 
@@ -203,7 +204,6 @@ Recherchez les requêtes de base de données qui consomment le plus de ressource
 
 ![Le volet détails de la requête dans le portail de gestion Windows Azure SQL Database][QueryDetails]
 
-
 ## <a name="implement-the-solution-and-verify-the-result"></a>Implémenter la solution et vérifier le résultat
 
 Après avoir modifié la méthode `GetRequiredFieldsAsync` pour utiliser une instruction SELECT côté base de données, le test de charge a montré les résultats suivants.
@@ -218,19 +218,17 @@ Le test de charge effectué à l’aide de la méthode `AggregateOnDatabaseAsync
 
 ![Résultats de test de charge pour la méthode AggregateOnDatabaseAsync][Load-Test-Results-Database-Side2]
 
-Le temps de réponse moyen est désormais minimal. Il s’agit d’une amélioration importante des performances, principalement par la réduction des E/S volumineuses à partir de la base de données. 
+Le temps de réponse moyen est désormais minimal. Il s’agit d’une amélioration importante des performances, principalement par la réduction des E/S volumineuses à partir de la base de données.
 
 Voici les données de télémétrie correspondantes pour la méthode `AggregateOnDatabaseAsync`. La quantité de données récupérées à partir de la base de données a été considérablement réduite de plus de 280 Ko par transaction à 53 octets. Par conséquent, le nombre maximal de demandes soutenues par minute a été augmenté, d’environ 2 000 à plus de 25 000.
 
 ![Données de télémétrie pour la méthode « AggregateOnDatabaseAsync »][TelemetryAggregateInDatabaseAsync]
-
 
 ## <a name="related-resources"></a>Ressources associées
 
 - [Antimodèle de base de données occupé][BusyDatabase]
 - [Antimodèle E/S bavardes][chatty-io]
 - [Bonnes pratiques de partitionnement des données][data-partitioning]
-
 
 [BusyDatabase]: ../busy-database/index.md
 [data-partitioning]: ../../best-practices/data-partitioning.md

@@ -4,12 +4,12 @@ titleSuffix: Azure Reference Architectures
 description: Comparatif des différentes architectures de référence pour intégrer un environnement Active Directory local à Azure.
 ms.date: 07/02/2018
 ms.custom: seodec18
-ms.openlocfilehash: 905dedda6de1a107f55b2f7651441780a685aea7
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 99a64f0a5fbe5624aa8ad05bd3565ab2aef618b3
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53119861"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011784"
 ---
 # <a name="choose-a-solution-for-integrating-on-premises-active-directory-with-azure"></a>Choisir une solution pour intégrer l’environnement Active Directory local à Azure
 
@@ -46,7 +46,7 @@ Vous pouvez également utiliser Azure AD sans utiliser un répertoire local. Dan
 **Défis**
 
 - Les services d’identité sont réservés aux utilisateurs et aux groupes. Aucune authentification de comptes de service et d’ordinateur n’est possible.
-- Vous devez configurer la connectivité à votre domaine local pour assurer la synchronisation du répertoire Azure AD. 
+- Vous devez configurer la connectivité à votre domaine local pour assurer la synchronisation du répertoire Azure AD.
 - Les applications devront peut-être être réécrites pour activer l’authentification via Azure AD.
 
 **Architecture de référence**
@@ -55,9 +55,9 @@ Vous pouvez également utiliser Azure AD sans utiliser un répertoire local. Dan
 
 ## <a name="ad-ds-in-azure-joined-to-an-on-premises-forest"></a>Services AD DS dans Azure associés à une forêt locale
 
-Déployer des serveurs AD Domain Services (AD DS) dans Azure. Créez un domaine dans Azure et associez-le à votre forêt AD locale. 
+Déployer des serveurs AD Domain Services (AD DS) dans Azure. Créez un domaine dans Azure et associez-le à votre forêt AD locale.
 
-Envisagez cette option si vous avez besoin d’utiliser des fonctionnalités AD DS qui ne sont pas actuellement disponibles dans Azure AD. 
+Envisagez cette option si vous avez besoin d’utiliser des fonctionnalités AD DS qui ne sont pas actuellement disponibles dans Azure AD.
 
 **Avantages**
 
@@ -97,13 +97,13 @@ Parmi les utilisations courantes de cette architecture figurent la conservation 
 
 ## <a name="extend-ad-fs-to-azure"></a>Étendre AD FS à Azure
 
-Répliquez un déploiement Active Directory Federation Services (AD FS) dans Azure afin de permettre l’authentification et l’autorisation fédérées des composants en cours d’exécution dans Azure. 
+Répliquez un déploiement Active Directory Federation Services (AD FS) dans Azure afin de permettre l’authentification et l’autorisation fédérées des composants en cours d’exécution dans Azure.
 
 Utilisations courantes de cette architecture :
 
 - Authentifier et autoriser les utilisateurs des organisations partenaires.
 - Permettre aux utilisateurs de s’authentifier à partir de navigateurs web s’exécutant en dehors du pare-feu de l’organisation.
-- Permettre aux utilisateurs de se connecter à partir d’appareils externes autorisés tels que des appareils mobiles. 
+- Permettre aux utilisateurs de se connecter à partir d’appareils externes autorisés tels que des appareils mobiles.
 
 **Avantages**
 

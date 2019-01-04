@@ -1,14 +1,16 @@
 ---
 title: Antimodèle E/S bavardes
+titleSuffix: Performance antipatterns for cloud apps
 description: Un grand nombre de demandes d’E/S peut nuire aux performances et à la réactivité.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: 17193198918cc742b2e3f30e77dfc5c3f2726ebf
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: c018e365d0a6244f77d119ad59f601e9c7ea965c
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428565"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011223"
 ---
 # <a name="chatty-io-antipattern"></a>Antimodèle E/S bavardes
 
@@ -26,7 +28,7 @@ L’exemple suivant lit à partir d’une base de données de produits. Il exist
 2. Recherche de tous les produits de cette sous-catégorie en interrogeant la table `Product`.
 3. Pour chaque produit, interrogation des données de tarification à partir de la table `ProductPriceListHistory`.
 
-L’application utilise [Entity Framework] [ ef] pour interroger la base de données. Vous trouverez l’exemple complet [ici][code-sample]. 
+L’application utilise [Entity Framework] [ ef] pour interroger la base de données. Vous trouverez l’exemple complet [ici][code-sample].
 
 ```csharp
 public async Task<IHttpActionResult> GetProductsInSubCategoryAsync(int subcategoryId)
@@ -57,11 +59,11 @@ public async Task<IHttpActionResult> GetProductsInSubCategoryAsync(int subcatego
 }
 ```
 
-Cet exemple illustre le problème explicitement, mais parfois un O/RM peut masquer le problème, s’il extrait implicitement les enregistrements enfants un par un. Ce problème est appelé « Problème N+1 ». 
+Cet exemple illustre le problème explicitement, mais parfois un O/RM peut masquer le problème, s’il extrait implicitement les enregistrements enfants un par un. Ce problème est appelé « Problème N+1 ».
 
 ### <a name="implementing-a-single-logical-operation-as-a-series-of-http-requests"></a>Implémentation d’une opération logique unique sous forme de série de requêtes HTTP
 
-Cela se produit souvent lorsque les développeurs tentent de suivre un paradigme orienté objet et de traiter des objets distants comme s’il s’agissait d’objets locaux dans la mémoire. Cela peut entraîner de trop nombreux allers-retours réseau. Par exemple, l’API web suivante expose les propriétés individuelles des objets `User` par le biais des méthodes GET HTTP individuelles. 
+Cela se produit souvent lorsque les développeurs tentent de suivre un paradigme orienté objet et de traiter des objets distants comme s’il s’agissait d’objets locaux dans la mémoire. Cela peut entraîner de trop nombreux allers-retours réseau. Par exemple, l’API web suivante expose les propriétés individuelles des objets `User` par le biais des méthodes GET HTTP individuelles.
 
 ```csharp
 public class UserController : ApiController
@@ -89,7 +91,7 @@ public class UserController : ApiController
 }
 ```
 
-Tandis que cette approche est techniquement correcte, la plupart des clients auront probablement besoin d’obtenir plusieurs propriétés pour chaque `User`, ce qui donne un code client qui ressemble à ce qui suit : 
+Tandis que cette approche est techniquement correcte, la plupart des clients auront probablement besoin d’obtenir plusieurs propriétés pour chaque `User`, ce qui donne un code client qui ressemble à ce qui suit :
 
 ```csharp
 HttpResponseMessage response = await client.GetAsync("users/1/username");
@@ -107,7 +109,7 @@ var dob = await response.Content.ReadAsStringAsync();
 
 ### <a name="reading-and-writing-to-a-file-on-disk"></a>Lecture et écriture sur un fichier du disque
 
-Les E/S d’un fichier impliquent l’ouverture d’un fichier et le déplacement vers le point approprié avant la lecture ou l’écriture des données. Une fois l’opération terminée, le fichier peut être fermé pour économiser les ressources du système d’exploitation. Une application qui lit et écrit en permanence de petites quantités d’informations dans un fichier génère une surcharge d’E/S. Les petites requêtes en écriture peuvent également entraîner une fragmentation du fichier, ralentissant davantage les opérations d’E/S qui s’ensuivent. 
+Les E/S d’un fichier impliquent l’ouverture d’un fichier et le déplacement vers le point approprié avant la lecture ou l’écriture des données. Une fois l’opération terminée, le fichier peut être fermé pour économiser les ressources du système d’exploitation. Une application qui lit et écrit en permanence de petites quantités d’informations dans un fichier génère une surcharge d’E/S. Les petites requêtes en écriture peuvent également entraîner une fragmentation du fichier, ralentissant davantage les opérations d’E/S qui s’ensuivent.
 
 L’exemple suivant utilise un `FileStream` pour écrire un objet `Customer` dans un fichier. La création de `FileStream` a pour effet d’ouvrir le fichier et sa suppression entraîne la fermeture de ce dernier. (l’instruction `using` supprime automatiquement l’objet `FileStream`.) Si l’application appelle cette méthode à plusieurs reprises lors de l’ajout de nouveaux clients, la surcharge d’E/S peut rapidement s’accumuler.
 
@@ -211,7 +213,7 @@ await SaveCustomerListToFileAsync(customers);
 
 - Les deux premiers exemples effectuent *moins* d’appels d’E/S et chacun d’eux récupère *plus* d’informations. Vous devez faire un compromis entre ces deux facteurs. La réponse appropriée dépend des modèles d’utilisation réels. Par exemple, dans l’exemple d’API web, les clients ont souvent seulement besoin du nom d’utilisateur. Dans ce cas, il peut être utile de l’exposer sous la forme d’un appel d’API distinct. Pour plus d’informations, consultez l’antimodèle [Récupération superflue][extraneous-fetching].
 
-- Lors de la lecture des données, ne créez pas de requêtes d’E/S trop grandes. Une application doit récupérer uniquement les informations qu’elle est susceptible d’utiliser. 
+- Lors de la lecture des données, ne créez pas de requêtes d’E/S trop grandes. Une application doit récupérer uniquement les informations qu’elle est susceptible d’utiliser.
 
 - Parfois, cela permet de partitionner les informations d’un objet en deux blocs, un pour *les données fréquemment sollicitées* qui concerne la plupart des requêtes et un pour les *données moins souvent sollicitées*, qui sont rarement utilisées. Souvent les données fréquemment sollicitées constituent une petite partie de l’ensemble des données d’un objet. Par conséquent, le fait de renvoyer cette partie uniquement peut permettre de réduire la surcharge d’E/S.
 
@@ -231,7 +233,7 @@ Vous pouvez procéder de la manière suivante pour identifier la cause des probl
 2. Effectuez un test de charge pour chaque opération identifiée à l’étape précédente.
 3. Lors des tests de charge, rassemblez les données de télémétrie concernant les requêtes d’accès aux données effectuées par chaque opération.
 4. Recueillez les statistiques détaillées de chaque requête envoyée à un magasin de données.
-5. Profilez l’application dans l’environnement de test pour déterminer les endroits où des goulots d’étranglement peuvent se produire. 
+5. Profilez l’application dans l’environnement de test pour déterminer les endroits où des goulots d’étranglement peuvent se produire.
 
 Recherchez la présence des symptômes suivants :
 
@@ -246,16 +248,16 @@ Les sections suivantes appliquent ces étapes à l’exemple présenté plus hau
 
 ### <a name="load-test-the-application"></a>Effectuer un test de charge de l’application
 
-Ce graphique montre les résultats du test de charge. Le temps de réponse médian est mesuré en dixième de seconde par requête. Le graphique présente une latence très élevée. Avec une charge de 1 000 utilisateurs, un utilisateur peut devoir attendre presque une minute pour voir les résultats d’une requête. 
+Ce graphique montre les résultats du test de charge. Le temps de réponse médian est mesuré en dixième de seconde par requête. Le graphique présente une latence très élevée. Avec une charge de 1 000 utilisateurs, un utilisateur peut devoir attendre presque une minute pour voir les résultats d’une requête.
 
 ![Résultats du test de charge des indicateurs clés pour l’exemple d’application d’E/S bavardes][key-indicators-chatty-io]
 
 > [!NOTE]
-> L’application a été déployée sous forme d’application web Azure App Service à l’aide d’Azure SQL Database. Le test de charge a utilisé une charge de travail d’étape simulée pouvant atteindre 1 000 utilisateurs simultanés. La base de données a été configurée avec un pool de connexions prenant en charge jusqu’à 1 000 connexions simultanées afin de réduire le risque de voir la contention des connexions affecter les résultats. 
+> L’application a été déployée sous forme d’application web Azure App Service à l’aide d’Azure SQL Database. Le test de charge a utilisé une charge de travail d’étape simulée pouvant atteindre 1 000 utilisateurs simultanés. La base de données a été configurée avec un pool de connexions prenant en charge jusqu’à 1 000 connexions simultanées afin de réduire le risque de voir la contention des connexions affecter les résultats.
 
 ### <a name="monitor-the-application"></a>Analyser l’application
 
-Vous pouvez utiliser un package d’analyse des performances d’application (APM) pour capturer et analyser les métriques clés permettant d’identifier les E/S bavardes. Les mesures importantes dépendent de la charge de travail d’E/S. Pour cet exemple, les requêtes d’ES/S intéressantes étaient celles de la base de données. 
+Vous pouvez utiliser un package d’analyse des performances d’application (APM) pour capturer et analyser les métriques clés permettant d’identifier les E/S bavardes. Les mesures importantes dépendent de la charge de travail d’E/S. Pour cet exemple, les requêtes d’ES/S intéressantes étaient celles de la base de données.
 
 L’illustration suivante montre les résultats générés à l’aide de l’[APM New Relic][new-relic]. Le temps de réponse moyen de la base de données a atteint un pic d’environ 5,6 secondes par requête lors de la charge de travail maximale. Le système a pu prendre en charge une moyenne de 410 requêtes par minute au cours du test.
 
@@ -279,7 +281,7 @@ L’image suivante montre les instructions SQL réelles qui ont été émises. L
 
 ![Détails relatifs à la requête pour l’exemple d’application testé][queries3]
 
-Si vous utilisez un O/RM, tel que Entity Framework, le suivi des requêtes SQL peut donner un aperçu de la manière dont le O/RM traduit les appels par programmation en instructions SQL et indiquer les zones où l’accès aux données peut être optimisé. 
+Si vous utilisez un O/RM, tel que Entity Framework, le suivi des requêtes SQL peut donner un aperçu de la manière dont le O/RM traduit les appels par programmation en instructions SQL et indiquer les zones où l’accès aux données peut être optimisé.
 
 ### <a name="implement-the-solution-and-verify-the-result"></a>Implémenter la solution et vérifier le résultat
 
@@ -293,7 +295,7 @@ Cette fois le système a pris en charge en moyenne 3 970 requêtes par minute, p
 
 ![Vue d’ensemble de la transaction pour l’API regroupée][databasetraffic2]
 
-Le suivi de l’instruction SQL indique que toutes les données sont extraites dans une instruction SELECT unique. Bien que cette requête soit beaucoup plus complexe, elle est exécutée une seule fois par opération. Et tandis que des jointures complexes peuvent devenir coûteuses, les systèmes de base de données relationnelle sont optimisés pour ce type de requête.  
+Le suivi de l’instruction SQL indique que toutes les données sont extraites dans une instruction SELECT unique. Bien que cette requête soit beaucoup plus complexe, elle est exécutée une seule fois par opération. Et tandis que des jointures complexes peuvent devenir coûteuses, les systèmes de base de données relationnelle sont optimisés pour ce type de requête.
 
 ![Détails de la requête de l’API regroupée][queries4]
 
@@ -322,4 +324,3 @@ Le suivi de l’instruction SQL indique que toutes les données sont extraites d
 [queries2]: _images/DatabaseQueries2.jpg
 [queries3]: _images/DatabaseQueries3.jpg
 [queries4]: _images/DatabaseQueries4.jpg
-

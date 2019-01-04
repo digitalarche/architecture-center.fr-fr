@@ -1,18 +1,20 @@
 ---
 title: Antimodèle de base de données occupé
+titleSuffix: Performance antipatterns for cloud apps
 description: Le déchargement du traitement sur un serveur de base de données peut entraîner des problèmes de performances et d’évolutivité.
 author: dragon119
 ms.date: 06/05/2017
-ms.openlocfilehash: a14a350aefc1801ae08cb4a8d0eb3d5b248c92bf
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 11bce03aed2e988d0a814b3298818715ba42c1c5
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428905"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011461"
 ---
 # <a name="busy-database-antipattern"></a>Antimodèle de base de données occupé
 
-Suite au déchargement du traitement sur un serveur de base de données, ce dernier peut consacrer une part importante de son temps à exécuter du code plutôt qu’à répondre aux demandes de stockage et de récupération des données. 
+Suite au déchargement du traitement sur un serveur de base de données, ce dernier peut consacrer une part importante de son temps à exécuter du code plutôt qu’à répondre aux demandes de stockage et de récupération des données.
 
 ## <a name="problem-description"></a>Description du problème
 
@@ -21,12 +23,12 @@ De nombreux systèmes de base de données peuvent exécuter du code. Il peut s�
 - Il se peut que le serveur de base de données passe trop de temps à traiter des opérations, plutôt qu’à accepter de nouvelles demandes de client et à extraire des données.
 - Une base de données est généralement une ressource partagée pouvant devenir un goulot d’étranglement pendant les périodes d’utilisation intensive.
 - Les coûts d’exécution peuvent être excessifs si la banque de données est mesurée. Cela est particulièrement vrai pour les services de base de données managés. Par exemple, il peut y avoir des frais liés à Microsoft Azure SQL Database pour les [unités de transaction de base de données][dtu] (DTU).
-- Les bases de données ont une capacité finie de montée en puissance, et il n’est pas simple de procéder à une mise à l’échelle horizontale. Par conséquent, il peut être préférable de transférer le traitement vers une ressource de calcul, comme une machine virtuelle ou une application App Service pouvant facilement augmenter la taille des instances.
+- Les bases de données ont une capacité finie de montée en puissance pour faire évoluer, et il n’est pas simple de procéder à une mise à l’échelle horizontale d’une base de données. Par conséquent, il peut être préférable de transférer le traitement vers une ressource de calcul, comme une machine virtuelle ou une application App Service qui peut facilement augmenter la taille des instances.
 
 Cet antimodèle survient généralement pour les raisons suivantes :
 
 - La base de données est considérée comme un service plutôt qu’un référentiel. Une application peut utiliser le serveur de base de données pour mettre en forme les données (par exemple, la conversion en XML), manipuler les données de chaîne ou effectuer des calculs complexes.
-- Les développeurs tentent d’écrire des requêtes dont les résultats peuvent être affichés directement pour les utilisateurs. Par exemple, une requête pour combiner des champs, ou formater des dates, des heures et des devises en fonction de paramètres régionaux.
+- Les développeurs tentent d’écrire des requêtes dont les résultats peuvent être affichés directement pour les utilisateurs. Par exemple, une requête peut combiner des champs, ou formater des dates, des heures et des devises en fonction de paramètres régionaux.
 - Les développeurs essaient de corriger l’antimodèle [Récupération superflus] [ ExtraneousFetching] en envoyant des calculs à la base de données.
 - Les procédures stockées sont utilisées pour encapsuler une logique métier, peut-être parce qu’elles sont considérées comme étant plus faciles à gérer et à mettre à jour.
 
@@ -85,11 +87,11 @@ ORDER BY soh.[TotalDue] DESC
 FOR XML PATH ('Order'), ROOT('Orders')
 ```
 
-Il s’agit clairement d’une requête complexe. Comme nous le verrons plus tard, il s’avère qu'un nombre important de ressources de traitement sont consommées sur le serveur de base de données.
+Il s’agit clairement d’une requête complexe. Comme nous le verrons plus tard, il s’avère qu’il utilise des ressources de traitement importantes sur le serveur de base de données.
 
 ## <a name="how-to-fix-the-problem"></a>Comment corriger le problème
 
-Pour corriger le problème, une solution consiste à déplacer le traitement du serveur de base de données vers les autres niveaux d’application. Dans l’idéal, vous devez limiter la base de données à l’exécution d’opérations d’accès aux données, en vous servant uniquement des fonctionnalités pour lesquelles la base de données est optimisée, par exemple l’agrégation de données.
+Déplacer le traitement du serveur de base de données vers les autres niveaux d’application. Dans l’idéal, vous devez limiter la base de données à l’exécution d’opérations d’accès aux données, en vous servant uniquement des fonctionnalités pour lesquelles la base de données est optimisée, par exemple l’agrégation dans un SGBDR.
 
 Par exemple, le code Transact-SQL précédent peut être remplacé par une instruction qui extrait simplement les données à traiter.
 
@@ -217,9 +219,9 @@ using (var command = new SqlCommand(...))
 
 ## <a name="how-to-detect-the-problem"></a>Comment détecter le problème
 
-Une base de données occupée se traduit par une baisse disproportionnée du débit et des temps de réponse pour les opérations qui accèdent à la base de données. 
+Une base de données occupée se traduit par une baisse disproportionnée du débit et des temps de réponse pour les opérations qui accèdent à la base de données.
 
-Vous pouvez procéder de la manière suivante pour identifier ce problème : 
+Vous pouvez procéder de la manière suivante pour identifier ce problème :
 
 1. Utilisez l’analyse des performances pour déterminer le temps consacré par le système de production aux activités liées à la base de données.
 
@@ -237,7 +239,7 @@ Les sections suivantes appliquent ces étapes à l’exemple d’application dé
 
 ### <a name="monitor-the-volume-of-database-activity"></a>Analyser le volume d’activité de la base de données
 
-Le graphique suivant montre les résultats de l’exécution d’un test de charge sur l’application exemple à l’aide d’une rampe de charge pouvant atteindre 50 utilisateurs simultanés. Le volume des demandes atteint rapidement la limite et reste à ce niveau, alors que le temps de réponse moyen augmente régulièrement. Notez qu’une échelle logarithmique est utilisée pour ces deux mesures.
+Le graphique suivant montre les résultats de l’exécution d’un test de charge dans l’exemple d’application à l’aide d’une charge dans l’étape pouvant atteindre 50 utilisateurs simultanés. Le volume des demandes atteint rapidement la limite et reste à ce niveau, alors que le temps de réponse moyen augmente régulièrement. Notez qu’une échelle logarithmique est utilisée pour ces deux mesures.
 
 ![Résultats du test de charge pour un traitement dans la base de données][ProcessingInDatabaseLoadTest]
 
@@ -261,10 +263,9 @@ L’utilisation du processeur et des DTU indique que le système a pris plus de 
 
 ![Moniteur Microsoft Azure SQL Database montrant les performances de la base de données lors du traitement dans l’application cliente][ProcessingInClientApplicationMonitor]
 
-## <a name="related-resources"></a>Ressources associées 
+## <a name="related-resources"></a>Ressources associées
 
 - [Antimodèle de récupération superflue][ExtraneousFetching]
-
 
 [dtu]: /azure/sql-database/sql-database-service-tiers-dtu
 [ExtraneousFetching]: ../extraneous-fetching/index.md
