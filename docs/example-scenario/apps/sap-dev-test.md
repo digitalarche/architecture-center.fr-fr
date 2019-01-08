@@ -1,15 +1,16 @@
 ---
-title: Environnements de développement/test pour les charges de travail SAP sur Azure
+title: Environnements de développement/test pour les charges de travail SAP
+titleSuffix: Azure Example Scenarios
 description: Créez un environnement de développement/test pour les charges de travail SAP.
 author: AndrewDibbins
 ms.date: 7/11/18
 ms.custom: fasttrack
-ms.openlocfilehash: 84665bfeb6ada568c631e1db72b97269d79f2e60
-ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
+ms.openlocfilehash: 3f6c828e8757a3f82ad6972a8f21cd2fed629162
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/06/2018
-ms.locfileid: "53004679"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643966"
 ---
 # <a name="devtest-environments-for-sap-workloads-on-azure"></a>Environnements de développement/test pour les charges de travail SAP sur Azure
 
@@ -17,16 +18,16 @@ Cet exemple montre comment créer un environnement de développement/test pour S
 
 Pour les cas d'usage de production, examinez les architectures de référence SAP disponibles ci-dessous :
 
-* [SAP NetWeaver pour AnyDB][sap-netweaver]
-* [SAP S/4HANA][sap-hana]
-* [SAP sur des Instances de grande taille Azure][sap-large]
+- [SAP NetWeaver pour AnyDB][sap-netweaver]
+- [SAP S/4HANA][sap-hana]
+- [SAP sur des Instances de grande taille Azure][sap-large]
 
 ## <a name="relevant-use-cases"></a>Cas d’usage appropriés
 
 Les autres cas d’usage appropriés sont les suivants :
 
-* Charges de travail SAP non productives non critiques (bac à sable, développement, test, assurance qualité)
-* Charges de travail SAP Business non critiques
+- Charges de travail SAP non productives non critiques (bac à sable, développement, test, assurance qualité)
+- Charges de travail SAP Business non critiques
 
 ## <a name="architecture"></a>Architecture
 
@@ -35,17 +36,17 @@ Les autres cas d’usage appropriés sont les suivants :
 Ce scénario illustre le provisionnement d’une base de données système SAP et d’un serveur d’application SAP uniques sur une seule machine virtuelle. Les données circulent dans le scénario comme suit :
 
 1. Les clients utilisent l’interface utilisateur SAP ou d’autres outils clients (Excel, un navigateur Web ou une autre application Web) pour accéder au système SAP basé sur Azure.
-2. La connectivité est assurée par une connexion ExpressRoute établie qui se termine dans Azure au niveau de la passerelle ExpressRoute. Le trafic réseau est acheminé via la passerelle ExpressRoute vers le sous-réseau de passerelle et depuis le sous-réseau de passerelle vers le sous-réseau spoke de niveau application (voir le modèle [hub-spoke][hub-spoke]) et via une passerelle de sécurité réseau vers la machine virtuelle d’applications SAP.
+2. La connectivité est assurée par une connexion ExpressRoute établie qui se termine dans Azure au niveau de la passerelle ExpressRoute. Le trafic réseau est routé via la passerelle ExpressRoute vers le sous-réseau de passerelle et depuis le sous-réseau de passerelle vers le sous-réseau spoke de niveau application (voir le modèle [hub-spoke][hub-spoke]), et via une passerelle de sécurité réseau vers la machine virtuelle de l’application SAP.
 3. Les serveurs de gestion d’identité fournissent des services d’authentification.
 4. Le serveur jumpbox offre des fonctionnalités de gestion locale.
 
 ### <a name="components"></a>Composants
 
-* Les [réseaux virtuels](/azure/virtual-network/virtual-networks-overview) constituent la base de la communication réseau dans Azure.
-* Les [machines virtuelles Azure](/azure/virtual-machines/windows/overview) fournissent une infrastructure sécurisée et virtualisée à la demande et à grande échelle avec un serveur Windows ou Linux.
-* [ExpressRoute](/azure/expressroute/expressroute-introduction) vous permet d’étendre vos réseaux locaux au cloud de Microsoft via une connexion privée assurée par un fournisseur de connectivité.
-* Les [groupes de sécurité réseau](/azure/virtual-network/security-overview) vous permettent de limiter le trafic réseau vers les ressources d’un réseau virtuel. Un groupe de sécurité réseau contient une liste de règles de sécurité qui autorisent ou refusent le trafic réseau entrant ou sortant en fonction de l’adresse IP source ou de destination, du port et du protocole. 
-* Les [groupes de ressources](/azure/azure-resource-manager/resource-group-overview#resource-groups) jouent le rôle de conteneurs logiques pour des ressources Azure.
+- Les [réseaux virtuels](/azure/virtual-network/virtual-networks-overview) constituent la base de la communication réseau dans Azure.
+- Les [machines virtuelles Azure](/azure/virtual-machines/windows/overview) fournissent une infrastructure sécurisée et virtualisée à la demande et à grande échelle avec un serveur Windows ou Linux.
+- [ExpressRoute](/azure/expressroute/expressroute-introduction) vous permet d’étendre vos réseaux locaux au cloud de Microsoft via une connexion privée assurée par un fournisseur de connectivité.
+- Les [groupes de sécurité réseau](/azure/virtual-network/security-overview) vous permettent de limiter le trafic réseau vers les ressources d’un réseau virtuel. Un groupe de sécurité réseau contient une liste de règles de sécurité qui autorisent ou refusent le trafic réseau entrant ou sortant en fonction de l’adresse IP source ou de destination, du port et du protocole.
+- Les [groupes de ressources](/azure/azure-resource-manager/resource-group-overview#resource-groups) jouent le rôle de conteneurs logiques pour des ressources Azure.
 
 ## <a name="considerations"></a>Considérations
 
@@ -81,18 +82,22 @@ Très grande|64 000|M64s|4xP20, 1xP10|[Très grande](https://azure.com/e/975fb58
 > [!NOTE]
 > Cette tarification, fournie à titre informatif, indique uniquement les coûts relatifs au stockage et aux machines virtuelles. Elle ne tient pas compte des frais associés à la mise en réseau, au stockage de sauvegarde et à l’entrée/la sortie des données.
 
-* [Petit](https://azure.com/e/9d26b9612da9466bb7a800eab56e71d1) : machine virtuelle de type D8s_v3 avec 8 processeurs virtuels, 32 Go de RAM et 200 Go de stockage temporaire, en plus de deux disques de Stockage Premium de 512 Go et un de 128 Go.
-* [Moyen](https://azure.com/e/465bd07047d148baab032b2f461550cd) : machine virtuelle de type D16s_v3 avec 16 processeurs virtuels, 64 Go de RAM et 400 Go de stockage temporaire, en plus de trois disques de Stockage Premium de 512 Go et un de 128 Go.
-* [Grand](https://azure.com/e/ada2e849d68b41c3839cc976000c6931) : machine virtuelle de type E32s_v3 avec 32 processeurs virtuels, 256 Go de RAM et 512 Go de stockage temporaire, en plus de trois disques de Stockage Premium de 512 Go et un de 128 Go.
-* [Très grand](https://azure.com/e/975fb58a965c4fbbb54c5c9179c61cef) : machine virtuelle de type M64s avec 64 processeurs virtuels, 1 024 Go de RAM et 2 000 Go de stockage temporaire, en plus de quatre disques de Stockage Premium de 512 Go et un de 128 Go.
+- [Petit](https://azure.com/e/9d26b9612da9466bb7a800eab56e71d1) : machine virtuelle de type D8s_v3 avec 8 processeurs virtuels, 32 Go de RAM et 200 Go de stockage temporaire, en plus de deux disques de Stockage Premium de 512 Go et un de 128 Go.
+- [Moyen](https://azure.com/e/465bd07047d148baab032b2f461550cd) : machine virtuelle de type D16s_v3 avec 16 processeurs virtuels, 64 Go de RAM et 400 Go de stockage temporaire, en plus de trois disques de Stockage Premium de 512 Go et un de 128 Go.
+- [Grand](https://azure.com/e/ada2e849d68b41c3839cc976000c6931) : machine virtuelle de type E32s_v3 avec 32 processeurs virtuels, 256 Go de RAM et 512 Go de stockage temporaire, en plus de trois disques de Stockage Premium de 512 Go et un de 128 Go.
+- [Très grand](https://azure.com/e/975fb58a965c4fbbb54c5c9179c61cef) : machine virtuelle de type M64s avec 64 processeurs virtuels, 1 024 Go de RAM et 2 000 Go de stockage temporaire, en plus de quatre disques de Stockage Premium de 512 Go et un de 128 Go.
 
 ## <a name="deployment"></a>Déploiement
 
 Cliquez ici pour déployer l’infrastructure sous-jacente à ce scénario.
 
+<!-- markdownlint-disable MD033 -->
+
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Fapps%2Fsap-2tier%2Fazuredeploy.json" target="_blank">
     <img src="https://azuredeploy.net/deploybutton.png"/>
 </a>
+
+<!-- markdownlint-enable MD033 -->
 
 > [!NOTE]
 > SAP et Oracle ne sont pas installés au cours de ce déploiement. Vous devez déployer ces composants séparément.

@@ -5,12 +5,12 @@ description: Pratiques éprouvées d’exécution de SAP S/4HANA dans un environ
 author: lbrader
 ms.date: 08/03/2018
 ms.custom: seodec18
-ms.openlocfilehash: 4014d5736527a2f29692720d199b4a1aa8f76020
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: ace5348ccb32299b2f4167b3d384ba72972ca9ad
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120184"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53644003"
 ---
 # <a name="deploy-sap-netweaver-windows-for-anydb-on-azure-virtual-machines"></a>Déployer SAP NetWeaver (Windows) pour AnyDB sur des machines virtuelles Azure
 
@@ -149,7 +149,7 @@ Pour la récupération d’urgence, vous devez être en mesure de basculer vers 
 
 - **Couche Serveurs d’applications**. Les serveurs d’applications SAP ne contiennent pas de données d’entreprise. Sur Azure, une stratégie de récupération d’urgence simple consiste à créer des serveurs d’applications SAP dans la région secondaire, puis à les arrêter. En cas de modification de la configuration ou de mise à jour du noyau sur le serveur d’applications principal, les mêmes modifications doivent être appliquées aux machines virtuelles de la région secondaire (par exemple, les exécutables du noyau copiés sur les machines virtuelles de récupération d’urgence). Pour la réplication automatique des serveurs d’applications vers une région secondaire, [Azure Site Recovery](/azure/site-recovery/site-recovery-overview) constitue la solution recommandée.
 
-- **Services centraux**. Ce composant de la pile d’applications SAP ne conserve pas non plus de données d’entreprise. Vous pouvez créer une machine virtuelle dans la région de récupération d’urgence pour exécuter le rôle Services centraux. Le seul contenu du nœud Services centraux principal à synchroniser est le contenu du partage /sapmnt. En outre, en cas de modification de la configuration ou de mise à jour du noyau sur les serveurs principaux des services centraux, celles-ci doivent être répétées sur la machine virtuelle de la région de récupération d’urgence exécutant les services centraux. Pour synchroniser les deux serveurs, vous pouvez utiliser Azure Site Recovery pour répliquer les nœuds de cluster ou simplement utiliser une copie planifiée régulièrement pour copier /sapmnt vers la région de récupération d’urgence. Pour plus d’informations sur le processus de génération, de copie et de test de basculement associé à cette méthode de réplication simple, téléchargez [SAP NetWeaver: Building a Hyper-V and Microsoft Azure–based Disaster Recovery Solution](https://download.microsoft.com/download/9/5/6/956FEDC3-702D-4EFB-A7D3-2DB7505566B6/SAP%20NetWeaver%20-%20Building%20an%20Azure%20based%20Disaster%20Recovery%20Solution%20V1_5%20.docx) (SAP NetWeaver : créer une solution de reprise d’activité après sinistre basée sur Hyper-V et Microsoft Azure) et lisez la section « 4.3. Couche SAP SPOF (ASCS) ».
+- **Services centraux**. Ce composant de la pile d’applications SAP ne conserve pas non plus de données d’entreprise. Vous pouvez créer une machine virtuelle dans la région de récupération d’urgence pour exécuter le rôle Services centraux. Le seul contenu du nœud Services centraux principal à synchroniser est le contenu du partage /sapmnt. En outre, en cas de modification de la configuration ou de mise à jour du noyau sur les serveurs principaux des services centraux, celles-ci doivent être répétées sur la machine virtuelle de la région de récupération d’urgence exécutant les services centraux. Pour synchroniser les deux serveurs, vous pouvez utiliser Azure Site Recovery pour répliquer les nœuds de cluster ou simplement utiliser une copie planifiée régulièrement pour copier /sapmnt vers la région de récupération d’urgence. Pour plus d’informations sur le processus de génération, de copie et de test de basculement associé à cette méthode de réplication simple, téléchargez [SAP NetWeaver: Building a Hyper-V and Microsoft Azure–based Disaster Recovery Solution](https://download.microsoft.com/download/9/5/6/956FEDC3-702D-4EFB-A7D3-2DB7505566B6/SAP%20NetWeaver%20-%20Building%20an%20Azure%20based%20Disaster%20Recovery%20Solution%20V1_5%20.docx) (SAP NetWeaver : créer une solution de reprise d’activité après sinistre basée sur Hyper-V et Microsoft Azure) et lisez la section « 4.3. Couche SAP SPOF (ASCS).
 
 - **Couche Base de données**. Pour implémenter la récupération d’urgence, la meilleure solution consiste à utiliser la technologie de réplication intégrée de la base de données. Dans le cas de SQL Server, par exemple, nous vous recommandons d’utiliser le groupe de disponibilité AlwaysOn pour établir un réplica dans une région distante, en répliquant les transactions de façon asynchrone avec basculement manuel. La réplication asynchrone évite d’affecter les performances des charges de travail interactives sur le site principal. Le basculement manuel donne la possibilité d’évaluer l’impact de la récupération d’urgence et de déterminer si le fonctionnement à partir du site de récupération d’urgence est justifié.
 
@@ -179,5 +179,14 @@ Les communautés peuvent répondre aux questions et vous aider à paramétrer un
 - [Support de la communauté Azure](https://azure.microsoft.com/support/community/)
 - [Communauté SAP](https://www.sap.com/community.html)
 - [Dépassement de capacité de la pile](https://stackoverflow.com/tags/sap/)
+
+## <a name="related-resources"></a>Ressources associées
+
+Vous pouvez consulter les [exemples de scénarios Azure](/azure/architecture/example-scenario) suivants, qui décrivent des solutions spécifiques utilisant certaines de ces technologies :
+
+- [Exécution des charges de travail de production SAP à l’aide d’Oracle Database sur Azure](/azure/architecture/example-scenario/apps/sap-production)
+- [Environnements de développement/test pour les charges de travail SAP sur Azure](/azure/architecture/example-scenario/apps/sap-dev-test)
+
+<!-- links -->
 
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/sap-reference-architectures.vsdx

@@ -9,12 +9,12 @@ pnp.pattern.categories:
 - data-management
 - design-implementation
 - performance-scalability
-ms.openlocfilehash: 9a2eecdff7494fb627ea5c4655e6edc789bd5bdf
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: de9530f7dd55c0ce5460cd3b58ab9f216c9b5c8c
+ms.sourcegitcommit: fb22348f917a76e30a6c090fcd4a18decba0b398
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429687"
+ms.lasthandoff: 12/16/2018
+ms.locfileid: "53450868"
 ---
 # <a name="command-and-query-responsibility-segregation-cqrs-pattern"></a>Modèle de séparation des responsabilités en matière de commande et de requête (CQRS)
 
@@ -39,8 +39,6 @@ Toutefois, l’approche CRUD traditionnelle présente certains inconvénients :
 - Il y a des risques de contention des données lorsque les enregistrements sont verrouillés dans le magasin de données d’un domaine collaboratif où plusieurs acteurs travaillent en parallèle sur le même ensemble de données. Ou vous pouvez rencontrer des conflits de mise à jour causés par des mises à jour simultanées quand le verrouillage optimiste est utilisé. Ces risques augmentent à mesure que la complexité et le débit du système évoluent. En outre, l’approche traditionnelle peut avoir des conséquences négatives sur les performances en raison de la charge sur la couche d’accès aux données et le magasin de données, et la complexité des requêtes nécessaire pour récupérer des informations.
 
 - Elle peut compliquer la gestion de la sécurité et des autorisations, car chaque entité est soumise à des opérations de lecture et d’écriture qui peuvent exposer des données dans le mauvais contexte.
-
-> Pour une meilleure compréhension des limites de l’approche CRUD, consultez [CRUD, Only When You Can Afford It](https://blogs.msdn.microsoft.com/maarten_mullender/2004/07/23/crud-only-when-you-can-afford-it-revisited/) (L’approche CRUD uniquement lorsque vous pouvez vous le permettre).
 
 ## <a name="solution"></a>Solution
 
@@ -248,6 +246,6 @@ Les modèles et les conseils suivants peuvent être utiles quand il s’agit d�
 
 - [Modèle de vue matérialisée](materialized-view.md). Le mode de lecture d’une implémentation CQRS peut contenir des vues matérialisées des données du modèle d’écriture, ou le modèle de lecture peut être utilisé pour générer des vues matérialisées.
 
-- Le guide des modèles et pratiques [CQRS Journey](https://aka.ms/cqrs) (Découverte de CQRS). En particulier [Introducing the Command Query Responsibility Segregation Pattern](https://msdn.microsoft.com/library/jj591573.aspx) (Présentation du modèle de séparation des responsabilités en matière de commande et de requête) qui explore le modèle et les situations dans lesquelles il peut vous être utile et [Epilogue: Lessons Learned](https://msdn.microsoft.com/library/jj591568.aspx) (Épilogue : leçons apprises) qui vous aide à comprendre certains des problèmes liés à l’utilisation de ce domaine.
+- Le guide des modèles et pratiques [CQRS Journey](https://aka.ms/cqrs) (Découverte de CQRS). En particulier [Introducing the Command Query Responsibility Segregation Pattern](https://msdn.microsoft.com/library/jj591573.aspx) (Présentation du modèle de séparation des responsabilités en matière de commande et de requête) explore le modèle et les situations dans lesquelles il peut vous être utile et [Epilogue: Lessons Learned](https://msdn.microsoft.com/library/jj591568.aspx) (Épilogue : leçons apprises) vous aide à comprendre certains des problèmes liés à l’utilisation de ce modèle.
 
 - L’article [CQRS de Martin Fowler](https://martinfowler.com/bliki/CQRS.html) qui explique les notions de base du modèle et propose des liens vers d’autres ressources utiles.

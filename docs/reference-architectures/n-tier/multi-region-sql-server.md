@@ -5,12 +5,12 @@ description: Déployez une application sur des machines virtuelles Azure dans pl
 author: MikeWasson
 ms.date: 07/19/2018
 ms.custom: seodec18
-ms.openlocfilehash: 5036d8c74dbf92d9547ab866b15b1576df48e3eb
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 84da8aaef7e552beff1f06befbaa2e50a3ac3d8b
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53119997"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643700"
 ---
 # <a name="run-an-n-tier-application-in-multiple-azure-regions-for-high-availability"></a>Exécuter une application multiniveau dans plusieurs régions pour une haute disponibilité
 
@@ -159,6 +159,13 @@ Testez la résilience aux défaillances du système. Voici quelques scénarios c
 - Arrêt du service DNS sur les contrôleurs de domaine.
 
 Mesurez les temps de récupération et vérifiez qu’ils répondent aux besoins de votre entreprise. Testez également des combinaisons de défaillances.
+
+## <a name="related-resources"></a>Ressources associées
+
+Vous pouvez consulter les [exemples de scénarios Azure](/azure/architecture/example-scenario) suivants, qui décrivent des solutions spécifiques utilisant certaines de ces technologies :
+
+- [Application web multiniveau développée pour la haute disponibilité et la reprise d’activité sur Azure](/azure/architecture/example-scenario/infrastructure/multi-tier-app-disaster-recovery)
+- [Création d’applications web sécurisées avec des machines virtuelles Windows sur Azure](/azure/architecture/example-scenario/infrastructure/regulated-multitier-app)
 
 <!-- links -->
 

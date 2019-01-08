@@ -1,14 +1,15 @@
 ---
-title: Sites web WordPress hautement évolutifs et sécurisés sur Azure
+title: Sites web WordPress hautement évolutifs et sécurisés
+titleSuffix: Azure Example Scenarios
 description: Créez un site web WordPress hautement évolutif et sécurisé pour les événements multimédias.
 author: david-stanford
 ms.date: 09/18/2018
-ms.openlocfilehash: 6ff39d09fa301c8c68ce2a644cc489c0e87a22fa
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.openlocfilehash: c0dad12e1da1f17b75d0661195123da4a8267152
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610599"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53644039"
 ---
 # <a name="highly-scalable-and-secure-wordpress-website"></a>Sites web WordPress hautement évolutifs et sécurisés
 
@@ -18,10 +19,10 @@ Cet exemple de scénario s’applique aux entreprises qui ont besoin d’une ins
 
 Les autres cas d’usage appropriés sont les suivants :
 
-* événements multimédias qui entraînent des pics de trafic ;
-* blogs qui utilisent WordPress comme système de gestion de contenu ;
-* sites web d’entreprise ou de e-commerce qui utilisent WordPress ;
-* sites web créés à l’aide d’autres systèmes de gestion de contenu.
+- événements multimédias qui entraînent des pics de trafic ;
+- blogs qui utilisent WordPress comme système de gestion de contenu ;
+- sites web d’entreprise ou de e-commerce qui utilisent WordPress ;
+- sites web créés à l’aide d’autres systèmes de gestion de contenu.
 
 ## <a name="architecture"></a>Architecture
 
@@ -47,19 +48,19 @@ Le second flux de travail correspond au mode de contribution des auteurs pour le
 
 ### <a name="components"></a>Composants
 
-* [Azure Content Delivery Network (CDN)](/azure/cdn/cdn-overview) est un réseau distribué de serveurs capables de fournir efficacement du contenu web aux utilisateurs. Les réseaux CDN réduisent la latence en stockant le contenu en cache sur des serveurs Edge dans des points de présence (POP) proches des utilisateurs finaux.
-* Les [réseaux virtuels](/azure/virtual-network/virtual-networks-overview) permettent à de nombreuses ressources, telles que les machines virtuelles de communiquer en toute sécurité entre elles, avec Internet et avec les réseaux locaux. Les réseaux virtuels fournissent un isolement et une segmentation, ils filtrent et acheminent le trafic et ils autorisent une connexion entre des emplacements. Les deux réseaux sont connectés via VNET Peering.
-* Les [groupes de sécurité réseau](/azure/virtual-network/security-overview) contiennent une liste de règles de sécurité qui autorisent ou refusent le trafic réseau entrant ou sortant en fonction du protocole, du port et de l’adresse IP source ou de destination. Les réseaux virtuels dans ce scénario sont sécurisés avec des règles de groupe de sécurité réseau qui limitent le flux du trafic entre les composants d’application.
-* Les [équilibreurs de charge](/azure/load-balancer/load-balancer-overview) distribuent le trafic entrant en fonction des règles et des sondes d’intégrité. Un équilibreur de charge offre une latence faible et un débit élevé, et peut augmenter l’échelle jusqu’à des millions de flux pour toutes les applications TCP et UDP. Dans ce scénario, un équilibreur de charge permet de distribuer le trafic à partir du réseau de distribution de contenu vers les serveurs web frontaux.
-* Les [groupes de machines virtuelles identiques][docs-vmss] vous permettent de créer et de gérer un groupe de machines virtuelles identiques à charge équilibrée. Le nombre d’instances de machine virtuelle peut augmenter ou diminuer automatiquement en fonction d’une demande ou d’un calendrier défini. Deux groupes de machines virtuelles identiques distincts sont utilisés dans ce scénario : un pour les serveurs web frontaux proposant du contenu, et l’autre pour les serveurs web frontaux utilisés pour créer du contenu.
-* Comme [Azure Files](/azure/storage/files/storage-files-introduction) fournit un partage de fichiers totalement managé dans le cloud qui héberge l’ensemble du contenu de WordPress dans ce scénario, toutes les machines virtuelles ont accès aux données.
-* La solution [Azure Key Vault](/azure/key-vault/key-vault-overview) est utilisée pour stocker et contrôler étroitement l’accès aux mots de passe, certificats et clés.
-* [Azure Active Directory (Azure AD)](/azure/active-directory/fundamentals/active-directory-whatis) est un service cloud et mutualisé de gestion des répertoires et des identités. Dans ce scénario, Azure AD fournit des services d’authentification pour le site web et les tunnels VPN.
+- [Azure Content Delivery Network (CDN)](/azure/cdn/cdn-overview) est un réseau distribué de serveurs capables de fournir efficacement du contenu web aux utilisateurs. Les réseaux CDN réduisent la latence en stockant le contenu en cache sur des serveurs Edge dans des points de présence (POP) proches des utilisateurs finaux.
+- Les [réseaux virtuels](/azure/virtual-network/virtual-networks-overview) permettent à de nombreuses ressources, telles que les machines virtuelles de communiquer en toute sécurité entre elles, avec Internet et avec les réseaux locaux. Les réseaux virtuels fournissent un isolement et une segmentation, ils filtrent et acheminent le trafic et ils autorisent une connexion entre des emplacements. Les deux réseaux sont connectés via VNET Peering.
+- Les [groupes de sécurité réseau](/azure/virtual-network/security-overview) contiennent une liste de règles de sécurité qui autorisent ou refusent le trafic réseau entrant ou sortant en fonction du protocole, du port et de l’adresse IP source ou de destination. Les réseaux virtuels dans ce scénario sont sécurisés avec des règles de groupe de sécurité réseau qui limitent le flux du trafic entre les composants d’application.
+- Les [équilibreurs de charge](/azure/load-balancer/load-balancer-overview) distribuent le trafic entrant en fonction des règles et des sondes d’intégrité. Un équilibreur de charge offre une latence faible et un débit élevé, et peut augmenter l’échelle jusqu’à des millions de flux pour toutes les applications TCP et UDP. Dans ce scénario, un équilibreur de charge permet de distribuer le trafic à partir du réseau de distribution de contenu vers les serveurs web frontaux.
+- Les [groupes de machines virtuelles identiques][docs-vmss] vous permettent de créer et de gérer un groupe de machines virtuelles identiques à charge équilibrée. Le nombre d’instances de machine virtuelle peut augmenter ou diminuer automatiquement en fonction d’une demande ou d’un calendrier défini. Deux groupes de machines virtuelles identiques distincts sont utilisés dans ce scénario : un pour les serveurs web frontaux proposant du contenu, et l’autre pour les serveurs web frontaux utilisés pour créer du contenu.
+- Comme [Azure Files](/azure/storage/files/storage-files-introduction) fournit un partage de fichiers totalement managé dans le cloud qui héberge l’ensemble du contenu de WordPress dans ce scénario, toutes les machines virtuelles ont accès aux données.
+- La solution [Azure Key Vault](/azure/key-vault/key-vault-overview) est utilisée pour stocker et contrôler étroitement l’accès aux mots de passe, certificats et clés.
+- [Azure Active Directory (Azure AD)](/azure/active-directory/fundamentals/active-directory-whatis) est un service cloud et mutualisé de gestion des répertoires et des identités. Dans ce scénario, Azure AD fournit des services d’authentification pour le site web et les tunnels VPN.
 
 ### <a name="alternatives"></a>Autres solutions
 
-* [SQL Server pour Linux](/azure/virtual-machines/linux/sql/sql-server-linux-virtual-machines-overview) peut remplacer le magasin de données MariaDB.
-* [Azure Database pour MySQL](/azure/mysql/overview) peut remplacer le magasin de données MariaDB si vous préférez une solution entièrement managée.
+- [SQL Server pour Linux](/azure/virtual-machines/linux/sql/sql-server-linux-virtual-machines-overview) peut remplacer le magasin de données MariaDB.
+- [Azure Database pour MySQL](/azure/mysql/overview) peut remplacer le magasin de données MariaDB si vous préférez une solution entièrement managée.
 
 ## <a name="considerations"></a>Considérations
 
@@ -95,9 +96,9 @@ Pour explorer le coût d’exécution de ce scénario, tous les services sont pr
 
 Nous avons fourni un [profil de coût][pricing] préconfiguré basé sur le diagramme d’architecture affiché ci-dessus. Pour configurer la calculatrice de prix pour votre cas d’usage, vous devez prendre en compte quelques éléments principaux :
 
-* Quel est le trafic escompté en termes de Go/mois ? La quantité du trafic a le plus gros impact sur vos coûts, car elle affecte le nombre de machines virtuelles qui sont nécessaires pour exposer les données dans le groupe de machines virtuelles identiques. En outre, elle est directement mise en corrélation avec la quantité de données exposées via le réseau CDN.
-* Combien de nouvelles données allez-vous écrire sur votre site web ? Les nouvelles données écrites sur votre site web sont mises en corrélation avec la quantité de données mises en miroir dans les régions.
-* Quelle est la proportion du contenu dynamique ? Quelle est la proportion statique ? L’écart entre le contenu dynamique et le contenu statique a un impact sur la quantité de données à récupérer à partir de la couche Données par rapport à la quantité de données mises en cache dans le réseau CDN.
+- Quel est le trafic escompté en termes de Go/mois ? La quantité du trafic a le plus gros impact sur vos coûts, car elle affecte le nombre de machines virtuelles qui sont nécessaires pour exposer les données dans le groupe de machines virtuelles identiques. En outre, elle est directement mise en corrélation avec la quantité de données exposées via le réseau CDN.
+- Combien de nouvelles données allez-vous écrire sur votre site web ? Les nouvelles données écrites sur votre site web sont mises en corrélation avec la quantité de données mises en miroir dans les régions.
+- Quelle est la proportion du contenu dynamique ? Quelle est la proportion statique ? L’écart entre le contenu dynamique et le contenu statique a un impact sur la quantité de données à récupérer à partir de la couche Données par rapport à la quantité de données mises en cache dans le réseau CDN.
 
 <!-- links -->
 [architecture]: ./media/architecture-secure-scalable-wordpress.png

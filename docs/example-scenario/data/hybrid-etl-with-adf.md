@@ -1,25 +1,26 @@
 ---
 title: ETL hybride avec une instance SSIS locale existante et Azure Data Factory
+titleSuffix: Azure Example Scenarios
 description: ETL hybride avec des déploiements de SQL Server Integration Services (SSIS) locaux existants et Azure Data Factory
 author: alhieng
 ms.date: 9/20/2018
 ms.custom: tsp-team
-ms.openlocfilehash: cc6c2bfe85dc0d1eb8ad29e044611f1e435810c3
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: 387b0aa1927a8d316aad76100f577da13833eae6
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53306787"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643505"
 ---
 # <a name="hybrid-etl-with-existing-on-premises-ssis-and-azure-data-factory"></a>ETL hybride avec des instances SSIS locales existantes et Azure Data Factory
 
-Les organisations qui migrent leurs bases de données SQL Server vers le cloud peuvent réaliser des économies considérables, augmenter les performances, gagner en flexibilité et améliorer la scalabilité. Toutefois, le fait de retravailler des processus ETL (extraire, transformer et charger) existants conçus avec SQL Server Integration Services (SSIS) peut être un obstacle pour la migration. Dans d’autres cas, le processus de chargement de données nécessite une logique complexe et/ou des composants d’outil de données spécifiques qui ne sont pas encore pris en charge par Azure Data Factory v2 (ADF). Les fonctionnalités SSIS couramment utilisées comprennent des transformations Recherche floue et Regroupement probable, la capture des changements de données (CDC), les dimensions à variation lente (SCD) et Data Quality Services (DQS).
+Les organisations qui migrent leurs bases de données SQL Server vers le cloud peuvent réaliser des économies considérables, augmenter les performances, gagner en flexibilité et améliorer la scalabilité. Toutefois, le fait de retravailler des processus ETL (extraire, transformer et charger) existants conçus avec SQL Server Integration Services (SSIS) peut être un obstacle pour la migration. Dans d’autres cas, le processus de chargement des données nécessite une logique complexe et/ou des composants d’outil de données spécifiques qui ne sont pas encore pris en charge par Azure Data Factory v2. Les fonctionnalités SSIS couramment utilisées comprennent des transformations Recherche floue et Regroupement probable, la capture des changements de données (CDC), les dimensions à variation lente (SCD) et Data Quality Services (DQS).
 
-L’approche ETL hybride peut être l’option la plus adaptée pour faciliter une migration lift-and-shift d’une base de données SQL existante. Une approche hybride utilise ADF comme moteur d’orchestration principal, mais continue à tirer parti des packages SSIS existants pour nettoyer les données et utiliser les ressources locales. Cette approche utilise SQL Server Integrated Runtime (IR) d’ADF pour effectuer un lift-and-shift des bases de données existantes dans le cloud, tout en utilisant le code existant et les packages SSIS.
+L’approche ETL hybride peut être l’option la plus adaptée pour faciliter une migration lift-and-shift d’une base de données SQL existante. Une approche hybride utilise Data Factory comme moteur d’orchestration principal, mais continue à tirer parti des packages SSIS existants pour nettoyer les données et utiliser les ressources locales. Cette approche utilise SQL Server Integrated Runtime (IR) de Data Factory pour effectuer un lift-and-shift des bases de données existantes dans le cloud, tout en utilisant le code existant et les packages SSIS.
 
-Cet exemple de scénario s’applique aux organisations qui migrent des bases de données vers le cloud et envisagent d’utiliser ADF comme moteur ETL principal dans le cloud tout en incorporant des packages SSIS existants dans leur nouveau workflow de données cloud. De nombreuses organisations ont beaucoup investi dans le développement de packages SSIS ETL pour des tâches de données spécifiques. La réécriture de ces packages peut être décourageante. Par ailleurs, de nombreux packages de code existants ont des dépendances sur des ressources locales qui empêchent la migration vers le cloud.
+Cet exemple de scénario s’applique aux organisations qui migrent des bases de données vers le cloud et envisagent d’utiliser Data Factory comme moteur ETL principal dans le cloud, tout en incorporant des packages SSIS existants dans leur nouveau workflow de données cloud. De nombreuses organisations ont beaucoup investi dans le développement de packages SSIS ETL pour des tâches de données spécifiques. La réécriture de ces packages peut être décourageante. Par ailleurs, de nombreux packages de code existants ont des dépendances sur des ressources locales qui empêchent la migration vers le cloud.
 
-ADF permet aux clients de tirer parti de leurs packages ETL existants sans investir outre mesure dans le développement ETL local. Cet exemple présente des cas d’usage potentiels pour tirer parti des packages SSIS existants dans le cadre d’un nouveau workflow de données cloud à l’aide d’Azure Data Factory v2.
+Data Factory permet aux clients de tirer parti de leurs packages ETL existants sans investir outre mesure dans le développement d’ETL locaux. Cet exemple présente des cas d’usage potentiels pour tirer parti des packages SSIS existants dans le cadre d’un nouveau workflow de données cloud à l’aide d’Azure Data Factory v2.
 
 ## <a name="potential-use-cases"></a>Cas d’usage potentiels
 
@@ -27,10 +28,10 @@ ADF permet aux clients de tirer parti de leurs packages ETL existants sans inves
 
 Plusieurs cas d’usage locaux potentiels sont listés ci-dessous :
 
-* Chargement des journaux de routeur réseau dans une base de données pour analyse.
-* Préparation des données d’emploi des ressources humaines pour les rapports analytiques.
-* Chargement des données de produit et de ventes dans un entrepôt de données pour la prévision des ventes.
-* Automatisation du chargement des magasins de données opérationnelles ou des entrepôts de données pour la finance et la comptabilité.
+- Chargement des journaux de routeur réseau dans une base de données pour analyse.
+- Préparation des données d’emploi des ressources humaines pour les rapports analytiques.
+- Chargement des données de produit et de ventes dans un entrepôt de données pour la prévision des ventes.
+- Automatisation du chargement des magasins de données opérationnelles ou des entrepôts de données pour la finance et la comptabilité.
 
 ## <a name="architecture"></a>Architecture
 
@@ -44,10 +45,10 @@ Plusieurs cas d’usage locaux potentiels sont listés ci-dessous :
 
 ### <a name="components"></a>Composants
 
-* Le [Stockage Blob][docs-blob-storage] est utilisé pour stocker des fichiers et comme source de Data Factory pour récupérer des données.
-* [SQL Server Integration Services][docs-ssis] contient les packages ETL locaux utilisés pour exécuter les charges de travail propres à la tâche.
-* [Azure Data Factory][docs-data-factory] est le moteur d’orchestration cloud qui prend des données de plusieurs sources, et les combine, les orchestre et les charge dans un entrepôt de données.
-* [SQL Data Warehouse][docs-sql-data-warehouse] centralise les données dans le cloud pour pouvoir y accéder facilement à l’aide de requêtes SQL ANSI standard.
+- Le [Stockage Blob][docs-blob-storage] est utilisé pour stocker des fichiers et comme source de Data Factory pour récupérer des données.
+- [SQL Server Integration Services][docs-ssis] contient les packages ETL locaux utilisés pour exécuter les charges de travail propres à la tâche.
+- [Azure Data Factory][docs-data-factory] est le moteur d’orchestration cloud qui prend des données de plusieurs sources, et les combine, les orchestre et les charge dans un entrepôt de données.
+- [SQL Data Warehouse][docs-sql-data-warehouse] centralise les données dans le cloud pour pouvoir y accéder facilement à l’aide de requêtes SQL ANSI standard.
 
 ### <a name="alternatives"></a>Autres solutions
 
@@ -61,26 +62,26 @@ Pour l’approche d’hébergement sur Azure, vous devez choisir la quantité d�
 
 Le choix est plus facile quand vous avez déjà des packages SSIS existants avec des dépendances locales comme des sources de données ou des fichiers qui ne sont pas accessibles à partir d’Azure. Dans ce scénario, votre seule option est l’IR auto-hébergé. Cette approche offre davantage de souplesse pour tirer parti du cloud comme moteur d’orchestration, sans avoir à réécrire les packages existants.
 
-L’objectif est de déplacer les données traitées dans le cloud pour les affiner ou les combiner avec d’autres données stockées dans le cloud. Dans le cadre du processus de conception, effectuez le suivi du nombre d’activités utilisées dans les pipelines ADF. Pour plus d’informations, consultez [Pipelines et activités dans Azure Data Factory](/azure/data-factory/concepts-pipelines-activities).
+L’objectif est de déplacer les données traitées dans le cloud pour les affiner ou les combiner avec d’autres données stockées dans le cloud. Dans le cadre du processus de conception, effectuez le suivi du nombre d’activités utilisées dans les pipelines Data Factory. Pour plus d’informations, consultez [Pipelines et activités dans Azure Data Factory](/azure/data-factory/concepts-pipelines-activities).
 
 ## <a name="pricing"></a>Tarifs
 
-Azure Data Factory est un moyen économique d’orchestrer le déplacement des données dans le cloud. Le coût dépend de plusieurs facteurs.
+Data Factory est un moyen économique d’orchestrer le déplacement des données dans le cloud. Le coût dépend de plusieurs facteurs.
 
-* Nombre d’exécutions de pipeline
-* Nombre d’entités/d’activités utilisées dans le pipeline
-* Nombre d’opérations de supervision
-* Nombre d’exécutions d’intégration (IR hébergé dans Azure ou IR auto-hébergé)
+- Nombre d’exécutions de pipeline
+- Nombre d’entités/d’activités utilisées dans le pipeline
+- Nombre d’opérations de supervision
+- Nombre d’exécutions d’intégration (IR hébergé dans Azure ou IR auto-hébergé)
 
-ADF utilise la facturation à l’utilisation. Par conséquent, les frais sont facturés uniquement pendant les exécutions de pipeline et la supervision. L’exécution d’un pipeline de base ne coûte pas plus de 50 cents et la supervision pas plus de 25 cents. Le [calculateur de coût Azure](https://azure.microsoft.com/pricing/calculator/) peut vous aider à élaborer une estimation plus précise en fonction de votre charge de travail spécifique.
+Data Factory utilise la facturation à l’utilisation. Par conséquent, les frais sont facturés uniquement pendant les exécutions de pipeline et la supervision. L’exécution d’un pipeline de base ne coûte pas plus de 50 cents et la supervision pas plus de 25 cents. Le [calculateur de coût Azure](https://azure.microsoft.com/pricing/calculator/) peut vous aider à élaborer une estimation plus précise en fonction de votre charge de travail spécifique.
 
-Quand vous exécutez une charge de travail ETL hybride, vous devez tenir compte du coût de la machine virtuelle qui héberge vos packages SSIS. Ce coût est basé sur la taille de la machine virtuelle : de D1v2 (1 cœur, 3,5 Go de RAM, disque de 50 Go) à E64V3 (64 cœurs, 432 Go de RAM, disque de 1 600 Go).  Si vous avez besoin d’aide pour choisir la taille appropriée de la machine virtuelle, consultez [Considérations sur les performances de machine virtuelle](/azure/cloud-services/cloud-services-sizes-specs#performance-considerations).
+Quand vous exécutez une charge de travail ETL hybride, vous devez tenir compte du coût de la machine virtuelle qui héberge vos packages SSIS. Ce coût est basé sur la taille de la machine virtuelle : de D1v2 (1 cœur, 3,5 Go de RAM, disque de 50 Go) à E64V3 (64 cœurs, 432 Go de RAM, disque de 1 600 Go). Si vous avez besoin d’aide pour choisir la taille appropriée de la machine virtuelle, consultez [Considérations sur les performances de machine virtuelle](/azure/cloud-services/cloud-services-sizes-specs#performance-considerations).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Découvrez plus d’informations sur [Azure Data Factory](https://azure.microsoft.com/services/data-factory/).
-* Démarrez avec Azure Data Factory en suivant le [Tutoriel pas à pas](/azure/data-factory/#step-by-step-tutorials).
-* [Provisionnez Azure-SSIS Integration Runtime dans Azure Data Factory](/azure/data-factory/tutorial-deploy-ssis-packages-azure).
+- Découvrez plus d’informations sur [Azure Data Factory](https://azure.microsoft.com/services/data-factory/).
+- Démarrez avec Azure Data Factory en suivant le [Tutoriel pas à pas](/azure/data-factory/#step-by-step-tutorials).
+- [Provisionnez Azure-SSIS Integration Runtime dans Azure Data Factory](/azure/data-factory/tutorial-deploy-ssis-packages-azure).
 
 <!-- links -->
 [architecture-diagram]: ./media/architecture-diagram-hybrid-etl-with-adf.png

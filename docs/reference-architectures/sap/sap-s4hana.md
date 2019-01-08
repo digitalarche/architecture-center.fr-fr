@@ -5,12 +5,12 @@ description: Pratiques éprouvées d’exécution de SAP S/4HANA dans un environ
 author: lbrader
 ms.date: 05/11/2018
 ms.custom: seodec18
-ms.openlocfilehash: 356b80c79aeb13ac951654350eafa904ff5e5ec1
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 9eb73ddaf5b1cb815f037f46c7e187f61d126876
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120235"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53644170"
 ---
 # <a name="sap-s4hana-for-linux-virtual-machines-on-azure"></a>SAP S/4HANA pour machines virtuelles Linux sur Azure
 
@@ -201,5 +201,14 @@ Les communautés peuvent répondre aux questions et vous aider à paramétrer un
 - [Support de la communauté Azure](https://azure.microsoft.com/support/community/)
 - [Communauté SAP](https://www.sap.com/community.html)
 - [Dépassement de capacité de la pile](https://stackoverflow.com/tags/sap/)
+
+## <a name="related-resources"></a>Ressources associées
+
+Vous pouvez consulter les [exemples de scénarios Azure](/azure/architecture/example-scenario) suivants, qui décrivent des solutions spécifiques utilisant certaines de ces technologies :
+
+- [Exécution des charges de travail de production SAP à l’aide d’Oracle Database sur Azure](/azure/architecture/example-scenario/apps/sap-production)
+- [Environnements de développement/test pour les charges de travail SAP sur Azure](/azure/architecture/example-scenario/apps/sap-dev-test)
+
+<!-- links -->
 
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/sap-reference-architectures.vsdx

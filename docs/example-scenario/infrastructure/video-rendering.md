@@ -1,15 +1,16 @@
 ---
-title: Rendu vidéo 3D sur Azure
+title: Rendu vidéo 3D
+titleSuffix: Azure Example Scenarios
 description: Exécutez des charges de travail HPC natives dans Azure à l’aide du service Azure Batch.
 author: adamboeglin
 ms.date: 07/13/2018
 ms.custom: fasttrack
-ms.openlocfilehash: 7dacefd5179c426912dd97af9af7b5a39505392d
-ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
+ms.openlocfilehash: 7e86da637553378a460b1c179c4f59ac258f0b34
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/06/2018
-ms.locfileid: "53004827"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643571"
 ---
 # <a name="3d-video-rendering-on-azure"></a>Rendu vidéo 3D sur Azure
 
@@ -21,10 +22,10 @@ Batch fournit une expérience cohérente de gestion et de planification des trav
 
 Les autres cas d’usage appropriés sont les suivants :
 
-* Modélisation 3D
-* Rendu FX Visual (VFX)
-* Transcodage vidéo
-* Traitement d’image, correction des couleurs et redimensionnement
+- Modélisation 3D
+- Rendu FX Visual (VFX)
+- Transcodage vidéo
+- Traitement d’image, correction des couleurs et redimensionnement
 
 ## <a name="architecture"></a>Architecture
 
@@ -45,9 +46,9 @@ Pour simplifier ce processus, vous pouvez également utiliser les [plug-ins de B
 
 Azure Batch s’appuie sur les technologies Azure suivantes :
 
-* Les [réseaux virtuels](/azure/virtual-network/virtual-networks-overview) sont utilisés pour le nœud principal et les ressources de calcul.
-* Les [comptes de stockage Azure](/azure/storage/common/storage-introduction) sont utilisés pour la synchronisation et la conservation des données.
-* Les [Microsoft Azure Virtual Machine Scale Sets][vmss] sont utilisés par CycleCloud pour les ressources de calcul.
+- Les [réseaux virtuels](/azure/virtual-network/virtual-networks-overview) sont utilisés pour le nœud principal et les ressources de calcul.
+- Les [comptes de stockage Azure](/azure/storage/common/storage-introduction) sont utilisés pour la synchronisation et la conservation des données.
+- Les [Microsoft Azure Virtual Machine Scale Sets][vmss] sont utilisés par CycleCloud pour les ressources de calcul.
 
 ## <a name="considerations"></a>Considérations
 
@@ -55,18 +56,18 @@ Azure Batch s’appuie sur les technologies Azure suivantes :
 
 Bien que la plupart des clients optent pour des ressources qui possèdent une grande puissance de processeur, d’autres charges de travail utilisant des groupes de machines virtuelles identiques peuvent impliquer des critères de choix des machines virtuelles différents, selon plusieurs facteurs :
 
-* L’application qui s’exécute est-elle memory-bound ?
-* A-t-elle besoin d’utiliser des GPU ? 
-* Les types de travaux sont-ils extrêmement parallèles ? Réclament-ils une connectivité InfiniBand pour les travaux étroitement couplés ?
-* Nécessitent des E/S rapides pour accéder au stockage sur les nœuds de calcul.
+- L’application qui s’exécute est-elle memory-bound ?
+- A-t-elle besoin d’utiliser des GPU ?
+- Les types de travaux sont-ils extrêmement parallèles ? Réclament-ils une connectivité InfiniBand pour les travaux étroitement couplés ?
+- Nécessitent des E/S rapides pour accéder au stockage sur les nœuds de calcul.
 
 Azure propose un large éventail de tailles de machine virtuelle qui répondent à chacune des exigences des applications ci-dessus ; certaines sont spécifiquement adaptées au calcul haute performance (HPC), mais même les plus petites tailles peuvent être utilisées pour fournir une implémentation de grille efficace :
 
-* [Tailles de machine virtuelle HPC][compute-hpc] Le rendu étant CPU-bound, Microsoft suggère généralement les machines virtuelles Azure de série H. Les machines virtuelles de ce type, spécialement conçues pour les besoins élevés de calcul, proposent des processeurs virtuels de 8 ou 16 cœurs, une mémoire DDR4, du stockage temporaire SSD et la technologie Intel Haswell E5.
-* [Tailles de machine virtuelle de GPU][compute-gpu] Les tailles de machine virtuelle au GPU optimisé sont des machines virtuelles spécialisées disponibles avec des GPU NVIDIA uniques ou multiples. Ces tailles sont conçues pour des charges de travail de visualisation, mais également de calcul et d’affichage graphique intensifs.
-* Les tailles des cœurs NC, NCv2, NCv3 et ND sont optimisées pour les applications nécessitant des ressources réseau et de calcul importantes, les algorithmes, notamment les applications et simulations CUDA et OpenCL, l’intelligence artificielle et le Deep Learning. Les tailles des cœurs NV sont optimisées et conçues pour la visualisation à distance, la diffusion en continu, les jeux, le codage et les scénarios VDI utilisant des infrastructures comme OpenGL et DirectX.
-* [Tailles de machine virtuelle à mémoire optimisée][compute-memory] Lorsque le besoin de mémoire augmente, les tailles de machines virtuelles à mémoire optimisée offrent un rapport mémoire/processeur supérieur.
-* [Tailles de machine virtuelle à usage général][compute-general] Des tailles de machines virtuelles à usage général sont également disponibles ; elles offrent un ratio mémoire/processeur équilibré.
+- [Tailles de machine virtuelle HPC][compute-hpc] Le rendu étant CPU-bound, Microsoft suggère généralement les machines virtuelles Azure de série H. Les machines virtuelles de ce type, spécialement conçues pour les besoins élevés de calcul, proposent des processeurs virtuels de 8 ou 16 cœurs, une mémoire DDR4, du stockage temporaire SSD et la technologie Intel Haswell E5.
+- [Tailles de machine virtuelle de GPU][compute-gpu] Les tailles de machine virtuelle au GPU optimisé sont des machines virtuelles spécialisées disponibles avec des GPU NVIDIA uniques ou multiples. Ces tailles sont conçues pour des charges de travail de visualisation, mais également de calcul et d’affichage graphique intensifs.
+- Les tailles des cœurs NC, NCv2, NCv3 et ND sont optimisées pour les applications nécessitant des ressources réseau et de calcul importantes, les algorithmes, notamment les applications et simulations CUDA et OpenCL, l’intelligence artificielle et le Deep Learning. Les tailles des cœurs NV sont optimisées et conçues pour la visualisation à distance, la diffusion en continu, les jeux, le codage et les scénarios VDI utilisant des infrastructures comme OpenGL et DirectX.
+- [Tailles de machine virtuelle à mémoire optimisée][compute-memory] Lorsque le besoin de mémoire augmente, les tailles de machines virtuelles à mémoire optimisée offrent un rapport mémoire/processeur supérieur.
+- [Tailles de machine virtuelle à usage général][compute-general] Des tailles de machines virtuelles à usage général sont également disponibles ; elles offrent un ratio mémoire/processeur équilibré.
 
 ### <a name="alternatives"></a>Autres solutions
 
@@ -90,32 +91,35 @@ Pour obtenir des conseils d’ordre général sur la conception de solutions sé
 
 Il n’existe pour le moment aucune fonctionnalité de basculement dans Azure Batch. Nous vous recommandons de suivre les étapes ci-dessous pour garantir la disponibilité en cas de panne non planifiée :
 
-* Créer un compte Azure Batch dans un autre emplacement Azure avec un autre compte de stockage
-* Créer les mêmes pools de nœud avec le même nom et aucun nœud alloué
-* S’assurer que les applications sont créées et mises à jour vers le compte de stockage secondaire
-* Charger des fichiers d’entrée et envoyer des travaux vers l’autre compte Azure Batch
+- Créer un compte Azure Batch dans un autre emplacement Azure avec un autre compte de stockage
+- Créer les mêmes pools de nœud avec le même nom et aucun nœud alloué
+- S’assurer que les applications sont créées et mises à jour vers le compte de stockage secondaire
+- Charger des fichiers d’entrée et envoyer des travaux vers l’autre compte Azure Batch
 
-## <a name="deploy-this-scenario"></a>Déployer ce scénario
+## <a name="deploy-the-scenario"></a>Déployez le scénario
 
-### <a name="creating-an-azure-batch-account-and-pools-manually"></a>Création manuelle d’un compte Azure Batch et des pools
+### <a name="create-an-azure-batch-account-and-pools-manually"></a>Créer manuellement un compte et des pools Azure Batch
 
 Ce scénario illustre le fonctionnement d’Azure Batch tout en présentant Azure Batch Labs comme un exemple de solution SaaS que vous pouvez développer pour vos propres clients :
 
 [Azure Batch Masterclass][batch-labs-masterclass]
 
-### <a name="deploying-the-example-scenario-using-an-azure-resource-manager-template"></a>Déploiement de l’exemple de scénario suivant un modèle Azure Resource Manager
+### <a name="deploy-the-components"></a>Déployer les composants
 
 Le modèle déploiera :
 
-* Un nouveau compte Azure Batch
-* Un compte de stockage
-* Un pool de nœuds associé au compte Batch
-* Le pool de nœuds sera configuré pour utiliser des machines virtuelles A2 v2 avec les images de Ubuntu Canonical
-* Le pool de nœuds ne contient initialement aucune machine virtuelle ; une mise à l’échelle manuelle sera nécessaire pour en ajouter
+- Un nouveau compte Azure Batch
+- Un compte de stockage
+- Un pool de nœuds associé au compte Batch
+- Le pool de nœuds sera configuré pour utiliser des machines virtuelles A2 v2 avec les images de Ubuntu Canonical
+- Le pool de nœuds ne contient initialement aucune machine virtuelle ; une mise à l’échelle manuelle sera nécessaire pour en ajouter
+
+<!-- markdownlint-disable MD033 -->
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Fhpc%2Fbatchcreatewithpools.json" target="_blank">
     <img src="https://azuredeploy.net/deploybutton.png"/>
 </a>
+<!-- markdownlint-enable MD033 -->
 
 [Plus d’informations sur les modèles Resource Manager][azure-arm-templates]
 
@@ -125,15 +129,15 @@ Le coût d’utilisation d’Azure Batch varie selon les tailles de machine virt
 
 Voici quelques exemples des coûts qui pourraient être engagés pour une tâche se terminant en 8 heures à l’aide de différents nombres de serveurs :
 
-* 100 machines virtuelles avec processeur hautes performances : [Estimation du coût][hpc-est-high]
+- 100 machines virtuelles avec processeur hautes performances : [Estimation du coût][hpc-est-high]
 
   100 H16m (16 cœurs, 225 Go de RAM, 512 Go de Stockage Premium), 2 To de Stockage Blob, 1 To de sortie
 
-* 50 machines virtuelles avec processeur hautes performances : [Estimation du coût][hpc-est-med]
+- 50 machines virtuelles avec processeur hautes performances : [Estimation du coût][hpc-est-med]
 
   50 H16m (16 cœurs, 225 Go de RAM, 512 Go de Stockage Premium), 2 To de Stockage Blob, 1 To de sortie
 
-* 10 machines virtuelles avec processeur hautes performances : [Estimation du coût][hpc-est-low]
+- 10 machines virtuelles avec processeur hautes performances : [Estimation du coût][hpc-est-low]
 
   10 H16m (16 cœurs, 225 Go de RAM, 512 Go de Stockage Premium), 2 To de Stockage Blob, 1 To de sortie
 
@@ -141,7 +145,7 @@ Voici quelques exemples des coûts qui pourraient être engagés pour une tâche
 
 Azure Batch prend également en charge les machines virtuelles basse priorité dans les pools de nœuds, qui peuvent représenter des économies substantielles. Pour plus d’informations, notamment sur la comparaison des prix entre les machines virtuelles standard et les machines virtuelles de faible priorité, consultez [Azure Batch Pricing][batch-pricing].
 
-> [!NOTE] 
+> [!NOTE]
 > Les machines virtuelles de faible priorité ne conviennent qu’à certaines applications et charges de travail.
 
 ## <a name="related-resources"></a>Ressources associées

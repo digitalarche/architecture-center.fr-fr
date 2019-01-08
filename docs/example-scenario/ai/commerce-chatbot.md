@@ -1,14 +1,15 @@
 ---
-title: Bot conversationnel pour les réservations d’hôtel sur Azure
+title: Bot conversationnel pour les réservations d’hôtel
+titleSuffix: Azure Example Scenarios
 description: Créez un bot conversationnel pour les applications de commerce avec Azure Bot Service.
 author: iainfoulds
 ms.date: 07/05/2018
-ms.openlocfilehash: a922a75d621672fcac95296b1d99112d68c91107
-ms.sourcegitcommit: 0a31fad9b68d54e2858314ca5fe6cba6c6b95ae4
+ms.openlocfilehash: 31a7384b11262ac967ab5f8a6c5e7f17e9a00b6f
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/13/2018
-ms.locfileid: "51610768"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643847"
 ---
 # <a name="conversational-chatbot-for-hotel-reservations-on-azure"></a>Bot conversationnel pour les réservations d’hôtel sur Azure
 
@@ -22,9 +23,9 @@ En utilisant les services Azure tels que Bot Service et Language Understanding o
 
 Les autres cas d’usage appropriés sont les suivants :
 
-* La consultation du menu à emporter d’un restaurant et le passage d’une commande
-* La vérification de la disponibilité d’un hôtel et la réservation d’une chambre
-* La recherche des photos disponibles et la commande des impressions
+- La consultation du menu à emporter d’un restaurant et le passage d’une commande
+- La vérification de la disponibilité d’un hôtel et la réservation d’une chambre
+- La recherche des photos disponibles et la commande des impressions
 
 ## <a name="architecture"></a>Architecture
 
@@ -41,18 +42,18 @@ Ce scénario présente un bot conversationnel qui fonctionne comme le concierge 
 
 ### <a name="components"></a>Composants
 
-* [Azure Active Directory][aad-docs] est le service informatique mutualisé de Microsoft pour la gestion des annuaires et des identités. Azure AD prend en charge un connecteur B2C, ce qui vous permet d’identifier les personnes à l’aide d’ID externes comme un compte Google, Facebook ou Microsoft.
-* [App Service][appservice-docs] vous permet de créer et d’héberger des applications web dans le langage de programmation de votre choix sans gérer l’infrastructure.
-* [Bot Service][botservice-docs] fournit des outils pour créer, tester, déployer et gérer des robots intelligents.
-* [Cognitive Services][cognitive-docs] permet d’utiliser des algorithmes intelligents pour voir, écouter, énoncer, comprendre et interpréter les besoins des utilisateurs selon des modes de communication naturels.
-* [SQL Database][sqldatabase-docs] est un service de base de données cloud relationnelle entièrement géré qui fournit la compatibilité du moteur SQL Server.
-* [Application Insights][appinsights-docs] est un service de gestion des performances des applications (APM) extensible qui vous permet de surveiller les performances des applications, telles que votre bot conversationnel.
+- [Azure Active Directory][aad-docs] est le service informatique mutualisé de Microsoft pour la gestion des annuaires et des identités. Azure AD prend en charge un connecteur B2C, ce qui vous permet d’identifier les personnes à l’aide d’ID externes comme un compte Google, Facebook ou Microsoft.
+- [App Service][appservice-docs] vous permet de créer et d’héberger des applications web dans le langage de programmation de votre choix sans gérer l’infrastructure.
+- [Bot Service][botservice-docs] fournit des outils pour créer, tester, déployer et gérer des robots intelligents.
+- [Cognitive Services][cognitive-docs] permet d’utiliser des algorithmes intelligents pour voir, écouter, énoncer, comprendre et interpréter les besoins des utilisateurs selon des modes de communication naturels.
+- [SQL Database][sqldatabase-docs] est un service de base de données cloud relationnelle entièrement géré qui fournit la compatibilité du moteur SQL Server.
+- [Application Insights][appinsights-docs] est un service de gestion des performances des applications (APM) extensible qui vous permet de surveiller les performances des applications, telles que votre bot conversationnel.
 
 ### <a name="alternatives"></a>Autres solutions
 
-* [L’API Microsoft Speech][speech-api] peut être utilisée pour modifier la façon dont les clients interagissent avec votre bot.
-* [QnA Maker][qna-maker] peut être utilisé pour ajouter rapidement des connaissances à votre bot à partir d’un contenu semi-structuré comme un Forum Aux Questions.
-* [Traduction de texte Translator Text][translator] est un service auquel vous pouvez penser pour ajouter facilement la prise en charge multilingue à votre bot.
+- [L’API Microsoft Speech][speech-api] peut être utilisée pour modifier la façon dont les clients interagissent avec votre bot.
+- [QnA Maker][qna-maker] peut être utilisé pour ajouter rapidement des connaissances à votre bot à partir d’un contenu semi-structuré comme un Forum Aux Questions.
+- [Traduction de texte Translator Text][translator] est un service auquel vous pouvez penser pour ajouter facilement la prise en charge multilingue à votre bot.
 
 ## <a name="considerations"></a>Considérations
 
@@ -88,23 +89,29 @@ Pour obtenir des conseils d’ordre général sur la conception de solutions ré
 
 Ce scénario est divisé en trois composants pour vous permettre d’explorer les zones sur lesquelles vous êtes le plus axé :
 
-* [Composants d’infrastructure](#deploy-infrastructure-components). Utilisez un modèle Azure Resource Manager pour déployer les composants d’infrastructure de base d’un service App Service, de Web App, d’Application Insights, d’un compte de stockage, de SQL Server et d’une base de données.
-* [Bot conversationnel d’application web](#deploy-web-app-chatbot). Utilisez l’interface de ligne de commande Azure pour déployer un bot avec Bot Service et l’application Language Understanding Intelligent Service (LUIS).
-* [Exemple d’application de bot conversationnel en C#](#deploy-chatbot-c-application-code). Utilisez Visual Studio pour vérifier le code de l’exemple d’application en C# de réservation d’hôtel et le déployer vers un bot dans Azure.
+- [Composants d’infrastructure](#deploy-infrastructure-components). Utilisez un modèle Azure Resource Manager pour déployer les composants d’infrastructure de base d’un service App Service, de Web App, d’Application Insights, d’un compte de stockage, de SQL Server et d’une base de données.
+- [Bot conversationnel d’application web](#deploy-web-app-chatbot). Utilisez l’interface de ligne de commande Azure pour déployer un bot avec Bot Service et l’application Language Understanding Intelligent Service (LUIS).
+- [Exemple d’application de bot conversationnel en C#](#deploy-chatbot-c-application-code). Utilisez Visual Studio pour vérifier le code de l’exemple d’application en C# de réservation d’hôtel et le déployer vers un bot dans Azure.
 
-**Prérequis.** Vous devez disposer d’un compte Azure existant. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+### <a name="prerequisites"></a>Prérequis
 
-### <a name="deploy-infrastructure-components"></a>Déployer les composants d’infrastructure
+Vous devez disposer d’un compte Azure existant. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+
+### <a name="walk-through"></a>Procédure pas à pas
 
 Pour déployer les composants d’infrastructure avec un modèle Resource Manager, procédez comme suit.
 
+<!-- markdownlint-disable MD033 -->
+
 1. Cliquez sur le bouton **Déployer sur Azure** :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Fapps%2Fcommerce-chatbot.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
 2. Attendez l’ouverture de la solution Template deployment dans le portail Azure, puis procédez comme suit :
-   * Sélectionnez **Créer un nouveau groupe de ressources**, puis indiquez un nom, par exemple *myCommerceChatBotInfrastructure* dans la zone de texte.
-   * Dans la zone de liste déroulante **Emplacement**, sélectionnez une région.
-   * Indiquez un nom d’utilisateur et un mot de passe sécurisé pour le compte Administrateur de SQL Server.
-   * Passez en revue les termes et conditions, puis cochez la case **J’accepte les termes et conditions mentionnés ci-dessus**.
-   * Sélectionnez le bouton **Acheter**.
+   - Sélectionnez **Créer un nouveau groupe de ressources**, puis indiquez un nom, par exemple *myCommerceChatBotInfrastructure* dans la zone de texte.
+   - Dans la zone de liste déroulante **Emplacement**, sélectionnez une région.
+   - Indiquez un nom d’utilisateur et un mot de passe sécurisé pour le compte Administrateur de SQL Server.
+   - Passez en revue les termes et conditions, puis cochez la case **J’accepte les termes et conditions mentionnés ci-dessus**.
+   - Sélectionnez le bouton **Acheter**.
+
+<!-- markdownlint-enable MD033 -->
 
 Le déploiement prend quelques minutes.
 
@@ -131,9 +138,9 @@ az bot create \
 
 ### <a name="deploy-chatbot-c-application-code"></a>Déployer le code de l’application en C# du bot conversationnel
 
-Un exemple d’application en C# est disponible sur GitHub : 
+Un exemple d’application en C# est disponible sur GitHub :
 
-* [Exemple de code C# de bot commercial](https://github.com/Microsoft/AzureBotServices-scenarios/tree/master/CSharp/Commerce/src)
+- [Exemple de code C# de bot commercial](https://github.com/Microsoft/AzureBotServices-scenarios/tree/master/CSharp/Commerce/src)
 
 L’exemple d’application inclut les composants d’authentification Azure Active Directory et l’intégration au composant LUIS de Cognitive Services. L’application requiert Visual Studio pour générer et déployer le scénario. Vous trouverez des informations supplémentaires sur la configuration d’AAD B2C et de l’application LUIS dans la documentation du référentiel GitHub.
 
@@ -143,16 +150,16 @@ Pour explorer le coût d’exécution de ce scénario, tous les services sont pr
 
 Nous proposons trois exemples de profils de coût selon le nombre de messages que devra traiter le bot conversationnel :
 
-* [Petit][small-pricing] : < 10 000 messages traités par mois.
-* [Moyen][medium-pricing] : < 500 000 messages traités par mois.
-* [Grand][large-pricing] : < 10 000 000 messages traités par mois.
+- [Petit][small-pricing] : < 10 000 messages traités par mois.
+- [Moyen][medium-pricing] : < 500 000 messages traités par mois.
+- [Grand][large-pricing] : < 10 000 000 messages traités par mois.
 
 ## <a name="related-resources"></a>Ressources associées
 
 Pour obtenir un ensemble de didacticiels interactifs sur Azure Bot Service, consultez la [section des didacticiels][botservice-docs] de la documentation.
 
-
 <!-- links -->
+
 [aadb2c-docs]: /azure/active-directory-b2c/active-directory-b2c-overview
 [aad-docs]: /azure/active-directory/
 [appinsights-docs]: /azure/application-insights/app-insights-overview

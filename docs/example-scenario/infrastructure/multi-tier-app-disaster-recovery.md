@@ -1,15 +1,16 @@
 ---
-title: Application web multiniveau développée pour la haute disponibilité et la reprise d’activité sur Azure
+title: Application web multiniveau conçue pour la haute disponibilité/reprise d’activité
+titleSuffix: Azure Example Scenarios
 description: Créer une application web multiniveau développée pour la haute disponibilité et la reprise d’activité sur Azure à l’aide de machines virtuelles Azure, de groupes à haute disponibilité, de zones de disponibilité, d’Azure Site Recovery et d’Azure Traffic Manager
 author: sujayt
 ms.date: 11/16/2018
 ms.custom: product-team
-ms.openlocfilehash: 71534dc095d5fba137a0e610d4e725c2efc6b432
-ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
+ms.openlocfilehash: baa468697b4a72975e3b192efc9bdf1861a0c0da
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/06/2018
-ms.locfileid: "53004598"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53644040"
 ---
 # <a name="multitier-web-application-built-for-high-availability-and-disaster-recovery-on-azure"></a>Application web multiniveau développée pour la haute disponibilité et la reprise d’activité sur Azure
 
@@ -25,9 +26,9 @@ Les applications stratégiques s’exécutant sur Windows ou Linux font partie d
 
 Les autres cas d’usage appropriés sont les suivants :
 
-* Déploiement d’applications hautement résilientes comme SAP et SharePoint
-* Conception d’un plan de continuité d’activité et de reprise d’activité pour les applications métier
-* Configurer la reprise d’activité et effectuer les exercices associés à des fins de conformité
+- Déploiement d’applications hautement résilientes comme SAP et SharePoint
+- Conception d’un plan de continuité d’activité et de reprise d’activité pour les applications métier
+- Configurer la reprise d’activité et effectuer les exercices associés à des fins de conformité
 
 ## <a name="architecture"></a>Architecture
 
@@ -49,17 +50,17 @@ Ce scénario présente une application multiniveau qui utilise ASP.NET et Micros
 
 ### <a name="components"></a>Composants
 
-* Les [groupes à haute disponibilité][docs-availability-sets] garantissent que les machines virtuelles que vous déployez sur Azure sont distribuées sur plusieurs nœuds matériels isolés dans un cluster. En cas de défaillance matérielle ou logicielle dans Azure, seule une partie de vos machines virtuelles est affectée et votre solution globale reste disponible et opérationnelle.
-* Les [zones de disponibilité][docs-availability-zones] protègent les applications et les données contre les défaillances de centre de données. Les zones de disponibilité sont des emplacements physiques individuels au sein d’une région Azure. Chaque zone est composée d’un ou de plusieurs centres de données équipés d’une alimentation, d’un système de refroidissement et d’un réseau indépendants. 
-* [Azure Site Recovery (ASR)][docs-azure-site-recovery] vous permet de répliquer des machines virtuelles sur une autre région Azure pour assurer la continuité d’activité et la reprise d’activité. Vous pouvez effectuer régulièrement des exercices de reprise d’activité pour garantir que vous répondez aux besoins de conformité. La machine virtuelle est répliquée avec les paramètres spécifiés dans la région sélectionnée afin que vous puissiez récupérer vos applications en cas de panne dans la région source.
-* [Azure Traffic Manager][docs-traffic-manager] est un équilibreur de charge du trafic DNS qui distribue le trafic de manière optimale aux services dans toutes les régions Azure du monde, tout en offrant réactivité et haute disponibilité.
-* [Azure Load Balancer][docs-load-balancer] distribue le trafic entrant en fonction des règles définies et des sondes d’intégrité. Un équilibreur de charge offre une latence faible et un débit élevé, et peut gérer jusqu’à des millions de flux pour toutes les applications TCP et UDP. Un équilibreur de charge public est utilisé dans ce scénario pour distribuer le trafic client entrant à la couche web. Dans ce scénario, un équilibreur de charge interne est utilisé pour distribuer le trafic de la couche métier au cluster SQL Server back-end.
+- Les [groupes à haute disponibilité][docs-availability-sets] garantissent que les machines virtuelles que vous déployez sur Azure sont distribuées sur plusieurs nœuds matériels isolés dans un cluster. En cas de défaillance matérielle ou logicielle dans Azure, seule une partie de vos machines virtuelles est affectée et votre solution globale reste disponible et opérationnelle.
+- Les [zones de disponibilité][docs-availability-zones] protègent les applications et les données contre les défaillances de centre de données. Les zones de disponibilité sont des emplacements physiques individuels au sein d’une région Azure. Chaque zone est composée d’un ou de plusieurs centres de données équipés d’une alimentation, d’un système de refroidissement et d’un réseau indépendants.
+- [Azure Site Recovery (ASR)][docs-azure-site-recovery] vous permet de répliquer des machines virtuelles sur une autre région Azure pour assurer la continuité d’activité et la reprise d’activité. Vous pouvez effectuer régulièrement des exercices de reprise d’activité pour garantir que vous répondez aux besoins de conformité. La machine virtuelle est répliquée avec les paramètres spécifiés dans la région sélectionnée afin que vous puissiez récupérer vos applications en cas de panne dans la région source.
+- [Azure Traffic Manager][docs-traffic-manager] est un équilibreur de charge du trafic DNS qui distribue le trafic de manière optimale aux services dans toutes les régions Azure du monde, tout en offrant réactivité et haute disponibilité.
+- [Azure Load Balancer][docs-load-balancer] distribue le trafic entrant en fonction des règles définies et des sondes d’intégrité. Un équilibreur de charge offre une latence faible et un débit élevé, et peut gérer jusqu’à des millions de flux pour toutes les applications TCP et UDP. Un équilibreur de charge public est utilisé dans ce scénario pour distribuer le trafic client entrant à la couche web. Dans ce scénario, un équilibreur de charge interne est utilisé pour distribuer le trafic de la couche métier au cluster SQL Server back-end.
 
 ### <a name="alternatives"></a>Autres solutions
 
-* Vous pouvez remplacer Windows par d’autres systèmes d’exploitation, car rien dans l’infrastructure ne dépend du système d’exploitation.
-* [SQL Server pour Linux][docs-sql-server-linux] peut remplacer le magasin de données back-end.
-* Vous pouvez remplacer la base de données par n’importe quelle application de base de données standard disponible.
+- Vous pouvez remplacer Windows par d’autres systèmes d’exploitation, car rien dans l’infrastructure ne dépend du système d’exploitation.
+- [SQL Server pour Linux][docs-sql-server-linux] peut remplacer le magasin de données back-end.
+- Vous pouvez remplacer la base de données par n’importe quelle application de base de données standard disponible.
 
 ## <a name="other-considerations"></a>Autres points à considérer
 

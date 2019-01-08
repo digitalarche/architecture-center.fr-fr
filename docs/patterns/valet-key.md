@@ -8,12 +8,12 @@ pnp.series.title: Cloud Design Patterns
 pnp.pattern.categories:
 - data-management
 - security
-ms.openlocfilehash: 791132eabf926cc285567454c60f894efa286433
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.openlocfilehash: 99d3fbe05e34d61edc0d339f34665e557b250b05
+ms.sourcegitcommit: fb22348f917a76e30a6c090fcd4a18decba0b398
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24542039"
+ms.lasthandoff: 12/16/2018
+ms.locfileid: "53450885"
 ---
 # <a name="valet-key-pattern"></a>Modèle de clé de valet
 
@@ -41,7 +41,7 @@ Le client utilise ce jeton pour accéder à une ressource spécifique du magasin
 
 Vous avez également la possibilité de configurer une clé possédant d’autres dépendances, comme l’étendue des données. Par exemple, selon les fonctionnalités du magasin de données, la clé peut spécifier une table complète dans un magasin de données ou uniquement des lignes spécifiques d’une table. Dans les systèmes de stockage cloud, la clé peut spécifier un conteneur, ou simplement un élément particulier d’un conteneur.
 
-La clé peut également être rendue. non valide par l’application. Cette approche se révèle utile si le client informe le serveur de la fin de l’opération de transfert de données. Le serveur peut alors rendre cette clé non valide pour empêcher que d’autres opérations soient effectuées.
+La clé peut également être rendue. non valide par l’application. Cette approche se révèle utile si le client informe le serveur de la fin de l’opération de transfert de données. Le serveur peut alors rendre cette clé non valide pour empêcher tout accès ultérieur.
 
 L’utilisation de ce modèle peut simplifier la gestion de l’accès aux ressources, car vous n’avez plus de besoin de créer et d’authentifier un utilisateur, d’accorder des autorisations, puis de supprimer à nouveau l’utilisateur. Cela permet également de limiter l’emplacement, l’autorisation et la période de validité&mdash;le tout en générant simplement une clé lors de l’exécution. Les facteurs importants consistent à limiter autant que possible la période de validité, et particulièrement l’emplacement de la ressource, pour que le destinataire puisse uniquement utiliser la clé pour le but prévu.
 
@@ -99,7 +99,7 @@ Ce modèle peut s’avérer inutile dans les situations suivantes :
 
 - S’il est nécessaire de limiter la taille des données, en particulier au cours des opérations de chargement. La seule solution à ce problème consiste à ce que l’application vérifie la taille des données une fois l’opération terminée, ou qu’elle vérifie la taille des chargements après une période spécifiée ou selon une planification.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Azure prend en charge des signatures d’accès partagé sur le stockage Azure pour le contrôle d’accès granulaire aux données dans les objets blob, tables et files d’attente et pour les rubriques et files d’attente Service Bus. Un jeton de signature d’accès partagé peut être configuré pour fournir des droits d’accès spécifiques telles que la lecture, l’écriture, la mise à jour et la suppression d’une table spécifique ; un groupe de clés dans une table ; une file d’attente ; un objet blob ; ou un conteneur d’objets blob. La validité peut être une période spécifiée ou n’avoir aucune limite de temps.
 
@@ -161,7 +161,7 @@ public class ValuesController : ApiController
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
+Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
 - Un exemple illustrant ce modèle est disponible sur [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/valet-key).
 - [Modèle d’opérateur de contrôle](gatekeeper.md). Ce modèle peut être utilisé avec le modèle de clé de valet pour protéger les applications et services à l’aide d’une instance d’hôte dédiée qui agit comme un répartiteur entre les clients et l’application ou le service. L’opérateur de contrôle valide et assainit les requêtes, et transmet les requêtes et les données entre le client et l’application. Il peut fournir une couche supplémentaire de sécurité et réduire la surface d’attaque du système.
 - [Modèle d’hébergement de contenu statique](static-content-hosting.md). Décrit comment déployer des ressources statiques dans un service de stockage cloud qui peut fournir ces ressources directement au client afin de réduire le besoin d’instances de calcul coûteuses. Lorsque les ressources ne sont pas destinées à être publiquement disponibles, le modèle de clé de valet peut être utilisé afin de les sécuriser.

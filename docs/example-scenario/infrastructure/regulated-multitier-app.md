@@ -1,15 +1,16 @@
 ---
-title: Création d’applications web sécurisées avec des machines virtuelles Windows Azure
+title: Création d’applications web sécurisées avec des machines virtuelles Windows
+titleSuffix: Azure Example Scenarios
 description: Créez une application web sécurisée, à plusieurs niveaux avec Windows Server sur Azure à l’aide de groupes identiques, d’Application Gateway et d’équilibreurs de charge.
 author: iainfoulds
 ms.date: 12/06/2018
 ms.custom: seodec18
-ms.openlocfilehash: 4e4d2117fbc46eda46f7ef276a71739e3a79270e
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: 2c5f77f265c10388f42138e7d3f6da9e3ead1cd8
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53307059"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643531"
 ---
 # <a name="building-secure-web-applications-with-windows-virtual-machines-on-azure"></a>Création d’applications web sécurisées avec des machines virtuelles Windows Azure
 
@@ -21,9 +22,9 @@ En règle générale, les organisations devaient maintenir les applications et l
 
 Voici quelques exemples où ce scénario peut être appliqué :
 
-* Modernisation des déploiements d’application dans un environnement cloud sécurisé.
-* Réduction des frais liés à la gestion des applications et des services hérités locaux.
-* Amélioration des soins et de l’expérience du patient avec de nouvelles plateformes d’application.
+- Modernisation des déploiements d’application dans un environnement cloud sécurisé.
+- Réduction des frais liés à la gestion des applications et des services hérités locaux.
+- Amélioration des soins et de l’expérience du patient avec de nouvelles plateformes d’application.
 
 ## <a name="architecture"></a>Architecture
 
@@ -39,26 +40,26 @@ Ce scénario montre une application web front-end qui se connecte à une base de
 
 ### <a name="components"></a>Composants
 
-* [Azure Application Gateway][appgateway-docs] est un équilibreur de charge du trafic web de couche 7, prenant en charge les applications et pouvant distribuer le trafic en fonction de règles de routage spécifiques. App Gateway peut également gérer le déchargement SSL afin d’améliorer les performances du serveur web.
-* [Le réseau virtuel Azure][vnet-docs] permet à de nombreuses ressources, telles que les machines virtuelles de communiquer en toute sécurité entre elles, avec Internet et avec les réseaux locaux. Les réseaux virtuels fournissent un isolement et une segmentation, ils filtrent et acheminent le trafic et ils autorisent une connexion entre des emplacements. Deux réseaux virtuels combinés avec les groupes de sécurité réseau appropriés sont utilisés dans ce scénario pour fournir une [zone démilitarisée][dmz] (DMZ) et une isolation de composants de l’application. L’appairage de réseau virtuel connecte les deux réseaux ensemble.
-* Les [groupes identiques de machines virtuelles Azure][scaleset-docs] permettent de créer et de gérer un groupe de machines virtuelles identiques à charge équilibrée. Le nombre d’instances de machine virtuelle peut augmenter ou diminuer automatiquement en fonction d’une demande ou d’un calendrier défini. Deux groupes distincts de machines virtuelles identiques sont utilisés dans ce scénario, un pour les instances d’applications ASP.NET frontales et un autre pour les instances de machine virtuelle du cluster SQL Server principal. La configuration de l’état souhaité (DSC) de PowerShell ou l’extension de script personnalisé Azure peut servir à configurer les instances de machine virtuelle avec les logiciels requis et les paramètres de configuration.
-* Les [groupes de sécurité réseau Azure][nsg-docs] contiennent une liste de règles de sécurité qui autorisent ou refusent le trafic réseau entrant ou sortant en fonction de l’adresse IP source ou de destination, du port et du protocole. Les réseaux virtuels dans ce scénario sont sécurisés avec des règles de groupe de sécurité réseau qui limitent le flux du trafic entre les composants d’application.
-* [Azure Load Balancer][loadbalancer-docs] distribue le trafic entrant en fonction des règles et des sondes d’intégrité. Un équilibreur de charge offre une latence faible et un débit élevé, et peut augmenter l’échelle jusqu’à des millions de flux pour toutes les applications TCP et UDP. Dans ce scénario, un équilibreur de charge interne permet de distribuer le trafic de la couche Application frontale vers le cluster SQL Server principal.
-* [Stockage Blob Azure][cloudwitness-docs] agit comme un emplacement de témoin Cloud pour le cluster SQL Server. Ce témoin est utilisé pour les opérations de cluster et les décisions nécessitant un vote supplémentaire pour décider du quorum. L’utilisation d’un témoin Cloud supprime la nécessité d’une machine virtuelle supplémentaire d’agir comme un témoin de partage de fichiers traditionnel.
+- [Azure Application Gateway][appgateway-docs] est un équilibreur de charge du trafic web de couche 7, prenant en charge les applications et pouvant distribuer le trafic en fonction de règles de routage spécifiques. App Gateway peut également gérer le déchargement SSL afin d’améliorer les performances du serveur web.
+- [Le réseau virtuel Azure][vnet-docs] permet à de nombreuses ressources, telles que les machines virtuelles de communiquer en toute sécurité entre elles, avec Internet et avec les réseaux locaux. Les réseaux virtuels fournissent un isolement et une segmentation, ils filtrent et acheminent le trafic et ils autorisent une connexion entre des emplacements. Deux réseaux virtuels combinés avec les groupes de sécurité réseau appropriés sont utilisés dans ce scénario pour fournir une [zone démilitarisée][dmz] (DMZ) et une isolation de composants de l’application. L’appairage de réseau virtuel connecte les deux réseaux ensemble.
+- Les [groupes identiques de machines virtuelles Azure][scaleset-docs] permettent de créer et de gérer un groupe de machines virtuelles identiques à charge équilibrée. Le nombre d’instances de machine virtuelle peut augmenter ou diminuer automatiquement en fonction d’une demande ou d’un calendrier défini. Deux groupes distincts de machines virtuelles identiques sont utilisés dans ce scénario, un pour les instances d’applications ASP.NET frontales et un autre pour les instances de machine virtuelle du cluster SQL Server principal. La configuration de l’état souhaité (DSC) de PowerShell ou l’extension de script personnalisé Azure peut servir à configurer les instances de machine virtuelle avec les logiciels requis et les paramètres de configuration.
+- Les [groupes de sécurité réseau Azure][nsg-docs] contiennent une liste de règles de sécurité qui autorisent ou refusent le trafic réseau entrant ou sortant en fonction de l’adresse IP source ou de destination, du port et du protocole. Les réseaux virtuels dans ce scénario sont sécurisés avec des règles de groupe de sécurité réseau qui limitent le flux du trafic entre les composants d’application.
+- [Azure Load Balancer][loadbalancer-docs] distribue le trafic entrant en fonction des règles et des sondes d’intégrité. Un équilibreur de charge offre une latence faible et un débit élevé, et peut augmenter l’échelle jusqu’à des millions de flux pour toutes les applications TCP et UDP. Dans ce scénario, un équilibreur de charge interne permet de distribuer le trafic de la couche Application frontale vers le cluster SQL Server principal.
+- [Stockage Blob Azure][cloudwitness-docs] agit comme un emplacement de témoin Cloud pour le cluster SQL Server. Ce témoin est utilisé pour les opérations de cluster et les décisions nécessitant un vote supplémentaire pour décider du quorum. L’utilisation d’un témoin Cloud supprime la nécessité d’une machine virtuelle supplémentaire d’agir comme un témoin de partage de fichiers traditionnel.
 
 ### <a name="alternatives"></a>Autres solutions
 
-* Vous pouvez utiliser indifféremment Linux ou Windows dans la mesure où l’infrastructure n’est pas dépendante du système d’exploitation.
+- Vous pouvez utiliser indifféremment Linux ou Windows dans la mesure où l’infrastructure n’est pas dépendante du système d’exploitation.
 
-* [SQL Server pour Linux][sql-linux] peut remplacer le magasin de données back-end.
+- [SQL Server pour Linux][sql-linux] peut remplacer le magasin de données back-end.
 
-* [Cosmos DB](/azure/cosmos-db/introduction) est une autre solution de magasin de données.
+- [Cosmos DB](/azure/cosmos-db/introduction) est une autre solution de magasin de données.
 
 ## <a name="considerations"></a>Considérations
 
 ### <a name="availability"></a>Disponibilité
 
-Dans ce scénario, les instances de machine virtuelle sont déployées sur des zones de disponibilité. Chaque zone de disponibilité est composée d’un ou de plusieurs centres de données équipés d’une alimentation, d’un système de refroidissement et d’un réseau indépendants. Au moins trois zones sont disponibles dans toutes les régions activées. Cette distribution d’instances de machine virtuelle entre des zones offre une haute disponibilité pour les couches Application. Pour plus d'informations, consultez [Que sont les zones de disponibilité dans Azure ?][azureaz-docs]
+Dans ce scénario, les instances de machine virtuelle sont déployées sur des [zones de disponibilité](/azure/availability-zones/az-overview). Chaque zone de disponibilité est composée d’un ou de plusieurs centres de données équipés d’une alimentation, d’un système de refroidissement et d’un réseau indépendants. Chaque région activée a un minimum de trois zones de disponibilité. Cette distribution d’instances de machine virtuelle entre des zones offre une haute disponibilité pour les couches Application.
 
 La couche Données peut être configurée pour utiliser des groupes de disponibilité Always On. Avec cette configuration de SQL Server, une base de données primaire au sein d’un cluster est configurée avec un maximum de huit bases de données secondaires. En cas de problème avec la base de données primaire, le cluster bascule sur l’une des bases de données secondaires, ce qui permet à l’application de rester disponible. Pour plus d’informations, consultez [Vue d’ensemble des groupes de disponibilité AlwaysOn pour SQL Server][sqlalwayson-docs].
 
@@ -84,20 +85,27 @@ Pour obtenir des conseils d’ordre général sur la conception de scénarios r�
 
 ## <a name="deploy-the-scenario"></a>Déployez le scénario
 
-**Prérequis.**
+### <a name="prerequisites"></a>Prérequis
 
-* Vous devez disposer d’un compte Azure existant. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
-* Un domaine dans Azure Active Directory (AD) Domain Services est nécessaire pour déployer un cluster SQL Server dans le groupe identique principal.
+- Vous devez disposer d’un compte Azure existant. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+
+- Un domaine dans Azure Active Directory (AD) Domain Services est nécessaire pour déployer un cluster SQL Server dans le groupe identique principal.
+
+### <a name="deploy-the-components"></a>Déployer les composants
 
 Pour déployer l’infrastructure principale pour ce scénario avec un modèle Azure Resource Manager, procédez comme suit.
 
+<!-- markdownlint-disable MD033 -->
+
 1. Sélectionnez le bouton **Déployer sur Azure** :<br><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Fsolution-architectures%2Fmaster%2Finfrastructure%2Fregulated-multitier-app%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
 2. Attendez l’ouverture de la solution Template deployment dans le portail Azure, puis procédez comme suit :
-   * Sélectionnez **Créer un nouveau** groupe de ressources, puis indiquez un nom, par exemple *myWindowsscenario* dans la zone de texte.
-   * Dans la zone de liste déroulante **Emplacement**, sélectionnez une région.
-   * Indiquez un nom d’utilisateur et un mot de passe sécurisé pour les instances de groupe de machines virtuelles identiques.
-   * Passez en revue les termes et conditions, puis cochez la case **J’accepte les termes et conditions mentionnés ci-dessus**.
-   * Sélectionnez le bouton **Acheter**.
+   - Sélectionnez **Créer un nouveau** groupe de ressources, puis indiquez un nom, par exemple *myWindowsscenario* dans la zone de texte.
+   - Dans la zone de liste déroulante **Emplacement**, sélectionnez une région.
+   - Indiquez un nom d’utilisateur et un mot de passe sécurisé pour les instances de groupe de machines virtuelles identiques.
+   - Passez en revue les termes et conditions, puis cochez la case **J’accepte les termes et conditions mentionnés ci-dessus**.
+   - Sélectionnez le bouton **Acheter**.
+
+<!-- markdownlint-enable MD033 -->
 
 Le déploiement prend 15 à 20 minutes.
 
@@ -107,9 +115,9 @@ Pour explorer le coût d’exécution de ce scénario, tous les services sont pr
 
 Nous proposons trois exemples de profils de coût basés sur le nombre d’instances de groupe identique de machines virtuelles exécutant vos applications.
 
-* [Petit][small-pricing] : 2 instances de machine virtuelle frontales et 2 instances principales.
-* [Moyen][medium-pricing] : 20 instances de machine virtuelle frontales et 5 instances principales.
-* [Grand][large-pricing] : 100 instances de machine virtuelle frontales et 10 instances principales.
+- [Petit][small-pricing] : 2 instances de machine virtuelle frontales et 2 instances principales.
+- [Moyen][medium-pricing] : 20 instances de machine virtuelle frontales et 5 instances principales.
+- [Grand][large-pricing] : 100 instances de machine virtuelle frontales et 10 instances principales.
 
 ## <a name="related-resources"></a>Ressources associées
 
@@ -122,14 +130,13 @@ Pour obtenir un guide d’implémentation plus détaillé, consultez l’[archit
 [architecture]: ./media/architecture-regulated-multitier-app.png
 [autoscaling]: /azure/architecture/best-practices/auto-scaling
 [availability]: ../../checklist/availability.md
-[azureaz-docs]: /azure/availability-zones/az-overview
 [cloudwitness-docs]: /windows-server/failover-clustering/deploy-cloud-witness
 [loadbalancer-docs]: /azure/load-balancer/load-balancer-overview
 [nsg-docs]: /azure/virtual-network/security-overview
 [ntiersql-ra]: /azure/architecture/reference-architectures/n-tier/n-tier-sql-server
-[resiliency]: /azure/architecture/resiliency/ 
+[resiliency]: /azure/architecture/resiliency/
 [security]: /azure/security/
-[scalability]: /azure/architecture/checklist/scalability 
+[scalability]: /azure/architecture/checklist/scalability
 [scaleset-docs]: /azure/virtual-machine-scale-sets/overview
 [sqlalwayson-docs]: /sql/database-engine/availability-groups/windows/overview-of-always-on-availability-groups-sql-server
 [vmssautoscale-docs]: /azure/virtual-machine-scale-sets/virtual-machine-scale-sets-autoscale-overview

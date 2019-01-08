@@ -4,12 +4,12 @@ titleSuffix: Azure Reference Architectures
 description: Implémentez une architecture réseau de site à site sécurisée qui s’étend sur un réseau virtuel Azure et un réseau local connecté à l’aide d’un VPN.
 author: RohitSharma-pnp
 ms.date: 10/22/2018
-ms.openlocfilehash: 5d3c8eeeb04398c29a25e90956888d9f79572e4f
-ms.sourcegitcommit: 8d951fd7e9534054b160be48a1881ae0857561ef
+ms.openlocfilehash: 92a5a12675ca12075bec3c7f59f73a19287fe5d7
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/13/2018
-ms.locfileid: "53329396"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53644204"
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-a-vpn-gateway"></a>Connecter un réseau local à Azure à l’aide d’une passerelle VPN
 
@@ -75,7 +75,7 @@ Pour obtenir la liste des appliances VPN prises en charge, voir [À propos des 
 > Si vous souhaitez changer de type de passerelle une fois celle-ci créée, il vous faudra la supprimer et en recréer une autre.
 >
 
-Sélectionnez la référence SKU de passerelle VPN Azure qui correspond le mieux à vos besoins en débit. Pour plus d’informations, consultez [SKU de passerelle][azure-gateway-skus]
+Sélectionnez la référence SKU de passerelle VPN Azure qui correspond le mieux à vos besoins en débit. Pour plus d’informations, consultez [Références (SKU) de passerelle][azure-gateway-skus]
 
 > [!NOTE]
 > La référence SKU de base n’est pas compatible avec Azure ExpressRoute. Vous pouvez [modifier la référence SKU][changing-SKUs] une fois la passerelle créée.

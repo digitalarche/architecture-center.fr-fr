@@ -1,15 +1,16 @@
 ---
-title: Serveur frontal e-commerce sur Azure
+title: Front-end d’e-commerce
+titleSuffix: Azure Example Scenarios
 description: Hébergez un site d’e-commerce sur Azure.
 author: masonch
 ms.date: 7/13/18
 ms.custom: fasttrack
-ms.openlocfilehash: e48f7607fcef6e5048c57f4f8f63b2f6bdd4f183
-ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
+ms.openlocfilehash: d6587218813fa450b284f3a300c7254a3c9fe41f
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/06/2018
-ms.locfileid: "53004859"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643949"
 ---
 # <a name="an-e-commerce-front-end-on-azure"></a>Serveur frontal e-commerce sur Azure
 
@@ -21,8 +22,8 @@ Ce document vous aide à découvrir les différents composants PaaS Azure et les
 
 Les autres cas d’usage appropriés sont les suivants :
 
-* La création d’une application nécessitant une mise à l’échelle élastique pour gérer les pics d’utilisateurs à des moments différents.
-* La création d’une application conçue pour fonctionner avec une haute disponibilité dans différentes régions Azure du monde entier.
+- La création d’une application nécessitant une mise à l’échelle élastique pour gérer les pics d’utilisateurs à des moments différents.
+- La création d’une application conçue pour fonctionner avec une haute disponibilité dans différentes régions Azure du monde entier.
 
 ## <a name="architecture"></a>Architecture
 
@@ -34,7 +35,7 @@ Ce scénario couvre l’achat de tickets à partir d’un site de e-commerce, le
 2. Azure CDN sert des images statiques et le contenu à l’utilisateur.
 3. L’utilisateur se connecte à l’application via un client Azure Active Directory B2C.
 4. L’utilisateur recherche des concerts à l’aide d’Azure Search.
-5. Le site web extrait les détails du concert à partir d’Azure SQL Database. 
+5. Le site web extrait les détails du concert à partir d’Azure SQL Database.
 6. Le site web fait référence aux images de tickets achetés dans le stockage Blob.
 7. Les résultats de requête de la base de données sont mis en cache dans Cache Redis Azure pour offrir de meilleures performances.
 8. L’utilisateur envoie des commandes de billets et des avis sur des concerts, qui sont placés dans la file d’attente.
@@ -44,18 +45,18 @@ Ce scénario couvre l’achat de tickets à partir d’un site de e-commerce, le
 
 ### <a name="components"></a>Composants
 
-* [Azure CDN][docs-cdn] fournit le contenu statique, mis en cache à partir d’emplacements proches des utilisateurs pour réduire la latence.
-* [Azure Traffic Manager][docs-traffic-manager] contrôle la distribution du trafic utilisateur pour les points de terminaison de service dans différentes régions Azure.
-* [App Services - Web Apps][docs-webapps] héberge des applications web permettant une mise à l’échelle automatique et une haute disponibilité sans avoir à gérer l’infrastructure.
-* [Azure Active Directory - B2C][docs-b2c] est un service de gestion des identités qui vous permet de personnaliser et de contrôler la façon dont les clients s’inscrivent, se connectent et gèrent leurs profils dans une application.
-* [Files d’attente de stockage][docs-storage-queues] stocke un grand nombre de messages de file d’attente accessibles par une application.
-* [Functions][docs-functions] constitue les options de calcul sans serveur qui permettent aux applications d’être exécutées à la demande sans avoir à gérer l’infrastructure.
-* [Cognitive Services – Analyse des sentiments][docs-sentiment-analysis] utilise des API de Machine Learning et permet aux développeurs d’ajouter facilement des fonctionnalités intelligentes dans des applications, comme la reconnaissance des émotions et la détection vidéo, la reconnaissance faciale, vocale et visuelle ainsi que la compréhension de la parole et du langage.
-* La [Recherche Azure][docs-search] est une solution cloud de recherche en tant que service, qui offre une expérience de recherche riche concernant du contenu privé et hétérogène dans les applications web, mobiles et d’entreprise.
-* Le [stockage Blob][docs-storage-blobs] est optimisé pour stocker de grandes quantités de données non structurées, telles que des données texte ou binaires.
-* [Cache Redis][docs-redis-cache] améliore les performances et l’extensibilité des systèmes qui s’appuient sur les magasins de données principaux en copiant temporairement des données fréquemment utilisées dans un stockage rapide situé près de l’application.
-* [SQL Database][docs-sql-database] est un service administré de bases de données relationnelles à usage général de Microsoft Azure qui prend en charge des structures telles que les données relationnelles, JSON, les données spatiales et XML.
-* [Application Insights][docs-application-insights] est conçu pour vous aider à améliorer en permanence les performances et la convivialité en détectant automatiquement les anomalies de performances via des outils d’analytique intégrés pour aider à comprendre ce que font les utilisateurs avec une application.
+- [Azure CDN][docs-cdn] fournit le contenu statique, mis en cache à partir d’emplacements proches des utilisateurs pour réduire la latence.
+- [Azure Traffic Manager][docs-traffic-manager] contrôle la distribution du trafic utilisateur pour les points de terminaison de service dans différentes régions Azure.
+- [App Services - Web Apps][docs-webapps] héberge des applications web permettant une mise à l’échelle automatique et une haute disponibilité sans avoir à gérer l’infrastructure.
+- [Azure Active Directory - B2C][docs-b2c] est un service de gestion des identités qui vous permet de personnaliser et de contrôler la façon dont les clients s’inscrivent, se connectent et gèrent leurs profils dans une application.
+- [Files d’attente de stockage][docs-storage-queues] stocke un grand nombre de messages de file d’attente accessibles par une application.
+- [Functions][docs-functions] constitue les options de calcul sans serveur qui permettent aux applications d’être exécutées à la demande sans avoir à gérer l’infrastructure.
+- [Cognitive Services – Analyse des sentiments][docs-sentiment-analysis] utilise des API de Machine Learning et permet aux développeurs d’ajouter facilement des fonctionnalités intelligentes dans des applications, comme la reconnaissance des émotions et la détection vidéo, la reconnaissance faciale, vocale et visuelle ainsi que la compréhension de la parole et du langage.
+- La [Recherche Azure][docs-search] est une solution cloud de recherche en tant que service, qui offre une expérience de recherche riche concernant du contenu privé et hétérogène dans les applications web, mobiles et d’entreprise.
+- Le [stockage Blob][docs-storage-blobs] est optimisé pour stocker de grandes quantités de données non structurées, telles que des données texte ou binaires.
+- [Cache Redis][docs-redis-cache] améliore les performances et l’extensibilité des systèmes qui s’appuient sur les magasins de données principaux en copiant temporairement des données fréquemment utilisées dans un stockage rapide situé près de l’application.
+- [SQL Database][docs-sql-database] est un service administré de bases de données relationnelles à usage général de Microsoft Azure qui prend en charge des structures telles que les données relationnelles, JSON, les données spatiales et XML.
+- [Application Insights][docs-application-insights] est conçu pour vous aider à améliorer en permanence les performances et la convivialité en détectant automatiquement les anomalies de performances via des outils d’analytique intégrés pour aider à comprendre ce que font les utilisateurs avec une application.
 
 ### <a name="alternatives"></a>Autres solutions
 
@@ -63,43 +64,43 @@ Bien d’autres technologies sont disponibles pour créer une application visibl
 
 Les autres options pour la couche Web et les fonctions incluent :
 
-* [Service Fabric][docs-service-fabric] : une plateforme concentrée autour de la création des composants distribués qui bénéficient d’un déploiement et d’une exécution sur un cluster avec un degré élevé de contrôle. Service Fabric peut également être utilisé pour héberger des conteneurs.
-* [Azure Kubernetes Service][docs-kubernetes-service] : une plateforme pour la création et le déploiement de solutions à conteneurs utilisables comme une implémentation d’une architecture de microservices. Cela offre une agilité aux différents composants de l’application, pour leur permettre d’être mis à l’échelle indépendamment à la demande.
-* [Azure Container Instances][docs-container-instances] : une façon rapide de déployer et d’exécuter des conteneurs avec un cycle de vie court. Les conteneurs sont alors déployés pour exécuter une tâche de traitement rapide, par exemple d’un message ou d’un calcul, puis ils sont déprovisionnés une fois l’opération terminée.
-* [Service Bus][service bus] peut être utilisé à la place de la file d'attente de stockage.
+- [Service Fabric][docs-service-fabric] : une plateforme concentrée autour de la création des composants distribués qui bénéficient d’un déploiement et d’une exécution sur un cluster avec un degré élevé de contrôle. Service Fabric peut également être utilisé pour héberger des conteneurs.
+- [Azure Kubernetes Service][docs-kubernetes-service] : une plateforme pour la création et le déploiement de solutions à conteneurs utilisables comme une implémentation d’une architecture de microservices. Cela offre une agilité aux différents composants de l’application, pour leur permettre d’être mis à l’échelle indépendamment à la demande.
+- [Azure Container Instances][docs-container-instances] : une façon rapide de déployer et d’exécuter des conteneurs avec un cycle de vie court. Les conteneurs sont alors déployés pour exécuter une tâche de traitement rapide, par exemple d’un message ou d’un calcul, puis ils sont déprovisionnés une fois l’opération terminée.
+- [Service Bus][service bus] peut être utilisé à la place de la file d'attente de stockage.
 
 D’autres options pour la couche Données incluent :
 
-* [Cosmos DB](/azure/cosmos-db/introduction) : base de données multimodèle de Microsoft distribuée à l’échelle mondiale. Cette plateforme permet d’exécuter d’autres modèles de données comme des données MongoDB, Cassandra ou Graph, ou un Stockage Table simple.
+- [Cosmos DB](/azure/cosmos-db/introduction) : base de données multimodèle de Microsoft distribuée à l’échelle mondiale. Cette plateforme permet d’exécuter d’autres modèles de données comme des données MongoDB, Cassandra ou Graph, ou un Stockage Table simple.
 
 ## <a name="considerations"></a>Considérations
 
 ### <a name="availability"></a>Disponibilité
 
-* Envisagez l’utilisation des [modèles de conception standards pour la disponibilité][design-patterns-availability] lorsque vous générez votre application cloud.
-* Passez en revue les considérations sur la disponibilité dans [l’architecture de référence d’application web de App Service][app-service-reference-architecture] appropriée
-* Pour plus d’informations sur la disponibilité, voir la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
+- Envisagez l’utilisation des [modèles de conception standards pour la disponibilité][design-patterns-availability] lorsque vous générez votre application cloud.
+- Passez en revue les considérations sur la disponibilité dans [l’architecture de référence d’application web de App Service][app-service-reference-architecture] appropriée
+- Pour plus d’informations sur la disponibilité, voir la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
 
 ### <a name="scalability"></a>Extensibilité
 
-* Lors de la création d’une application cloud, soyez conscient des [modèles de conception standards pour l’évolutivité][design-patterns-scalability].
-* Passez en revue les considérations sur l’extensibilité dans [l’architecture de référence d’application web de App Service][app-service-reference-architecture] appropriée
-* Pour plus d’informations sur l’extensibilité, voir la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
+- Lors de la création d’une application cloud, soyez conscient des [modèles de conception standards pour l’évolutivité][design-patterns-scalability].
+- Passez en revue les considérations sur l’extensibilité dans [l’architecture de référence d’application web de App Service][app-service-reference-architecture] appropriée
+- Pour plus d’informations sur l’extensibilité, voir la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
 
 ### <a name="security"></a>Sécurité
 
-* Envisagez l’utilisation des [modèles de conception standards pour la sécurité][design-patterns-security] le cas échéant.
-* Passez en revue les considérations sur la sécurité dans [l’architecture de référence d’application web de App Service][app-service-reference-architecture] appropriée.
-* Prenez en compte le suivi d’un processus de [cycle de vie de développement sécurisé][secure-development] pour aider les développeurs à créer des logiciels plus sécurisés et gérer les exigences de conformité de sécurité, tout en réduisant les coûts de développement.
-* Passez en revue le plan d’architecture pour [la conformité avec Azure PCI DSS][pci-dss-blueprint].
+- Envisagez l’utilisation des [modèles de conception standards pour la sécurité][design-patterns-security] le cas échéant.
+- Passez en revue les considérations sur la sécurité dans [l’architecture de référence d’application web de App Service][app-service-reference-architecture] appropriée.
+- Prenez en compte le suivi d’un processus de [cycle de vie de développement sécurisé][secure-development] pour aider les développeurs à créer des logiciels plus sécurisés et gérer les exigences de conformité de sécurité, tout en réduisant les coûts de développement.
+- Passez en revue le plan d’architecture pour [la conformité avec Azure PCI DSS][pci-dss-blueprint].
 
 ### <a name="resiliency"></a>Résilience
 
-* Envisagez l’utilisation du [modèle disjoncteur][circuit-breaker] pour permettre la gestion des erreurs sans perte de données dans le cas où une partie de l’application ne serait pas disponible.
-* Examinez les [modèles de conception standards pour la résilience][design-patterns-resiliency] et envisagez de les implémenter le cas échéant.
-* Vous trouverez différentes [pratiques recommandées pour App Service][resiliency-app-service] dans le Centre des architectures Azure.
-* Envisagez d’utiliser la [géo-réplication][sql-geo-replication] active pour la couche Données et le stockage [géoredondant][storage-geo-redudancy] des images et des files d’attente.
-* Pour plus d’informations sur la [résilience][resiliency], voir l’article correspondant dans le Centre des architectures Azure.
+- Envisagez l’utilisation du [modèle disjoncteur][circuit-breaker] pour permettre la gestion des erreurs sans perte de données dans le cas où une partie de l’application ne serait pas disponible.
+- Examinez les [modèles de conception standards pour la résilience][design-patterns-resiliency] et envisagez de les implémenter le cas échéant.
+- Vous trouverez différentes [pratiques recommandées pour App Service][resiliency-app-service] dans le Centre des architectures Azure.
+- Envisagez d’utiliser la [géo-réplication][sql-geo-replication] active pour la couche Données et le stockage [géoredondant][storage-geo-redudancy] des images et des files d’attente.
+- Pour plus d’informations sur la [résilience][resiliency], voir l’article correspondant dans le Centre des architectures Azure.
 
 ## <a name="deploy-the-scenario"></a>Déployez le scénario
 
@@ -111,14 +112,14 @@ Explorez le coût d’exécution de ce scénario, tous les services sont précon
 
 Nous proposons trois exemples de profils de coût basés sur la quantité de trafic que vous escomptez :
 
-* [Petit][small-pricing] : cet exemple de tarifs correspond aux composants qui sont nécessaires à la génération d’une sortie pour une instance d’un niveau de production minimal. Nous supposons ici la présence d’un petit nombre d’utilisateurs, de l’ordre de quelques milliers par mois. L’application utilise une seule instance d’une application web standard, suffisante pour permettre une mise à l’échelle automatique. Tous les autres composants sont mis à l’échelle à un niveau de base qui, pour un coût minimal, assure le respect du contrat de niveau de service et une capacité suffisante pour gérer une charge de travail de production.
-* [Moyen][medium-pricing] : cet exemple de tarifs correspond aux composants représentatifs d’un déploiement de taille moyenne. Ici, nous estimons environ 100 000 utilisateurs du système au cours d’un mois. Le trafic attendu est géré dans une instance de service d’application unique avec un niveau standard modéré. En outre, des niveaux modérés des services Cognitive et de recherche sont ajoutés à la calculatrice.
-* [Grand][large-pricing] : cet exemple de tarifs correspond à une application destinée à un déploiement à grande échelle, de l’ordre de plusieurs millions d’utilisateurs par mois déplaçant plusieurs téraoctets de données. À ce niveau de performances d’utilisation élevées, un niveau Premium est requis pour les applications web déployées dans plusieurs régions exposées par Traffic Manager. Les données incluent : le stockage, les bases de données et un réseau de distribution de contenu, qui sont configurés pour plusieurs téraoctets de données.
+- [Petit][small-pricing] : cet exemple de tarifs correspond aux composants qui sont nécessaires à la génération d’une sortie pour une instance d’un niveau de production minimal. Nous supposons ici la présence d’un petit nombre d’utilisateurs, de l’ordre de quelques milliers par mois. L’application utilise une seule instance d’une application web standard, suffisante pour permettre une mise à l’échelle automatique. Tous les autres composants sont mis à l’échelle à un niveau de base qui, pour un coût minimal, assure le respect du contrat de niveau de service et une capacité suffisante pour gérer une charge de travail de production.
+- [Moyen][medium-pricing] : cet exemple de tarifs correspond aux composants représentatifs d’un déploiement de taille moyenne. Ici, nous estimons environ 100 000 utilisateurs du système au cours d’un mois. Le trafic attendu est géré dans une instance de service d’application unique avec un niveau standard modéré. En outre, des niveaux modérés des services Cognitive et de recherche sont ajoutés à la calculatrice.
+- [Grand][large-pricing] : cet exemple de tarifs correspond à une application destinée à un déploiement à grande échelle, de l’ordre de plusieurs millions d’utilisateurs par mois déplaçant plusieurs téraoctets de données. À ce niveau de performances d’utilisation élevées, un niveau Premium est requis pour les applications web déployées dans plusieurs régions exposées par Traffic Manager. Les données incluent : le stockage, les bases de données et un réseau de distribution de contenu, qui sont configurés pour plusieurs téraoctets de données.
 
 ## <a name="related-resources"></a>Ressources associées
 
-* [Architecture de référence pour une application web multirégion][multi-region-web-app]
-* [eShop sur l’exemple de référence de conteneurs][microservices-ecommerce]
+- [Architecture de référence pour une application web multirégion][multi-region-web-app]
+- [eShop sur l’exemple de référence de conteneurs][microservices-ecommerce]
 
 <!-- links -->
 [architecture]: ./media/architecture-ecommerce-scenario.png

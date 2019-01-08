@@ -1,26 +1,28 @@
 ---
-title: Utilisation de Service Fabric pour décomposer des applications monolithiques
+title: Utilisation de Service Fabric pour décomposer des applications
+titleSuffix: Azure Example Scenarios
 description: Décomposez une grande application monolithique en microservices.
 author: timomta
 ms.date: 09/20/2018
 ms.custom: fasttrack
-ms.openlocfilehash: 438d2eabff39356a7593f2da798a74eebe94553a
-ms.sourcegitcommit: a0e8d11543751d681953717f6e78173e597ae207
+ms.openlocfilehash: 90159b0cbfd3e7af542a79d050d153b4a3435a0d
+ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/06/2018
-ms.locfileid: "53004625"
+ms.lasthandoff: 12/20/2018
+ms.locfileid: "53643813"
 ---
 # <a name="using-service-fabric-to-decompose-monolithic-applications"></a>Utilisation de Service Fabric pour décomposer des applications monolithiques
 
 Dans cet exemple de scénario, nous allons examiner une approche consistant à utiliser [Service Fabric](/azure/service-fabric/service-fabric-overview) en tant que plateforme pour décomposer une application monolithique difficile à gérer. Nous considérons ici une approche itérative de la décomposition d’un site web IIS/ASP.NET en une application constituée de plusieurs microservices facilement gérables.
 
 L’évolution d’une architecture monolithique vers une architecture de microservices offre les avantages suivants :
-* Vous pouvez modifier une petite unité de code compréhensible et ne déployer que cette unité.
-* Le déploiement de chaque unité de code ne nécessite que quelques minutes au plus.
-* Si cette petite unité de code comporte une erreur, seule cette unité cesse de fonctionner, et non la totalité de l’application.
-* Les petites unités de code peuvent être réparties discrètement et en toute simplicité entre plusieurs équipes de développement.
-* Les nouveaux développeurs peuvent appréhender rapidement et facilement les fonctionnalités discrètes de chaque unité.
+
+- Vous pouvez modifier une petite unité de code compréhensible et ne déployer que cette unité.
+- Le déploiement de chaque unité de code ne nécessite que quelques minutes au plus.
+- Si cette petite unité de code comporte une erreur, seule cette unité cesse de fonctionner, et non la totalité de l’application.
+- Les petites unités de code peuvent être réparties discrètement et en toute simplicité entre plusieurs équipes de développement.
+- Les nouveaux développeurs peuvent appréhender rapidement et facilement les fonctionnalités discrètes de chaque unité.
 
 Cet exemple considère une application IIS volumineuse sur une batterie de serveurs, mais les concepts de décomposition et d’hébergement itératifs sont applicables à tout type d’application de grande taille. Bien que cette solution utilise Windows, la plateforme Service Fabric est également exécutable sur Linux. Elle peut être exécutée localement, dans Azure ou sur des nœuds de machine virtuelle dans le fournisseur de cloud de votre choix.
 
