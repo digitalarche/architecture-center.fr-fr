@@ -3,32 +3,32 @@ title: Données relationnelles
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 0ed15bfe93c0cebffb377543eda9dd84e65d7c02
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 499e7c632bd6bfee31c0625f4d647825107ea2bb
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901408"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111816"
 ---
 # <a name="traditional-relational-database-solutions"></a>Solutions de bases de données relationnelles traditionnelles
 
-Les données relationnelles sont modélisées à l’aide du modèle relationnel. Dans ce modèle, les données sont exprimées sous forme de tuples. Un *tuple* est un ensemble de paires attribut/valeur. Par exemple, un tuple peut être (itemid = 5, orderid = 1, item = « Siège », quantité = 200,00). Un jeu de tuples qui partagent tous les mêmes attributs est appelé *relation*. 
+Les données relationnelles sont modélisées à l’aide du modèle relationnel. Dans ce modèle, les données sont exprimées sous forme de tuples. Un *tuple* est un ensemble de paires attribut/valeur. Par exemple, un tuple peut être (itemid = 5, orderid = 1, item = « Siège », quantité = 200,00). Un jeu de tuples qui partagent tous les mêmes attributs est appelé *relation*.
 
 Les relations sont naturellement représentées sous forme de tableaux, dans lesquels chaque tuple est exposé comme une ligne dans le tableau. Toutefois, les lignes sont classées de manière explicite, contrairement aux tuples. Le schéma des bases de données définit les colonnes (en-têtes) de chaque tableau. Chaque colonne est définie avec un nom et un type de données pour toutes les valeurs stockées dans cette colonne sur toutes les lignes du tableau.
 
 ![Exemple illustrant les données à l’aide d’une base de données relationnelle](../images/example-relational.png)
 
-Une banque de données qui organise les données à l’aide du modèle relationnel est appelée base de données relationnelle. Les clés primaires identifient uniquement des lignes dans un tableau. Des champs de clé étrangère sont utilisés dans un tableau pour faire référence à une ligne dans un autre tableau en faisant référence à la clé primaire de l’autre tableau. Des clés étrangères sont utilisées pour préserver l’intégrité référentielle, faisant en sorte que les lignes référencées ne soient ni modifiées ni supprimées tandis que la ligne de référence dépend d’elles. 
+Une banque de données qui organise les données à l’aide du modèle relationnel est appelée base de données relationnelle. Les clés primaires identifient uniquement des lignes dans un tableau. Des champs de clé étrangère sont utilisés dans un tableau pour faire référence à une ligne dans un autre tableau en faisant référence à la clé primaire de l’autre tableau. Des clés étrangères sont utilisées pour préserver l’intégrité référentielle, faisant en sorte que les lignes référencées ne soient ni modifiées ni supprimées tandis que la ligne de référence dépend d’elles.
 
 ![Exemple illustrant les données à l’aide d’une base de données relationnelle](../images/example-relational2.png)
 
 Les bases de données relationnelles prennent en charge différents types de contraintes qui permettent de garantir l’intégrité des données :
 
-- Les contraintes uniques garantissent que toutes les valeurs d’une colonne sont uniques. 
+- Les contraintes uniques garantissent que toutes les valeurs d’une colonne sont uniques.
 
 - Les contraintes de clé étrangère sont associées aux données de deux tableaux. Une clé étrangère fait référence à la clé primaire ou à une autre clé unique à partir d’un autre tableau. Une contrainte de clé étrangère applique l’intégrité référentielle, interdisant les modifications qui génèrent des valeurs de clé étrangère non valides.
 
-- Les contraintes CHECK, également connues sous le nom de contraintes d’intégrité d’entité, limitent les valeurs qui peuvent être stockées dans une colonne unique ou être en relation avec des valeurs d’autres colonnes de la même ligne. 
+- Les contraintes CHECK, également connues sous le nom de contraintes d’intégrité d’entité, limitent les valeurs qui peuvent être stockées dans une colonne unique ou être en relation avec des valeurs d’autres colonnes de la même ligne.
 
 La plupart des bases de données relationnelles utilisent le langage SQL (Structured Query Langage) qui permet une approche déclarative à l’interrogation. La requête décrit le résultat souhaité, mais pas les étapes pour exécuter la requête. Le moteur décide alors de la meilleure façon d’exécuter la requête. Cela diffère d’une approche procédurale, où le programme de la requête spécifie explicitement les étapes de traitement. Toutefois, les bases de données relationnelles peuvent stocker des routines de codes exécutables sous la forme de procédures et fonctions stockées, ce qui permet une combinaison des approches déclaratives et procédurales.
 
