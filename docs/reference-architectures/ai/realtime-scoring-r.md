@@ -2,14 +2,14 @@
 title: Scoring en temps réel des modèles Machine Learning R
 description: Implémentez un service de prédiction en temps réel en R en exécutant Machine Learning Server dans Azure Kubernetes Service (AKS).
 author: njray
-ms.date: 12/12/18
+ms.date: 12/12/2018
 ms.custom: azcat-ai
-ms.openlocfilehash: a6069704c48fbc1f1a1e4b5df428011d6b5b883d
-ms.sourcegitcommit: 62d2211badd1d6950e8cb819d70c9a4ab1ee01d9
+ms.openlocfilehash: 6f3447d1dcab801ccdaf4cf88611725cc00eb68d
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53318990"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112275"
 ---
 # <a name="real-time-scoring-of-r-machine-learning-models"></a>Scoring en temps réel des modèles Machine Learning R
 
@@ -51,7 +51,7 @@ L’[opérationnalisation du modèle][operationalization] Machine Learning Serve
 
 Pour que l’opérationnalisation du modèle fonctionne correctement avec Machine Learning Server sur des conteneurs, vous devez installer un certificat JSON Web Token (JWT). Ce déploiement utilise un certificat fourni par Microsoft. Dans un environnement de production, fournissez le vôtre.
 
-Pour le trafic entre Container Registry et AKS, envisagez d’activer le [contrôle d’accès en fonction du rôle][rbac] (RBAC) pour limiter les privilèges d’accès à ceux qui sont nécessaires. 
+Pour le trafic entre Container Registry et AKS, envisagez d’activer le [contrôle d’accès en fonction du rôle][rbac] (RBAC) pour limiter les privilèges d’accès à ceux qui sont nécessaires.
 
 ### <a name="separate-storage"></a>Stockage distinct
 

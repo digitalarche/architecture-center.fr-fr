@@ -1,18 +1,17 @@
 ---
-title: Identité fédérée
+title: Modèle d’identité fédérée
+titleSuffix: Cloud Design Patterns
 description: Déléguez l’authentification à un fournisseur d’identité externe.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- security
-ms.openlocfilehash: a1edbdd080309383201d33e73602e2f18928c080
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: b268000a81edbb2f224a9244d5949def75854f04
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24542631"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110355"
 ---
 # <a name="federated-identity-pattern"></a>Modèle d’identité fédérée
 
@@ -41,7 +40,6 @@ Les fournisseurs d’identité approuvés incluent les annuaires d’entreprise,
 La figure illustre le modèle d’identité fédérée quand une application cliente doit accéder à un service qui requiert une authentification. L’authentification est effectuée par un IdP qui fonctionne conjointement avec un STS. L’IdP émet des jetons de sécurité qui fournissent des informations sur l’utilisateur authentifié. Ces informations, appelées revendications, incluent l’identité de l’utilisateur et, éventuellement, d’autres informations telles que l’appartenance au rôle et des droits d’accès plus précis.
 
 ![Vue d’ensemble de l’authentification fédérée](./_images/federated-identity-overview.png)
-
 
 Ce modèle est souvent appelé contrôle d’accès basé sur les revendications. Les applications et services autorisent l’accès aux fonctions et fonctionnalités d’après les revendications contenues dans le jeton. Le service qui requiert une authentification doit approuver l’IdP. L’application cliente contacte l’IdP qui effectue l’authentification. Si l’authentification réussit, l’IdP retourne un jeton contenant les revendications qui identifient l’utilisateur au STS (notez que l’IdP et le STS peuvent être le même service). Le STS peut transformer et augmenter les revendications dans le jeton en fonction de règles prédéfinies, avant de le retourner au client. L’application cliente peut ensuite passer ce jeton au service en tant que preuve de son identité.
 
@@ -79,12 +77,11 @@ Ce modèle peut s’avérer inutile dans les situations suivantes :
 
 - L’application a initialement été créée à l’aide d’un autre mécanisme d’authentification, peut-être avec des magasins d’utilisateurs personnalisés, ou n’a pas la capacité de gérer les standards de négociation utilisés par les technologies basées sur les revendications. L’introduction de l’authentification basée sur les revendications et du contrôle d’accès dans des applications existantes peut être complexe et probablement non rentable.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Une organisation héberge une application SaaS (Software as a Service) multi-locataire dans Microsoft Azure. L’application comprend un site web que les locataires peuvent utiliser pour gérer celle-ci pour leurs propres utilisateurs. L’application permet aux locataires d’accéder au site web à l’aide d’une identité fédérée qui est générée par Active Directory Federation Services (ADFS) quand un utilisateur est authentifié par l’annuaire Active Directory de cette organisation.
 
 ![Comment les utilisateurs au sein d’un grand abonné d’entreprise accèdent à l’application](./_images/federated-identity-multitenat.png)
-
 
 L’illustration montre comment les locataires s’authentifient auprès de leur propre fournisseur d’identité (étape 1), en l’occurrence ADFS. Après avoir authentifié un locataire, ADFS émet un jeton. Le navigateur client transmet ce jeton au fournisseur de fédération de l’application SaaS, qui approuve les jetons émis par le service ADFS du locataire, afin de récupérer un jeton qui est valide pour le fournisseur de fédération SaaS (étape 2). Si nécessaire, le fournisseur de fédération SaaS transforme les revendications dans le jeton en revendications que l’application reconnaît (étape 3) avant de retourner le nouveau jeton au navigateur client. L’application approuve les jetons émis par le fournisseur de fédération SaaS et utilise les revendications dans le jeton pour appliquer des règles d’autorisation (étape 4).
 
@@ -95,5 +92,5 @@ Les locataires n’ont pas besoin de mémoriser des informations d’identificat
 - [Microsoft Azure Active Directory](https://azure.microsoft.com/services/active-directory/)
 - [Services de domaine Active Directory](https://msdn.microsoft.com/library/bb897402.aspx)
 - [Active Directory Federation Services](https://msdn.microsoft.com/library/bb897402.aspx)
-- [Gestion des identités pour les applications multi-locataires dans Microsoft Azure](https://azure.microsoft.com/documentation/articles/guidance-multitenant-identity/)
-- [Applications multi-locataires dans Azure](https://azure.microsoft.com/documentation/articles/dotnet-develop-multitenant-applications/)
+- [Gestion des identités pour les applications multi-locataires dans Microsoft Azure](/azure/architecture/multitenant-identity)
+- [Applications multi-locataires dans Azure](/azure/dotnet-develop-multitenant-applications)

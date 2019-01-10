@@ -1,14 +1,16 @@
 ---
 title: Utiliser la meilleure banque de données pour le travail
-description: Choisissez la technologie de stockage la mieux adaptée à vos données et son mode d’utilisation
+titleSuffix: Azure Application Architecture Guide
+description: Choisissez la technologie de stockage la mieux adaptée à vos données et son mode d’utilisation.
 author: MikeWasson
 ms.date: 08/30/2018
-ms.openlocfilehash: 25839f5a749881f415c923db5497984d32b8ac91
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.custom: seojan19
+ms.openlocfilehash: ab7cbe7005a00bcc2bfd7bad97f3eaf125f53e12
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43326089"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113295"
 ---
 # <a name="use-the-best-data-store-for-the-job"></a>Utiliser la meilleure banque de données pour le travail
 
@@ -20,7 +22,7 @@ Le temps où vous stockiez toutes vos données dans une importante base de donn�
 - Les données doivent être normalisées et conformes à un schéma prédéfini (schéma en écriture).
 - La contention de verrouillage peut affecter les performances.
 
-Dans toute solution de grande envergure, il est peu probable qu’une technologie de banque de données unique réponde à tous vos besoins. Les alternatives aux bases de données relationnelles incluent des banques de clés/valeurs, des bases de données de documents, des bases de données de moteurs de recherche, des bases de données de séries chronologiques, des bases de données de familles de colonnes et des bases de données graphiques. Chacune de ces alternatives a ses avantages et ses inconvénients, et sera plus ou moins adaptée en fonction du type de données. 
+Dans toute solution de grande envergure, il est peu probable qu’une technologie de banque de données unique réponde à tous vos besoins. Les alternatives aux bases de données relationnelles incluent des banques de clés/valeurs, des bases de données de documents, des bases de données de moteurs de recherche, des bases de données de séries chronologiques, des bases de données de familles de colonnes et des bases de données graphiques. Chacune de ces alternatives a ses avantages et ses inconvénients, et sera plus ou moins adaptée en fonction du type de données.
 
 Par exemple, vous pouvez stocker un catalogue de produits dans une base de données de documents, telle que Cosmos DB, qui offre un schéma flexible. Dans ce cas, chaque description de produit constitue un document autonome. Pour lancer des requêtes sur la totalité du catalogue, vous devrez peut-être indexer le catalogue et stocker l’index dans Azure Search. L’inventaire de produits peut être stocké dans une base de données SQL, car ces données requièrent des garanties ACID.
 
@@ -30,13 +32,13 @@ N’oubliez pas que les données représentent bien plus que les données d’ap
 
 **N’utilisez pas une base de données relationnelle pour tous les types de données**. Envisagez d’adopter d’autres banques de données le cas échéant. Voir [Choisir le magasin de données correct][data-store-overview].
 
-**Adopter la persistance polyglotte**. Dans toute solution de grande envergure, il est peu probable qu’une technologie de banque de données unique réponde à tous vos besoins. 
+**Adopter la persistance polyglotte**. Dans toute solution de grande envergure, il est peu probable qu’une technologie de banque de données unique réponde à tous vos besoins.
 
 **Tenez compte du type de données**. Par exemple, placez les données transactionnelles dans SQL, les documents JSON dans une base de données de documents, les données de télémétrie dans une base de données de séries chronologiques, les journaux des applications dans Elasticsearch et les objets blob dans le Stockage Blob Azure.
 
-**Préférez la disponibilité à la cohérence (forte)**. Le théorème CAP implique qu’un système distribué doit trouver un compromis entre la disponibilité et la cohérence. (Les partitions réseau, l’autre élément principal du théorème CAP, ne peuvent jamais être totalement ignorées.) Souvent, vous pouvez obtenir une meilleure disponibilité en adoptant un modèle de *cohérence éventuelle*. 
+**Préférez la disponibilité à la cohérence (forte)**. Le théorème CAP implique qu’un système distribué doit trouver un compromis entre la disponibilité et la cohérence. (Les partitions réseau, l’autre élément principal du théorème CAP, ne peuvent jamais être totalement ignorées.) Souvent, vous pouvez obtenir une meilleure disponibilité en adoptant un modèle de *cohérence éventuelle*.
 
-**Prenez en compte les compétences de l’équipe de développement**. Si la persistance polyglotte offre de nombreux avantages, elle peut également s’avérer très complexe. L’adoption d’une nouvelle technologie de stockage de données requiert un nouvel ensemble de compétences. L’équipe de développement doit comprendre comment tirer le meilleur parti de la technologie. Ils doivent découvrir les modèles d’utilisation appropriés, savoir comment optimiser les requêtes, ajuster les performances, etc. Prenez en compte ces facteurs lors de l’adoption de technologies de stockage. 
+**Prenez en compte les compétences de l’équipe de développement**. Si la persistance polyglotte offre de nombreux avantages, elle peut également s’avérer très complexe. L’adoption d’une nouvelle technologie de stockage de données requiert un nouvel ensemble de compétences. L’équipe de développement doit comprendre comment tirer le meilleur parti de la technologie. Ils doivent découvrir les modèles d’utilisation appropriés, savoir comment optimiser les requêtes, ajuster les performances, etc. Prenez en compte ces facteurs lors de l’adoption de technologies de stockage.
 
 **Utilisez des transactions de compensation**. Avec la persistance polyglotte, il est possible qu’une transaction unique écrive des données dans plusieurs banques de données. En cas de problème, utilisez des transactions de compensation pour annuler toutes les étapes qui ont déjà été effectuées.
 

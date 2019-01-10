@@ -1,18 +1,17 @@
 ---
-title: Consolidation des ressources de calcul
+title: Modèle de consolidation des ressources de calcul
+titleSuffix: Cloud Design Patterns
 description: Consolidez plusieurs tâches ou opérations en une seule unité de calcul.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- design-implementation
-ms.openlocfilehash: bd212b8b4406a08058f811db030843f732e08cdc
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 0f787537fb97f52ad69df7f0784b7fca3c45d7d1
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428837"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111476"
 ---
 # <a name="compute-resource-consolidation-pattern"></a>Modèle de consolidation des ressources de calcul
 
@@ -27,7 +26,6 @@ Une application cloud implémente souvent des opérations diverses. Dans certain
 À titre d’exemple, la figure illustre la structure simplifiée d’une solution hébergée dans le cloud qui est implémentée à l’aide de plusieurs unités de calcul. Chaque unité de calcul s’exécute dans son propre environnement virtuel. Chaque fonction a été implémentée en tant que tâche séparée (de la Tâche A à la Tâche E) s’exécutant dans sa propre unité de calcul.
 
 ![Exécution de tâches dans un environnement cloud à l’aide d’un ensemble d’unités de calcul dédiées](./_images/compute-resource-consolidation-diagram.png)
-
 
 Chaque unité de calcul consomme des ressources facturables, même lorsqu’elle est inactive ou peu utilisée. Par conséquent, cette solution n’est pas toujours la plus rentable.
 
@@ -67,7 +65,7 @@ Prenez en compte les points suivants lorsque vous implémentez ce modèle :
 **Contention**. Évitez d’introduire de la contention entre les tâches qui sont en concurrence pour bénéficier des ressources de la même unité de calcul. Dans l’idéal, les tâches qui partagent la même unité de calcul doivent présenter des caractéristiques d’utilisation de ressources différentes. Par exemple, deux tâches gourmandes en ressources de calcul ne doivent probablement pas résider dans la même unité de calcul, comme c’est le cas pour deux tâches qui utilisent d’importantes quantités de mémoire. Toutefois, associer une tâche gourmande en ressources de calcul à une tâche requérant une grande quantité de mémoire est possible.
 
 > [!NOTE]
->  Envisagez de consolider des ressources de calcul uniquement pour un système qui a été en production pendant un certain temps, afin que les opérateurs et développeurs puissent surveiller le système et créer une _carte thermique_ qui identifie la façon dont chaque tâche utilise les différentes ressources. Cette carte peut être utilisée pour déterminer les tâches les plus adaptées au partage de ressources de calcul.
+> Envisagez de consolider des ressources de calcul uniquement pour un système qui a été en production pendant un certain temps, afin que les opérateurs et développeurs puissent surveiller le système et créer une _carte thermique_ qui identifie la façon dont chaque tâche utilise les différentes ressources. Cette carte peut être utilisée pour déterminer les tâches les plus adaptées au partage de ressources de calcul.
 
 **Complexité** : Combiner plusieurs tâches dans une seule unité de calcul complique le code dans l’unité et le rend plus difficile à tester, déboguer et maintenir.
 
@@ -85,7 +83,7 @@ Ce modèle peut ne pas être adapté pour les tâches qui effectuent des opérat
 
 Lors de la création d’un service cloud sur Azure, il est possible de consolider le traitement effectué par plusieurs tâches dans un rôle unique. Il s’agit généralement d’un rôle de travail qui exécute des tâches de traitement asynchrone ou en arrière-plan.
 
-> Dans certains cas, il est possible d’inclure les tâches de traitement asynchrone ou en arrière-plan dans le rôle Web. Cette technique permet de réduire les coûts et de simplifier le déploiement, même si elle peut avoir un impact sur l’extensibilité et la réactivité de l’interface publique fournie par le rôle Web. 
+> Dans certains cas, il est possible d’inclure les tâches de traitement asynchrone ou en arrière-plan dans le rôle Web. Cette technique permet de réduire les coûts et de simplifier le déploiement, même si elle peut avoir un impact sur l’extensibilité et la réactivité de l’interface publique fournie par le rôle Web.
 
 Le rôle est responsable du démarrage et de l’arrêt des tâches. Lorsque le contrôleur de structure Azure charge un rôle, il déclenche l’événement `Start` pour le rôle. Vous pouvez remplacer la méthode `OnStart` de la classe `WebRole` ou `WorkerRole` pour gérer cet événement, par exemple, pour initialiser les données et autres ressources dont les tâches de cette méthode dépendent.
 
@@ -104,7 +102,6 @@ Lorsqu’un rôle s’arrête ou est recyclé, le contrôleur de structure empê
 Les tâches sont démarrées par la méthode `Run` qui attend que les tâches se terminent. Les tâches implémentent la logique métier du service cloud et peuvent répondre aux messages publiés dans le rôle via l’équilibreur de charge Azure. La figure illustre le cycle de vie des tâches et des ressources dans un rôle d’un service cloud Azure.
 
 ![Le cycle de vie des tâches et des ressources dans un rôle d’un service cloud Azure](./_images/compute-resource-consolidation-lifecycle.png)
-
 
 Le fichier _WorkerRole.cs_ du projet _ComputeResourceConsolidation.Worker_ montre un exemple d’implémentation de ce modèle dans un service cloud Azure.
 

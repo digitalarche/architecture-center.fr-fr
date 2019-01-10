@@ -1,21 +1,21 @@
 ---
 title: Modèles de conception et d’implémentation
+titleSuffix: Cloud Design Patterns
 description: Une bonne conception englobe des facteurs tels que la cohérence et la cohérence dans la conception de composants et de déploiements, la facilité de gestion pour simplifier l’administration et le développement, et la réutilisation pour permettre l’utilisation de composants et de sous-systèmes dans d’autres applications et dans d’autres scénarios. Les décisions prises pendant la phase de conception et d’implémentation ont un impact important sur la qualité et le coût total de possession d’applications et de services cloud.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-ms.openlocfilehash: 861445ceeca62e5b1e62fd4cb33924c35e10c0b0
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.custom: seodec18
+ms.openlocfilehash: 38b20fad513109051d40c1b9556f75fa86e03dd7
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847796"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009795"
 ---
 # <a name="design-and-implementation-patterns"></a>Modèles de conception et d’implémentation
 
 Une bonne conception englobe des facteurs tels que la cohérence et la cohérence dans la conception de composants et de déploiements, la facilité de gestion pour simplifier l’administration et le développement, et la réutilisation pour permettre l’utilisation de composants et de sous-systèmes dans d’autres applications et dans d’autres scénarios. Les décisions prises pendant la phase de conception et d’implémentation ont un impact important sur la qualité et le coût total de possession d’applications et de services cloud.
-
 
 |                                Modèle                                 |                                                                                                      Résumé                                                                                                       |
 |------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -33,4 +33,3 @@ Une bonne conception englobe des facteurs tels que la cohérence et la cohérenc
 |                        [Sidecar](../sidecar.md)                        |                                                  Déployez les composants d’une application sur un processus ou conteneur distinct pour fournir l’isolation et l’encapsulation.                                                  |
 |         [Hébergement de contenu statique](../static-content-hosting.md)         |                                                        Déployez un contenu statique dans un service de stockage cloud qui peut distribuer ce contenu directement au client.                                                        |
 |                      [Étranglement](../strangler.md)                      |                                         Faites migrer un système hérité de façon incrémentielle en remplaçant progressivement des parties spécifiques des fonctionnalités par de nouveaux services et applications.                                          |
-

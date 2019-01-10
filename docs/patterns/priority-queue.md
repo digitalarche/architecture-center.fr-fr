@@ -1,19 +1,17 @@
 ---
-title: File d’attente avec un ordre de priorité
+title: Modèle de file d’attente avec un ordre de priorité
+titleSuffix: Cloud Design Patterns
 description: Classez par ordre de priorité les requêtes envoyées aux services, de telle sorte que les demandes ayant une priorité plus élevée soient reçues et traitées plus rapidement que celles de moindre priorité.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- messaging
-- performance-scalability
-ms.openlocfilehash: 400bfbc03cf5640ff32a551636b01d60e6c0ec50
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: ddd9cc9ec85c6ed23fabaaa58424736ba1aa9421
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428497"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011121"
 ---
 # <a name="priority-queue-pattern"></a>Modèle de file d’attente avec un ordre de priorité
 
@@ -31,12 +29,11 @@ Une file d’attente est généralement une structure FIFO (premier entré, prem
 
 ![Figure 1 : Utilisation d’un mécanisme de mise en file d’attente qui prend en charge la hiérarchisation des messages](./_images/priority-queue-pattern.png)
 
-> La plupart des implémentations de files d’attente de messages prennent en charge plusieurs consommateurs (à l’exemple du [modèle de consommateurs concurrents](https://msdn.microsoft.com/library/dn568101.aspx)), et le nombre de processus consommateur peut être adapté à la hausse ou à la baisse en fonction de la demande.
+> La plupart des implémentations de files d’attente de messages prennent en charge plusieurs consommateurs (à l’exemple du [modèle de consommateurs concurrents](./competing-consumers.md)), et le nombre de processus consommateur peut être adapté à la hausse ou à la baisse en fonction de la demande.
 
 Dans les systèmes qui ne prennent pas en charge les files d’attente de messages basées sur la priorité, une autre solution consiste à tenir à jour une file d’attente distincte pour chaque priorité. Il revient à l’application de poster les messages dans la file d’attente appropriée. À chaque file d’attente peut correspondre un pool de consommateurs distinct. Les files d’attente à plus haute priorité peuvent avoir un pool de consommateurs plus étoffé s’exécutant sur du matériel plus rapide que les files d’attente à plus basse priorité. La figure suivante illustre l’utilisation de files d’attente de messages différentes pour chaque priorité.
 
 ![Figure 2 : Utilisation de files d’attente de messages différentes pour chaque priorité](./_images/priority-queue-separate.png)
-
 
 Il existe une variante de cette stratégie qui repose sur l’utilisation d’un pool unique de consommateurs qui recherchent d’abord la présence de messages dans les files d’attente à haute priorité avant de passer aux files d’attente à plus basse priorité. Des différences sémantiques existent entre une solution qui utilise un seul pool de processus consommateur (avec une file d’attente unique qui prend en charge des messages de différentes priorités ou avec plusieurs files d’attente qui traitent chacune des messages de même priorité) et une solution qui utilise plusieurs files d’attente avec un pool distinct pour chaque file d’attente.
 
@@ -88,7 +85,6 @@ Une solution Azure peut implémenter une rubrique Service Bus dans laquelle une 
 
 ![Figure 3 : Implémentation d’une file d’attente avec un ordre de priorité en association avec des rubriques et des abonnements Azure Service Bus](./_images/priority-queue-service-bus.png)
 
-
 Dans la figure ci-dessus, l’application crée plusieurs messages et assigne une valeur à une propriété personnalisée appelée `Priority` dans chaque message, à savoir `High` ou `Low`. L’application poste ces messages dans une rubrique. La rubrique est associée à deux abonnements qui filtrent tous deux les messages en examinant la propriété `Priority`. L’un des deux abonnements accepte les messages dont la propriété `Priority` a la valeur `High`, tandis que l’autre accepte les messages dont la propriété `Priority` a la valeur `Low`. Un pool de consommateurs lit les messages de chaque abonnement. L’abonnement à haute priorité dispose d’un pool plus étoffé, et ces consommateurs peuvent s’exécuter sur des ordinateurs plus puissants, disposant de plus de ressources que les consommateurs du pool à basse priorité.
 
 Notez que les messages à haute et basse priorité n’ont pas de désignation particulière dans cet exemple. Il s’agit simplement de libellés spécifiés sous forme de propriétés dans chaque message, qui servent à diriger les messages vers un abonnement spécifique. Si des priorités supplémentaires sont nécessaires, il est relativement facile de créer d’autres abonnements et pools de processus consommateur pour traiter ces priorités.
@@ -121,6 +117,7 @@ public class PriorityWorkerRole : RoleEntryPoint
   }
 }
 ```
+
 Les rôles de travail `PriorityQueue.High` et `PriorityQueue.Low` remplacent tous deux la fonctionnalité par défaut de la méthode `ProcessMessage`. Le code ci-dessous représente la méthode `ProcessMessage` pour le rôle de travail `PriorityQueue.High`.
 
 ```csharp
@@ -170,11 +167,10 @@ Les modèles et les conseils suivants peuvent aussi présenter un intérêt quan
 
 - [Primer de messagerie asynchrone](https://msdn.microsoft.com/library/dn589781.aspx). un service consommateur qui traite une demande peut être amené à envoyer une réponse à l’instance de l’application qui a posté la demande. Fournit des informations sur les stratégies que vous pouvez employer pour implémenter une messagerie demande/réponse.
 
-- [Modèle des consommateurs concurrents](competing-consumers.md) : pour accroître le débit des files d’attente, il est possible d’avoir plusieurs consommateurs à l’écoute d’une même file d’attente et de traiter les tâches en parallèle. Ces consommateurs sont en concurrence pour les messages, mais un seul d’entre eux doit pouvoir traiter chaque message. Fournit des informations sur les avantages et les inconvénients de l’implémentation de cette approche.
+- [Modèle des consommateurs concurrents](./competing-consumers.md) : pour accroître le débit des files d’attente, il est possible d’avoir plusieurs consommateurs à l’écoute d’une même file d’attente et de traiter les tâches en parallèle. Ces consommateurs sont en concurrence pour les messages, mais un seul d’entre eux doit pouvoir traiter chaque message. Fournit des informations sur les avantages et les inconvénients de l’implémentation de cette approche.
 
-- [Modèle de limitation](throttling.md) : vous pouvez implémenter la limitation en utilisant des files d’attente. La messagerie avec prise en compte des priorités permet d’assurer que les demandes en provenance d’applications critiques ou d’applications exécutées par des clients majeurs sont prioritaires sur les demandes en provenance d’applications moins importantes.
+- [Modèle de limitation](./throttling.md) : vous pouvez implémenter la limitation en utilisant des files d’attente. La messagerie avec prise en compte des priorités permet d’assurer que les demandes en provenance d’applications critiques ou d’applications exécutées par des clients majeurs sont prioritaires sur les demandes en provenance d’applications moins importantes.
 
 - [Recommandations en matière de mise à l’échelle automatique](https://msdn.microsoft.com/library/dn589774.aspx) : la possibilité ou non d’adapter la taille du pool de processus consommateur gérant une file d’attente dépend de la longueur de celle-ci. Cette stratégie peut contribuer à améliorer les performances, surtout pour les pools qui traitent des messages à haute priorité.
 
 - [Modèles Intégration Entreprise avec Service Bus](https://abhishekrlal.com/2013/01/11/enterprise-integration-patterns-with-service-bus-part-2/) sur le blog d’Abhishek Lal.
-

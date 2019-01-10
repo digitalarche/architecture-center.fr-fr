@@ -1,19 +1,17 @@
 ---
-title: Magasin de configurations externes
+title: Modèle de magasin de configurations externe
+titleSuffix: Cloud Design Patterns
 description: Déplacez les informations de configuration depuis le package de déploiement d’application vers un emplacement centralisé.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- design-implementation
-- management-monitoring
-ms.openlocfilehash: 733ca979903d1526d3a1a6b281a8903893e19fda
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: 7e37e5bc052a9d8e8747a3a4ac3d79a311185ea4
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24542279"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011308"
 ---
 # <a name="external-configuration-store-pattern"></a>Modèle de magasin de configurations externe
 
@@ -40,7 +38,6 @@ Le magasin de stockage que vous choisissez pour les informations de configuratio
 > De nombreux systèmes de configuration intégrés lisent les données quand l’application démarre et les mettent en cache en mémoire afin de les rendre rapidement accessibles et de réduire au minimum l’impact sur les performances de l’application. Selon le type de magasin de stockage utilisé et la latence de ce magasin, il peut être utile d’implémenter un mécanisme de mise en cache dans le magasin de configuration externe. Pour plus d’informations, consultez [Conseils de mise en cache](https://msdn.microsoft.com/library/dn589802.aspx). La figure illustre une vue d’ensemble du modèle de magasin de configuration externe avec le cache local facultatif.
 
 ![Vue d’ensemble du modèle de magasin de configuration externe avec le cache local facultatif](./_images/external-configuration-store-overview.png)
-
 
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
@@ -76,7 +73,7 @@ Ce modèle est utile dans les situations suivantes :
 
 - Comme moyen de simplifier l’administration de plusieurs applications et éventuellement pour analyser l’utilisation des paramètres de configuration en consignant tout ou partie des types d’accès au magasin de configuration.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Dans une application hébergée par Microsoft Azure, un choix classique pour stocker les informations de configuration de manière externe consiste à utiliser Stockage Azure. Cette solution est résiliente, offre des performances élevées et est répliquée trois fois avec basculement automatique pour offrir une haute disponibilité. Le stockage Table Azure fournit un magasin de clés/valeurs avec la possibilité d’utiliser un schéma flexible pour les valeurs. Le stockage Blob Azure fournit un magasin hiérarchique basé sur un conteneur, qui peut contenir n’importe quel type de données dans des objets blob nommés individuellement.
 
@@ -101,7 +98,7 @@ La classe `ExternalConfigurationManager` fournit un wrapper autour d’un objet 
 
 Notez que tous les paramètres sont également mis en cache dans un objet `Dictionary` à l’intérieur de la classe `ExternalConfigurationManager` pour un accès rapide. La méthode `GetSetting` utilisée pour récupérer un paramètre de configuration lit les données dans le cache. Si le paramètre est introuvable dans le cache, il est récupéré de l’objet `BlobSettingsStore`.
 
-La méthode `GetSettings` appelle la méthode `CheckForConfigurationChanges` afin de déterminer si les informations de configuration dans le stockage blob ont été modifiées. À cette fin, elle examine le numéro de version et le compare au numéro de version actuel détenu par l’objet `ExternalConfigurationManager`. Si une ou plusieurs modifications ont eu lieu, l’événement `Changed` est déclenché et les paramètres de configuration mis en cache dans l’objet `Dictionary` sont actualisés. Il s’agit d’une application du [modèle de type cache-aside](cache-aside.md).
+La méthode `GetSettings` appelle la méthode `CheckForConfigurationChanges` afin de déterminer si les informations de configuration dans le stockage blob ont été modifiées. À cette fin, elle examine le numéro de version et le compare au numéro de version actuel détenu par l’objet `ExternalConfigurationManager`. Si une ou plusieurs modifications ont eu lieu, l’événement `Changed` est déclenché et les paramètres de configuration mis en cache dans l’objet `Dictionary` sont actualisés. Il s’agit d’une application du [modèle de type cache-aside](./cache-aside.md).
 
 L’exemple de code suivant montre comment sont implémentés l’événement `Changed` et les méthodes `GetSettings` et `CheckForConfigurationChanges` :
 
@@ -130,7 +127,7 @@ public class ExternalConfigurationManager : IDisposable
   public string GetAppSetting(string key)
   {
     ...
-    // Try to get the value from the settings cache. 
+    // Try to get the value from the settings cache.
     // If there's a cache miss, get the setting from the settings store and refresh the settings cache.
 
     string value;

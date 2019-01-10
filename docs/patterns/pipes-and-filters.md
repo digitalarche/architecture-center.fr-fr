@@ -1,19 +1,17 @@
 ---
-title: Canaux et filtres
+title: Modèle de canaux et de filtres
+titleSuffix: Cloud Design Patterns
 description: Divisez une tâche qui exécute un traitement complexe en une série d’éléments séparés qui peuvent être réutilisés.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- design-implementation
-- messaging
-ms.openlocfilehash: fd616676f9487bdfe1bf23b3d0fec6c65b97a8f4
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 7084b538159f7104d2322e35f94f43e905f700bf
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429568"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011682"
 ---
 # <a name="pipes-and-filters-pattern"></a>Modèle de canaux et de filtres
 
@@ -39,7 +37,6 @@ Décomposez le traitement requis pour chaque flux en un ensemble de composants d
 
 ![Figure 2 : Solution implémentée à l’aide de canaux et de filtres](./_images/pipes-and-filters-solution.png)
 
-
 Le temps nécessaire pour traiter une requête unique dépend de la vitesse du filtre le plus lent dans le pipeline. Un ou plusieurs filtres peuvent être un goulot d’étranglement, surtout si un grand nombre de demandes s’affichent dans un flux à partir d’une source de données particulière. Le principal avantage de la structure du pipeline est qu’elle fournit des possibilités d’exécution d’instances parallèles de filtres lents, permettant au système de répartir la charge et d’améliorer le débit.
 
 Les filtres qui composent un pipeline peuvent être exécutés sur des machines différentes, ce qui permet leur mise à l’échelle de manière indépendante et vous permet de bénéficier de l’élasticité fournie par de nombreux environnements de cloud. Un filtre qui nécessite beaucoup de ressources système peut être exécuté sur du matériel de haute performance, tandis que d’autres filtres moins exigeants peuvent être exécutés sur du matériel standard moins coûteux. Il n’est pas nécessaire que les filtres se trouvent dans le même centre de données ou le même emplacement géographique, ce qui permet que chaque élément dans un pipeline s’exécute dans un environnement proche des ressources qu’il requiert.  La figure suivante montre un exemple appliqué au pipeline pour les données de la source 1.
@@ -50,11 +47,12 @@ Si l’entrée et la sortie d’un filtre sont structurées sous forme de flux, 
 
 La résilience que ce modèle fournit constitue un autre avantage. Si un filtre échoue ou si l’ordinateur sur lequel il s’exécute n’est plus disponible, le pipeline peut replanifier le travail que le filtre effectuait et diriger ce travail vers une autre instance du composant. L’échec d’un filtre unique n’entraîne pas nécessairement la défaillance du pipeline tout entier.
 
-L’utilisation du modèle de canaux et de filtres conjointement avec le [Modèle de transaction de compensation](compensating-transaction.md) est une approche alternative à l’implémentation des transactions distribuées. Une transaction distribuée peut être décomposée en tâches compensables distinctes, qui peuvent chacune être implémentées à l’aide d’un filtre qui implémente également le modèle de transaction de compensation. Les filtres dans un pipeline peuvent être implémentés en tant que tâches hébergées distinctes s’exécutant près des données qu’ils gèrent.
+L’utilisation du modèle de canaux et de filtres conjointement avec le [Modèle de transaction de compensation](./compensating-transaction.md) est une approche alternative à l’implémentation des transactions distribuées. Une transaction distribuée peut être décomposée en tâches compensables distinctes, qui peuvent chacune être implémentées à l’aide d’un filtre qui implémente également le modèle de transaction de compensation. Les filtres dans un pipeline peuvent être implémentés en tant que tâches hébergées distinctes s’exécutant près des données qu’ils gèrent.
 
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
 Prenez en compte les points suivants quand vous choisissez comment implémenter ce modèle :
+
 - **Complexité** : La flexibilité accrue fournie par ce modèle peut également introduire de la complexité, surtout si les filtres dans un pipeline sont répartis sur différents serveurs.
 
 - **Fiabilité**. Utilisez une infrastructure qui permet de s’assurer que la circulation des données entre les filtres dans un pipeline ne sera pas perdue.
@@ -70,11 +68,12 @@ Prenez en compte les points suivants quand vous choisissez comment implémenter 
 ## <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
 
 Utilisez ce modèle dans les situations suivantes :
+
 - Le traitement requis par une application peut facilement être décomposé en un ensemble d’étapes indépendantes.
 
 - Les étapes de traitement réalisées par une application possèdent différentes exigences d’extensibilité.
 
-    >  Il est possible de regrouper les filtres qui doivent être mis à l’échelle ensemble dans le même processus. Pour en savoir plus, consultez le [Modèle de consolidation des ressources de calcul](compute-resource-consolidation.md).
+    >  Il est possible de regrouper les filtres qui doivent être mis à l’échelle ensemble dans le même processus. Pour en savoir plus, consultez le [Modèle de consolidation des ressources de calcul](./compute-resource-consolidation.md).
 
 - Une certaine flexibilité est nécessaire pour permettre la réorganisation des étapes de traitement effectuées par une application ou la possibilité d’ajouter et de supprimer des étapes.
 
@@ -83,6 +82,7 @@ Utilisez ce modèle dans les situations suivantes :
 - Une solution fiable est requise pour minimiser les effets de l’échec dans une étape lors du traitement des données.
 
 Ce modèle peut ne pas avoir d’utilité dans les cas suivants :
+
 - Les étapes de traitement effectuées par une application ne sont pas indépendantes, mais elles doivent être exécutées simultanément dans le cadre de la même transaction.
 
 - La quantité d’informations de contexte ou d’état requise par une étape rend cette approche inefficace. Il est possible de conserver les informations d’état dans une base de données à la place, mais n’utilisez pas cette stratégie si la charge supplémentaire sur la base de données provoque une contention excessive.
@@ -93,10 +93,9 @@ Vous pouvez utiliser une séquence de files d’attente de message pour fournir 
 
 ![Figure 4 : Implémentation d’un pipeline à l’aide de files d’attente](./_images/pipes-and-filters-message-queues.png)
 
-
 Si vous générez une solution sur Azure, vous pouvez utiliser les files d’attente Service Bus pour fournir un mécanisme de file d’attente fiable et évolutif. La classe `ServiceBusPipeFilter` ci-dessous, en C#, montre comment vous pouvez implémenter un filtre qui reçoit des messages d’entrée de la part d’une file d’attente, qui traite ces messages et qui publie les résultats vers une autre file.
 
->  La classe `ServiceBusPipeFilter` est définie dans le projet PipesAndFilters.Shared disponible à partir de [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/pipes-and-filters).
+> La classe `ServiceBusPipeFilter` est définie dans le projet PipesAndFilters.Shared disponible à partir de [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/pipes-and-filters).
 
 ```csharp
 public class ServiceBusPipeFilter
@@ -278,8 +277,9 @@ public class FinalReceiverRoleEntry : RoleEntryPoint
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
 Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
+
 - Un exemple illustrant ce modèle est disponible sur [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/pipes-and-filters).
-- [Modèle des consommateurs concurrents](competing-consumers.md). Un pipeline peut contenir plusieurs instances d’un ou plusieurs filtres. Cette approche est utile pour l’exécution d’instances parallèles de filtres lents, permettant au système de répartir la charge et d’améliorer le débit. Chaque instance d’un filtre est en concurrence avec les autres pour l’entrée, deux instances d’un même filtre ne doivent pas être en mesure de traiter les mêmes données. Fournit une explication de cette approche.
-- [Modèle de consolidation des ressources de calcul](compute-resource-consolidation.md). Il est possible de regrouper les filtres qui doivent être mis à l’échelle ensemble dans le même processus. Fournit plus d’informations sur les avantages et les inconvénients de cette stratégie.
-- [Modèle de transaction de compensation](compensating-transaction.md). Un filtre peut être implémenté comme une opération qui peut être inversée ou qui possède une opération de compensation qui rétablit la version antérieure de l’état en cas de défaillance. Explique comment cela peut être implémenté pour maintenir ou garantir la cohérence éventuelle.
+- [Modèle des consommateurs concurrents](./competing-consumers.md). Un pipeline peut contenir plusieurs instances d’un ou plusieurs filtres. Cette approche est utile pour l’exécution d’instances parallèles de filtres lents, permettant au système de répartir la charge et d’améliorer le débit. Chaque instance d’un filtre est en concurrence avec les autres pour l’entrée, deux instances d’un même filtre ne doivent pas être en mesure de traiter les mêmes données. Fournit une explication de cette approche.
+- [Modèle de consolidation des ressources de calcul](./compute-resource-consolidation.md). Il est possible de regrouper les filtres qui doivent être mis à l’échelle ensemble dans le même processus. Fournit plus d’informations sur les avantages et les inconvénients de cette stratégie.
+- [Modèle de transaction de compensation](./compensating-transaction.md). Un filtre peut être implémenté comme une opération qui peut être inversée ou qui possède une opération de compensation qui rétablit la version antérieure de l’état en cas de défaillance. Explique comment cela peut être implémenté pour maintenir ou garantir la cohérence éventuelle.
 - [Idempotency Patterns](https://blog.jonathanoliver.com/idempotency-patterns/) sur le blog de Jonathan Oliver.

@@ -1,19 +1,17 @@
 ---
-title: Clé de valet
+title: Modèle de clé de valet
+titleSuffix: Cloud Design Patterns
 description: Utilisez un jeton ou une clé qui fournissent aux clients un accès direct limité à une ressource ou à un service spécifique.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- data-management
-- security
-ms.openlocfilehash: 99d3fbe05e34d61edc0d339f34665e557b250b05
-ms.sourcegitcommit: fb22348f917a76e30a6c090fcd4a18decba0b398
+ms.custom: seodec18
+ms.openlocfilehash: 09173717d499d524d4d5dad2c1202c1bf361b1e5
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/16/2018
-ms.locfileid: "53450885"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009863"
 ---
 # <a name="valet-key-pattern"></a>Modèle de clé de valet
 
@@ -105,7 +103,7 @@ Azure prend en charge des signatures d’accès partagé sur le stockage Azure p
 
 Les signatures d’accès partagé Azure prennent également en charge les stratégies d’accès stockées sur serveur qui peuvent être associées à une ressource spécifique comme une table ou un objet blob. Cette fonctionnalité offre davantage de contrôle et de flexibilité par rapport aux jetons de signature d’accès partagé générés par l’application et doit être utilisée chaque fois que cela est possible. Les paramètres définis dans une stratégie stockée sur serveur peuvent être modifiés et sont reflétés dans le jeton sans qu’un nouveau jeton doive être émis, mais les paramètres définis dans le jeton ne peuvent pas être modifiés sans émettre un nouveau jeton. Cette approche permet également de révoquer un jeton de signature d’accès partagé valide avant son expiration.
 
-> Pour plus d’informations, consultez [Introducing Table SAS (Shared Access Signature), Queue SAS and update to Blob SAS](https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/12/introducing-table-sas-shared-access-signature-queue-sas-and-update-to-blob-sas/) (Présentation de la SAP (signature d’accès partagé) de table, de la SAP de file d’attente et de la mise à jour vers la SAP d’objet blob) et [Utilisation des signatures d’accès partagé (SAP)](https://azure.microsoft.com/documentation/articles/storage-dotnet-shared-access-signature-part-1/) sur MSDN.
+> Pour plus d’informations, consultez [Introducing Table SAS (Shared Access Signature), Queue SAS and update to Blob SAS](https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/12/introducing-table-sas-shared-access-signature-queue-sas-and-update-to-blob-sas/) (Présentation de la SAP (signature d’accès partagé) de table, de la SAP de file d’attente et de la mise à jour vers la SAP d’objet blob) et [Utilisation des signatures d’accès partagé (SAP)](/azure/storage/common/storage-dotnet-shared-access-signature-part-1) sur MSDN.
 
 Le code suivant montre comment créer un jeton de signature d’accès partagé valide pendant cinq minutes. La méthode `GetSharedAccessReferenceForUpload` renvoie un jeton de signatures d’accès partagé qui peut être utilisé pour charger un fichier dans le stockage Blob Azure.
 
@@ -162,9 +160,10 @@ public class ValuesController : ApiController
 ## <a name="next-steps"></a>Étapes suivantes
 
 Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
+
 - Un exemple illustrant ce modèle est disponible sur [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/valet-key).
-- [Modèle d’opérateur de contrôle](gatekeeper.md). Ce modèle peut être utilisé avec le modèle de clé de valet pour protéger les applications et services à l’aide d’une instance d’hôte dédiée qui agit comme un répartiteur entre les clients et l’application ou le service. L’opérateur de contrôle valide et assainit les requêtes, et transmet les requêtes et les données entre le client et l’application. Il peut fournir une couche supplémentaire de sécurité et réduire la surface d’attaque du système.
-- [Modèle d’hébergement de contenu statique](static-content-hosting.md). Décrit comment déployer des ressources statiques dans un service de stockage cloud qui peut fournir ces ressources directement au client afin de réduire le besoin d’instances de calcul coûteuses. Lorsque les ressources ne sont pas destinées à être publiquement disponibles, le modèle de clé de valet peut être utilisé afin de les sécuriser.
+- [Modèle d’opérateur de contrôle](./gatekeeper.md). Ce modèle peut être utilisé avec le modèle de clé de valet pour protéger les applications et services à l’aide d’une instance d’hôte dédiée qui agit comme un répartiteur entre les clients et l’application ou le service. L’opérateur de contrôle valide et assainit les requêtes, et transmet les requêtes et les données entre le client et l’application. Il peut fournir une couche supplémentaire de sécurité et réduire la surface d’attaque du système.
+- [Modèle d’hébergement de contenu statique](./static-content-hosting.md). Décrit comment déployer des ressources statiques dans un service de stockage cloud qui peut fournir ces ressources directement au client afin de réduire le besoin d’instances de calcul coûteuses. Lorsque les ressources ne sont pas destinées à être publiquement disponibles, le modèle de clé de valet peut être utilisé afin de les sécuriser.
 - [Introducing Table SAS (Shared Access Signature), Queue SAS and update to Blob SAS](https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/12/introducing-table-sas-shared-access-signature-queue-sas-and-update-to-blob-sas/) (Présentation de la SAP (signature d’accès partagé) de table, de la SAP de file d’attente et de la mise à jour vers la SAP d’objet blob)
-- [Utilisation des signatures d’accès partagé (SAP)](https://azure.microsoft.com/documentation/articles/storage-dotnet-shared-access-signature-part-1/)
-- [Authentification par signature d’accès partagé avec Service Bus](https://azure.microsoft.com/documentation/articles/service-bus-shared-access-signature-authentication/)
+- [Utilisation des signatures d’accès partagé (SAP)](/azure/storage/common/storage-dotnet-shared-access-signature-part-1)
+- [Authentification par signature d’accès partagé avec Service Bus](/azure/service-bus-messaging/service-bus-sas)

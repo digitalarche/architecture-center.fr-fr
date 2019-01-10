@@ -1,19 +1,17 @@
 ---
-title: Partitionnement
+title: Modèle de partitionnement
+titleSuffix: Cloud Design Patterns
 description: Divisez un magasin de données en un ensemble de partitions horizontales ou de partitions de base de données.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- data-management
-- performance-scalability
-ms.openlocfilehash: bc2b6aeb6966d14327a21849adbbfe635eae59df
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 52c0579e4b08aa18456e0cc5a26742aab39a1a7e
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428854"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010322"
 ---
 # <a name="sharding-pattern"></a>Modèle de partitionnement
 
@@ -57,7 +55,7 @@ L’abstraction de l’emplacement physique des données dans la logique de part
 
 Pour garantir l’extensibilité et des performances optimales, il est important fractionner les données d’une manière appropriée pour les types de requêtes que l’application exécute. Dans de nombreux cas, il est peu probable que le schéma de partitionnement corresponde exactement aux besoins de chaque requête. Par exemple, dans un système mutualisé, une application peut avoir besoin de récupérer des données sur les locataires à l’aide de l’ID de locataire, mais aussi de rechercher ces données en fonction d’autres attributs, tels que le nom ou l’emplacement du locataire. Pour gérer ces situations, mettez en œuvre une stratégie de partitionnement avec une clé de partition qui prend en charge les requêtes les plus courantes.
 
-Si les requêtes récupèrent régulièrement les données à l’aide d’une combinaison de valeurs d’attributs, vous pouvez probablement définir une clé de partition composite en associant des attributs. Vous pouvez également utiliser un modèle tel qu’une [table d’index](index-table.md) pour permettre une recherche rapide des données en fonction des attributs qui ne sont pas couverts par la clé de partition.
+Si les requêtes récupèrent régulièrement les données à l’aide d’une combinaison de valeurs d’attributs, vous pouvez probablement définir une clé de partition composite en associant des attributs. Vous pouvez également utiliser un modèle tel qu’une [table d’index](./index-table.md) pour permettre une recherche rapide des données en fonction des attributs qui ne sont pas couverts par la clé de partition.
 
 ## <a name="sharding-strategies"></a>Stratégies de partitionnement
 
@@ -67,8 +65,7 @@ Trois stratégies sont couramment utilisées lors de la sélection de la clé de
 
    ![Illustration 1 : Partitionnement des données de locataire en fonction des ID de locataire](./_images/sharding-tenant.png)
 
-
-   Le mappage entre la clé de partition et le stockage physique peut reposer sur des partitions physiques où chaque clé de partition est mappée à une partition physique. Une autre technique plus souple de rééquilibrage des partitions est le partitionnement virtuel, où les clés de partition sont mappées au même nombre de partitions virtuelles, qui sont à leur tour mappées à moins de partitions physiques. Dans cette approche, une application localise les données à l’aide d’une clé de partition qui fait référence à une partition virtuelle, et le système mappe de façon transparente les partitions virtuelles aux partitions physiques. Le mappage entre une partition virtuelle et une partition physique peut changer sans nécessiter la modification du code d’application afin d’utiliser un autre ensemble de clés de partition.
+Le mappage entre la clé de partition et le stockage physique peut reposer sur des partitions physiques où chaque clé de partition est mappée à une partition physique. Une autre technique plus souple de rééquilibrage des partitions est le partitionnement virtuel, où les clés de partition sont mappées au même nombre de partitions virtuelles, qui sont à leur tour mappées à moins de partitions physiques. Dans cette approche, une application localise les données à l’aide d’une clé de partition qui fait référence à une partition virtuelle, et le système mappe de façon transparente les partitions virtuelles aux partitions physiques. Le mappage entre une partition virtuelle et une partition physique peut changer sans nécessiter la modification du code d’application afin d’utiliser un autre ensemble de clés de partition.
 
 **Stratégie de plage**. Cette stratégie regroupe les éléments associés dans la même partition et les trie par clé de partition &mdash;les clés de partition étant séquentielles. Elle est utile pour les applications qui récupèrent fréquemment des ensembles d’éléments à l’aide de requêtes de plage (des requêtes qui renvoient un ensemble d’éléments de données pour une clé de partition comprise dans une certaine plage). Par exemple, si une application doit régulièrement rechercher toutes les commandes passées au cours d’un mois spécifique, ces données peuvent être récupérées plus rapidement si toutes les commandes d’un mois sont stockées par date et heure dans la même partition. Si les commandes ont été stockées dans des partitions différentes, elles doivent être extraites individuellement via un grand nombre de requêtes ponctuelles (des requêtes qui renvoient un seul élément de données). L’image suivante illustre le stockage d’ensembles de données séquentiels (plages) dans la partition.
 
@@ -124,7 +121,7 @@ Prenez en compte les points suivants lorsque vous choisissez comment implémente
 
     >  Les valeurs incrémentées automatiquement dans d’autres champs (même si elles ne sont pas des clés de partition) peuvent également entraîner des problèmes. Par exemple, si vous utilisez des champs incrémentés automatiquement pour générer des ID uniques, deux éléments distincts situés dans des partitions différentes risquent d’avoir le même ID.
 
-- Il n’est pas toujours possible de créer une clé de partition qui répond aux besoins de chaque requête possible sur les données. Partitionnez les données pour prendre en charge les requêtes les plus fréquentes et, si nécessaire, créez des tables d’index secondaires pour prendre en charge les requêtes qui récupèrent des données à l’aide de critères basés sur des attributs qui ne font pas partie de la clé de partition. Pour plus d'informations, voir le [modèle de table d’index](index-table.md).
+- Il n’est pas toujours possible de créer une clé de partition qui répond aux besoins de chaque requête possible sur les données. Partitionnez les données pour prendre en charge les requêtes les plus fréquentes et, si nécessaire, créez des tables d’index secondaires pour prendre en charge les requêtes qui récupèrent des données à l’aide de critères basés sur des attributs qui ne font pas partie de la clé de partition. Pour plus d'informations, voir le [modèle de table d’index](./index-table.md).
 
 - Les requêtes qui accèdent à une seule partition sont plus efficaces que celles qui récupèrent des données de plusieurs partitions. Par conséquent, évitez d’implémenter un système de partitionnement où les applications exécutent de nombreuses requêtes qui joignent les données contenues dans des partitions différentes. N’oubliez pas qu’une même partition peut contenir les données de plusieurs types d’entités. Envisagez la dénormalisation de vos données pour conserver les entités associées qui sont fréquemment interrogées ensemble (par exemple, les détails des clients et des commandes qu’ils ont passées) dans la même partition pour réduire le nombre de lectures effectuées par une application.
 
@@ -150,7 +147,8 @@ Prenez en compte les points suivants lorsque vous choisissez comment implémente
 
 Utilisez ce modèle quand un magasin de données est susceptible d’avoir besoin de plus de ressources disponibles pour un nœud de stockage unique, ou pour améliorer les performances en réduisant les conflits dans un magasin de données.
 
->  Le principal objectif du partitionnement est d’améliorer les performances et l’extensibilité d’un système, mais il peut au passage améliorer la disponibilité selon la répartition des données dans les partitions. Un échec dans une partition n’empêche pas nécessairement une application d’accéder aux données contenues dans les autres partitions. Un opérateur peut exécuter une maintenance ou une récupération sur une ou plusieurs partitions sans rendre inaccessible la totalité des données d’une application. Pour plus d’informations, consultez les [recommandations en matière de partitionnement de données](https://msdn.microsoft.com/library/dn589795.aspx).
+> [!NOTE]
+Le principal objectif du partitionnement est d’améliorer les performances et l’extensibilité d’un système, mais il peut au passage améliorer la disponibilité selon la répartition des données dans les partitions. Un échec dans une partition n’empêche pas nécessairement une application d’accéder aux données contenues dans les autres partitions. Un opérateur peut exécuter une maintenance ou une récupération sur une ou plusieurs partitions sans rendre inaccessible la totalité des données d’une application. Pour plus d’informations, consultez les [recommandations en matière de partitionnement de données](https://msdn.microsoft.com/library/dn589795.aspx).
 
 ## <a name="example"></a>Exemples
 
@@ -215,7 +213,8 @@ Trace.TraceInformation("Fanout query complete - Record Count: {0}",
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
 Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
+
 - [Data Consistency Primer](https://msdn.microsoft.com/library/dn589800.aspx) (Manuel d’introduction à la cohérence des données). Il peut être nécessaire de maintenir la cohérence des données réparties dans les différentes partitions. Résume les problèmes se rapportant au maintien de la cohérence des données distribuées, et décrit les avantages et les compromis des différents modèles de cohérence.
 - [Conseils sur le partitionnement des données](https://msdn.microsoft.com/library/dn589795.aspx). Le partitionnement d’un magasin de données peut entraîner d’autres problèmes. Décrit ces problèmes liés au partitionnement des magasins de données dans le cloud pour améliorer l’extensibilité, réduire les conflits et optimiser les performances.
-- [Modèle de table d’index](index-table.md). Parfois, il n’est pas possible de prendre entièrement en charge les requêtes uniquement par le biais de la conception de la clé de partition. Permet à une application de récupérer rapidement des données à partir d’un vaste magasin de données en spécifiant une clé autre que la clé de partition.
-- [Modèle de vue matérialisée](materialized-view.md). Pour maintenir les performances de certaines opérations de requête, il est utile de créer des vues matérialisées qui agrègent et synthétisent les données, surtout si ces données reposent sur les informations distribuées dans plusieurs partitions. Décrit comment générer et remplir ces vues.
+- [Modèle de table d’index](./index-table.md). Parfois, il n’est pas possible de prendre entièrement en charge les requêtes uniquement par le biais de la conception de la clé de partition. Permet à une application de récupérer rapidement des données à partir d’un vaste magasin de données en spécifiant une clé autre que la clé de partition.
+- [Modèle de vue matérialisée](./materialized-view.md). Pour maintenir les performances de certaines opérations de requête, il est utile de créer des vues matérialisées qui agrègent et synthétisent les données, surtout si ces données reposent sur les informations distribuées dans plusieurs partitions. Décrit comment générer et remplir ces vues.

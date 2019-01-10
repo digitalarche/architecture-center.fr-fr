@@ -1,18 +1,17 @@
 ---
-title: Consommateurs concurrents
+title: Modèle des consommateurs concurrents
+titleSuffix: Cloud Design Patterns
 description: Ce modèle vise à permettre à plusieurs consommateurs concurrents de traiter les messages reçus sur un même canal de messagerie.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- messaging
-ms.openlocfilehash: aea172dcdb33c0d8513fb69715f1549b4a20f5e6
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 77459ff42422969acdc83e66535197547d555de1
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428367"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112105"
 ---
 # <a name="competing-consumers-pattern"></a>Modèle des consommateurs concurrents
 
@@ -34,7 +33,7 @@ Utilisez une file d’attente de messages pour implémenter le canal de communic
 
 Cette solution offre les avantages suivants :
 
-- Elle fournit un système à charge nivelée qui peut gérer les écarts importants dans le volume de demandes envoyées par les instances de l’application. La file d’attente joue le rôle de tampon entre les instances de l’application et les instances du service consommateur. L’impact sur la disponibilité et la réactivité de l’application et des instances du service peut ainsi s’en trouver limité, comme décrit dans [Modèle de nivellement de charge basé sur une file d’attente](queue-based-load-leveling.md). La gestion d’un message qui demande un traitement de longue durée n’empêche pas la gestion simultanée d’autres messages par d’autres instances du service consommateur.
+- Elle fournit un système à charge nivelée qui peut gérer les écarts importants dans le volume de demandes envoyées par les instances de l’application. La file d’attente joue le rôle de tampon entre les instances de l’application et les instances du service consommateur. L’impact sur la disponibilité et la réactivité de l’application et des instances du service peut ainsi s’en trouver limité, comme décrit dans [Modèle de nivellement de charge basé sur une file d’attente](./queue-based-load-leveling.md). La gestion d’un message qui demande un traitement de longue durée n’empêche pas la gestion simultanée d’autres messages par d’autres instances du service consommateur.
 
 - Elle améliore la fiabilité. Si un producteur communique directement avec un consommateur au lieu d’utiliser ce modèle, mais qu’il ne surveille pas le consommateur, il est fort probable que les messages seront perdus ou ne pourront pas être traités en cas de défaillance du consommateur. Dans ce modèle, les messages ne sont pas envoyés à une instance de service spécifique. Une instance de service défaillante ne bloquera pas un producteur, et les messages pourront être traités par n’importe quelle instance de service active.
 
@@ -85,8 +84,9 @@ Ce modèle peut ne pas avoir d’utilité dans les cas suivants :
 
 Azure propose des files d’attente de stockage et des files d’attente Service Bus qui peuvent servir de mécanisme pour l’implémenter ce modèle. La logique d’application peut poster des messages dans une file d’attente, et les consommateurs implémentés comme tâches dans un ou plusieurs rôles peuvent récupérer les messages de cette file d’attente et les traiter. Pour des besoins de résilience, une file d’attente Service Bus permet à un consommateur d’utiliser le mode `PeekLock` quand il s’agit de récupérer un message dans la file d’attente. Ce mode ne supprime pas réellement le message ; il ne fait que le masquer aux autres consommateurs. Le consommateur d’origine peut supprimer le message à l’issue de son traitement. En cas de défaillance du consommateur, le mode PeekLock expire et le message redevient visible, ce qui permet à un autre consommateur de le récupérer.
 
-> Pour obtenir des informations détaillées sur l’utilisation des files d’attente Azure Service Bus, consultez [Files d’attente, rubriques et abonnements Service Bus](https://msdn.microsoft.com/library/windowsazure/hh367516.aspx).
-Pour plus d’informations sur l’utilisation des files d’attente de stockage Azure, consultez [Prise en main du stockage de files d’attente Azure à l’aide de .NET](https://azure.microsoft.com/documentation/articles/storage-dotnet-how-to-use-queues/).
+Pour obtenir des informations détaillées sur l’utilisation des files d’attente Azure Service Bus, consultez [Files d’attente, rubriques et abonnements Service Bus](https://msdn.microsoft.com/library/windowsazure/hh367516.aspx).
+
+Pour plus d’informations sur l’utilisation des files d’attente de stockage Azure, consultez [Prise en main du stockage de files d’attente Azure à l’aide de .NET](/azure/storage/queues/storage-dotnet-how-to-use-queues).
 
 Le code suivant de la classe `QueueManager` de la solution CompetingConsumers disponible sur [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/competing-consumers) montre comment créer une file d’attente en utilisant une instance `QueueClient` dans le gestionnaire d’événements `Start` d’un rôle web ou de travail.
 
@@ -174,7 +174,7 @@ private void OptionsOnExceptionReceived(object sender,
 }
 ```
 
-Notez que les fonctionnalités de mise à l’échelle automatique, telles que celles disponibles dans Azure, peuvent être utilisées pour démarrer et arrêter des instances de rôle à mesure que la longueur de la file d’attente évolue. Pour plus d’informations, consultez [Recommandations en matière de mise à l’échelle automatique](https://msdn.microsoft.com/library/dn589774.aspx). De même, il n’est pas nécessaire de conserver une correspondance un-à-un entre les instances de rôle et les processus de travail (une même instance de rôle peut implémenter plusieurs processus de travail). Pour plus d’informations, consultez [Modèle de consolidation des ressources de calcul](compute-resource-consolidation.md).
+Notez que les fonctionnalités de mise à l’échelle automatique, telles que celles disponibles dans Azure, peuvent être utilisées pour démarrer et arrêter des instances de rôle à mesure que la longueur de la file d’attente évolue. Pour plus d’informations, consultez [Recommandations en matière de mise à l’échelle automatique](https://msdn.microsoft.com/library/dn589774.aspx). De même, il n’est pas nécessaire de conserver une correspondance un-à-un entre les instances de rôle et les processus de travail (une même instance de rôle peut implémenter plusieurs processus de travail). Pour plus d’informations, consultez [Modèle de consolidation des ressources de calcul](./compute-resource-consolidation.md).
 
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
@@ -184,8 +184,8 @@ Les modèles et les conseils suivants peuvent présenter un intérêt quand il s
 
 - [Mise à l’échelle automatique](https://msdn.microsoft.com/library/dn589774.aspx). il est possible de démarrer et d’arrêter des instances d’un service consommateur, car la longueur de la file d’attente dans laquelle les applications postent les messages est variable. La mise à l’échelle automatique peut contribuer à maintenir le débit pendant les périodes d’intense traitement.
 
-- [Modèle de consolidation des ressources de calcul](compute-resource-consolidation.md) : il est possible de consolider plusieurs instances d’un service consommateur dans un processus unique pour réduire les coûts et les surcharges de gestion. Le modèle de consolidation des ressources de calcul décrit les avantages et les inconvénients de cette approche.
+- [Modèle de consolidation des ressources de calcul](./compute-resource-consolidation.md). il est possible de consolider plusieurs instances d’un service consommateur dans un processus unique pour réduire les coûts et les surcharges de gestion. Le modèle de consolidation des ressources de calcul décrit les avantages et les inconvénients de cette approche.
 
-- [Modèle de nivellement de la charge basé sur une file d’attente](queue-based-load-leveling.md) : l’introduction d’une file d’attente de messages peut doter le système de capacités de résilience, permettant ainsi aux instances du service de gérer des volumes très variables de demandes en provenance d’instances d’application. La file d’attente de messages fait office de tampon, ce qui a pour effet de niveler la charge. Le modèle de nivellement de la charge basé sur une file d’attente décrit plus en détail ce scénario.
+- [Queue-based Load Leveling pattern](./queue-based-load-leveling.md) (Modèle de nivellement de charge basé sur une file d’attente). l’introduction d’une file d’attente de messages peut doter le système de capacités de résilience, permettant ainsi aux instances du service de gérer des volumes très variables de demandes en provenance d’instances d’application. La file d’attente de messages fait office de tampon, ce qui a pour effet de niveler la charge. Le modèle de nivellement de la charge basé sur une file d’attente décrit plus en détail ce scénario.
 
 - Ce modèle s’accompagne d’un [exemple d’application](https://github.com/mspnp/cloud-design-patterns/tree/master/competing-consumers).

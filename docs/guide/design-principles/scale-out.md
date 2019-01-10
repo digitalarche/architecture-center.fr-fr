@@ -1,14 +1,16 @@
 ---
 title: Penser la conception des applications pour augmenter la taille des instances
+titleSuffix: Azure Application Architecture Guide
 description: Les applications cloud doivent être conçues pour une mise à l’échelle horizontale.
 author: MikeWasson
 ms.date: 08/30/2018
-ms.openlocfilehash: 9b57f4e6a17eece4f5283436e104c286602bb54f
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.custom: seojan19
+ms.openlocfilehash: 9e8a36146c711fda2b03e00dfeb3554caf1fd5f0
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43325652"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113057"
 ---
 # <a name="design-to-scale-out"></a>Penser la conception des applications pour augmenter la taille des instances
 
@@ -18,11 +20,11 @@ Le principal avantage du cloud est la mise à l’échelle élastique &mdash; la
 
 ## <a name="recommendations"></a>Recommandations
 
-**Évitez l’adhérence des instances**. L’adhérence, ou *affinité de session*, intervient lorsque les requêtes émanant du même client sont toujours routées vers le même serveur. L’adhérence limite les possibilités de montée en charge de l’application. Par exemple, le trafic provenant d’un utilisateur générant beaucoup de volume ne sera pas distribué entre les différentes instances. L’adhérence peut être due au stockage de l’état de session en mémoire et à l’utilisation de clés spécifiques à l’ordinateur pour le chiffrement. Assurez-vous que n’importe quelle instance peut gérer n’importe quelle requête. 
+**Évitez l’adhérence des instances**. L’adhérence, ou *affinité de session*, intervient lorsque les requêtes émanant du même client sont toujours routées vers le même serveur. L’adhérence limite les possibilités de montée en charge de l’application. Par exemple, le trafic provenant d’un utilisateur générant beaucoup de volume ne sera pas distribué entre les différentes instances. L’adhérence peut être due au stockage de l’état de session en mémoire et à l’utilisation de clés spécifiques à l’ordinateur pour le chiffrement. Assurez-vous que n’importe quelle instance peut gérer n’importe quelle requête.
 
-**Identifiez les goulots d’étranglement**. La montée en puissance ne règle pas tous les problèmes de performance. Par exemple, si votre base de données principale est le goulot d’étranglement, ajouter des serveurs web ne servira à rien. Identifiez et éliminez les goulots d’étranglement au niveau du système avant de multiplier les instances. Les parties avec état du système sont les causes les plus courantes des goulots d’étranglement. 
+**Identifiez les goulots d’étranglement**. La montée en puissance ne règle pas tous les problèmes de performance. Par exemple, si votre base de données principale est le goulot d’étranglement, ajouter des serveurs web ne servira à rien. Identifiez et éliminez les goulots d’étranglement au niveau du système avant de multiplier les instances. Les parties avec état du système sont les causes les plus courantes des goulots d’étranglement.
 
-**Décomposez les charges de travail par exigences d’évolutivité.**  Les applications se composent souvent de plusieurs charges de travail, avec des exigences différentes en matière d’évolutivité. Par exemple, une application peut avoir un site web public et un site d’administration distinct. Le site public peut rencontrer des pics de trafic soudains, alors que le site d’administration a une charge moins élevée et plus prévisible. 
+**Décomposez les charges de travail par exigences d’évolutivité.**  Les applications se composent souvent de plusieurs charges de travail, avec des exigences différentes en matière d’évolutivité. Par exemple, une application peut avoir un site web public et un site d’administration distinct. Le site public peut rencontrer des pics de trafic soudains, alors que le site d’administration a une charge moins élevée et plus prévisible.
 
 **Déchargez les tâches gourmandes en ressources.** Le cas échéant, les tâches qui nécessitent beaucoup de ressources de processeur ou d’E/S doivent être déplacées vers des [tâches en arrière-plan][background-jobs] afin de réduire la charge au niveau du serveur frontal qui traite les requêtes d’utilisateur.
 
@@ -32,11 +34,10 @@ Le principal avantage du cloud est la mise à l’échelle élastique &mdash; la
 
 **Pensez la conception des applications pour réduire la taille des instances**.  N’oubliez pas que dans le cadre d’une évolutivité élastique, l’application connaîtra des périodes de mise à l’échelle, lorsque des instances sont supprimées. L’application doit gérer de manière appropriée les instances en cours de suppression. Voici quelques méthodes de gestion de la mise à l’échelle :
 
-- Détectez les événements d’arrêt (le cas échéant) et arrêtez correctement les instances. 
-- Les clients/consommateurs d’un service doivent prendre en charge les nouvelles tentatives et la gestion des erreurs temporaires. 
-- Pour les tâches longues, envisagez de fragmenter le travail à l’aide de points de contrôle ou du modèle [Canaux et filtres][pipes-filters-pattern]. 
-- Placez les éléments de travail dans une file d’attente afin qu’une autre instance puisse s’en charger dans le cas où une instance est supprimée au cours du processus de traitement. 
-
+- Détectez les événements d’arrêt (le cas échéant) et arrêtez correctement les instances.
+- Les clients/consommateurs d’un service doivent prendre en charge les nouvelles tentatives et la gestion des erreurs temporaires.
+- Pour les tâches longues, envisagez de fragmenter le travail à l’aide de points de contrôle ou du modèle [Canaux et filtres][pipes-filters-pattern].
+- Placez les éléments de travail dans une file d’attente afin qu’une autre instance puisse s’en charger dans le cas où une instance est supprimée au cours du processus de traitement.
 
 <!-- links -->
 

@@ -1,20 +1,17 @@
 ---
-title: Surveillance de point de terminaison d’intégrité
+title: Modèle Surveillance de point de terminaison
+titleSuffix: Cloud Design Patterns
 description: Implémentez des contrôles fonctionnels dans une application à laquelle des outils externes peuvent accéder par le biais de points de terminaison exposés à intervalles réguliers.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- availability
-- management-monitoring
-- resiliency
-ms.openlocfilehash: 22a4e47c4dd8dd3dd11a4238e859acbea49f9d1b
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 85a1355ff47e6fce80d9b2ed114024651eb994db
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428973"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114247"
 ---
 # <a name="health-endpoint-monitoring-pattern"></a>Modèle Surveillance de point de terminaison
 
@@ -42,6 +39,7 @@ Le code de réponse indique l’état de l’application et éventuellement les 
 ![Vue d’ensemble du modèle](./_images/health-endpoint-monitoring-pattern.png)
 
 Le code de surveillance de l’intégrité peut effectuer d’autres contrôles dans l’application :
+
 - Vérification de la disponibilité ou du temps de réponse du stockage cloud ou d’une base de données.
 - Vérification d’autres ressources ou services situés dans l’application, ou situés ailleurs mais utilisés par l’application.
 
@@ -67,7 +65,7 @@ Prenez en compte les points suivants lorsque vous choisissez comment implémente
 
 Comment valider la réponse. Par exemple, un seul code d’état 200 (OK) suffit-il pour vérifier que l’application fonctionne correctement ? Même si cela fournit la mesure la plus simple de la disponibilité des applications, et s’il s’agit de l’implémentation minimale de ce modèle, cela ne fournit que peu d’informations sur les opérations, les tendances et les éventuels problèmes à venir dans l’application.
 
-   >  Vérifiez que l’application retourne correctement un code d’état 200 (OK) uniquement quand la ressource cible est détectée et traitée. Dans certains scénarios, par exemple quand vous utilisez une page maître pour héberger la page web cible, le serveur retourne un code d’état 200 (OK) au lieu d’un code 404 (Introuvable), même quand la page de contenu cible est introuvable.
+   > Vérifiez que l’application retourne correctement un code d’état 200 (OK) uniquement quand la ressource cible est détectée et traitée. Dans certains scénarios, par exemple quand vous utilisez une page maître pour héberger la page web cible, le serveur retourne un code d’état 200 (OK) au lieu d’un code 404 (Introuvable), même quand la page de contenu cible est introuvable.
 
 Le nombre de points de terminaison à exposer pour une application. Une approche consiste à exposer au moins un point de terminaison pour les services de base utilisés par l’application, et un autre pour les services de priorité inférieure. Ceci permet d’affecter différents niveaux d’importance à chaque résultat de surveillance. Pour bénéficier d’une granularité de surveillance supplémentaire, vous pouvez exposer plusieurs points de terminaison, par exemple un pour chaque service de base. Ainsi, un contrôle de vérification de l’intégrité peut vérifier la base de données, le stockage et un service de géocodage externe utilisé par une application, chacun nécessitant un niveau de disponibilité et un temps de réponse différent. L’application peut toujours être saine si le service de géocodage ou une autre tâche en arrière-plan n’est pas disponible pendant quelques minutes.
 
@@ -98,6 +96,7 @@ Comment configurer la sécurité des points de terminaison de surveillance pour 
 ## <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
 
 Ce modèle est utile dans les situations suivantes :
+
 - Surveillance d’applications web et de sites web pour vérifier la disponibilité.
 - Surveillance d’applications web et de sites web pour vérifier le bon fonctionnement.
 - Surveillance de services de couche intermédiaire ou de services partagés pour détecter et isoler une défaillance susceptible de perturber d’autres applications.
@@ -134,6 +133,7 @@ public ActionResult CoreServices()
   return new HttpStatusCodeResult((int)HttpStatusCode.OK);
 }
 ```
+
 La méthode `ObscurePath` montre comment lire un chemin à partir de la configuration d’application et l’utiliser comme point de terminaison pour les tests. Cet exemple, en C#, montre également comment accepter un ID comme paramètre et l’utiliser pour vérifier si les requêtes sont valides.
 
 ```csharp
@@ -178,6 +178,7 @@ public ActionResult TestResponseFromConfig()
   return new HttpStatusCodeResult(returnStatusCode);
 }
 ```
+
 ## <a name="monitoring-endpoints-in-azure-hosted-applications"></a>Surveillance des points de terminaison dans les applications hébergées Azure
 
 Voici quelques options pour la surveillance des points de terminaison dans les applications Azure :
@@ -192,7 +193,7 @@ Voici quelques options pour la surveillance des points de terminaison dans les a
 
 Les conditions que vous pouvez surveiller varient en fonction du mécanisme d’hébergement que vous choisissez pour votre application (par exemple, sites web, services cloud, machines virtuelles ou services mobiles), mais tous ces mécanismes incluent la possibilité de créer une règle d’alerte qui utilise un point de terminaison web que vous spécifiez dans les paramètres de votre service. Ce point de terminaison doit répondre en temps opportun pour que le système d’alerte puisse détecter si l’application fonctionne correctement.
 
->  En savoir plus sur la [création de notifications d’alerte][portal-alerts].
+> En savoir plus sur la [création de notifications d’alerte][portal-alerts].
 
 Si vous hébergez votre application dans des machines virtuelles ou des rôles de travail et web de Services cloud Azure, vous pouvez tirer parti de l’un des services intégrés à Azure appelé Traffic Manager. Traffic Manager est un service de routage et d’équilibrage de charge qui peut distribuer les demandes à des instances spécifiques de votre application hébergée par les services cloud en fonction d’une gamme de règles et de paramètres.
 
@@ -200,13 +201,14 @@ En plus de router les demandes, Traffic Manager exécute une requête ping sur u
 
 Toutefois, Traffic Manager n’attend que dix secondes pour recevoir une réponse à partir de l’URL de surveillance. Ainsi, vous devez vérifier que votre code de vérification de l’intégrité s’exécute pendant ce laps de temps, en prenant en compte la latence du réseau pour l’aller-retour entre Traffic Manager et votre application.
 
->  En savoir plus sur l’utilisation de [Traffic Manager pour surveiller vos applications](https://azure.microsoft.com/documentation/services/traffic-manager/). Traffic Manager est également abordé dans [Multiple Datacenter Deployment Guidance (Recommandations pour le déploiement dans plusieurs centres de données)](https://msdn.microsoft.com/library/dn589779.aspx).
+> En savoir plus sur l’utilisation de [Traffic Manager pour surveiller vos applications](/azure/traffic-manager/). Traffic Manager est également abordé dans [Multiple Datacenter Deployment Guidance (Recommandations pour le déploiement dans plusieurs centres de données)](https://msdn.microsoft.com/library/dn589779.aspx).
 
 ## <a name="related-guidance"></a>Aide connexe
 
 Les conseils suivants peuvent être utiles lors de l’implémentation de ce modèle :
+
 - [Instrumentation and Telemetry Guidance (Recommandations relatives à l’instrumentation et la télémétrie)](https://msdn.microsoft.com/library/dn589775.aspx). La vérification de l’intégrité des services et des composants s’effectue généralement par l’interrogation, mais il est également utile de disposer d’informations pour surveiller les performances des applications et détecter les événements qui se produisent au moment de l’exécution. Ces données peuvent être retransmises aux outils de surveillance en guise d’informations supplémentaires pour la surveillance de l’intégrité. L’article Instrumentation and Telemetry Guidance explore la collecte des informations de diagnostics à distance par l’instrumentation dans les applications.
 - [Recevoir les notifications d’alerte][portal-alerts].
 - Ce modèle comprend un [exemple d’application](https://github.com/mspnp/cloud-design-patterns/tree/master/health-endpoint-monitoring) téléchargeable.
 
-[portal-alerts]: https://azure.microsoft.com/documentation/articles/insights-receive-alert-notifications/
+[portal-alerts]: /azure/azure-monitor/platform/alerts-metric

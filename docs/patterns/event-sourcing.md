@@ -1,19 +1,17 @@
 ---
-title: Approvisionnement en événements
+title: Modèle d'approvisionnement en événements
+titleSuffix: Cloud Design Patterns
 description: Utilisez un magasin d’ajout uniquement pour enregistrer la série complète d’événements qui décrivent les actions exécutées sur les données dans un domaine.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- data-management
-- performance-scalability
-ms.openlocfilehash: 1cb63b61f5eb97726e266f797dfe13011907c95f
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 56db321e33ecef17704eda4eda971ff3c7e44133
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429330"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011631"
 ---
 # <a name="event-sourcing-pattern"></a>Modèle d'approvisionnement en événements
 
@@ -42,14 +40,13 @@ Le modèle d’approvisionnement en événements définit une approche de gestio
 
 Les événements sont conservés dans un magasin d’événements qui joue le rôle de système d’enregistrement (la source de données faisant autorité) sur l’état actuel des données. Le magasin d’événements publie généralement ces événements afin que les consommateurs puissent être avertis et les traiter si nécessaire. Les consommateurs pourraient, par exemple, initier des tâches qui appliquent les opérations des événements à d’autres systèmes, ou effectuer toute autre action associée nécessaire pour terminer l’opération. Notez que le code applicatif qui génère les événements est découplé des systèmes qui s’abonnent aux événements.
 
-Les événements publiés par le magasin d’événements servent généralement à conserver les vues matérialisées des entités car les actions dans l’application les modifient, ainsi que pour l’intégration avec les systèmes externes. Par exemple, un système peut conserver une vue matérialisée de toutes les commandes client utilisée pour remplir des parties de l’interface utilisateur. Lorsque l’application ajoute de nouvelles commandes, ajoute ou supprime des articles de la commande et ajoute des informations d’expédition, les événements qui décrivent ces modifications peuvent être gérés et utilisés pour mettre à jour la [vue matérialisée](materialized-view.md).
+Les événements publiés par le magasin d’événements servent généralement à conserver les vues matérialisées des entités car les actions dans l’application les modifient, ainsi que pour l’intégration avec les systèmes externes. Par exemple, un système peut conserver une vue matérialisée de toutes les commandes client utilisée pour remplir des parties de l’interface utilisateur. Lorsque l’application ajoute de nouvelles commandes, ajoute ou supprime des articles de la commande et ajoute des informations d’expédition, les événements qui décrivent ces modifications peuvent être gérés et utilisés pour mettre à jour la [vue matérialisée](./materialized-view.md).
 
 En outre, les applications peuvent, à tout moment, lire l’historique des événements et l’utiliser pour matérialiser l’état actuel d’une entité en relisant et exploitant tous les événements liés à cette entité. Cela peut être effectué à la demande pour matérialiser un objet de domaine lors du traitement d’une requête, ou par le biais d’une tâche planifiée afin que l’état de l’entité puisse être conservé sous la forme d’une vue matérialisée pour prendre en charge la couche de présentation.
 
 La figure montre une vue d’ensemble du modèle, y compris certaines des options d’utilisation du flux d’événements telles que la création d’une vue matérialisée, l’intégration des événements avec des systèmes et applications externes et la relecture des événements pour créer des projections de l’état actuel d’entités spécifiques.
 
 ![Vue d’ensemble et exemple du modèle d'approvisionnement en événements](./_images/event-sourcing-overview.png)
-
 
 Le modèle d'approvisionnement en événements offre les avantages suivants :
 
@@ -128,7 +125,6 @@ Le diagramme suivant illustre la façon dont le sous-système de réservation de
 
 ![Utilisation de l’approvisionnement en événements pour capturer des informations sur les réservations de places dans un système de gestion de conférences](./_images/event-sourcing-bounded-context.png)
 
-
 Voici la séquence d’actions permettant de réserver deux places :
 
 1. L’interface utilisateur émet une commande pour réserver des places pour deux participants. La commande est traitée par un gestionnaire de commandes distinct. Logique qui est dissociée de l’interface utilisateur et est responsable du traitement des requêtes publiées sous forme de commandes.
@@ -153,11 +149,11 @@ En plus d’accroître l’extensibilité, l’utilisation d’un magasin d’é
 
 Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
 
-- [Modèle de séparation des responsabilités en matière de commande et de requête (CQRS)](cqrs.md). Le magasin d’écriture qui fournit la source permanente d’informations relatives à une implémentation CQRS est souvent basé sur une implémentation du modèle d’approvisionnement en événements. Décrit comment séparer les opérations qui lisent les données dans une application des opérations qui mettent à jour les données en utilisant des interfaces distinctes.
+- [Modèle de séparation des responsabilités en matière de commande et de requête (CQRS)](./cqrs.md). Le magasin d’écriture qui fournit la source permanente d’informations relatives à une implémentation CQRS est souvent basé sur une implémentation du modèle d’approvisionnement en événements. Décrit comment séparer les opérations qui lisent les données dans une application des opérations qui mettent à jour les données en utilisant des interfaces distinctes.
 
-- [Modèle de vue matérialisée](materialized-view.md). Le magasin de données utilisé dans un système basé sur l’approvisionnement en événements n’est généralement idéal pour assurer une interrogation efficace. L’approche courante consiste à générer des vues préremplies des données à intervalles réguliers, ou lorsque les données changent. Montre comment procéder.
+- [Modèle de vue matérialisée](./materialized-view.md). Le magasin de données utilisé dans un système basé sur l’approvisionnement en événements n’est généralement idéal pour assurer une interrogation efficace. L’approche courante consiste à générer des vues préremplies des données à intervalles réguliers, ou lorsque les données changent. Montre comment procéder.
 
-- [Modèle de transaction de compensation](compensating-transaction.md). Les données existantes dans un magasin d’approvisionnement en événements ne sont pas mises à jour. À la place, de nouvelles entrées sont ajoutées pour assurer la transition de l’état des entités vers les nouvelles valeurs. Pour annuler une modification, on utilise les entrées de compensation car il n’est pas possible de simplement annuler la modification précédente. Décrit comment annuler le travail qui a été effectué par une opération précédente.
+- [Modèle de transaction de compensation](./compensating-transaction.md). Les données existantes dans un magasin d’approvisionnement en événements ne sont pas mises à jour. À la place, de nouvelles entrées sont ajoutées pour assurer la transition de l’état des entités vers les nouvelles valeurs. Pour annuler une modification, on utilise les entrées de compensation car il n’est pas possible de simplement annuler la modification précédente. Décrit comment annuler le travail qui a été effectué par une opération précédente.
 
 - [Data Consistency Primer](https://msdn.microsoft.com/library/dn589800.aspx) (Manuel d’introduction à la cohérence des données). En cas d’utilisation de l’approvisionnement en événements avec un magasin de lecture distinct ou des vues matérialisées, les données de lecture ne sont pas immédiatement cohérentes, mais uniquement cohérentes. Résume les problèmes se rapportant à la conservation de la cohérence des données distribuées.
 

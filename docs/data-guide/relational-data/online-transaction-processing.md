@@ -3,12 +3,12 @@ title: Traitement transactionnel en ligne (OLTP)
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: be24bc173359539785385de4a188e7536f6d2ffe
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 331da288384bf14581eeda35116085d759807245
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902754"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113958"
 ---
 # <a name="online-transaction-processing-oltp"></a>Traitement transactionnel en ligne (OLTP)
 
@@ -16,11 +16,11 @@ La gestion des données transactionnelles à l’aide de systèmes informatiques
 
 ## <a name="transactional-data"></a>Données transactionnelles
 
-Les données transactionnelles sont des informations qui assurent le suivi des interactions relatives aux activités d’une organisation. Ces interactions sont généralement des transactions commerciales, tels que les paiements reçus des clients, les paiements effectués aux fournisseurs, le déplacement de produits dans le cadre de l’inventaire, les commandes prises ou les services fournis. Les événements transactionnels, qui représentent les transactions proprement dites, contiennent une dimension de temps, des valeurs numériques et des références à d’autres données. 
+Les données transactionnelles sont des informations qui assurent le suivi des interactions relatives aux activités d’une organisation. Ces interactions sont généralement des transactions commerciales, tels que les paiements reçus des clients, les paiements effectués aux fournisseurs, le déplacement de produits dans le cadre de l’inventaire, les commandes prises ou les services fournis. Les événements transactionnels, qui représentent les transactions proprement dites, contiennent une dimension de temps, des valeurs numériques et des références à d’autres données.
 
 Les transactions doivent généralement être *atomiques* et *cohérentes*. Atomicité signifie qu’une transaction complète réussit ou échoue toujours en tant que seule unité de travail et n’est jamais laissée dans un état à moitié terminé. Si une transaction ne peut pas être effectuée, le système de base de données doit restaurer toutes les étapes qui ont déjà été effectuées dans le cadre de cette transaction. Dans un système de gestion de base de données relationnelle traditionnel, cette restauration a lieu automatiquement si une transaction ne peut pas être effectuée. Cohérence signifie que les transactions laissent toujours les données dans un état valide. (Il s’agit de descriptions très informelles de l’atomicité et de la cohérence. Il existe des définitions plus formelles de ces propriétés, telles qu’ [ACID](https://en.wikipedia.org/wiki/ACID).)
 
-Les bases de données transactionnelles peuvent prendre en charge une cohérence forte pour les transactions grâce à différentes stratégies de verrouillage, tels que le verrouillage pessimiste, pour garantir que toutes les données sont fortement cohérentes dans le contexte de l’entreprise, pour tous les utilisateurs et les processus. 
+Les bases de données transactionnelles peuvent prendre en charge une cohérence forte pour les transactions grâce à différentes stratégies de verrouillage, tels que le verrouillage pessimiste, pour garantir que toutes les données sont fortement cohérentes dans le contexte de l’entreprise, pour tous les utilisateurs et les processus.
 
 L’architecture de déploiement la plus courante utilisant des données transactionnelles est le niveau de magasin de données dans une architecture à 3 couches. Une architecture à 3 couches se compose généralement d’une couche de présentation, d’une couche de logique métier et d’une couche de magasin de données. L’architecture [multiniveau](/azure/architecture/guide/architecture-styles/n-tier) est une architecture de déploiement associée pouvant avoir plusieurs couches intermédiaires qui gèrent la logique métier.
 
@@ -44,7 +44,7 @@ Les données transactionnelles ont tendance à présenter les caractéristiques 
 | Modèle | Relationnel |
 | Forme des données | Tabulaire |
 | Flexibilité de requête | Très flexible |
-| Scale | Petite (Mo) à grande (quelques To) | 
+| Scale | Petite (Mo) à grande (quelques To) |
 
 ## <a name="when-to-use-this-solution"></a>Quand utiliser cette solution ?
 
@@ -53,6 +53,7 @@ Choisissez OLTP lorsque vous avez besoin de traiter et stocker efficacement les 
 Les systèmes OLTP sont conçus pour traiter et stocker efficacement des transactions, ainsi que les données transactionnelles de requête. L’objectif de traiter et de stocker efficacement des transactions individuelles par un système OLTP est atteint en partie par la normalisation des données &mdash; c’est-à-dire, le fractionnement des données en blocs plus petits qui sont moins redondants. Cela prend en charge l’efficacité en permettant au système OLTP de traiter indépendamment une grande quantité de transactions et en évitant le traitement supplémentaire nécessaire pour maintenir l’intégrité des données en présence de données redondantes.
 
 ## <a name="challenges"></a>Défis
+
 La mise en œuvre et l’utilisation d’un système OLTP peuvent créer quelques défis :
 
 - Les systèmes OLTP ne sont pas toujours appropriés pour gérer des agrégats sur de grandes quantités de données, bien qu’il existe des exceptions, notamment une solution SQL Server correctement planifiée. L’analytique des données qui s’appuient sur des calculs d’agrégation pour des millions de transactions individuelles exige, pour un système OLTP, de très nombreuses ressources. Elles peuvent s’exécuter lentement et entraîner un ralentissement en bloquant les autres transactions dans la base de données.
@@ -80,7 +81,7 @@ Pour restreindre les choix, commencez par répondre aux questions suivantes :
 
 - Votre solution a-t-elle des dépendances spécifiques pour la compatibilité de Microsoft SQL Server, MySQL ou PostgreSQL ? Votre application peut limiter les magasins de données que vous pouvez choisir en fonction des pilotes pris en charge pour la communication avec le magasin de données, ou du magasin de données supposé être utilisé.
 
-- Vos exigences de débit d’écriture sont-elles particulièrement élevées ? Si oui, choisissez une option qui fournit des tables en mémoire. 
+- Vos exigences de débit d’écriture sont-elles particulièrement élevées ? Si oui, choisissez une option qui fournit des tables en mémoire.
 
 - Votre solution est-elle mutualisée ? Dans ce cas, envisagez des options prenant en charge des pools de capacité, où plusieurs instances de base de données proviennent d’un pool élastique de ressources, et non de ressources fixes par base de données. Ceci vous permet de mieux distribuer la capacité sur toutes les instances de base de données et d’améliorer la rentabilité de votre solution.
 
@@ -94,13 +95,17 @@ Pour restreindre les choix, commencez par répondre aux questions suivantes :
 
 Les tableaux suivants résument les principales différences entre les fonctionnalités.
 
-### <a name="general-capabilities"></a>Fonctionnalités générales 
+### <a name="general-capabilities"></a>Fonctionnalités générales
+
+<!-- markdownlint-disable MD033 -->
 
 |                              | Azure SQL Database | SQL Server sur une machine virtuelle Azure | Azure Database pour MySQL | Azure Database pour PostgreSQL |
 |------------------------------|--------------------|----------------------------------------|--------------------------|-------------------------------|
 |      Est un service géré      |        Oui         |                   Non                    |           OUI            |              Oui              |
 |       S’exécute sur la plateforme       |        N/A         |         Windows, Linux, Docker         |           N/A            |              N/A              |
 | Programmabilité <sup>1</sup> |   T-SQL, .NET, R   |         T-SQL, .NET, R, Python         |  T-SQL, .NET, R, Python  |              SQL              |
+
+<!-- markdownlint-enable MD033 -->
 
 [1] sans prise en charge des pilotes client, ce qui permet de se connecter à de nombreux langages de programmation et d’utiliser le magasin de données OLTP.
 
@@ -116,7 +121,7 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 ### <a name="analytic-workload-capabilities"></a>Fonctionnalités de la charge de travail analytique
 
 | | Azure SQL Database | SQL Server sur une machine virtuelle Azure| Azure Database pour MySQL | Azure Database pour PostgreSQL|
-| --- | --- | --- | --- | --- | --- | 
+| --- | --- | --- | --- | --- | --- |
 | Tables temporelles | Oui | Oui | Non  | Non  |
 | Tables en mémoire (optimisées en mémoire) | Oui | Oui | Non  | Non  |
 | Prise en charge de ColumnStore | OUI | Oui | Non  | Non  |
@@ -125,9 +130,9 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 ### <a name="availability-capabilities"></a>Fonctionnalités de disponibilité
 
 | | Azure SQL Database | SQL Server sur une machine virtuelle Azure| Azure Database pour MySQL | Azure Database pour PostgreSQL|
-| --- | --- | --- | --- | --- | --- | 
-| Bases de données secondaires accessibles en lecture | Oui | Oui | Non  | Non  | 
-| Réplication géographique | Oui | Oui | Non  | Non  | 
+| --- | --- | --- | --- | --- | --- |
+| Bases de données secondaires accessibles en lecture | Oui | Oui | Non  | Non  |
+| Réplication géographique | Oui | Oui | Non  | Non  |
 | Basculement automatique vers la base de données secondaire | Oui | Non  | Non  | Non |
 | Limite de restauration dans le temps | Oui | OUI | OUI | Oui |
 
@@ -145,4 +150,3 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 |                                         Authentification multifacteur                                         |        Oui         |                  Oui                   |            Non             |              Non                |
 | Prend en charge [Always Encrypted](/sql/relational-databases/security/encryption/always-encrypted-database-engine) |        Oui         |                  OUI                   |           Oui            |              Non                |
 |                                                 IP privée                                                  |         Non          |                  OUI                   |           Oui            |              Non                |
-

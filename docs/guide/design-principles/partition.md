@@ -1,14 +1,16 @@
 ---
 title: Partitionner pour contourner les limites
-description: Utilisez le partitionnement pour contourner les limites liées à la base de données, au réseau et au calcul
+titleSuffix: Azure Application Architecture Guide
+description: Utilisez le partitionnement pour contourner les limites liées à la base de données, au réseau et au calcul.
 author: MikeWasson
 ms.date: 08/30/2018
-ms.openlocfilehash: 2f6bf797c2c7e5af7c487635c19eaf77eee77dec
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.custom: seojan19
+ms.openlocfilehash: f6c0daa1b1ea469413156fdf3cd6969f98528fb3
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43326294"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110490"
 ---
 # <a name="partition-around-limits"></a>Partitionner pour contourner les limites
 
@@ -22,7 +24,7 @@ Vous disposez de nombreuses méthodes pour partitionner un système, notamment :
 
 - Partitionnez une file d’attente ou un bus de messages afin d’éviter les limites relatives au nombre de requêtes ou de connexions simultanées.
 
-- Partitionnez une application web App Service pour contourner les limites du nombre d’instances par plan App Service. 
+- Partitionnez une application web App Service pour contourner les limites du nombre d’instances par plan App Service.
 
 Une base de données peut être partitionnée *horizontalement*, *verticalement* ou *fonctionnellement*.
 
@@ -40,14 +42,12 @@ Pour plus d’informations, consultez l’article [Partitionnement des données]
 
 **Concevez la clé de partition pour éviter les zones réactives**. Si vous partitionnez une base de données, mais qu’une seule partition reçoit la majorité des requêtes, vous n’avez pas résolu votre problème. Dans l’idéal, la charge est répartie uniformément entre toutes les partitions. Par exemple, hachez les données par ID client plutôt qu’en fonction de la première lettre du nom du client, car certaines lettres sont plus fréquentes. Le même principe s’applique lors du partitionnement d’une file d’attente de messages. Sélectionnez une clé de partition entraînant une répartition uniforme des messages dans l’ensemble des files d’attente. Pour plus d’informations, consultez l’article [Partitionnement][sharding].
 
-**Partitionnez pour contourner les limites de service et d’abonnement Azure**. Les composants et les services ne sont pas les seuls à présenter des limites ; c’est également le cas des abonnements et des groupes de ressources. Dans le cas des applications très volumineuses, vous pouvez avoir besoin de créer des partitions pour contourner ces limites.  
+**Partitionnez pour contourner les limites de service et d’abonnement Azure**. Les composants et les services ne sont pas les seuls à présenter des limites ; c’est également le cas des abonnements et des groupes de ressources. Dans le cas des applications très volumineuses, vous pouvez avoir besoin de créer des partitions pour contourner ces limites.
 
-**Partitionnez à différents niveaux**. Considérez l’exemple d’un serveur de base de données déployé sur une machine virtuelle. Cette machine virtuelle est équipée d’un disque dur virtuel qui est sauvegardé par le service Stockage Azure. Le compte de stockage appartient à un abonnement Azure. Notez que chaque niveau de la hiérarchie comporte des limites. Le serveur de base de données peut présenter une limite de pool de connexions. Les machines virtuelles comportent des limites d’UC et de réseau. Le stockage présente des limites d’IOPS. L’abonnement fait l’objet de limites concernant le nombre de cœurs de machine virtuelle. Il est généralement plus facile de créer des partitions à un niveau inférieur de la hiérarchie. Seules les applications volumineuses nécessitent un partitionnement au niveau abonnement. 
+**Partitionnez à différents niveaux**. Considérez l’exemple d’un serveur de base de données déployé sur une machine virtuelle. Cette machine virtuelle est équipée d’un disque dur virtuel qui est sauvegardé par le service Stockage Azure. Le compte de stockage appartient à un abonnement Azure. Notez que chaque niveau de la hiérarchie comporte des limites. Le serveur de base de données peut présenter une limite de pool de connexions. Les machines virtuelles comportent des limites d’UC et de réseau. Le stockage présente des limites d’IOPS. L’abonnement fait l’objet de limites concernant le nombre de cœurs de machine virtuelle. Il est généralement plus facile de créer des partitions à un niveau inférieur de la hiérarchie. Seules les applications volumineuses nécessitent un partitionnement au niveau abonnement.
 
 <!-- links -->
 
 [azure-limits]: /azure/azure-subscription-service-limits
 [data-partitioning-guidance]: ../../best-practices/data-partitioning.md
 [sharding]: ../../patterns/sharding.md
-
- 

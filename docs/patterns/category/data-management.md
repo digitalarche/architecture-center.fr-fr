@@ -1,23 +1,23 @@
 ---
 title: Modèles de gestion des données
+titleSuffix: Cloud Design Patterns
 description: La gestion des données constitue l’élément clé des applications cloud et a une incidence sur la plupart des attributs de qualité. Les données sont généralement hébergées dans des emplacements distincts et sur plusieurs serveurs pour des raisons de performances, d’extensibilité ou de disponibilité, ce qui peut soulever une multitude de problèmes. Par exemple, il est impératif de préserver la cohérence des données et de synchroniser généralement les données entre les différents emplacements.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-ms.openlocfilehash: b80c2a127af07e1e362e9078e2a476d33a26ef7c
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.custom: seodec18
+ms.openlocfilehash: ff6d5703af64ddd8b012b588ddfe810da0b6630c
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847088"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009183"
 ---
 # <a name="data-management-patterns"></a>Modèles de gestion des données
 
 [!INCLUDE [header](../../_includes/header.md)]
 
 La gestion des données constitue l’élément clé des applications cloud et a une incidence sur la plupart des attributs de qualité. Les données sont généralement hébergées dans des emplacements distincts et sur plusieurs serveurs pour des raisons de performances, d’extensibilité ou de disponibilité, ce qui peut soulever une multitude de problèmes. Par exemple, il est impératif de préserver la cohérence des données et de synchroniser généralement les données entre les différents emplacements.
-
 
 |                        Modèle                         |                                                                  Résumé                                                                  |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -29,4 +29,3 @@ La gestion des données constitue l’élément clé des applications cloud et a
 |               [Partitionnement](../sharding.md)               |                                    Divisez un magasin de données en un ensemble de partitions horizontales ou de partitions de base de données.                                     |
 | [Hébergement de contenu statique](../static-content-hosting.md) |                   Déployez un contenu statique dans un service de stockage cloud qui peut distribuer ce contenu directement au client.                    |
 |              [Clé de sûreté](../valet-key.md)              |                 Utilisez un jeton ou une clé qui fournissent aux clients un accès direct limité à une ressource ou un service spécifique.                 |
-

@@ -1,13 +1,17 @@
 ---
 title: Modèles de conception de cloud
+titleSuffix: Azure Architecture Center
 description: Modèles de conception de cloud pour Microsoft Azure
 keywords: Azure
-ms.openlocfilehash: 4747c896fc6fc5866be782d76c5290d6b49ad451
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+author: dragon119
+ms.date: 12/10/2018
+ms.custom: seodec18
+ms.openlocfilehash: 873d4cf02690a2cc3ffe4f35b044dedf70700fb5
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30848255"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011019"
 ---
 # <a name="cloud-design-patterns"></a>Modèles de conception de cloud
 
@@ -19,6 +23,8 @@ Chaque modèle décrit le problème traité par le modèle, les aspects à prend
 
 ## <a name="problem-areas-in-the-cloud"></a>Zones à problème du cloud
 
+<!-- markdownlint-disable MD033 -->
+
 <ul id="categories" class="panel">
 {%- for category in categories %}
     <li>
@@ -26,6 +32,8 @@ Chaque modèle décrit le problème traité par le modèle, les aspects à prend
     </li>
 {%- endfor %}
 </ul>
+
+<!-- markdownlint-enable MD033 -->
 
 ## <a name="catalog-of-patterns"></a>Catalogue de modèles
 

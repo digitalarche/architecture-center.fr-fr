@@ -1,21 +1,21 @@
 ---
 title: Modèles de résilience
+titleSuffix: Cloud Design Patterns
 description: La résilience est la capacité d’un système à traiter de manière appropriée les défaillances et à récupérer après ces dernières. La nature de l’hébergement cloud, où les applications sont souvent multi-locataires, utilisent les services de plateforme partagée, sont en concurrence pour la bande passante et les ressources, communiquent via Internet et s’exécutent sur du matériel de base, signifie qu’il existe une probabilité accrue que des erreurs temporaires et des erreurs plus permanentes se produisent. Pouvoir détecter les pannes et récupérer rapidement et efficacement est nécessaire afin de maintenir la résilience.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-ms.openlocfilehash: 5f5f9c6a23005b1b7ecfc75183f7730823de922e
-ms.sourcegitcommit: e67b751f230792bba917754d67789a20810dc76b
+ms.custom: seodec18
+ms.openlocfilehash: d478c0fb42e89c6bb5d84b4d077259ff4bf35f16
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2018
-ms.locfileid: "30847190"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009710"
 ---
 # <a name="resiliency-patterns"></a>Modèles de résilience
 
 La résilience est la capacité d’un système à traiter de manière appropriée les défaillances et à récupérer après ces dernières. La nature de l’hébergement cloud, où les applications sont souvent multi-locataires, utilisent les services de plateforme partagée, sont en concurrence pour la bande passante et les ressources, communiquent via Internet et s’exécutent sur du matériel de base, signifie qu’il existe une probabilité accrue que des erreurs temporaires et des erreurs plus permanentes se produisent. Pouvoir détecter les pannes et récupérer rapidement et efficacement est nécessaire afin de maintenir la résilience.
-
 
 |                            Modèle                             |                                                                                                      Résumé                                                                                                       |
 |----------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -27,4 +27,3 @@ La résilience est la capacité d’un système à traiter de manière appropri�
 |  [Nivellement de la charge basé sur une file d’attente](../queue-based-load-leveling.md)  |                                            Utilisez une file d’attente qui agit comme mémoire tampon entre une tâche et un service qu’elle appelle, afin d’atténuer les surcharges intermittentes.                                             |
 |                      [Nouvelle tentative](../retry.md)                      |             Permettez à une application de gérer les défaillances temporaires anticipées quand elle tente de se connecter à un service ou à une ressource réseau en réessayant d’exécuter en toute transparence une opération qui a échoué précédemment.             |
 | [Superviseur de l’agent du planificateur](../scheduler-agent-supervisor.md) |                                                            Coordonnez un ensemble d’actions sur un ensemble distribué de services et d’autres ressources à distance.                                                            |
-

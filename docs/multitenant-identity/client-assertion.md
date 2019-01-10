@@ -6,18 +6,19 @@ ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: adfs
 pnp.series.next: key-vault
-ms.openlocfilehash: 58eed82c982fe1c6cba0f04b237d92d117a26fd4
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: b5951153fff109b648e7e4f74daac0f414240fe4
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902261"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113142"
 ---
 # <a name="use-client-assertion-to-get-access-tokens-from-azure-ad"></a>Utiliser une assertion du client pour obtenir des jetons d’accès d’Azure AD
 
 [![GitHub](../_images/github.png) Exemple de code][sample application]
 
 ## <a name="background"></a>Arrière-plan
+
 Lors de l’utilisation d’un flux de code d’autorisation ou d’un flux hybride dans OpenID Connect, le client reçoit un jeton d’accès en échange d’un code d’autorisation. Au cours de cette étape, le client doit s’authentifier auprès du serveur.
 
 ![Clé secrète client](./images/client-secret.png)
@@ -26,7 +27,7 @@ L’un des moyens d’authentifier le client consiste à utiliser une clé secr�
 
 Voici un exemple de requête du client au fournisseur d’identité, demandant un jeton d’accès. Notez le paramètre `client_secret` .
 
-```
+```http
 POST https://login.microsoftonline.com/b9bd2162xxx/oauth2/token HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
@@ -45,7 +46,7 @@ Pour renforcer la sécurité, vous pouvez utiliser l’ [assertion du client] au
 
 Voici une requête de jeton utilisant l’assertion du client :
 
-```
+```http
 POST https://login.microsoftonline.com/b9bd2162xxx/oauth2/token HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
@@ -61,8 +62,6 @@ Notez que le paramètre `client_secret` n’est plus utilisé. À la place, le p
 
 > [!NOTE]
 > Les certificats X.509 ne représentent pas la seule forme d’assertion du client ; nous en parlons ici car ils sont pris en charge par Azure AD.
-> 
-> 
 
 Au moment de l’exécution, l’application web lit le certificat à partir du magasin de certificats. Le certificat doit être installé sur la même machine que l’application web.
 
@@ -100,7 +99,8 @@ Pour plus d’informations sur la configuration d’une assertion du client dans
 
 [**Suivant**][key vault]
 
-<!-- Links -->
+<!-- links -->
+
 [configure-web-app]: /azure/app-service-web/web-sites-configure/
 [azure-management-portal]: https://portal.azure.com
 [assertion du client]: https://tools.ietf.org/html/rfc7521

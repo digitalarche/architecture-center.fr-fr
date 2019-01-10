@@ -3,16 +3,16 @@ title: Traitement des fichiers CSV et JSON
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 18fb06ec5c44b9db5ebad4d315858df4c75eb594
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 78d57ac4f229e863e676bf3cad0140864cd243d1
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902255"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113980"
 ---
 # <a name="working-with-csv-and-json-files-for-data-solutions"></a>Utilisation des fichiers CSV et JSON pour des solutions de données
 
-CSV et JSON sont probablement les formats les plus fréquemment utilisés pour l’ingestion, l’échange et le stockage des données non structurées ou semi-structurées. 
+CSV et JSON sont probablement les formats les plus fréquemment utilisés pour l’ingestion, l’échange et le stockage des données non structurées ou semi-structurées.
 
 ## <a name="about-csv-format"></a>À propos du format CSV
 
@@ -22,14 +22,14 @@ En dépit de leurs limitations, les fichiers CSV sont fréquemment utilisés pou
 
 ## <a name="about-json-format"></a>À propos du format JSON
 
-Les données JSON (JavaScript Object Notation) sont représentées sous forme de paires clé-valeur dans un format semi-structuré. Le format JSON est souvent comparé au format XML, puisque les deux sont capables de stocker des données dans un format hiérarchique, avec les données enfant représentées en ligne avec son parent. Les deux sont auto-descriptifs et lisibles par l’utilisateur, mais les documents JSON ont tendance à être beaucoup plus petits, conduisant à leur utilisation fréquente dans l’échange de données en ligne, en particulier avec l’avènement des services Web basés sur REST. 
+Les données JSON (JavaScript Object Notation) sont représentées sous forme de paires clé-valeur dans un format semi-structuré. Le format JSON est souvent comparé au format XML, puisque les deux sont capables de stocker des données dans un format hiérarchique, avec les données enfant représentées en ligne avec son parent. Les deux sont auto-descriptifs et lisibles par l’utilisateur, mais les documents JSON ont tendance à être beaucoup plus petits, conduisant à leur utilisation fréquente dans l’échange de données en ligne, en particulier avec l’avènement des services Web basés sur REST.
 
 Les fichiers au format JSON présentent de nombreux avantages sur le format CSV :
 
-* JSON maintient les structures hiérarchiques, permettant une meilleure conservation des données connexes dans un seul document en représentant des relations complexes.
-* La plupart des langages de programmation prennent en charge la désérialisation JSON en objets en mode natif ou fournissent des bibliothèques de sérialisation JSON légères.
-* JSON prend en charge les listes d’objets, contribuant à éviter les translations désordonnées des listes en un modèle de données relationnelles.
-* JSON est un format de fichier fréquemment utilisé pour les bases de données NoSQL, tels que MongoDB, Couchbase et Azure Cosmos DB.
+- JSON maintient les structures hiérarchiques, permettant une meilleure conservation des données connexes dans un seul document en représentant des relations complexes.
+- La plupart des langages de programmation prennent en charge la désérialisation JSON en objets en mode natif ou fournissent des bibliothèques de sérialisation JSON légères.
+- JSON prend en charge les listes d’objets, contribuant à éviter les translations désordonnées des listes en un modèle de données relationnelles.
+- JSON est un format de fichier fréquemment utilisé pour les bases de données NoSQL, tels que MongoDB, Couchbase et Azure Cosmos DB.
 
 Dans la mesure où un grand nombre de données entrantes sur le réseau est déjà au format JSON, la plupart des langages de programmation sur Web prennent en charge l’utilisation de JSON en mode natif ou via l’utilisation des bibliothèques externes pour sérialiser et désérialiser des données JSON. Cette prise en charge universelle de JSON a conduit à son utilisation dans des formats logiques via la représentation sous forme de structure de données, formats d’échange de données à chaud et le stockage de données des données à froid.
 
@@ -37,9 +37,9 @@ De nombreux moteurs du traitement par lot et de flux de données prend en charge
 
 ## <a name="when-to-use-csv-or-json-formats"></a>Quand utiliser des formats CSV ou JSON
 
-Les fichiers CSV sont fréquemment utilisés pour l’exportation et l’importation des données ou leur traitement pour l’analytique et le Machine Learning. Les fichiers au format JSON ont les mêmes avantages, mais sont plus fréquents dans les solutions d’échange de données à chaud. Les documents JSON sont souvent envoyés par des appareils mobiles et Web exécutant des transactions en ligne, par des appareils IoT (internet des objets) pour une communication à sens unique ou bidirectionnelle ou par des applications clientes qui communiquent avec les services SaaS et PaaS ou des architectures sans serveur. 
+Les fichiers CSV sont fréquemment utilisés pour l’exportation et l’importation des données ou leur traitement pour l’analytique et le Machine Learning. Les fichiers au format JSON ont les mêmes avantages, mais sont plus fréquents dans les solutions d’échange de données à chaud. Les documents JSON sont souvent envoyés par des appareils mobiles et Web exécutant des transactions en ligne, par des appareils IoT (internet des objets) pour une communication à sens unique ou bidirectionnelle ou par des applications clientes qui communiquent avec les services SaaS et PaaS ou des architectures sans serveur.
 
-Les formats de fichiers CSV et JSON facilitent tous les deux les échanges des données entre des systèmes ou des appareils différents. Leurs formats semi-structurés permettent une grande souplesse lors du transfert de presque tous les types de données et la prise en charge universelle de ces formats rendent l’utilisation plus facile. Ils peuvent tous les deux servir de source brute véritable dans les cas où les données traitées sont stockées dans des formats binaires pour des interrogations plus efficaces. 
+Les formats de fichiers CSV et JSON facilitent tous les deux les échanges des données entre des systèmes ou des appareils différents. Leurs formats semi-structurés permettent une grande souplesse lors du transfert de presque tous les types de données et la prise en charge universelle de ces formats rendent l’utilisation plus facile. Ils peuvent tous les deux servir de source brute véritable dans les cas où les données traitées sont stockées dans des formats binaires pour des interrogations plus efficaces.
 
 ## <a name="working-with-csv-and-json-data-in-azure"></a>Utilisation des données CSV et JSON dans Azure
 
@@ -53,9 +53,8 @@ Selon le scénario, vous pouvez effectuer le [traitement par lots](../big-data/b
 
 L’utilisation de ces formats présente certains défis à prendre en compte :
 
-* Sans restriction du modèle de données, les fichiers CSV et JSON sont sujets à une altération des données (« garbage in, garbage out »). Par exemple, il n’existe aucune notion d’objet date/heure dans l’un ou l’autre fichier, ainsi le format du fichier n’empêche pas l’insertion de « ABC123 » dans un champ de date, par exemple.
+- Sans restriction du modèle de données, les fichiers CSV et JSON sont sujets à une altération des données (« garbage in, garbage out »). Par exemple, il n’existe aucune notion d’objet date/heure dans l’un ou l’autre fichier, ainsi le format du fichier n’empêche pas l’insertion de « ABC123 » dans un champ de date, par exemple.
 
-* L’utilisation de fichiers CSV et JSON en tant que solution de stockage à froid n’est pas bien adaptée à l’utilisation du Big Data. Dans la plupart des cas, ils ne peuvent pas être fractionnés en partitions pour un traitement parallèle et ne peuvent pas être compressés aussi bien que des formats binaires. Cela conduit souvent au traitement et au stockage de ces données dans des formats optimisés pour la lecture tels que Parquet et ORC (ligne optimisée en colonnes), lesquels fournissent également des index et statistiques en ligne sur les données contenues.
+- L’utilisation de fichiers CSV et JSON en tant que solution de stockage à froid n’est pas bien adaptée à l’utilisation du Big Data. Dans la plupart des cas, ils ne peuvent pas être fractionnés en partitions pour un traitement parallèle et ne peuvent pas être compressés aussi bien que des formats binaires. Cela conduit souvent au traitement et au stockage de ces données dans des formats optimisés pour la lecture tels que Parquet et ORC (ligne optimisée en colonnes), lesquels fournissent également des index et statistiques en ligne sur les données contenues.
 
-* Vous pouvez avoir besoin d’appliquer un schéma sur les données semi-structurées pour faciliter la requête et l’analyse. En règle générale, cela requiert le stockage des données sous une autre forme qui convient aux besoins de stockage de données de votre environnement, comme dans une base de données.
-
+- Vous pouvez avoir besoin d’appliquer un schéma sur les données semi-structurées pour faciliter la requête et l’analyse. En règle générale, cela requiert le stockage des données sous une autre forme qui convient aux besoins de stockage de données de votre environnement, comme dans une base de données.

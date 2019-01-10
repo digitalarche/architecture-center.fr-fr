@@ -5,12 +5,12 @@ description: Déployez des appliances virtuelles réseau dans un environnement �
 author: telmosampaio
 ms.date: 12/08/2018
 ms.custom: seodec18
-ms.openlocfilehash: d3f9017db1bbf9741b10db16eb5a3dbab78f1160
-ms.sourcegitcommit: 7d21aec9d9de0004ac777c1d1e364f53aac2350d
+ms.openlocfilehash: 646721f80d19f493b7674884f8108762d743201b
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/09/2018
-ms.locfileid: "53120750"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011087"
 ---
 # <a name="deploy-highly-available-network-virtual-appliances"></a>Déployer des appliances virtuelles réseau hautement disponibles
 
@@ -30,6 +30,8 @@ Pour rendre une appliance virtuelle réseau hautement disponible, déployez plus
 
 Les architectures suivantes décrivent les ressources et la configuration nécessaire pour des appliances virtuelles réseau hautement disponibles :
 
+<!-- markdownlint-disable MD033 -->
+
 | Solution | Avantages | Considérations |
 | --- | --- | --- |
 | [Entrée avec appliances virtuelles réseau de couche 7][ingress-with-layer-7] |Tous les nœuds d’appliance virtuelle réseau sont actifs. |Nécessite une appliance virtuelle réseau pouvant arrêter les connexions et utiliser SNAT<br/> Requiert un ensemble distinct d’appliances virtuelles réseau pour le trafic provenant d’Internet et d’Azure <br/> Peut uniquement être utilisé pour le trafic provenant de l’extérieur d’Azure |
@@ -37,6 +39,8 @@ Les architectures suivantes décrivent les ressources et la configuration néces
 | [Entrée-sortie avec appliances virtuelles réseau de couche 7][ingress-egress-with-layer-7] |Tous les nœuds sont actifs.<br/>Capable de gérer le trafic provenant d’Azure. |Nécessite une appliance virtuelle réseau pouvant arrêter les connexions et utiliser SNAT<br/>Requiert un ensemble distinct d’appliances virtuelles réseau pour le trafic provenant d’Internet et d’Azure |
 | [Commutateur PIP-UDR][pip-udr-switch] |Ensemble unique d’appliances virtuelles réseau pour tout le trafic<br/>Peut gérer tout le trafic (aucune limite sur les règles de port) |Actif/Passif<br/>Requiert un processus de basculement |
 | [PIP-UDR sans SNAT](#pip-udr-nvas-without-snat) | Ensemble unique d’appliances virtuelles réseau pour tout le trafic<br/>Peut gérer tout le trafic (aucune limite sur les règles de port)<br/>Ne nécessite pas de configuration SNAT pour les requêtes entrantes |Actif/Passif<br/>Requiert un processus de basculement<br/>Le sondage et la logique de basculement sont exécutés en dehors du réseau virtuel |
+
+<!-- markdown-enable MD033 -->
 
 ## <a name="ingress-with-layer-7-nvas"></a>Entrée avec appliances virtuelles réseau de couche 7
 

@@ -5,12 +5,12 @@ description: Liste de vérification qui fournit des conseils de résilience pour
 author: petertaylor9999
 ms.date: 11/26/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 55f17d3b24af4be4f313c66923f4153296041545
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: e1fb780cf9f54a5078cc5d3c6b597b351f93e05e
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53307178"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112666"
 ---
 # <a name="resiliency-checklist-for-specific-azure-services"></a>Liste de vérification de la résilience pour des services Azure spécifiques
 
@@ -124,7 +124,7 @@ Si vous utilisez Cache Redis comme un cache de données temporaire et non comme 
 
 **Répliquez la base de données.** Utilisez les groupes de disponibilité Always On SQL Server pour répliquer la base de données. Vous bénéficierez ainsi d’une haute disponibilité en cas d’échec d’une instance SQL Server. Pour plus d’informations, consultez [Exécuter des machines virtuelles Windows pour une architecture multiniveau](../reference-architectures/virtual-machines-windows/n-tier.md).
 
-**Sauvegardez la base de données.** Si vous utilisez déjà le service [Sauvegarde Azure](https://azure.microsoft.com/documentation/services/backup/) pour sauvegarder vos machines virtuelles, envisagez d’utiliser [Sauvegarde Azure pour les charges de travail SQL Server à l’aide de DPM](/azure/backup/backup-azure-backup-sql/). Avec cette approche, il y a un rôle d’administrateur de sauvegarde pour l’organisation et une procédure de récupération unifiée pour les machines virtuelles et SQL Server. Autrement, utilisez la [sauvegarde gérée SQL Server dans Microsoft Azure](https://msdn.microsoft.com/library/dn449496.aspx).
+**Sauvegardez la base de données.** Si vous utilisez déjà le service [Sauvegarde Azure](/azure/backup/) pour sauvegarder vos machines virtuelles, envisagez d’utiliser [Sauvegarde Azure pour les charges de travail SQL Server à l’aide de DPM](/azure/backup/backup-azure-backup-sql/). Avec cette approche, il y a un rôle d’administrateur de sauvegarde pour l’organisation et une procédure de récupération unifiée pour les machines virtuelles et SQL Server. Autrement, utilisez la [sauvegarde gérée SQL Server dans Microsoft Azure](https://msdn.microsoft.com/library/dn449496.aspx).
 
 ## <a name="traffic-manager"></a>Traffic Manager
 

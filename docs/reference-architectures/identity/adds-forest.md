@@ -8,12 +8,12 @@ description: >-
 author: telmosampaio
 ms.date: 05/02/2018
 ms.custom: seodec18
-ms.openlocfilehash: 3e3c3c8ff12bab85a96d4eb879f81195d22e79f8
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: e4415a2f9c2d37e61190f2fd60bbfe5990693697
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643779"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113312"
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Créer une forêt de ressources Active Directory Domain Services (AD DS) dans Azure
 
@@ -27,7 +27,7 @@ Active Directory Domain Services (AD DS) stocke des informations d’identité d
 
 Parmi les utilisations courantes de cette architecture figurent la conservation d’une séparation de sécurité pour les objets et les identités contenus dans le cloud et la migration de domaines individuels depuis l’environnement local vers le cloud.
 
-Pour plus d’informations, consultez [Choisir une solution pour intégrer l’environnement Active Directory local à Azure][considerations]. 
+Pour plus d’informations, consultez [Choisir une solution pour intégrer l’environnement Active Directory local à Azure][considerations].
 
 ## <a name="architecture"></a>Architecture
 
@@ -174,8 +174,8 @@ Un déploiement pour cette architecture est disponible sur [GitHub][github]. Rem
 [running-VMs-for-an-N-tier-architecture-on-Azure]: ../virtual-machines-windows/n-tier.md
 
 [ad-azure-guidelines]: https://msdn.microsoft.com/library/azure/jj156090.aspx
-[azure-expressroute]: https://azure.microsoft.com/documentation/articles/expressroute-introduction/
-[azure-vpn-gateway]: https://azure.microsoft.com/documentation/articles/vpn-gateway-about-vpngateways/
+[azure-expressroute]: /azure/expressroute/expressroute-introduction
+[azure-vpn-gateway]: /azure/vpn-gateway/vpn-gateway-about-vpngateways
 [considerations]: ./considerations.md
 [creating-external-trusts]: https://technet.microsoft.com/library/cc816837(v=ws.10).aspx
 [creating-forest-trusts]: https://technet.microsoft.com/library/cc816810(v=ws.10).aspx

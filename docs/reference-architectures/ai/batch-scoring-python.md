@@ -2,14 +2,14 @@
 title: Scoring par lots des modèles Python sur Azure
 description: Générez une solution scalable pour le scoring par lots des modèles selon une planification en parallèle à l’aide d’Azure Batch AI.
 author: njray
-ms.date: 12/13/18
+ms.date: 12/13/2018
 ms.custom: azcat-ai
-ms.openlocfilehash: 93fc0c81663931c0a8b0f54b41934287056e6953
-ms.sourcegitcommit: fb22348f917a76e30a6c090fcd4a18decba0b398
+ms.openlocfilehash: 4c43a3dadab11cb8dcf163cf63618795299283ad
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/16/2018
-ms.locfileid: "53450822"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111047"
 ---
 # <a name="batch-scoring-of-python-models-on-azure"></a>Scoring par lots des modèles Python sur Azure
 
@@ -43,7 +43,7 @@ Pour les modèles Python standard, il est généralement admis que les processeu
 
 ### <a name="parallelizing-across-vms-vs-cores"></a>Parallélisation dans les machines virtuelles et les cœurs
 
-Lors de l’exécution des processus de scoring de nombreux modèles en mode Batch, le travail doit être mis en parallèle sur les machines virtuelles. Deux approches sont possibles : 
+Lors de l’exécution des processus de scoring de nombreux modèles en mode Batch, le travail doit être mis en parallèle sur les machines virtuelles. Deux approches sont possibles :
 
 * Créer un cluster plus grand avec des machines virtuelles de faible coût.
 

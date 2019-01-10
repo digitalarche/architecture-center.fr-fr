@@ -5,12 +5,12 @@ description: Utiliser Azure pour obtenir des insights détaillés à partir de d
 author: MikeWasson
 ms.date: 11/06/2018
 ms.custom: seodec18
-ms.openlocfilehash: 3808cc5d09e2e0a5aaee1a6cfcb050b98a0ef2ee
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: 2f15b8d4376638e6e8e522e5150a3b3c247cba8f
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53644221"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010288"
 ---
 # <a name="enterprise-bi-in-azure-with-sql-data-warehouse"></a>Enterprise BI dans Azure avec SQL Data Warehouse
 
@@ -72,7 +72,7 @@ Les sections suivantes décrivent ces étapes plus en détail.
 
 L’utilitaire [BCP](/sql/tools/bcp-utility) (programme de copie en bloc) constitue un moyen rapide de créer des fichiers texte plats à partir des tables SQL. Dans cette étape, vous sélectionnez les colonnes que vous souhaitez exporter, mais vous ne transformez pas les données. Les transformations de données doivent se faire dans SQL Data Warehouse.
 
-**Recommandations**
+**Recommandations :**
 
 Si possible, prévoyez l’extraction des données lors des heures creuses afin de minimiser la contention des ressources dans l’environnement de production.
 
@@ -84,7 +84,7 @@ Vous pouvez accélérer le transfert réseau en enregistrant les données export
 
 L’utilitaire [AzCopy](/azure/storage/common/storage-use-azcopy) est conçu pour la copie hautes performances des données dans le Stockage Blob Azure.
 
-**Recommandations**
+**Recommandations :**
 
 Créez un compte de stockage dans une région proche de l’emplacement des données source. Déployez le compte de stockage et l’instance SQL Data Warehouse dans la même région.
 
@@ -105,7 +105,7 @@ Le chargement des données est un processus en deux étapes :
 1. Créez un ensemble de tables externes pour les données. Une table externe est une définition de table qui pointe vers des données stockées à l’extérieur de l’entrepôt &mdash;. Dans notre cas, il s’agit des fichiers plats dans le stockage d’objets blob. Cette étape ne déplace aucune donnée dans l’entrepôt.
 2. Créez des tables de mise en lots, et chargez-y les données. Cette étape copie les données dans l’entrepôt.
 
-**Recommandations**
+**Recommandations :**
 
 Préférez utiliser SQL Data Warehouse lorsque vous disposez d’une importante quantité de données (supérieure à 1 To) et que vous exécutez une charge de travail d’analyse qui profiterait de ce parallélisme. SQL Data Warehouse ne convient pas à des charges de travail OLTP ni à des jeux de données moins importants (inférieurs à 250 Go). Pour les jeux de données inférieurs à 250 Go, préférez utiliser Azure SQL Database ou SQL Server. Pour plus d’informations, consultez la page [Entreposage des données](../../data-guide/relational-data/data-warehousing.md).
 
@@ -155,7 +155,7 @@ Power BI prend en charge deux options pour la connexion à Azure Analysis Servic
 
 Nous vous recommandons l’option Connexion active car elle ne nécessite pas de copier des données dans le modèle Power BI. De plus, DirectQuery veille à ce que les résultats soient toujours cohérents avec les données sources les plus récentes. Pour plus d’informations, consultez [Connexion avec Power BI](/azure/analysis-services/analysis-services-connect-pbi).
 
-**Recommandations**
+**Recommandations :**
 
 N’exécutez pas des requêtes de tableau de bord BI directement dans l’entrepôt de données. Les tableaux de bord BI nécessitent des temps de réponse très lents. Les requêtes directes dans l’entrepôt de données peuvent ne pas être adaptées. De plus, l’actualisation du tableau de bord comptera dans le nombre de requêtes simultanées, ce qui peut impacter les performances.
 

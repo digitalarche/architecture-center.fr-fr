@@ -3,18 +3,22 @@ title: Sélectionner une analytique de données et une technologie de création 
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: a5e793c9caf50daca4ef7e40c49e54f25f04e856
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 5b4947f53edf595c206ef4f55572dadc1a9daa09
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902414"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111408"
 ---
 # <a name="choosing-a-data-analytics-technology-in-azure"></a>Sélectionner une technologie d’analytique de données dans Azure
 
-La plupart des solutions Big Data ont pour but de fournir des informations sur les données via l’analyse et les rapports. Cela peut inclure des visualisations et des rapports préconfigurés, ou une exploration interactive des données. 
+La plupart des solutions Big Data ont pour but de fournir des informations sur les données via l’analyse et les rapports. Cela peut inclure des visualisations et des rapports préconfigurés, ou une exploration interactive des données.
+
+<!-- markdownlint-disable MD026 -->
 
 ## <a name="what-are-your-options-when-choosing-a-data-analytics-technology"></a>Quelles sont vos options quant au choix d’une technologie d’analytique de données ?
+
+<!-- markdownlint-disable MD026 -->
 
 Il existe plusieurs options pour l’analyse, les visualisations et la création de rapports dans Azure, selon vos besoins :
 
@@ -29,7 +33,7 @@ Il existe plusieurs options pour l’analyse, les visualisations et la création
 
 Les organisations peuvent utiliser Power BI pour générer des rapports et les publier. Tout le monde peut créer des tableaux de bord personnalisés, avec gouvernance et [sécurité intégrée](/power-bi/service-admin-power-bi-security). Power BI utilise [Azure Active Directory](/azure/active-directory/) (Azure AD) pour authentifier les utilisateurs qui se connectent au service Power BI, et utilise les informations de connexion Power BI chaque fois qu’un utilisateur tente d’accéder aux ressources nécessitant une authentification.
 
-### <a name="jupyter-notebooks"></a>Blocs-notes Jupyter 
+### <a name="jupyter-notebooks"></a>Blocs-notes Jupyter
 
 Les [blocs-notes Jupyter](https://jupyter.readthedocs.io/en/latest/index.html) fournissent un interpréteur de commandes basé sur navigateur permettant aux scientifiques de données de créer des fichiers *blocs-notes* contenant du code Python, Scala ou R ainsi que du texte Markdown. C’est un moyen efficace de collaborer en partageant et en documentant le code et les résultats dans un document unique.
 
@@ -49,15 +53,15 @@ Contrairement aux blocs-notes Jupyter en cours d’exécution sur un cluster HDI
 
 Principaux avantages :
 
-* Service gratuit&mdash;pas d’abonnement Azure requis.
-* Inutile d’installer Jupyter et les distributions R ou Python connexes localement&mdash;utilisez simplement un navigateur.
-* Gérez vos propres bibliothèques en ligne et accédez-y sur n’importe quel appareil.
-* Partagez vos blocs-notes avec des collaborateurs.
+- Service gratuit&mdash;pas d’abonnement Azure requis.
+- Inutile d’installer Jupyter et les distributions R ou Python connexes localement&mdash;utilisez simplement un navigateur.
+- Gérez vos propres bibliothèques en ligne et accédez-y sur n’importe quel appareil.
+- Partagez vos blocs-notes avec des collaborateurs.
 
 Considérations :
 
-* Vous ne pourrez pas accéder à vos blocs-notes en mode hors connexion.
-* Les capacités de traitement limitées du service de blocs-notes gratuit peuvent ne pas suffire pour l’apprentissage de modèles volumineux ou complexes.
+- Vous ne pourrez pas accéder à vos blocs-notes en mode hors connexion.
+- Les capacités de traitement limitées du service de blocs-notes gratuit peuvent ne pas suffire pour l’apprentissage de modèles volumineux ou complexes.
 
 ## <a name="key-selection-criteria"></a>Critères de sélection principaux
 
@@ -73,9 +77,11 @@ Pour restreindre les choix, commencez par répondre à ces questions :
 
 ## <a name="capability-matrix"></a>Matrice des fonctionnalités
 
-Les tableaux suivants résument les principales différences entre les fonctionnalités. 
+Les tableaux suivants résument les principales différences entre les fonctionnalités.
 
 ### <a name="general-capabilities"></a>Fonctionnalités générales
+
+<!-- markdownlint-disable MD033 -->
 
 | | Power BI | Blocs-notes Jupyter | Blocs-notes Zeppelin | Blocs-notes Microsoft Azure |
 | --- | --- | --- | --- | --- |
@@ -90,6 +96,8 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 | Tarifs | Gratuit pour Power BI Desktop (création), consultez la section [Tarification](https://powerbi.microsoft.com/pricing/) pour les options d’hébergement | Gratuit | Gratuit | Gratuit |
 | Collaboration multi-utilisateur | [Oui](/power-bi/service-how-to-collaborate-distribute-dashboards-reports) | Oui (via le partage ou avec un serveur multi-utilisateur comme [JupyterHub](https://github.com/jupyterhub/jupyterhub)) | Oui | Oui (via le partage) |
 
+<!-- markdownlint-enable MD033 -->
+
 [1] Si utilisé dans un cluster HDInsight géré.
 
 [2] En utilisant Power BI Desktop.
@@ -97,4 +105,3 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 [2] Vous pouvez rechercher dans le [référentiel Maven](https://search.maven.org/) des packages proposés par la communauté.
 
 [3] Les packages Python peuvent être installés à l’aide de pip ou conda. Les packages R peuvent être installés à partir de CRAN ou de GitHub. Les packages en F # peuvent être installés via nuget.org à l’aide du [Gestionnaire de dépendances Paket](https://fsprojects.github.io/Paket/).
-

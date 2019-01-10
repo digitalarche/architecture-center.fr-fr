@@ -1,19 +1,17 @@
 ---
-title: Cache-Aside
-description: Chargez les données à la demande dans un cache à partir d’une banque de données
+title: Modèle Cache-Aside
+titleSuffix: Cloud Design Patterns
+description: Chargez les données à la demande dans un cache à partir d’une banque de données.
 keywords: modèle de conception
 author: dragon119
 ms.date: 11/01/2018
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- data-management
-- performance-scalability
-ms.openlocfilehash: 4c93ed02ff28e79cedc26f83364592baba96821d
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.custom: seodec18
+ms.openlocfilehash: 96dee3ca766414a3a17ea161f13c9fcd15001b4d
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916368"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114162"
 ---
 # <a name="cache-aside-pattern"></a>Modèle Cache-Aside
 
@@ -35,14 +33,13 @@ Une application peut émuler la fonctionnalité de mise en cache avec double lec
 
 ![Utilisation du modèle Cache-Aside pour stocker des données dans le cache](./_images/cache-aside-diagram.png)
 
-
 Si une application met à jour les informations, elle peut appliquer la stratégie de double écriture en répercutant la modification dans la banque de données et en invalidant l’élément correspondant dans le cache.
 
 Lorsque l’application aura à nouveau besoin de cet élément, la stratégie Cache-Aside permettra de récupérer les données mises à jour dans la banque de données et de les ajouter au cache.
 
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
-Prenez en compte les points suivants lorsque vous choisissez comment implémenter ce modèle : 
+Prenez en compte les points suivants lorsque vous choisissez comment implémenter ce modèle :
 
 **Durée de vie des données mises en cache**. De nombreux caches intègrent une stratégie d’expiration qui invalide les données et les supprime du cache si elles n’ont pas été consultées pendant une certaine période. Pour que la stratégie Cache-Aside soit efficace, assurez-vous que la stratégie d’expiration correspond au modèle d’accès pour les applications qui utilisent les données. Ne configurez pas un délai d’expiration trop court, car les applications pourraient alors récupérer des données en continu dans la banque de données pour les ajouter au cache. De même, ne configurez pas un délai d’expiration trop long pour éviter que les données en cache deviennent obsolètes. N’oubliez pas que la mise en cache est particulièrement efficace pour des données relativement statiques ou des données qui sont fréquemment lues.
 
@@ -68,9 +65,9 @@ Ce modèle peut ne pas convenir :
 
 ## <a name="example"></a>Exemples
 
-Dans Microsoft Azure, vous pouvez utiliser le Cache Redis Azure pour créer un cache distribué qui peut être partagé par plusieurs instances d’une application. 
+Dans Microsoft Azure, vous pouvez utiliser le Cache Redis Azure pour créer un cache distribué qui peut être partagé par plusieurs instances d’une application.
 
-Les exemples de code suivants utilisent le client [StackExchange.Redis]. Il s’agit d’une bibliothèque de client Redis écrite pour .NET. Pour vous connecter à une instance de Cache Redis Azure, appelez la méthode statique `ConnectionMultiplexer.Connect` et transmettez la chaîne de connexion. La méthode renvoie un élément `ConnectionMultiplexer` qui représente la connexion. Pour partager une instance `ConnectionMultiplexer` dans votre application, vous pouvez utiliser une propriété statique qui renvoie une instance connectée, comme dans l’exemple suivant. Cette approche fournit une méthode thread-safe permettant d’initialiser une seule instance connectée.
+Les exemples de code suivants utilisent le client [StackExchange.Redis](https://github.com/StackExchange/StackExchange.Redis). Il s’agit d’une bibliothèque de client Redis écrite pour .NET. Pour vous connecter à une instance de Cache Redis Azure, appelez la méthode statique `ConnectionMultiplexer.Connect` et transmettez la chaîne de connexion. La méthode renvoie un élément `ConnectionMultiplexer` qui représente la connexion. Pour partager une instance `ConnectionMultiplexer` dans votre application, vous pouvez utiliser une propriété statique qui renvoie une instance connectée, comme dans l’exemple suivant. Cette approche fournit une méthode thread-safe permettant d’initialiser une seule instance connectée.
 
 ```csharp
 private static ConnectionMultiplexer Connection;
@@ -89,7 +86,6 @@ La méthode `GetMyEntityAsync` dans l’exemple de code suivant illustre une imp
 
 Un objet est identifié en utilisant un identifiant entier comme clé. La méthode `GetMyEntityAsync` tente de récupérer un élément avec cette clé à partir du cache. Si un élément correspondant est trouvé, celui-ci est renvoyé. Si aucune correspondance n’est trouvée dans le cache, la méthode `GetMyEntityAsync` récupère l’objet à partir d’une banque de données, l’ajoute au cache, puis le renvoie. Le code qui lit les données de la banque de données n’est pas présenté ici, car il varie selon la banque de données. Notez que l’élément mis en cache est configuré pour expirer afin qu’il ne devienne pas obsolète dans le cas où il serait mis à jour à un autre endroit.
 
-
 ```csharp
 // Set five minute expiration as a default
 private const double DefaultExpirationTimeInMinutes = 5.0;
@@ -99,23 +95,23 @@ public async Task<MyEntity> GetMyEntityAsync(int id)
   // Define a unique key for this method and its parameters.
   var key = $"MyEntity:{id}";
   var cache = Connection.GetDatabase();
-  
+
   // Try to get the entity from the cache.
   var json = await cache.StringGetAsync(key).ConfigureAwait(false);
-  var value = string.IsNullOrWhiteSpace(json) 
-                ? default(MyEntity) 
+  var value = string.IsNullOrWhiteSpace(json)
+                ? default(MyEntity)
                 : JsonConvert.DeserializeObject<MyEntity>(json);
-  
+
   if (value == null) // Cache miss
   {
     // If there's a cache miss, get the entity from the original store and cache it.
-    // Code has been omitted because it's data store dependent.  
+    // Code has been omitted because it is data store dependent.
     value = ...;
 
     // Avoid caching a null value.
     if (value != null)
     {
-      // Put the item in the cache with a custom expiration time that 
+      // Put the item in the cache with a custom expiration time that
       // depends on how critical it is to have stale data.
       await cache.StringSetAsync(key, JsonConvert.SerializeObject(value)).ConfigureAwait(false);
       await cache.KeyExpireAsync(key, TimeSpan.FromMinutes(DefaultExpirationTimeInMinutes)).ConfigureAwait(false);
@@ -126,7 +122,7 @@ public async Task<MyEntity> GetMyEntityAsync(int id)
 }
 ```
 
->  Ces exemples utilisent Cache Redis pour accéder au magasin de données et récupérer des informations depuis le cache. Pour plus d’informations, consultez les articles [Using Microsoft Azure Redis Cache](https://docs.microsoft.com/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) (Utilisation du Cache Redis Microsoft Azure) et [Création d’une application web avec le Cache Redis](https://docs.microsoft.com/azure/redis-cache/cache-web-app-howto).
+> Ces exemples utilisent Cache Redis pour accéder au magasin de données et récupérer des informations depuis le cache. Pour plus d’informations, consultez les articles [Using Microsoft Azure Redis Cache](https://docs.microsoft.com/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) (Utilisation du Cache Redis Microsoft Azure) et [Création d’une application web avec le Cache Redis](https://docs.microsoft.com/azure/redis-cache/cache-web-app-howto).
 
 La méthode `UpdateEntityAsync` illustrée ci-dessous montre comment invalider un objet dans le cache lorsque sa valeur est modifiée par l’application. Le code met à jour la banque de données d’origine, puis supprime l’élément en cache du cache.
 
@@ -134,7 +130,7 @@ La méthode `UpdateEntityAsync` illustrée ci-dessous montre comment invalider u
 public async Task UpdateEntityAsync(MyEntity entity)
 {
     // Update the object in the original data store.
-    await this.store.UpdateEntityAsync(entity).ConfigureAwait(false); 
+    await this.store.UpdateEntityAsync(entity).ConfigureAwait(false);
 
     // Invalidate the current cache object.
     var cache = Connection.GetDatabase();
@@ -147,14 +143,10 @@ public async Task UpdateEntityAsync(MyEntity entity)
 > [!NOTE]
 > L’ordre dans lequel sont effectuées les étapes est important. Mettez à jour la banque de données *avant* de supprimer l’élément du cache. Si vous supprimez d’abord l’élément mis en cache, un client pourrait avoir le temps d’extraire l’élément avant que la banque de données ne soit mise à jour. En raison de cette absence dans le cache (l’élément a été supprimé du cache), la version antérieure de l’élément serait extraite de la banque de données et ajoutée au cache. On obtiendrait donc des données en cache obsolètes.
 
-
-## <a name="related-guidance"></a>Aide connexe 
+## <a name="related-guidance"></a>Aide connexe
 
 Les informations suivantes peuvent également être pertinentes durant l’implémentation de ce modèle :
 
 - [Recommandations en matière de cache](https://docs.microsoft.com/azure/architecture/best-practices/caching). Fournit des informations supplémentaires sur la façon dont vous pouvez mettre en cache des données dans une solution cloud, ainsi que les points à prendre en compte lorsque vous implémentez un cache.
 
 - [Manuel d’introduction à la cohérence des données](https://msdn.microsoft.com/library/dn589800.aspx). Les applications cloud utilisent généralement des données réparties dans plusieurs banques de données. La gestion et la maintenance de la cohérence des données dans cet environnement constituent un aspect essentiel du système, notamment par rapport aux problèmes de concurrence et de disponibilité pouvant survenir. Ce manuel décrit les problèmes de cohérence des données distribuées et explique comment une application peut implémenter la cohérence éventuelle pour garantir la disponibilité des données.
-
-
-[StackExchange.Redis]: https://github.com/StackExchange/StackExchange.Redis
