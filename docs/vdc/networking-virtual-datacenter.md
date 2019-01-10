@@ -7,12 +7,12 @@ tags: azure-resource-manager
 ms.service: virtual-network
 ms.date: 11/28/2018
 ms.author: jonor
-ms.openlocfilehash: 1d8a9e860ab1a66104dc4133eb5f22ffb4706b84
-ms.sourcegitcommit: 5a3fa0bf35376bbe4a6dd668f2d7d44f9cf9c806
+ms.openlocfilehash: f02cc7df1e90ba3de97a1c25777ab6d27bfdf697
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/14/2018
-ms.locfileid: "53411682"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011181"
 ---
 # <a name="azure-virtual-datacenter-a-network-perspective"></a>Centre de données virtuel Azure : perspective réseau
 
@@ -51,15 +51,6 @@ Une implémentation de VDC peut aider les entreprises à déplacer des charges d
 -   Implémenter les exigences de gestion partagée ou centralisée de la sécurité et des accès dans l’ensemble des charges de travail
 -   Combiner de manière appropriée Azure DevOps et la centralisation des services informatiques pour une grande entreprise
 
-La clé permettant d’accéder aux avantages du VDC repose sur l’utilisation d’une topologie centralisée, de type hub-and-spoke, avec un mélange de fonctionnalités Azure : 
-
-- [Réseau virtuel Azure][VNet] 
-- [Groupes de sécurité réseau (NSG)][NSG]
-- [Appairage de réseaux virtuels][VNetPeering] 
-- [UDR (routes définies par l’utilisateur)][UDR]
-- Services d’identité Azure et [contrôle d’accès en fonction du rôle (RBAC)][RBAC] 
-- Éventuellement [Pare-feu Azure][AzFW], [Azure DNS][DNS], [Azure Front Door Service][AFD] et [Azure Virtual WAN][vWAN]
-
 La clé permettant d’accéder aux avantages du VDC repose sur l’utilisation d’une topologie réseau centralisée, de type « hub-and-spoke », avec un mélange de services et de fonctionnalités Azure :
 
 * [Réseau virtuel Azure][VNet]
@@ -79,9 +70,6 @@ Les organisations qui se tournent vers DevOps peuvent également utiliser les co
 ## <a name="considerations-for-implementing-a-virtual-datacenter"></a>Considérations relatives à l’implémentation d’un centre de données virtuel
 
 Quand vous concevez une implémentation de VDC, vous devez prendre en compte plusieurs aspects cruciaux :
-
-### <a name="identity-and-directory-services"></a>Services d’identité et d’annuaire
-Les services d’identité et d’annuaire constituent un aspect clé de tous les centres de données, à la fois en local et dans le cloud. La notion d’identité est liée à tous les aspects des accès et des autorisations vis-à-vis des services au sein du VDC. Pour garantir que seuls les utilisateurs et processus autorisés ont accès à votre compte et à vos ressources Azure, Azure utilise plusieurs types d’informations d’identification pour l’authentification. Ces informations regroupent les mots de passe permettant d’accéder au compte Azure, les clés de chiffrement, les signatures numériques et les certificats. 
 
 ### <a name="identity-and-directory-service"></a>Services d’identité et d’annuaire
 
@@ -340,7 +328,7 @@ Les possibilités de charge de travail sont illimitées. Voici quelques-uns des 
 
 **Big Data/Analytique** : En cas de scale-up lié à un volume de données très important, il peut arriver que le scale-up des bases de données ne s’effectue pas correctement. La technologie Hadoop offre un système permettant d’exécuter des requêtes distribuées en parallèle sur un grand nombre de nœuds. Les clients ont la possibilité d’exécuter des charges de travail de données dans des machines virtuelles IaaS ou PaaS ([HDInsight][HDI]). HDInsight prend en charge le déploiement dans un réseau virtuel basé sur l’emplacement et peut être déployé sur un cluster dans un rayon du VDC.
 
-**Événements et messagerie** : [Azure Event Hubs][EventHubs] est un service d’ingestion de données de télémétrie à très grande échelle qui collecte, transforme et stocke des millions d’événements. En tant que plateforme de streaming distribuée, il offre une faible latence et une durée de rétention configurable vous permettant d’ingérer des quantités massives de données de télémétrie dans Azure et de lire les données de plusieurs applications. Le service Event Hubs prend en charge le traitement de pipelines en temps réel et par lots sur le même flux.
+**Événements et messagerie** : Azure Event Hubs[EventHubs] est un service d’ingestion de données de télémétrie à très grande échelle qui collecte, transforme et stocke des millions d’événements. En tant que plateforme de streaming distribuée, il offre une faible latence et une durée de rétention configurable vous permettant d’ingérer des quantités massives de données de télémétrie dans Azure et de lire les données de plusieurs applications. Le service Event Hubs prend en charge le traitement de pipelines en temps réel et par lots sur le même flux.
 
 Vous pouvez implémenter un service de messagerie cloud à haut niveau de fiabilité entre applications et services via [Azure Service Bus][ServiceBus]. Il offre une messagerie répartie asynchrone entre le client et le serveur, une messagerie FIFO (premier entré, premier sorti) structurée ainsi que des fonctionnalités de publication et d’abonnement.
 

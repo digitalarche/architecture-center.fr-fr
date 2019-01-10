@@ -1,32 +1,30 @@
 ---
-title: Gestion des identités pour les applications mutualisées
+title: Gestion des identités pour les applications multilocataires
 description: Meilleures pratiques pour la gestion de l’authentification, de l’autorisation et de l’identité dans les applications multi-locataires.
 author: MikeWasson
 ms.date: 07/21/2017
-pnp.series.title: Manage Identity in Multitenant Applications
-pnp.series.next: tailspin
-ms.openlocfilehash: 24e09720d3257cbfae350995fa5238663da1d26e
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 864317cc98ee0211d4f4274253eda12b72beceed
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902049"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114145"
 ---
 # <a name="manage-identity-in-multitenant-applications"></a>Gérer l’identité dans les applications mutualisées
 
 Cette série d’articles décrit les meilleures pratiques pour les applications multi-locataires, lors de l’utilisation d’Azure AD pour l’authentification et la gestion des identités.
 
-[![GitHub](../_images/github.png) Exemple de code][sample application]
+[![GitHub](../_images/github.png) Exemple de code][sample-application]
 
 Lorsque vous générez une les application multi-locataire, l’une des premières difficultés est la gestion des identités utilisateur, car désormais chaque utilisateur appartient à un client. Par exemple : 
 
-* Les utilisateurs se connectent avec les informations d’identification de leur organisation.
-* Les utilisateurs doivent avoir accès aux données de leur organisation, mais pas aux données appartenant à d’autres clients.
-* Une organisation peut s’inscrire auprès de l’application, puis affecter des rôles d’application à ses membres.
+- Les utilisateurs se connectent avec les informations d’identification de leur organisation.
+- Les utilisateurs doivent avoir accès aux données de leur organisation, mais pas aux données appartenant à d’autres clients.
+- Une organisation peut s’inscrire auprès de l’application, puis affecter des rôles d’application à ses membres.
 
 Azure Active Directory (Azure AD) possède des fonctionnalités qui prennent en charge tous ces scénarios.
 
-Pour accompagner cette série d’articles, nous avons créé une [implémentation de bout en bout] [ sample application] d’une application multi-locataire. Les articles reflètent ce que nous avons appris au cours de la création de l’application. Pour vous familiariser avec l’application, consultez [Exécution de l’application Surveys][running-the-app].
+Pour accompagner cette série d’articles, nous avons créé une [implémentation de bout en bout] [ sample-application] d’une application multi-locataire. Les articles reflètent ce que nous avons appris au cours de la création de l’application. Pour vous familiariser avec l’application, consultez [Exécution de l’application Surveys][running-the-app].
 
 ## <a name="introduction"></a>Introduction
 
@@ -40,12 +38,17 @@ Mais ces utilisateurs appartiennent à des organisations :
 
 Exemple : Tailspin vend des abonnements à son application SaaS. Contoso et Fabrikam s’inscrivent à l’application. Quand Alice (`alice@contoso`) s’inscrit, l’application doit savoir qu’Alice fait partie de Contoso.
 
-* Alice *doit* avoir accès aux données Contoso.
-* Alice *ne doit pas* avoir accès aux données Fabrikam.
+- Alice *doit* avoir accès aux données Contoso.
+- Alice *ne doit pas* avoir accès aux données Fabrikam.
 
-Ce guide vous explique comment gérer des identités d’utilisateurs dans une application multi-locataire, en utilisant [Azure Active Directory][AzureAD] (Azure AD) pour gérer la connexion et l’authentification.
+Ce guide vous explique comment gérer les identités des utilisateurs dans une application multilocataire, en utilisant [Azure Active Directory (Azure AD)](/azure/active-directory) pour gérer la connexion et l’authentification.
+
+<!-- markdownlint-disable MD026 -->
 
 ## <a name="what-is-multitenancy"></a>Qu’est-ce que l’architecture mutualisée ?
+
+<!-- markdownlint-enable MD026 -->
+
 Un *locataire* est un groupe d’utilisateurs. Dans une application SaaS, le locataire est un abonné ou un client de l’application. *architecture mutualisée* est une architecture où plusieurs locataires partagent la même instance physique de l’application. Bien que les locataires partagent des ressources physiques (par exemple, les machines virtuelles ou le stockage), chaque locataire obtient sa propre instance logique de l’application.
 
 Normalement, les données d’application sont partagées entre les utilisateurs d’un locataire, mais pas avec d’autres locataires.
@@ -57,6 +60,7 @@ Comparez cette architecture avec une architecture à locataire unique, où chaqu
 ![Locataire unique](./images/single-tenant.png)
 
 ### <a name="multitenancy-and-horizontal-scaling"></a>Architecture mutualisée et mise à l’échelle horizontale
+
 Pour atteindre une mise à l’échelle dans le cloud, il est courant d’ajouter des instances physiques supplémentaires. Il s’agit de la *mise à l’échelle horizontale* ou de l’*augmentation de la taille des instances*. Prenons l’exemple d’une application web. Pour gérer davantage de trafic, vous pouvez ajouter des machines virtuelles serveurs supplémentaires et les placer derrière un équilibreur de charge. Chaque machine virtuelle exécute une instance physique distincte de l’application web.
 
 ![Équilibrage de la charge d’un site web](./images/load-balancing.png)
@@ -64,40 +68,34 @@ Pour atteindre une mise à l’échelle dans le cloud, il est courant d’ajoute
 Toute requête peut être acheminée vers n’importe quelle instance. Globalement, le système fonctionne comme une instance logique unique. Vous pouvez supprimer une machine virtuelle ou en ajouter une nouvelle, sans affecter les utilisateurs. Dans cette architecture, chaque instance physique est mutualisée, et vous effectuez la mise à l’échelle en ajoutant des instances supplémentaires. Si une instance subit une défaillance, cela ne doit affecter aucun locataire.
 
 ## <a name="identity-in-a-multitenant-app"></a>Identité dans une application multi-locataire
+
 Dans une application multi-locataire, vous devez considérer les utilisateurs dans le contexte des locataires.
 
-**Authentification**
+### <a name="authentication"></a>Authentification
 
-* Les utilisateurs se connectent à l’application avec les informations d’identification de leur organisation. Ils n’ont pas à créer de nouveaux profils utilisateur pour l’application.
-* Les utilisateurs appartenant à la même organisation font partie du même locataire.
-* Quand un utilisateur se connecte, l’application sait à quel locataire l’utilisateur appartient.
+- Les utilisateurs se connectent à l’application avec les informations d’identification de leur organisation. Ils n’ont pas à créer de nouveaux profils utilisateur pour l’application.
+- Les utilisateurs appartenant à la même organisation font partie du même locataire.
+- Quand un utilisateur se connecte, l’application sait à quel locataire l’utilisateur appartient.
 
-**Autorisation**
+### <a name="authorization"></a>Authorization
 
-* Lors de l’autorisation d’actions d’un utilisateur (par exemple, l’affichage d’une ressource), l’application doit prendre en compte le locataire de l’utilisateur.
-* Des rôles peuvent être affectés aux utilisateurs de dans l’application, comme « Admin » ou « Utilisateur Standard ». Les attributions de rôles doivent être gérées par le client, et non par le fournisseur SaaS.
+- Lors de l’autorisation d’actions d’un utilisateur (par exemple, l’affichage d’une ressource), l’application doit prendre en compte le locataire de l’utilisateur.
+- Des rôles peuvent être affectés aux utilisateurs de dans l’application, comme « Admin » ou « Utilisateur Standard ». Les attributions de rôles doivent être gérées par le client, et non par le fournisseur SaaS.
 
 **Exemple.** Alice, une employé de Contoso, navigue vers l’application dans son navigateur et clique sur le bouton « Se connecter ». Elle est redirigée vers un écran de connexion où elle entre ses informations d’identification d’entreprise (nom d’utilisateur et mot de passe). À ce stade, elle est connectée à l’application en tant que `alice@contoso.com`. L’application sait également qu’Alice est une utilisatrice administratrice de cette application. Son statut d’administratrice lui permet de voir une liste de toutes les ressources appartenant à Contoso. Toutefois, elle ne peut pas afficher les ressources de Fabrikam, car elle est administratrice uniquement au sein de son client.
 
 Dans ce guide, nous examinerons plus particulièrement l’utilisation d’Azure AD pour la gestion des identités.
 
-* Nous supposons que le client stocke ses profils utilisateur dans Azure AD (notamment les locataires Office 365 et Dynamics CRM).
-* Les clients disposant d’Active Directory (AD) sur site peuvent utiliser [Azure AD Connect][ADConnect] pour synchroniser leur AD sur site auprès d’Azure AD.
+- Nous supposons que le client stocke ses profils utilisateur dans Azure AD (notamment les locataires Office 365 et Dynamics CRM).
+- Les clients disposant d’Active Directory (AD) local peuvent utiliser [Azure AD Connect](/azure/active-directory/hybrid/whatis-hybrid-identity) pour synchroniser leur Active Directory local avec Azure AD.
 
-Si un client disposant d’AD local ne peut pas utiliser Azure AD Connect (en raison d’une stratégie informatique d’entreprise ou pour d’autres raisons), le fournisseur SaaS peut fédérer avec l’AD du client via les services ADFS (Active Directory Federation Services). Cette option est décrite dans [Fédération avec les services ADFS d’un client].
+Si un client disposant d’AD local ne peut pas utiliser Azure AD Connect (en raison d’une stratégie informatique d’entreprise ou pour d’autres raisons), le fournisseur SaaS peut fédérer avec l’AD du client via les services ADFS (Active Directory Federation Services). Cette option est décrite dans [Fédération avec les services ADFS d’un client](adfs.md).
 
 Ce guide ne prend pas en considération les autres aspects d’une architecture mutualisée, comme le partitionnement des données, la configuration par locataire, etc.
 
-[**Suivant**][tailpin]
+[**Suivant**](./tailspin.md)
 
+<!-- links -->
 
-
-<!-- Links -->
-[ADConnect]: /azure/active-directory/hybrid/whatis-hybrid-identity
-[AzureAD]: /azure/active-directory
-
-[Fédération avec les services ADFS d’un client]: adfs.md
-[tailpin]: tailspin.md
-
+[sample-application]: https://github.com/mspnp/multitenant-saas-guidance
 [running-the-app]: ./run-the-app.md
-[sample application]: https://github.com/mspnp/multitenant-saas-guidance

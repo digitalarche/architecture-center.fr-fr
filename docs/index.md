@@ -4,12 +4,13 @@ description: Le centre des architectures Azure est le centre officiel pour obten
 layout: LandingPage
 ms.topic: landing-page
 ms.date: 09/28/2018
-ms.openlocfilehash: 8da4c9ea487d199debfd6283f8b55c0254db0fd6
-ms.sourcegitcommit: 07d221123d5df7ec9985b3084176c6019e413465
+google-site-verification: b-xRLveOzJ9oSOh37wgRTRB2lMOoFY8HiHf9_0DIawE
+ms.openlocfilehash: 7d619b2e0c7029a729874131ce32040ab6332011
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/16/2018
-ms.locfileid: "49347107"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111918"
 ---
 # <a name="azure-architecture-center"></a>Centre des architectures Azure
 
@@ -302,7 +303,7 @@ ms.locfileid: "49347107"
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3> Conception dans l’optique de la sécurité dans Azure</h3>
+                        <h3> Conception dans l’optique de la sécurité dans Azure</h3>
                     </div>
                 </div>
             </div>

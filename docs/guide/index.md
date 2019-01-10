@@ -2,12 +2,12 @@
 layout: LandingPage
 ms.topic: landing-page
 ms.date: 08/30/2018
-ms.openlocfilehash: a1cac753d384c0fee0af204cddaeea1e63213b9f
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.openlocfilehash: ce1642f237cfae579cc987777c61c8d6eabff571
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43325857"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113873"
 ---
 # <a name="azure-application-architecture-guide"></a>Guide de l’architecture des applications Azure
 
@@ -15,9 +15,11 @@ Ce guide présente une approche structurée pour concevoir des applications sur 
 
 ## <a name="introduction"></a>Introduction
 
-Le cloud change la façon dont les applications sont conçues. À la place de monolithes, les applications sont décomposées en services plus petits et décentralisés. Ces services communiquent via des API ou à l’aide d’une messagerie ou d’une gestion des évènements asynchrone. Les applications sont mises à l’échelle horizontalement, en ajoutant de nouvelles instances lorsque c’est demandé. 
+Le cloud change la façon dont les applications sont conçues. À la place de monolithes, les applications sont décomposées en services plus petits et décentralisés. Ces services communiquent via des API ou à l’aide d’une messagerie ou d’une gestion des évènements asynchrone. Les applications sont mises à l’échelle horizontalement, en ajoutant de nouvelles instances lorsque c’est demandé.
 
-Ces tendances amènent de nouveaux défis. L’état de l’application est distribué. Les opérations sont effectuées en parallèle et de façon asynchrone. Le système dans son ensemble doit être résilient lorsque des échecs se produisent. Les déploiements doivent être automatisée et prévisibles. La surveillance et les données de télémétrie sont critiques pour obtenir des informations du système. Le guide de l’architecture des applications Azure est conçu pour vous aider à naviguer au travers de ces modifications. 
+Ces tendances amènent de nouveaux défis. L’état de l’application est distribué. Les opérations sont effectuées en parallèle et de façon asynchrone. Le système dans son ensemble doit être résilient lorsque des échecs se produisent. Les déploiements doivent être automatisée et prévisibles. La surveillance et les données de télémétrie sont critiques pour obtenir des informations du système. Le guide de l’architecture des applications Azure est conçu pour vous aider à naviguer au travers de ces modifications.
+
+<!-- markdownlint-disable MD033 -->
 
 <table>
 <thead>
@@ -47,6 +49,8 @@ Infrastructure immuable<br/>
 </tbody>
 </table>
 
+<!-- markdownlint-enable MD033 -->
+
 Ce guide est destiné aux architectes, développeurs et aux équipes d’exploitation des applications. Il ne s’agit pas d’un guide de procédure montrant comment utiliser les services Azure individuels. Après avoir lu ce guide, vous comprendrez les modèles architecturaux et les meilleures pratiques à appliquer lors d’une conception sur la plateforme de Azure Cloud. Vous pouvez également télécharger une [version du livre électronique du guide][ebook].
 
 ## <a name="how-this-guide-is-structured"></a>Structure de ce guide
@@ -63,7 +67,7 @@ En savoir plus :
 
 ### <a name="technology-choices"></a>Choix de technologie
 
-Deux choix de technologie doivent être faits dès le départ car ils affectent l’ensemble de l’architecture. Il s’agit des choix des technologies de calcul et magasins de données. *Calcul* fait référence au modèle d’hébergement pour les ressources de calcul utilisées par vos applications. Les *magasins de données* comprennent les bases de données, mais également le stockage pour les files d’attente, les caches, les journaux et toutes les autres choses qu’une application peut stocker d’une façon persistante. 
+Deux choix de technologie doivent être faits dès le départ car ils affectent l’ensemble de l’architecture. Il s’agit des choix des technologies de calcul et magasins de données. *Calcul* fait référence au modèle d’hébergement pour les ressources de calcul utilisées par vos applications. Les *magasins de données* comprennent les bases de données, mais également le stockage pour les files d’attente, les caches, les journaux et toutes les autres choses qu’une application peut stocker d’une façon persistante.
 
 En savoir plus :
 
@@ -78,12 +82,10 @@ En savoir plus :
 
 - [Principes de conception](./design-principles/index.md)
 
-
 ### <a name="quality-pillars"></a>Piliers de qualité
 
-Une application cloud réussie se concentrera sur cinq piliers de qualité logicielle : l’extensibilité, la disponibilité, la résilience, la gestion et la sécurité. Utilisez nos checklists de révision de la conception pour passer en revue votre architecture en fonction de ces piliers de qualité.
+Une application cloud réussie s’appuiera sur les cinq piliers de la qualité d’un logiciel : Scalabilité, disponibilité, résilience, gestion et sécurité. Utilisez nos checklists de révision de la conception pour passer en revue votre architecture en fonction de ces piliers de qualité.
 
 - [Piliers de qualité](./pillars.md)
-
 
 [ebook]: https://azure.microsoft.com/campaigns/cloud-application-architecture-guide/
