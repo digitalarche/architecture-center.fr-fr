@@ -4,12 +4,12 @@ description: Comment créer des applications résilientes dans Azure, pour une h
 author: MikeWasson
 ms.date: 12/18/2018
 ms.custom: resiliency
-ms.openlocfilehash: 28ad589c6d54a1574b5cd5c4f08e3c6adfe349c3
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: ef8fd64756c483528aa83048e23f6387dedb74d6
+ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113125"
+ms.lasthandoff: 01/09/2019
+ms.locfileid: "54160857"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Conception d’applications résilientes pour Azure
 
@@ -148,7 +148,7 @@ Mais il existe des compromis à cette approche. La logique d’application est p
 
 **Contrat SLA pour déploiement multi-région**. Une autre technique de haute disponibilité consiste à déployer l’application dans plusieurs régions, et à utiliser Azure Traffic Manager pour basculer au cas où l’application échoue dans une région. Pour un déploiement multirégion, le contrat SLA composite est calculé comme suit.
 
-*N* est le contrat SLA composite de l’application déployée dans une région, et *R* est le nombre de régions où l’application est déployée. Le risque que l’application échoue dans toutes les régions en même temps est ((1 &minus N) ^ R).
+*N* est le contrat SLA composite de l’application déployée dans une région, et *R* est le nombre de régions où l’application est déployée. Le risque que l’application échoue dans toutes les régions en même temps est ((1 &minus; N) ^ R).
 
 Par exemple, si le contrat SLA d’une seule région est 99,95 %,
 

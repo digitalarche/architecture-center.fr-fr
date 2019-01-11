@@ -4,18 +4,18 @@ description: Architectures de référence, schémas et des recommandations préc
 layout: LandingPage
 ms.topic: landing-page
 ms.date: 08/30/2018
-ms.openlocfilehash: 173698aee0a67578beaa806a59e1c7b0265cdd61
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: 4e0f3b32abc8d2e0da9b139b0e6aae1d48152a37
+ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54011801"
+ms.lasthandoff: 01/09/2019
+ms.locfileid: "54160772"
 ---
 # <a name="azure-reference-architectures"></a>Architectures de référence Azure
 
 Nos architectures de référence sont organisées par scénario, avec les architectures connexes regroupées. Chaque architecture comprend les pratiques recommandées, ainsi que des considérations pour l’extensibilité, la disponibilité, la facilité de gestion et la sécurité. La plupart incluent également une solution pouvant être déployée.
 
-Passer à : [AI](#ai-and-machine-learning) | [Big Data](#big-data-solutions) | [Serverless](#serverless-applications) | [Réseaux virtuels](#virtual-networks)  |  [Charges de travail de machine virtuelle](#vm-workloads) | [SAP](#sap) | [Applications web](#web-applications) | [Active Directory](#extend-on-premises-active-directory-to-azure)
+Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [IoT](#internet-of-things) | [Serverless](#serverless-applications) | [Réseaux virtuels](#virtual-networks) | [Charges de travail de machine virtuelle](#vm-workloads) | [SAP](#sap) | [Applications web](#web-applications) | [Active Directory](#extend-on-premises-active-directory-to-azure)
 
 <!-- markdownlint-disable MD033 -->
 
@@ -201,6 +201,31 @@ Passer à : [AI](#ai-and-machine-learning) | [Big Data](#big-data-solutions) | 
                     <div class="cardText">
                         <h3>Traitement de flux de données avec Azure Stream Analytics</h3>
                         <p>Pipeline de traitement de flux de bout en bout qui met en corrélation les enregistrements issus de deux flux de données pour calculer une moyenne mobile.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+</ul>
+
+## <a name="internet-of-things"></a>Internet des Objets
+
+<ul class="panelContent cardsF">
+<!-- IoT reference architecture -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./iot/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="./iot/_images/iot.svg" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Architecture de référence Azure IoT</h3>
+                        <p>Architecture recommandée pour les applications IoT sur Azure utilisant des composants PaaS (Platform-as-a-Service).</p>
                     </div>
                 </div>
             </div>
