@@ -1,20 +1,20 @@
 ---
-title: 'Adoption du cloud d’entreprise : Gestion de l’accès aux ressources dans Azure'
-description: 'Explication de la structure de gestion de l’accès aux ressources dans Azure : gestion des ressources Azure, abonnements, groupes de ressources et ressources'
+title: 'Adoption du cloud d’entreprise : Gestion de l’accès aux ressources dans Azure'
+description: 'Présentation des constructions de gestion des accès aux ressources dans Azure : Azure Resource Manager, abonnements, groupes de ressources et ressources'
 author: petertaylor9999
 ms.date: 09/10/2018
-ms.openlocfilehash: c26b01d207bc4eb100653a826a053b394d03d1e6
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 8cb28d0dd5dbdfcef846786083d5197f435bf3ea
+ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428701"
+ms.lasthandoff: 01/09/2019
+ms.locfileid: "54160789"
 ---
-# <a name="enterprise-cloud-adoption-resource-access-management-in-azure"></a>Adoption du cloud d’entreprise : Gestion de l’accès aux ressources dans Azure
+# <a name="enterprise-cloud-adoption-resource-access-management-in-azure"></a>Adoption du cloud d’entreprise : Gestion de l’accès aux ressources dans Azure
 
 Comme vous l’avez appris dans l’article [Qu’est-ce que la gouvernance de ressource ?](what-is-governance.md), la gouvernance consiste à gérer, surveiller et contrôler en continu les ressources Azure afin d’atteindre les objectifs et de satisfaire aux exigences de votre organisation. Avant de découvrir comment concevoir un modèle de gouvernance, il est important de comprendre les contrôles de gestion des accès aux ressources dans Azure. La configuration de ces contrôles de gestion des accès aux ressources constitue la base de votre modèle de gouvernance.
 
-Nous allons commencer en examinant plus en détail comment les ressources sont déployées dans Azure. 
+Commençons par examiner de plus près le déploiement des ressources dans Azure. 
 
 ## <a name="what-is-an-azure-resource"></a>Qu’est-ce qu’une ressource Azure ?
 
@@ -46,7 +46,7 @@ Dans [Comment fonctionne Azure ?](what-is-azure.md), vous avez appris qu’Azure
 ![](../_images/governance-1-12.png)   
 *Figure 4 : Azure Resource Manager.*
 
-L’illustration suivante montre trois clients : [Powershell](/powershell/azure/overview), [le Portail Azure](https://portal.azure.com) et [l’interface de ligne de commande (CLI) Azure](/cli/azure) :
+La figure suivante montre trois clients : [PowerShell](/powershell/azure/overview), le [Portail Azure](https://portal.azure.com) et l’[interface CLI (interface de ligne de commande) Azure](/cli/azure) :
 
 ![](../_images/governance-1-13.png)   
 *Figure 5 : Les clients Azure se connectent à l’API RESTful d’Azure Resource Manager.*

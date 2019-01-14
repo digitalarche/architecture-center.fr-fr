@@ -1,18 +1,17 @@
 ---
-title: Transaction de compensation
+title: Modèle de transaction de compensation
+titleSuffix: Cloud Design Patterns
 description: Annulez le travail effectué par une série d’étapes qui définissent ensemble une opération cohérente.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- resiliency
-ms.openlocfilehash: 3d58537d9c77b97332bcabf762b9af7ed2f20421
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: b81151a6db08c2c14c7f26af3b4b79bfd22a18bb
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428140"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011614"
 ---
 # <a name="compensating-transaction-pattern"></a>Modèle de transaction de compensation
 
@@ -86,7 +85,7 @@ Notez que les étapes de la transaction de compensation ne seront pas forcément
 
 ![Exécution d’une transaction de compensation afin d’annuler une transaction à long terme pour réserver un itinéraire de voyage](./_images/compensating-transaction-diagram.png)
 
-
+> [!NOTE]
 > Il est parfois possible d’exécuter en parallèle les étapes de la transaction de compensation. Cela dépend de la façon dont vous avez conçu la logique de compensation pour chaque étape.
 
 Dans de nombreuses solutions d’entreprise, l’échec d’une seule étape ne nécessite pas toujours une réinitialisation de l’état d’origine du système via une transaction de compensation. Par exemple, si&mdash;après avoir réservé les vols F1, F2 et F3 dans le scénario du site web de voyage&mdash;le client ne parvient pas à réserver une chambre à l’hôtel H1, il est préférable de proposer au client une chambre dans un autre hôtel de la ville plutôt que d’annuler tous les vols. Le client peut toujours décider d’annuler (auquel cas la transaction de compensation s’exécute et annule les réservations effectuées sur les vols F1, F2 et F3), mais cette décision doit être prise par le client et non pas par le système.
@@ -97,6 +96,6 @@ Les modèles et les conseils suivants peuvent aussi présenter un intérêt quan
 
 - [Data Consistency Primer](https://msdn.microsoft.com/library/dn589800.aspx) (Manuel d’introduction à la cohérence des données). Le modèle de transaction de compensation est souvent utilisé pour annuler les opérations qui implémentent le modèle de cohérence éventuelle. Ce manuel présente les avantages et les inconvénients de la cohérence éventuelle.
 
-- [Modèle Planificateur-Agent-Superviseur](scheduler-agent-supervisor.md). Ce modèle décrit comment implémenter des systèmes résilients qui exécutent des opérations métiers utilisant des ressources et des services distribués. Parfois, il peut être nécessaire d’annuler le travail effectué par une opération à l’aide d’une transaction de compensation.
+- [Modèle Planificateur-Agent-Superviseur](./scheduler-agent-supervisor.md). Ce modèle décrit comment implémenter des systèmes résilients qui exécutent des opérations métiers utilisant des ressources et des services distribués. Parfois, il peut être nécessaire d’annuler le travail effectué par une opération à l’aide d’une transaction de compensation.
 
 - [Modèle Nouvelle tentative](./retry.md). Les transactions de compensation peuvent s’avérer coûteuses. Il est possible de limiter leur utilisation en implémentant une stratégie efficace consistant à relancer les opérations ayant échoué en suivant le modèle Nouvelle tentative.

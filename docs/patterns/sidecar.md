@@ -1,14 +1,17 @@
 ---
 title: Modèle side-car
+titleSuffix: Cloud Design Patterns
 description: Déployez les composants d’une application sur un processus ou conteneur distinct pour fournir l’isolation et l’encapsulation.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: ec168009aa99f412c3f1222a1c404ea4ea5cb669
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: 8d3cdd5297b99bc369de6192bca50bd9f02dca47
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541767"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010001"
 ---
 # <a name="sidecar-pattern"></a>Modèle side-car
 
@@ -18,7 +21,7 @@ Ce modèle est nommé *side-car*, car il ressemble à un side-car attaché à un
 
 ## <a name="context-and-problem"></a>Contexte et problème
 
-Les applications et services nécessitent souvent des fonctionnalités connexes, telles que la surveillance, la journalisation, la configuration et les services réseau. Ces tâches périphériques peuvent être implémentées en tant que composants ou services distincts. 
+Les applications et services nécessitent souvent des fonctionnalités connexes, telles que la surveillance, la journalisation, la configuration et les services réseau. Ces tâches périphériques peuvent être implémentées en tant que composants ou services distincts.
 
 Si elles sont étroitement intégrées à l’application, elles peuvent s’exécuter dans le même processus que l’application, optimisant l’utilisation des ressources partagées. Toutefois, cela signifie également qu’elles ne sont pas bien isolées ; une panne dans un de ces composants peut affecter les autres composants ou l’ensemble de l’application. De plus, elles doivent généralement être implémentées à l’aide du même langage que l’application parente. Ainsi, le composant et l’application sont étroitement interdépendants.
 
@@ -26,23 +29,23 @@ Si l’application est décomposée en services, chaque service peut être gén�
 
 ## <a name="solution"></a>Solution
 
-Colocalisez un ensemble cohérent de tâches avec l’application principale, mais placez-les à l’intérieur de leur propre processus ou conteneur, en fournissant une interface homogène pour les services de plateforme entre les langages. 
+Colocalisez un ensemble cohérent de tâches avec l’application principale, mais placez-les à l’intérieur de leur propre processus ou conteneur, en fournissant une interface homogène pour les services de plateforme entre les langages.
 
-![](./_images/sidecar.png)
+![Diagramme du modèle Sidecar](./_images/sidecar.png)
 
-Un service side-car ne fait pas nécessairement partie de l’application, mais il est connecté à celle-ci. Il est présent partout où l’application parente est présente. Les side-cars sont des processus ou services de prise en charge qui sont déployés avec l’application principale. Dans le cas d’une motocyclette, le side-car est attaché à celle-ci, et chaque motocyclette peut avoir son propre side-car. De la même façon, un service side-car partage le devenir de son application parente. Pour chaque instance de l’application, une instance du side-car est déployée et hébergée à ses côtés. 
+Un service side-car ne fait pas nécessairement partie de l’application, mais il est connecté à celle-ci. Il est présent partout où l’application parente est présente. Les side-cars sont des processus ou services de prise en charge qui sont déployés avec l’application principale. Dans le cas d’une motocyclette, le side-car est attaché à celle-ci, et chaque motocyclette peut avoir son propre side-car. De la même façon, un service side-car partage le devenir de son application parente. Pour chaque instance de l’application, une instance du side-car est déployée et hébergée à ses côtés.
 
 Avantages de l’utilisation d’un modèle side-car :
 
-- Un side-car étant indépendant de son application principale en termes d’environnement d’exécution et de langage de programmation, vous n’avez pas besoin de développer un side-car par langage. 
+- Un side-car étant indépendant de son application principale en termes d’environnement d’exécution et de langage de programmation, vous n’avez pas besoin de développer un side-car par langage.
 
-- Le side-car peut accéder aux mêmes ressources que l’application principale. Par exemple, un side-car peut surveiller les ressources système utilisées par lui-même et l’application principale. 
+- Le side-car peut accéder aux mêmes ressources que l’application principale. Par exemple, un side-car peut surveiller les ressources système utilisées par lui-même et l’application principale.
 
 - En raison de sa proximité avec l’application principale, il n’existe aucune latence importante quand l’un et l’autre communiquent.
 
 - Même pour les applications qui ne fournissent pas de mécanisme d’extensibilité, vous pouvez utiliser un side-car pour étendre les fonctionnalités en le joignant en tant que processus propre dans le même hôte ou sous-conteneur que l’application principale.
 
-Le modèle side-car est souvent utilisé avec des conteneurs et est appelé « conteneur side-car » ou « conteneur assistant ». 
+Le modèle side-car est souvent utilisé avec des conteneurs et est appelé « conteneur side-car » ou « conteneur assistant ».
 
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
@@ -53,7 +56,7 @@ Le modèle side-car est souvent utilisé avec des conteneurs et est appelé « c
 
 ## <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
 
-Utilisez ce modèle dans les situations suivantes :
+Utilisez ce modèle dans les situations suivantes :
 
 - Votre application principale utilise un ensemble hétérogène de langages et de frameworks. Un composant situé dans un service side-car peut être utilisé par des applications écrites dans des langages différents à l’aide de différents frameworks.
 - Un composant est détenu par une équipe à distance ou une autre organisation.
@@ -67,20 +70,15 @@ Ce modèle peut ne pas convenir :
 - Pour les petites applications où l’avantage procuré par l’isolation ne contrebalance pas le coût en ressources lié au déploiement d’un service side-car pour chaque instance.
 - Quand le service doit se mettre à l’échelle différemment ou indépendamment des applications principales. Dans ce cas, il peut être préférable de déployer la fonctionnalité en tant que service distinct.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Ce modèle side-car s’applique à de nombreux scénarios. Voici quelques exemples courants :
 
 - API d’infrastructure. L’équipe de développement de l’infrastructure crée un service qui est déployé en même temps que chaque application, au lieu d’une bibliothèque cliente spécifique au langage pour accéder à l’infrastructure. Le service est chargé en tant que side-car et fournit une couche commune pour les services de l’infrastructure, notamment la journalisation, les données de l’environnement, le magasin de configuration, la découverte, les contrôles d’intégrité et les services de surveillance. De plus, le side-car surveille le processus (ou conteneur) et l’environnement hôte de l’application parente et journalise les informations dans un service centralisé.
 - Gérer NGINX/HAProxy. Déployer NGINX avec un service side-car qui surveille l’état de l’environnement, puis met à jour le fichier de configuration NGINX et recycle le processus quand une modification d’état est nécessaire.
-- Side-car ambassadeur. Déployer un service [Ambassadeur][ambassador] en tant que side-car. L’application fait appel à l’ambassadeur, qui gère la journalisation des demandes, le routage, la rupture de circuit (circuit breaking) et autres fonctionnalités liées à la connectivité.
+- Side-car ambassadeur. Déployez un service [Ambassadeur](./ambassador.md) en tant que side-car. L’application fait appel à l’ambassadeur, qui gère la journalisation des demandes, le routage, la rupture de circuit (circuit breaking) et autres fonctionnalités liées à la connectivité.
 - Proxy de déchargement. Placer un proxy NGINX devant une instance de service node.js afin de gérer la fourniture de contenu de fichier statique pour le service.
-
 
 ## <a name="related-guidance"></a>Aide connexe
 
-- [Modèle ambassadeur][ambassador]
-
-
-[ambassador]: ./ambassador.md
-
+- [Modèle ambassadeur](./ambassador.md)

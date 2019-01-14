@@ -4,12 +4,12 @@ titleSuffix: Azure Reference Architectures
 description: Implémentez une architecture multiniveau sur Azure pour la disponibilité, la sécurité, l’extensibilité et la facilité de gestion.
 author: MikeWasson
 ms.date: 11/12/2018
-ms.openlocfilehash: 38983dec83718f53fc1ffd79c1347582200f5db0
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: e7dbd8dd2b8e5aff8f18ff9b87fce0b76a850bce
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120121"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011376"
 ---
 # <a name="windows-n-tier-application-on-azure-with-sql-server"></a>Application multiniveau Windows sur Azure avec SQL Server
 
@@ -65,7 +65,7 @@ Concevez les sous-réseaux en tenant compte des exigences en matière de sécuri
 
 ### <a name="load-balancers"></a>Équilibreurs de charge
 
-N’exposez pas les machines virtuelles directement à Internet. Attribuez plutôt à chaque machine virtuelle une adresse IP privée. Les clients se connectent à partir d’une adresse IP publique associée à la passerelle Application Gateway.
+N’exposez pas les machines virtuelles directement à Internet. Attribuez plutôt à chaque machine virtuelle une adresse IP privée. Les clients se connectent à l’aide de l’adresse IP publique associée à la passerelle Application Gateway.
 
 Définissez des règles d’équilibreur de charge pour diriger le trafic réseau vers les machines virtuelles. Par exemple, pour activer le trafic HTTP, mappez le port 80 de la configuration du serveur frontal au port 80 dans le pool d’adresses principales. Quand un client envoie une requête HTTP au port 80, l’équilibreur de charge sélectionne une adresse IP backend en utilisant un [algorithme de hachage][load-balancer-hashing] qui inclut l’adresse IP source. Les requêtes des clients sont réparties entre toutes les machines virtuelles dans le pool d’adresses principales.
 

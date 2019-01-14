@@ -3,14 +3,14 @@ title: Environnements de développement/test pour les charges de travail SAP
 titleSuffix: Azure Example Scenarios
 description: Créez un environnement de développement/test pour les charges de travail SAP.
 author: AndrewDibbins
-ms.date: 7/11/18
+ms.date: 07/11/2018
 ms.custom: fasttrack
-ms.openlocfilehash: 3f6c828e8757a3f82ad6972a8f21cd2fed629162
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: 9f9e8ec971373e4309703800c200ba2c62fe9a66
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643966"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111017"
 ---
 # <a name="devtest-environments-for-sap-workloads-on-azure"></a>Environnements de développement/test pour les charges de travail SAP sur Azure
 
@@ -31,12 +31,12 @@ Les autres cas d’usage appropriés sont les suivants :
 
 ## <a name="architecture"></a>Architecture
 
-![Diagramme d’architecture pour les environnements de développement/test des charges de travail SAP](media/architecture-sap-dev-test.png)
+![Diagramme d’architecture pour les environnements de développement/test des charges de travail SAP](./media/architecture-sap-dev-test.png)
 
 Ce scénario illustre le provisionnement d’une base de données système SAP et d’un serveur d’application SAP uniques sur une seule machine virtuelle. Les données circulent dans le scénario comme suit :
 
 1. Les clients utilisent l’interface utilisateur SAP ou d’autres outils clients (Excel, un navigateur Web ou une autre application Web) pour accéder au système SAP basé sur Azure.
-2. La connectivité est assurée par une connexion ExpressRoute établie qui se termine dans Azure au niveau de la passerelle ExpressRoute. Le trafic réseau est routé via la passerelle ExpressRoute vers le sous-réseau de passerelle et depuis le sous-réseau de passerelle vers le sous-réseau spoke de niveau application (voir le modèle [hub-spoke][hub-spoke]), et via une passerelle de sécurité réseau vers la machine virtuelle de l’application SAP.
+2. La connectivité est assurée par une connexion ExpressRoute établie qui se termine dans Azure au niveau de la passerelle ExpressRoute. Le trafic réseau est routé via la passerelle ExpressRoute vers le sous-réseau de passerelle, et depuis le sous-réseau de passerelle vers le sous-réseau spoke de niveau application (consultez les informations sur la [topologie réseau hub-and-spoke][hub-spoke]), et via une passerelle de sécurité réseau vers la machine virtuelle de l’application SAP.
 3. Les serveurs de gestion d’identité fournissent des services d’authentification.
 4. Le serveur jumpbox offre des fonctionnalités de gestion locale.
 
@@ -52,7 +52,7 @@ Ce scénario illustre le provisionnement d’une base de données système SAP e
 
 ### <a name="availability"></a>Disponibilité
 
- Microsoft propose un contrat de niveau de service (SLA) pour les instances de machine virtuelle uniques. Pour plus d’informations sur le contrat de niveau de service Microsoft Azure pour les machines virtuelles [Contrat SLA pour les machines virtuelles](https://azure.microsoft.com/support/legal/sla/virtual-machines)
+Microsoft propose un contrat de niveau de service (SLA) pour les instances de machine virtuelle uniques. Pour plus d’informations sur le contrat de niveau de service Microsoft Azure pour les machines virtuelles [Contrat SLA pour les machines virtuelles](https://azure.microsoft.com/support/legal/sla/virtual-machines)
 
 ### <a name="scalability"></a>Extensibilité
 

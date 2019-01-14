@@ -5,12 +5,12 @@ description: Liste de vérification fournissant des indications relatives aux pr
 author: petertaylor9999
 ms.date: 11/26/2018
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 1201e2045c6a5f7be9c8286cd192559a8d66d169
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: 1a3c7b899be1c61cc53eb9caee30f5153edeb5ae
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53307450"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113601"
 ---
 # <a name="resiliency-checklist"></a>Liste de vérification de résilience
 
@@ -80,7 +80,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 **Envisagez d’utiliser un type de compte de stockage géoredondant.** Les données stockées dans un compte Stockage Azure sont toujours répliquées localement. Cependant, plusieurs stratégies de réplication sont proposées lors du provisionnement d’un compte de stockage. Sélectionnez [Stockage géo-redondant avec accès en lecture (RA-GRS)](/azure/storage/storage-redundancy/#read-access-geo-redundant-storage) pour que vos données d’application soient protégées dans l’éventualité peu probable où une région entière deviendrait indisponible.
 
 > [!NOTE]
-> Pour les machines virtuelles, ne vous appuyez pas sur la réplication RA-GRS pour restaurer les disques de machine virtuelle (fichiers VHD). Utilisez le service [Sauvegarde Azure][azure-backup] à la place.
+> Pour les machines virtuelles, ne vous appuyez pas sur la réplication RA-GRS pour restaurer les disques de machine virtuelle (fichiers VHD). À la place, utilisez le service [Sauvegarde Azure](/azure/backup).
 
 ## <a name="security"></a>Sécurité
 
@@ -169,7 +169,6 @@ La résilience est la capacité d’un système à récupérer après des défai
 [app-service-autoscale]: /azure/monitoring-and-diagnostics/insights-how-to-scale/
 [asynchronous-c-sharp]: /dotnet/articles/csharp/async
 [availability-sets]:/azure/virtual-machines/virtual-machines-windows-manage-availability/
-[azure-backup]: https://azure.microsoft.com/documentation/services/backup/
 [circuit-breaker]: ../patterns/circuit-breaker.md
 [cloud-service-autoscale]: /azure/cloud-services/cloud-services-how-to-scale/
 [fma]: ../resiliency/failure-mode-analysis.md

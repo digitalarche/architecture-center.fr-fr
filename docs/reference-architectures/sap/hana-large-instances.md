@@ -5,12 +5,12 @@ description: Pratiques éprouvées d’exécution de SAP HANA dans un environnem
 author: lbrader
 ms.date: 05/16/2018
 ms.custom: seodec18
-ms.openlocfilehash: ef3c57f292024af0abbeb4ead62ab4b3aeb57a90
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: 47953037827923ea0e4f492dfc29ce815072a20e
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53644085"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011359"
 ---
 # <a name="run-sap-hana-on-azure-large-instances"></a>Exécution de SAP HANA sur les grandes instances Azure
 
@@ -41,7 +41,7 @@ Cette architecture est constituée des composants d’infrastructure suivants.
 
 - **Stockage NFS (Network File System)**. Le serveur [NFS][nfs] prend en charge le partage de fichiers réseau qui assure la persistance des données sécurisée de la grande instance HANA.
 
-- **ExpressRoute**. [ExpressRoute][expressroute] est le service réseau Azure recommandé pour l’établissement de connexions privées entre un réseau local et les réseaux virtuels Azure non accessibles sur l’Internet public. Les machines virtuelles Azure se connectent aux grandes instances HANA à l’aide d’une autre connexion ExpressRoute. La connexion ExpressRoute entre le réseau virtuel Azure et les grandes instances HANA est configurée dans le cadre de l’offre Microsoft.
+- **ExpressRoute**. [ExpressRoute][expressroute] est le service réseau Azure recommandé pour la création de connexions privées entre un réseau local et les réseaux virtuels Azure non accessibles via le réseau Internet public. Les machines virtuelles Azure se connectent aux grandes instances HANA à l’aide d’une autre connexion ExpressRoute. La connexion ExpressRoute entre le réseau virtuel Azure et les grandes instances HANA est configurée dans le cadre de l’offre Microsoft.
 
 - **Passerelle**. La passerelle ExpressRoute est utilisée pour connecter le réseau virtuel Azure utilisé pour la couche Application SAP au réseau hébergeant la grande instance HANA. Utilisez la référence SKU [Hautes performances ou ultra-performance][sku].
 

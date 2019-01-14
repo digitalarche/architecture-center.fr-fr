@@ -1,17 +1,17 @@
 ---
 title: Autorisation dans les applications multi-locataires
-description: Comment déclarer des autorisations dans une application multi-locataire
+description: Comment effectuer une autorisation dans une application multilocataire.
 author: MikeWasson
 ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: app-roles
 pnp.series.next: web-api
-ms.openlocfilehash: 8ff2317eb85197ed93e048b6a2d836405436cc17
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: 6e406a7e80b77dea161db194a82ccae043bdc777
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53307161"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110337"
 ---
 # <a name="role-based-and-resource-based-authorization"></a>Autorisation basée sur les ressources et les rôles
 
@@ -25,6 +25,7 @@ Notre [implémentation de référence] est une application ASP.NET Core. Dans c
 Une application classique utilise une combinaison des deux. Par exemple, pour supprimer une ressource, l’utilisateur doit être le propriétaire de la ressource *ou* un administrateur.
 
 ## <a name="role-based-authorization"></a>Autorisation basée sur les rôles
+
 L’application [Tailspin Surveys][Tailspin] définit les rôles suivants :
 
 * Administrateur. Peut effectuer toutes les opérations CRUD sur toute enquête appartenant à ce locataire.
@@ -38,6 +39,7 @@ Pour plus d’informations sur la façon de définir et de gérer les rôles, co
 Quelle que soit la façon dont vous gérez les rôles, votre code d’autorisation se présente de la même façon. ASP.NET Core possède une abstraction appelée [stratégies d’autorisation][policies]. Avec cette fonctionnalité, vous définissez des stratégies d’autorisation dans le code, puis vous appliquez ces stratégies à des actions de contrôleur. La stratégie est dissociée du contrôleur.
 
 ### <a name="create-policies"></a>Création des stratégies
+
 Pour définir une stratégie, commencez par créer une classe qui implémente `IAuthorizationRequirement`. Il est plus facile de dériver de `AuthorizationHandler`. Dans la méthode `Handle` , examinez la ou les revendications pertinentes.
 
 Voici un exemple de l’application Surveys de Tailspin :
@@ -47,7 +49,7 @@ public class SurveyCreatorRequirement : AuthorizationHandler<SurveyCreatorRequir
 {
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, SurveyCreatorRequirement requirement)
     {
-        if (context.User.HasClaim(ClaimTypes.Role, Roles.SurveyAdmin) || 
+        if (context.User.HasClaim(ClaimTypes.Role, Roles.SurveyAdmin) ||
             context.User.HasClaim(ClaimTypes.Role, Roles.SurveyCreator))
         {
             context.Succeed(requirement);
@@ -68,7 +70,7 @@ services.AddAuthorization(options =>
         policy =>
         {
             policy.AddRequirements(new SurveyCreatorRequirement());
-            policy.RequireAuthenticatedUser(); // Adds DenyAnonymousAuthorizationRequirement 
+            policy.RequireAuthenticatedUser(); // Adds DenyAnonymousAuthorizationRequirement
             // By adding the CookieAuthenticationDefaults.AuthenticationScheme, if an authenticated
             // user is not in the appropriate role, they will be redirected to a "forbidden" page.
             policy.AddAuthenticationSchemes(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -87,6 +89,7 @@ services.AddAuthorization(options =>
 Ce code définit aussi le schéma d’authentification, qui indique à ASP.NET quel intergiciel (middleware) d’authentification exécuter en cas d’échec de l’autorisation. Dans ce cas, nous spécifions le middleware d’authentification de cookie, car il peut rediriger l’utilisateur vers une page « interdite ». L’emplacement de la page interdite est défini dans l’option `AccessDeniedPath` du middleware de cookie ; consultez [Configuration du middleware d’authentification].
 
 ### <a name="authorize-controller-actions"></a>Autorisation des actions de contrôleur
+
 Enfin, pour autoriser une action dans un contrôleur MVC, définissez la stratégie dans l’attribut `Authorize` :
 
 ```csharp
@@ -112,6 +115,7 @@ Elle est toujours prise en charge dans ASP.NET Core, mais elle présente certain
 * Les stratégies permettent des décisions d’autorisation plus complexes (par exemple, un âge >= 21) qui ne peuvent pas être exprimées par la simple appartenance à un rôle.
 
 ## <a name="resource-based-authorization"></a>Autorisation basée sur les ressources
+
 *Autorisation basée sur les ressources* se produit chaque fois que l’autorisation dépend d’une ressource spécifique qui sera affectée par une opération. Dans l’application Surveys de Tailspin, chaque enquête a un propriétaire et des collaborateurs zéro-à-plusieurs.
 
 * Le propriétaire peut lire, mettre à jour, supprimer et publier l’enquête, ainsi qu’annuler sa publication.
@@ -247,7 +251,8 @@ static readonly Dictionary<OperationAuthorizationRequirement, Func<List<UserPerm
 
 [**Suivant**][web-api]
 
-<!-- Links -->
+<!-- links -->
+
 [Tailspin]: tailspin.md
 
 [Rôles d’application]: app-roles.md

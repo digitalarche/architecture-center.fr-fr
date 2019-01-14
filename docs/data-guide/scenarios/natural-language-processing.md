@@ -3,30 +3,30 @@ title: Traitement en langage naturel
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 32f2a5e3a0baddc765fb36ccc42fe2626faa5eba
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 373afbabec78dd1ec30b6d07bca9d5da62b5d6e3
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901437"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110473"
 ---
 # <a name="natural-language-processing"></a>Traitement en langage naturel
 
 Le traitement en langage naturel (NLP) est utilisé pour des tâches telles que l’analyse des sentiments, la détection des rubriques, la détection de la langue, l’extraction de phrases clés et la classification des documents.
 
-![](./images/nlp-pipeline.png)
+![Diagramme d’un pipeline de traitement du langage naturel](./images/nlp-pipeline.png)
 
-## <a name="when-to-use-this-solution"></a>Quand utiliser cette solution
+## <a name="when-to-use-this-solution"></a>Quand utiliser cette solution ?
 
-NLP peut être utilisé pour classifier des documents, tels que l’étiquetage des documents sensibles ou indésirables. Les résultats du NLP peuvent être utilisés pour un traitement ou une recherche ultérieure. Le NLP est également utilisé pour résumer un texte en identifiant les entités présentes dans le document. Ces entités peuvent également servir à ajouter des balises à des documents avec des mots clés, ce qui permet une recherche et une récupération basées sur le contenu. Les entités peuvent être combinées dans les rubriques à des résumés qui décrivent les rubriques importantes présentes dans chaque document. Les rubriques détectées peuvent être utilisées pour classer les documents pour la navigation ou pour énumérer des documents connexes selon une rubrique sélectionnée. Le NLP est encore utilisé pour noter le sentiment d’un texte, afin d’évaluer la tonalité positive ou négative d’un document. Ces approches utilisent de nombreuses techniques à partir du traitement en langage naturel, telle que : 
+NLP peut être utilisé pour classifier des documents, tels que l’étiquetage des documents sensibles ou indésirables. Les résultats du NLP peuvent être utilisés pour un traitement ou une recherche ultérieure. Le NLP est également utilisé pour résumer un texte en identifiant les entités présentes dans le document. Ces entités peuvent également servir à ajouter des balises à des documents avec des mots clés, ce qui permet une recherche et une récupération basées sur le contenu. Les entités peuvent être combinées dans les rubriques à des résumés qui décrivent les rubriques importantes présentes dans chaque document. Les rubriques détectées peuvent être utilisées pour classer les documents pour la navigation ou pour énumérer des documents connexes selon une rubrique sélectionnée. Le NLP est encore utilisé pour noter le sentiment d’un texte, afin d’évaluer la tonalité positive ou négative d’un document. Ces approches utilisent de nombreuses techniques à partir du traitement en langage naturel, telle que :
 
 - **Générateur de jetons**. Fractionner le texte en mots ou expressions.
-- **Recherche de radical et lemmatisation**. Normalisation des mots afin que différentes formes correspondent au mot canonique avec la même signification. Par exemple, « exécution » et « exécuté » correspondent à « exécuter ». 
+- **Recherche de radical et lemmatisation**. Normalisation des mots afin que différentes formes correspondent au mot canonique avec la même signification. Par exemple, « exécution » et « exécuté » correspondent à « exécuter ».
 - **Extraction d’une entité**. Identification des sujets dans le texte.
 - **Détection d’une partie du message**. Identification des verbe, nom, participe, expression verbale et ainsi de suite d’un texte.
 - **Détection des limites d’une phrase**. Détection des phrases complètes dans les paragraphes du texte.
 
-Lorsque vous utilisez NLP pour extraire des informations et des analyses de textes de forme libre, les documents bruts stockés dans le stockage d’objets tels que le stockage Azure ou Azure Data Lake Store constituent généralement le point de départ. 
+Lorsque vous utilisez NLP pour extraire des informations et des analyses de textes de forme libre, les documents bruts stockés dans le stockage d’objets tels que le stockage Azure ou Azure Data Lake Store constituent généralement le point de départ.
 
 ## <a name="challenges"></a>Défis
 

@@ -1,14 +1,17 @@
 ---
 title: Modèle de services principaux destinés aux frontaux
-description: Créez différents services principaux destinés à être consommés par des applications ou interfaces frontales spécifiques.
+titleSuffix: Cloud Design Patterns
+description: Créez différents services principaux destinés à être utilisés par des applications ou interfaces frontales spécifiques.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: a0dbc9ab58aa218f6faf40b70dad1bdc22d71458
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 1fc597ded3e87ca7b4a200a13af9dce5ba2dbec5
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428786"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009744"
 ---
 # <a name="backends-for-frontends-pattern"></a>Modèle de services principaux destinés aux frontaux
 
@@ -18,23 +21,23 @@ Créez différents services principaux destinés à être utilisés par des appl
 
 À l’origine, une application peut être destinée à une interface utilisateur web de bureau. Un service principal est généralement développé en parallèle et fournit les fonctionnalités requises par cette interface utilisateur. À mesure que la base d’utilisateurs de l’application augmente, une application mobile est développée et doit interagir avec le même service principal. Le service principal devient un service principal à usage général, répondant aussi bien aux exigences des interfaces de bureau qu’à celles des interfaces mobiles.
 
-Toutefois, les fonctionnalités d’un appareil mobile diffèrent sensiblement de celles d’un navigateur de bureau en termes de taille d’écran, de performances et de limitations d’affichage. Par conséquent, les impératifs d’un service principal d’application mobile sont distincts de ceux d’une interface utilisateur web de bureau. 
+Toutefois, les fonctionnalités d’un appareil mobile diffèrent sensiblement de celles d’un navigateur de bureau en termes de taille d’écran, de performances et de limitations d’affichage. Par conséquent, les impératifs d’un service principal d’application mobile sont distincts de ceux d’une interface utilisateur web de bureau.
 
 Le service principal doit donc satisfaire à des exigences contradictoires. Le service principal nécessite des modifications régulières et significatives pour desservir à la fois l’interface utilisateur web de bureau et l’application mobile. Étant donné que des équipes d’interface distinctes travaillent souvent sur chaque frontal, le service principal devient un goulot d’étranglement dans le processus de développement. Les exigences de mise à jour conflictuelles et l’obligation de maintenir le service opérationnel pour les deux frontaux peuvent nécessiter un travail considérable sur une seule ressource déployable.
 
-![](./_images/backend-for-frontend.png) 
+![Diagramme de contexte et problème du modèle de services back-end destinés aux services front-end](./_images/backend-for-frontend.png)
 
-L’activité de développement étant axée sur le service principal, il est possible qu’une équipe distincte soit créée pour gérer et mettre à jour le service principal. Les équipes de développement d’interface se retrouvent alors déconnectées de l’équipe de service principal, contraignant ainsi cette dernière à trouver un équilibre entre les exigences contradictoires des différentes équipes d’interface utilisateur. Lorsqu’une équipe d’interface requiert l’apport de modifications au service principal, ces modifications doivent être validées auprès des autres équipes d’interface avant de pouvoir être intégrées au service principal. 
+L’activité de développement étant axée sur le service principal, il est possible qu’une équipe distincte soit créée pour gérer et mettre à jour le service principal. Les équipes de développement d’interface se retrouvent alors déconnectées de l’équipe de service principal, contraignant ainsi cette dernière à trouver un équilibre entre les exigences contradictoires des différentes équipes d’interface utilisateur. Lorsqu’une équipe d’interface requiert l’apport de modifications au service principal, ces modifications doivent être validées auprès des autres équipes d’interface avant de pouvoir être intégrées au service principal.
 
 ## <a name="solution"></a>Solution
 
 Créez un service principal par interface utilisateur. Ajustez le comportement et les performances de chaque service principal pour qu’ils répondent au mieux aux besoins de l’environnement frontal, sans vous soucier d’affecter l’expérience des autres frontaux.
 
-![](./_images/backend-for-frontend-example.png) 
+![Diagramme du modèle de services back-end destinés aux services front-end](./_images/backend-for-frontend-example.png)
 
 Étant donné que chaque service principal est propre à une interface, il peut être optimisé pour cette dernière. Par conséquent, il sera moins volumineux, moins complexe et probablement plus rapide qu’un service principal générique qui tente de répondre aux exigences de toutes les interfaces. Chaque équipe d’interface a la possibilité de contrôler son propre service principal et ne dépend pas d’une équipe de développement de service principal centralisée. L’équipe d’interface dispose ainsi d’une réelle flexibilité en matière de sélection de langue, de cadence de mise en production, de hiérarchisation des charges de travail et d’intégration de fonctionnalités à son service principal.
 
-Pour plus d’informations, consultez [Pattern: Backends For Frontends](https://samnewman.io/patterns/architectural/bff/) (Modèle : Services principaux destinés aux frontaux).
+Pour plus d’informations, consultez l’article [Pattern: Backends For Frontends](https://samnewman.io/patterns/architectural/bff/).
 
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
@@ -64,5 +67,3 @@ Ce modèle peut ne pas convenir dans les cas suivants :
 - [Gateway Aggregation pattern](./gateway-aggregation.md) (Modèle d’agrégation de passerelle)
 - [Modèle de déchargement de passerelle](./gateway-offloading.md)
 - [Gateway Routing pattern](./gateway-routing.md) (Modèle de routage de passerelle)
-
-

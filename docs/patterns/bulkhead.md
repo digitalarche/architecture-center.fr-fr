@@ -1,20 +1,23 @@
 ---
 title: Modèle de cloisonnement
-description: Isolez les éléments d’une application sous forme de pools afin qu’en cas de défaillance de l’un d’eux, les autres continuent à fonctionner
+titleSuffix: Cloud Design Patterns
+description: Isolez les éléments d’une application sous forme de pools afin qu’en cas de défaillance de l’un d’eux, les autres continuent à fonctionner.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 9917870e1dcbed87aaa41e051f1622ad4950456a
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.custom: seodec18
+ms.openlocfilehash: 0a2ae4789d3c1653405a59ef8cb4f6171a8abc81
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2018
-ms.locfileid: "31012703"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112190"
 ---
 # <a name="bulkhead-pattern"></a>Modèle de cloisonnement
 
 Isolez les éléments d’une application sous forme de pools afin qu’en cas de défaillance de l’un d’eux, les autres continuent à fonctionner.
 
-Ce modèle est nommé *cloisonnement*, car il est comparable aux cloisons qui séparent les différents compartiments d’un navire. Si la coque d’un navire subit une avarie, seule la section endommagée se remplit d’eau, empêchant ainsi le navire de couler. 
+Ce modèle est nommé *cloisonnement*, car il est comparable aux cloisons qui séparent les différents compartiments d’un navire. Si la coque d’un navire subit une avarie, seule la section endommagée se remplit d’eau, empêchant ainsi le navire de couler.
 
 ## <a name="context-and-problem"></a>Contexte et problème
 
@@ -34,16 +37,16 @@ Ce modèle offre les avantages suivants :
 
 - Les consommateurs et les services sont isolés des défaillances en cascade. Un problème affectant un consommateur ou un service peut être isolé dans sa propre cloison, empêchant ainsi la défaillance de la totalité de la solution.
 - Vous pouvez préserver certaines fonctionnalités en cas de défaillance d’un service. Les autres services et fonctionnalités de l’application continueront à fonctionner.
-- Vous pouvez déployer des services qui offrent différentes qualités de service pour les applications consommatrices. Vous avez la possibilité de configurer un pool de consommateurs hautement prioritaire pour l’utilisation des services à priorité élevée. 
+- Vous pouvez déployer des services qui offrent différentes qualités de service pour les applications consommatrices. Vous avez la possibilité de configurer un pool de consommateurs hautement prioritaire pour l’utilisation des services à priorité élevée.
 
 Le diagramme ci-après illustre des cloisons structurées autour de pools de connexions qui appellent des services individuels. Si le Service A devient défaillant ou pose un autre problème, le pool de connexions est isolé, de sorte que seules les charges de travail qui utilisent le pool de threads attribué au Service A sont affectées par le problème. Les charges de travail qui utilisent les Services B et C ne sont pas touchées par le problème et peuvent se poursuivre sans interruption.
 
-![](./_images/bulkhead-1.png) 
+![Premier diagramme du modèle de cloisonnement](./_images/bulkhead-1.png)
 
 Le diagramme ci-après représente plusieurs clients appelant un seul service. Une instance de service distincte est attribuée à chaque client. Le Client 1 a effectué trop de requêtes et a submergé son instance. Étant donné que chaque instance de service est isolée des autres, les autres clients peuvent continuer à effectuer des appels.
 
-![](./_images/bulkhead-2.png)
-     
+![Premier diagramme du modèle de cloisonnement](./_images/bulkhead-2.png)
+
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
 - Définissez des partitions basées sur les exigences métiers et techniques de l’application.
@@ -92,11 +95,10 @@ spec:
 
 ## <a name="related-guidance"></a>Aide connexe
 
-- [Modèle Disjoncteur](./circuit-breaker.md)
 - [Conception d’applications résilientes pour Azure](../resiliency/index.md)
+- [Modèle Disjoncteur](./circuit-breaker.md)
 - [Modèle Nouvelle tentative](./retry.md)
 - [Modèle de limitation](./throttling.md)
-
 
 <!-- links -->
 

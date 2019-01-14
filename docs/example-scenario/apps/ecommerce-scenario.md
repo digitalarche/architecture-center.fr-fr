@@ -3,14 +3,14 @@ title: Front-end d’e-commerce
 titleSuffix: Azure Example Scenarios
 description: Hébergez un site d’e-commerce sur Azure.
 author: masonch
-ms.date: 7/13/18
+ms.date: 07/13/2018
 ms.custom: fasttrack
-ms.openlocfilehash: d6587218813fa450b284f3a300c7254a3c9fe41f
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: f07c21b8eb9d812b9831abe8f2e4f6d131893df2
+ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643949"
+ms.lasthandoff: 01/09/2019
+ms.locfileid: "54160806"
 ---
 # <a name="an-e-commerce-front-end-on-azure"></a>Serveur frontal e-commerce sur Azure
 
@@ -67,7 +67,7 @@ Les autres options pour la couche Web et les fonctions incluent :
 - [Service Fabric][docs-service-fabric] : une plateforme concentrée autour de la création des composants distribués qui bénéficient d’un déploiement et d’une exécution sur un cluster avec un degré élevé de contrôle. Service Fabric peut également être utilisé pour héberger des conteneurs.
 - [Azure Kubernetes Service][docs-kubernetes-service] : une plateforme pour la création et le déploiement de solutions à conteneurs utilisables comme une implémentation d’une architecture de microservices. Cela offre une agilité aux différents composants de l’application, pour leur permettre d’être mis à l’échelle indépendamment à la demande.
 - [Azure Container Instances][docs-container-instances] : une façon rapide de déployer et d’exécuter des conteneurs avec un cycle de vie court. Les conteneurs sont alors déployés pour exécuter une tâche de traitement rapide, par exemple d’un message ou d’un calcul, puis ils sont déprovisionnés une fois l’opération terminée.
-- [Service Bus][service bus] peut être utilisé à la place de la file d'attente de stockage.
+- Vous pouvez utiliser [Service Bus][service-bus] à la place d’une file d’attente de stockage.
 
 D’autres options pour la couche Données incluent :
 
@@ -156,5 +156,6 @@ Nous proposons trois exemples de profils de coût basés sur la quantité de tra
 [resiliency]: /azure/architecture/checklist/resiliency
 [scalability]: /azure/architecture/checklist/scalability
 [secure-development]: https://www.microsoft.com/SDL/process/design.aspx
+[service-bus]: /azure/service-bus-messaging/
 [sql-geo-replication]: /azure/sql-database/sql-database-geo-replication-overview
 [storage-geo-redudancy]: /azure/storage/common/storage-redundancy-grs

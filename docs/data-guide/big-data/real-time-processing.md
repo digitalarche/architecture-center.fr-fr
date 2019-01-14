@@ -3,18 +3,18 @@ title: Traitement en temps réel
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: ccd098ab0d5393231eeb26eb1c56c52cdcb78fbe
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 75b52ae9bf7419b451084bb1a1eaf0984258433c
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901608"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113907"
 ---
 # <a name="real-time-processing"></a>Traitement en temps réel
 
 Le traitement en temps réel concerne les flux de données capturés en temps réel et traités avec une latence minimale pour générer des réponses automatisées ou des rapports en temps réel (ou en quasi-temps réel). Par exemple, une solution de contrôle du trafic en temps réel pourrait utiliser des données de capteur pour détecter des pics de trafic. Ces données permettraient de mettre à jour dynamiquement une carte montrant les embouteillages, ou mettre en place automatiquement des voies réservées aux véhicules à occupation multiple ou d’autres systèmes de gestion du trafic.
 
-![](./images/real-time-pipeline.png)
+![Diagramme d’un pipeline de traitement en temps réel](./images/real-time-pipeline.png)
 
 Le traitement en temps réel se définit comme le traitement d’un flux non borné de données d’entrée, avec des critères de latence très stricts pour le traitement &mdash; en millisecondes ou en secondes. En général, ces données entrantes arrivent dans un format non structuré ou semi-structuré, par exemple, JSON, et ont les mêmes exigences de traitement que le [traitement par lots](./batch-processing.md), mais avec des temps de réponse plus courts pour gérer la consommation en temps réel.
 
@@ -32,9 +32,9 @@ Une architecture de traitement en temps réel comporte les composants logiques s
 
 - **Traitement des flux de données**. Après avoir capturé les messages en temps réel, la solution doit les traiter en filtrant, en agrégeant et, plus généralement, en préparant les données pour l’analyse.
 
-- **Magasin de données analytiques**. De nombreuses solutions Big Data sont conçues pour préparer les données à des fins d’analyse, puis fournir les données traitées dans un format structuré et interrogeable à l’aide d’outils d’analyse. 
+- **Magasin de données analytiques**. De nombreuses solutions Big Data sont conçues pour préparer les données à des fins d’analyse, puis fournir les données traitées dans un format structuré et interrogeable à l’aide d’outils d’analyse.
 
-- **Analyse et rapports**. La plupart des solutions Big Data ont pour but de fournir des informations sur les données par le biais de l’analyse et des rapports. 
+- **Analyse et rapports**. La plupart des solutions Big Data ont pour but de fournir des informations sur les données par le biais de l’analyse et des rapports.
 
 ## <a name="technology-choices"></a>Choix de technologie
 

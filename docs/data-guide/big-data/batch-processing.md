@@ -3,12 +3,12 @@ title: Traitement par lots
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: fe07d4d6501d4778025b75807f4d6be5854c3e09
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 50e50ae121fda7ceb9dd298b8a072bd7cc4053d9
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901981"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114179"
 ---
 # <a name="batch-processing"></a>Traitement par lots
 
@@ -16,9 +16,9 @@ L’un des scénarios les plus courants pour le Big Data est le traitement par l
 
 Par exemple, les journaux provenant d’un serveur web peuvent être copiés dans un dossier, puis traités pendant la nuit pour générer les rapports quotidiens d’activités web.
 
-![](./images/batch-pipeline.png)
+![Diagramme d’un pipeline de traitement par lots](./images/batch-pipeline.png)
 
-## <a name="when-to-use-this-solution"></a>Quand utiliser cette solution
+## <a name="when-to-use-this-solution"></a>Quand utiliser cette solution ?
 
 Le traitement par lots est utilisé dans différents scénarios, qui vont des transformations de données simples à un pipeline ETL (extraction, transformation et chargement) plus complet. Dans un contexte de Big Data, le traitement par lots peut fonctionner sur des jeux de données très volumineux, pour lesquels le calcul prend beaucoup de temps. (Voir par exemple [Architecture lambda](../big-data/index.md#lambda-architecture).) En général, il aboutit à une exploration interactive plus poussée, fournit des données modélisables pour le Machine Learning ou écrit les données dans un magasin de données optimisé pour l’analytique et la visualisation.
 
@@ -34,13 +34,13 @@ Il peut s’agir par exemple de transformer un grand ensemble de fichiers CSV ou
 
 Une architecture de traitement par lots comporte les éléments logiques suivants, illustrés dans le diagramme ci-dessus.
 
-- **Stockage des données**. En général, un magasin de fichiers distribués pouvant servir de référentiel pour de gros volumes de fichiers dans différents formats. Ce type de magasin est communément appelé lac de données. 
+- **Stockage des données**. En général, un magasin de fichiers distribués pouvant servir de référentiel pour de gros volumes de fichiers dans différents formats. Ce type de magasin est communément appelé lac de données.
 
-- **Traitement par lots**. En raison des gros volumes en jeu dans le Big Data, les solutions doivent gérer les fichiers de données en appliquant des traitements par lots de longue durée pour filtrer, agréger et, plus généralement, préparer les données à des fins d’analyse. Généralement, ces travaux impliquent la lecture des fichiers source, leur traitement et l’écriture de la sortie dans de nouveaux fichiers. 
+- **Traitement par lots**. En raison des gros volumes en jeu dans le Big Data, les solutions doivent gérer les fichiers de données en appliquant des traitements par lots de longue durée pour filtrer, agréger et, plus généralement, préparer les données à des fins d’analyse. Généralement, ces travaux impliquent la lecture des fichiers source, leur traitement et l’écriture de la sortie dans de nouveaux fichiers.
 
-- **Magasin de données analytiques**. De nombreuses solutions Big Data sont conçues pour préparer les données à des fins d’analyse, puis fournir les données traitées dans un format structuré et interrogeable à l’aide d’outils d’analyse. 
+- **Magasin de données analytique**. De nombreuses solutions Big Data sont conçues pour préparer les données à des fins d’analyse, puis fournir les données traitées dans un format structuré et interrogeable à l’aide d’outils d’analyse.
 
-- **Analyse et rapports**. La plupart des solutions Big Data ont pour but de fournir des informations sur les données par le biais de l’analyse et des rapports. 
+- **Analyse et rapports**. La plupart des solutions Big Data ont pour but de fournir des informations sur les données via l’analyse et les rapports.
 
 - **Orchestration**. Avec le traitement par lots, une orchestration est en général nécessaire pour migrer ou copier les données dans les couches de stockage, de traitement, de magasin de données analytiques et de création de rapports.
 
@@ -55,7 +55,11 @@ Les technologies suivantes sont recommandées pour les solutions de traitement p
 
 Pour plus d’informations, consultez la page [Stockage de données](../technology-choices/data-storage.md).
 
+<!-- markdownlint-disable MD024 -->
+
 ### <a name="batch-processing"></a>Traitement par lots
+
+<!-- markdownlint-enable MD024 -->
 
 - **U-SQL**. U-SQL est le langage de traitement des requêtes utilisé par Azure Data Lake Analytics. Il combine la nature déclarative de SQL avec l’extensibilité procédurale de C#, et tire parti du parallélisme pour permettre un traitement efficace des données à très grande échelle.
 - **Hive**. Hive est un langage de type SQL pris en charge dans la plupart des distributions Hadoop, y compris HDInsight. Il permet de traiter des données provenant de n’importe quel magasin compatible HDFS, notamment le Stockage Blob Azure et Azure Data Lake Store.

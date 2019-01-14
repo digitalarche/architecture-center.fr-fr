@@ -1,14 +1,16 @@
 ---
 title: Critères de sélection d’une banque de données
-description: Vue d’ensemble des options de calcul Azure
+titleSuffix: Azure Application Architecture Guide
+description: Vue d’ensemble des options de calcul Azure.
 author: MikeWasson
 ms.date: 06/01/2018
-ms.openlocfilehash: f8996cdeb937a28b3f3056da3921a3f89dd36b1a
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.custom: seojan19
+ms.openlocfilehash: 156df11d74d033d40d943c60e8e41d4920a24175
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916428"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114315"
 ---
 # <a name="criteria-for-choosing-a-data-store"></a>Critères de sélection d’une banque de données
 
@@ -21,46 +23,68 @@ Pour débuter votre comparaison, rassemblez le maximum d’informations ci-desso
 ### <a name="functional-requirements"></a>Spécifications fonctionnelles
 
 - **Format de données** : quel type de données prévoyez-vous de stocker ? Les données transactionnelles, les objets JSON, les données de télémétrie, les index de recherche et les fichiers plats comptent parmi les types courants.
+
 - **Taille des données** : quelle est la taille des entités que vous avez besoin de stocker ? Ces entités devront-elles être conservées dans un document unique ou peuvent-elles être scindées en plusieurs documents, tables, collections, etc ?
-- **Échelle et structure** : de quelle capacité de stockage globale avez-vous besoin ? Prévoyez-vous de partitionner vos données ? 
-- **Relations entre les données** : vos données devront-elles prendre en charge des relations un-à-plusieurs ou plusieurs à plusieurs ? Les relations proprement dites constituent-elles une part importante des données ? Prévoyez-vous de joindre ou de combiner les données d’un même jeu de données ou de plusieurs jeux de données externes ? 
+
+- **Échelle et structure** : de quelle capacité de stockage globale avez-vous besoin ? Prévoyez-vous de partitionner vos données ?
+
+- **Relations entre les données** : vos données devront-elles prendre en charge des relations un-à-plusieurs ou plusieurs à plusieurs ? Les relations proprement dites constituent-elles une part importante des données ? Prévoyez-vous de joindre ou de combiner les données d’un même jeu de données ou de plusieurs jeux de données externes ?
+
 - **Modèle de cohérence** : quelle importance accordez-vous à ce que les mises à jour effectuées dans un nœud apparaissent dans les autres nœuds, avant que d’autres modifications puissent avoir lieu ? Pouvez-vous accepter la cohérence éventuelle ? Avez-vous besoin de garanties ACID pour les transactions ?
+
 - **Flexibilité de schéma** : quel type de schéma appliquerez-vous à vos données ? Allez-vous utiliser un schéma fixe, une approche de schéma à l’écriture ou une approche de schéma à la lecture ?
+
 - **Accès concurrentiel**. quel type de mécanisme d’accès concurrentiel souhaitez-vous utiliser durant la mise à jour et la synchronisation des données ? L’application sera-t-elle appelée à procéder à de nombreuses mises à jour qui pourraient potentiellement entrer en conflit ? Dans ce cas, vous aurez peut-être besoin du verrouillage des enregistrements et du contrôle d’accès concurrentiel pessimiste. Sinon, pouvez vous prendre en charge les contrôles d’accès concurrentiel optimiste ? Dans ce cas, le contrôle d’accès concurrentiel basé sur l’horodatage est-il suffisant ou avez-vous besoin de l’ajout de la fonctionnalité de contrôle d’accès concurrentiel multiversion ?
+
 - **Déplacement des données** : votre solution devra-t-elle effectuer des tâches ETL pour déplacer les données vers d’autres banques ou entrepôts de données ?
+
 - **Cycle de vie des données** : les données sont-elles écrites une fois et lues autant de fois que souhaité ? Peuvent-elles être déplacées dans un espace de stockage froid ?
+
 - **Autres fonctionnalités prises en charge** : avez-vous besoin d’autres fonctionnalités spécifiques, telles que la validation de schéma, l’agrégation, l’indexation, la recherche en texte intégral, MapReduce ou d’autres fonctions de requête ?
 
 ### <a name="non-functional-requirements"></a>Spécifications non fonctionnelles
 
 - **Performances et scalabilité** : quels sont vos besoins en matière de performances de données ? Avez-vous des exigences spécifiques concernant la vitesse d’ingestion des données et la vitesse de traitement des données ? Quels sont les temps de réponse acceptables pour l’interrogation et l’agrégation des données une fois celles-ci ingérées ? De quelle taille aurez-vous besoin pour augmenter les capacités de la banque de données ? Votre charge de travail est-elle plutôt axée sur la lecture ou sur l’écriture ?
-- **Fiabilité** : quel contrat SLA global devez-vous prendre en charge ? Quel niveau de tolérance aux pannes devez-vous offrir aux consommateurs de données ? De quelles fonctionnalités de sauvegarde et de restauration avez-vous besoin ? 
-- **Réplication** : vos données devront-elles être réparties entre plusieurs réplicas ou régions ? De quel type de fonctionnalités de réplication de données avez-vous besoin ? 
-- **Limites** : les limites d’une banque de données déterminée répondent-elles à vos besoins en matière d’échelle, de nombre de connexions et de débit ? 
+
+- **Fiabilité** : quel contrat SLA global devez-vous prendre en charge ? Quel niveau de tolérance aux pannes devez-vous offrir aux consommateurs de données ? De quelles fonctionnalités de sauvegarde et de restauration avez-vous besoin ?
+
+- **Réplication** : vos données devront-elles être réparties entre plusieurs réplicas ou régions ? De quel type de fonctionnalités de réplication de données avez-vous besoin ?
+
+- **Limites** : les limites d’une banque de données déterminée répondent-elles à vos besoins en matière d’échelle, de nombre de connexions et de débit ?
 
 ### <a name="management-and-cost"></a>Gestion et coût
 
 - **Service managé** : si possible, utilisez un service de données managé, sauf si vous avez besoin de fonctionnalités spécifiques que seule une banque de données hébergée par IaaS peut offrir.
+
 - **Disponibilité dans les régions** : pour les services managés, le service est-il disponible dans toutes les régions Azure ? Votre solution doit-elle être hébergée dans certaines régions Azure ?
+
 - **Portabilité** : vos données devront-elles être migrées localement, vers des centres de données externes ou vers d’autres environnements d’hébergement cloud ?
+
 - **Licences** : avez-vous une préférence quant au type de licence : propriétaire ou OSS ? Existe-t-il d’autres restrictions externes quant au type de licence que vous pouvez utiliser ?
+
 - **Coût global** : quel est le coût global d’utilisation du service dans votre solution ? Combien d’instances devront s’exécuter pour répondre à vos besoins en matière de durée de fonctionnement et de débit ? Prenez en compte les coûts d’exploitation dans ce calcul. L’un des raisons de préférer les services managés est leur coût d’exploitation réduit.
+
 - **Rentabilité** : pouvez-vous partitionner vos données de façon à profiter d’un stockage plus économique ? Par exemple, pouvez-vous transférer les objets volumineux d’une base de données relationnelle coûteuse vers une banque d’objets ?
 
 ### <a name="security"></a>Sécurité
 
 - **Sécurité**. de quel type de chiffrement avez-vous besoin ? Avez-vous besoin d’un chiffrement au repos ? Quel mécanisme d’authentification voulez-vous utiliser pour vous connecter à vos données ?
+
 - **Audit** : quel type de journal d’audit avez-vous besoin de générer ?
+
 - **Spécifications réseau** : devez-vous limiter ou gérer l’accès à vos données à partir d’autres ressources réseau ? Les données ne doivent-elle être accessibles qu’à l’intérieur de l’environnement Azure ? Les données doivent-elle être accessibles à partir d’adresses IP ou de sous-réseaux spécifiques ? Doivent-elles être accessibles à partir d’applications ou de services hébergés localement ou dans d’autres centres de données externes ?
 
 ### <a name="devops"></a>DevOps
 
 - **Ensemble de compétences** : votre équipe est-elle encline à utiliser certains langages de programmation, systèmes d’exploitation et autres technologies plutôt que d’autres ? Votre équipe aurait des difficultés à en utiliser d’autres ?
+
 - **Clients** : existe-t-il un bon support client pour vos langages de développement?
 
 Les sections suivantes comparent les différents modèles de banque de données en termes de profil de charge de travail, de types de données et d’exemples de cas d’usage.
 
 ## <a name="relational-database-management-systems-rdbms"></a>Systèmes de gestion de base de données relationnelle (SGBDR)
+
+<!-- markdownlint-disable MD033 -->
 
 <table>
 <tr><td><strong>Charge de travail</strong></td>
@@ -305,7 +329,7 @@ Les sections suivantes comparent les différents modèles de banque de données 
     <td>
         <ul>
             <li>Analyse de données</li>
-            <li>Décisionnel d’entreprise   </li>
+            <li>Décisionnel d’entreprise</li>
         </ul>
     </td>
 </tr>
@@ -324,7 +348,6 @@ Les sections suivantes comparent les différents modèles de banque de données 
     </td>
 </tr>
 </table>
-
 
 ## <a name="time-series-databases"></a>Bases de données de séries chronologiques
 
@@ -424,3 +447,5 @@ Les sections suivantes comparent les différents modèles de banque de données 
     </td>
 </tr>
 </table>
+
+<!-- markdownlint-enable MD033 -->

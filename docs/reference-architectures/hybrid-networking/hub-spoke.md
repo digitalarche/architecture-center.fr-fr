@@ -5,12 +5,12 @@ description: Implémentez une topologie de réseau hub-and-spoke dans Azure.
 author: telmosampaio
 ms.date: 10/08/2018
 ms.custom: seodec18
-ms.openlocfilehash: fe56630b621f02fe71b864642b75688ba1965862
-ms.sourcegitcommit: 8d951fd7e9534054b160be48a1881ae0857561ef
+ms.openlocfilehash: c7cf2923856b3c659876afcc89bb312e492c6409
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/13/2018
-ms.locfileid: "53329430"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112445"
 ---
 # <a name="implement-a-hub-spoke-network-topology-in-azure"></a>Implémenter une topologie de réseau hub-and-spoke dans Azure
 
@@ -176,11 +176,9 @@ Pour déployer réseau virtuel du hub, procédez comme suit.
 
 5. Attendez que le déploiement se termine. Ce déploiement crée un réseau virtuel, une machine virtuelle, une passerelle VPN et une connexion à la passerelle.  La création de la passerelle VPN peut prendre environ 40 minutes.
 
-### <a name="test-connectivity-with-the-hub"></a>Tester la connectivité avec le hub
+### <a name="test-connectivity-to-the-hub-vnet-mdash-windows-deployment"></a>Tester la connectivité au réseau virtuel hub &mdash; Déploiement Windows
 
-Testez la connectivité entre l’environnement local simulé et le réseau virtuel du hub.
-
-**Déploiement sous Windows**
+Pour tester la connectivité entre l’environnement local simulé et le réseau virtuel hub à l’aide de machines virtuelles Windows, effectuez les étapes suivantes :
 
 1. Utilisez le portail Azure pour trouver la machine virtuelle appelée `jb-vm1` dans le groupe de ressources `onprem-jb-rg`.
 
@@ -206,11 +204,13 @@ TcpTestSucceeded : True
 > [!NOTE]
 > Par défaut, les machines virtuelles Windows Server n’autorisent pas les réponses ICMP dans Azure. Si vous souhaitez utiliser `ping` pour tester la connectivité, vous devez activer le trafic ICMP dans le pare-feu Windows avancé et ce, pour chaque machine virtuelle.
 
-**Déploiement sous Linux**
+### <a name="test-connectivity-to-the-hub-vnet-mdash-linux-deployment"></a>Tester la connectivité au réseau virtuel hub &mdash; Déploiement Linux
+
+Pour tester la connectivité entre l’environnement local simulé et le réseau virtuel hub à l’aide de machines virtuelles Linux, effectuez les étapes suivantes :
 
 1. Utilisez le portail Azure pour trouver la machine virtuelle appelée `jb-vm1` dans le groupe de ressources `onprem-jb-rg`.
 
-2. Cliquez sur `Connect` et copiez la commande `ssh` qui s’affiche dans le portail. 
+2. Cliquez sur `Connect` et copiez la commande `ssh` qui s’affiche dans le portail.
 
 3. Depuis un invite Linux, exécutez `ssh` pour vous connecter à l’environnement local simulé. Utilisez le mot de passe spécifié dans le fichier de paramètre `onprem.json`.
 
@@ -253,11 +253,9 @@ Pour déployer les réseaux virtuels spokes, procédez comme suit.
    azbb -s <subscription_id> -g hub-vnet-rg -l <location> -p hub-vnet-peering.json --deploy
    ```
 
-### <a name="test-connectivity"></a>Tester la connectivité
+### <a name="test-connectivity-to-the-spoke-vnets-mdash-windows-deployment"></a>Tester la connectivité aux réseaux virtuels spoke &mdash; Déploiement Windows
 
-Testez la connectivité entre l’environnement local simulé et les réseaux virtuels spokes.
-
-**Déploiement sous Windows**
+Pour tester la connectivité entre l’environnement local simulé et les réseaux virtuels spoke à l’aide de machines virtuelles Windows, effectuez les étapes suivantes :
 
 1. Utilisez le portail Azure pour trouver la machine virtuelle appelée `jb-vm1` dans le groupe de ressources `onprem-jb-rg`.
 
@@ -270,7 +268,7 @@ Testez la connectivité entre l’environnement local simulé et les réseaux vi
    Test-NetConnection 10.2.0.68 -CommonTCPPort RDP
    ```
 
-**Déploiement sous Linux**
+### <a name="test-connectivity-to-the-spoke-vnets-mdash-linux-deployment"></a>Tester la connectivité aux réseaux virtuels spoke &mdash; Déploiement Linux
 
 Pour tester la connectivité entre l’environnement local simulé et le réseau virtuel spoke à l’aide de machines virtuelles Linux, procédez comme suit :
 
@@ -329,4 +327,3 @@ Cette étape est facultative. Si vous souhaitez autoriser les spokes à se conne
 [1]: ./images/hub-spoke-gateway-routing.svg "Topologie hub-and-spoke dans Azure avec routage transitif"
 [2]: ./images/hub-spoke-no-gateway-routing.svg "Topologie hub-and-spoke dans Azure avec routage transitif utilisant une appliance virtuelle réseau"
 [3]: ./images/hub-spokehub-spoke.svg "Topologie hub-and-spoke/hub-and-spoke dans Azure"
-[ARM-Templates]: https://azure.microsoft.com/documentation/articles/resource-group-authoring-templates/

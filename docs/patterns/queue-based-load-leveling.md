@@ -1,25 +1,19 @@
 ---
-title: Nivellement de la charge basé sur une file d’attente
+title: Modèle de nivellement de charge basé sur une file d’attente
+titleSuffix: Cloud Design Patterns
 description: Utilisez une file d’attente qui agit comme mémoire tampon entre une tâche et un service qu’elle appelle, afin d’atténuer les surcharges intermittentes.
 keywords: modèle de conception
 author: dragon119
-ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- messaging
-- availability
-- performance-scalability
-- resiliency
-ms.openlocfilehash: 99b226511fe14bffdab3cdcf65d4e6cffe89bba6
-ms.sourcegitcommit: 8ab30776e0c4cdc16ca0dcc881960e3108ad3e94
+ms.date: 01/02/2019
+ms.custom: seodec18
+ms.openlocfilehash: bb519fa52fcb6472733b6e52d7332d470eda8349
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2017
-ms.locfileid: "26359317"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011546"
 ---
 # <a name="queue-based-load-leveling-pattern"></a>Modèle de nivellement de charge basé sur une file d’attente
-
-[!INCLUDE [header](../_includes/header.md)]
 
 Utilisez une file d’attente qui agit comme une mémoire tampon entre une tâche et un service qu’elle appelle, afin d’atténuer les surcharges intermittentes qui entraînent l’échec du service ou l’expiration de la tâche. Cela permet de réduire l’impact des pics de demande sur la disponibilité et la réactivité de la tâche et du service.
 
@@ -61,22 +55,28 @@ Ce modèle est utile pour toute application qui utilise des services soumis à u
 
 Ce modèle n’est pas utile si l’application attend une réponse du service avec une latence minimale.
 
-## <a name="example"></a>exemples
+## <a name="example"></a>Exemples
 
-Un rôle web Microsoft Azure stocke les données à l’aide d’un service de stockage distinct. Si un grand nombre d’instances du rôle web s’exécutent simultanément, le service de stockage risque de ne pas répondre aux requêtes assez vite pour les empêcher d’expirer ou d’échouer. Cette illustration met en évidence un service saturé par un grand nombre de requêtes simultanées émises des instances de rôle web.
+Une application web écrit des données dans un magasin de données externes. Si un grand nombre d’instances de l’application web s’exécutent simultanément, le magasin de données risque de ne pas pouvoir répondre aux requêtes assez rapidement, ce qui va entraîner l’expiration du délai d’exécution des requêtes, leur limitation ou leur échec. Le diagramme suivant montre un magasin de données saturé par un grand nombre de requêtes simultanées émanant des instances d’une application.
 
-![Illustration 2 : service saturé par un grand nombre de requêtes simultanées émises des instances de rôle web](./_images/queue-based-load-leveling-overwhelmed.png)
+![Figure 2 - Service saturé par un grand nombre de requêtes simultanées émanant des instances d’une application web](./_images/queue-based-load-leveling-overwhelmed.png)
+
+Pour résoudre ce problème, vous pouvez utiliser une file d’attente afin de niveler la charge entre les instances d’application et le magasin de données. Une application Azure Functions lit les messages de la file d’attente et exécute les requêtes de lecture/écriture dans le magasin de données. La logique d’application de l’application de fonction peut contrôler la fréquence à laquelle les requêtes sont passées au magasin de données pour éviter la surcharge de ce dernier. (Sinon, l’application de fonction réintroduit simplement le même problème sur le serveur back-end.)
+
+![Figure 3 - Utilisation d’une file d’attente et d’une application de fonction pour niveler la charge](./_images/queue-based-load-leveling-function.png)
 
 
-Pour résoudre ce problème, vous pouvez utiliser une file d’attente pour niveler la charge entre les instances de rôle web et le service de stockage. Toutefois, le service de stockage est conçu pour accepter des requêtes synchrones et ne peut pas être facilement modifié pour lire les messages et gérer le débit. Vous pouvez introduire un rôle de travail agissant en tant que service proxy, qui reçoit des requêtes de la file d’attente et les transmet au service de stockage. La logique d’application du rôle de travail peut contrôler la fréquence à laquelle les requêtes sont transmises au service de stockage pour empêcher la surcharge de ce dernier. Cette figure illustre l’utilisation d’une file d’attente et d’un rôle de travail pour niveler la charge entre les instances du rôle Web et le service.
-
-![Illustration 3 : utilisation d’une file d’attente et d’un rôle de travail pour niveler la charge entre les instances du rôle web et le service](./_images/queue-based-load-leveling-worker-role.png)
 
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
 Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
 
 - [Primer de messagerie asynchrone](https://msdn.microsoft.com/library/dn589781.aspx). Les files d’attente sont par nature asynchrones. Il peut être nécessaire de reconcevoir la logique d’application dans une tâche si elle est adaptée de sorte à ne plus communiquer directement avec un service mais à utiliser une file d’attente. De même, il peut être nécessaire de refactoriser un service pour accepter les requêtes provenant d’une file d’attente. Sinon, il est parfois possible d’implémenter un service proxy, comme décrit dans l’exemple.
-- [Modèle des consommateurs concurrents](competing-consumers.md). Il est parfois possible d’exécuter plusieurs instances d’un service, chacune agissant comme un consommateur de messages à partir de la file d’attente de nivellement de charge. Vous pouvez utiliser cette approche pour ajuster la fréquence à laquelle les messages sont reçus et transmis à un service.
-- [Modèle de limitation](throttling.md). Un moyen simple d’implémenter la limitation avec un service consiste à utiliser le nivellement de charge basé sur la file d’attente et à acheminer toutes les requêtes vers un service via une file d’attente de messages. Le service peut traiter des requêtes à un rythme qui garantit que les ressources requises par le service ne sont pas épuisées, de façon à réduire le nombre de conflits éventuels.
-- [Concepts du service de file d’attente](https://msdn.microsoft.com/library/azure/dd179353.aspx). Informations sur le choix d’un mécanisme de messagerie et de file d’attente dans les applications Azure.
+
+- [Modèle des consommateurs concurrents](./competing-consumers.md). Il est parfois possible d’exécuter plusieurs instances d’un service, chacune agissant comme un consommateur de messages à partir de la file d’attente de nivellement de charge. Vous pouvez utiliser cette approche pour ajuster la fréquence à laquelle les messages sont reçus et transmis à un service.
+
+- [Modèle de limitation](./throttling.md). Un moyen simple d’implémenter la limitation avec un service consiste à utiliser le nivellement de charge basé sur la file d’attente et à acheminer toutes les requêtes vers un service via une file d’attente de messages. Le service peut traiter des requêtes à un rythme qui garantit que les ressources requises par le service ne sont pas épuisées, de façon à réduire le nombre de conflits éventuels.
+
+- [Choisir entre les différents services de messagerie Azure](/azure/event-grid/compare-messaging-services). Informations sur le choix d’un mécanisme de messagerie et de file d’attente dans les applications Azure.
+
+- [Améliorer la scalabilité dans une application web Azure](../reference-architectures/app-service-web-app/scalable-web-app.md). Cette architecture de référence inclut le nivellement de charge basé sur la file d’attente dans le cadre de l’architecture.

@@ -1,18 +1,18 @@
 ---
 title: ETL hybride avec une instance SSIS locale existante et Azure Data Factory
 titleSuffix: Azure Example Scenarios
-description: ETL hybride avec des déploiements de SQL Server Integration Services (SSIS) locaux existants et Azure Data Factory
+description: ETL hybride avec des déploiements SSIS (SQL Server Integration Services) locaux existants et Azure Data Factory.
 author: alhieng
-ms.date: 9/20/2018
+ms.date: 09/20/2018
 ms.custom: tsp-team
-ms.openlocfilehash: 387b0aa1927a8d316aad76100f577da13833eae6
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: a2ca3817ed172e6d2332a92f68970ea2a5ad8f6c
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643505"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110388"
 ---
-# <a name="hybrid-etl-with-existing-on-premises-ssis-and-azure-data-factory"></a>ETL hybride avec des instances SSIS locales existantes et Azure Data Factory
+# <a name="hybrid-etl-with-existing-on-premises-ssis-and-azure-data-factory"></a>ETL hybride avec une instance SSIS locale existante et Azure Data Factory
 
 Les organisations qui migrent leurs bases de données SQL Server vers le cloud peuvent réaliser des économies considérables, augmenter les performances, gagner en flexibilité et améliorer la scalabilité. Toutefois, le fait de retravailler des processus ETL (extraire, transformer et charger) existants conçus avec SQL Server Integration Services (SSIS) peut être un obstacle pour la migration. Dans d’autres cas, le processus de chargement des données nécessite une logique complexe et/ou des composants d’outil de données spécifiques qui ne sont pas encore pris en charge par Azure Data Factory v2. Les fonctionnalités SSIS couramment utilisées comprennent des transformations Recherche floue et Regroupement probable, la capture des changements de données (CDC), les dimensions à variation lente (SCD) et Data Quality Services (DQS).
 

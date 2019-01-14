@@ -1,21 +1,23 @@
 ---
 title: Arbre de décision des services de calcul Azure
-description: Un organigramme pour sélectionner un service de calcul
+titleSuffix: Azure Application Architecture Guide
+description: Organigramme permettant de sélectionner un service de calcul.
 author: MikeWasson
 ms.date: 11/03/2018
-ms.openlocfilehash: cb074272b8d00a71223d8c5755ef8cde3a3f2592
-ms.sourcegitcommit: 225251ee2dd669432a9c9abe3aa8cd84d9e020b7
+ms.custom: seojan19
+ms.openlocfilehash: 905b9956c9dcddddb21a87ea588af0ad5160ae2a
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/04/2018
-ms.locfileid: "50981978"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114077"
 ---
 # <a name="decision-tree-for-azure-compute-services"></a>Arbre de décision des services de calcul Azure
 
-Azure offre de nombreuses manières d’héberger votre code d’application. Le terme *calcul* fait référence au modèle d’hébergement des ressources de calcul utilisées par votre application. L’organigramme suivant vous aidera à choisir un service de calcul pour votre application. Il vous guide au travers d’un ensemble de critères de décisions clé pour trouver une recommandation. 
+Azure offre de nombreuses manières d’héberger votre code d’application. Le terme *calcul* fait référence au modèle d’hébergement des ressources de calcul utilisées par votre application. L’organigramme suivant vous aidera à choisir un service de calcul pour votre application. Il vous guide au travers d’un ensemble de critères de décisions clé pour trouver une recommandation.
 
 **Traitez cet organigramme comme un point de départ.** Chaque application dispose de ces exigences propres, utilisez donc la recommandation pour commencer. Réalisez ensuite une évaluation plus détaillée, en considérant les aspects suivants :
- 
+
 - Ensemble des fonctionnalités
 - [Limites du service](/azure/azure-subscription-service-limits)
 - [Coût](https://azure.microsoft.com/pricing/)
@@ -26,11 +28,11 @@ Azure offre de nombreuses manières d’héberger votre code d’application. Le
 
 Si votre application comprend plusieurs charges de travail, évaluez-les séparément. Une solution complète peut incorporer deux services de calcul ou plus.
 
-Pour plus d’informations sur les options d’hébergement des conteneurs dans Azure, consultez https://azure.microsoft.com/overview/containers/.
+Pour plus d’informations sur les options d’hébergement des conteneurs dans Azure, consultez [Conteneurs Azure](https://azure.microsoft.com/overview/containers/).
 
 ## <a name="flowchart"></a>Organigramme
 
-![](../images/compute-decision-tree.svg)
+![Arbre de décision des services de calcul Azure](../images/compute-decision-tree.svg)
 
 ## <a name="definitions"></a>Définitions
 

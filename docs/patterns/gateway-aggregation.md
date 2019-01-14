@@ -1,14 +1,17 @@
 ---
 title: Modèle d’agrégation de passerelle
+titleSuffix: Cloud Design Patterns
 description: Utilisez une passerelle pour agréger plusieurs requêtes individuelles dans une requête unique.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: f59c8b8b02c6db28024d13621b782997e63a4e9e
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: 8d929b1b3937d8f9ef50c1b08e8aea0b5c1f92c1
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541271"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009455"
 ---
 # <a name="gateway-aggregation-pattern"></a>Modèle d’agrégation de passerelle
 
@@ -16,11 +19,11 @@ Utilisez une passerelle pour agréger plusieurs requêtes individuelles dans une
 
 ## <a name="context-and-problem"></a>Contexte et problème
 
-Pour exécuter une tâche unique, un client peut avoir besoin d’effectuer plusieurs appels à différents services principaux. Une application qui a besoin de nombreux services pour effectuer une tâche doit étendre ses ressources pour chaque requête. Lorsqu’une fonctionnalité ou un service est ajouté(e) à l’application, des requêtes supplémentaires sont nécessaires, ce qui augmente le nombre de ressources et d’appels réseau requis. Les échanges excessifs entre un client et un serveur principal peuvent nuire aux performances et à l’évolutivité de l’application.  Avec les architectures de microservice, ce problème est devenu encore plus courant, car les applications reposant sur de nombreux services de plus petite taille génèrent naturellement un nombre plus élevé d’appels entre les services. 
+Pour exécuter une tâche unique, un client peut avoir besoin d’effectuer plusieurs appels à différents services principaux. Une application qui a besoin de nombreux services pour effectuer une tâche doit étendre ses ressources pour chaque requête. Lorsqu’une fonctionnalité ou un service est ajouté(e) à l’application, des requêtes supplémentaires sont nécessaires, ce qui augmente le nombre de ressources et d’appels réseau requis. Les échanges excessifs entre un client et un serveur principal peuvent nuire aux performances et à l’évolutivité de l’application.  Avec les architectures de microservice, ce problème est devenu encore plus courant, car les applications reposant sur de nombreux services de plus petite taille génèrent naturellement un nombre plus élevé d’appels entre les services.
 
 Dans le diagramme suivant, le client envoie des requêtes à chaque service (1,2,3). Chaque service traite la requête et renvoie la réponse à l’application (4,5,6). Sur un réseau cellulaire avec une latence généralement élevée, le fait d’utiliser des requêtes individuelles de cette manière est inefficace et peut entraîner une rupture de la connectivité ou des requêtes incomplètes. Alors que chaque requête peut être effectuée en parallèle, l’application doit envoyer, attendre et traiter les données pour chaque requête sur des connexions distinctes, ce qui augmente les risques de défaillance.
 
-![](./_images/gateway-aggregation-problem.png) 
+![Diagramme de problème pour le modèle d’agrégation de passerelle](./_images/gateway-aggregation-problem.png)
 
 ## <a name="solution"></a>Solution
 
@@ -30,7 +33,7 @@ Ce modèle peut réduire le nombre de requêtes que l’application envoie aux s
 
 Dans le diagramme suivant, l’application envoie une requête à la passerelle (1). La requête contient un ensemble de requêtes supplémentaires. La passerelle décompose ces requêtes et traite chacune d’entre elles en l’envoyant au service approprié (2). Chaque service renvoie une réponse à la passerelle (3). La passerelle combine les réponses de chaque service et envoie la réponse finale à l’application (4). L’application envoie une seule requête et reçoit une seule réponse de la passerelle.
 
-![](./_images/gateway-aggregation.png)
+![Diagramme de solution pour le modèle d’agrégation de passerelle](./_images/gateway-aggregation.png)
 
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
@@ -49,7 +52,7 @@ Dans le diagramme suivant, l’application envoie une requête à la passerelle 
 
 ## <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
 
-Utilisez ce modèle dans les situations suivantes :
+Utilisez ce modèle dans les situations suivantes :
 
 - Un client doit communiquer avec plusieurs services principaux pour effectuer une opération.
 - Le client peut utiliser des réseaux avec une latence importante, tels que les réseaux cellulaires.
@@ -59,7 +62,7 @@ Ce modèle peut ne pas convenir dans les cas suivants :
 - Vous souhaitez réduire le nombre d’appels entre un client et un service unique dans le cadre de plusieurs opérations. Dans ce scénario, il peut être préférable d’ajouter une opération par lot au niveau du service.
 - Le client ou l’application se trouve à proximité des services principaux et la latence n’est pas un facteur important.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 L’exemple suivant montre comment créer un service d’agrégation de passerelle NGINX simple à l’aide de Lua.
 

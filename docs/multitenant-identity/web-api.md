@@ -1,17 +1,17 @@
 ---
 title: Sécurisation d’une API web de serveur principal dans une application multi-locataire
-description: Comment sécuriser une API web de serveur principal
+description: Comment sécuriser une API web back-end.
 author: MikeWasson
 ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: authorize
 pnp.series.next: token-cache
-ms.openlocfilehash: e738eb94b5978efa4e7a4bebcc72daa7968ac904
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 517bdbb6e1a1063db9337b63905e2ff5f4bdd4d4
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901590"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114026"
 ---
 # <a name="secure-a-backend-web-api"></a>Sécuriser une API web principale
 
@@ -19,13 +19,13 @@ ms.locfileid: "52901590"
 
 L’application [Surveys de Tailspin] utilise une API web de serveur principal pour gérer les opérations CRUD sur les enquêtes. Par exemple, quand un utilisateur clique sur « My Surveys », l’application web envoie une requête HTTP à l’API web :
 
-```
+```http
 GET /users/{userId}/surveys
 ```
 
 L’API web renvoie un objet JSON :
 
-```
+```http
 {
   "Published":[],
   "Own":[
@@ -40,8 +40,6 @@ Comme l’API web n’autorise pas les requêtes anonymes, l’application web d
 
 > [!NOTE]
 > Il s’agit d’un scénario serveur à serveur. L’application ne fait aucun appel AJAX à l’API à partir du client navigateur.
-> 
-> 
 
 Il existe deux approches principales possibles :
 
@@ -50,7 +48,7 @@ Il existe deux approches principales possibles :
 
 L’application de Tailspin implémente l’identité d’utilisateur délégué. Voici les principales différences :
 
-**Identité d’utilisateur délégué**
+**Identité d’utilisateur délégué :**
 
 * Le jeton du porteur envoyé à l’API web contient l’identité de l’utilisateur.
 * L’API web prend des décisions d’autorisation basées sur l’identité de l’utilisateur.
@@ -58,7 +56,7 @@ L’application de Tailspin implémente l’identité d’utilisateur délégué
 * En général, l’application web prend toujours des décisions d’autorisation qui affectent l’interface utilisateur, comme l’affichage ou le masquage des éléments d’interface utilisateur).
 * L’API web peut potentiellement être utilisée par des clients non approuvés, comme une application JavaScript ou une application cliente native.
 
-**Identité d’application**
+**Identité d’application :**
 
 * L’API web n’obtient pas d’informations sur l’utilisateur.
 * L’API web ne peut déclarer aucune autorisation basée sur l’identité de l’utilisateur. Toutes les décisions d’autorisation sont prises par l’application web.  
@@ -75,23 +73,25 @@ Le reste de cet article part du principe que l’application s’authentifie aup
 ![Obtention du jeton d’accès](./images/access-token.png)
 
 ## <a name="register-the-web-api-in-azure-ad"></a>Inscription de l’API web dans Azure AD
+
 Pour qu’Azure AD émette un jeton du porteur pour l’API web, vous devez configurer certains paramètres dans Azure AD.
 
 1. Inscrivez l’API web dans Azure AD.
 
 2. Ajoutez l’ID client de l’application web au manifeste d’application de l’API web, dans la propriété `knownClientApplications` . Consultez la page [Mettre à jour les manifestes de l’application].
 
-3. Donnez à l’application web l’autorisation d’appeler l’API web. Dans le portail de gestion Azure, vous pouvez définir deux types d’autorisations : les « autorisations d’application » pour l’identité d’application (flux d’informations d’identification du client) ou les « autorisations déléguées » pour l’identité d’utilisateur délégué.
-   
+3. Donnez à l’application web l’autorisation d’appeler l’API web. Dans le Portail de gestion Azure, vous pouvez définir deux types d’autorisation : les « autorisations d’application » pour l’identité d’application (flux d’informations d’identification du client) ou les « autorisations déléguées » pour l’identité d’utilisateur délégué.
+
    ![Autorisations déléguées](./images/delegated-permissions.png)
 
 ## <a name="getting-an-access-token"></a>Obtention d’un jeton d’accès
+
 Avant d’appeler l’API web, l’application web obtient un jeton d’accès à partir d’Azure AD. Dans une application .NET, utilisez la [bibliothèque d’authentification Azure AD (ADAL) pour .NET][ADAL].
 
 Dans le flux du code d’autorisation OAuth 2, l’application échange un code d’autorisation contre un jeton d’accès. Le code suivant utilise la bibliothèque ADAL pour obtenir le jeton d’accès. Ce code est appelé pendant l’événement `AuthorizationCodeReceived` .
 
 ```csharp
-// The OpenID Connect middleware sends this event when it gets the authorization code.   
+// The OpenID Connect middleware sends this event when it gets the authorization code.
 public override async Task AuthorizationCodeReceived(AuthorizationCodeReceivedContext context)
 {
     string authorizationCode = context.ProtocolMessage.Code;
@@ -127,9 +127,10 @@ var result = await authContext.AcquireTokenSilentAsync(resourceID, credential, n
 où `userId` est l’ID d’objet de l’utilisateur, qui se trouve dans la revendication `http://schemas.microsoft.com/identity/claims/objectidentifier`.
 
 ## <a name="using-the-access-token-to-call-the-web-api"></a>Utilisation du jeton d’accès pour appeler l’API web.
+
 Une fois que vous avez le jeton, envoyez-le dans l’en-tête d’autorisation des requêtes HTTP à l’API web.
 
-```
+```http
 Authorization: Bearer xxxxxxxxxx
 ```
 
@@ -155,6 +156,7 @@ public static async Task<HttpResponseMessage> SendRequestWithBearerTokenAsync(th
 ```
 
 ## <a name="authenticating-in-the-web-api"></a>Authentification dans l’API web
+
 L’API web doit authentifier le jeton du porteur. Dans ASP.NET Core, vous pouvez utiliser le package [Microsoft.AspNet.Authentication.JwtBearer][JwtBearer]. Ce package fournit un middleware qui permet à l’application de recevoir des jetons de porteur OpenID Connect.
 
 Inscrivez le middleware dans la classe `Startup` de votre API web.
@@ -172,7 +174,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, Applicat
         },
         Events= new SurveysJwtBearerEvents(loggerFactory.CreateLogger<SurveysJwtBearerEvents>())
     });
-    
+
     // ...
 }
 ```
@@ -183,9 +185,10 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, Applicat
 * **Events** est une classe dérivée de **JwtBearerEvents**.
 
 ### <a name="issuer-validation"></a>Validation de l’émetteur
+
 Validez l’émetteur du jeton dans l’événement **JwtBearerEvents.TokenValidated**. L’émetteur est envoyé dans la revendication « iss ».
 
-Dans l’application Surveys, l’API web ne gère pas l’[inscription du locataire]. Par conséquent, elle vérifie uniquement si l’émetteur se trouve déjà dans la base de données de l’application. Si ce n’est pas le cas, elle lève une exception, ce qui provoque l’échec de l’authentification.
+Dans l’application Surveys, l’API web ne gère pas [l’inscription du locataire]. Par conséquent, elle vérifie uniquement si l’émetteur se trouve déjà dans la base de données de l’application. Si ce n’est pas le cas, elle lève une exception, ce qui provoque l’échec de l’authentification.
 
 ```csharp
 public override async Task TokenValidated(TokenValidatedContext context)
@@ -221,7 +224,8 @@ public override async Task TokenValidated(TokenValidatedContext context)
 Comme le montre cet exemple, vous pouvez également utiliser l’événement **TokenValidated** pour modifier les revendications. N’oubliez pas que les revendications proviennent directement d’Azure AD. Si l’application web modifie les revendications qu’elle obtient, ces modifications n’apparaîtront pas dans le jeton du porteur reçu par l’API web. Pour plus d’informations, voir [Transformations de revendications][claims-transformation].
 
 ## <a name="authorization"></a>Authorization
-Pour obtenir une description générale de l’autorisation, voir [Autorisation basée sur les ressources et les rôles][Authorization]. 
+
+Pour obtenir une description générale de l’autorisation, voir [Autorisation basée sur les ressources et les rôles][Authorization].
 
 L’intergiciel (middleware) JwtBearer gère les réponses d’autorisation. Par exemple, pour limiter une action de contrôleur aux seuls utilisateurs authentifiés, utilisez l’attribut **[Authorize]** et spécifiez **JwtBearerDefaults.AuthenticationScheme** en tant que schéma d’authentification :
 
@@ -248,18 +252,18 @@ public void ConfigureServices(IServiceCollection services)
             policy =>
             {
                 policy.AddRequirements(new SurveyCreatorRequirement());
-                policy.RequireAuthenticatedUser(); // Adds DenyAnonymousAuthorizationRequirement 
+                policy.RequireAuthenticatedUser(); // Adds DenyAnonymousAuthorizationRequirement
                 policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
             });
         options.AddPolicy(PolicyNames.RequireSurveyAdmin,
             policy =>
             {
                 policy.AddRequirements(new SurveyAdminRequirement());
-                policy.RequireAuthenticatedUser(); // Adds DenyAnonymousAuthorizationRequirement 
+                policy.RequireAuthenticatedUser(); // Adds DenyAnonymousAuthorizationRequirement
                 policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
             });
     });
-    
+
     // ...
 }
 ```
@@ -274,7 +278,7 @@ public void ConfigureServices(IServiceCollection services)
 [IdentityServer4]: https://github.com/IdentityServer/IdentityServer4
 [Mettre à jour les manifestes de l’application]: ./run-the-app.md#update-the-application-manifests
 [Mise en cache de jeton]: token-cache.md
-[inscription du locataire]: signup.md
+[l’inscription du locataire]: signup.md
 [claims-transformation]: claims.md#claims-transformations
 [Authorization]: authorize.md
 [sample application]: https://github.com/mspnp/multitenant-saas-guidance

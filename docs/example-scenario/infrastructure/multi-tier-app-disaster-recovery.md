@@ -1,16 +1,16 @@
 ---
 title: Application web multiniveau conçue pour la haute disponibilité/reprise d’activité
 titleSuffix: Azure Example Scenarios
-description: Créer une application web multiniveau développée pour la haute disponibilité et la reprise d’activité sur Azure à l’aide de machines virtuelles Azure, de groupes à haute disponibilité, de zones de disponibilité, d’Azure Site Recovery et d’Azure Traffic Manager
+description: Créez une application web multiniveau développée pour la haute disponibilité et la reprise d’activité après sinistre sur Azure à l’aide de machines virtuelles Azure, de groupes à haute disponibilité, de zones de disponibilité, d’Azure Site Recovery et d’Azure Traffic Manager.
 author: sujayt
 ms.date: 11/16/2018
 ms.custom: product-team
-ms.openlocfilehash: baa468697b4a72975e3b192efc9bdf1861a0c0da
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: d2b466cc691c02ea3c5fb6ff72d91865d33c3378
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53644040"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114094"
 ---
 # <a name="multitier-web-application-built-for-high-availability-and-disaster-recovery-on-azure"></a>Application web multiniveau développée pour la haute disponibilité et la reprise d’activité sur Azure
 

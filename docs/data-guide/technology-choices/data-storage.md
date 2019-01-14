@@ -3,27 +3,31 @@ title: Sélectionner une technologie de stockage de données
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: c97249228ca45a7a17822b6dd55acad6360c6f6b
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 9fe28249b51083bb588808770aba9ac7d48d560e
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902644"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113159"
 ---
 # <a name="choosing-a-big-data-storage-technology-in-azure"></a>Sélectionner une technologie de stockage de Big Data dans Azure
 
 Cette rubrique compare les options de stockage de données pour les solutions de Big Data, &mdash; plus précisément, le stockage de données pour l’ingestion de données en bloc et le traitement par lots, par opposition aux [magasins de données analytiques](./analytical-data-stores.md) ou à l’[ingestion en continu en temps réel](./real-time-ingestion.md).
 
+<!-- markdownlint-disable MD026 -->
+
 ## <a name="what-are-your-options-when-choosing-data-storage-in-azure"></a>Quelles sont vos options à l’heure de choisir un stockage de données dans Azure ?
 
-Il existe plusieurs options disponibles pour l’ingestion de données dans Azure, en fonction de vos besoins :
+<!-- markdownlint-enable MD026 -->
 
-**Stockage Fichier**
+En fonction de vos besoins, il existe plusieurs options disponibles pour l’ingestion de données dans Azure.
+
+**Stockage de fichiers :**
 
 - [Stockage d’objets blob Azure](/azure/storage/blobs/storage-blobs-introduction)
 - [Azure Data Lake Store](/azure/data-lake-store/)
 
-**Bases de données NoSQL**
+**Bases de données NoSQL :**
 
 - [Azure Cosmos DB](/azure/cosmos-db/)
 - [HBase sur HDInsight](https://hbase.apache.org/)
@@ -34,7 +38,7 @@ Le stockage Azure est un service de stockage managé hautement disponible, sécu
 
 Vous pouvez utiliser divers services de stockage Azure pour stocker vos données. L’option la plus flexible pour le stockage d’objets blob à partir de plusieurs sources de données est le [stockage d’objets blob](/azure/storage/blobs/storage-blobs-introduction). Les objets blob sont en fait des fichiers. Ils stockent des images, des documents, des fichiers HTML, des disques durs virtuels (VHD), du Big Data tel que des journaux et des sauvegardes de base de données, autrement dit, pratiquement tout. Les objets blob sont stockés dans des conteneurs, équivalents à des dossiers. Un conteneur regroupe un ensemble d’objets blob. Un compte de stockage peut contenir un nombre illimité de conteneurs, et un conteneur peut stocker un nombre illimité d’objets blob.
 
-Le stockage Azure est un choix judicieux pour les solutions de Big Data et d’analyse, en raison de sa flexibilité, sa haute disponibilité et son faible coût. Il fournit des niveaux de stockage chaud, froid et archive pour différents cas d’usage. Pour plus d’informations, consultez [Stockage Blob Azure : niveaux de stockage chaud, froid et archive](/azure/storage/blobs/storage-blob-storage-tiers).
+Le stockage Azure est un choix judicieux pour les solutions de Big Data et d’analyse, en raison de sa flexibilité, sa haute disponibilité et son faible coût. Il fournit des niveaux de stockage chaud, froid et archive pour différents cas d’usage. Pour plus d’informations, consultez [Stockage Blob Azure : Niveaux de stockage chaud, froid et archive](/azure/storage/blobs/storage-blob-storage-tiers).
 
 Le stockage d’objets blob Azure est accessible à partir de Hadoop (disponible via HDInsight). HDInsight peut utiliser un conteneur d’objets blob dans le stockage Azure comme système de fichiers par défaut pour le cluster. Grâce à une interface HDFS (Hadoop Distributed File System) fournie par un pilote WASB, l’ensemble des composants de HDInsight peut fonctionner directement sur les données structurées ou non structurées en tant qu’objets blob. Le stockage d’objets blob Azure est également accessible via Azure SQL Data Warehouse à l’aide de sa fonctionnalité PolyBase.
 
@@ -59,7 +63,7 @@ Combiné à Azure Data Lake Analytics, Data Lake Store est spécialement conçu 
 
 [Azure Cosmos DB](/azure/cosmos-db/) est un service de base de données multimodèle mondialement distribué de Microsoft. Cosmos DB garantit des latences en millisecondes à un chiffre au 99e centile partout dans le monde, offre de multiples modèles de cohérence bien définis pour affiner les performances, et garantit une disponibilité optimale grâce à des fonctionnalités d’hébergement multiple.
 
-Azure Cosmos DB est sans schéma. Il indexe automatiquement toutes les données sans avoir à s’occuper de la gestion des schémas et des index. Il est également multimodèle. Les modèles de données de types documents, valeurs clés, graphiques et colonnes sont pris en charge de manière native. 
+Azure Cosmos DB est sans schéma. Il indexe automatiquement toutes les données sans avoir à s’occuper de la gestion des schémas et des index. Il est également multimodèle. Les modèles de données de types documents, valeurs clés, graphiques et colonnes sont pris en charge de manière native.
 
 Fonctionnalités d’Azure Cosmos DB :
 
@@ -119,4 +123,3 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 | Intégration native à Azure Functions |                        [Oui](/azure/cosmos-db/serverless-computing-database)                        |                                                                     Non                                                                      |
 |   Distribution mondiale automatique    |                          [Oui](/azure/cosmos-db/distribute-data-globally)                           | Aucune [réplication de cluster HBase ne peut être configurée ](/azure/hdinsight/hbase/apache-hbase-replication) dans les régions avec une cohérence éventuelle |
 |           Modèle de tarification            | Unités de requête (RU) avec mise à l’échelle élastique facturées par seconde en fonction des besoins, stockage avec mise à l’échelle élastique |                              Prix par minute du cluster HDInsight (mise à l’échelle horizontale des nœuds), stockage                               |
-

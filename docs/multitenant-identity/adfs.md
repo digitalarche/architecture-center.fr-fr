@@ -1,23 +1,24 @@
 ---
 title: Se fédérer avec les services AD FS d’un client
-description: Comment effectuer la fédération avec les services AD FS d’un client dans une application mutualisée
+description: Comment effectuer la fédération avec les services AD FS d’un client dans une application multilocataire.
 author: MikeWasson
 ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: token-cache
 pnp.series.next: client-assertion
-ms.openlocfilehash: fec10ca0e067b3b51bf9dba70d66ceb12423787d
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 27fad1aab8d359346353cc031a2e8d8746294818
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902695"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113550"
 ---
 # <a name="federate-with-a-customers-ad-fs"></a>Se fédérer avec les services AD FS d’un client
 
 Il décrit comment une application SaaS mutualisée peut prendre en charge l’authentification via Active Directory Federation Services (AD FS), afin de se fédérer avec les services AD FS d’un client.
 
 ## <a name="overview"></a>Vue d’ensemble
+
 Azure Active Directory (Azure AD) vous permet de connecter des utilisateurs à partir de clients Azure AD, y compris de clients Office 365 et Dynamics CRM Online. Mais qu’en est-il des clients qui utilisent Active Directory localement sur un intranet d’entreprise ?
 
 Pour eux, l’une des possibilités consiste à synchroniser leur Active Directory local avec Azure AD, à l’aide d’ [Azure AD Connect]. Cependant, certains clients sont parfois dans l’incapacité d’utiliser cette approche, à cause d’une stratégie informatique de l’entreprise ou d’autres raisons. Dans ce cas, l’autre possibilité consiste à assurer une fédération à l’aide d’Active Directory Federation Services (AD FS).
@@ -38,22 +39,24 @@ La relation d’approbation comprend trois rôles principaux :
 
 > [!NOTE]
 > Dans cet article, nous partons du principe que l’application utilise OpenID Connect comme protocole d’authentification. L’autre possibilité consiste à utiliser WS-Federation.
-> 
+>
 > Pour OpenID Connect, le fournisseur SaaS doit utiliser AD FS 2016 dans Windows Server 2016. AD FS 3.0 ne prend pas en charge OpenID Connect.
-> 
+>
 > ASP.NET Core n’intègre pas de prise en charge prêt à l’emploi pour WS-Federation.
-> 
-> 
+>
+>
 
 Pour obtenir un exemple d’utilisation de WS-Federation avec ASP.NET 4, consultez [active-directory-dotnet-webapp-wsfederation][active-directory-dotnet-webapp-wsfederation].
 
 ## <a name="authentication-flow"></a>Flux d’authentification
+
 1. Lorsque l’utilisateur clique sur « Connexion », l’application le redirige vers un point de terminaison OpenID Connect sur les services AD FS du fournisseur SaaS.
 2. L’utilisateur entre son nom d’utilisateur («`alice@corp.contoso.com`»). Les services AD FS utilisent la découverte du domaine d’accueil pour pointer vers les services AD FS du client, où l’utilisateur entre ses informations d’identification.
 3. Les services AD FS du client envoient les revendications des utilisateurs aux services AD FS du fournisseur SaaS, à l’aide de WS-Federation (ou de SAML).
 4. Les revendications transitent des services AD FS vers l’application, à l’aide d’OpenID Connect. Cela nécessite un changement de protocole (WS-Federation).
 
 ## <a name="limitations"></a>Limites
+
 Par défaut, l’application par partie de confiance ne reçoit qu’un ensemble fixe de revendications disponibles dans id_token, comme le montre le tableau suivant. Avec AD FS 2016, vous pouvez personnaliser id_token dans les scénarios OpenID Connect. Pour plus d’informations, consultez [Jetons d’ID personnalisés dans AD FS](/windows-server/identity/ad-fs/development/customize-id-token-ad-fs-2016).
 
 | Revendication | Description |
@@ -72,12 +75,11 @@ Par défaut, l’application par partie de confiance ne reçoit qu’un ensemble
 
 > [!NOTE]
 > La revendication « iss » contient les services AD FS du partenaire (en règle générale, cette revendication identifie le fournisseur SaaS comme étant l’émetteur). Elle n’identifie pas les services AD FS du client. Vous pouvez trouver le domaine du client dans l’UPN.
-> 
-> 
 
 Le reste de cet article décrit comment définir la relation d’approbation entre la partie de confiance (l’application) et le partenaire du compte (le client).
 
 ## <a name="ad-fs-deployment"></a>Déploiement des services AD FS
+
 Le fournisseur SaaS peut déployer les services AD FS sur site ou sur des machines virtuelles Azure. Pour des raisons de sécurité et de disponibilité, les instructions suivantes sont importantes :
 
 * Déployez au moins deux serveurs AD FS et deux serveurs proxy AD FS pour optimiser la disponibilité des services AD FS.
@@ -87,13 +89,15 @@ Le fournisseur SaaS peut déployer les services AD FS sur site ou sur des machi
 La configuration d’une topologie similaire dans Azure nécessite l’utilisation de réseaux virtuels, de groupes de sécurité réseau, de machines virtuelles Azure et de groupes à haute disponibilité. Pour plus d’informations, consultez [Recommandations en matière de déploiement de Windows Server Active Directory sur des machines virtuelles Azure][active-directory-on-azure].
 
 ## <a name="configure-openid-connect-authentication-with-ad-fs"></a>Configurer l’authentification OpenID Connect avec les services AD FS
-Le fournisseur SaaS doit activer OpenID Connect entre l’application et les services AD FS. Pour ce faire, ajoutez un groupe d’applications dans les services AD FS.  Vous trouverez des instructions détaillées dans ce [billet de blog], sous « Setting up a Web App for OpenId Connect sign in AD FS » (Configuration d’une application web pour une connexion via Open ID Connect dans AD FS). 
+
+Le fournisseur SaaS doit activer OpenID Connect entre l’application et les services AD FS. Pour ce faire, ajoutez un groupe d’applications dans les services AD FS.  Vous trouverez des instructions détaillées dans ce [billet de blog], sous « Setting up a Web App for OpenId Connect sign in AD FS » (Configuration d’une application web pour une connexion via Open ID Connect dans AD FS).
 
 Ensuite, configurez l’intergiciel (middleware) OpenID Connect. Le point de terminaison des métadonnées est `https://domain/adfs/.well-known/openid-configuration`, où « domain » est le domaine des services AD FS du fournisseur SaaS.
 
 En général, vous pouvez l’associer à d’autres points de terminaison OpenID Connect (comme AAD). Vous aurez besoin de deux boutons de connexion différents (ou identiques mais différenciés par un moyen ou un autre), afin que l’utilisateur soit redirigé vers le point de terminaison d’authentification approprié.
 
 ## <a name="configure-the-ad-fs-resource-partner"></a>Configurer le partenaire de ressources des services AD FS
+
 Le fournisseur SaaS doit effectuer les opérations suivantes pour chaque client qui souhaite se connecter via les services AD FS :
 
 1. Ajouter une approbation de fournisseur de revendications.
@@ -103,6 +107,7 @@ Le fournisseur SaaS doit effectuer les opérations suivantes pour chaque client 
 Voyons ces étapes plus en détail.
 
 ### <a name="add-the-claims-provider-trust"></a>Ajouter une approbation de fournisseur de revendications
+
 1. Dans Gestionnaire de serveur, cliquez sur **Outils**, puis sélectionnez **Gestion AD FS**.
 2. Dans l’arborescence de la console, sous **AD FS**, cliquez avec le bouton droit sur **Approbations de fournisseur de revendications**. Sélectionnez **Ajouter une approbation de fournisseur de revendications**.
 3. Cliquez sur **Démarrer** pour démarrer l’assistant.
@@ -110,6 +115,7 @@ Voyons ces étapes plus en détail.
 5. Parcourez le reste des étapes de l’Assistant en acceptant les valeurs par défaut.
 
 ### <a name="edit-claims-rules"></a>Modifier des règles de revendications
+
 1. Cliquez sur l’approbation de fournisseur de revendications ajoutée, puis sélectionnez **Modifier des règles de revendications**.
 2. Cliquez sur **Ajouter une règle**.
 3. Sélectionnez « Transférer ou filtrer une revendication entrante » et cliquez sur **Suivant**.
@@ -123,9 +129,10 @@ Voyons ces étapes plus en détail.
 9. Cliquez sur **OK** pour terminer l’assistant.
 
 ### <a name="enable-home-realm-discovery"></a>Activer la découverte du domaine d’accueil
+
 Exécutez le script PowerShell suivant :
 
-```
+```powershell
 Set-ADFSClaimsProviderTrust -TargetName "name" -OrganizationalAccountSuffix @("suffix")
 ```
 
@@ -134,12 +141,14 @@ où « name » est le nom convivial de l’approbation de fournisseur de reven
 Avec cette configuration, les utilisateurs peuvent saisir leur compte professionnel et AD FS sélectionne automatiquement le fournisseur de revendications correspondant. Consultez la page [Personnalisation des pages de connexion AD FS], dans la section « Configurer le fournisseur d’identité pour utiliser certains suffixes d’adresse de messagerie ».
 
 ## <a name="configure-the-ad-fs-account-partner"></a>Configurer le partenaire de compte AD FS
+
 Le client doit effectuer les opérations suivantes :
 
 1. Ajouter une approbation de partie de confiance.
 2. Ajouter des règles de revendications.
 
 ### <a name="add-the-rp-trust"></a>Ajouter l’approbation de la partie de confiance
+
 1. Dans Gestionnaire de serveur, cliquez sur **Outils**, puis sélectionnez **Gestion AD FS**.
 2. Dans l’arborescence de la console, sous **AD FS**, cliquez avec le bouton droit sur **Approbations de partie de confiance**. Sélectionnez **Ajouter une approbation de partie de confiance**.
 3. Sélectionnez **Prise en charge des revendications**, puis cliquez sur **Démarrer**.
@@ -152,6 +161,7 @@ Le client doit effectuer les opérations suivantes :
 8. Cliquez sur **Suivant** pour terminer l’assistant.
 
 ### <a name="add-claims-rules"></a>Ajouter des règles de revendications
+
 1. Cliquez avec le bouton droit de la souris sur l’approbation de partie de confiance ajoutée, puis sélectionnez **Modifier la stratégie d’émission de revendications**.
 2. Cliquez sur **Ajouter une règle**.
 3. Sélectionnez « Envoyer les attributs LDAP comme des revendications » et cliquez sur **Suivant**.
@@ -167,19 +177,19 @@ Le client doit effectuer les opérations suivantes :
 9. Sélectionnez « Envoyer les revendications à l’aide d’une règle personnalisée », puis cliquez sur **Suivant**.
 10. Attribuez un nom à la règle (par exemple, « Type de revendication d’ancrage »).
 11. Sous **Règle personnalisée**, ajoutez le code suivant :
-    
-    ```
+
+    ```console
     EXISTS([Type == "http://schemas.microsoft.com/ws/2014/01/identity/claims/anchorclaimtype"])=>
     issue (Type = "http://schemas.microsoft.com/ws/2014/01/identity/claims/anchorclaimtype",
           Value = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn");
     ```
-    
+
     Cette règle émet une revendication de type `anchorclaimtype`. La revendication indique à la partie de confiance d’utiliser l’UPN comme ID non modifiable de l’utilisateur.
 12. Cliquez sur **Terminer**.
 13. Cliquez sur **OK** pour terminer l’assistant.
 
+<!-- links -->
 
-<!-- Links -->
 [Azure AD Connect]: /azure/active-directory/hybrid/whatis-hybrid-identity
 [approbation de fédération]: https://technet.microsoft.com/library/cc770993(v=ws.11).aspx
 [partenaire du compte]: https://technet.microsoft.com/library/cc731141(v=ws.11).aspx

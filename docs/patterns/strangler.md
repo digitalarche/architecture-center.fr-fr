@@ -1,18 +1,21 @@
 ---
 title: Modèle d’étranglement
+titleSuffix: Cloud Design Patterns
 description: Faites migrer un système hérité de façon incrémentielle en remplaçant progressivement des parties spécifiques des fonctionnalités par de nouveaux services et applications.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 0bf0b76a69f947419da83edd894a04dbea02371b
-ms.sourcegitcommit: 2ae794de13c45cf24ad60d4f4dbb193c25944eff
+ms.custom: seodec18
+ms.openlocfilehash: 7d7c58c97537537ae9f2f96b7ecf1b437fc258b4
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/25/2018
-ms.locfileid: "50001879"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010209"
 ---
 # <a name="strangler-pattern"></a>Modèle d’étranglement
 
-Faites migrer un système hérité de façon incrémentielle en remplaçant progressivement des parties spécifiques des fonctionnalités par de nouveaux services et applications. Lorsque les fonctionnalités d’un système hérité sont remplacées, le nouveau système finit par remplacer toutes les fonctionnalités de l’ancien système. Il étrangle alors l’ancien système et vous permet ainsi de le désactiver. 
+Faites migrer un système hérité de façon incrémentielle en remplaçant progressivement des parties spécifiques des fonctionnalités par de nouveaux services et applications. Lorsque les fonctionnalités d’un système hérité sont remplacées, le nouveau système finit par remplacer toutes les fonctionnalités de l’ancien système. Il étrangle alors l’ancien système et vous permet ainsi de le désactiver.
 
 ## <a name="context-and-problem"></a>Contexte et problème
 
@@ -24,7 +27,7 @@ Le remplacement complet d’un système complexe peut constituer un défi de tai
 
 Remplacez progressivement des parties spécifiques des fonctionnalités par de nouveaux services et applications. Créez une façade qui intercepte les requêtes destinées au système hérité principal. La façade route ces requêtes soit vers l’application héritée, soit vers les nouveaux services. Les fonctionnalités existantes peuvent faire l’objet d’une migration progressive vers le nouveau système, et les clients peuvent continuer à utiliser la même interface sans savoir qu’une migration a été effectuée.
 
-![](./_images/strangler.png)  
+![Diagramme du modèle d’étranglement](./_images/strangler.png)
 
 Ce modèle contribue à minimiser les risques liés à la migration et à étaler l’effort de développement dans le temps. Étant donné que la façade route les utilisateurs en toute sécurité vers l’application adéquate, vous pouvez ajouter des fonctionnalités au nouveau système à votre rythme, tout en ayant l’assurance que l’application héritée continue à fonctionner. Avec le temps, à mesure que les fonctionnalités font l’objet d’une migration vers le nouveau système, le système hérité finit par être « étranglé » et par devenir inutile. Une fois ce processus terminé, le système hérité peut alors être mis hors service sans problème.
 
@@ -48,9 +51,3 @@ Ce modèle peut ne pas convenir :
 ## <a name="related-guidance"></a>Aide connexe
 
 - Billet de blog de Martin Fowler sur [StranglerApplication](https://www.martinfowler.com/bliki/StranglerApplication.html)
-- [Anti-Corruption Layer pattern (Modèle de couche de lutte contre la corruption)](./anti-corruption-layer.md)
-- [Gateway Routing pattern (Modèle de routage de passerelle)](./gateway-routing.md)
-
-
- 
-

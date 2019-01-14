@@ -1,22 +1,24 @@
 ---
 title: Vue d’ensemble des options de calcul Azure
-description: Vue d’ensemble des options de calcul Azure
+titleSuffix: Azure Application Architecture Guide
+description: Vue d’ensemble des options de calcul Azure.
 author: MikeWasson
 ms.date: 06/13/2018
-ms.openlocfilehash: cb59c4472b183d9a14031497f0b6db673938c9a9
-ms.sourcegitcommit: b2a4eb132857afa70201e28d662f18458865a48e
+ms.custom: seojan19
+ms.openlocfilehash: 80e57263207ef3a96791d61097ff9f0e3259bf53
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/05/2018
-ms.locfileid: "48818817"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111493"
 ---
 # <a name="overview-of-azure-compute-options"></a>Vue d’ensemble des options de calcul Azure
 
-Le terme *calcul* fait référence au modèle d’hébergement des ressources de calcul utilisées par votre application. 
+Le terme *calcul* fait référence au modèle d’hébergement des ressources de calcul utilisées par votre application.
 
 ## <a name="overview"></a>Vue d’ensemble
 
-À l’une des extrémités du spectre se trouve la fonctionnalité **infrastructure as a service** (IaaS). IaaS vous permet d’approvisionner les machines virtuelles dont vous avez besoin, ainsi que les composants de stockage et réseau associés. Ensuite, vous déployez les logiciels et les applications dont vous souhaitez disposer sur ces machines virtuelles. Ce modèle est le plus proche d’un environnement local traditionnel, à ceci près que l’infrastructure est gérée par Microsoft. Vous continuez de gérer les différentes machines virtuelles.  
+À l’une des extrémités du spectre se trouve la fonctionnalité **infrastructure as a service** (IaaS). IaaS vous permet d’approvisionner les machines virtuelles dont vous avez besoin, ainsi que les composants de stockage et réseau associés. Ensuite, vous déployez les logiciels et les applications dont vous souhaitez disposer sur ces machines virtuelles. Ce modèle est le plus proche d’un environnement local traditionnel, à ceci près que l’infrastructure est gérée par Microsoft. Vous continuez de gérer les différentes machines virtuelles.
 
 La fonctionnalité **Platform as a Service** (PaaS) offre un environnement d’hébergement géré, dans lequel vous pouvez déployer votre application sans avoir à gérer de machines virtuelles ni de ressources réseau. Par exemple, plutôt que de créer des machines virtuelles individuelles, vous spécifiez un nombre d’instances, et le service approvisionne, configure et gère les ressources nécessaires. Azure App Service constitue un exemple de service PaaS.
 
@@ -32,22 +34,22 @@ Les principales options de calcul actuellement disponibles dans Azure sont les s
 
 - [Machines Virtuelles](/azure/virtual-machines/) est un service IaaS qui vous permet de déployer et gérer des machines virtuelles à l’intérieur d’un réseau virtuel (VNet).
 - [App Service](/azure/app-service/app-service-value-prop-what-is) est une offre PaaS managée pour l’hébergement d’applications web, de serveurs principaux d’applications mobiles, d’API RESTful ou de processus d’entreprise automatisés.
-- [Service Fabric](/azure/service-fabric/service-fabric-overview) est une plateforme de systèmes distribués qui peut s’exécuter dans de nombreux environnements, y compris sur Azure ou localement. Service Fabric est un orchestrateur de microservices sur un cluster de machines. 
+- [Service Fabric](/azure/service-fabric/service-fabric-overview) est une plateforme de systèmes distribués qui peut s’exécuter dans de nombreux environnements, y compris sur Azure ou localement. Service Fabric est un orchestrateur de microservices sur un cluster de machines.
 - [Azure Container Service](/azure/container-service/container-service-intro) vous permet de créer, configurer et gérer un cluster de machines virtuelles préconfigurées pour l’exécution d’applications en conteneur.
 - [Azure Container Instances](/azure/container-instances/container-instances-overview) propose la façon la plus simple et rapide qui soit d’exécuter un conteneur dans Azure, sans avoir à configurer des machines virtuelles ni adopter un service de niveau supérieur.
 - [Azure Functions](/azure/azure-functions/functions-overview) est un service FaaS géré.
 - [Azure Batch](/azure/batch/batch-technical-overview) est un service géré qui permet d’exécuter des applications de calcul haute performance (HPC) et parallèles à grande échelle.
-- [Cloud Services](/azure/cloud-services/cloud-services-choose-me) est un service géré permettant d’exécuter des applications cloud. Il utilise un modèle d’hébergement PaaS. 
+- [Cloud Services](/azure/cloud-services/cloud-services-choose-me) est un service géré permettant d’exécuter des applications cloud. Il utilise un modèle d’hébergement PaaS.
 
 Lorsque vous sélectionnez une option de calcul, voici quelques facteurs à prendre en compte :
 
-- Modèle d’hébergement. Comment le service est-il hébergé ? Quelles sont les exigences et limitations imposées par cet environnement d’hébergement ? 
+- Modèle d’hébergement. Comment le service est-il hébergé ? Quelles sont les exigences et limitations imposées par cet environnement d’hébergement ?
 - DevOps. Existe-t-il une prise en charge intégrée des mises à niveau d’application ? Quel est le modèle de déploiement utilisé ?
-- Extensibilité. Comment le service gère-t-il l’ajout ou la suppression d’instances ? Peut-il faire l’objet d’une mise à l’échelle automatique basée sur la charge et sur d’autres métriques ? 
-- Disponibilité. Quel est le Contrat de niveau de service (SLA) du service ? 
+- Extensibilité. Comment le service gère-t-il l’ajout ou la suppression d’instances ? Peut-il faire l’objet d’une mise à l’échelle automatique basée sur la charge et sur d’autres métriques ?
+- Disponibilité. Quel est le Contrat de niveau de service (SLA) du service ?
 - Coût. Outre le coût du service proprement dit, considérez le coût des opérations de gestion d’une solution reposant sur ce service. Par exemple, les solutions IaaS peuvent augmenter le coût des opérations.
-- Quelles sont les limitations globales de chaque service ? 
-- Quels sont les types d’architectures d’application les mieux adaptés à ce service ? 
+- Quelles sont les limitations globales de chaque service ?
+- Quels sont les types d’architectures d’application les mieux adaptés à ce service ?
 
 ## <a name="next-steps"></a>Étapes suivantes
 

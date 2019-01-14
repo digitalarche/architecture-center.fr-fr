@@ -3,12 +3,12 @@ title: Extraire, transformer et charger (ETL)
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 6f56da72bd7a93ecd40b0be2a19e93d9062038fb
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: b23e1ab35f278bd8e1b203cd0026ee356be022dc
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901539"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113431"
 ---
 # <a name="extract-transform-and-load-etl"></a>Extraire, transformer et charger (ETL)
 
@@ -16,7 +16,7 @@ Un problème courant auquel les organisations font face est le mode de collecte 
 
 Au fil des années, différents outils, services et processus ont été développés pour relever ces défis. Quel que soit le processus utilisé, il est nécessaire de coordonner le travail et d’appliquer un certain degré de transformation des données dans le pipeline de données. Les sections suivantes illustrent les méthodes couramment utilisées pour effectuer ces tâches.
 
-## <a name="extract-transform-and-load-etl"></a>Extraire, transformer et charger (ETL)
+## <a name="extract-transform-and-load-etl-process"></a>Processus ETL (extraction, transformation et chargement)
 
 ETL est un pipeline de données utilisé pour collecter des données provenant de différentes sources, transformer les données en fonction des règles métier et charger les données dans un magasin de données de destination. Le travail de transformation dans ETL a lieu dans un moteur spécialisé et implique souvent l’utilisation de tables intermédiaires pour conserver temporairement les données lors de leur transformation et leur chargement final vers leur destination.
 
@@ -27,9 +27,11 @@ La transformation des données qui a lieu implique généralement plusieurs opé
 Souvent, les trois phases ETL sont exécutées en parallèle pour gagner du temps. Par exemple, tandis que les données sont extraites, un processus de transformation peut travailler sur les données déjà reçues et les préparer pour le chargement, et un processus de chargement peut commencer à travailler sur les données préparées, au lieu d’attendre la fin du processus d’extraction complet.
 
 Service Azure approprié :
+
 - [Azure Data Factory v2](https://azure.microsoft.com/services/data-factory/)
 
 Autres outils :
+
 - [SQL Server Integration Services (SSIS)](/sql/integration-services/sql-server-integration-services)
 
 ## <a name="extract-load-and-transform-elt"></a>Extraire, charger et transformer (ELT)
@@ -40,11 +42,11 @@ Extraire, charger et transformer (ELT) diffère du processus ETL uniquement où 
 
 Les scénarios d’utilisation classiques d’ELT concernent le domaine du Big Data. Par exemple, vous pouvez commencer par extraire toutes les données sources dans des fichiers plats dans un stockage évolutif comme le système de fichiers distribués (HDFS) Hadoop ou Azure Data Lake Store. Les technologies comme Spark, Hive ou PolyBase peuvent ensuite être utilisées pour interroger les données sources. Le point clé avec ELT est que le magasin de données utilisé pour effectuer la transformation est le même magasin de données que celui où les données sont finalement consommées. Ce magasin de données lit directement à partir du stockage évolutif, au lieu de charger les données dans son propre stockage propriétaire. Cette approche ignore l’étape de copie des données présente dans ETL, qui peut être une opération longue pour les jeux de données volumineux.
 
-Dans la pratique, le magasin de données cible est un [entrepôt de données](./data-warehousing.md) utilisant un cluster Hadoop (avec Hive ou Spark) ou un SQL Data Warehouse. En général, un schéma est placé sur les données de fichier plat au moment de la requête et stocké sous la forme d’une table, permettant l’interrogation des données comme toute autre table dans le magasin de données. Celles-ci sont désignées comme des tables externes, car les données ne résident pas dans le stockage géré par le magasin de données lui-même, mais dans un stockage évolutif externe. 
+Dans la pratique, le magasin de données cible est un [entrepôt de données](./data-warehousing.md) utilisant un cluster Hadoop (avec Hive ou Spark) ou un SQL Data Warehouse. En général, un schéma est placé sur les données de fichier plat au moment de la requête et stocké sous la forme d’une table, permettant l’interrogation des données comme toute autre table dans le magasin de données. Celles-ci sont désignées comme des tables externes, car les données ne résident pas dans le stockage géré par le magasin de données lui-même, mais dans un stockage évolutif externe.
 
 Le magasin de données gère uniquement le schéma des données et applique le schéma lors de la lecture. Par exemple, un cluster Hadoop utilisant Hive décrit une table Hive où la source des données est en réalité un chemin d’accès à un ensemble de fichiers dans HDFS. Dans SQL Data Warehouse, PolyBase peut obtenir le même résultat &mdash; créant une table sur des données stockées en externe à la base de données. Une fois la source de données chargée, les données présentes dans les tables externes peuvent être traitées grâce aux fonctionnalités du magasin de données. Dans les scénarios Big Data, cela signifie que le magasin de données doit être capable d’un traitement parallèle massif (MPP), qui fractionne les données en segments plus petits et distribue le traitement des segments sur plusieurs machines en parallèle.
 
-La dernière phase du pipeline ELT consiste généralement à transformer la source de données dans un format final plus efficace pour les types de requêtes qui doivent être pris en charge. Par exemple, les données peuvent être partitionnées. En outre, ELT peut utiliser des formats de stockage optimisé comme Parquet, qui stocke les données orientées ligne dans un mode en colonnes et fournit une indexation optimisée. 
+La dernière phase du pipeline ELT consiste généralement à transformer la source de données dans un format final plus efficace pour les types de requêtes qui doivent être pris en charge. Par exemple, les données peuvent être partitionnées. En outre, ELT peut utiliser des formats de stockage optimisé comme Parquet, qui stocke les données orientées ligne dans un mode en colonnes et fournit une indexation optimisée.
 
 Service Azure approprié :
 
@@ -68,9 +70,11 @@ Les flux de contrôle exécutent les flux de données en tant que tâche. Dans u
 Dans le schéma ci-dessus, le flux de contrôle comporte plusieurs tâches, notamment une tâche de flux de données. L’une des tâches est imbriquée dans un conteneur. Les conteneurs peuvent être utilisés pour donner une structure aux tâches, fournissant une unité de travail. La répétition d’éléments dans une collection, comme des fichiers dans un dossier ou des instructions dans une base de données, en est un exemple.
 
 Service Azure approprié :
+
 - [Azure Data Factory v2](https://azure.microsoft.com/services/data-factory/)
 
 Autres outils :
+
 - [SQL Server Integration Services (SSIS)](/sql/integration-services/sql-server-integration-services)
 
 ## <a name="technology-choices"></a>Choix de technologie

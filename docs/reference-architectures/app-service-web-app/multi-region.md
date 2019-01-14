@@ -5,12 +5,12 @@ description: Architecture recommandée pour une application web hautement dispon
 author: MikeWasson
 ms.date: 10/25/2018
 ms.custom: seodec18
-ms.openlocfilehash: 61ee7220dbc37140ff1598de78f89aaef8a3e922
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 04ba786ea16aa3245a8f0b7fcafeacc60ac447c2
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53119844"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113329"
 ---
 # <a name="run-a-web-application-in-multiple-azure-regions-for-high-availability"></a>Exécuter une application web dans plusieurs régions Azure à des fins de haute disponibilité
 
@@ -65,7 +65,7 @@ Envisagez de placer la région primaire, la région secondaire et Traffic Manage
 
 Une bonne pratique consiste à créer un point de terminaison de sonde d’intégrité qui signale l’intégrité globale de l’application et à utiliser ce point de terminaison pour la sonde d’intégrité. Le point de terminaison doit vérifier les dépendances critiques telles que les applications App Service, la file d’attente de stockage et SQL Database. Dans le cas contraire, la sonde risque de signaler un point de terminaison intègre alors que des parties critiques de l’application sont défaillantes.
 
-En revanche, n’utilisez pas la sonde d’intégrité pour vérifier des services de priorité inférieure. Par exemple, si un service de messagerie tombe en panne, l’application peut basculer vers un second fournisseur ou simplement différer l’envoi des e-mails. Cette situation n’est pas suffisamment prioritaire pour entraîner le basculement de l’application. Pour plus d’informations, consultez [Modèle de surveillance de point de terminaison d’intégrité][health-endpoint-monitoring-pattern].
+En revanche, n’utilisez pas la sonde d’intégrité pour vérifier des services de priorité inférieure. Par exemple, si un service de messagerie tombe en panne, l’application peut basculer vers un second fournisseur ou simplement différer l’envoi des e-mails. Cette situation n’est pas suffisamment prioritaire pour entraîner le basculement de l’application. Pour plus d’informations, consultez [Modèle Supervision de point de terminaison d’intégrité][health-endpoint-monitoring-pattern].
 
 ### <a name="sql-database"></a>Base de données SQL
 
@@ -147,7 +147,7 @@ Si la base de données primaire est défaillante, effectuez un basculement manue
 
 <!-- links -->
 
-[azure-sql-db]: https://azure.microsoft.com/documentation/services/sql-database/
+[azure-sql-db]: /azure/sql-database/
 [azure-dns]: /azure/dns/dns-overview
 [cosmosdb-geo]: /azure/cosmos-db/distribute-data-globally
 [guidance-web-apps-scalability]: ./scalable-web-app.md

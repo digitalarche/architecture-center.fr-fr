@@ -5,12 +5,12 @@ description: Recommandations liées au nommage des machines virtuelles, comptes 
 author: telmosampaio
 ms.date: 10/19/2018
 ms.custom: seodec18
-ms.openlocfilehash: 4f934102acea24e8e1070ed6a25d63927f0bd252
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: f0349b5db7eb15037bd92567eaf917b5d044daa0
+ms.sourcegitcommit: 036cd03c39f941567e0de4bae87f4e2aa8c84cf8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53307076"
+ms.lasthandoff: 01/05/2019
+ms.locfileid: "54058197"
 ---
 # <a name="naming-conventions-for-azure-resources"></a>Conventions d’affectation de noms pour les ressources Azure
 
@@ -62,7 +62,7 @@ Les affixes peuvent faire référence à différents aspects des ressources spé
 | --- | --- | --- |
 | Environnement |dev, prod, AQ |Identifie l’environnement de la ressource |
 | Lieu |uw (USA Ouest), ue (USA Est) |Identifie la région dans laquelle la ressource est déployée |
-| Instance |01, 02 |Pour les ressources possédant plusieurs instances nommées (serveurs web, etc.) |
+| Instance |1, 2, ... |Pour les ressources ayant plusieurs instances nommées, par exemple des machines virtuelles ou des cartes d’interface réseau. |
 | Produit ou service |service |Identifie le produit, l’application ou le service pris en charge par la ressource |
 | Rôle |sql, web, messagerie |Identifie le rôle de la ressource associée |
 
@@ -175,7 +175,7 @@ Il existe deux principaux cas d’utilisation de comptes de stockage : sauvegar
 
 Vous pouvez configurer un nom de domaine personnalisé pour accéder à des données blob dans votre compte de stockage Azure. Le point de terminaison par défaut pour le service Blob est `https://<name>.blob.core.windows.net`.
 
-Cependant, si vous mappez un domaine personnalisé (tel que www.contoso.com) au point de terminaison des objets blob de votre compte de stockage, vous pouvez également accéder aux données d’objets blob de votre compte de stockage à l’aide de ce domaine. Par exemple, avec un nom de domaine personnalisé, `https://mystorage.blob.core.windows.net/mycontainer/myblob` devient accessible en tant que `https://www.contoso.com/mycontainer/myblob`.
+Toutefois, si vous mappez un domaine personnalisé (par exemple `www.contoso.com`) au point de terminaison d’objets blob de votre compte de stockage, vous pouvez également accéder aux données d’objets blob de votre compte de stockage à l’aide de ce domaine. Par exemple, avec un nom de domaine personnalisé, `https://mystorage.blob.core.windows.net/mycontainer/myblob` devient accessible en tant que `https://www.contoso.com/mycontainer/myblob`.
 
 Pour plus d’informations sur la configuration de cette fonctionnalité, consultez l’article [Configurer un nom de domaine personnalisé pour un point de terminaison de stockage Blob](/azure/storage/storage-custom-domain-name/).
 

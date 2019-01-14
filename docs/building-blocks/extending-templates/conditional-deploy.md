@@ -1,14 +1,14 @@
 ---
 title: Déployer une ressource de manière conditionnelle dans un modèle Azure Resource Manager
-description: Explique comment étendre les fonctionnalités des modèles Azure Resource Manager au déploiement conditionnel d’une ressource en fonction de la valeur d’un paramètre
+description: Explique comment étendre les fonctionnalités des modèles Azure Resource Manager pour déployer une ressource de manière conditionnelle en fonction de la valeur d’un paramètre.
 author: petertay
 ms.date: 10/30/2018
-ms.openlocfilehash: 2c74e17a5f38f9225b696640a23b55b1285276bb
-ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
+ms.openlocfilehash: 0e02fbbd130bd6be2fc10173c8466b028d5d61da
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/30/2018
-ms.locfileid: "50251836"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113465"
 ---
 # <a name="conditionally-deploy-a-resource-in-an-azure-resource-manager-template"></a>Déployer une ressource de manière conditionnelle dans un modèle Azure Resource Manager
 
@@ -22,7 +22,7 @@ Examinons un exemple de modèle illustrant cette approche. Notre modèle utilise
 
 Examinons chaque section du modèle.
 
-L’élément `parameters` définit un paramètre unique nommé `virtualNetworkPeerings` : 
+L’élément `parameters` définit un paramètre unique nommé `virtualNetworkPeerings` :
 
 ```json
 {
@@ -35,6 +35,7 @@ L’élément `parameters` définit un paramètre unique nommé `virtualNetworkP
     }
   },
 ```
+
 Notre paramètre `virtualNetworkPeerings` est un `array` et présente le schéma suivant :
 
 ```json
@@ -95,9 +96,10 @@ Les propriétés de notre paramètre spécifient les [paramètres associés à l
     }
 ]
 ```
+
 Cette partie de notre modèle effectue plusieurs opérations. Pour commencer, la ressource réelle en cours de déploiement est un modèle inclus de type `Microsoft.Resources/deployments` intégrant son propre modèle qui procède au déploiement proprement dit de la ressource `Microsoft.Network/virtualNetworks/virtualNetworkPeerings`.
 
-Nous garantissons l’unicité de l’élément `name` du modèle inclus en concaténant l’itération actuelle de l’élément `copyIndex()` avec le préfixe `vnp-`. 
+Nous garantissons l’unicité de l’élément `name` du modèle inclus en concaténant l’itération actuelle de l’élément `copyIndex()` avec le préfixe `vnp-`.
 
 L’élément `condition` indique que notre ressource doit être traitée lorsque la fonction `greater()` prend la valeur `true`. Ici, nous vérifions si le tableau de paramètres `virtualNetworkPeerings` est supérieur à zéro (`greater()`). Si tel est le cas, il prend la valeur `true`, et la `condition` est satisfaite. Dans le cas contraire, il prend la valeur `false`.
 
@@ -116,7 +118,7 @@ Ensuite, nous spécifions notre boucle `copy`. Il s’agit d’une boucle `seria
   },
 ```
 
-Notre variable `workaround` inclut deux propriétés, `true` et `false`. La propriété `true` prend la valeur du tableau de paramètres `virtualNetworkPeerings`. La propriété `false` prend la valeur d’un objet vide incluant les propriétés nommées qui sont attendues par Resource Manager &mdash; notez que `false` correspond réellement à un tableau, tout comme notre paramètre `virtualNetworkPeerings`, ce qui entraîne la réussite de la validation. 
+Notre variable `workaround` inclut deux propriétés, `true` et `false`. La propriété `true` prend la valeur du tableau de paramètres `virtualNetworkPeerings`. La propriété `false` prend la valeur d’un objet vide incluant les propriétés nommées qui sont attendues par Resource Manager &mdash; notez que `false` correspond réellement à un tableau, tout comme notre paramètre `virtualNetworkPeerings`, ce qui entraîne la réussite de la validation.
 
 Notre variable `peerings` utilise notre variable `workaround` en vérifiant de nouveau si la longueur du tableau de paramètres `virtualNetworkPeerings` est supérieure à zéro. Si tel est le cas, l’élément `string` prend la valeur `true`, et la variable `workaround` prend la valeur du tableau de paramètres `virtualNetworkPeerings`. Dans le cas contraire, l’élément prend la valeur `false`, et la variable `workaround` prend la valeur de notre objet vide dans le premier élément du tableau.
 
@@ -137,7 +139,7 @@ az group deployment create -g <resource-group-name> \
 * Utilisez des objets au lieu de valeurs scalaires comme paramètres de modèle. Consultez [Utiliser un objet en tant que paramètre dans un modèle Azure Resource Manager](./objects-as-parameters.md)
 
 <!-- links -->
-[azure-resource-manager-condition]: /azure/azure-resource-manager/resource-group-authoring-templates#resources
+[azure-resource-manager-condition]: /azure/azure-resource-manager/resource-manager-templates-resources#condition
 [azure-resource-manager-variable]: /azure/azure-resource-manager/resource-group-authoring-templates#variables
 [vnet-peering-resource-schema]: /azure/templates/microsoft.network/virtualnetworks/virtualnetworkpeerings
 [cli]: /cli/azure/?view=azure-cli-latest

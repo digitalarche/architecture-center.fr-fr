@@ -1,20 +1,17 @@
 ---
-title: CQRS
+title: Modèle de séparation des responsabilités en matière de commande et de requête (CQRS)
+titleSuffix: Cloud Design Patterns
 description: Séparez les opérations qui lisent les données des opérations qui mettent à jour les données en utilisant des interfaces distinctes.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- data-management
-- design-implementation
-- performance-scalability
-ms.openlocfilehash: de9530f7dd55c0ce5460cd3b58ab9f216c9b5c8c
-ms.sourcegitcommit: fb22348f917a76e30a6c090fcd4a18decba0b398
+ms.custom: seodec18
+ms.openlocfilehash: 320f6cd51a44b3a6732d8395f0a5e1db8f9f5774
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/16/2018
-ms.locfileid: "53450868"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010373"
 ---
 # <a name="command-and-query-responsibility-segregation-cqrs-pattern"></a>Modèle de séparation des responsabilités en matière de commande et de requête (CQRS)
 
@@ -56,7 +53,7 @@ Le magasin de lecture peut être un réplica en lecture seule du magasin d’éc
 
 La séparation des magasins de lecture et d’écriture permet également de les mettre à l’échelle de façon individuelle en fonction de la charge. Par exemple, les magasins de lecture sont généralement confrontés à une charge plus importante que les magasins d’écriture.
 
-Lorsque le modèle de requête/lecture contient des données dénormalisées (consultez [Materialized View pattern](materialized-view.md) (Modèle de vue matérialisée)), les performances sont optimisées lors de la lecture des données de chacune des vues d’une application ou lors de l’interrogation de données dans le système.
+Lorsque le modèle de requête/lecture contient des données dénormalisées (consultez [Materialized View pattern](./materialized-view.md) (Modèle de vue matérialisée)), les performances sont optimisées lors de la lecture des données de chacune des vues d’une application ou lors de l’interrogation de données dans le système.
 
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
@@ -96,7 +93,7 @@ Ce modèle n’est pas recommandé dans les situations suivantes :
 
 ## <a name="event-sourcing-and-cqrs"></a>Approvisionnement en événements et CQRS
 
-Le modèle CQRS est souvent utilisé avec le modèle d’approvisionnement en événements. Les systèmes basés sur le modèle CQRS utilisent des modèles de données de lecture et d’écriture séparés, tous adaptés aux tâches appropriées et souvent situés dans des magasins distincts physiquement. Lorsqu’il est utilisé avec le modèle [Approvisionnement en événements](event-sourcing.md), le magasin d’événements est le modèle d’écriture, ainsi que la source officielle d’informations. Le modèle de lecture d’un système basé sur le modèle CQRS fournit des vues matérialisées des données, généralement sous forme de vues extrêmement dénormalisées. Ces vues sont personnalisées en fonction des interfaces et affichent les exigences de l’application, ce qui permet d’optimiser les performances de requête et d’affichage.
+Le modèle CQRS est souvent utilisé avec le modèle d’approvisionnement en événements. Les systèmes basés sur le modèle CQRS utilisent des modèles de données de lecture et d’écriture séparés, tous adaptés aux tâches appropriées et souvent situés dans des magasins distincts physiquement. Quand il est utilisé avec le [Modèle d’approvisionnement en événements](./event-sourcing.md), le magasin d’événements est le modèle d’écriture ainsi que la source officielle d’informations. Le modèle de lecture d’un système basé sur le modèle CQRS fournit des vues matérialisées des données, généralement sous forme de vues extrêmement dénormalisées. Ces vues sont personnalisées en fonction des interfaces et affichent les exigences de l’application, ce qui permet d’optimiser les performances de requête et d’affichage.
 
 L’utilisation du flux d’événements en tant que magasin d’écriture au lieu de données réelles à un point dans le temps évite les conflits de mise à jour d’un agrégat unique et optimise les performances et l’extensibilité. Les événements peuvent être utilisés pour générer de façon asynchrone des vues matérialisées des données qui servent à remplir le magasin de lecture.
 
@@ -242,10 +239,10 @@ Les modèles et les conseils suivants peuvent être utiles quand il s’agit d�
 
 - [Partitionnement des données](https://msdn.microsoft.com/library/dn589795.aspx). Cet article décrit la façon dont les magasins de données de lecture et d’écriture utilisés dans le modèle CQRS peuvent être divisés en partitions gérées et accessibles de façon distincte pour améliorer l’extensibilité, réduire la contention et optimiser les performances.
 
-- [Event Sourcing Pattern](event-sourcing.md) (Modèle d’approvisionnement en événements). Cet article décrit plus en détail la façon dont l’approvisionnement en événements peut être utilisé avec le modèle CQRS pour simplifier les tâches dans des domaines complexes tout en améliorant les performances, l’extensibilité et la réactivité. Il explique également comment proposer de la cohérence pour les données transactionnelles tout en maintenant un historique et des journaux d’audit complets qui peuvent mettre en place des actions de compensation.
+- [Modèle d'approvisionnement en événements](./event-sourcing.md). Cet article décrit plus en détail la façon dont l’approvisionnement en événements peut être utilisé avec le modèle CQRS pour simplifier les tâches dans des domaines complexes tout en améliorant les performances, l’extensibilité et la réactivité. Il explique également comment proposer de la cohérence pour les données transactionnelles tout en maintenant un historique et des journaux d’audit complets qui peuvent mettre en place des actions de compensation.
 
-- [Modèle de vue matérialisée](materialized-view.md). Le mode de lecture d’une implémentation CQRS peut contenir des vues matérialisées des données du modèle d’écriture, ou le modèle de lecture peut être utilisé pour générer des vues matérialisées.
+- [Modèle de vue matérialisée](./materialized-view.md). Le mode de lecture d’une implémentation CQRS peut contenir des vues matérialisées des données du modèle d’écriture, ou le modèle de lecture peut être utilisé pour générer des vues matérialisées.
 
-- Le guide des modèles et pratiques [CQRS Journey](https://aka.ms/cqrs) (Découverte de CQRS). En particulier [Introducing the Command Query Responsibility Segregation Pattern](https://msdn.microsoft.com/library/jj591573.aspx) (Présentation du modèle de séparation des responsabilités en matière de commande et de requête) explore le modèle et les situations dans lesquelles il peut vous être utile et [Epilogue: Lessons Learned](https://msdn.microsoft.com/library/jj591568.aspx) (Épilogue : leçons apprises) vous aide à comprendre certains des problèmes liés à l’utilisation de ce modèle.
+- Le guide des modèles et pratiques [CQRS Journey](https://aka.ms/cqrs) (Découverte de CQRS). En particulier, l’article de [présentation du modèle de séparation des responsabilités pour les commandes et les requêtes](https://msdn.microsoft.com/library/jj591573.aspx) explore le modèle et les situations dans lesquelles il peut vous être utile. L’article [Epilogue: Lessons Learned](https://msdn.microsoft.com/library/jj591568.aspx) (Épilogue : leçons apprises) vous aide à comprendre certains des problèmes liés à l’utilisation de ce modèle.
 
 - L’article [CQRS de Martin Fowler](https://martinfowler.com/bliki/CQRS.html) qui explique les notions de base du modèle et propose des liens vers d’autres ressources utiles.

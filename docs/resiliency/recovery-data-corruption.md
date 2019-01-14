@@ -1,16 +1,16 @@
 ---
 title: Récupérer suite à une altération de données ou à une suppression accidentelle
-description: Article dédié à la description de la récupération suite à une corruption de données ou à une suppression accidentelle de données et à la conception d’applications résilientes, hautement disponibles et tolérantes aux pannes, ainsi qu’à la planification de la récupération d’urgence
+description: Présentation du processus de récupération après une altération des données ou une suppression accidentelle des données. Description de la conception d’applications résilientes, hautement disponibles et à tolérance de panne ainsi que de la planification de la reprise d’activité après sinistre.
 author: MikeWasson
 ms.date: 11/11/2018
-ms.openlocfilehash: 1f3dd448ac6172727481c437fb8a113f25d83464
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.openlocfilehash: 40379f32c6af47002e897c28392816fa1578502a
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916266"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111255"
 ---
-# <a name="recover-from-data-corruption-or-accidental-deletion"></a>Récupérer suite à une altération de données ou à une suppression accidentelle 
+# <a name="recover-from-data-corruption-or-accidental-deletion"></a>Récupérer suite à une altération de données ou à une suppression accidentelle
 
 Un plan solide de continuité d’activité englobe une portion dédiée à la récupération suite aux corruptions ou aux suppressions de données. Vous trouverez ci-après des informations sur la récupération suite à une corruption ou à une suppression accidentelle de vos données en raison d’erreurs applicatives ou d’erreurs de l’opérateur.
 
@@ -20,7 +20,7 @@ Pour protéger les machines virtuelles Azure contre les erreurs applicatives ou 
 
 ## <a name="storage"></a>Stockage
 
-Le stockage Azure fournit la résilience des données via des réplicas automatisés. Toutefois, cela n’empêche pas le code d’application ou les utilisateurs d’altérer des données de façon volontaire ou accidentelle. La conservation de l’intégrité des données sous la menace d’erreurs des utilisateurs et des applications nécessite des techniques plus avancées, comme la copie des données vers un emplacement de stockage secondaire avec un journal d’audit. 
+Le stockage Azure fournit la résilience des données via des réplicas automatisés. Toutefois, cela n’empêche pas le code d’application ou les utilisateurs d’altérer des données de façon volontaire ou accidentelle. La conservation de l’intégrité des données sous la menace d’erreurs des utilisateurs et des applications nécessite des techniques plus avancées, comme la copie des données vers un emplacement de stockage secondaire avec un journal d’audit.
 
 - **Objets blob de blocs**. Créez un instantané à un point dans le temps de chaque objet blob de blocs. Pour plus d’informations, consultez [Création d’un instantané d’objet blob](/rest/api/storageservices/creating-a-snapshot-of-a-blob). Pour chaque instantané, vous êtes facturé pour le stockage requis pour stocker les différences identifiées sur l’objet blob depuis le dernier état d’instantané. Les instantanés dépendant de l’existence de l’objet blob d’origine sur lequel ils sont basés, nous vous recommandons de copier les données sur un autre objet blob voire sur un autre compte de stockage. Cela garantit la protection des données de sauvegarde contre tout risque de suppression accidentelle. Vous pouvez utiliser [AzCopy](/azure/storage/common/storage-use-azcopy) ou [Azure PowerShell](/azure/storage/common/storage-powershell-guide-full) pour copier les objets blob vers un autre compte de stockage.
 
@@ -30,7 +30,7 @@ Le stockage Azure fournit la résilience des données via des réplicas automati
 
 ## <a name="database"></a>Base de données
 
-### <a name="azure-sql-database"></a>Azure SQL Database 
+### <a name="azure-sql-database"></a>Azure SQL Database
 
 SQL Database effectue automatiquement une combinaison de sauvegardes de bases de données complètes (toutes les semaines), de sauvegardes de bases de données différentielles (toutes les heures), et de sauvegardes de journaux de transactions (toutes les cinq à dix minutes) pour protéger votre entreprise contre la perte de données. Utilisez la restauration dans le temps pour restaurer une base de données à une heure antérieure. Pour plus d'informations, consultez les pages suivantes :
 
@@ -46,11 +46,10 @@ Pour SQL Server exécuté sur une machine virtuelle, il existe deux options : le
 
 Azure Cosmos DB effectue des sauvegardes automatiques à des intervalles réguliers. Les sauvegardes sont stockées séparément dans un autre service de stockage, et ces sauvegardes sont répliquées globalement pour garantir la résilience contre les sinistres régionaux. En cas de suppression accidentelle de votre base de données ou collection, vous pouvez émettre un ticket de support ou appeler le support technique Azure pour restaurer les données à partir de la dernière sauvegarde automatique. Pour plus d’informations, consultez [Sauvegarde et restauration en ligne automatiques avec Azure Cosmos DB](/azure/cosmos-db/online-backup-and-restore).
 
-### <a name="azure-database-for-mysql-azure-database-for-postresql"></a>Azure Database pour MySQL, Azure Database pour PostgreSQL
+### <a name="azure-database-for-mysql-azure-database-for-postgresql"></a>Azure Database pour MySQL, Azure Database pour PostgreSQL
 
-Lorsque vous utilisez Azure Database pour MySQL ou Azure Database pour PostgreSQL, le service de base de données crée automatiquement une sauvegarde du service toutes les cinq minutes. À l’aide de cette fonctionnalité de sauvegarde automatique, vous pouvez restaurer le serveur et toutes ses bases de données dans un nouveau serveur à un moment antérieur. Pour plus d'informations, consultez les pages suivantes :
+Quand vous utilisez Azure Database pour MySQL ou Azure Database pour PostgreSQL, le service de base de données crée automatiquement une sauvegarde du service toutes les cinq minutes. À l’aide de cette fonctionnalité de sauvegarde automatique, vous pouvez restaurer le serveur et toutes ses bases de données dans un nouveau serveur à un moment antérieur. Pour plus d'informations, consultez les pages suivantes :
 
 - [Sauvegarde et restauration d’un serveur Azure Database pour MySQL à l’aide du portail Azure](/azure/mysql/howto-restore-server-portal)
 
 - [Comment sauvegarder et restaurer un serveur Azure Database pour PostgreSQL à l’aide du portail Azure](/azure/postgresql/howto-restore-server-portal)
-

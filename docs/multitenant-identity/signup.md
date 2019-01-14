@@ -1,17 +1,17 @@
 ---
 title: Inscription et intégration de locataire dans des applications multi-locataires
-description: Comment intégrer des locataires à une application multi-locataire
+description: Comment intégrer des locataires à une application multilocataire.
 author: MikeWasson
 ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: claims
 pnp.series.next: app-roles
-ms.openlocfilehash: 541a4dd9abb2168eef4a60a0ec99e1e7c06049b5
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: d112cb65e3cd8bae7b273a974bf8e5d2b04aff8a
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902474"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112717"
 ---
 # <a name="tenant-sign-up-and-onboarding"></a>Inscription et intégration de locataire
 
@@ -25,6 +25,7 @@ Il existe plusieurs raisons d’implémenter un processus d’inscription :
 * Effectuer toute configuration par locataire en une seule fois nécessaire à votre application.
 
 ## <a name="admin-consent-and-azure-ad-permissions"></a>Consentement administrateur et autorisations Azure AD
+
 Pour s’authentifier auprès d’Azure AD, une application doit accéder au répertoire de l’utilisateur. L’application doit avoir au minimum une autorisation de lecteur du profil utilisateur. La première fois qu’un utilisateur se connecte, Azure AD affiche une page de consentement qui répertorie les autorisations demandées. En cliquant sur **Accepter**, l’utilisateur accorde l’autorisation à l’application.
 
 Par défaut, le consentement est accordé par utilisateur. Chaque utilisateur qui se connecte voit la page de consentement. Toutefois, Azure AD prend également en charge le *consentement administrateur*, qui permet à un administrateur Active Directory de donner son consentement pour l’intégralité d’une organisation.
@@ -39,9 +40,10 @@ Seul un administrateur Active Directory peut donner un consentement administrate
 
 ![Erreur de consentement](./images/consent-error.png)
 
-Si l’application nécessite des autorisations supplémentaires ultérieurement, le client doit s’inscrire à nouveau et donner son consentement pour les autorisations mises à jour.  
+Si l’application nécessite des autorisations supplémentaires ultérieurement, le client doit s’inscrire à nouveau et donner son consentement pour les autorisations mises à jour.
 
 ## <a name="implementing-tenant-sign-up"></a>Implémentation de l’inscription du locataire
+
 Pour l’application [Tailspin Surveys][Tailspin], nous avons défini plusieurs conditions requises pour le processus d’inscription :
 
 * Un locataire doit s’inscrire avant que des utilisateurs puissent se connecter.
@@ -58,7 +60,7 @@ Quand un utilisateur anonyme visite l’application Surveys, deux boutons s’af
 
 Ces boutons appellent des actions dans la classe `AccountController`.
 
-L’action `SignIn` renvoie un **ChallegeResult**, ce qui entraîne la redirection, par le middleware OpenID Connect, vers le point de terminaison d’authentification. Il s’agit de la méthode par défaut pour déclencher l’authentification dans ASP.NET Core.  
+L’action `SignIn` renvoie un **ChallegeResult**, ce qui entraîne la redirection, par le middleware OpenID Connect, vers le point de terminaison d’authentification. Il s’agit de la méthode par défaut pour déclencher l’authentification dans ASP.NET Core.
 
 ```csharp
 [AllowAnonymous]
@@ -101,11 +103,16 @@ Les informations d’état dans `AuthenticationProperties` sont ajoutées au par
 Une fois que l’utilisateur s’authentifie dans Azure AD et qu’il est redirigé vers l’application, le ticket d’authentification contient l’état. Nous utilisons cela pour garantir que la valeur « signup » est conservée dans l’intégralité du flux d’authentification.
 
 ## <a name="adding-the-admin-consent-prompt"></a>Ajout de l’invite de consentement administrateur
+
 Dans Azure AD, le flux de consentement administrateur est déclenché en ajoutant un paramètre « prompt » à la chaîne de requête dans la demande d’authentification :
+
+<!-- markdownlint-disable MD040 -->
 
 ```
 /authorize?prompt=admin_consent&...
 ```
+
+<!-- markdownlint-enable MD040 -->
 
 L’application Surveys ajoute l’invite pendant l’événement `RedirectToAuthenticationEndpoint` . Cet événement est appelé juste avant que le middleware ne redirige vers le point de terminaison de l’authentification.
 
@@ -122,7 +129,7 @@ public override Task RedirectToAuthenticationEndpoint(RedirectContext context)
 }
 ```
 
-Le paramètre` ProtocolMessage.Prompt` indique au middleware d’ajouter le paramètre « prompt » à la demande d’authentification.
+Le paramètre `ProtocolMessage.Prompt` indique au middleware d’ajouter le paramètre « prompt » à la demande d’authentification.
 
 Notez que l’invite est nécessaire uniquement pendant l’inscription. Une connexion normale ne doit pas l’inclure. Pour faire la distinction entre les deux, nous vérifions la valeur `signup` dans l’état d’authentification. La méthode d’extension suivante vérifie cette condition :
 
@@ -143,7 +150,8 @@ internal static bool IsSigningUp(this BaseControlContext context)
     bool isSigningUp;
     if (!bool.TryParse(signupValue, out isSigningUp))
     {
-        // The value for signup is not a valid boolean, throw                
+        // The value for signup is not a valid boolean, throw
+
         throw new InvalidOperationException($"'{signupValue}' is an invalid boolean value");
     }
 
@@ -152,6 +160,7 @@ internal static bool IsSigningUp(this BaseControlContext context)
 ```
 
 ## <a name="registering-a-tenant"></a>Inscription d’un locataire
+
 L’application Surveys stocke certaines informations sur chaque locataire et utilisateur dans la base de données de l’application.
 
 ![Table Tenant](./images/tenant-table.png)
@@ -255,7 +264,8 @@ Voici un résumé de l’intégralité du flux d’inscription dans l’applicat
 
 [**Suivant**][app roles]
 
-<!-- Links -->
+<!-- links -->
+
 [app roles]: app-roles.md
 [Tailspin]: tailspin.md
 

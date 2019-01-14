@@ -5,12 +5,12 @@ description: Implémentez une architecture réseau de site à site sécurisée q
 author: telmosampaio
 ms.date: 10/22/2017
 ms.custom: seodec18
-ms.openlocfilehash: 8e9de168fe2969159f62ce84a19f4b21fd1cb538
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 1308f85f2f6d05b86e22f2558d89f164d076d182
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120388"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112785"
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-expressroute"></a>Connecter un réseau local à Azure à l’aide d’ExpressRoute
 
@@ -207,8 +207,7 @@ Vous pouvez configurer la haute disponibilité pour votre connexion Azure de dif
 
 - Connectez le réseau virtuel à plusieurs circuits ExpressRoute fournis par différents fournisseurs de services. Cette stratégie vous fournit des fonctionnalités de récupération d’urgence et de haute disponibilité supplémentaires.
 
-- Configurez un réseau VPN de site à site comme un chemin d’accès de basculement pour ExpressRoute. Pour en savoir plus sur cette option, consultez l’article [Connecter un réseau local à Azure à l’aide d’ExpressRoute avec basculement VPN][highly-available-network-architecture].
- Cette option ne s’applique qu’à l’homologation privée. Pour les services Azure et Office 365, Internet est le seul chemin de basculement disponible.
+- Configurez un réseau VPN de site à site comme un chemin d’accès de basculement pour ExpressRoute. Pour en savoir plus sur cette option, consultez l’article [Connecter un réseau local à Azure à l’aide d’ExpressRoute avec basculement VPN][highly-available-network-architecture]. Cette option ne s’applique qu’à l’homologation privée. Pour les services Azure et Office 365, Internet est le seul chemin de basculement disponible.
 
 ## <a name="manageability-considerations"></a>Considérations relatives à la facilité de gestion
 
@@ -224,7 +223,7 @@ Pour optimiser la sécurité, ajoutez des appliances de sécurité réseau entre
 
 ![[2]][2]
 
-Pour des raisons de conformité ou en cas d’audit, il peut être nécessaire d’interdire l’accès direct à Internet à partir des composants qui s’exécutent dans le réseau virtuel et d’implémenter le [tunneling forcé][forced-tuneling]. Dans ce cas, le trafic Internet doit être redirigé vers un proxy exécuté en local, où il peut être audité. Le proxy peut être configuré pour bloquer les flux de trafic sortant non autorisés et filtrer le trafic entrant potentiellement malveillant.
+Pour des raisons de conformité ou en cas d’audit, il peut être nécessaire d’interdire l’accès direct à Internet à partir des composants qui s’exécutent dans le réseau virtuel et d’implémenter le [tunneling forcé][forced-tunneling]. Dans ce cas, le trafic Internet doit être redirigé via un proxy exécuté en local, où il peut être audité. Le proxy peut être configuré pour bloquer les flux de trafic sortant non autorisés et filtrer le trafic entrant potentiellement malveillant.
 
 ![[3]][3]
 
@@ -270,7 +269,7 @@ Pour déployer la solution, procédez comme suit :
 
 <!-- links -->
 
-[forced-tuneling]: ../dmz/secure-vnet-hybrid.md
+[forced-tunneling]: ../dmz/secure-vnet-hybrid.md
 [highly-available-network-architecture]: ./expressroute-vpn-failover.md
 
 [expressroute-technical-overview]: /azure/expressroute/expressroute-introduction
@@ -286,8 +285,8 @@ Pour déployer la solution, procédez comme suit :
 [azurect]: https://github.com/Azure/NetworkMonitoring/tree/master/AzureCT
 [visio-download]: https://archcenter.blob.core.windows.net/cdn/hybrid-network-architectures.vsdx
 [er-circuit-parameters]: https://github.com/mspnp/reference-architectures/tree/master/hybrid-networking/expressroute/parameters/expressRouteCircuit.parameters.json
-[azure-powershell-download]: https://azure.microsoft.com/documentation/articles/powershell-install-configure/
-[azure-cli]: https://azure.microsoft.com/documentation/articles/xplat-cli-install/
+[azure-powershell-download]: /powershell/azure/overview
+[azure-cli]: /cli/azure/install-azure-cli
 
 [0]: ./images/expressroute.png "Architecture réseau hybride avec Azure ExpressRoute"
 [1]: ../_images/guidance-hybrid-network-expressroute/figure2.png "Utilisation de routeurs redondants avec les circuits ExpressRoute principaux et secondaires"

@@ -1,18 +1,17 @@
 ---
-title: Disjoncteur
+title: Modèle Disjoncteur
+titleSuffix: Cloud Design Patterns
 description: Gérer les erreurs dont la résolution peut prendre un certain temps lors de la connexion à une ressource ou à un service distant.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- resiliency
-ms.openlocfilehash: 5a9c8254bf62488b46517ee3582c2323e206df8a
-ms.sourcegitcommit: e9d9e214529edd0dc78df5bda29615b8fafd0e56
+ms.custom: seodec18
+ms.openlocfilehash: 56c90fcb23fd68b0d1b545db90adeab3272705c2
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/28/2018
-ms.locfileid: "37090949"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009761"
 ---
 # <a name="circuit-breaker-pattern"></a>Modèle Disjoncteur
 
@@ -20,7 +19,7 @@ Gérer les erreurs pour lesquelles la récupération peut prendre un certain tem
 
 ## <a name="context-and-problem"></a>Contexte et problème
 
-Dans un environnement distribué, les appels à des ressources et services distants peuvent échouer en raison d’erreurs temporaires telles que des connexions réseau lentes, des expirations de délais d’attente, ou encore une indisponibilité temporaire ou une sollicitation trop importante des ressources. Ces erreurs disparaissent en général automatiquement après un court laps de temps, et une application cloud fiable doit être prête à les gérer à l’aide d’une stratégie telle que le [modèle Nouvelle tentative][retry-pattern].
+Dans un environnement distribué, les appels à des ressources et services distants peuvent échouer en raison d’erreurs temporaires telles que des connexions réseau lentes, des expirations de délais d’attente, ou encore une indisponibilité temporaire ou une sollicitation trop importante des ressources. Ces erreurs disparaissent en général automatiquement après un court laps de temps, et une application cloud robuste doit être prête à les gérer à l’aide d’une stratégie telle que le [modèle Nouvelle tentative][retry-pattern].
 
 Toutefois, dans certaines situations les erreurs sont dues à des événements imprévus et peuvent durer beaucoup plus longtemps. Ces erreurs peuvent aller d’une perte partielle de connectivité à la défaillance complète d’un service. Dans ces cas-là, il ne sert à rien qu’une application effectue de nouvelles tentatives qui sont vouées à l’échec. Au lieu de cela, elle doit rapidement reconnaître que l’opération a échoué et traiter cet échec en conséquence.
 
@@ -36,13 +35,13 @@ Un disjoncteur agit comme un proxy pour les opérations qui risquent d’échoue
 
 Le proxy peut être implémenté en tant que machine d’état avec les états suivants qui simulent la fonctionnalité d’un disjoncteur électrique :
 
-- **Fermé** : la demande de l’application est routée vers l’opération. Le proxy tient à jour un décompte du nombre d’échecs récents, et si l’appel à l’opération n’aboutit pas, le proxy incrémente ce nombre. Si le nombre d’échecs récents dépasse un seuil spécifié pendant une période donnée, le proxy est placé à l’état **Ouvert**. À ce stade, le proxy démarre un minuteur de délai d’attente, et quand ce minuteur expire le proxy est placé à l’état **Demi-ouvert**.
+- **Fermé** : La requête de l’application est routée vers l’opération. Le proxy tient à jour un décompte du nombre d’échecs récents, et si l’appel à l’opération n’aboutit pas, le proxy incrémente ce nombre. Si le nombre d’échecs récents dépasse un seuil spécifié pendant une période donnée, le proxy est placé à l’état **Ouvert**. À ce stade, le proxy démarre un minuteur de délai d’attente, et quand ce minuteur expire le proxy est placé à l’état **Demi-ouvert**.
 
     > Le minuteur de délai d’attente a pour but de donner au système suffisamment de temps pour résoudre le problème qui a provoqué l’échec, avant d’autoriser l’application à tenter une nouvelle fois d’effectuer l’opération.
 
-- **Ouvert** : la demande de l’application échoue immédiatement et une exception est retournée à l’application.
+- **Ouverte** : La requête de l’application est immédiatement un échec. Une exception est retournée à l’application.
 
-- **Demi-ouvert** : un nombre limité de demandes provenant de l’application est autorisé à traverser le disjoncteur et à appeler l’opération. Si ces demandes réussissent, on considère que l’erreur ayant provoqué l’échec a été corrigée et le disjoncteur passe à l’état **Fermé** (le compteur d’échecs est réinitialisé). Si une demande échoue, le disjoncteur considère que l’erreur est toujours présente. Il repasse donc à l’état **Ouvert** et redémarre le minuteur de délai d’attente pour accorder au système un délai supplémentaire pour récupérer suite à la défaillance.
+- **Demi-ouvert** : Un nombre limité de requêtes provenant de l’application est autorisé à passer et à appeler l’opération. Si ces demandes réussissent, on considère que l’erreur ayant provoqué l’échec a été corrigée et le disjoncteur passe à l’état **Fermé** (le compteur d’échecs est réinitialisé). Si une demande échoue, le disjoncteur considère que l’erreur est toujours présente. Il repasse donc à l’état **Ouvert** et redémarre le minuteur de délai d’attente pour accorder au système un délai supplémentaire pour récupérer suite à la défaillance.
 
     > L’état **Demi-ouvert** est utile pour empêcher qu’un service en train de récupérer ne soit submergé soudainement de demandes. Quand un service est en cours de récupération, il peut être capable de prendre en charge un volume limité de demandes jusqu’à ce que la récupération soit terminée, mais pendant que la récupération est en cours un flux de travail peut provoquer un nouvel échec ou l’expiration du délai de service.
 
@@ -68,7 +67,7 @@ Prenez en compte les points suivants quand vous choisissez comment implémenter 
 
 **Capacité de restauration**. Vous devez configurer le disjoncteur pour qu’il corresponde au modèle de récupération probable de l’opération qu’il protège. Par exemple, si le disjoncteur reste à l’état **Ouvert** pendant une longue période, il peut lever des exceptions même si la cause de l’échec a disparu. De même, un disjoncteur peut fluctuer et réduire le temps de réponse des applications s’il bascule trop rapidement de l’état **Ouvert** à l’état **Demi-ouvert**.
 
-**Test des opérations ayant échoué**. À l’état **Ouvert**, plutôt que d’utiliser un minuteur pour déterminer quand basculer à l’état **Demi-ouvert**, un disjoncteur peut exécuter régulièrement un test ping sur la ressource ou le service distant pour déterminer s’il ou elle est de nouveau disponible. Cette commande ping peut prendre la forme d’une tentative d’appel d’une opération qui a précédemment échoué. Vous pourriez aussi utiliser une opération spéciale fournie par le service distant spécifiquement pour tester l’intégrité du service, comme indiqué par le [Modèle de surveillance de point de terminaison d’intégrité](health-endpoint-monitoring.md).
+**Test des opérations ayant échoué**. À l’état **Ouvert**, plutôt que d’utiliser un minuteur pour déterminer quand basculer à l’état **Demi-ouvert**, un disjoncteur peut exécuter régulièrement un test ping sur la ressource ou le service distant pour déterminer s’il ou elle est de nouveau disponible. Cette commande ping peut prendre la forme d’une tentative d’appel d’une opération qui a précédemment échoué. Vous pourriez aussi utiliser une opération spéciale fournie par le service distant spécifiquement pour tester l’intégrité du service, comme indiqué par le [Modèle de surveillance de point de terminaison d’intégrité](./health-endpoint-monitoring.md).
 
 **Remplacement manuel**. Dans un système où le temps de récupération pour une opération ayant échoué est très variable, il est préférable de fournir une option de réinitialisation manuelle qui permet à un administrateur de fermer un disjoncteur (et de réinitialiser le compteur d’échecs). De même, un administrateur peut forcer un disjoncteur à l’état **Ouvert** (et redémarrer le minuteur de délai d’attente) si l’opération protégée par le disjoncteur est temporairement indisponible.
 
@@ -284,9 +283,6 @@ catch (Exception ex)
 
 Les modèles suivants peuvent également être utiles lors de l’implémentation de ce modèle :
 
-- [Modèle Nouvelles tentatives][retry-pattern]. Décrit comment une application peut gérer les défaillances temporaires anticipées quand elle tente de se connecter à un service ou à une ressource réseau en réessayant d’exécuter en toute transparence une opération qui a échoué précédemment.
+- [Modèle Nouvelle tentative](./retry.md). Décrit comment une application peut gérer les défaillances temporaires anticipées quand elle tente de se connecter à un service ou à une ressource réseau en réessayant d’exécuter en toute transparence une opération qui a échoué précédemment.
 
-- [Modèle Surveillance de point de terminaison](health-endpoint-monitoring.md). Un disjoncteur peut tester l’intégrité d’un service en envoyant une demande à un point de terminaison exposé par le service. Le service doit retourner des informations indiquant son état.
-
-
-[retry-pattern]: ./retry.md
+- [Modèle Supervision de point de terminaison d’intégrité](./health-endpoint-monitoring.md). Un disjoncteur peut tester l’intégrité d’un service en envoyant une demande à un point de terminaison exposé par le service. Le service doit retourner des informations indiquant son état.

@@ -1,14 +1,14 @@
 ---
 title: Utiliser un objet en tant que paramètre dans un modèle Azure Resource Manager
-description: Explique comment étendre les fonctionnalités des modèles Azure Resource Manager afin d’utiliser des objets en tant que paramètres
+description: Décrit comment étendre la fonctionnalité des modèles Azure Resource Manager pour utiliser des objets en tant que paramètres.
 author: petertay
 ms.date: 10/30/2018
-ms.openlocfilehash: c1955823b3474efa0abea1d9634add5f13d02eda
-ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
+ms.openlocfilehash: f0826d8ed1ce446d295ebdacc66d8b0bef0b0dec
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/30/2018
-ms.locfileid: "50251887"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54111204"
 ---
 # <a name="use-an-object-as-a-parameter-in-an-azure-resource-manager-template"></a>Utiliser un objet en tant que paramètre dans un modèle Azure Resource Manager
 
@@ -24,10 +24,11 @@ Examinons un exemple qui déploie une ressource de réseau virtuel. Commençons 
     "VNetSettings":{"type":"object"}
 },
 ```
+
 Ensuite, indiquons les valeurs de l’objet `VNetSettings` :
 
 > [!NOTE]
-> Pour découvrir comment spécifier les valeurs de paramètre lors du déploiement, consultez la section **parameters** de l’article [Comprendre la structure et la syntaxe des modèles Azure Resource Manager][azure-resource-manager-authoring-templates]. 
+> Pour découvrir comment spécifier les valeurs de paramètre lors du déploiement, consultez la section **parameters** de l’article [Comprendre la structure et la syntaxe des modèles Azure Resource Manager][azure-resource-manager-authoring-templates].
 
 ```json
 "parameters":{
@@ -91,9 +92,10 @@ Comme vous pouvez le constater, notre paramètre unique spécifie en réalité t
     }
   ]
 ```
-Les valeurs de notre objet `VNetSettings` sont appliquées aux propriétés requises par notre ressource de réseau virtuel à l’aide de la fonction `parameters()` avec l’indexeur de tableau `[]` et l’opérateur point. Cette approche fonctionne si vous souhaitez simplement appliquer de manière statique les valeurs de l’objet de paramètre à la ressource. En revanche, si vous voulez attribuer dynamiquement un tableau de valeurs de propriété lors du déploiement, vous pouvez utiliser une [boucle de copie][azure-resource-manager-create-multiple-instances]. Pour utiliser une boucle de copie, vous fournissez un tableau JSON de valeurs de propriété de ressource, et la boucle de copie applique alors dynamiquement ces valeurs aux propriétés de la ressource. 
 
-Notez que l’utilisation de l’approche dynamique soulève un problème. Pour illustrer ce dernier, examinons un tableau standard de valeurs de propriété. Dans cet exemple, les valeurs de nos propriétés sont stockées dans une variable. Notez que nous disposons ici de deux tableaux &mdash; l’un nommé `firstProperty` et l’autre appelé `secondProperty`. 
+Les valeurs de notre objet `VNetSettings` sont appliquées aux propriétés requises par notre ressource de réseau virtuel à l’aide de la fonction `parameters()` avec l’indexeur de tableau `[]` et l’opérateur point. Cette approche fonctionne si vous souhaitez simplement appliquer de manière statique les valeurs de l’objet de paramètre à la ressource. En revanche, si vous voulez attribuer dynamiquement un tableau de valeurs de propriété lors du déploiement, vous pouvez utiliser une [boucle de copie][azure-resource-manager-create-multiple-instances]. Pour utiliser une boucle de copie, vous fournissez un tableau JSON de valeurs de propriété de ressource, et la boucle de copie applique alors dynamiquement ces valeurs aux propriétés de la ressource.
+
+Notez que l’utilisation de l’approche dynamique soulève un problème. Pour illustrer ce dernier, examinons un tableau standard de valeurs de propriété. Dans cet exemple, les valeurs de nos propriétés sont stockées dans une variable. Notez que nous disposons ici de deux tableaux &mdash; l’un nommé `firstProperty` et l’autre appelé `secondProperty`.
 
 ```json
 "variables": {
@@ -166,9 +168,9 @@ Vous pouvez constater que le troisième élément du tableau est dépourvu de la
 
 ## <a name="using-a-property-object-in-a-copy-loop"></a>Utilisation d’un objet de propriété dans une boucle de copie
 
-Cette approche se révèle encore plus utile lorsque vous l’utilisez conjointement avec la [boucle de copie en série][azure-resource-manager-create-multiple], notamment pour le déploiement de ressources enfants. 
+Cette approche se révèle encore plus utile lorsque vous l’utilisez conjointement avec la [boucle de copie en série][azure-resource-manager-create-multiple], notamment pour le déploiement de ressources enfants.
 
-Pour illustrer ce point, examinons un modèle qui déploie un [Groupe de sécurité réseau (NSG)][nsg] avec deux règles de sécurité. 
+Pour illustrer ce point, examinons un modèle qui déploie un [Groupe de sécurité réseau (NSG)][nsg] avec deux règles de sécurité.
 
 Commençons par étudier nos paramètres. Lorsque nous examinerons notre modèle, nous constaterons que nous avons défini un seul paramètre nommé `networkSecurityGroupsSettings` qui inclut un tableau appelé `securityRules`. Ce tableau contient deux objets JSON qui spécifient un certain nombre de paramètres pour une règle de sécurité.
 
@@ -176,7 +178,7 @@ Commençons par étudier nos paramètres. Lorsque nous examinerons notre modèle
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
-    "parameters":{ 
+    "parameters":{
       "networkSecurityGroupsSettings": {
       "value": {
           "securityRules": [
@@ -249,7 +251,7 @@ Commençons par étudier nos paramètres. Lorsque nous examinerons notre modèle
                 "resources": [],
                 "outputs": {}
             }
-        }       
+        }
     },
     {
         "apiVersion": "2015-01-01",
@@ -292,12 +294,12 @@ Commençons par étudier nos paramètres. Lorsque nous examinerons notre modèle
           }
         }
     }
-  ],          
+  ],
   "outputs": {}
 }
 ```
 
-Examinons de plus près la façon dont nous spécifions nos valeurs de propriété dans la ressource enfant `securityRules`. Toutes nos propriétés sont référencées à l’aide de la fonction `parameter()`, puis nous utilisons l’opérateur point pour référencer notre tableau `securityRules`, indexé par la valeur actuelle de l’itération. Enfin, nous utilisons un autre opérateur point pour référencer le nom de l’objet. 
+Examinons de plus près la façon dont nous spécifions nos valeurs de propriété dans la ressource enfant `securityRules`. Toutes nos propriétés sont référencées à l’aide de la fonction `parameter()`, puis nous utilisons l’opérateur point pour référencer notre tableau `securityRules`, indexé par la valeur actuelle de l’itération. Enfin, nous utilisons un autre opérateur point pour référencer le nom de l’objet.
 
 ## <a name="try-the-template"></a>Essayer le modèle
 
@@ -316,8 +318,8 @@ az group deployment create -g <resource-group-name> \
 
 - Découvrez comment créer un modèle qui effectue une itération dans un tableau d’objets et le transforme en schéma JSON. Voir [Implémenter un transformateur et un collecteur de propriétés dans un modèle Azure Resource Manager](./collector.md)
 
-
 <!-- links -->
+
 [azure-resource-manager-authoring-templates]: /azure/azure-resource-manager/resource-group-authoring-templates
 [azure-resource-manager-create-template]: /azure/azure-resource-manager/resource-manager-create-first-template
 [azure-resource-manager-create-multiple-instances]: /azure/azure-resource-manager/resource-group-create-multiple

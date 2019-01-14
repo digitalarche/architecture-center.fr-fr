@@ -1,16 +1,16 @@
 ---
 title: Utiliser Key Vault pour protéger les secrets d’application
-description: Comment utiliser le service Key Vault pour stocker les secrets d’application
+description: Comment utiliser le service Key Vault pour stocker les secrets d’application.
 author: MikeWasson
 ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: client-assertion
-ms.openlocfilehash: 4cefea7e09cf11cbbc66cdb238c5dea8f700cdad
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: dc471ca5fa090270465624548ffe7335363d6cb7
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902525"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112751"
 ---
 # <a name="use-azure-key-vault-to-protect-application-secrets"></a>Utiliser Azure Key Vault pour protéger les secrets d’application
 
@@ -47,6 +47,7 @@ Chacun de ces paramètres se substituant aux précédents, les paramètres stock
 Au démarrage, l’application lit les paramètres de chaque fournisseur de configuration enregistré et les utilise pour remplir un objet d’options fortement typé. Pour plus d’informations, consultez [Utilisation des options et des objets de configuration][options].
 
 ## <a name="setting-up-key-vault-in-the-surveys-app"></a>Configuration du coffre de clés dans l’application Surveys
+
 Configuration requise :
 
 * Installez les [applets de commande Azure Resource Manager][azure-rm-cmdlets].
@@ -62,10 +63,9 @@ Procédure générale :
 6. Mettez à jour les clés secrètes de l’utilisateur de l’application.
 
 ### <a name="set-up-an-admin-user"></a>Configuration d’un utilisateur admin
+
 > [!NOTE]
 > Pour créer un coffre de clés, vous devez utiliser un compte qui peut gérer votre abonnement Azure. De même, toute application que vous autorisez à lire dans le coffre de clés doit être inscrite dans le même locataire que ce compte.
-> 
-> 
 
 Dans cette étape, vous allez vous assurer que vous pouvez créer un coffre de clés lorsque vous êtes connecté en tant qu’utilisateur du client où l’application Surveys est inscrite.
 
@@ -84,19 +84,20 @@ Assignez maintenant cet utilisateur comme propriétaire d’abonnement.
 
 1. Dans le menu Hub, sélectionnez **Abonnements**.
 
-    ![](./images/running-the-app/subscriptions.png)
+    ![Capture d’écran du hub du portail Azure](./images/running-the-app/subscriptions.png)
 
 2. Sélectionnez l’abonnement auquel l’administrateur doit accéder.
 3. Dans le panneau de l’abonnement, sélectionnez **Contrôle d’accès (IAM)**.
 4. Cliquez sur **Add**.
-4. Sous **Rôle**, sélectionnez **Propriétaire**.
-5. Tapez l’adresse e-mail de l’utilisateur à ajouter comme propriétaire.
-6. Sélectionnez l’utilisateur et cliquez sur **Enregistrer**.
+5. Sous **Rôle**, sélectionnez **Propriétaire**.
+6. Tapez l’adresse e-mail de l’utilisateur à ajouter comme propriétaire.
+7. Sélectionnez l’utilisateur et cliquez sur **Enregistrer**.
 
 ### <a name="set-up-a-client-certificate"></a>Configuration d’un certificat client
+
 1. Exécutez le script PowerShell [/Scripts/Setup-KeyVault.ps1][Setup-KeyVault] comme suit :
-   
-    ```
+
+    ```powershell
     .\Setup-KeyVault.ps1 -Subject <<subject>>
     ```
     Pour le paramètre `Subject` , entrez un nom, comme « surveysapp ». Le script génère un certificat auto-signé et le stocke dans le magasin de certificats « Utilisateur actuel/Personnel ». La sortie du script est un fragment JSON. Copiez cette valeur.
@@ -105,10 +106,10 @@ Assignez maintenant cet utilisateur comme propriétaire d’abonnement.
 
 3. Sélectionnez **Azure Active Directory** > **Inscriptions des applications** > Surveys
 
-4.  Cliquez sur **Manifeste**, puis sur **Modifier**.
+4. Cliquez sur **Manifeste**, puis sur **Modifier**.
 
-5.  Collez la sortie du script dans la propriété `keyCredentials` . Le résultat doit être semblable à ce qui suit :
-        
+5. Collez la sortie du script dans la propriété `keyCredentials` . Le résultat doit être semblable à ce qui suit :
+
     ```json
     "keyCredentials": [
         {
@@ -119,87 +120,90 @@ Assignez maintenant cet utilisateur comme propriétaire d’abonnement.
         "value": "MIIDAjCCAeqgAwIBAgIQFxeRiU59eL.....
         }
     ],
-    ```          
+    ```
 
-6. Cliquez sur **Enregistrer**.  
+6. Cliquez sur **Enregistrer**.
 
 7. Répétez les étapes 3 à 6 pour ajouter le même fragment JSON au manifeste d’application de l’API web (Surveys.WebAPI).
 
 8. Dans la fenêtre PowerShell, exécutez la commande suivante pour obtenir l’empreinte numérique du certificat.
-   
-    ```
+
+    ```powershell
     certutil -store -user my [subject]
     ```
-    
+
     Pour `[subject]`, utilisez la valeur que vous avez spécifiée pour Subject dans le script PowerShell. L’empreinte numérique est répertoriée sous « Cert Hash(sha1) ». Copiez cette valeur. Vous utiliserez l’empreinte numérique ultérieurement.
 
 ### <a name="create-a-key-vault"></a>Création d’un coffre de clés
+
 1. Exécutez le script PowerShell [/Scripts/Setup-KeyVault.ps1][Setup-KeyVault] comme suit :
-   
-    ```
+
+    ```powershell
     .\Setup-KeyVault.ps1 -KeyVaultName <<key vault name>> -ResourceGroupName <<resource group name>> -Location <<location>>
     ```
-   
-    Lorsque vous êtes invité à entrer vos informations d’identification, connectez-vous avec les informations de l’utilisateur Azure AD que vous avez créé précédemment. Le script crée un groupe de ressources et un coffre de clés au sein de ce groupe de ressources. 
-   
-2. Exécutez à nouveau SetupKeyVault.ps comme suit :
-   
-    ```
+
+    Lorsque vous êtes invité à entrer vos informations d’identification, connectez-vous avec les informations de l’utilisateur Azure AD que vous avez créé précédemment. Le script crée un groupe de ressources et un coffre de clés au sein de ce groupe de ressources.
+
+2. Réexécutez Setup-KeyVault.ps1 comme suit :
+
+    ```powershell
     .\Setup-KeyVault.ps1 -KeyVaultName <<key vault name>> -ApplicationIds @("<<Surveys app id>>", "<<Surveys.WebAPI app ID>>")
     ```
-   
+
     Définissez les valeurs des paramètres suivantes :
-   
+
        * key vault name = Le nom que vous avez affecté au coffre de clés à l’étape précédente.
        * Surveys app ID = ID de l’application web Surveys.
        * Surveys.WebApi app ID = ID de l’application Surveys.WebAPI.
-         
+
     Exemple :
-     
-    ```
+
+    ```powershell
      .\Setup-KeyVault.ps1 -KeyVaultName tailspinkv -ApplicationIds @("f84df9d1-91cc-4603-b662-302db51f1031", "8871a4c2-2a23-4650-8b46-0625ff3928a6")
     ```
-    
+
     Ce script autorise l’application web et l’API web à extraire les données secrètes de votre coffre de clés. Pour plus d’informations, consultez [Prise en main du coffre de clés Azure](/azure/key-vault/key-vault-get-started/).
 
 ### <a name="add-configuration-settings-to-your-key-vault"></a>Ajout de paramètres de configuration à votre coffre de clés
-1. Exécutez SetupKeyVault.ps comme suit :
-   
-    ```
-    .\Setup-KeyVault.ps1 -KeyVaultName <<key vault name> -KeyName Redis--Configuration -KeyValue "<<Redis DNS name>>.redis.cache.windows.net,password=<<Redis access key>>,ssl=true" 
+
+1. Exécutez Setup-KeyVault.ps1 comme suit :
+
+    ```powershell
+    .\Setup-KeyVault.ps1 -KeyVaultName <<key vault name> -KeyName Redis--Configuration -KeyValue "<<Redis DNS name>>.redis.cache.windows.net,password=<<Redis access key>>,ssl=true"
     ```
     where
-   
+
    * key vault name = Le nom que vous avez affecté au coffre de clés à l’étape précédente.
    * Redis DNS name = Le nom DNS de votre instance de cache Redis.
    * Redis access key = la clé d’accès pour votre instance de cache Redis.
-     
+
 2. À ce stade, il est judicieux de vérifier si vous avez stocké correctement les clés secrètes dans le coffre de clés. Exécutez la commande PowerShell suivante :
-   
-    ```
+
+    ```powershell
     Get-AzureKeyVaultSecret <<key vault name>> Redis--Configuration | Select-Object *
     ```
 
-3. Réexécutez SetupKeyVault.ps pour ajouter la chaîne de connexion de base de données :
-   
-    ```
+3. Réexécutez Setup-KeyVault.ps1 pour ajouter la chaîne de connexion de base de données :
+
+    ```powershell
     .\Setup-KeyVault.ps1 -KeyVaultName <<key vault name> -KeyName Data--SurveysConnectionString -KeyValue <<DB connection string>> -ConfigName "Data:SurveysConnectionString"
     ```
-   
+
     où `<<DB connection string>>` est la valeur de la chaîne de connexion de base de données.
-   
+
     Pour effectuer un test avec la base de données locale, copiez la chaîne de connexion à partir du fichier Tailspin.Surveys.Web/appsettings.json. Si vous faites cela, veillez à remplacer la double barre oblique inverse (« \\\\ ») par une simple barre oblique inverse. La double barre oblique inverse est un caractère d’échappement dans le fichier JSON.
-   
+
     Exemple :
-   
-    ```
-    .\Setup-KeyVault.ps1 -KeyVaultName mykeyvault -KeyName Data--SurveysConnectionString -KeyValue "Server=(localdb)\MSSQLLocalDB;Database=Tailspin.SurveysDB;Trusted_Connection=True;MultipleActiveResultSets=true" 
+
+    ```powershell
+    .\Setup-KeyVault.ps1 -KeyVaultName mykeyvault -KeyName Data--SurveysConnectionString -KeyValue "Server=(localdb)\MSSQLLocalDB;Database=Tailspin.SurveysDB;Trusted_Connection=True;MultipleActiveResultSets=true"
     ```
 
 ### <a name="uncomment-the-code-that-enables-key-vault"></a>Suppression des marques de commentaire du code qui active le coffre de clés
+
 1. Ouvrez la solution Tailspin.Surveys.
 2. Dans Tailspin.Surveys.Web/Startup.cs, localisez le bloc de code suivant et supprimez les commentaires.
-   
+
     ```csharp
     //var config = builder.Build();
     //builder.AddAzureKeyVault(
@@ -208,17 +212,18 @@ Assignez maintenant cet utilisateur comme propriétaire d’abonnement.
     //    config["AzureAd:ClientSecret"]);
     ```
 3. Dans Tailspin.Surveys.Web/Startup.cs, localisez le code qui inscrit `ICredentialService`. Supprimez les commentaires de la ligne qui utilise `CertificateCredentialService`, puis commentez la ligne qui utilise `ClientCredentialService` :
-   
+
     ```csharp
     // Uncomment this:
     services.AddSingleton<ICredentialService, CertificateCredentialService>();
     // Comment out this:
     //services.AddSingleton<ICredentialService, ClientCredentialService>();
     ```
-   
+
     Cette modification permet à l’application web d’utiliser l’[Assertion de client][client-assertion] pour obtenir des jetons d’accès OAuth. Avec l’assertion de client, vous n’avez pas besoin de secret client OAuth. Vous pouvez aussi stocker le secret client dans le coffre de clés. Cependant, le coffre de clés et l’assertion de client utilisent tous deux un certificat client. Donc, si vous activez le coffre de clés, il est recommandé d’activer aussi l’assertion de client.
 
 ### <a name="update-the-user-secrets"></a>Mise à jour des données secrètes de l’utilisateur
+
 Dans l’Explorateur de solutions, cliquez avec le bouton droit sur le projet Tailspin.Surveys.Web, puis sélectionnez **Gérer les données secrètes de l’utilisateur**. Dans le fichier secrets.json, supprimez le script JSON existant et collez les éléments suivants :
 
 ```json
@@ -243,16 +248,14 @@ Dans l’Explorateur de solutions, cliquez avec le bouton droit sur le projet Ta
 
 Remplacez les entrées entre [crochets] par les valeurs correctes.
 
-* `AzureAd:ClientId`: L’ID client de l’application Surveys.
-* `AzureAd:ClientSecret` : clé que vous avez générée au moment d’inscrire l’application Surveys dans Azure AD.
-* `AzureAd:WebApiResourceId`: L’URI ID d’application que vous avez spécifié lorsque vous avez créé l’application Surveys.WebAPI dans Azure AD.
-* `Asymmetric:CertificateThumbprint`: L’empreinte numérique de certificat que vous avez obtenue précédemment, lorsque vous avez créé le certificat client.
-* `KeyVault:Name`: Le nom de votre coffre de clés.
+* `AzureAd:ClientId`: ID client de l’application Surveys.
+* `AzureAd:ClientSecret`: clé que vous avez générée au moment d’inscrire l’application Surveys dans Azure AD.
+* `AzureAd:WebApiResourceId`: URI d’ID de l’application que vous avez spécifié quand vous avez créé l’application Surveys.WebAPI dans Azure AD.
+* `Asymmetric:CertificateThumbprint`: Empreinte numérique de certificat obtenue quand vous avez créé le certificat client.
+* `KeyVault:Name`: Nom de votre coffre de clés.
 
 > [!NOTE]
 > `Asymmetric:ValidationRequired` a la valeur false, car le certificat que vous avez créé précédemment n’a pas été signé par une autorité de certification racine. En production, utilisez un certificat signé par une autorité de certification racine, puis affectez à `ValidationRequired` la valeur true.
-> 
-> 
 
 Enregistrez le fichier secrets.json mis à jour.
 
@@ -280,12 +283,11 @@ Remplacez les entrées entre [crochets] et enregistrez le fichier secrets.json.
 
 > [!NOTE]
 > Pour l’API web, veillez à utiliser l’ID client de l’application Surveys.WebAPI et non de l’application Surveys.
-> 
-> 
 
 [**Suivant**][adfs]
 
-<!-- Links -->
+<!-- links -->
+
 [adfs]: ./adfs.md
 [authorize-app]: /azure/key-vault/key-vault-get-started//#authorize
 [azure-portal]: https://portal.azure.com

@@ -1,19 +1,17 @@
 ---
-title: Superviseur de l’agent du planificateur
+title: Modèle de superviseur de l’agent du planificateur
+titleSuffix: Cloud Design Patterns
 description: Coordonnez un ensemble d’actions sur un ensemble distribué de services et d’autres ressources à distance.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- messaging
-- resiliency
-ms.openlocfilehash: 7914708413d68689e2326df28ced00e5fc3a5dd8
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.custom: seodec18
+ms.openlocfilehash: 7e1f45b1f2f206e1739d69bab6d4b2641f58a0f9
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428667"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011716"
 ---
 # <a name="scheduler-agent-supervisor-pattern"></a>Modèle de superviseur de l’agent du planificateur
 
@@ -25,7 +23,7 @@ Coordonnez un ensemble d’actions distribuées en une seule opération. Si une 
 
 Une application effectue des tâches comprenant plusieurs étapes, dont certaines nécessitent l’utilisation de services distants ou l’accès à des ressources distantes. Les étapes peuvent être indépendantes les unes des autres, mais elles restent orchestrées par la logique d’application qui implémente la tâche.
 
-Dès que possible, l’application doit s’assurer que la tâche s’exécute jusqu’au bout et résoudre les échecs susceptibles de se produire lors de l’accès à des ressources ou des services distants. Les échecs peuvent avoir de nombreuses causes. Par exemple, le réseau peut être hors service, les communications peuvent être interrompues, un service distant peut ne pas répondre ou se trouver dans un état instable, ou une ressource distante peut être temporairement inaccessible, notamment en raison de contraintes de ressources. Dans de nombreux cas, les échecs sont temporaires et peuvent être gérés à l’aide du [modèle Nouvelle tentative][retry-pattern].
+Dès que possible, l’application doit s’assurer que la tâche s’exécute jusqu’au bout et résoudre les échecs susceptibles de se produire lors de l’accès à des ressources ou des services distants. Les échecs peuvent avoir de nombreuses causes. Par exemple, le réseau peut être hors service, les communications peuvent être interrompues, un service distant peut ne pas répondre ou se trouver dans un état instable, ou une ressource distante peut être temporairement inaccessible, notamment en raison de contraintes de ressources. Dans de nombreux cas, les échecs sont temporaires et peuvent être gérés à l’aide du [modèle Nouvelle tentative](./retry.md).
 
 Si l’application détecte une erreur plus permanente de laquelle elle ne peut pas récupérer facilement, elle doit être en mesure de restaurer le système à un état cohérent et de garantir l’intégrité de l’ensemble de l’opération.
 
@@ -47,8 +45,8 @@ Le planificateur conserve les informations sur la progression de la tâche et l�
 
 ![Figure 1 : acteurs dans le modèle de superviseur de l’agent du planificateur](./_images/scheduler-agent-supervisor-pattern.png)
 
-
-> Ce diagramme présente une version simplifiée du modèle. Dans une implémentation réelle, plusieurs instances du planificateur peuvent s’exécuter simultanément, chacune constituée d’un sous-ensemble de tâches. De même, le système peut exécuter plusieurs instances de chaque agent, voire plusieurs superviseurs. Dans ce cas, les superviseurs doivent coordonner soigneusement leur travail entre eux pour s’assurer qu’ils ne cherchent pas à récupérer les mêmes étapes et tâches ayant échoué. Le [modèle d’élection du responsable](leader-election.md) offre une solution possible à ce problème.
+> [!NOTE]
+> Ce diagramme présente une version simplifiée du modèle. Dans une implémentation réelle, plusieurs instances du planificateur peuvent s’exécuter simultanément, chacune constituée d’un sous-ensemble de tâches. De même, le système peut exécuter plusieurs instances de chaque agent, voire plusieurs superviseurs. Dans ce cas, les superviseurs doivent coordonner soigneusement leur travail entre eux pour s’assurer qu’ils ne cherchent pas à récupérer les mêmes étapes et tâches ayant échoué. Le [modèle d’élection du responsable](./leader-election.md) offre une solution possible à ce problème.
 
 Quand l’application est prête à exécuter une tâche, elle soumet une requête au planificateur. Le planificateur enregistre les informations d’état initiales sur la tâche et ses étapes (par exemple, « step not yet started » (étape pas encore démarrée)) dans le magasin d’état, puis commence à exécuter les opérations définies par le flux de travail. Quand le planificateur commence chaque étape, il met à jour les informations sur l’état de l’étape en question dans le magasin d’état (par exemple, « step running » (étape en cours d’exécution)).
 
@@ -60,11 +58,11 @@ Si l’agent échoue, le planificateur ne reçoit pas de réponse. Le modèle ne
 
 Si le délai d’attente d’une étape expire ou si celle-ci échoue, le magasin d’état contiendra un enregistrement indiquant que l’étape est en cours d’exécution, mais l’heure limite d’achèvement sera dépassée. Le superviseur recherche les étapes dans cette situation et essaie de les récupérer. Une stratégie possible pour le superviseur consiste à mettre à jour la valeur de l’heure limite d’achèvement afin d’augmenter le temps disponible pour terminer l’étape, puis à envoyer au planificateur un message identifiant l’étape dont le délai d’attente a expiré. Le planificateur peut alors tenter de répéter cette étape. Cependant, cette conception requiert que les tâches soient idempotentes.
 
-Le superviseur peut avoir besoin d’empêcher que la même étape fasse l’objet de nouvelles tentatives si elle échoue ou si son délai d’attente expire continuellement. Pour ce faire, le superviseur peut conserver un compteur du nombre de nouvelles tentatives pour chaque étape, en plus des informations d’état, dans le magasin d’état. Si ce nombre dépasse un seuil prédéfini, le superviseur peut adopter une stratégie consistant à attendre plus longtemps avant de signaler au planificateur qu’il doit réessayer cette étape, en partant du principe que l’erreur pourra être résolue pendant cette période. Le superviseur peut également envoyer un message au planificateur pour demander l’annulation de la tâche entière en implémentant un [modèle de transaction de compensation](compensating-transaction.md). Cette approche implique que le planificateur et les agents fournissent les informations nécessaires afin d’implémenter les opérations de compensation pour chaque étape qui s’est terminée correctement.
+Le superviseur peut avoir besoin d’empêcher que la même étape fasse l’objet de nouvelles tentatives si elle échoue ou si son délai d’attente expire continuellement. Pour ce faire, le superviseur peut conserver un compteur du nombre de nouvelles tentatives pour chaque étape, en plus des informations d’état, dans le magasin d’état. Si ce nombre dépasse un seuil prédéfini, le superviseur peut adopter une stratégie consistant à attendre plus longtemps avant de signaler au planificateur qu’il doit réessayer cette étape, en partant du principe que l’erreur pourra être résolue pendant cette période. Le superviseur peut également envoyer un message au planificateur pour demander l’annulation de la tâche entière en implémentant un [modèle de transaction de compensation](./compensating-transaction.md). Cette approche implique que le planificateur et les agents fournissent les informations nécessaires afin d’implémenter les opérations de compensation pour chaque étape qui s’est terminée correctement.
 
 > Le superviseur n’a pas pour rôle de surveiller le planificateur et les agents, et de les redémarrer s’ils venaient à échouer. Cet aspect du système doit être géré par l’infrastructure dans laquelle ces composants sont exécutés. De même, le superviseur ne doit pas avoir connaissance des opérations métier exécutées par les tâches accomplies par le planificateur (y compris le mode de compensation en cas d’échec de ces tâches). C’est le rôle de la logique de flux de travail implémentée par le planificateur. La seule responsabilité du superviseur consiste à déterminer si une étape a échoué et à faire en sorte qu’elle soit répétée ou que l’intégralité de la tâche contenant l’étape qui a échoué soit annulée.
 
-Si le planificateur est redémarré après un échec ou si le flux de travail exécuté par le planificateur s’arrête de manière inattendue, le planificateur doit être en mesure de déterminer l’état des tâches en cours au moment de l’échec et être prêt à reprendre cette tâche à partir de ce point. Les détails d’implémentation de ce processus sont le plus souvent propres au système. Si la tâche ne peut pas être récupérée, il peut être nécessaire d’annuler le travail déjà effectué par la tâche. L’implémentation d’une [transaction de compensation](compensating-transaction.md) peut également être requise.
+Si le planificateur est redémarré après un échec ou si le flux de travail exécuté par le planificateur s’arrête de manière inattendue, le planificateur doit être en mesure de déterminer l’état des tâches en cours au moment de l’échec et être prêt à reprendre cette tâche à partir de ce point. Les détails d’implémentation de ce processus sont le plus souvent propres au système. Si la tâche ne peut pas être récupérée, il peut être nécessaire d’annuler le travail déjà effectué par la tâche. L’implémentation d’une [transaction de compensation](./compensating-transaction.md) peut également être requise.
 
 Le principal avantage de ce modèle est que le système est résilient en cas d’échec temporaire ou irrécupérable inattendu. Le système peut être construit de manière à être doté d’une capacité de réparation spontanée. Par exemple, si un agent ou le planificateur échoue, un nouvel agent peut être démarré et le superviseur peut faire en sorte que l’exécution d’une tâche reprenne. Si le superviseur échoue, une autre instance peut être démarrée et peut reprendre là où l’échec s’est produit. Si le superviseur est programmé pour s’exécuter périodiquement, une nouvelle instance peut être démarrée automatiquement après un intervalle prédéfini. Le magasin d’état peut être répliqué afin d’augmenter encore plus le degré de résilience.
 
@@ -102,15 +100,16 @@ Les informations d’état créées pour la commande par le processus de soumiss
 
 - **ProcessState**. État actuel de la tâche gérant la commande. Les états possibles sont :
 
-    - **Pending**. La commande a été créée, mais le traitement n’a pas encore commencé.
-    - **Processing**. La commande est en cours de traitement.
-    - **Processed**. La commande a été traitée avec succès.
-    - **Error**. Le traitement de la commande a échoué.
+  - **Pending**. La commande a été créée, mais le traitement n’a pas encore commencé.
+  - **Processing**. La commande est en cours de traitement.
+  - **Processed**. La commande a été traitée avec succès.
+  - **Error**. Le traitement de la commande a échoué.
 
 - **FailureCount**. Nombre de fois que le traitement a été tenté pour la commande.
 
 Dans ces informations d’état, le champ `OrderID` est copié à partir de l’ID de commande de la nouvelle commande. Les champs `LockedBy` et `CompleteBy` sont définis sur `null`, le champ `ProcessState` sur `Pending` et le champ `FailureCount` sur 0.
 
+> [!NOTE]
 > Dans cet exemple, la logique de traitement des commandes est relativement simple et ne comprend qu’une seule étape qui appelle un service distant. Dans un scénario à plusieurs étapes plus complexe, le processus de soumission impliquerait probablement plusieurs étapes, et plusieurs enregistrements seraient donc créés dans le magasin d’état, chacun d’entre eux décrivant l’état d’une étape individuelle.
 
 Le planificateur s’exécute également dans le cadre d’un rôle de travail et implémente la logique métier qui gère la commande. Une instance du planificateur cherchant à déterminer s’il existe de nouvelles commandes examine le magasin d’état pour détecter des enregistrements dont le champ `LockedBy` présente la valeur « null » et le champ `ProcessState` la valeur « Pending ». Quand le planificateur trouve une nouvelle commande, il renseigne immédiatement le champ `LockedBy` avec son propre ID d’instance, définit le champ `CompleteBy` sur une heure appropriée et définit le champ `ProcessState` sur « Processing ». Le code est conçu pour être exclusif et atomique afin de garantir que deux instances simultanées du planificateur ne peuvent pas essayer de gérer la même commande en même temps.
@@ -136,14 +135,13 @@ Pour permettre le signalement de l’état de la commande, l’application peut 
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
 Les modèles et les conseils suivants peuvent aussi présenter un intérêt quand il s’agit d’implémenter ce modèle :
-- [Modèle Nouvelle tentative][retry-pattern]. Un agent peut utiliser ce modèle pour réessayer de manière transparente une opération qui accède à une ressource ou un service distant ayant échoué précédemment. À utiliser quand la cause de l’échec est considérée comme temporaire et pouvant être corrigée.
-- [Modèle Disjoncteur](circuit-breaker.md). Un agent peut utiliser ce modèle pour gérer les erreurs dont la correction prend un certain temps lors de la connexion à une ressource ou à un service distant.
-- [Modèle de transaction de compensation](compensating-transaction.md). Si le flux de travail exécuté par un planificateur ne peut pas être mené à bien, il peut être nécessaire d’annuler tout le travail qu’il a déjà effectué. Le modèle de transaction de compensation décrit comment le faire pour les opérations qui suivent le modèle de cohérence éventuelle. Ces types d’opérations sont généralement implémentées par un planificateur qui exécute des flux de travail et des processus métier complexes.
-- [Primer de messagerie asynchrone](https://msdn.microsoft.com/library/dn589781.aspx). En général, les composants du modèle de superviseur de l’agent du planificateur s’exécutent indépendamment les uns des autres et communiquent de manière asynchrone. Cet article décrit quelques-unes des approches qui peuvent être utilisées pour implémenter une communication asynchrone basée sur les files d’attente de messages.
-- [Modèle d’élection du responsable](leader-election.md). Il peut être nécessaire de coordonner les actions de plusieurs instances d’un superviseur pour empêcher ces instances de tenter de récupérer le même processus ayant échoué. Le modèle d’élection du responsable décrit comment faire cela.
-- [Architecture cloud : le modèle Planificateur-Agent-Superviseur](https://blogs.msdn.microsoft.com/clemensv/2010/09/27/cloud-architecture-the-scheduler-agent-supervisor-pattern/) sur le blog de Clemens Vasters
-- [Modèle de gestionnaire de processus](https://www.enterpriseintegrationpatterns.com/patterns/messaging/ProcessManager.html)
-- [Reference 6: A Saga on Sagas](https://msdn.microsoft.com/library/jj591569.aspx) (Référence 6 : une saga des sagas). Exemple illustrant la manière dont le modèle CQRS utilise un gestionnaire de processus (partie de la documentation relative au projet CQRS Journey).
-- [Microsoft Azure Scheduler](https://azure.microsoft.com/services/scheduler/)
 
-[retry-pattern]: ./retry.md
+- [Modèle Nouvelle tentative](./retry.md). Un agent peut utiliser ce modèle pour réessayer de manière transparente une opération qui accède à une ressource ou un service distant ayant échoué précédemment. À utiliser quand la cause de l’échec est considérée comme temporaire et pouvant être corrigée.
+- [Modèle Disjoncteur](./circuit-breaker.md). Un agent peut utiliser ce modèle pour gérer les erreurs dont la correction prend un certain temps lors de la connexion à une ressource ou à un service distant.
+- [Modèle de transaction de compensation](./compensating-transaction.md). Si le flux de travail exécuté par un planificateur ne peut pas être mené à bien, il peut être nécessaire d’annuler tout le travail qu’il a déjà effectué. Le modèle de transaction de compensation décrit comment le faire pour les opérations qui suivent le modèle de cohérence éventuelle. Ces types d’opérations sont généralement implémentées par un planificateur qui exécute des flux de travail et des processus métier complexes.
+- [Primer de messagerie asynchrone](https://msdn.microsoft.com/library/dn589781.aspx). En général, les composants du modèle de superviseur de l’agent du planificateur s’exécutent indépendamment les uns des autres et communiquent de manière asynchrone. Cet article décrit quelques-unes des approches qui peuvent être utilisées pour implémenter une communication asynchrone basée sur les files d’attente de messages.
+- [Modèle d’élection du responsable](./leader-election.md). Il peut être nécessaire de coordonner les actions de plusieurs instances d’un superviseur pour empêcher ces instances de tenter de récupérer le même processus ayant échoué. Le modèle d’élection du responsable décrit comment faire cela.
+- [Cloud Architecture: The Scheduler-Agent-Supervisor Pattern](https://blogs.msdn.microsoft.com/clemensv/2010/09/27/cloud-architecture-the-scheduler-agent-supervisor-pattern/) sur le blob de Clemens Vasters
+- [Modèle de gestionnaire de processus](https://www.enterpriseintegrationpatterns.com/patterns/messaging/ProcessManager.html)
+- [Référence 6 : une saga de sagas](https://msdn.microsoft.com/library/jj591569.aspx). Exemple illustrant la manière dont le modèle CQRS utilise un gestionnaire de processus (partie de la documentation relative au projet CQRS Journey).
+- [Microsoft Azure Scheduler](https://azure.microsoft.com/services/scheduler/)

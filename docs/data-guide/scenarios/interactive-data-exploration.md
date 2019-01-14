@@ -3,26 +3,26 @@ title: Exploration interactive des données
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 81301e1d81a76d074d001cc9b20bdaf5231e536b
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 1b77f3ced551f5d71578a9b09fd50cd8b0d5587c
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901573"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113193"
 ---
 # <a name="interactive-data-exploration"></a>Exploration interactive des données
 
 Dans de nombreuses solutions d’informatique décisionnelle (BI) d’entreprise, les rapports et les modèles sémantiques sont créés par les spécialistes de la BI et gérés de façon centralisée. Cependant, les organisations veulent de plus en plus souvent donner les moyens aux utilisateurs de prendre des décisions guidées par les données. Par ailleurs, elles sont de plus en plus nombreuses à engager des *scientifiques des données* ou des *analystes de données*, dont le travail consiste à explorer les données de façon interactive et à appliquer des modèles statistiques et des techniques d’analyse pour trouver des tendances et des modèles dans les données. L’exploration interactive des données requiert des outils et des plateformes qui assurent un traitement à faible latence des visualisations de données et des requêtes ad hoc.
 
-![](./images/data-exploration.png)
+![Exploration interactive des données](./images/data-exploration.png)
 
 ## <a name="self-service-bi"></a>Informatique décisionnelle en libre-service
 
 L’informatique décisionnelle en libre-service est le nom donné à une approche moderne de la prise de décision selon laquelle les utilisateurs ont l’autonomie nécessaire pour rechercher, explorer et partager des informations à partir de l’ensemble des données de l’entreprise. Pour cela, la solution de données doit remplir plusieurs conditions :
 
-* Découverte des sources de données d’entreprise au moyen d’un catalogue de données.
-* Gestion des données de référence garantissant la cohérence des valeurs et des définitions des entités de données.
-* Outils interactifs de modélisation et de visualisation des données pour les utilisateurs professionnels.
+- Découverte des sources de données d’entreprise au moyen d’un catalogue de données.
+- Gestion des données de référence garantissant la cohérence des valeurs et des définitions des entités de données.
+- Outils interactifs de modélisation et de visualisation des données pour les utilisateurs professionnels.
 
 Dans une solution d’informatique décisionnelle en libre-service, les utilisateurs professionnels recherchent et exploitent en général les sources de données qui correspondent à leur propre domaine dans l’entreprise, et utilisent des outils intuitifs et des applications de productivité pour définir des rapports et des modèles de données personnels, qu’ils peuvent partager avec leurs collègues.
 
@@ -32,6 +32,7 @@ Services Azure appropriés :
 - [Microsoft Power BI](https://powerbi.microsoft.com/)
 
 ## <a name="data-science-experimentation"></a>Expérimentation en science des données
+
 Lorsqu’une organisation a besoin de techniques avancées d’analytique et de modélisation prédictive, le travail de préparation initial est généralement effectué par des spécialistes de la science des données. Un scientifique des données explore les données et applique des techniques d’analyse statistique pour trouver des relations entre les *traits* des données et les *étiquettes* prédites souhaitées. L’exploration de données est généralement effectuée à l’aide de langages de programmation comme Python et R, qui prennent en charge nativement la modélisation statistique et la visualisation. Les scripts utilisés sont généralement hébergés dans des environnements spécialisés, par exemple, des Notebooks Jupyter. Ces outils permettent aux scientifiques des données d’explorer les données par programme tout en documentant et en partageant les informations trouvées.
 
 Services Azure appropriés :
@@ -43,7 +44,7 @@ Services Azure appropriés :
 
 ## <a name="challenges"></a>Défis
 
-- **Respect de la confidentialité des données.** Faites attention quand vous mettez des données personnelles à la disposition des utilisateurs à des fins d’analyse et de création de rapports en libre-service. Cela soulève probablement des considérations relatives à la conformité, en raison des directives organisationnelles, ainsi que des problèmes de réglementation. 
+- **Respect de la confidentialité des données**. Faites attention quand vous mettez des données personnelles à la disposition des utilisateurs à des fins d’analyse et de création de rapports en libre-service. Cela soulève probablement des considérations relatives à la conformité, en raison des directives organisationnelles, ainsi que des problèmes de réglementation.
 
 - **Volume de données**. S’il peut être utile de donner accès à la totalité de la source de données aux utilisateurs, cela peut occasionner de très longues opérations Excel ou Power BI, ou des requêtes Spark SQL qui utilisent de nombreuses ressources de cluster.
 
@@ -74,7 +75,8 @@ Pour plus d’informations, consultez la section [Traitement par lots](../techno
 
 ### <a name="analytical-data-store"></a>Magasin de données analytiques
 
-- **Spark SQL**. Spark SQL est une API qui repose sur Spark et prend en charge la création de trames de données et de tables interrogeables avec la syntaxe SQL. Que les fichiers de données à analyser soient des fichiers sources bruts ou de nouveaux fichiers nettoyés et préparés par un processus de traitement par lots, les utilisateurs peuvent définir des tables Spark SQL dessus pour aller plus loin dans l’interrogation de l’analyse. 
+- **Spark SQL**. Spark SQL est une API qui repose sur Spark et prend en charge la création de trames de données et de tables interrogeables avec la syntaxe SQL. Que les fichiers de données à analyser soient des fichiers sources bruts ou de nouveaux fichiers nettoyés et préparés par un processus de traitement par lots, les utilisateurs peuvent définir des tables Spark SQL dessus pour aller plus loin dans l’interrogation de l’analyse.
+
 - **Hive**. En parallèle du traitement des données brutes par lots avec Hive, vous pouvez créer une base de données Hive contenant les tables et les vues Hive en fonction des dossiers dans lesquels sont stockées les données, ce qui permet d’effectuer des requêtes interactives à des fins d’analyse et de création de rapports. HDInsight contient un type de cluster Hive interactif qui utilise la mise en cache en mémoire afin de réduire le temps de réponse aux requêtes Hive. Les utilisateurs qui sont à l’aise avec la syntaxe de type SQL peuvent utiliser Interactive Hive pour explorer les données.
 
 Pour plus d’informations, consultez la section [Magasins de données analytiques](../technology-choices/analytical-data-stores.md).
@@ -82,7 +84,9 @@ Pour plus d’informations, consultez la section [Magasins de données analytiqu
 ### <a name="analytics-and-reporting"></a>Analytique et création de rapports
 
 - **Jupyter**. Les Notebooks Jupyter offrent une interface sur navigateur pour exécuter du code dans des langages comme R, Python ou Scala. Lorsque R Server ou Spark est utilisé pour traiter les données par lots, ou Spark SQL pour définir un schéma des tables à des fins d’interrogation, Jupyter peut représenter un bon choix pour interroger les données. Si vous utilisez Spark, vous pouvez vous servir de l’API de trame de données Spark standard ou de l’API Spark SQL ainsi que des instructions SQL incorporées pour interroger les données et générer des visualisations.
-- **Drill**. Pour effectuer une exploration de données ad hoc, [Apache Drill](https://drill.apache.org/) est un moteur de requête SQL sans schéma. Puisqu’il n’a pas besoin de schéma, vous pouvez interroger des données issues de diverses sources de données, et le moteur comprendra automatiquement la structure de ces données.  Vous pouvez utiliser l’option Drill with Azure Blob Storage (Explorer avec Stockage Blob Azure) par le biais du [plug-in Stockage Blob Azure](https://drill.apache.org/docs/azure-blob-storage-plugin/). Cela vous permet d’exécuter des requêtes sur les données dans Stockage Blob sans déplacer les données. 
+
+- **Drill**. Pour effectuer une exploration de données ad hoc, [Apache Drill](https://drill.apache.org/) est un moteur de requête SQL sans schéma. Puisqu’il n’a pas besoin de schéma, vous pouvez interroger des données issues de diverses sources de données, et le moteur comprendra automatiquement la structure de ces données.  Vous pouvez utiliser l’option Drill with Azure Blob Storage (Explorer avec Stockage Blob Azure) par le biais du [plug-in Stockage Blob Azure](https://drill.apache.org/docs/azure-blob-storage-plugin/). Cela vous permet d’exécuter des requêtes sur les données dans Stockage Blob sans déplacer les données.
+
 - **Clients Interactive Hive**. Si vous utilisez un cluster Interactive Hive pour interroger les données, vous pouvez utiliser la vue Hive dans le tableau de bord du cluster Ambari, l’outil de ligne de commande Beeline ou n’importe quel outil ODBC (avec le pilote ODBC de Hive), par exemple, Microsoft Excel ou Power BI.
 
 Pour plus d'informations, consultez la section [Technologies d’analytique des données et de création de rapports](../technology-choices/analysis-visualizations-reporting.md).

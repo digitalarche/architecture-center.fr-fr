@@ -1,14 +1,14 @@
 ---
 title: Implémenter un transformateur et un collecteur de propriétés dans un modèle Azure Resource Manager
-description: Décrit la procédure d’implémentation d’un transformateur et d’un collecteur de propriétés dans un modèle Azure Resource Manager
+description: Décrit la procédure d’implémentation d’un transformateur et d’un collecteur de propriétés dans un modèle Azure Resource Manager.
 author: petertay
 ms.date: 10/30/2018
-ms.openlocfilehash: ad5b3a71f516ec12fee311e25c43f434f9f306ed
-ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
+ms.openlocfilehash: 1a6a01ee513609132d8522a79ccb81b7938651b5
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/30/2018
-ms.locfileid: "50251785"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113805"
 ---
 # <a name="implement-a-property-transformer-and-collector-in-an-azure-resource-manager-template"></a>Implémenter un transformateur et un collecteur de propriétés dans un modèle Azure Resource Manager
 
@@ -24,12 +24,14 @@ Examinons la façon dont nous pouvons implémenter un collecteur et un transform
 ![Architecture du collecteur et du transformateur de propriétés](../_images/collector-transformer.png)
 
 Notre **modèle d’appel** inclut deux ressources :
-* un lien de modèle qui appelle notre **modèle de collecteur** ;
-* la ressource NSG à déployer.
+
+- Un lien de modèle qui appelle notre **modèle de collecteur**
+- La ressource NSG à déployer.
 
 Notre **modèle de collecteur** inclut deux ressources :
-* une ressource **ancre** ;
-* un lien de modèle qui appelle le modèle de transformateur dans une boucle de copie.
+
+- Une ressource **ancre**
+- Un lien de modèle qui appelle le modèle de transformation dans une boucle de copie
 
 Notre **modèle de transformateur** ne comporte qu’une seule ressource : un modèle vide avec une variable qui transforme notre code JSON `source` en schéma JSON attendu par notre ressource NSG dans le **modèle principal**.
 
@@ -41,7 +43,7 @@ Nous allons utiliser notre objet de paramètre `securityRules` mentionné dans l
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
-    "parameters":{ 
+    "parameters": {
       "networkSecurityGroupsSettings": {
       "value": {
           "securityRules": [
@@ -80,9 +82,10 @@ Commençons par examiner notre **modèle de transformateur**.
 
 ## <a name="transform-template"></a>Modèle de transformateur
 
-Notre **modèle de transformateur** comporte deux paramètres qui sont transmis par le **modèle de collecteur** : 
-* `source` est un objet qui reçoit l’un des objets de valeur de propriété du tableau de propriétés. Dans notre exemple, les différents objets du tableau `"securityRules"` sont transmis un par un.
-* `state` est un tableau qui reçoit les résultats concaténés de toutes les transformations précédentes. Il s’agit de la collection de code JSON transformé.
+Notre **modèle de transformateur** comporte deux paramètres qui sont transmis par le **modèle de collecteur** :
+
+- `source` est un objet qui reçoit l’un des objets de valeur de propriété du tableau de propriétés. Dans notre exemple, les différents objets du tableau `"securityRules"` sont transmis un par un.
+- `state` est un tableau qui reçoit les résultats concaténés de toutes les transformations précédentes. Il s’agit de la collection de code JSON transformé.
 
 Nos paramètres ressemblent à ceci :
 
@@ -115,7 +118,7 @@ Notre modèle définit également une variable nommée `instance`. Elle effectue
             "destinationAddressPrefix": "[parameters('source').destinationAddressPrefix]",
             "access": "[parameters('source').access]",
             "priority": "[parameters('source').priority]",
-            "direction": "[parameters('source').direction]"            
+            "direction": "[parameters('source').direction]"
         }
       }
     ]
@@ -139,9 +142,10 @@ Enfin, l’élément `output` de notre modèle concatène les transformations co
 ## <a name="collector-template"></a>Modèle de collecteur
 
 Notre **modèle de collecteur** comporte trois paramètres :
-* `source` est notre tableau d’objets de paramètre complet. Il est transmis par le **modèle d’appel**. Il porte le même nom que le paramètre `source` dans notre **modèle de transformateur**, mais présente une différence essentielle avec ce dernier que vous avez peut-être déjà remarquée : il s’agit du tableau complet, mais nous ne transmettons au **modèle de transformateur** qu’un seul élément de ce tableau à la fois.
-* `transformTemplateUri` est l’URI de notre **modèle de transformateur**. Nous le définissons ici sous la forme d’un paramètre pour permettre la réutilisation du modèle.
-* `state` est un tableau initialement vide que nous transmettons à notre **modèle de transformateur**. Il stocke la collection d’objets de paramètre transformés lorsque la boucle de copie est terminée.
+
+- `source` est notre tableau d’objets de paramètre complet. Il est transmis par le **modèle d’appel**. Il porte le même nom que le paramètre `source` dans notre **modèle de transformateur**, mais présente une différence essentielle avec ce dernier que vous avez peut-être déjà remarquée : il s’agit du tableau complet, mais nous ne transmettons au **modèle de transformateur** qu’un seul élément de ce tableau à la fois.
+- `transformTemplateUri` est l’URI de notre **modèle de transformateur**. Nous le définissons ici sous la forme d’un paramètre pour permettre la réutilisation du modèle.
+- `state` est un tableau initialement vide que nous transmettons à notre **modèle de transformateur**. Il stocke la collection d’objets de paramètre transformés lorsque la boucle de copie est terminée.
 
 Nos paramètres ressemblent à ceci :
 
@@ -153,7 +157,7 @@ Nos paramètres ressemblent à ceci :
       "type": "array",
       "defaultValue": [ ]
     }
-``` 
+```
 
 Ensuite, nous définissons une variable nommée `count`. Sa valeur correspond à la longueur du tableau d’objets de paramètre `source` :
 
@@ -166,8 +170,9 @@ Ensuite, nous définissons une variable nommée `count`. Sa valeur correspond à
 Comme vous pouvez l’imaginer, nous l’utilisons pour le nombre d’itérations dans notre boucle de copie.
 
 À présent, examinons nos ressources. Nous définissons deux ressources :
-* `loop-0` est la ressource de base zéro pour notre boucle de copie.
-* `loop-` est concaténé avec le résultat de la fonction `copyIndex(1)` afin de générer pour notre ressource un nom unique basé sur l’itération, en commençant par `1`.
+
+- `loop-0` est la ressource de base zéro pour notre boucle de copie.
+- `loop-` est concaténé avec le résultat de la fonction `copyIndex(1)` afin de générer pour notre ressource un nom unique basé sur l’itération, en commençant par `1`.
 
 Nos ressources ressemblent à ceci :
 
@@ -231,6 +236,7 @@ Enfin, l’élément `output` de notre modèle renvoie l’élément `output` de
     }
   }
 ```
+
 Il peut sembler illogique de renvoyer l’élément `output` de la dernière itération de notre **modèle de transformateur** à notre **modèle d’appel**, puisqu’il s’avère que nous l’avons stocké dans notre paramètre `source`. Toutefois, n’oubliez pas qu’il s’agit de la dernière itération de notre **modèle de transformateur** qui stocke le tableau complet d’objets de propriété transformés, lequel correspond précisément à l’élément que nous souhaitons renvoyer.
 
 Enfin, examinons la façon dont nous pouvons appeler le **modèle de collecteur** à partir de notre **modèle d’appel**.
@@ -277,8 +283,9 @@ Il s’agit évidemment de l’URI du **modèle de collecteur** qui sera utilis�
 ```
 
 Nous transmettons deux paramètres au **modèle de collecteur** :
-* `source` est notre tableau d’objets de propriété. Dans notre exemple, il s’agit de notre paramètre `networkSecurityGroupsSettings`.
-* `transformTemplateUri` est la variable que nous venons de définir avec l’URI de notre **modèle de collecteur**.
+
+- `source` est notre tableau d’objets de propriété. Dans notre exemple, il s’agit de notre paramètre `networkSecurityGroupsSettings`.
+- `transformTemplateUri` est la variable que nous venons de définir avec l’URI de notre **modèle de collecteur**.
 
 Enfin, notre ressource `Microsoft.Network/networkSecurityGroups` attribue directement l’élément `output` de la ressource de modèle lié `collector` à sa propriété `securityRules` :
 

@@ -1,14 +1,14 @@
 ---
 title: Mettre à jour une ressource dans un modèle Azure Resource Manager
-description: Explique comment étendre les fonctionnalités des modèles Azure Resource Manager afin de mettre à jour une ressource
+description: Décrit comment étendre la fonctionnalité des modèles Azure Resource Manager pour mettre à jour une ressource.
 author: petertay
 ms.date: 10/31/2018
-ms.openlocfilehash: dc97534e658c9728ac617b4e52031e2553600458
-ms.sourcegitcommit: e9eb2b895037da0633ef3ccebdea2fcce047620f
+ms.openlocfilehash: 927826283163b2ae45575035168d6238de98dc00
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/30/2018
-ms.locfileid: "50251819"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113414"
 ---
 # <a name="update-a-resource-in-an-azure-resource-manager-template"></a>Mettre à jour une ressource dans un modèle Azure Resource Manager
 
@@ -20,7 +20,7 @@ Ensuite, vous devez spécifier le nom de la propriété existante à modifier ou
 
 ## <a name="example-template"></a>Exemple de modèle
 
-Examinons un exemple de modèle illustrant cette approche. Notre modèle déploie un réseau virtuel nommé `firstVNet` qui comporte un sous-réseau appelé `firstSubnet`. Puis il déploie une interface de réseau virtuel nommée `nic1` et l’associe à notre sous-réseau. Ensuite, une ressource de déploiement nommée `updateVNet` inclut un modèle imbriqué qui met à jour notre ressource `firstVNet` en ajoutant un second sous-réseau appelé `secondSubnet`. 
+Examinons un exemple de modèle illustrant cette approche. Notre modèle déploie un réseau virtuel nommé `firstVNet` et qui comporte un sous-réseau appelé `firstSubnet`. Puis il déploie une interface de réseau virtuel nommée `nic1` et l’associe à notre sous-réseau. Ensuite, une ressource de déploiement nommée `updateVNet` inclut un modèle imbriqué qui met à jour notre ressource `firstVNet` en ajoutant un second sous-réseau appelé `secondSubnet`.
 
 ```json
 {
@@ -37,7 +37,7 @@ Examinons un exemple de modèle illustrant cette approche. Notre modèle déploi
           "addressSpace":{"addressPrefixes": [
               "10.0.0.0/22"
           ]},
-          "subnets":[              
+          "subnets":[
               {
                   "name":"firstSubnet",
                   "properties":{
@@ -130,11 +130,11 @@ az group deployment create -g <resource-group-name> \
     --template-uri https://raw.githubusercontent.com/mspnp/template-examples/master/example1-update/deploy.json
 ```
 
-Une fois le déploiement terminé, ouvrez le groupe de ressources que vous avez spécifié dans le portail. Vous voyez un réseau virtuel nommé `firstVNet` et une interface de réseau virtuel appelée `nic1`. Cliquez sur `firstVNet`, puis sur `subnets`. Vous voyez `firstSubnet` qui a été créé à l’origine et vous voyez `secondSubnet` qui a été ajouté dans la ressource `updateVNet`. 
+Une fois le déploiement terminé, ouvrez le groupe de ressources que vous avez spécifié dans le portail. Vous voyez un réseau virtuel nommé `firstVNet` et une interface de réseau virtuel appelée `nic1`. Cliquez sur `firstVNet`, puis sur `subnets`. Vous voyez `firstSubnet` qui a été créé à l’origine et vous voyez `secondSubnet` qui a été ajouté dans la ressource `updateVNet`.
 
 ![Sous-réseau d’origine et sous-réseau mis à jour](../_images/firstVNet-subnets.png)
 
-Ensuite, revenez au groupe de ressources, cliquez sur `nic1`, puis cliquez sur `IP configurations`. Dans la section `IP configurations`, `subnet` est défini sur `firstSubnet (10.0.0.0/24)`. 
+Ensuite, revenez au groupe de ressources, cliquez sur `nic1`, puis cliquez sur `IP configurations`. Dans la section `IP configurations`, `subnet` est défini sur `firstSubnet (10.0.0.0/24)`.
 
 ![Paramètres de configuration IP nic1](../_images/nic1-ipconfigurations.png)
 

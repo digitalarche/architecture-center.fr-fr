@@ -1,18 +1,17 @@
 ---
-title: Opérateur de contrôle
+title: Modèle d’opérateur de contrôle
+titleSuffix: Cloud Design Patterns
 description: Protégez les applications et services à l’aide d’une instance d’hôte dédiée qui agit comme un intermédiaire entre les clients et l’application ou le service, valide et assainit les requêtes, et transmet les requêtes et les données entre eux.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- security
-ms.openlocfilehash: 39f8548bbccb5e19d433f65b2e7e09147d676996
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: a45ace8ea05e4a7dd1d8a48653e94a5fe5bfb0f6
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541319"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54009693"
 ---
 # <a name="gatekeeper-pattern"></a>Modèle d’opérateur de contrôle
 
@@ -32,12 +31,11 @@ Pour réduire le risque que des clients accèdent aux services et informations s
 
 ![Vue d’ensemble globale de ce modèle](./_images/gatekeeper-diagram.png)
 
-
 Le modèle d’opérateur de contrôle peut simplement servir à protéger le stockage, ou il peut être utilisé comme une façade plus complète pour protéger toutes les fonctions de l’application. Les facteurs importants sont les suivants :
 
-- **Validation contrôlée.** L’opérateur de contrôle valide toutes les requêtes et rejette celles qui ne respectent pas les exigences de validation.
-- **Risque et exposition limités.** L’opérateur de contrôle n’a pas accès aux informations d’identification ni aux clés utilisées par l’hôte approuvé pour accéder au stockage et aux services. Si l’opérateur de contrôle est compromis, l’attaquant n’a pas accès à ces informations d’identification ni aux clés.
-- **Sécurité appropriée.** L’opérateur de contrôle s’exécute dans un mode à privilèges limités, tandis que le reste de l’application s’exécute en mode de sécurité totale, nécessaire pour accéder au stockage et aux services. Si l’opérateur de contrôle est compromis, il ne peut pas accéder directement aux données ni aux services de l’application.
+- **Validation contrôlée**. L’opérateur de contrôle valide toutes les requêtes et rejette celles qui ne respectent pas les exigences de validation.
+- **Risque et exposition limités**. L’opérateur de contrôle n’a pas accès aux informations d’identification ni aux clés utilisées par l’hôte approuvé pour accéder au stockage et aux services. Si l’opérateur de contrôle est compromis, l’attaquant n’a pas accès à ces informations d’identification ni aux clés.
+- **Sécurité appropriée**. L’opérateur de contrôle s’exécute dans un mode à privilèges limités, tandis que le reste de l’application s’exécute en mode de sécurité totale, nécessaire pour accéder au stockage et aux services. Si l’opérateur de contrôle est compromis, il ne peut pas accéder directement aux données ni aux services de l’application.
 
 Ce modèle agit comme un pare-feu dans une topographie réseau standard. Il permet à l’opérateur de contrôle d’examiner les requêtes et de prendre une décision sur la transmission de la requête à l’hôte approuvé (parfois appelé le keymaster) qui effectue les tâches requises. Cette décision exige généralement de l’opérateur de contrôle qu’il valide et assainisse le contenu de la requête avant de la transmettre à l’hôte approuvé.
 
@@ -59,13 +57,12 @@ Ce modèle est utile dans les situations suivantes :
 - Applications qui gèrent des informations sensibles, exposent des services qui doivent présentent un degré élevé de protection contre les attaques malveillantes, ou effectuent des opérations critiques qui ne doivent pas être interrompues.
 - Applications distribuées où il est nécessaire pour effectuer la validation des requêtes séparément des tâches principales ou de centraliser cette validation pour simplifier la maintenance et l’administration.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Dans un scénario d’hébergement cloud, ce modèle peut être implémenté en découplant le rôle d’opérateur de contrôle ou de machine virtuelle des rôles approuvés et des services dans une application. Pour ce faire, utilisez un point de terminaison interne, une file d’attente ou un stockage comme mécanisme de communication intermédiaire. La figure illustre l’utilisation d’un point de terminaison interne.
 
 ![Exemple du modèle utilisant les rôles web et de travail pour les services cloud](./_images/gatekeeper-endpoint.png)
 
-
 ## <a name="related-patterns"></a>Modèles associés
 
-Le [modèle de clé Valet](valet-key.md) peut également être intéressant lorsque vous implémentez le modèle d’opérateur de contrôle. Lors de la communication entre l’opérateur de contrôle et les rôles approuvés, il est conseillé de renforcer la sécurité à l’aide de clés ou de jetons qui limitent les autorisations pour accéder aux ressources. Décrit l’utilisation d’un jeton ou d’une clé qui fournit aux clients un accès direct limité à une ressource ou un service spécifique.
+Le [modèle de clé Valet](./valet-key.md) peut également être intéressant lorsque vous implémentez le modèle d’opérateur de contrôle. Lors de la communication entre l’opérateur de contrôle et les rôles approuvés, il est conseillé de renforcer la sécurité à l’aide de clés ou de jetons qui limitent les autorisations pour accéder aux ressources. Décrit l’utilisation d’un jeton ou d’une clé qui fournit aux clients un accès direct limité à une ressource ou un service spécifique.

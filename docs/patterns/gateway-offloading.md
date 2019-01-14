@@ -1,14 +1,17 @@
 ---
 title: Modèle de déchargement de passerelle
+titleSuffix: Cloud Design Patterns
 description: Déchargez des fonctionnalités de service partagé ou spécialisé sur un proxy de passerelle.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: 6b3e4541aae77349ca91c18c788ddb508912361d
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: 50af3d8593279986ed6efee55667187424c18e56
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24540007"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010208"
 ---
 # <a name="gateway-offloading-pattern"></a>Modèle de déchargement de passerelle
 
@@ -24,12 +27,12 @@ D’autres services courants comme l’authentification, l’autorisation, la jo
 
 ## <a name="solution"></a>Solution
 
-Déchargez certaines fonctionnalités sur une passerelle d’API, particulièrement les questions transversales comme la gestion des certificats, l’authentification, la terminaison SSL, la surveillance, la traduction de protocole ou la limitation. 
+Déchargez certaines fonctionnalités sur une passerelle d’API, particulièrement les questions transversales comme la gestion des certificats, l’authentification, la terminaison SSL, la surveillance, la traduction de protocole ou la limitation.
 
 Le schéma suivant montre une passerelle d’API qui termine les connexions SSL entrantes. Il demande des données pour le compte du demandeur d’origine à partir d’un serveur HTTP en amont de la passerelle d’API.
 
- ![](./_images/gateway-offload.png)
- 
+ ![Diagramme du modèle de déchargement de passerelle](./_images/gateway-offload.png)
+
 Ce modèle présente les avantages suivants :
 
 - Simplifiez le développement de services en supprimant le besoin de distribution et de maintien des ressources de prise en charge, comme les certificats de serveur web et la configuration des sites web sécurisés. Une configuration plus simple permet une gestion et une extensibilité plus aisées, à l’instar des mises à niveau des services.
@@ -40,15 +43,15 @@ Ce modèle présente les avantages suivants :
 
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
-- Vérifiez que la passerelle d’API est hautement disponible et résistante à l’échec. Évitez les points de défaillance uniques en exécutant plusieurs instances de votre passerelle d’API. 
+- Vérifiez que la passerelle d’API est hautement disponible et résistante à l’échec. Évitez les points de défaillance uniques en exécutant plusieurs instances de votre passerelle d’API.
 - Assurez-vous que la passerelle est conçue pour répondre aux besoins en termes de capacité et de mise à l’échelle de votre application et de vos points de terminaison. Vérifiez que la passerelle ne se transforme pas en goulot d’étranglement pour l’application et qu’elle est suffisamment évolutive.
 - Déchargez uniquement les fonctionnalités qui sont utilisées par l’intégralité de l’application, telles que la sécurité ou le transfert de données.
-- La logique métier ne doit jamais être déchargée vers la passerelle d’API. 
+- La logique métier ne doit jamais être déchargée vers la passerelle d’API.
 - Si vous avez besoin de suivre des transactions, envisagez de générer des ID de corrélation à des fins de journalisation.
 
 ## <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
 
-Utilisez ce modèle dans les situations suivantes :
+Utilisez ce modèle dans les situations suivantes :
 
 - Un déploiement d’application qui a un problème partagé comme les certificats SSL ou le chiffrement.
 - Une fonctionnalité commune à plusieurs déploiements d’application qui peuvent avoir différents besoins en matière de ressources, comme des ressources de mémoire, une capacité de stockage ou des connexions réseau.
@@ -56,11 +59,11 @@ Utilisez ce modèle dans les situations suivantes :
 
 Ce modèle peut ne pas convenir s’il introduit le couplage entre les services.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 Avec Nginx en tant qu’appliance de déchargement SSL, la configuration suivante termine une connexion SSL entrante et la distribue à l’un des trois serveurs HTTP en amont.
 
-```
+```console
 upstream iis {
         server  10.3.0.10    max_fails=3    fail_timeout=15s;
         server  10.3.0.20    max_fails=3    fail_timeout=15s;
@@ -89,4 +92,3 @@ proxy_set_header X-Real-IP $remote_addr;
 - [Backends for Frontends pattern](./backends-for-frontends.md) (Modèle de services principaux destinés aux frontaux)
 - [Gateway Aggregation pattern](./gateway-aggregation.md) (Modèle d’agrégation de passerelle)
 - [Modèle de routage de passerelle](./gateway-routing.md)
-

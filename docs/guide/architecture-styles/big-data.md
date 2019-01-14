@@ -1,22 +1,24 @@
 ---
 title: Style d’architecture Big Data
-description: Décrit les avantages, les inconvénients et les meilleures pratiques relatifs aux architectures Big Data sur Azure.
+titleSuffix: Azure Application Architecture Guide
+description: Décrit les avantages, les inconvénients et les bonnes pratiques des architectures Big Data sur Azure.
 author: MikeWasson
 ms.date: 08/30/2018
-ms.openlocfilehash: 107ea7ad4e97a891236596291b0cee41a72eb865
-ms.sourcegitcommit: 19a517a2fb70768b3edb9a7c3c37197baa61d9b5
+ms.custom: seojan19
+ms.openlocfilehash: 507cd4dcf74ed7e106a99b93dd029dfdffd6e4bc
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/26/2018
-ms.locfileid: "52295563"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54112496"
 ---
 # <a name="big-data-architecture-style"></a>Style d’architecture Big Data
 
 Une architecture Big Data est conçue pour gérer l’ingestion, le traitement et l’analyse de données trop volumineuses ou complexes pour les systèmes de base de données traditionnels.
 
-![](./images/big-data-logical.svg)
+![Diagramme logique d’un style d’architecture Big Data](./images/big-data-logical.svg)
 
- Les solutions Big Data impliquent généralement un ou plusieurs des types de charges de travail suivants :
+Les solutions Big Data impliquent généralement un ou plusieurs des types de charges de travail suivants :
 
 - Traitement par lots des sources Big Data au repos.
 - Traitement en temps réel des Big Data en mouvement.
@@ -25,25 +27,25 @@ Une architecture Big Data est conçue pour gérer l’ingestion, le traitement e
 
 La plupart des architectures Big Data incluent tout ou partie des composants suivants :
 
-- **Sources de données** : toutes les solutions Big Data reposent sur une ou plusieurs sources de données. Voici quelques exemples :
+- **Sources de données** : Toutes les solutions Big Data reposent sur une ou plusieurs sources de données. Voici quelques exemples :
 
-    - Magasins de données d’application, tels que des bases de données relationnelles.
-    - Fichiers statiques produits par les applications, tels que les fichiers journaux de serveur web.
-    - Sources de données en temps réel, tels que les appareils IoT.
+  - Magasins de données d’application, tels que des bases de données relationnelles.
+  - Fichiers statiques produits par les applications, tels que les fichiers journaux de serveur web.
+  - Sources de données en temps réel, tels que les appareils IoT.
 
-- **Stockage de données** : les données destinées aux opérations de traitement par lots sont généralement stockées dans un magasin de fichiers distribués qui peut contenir de vastes volumes de fichiers volumineux dans divers formats. Ce type de magasin est souvent appelé « *lac de données* ». Les options pour l’implémentation de ce stockage incluent des conteneurs Azure Data Lake Store ou les conteneurs blob dans le stockage Azure. 
+- **Stockage des données** : Les données destinées aux opérations de traitement par lots sont généralement stockées dans un magasin de fichiers distribués, qui peut contenir de vastes volumes de fichiers volumineux dans divers formats. Ce type de magasin est souvent appelé « *lac de données* ». Les options pour l’implémentation de ce stockage incluent des conteneurs Azure Data Lake Store ou les conteneurs blob dans le stockage Azure.
 
-- **Traitement par lots** : étant donné que les jeux de données sont trop lourds, une solution Big Data doit souvent traiter les fichiers de données à l’aide de traitements par lots à longue durée d’exécution pour filtrer, agréger et préparer les données en vue de l’analyse. Généralement, ces travaux impliquent la lecture des fichiers source, leur traitement et l’écriture de la sortie dans de nouveaux fichiers. Les options incluent l’exécution de travaux U-SQL dans Azure Data Lake Analytics, à l’aide de travaux personnalisés de mappage/réduction, Pig ou Hive dans un cluster HDInsight Hadoop ou à l’aide des programmes Java, Scala ou Python dans un cluster HDInsight Spark.
+- **Traitement par lots** : Étant donné que les jeux de données sont trop lourds, une solution Big Data doit souvent traiter les fichiers de données à l’aide de traitements par lots à longue durée d’exécution pour filtrer, agréger et préparer les données en vue de l’analyse. Généralement, ces travaux impliquent la lecture des fichiers source, leur traitement et l’écriture de la sortie dans de nouveaux fichiers. Les options incluent l’exécution de travaux U-SQL dans Azure Data Lake Analytics, à l’aide de travaux personnalisés de mappage/réduction, Pig ou Hive dans un cluster HDInsight Hadoop ou à l’aide des programmes Java, Scala ou Python dans un cluster HDInsight Spark.
 
-- **Ingestion de messages en temps réel** : si la solution inclut des sources en temps réel, l’architecture doit inclure un moyen pour capturer et stocker des messages en temps réel pour le traitement de flux de données. Il peut s’agir d’un simple magasin de données, où les messages entrants sont déposés dans un dossier en vue du traitement. Toutefois, de nombreuses solutions besoin d’un magasin d’ingestion des messages qui agit comme une mémoire tampon pour les messages et qui prend en charge un traitement de montée en puissance, une remise fiable et d’autres sémantiques de files d’attente de message. Les options incluent Azure Event Hubs, Azure IoT Hubs et Kafka.
+- **Ingestion de messages en temps réel** : Si la solution inclut des sources en temps réel, l’architecture doit inclure un moyen pour capturer et stocker des messages en temps réel pour le traitement de flux de données. Il peut s’agir d’un simple magasin de données, où les messages entrants sont déposés dans un dossier en vue du traitement. Toutefois, de nombreuses solutions besoin d’un magasin d’ingestion des messages qui agit comme une mémoire tampon pour les messages et qui prend en charge un traitement de montée en puissance, une remise fiable et d’autres sémantiques de files d’attente de message. Les options incluent Azure Event Hubs, Azure IoT Hubs et Kafka.
 
-- **Traitement de flux** : après la capture des messages en temps réel, la solution doit les traiter en filtrant, agrégeant et préparant les données en vue de l’analyse. Les données de flux traitées sont ensuite écrites dans un récepteur de sortie. Azure Stream Analytics fournit un service de traitement de flux managé reposant sur des requêtes SQL à l’exécution permanente qui fonctionnent sur les flux de données indépendants. Vous pouvez également utiliser des technologies de flux Apache open source comme Storm et Spark dans un cluster HDInsight.
+- **Traitement de flux** : Après avoir capturé les messages en temps réel, la solution doit les traiter en filtrant, en agrégeant et, plus généralement, en préparant les données pour l’analyse. Les données de flux traitées sont ensuite écrites dans un récepteur de sortie. Azure Stream Analytics fournit un service de traitement de flux managé reposant sur des requêtes SQL à l’exécution permanente qui fonctionnent sur les flux de données indépendants. Vous pouvez également utiliser des technologies de flux Apache open source comme Storm et Spark dans un cluster HDInsight.
 
-- **Magasin de données analytique** : de nombreuses solutions Big Data préparent les données pour l’analyse, puis fournissent les données traitées dans un format structuré qui peut être interrogé à l’aide des outils d’analyse. Le magasin de données analytique utilisé pour répondre à ces requêtes peut être un entrepôt de données relationnelles de type Kimball, comme indiqué dans les solutions décisionnelles (BI) plus traditionnelles. Les données peuvent également être présentées via une technologie NoSQL à faible latence, telle que HBase, ou via une base de données Hive interactif qui fournit une abstraction de métadonnées sur les fichiers de données dans le magasin de données distribuées. Azure SQL Data Warehouse fournit un service managé pour l’entreposage cloud des données à grande échelle. HDInsight prend en charge les formats Hive interactif, HBase et Spark SQL, qui peuvent également servir à préparer les données en vue de l’analyse.
+- **Magasin de données analytiques** : De nombreuses solutions Big Data préparent les données pour l’analyse, puis fournissent les données traitées dans un format structuré qui peut être interrogé à l’aide des outils d’analyse. Le magasin de données analytique utilisé pour répondre à ces requêtes peut être un entrepôt de données relationnelles de type Kimball, comme indiqué dans les solutions décisionnelles (BI) plus traditionnelles. Les données peuvent également être présentées via une technologie NoSQL à faible latence, telle que HBase, ou via une base de données Hive interactif qui fournit une abstraction de métadonnées sur les fichiers de données dans le magasin de données distribuées. Azure SQL Data Warehouse fournit un service managé pour l’entreposage cloud des données à grande échelle. HDInsight prend en charge les formats Hive interactif, HBase et Spark SQL, qui peuvent également servir à préparer les données en vue de l’analyse.
 
-- **Analyse et rapports** : la plupart des solutions Big Data ont pour but de fournir des informations sur les données via l’analyse et les rapports. Pour permettre aux utilisateurs d’analyser les données, l’architecture peut inclure une couche de modélisation des données, comme un cube OLAP multidimensionnel ou un modèle de données tabulaire dans Azure Analysis Services. Elle peut également prendre en charge le décisionnel libre-service, en utilisant les technologies de modélisation et de visualisation de Microsoft Power BI ou Microsoft Excel. L’analyse et les rapports peuvent aussi prendre la forme d’une exploration interactive des données par les scientifiques de données ou les analystes de données. Pour ces scénarios, plusieurs services Azure prennent en charge les blocs-notes analytiques, tels que Jupyter, ce qui permet à ces utilisateurs de tirer parti de leurs connaissances avec Python ou R. Pour l’exploration de données à grande échelle, vous pouvez utiliser Microsoft R Server seul ou avec Spark.
+- **Analyse et rapports** : La plupart des solutions Big Data ont pour but de fournir des informations sur les données par le biais de l’analyse et des rapports. Pour permettre aux utilisateurs d’analyser les données, l’architecture peut inclure une couche de modélisation des données, comme un cube OLAP multidimensionnel ou un modèle de données tabulaire dans Azure Analysis Services. Elle peut également prendre en charge le décisionnel libre-service, en utilisant les technologies de modélisation et de visualisation de Microsoft Power BI ou Microsoft Excel. L’analyse et les rapports peuvent aussi prendre la forme d’une exploration interactive des données par les scientifiques de données ou les analystes de données. Pour ces scénarios, plusieurs services Azure prennent en charge les blocs-notes analytiques, tels que Jupyter, ce qui permet à ces utilisateurs de tirer parti de leurs connaissances avec Python ou R. Pour l’exploration de données à grande échelle, vous pouvez utiliser Microsoft R Server seul ou avec Spark.
 
-- **Orchestration** : la plupart des solutions Big Data consistent en des opérations de traitement de données répétées, encapsulées dans des workflows, qui transforment les données source, déplacent les données entre plusieurs sources et récepteurs, chargent les données traitées dans un magasin de données analytique, ou envoient les résultats directement à un rapport ou à un tableau de bord. Pour automatiser ces workflows, vous pouvez utiliser une technologie d’orchestration telle qu’Azure Data Factory ou Apache Oozie avec Sqoop.
+- **Orchestration** : La plupart des solutions Big Data consistent en des opérations de traitement de données répétées, encapsulées dans des workflows, qui transforment les données source, déplacent les données entre plusieurs sources et récepteurs, chargent les données traitées dans un magasin de données analytique, ou envoient les résultats directement à un rapport ou à un tableau de bord. Pour automatiser ces workflows, vous pouvez utiliser une technologie d’orchestration telle qu’Azure Data Factory ou Apache Oozie avec Sqoop.
 
 Azure inclut de nombreux services qui peuvent être utilisés dans une architecture Big Data. Il existe deux grandes catégories :
 
@@ -75,7 +77,7 @@ Envisagez ce style d’architecture pour répondre aux besoins suivants :
 - **Maturité de la technologie**. La plupart des technologies utilisées en Big Data sont en pleine évolution. Tandis que les technologies Hadoop de base comme Hive et Pig se sont stabilisées, de nouvelles technologies, telles que Spark, introduisent des modifications et des améliorations importantes à chaque nouvelle version. Les services managés tels qu’Azure Data Lake Analytics et Azure Data Factory sont relativement récents par rapport aux autres services Azure et évolueront probablement au fil du temps.
 - **Sécurité**. Les solutions Big Data s’appuient généralement sur le stockage de toutes les données statiques dans un lac de données centralisé. La sécurisation de l’accès à ces données peut être difficile, en particulier lorsque les données doivent être ingérées et consommées par plusieurs applications et plateformes.
 
-## <a name="best-practices"></a>Meilleures pratiques
+## <a name="best-practices"></a>Bonnes pratiques
 
 - **Tirer parti du parallélisme**. La plupart des technologies de traitement Big Data distribuent la charge sur plusieurs unités de traitement. Cela nécessite la création et le stockage de fichiers de données statiques dans un format fractionnable. Les systèmes de fichiers distribués tels que HDFS permettent d’optimiser les performances de lecture et d’écriture. Le traitement réel est effectué par plusieurs nœuds de cluster en parallèle, ce qui réduit globalement les temps de travail.
 
@@ -85,7 +87,7 @@ Envisagez ce style d’architecture pour répondre aux besoins suivants :
 
 - **Traiter les données sur place**. Les solutions BI traditionnelles utilisent souvent un processus ETL (extraction, transformation et chargement) pour déplacer des données dans un entrepôt de données. Avec de plus grands volumes de données et une plus grande variété de formats, les solutions Big Data utilisent généralement des variantes de processus ETL, comme le processus TEL (transformation, extraction et chargement). Avec cette approche, les données sont traitées dans le magasin de données distribué, en leur donnant la structure requise avant de déplacer les données transformées dans un magasin de données analytique.
 
-- **Équilibrer les coûts d’utilisation et de temps**. Pour les programmes de traitement par lots, il est important de tenir compte des deux facteurs : le coût unitaire de nœuds de calcul et le coût par minute de l’utilisation de ces nœuds pour effectuer le travail. Par exemple, un programme de traitement par lots peut prendre les huit heures avec quatre nœuds de cluster. Toutefois, il peut arriver que le programme utilise les quatre nœuds uniquement pendant les deux premières heures et, par la suite, qu’il n’ait besoin que de deux nœuds. Dans ce cas, exécuter l’intégralité du programme sur deux nœuds augmenterait la durée totale du travail, sans pour autant la doubler. Le coût total serait donc inférieur. Dans certains scénarios métier, une durée de traitement plus longue peut être préférable au coût plus élevé lié à l’utilisation de ressources de cluster sous-exploitées.
+- **Équilibrer les coûts d’utilisation et de temps**. Pour les travaux de traitement par lots, il est important de prendre en compte deux facteurs : le coût unitaire de nœuds de calcul et le coût par minute de l’utilisation de ces nœuds pour effectuer le travail. Par exemple, un programme de traitement par lots peut prendre les huit heures avec quatre nœuds de cluster. Toutefois, il peut arriver que le programme utilise les quatre nœuds uniquement pendant les deux premières heures et, par la suite, qu’il n’ait besoin que de deux nœuds. Dans ce cas, exécuter l’intégralité du programme sur deux nœuds augmenterait la durée totale du travail, sans pour autant la doubler. Le coût total serait donc inférieur. Dans certains scénarios métier, une durée de traitement plus longue peut être préférable au coût plus élevé lié à l’utilisation de ressources de cluster sous-exploitées.
 
 - **Séparer les ressources de cluster**. Lorsque vous déployez des clusters HDInsight, vous obtenez normalement de meilleures performances en approvisionnant des ressources de cluster distinctes pour chaque type de charge de travail. Par exemple, bien que les clusters Spark incluent Hive, si vous avez besoin d’effectuer un traitement intensif avec Hive et Spark, vous devez envisager de déployer des clusters dédiés distincts pour Spark et Hadoop. De même, si vous utilisez HBase et Storm pour le traitement de flux de données à faible latence et Hive pour le traitement par lots, envisagez des clusters distincts pour Storm, HBase et Hadoop.
 
@@ -97,7 +99,7 @@ Envisagez ce style d’architecture pour répondre aux besoins suivants :
 
 L’Internet des objets (IoT) est un sous-ensemble spécialisé des solutions big data. Le diagramme suivant présente une architecture logique possible pour IoT. Le diagramme met en avant les composants de diffusion d’événements de l’architecture.
 
-![](./images/iot.png)
+![Diagramme d’une architecture IoT](./images/iot.png)
 
 La **passerelle cloud** ingère les événements d’appareils à la limite du cloud en utilisant un système de messagerie fiable et à faible latence.
 
@@ -109,9 +111,9 @@ Voici quelques types de traitement courants. (Cette liste n’est certainement p
 
 - Écriture de données d’événement dans un stockage froid pour archivage ou traitement analytique par lots.
 
-- Analytique de séquence à chaud (« hot path analytics »), avec une analyse du flux d’événements en (quasi) temps réel, pour détecter les anomalies, reconnaître les modèles dans des fenêtres de temps glissantes ou déclencher des alertes quand une condition spécifique est rencontrée dans le flux. 
+- Analytique de séquence à chaud (« hot path analytics »), avec une analyse du flux d’événements en (quasi) temps réel, pour détecter les anomalies, reconnaître les modèles dans des fenêtres de temps glissantes ou déclencher des alertes quand une condition spécifique est rencontrée dans le flux.
 
-- Gestion de types de messages d’appareils non liés à la télémétrie, tels que les notifications et les alarmes. 
+- Gestion de types de messages d’appareils non liés à la télémétrie, tels que les notifications et les alarmes.
 
 - Apprentissage automatique.
 

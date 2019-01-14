@@ -1,17 +1,17 @@
 ---
 title: Mise en cache de jetons d’accès dans une application multi-locataire
-description: Mise en cache des jetons d’accès utilisés pour appeler une API web de serveur principal
+description: Mise en cache des jetons d’accès utilisés pour appeler une API web de serveur back-end.
 author: MikeWasson
 ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: web-api
 pnp.series.next: adfs
-ms.openlocfilehash: 950b638e629ad97e24b05e781da844bc110bad91
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: 0cf4b3c3b9187759522b4530c94268ce8d7baa86
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52901709"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110950"
 ---
 # <a name="cache-access-tokens"></a>Mettre en cache des jetons d’accès
 
@@ -41,14 +41,14 @@ Dans l’application Surveys de Tailspin, la classe `DistributedTokenCache` impl
 Le magasin de stockage est partitionné par utilisateur. Pour chaque requête HTTP, les jetons de cet utilisateur sont lus à partir du magasin de stockage et chargés dans le dictionnaire `TokenCache` . Si Redis est utilisé comme magasin de stockage, chaque instance de serveur d’une batterie de serveurs lit/écrit dans le même cache, et cette approche est adaptée pour de nombreux utilisateurs.
 
 ## <a name="encrypting-cached-tokens"></a>Chiffrement des jetons mis en cache
+
 Les jetons sont des données sensibles, car elles donnent accès aux ressources d’un utilisateur. (En outre, contrairement à un mot de passe d’utilisateur, vous ne pouvez pas simplement stocker un code de hachage du jeton.) Par conséquent, il est essentiel de protéger les jetons. Le cache Redis est protégé par un mot de passe, mais si quelqu'un obtient le mot de passe, cette personne peut accéder à tous les jetons d’accès mis en cache. Pour cette raison, `DistributedTokenCache` chiffre toutes les données qu’il écrit dans le magasin de stockage. Le chiffrement est effectué à l’aide des API de [protection des données][data-protection] ASP.NET Core.
 
 > [!NOTE]
 > Si vous effectuez un déploiement sur des sites web Azure, les clés de chiffrement sont sauvegardées dans le stockage réseau et synchronisées sur tous les ordinateurs (voir [Durée de vie et de gestion de clés][key-management]). Par défaut, les clés ne sont pas chiffrées lors de leur exécution dans les sites web Azure, mais vous pouvez [activer le chiffrement à l’aide d’un certificat X.509][x509-cert-encryption].
-> 
-> 
 
 ## <a name="distributedtokencache-implementation"></a>Implémentation de DistributedTokenCache
+
 La classe `DistributedTokenCache` dérive de la classe [TokenCache][tokencache-class] ADAL.
 
 Dans le constructeur, la classe `DistributedTokenCache` crée une clé pour l’utilisateur actuel et charge le cache à partir du magasin de stockage :

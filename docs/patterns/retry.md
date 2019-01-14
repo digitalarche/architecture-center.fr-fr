@@ -1,18 +1,17 @@
 ---
-title: Retry
+title: Modèle Nouvelle tentative
+titleSuffix: Cloud Design Patterns
 description: Permettez à une application de gérer les défaillances temporaires anticipées quand elle tente de se connecter à un service ou à une ressource réseau en réessayant d’exécuter en toute transparence une opération qui a échoué précédemment.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- resiliency
-ms.openlocfilehash: 73fdcbcc2bd75593a4c8e33dc2259c90593e14db
-ms.sourcegitcommit: 3d9ee03e2dda23753661a80c7106d1789f5223bb
+ms.custom: seodec18
+ms.openlocfilehash: 44a9c7e188bcf76a5f6904879c2121d50397da6c
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/23/2018
-ms.locfileid: "29478253"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011509"
 ---
 # <a name="retry-pattern"></a>Modèle Nouvelle tentative
 
@@ -36,7 +35,7 @@ Si une application détecte un échec lorsqu’elle tente d’envoyer une requê
 
 - **Nouvelle tentative**. Si l’erreur spécifique signalée est inhabituelle ou rare, elle peut avoir été provoquée par des circonstances inhabituelles telles qu’un paquet réseau endommagé au cours de sa transmission. Dans ce cas, l’application pourrait relancer immédiatement la requête ayant échoué, car la même erreur est peu susceptible de se reproduire et qu’il est probable que la requête aboutisse.
 
-- **Nouvelle tentative après un délai.** Si l’échec est causé par un problème courant de connectivité ou de disponibilité, le réseau ou le service nécessitera certainement un certain délai le temps que les problèmes de connectivité soient corrigés ou que la file d’attente de tâches soit vidée. L’application doit attendre un délai approprié avant de relancer la requête.
+- **Nouvelle tentative après un délai**. Si l’échec est causé par un problème courant de connectivité ou de disponibilité, le réseau ou le service nécessitera certainement un certain délai le temps que les problèmes de connectivité soient corrigés ou que la file d’attente de tâches soit vidée. L’application doit attendre un délai approprié avant de relancer la requête.
 
 Pour les échecs temporaires les plus courants, le délai entre chaque tentative doit être choisi de façon à pouvoir répartir les requêtes provenant de plusieurs instances de l’application de manière aussi équitable que possible. Cela réduit le risque de surcharger encore davantage un service déjà occupé. Si de nombreuses instances d’une application inondent en permanence un service de demandes de nouvelles tentatives, le service aura besoin de plus de temps pour récupérer un fonctionnement normal.
 
@@ -60,7 +59,7 @@ La stratégie de nouvelle tentative doit être configurée en fonction des exige
 
 Une stratégie de relance agressive avec un délai minimal entre les tentatives et un grand nombre de nouvelles tentatives peut affecter encore davantage les performances d’un service occupé qui a déjà atteint ou est sur le point d’atteindre sa capacité maximale. Cette stratégie de relance peut également affecter la réactivité de l’application si elle tente en permanence de relancer une opération ayant échoué.
 
-Si une requête continue d’échouer après un nombre important de nouvelles tentatives, il est préférable que l’application cesse d’envoyer de nouvelles requêtes à la même ressource et qu’elle signale immédiatement l’erreur. Lorsque le délai expire, l’application peut, à titre d’essai, envoyer une ou plusieurs requêtes pour voir si elles aboutissent. Pour plus d’informations sur cette stratégie, consultez l’article [Modèle Disjoncteur](circuit-breaker.md).
+Si une requête continue d’échouer après un nombre important de nouvelles tentatives, il est préférable que l’application cesse d’envoyer de nouvelles requêtes à la même ressource et qu’elle signale immédiatement l’erreur. Lorsque le délai expire, l’application peut, à titre d’essai, envoyer une ou plusieurs requêtes pour voir si elles aboutissent. Pour plus d’informations sur cette stratégie, consultez l’article [Modèle Disjoncteur](./circuit-breaker.md).
 
 Déterminez si l’opération est idempotente. Si c’est le cas, une nouvelle tentative peut être lancée sans risque. Dans le cas contraire, les nouvelles tentatives pourraient entraîner plusieurs exécutions de la même opération, causant des effets secondaires inattendus. Par exemple, un service peut recevoir la requête, la traiter avec succès, mais ne pas parvenir à envoyer une réponse. À ce stade, la logique de nouvelle tentative peut consister à renvoyer la requête en supposant que la première requête n’a pas été reçue.
 
@@ -74,7 +73,7 @@ Implémentez la logique de nouvelle tentative uniquement lorsque vous avez ident
 
 Il est important de consigner tous les échecs de connexion qui entraînent une nouvelle tentative afin que les problèmes sous-jacents liés à l’application, aux services ou aux ressources puissent être identifiés.
 
-Recherchez les erreurs qui sont les plus susceptibles de se produire pour un service ou une ressource afin de découvrir si elles sont susceptibles d’être longues ou définitives. Si elles le sont, il est préférable de gérer l’erreur comme une exception. L’application peut signaler ou consigner l’exception, puis retenter l’opération en appelant un autre service (le cas échéant) ou en fournissant un niveau de fonctionnalité inférieur. Pour plus d’informations sur la façon de détecter et de gérer les erreurs de longue durée, consultez l’article [Modèle Disjoncteur](circuit-breaker.md).
+Recherchez les erreurs qui sont les plus susceptibles de se produire pour un service ou une ressource afin de découvrir si elles sont susceptibles d’être longues ou définitives. Si elles le sont, il est préférable de gérer l’erreur comme une exception. L’application peut signaler ou consigner l’exception, puis retenter l’opération en appelant un autre service (le cas échéant) ou en fournissant un niveau de fonctionnalité inférieur. Pour plus d’informations sur la façon de détecter et de gérer les erreurs de longue durée, consultez l’article [Modèle Disjoncteur](./circuit-breaker.md).
 
 ## <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
 
@@ -86,7 +85,7 @@ Ce modèle peut ne pas avoir d’utilité dans les cas suivants :
 - Pour gérer les échecs qui ne sont pas dus à des erreurs temporaires, tels que les exceptions internes générées par des erreurs dans la logique métier d’une application.
 - Pour éviter de résoudre les problèmes d’extensibilité dans un système. Si une application génère fréquemment des erreurs liées à la disponibilité, cela indique souvent que le service ou la ressource concerné(e) doit être mis(e) à l’échelle.
 
-## <a name="example"></a>exemples
+## <a name="example"></a>Exemples
 
 Cet exemple en C# illustre une implémentation du modèle Nouvelle tentative. La méthode `OperationWithBasicRetryAsync`, illustrée ci-dessous, appelle un service externe en mode asynchrone via la méthode `TransientOperationAsync`. Les détails de la méthode `TransientOperationAsync` sont propres au service et ne sont donc pas spécifiés dans l’exemple de code.
 
@@ -120,7 +119,7 @@ public async Task OperationWithBasicRetryAsync()
       // long to wait, based on the retry strategy.
       if (currentRetry > this.retryCount || !IsTransient(ex))
       {
-        // If this isn't a transient error or we shouldn't retry, 
+        // If this isn't a transient error or we shouldn't retry,
         // rethrow the exception.
         throw;
       }
@@ -173,6 +172,6 @@ private bool IsTransient(Exception ex)
 
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
-- [Modèle Disjoncteur](circuit-breaker.md). Le modèle Nouvelle tentative est idéal pour gérer les erreurs temporaires. Lorsque l’erreur semble être de plus longue durée, il peut être plus judicieux d’implémenter le modèle Disjoncteur. Le modèle Nouvelle tentative peut également être combiné à un modèle Disjoncteur afin de mettre en place une approche complète de gestion des erreurs.
+- [Modèle Disjoncteur](./circuit-breaker.md). Le modèle Nouvelle tentative est idéal pour gérer les erreurs temporaires. Lorsque l’erreur semble être de plus longue durée, il peut être plus judicieux d’implémenter le modèle Disjoncteur. Le modèle Nouvelle tentative peut également être combiné à un modèle Disjoncteur afin de mettre en place une approche complète de gestion des erreurs.
 - [Guide du mécanisme de nouvelle tentative relatif aux différents services](https://docs.microsoft.com/azure/architecture/best-practices/retry-service-specific)
 - [Résilience de connexion](https://docs.microsoft.com/ef/core/miscellaneous/connection-resiliency)

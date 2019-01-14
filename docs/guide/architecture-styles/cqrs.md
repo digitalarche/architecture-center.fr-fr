@@ -1,24 +1,26 @@
 ---
 title: Style d’architecture CQRS
-description: Décrit les avantages, les inconvénients et les bonnes pratiques relatifs aux architectures CQRS
+titleSuffix: Azure Application Architecture Guide
+description: Décrit les avantages, les inconvénients et les bonnes pratiques des architectures CQRS.
 author: MikeWasson
 ms.date: 08/30/2018
-ms.openlocfilehash: ba7af25f940a01e184279c4665f8fce8ebb71b23
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.custom: seojan19
+ms.openlocfilehash: eab765d4eece919d2ca946a3f7152bde24bfd6c5
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43325922"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54114043"
 ---
 # <a name="cqrs-architecture-style"></a>Style d’architecture CQRS
 
-Le modèle CQRS (Command and Query Responsibility Segregation, répartition des responsabilités entre les commandes et les requêtes) est un style d’architecture qui sépare les opérations de lecture des opérations d’écriture. 
+Le modèle CQRS (Command and Query Responsibility Segregation, répartition des responsabilités entre les commandes et les requêtes) est un style d’architecture qui sépare les opérations de lecture des opérations d’écriture.
 
-![](./images/cqrs-logical.svg)
+![Diagramme logique d’un style d’architecture CQRS](./images/cqrs-logical.svg)
 
 Dans les architectures traditionnelles, le même modèle de données est utilisé pour interroger et mettre à jour une base de données. Cette approche se révèle simple et efficace pour les opérations CRUD de base. Toutefois, dans le cas des applications plus complexes, elle peut devenir plus difficile à gérer. Par exemple, côté lecture, l’application peut exécuter de nombreuses requêtes, renvoyant des objets de transfert de données de différentes formes. Le mappage d’objets peut alors devenir compliqué. Côté écriture, le modèle peut implémenter une logique métier et de validation complexe. Par conséquent, vous risquez d’obtenir un modèle excessivement complexe et surchargé.
 
-Un autre problème potentiel réside dans le fait que les charges de travail de lecture et d’écriture sont souvent asymétriques et présentent des exigences de performances et de mise à l’échelle très différentes. 
+Un autre problème potentiel réside dans le fait que les charges de travail de lecture et d’écriture sont souvent asymétriques et présentent des exigences de performances et de mise à l’échelle très différentes.
 
 CQRS résout ces problèmes en séparant les lectures des écritures dans des modèles distincts et utilise des **commandes** pour mettre à jour les données, et des **requêtes** pour lire les données.
 
@@ -28,11 +30,11 @@ CQRS résout ces problèmes en séparant les lectures des écritures dans des mo
 
 Pour renforcer l’isolation, vous pouvez séparer physiquement les données de lecture des données d’écriture. Dans ce cas, la base de données de lecture peut utiliser son propre schéma de données optimisé pour les requêtes. Par exemple, elle peut stocker une [vue matérialisée][materialized-view] des données, afin d’éviter des jointures ou des mappages O/RM complexes. Elle peut même utiliser un autre type de magasin de données. Par exemple, il est possible que la base de données d’écriture soit relationnelle, et que la base de données de lecture soit une base de données de documents.
 
-Si vous utilisez des bases de données de lecture et d’écriture distinctes, vous devez les garder synchronisées. En règle générale, vous obtenez ce résultat en faisant en sorte que le modèle d’écriture publie un événement chaque fois qu’il met à jour la base de données. La mise à jour de la base de données et la publication de l’événement doivent s’effectuer dans une transaction unique. 
+Si vous utilisez des bases de données de lecture et d’écriture distinctes, vous devez les garder synchronisées. En règle générale, vous obtenez ce résultat en faisant en sorte que le modèle d’écriture publie un événement chaque fois qu’il met à jour la base de données. La mise à jour de la base de données et la publication de l’événement doivent s’effectuer dans une transaction unique.
 
 Certaines implémentations de l’architecture CQRS utilisent le [modèle d’approvisionnement en événements][event-sourcing] (ou Event Sourcing). Avec ce modèle, l’état de l’application est stocké sous la forme d’une séquence d’événements. Chaque événement représente un ensemble de modifications des données. L’état actuel est construit par la relecture des événements. Dans un contexte CQRS, l’un des avantages de l’approvisionnement en événements réside dans le fait que les mêmes événements peuvent être utilisés pour informer les autres composants &mdash; en particulier, pour avertir le modèle de lecture. Le modèle de lecture utilise les événements pour créer une capture instantanée de l’état actuel, ce qui se révèle plus efficace pour les requêtes. Toutefois, l’approvisionnement en événements complique la conception.
 
-![](./images/cqrs-events.svg)
+![Événements CQRS](./images/cqrs-events.svg)
 
 ## <a name="when-to-use-this-architecture"></a>Quand utiliser cette architecture
 
@@ -43,7 +45,7 @@ CQRS n’est pas une architecture de premier niveau qui s’applique à la total
 ## <a name="benefits"></a>Avantages
 
 - **Mise à l’échelle de manière indépendante**. CQRS permet de mettre à l’échelle les charges de travail de lecture et d’écriture indépendamment, et peut contribuer à réduire les contentions de verrouillage.
-- **Schémas de données optimisés**.  Le côté lecture peut utiliser un schéma optimisé pour les requêtes, tandis que le côté écriture utilise un schéma optimisé pour les mises à jour.  
+- **Schémas de données optimisés**. Le côté lecture peut utiliser un schéma optimisé pour les requêtes, tandis que le côté écriture utilise un schéma optimisé pour les mises à jour.
 - **Sécurité**. Il est plus facile de s’assurer que seules les entités de domaine adéquates effectuent des écritures sur les données.
 - **Séparation des problèmes**. Le fait de séparer le côté lecture du côté écriture peut produire des modèles plus faciles à gérer et plus flexibles. La plus grande partie de la logique métier complexe est placée dans le modèle d’écriture. Le modèle de lecture peut être relativement simple.
 - **Requêtes simplifiées**. En stockant une vue matérialisée dans la base de données de lecture, l’application peut éviter les jointures complexes lors de l’interrogation.
@@ -52,13 +54,13 @@ CQRS n’est pas une architecture de premier niveau qui s’applique à la total
 
 - **Complexité** : Le principe de base de CQRS est simple. Toutefois, cette architecture peut compliquer la conception d’applications, notamment si elle inclut le modèle d’approvisionnement en événements.
 
-- **Messagerie**. Bien que CQRS ne nécessite aucune messagerie, il est fréquent d’utiliser une messagerie pour traiter les commandes et pour publier les événements de mise à jour. Dans ce cas, l’application doit gérer les échecs de messages ou les messages en double. 
+- **Messagerie**. Bien que CQRS ne nécessite aucune messagerie, il est fréquent d’utiliser une messagerie pour traiter les commandes et pour publier les événements de mise à jour. Dans ce cas, l’application doit gérer les échecs de messages ou les messages en double.
 
-- **Cohérence finale**. Si vous séparez les bases de données de lecture et d’écriture, les données de lecture peuvent être périmées. 
+- **Cohérence finale**. Si vous séparez les bases de données de lecture et d’écriture, les données de lecture peuvent être périmées.
 
-## <a name="best-practices"></a>Meilleures pratiques
+## <a name="best-practices"></a>Bonnes pratiques
 
-- Pour plus d’informations sur l’implémentation de CQRS, consultez l’article [CQRS Pattern (Modèle CQRS)][cqrs-pattern].
+- Pour plus d’informations sur l’implémentation de CQRS, consultez l’article sur le [modèle CQRS][cqrs-pattern].
 
 - Envisagez d’utiliser le modèle [Approvisionnement en événements][event-sourcing] pour éviter les conflits de mise à jour.
 
@@ -68,12 +70,11 @@ CQRS n’est pas une architecture de premier niveau qui s’applique à la total
 
 CQRS peut se révéler particulièrement utile dans une [architecture de microservices][microservices]. L’un des principes des microservices est qu’un service ne peut pas accéder directement au magasin de données d’un autre service.
 
-![](./images/cqrs-microservices-wrong.png)
+![Diagramme d’une approche incorrecte des microservices](./images/cqrs-microservices-wrong.png)
 
 Dans le diagramme ci-après, le Service A écrit dans un magasin de données, et le Service B conserve une vue matérialisée des données. Le Service A publie un événement chaque fois qu’il écrit dans le magasin de données. Le Service B s’abonne à l’événement.
 
-![](./images/cqrs-microservices-right.png)
-
+![Diagramme d’une approche correcte des microservices](./images/cqrs-microservices-right.png)
 
 <!-- links -->
 

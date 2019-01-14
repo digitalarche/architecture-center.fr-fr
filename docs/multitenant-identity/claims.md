@@ -1,23 +1,24 @@
 ---
 title: Utilisation d’identités basées sur les revendications dans les applications multi-locataires
-description: Comment utiliser des revendications pour la validation de l’émetteur et l’autorisation
+description: Comment utiliser des revendications pour la validation et l’autorisation de l’émetteur.
 author: MikeWasson
 ms.date: 07/21/2017
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: authenticate
 pnp.series.next: signup
-ms.openlocfilehash: 3ed6c7c9a48f3617f82112e76878c770099fde3e
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.openlocfilehash: ffaa6085dd9ca9ddec203e6661575e984b2e25e0
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902406"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54113584"
 ---
 # <a name="work-with-claims-based-identities"></a>Utilisation d’identités basées sur les revendications
 
 [![GitHub](../_images/github.png) Exemple de code][sample application]
 
 ## <a name="claims-in-azure-ad"></a>Revendications dans Azure AD
+
 Quand un utilisateur se connecte, Azure AD envoie un jeton d’ID qui contient un ensemble de revendications concernant l’utilisateur. Une revendication est simplement une information, exprimée sous la forme d’une paire clé/valeur. Par exemple : `email`=`bob@contoso.com`.  Les revendications ont un émetteur &mdash; dans ce cas, Azure AD &mdash; qui est l’entité qui authentifie l’utilisateur et crée les revendications. Vous approuvez les revendications, car vous approuvez l’émetteur. (À l’inverse, si vous n’approuvez l’émetteur, n’approuvez pas les revendications !)
 
 De façon générale :
@@ -51,15 +52,15 @@ Ce tableau répertorie les types de revendications tels qu’ils apparaissent da
 * upn > `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn`
 
 ## <a name="claims-transformations"></a>Transformations de revendication
+
 Pendant le flux d’authentification, vous pouvez modifier les revendications que vous obtenez du fournisseur d’identité. Dans ASP.NET Core, vous pouvez effectuer une transformation des revendications à l’intérieur de l’événement **AuthenticationValidated** à partir du middleware OpenID Connect. (Consultez la page [Authentication events].)
 
 Toutes les revendications que vous ajoutez pendant **AuthenticationValidated** sont stockées dans le cookie d’authentification de session. Elles ne font pas l’objet d’une transmission de type push à Azure AD.
 
 Voici quelques exemples de transformation de revendications :
 
-* **Normalisation des revendications**, ou rendre les réclamations cohérentes entre les utilisateurs. Cela est particulièrement approprié si vous obtenez des revendications de plusieurs fournisseurs d’identité, qui peuvent utiliser des types de revendications différents pour des informations similaires.
-  Par exemple, Azure AD envoie une revendication « upn » qui contient l’adresse de messagerie de l’utilisateur. D’autres fournisseurs d’identité peuvent envoyer une revendication « email ». Le code suivant convertit la revendication « upn » en revendication « email » :
-  
+* **Normalisation des revendications**, ou rendre les réclamations cohérentes entre les utilisateurs. Cela est particulièrement approprié si vous obtenez des revendications de plusieurs fournisseurs d’identité, qui peuvent utiliser des types de revendications différents pour des informations similaires. Par exemple, Azure AD envoie une revendication « upn » qui contient l’adresse de messagerie de l’utilisateur. D’autres fournisseurs d’identité peuvent envoyer une revendication « email ». Le code suivant convertit la revendication « upn » en revendication « email » :
+
   ```csharp
   var email = principal.FindFirst(ClaimTypes.Upn)?.Value;
   if (!string.IsNullOrWhiteSpace(email))
@@ -67,12 +68,14 @@ Voici quelques exemples de transformation de revendications :
       identity.AddClaim(new Claim(ClaimTypes.Email, email));
   }
   ```
+
 * Ajoutez **les valeurs de revendication par défaut** pour les revendications qui ne sont pas présentes &mdash; par exemple, affectation d’un utilisateur à un rôle par défaut. Dans certains cas, cela peut simplifier la logique d’autorisation.
-* Ajoutez **les types de revendication personnalisée** avec les informations spécifiques à l’application sur l’utilisateur. Par exemple, vous pouvez stocker des informations sur l’utilisateur dans une base de données. Vous pouvez ajouter une revendication personnalisée avec ces informations sur le ticket d’authentification. La revendication est stockée dans un cookie. Ainsi, vous n’aurez besoin de la récupérer dans la base de données qu’une seule fois par session de connexion. En revanche, vous souhaitez également éviter de créer des cookies trop volumineux. Par conséquent, réfléchissez à un compromis entre la taille des cookies et les recherches dans la base de données.   
+* Ajoutez **les types de revendication personnalisée** avec les informations spécifiques à l’application sur l’utilisateur. Par exemple, vous pouvez stocker des informations sur l’utilisateur dans une base de données. Vous pouvez ajouter une revendication personnalisée avec ces informations sur le ticket d’authentification. La revendication est stockée dans un cookie. Ainsi, vous n’aurez besoin de la récupérer dans la base de données qu’une seule fois par session de connexion. En revanche, vous souhaitez également éviter de créer des cookies trop volumineux. Par conséquent, réfléchissez à un compromis entre la taille des cookies et les recherches dans la base de données.
 
 Une fois le flux d’authentification terminé, les revendications sont disponibles dans `HttpContext.User`. À ce stade, vous devez les traiter comme une collection en lecture seule &mdash; vous pouvez par exemple les utiliser pour prendre des décisions d’autorisation.
 
 ## <a name="issuer-validation"></a>Validation de l’émetteur
+
 Dans OpenID Connect, la revendication de l’émetteur (« iss ») identifie le fournisseur d’identité qui a émis le jeton d’ID. Une partie du flux d’authentification OIDC consiste à vérifier que la revendication de l’émetteur correspond à l’émetteur réel. Le middleware OIDC gère cela automatiquement.
 
 Dans Azure AD, la valeur d’émetteur est unique par locataire AD (`https://sts.windows.net/<tenantID>`). Par conséquent, une application doit effectuer une vérification supplémentaire pour garantir que l’émetteur représente un locataire qui est autorisé à se connecter à l’application.
@@ -87,25 +90,28 @@ Pour une application à locataire unique, vous pouvez simplement vérifier que l
 Pour obtenir plus de détails, consultez [Inscription et intégration de locataire dans une application multi-locataire][signup].
 
 ## <a name="using-claims-for-authorization"></a>Utilisation de revendications pour l’autorisation
+
 Avec les revendications, l’identité d’un utilisateur n’est plus une entité monolithique. Par exemple, un utilisateur peut avoir une adresse e-mail, un numéro de téléphone, une date de naissance, un genre, etc. Il est possible que le point de distribution d’émission (IDP) de l’utilisateur stocke toutes ces informations. Mais lorsque vous authentifiez l’utilisateur, vous obtiendrez généralement un sous-ensemble de ces informations sous la forme de revendications. Dans ce modèle, l’identité de l’utilisateur est simplement un ensemble de revendications. Au moment de prendre des décisions d’autorisation à propos d’un utilisateur, vous rechercherez des ensembles de revendications spécifiques. En d’autres termes, la question « L’utilisateur X peut-il effectuer l’action Y ? » devient finalement « L’utilisateur X dispose-t-il de la revendication Z ? ».
 
 Voici quelques modèles de base pour la vérification des revendications.
 
 * Pour vérifier que l’utilisateur a une revendication particulière avec une valeur particulière :
-  
+
    ```csharp
    if (User.HasClaim(ClaimTypes.Role, "Admin")) { ... }
    ```
+
    Ce code vérifie si l’utilisateur a une revendication de rôle avec la valeur « Admin ». Il gère correctement le cas où l’utilisateur n’a aucune revendication de rôle ou a plusieurs revendications de rôle.
   
    La classe **ClaimTypes** définit des constantes pour les types de revendications couramment utilisés. Toutefois, vous pouvez utiliser n’importe quelle valeur de chaîne pour le type de revendication.
 * Pour obtenir une valeur unique pour un type de revendication, quand vous prévoyez qu’il y aura au plus une valeur :
-  
+
   ```csharp
   string email = User.FindFirst(ClaimTypes.Email)?.Value;
   ```
+
 * Pour obtenir toutes les valeurs pour un type de revendication :
-  
+
   ```csharp
   IEnumerable<Claim> groups = User.FindAll("groups");
   ```
@@ -114,8 +120,7 @@ Pour en savoir plus, consultez [Autorisation basée sur les ressources et les r�
 
 [**Suivant**][signup]
 
-
-<!-- Links -->
+<!-- links -->
 
 [paramètre d’étendue]: https://nat.sakimura.org/2012/01/26/scopes-and-claims-in-openid-connect/
 [Types de jeton et de revendication pris en charge]: /azure/active-directory/active-directory-token-and-claims/

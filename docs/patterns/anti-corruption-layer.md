@@ -1,14 +1,17 @@
 ---
 title: Modèle de couche de lutte contre la corruption
+titleSuffix: Cloud Design Patterns
 description: Implémentez une couche de façade ou d’adaptateur entre une application moderne et un système hérité.
+keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-ms.openlocfilehash: ac898519c9aa0a0aa2301da9f48756db0eb2af7c
-ms.sourcegitcommit: f665226cec96ec818ca06ac6c2d83edb23c9f29c
+ms.custom: seodec18
+ms.openlocfilehash: d1023140deea4a2714c762945935d0838136e508
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2018
-ms.locfileid: "31012366"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011274"
 ---
 # <a name="anti-corruption-layer-pattern"></a>Modèle de couche de lutte contre la corruption
 
@@ -20,15 +23,15 @@ La plupart des applications s’appuient sur d’autres systèmes pour certaines
 
 Souvent, ces systèmes hérités connaissent des problèmes de qualité comme des schémas de données complexes ou des API obsolètes. Les fonctionnalités et technologies utilisées dans les systèmes hérités peuvent varier considérablement par rapport à des systèmes plus modernes. Pour interagir avec le système hérité, la nouvelle application doit éventuellement prendre en charge une infrastructure, des protocoles, des modèles de données, des API obsolètes ou d’autres fonctionnalités que vous n’implémenteriez pas dans une application moderne.
 
-Maintenir l’accès entre les systèmes nouveaux et hérités peut forcer le nouveau système à respecter au moins certaines API ou d’autres sémantiques du système hérité. Lorsque ces fonctionnalités héritées ont des problèmes de qualité, le fait de les prendre en charge « corrompt » ce qui pourrait être une application moderne correctement conçue. 
+Maintenir l’accès entre les systèmes nouveaux et hérités peut forcer le nouveau système à respecter au moins certaines API ou d’autres sémantiques du système hérité. Lorsque ces fonctionnalités héritées ont des problèmes de qualité, le fait de les prendre en charge « corrompt » ce qui pourrait être une application moderne correctement conçue.
 
-Des problèmes similaires peuvent se produire avec n’importe quel système externe que votre équipe de développement ne contrôle pas, pas uniquement avec les systèmes hérités. 
+Des problèmes similaires peuvent se produire avec n’importe quel système externe que votre équipe de développement ne contrôle pas, pas uniquement avec les systèmes hérités.
 
 ## <a name="solution"></a>Solution
 
 Isolez les différents sous-systèmes en plaçant une couche de lutte contre la corruption entre eux. Cette couche traduit les communications entre les deux systèmes, ce qui permet à un système de rester identique alors que l’autre système peut éviter de compromettre sa conception et son approche technologique.
 
-![](./_images/anti-corruption-layer.png) 
+![Diagramme du modèle de couche anticorruption](./_images/anti-corruption-layer.png)
 
 Le diagramme ci-dessus illustre une application comprenant deux sous-systèmes. Le sous-système A appelle le sous-système B à travers une couche de lutte contre la corruption. La communication entre le sous-système A et la couche de lutte contre la corruption utilise toujours le modèle de données et l’architecture du sous-système A. Les appels à partir de la couche de lutte contre la corruption vers le sous-système B sont conformes au modèle de données ou aux méthodes de ce sous-système. La couche de lutte contre la corruption contient toute la logique nécessaire pour effectuer la traduction entre les deux systèmes. La couche peut être implémentée en tant que composant dans l’application ou en tant que service indépendant.
 
@@ -40,7 +43,7 @@ Le diagramme ci-dessus illustre une application comprenant deux sous-systèmes. 
 - Évaluez si vous avez besoin de plus d’une couche de lutte contre la corruption. Vous pouvez décomposer les fonctionnalités en plusieurs services à l’aide de différents langages ou technologies ; vous pouvez également choisir de partitionner la couche de lutte contre la corruption pour d’autres raisons.
 - Réfléchissez à la façon dont la couche de lutte contre la corruption sera gérée par rapport à vos autres applications ou services. Comment sera-t-elle intégrée à vos processus de surveillance, de mise en production et de configuration ?
 - Assurez-vous que la cohérence des transactions et des données est conservée et qu’elle peut être surveillée.
-- Déterminez si la couche de lutte contre la corruption doit gérer toutes les communications entre différents sous-systèmes ou uniquement un sous-ensemble de fonctionnalités. 
+- Déterminez si la couche de lutte contre la corruption doit gérer toutes les communications entre différents sous-systèmes ou uniquement un sous-ensemble de fonctionnalités.
 - Si la couche de lutte contre la corruption fait partie d’une stratégie de migration d’application, déterminez si elle sera permanente, ou si elle sera mise hors service une fois toutes les fonctionnalités hérités migrées.
 
 ## <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
@@ -48,9 +51,9 @@ Le diagramme ci-dessus illustre une application comprenant deux sous-systèmes. 
 Utilisez ce modèle dans les situations suivantes :
 
 - Une migration est planifiée pour avoir lieu en plusieurs étapes, mais l’intégration entre les systèmes nouveaux et hérités doit être maintenue.
-- Deux ou plusieurs sous-systèmes ont des sémantiques différentes, mais doivent tout de même communiquer. 
+- Deux ou plusieurs sous-systèmes ont des sémantiques différentes, mais doivent tout de même communiquer.
 
-Ce modèle peut ne pas convenir s’il n’y a aucune différence de sémantique significative entre les systèmes nouveaux et hérités. 
+Ce modèle peut ne pas convenir s’il n’y a aucune différence de sémantique significative entre les systèmes nouveaux et hérités.
 
 ## <a name="related-guidance"></a>Aide connexe
 

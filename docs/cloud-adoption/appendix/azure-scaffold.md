@@ -1,19 +1,19 @@
 ---
-title: Bonnes pratiques pour les entreprises effectuant une migration vers Azure
+title: Meilleures pratiques pour les entreprises effectuant une migration vers Azure
 description: Décrit la structure que les entreprises peuvent utiliser pour garantir un environnement sécurisé et facile à gérer.
 author: rdendtler
 ms.author: rodend
 ms.date: 9/22/2018
-ms.openlocfilehash: a1962a3d5be79715de4781d955b6be1db5923bea
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.openlocfilehash: 66af73f5bfc7f7145c20446af05f33a9d69e6c28
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47429285"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011733"
 ---
-# <a name="azure-enterprise-scaffold-prescriptive-subscription-governance"></a>Structure d’entreprise Azure : gouvernance normative de l’abonnement
+# <a name="azure-enterprise-scaffold-prescriptive-subscription-governance"></a>Structure d’entreprise Azure : Gouvernance normative de l’abonnement
 
-Les entreprises adoptent de plus en plus le cloud public en raison de son agilité et de sa flexibilité. Elles se servent des points forts du cloud pour générer des revenus et optimiser l’utilisation des ressources dans le cadre de leur activité. Microsoft Azure offre une multitude de services et de fonctionnalités que les entreprises assemblent comme des modules pour gérer un large éventail de charges de travail et d’applications.
+Les entreprises adoptent de plus en plus le cloud public en raison de son agilité et de la flexibilité. Elles se servent des points forts du cloud pour générer des revenus et optimiser l’utilisation des ressources dans le cadre de leur activité. Microsoft Azure offre une multitude de services et de fonctionnalités que les entreprises assemblent comme des modules pour gérer un large éventail de charges de travail et d’applications.
 
 Décider d’utiliser Microsoft Azure n’est que la première étape pour bénéficier de l’avantage du cloud. La deuxième étape consiste à comprendre comment l’entreprise peut utiliser Azure efficacement et identifier les fonctionnalités de base qui doivent être présentes pour répondre à certaines questions comme :
 
@@ -38,11 +38,11 @@ La structure d’entreprise constitue le fondement de chaque nouvel abonnement d
 > [!NOTE]
 > Microsoft a publié en préversion une nouvelle fonctionnalité appelée [Azure Blueprints](/azure/governance/blueprints/overview) qui vous permet d’empaqueter, gérer et déployer images, modèles, stratégies et autres scripts courants dans les abonnements et les groupes d’administration. Cette fonctionnalité est le trait d’union entre l’objectif de la structure en tant que modèle de référence et le déploiement de ce modèle dans votre organisation.
 >
-L’illustration suivante présente les composants de la structure. Celle-ci est basée sur un plan solide de la hiérarchie de gestion et des abonnements. Les piliers sont des stratégies Resource Manager et des standards de nommage stricts. Le reste de la structure est constitué des fonctionnalités Azure de base qui habilitent et connectent un environnement sécurisé et facile à gérer.
+L’illustration suivante présente les composants de la structure. Celle-ci est basée sur un plan solide de la hiérarchie de gestion et des abonnements. Les piliers en sont des stratégies Resource Manager et des normes d’affectation de noms fortes. Le reste de la structure est constitué des fonctionnalités Azure de base qui habilitent et connectent un environnement sécurisé et facile à gérer.
 
 ![structure d’entreprise](./_images/scaffoldv2.png)
 
-## <a name="define-your-hierarchy"></a>Définir votre hiérarchie
+## <a name="define-your-hierarchy"></a>Définition de votre hiérarchie
 
 La structure a pour assise la hiérarchie et la relation de l’Accord de Mise en Œuvre Entreprise Azure à travers les abonnements et les groupes de ressources. L’Accord de Mise en Œuvre Entreprise définit la forme et l’utilisation des services Azure au sein de votre entreprise d’un point de vue conceptuel. Dans le cadre du Contrat Entreprise, vous pouvez subdiviser l’environnement en services, en comptes et finalement en abonnements et en groupes de ressources à l’image de la structure de votre organisation.
 
@@ -70,7 +70,7 @@ Bien que chacun de ces modèles ait sa place, le modèle **division** est de plu
 
 ### <a name="management-groups"></a>Groupes d'administration
 
-Microsoft a récemment rendu publique une nouvelle façon de modéliser votre hiérarchie : les [groupes d’administration Azure](/azure/azure-resource-manager/management-groups-overview). Les groupes d’administration sont bien plus flexibles que les services et les comptes et peuvent être imbriqués sur six niveaux. Les groupes d’administration vous permettent de créer une hiérarchie distincte de votre hiérarchie de facturation, seulement dans une optique de gestion efficace des ressources. Les groupes d’administration permettent de reproduire une hiérarchie de facturation et c’est ce par quoi les entreprises commencent souvent. Cependant, la puissance des groupes d’administration se manifeste quand ils sont utilisés pour modéliser l’organisation dans laquelle des abonnements associés &mdash; qu’ils se trouvent où non dans la hiérarchie de facturation &mdash; sont regroupés avec la nécessité de leur attribuer des rôles communs, ainsi que des stratégies et des initiatives. Quelques exemples :
+Microsoft a récemment rendu publique une nouvelle façon de modéliser votre hiérarchie : [Groupes d’administration Azure](/azure/azure-resource-manager/management-groups-overview). Les groupes d’administration sont bien plus flexibles que les services et les comptes et peuvent être imbriqués sur six niveaux. Les groupes d’administration vous permettent de créer une hiérarchie distincte de votre hiérarchie de facturation, seulement dans une optique de gestion efficace des ressources. Les groupes d’administration permettent de reproduire une hiérarchie de facturation et c’est ce par quoi les entreprises commencent souvent. Cependant, la puissance des groupes d’administration se manifeste quand ils sont utilisés pour modéliser l’organisation dans laquelle des abonnements associés &mdash; qu’ils se trouvent où non dans la hiérarchie de facturation &mdash; sont regroupés avec la nécessité de leur attribuer des rôles communs, ainsi que des stratégies et des initiatives. Quelques exemples :
 
 * **Production/hors production**. Certaines entreprises créent des groupes d’administration pour identifier leurs abonnements production et hors production. Les groupes d’administration permettent à ces clients de gérer plus facilement les rôles et les stratégies. Par exemple, si un abonnement hors production peut octroyer aux développeurs un accès « contributeur », en production, ils ne bénéficie que d’un accès « lecteur ».
 * **Services internes/services externe**. À l’instar des abonnements production/hors production, les entreprises ont souvent des exigences, des stratégies et des rôles différents pour les services internes et les services externes (destinés aux clients).
@@ -81,9 +81,9 @@ Des groupes d’administration bien pensés constituent, avec une stratégie et 
 
 Quand vous êtes amené à prendre des décisions concernant vos services et comptes (ou groupes d’administration), votre objectif premier est de diviser votre environnement Azure à l’image de votre organisation. Or, vos décisions les plus importantes sont celles qui ont trait aux abonnements ; elles ont un impact sur la sécurité, la scalabilité et la facturation.  De nombreuses organisations se servent des modèles suivants de guides :
 
-* **Application/service** : les abonnements représentent une application ou un service (portefeuille d’applications).
-* **Cycle de vie** : les abonnements représentent le cycle de vie d’un service, par exemple Production ou Développement.
-* **Service** : les abonnements représentent les services de l’organisation.
+* **Application/Service** : Les abonnements représentent une application ou un service (portefeuille d’applications).
+* **Cycle de vie** : Les abonnements représentent le cycle de vie d’un service, par exemple Production ou Développement.
+* **Service** : Les abonnements représentent les services de l’organisation.
 
 Les deux premiers modèles sont les plus couramment utilisés et sont fortement recommandés. L’approche Cycle de vie convient pour la plupart des organisations. Dans ce cas, la recommandation générale est d’utiliser deux abonnements de base, « Production » et « Hors production », puis d’utiliser des groupes de ressources pour segmenter davantage les environnements.
 
@@ -124,7 +124,6 @@ Au-delà de la facturation et de la gestion, les balises sont utilisées de dive
 ## <a name="azure-policy-and-initiatives"></a>Stratégie et initiatives Azure
 
 Le deuxième pilier de la structure consiste à utiliser une [stratégie et des initiatives Azure](/azure/azure-policy/azure-policy-introduction) pour gérer les risques en appliquant des règles (avec des effets) sur les ressources et les services de vos abonnements. Les initiatives Azure sont des collections de stratégies visant à atteindre un objectif unique. Une stratégie et des initiatives Azure sont alors affectées à une étendue de ressources pour commencer la mise en œuvre des stratégies spécifiques.
-< IMG d’initiatives/stratégies/affectations>
 
 La stratégie et les initiatives Azure sont encore plus efficaces quand elles sont associées aux groupes d’administration mentionnés précédemment. Les groupes d’administration permettent d’affecter une initiative ou une stratégie à tout un ensemble d’abonnements.
 
@@ -161,7 +160,7 @@ Pour sécuriser l’accès à vos ressources, vous devez configurer d’abord vo
 
 ![arch.png](./_images/arch.png)
 
-Lorsqu’Azure a été initialement lancé, les contrôles d’accès à un abonnement étaient basiques : administrateur ou coadministrateur. L’accès à un abonnement dans le modèle classique impliquait l’accès à toutes les ressources dans le portail. Ce manque de contrôle précis a conduit à une prolifération d’abonnements afin de fournir un niveau de contrôle d’accès raisonnable pour une inscription Azure. Cette prolifération d’abonnements n’est plus nécessaire. Le contrôle d’accès en fonction du rôle (RBAC) vous permet d’affecter les utilisateurs à des rôles standard qui offrent un accès courant, tel que « propriétaire », « collaborateur » ou « lecteur ». Vous pouvez même créer vos propres rôles.
+Quand Azure a été initialement lancé, les contrôles d’accès à un abonnement étaient élémentaires : Administrateur ou coadministrateur. L’accès à un abonnement dans le modèle classique impliquait l’accès à toutes les ressources dans le portail. Ce manque de contrôle précis a conduit à une prolifération d’abonnements afin de fournir un niveau de contrôle d’accès raisonnable pour une inscription Azure. Cette prolifération d’abonnements n’est plus nécessaire. Le contrôle d’accès en fonction du rôle (RBAC) vous permet d’affecter les utilisateurs à des rôles standard qui offrent un accès courant, tel que « propriétaire », « collaborateur » ou « lecteur ». Vous pouvez même créer vos propres rôles.
 
 Lorsque vous implémentez l’accès en fonction du rôle, vous avez tout intérêt à suivre les recommandations suivantes :
 
@@ -219,55 +218,55 @@ La collecte et l’analyse des données de télémétrie, qui donnent des indica
 * Les **journaux de diagnostic** sont émis par un service Azure et fournissent des informations complètes et fréquentes sur le fonctionnement de ce service.
 
 Ces informations peuvent être visualisées et traitées à plusieurs niveaux et sont constamment améliorées. Azure propose des fonctionnalités **partagées**, **principales** et **approfondies** destinées à superviser les ressources Azure via les services présentés dans le schéma ci-dessous.
-![supervision](./_images/monitoring.png)
+![monitoring](./_images/monitoring.png)
 
 ### <a name="shared-capabilities"></a>Fonctionnalités partagées
 
-* **Alertes** : vous pouvez collecter chaque journal, événement et métrique auprès des ressources Azure, mais s’il n’est pas possible d’être notifié de l’existence de conditions et d’actions critiques, ces données ne peuvent être utilisées qu’à des fins historiques et forensiques. Les alertes Azure vous notifient de façon proactive de l’existence de conditions que vous définissez dans toutes vos applications et votre infrastructure. Vous créez des règles d’alerte pour les journaux, les événements et les métriques qui utilisent des groupes d’actions afin de notifier des ensembles de destinataires. Les groupes d’actions permettent aussi d’automatiser les corrections en utilisant des actions externes comme des webhooks pour exécuter des runbooks Azure Automation et Azure Functions.
+* **Alertes** : Vous pouvez collecter chaque journal, événement et métrique auprès des ressources Azure, mais s’il n’est pas possible d’être notifié de l’existence de conditions et d’actions critiques, ces données peuvent uniquement être utilisées à des fins historiques et forensiques. Les alertes Azure vous notifient de façon proactive de l’existence de conditions que vous définissez dans toutes vos applications et votre infrastructure. Vous créez des règles d’alerte pour les journaux, les événements et les métriques qui utilisent des groupes d’actions afin de notifier des ensembles de destinataires. Les groupes d’actions permettent aussi d’automatiser les corrections en utilisant des actions externes comme des webhooks pour exécuter des runbooks Azure Automation et Azure Functions.
 
-* **Tableaux de bord** : les tableaux de bord vous permettent d’agréger les vues de supervision et de combiner les données dans l’ensemble des ressources et des abonnements pour vous donner un aperçu des données de télémétrie des ressources Azure à l’échelle de l’entreprise. Vous pouvez créer et configurer vos propres vues et les partager avec d’autres utilisateurs. Par exemple, vous pouvez créer un tableau de bord constitué de plusieurs vignettes pour les différents administrateurs de base de données afin de fournir des informations dans tous les services de base de données Azure, notamment Azure SQL DB, Azure DDB pour PostgreSQL et Azure DB pour MySQL.
+* **Tableaux de bord** : Les tableaux de bord vous permettent d’agréger les vues de supervision et de combiner les données dans l’ensemble des ressources et des abonnements pour vous donner un aperçu de la télémétrie des ressources Azure à l’échelle de l’entreprise. Vous pouvez créer et configurer vos propres vues et les partager avec d’autres utilisateurs. Par exemple, vous pouvez créer un tableau de bord constitué de plusieurs vignettes pour les différents administrateurs de base de données afin de fournir des informations dans tous les services de base de données Azure, notamment Azure SQL DB, Azure DDB pour PostgreSQL et Azure DB pour MySQL.
 
-* **Metrics Explorer** : les métriques sont des valeurs numériques générées par les ressources Azure (par exemple, % UC, E/S de disque) qui fournissent des insights sur le fonctionnement et les performances de vos ressources. En utilisant Metrics Explorer, vous pouvez définir et envoyer les métriques qui vous intéressent à Log Analytics à des fins d’agrégation et d’analyse.
+* **Metrics Explorer** : Les métriques sont des valeurs numériques générées par les ressources Azure (par exemple % CPU, E/S de disque) qui fournissent des insights sur le fonctionnement et les performances de vos ressources. En utilisant Metrics Explorer, vous pouvez définir et envoyer les métriques qui vous intéressent à Log Analytics à des fins d’agrégation et d’analyse.
 
-### <a name="core-monitoring"></a>Supervision principale
+### <a name="core-monitoring"></a>Analyse principale
 
-* **Azure Monitor** : Azure Monitor est le service de plateforme principal qui fournit une source unique pour la supervision des ressources Azure. L’interface Azure Monitor du portail Azure offre un point d’accès centralisé à toutes les fonctionnalités de supervision d’Azure, notamment aux fonctionnalités de supervision approfondies d’Application Insights, de Log Analytics, de la supervision réseau, des solutions de gestion et de Service Map. Avec Azure Monitor, vous pouvez visualiser, interroger, acheminer, archiver et agir sur les métriques et les journaux issus des ressources Azure à l’échelle de votre domaine cloud. Outre le portail, vous pouvez récupérer les données par l’intermédiaire des applets de commande PowerShell Monitor, de l’interface de ligne de commande multiplateforme ou des API REST Azure Monitor.
+* **Azure Monitor** : Azure Monitor est le service de plateforme principal qui fournit une seule source de supervision des ressources Azure. L’interface Azure Monitor du portail Azure offre un point d’accès centralisé à toutes les fonctionnalités de supervision d’Azure, notamment aux fonctionnalités de supervision approfondies d’Application Insights, de Log Analytics, de la supervision réseau, des solutions de gestion et de Service Map. Avec Azure Monitor, vous pouvez visualiser, interroger, acheminer, archiver et agir sur les métriques et les journaux issus des ressources Azure à l’échelle de votre domaine cloud. Outre le portail, vous pouvez récupérer les données par l’intermédiaire des applets de commande PowerShell Monitor, de l’interface de ligne de commande multiplateforme ou des API REST Azure Monitor.
 
-* **Azure Advisor** : Azure Advisor supervise constamment les données de télémétrie de tous vos abonnements et environnements et fournit des recommandations sur la meilleure façon d’optimiser vos ressources Azure pour réaliser des économies et améliorer les performances, la sécurité et la disponibilité des ressources qui composent vos applications.
+* **Azure Advisor** : Azure Advisor supervise constamment les données de télémétrie de tous vos abonnements et environnements. Il fournit des suggestions sur les bonnes pratiques permettant d’optimiser vos ressources Azure pour faire des économies et améliorer les performances, la sécurité et la disponibilité des ressources qui composent vos applications.
 
-* **Service Health** : Azure Service Health identifie les éventuels problèmes liés aux services Azure qui peuvent avoir un impact sur vos applications et vous aide à définir des fenêtres de maintenance planifiées.
+* **Service Health** : Azure Service Health identifie les problèmes liés aux services Azure qui peuvent avoir un impact sur vos applications et vous aide à définir des fenêtres de maintenance planifiées.
 
-* **Journal d’activité** : le journal d’activité décrit toutes les opérations effectuées sur les ressources de votre abonnement. Il fournit une piste d’audit pour déterminer le « quoi », « qui, » et « quand » des opérations de création, de mise à jour et de suppression des ressources. Les événements du journal d’activité sont stockés dans la plateforme et peuvent faire l’objet d’une requête pendant 90 jours. Vous pouvez intégrer les journaux d’activité à Log Analytics sur des périodes de rétention plus longues et pour des interrogations et des analyses plus approfondies sur diverses ressources.
+* **Journal d’activité** : Le journal d’activité décrit toutes les opérations effectuées sur les ressources de votre abonnement. Il fournit une piste d’audit pour déterminer le « quoi », « qui, » et « quand » des opérations de création, de mise à jour et de suppression des ressources. Les événements du journal d’activité sont stockés dans la plateforme et peuvent faire l’objet d’une requête pendant 90 jours. Vous pouvez intégrer les journaux d’activité à Log Analytics sur des périodes de rétention plus longues et pour des interrogations et des analyses plus approfondies sur diverses ressources.
 
-### <a name="deep-application-monitoring"></a>Supervision approfondie des applications
+### <a name="deep-application-monitoring"></a>Analyse approfondie des applications
 
-* **Application Insights** : Application Insights vous permet de collecter des données de télémétrie spécifiques d’applications et de surveiller les performances, la disponibilité et l’utilisation de ces applications dans le cloud ou localement en instrumentant votre application avec des SDK pris en charge pour plusieurs langages, dont .NET, JavaScript, JAVA, Node.js, Ruby et Python. Les événements Application Insights sont intégrés dans le même magasin de données Log Analytics qui prend en charge la supervision de l’infrastructure et de la sécurité pour vous permettre de mettre en corrélation et d’agréger les événements dans le temps via un langage de requête élaboré.
+* **Application Insights** : Application Insights vous permet de collecter des données de télémétrie spécifiques à des applications, et de superviser les performances, la disponibilité et l’utilisation de ces applications dans le cloud ou localement en instrumentant votre application avec des SDK pris en charge pour plusieurs langages, dont .NET, JavaScript, JAVA, Node.js, Ruby et Python. Les événements Application Insights sont intégrés dans le même magasin de données Log Analytics qui prend en charge la supervision de l’infrastructure et de la sécurité pour vous permettre de mettre en corrélation et d’agréger les événements dans le temps via un langage de requête élaboré.
 
-### <a name="deep-infrastructure-monitoring"></a>Supervision d’infrastructure approfondie
+### <a name="deep-infrastructure-monitoring"></a>Analyse approfondie des infrastructures
 
 * **Log Analytics** : Log Analytics joue un rôle central dans la supervision Azure en collectant des données de télémétrie et d’autres données auprès de diverses sources et en fournissant un langage de requête et un moteur d’analytique qui vous donnent des insights sur le fonctionnement de vos applications et ressources. Vous pouvez interagir directement avec les données Log Analytics via des recherches dans les journaux et des vues hautement performantes ou utiliser les outils d’analyse d’autres services Azure qui stockent leurs données dans Log Analytics, comme Application Insights ou Azure Security Center.
 
-* **Supervision réseau** : les services de supervision réseau d’Azure vous permettent d’obtenir des insights sur le flux de trafic, les performances, la sécurité, la connectivité et les goulots d’étranglement du réseau. Une conception réseau bien planifiée doit inclure la configuration des services de supervision réseau comme Network Watcher et le Moniteur ExpressRoute.
+* **Supervision réseau** : Les services de supervision réseau d’Azure vous permettent d’obtenir des insights sur le flux de trafic, les performances, la sécurité, la connectivité et les goulots d’étranglement du réseau. Une conception réseau bien planifiée doit inclure la configuration des services de supervision réseau comme Network Watcher et le Moniteur ExpressRoute.
 
-* **Solutions de gestion** : les solutions de gestion sont des jeux empaquetés de logique, d’insights et de requêtes Log Analytics prédéfinies pour une application ou un service. Elles utilisent Log Analytics comme base de stockage et d’analyse des données d’événement. La supervision des conteneurs et l’analytique Azure SQL Database sont des exemples de solutions de gestion.
+* **Solutions de gestion** : Les solutions de gestion sont des jeux empaquetés de logique, d’insights et de requêtes Log Analytics prédéfinies pour une application ou un service. Elles utilisent Log Analytics comme base de stockage et d’analyse des données d’événement. La supervision des conteneurs et l’analytique Azure SQL Database sont des exemples de solutions de gestion.
 
 * **Service Map** : Service Map offre une vue graphique de vos composants d’infrastructure, de leurs processus et de leurs interdépendances vis-à-vis d’autres ordinateurs et processus externes. Il intègre les événements, les données de performances et les solutions de gestion dans Log Analytics.
 
 > [!TIP]
 > Avant de créer des alertes individuelles, créez et tenez à jour un ensemble de groupes d’actions partagés qui puisse être utilisé dans toutes les alertes Azure. Vous pourrez ainsi gérer de façon centralisée le cycle de vie de vos listes de destinataires, les méthodes de remise de notifications (e-mail, numéros de téléphone SMS) et les webhooks ciblant des actions externes (runbooks Azure Automation, Azure Functions / Logic Apps, ITSM).
 
-## <a name="cost-management"></a>Gestion des coûts
+## <a name="cost-management"></a>la gestion des coûts ;
 
 Un des changements majeurs auxquels vous serez confronté en passant d’un cloud local au cloud public est le passage de dépenses d’investissement (acheter du matériel) à des dépenses d’exploitation (payer pour le service que vous utilisez). Le passage de dépenses d’investissement à des dépenses d’exploitation s’accompagne aussi de la nécessité de gérer plus scrupuleusement les coûts. L’avantage du cloud est que vous pouvez agir foncièrement et positivement sur le coût d’un service que vous utilisez simplement en le désactivant (ou en le redimensionnant) quand vous n’en avez pas besoin. La gestion délibérée des coûts dans le cloud est une pratique recommandée à laquelle les clients expérimentés s’adonnent quotidiennement.
 
-Microsoft met à votre disposition plusieurs outils pour examiner, suivre et gérer les coûts. Nous vous proposons aussi un ensemble complet d’API pour vous permettre de personnaliser la gestion des coûts et de l’intégrer à vos propres outils et tableaux de bord. Ces outils sont plus ou moins regroupés dans les fonctionnalités du portail Azure et des fonctionnalités externes.
+Microsoft met à votre disposition plusieurs outils pour examiner, suivre et gérer les coûts. Nous vous proposons aussi un ensemble complet d’API pour vous permettre de personnaliser la gestion des coûts et de l’intégrer à vos propres outils et tableaux de bord. Ces outils sont plus ou moins regroupés dans deux catégories : Fonctionnalités du Portail Azure et fonctionnalités externes
 
 ### <a name="azure-portal-capabilities"></a>Fonctionnalités du portail Azure
 
 Il s’agit d’outils destinés à fournir des informations instantanées sur les coûts et à vous permettre de pendre des mesures.
 
-* **Coût des ressources d’abonnement** : située dans le portail, la vue [Analyse des coûts Azure](/azure/cost-management/overview) vous donne un aperçu rapide de vos coûts, ainsi que des informations sur les dépenses quotidiennes par ressource ou groupe de ressources.
-* **Azure Cost Management** : ce produit est le résultat du rachat de Cloudyn par Microsoft et vous permet de gérer et d’analyser vos dépenses Azure et ce que vous dépensez auprès d’autres fournisseurs de cloud public. Il existe des niveaux gratuits et payants, offrant un grande quantité de fonctionnalités, comme indiqué dans la [présentation](/azure/cost-management/overview).
+* **Coût des ressources d’abonnement** : Située dans le portail, la vue [Analyse des coûts Azure](/azure/cost-management/overview) vous donne un aperçu rapide de vos coûts ainsi que des informations sur les dépenses quotidiennes par ressource ou groupe de ressources.
+* **Azure Cost Management** : Ce produit est le résultat du rachat de Cloudyn par Microsoft. Il vous permet de gérer et d’analyser vos dépenses Azure et ce que vous dépensez auprès d’autres fournisseurs de clouds publics. Il existe des niveaux gratuits et payants, offrant un grande quantité de fonctionnalités, comme indiqué dans la [présentation](/azure/cost-management/overview).
 * **Azure Budgets et groupes d’actions** : jusqu’à récemment, la détermination du coût d’un service et les réponses à y apporter étaient un exercice plutôt manuel. Avec l’introduction d’Azure Budgets et de ses API, il est désormais possible de créer des actions (comme dans [cet](https://channel9.msdn.com/Shows/Azure-Friday/Managing-costs-with-the-Azure-Budgets-API-and-Action-Groups) exemple) quand les coûts atteignent un seuil. Par exemple, arrêter un groupe de ressources de « test » dès qu’il atteint 100 % de son budget ou [autre exemple].
 * **Azure Advisor** : connaître le coût d’un service est une chose, savoir exploiter ces informations en est une autre. [Azure Advisor](/azure/advisor/advisor-overview) vous fait des suggestions quant aux mesures à prendre pour réaliser des économies, améliorer la fiabilité ou même accroître la sécurité.
 
@@ -281,18 +280,18 @@ Les clients qui utilisent le cloud depuis longtemps et qui sont des utilisateurs
 
 * **Supervision active des coûts**. Les organisations qui ont une certaine expérience d’Azure supervisent constamment les coûts et prennent des mesures quand cela s’avère nécessaire. Certaines organisations emploient même des personnes pour effectuer des analyses et suggérer des changements dans l’utilisation, des postes qui sont largement rentabilisés la première fois qu’elles découvrent qu’un cluster HDInsight inutilisé s’exécute depuis des mois.
 * **Utilisation d’instances réservées**. Un autre principe clé pour gérer les coûts dans le cloud est d’utiliser l’outil adéquat. Si vous avez une machine virtuelle IaaS qui doit rester active 24h/24, 7j/7, vous pouvez réalisez des économies significatives en utilisant une instance réservée. Trouver le juste équilibre entre automatiser l’arrêt des machines virtuelles et utiliser des instances réservées demande de l’expérience et de l’analyse.
-* **Utilisation efficace de l’automation** : un grand nombre de charges de travail n’ont pas besoin de s’exécuter tous les jours. Rien que le fait de désactiver une machine virtuelle pendant 4 heures tous les jours peut vous faire économiser 15 % sur vos coûts. L’automation est vite rentabilisée.
-* **Utilisation de balises de ressource pour une meilleure visibilité** : comme indiqué précédemment dans ce document, l’utilisation de balises de ressource permet de mieux analyser les coûts.
+* **Utiliser l’automation efficacement** : Un grand nombre de charges de travail n’ont pas besoin de s’exécuter tous les jours. Rien que le fait de désactiver une machine virtuelle pendant 4 heures tous les jours peut vous faire économiser 15 % sur vos coûts. L’automation est vite rentabilisée.
+* **Utiliser des étiquettes de ressource pour une meilleure visibilité** : Comme indiqué ailleurs dans ce document, l’utilisation d’étiquettes de ressource permet de mieux analyser les coûts.
 
 La gestion des coûts est une discipline essentielle à une exécution efficace et efficiente d’un cloud public. Les entreprises qui réussissent sont celles qui parviennent à maîtriser leurs coûts et à les aligner sur leur demande effective, pas celles qui achètent trop et qui espèrent que la demande viendra.
 
-## <a name="automate"></a>Automatiser
+## <a name="automate"></a>Automatisation
 
 Parmi les organisations qui font appel à des fournisseurs de cloud, ce qui distingue celles qui sont matures des autres est le niveau d’automation qu’elles incorporent.  L’automation est un processus sans fin et un domaine dans lequel votre organisation doit investir du temps et des ressources à mesure qu’elle migre dans le cloud.  L’automation permet notamment un déploiement cohérent des ressources (en lien direct avec un autre concept de structure de base, Modèles et DevOps) en vue de corriger les problèmes.  L’automation est le « tissu conjonctif » de la structure Azure qui relie chacune des parties entre elles.
 
 Pour développer cette capacité, vous avez le choix entre une large palette d’outils, qu’il s’agisse d’outils internes comme Azure Automation, Event Grid et Azure CLI ou de l’un des nombreux outils tiers disponibles comme Terraform, Jenkins, Chef et Puppet (pour ne citer que ceux-la). La capacité de vos équipes d’opérations à automatiser est subordonnée à l’utilisation d’Azure Automation, d’Event Grid et d’Azure Cloud Shell :
 
-* **Azure Automation** : cette fonctionnalité cloud vous permet de créer des runbooks (dans PowerShell ou Python) et d’automatiser les processus, de configurer les ressources et même d’appliquer des correctifs.  [Azure Automation](/azure/automation/automation-intro) propose un ensemble complet de fonctionnalités multiplateformes qui sont indispensables à votre déploiement, mais elles sont trop nombreuses pour être présentées ici en détail.
+* **Azure Automation** : Cette fonctionnalité cloud vous permet de créer des runbooks (dans PowerShell ou Python) et d’automatiser les processus, de configurer les ressources et même d’appliquer des correctifs.  [Azure Automation](/azure/automation/automation-intro) propose un ensemble complet de fonctionnalités multiplateformes qui sont indispensables à votre déploiement, mais elles sont trop nombreuses pour être présentées ici en détail.
 * **Event Grid** : ce [service](/azure/event-grid) est un système de routage d’événements entièrement géré qui vous permet de réagir aux événements qui se produisent dans votre environnement Azure. Si l’automation est le tissu conjonctif des organisations cloud matures, Event Grid est le tissu conjonctif d’une automation efficace. Avec Event Grid, vous pouvez créer une action serverless simple pour envoyer un e-mail à un administrateur chaque fois qu’une ressource est créée et journaliser cette ressource dans une base de données. Ce même Event Grid peut envoyer une notification quand une ressource est supprimée et supprimer l’élément de la base de données.
 * **Azure Cloud Shell** : il s’agit d’un [interpréteur de commandes](/azure/cloud-shell/overview) interactif basé sur navigateur qui permet de gérer les ressources dans Azure. Il fournit un environnement complet pour PowerShell ou Bash qui se lance si nécessaire (et est géré automatiquement), si bien que vous disposez d’un environnement cohérent à partir duquel exécuter vos scripts. Azure Cloud Shell vous donne accès à d’autres outils clés (déjà installés) pour automatiser votre environnement, notamment [Azure CLI](/cli/azure/get-started-with-azure-cli?view=azure-cli-latest), [Terraform](/azure/virtual-machines/linux/terraform-install-configure) et une liste croissante d’autres [outils](https://azure.microsoft.com/updates/cloud-shell-new-cli-tools-and-font-size-selection/) destinés à gérer conteneurs, bases de données (sqlcmd) et bien plus encore.
 

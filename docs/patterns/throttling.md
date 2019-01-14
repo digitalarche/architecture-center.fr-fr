@@ -1,19 +1,17 @@
 ---
-title: Limitation
+title: Modèle de limitation
+titleSuffix: Cloud Design Patterns
 description: Contrôlez la consommation des ressources utilisées par une instance d’une application, un locataire ou un service entier.
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- availability
-- performance-scalability
-ms.openlocfilehash: 29156fc72f40a952dd53adcb20ffa7c3d0af79b4
-ms.sourcegitcommit: b0482d49aab0526be386837702e7724c61232c60
+ms.custom: seodec18
+ms.openlocfilehash: 9babe6b3c81b0846e83dfef98bbd76a89661d911
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/14/2017
-ms.locfileid: "24541255"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54010662"
 ---
 # <a name="throttling-pattern"></a>Modèle de limitation
 
@@ -37,14 +35,13 @@ Le système peut implémenter plusieurs stratégies de limitation, y compris :
 
 - La désactivation ou la dégradation des fonctionnalités des services non essentiels sélectionnés, afin que les services essentiels puissent s’exécuter normalement avec suffisamment de ressources. Par exemple, si l’application diffuse une vidéo, elle peut basculer sur une résolution plus faible.
 
-- L’utilisation du nivellement de la charge pour lisser le volume d’activité (cette approche est abordée plus en détail dans [Queue-based Load Leveling pattern](queue-based-load-leveling.md)(Modèle de nivellement de la charge basé sur une file d’attente)). Dans un environnement multi-locataire, cette approche réduira les performances de chaque locataire. Si le système doit prendre en charge un mélange de locataires avec différents SLA, le travail des locataires prioritaires peut être effectué immédiatement. Les requêtes des autres locataires peuvent être retenues et gérées lorsque le backlog a été allégé. Le [modèle de file d’attente de priorité][] peut être utilisé pour aider à implémenter cette approche.
+- L’utilisation du nivellement de la charge pour lisser le volume d’activité (cette approche est abordée plus en détail dans [Queue-based Load Leveling pattern](./queue-based-load-leveling.md)(Modèle de nivellement de la charge basé sur une file d’attente)). Dans un environnement multi-locataire, cette approche réduira les performances de chaque locataire. Si le système doit prendre en charge un mélange de locataires avec différents SLA, le travail des locataires prioritaires peut être effectué immédiatement. Les requêtes des autres locataires peuvent être retenues et gérées lorsque le backlog a été allégé. Vous pouvez vous servir du [modèle de file d’attente de priorité][] pour implémenter cette approche.
 
 - Le report d’opérations en cours d’exécution pour le compte d’applications ou de locataires basse priorité. Ces opérations peuvent être suspendues ou limitées, avec une exception générée pour informer le locataire que le système est occupé et que l’opération doit être retentée ultérieurement.
 
 L’illustration montre un graphique par zone pour l’utilisation des ressources (combinaison de mémoire, processeur, bande passante et d’autres facteurs) en fonction de l’heure pour des applications se servant de trois fonctionnalités. Une fonction est une zone de fonctionnalités, comme un composant qui effectue un ensemble spécifique de tâches, une partie de code qui effectue un calcul complexe ou un élément qui fournit un service tel qu’un cache en mémoire. Ces fonctions sont étiquetées A, B et C.
 
 ![Figure 1 - Graphique illustrant l’utilisation des ressources en fonction de l’heure pour des applications s’exécutant pour le compte de trois utilisateurs](./_images/throttling-resource-utilization.png)
-
 
 > La zone se trouvant immédiatement en dessous de la ligne d’une fonctionnalité indique les ressources utilisées par les applications lorsqu’elles appellent cette fonctionnalité. Par exemple, la zone en dessous de la ligne de la fonctionnalité A montre les ressources utilisées par les applications qui se servent de la fonctionnalité A, et la zone entre les lignes de la fonctionnalité A et de la fonctionnalité B indique les ressources utilisées par les applications qui appellent la fonctionnalité B. L’agrégation des zones pour chaque fonctionnalité illustre l’utilisation de ressources totale du système.
 
@@ -55,7 +52,6 @@ Les approches de mise à l’échelle automatique et de limite peuvent égalemen
 La figure suivante montre un graphique par zone de l’utilisation globale des ressources par toutes les applications s’exécutant dans un système en fonction de l’heure. Elle illustre également la façon dont la limitation peut être combinée avec la mise à l’échelle automatique.
 
 ![Figure 2 - Graphique montrant les effets de la combinaison de la limitation avec la mise à l’échelle automatique](./_images/throttling-autoscaling.png)
-
 
 À l’heure T1, le seuil spécifiant la limite logicielle de l’utilisation des ressources est atteint. À ce stade, le système peut commencer à augmenter la taille des instances. Toutefois, si les nouvelles ressources ne sont pas disponibles assez rapidement, les ressources existantes peuvent s’épuiser et le système peut tomber en panne. Pour éviter ce problème, le système est temporairement limité, comme décrit précédemment. Une fois la mise à l’échelle automatique terminée et les ressources supplémentaires disponibles, la limitation peut être retirée.
 
@@ -85,7 +81,7 @@ Utilisez ce modèle :
 
 - Pour aider à optimiser les coûts d’un système en limitant les niveaux de ressources maximum nécessaires pour qu’il continue à fonctionner.
 
-## <a name="example"></a>Exemple
+## <a name="example"></a>Exemples
 
 La dernière figure illustre la façon dont la limitation peut être implémentée dans un système multi-locataire. Les utilisateurs de chaque organisation de locataire accèdent à une application hébergée dans le cloud, dans laquelle ils remplissent et envoient des enquêtes. L’application contient une instrumentation qui surveille la vitesse d’envoi des requêtes à l’application par ces utilisateurs.
 
@@ -93,14 +89,12 @@ Afin d’empêcher les utilisateurs d’un locataire de nuire à la réactivité
 
 ![Figure 3 - Implémentation de la limitation dans une application multi-locataire](./_images/throttling-multi-tenant.png)
 
-
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
 Les modèles et les conseils suivants peuvent également être pertinents lors de l'implémentation de ce modèle :
-- [Instrumentation and Telemetry Guidance (Recommandations relatives à l’instrumentation et la télémétrie)](https://msdn.microsoft.com/library/dn589775.aspx). La limitation dépend de la collecte d’informations sur la façon dont un service est utilisé. Décrit comment générer et capturer des informations de surveillance personnalisées.
+
+- [Recommandations relatives à l’instrumentation et la télémétrie](https://msdn.microsoft.com/library/dn589775.aspx). La limitation dépend de la collecte d’informations sur la façon dont un service est utilisé. Décrit comment générer et capturer des informations de surveillance personnalisées.
 - [Service Metering Guidance](https://msdn.microsoft.com/library/dn589796.aspx) (Conseils sur la mesure des services). Décrit comment mesurer l’utilisation des services afin de mieux comprendre la façon dont ils sont utilisés. Ces informations peuvent être utiles pour déterminer la manière de limiter un service.
 - [Autoscaling](https://msdn.microsoft.com/library/dn589774.aspx) (Mise à l’échelle automatique). La limitation peut être utilisée en tant que mesure intermédiaire pendant la mise à l’échelle automatique d’un système ou pour éliminer le besoin de mise à l’échelle automatique d’un système. Contient des informations sur les stratégies de mise à l’échelle automatique.
-- [Queue-based Load Leveling pattern](queue-based-load-leveling.md) (Modèle de nivellement de charge basé sur une file d’attente). Le nivellement de charge basé sur une file d’attente est un mécanisme couramment utilisé pour l’implémentation de la limitation. Une file d’attente peut agir comme une mémoire tampon qui permet d’équilibrer la vitesse à laquelle les requêtes envoyées par une application sont remises à un service.
-- [modèle de file d’attente de priorité][] (Modèle de file d’attente de priorité). Un système peut utiliser la file d’attente de priorité dans le cadre de la stratégie de limitation pour maintenir les performances des applications critiques ou très importantes tout en réduisant les performances des applications moins importantes.
-
-[modèle de file d’attente de priorité]: priority-queue.md (Modèle de file d’attente de priorité)
+- [Queue-based Load Leveling pattern](./queue-based-load-leveling.md) (Modèle de nivellement de charge basé sur une file d’attente). Le nivellement de charge basé sur une file d’attente est un mécanisme couramment utilisé pour l’implémentation de la limitation. Une file d’attente peut agir comme une mémoire tampon qui permet d’équilibrer la vitesse à laquelle les requêtes envoyées par une application sont remises à un service.
+- [Priority Queue pattern](./priority-queue.md) (Modèle de file d’attente de priorité). Un système peut utiliser la file d’attente de priorité dans le cadre de la stratégie de limitation pour maintenir les performances des applications critiques ou très importantes tout en réduisant les performances des applications moins importantes.

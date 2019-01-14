@@ -5,12 +5,12 @@ description: Implémentez une architecture réseau de site à site sécurisée e
 author: telmosampaio
 ms.date: 10/22/2017
 ms.custom: seodec18
-ms.openlocfilehash: d44c046f2351d6103a01108574e0295302f0ba11
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: d32e4dfa81cf74a4ca74746120c15f1ddc066c3e
+ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53119946"
+ms.lasthandoff: 01/04/2019
+ms.locfileid: "54011104"
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-expressroute-with-vpn-failover"></a>Connecter un réseau local à Azure à l’aide d’ExpressRoute avec basculement VPN
 
@@ -71,7 +71,7 @@ $vnet = Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
 
 Vérifiez que votre organisation répond à la [configuration requise d’ExpressRoute] [ expressroute-prereq] pour se connecter à Azure.
 
-Si vous disposez déjà d’une passerelle de réseau virtuel VPN dans votre réseau virtuel Azure, utilisez la commande Powershell suivante pour la supprimer :
+Si vous avez déjà une passerelle de réseau virtuel VPN dans votre réseau virtuel Azure, utilisez la commande PowerShell suivante pour la supprimer :
 
 ```powershell
 Remove-AzureRmVirtualNetworkGateway -Name <yourgatewayname> -ResourceGroupName <yourresourcegroup>

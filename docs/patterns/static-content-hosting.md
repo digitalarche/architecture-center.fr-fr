@@ -1,24 +1,19 @@
 ---
-title: Hébergement de contenu statique
+title: Modèle d’hébergement de contenu statique
+titleSuffix: Cloud Design Patterns
 description: Déployez un contenu statique dans un service de stockage cloud qui peut distribuer ce contenu directement au client.
 keywords: modèle de conception
 author: dragon119
-ms.date: 06/23/2017
-pnp.series.title: Cloud Design Patterns
-pnp.pattern.categories:
-- data-management
-- design-implementation
-- performance-scalability
-ms.openlocfilehash: 450d0c4c08098c1ba48e4c0dac3d058a46e3709b
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
+ms.date: 01/04/2019
+ms.custom: seodec18
+ms.openlocfilehash: cf4f65e935a01e4d84b3cc82b5779edb729bd80e
+ms.sourcegitcommit: 036cd03c39f941567e0de4bae87f4e2aa8c84cf8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428208"
+ms.lasthandoff: 01/05/2019
+ms.locfileid: "54058180"
 ---
 # <a name="static-content-hosting-pattern"></a>Modèle d’hébergement de contenu statique
-
-[!INCLUDE [header](../_includes/header.md)]
 
 Déployez un contenu statique dans un service de stockage cloud qui peut distribuer ce contenu directement au client. Cela peut réduire le besoin en instances de calcul éventuellement coûteuses.
 
@@ -26,11 +21,11 @@ Déployez un contenu statique dans un service de stockage cloud qui peut distrib
 
 En règle générale, les applications web comprennent certains éléments de contenu statique. Ce contenu statique peut inclure des pages HTML et d’autres ressources telles que des images et des documents qui sont disponibles pour le client, que ce soit en tant que composant d’une page HTML (par exemple, images incorporées, feuilles de style et fichiers JavaScript côté client) ou sous forme de téléchargements distincts (par exemple, documents PDF).
 
-Même si les serveurs web sont bien réglés pour optimiser les requêtes via la mise en cache de sortie et l’exécution de code de page dynamique efficaces, ils doivent tout de même gérer les requêtes pour télécharger du contenu statique. Cela fait appel à des cycles de traitement qui peuvent souvent être mieux utilisés ailleurs.
+Bien que les serveurs web soient optimisés pour le rendu dynamique et la mise en cache de sortie, ils doivent néanmoins gérer les requêtes pour le téléchargement de contenu statique. Cela fait appel à des cycles de traitement qui peuvent souvent être mieux utilisés ailleurs.
 
 ## <a name="solution"></a>Solution
 
-Dans la plupart des environnements d’hébergement cloud, il est possible de réduire la nécessité d’instances de calcul (par exemple, utiliser une instance plus petite ou moins d’instances) en recherchant les pages statiques et les ressources d’une application dans un service de stockage. Le coût du stockage hébergé sur le cloud est généralement moindre par rapport à celui des instances de calcul.
+Dans la plupart des environnements d’hébergement cloud, vous pouvez placer certaines des ressources et des pages statiques d’une application dans un service de stockage. Le service de stockage peut traiter les requêtes de ces ressources, ce qui permet ainsi de réduire la charge des ressources de calcul qui gèrent d’autres requêtes web. Le coût du stockage hébergé sur le cloud est généralement moindre par rapport à celui des instances de calcul.
 
 Lors de l’hébergement de certaines parties d’une application dans un service de stockage, les principales considérations à prendre en compte sont celles liées au déploiement de l’application et à la sécurisation des ressources qui ne sont pas destinées à être accessibles pour les utilisateurs anonymes.
 
@@ -44,11 +39,13 @@ Prenez en compte les points suivants lorsque vous choisissez comment implémente
 
 - Les comptes de stockage sont souvent géorépliqués par défaut pour assurer la résilience par rapport aux événements susceptibles d’affecter un centre de données. Cela signifie que l’adresse IP peut être changée, mais que l’URL restera la même.
 
-- Lorsque du contenu se trouve dans un compte de stockage et qu’un autre contenu se trouve dans une instance de calcul hébergée, il devient plus difficile de déployer une application et de la mettre à jour. Vous devrez peut-être effectuer des déploiements distincts et contrôler la version de l’application et du contenu pour les gérer de façon plus simple&mdash;particulièrement quand le contenu statique inclut des fichiers de script ou des composants d’interface utilisateur. Toutefois, si seules les ressources statiques doivent être mises à jour, elles peuvent simplement être chargées sur le compte de stockage sans avoir à redéployer le package d’application.
+- Quand un contenu se trouve dans un compte de stockage et qu’un autre contenu se trouve dans une instance de calcul hébergée, il devient plus difficile de déployer une application et de la mettre à jour. Vous devrez peut-être effectuer des déploiements distincts et contrôler la version de l’application et du contenu pour les gérer de façon plus simple&mdash;particulièrement quand le contenu statique inclut des fichiers de script ou des composants d’interface utilisateur. Toutefois, si seules les ressources statiques doivent être mises à jour, elles peuvent simplement être chargées sur le compte de stockage sans avoir à redéployer le package d’application.
 
 - Les services de stockage peuvent ne pas prendre en charge l’utilisation de noms de domaine personnalisés. Dans ce cas, il est nécessaire de spécifier l’URL complète des ressources dans les liens, car ils seront dans un autre domaine que le contenu généré dynamiquement qui contient les liens.
 
-- Les conteneurs de stockage doivent être configurés pour un accès en lecture public, mais il est essentiel de vous assurer qu’ils ne sont pas configurés pour l’accès en écriture public, afin d’empêcher les utilisateurs de charger du contenu. Envisagez d’utiliser une clé de valet ou un jeton pour contrôler l’accès aux ressources qui ne doivent pas être disponibles de façon anonyme&mdash;, consultez [Valet Key pattern](valet-key.md) (Modèle de clé de valet) pour plus d’informations.
+- Les conteneurs de stockage doivent être configurés pour un accès en lecture public, mais il est essentiel de vous assurer qu’ils ne sont pas configurés pour l’accès en écriture public, afin d’empêcher les utilisateurs de charger du contenu.
+
+- Utilisez une clé de valet ou un jeton pour contrôler l’accès aux ressources qui ne doivent pas être disponibles de façon anonyme. Pour plus d’informations, consultez [Modèle de clé de valet](./valet-key.md).
 
 ## <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
 
@@ -56,7 +53,7 @@ Ce modèle est utile dans les situations suivantes :
 
 - Pour réduire le coût d’hébergement des sites web et des applications qui contiennent certaines ressources statiques.
 
-- Pour réduire le coût d’hébergement des sites web qui comprennent uniquement des ressources et du contenu statiques. Selon les capacités du système de stockage du fournisseur d’hébergement, il peut être possible d’héberger totalement un site web complètement statique dans un compte de stockage.
+- Pour réduire le coût d’hébergement des sites web qui comprennent uniquement des ressources et du contenu statiques. En fonction des capacités du système de stockage du fournisseur d’hébergement, il est possible d’héberger intégralement un site web complètement statique dans un compte de stockage.
 
 - Pour exposer du contenu et des ressources statiques pour les applications s’exécutant dans d’autres environnements d’hébergement ou sur des serveurs locaux.
 
@@ -72,30 +69,15 @@ Ce modèle peut s’avérer inutile dans les situations suivantes :
 
 ## <a name="example"></a>Exemples
 
-Le contenu statique se trouvant dans le stockage d’objets blob Azure est accessible directement via un navigateur web. Azure fournit une interface basée sur HTTP pour le stockage qui peut être exposé publiquement aux clients. Par exemple, le contenu d’un conteneur de stockage d’objets blob Azure est exposé à l’aide d’une URL sous la forme suivante :
+Le Stockage Azure prend en charge la fourniture de contenu statique directement à partir d’un conteneur de stockage. Les fichiers sont traités via des requêtes d’accès anonymes. Par défaut, les fichiers ont une URL dans un sous-domaine de `core.windows.net`, par exemple `https://contoso.z4.web.core.windows.net/image.png`. Vous pouvez configurer un nom de domaine personnalisé et utiliser Azure CDN pour accéder aux fichiers via une connexion HTTPS. Pour plus d’informations, consultez [Hébergement de sites web statiques dans le service Stockage Azure](/azure/storage/blobs/storage-blob-static-website).
 
-`https://[ storage-account-name ].blob.core.windows.net/[ container-name ]/[ file-name ]`
+![Distribution de parties statiques d’une application directement à partir d’un service de stockage](./_images/static-content-hosting-pattern.png)
 
+L’hébergement de sites web statiques permet l’accès anonyme aux fichiers. Si vous devez contrôler l’accès aux fichiers de manière individualisée, stockez ces derniers dans le Stockage Blob Azure, puis générez des [signatures d’accès partagé](/azure/storage/common/storage-dotnet-shared-access-signature-part-1) pour limiter l’accès.
 
-Lors du chargement du contenu, il est nécessaire de créer un ou plusieurs conteneurs blob pour stocker les fichiers et les documents. Notez que l’autorisation par défaut d’un nouveau conteneur est Privée et que vous devez la remplacer par Publique pour permettre aux clients d’accéder aux contenus. S’il est nécessaire de protéger le contenu des accès anonymes, vous pouvez implémenter le [modèle de clé de valet](valet-key.md), afin que les utilisateurs présentent un jeton valide pour télécharger les ressources.
+Les liens des pages distribuées au client doivent spécifier l’URL complète de la ressource. Si la ressource est protégée à l’aide d’une clé de valet, par exemple une signature d’accès partagé Azure, cette signature doit être incluse dans l’URL.
 
-> L’article [Blob Service Concepts](https://msdn.microsoft.com/library/azure/dd179376.aspx) (Concepts de service blob) contient des informations sur le stockage d’objets blob et sur les méthodes vous permettant d’y accéder et de l’utiliser.
-
-Les liens de chaque page spécifieront l’URL de la ressource et le client y accédera directement à partir du service de stockage. La figure illustre la distribution des parties statiques d’une application directement à partir d’un service de stockage.
-
-![Figure 1 - Distribution des parties statiques d’une application directement à partir d’un service de stockage](./_images/static-content-hosting-pattern.png)
-
-
-Les liens des pages distribuées au client doivent spécifier l’URL complète de la ressource et du conteneur d’objets blob. Par exemple, une page qui contient un lien vers une image dans un conteneur public peut contenir le code HTML suivant.
-
-```html
-<img src="https://mystorageaccount.blob.core.windows.net/myresources/image1.png"
-     alt="My image" />
-```
-
-> Si les ressources sont protégées à l’aide d’une clé de valet, par exemple une signature d’accès partagé Azure, cette signature doit être incluse dans les URL des liens.
-
-Une solution nommée StaticContentHosting qui illustre l’utilisation du stockage externe pour les ressources statiques est disponible à partir de [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/static-content-hosting). Le projet StaticContentHosting.Cloud contient les fichiers de configuration qui spécifient le compte de stockage et le conteneur qui détient le contenu statique.
+Un exemple d’application illustrant l’utilisation du stockage externe pour les ressources statiques est disponible sur [GitHub][sample-app]. Cet exemple utilise des fichiers config pour spécifier le compte de stockage ainsi que le conteneur qui détient le contenu statique.
 
 ```xml
 <Setting name="StaticContent.StorageConnectionString"
@@ -167,6 +149,8 @@ Le fichier Index.cshtml dans le dossier Views\Home contient un élément d’ima
 
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
-- Un exemple illustrant ce modèle est disponible sur [GitHub](https://github.com/mspnp/cloud-design-patterns/tree/master/static-content-hosting).
-- [Valet Key pattern](valet-key.md) (Modèle de clé de valet). Si les ressources cibles ne sont pas censées être accessibles aux utilisateurs anonymes, il est nécessaire d’implémenter la sécurité sur le magasin qui contient le contenu statique. Décrit l’utilisation d’un jeton ou d’une clé qui fournit aux clients un accès direct limité à une ressource ou un service spécifique comme un service de stockage hébergé sur le cloud.
-- [Blob Service Concepts](https://msdn.microsoft.com/library/azure/dd179376.aspx) (Concepts de service blob)
+- [Exemple d’hébergement de contenu statique][sample-app]. Exemple d’application qui illustre ce modèle.
+- [Valet Key pattern](./valet-key.md) (Modèle de clé de valet). Si les ressources cibles ne sont pas censées être accessibles aux utilisateurs anonymes, utilisez ce modèle pour restreindre l’accès direct.
+- [Application web serverless sur Azure](../reference-architectures/serverless/web-app.md). Architecture de référence utilisant un hébergement web statique avec Azure Functions pour implémenter une application web serverless.
+
+[sample-app]: https://github.com/mspnp/cloud-design-patterns/tree/master/static-content-hosting

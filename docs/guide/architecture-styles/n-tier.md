@@ -1,33 +1,35 @@
 ---
 title: Style d’architecture multiniveau
-description: Décrit les avantages, les inconvénients et les bonnes pratiques pour les architectures multiniveaux sur Azure
+titleSuffix: Azure Application Architecture Guide
+description: Décrit les avantages, les inconvénients et les bonnes pratiques des architectures multiniveaux sur Azure.
 author: MikeWasson
 ms.date: 08/30/2018
-ms.openlocfilehash: 2a113cefec8bd1c6c524030fbc459851094c09d6
-ms.sourcegitcommit: ae8a1de6f4af7a89a66a8339879843d945201f85
+ms.custom: seojan19
+ms.openlocfilehash: 4e8aae0032d20df05e1b16a47fda4afa720ed0d9
+ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2018
-ms.locfileid: "43325748"
+ms.lasthandoff: 01/08/2019
+ms.locfileid: "54110303"
 ---
 # <a name="n-tier-architecture-style"></a>Style d’architecture multiniveau
 
-Une architecture multiniveau divise une application en plusieurs **couches logiques** et **niveaux physiques**. 
+Une architecture multiniveau divise une application en plusieurs **couches logiques** et **niveaux physiques**.
 
-![](./images/n-tier-logical.svg)
+![Diagramme logique d’un style d’architecture multiniveau](./images/n-tier-logical.svg)
 
-Les couches permettent de séparer les responsabilités et de gérer les dépendances. À chaque couche correspond une responsabilité spécifique. Si une couche supérieure peut utiliser les services d’une couche inférieure, l’inverse n’est pas vrai. 
+Les couches permettent de séparer les responsabilités et de gérer les dépendances. À chaque couche correspond une responsabilité spécifique. Si une couche supérieure peut utiliser les services d’une couche inférieure, l’inverse n’est pas vrai.
 
-Les niveaux sont physiquement séparés et s’exécutent sur des machines distinctes. Un niveau peut appeler un autre niveau directement ou utiliser la messagerie asynchrone (file d’attente de messages). Même si chaque couche peut être hébergée dans son propre niveau, il ne s’agit pas d’une obligation. Plusieurs couches peuvent être hébergées dans un même niveau. Si la séparation physique des niveaux améliore la scalabilité et la résilience, elle ajoute aussi de la latence du fait de la communication réseau supplémentaire. 
+Les niveaux sont physiquement séparés et s’exécutent sur des machines distinctes. Un niveau peut appeler un autre niveau directement ou utiliser la messagerie asynchrone (file d’attente de messages). Même si chaque couche peut être hébergée dans son propre niveau, il ne s’agit pas d’une obligation. Plusieurs couches peuvent être hébergées dans un même niveau. Si la séparation physique des niveaux améliore la scalabilité et la résilience, elle ajoute aussi de la latence du fait de la communication réseau supplémentaire.
 
-Une application classique à trois niveaux est constituée d’un niveau de présentation, d’un niveau intermédiaire et d’un niveau de base de données. Le niveau intermédiaire est facultatif. Les applications plus complexes peuvent avoir plus de trois niveaux. Le diagramme ci-dessus représente une application à deux niveaux intermédiaires, encapsulant différents domaines de fonctionnalité. 
+Une application classique à trois niveaux est constituée d’un niveau de présentation, d’un niveau intermédiaire et d’un niveau de base de données. Le niveau intermédiaire est facultatif. Les applications plus complexes peuvent avoir plus de trois niveaux. Le diagramme ci-dessus représente une application à deux niveaux intermédiaires, encapsulant différents domaines de fonctionnalité.
 
 Une application multiniveau peut avoir une **architecture à couches fermées** ou une **architecture à couches ouvertes** :
 
-- Dans une architecture à couches fermées, une couche peut appeler uniquement la couche inférieure suivante. 
-- Dans une architecture à couches ouvertes, une couche peut appeler n’importe quelle couche inférieure. 
+- Dans une architecture à couches fermées, une couche peut appeler uniquement la couche inférieure suivante.
+- Dans une architecture à couches ouvertes, une couche peut appeler n’importe quelle couche inférieure.
 
-Une architecture à couche fermées limite les dépendances entre les couches. En revanche, elle peut générer un trafic réseau inutile si une couche transmet simplement les demandes à la couche suivante. 
+Une architecture à couche fermées limite les dépendances entre les couches. En revanche, elle peut générer un trafic réseau inutile si une couche transmet simplement les demandes à la couche suivante.
 
 ## <a name="when-to-use-this-architecture"></a>Quand utiliser cette architecture
 
@@ -35,7 +37,7 @@ Les architectures multiniveaux sont généralement implémentées sous forme d�
 
 Une architecture multiniveau est à envisager pour :
 
-- les applications web simples ; 
+- les applications web simples ;
 - la migration d’une application locale vers Azure avec une refactorisation minimale ;
 - le développement unifié d’applications locales et cloud.
 
@@ -50,32 +52,32 @@ Les architectures multiniveaux sont très courantes dans les applications locale
 
 ## <a name="challenges"></a>Défis
 
-- Il est facile de se retrouver avec un niveau intermédiaire qui effectue uniquement des opérations CRUD sur la base de données, ce qui ajoute une latence supplémentaire pour un intérêt limité. 
+- Il est facile de se retrouver avec un niveau intermédiaire qui effectue uniquement des opérations CRUD sur la base de données, ce qui ajoute une latence supplémentaire pour un intérêt limité.
 - La conception monolithique interdit tout déploiement indépendant de fonctionnalités.
-- La gestion d’une application IaaS s’avère plus fastidieuse que pour une application utilisant uniquement des services managés. 
+- La gestion d’une application IaaS s’avère plus fastidieuse que pour une application utilisant uniquement des services managés.
 - Il peut être difficile de gérer la sécurité réseau dans un système de grande taille.
 
-## <a name="best-practices"></a>Meilleures pratiques
+## <a name="best-practices"></a>Bonnes pratiques
 
 - Utilisez la mise à l’échelle automatique pour gérer les évolutions au niveau de la charge. Consultez [Bonnes pratiques en matière de mise à l’échelle automatique][autoscaling].
 - Utilisez la messagerie asynchrone pour dissocier les niveaux.
 - Mettez en cache les données semi-statiques. Consultez [Bonnes pratiques en matière de mise en cache][caching].
 - Configurez le niveau de base de données pour la haute disponibilité à l’aide d’une solution telle que les [Groupes de disponibilité SQL Server Always On][sql-always-on].
 - Placez un pare-feu d’applications web (WAF) entre le frontend et Internet.
-- Placez chaque niveau dans son propre sous-réseau et utilisez les sous-réseaux comme frontière de sécurité. 
+- Placez chaque niveau dans son propre sous-réseau et utilisez les sous-réseaux comme frontière de sécurité.
 - Limitez l’accès à la couche Données en autorisant uniquement les demandes en provenance des niveaux intermédiaires.
 
 ## <a name="n-tier-architecture-on-virtual-machines"></a>Architecture multiniveau sur les machines virtuelles
 
-Cette section décrit une architecture multiniveau recommandée s’exécutant sur des machines virtuelles. 
+Cette section décrit une architecture multiniveau recommandée s’exécutant sur des machines virtuelles.
 
-![](./images/n-tier-physical.png)
+![Diagramme physique d’une architecture multiniveau](./images/n-tier-physical.png)
 
-Chaque niveau est constitué d’au moins deux machines virtuelles placées dans un groupe à haute disponibilité ou un groupe de machines virtuelles identiques. La présence de plusieurs machines virtuelles assure une résilience en cas de défaillance d’une machine virtuelle. Les équilibreurs de charge servent à répartir les demandes entre les machines virtuelles d’un même niveau. Un niveau peut faire l’objet d’une mise à l’échelle horizontale par l’ajout de machines virtuelles supplémentaires au pool. 
+Chaque niveau est constitué d’au moins deux machines virtuelles placées dans un groupe à haute disponibilité ou un groupe de machines virtuelles identiques. La présence de plusieurs machines virtuelles assure une résilience en cas de défaillance d’une machine virtuelle. Les équilibreurs de charge servent à répartir les demandes entre les machines virtuelles d’un même niveau. Un niveau peut faire l’objet d’une mise à l’échelle horizontale par l’ajout de machines virtuelles supplémentaires au pool.
 
 Chaque niveau est également placé dans son propre sous-réseau, ce qui signifie que leurs adresses IP internes se trouvent dans la même plage d’adresses. Cela permet d’appliquer facilement des règles de groupe de sécurité réseau (NSG) et des tables de routage aux niveaux individuels.
 
-Les niveaux web et business sont sans état. N’importe quelle machine virtuelle peut traiter une demande pour ce niveau. La couche Données doit être constituée d’une base de données répliquée. Pour Windows, nous recommandons SQL Server avec des groupes de disponibilité Always On pour la haute disponibilité. Pour Linux, choisissez une base de données qui prend en charge la réplication, comme Apache Cassandra. 
+Les niveaux web et business sont sans état. N’importe quelle machine virtuelle peut traiter une demande pour ce niveau. La couche Données doit être constituée d’une base de données répliquée. Pour Windows, nous recommandons SQL Server avec des groupes de disponibilité Always On pour la haute disponibilité. Pour Linux, choisissez une base de données qui prend en charge la réplication, comme Apache Cassandra.
 
 Les groupes de sécurité réseau (NSG) limitent l’accès à chaque niveau. Par exemple, le niveau de base de données autorise uniquement l’accès à partir du niveau business.
 
@@ -92,13 +94,13 @@ Pour obtenir des informations plus détaillées et un modèle Resource Manager d
 
 - Utiliser des groupes de machines virtuelles identiques pour la mise à l’échelle automatique.
 
-- Recherchez dans l’architecture des endroits où vous pouvez utiliser un service managé sans refactorisation importante. Regardez tout particulièrement du côté de la mise en cache, de la messagerie, du stockage et des bases de données. 
+- Recherchez dans l’architecture des endroits où vous pouvez utiliser un service managé sans refactorisation importante. Regardez tout particulièrement du côté de la mise en cache, de la messagerie, du stockage et des bases de données.
 
 - Pour renforcer la sécurité, placez une zone DMZ réseau devant l’application. La zone DMZ comprend des appliances virtuelles réseau (NVA) qui implémentent des fonctionnalités de sécurité telles que des pare-feu et l’inspection des paquets. Pour plus d’informations, consultez [Architecture de référence de zone DMZ réseau][dmz].
 
 - Pour la haute disponibilité, placez au moins deux NVA dans un groupe à haute disponibilité, avec un équilibrage de charge externe pour répartir les demandes Internet entre les instances. Pour plus d’informations, consultez [Déployer des appliances virtuelles réseau hautement disponibles][ha-nva].
 
-- N’autorisez pas d’accès RDP ou SSH direct aux machines virtuelles qui exécutent du code d’application. Au lieu de cela, les opérateurs doivent se connecter à un serveur de rebond, aussi appelé hôte bastion. Il s’agit d’une machine virtuelle située sur le réseau dont les administrateurs se servent pour se connecter aux autres machines virtuelles. Le serveur de rebond dispose d’un groupe de sécurité réseau (NSG) qui n’autorise RDP ou SSH qu’à partir des adresses IP publiques approuvées.
+- N’autorisez pas d’accès RDP ou SSH direct aux machines virtuelles qui exécutent du code d’application. Au lieu de cela, les opérateurs doivent se connecter à un serveur de rebond, aussi appelé hôte bastion. Il s’agit d’une machine virtuelle située sur le réseau que les administrateurs utilisent pour se connecter aux autres machines virtuelles. Le serveur de rebond dispose d’un groupe de sécurité réseau (NSG) qui n’autorise RDP ou SSH qu’à partir des adresses IP publiques approuvées.
 
 - Vous pouvez étendre le réseau virtuel Azure à votre réseau local en utilisant un réseau privé virtuel (VPN) de site à site ou Azure ExpressRoute. Pour plus d’informations, consultez [Architecture de référence de réseau hybride][hybrid-network].
 
