@@ -4,12 +4,12 @@ description: Architecture recommandée pour les applications IoT sur Azure utili
 titleSuffix: Azure Reference Architectures
 author: MikeWasson
 ms.date: 01/09/2019
-ms.openlocfilehash: bde507527262a722219edba534275fb7ab499069
-ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
+ms.openlocfilehash: c0aa1771abc99b1f17f1e553c9626e50a386f34c
+ms.sourcegitcommit: d5ea427c25f9f7799cc859b99f328739ca2d8c1c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/09/2019
-ms.locfileid: "54166026"
+ms.lasthandoff: 01/15/2019
+ms.locfileid: "54307686"
 ---
 # <a name="azure-iot-reference-architecture"></a>Architecture de référence Azure IoT
 
