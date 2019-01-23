@@ -3,13 +3,16 @@ title: Conception d’applications résilientes pour Azure
 description: Comment créer des applications résilientes dans Azure, pour une haute disponibilité et une récupération d’urgence.
 author: MikeWasson
 ms.date: 12/18/2018
+ms.topic: article
+ms.service: architecture-center
+ms.subservice: cloud-design-principles
 ms.custom: resiliency
-ms.openlocfilehash: ef8fd64756c483528aa83048e23f6387dedb74d6
-ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
+ms.openlocfilehash: ba3637ce90b793425b1238ee0d99d36a936da6ca
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/09/2019
-ms.locfileid: "54160857"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488594"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Conception d’applications résilientes pour Azure
 

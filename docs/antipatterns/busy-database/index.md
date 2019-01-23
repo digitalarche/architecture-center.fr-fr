@@ -4,13 +4,16 @@ titleSuffix: Performance antipatterns for cloud apps
 description: Le déchargement du traitement sur un serveur de base de données peut entraîner des problèmes de performances et d’évolutivité.
 author: dragon119
 ms.date: 06/05/2017
+ms.topic: article
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 11bce03aed2e988d0a814b3298818715ba42c1c5
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: 7d3fe47407eff7168dfd227a1dd1bd5917c7d431
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54011461"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54487030"
 ---
 # <a name="busy-database-antipattern"></a>Antimodèle de base de données occupé
 

@@ -5,13 +5,16 @@ description: Modèles de conception pour créer des applications fiables, scalab
 keywords: Azure
 author: dragon119
 ms.date: 12/10/2018
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 51f5f146ecf453e7134e7cc3811b2dd5ded325ac
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: 1f3a76a104f0157526db3cff338c2b8b08dd573c
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54112479"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488254"
 ---
 # <a name="cloud-design-patterns"></a>Modèles de conception de cloud
 
