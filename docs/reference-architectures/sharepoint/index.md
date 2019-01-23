@@ -1,17 +1,15 @@
 ---
-title: Exécuter une batterie de serveurs SharePoint Server 2016 hautement disponible dans Azure
+title: "Exécuter une batterie de serveurs SharePoint Server\_2016 hautement disponible dans Azure"
 titleSuffix: Azure Reference Architectures
-description: Architecture recommandée pour déployer une batterie de serveurs SharePoint Server 2016 à haute disponibilité sur Azure.
+description: "Architecture recommandée pour déployer une batterie de serveurs SharePoint Server\_2016 à haute disponibilité sur Azure."
 author: njray
 ms.date: 07/26/2018
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: seodec18
-ms.openlocfilehash: 6cc8255f95cb4944ff3ef138ad5edf2e5bbea4b4
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
-ms.translationtype: HT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120099"
 ---
+
 # <a name="run-a-highly-available-sharepoint-server-2016-farm-in-azure"></a>Exécuter une batterie de serveurs SharePoint Server 2016 hautement disponible dans Azure
 
 Cette architecture de référence présente des pratiques éprouvées pour déployer une batterie de serveurs SharePoint Server 2016 hautement disponible sur Azure à l’aide de la topologie MinRole et de groupes de disponibilité Always On SQL Server. La batterie de serveurs SharePoint est déployée dans un réseau virtuel sécurisé sans aucun point de terminaison ou présence exposé à Internet. [**Déployez cette solution**](#deploy-the-solution).
@@ -123,7 +121,7 @@ Pour plus d’informations sur ces recommandations, consultez l’article [Compt
 
 Cette architecture de référence déploie une batterie de serveurs SharePoint Server 2016 qui peut être utilisée comme un [environnement hybride de SharePoint][sharepoint-hybrid] &mdash;, en étendant SharePoint Server 2016 à Office 365 SharePoint Online. Si vous avez Office Online Server, consultez l’article [Prise en charge de Microsoft Office Web Apps et Office Online Server dans Azure][office-web-apps].
 
-Les applications de service par défaut de ce déploiement sont conçues pour prendre en charge les charges de travail hybrides. Toutes les charges de travail hybrides SharePoint Server 2016 et Office 365 peuvent être déployées sur cette batterie de serveurs sans apporter de modifications à l’infrastructure SharePoint, à une exception près : l’application de service de recherche hybride cloud ne doit pas être déployée sur les serveurs hébergeant une topologie de recherche existante. Par conséquent, une ou plusieurs machines virtuelles en fonction du rôle de recherche doivent être ajoutées à la batterie de serveurs pour prendre en charge ce scénario hybride.
+Les applications de service par défaut de ce déploiement sont conçues pour prendre en charge les charges de travail hybrides. Vous pouvez déployer toutes les charges de travail hybrides SharePoint Server 2016 et Office 365 sur cette batterie de serveurs sans changer l’infrastructure SharePoint, à une exception près : L’application du service de recherche hybride cloud ne doit pas être déployée sur les serveurs hébergeant une topologie de recherche existante. Par conséquent, une ou plusieurs machines virtuelles en fonction du rôle de recherche doivent être ajoutées à la batterie de serveurs pour prendre en charge ce scénario hybride.
 
 ### <a name="sql-server-always-on-availability-groups"></a>Groupes de disponibilité SQL Server Always On
 
@@ -147,7 +145,7 @@ Notez que SharePoint Server 2016 ne prend pas en charge l’utilisation de group
 
 Cette architecture de référence prend en charge la haute disponibilité dans une région Azure, étant donné que chaque rôle dispose d’au moins deux ordinateurs virtuels déployés dans un groupe à haute disponibilité.
 
-Pour vous protéger contre une panne régionale, créez une batterie de serveurs de récupération d’urgence distincte dans une région Azure différente. Vos objectifs de délai de récupération (RTO) et les objectifs de point de récupération (RPO) déterminent la configuration requise. Pour plus d’informations, consultez l’article [Choisir une stratégie de récupération d’urgence pour SharePoint Server 2016][sharepoint-dr]. La région secondaire doit être une *région jumelée* avec la région primaire. En cas de panne étendue, la récupération d’une région est hiérarchisée pour chaque paire. Pour plus d’informations, consultez l’article [Continuité des activités et récupération d’urgence (BCDR) : régions jumelées d’Azure][paired-regions].
+Pour vous protéger contre une panne régionale, créez une batterie de serveurs de récupération d’urgence distincte dans une région Azure différente. Vos objectifs de délai de récupération (RTO) et les objectifs de point de récupération (RPO) déterminent la configuration requise. Pour plus d’informations, consultez l’article [Choisir une stratégie de récupération d’urgence pour SharePoint Server 2016][sharepoint-dr]. La région secondaire doit être une *région jumelée* avec la région primaire. En cas de panne étendue, la récupération d’une région est hiérarchisée pour chaque paire. Pour plus d’informations, consultez l’article [Continuité des activités et récupération d’urgence (BCDR) : régions jumelées Azure][paired-regions].
 
 ## <a name="manageability-considerations"></a>Considérations relatives à la facilité de gestion
 

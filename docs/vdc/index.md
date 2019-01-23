@@ -3,13 +3,11 @@ title: Centre de données virtuel Azure
 description: Ressources portant sur le centre de données virtuel Microsoft Azure
 keywords: Azure
 layout: LandingPage
-ms.openlocfilehash: 5b5b6f58911e39ae1296722194b58c601b9baea8
-ms.sourcegitcommit: 94d50043db63416c4d00cebe927a0c88f78c3219
-ms.translationtype: HT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 09/28/2018
-ms.locfileid: "47428089"
+ms.topic: landing-page
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
 ---
+
 # <a name="azure-virtual-datacenter-and-the-enterprise-control-plane"></a>Le centre de données virtuel Azure et le plan de contrôle entreprise
 
 Le centre de données virtuel Azure est une approche permettant de tirer le meilleur parti des capacités Azure tout en respectant vos stratégies de sécurité et réseau existantes. Lorsqu’ils déploient des charges de travail d’entreprise dans le cloud, les services informatiques et les unités opérationnelles doivent équilibrer la gouvernance et l’agilité des développeurs. Le centre de données virtuel Azure apporte des modèles pour atteindre cet équilibre en mettant l’accent sur la gouvernance.
@@ -19,28 +17,28 @@ Le centre de données virtuel Azure est une approche permettant de tirer le meil
 <tr>
     <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Concepts"><img src="../_images/virtual-datacenter.svg" alt="Virtual Datacenter eBook" /></a></td>
     <td>
-        <h3><a href="https://aka.ms/VDC/Concepts">Azure Virtual Datacenter: Concepts</a> (Centre de données virtuel Azure : Concepts)</h3>
+        <h3><a href="https://aka.ms/VDC/Concepts">Centre de données virtuel Azure : Concepts</a></h3>
         <p>Ce livre électronique vous explique comment déployer des charges de travail d’entreprise sur la plateforme cloud Azure tout en respectant vos stratégies de sécurité et de mise en réseau existantes.</p>
     </td>
 </tr>
 <tr>
     <td style="width: 64px; vertical-align: middle;"><a href="/azure/networking/networking-virtual-datacenter"><img src="./images/vdc-network.png" alt="Network Perspective" /></a></td>
     <td>
-        <h3><a href="networking-virtual-datacenter.md">Centre de données virtuel Azure : une perspective réseau</a></h3>
+        <h3><a href="networking-virtual-datacenter.md">Centre de données virtuel Azure : perspective réseau</a></h3>
         <p>Cet article en ligne fournit une vue d’ensemble des modèles et des conceptions de réseau qui permettent de balayer les inquiétudes de nombreux clients concernant la mise à l’échelle, les performances et la sécurité de l’architecture lorsque ces clients envisagent une migration massive vers le cloud.</p>
     </td>
 </tr>
 <tr>
     <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Lift"><img src="./images/vdc-lift-and-shift.png" alt="Lift and Shift Guide" /></a></td>
     <td>
-        <h3><a href="https://aka.ms/VDC/Lift">Azure Virtual Datacenter: Lift and Shift Guide </a> (Centre de données virtuel Azure : guide de la méthode lift and shift)</h3>
+        <h3><a href="https://aka.ms/VDC/Lift">Centre de données virtuel Azure : Guide lift-and-shift </a></h3>
         <p>Ce livre blanc porte sur le processus sur lequel le personnel des services informatiques et les décisionnaires de l’entreprise peuvent s’appuyer afin d’identifier et de planifier la migration d’applications et de serveurs vers Azure à l’aide de la méthode lift and shift, qui permet de réduire les coûts de développement additionnels tout en optimisant les possibilités d’hébergement cloud.</p>
     </td>
 </tr>
 <tr>
     <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Deck"><img src="./images/vdc-deck.png" alt="Presentation Deck" /></a></td>
     <td>
-        <h3><a href="https://aka.ms/VDC/Deck">Azure Virtual Datacenter: Presentation Deck</a> (Centre de données virtuel Azure : Diapositives de présentation)</h3>
+        <h3><a href="https://aka.ms/VDC/Deck">Centre de données virtuel Azure : jeu de présentation </a></h3>
         <p>Cette présentation propose un tour d’horizon des outils et conseils relatifs au centre de données virtuel Azure. Elle couvre les objectifs du centre de données virtuel, les motivations du client, les régions Azure, les éléments d’une automatisation du centre de données virtuel, les centres de données virtuels Azure performants et de confiance, et elle se termine par un plan d’action centré sur les instructions du directeur informatique. Des informations de support et de formation sont également fournies.</p>
     </td>
 </tr>
