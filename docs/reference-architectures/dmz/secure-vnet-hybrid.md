@@ -4,17 +4,23 @@ titleSuffix: Azure Reference Architectures
 description: Implémentez une architecture réseau hybride sécurisée dans Azure.
 author: telmosampaio
 ms.date: 10/22/2018
-ms.custom: seodec18
-ms.openlocfilehash: 9a74401d3496807ce2dfc113476e001d19e657e5
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: seodec18, networking
+ms.openlocfilehash: 82327cca08e614bfe5226c9ca1a414388878a7c2
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54112292"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54482508"
 ---
 # <a name="implement-a-dmz-between-azure-and-your-on-premises-datacenter"></a>Implémenter une zone DMZ entre Azure et votre centre de données local
 
 Cette architecture de référence montre un réseau sécurisé hybride qui étend un réseau local sur Azure. L’architecture implémente une DMZ, également appelée *réseau de périmètre*, entre le réseau local et un réseau virtuel Azure (VNet). La DMZ comprend des appliances virtuelles réseau (NVA) qui implémentent des fonctionnalités de sécurité telles que des pare-feu et l’inspection des paquets. Tout le trafic sortant du réseau virtuel est acheminé de force vers Internet via le réseau local afin qu’il puisse être audité. [**Déployez cette solution**](#deploy-the-solution).
+
+> [!NOTE]
+> Vous pouvez suivre ce scénario avec le [Pare-feu Azure](/azure/firewall/), service de sécurité réseau basé sur le cloud.
 
 ![Architecture réseau hybride sécurisée](./images/dmz-private.png)
 

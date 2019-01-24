@@ -1,16 +1,19 @@
 ---
-title: 'Adoption du cloud d’entreprise : Conception de la gouvernance pour une charge de travail simple'
+title: 'Adoption du cloud d’entreprise : Conception de gouvernance pour une charge de travail simple'
 description: Conseils pour configurer les contrôles de gouvernance Azure pour permettre aux utilisateurs de déployer une charge de travail simple
 author: petertaylor9999
 ms.date: 09/10/2018
-ms.openlocfilehash: 13c7c4b41df14151d28b9c685f01019af3ec63f2
-ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.openlocfilehash: f87584b4182e5eca143f6429220c822b4be2ed70
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44389245"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481726"
 ---
-# <a name="enterprise-cloud-adoption-governance-design-for-a-simple-workload"></a>Adoption du cloud d’entreprise : Conception de la gouvernance pour une charge de travail simple
+# <a name="enterprise-cloud-adoption-governance-design-for-a-simple-workload"></a>Adoption du cloud d’entreprise : Conception de gouvernance pour une charge de travail simple
 
 Ce guide a pour but de vous aider à comprendre comment concevoir un modèle de gouvernance des ressources dans Azure destiné à prendre en charge une seule équipe et une charge de travail simple.  Nous allons passer en revue plusieurs exigences de gouvernance hypothétiques, puis étudier plusieurs exemples d’implémentation qui répondent à ces exigences. 
 

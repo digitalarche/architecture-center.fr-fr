@@ -3,12 +3,15 @@ title: Migrer une application Azure Cloud Services vers Azure Service Fabric
 description: Comment migrer une application à partir d’Azure Cloud Services vers Azure Service Fabric.
 author: MikeWasson
 ms.date: 04/11/2018
-ms.openlocfilehash: a1b4e005b2dab67d8107f4002468e1d7622ae342
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.openlocfilehash: e2b89fa51abdb7be6124ded6e64889b5b54854a4
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916445"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54487897"
 ---
 # <a name="migrate-an-azure-cloud-services-application-to-azure-service-fabric"></a>Migrer une application Azure Cloud Services vers Azure Service Fabric 
 
@@ -101,7 +104,7 @@ L’application se compose de deux rôles web et d’un rôle de travail.
 
 - Le rôle web **Tailspin.Web.Survey.Public** héberge un site web ASP.NET sur lequel les utilisateurs peuvent répondre aux enquêtes publiées par les clients de Tailspin. 
 
-- Le rôle de travail **Tailspin.Workers.Survey** est chargé du traitement en arrière-plan. Les rôles web placent les éléments de travail dans une file d’attente, et le rôle de travail traite les éléments. Deux tâches en arrière-plan sont définies : export des réponses de l’enquête dans la base de données SQL Azure, et calcul des statistiques relatives aux réponses de l’enquête.
+- Le rôle de travail **Tailspin.Workers.Survey** est chargé du traitement en arrière-plan. Les rôles web placent les éléments de travail dans une file d’attente, et le rôle de travail traite les éléments. Deux tâches en arrière-plan sont définies : exportation des réponses de l’enquête dans la base de données SQL Azure, et calcul des statistiques relatives aux réponses de l’enquête.
 
 Outre Cloud Services, l’application Surveys utilise d’autres services Azure :
 

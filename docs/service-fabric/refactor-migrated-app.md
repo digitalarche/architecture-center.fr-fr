@@ -3,12 +3,15 @@ title: Refactoriser une application Azure Service Fabric migrée depuis Azure Cl
 description: Comment refactoriser une application Azure Service Fabric existante migrée depuis Azure Cloud Services
 author: petertay
 ms.date: 02/02/2018
-ms.openlocfilehash: 14ecaf81a07c72296e8db300df371e9a0c990434
-ms.sourcegitcommit: dbbf914757b03cdee7a274204f9579fa63d7eed2
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.openlocfilehash: 1fd6bb5df18b46c8df3719fd107dd53a18dfd4ff
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/02/2018
-ms.locfileid: "50916462"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54487285"
 ---
 # <a name="refactor-an-azure-service-fabric-application-migrated-from-azure-cloud-services"></a>Refactoriser une application Azure Service Fabric migrée depuis Azure Cloud Services
 
@@ -91,7 +94,7 @@ Notez que les opérations pour conserver les éléments retirés d’une file d�
 
 Chaque service dans l’application Surveys communique à l’aide d’une API web RESTful. Les API RESTful offre les avantages suivants :
 * Facilité d’utilisation : chaque service est généré à l’aide d’ASP.NET Core MVC, qui prend nativement en charge la création d’API web.
-* Sécurité : alors que chaque service ne requiert pas SSL, Tailspin peut demander à chaque service de le demander. 
+* Sécurité : comme chaque service ne nécessite pas SSL, Tailspin peut demander à chaque service de le demander. 
 * Contrôle de version : les clients peuvent être écrits et testés par rapport à une version spécifique d’une API web.
 
 Les services dans l’application Survey peuvent utiliser le [proxy inverse][reverse-proxy] implémenté par Service Fabric. Le proxy inverse est un service qui s’exécute sur chaque nœud dans le cluster Service Fabric et qui permet la résolution des points de terminaison, les nouvelles tentatives automatiques et gère d’autres types d’échec de connexion. Pour utiliser le proxy inverse, chaque appel d’API RESTful vers un service spécifique est effectué à l’aide d’un port de proxy inverse prédéfini.  Par exemple, si le port de proxy inverse a été défini sur **19081**, un appel à *Tailspin.SurveyAnswerService* peut être effectué comme suit :

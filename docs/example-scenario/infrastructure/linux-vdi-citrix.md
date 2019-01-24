@@ -4,13 +4,16 @@ titleSuffix: Azure Example Scenarios
 description: Générez un environnement VDI pour les bureaux Linux à l’aide de Citrix sur Azure.
 author: miguelangelopereira
 ms.date: 09/12/2018
-ms.custom: fasttrack
-ms.openlocfilehash: af1cf01cb8b118e829c3870b636018aa5181b180
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.topic: example-scenario
+ms.service: architecture-center
+ms.subservice: example-scenario
+ms.custom: fasttrack, Linux
+ms.openlocfilehash: a6fe0b7e53c83c7b932c39f910257a1e7d24834f
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643915"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481229"
 ---
 # <a name="linux-virtual-desktops-with-citrix"></a>Bureaux virtuels Linux avec Citrix
 
@@ -90,7 +93,7 @@ Dans ce scénario, les références SKU suivantes sont utilisées :
 - Cet exemple est conçu pour assurer une haute disponibilité de tous les rôles autres que celui du serveur de licences. Comme l’environnement continue de fonctionner pendant un délai supplémentaire de 30 jours si le serveur de licences se trouve hors ligne, aucune redondance supplémentaire n’est requise sur ce serveur.
 - Tous les serveurs assurant des rôles similaires doivent être déployés dans des [groupes à haute disponibilité](/azure/virtual-machines/windows/manage-availability#configure-multiple-virtual-machines-in-an-availability-set-for-redundancy).
 - Cet exemple de scénario ne comprend pas les fonctionnalités de reprise d’activité après sinistre. [Azure Site Recovery](/azure/site-recovery/site-recovery-overview) peut compléter idéalement cette conception.
-- Envisagez de déployer dans ce scénario les instances de machine virtuelle sur des [zones de disponibilité](/azure/availability-zones/az-overview). Chaque zone de disponibilité est composée d’un ou de plusieurs centres de données équipés d’une alimentation, d’un refroidissement et d’un réseau indépendants. Chaque région activée a un minimum de trois zones de disponibilité. Cette distribution d’instances de machine virtuelle entre des zones offre une haute disponibilité pour les couches Application. Pour plus d’informations, consultez [Que sont les zones de disponibilité dans Azure ?][azureaz-docs]. Vous pouvez aussi [déployer des passerelles VPN et ExpressRoute dans des zones de disponibilité Azure](/azure/vpn-gateway/about-zone-redundant-vnet-gateways).
+- Envisagez de déployer dans ce scénario les instances de machine virtuelle sur des [zones de disponibilité](/azure/availability-zones/az-overview). Chaque zone de disponibilité est composée d’un ou de plusieurs centres de données équipés d’une alimentation, d’un refroidissement et d’un réseau indépendants. Chaque région activée a un minimum de trois zones de disponibilité. Cette distribution d’instances de machine virtuelle entre des zones offre une haute disponibilité pour les couches Application. Pour plus d’informations, consultez [Que sont les zones de disponibilité dans Azure ?](/azure/availability-zones/az-overview). Vous pouvez aussi [déployer des passerelles VPN et ExpressRoute dans des zones de disponibilité Azure](/azure/vpn-gateway/about-zone-redundant-vnet-gateways).
 - Pour une solution de gestion des déploiements de production, il est nécessaire d’implémenter des solutions de type [sauvegarde](/azure/backup/backup-introduction-to-azure-backup), [surveillance](/azure/monitoring-and-diagnostics/monitoring-overview) et [mise à jour](/azure/automation/automation-update-management).
 - Cet exemple doit fonctionner pour environ 250 utilisateurs simultanés (environ 50-60 par serveur VDA) avec une utilisation mixte. Mais la capacité dépend beaucoup du type d’applications utilisées. Pour une utilisation en production, des tests de charge rigoureux doivent être effectués.
 

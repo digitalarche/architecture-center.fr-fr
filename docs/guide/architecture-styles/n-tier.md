@@ -4,13 +4,16 @@ titleSuffix: Azure Application Architecture Guide
 description: Décrit les avantages, les inconvénients et les bonnes pratiques des architectures multiniveaux sur Azure.
 author: MikeWasson
 ms.date: 08/30/2018
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: 4e8aae0032d20df05e1b16a47fda4afa720ed0d9
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: d7b94d56831a6b9172a9091f0e4f7fa63a8881f1
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54110303"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481488"
 ---
 # <a name="n-tier-architecture-style"></a>Style d’architecture multiniveau
 
@@ -81,10 +84,11 @@ Les niveaux web et business sont sans état. N’importe quelle machine virtuell
 
 Les groupes de sécurité réseau (NSG) limitent l’accès à chaque niveau. Par exemple, le niveau de base de données autorise uniquement l’accès à partir du niveau business.
 
-Pour obtenir des informations plus détaillées et un modèle Resource Manager déployable, consultez les architectures de référence suivantes :
+Pour plus d’informations sur l’exécution d’applications multiniveaux sur Azure :
 
 - [Exécuter des machines virtuelles Windows pour une architecture multiniveau][n-tier-windows]
-- [Exécuter des machines virtuelles Linux pour une application multiniveau][n-tier-linux]
+- [Application multiniveau Windows sur Azure avec SQL Server][n-tier-linux]
+- [Module Microsoft Learn : Visite guidée du style d’architecture multiniveau](/learn/modules/n-tier-architecture/)
 
 ### <a name="additional-considerations"></a>Considérations supplémentaires
 

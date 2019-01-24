@@ -4,16 +4,19 @@ titleSuffix: Azure Reference Architectures
 description: Implémentez une architecture multiniveau sur Azure pour la disponibilité, la sécurité, l’extensibilité et la facilité de gestion.
 author: MikeWasson
 ms.date: 11/12/2018
-ms.openlocfilehash: e7dbd8dd2b8e5aff8f18ff9b87fce0b76a850bce
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.openlocfilehash: cf12d27ccaebb9845ada4d4a437e9889ea3325f2
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54011376"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485398"
 ---
 # <a name="windows-n-tier-application-on-azure-with-sql-server"></a>Application multiniveau Windows sur Azure avec SQL Server
 
-Cette architecture de référence montre comment déployer des machines virtuelles et un réseau virtuel configuré pour une application multiniveau à l’aide de SQL Server sur Windows pour la couche Données. [**Déployez cette solution**](#deploy-the-solution).
+Cette architecture de référence montre comment déployer des machines virtuelles et un réseau virtuel configuré pour une application [multiniveau](../../guide/architecture-styles/n-tier.md) à l’aide de SQL Server sur Windows pour le niveau Données. [**Déployez cette solution**](#deploy-the-solution).
 
 ![Architecture multiniveau à l’aide de Microsoft Azure](./images/n-tier-sql-server.png)
 
@@ -233,6 +236,10 @@ Un déploiement pour cette architecture de référence est disponible sur [GitHu
     ```
 
 Pour plus d’informations sur le déploiement de cet exemple d’architecture de référence à l’aide des blocs de construction Azure, visitez notre [référentiel GitHub][git].
+
+## <a name="next-steps"></a>Étapes suivantes
+
+- [Module Microsoft Learn : Visite guidée du style d’architecture multiniveau](/learn/modules/n-tier-architecture/)
 
 <!-- links -->
 [dmz]: ../dmz/secure-vnet-dmz.md

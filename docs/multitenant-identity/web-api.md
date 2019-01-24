@@ -3,15 +3,18 @@ title: Sécurisation d’une API web de serveur principal dans une application m
 description: Comment sécuriser une API web back-end.
 author: MikeWasson
 ms.date: 07/21/2017
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: authorize
 pnp.series.next: token-cache
-ms.openlocfilehash: 517bdbb6e1a1063db9337b63905e2ff5f4bdd4d4
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: a895276a77c111e660f29397d250373bee53f29e
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54114026"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54480766"
 ---
 # <a name="secure-a-backend-web-api"></a>Sécuriser une API web principale
 

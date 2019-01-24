@@ -4,15 +4,18 @@ description: Découvrez comment créer votre centre de données virtuel dans Azu
 author: tracsman
 manager: rossort
 tags: azure-resource-manager
-ms.service: virtual-network
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: virtual-network
 ms.date: 11/28/2018
 ms.author: jonor
-ms.openlocfilehash: f02cc7df1e90ba3de97a1c25777ab6d27bfdf697
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: 1f61996d231f3bf0cc2c550f4d3e119116bb7bc0
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54011181"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488645"
 ---
 # <a name="azure-virtual-datacenter-a-network-perspective"></a>Centre de données virtuel Azure : perspective réseau
 
@@ -103,7 +106,7 @@ Un [**réseau privé virtuel de site à site Azure**][VPN] est un service d’in
 
 En cas de très nombreuses connexions VPN, le service réseau [**Azure Virtual WAN**][vWAN] offre une connectivité de branche à branche optimisée et automatisée par le biais d’Azure. Le WAN virtuel vous permet de vous connecter et de configurer des appareils de branche pour communiquer avec Azure. Vous pouvez effectuer cette connexion et cette configuration manuellement ou à l’aide d’appareils de fournisseurs favoris par le biais d’un partenaire Virtual WAN. L’utilisation d’appareils de fournisseurs favoris permet une utilisation facile, une simplification de la connectivité et une gestion de la configuration. Le tableau de bord intégré du WAN Azure fournit des informations de dépannage en temps réel qui peuvent vous faire gagner du temps et vous permettre d’afficher en toute simplicité la connectivité de site à site à grande échelle.
 
-[**ExpressRoute**][ExR] est un service de connectivité Azure qui permet d’établir des connexions privées entre une implémentation de VDC et n’importe quel réseau local. Les connexions ExpressRoute ne sont pas établies par l’intermédiaire du réseau public Internet et offrent un surcroît de sécurité et de fiabilité et des débits supérieurs (jusqu’à 10 Gbits/s), ainsi qu’une latence constante. ExpressRoute est utile pour les implémentations de VDC, car les clients ExpressRoute peuvent bénéficier des règles de conformité associées aux connexions privées. Avec ExpressRoute Direct [ExRD], vous pouvez vous connecter directement aux routeurs Microsoft à 100 Gbits/s pour les clients ayant des besoins en bande passante supérieurs.
+[**ExpressRoute**][ExR] est un service de connectivité Azure qui permet d’établir des connexions privées entre une implémentation de VDC et n’importe quel réseau local. Les connexions ExpressRoute ne sont pas établies par l’intermédiaire du réseau public Internet et offrent un surcroît de sécurité et de fiabilité et des débits supérieurs (jusqu’à 10 Gbits/s), ainsi qu’une latence constante. ExpressRoute est utile pour les implémentations de VDC, car les clients ExpressRoute peuvent bénéficier des règles de conformité associées aux connexions privées. Avec [ExpressRoute Direct][ExRD], vous pouvez vous connecter directement aux routeurs Microsoft à 100 Gbits/s pour les clients ayant des besoins en bande passante supérieurs.
 
 Le déploiement de connexions ExpressRoute implique généralement la souscription d’un engagement auprès d’un fournisseur de services ExpressRoute. Les clients qui doivent être opérationnels rapidement commencent généralement par utiliser un VPN site à site pour établir la connectivité entre une implémentation de VDC et les ressources locales, puis effectuent une migration vers une connexion ExpressRoute quand votre interconnexion physique avec votre fournisseur de services est établie.
 
@@ -292,7 +295,7 @@ Il est important de suivre les journaux NSG, en particulier les informations sui
 
 Tous les journaux peuvent être stockés dans des comptes de stockage Azure à des fins d’audit, d’analyse statique ou de sauvegarde. Quand vous stockez les journaux dans un compte de stockage Azure, les clients peuvent utiliser différents types de framework pour récupérer, préparer, analyser et visualiser ces données afin de signaler l’état et l’intégrité des ressources cloud. 
 
-Les grandes entreprises doivent avoir acquis au préalable un framework standard pour la supervision des systèmes locaux. Ils peuvent étendre ce framework pour intégrer les journaux générés par les déploiements cloud. À l’aide d’[Azure Log Analytics][https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-queries], les organisations peuvent conserver l’ensemble de la journalisation dans le cloud. Log Analytics est implémenté en tant que service cloud. Il peut donc être opérationnel rapidement, avec un investissement minimal dans les services d’infrastructure. Log Analytics s’intègre également aux composants System Center, tels que System Center Operations Manager, pour étendre au cloud vos investissements de gestion existants. 
+Les grandes entreprises doivent avoir acquis au préalable un framework standard pour la supervision des systèmes locaux. Ils peuvent étendre ce framework pour intégrer les journaux générés par les déploiements cloud. Avec [Azure Log Analytics](/azure/log-analytics/log-analytics-queries), les organisations peuvent conserver l’ensemble de la journalisation dans le cloud. Log Analytics est implémenté en tant que service cloud. Il peut donc être opérationnel rapidement, avec un investissement minimal dans les services d’infrastructure. Log Analytics s’intègre également aux composants System Center, tels que System Center Operations Manager, pour étendre au cloud vos investissements de gestion existants. 
 
 Log Analytics est un service dans Azure conçu pour faciliter la collecte, la mise en corrélation, la recherche et l’exploitation des données de journalisation et de performances générées par les systèmes d’exploitation, les applications et les composants cloud d’infrastructure. Ce composant vous offre des informations opérationnelles en temps réel à l’aide d’une fonction de recherche intégrée et de tableaux de bord personnalisés, qui vous permettent d’analyser tous les enregistrements de l’ensemble de vos charges de travail dans votre implémentation de VDC.
 
@@ -328,7 +331,7 @@ Les possibilités de charge de travail sont illimitées. Voici quelques-uns des 
 
 **Big Data/Analytique** : En cas de scale-up lié à un volume de données très important, il peut arriver que le scale-up des bases de données ne s’effectue pas correctement. La technologie Hadoop offre un système permettant d’exécuter des requêtes distribuées en parallèle sur un grand nombre de nœuds. Les clients ont la possibilité d’exécuter des charges de travail de données dans des machines virtuelles IaaS ou PaaS ([HDInsight][HDI]). HDInsight prend en charge le déploiement dans un réseau virtuel basé sur l’emplacement et peut être déployé sur un cluster dans un rayon du VDC.
 
-**Événements et messagerie** : Azure Event Hubs[EventHubs] est un service d’ingestion de données de télémétrie à très grande échelle qui collecte, transforme et stocke des millions d’événements. En tant que plateforme de streaming distribuée, il offre une faible latence et une durée de rétention configurable vous permettant d’ingérer des quantités massives de données de télémétrie dans Azure et de lire les données de plusieurs applications. Le service Event Hubs prend en charge le traitement de pipelines en temps réel et par lots sur le même flux.
+**Événements et messagerie** : [Azure Event Hubs][EventHubs] est un service d’ingestion de données de télémétrie à très grande échelle qui collecte, transforme et stocke des millions d’événements. En tant que plateforme de streaming distribuée, il offre une faible latence et une durée de rétention configurable vous permettant d’ingérer des quantités massives de données de télémétrie dans Azure et de lire les données de plusieurs applications. Le service Event Hubs prend en charge le traitement de pipelines en temps réel et par lots sur le même flux.
 
 Vous pouvez implémenter un service de messagerie cloud à haut niveau de fiabilité entre applications et services via [Azure Service Bus][ServiceBus]. Il offre une messagerie répartie asynchrone entre le client et le serveur, une messagerie FIFO (premier entré, premier sorti) structurée ainsi que des fonctionnalités de publication et d’abonnement.
 
@@ -421,7 +424,7 @@ Ce document a abordé les fonctionnalités ci-après. Pour plus d’informations
 [AAD]: /azure/active-directory/active-directory-whatis
 [VPN]: /azure/vpn-gateway/vpn-gateway-about-vpngateways 
 [ExR]: /azure/expressroute/expressroute-introduction
-[ExRD]: https://docs.microsoft.com/en-us/azure/expressroute/expressroute-erdirect-about
+[ExRD]: /azure/expressroute/expressroute-erdirect-about
 [vWAN]: /azure/virtual-wan/virtual-wan-about
 [NVA]: /azure/architecture/reference-architectures/dmz/nva-ha
 [AzFW]: /azure/firewall/overview
@@ -431,7 +434,7 @@ Ce document a abordé les fonctionnalités ci-après. Pour plus d’informations
 [ALB]: /azure/load-balancer/load-balancer-overview
 [DDOS]: /azure/virtual-network/ddos-protection-overview
 [PIP]: /azure/virtual-network/resource-groups-networking#public-ip-address
-[AFD]: https://docs.microsoft.com/en-us/azure/frontdoor/front-door-overview
+[AFD]: /azure/frontdoor/front-door-overview
 [AppGW]: /azure/application-gateway/application-gateway-introduction
 [WAF]: /azure/application-gateway/application-gateway-web-application-firewall-overview
 [Monitor]: /azure/monitoring-and-diagnostics/

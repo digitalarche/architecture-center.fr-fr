@@ -4,17 +4,20 @@ titleSuffix: Azure Reference Architectures
 description: Exécutez des machines virtuelles Linux pour une architecture multiniveau avec Apache Cassandra dans Microsoft Azure.
 author: MikeWasson
 ms.date: 11/12/2018
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: seodec18
-ms.openlocfilehash: bbd1029fe17b5d88d54246127c5d8983a573b012
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 6c9a2b4fe513c959e537f705beb1c024b54c7b50
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120160"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485446"
 ---
 # <a name="linux-n-tier-application-in-azure-with-apache-cassandra"></a>Application multiniveau Linux dans Azure avec Apache Cassandra
 
-Cette architecture de référence montre comment déployer des machines virtuelles et un réseau virtuel configuré pour une application multiniveau en utilisant Apache Cassandra sur Linux pour la couche Données. [**Déployez cette solution**](#deploy-the-solution).
+Cette architecture de référence montre comment déployer des machines virtuelles et un réseau virtuel configuré pour une application [multiniveau](../../guide/architecture-styles/n-tier.md) en utilisant Apache Cassandra sur Linux pour le niveau Données. [**Déployez cette solution**](#deploy-the-solution).
 
 ![Architecture multiniveau à l’aide de Microsoft Azure](./images/n-tier-cassandra.png)
 
@@ -164,6 +167,10 @@ Pour déployer les machines virtuelles Linux pour une architecture de référenc
    ```
 
 Pour plus d’informations sur le déploiement de cet exemple d’architecture de référence à l’aide des blocs de construction Azure, visitez notre [référentiel GitHub][git].
+
+## <a name="next-steps"></a>Étapes suivantes
+
+- [Module Microsoft Learn : Visite guidée du style d’architecture multiniveau](/learn/modules/n-tier-architecture/)
 
 <!-- links -->
 

@@ -1,16 +1,19 @@
 ---
-title: 'Adoption du cloud d’entreprise : Vue d’ensemble des opérations'
+title: 'Adoption du cloud d’entreprise : Vue d’ensemble des opérations'
 description: Vue d’ensemble du contenu relatif aux opérations pour l’adoption du cloud d’entreprise Azure
 author: petertaylor9999
 ms.date: 09/20/2018
-ms.openlocfilehash: 04500efe77f19a3e184cceb0446c6032f5e3cf44
-ms.sourcegitcommit: b7e521ba317f4fcd3253c80ac0c0a355eaaa56c5
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.openlocfilehash: e1b401c59ec91797029440824e88d4c4bfd83315
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/21/2018
-ms.locfileid: "46534119"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54484452"
 ---
-# <a name="enterprise-cloud-adoption-operations-overview"></a>Adoption du cloud d’entreprise : Vue d’ensemble des opérations
+# <a name="enterprise-cloud-adoption-operations-overview"></a>Adoption du cloud d’entreprise : Vue d’ensemble des opérations
 
 Cette section de l’adoption du cloud d’entreprise Azure traite des **opérations**. 
 

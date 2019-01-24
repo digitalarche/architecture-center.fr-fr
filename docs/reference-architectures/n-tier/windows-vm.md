@@ -4,12 +4,15 @@ titleSuffix: Azure Reference Architectures
 description: Découvrez les bonnes pratiques pour exécuter une machine virtuelle Windows dans Azure.
 author: telmosampaio
 ms.date: 12/13/2018
-ms.openlocfilehash: b874fd3958a7f5571e6b77a24b266b113af49331
-ms.sourcegitcommit: 032f402482762f4e674aeebbc122ad18dfba11eb
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.openlocfilehash: a25488357eb11b80e8f79ddae7f7d69735a6bec3
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/14/2018
-ms.locfileid: "53396451"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485262"
 ---
 # <a name="run-a-windows-virtual-machine-on-azure"></a>Exécuter une machine virtuelle Windows dans Azure
 
@@ -108,7 +111,7 @@ Tous les groupes de sécurité réseau contiennent un ensemble de [règles par d
 [disk-encryption]: /azure/security/azure-security-disk-encryption
 [enable-monitoring]: /azure/monitoring-and-diagnostics/insights-how-to-use-diagnostics
 [fqdn]: /azure/virtual-machines/virtual-machines-windows-portal-create-fqdn
-[group-policy]: https://docs.microsoft.com/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/dn595129(v=ws.11)
+[group-policy]: /windows-server/administration/windows-server-update-services/deploy/4-configure-group-policy-settings-for-automatic-updates
 [manage-vm-availability]: /azure/virtual-machines/virtual-machines-windows-manage-availability
 [managed-disks]: /azure/storage/storage-managed-disks-overview
 [naming-conventions]: ../../best-practices/naming-conventions.md

@@ -3,13 +3,16 @@ title: Supervision des applications web sur Azure
 description: Surveillez une application web hébergée dans Azure App Service.
 author: adamboeglin
 ms.date: 12/12/2018
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: azcat
-ms.openlocfilehash: 2333ab0884e37354dc00113c8c40b6184fdf6ff1
-ms.sourcegitcommit: 8d951fd7e9534054b160be48a1881ae0857561ef
+ms.openlocfilehash: 5219d08fce5cf09b075b6d7adfb73970e007ded4
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/13/2018
-ms.locfileid: "53329484"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54487931"
 ---
 # <a name="web-application-monitoring-on-azure"></a>Supervision des applications web sur Azure
 
@@ -63,7 +66,7 @@ Azure Monitor, Application Insights et Log Analytics envoient tous les trois des
 
 Cet article décrit les options de supervision facilement disponibles avec les fonctionnalités populaires, mais de nombreuses options s’offrent à vous, notamment la possibilité de créer vos propres mécanismes de journalisation. Une pratique recommandée consiste à ajouter des services de supervision lorsque vous générez des niveaux dans une solution. Voici certaines extensions et alternatives possibles :
 
-- Consolidez les métriques Azure Monitor et Application Insights dans Grafana à l’aide d[Azure Monitor Data Source For Grafana][Azure Monitor Data Source For Grafana].
+- Consolidez les métriques Azure Monitor et Application Insights dans Grafana à l’aide d’[Azure Monitor Data Source For Grafana][Azure Monitor Data Source For Grafana].
 - [Data Dog][data-dog] comprend un connecteur pour Azure Monitor
 - Automatisez les fonctions de supervision à l’aide d’[Azure Automation][Azure Automation].
 - Ajoutez une communication avec les [solutions ITSM][ITSM solutions].
@@ -81,7 +84,7 @@ Toutefois, les considérations relatives à la haute disponibilité de l’appli
 
 Les exigences relatives aux informations personnelles et à la conformité affectent la collecte, la rétention et le stockage des données. En savoir plus sur la façon dont [Application Insights][application-insights] et [Log Analytics][log-analytics] gèrent les données de télémétrie.
 
-Les considérations relatives à la sécurité suivantes peuvent également s’appliquer :
+Les considérations suivantes relatives à la sécurité peuvent également s’appliquer :
 
 - Développez un plan pour gérer les informations personnelles si les développeurs sont autorisés à collecter leurs propres données ou à enrichir les données de télémétrie existantes.
 - Envisagez la rétention des données. Par exemple, Application Insights conserve les données de télémétrie pendant 90 jours. Archivez les données auxquelles vous souhaitez accéder pendant une période plus longue à l’aide de Microsoft Power BI, l’exportation continue ou l’API REST. Des tarifs de stockage s’appliquent.
@@ -92,13 +95,13 @@ Les considérations relatives à la sécurité suivantes peuvent également s’
 
 ## <a name="pricing"></a>Tarifs
 
-Les frais de supervision peuvent être rapidement élevés. Envisagez donc la tarification en amont, de comprendre ce que vous surveillez et de vérifier les frais associés de chaque service. Azure Monitor fournit sans frais des [métriques de base][basic metrics], alors que les coûts de supervision d’[Application Insights][application-insights-pricing] et de [Log Analytics][log-analytics] sont basés sur la quantité de données ingérées et le nombre de tests que vous exécutez.
+Les frais de supervision peuvent augmenter rapidement. Envisagez donc la tarification en amont, de comprendre ce que vous surveillez et de vérifier les frais associés de chaque service. Azure Monitor fournit sans frais des [métriques de base][basic metrics], alors que les coûts de supervision d’[Application Insights][application-insights-pricing] et de [Log Analytics][log-analytics] sont basés sur la quantité de données ingérées et le nombre de tests que vous exécutez.
 
 Pour vous aider à commencer, utilisez la [calculatrice de prix][pricing] pour estimer les coûts. Pour pouvoir observer l’évolution de la tarification pour votre cas d’usage particulier, modifiez les diverses options en fonction du déploiement que vous escomptez.
 
 Les données d’Application Insights sont envoyées au portail Azure pendant le débogage et une fois que vous avez publié votre application. À des fins de test et pour éviter des frais, un volume limité de données de télémétrie est instrumenté. Pour ajouter d’autres indicateurs, vous pouvez augmenter la limite de données de télémétrie. Pour un contrôle plus précis, consultez l’article [Échantillonnage dans Application Insights][Sampling in Application Insights].
 
-Après le déploiement, vous pouvez observer un [Flux de métriques temps réel][Live Metrics Stream] des indicateurs de performance. Ces données ne sont pas stockées &mdash; vous affichez des métriques en temps réel &mdash;, mais les données de télémétrie peuvent être collectées et analysées ultérieurement. Aucun frais n’est lié aux données Flux de métriques temps réel.
+Après le déploiement, vous pouvez observer un [Flux de métriques temps réel][Live Metrics Stream] des indicateurs de performance. Ces données ne sont pas stockées &mdash; vous affichez des métriques en temps réel &mdash;, mais les données de télémétrie peuvent être collectées et analysées ultérieurement. Aucuns frais ne sont liés aux données Flux de métriques temps réel.
 
 Log Analytics est facturé par Go de données ingéré dans le service. Les 5 premiers Go de données ingérés dans le service Azure Log Analytics chaque mois sont gratuits, et les données sont conservées sans frais pendant les 31 premiers jours dans votre espace de travail Log Analytics.
 

@@ -3,12 +3,15 @@ title: 'Adoption du cloud d’entreprise : Principes opérationnels de base'
 description: Aide sur les principes opérationnels de base
 author: petertaylor9999
 ms.date: 09/20/2018
-ms.openlocfilehash: d5f4c6529e92be387465a6ab9dca55267c584c11
-ms.sourcegitcommit: b7e521ba317f4fcd3253c80ac0c0a355eaaa56c5
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.openlocfilehash: 26867e3ecce738f18c5a03ff41754281229851f4
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/21/2018
-ms.locfileid: "46534181"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481123"
 ---
 # <a name="establishing-an-operational-fitness-review"></a>Mettre en place une évaluation de l’adéquation opérationnelle
 
@@ -75,13 +78,13 @@ Ce processus est itératif. Dans l’idéal, l’entreprise doit avoir une équi
 
 L’équipe d’évaluation de l’adéquation opérationnelle se compose des rôles suivants :
 
-1. **Responsable des résultats d’entreprise (Business Owner)**. Source de connaissances sur l’entreprise, il identifie et hiérarchise les opérations d’entreprise « critiques ». Il compare également le coût de prévention à l’impact sur l’entreprise et prend la décision finale concernant les mesures de correction à appliquer.
+1. **Responsable des résultats d’entreprise (Business Owner)**. Source de connaissances sur l’entreprise, il identifie et hiérarchise les opérations « critiques » pour l'entreprise. Il compare également le coût de prévention à l’impact sur l’entreprise et prend la décision finale concernant les mesures de correction à appliquer.
 
 2. **Conseiller d’entreprise (Business Advocate)**. Il est chargé de décomposer les opérations d’entreprise en différentes parties correspondant à une infrastructure et des services cloud et locaux. Une connaissance approfondie des technologies associées à chaque opération est nécessaire.
 
-3. **Responsable de l’ingénierie (Engineering Owner)**. Ils sont chargés d’implémenter les services associés à l’opération d’entreprise. Ils peuvent participer à la conception, à la mise en œuvre et au déploiement de solutions à des problèmes liés aux exigences non fonctionnelles et révélés par l’équipe d’évaluation de l’adéquation opérationnelle.
+3. **Responsable de l’ingénierie (Engineering Owner)**. Il est chargé d’implémenter les services associés à l’opération d’entreprise. Ils peuvent participer à la conception, à la mise en œuvre et au déploiement de solutions à des problèmes liés aux exigences non fonctionnelles et révélés par l’équipe d’évaluation de l’adéquation opérationnelle.
 
-4. **Responsable des services (Service Owner)**. Ils sont responsables du fonctionnement des applications et des services de l’entreprise. Ils collectent des données de journalisation et d’utilisation de ces applications et services, qui servent à identifier les problèmes et à vérifier les correctifs une fois déployés.
+4. **Responsable des services (Service Owner)**. Il est responsable du fonctionnement des applications et des services de l’entreprise. Ils collectent des données de journalisation et d’utilisation de ces applications et services, qui servent à identifier les problèmes et à vérifier les correctifs une fois déployés.
 
 ## <a name="operational-fitness-review-meeting"></a>Les réunions d’évaluation de l’adéquation opérationnelle
 
@@ -104,7 +107,7 @@ Les détails du processus et des réunions doivent être parfaitement adaptés �
 ## <a name="recommended-resources"></a>Ressources recommandées
 
 - [Piliers de la qualité logicielle](../../guide/pillars.md).
-Cette section du guide d’architecture des applications Azure décrit les cinq piliers de la qualité logicielle : l’extensibilité, la disponibilité, la résilience, la gestion et la sécurité.
+Cette section du guide d’architecture des applications Azure décrit les cinq piliers de la qualité logicielle : scalabilité, disponibilité, résilience, gestion et sécurité.
 - [Dix principes de conception pour les applications Azure](../../guide/design-principles/index.md).
 Cette section du guide d’architecture des applications Azure présente un ensemble de principes de conception visant à rendre les applications plus évolutives, plus résilientes et plus faciles à gérer.
 - [Concevoir des applications résilientes pour Azure](../../resiliency/index.md).
