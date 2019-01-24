@@ -4,13 +4,16 @@ titleSuffix: Azure Design Review Framework
 description: Liste de contrôle de l’extensibilité et recommandations concernant les problématiques de conception pour la mise à l’échelle automatique d’Azure.
 author: dragon119
 ms.date: 01/10/2018
+ms.topic: checklist
+ms.service: architecture-center
+ms.subservice: cloud-design-principles
 ms.custom: checklist
-ms.openlocfilehash: 8bb31e8176238fb32bdf4424aa733b812b5eeb68
-ms.sourcegitcommit: 4ba3304eebaa8c493c3e5307bdd9d723cd90b655
+ms.openlocfilehash: 7157ba4982b42a7f4f56422185d3b857bd909a78
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/12/2018
-ms.locfileid: "53307144"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54483665"
 ---
 # <a name="scalability-checklist"></a>Liste de contrôle de l’extensibilité
 

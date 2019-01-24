@@ -3,12 +3,15 @@ title: Choisir une technologie de traitement du langage naturel
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 699e01bc9905d02fc8ec1113039087189f6e8caf
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
+ms.openlocfilehash: 20dc51e661befcc09dd1751b031d445ff2b9fa1a
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54114111"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54486486"
 ---
 # <a name="choosing-a-natural-language-processing-technology-in-azure"></a>Choisir une technologie de traitement du langage naturel dans Azure
 

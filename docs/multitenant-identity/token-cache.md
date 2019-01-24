@@ -3,15 +3,18 @@ title: Mise en cache de jetons d’accès dans une application multi-locataire
 description: Mise en cache des jetons d’accès utilisés pour appeler une API web de serveur back-end.
 author: MikeWasson
 ms.date: 07/21/2017
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: web-api
 pnp.series.next: adfs
-ms.openlocfilehash: 0cf4b3c3b9187759522b4530c94268ce8d7baa86
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: ccecee8856d3c053d320ebd2bb26469389ce9a10
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54110950"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481692"
 ---
 # <a name="cache-access-tokens"></a>Mettre en cache des jetons d’accès
 

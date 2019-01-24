@@ -1,16 +1,19 @@
 ---
-title: 'Adoption du cloud d’entreprise : Fonctionnement d’Azure'
+title: 'Adoption du cloud d’entreprise : Fonctionnement d’Azure'
 description: Explication sur le fonctionnement interne d’Azure
 author: petertaylor9999
 ms.date: 09/10/2018
-ms.openlocfilehash: 1d9ff8003e97bcfe88121e8231473236f8cfb527
-ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.openlocfilehash: 510fc1040812d61b8d736b25c434511ea981b9e5
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44389058"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481828"
 ---
-# <a name="enterprise-cloud-adoption-how-does-azure-work"></a>Adoption du cloud d’entreprise : Fonctionnement d’Azure
+# <a name="enterprise-cloud-adoption-how-does-azure-work"></a>Adoption du cloud d’entreprise : Fonctionnement d’Azure
 
 Azure est la plateforme de cloud public de Microsoft. Azure offre une grande collection de services, y compris la plateforme en tant que service (PaaS), l’infrastructure en tant que service (IaaS), la base de données en tant que service (DBaaS) et bien d’autres. Mais ce qu’est -ce qu’Azure exactement et comment fonctionne-t-il ?
 

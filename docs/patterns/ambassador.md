@@ -5,13 +5,16 @@ description: Créez des services d’assistance qui envoient des requêtes rése
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: f03bfa0b45494ac1428aeee5cc6c413d5607ba79
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: bbf83cdd4bc850c641a0559942f71013e9ce9553
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54009778"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54486286"
 ---
 # <a name="ambassador-pattern"></a>Modèle ambassadeur
 

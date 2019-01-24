@@ -3,12 +3,15 @@ title: Extraire, transformer et charger (ETL)
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: b23e1ab35f278bd8e1b203cd0026ee356be022dc
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
+ms.openlocfilehash: 1551736d8ef3d2b82eb0a2fdb626330798ec1c65
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113431"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488025"
 ---
 # <a name="extract-transform-and-load-etl"></a>Extraire, transformer et charger (ETL)
 

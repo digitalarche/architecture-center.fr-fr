@@ -3,12 +3,16 @@ title: Identification des limites de microservice
 description: Identification des limites de microservices.
 author: MikeWasson
 ms.date: 10/23/2018
-ms.openlocfilehash: d353051e651b57472168609c36bbc47c02096ee7
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: microservices
+ms.openlocfilehash: 961dd98081978c312ca6e0e347c66bef70f01624
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54112632"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54484191"
 ---
 # <a name="designing-microservices-identifying-microservice-boundaries"></a>Conception de microservices : Identification des limites de microservice
 

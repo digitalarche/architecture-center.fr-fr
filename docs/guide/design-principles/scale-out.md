@@ -4,13 +4,16 @@ titleSuffix: Azure Application Architecture Guide
 description: Les applications cloud doivent être conçues pour une mise à l’échelle horizontale.
 author: MikeWasson
 ms.date: 08/30/2018
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: 9e8a36146c711fda2b03e00dfeb3554caf1fd5f0
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: 32ea1e7dc732c819783ad2fc06dbcffd75685d23
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113057"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54483732"
 ---
 # <a name="design-to-scale-out"></a>Penser la conception des applications pour augmenter la taille des instances
 

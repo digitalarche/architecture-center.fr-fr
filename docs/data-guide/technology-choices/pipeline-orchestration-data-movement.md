@@ -3,12 +3,15 @@ title: Sélection d’une technologie d’orchestration de pipeline de données
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 7d1fddf54216b756a5dc2c183a43449a2f45a122
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
+ms.openlocfilehash: 76a101b76497ae2b2aacff973175bb0fe4703d9e
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902369"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54482440"
 ---
 # <a name="choosing-a-data-pipeline-orchestration-technology-in-azure"></a>Sélection d’une technologie d’orchestration de pipeline de données dans Azure
 

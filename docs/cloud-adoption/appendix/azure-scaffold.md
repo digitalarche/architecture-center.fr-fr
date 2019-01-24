@@ -4,12 +4,15 @@ description: Décrit la structure que les entreprises peuvent utiliser pour gara
 author: rdendtler
 ms.author: rodend
 ms.date: 9/22/2018
-ms.openlocfilehash: 66af73f5bfc7f7145c20446af05f33a9d69e6c28
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.openlocfilehash: 883f32b1533261977aa274f64c78762c9e7b13f3
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54011733"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54484412"
 ---
 # <a name="azure-enterprise-scaffold-prescriptive-subscription-governance"></a>Structure d’entreprise Azure : Gouvernance normative de l’abonnement
 

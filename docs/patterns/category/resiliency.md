@@ -5,13 +5,16 @@ description: La résilience est la capacité d’un système à traiter de mani�
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: d478c0fb42e89c6bb5d84b4d077259ff4bf35f16
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: 5863cf9491434e2ddd683178591aff09c40e7315
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54009710"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481203"
 ---
 # <a name="resiliency-patterns"></a>Modèles de résilience
 

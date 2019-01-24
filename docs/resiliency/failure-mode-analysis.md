@@ -3,13 +3,16 @@ title: Analyse du mode d’échec
 description: Instructions pour effectuer l’analyse du mode d’échec pour les solutions cloud basées sur Azure.
 author: MikeWasson
 ms.date: 05/07/2018
+ms.topic: article
+ms.service: architecture-center
+ms.subservice: cloud-design-principles
 ms.custom: resiliency
-ms.openlocfilehash: e74a98ed1d57c3bd0b3b518ff4fae743dd12f02b
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: 6d0f58161c5b9d5922c21f24b1b1a50bab836bb1
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113210"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54484276"
 ---
 # <a name="failure-mode-analysis"></a>Analyse du mode d’échec
 

@@ -5,14 +5,12 @@ description: Modèles de conception de cloud pour Microsoft Azure
 keywords: Azure
 author: dragon119
 ms.date: 12/10/2018
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 873d4cf02690a2cc3ffe4f35b044dedf70700fb5
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
-ms.translationtype: HT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54011019"
 ---
+
 # <a name="cloud-design-patterns"></a>Modèles de conception de cloud
 
 [!INCLUDE [header](../../_includes/header.md)]

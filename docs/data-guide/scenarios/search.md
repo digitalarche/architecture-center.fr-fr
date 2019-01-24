@@ -3,12 +3,15 @@ title: Traitement de texte de forme libre pour la recherche
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 6b90d70129f6b5ba978ce0f79dc5a04d57126b5d
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
+ms.openlocfilehash: ba1685d12834b04e7d231929c53453b51527cce2
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113023"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54484582"
 ---
 # <a name="processing-free-form-text-for-search"></a>Traitement de texte de forme libre pour la recherche
 

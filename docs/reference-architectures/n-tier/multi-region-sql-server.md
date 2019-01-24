@@ -4,13 +4,16 @@ titleSuffix: Azure Reference Architectures
 description: Déployez une application sur des machines virtuelles Azure dans plusieurs régions pour bénéficier d’une haute disponibilité et d’un haut niveau de résilience.
 author: MikeWasson
 ms.date: 07/19/2018
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: seodec18
-ms.openlocfilehash: 5eef936dded1829ee561ce1b13df4fb147694dc7
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: 384634acb8690c64f75eabbfebc5f1de414f6da2
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54111986"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54484616"
 ---
 # <a name="run-an-n-tier-application-in-multiple-azure-regions-for-high-availability"></a>Exécuter une application multiniveau dans plusieurs régions pour une haute disponibilité
 

@@ -5,13 +5,16 @@ description: Créez différents services principaux destinés à être utilisés
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 1fc597ded3e87ca7b4a200a13af9dce5ba2dbec5
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: 7a58da4c249250eaa789c39222e965e1cdf84002
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54009744"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54487880"
 ---
 # <a name="backends-for-frontends-pattern"></a>Modèle de services principaux destinés aux frontaux
 

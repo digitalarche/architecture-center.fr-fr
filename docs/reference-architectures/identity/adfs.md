@@ -4,13 +4,16 @@ titleSuffix: Azure Reference Architectures
 description: Implémentez une architecture réseau hybride sécurisée avec l’autorisation des services AD FS (Active Directory Federation Service) dans Azure.
 author: telmosampaio
 ms.date: 12/18.2018
-ms.custom: seodec18
-ms.openlocfilehash: 0cdb8ce61c48189a7b708dfa022a68080040ec3d
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: seodec18, identity
+ms.openlocfilehash: 22a2a2042c85e70d0d5a523c9ecf72395a9e774c
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54111838"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488271"
 ---
 # <a name="extend-active-directory-federation-services-ad-fs-to-azure"></a>Étendre les services de fédération Active Directory (AD FS) dans Azure
 

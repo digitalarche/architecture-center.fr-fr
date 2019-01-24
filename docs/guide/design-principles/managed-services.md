@@ -4,13 +4,16 @@ titleSuffix: Azure Application Architecture Guide
 description: Dans la mesure du possible, privilégiez l’approche PaaS (platform as a service) plutôt que l’approche IaaS (infrastructure as a service).
 author: MikeWasson
 ms.date: 08/30/2018
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: 6f1ea3f3bf2442b331583a59973e3d32908aadeb
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: f08914e1eacc4f02fdb16093fe590f46249e3da3
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54111663"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485806"
 ---
 # <a name="use-managed-services"></a>Utiliser les services gérés
 

@@ -3,12 +3,15 @@ title: Données non relationnelles et NoSQL
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: e712cf7def9e237257b911c40346027c1529201d
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
+ms.openlocfilehash: f1f8a9ddc0a728f6be4350edb361afd19901de20
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54114281"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54483588"
 ---
 # <a name="non-relational-data-and-nosql"></a>Données non relationnelles et NoSQL
 

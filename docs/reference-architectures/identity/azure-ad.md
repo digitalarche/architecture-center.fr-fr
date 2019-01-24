@@ -4,13 +4,16 @@ titleSuffix: Azure Reference Architectures
 description: Implémentez une architecture réseau hybride sécurisée à l’aide d’Azure Active Directory (Azure AD).
 author: telmosampaio
 ms.date: 11/28/2016
-ms.custom: seodec18
-ms.openlocfilehash: cab80adad91626d0e02a6d0a27de23a9dfc43769
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: seodec18, identity
+ms.openlocfilehash: 3dc70c7eaea18f010d67befa5969d1be0423239c
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53120065"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54484395"
 ---
 # <a name="integrate-on-premises-active-directory-domains-with-azure-active-directory"></a>Intégrer des domaines Active Directory locaux avec Azure Active Directory
 

@@ -3,12 +3,15 @@ title: Implémenter un transformateur et un collecteur de propriétés dans un m
 description: Décrit la procédure d’implémentation d’un transformateur et d’un collecteur de propriétés dans un modèle Azure Resource Manager.
 author: petertay
 ms.date: 10/30/2018
-ms.openlocfilehash: 1a6a01ee513609132d8522a79ccb81b7938651b5
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: article
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.openlocfilehash: 5dc910b8577e27059761db417e6350cd38cdf2b8
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113805"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54484718"
 ---
 # <a name="implement-a-property-transformer-and-collector-in-an-azure-resource-manager-template"></a>Implémenter un transformateur et un collecteur de propriétés dans un modèle Azure Resource Manager
 

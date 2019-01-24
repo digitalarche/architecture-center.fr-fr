@@ -1,16 +1,19 @@
 ---
-title: 'Adoption du cloud d’entreprise : Prise en main'
+title: 'Adoption du cloud d’entreprise : Prise en main'
 description: Décrit une vue d’ensemble de la première phase de la transformation numérique d’une entreprise pour l’adoption de technologies cloud Azure
 author: petertaylor9999
 ms.date: 09/10/2018
-ms.openlocfilehash: b51e834a56f4d9818ca9475f959c3f888bae20bc
-ms.sourcegitcommit: c49aeef818d7dfe271bc4128b230cfc676f05230
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.openlocfilehash: 027757c76008da092e0d7ab65b072259a04b3cad
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/11/2018
-ms.locfileid: "44389288"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488084"
 ---
-# <a name="enterprise-cloud-adoption-getting-started"></a>Adoption du cloud d’entreprise : Prise en main 
+# <a name="enterprise-cloud-adoption-getting-started"></a>Adoption du cloud d’entreprise : Prise en main 
 
 La **transformation numérique** vers le cloud computing implique de passer d’un fonctionnement local à un fonctionnement dans le cloud. Ce changement induit de nouvelles méthodes de gestion d’une entreprise. Par exemple, la transformation numérique implique de passer de dépenses en capital pour les logiciels et les matériels de centre de données à des dépenses d’exploitation pour l’utilisation des ressources cloud. 
 

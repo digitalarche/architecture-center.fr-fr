@@ -4,12 +4,15 @@ titleSuffix: Azure Example Scenarios
 description: Créez un pipeline de traitement de commande hautement évolutif à l’aide d’Azure Cosmos DB.
 author: alexbuckgit
 ms.date: 07/10/2018
-ms.openlocfilehash: 285db7979f8a20ae75b534dcea5174b7151047ca
-ms.sourcegitcommit: 7d9efe716e8c9e99f3fafa9d0213d48c23d9713d
+ms.topic: example-scenario
+ms.service: architecture-center
+ms.subservice: example-scenario
+ms.openlocfilehash: ff71697969ba9fd85ff49c38458e59fc3447f905
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/09/2019
-ms.locfileid: "54160823"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481029"
 ---
 # <a name="scalable-order-processing-on-azure"></a>Traitement évolutif des commandes sur Azure
 

@@ -5,13 +5,16 @@ description: Une bonne conception englobe des facteurs tels que la cohérence et
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 38b20fad513109051d40c1b9556f75fa86e03dd7
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: ff609679bed4ee4aa88daf95ff1cab4ab2d90d48
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54009795"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54482545"
 ---
 # <a name="design-and-implementation-patterns"></a>Modèles de conception et d’implémentation
 

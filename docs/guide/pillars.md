@@ -4,13 +4,16 @@ titleSuffix: Azure Application Architecture Guide
 description: 'Décrit les cinq piliers de la qualité des logiciels : l’extensibilité, la disponibilité, la résilience, la gestion et la sécurité.'
 author: MikeWasson
 ms.date: 08/30/2018
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: 2f013063afea89e3e322aa6f36484f6df50210be
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: 76870f58fc957f6d82f6dc176d1c538c795a7d20
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113941"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54486231"
 ---
 # <a name="pillars-of-software-quality"></a>Piliers de la qualité logicielle
 

@@ -5,13 +5,16 @@ description: Déployez un contenu statique dans un service de stockage cloud qui
 keywords: modèle de conception
 author: dragon119
 ms.date: 01/04/2019
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: cf4f65e935a01e4d84b3cc82b5779edb729bd80e
-ms.sourcegitcommit: 036cd03c39f941567e0de4bae87f4e2aa8c84cf8
+ms.openlocfilehash: 719f0221ecc8d52267cba3136eec20dadef30b99
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/05/2019
-ms.locfileid: "54058180"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54483443"
 ---
 # <a name="static-content-hosting-pattern"></a>Modèle d’hébergement de contenu statique
 

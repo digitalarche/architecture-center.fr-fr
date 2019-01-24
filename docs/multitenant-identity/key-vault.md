@@ -3,14 +3,17 @@ title: Utiliser Key Vault pour protéger les secrets d’application
 description: Comment utiliser le service Key Vault pour stocker les secrets d’application.
 author: MikeWasson
 ms.date: 07/21/2017
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: client-assertion
-ms.openlocfilehash: dc471ca5fa090270465624548ffe7335363d6cb7
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: 6aa8d33da0b2fd41fdc037bac28bca9f7ff09907
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54112751"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481556"
 ---
 # <a name="use-azure-key-vault-to-protect-application-secrets"></a>Utiliser Azure Key Vault pour protéger les secrets d’application
 

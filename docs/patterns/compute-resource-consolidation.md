@@ -5,13 +5,16 @@ description: Consolidez plusieurs tâches ou opérations en une seule unité de 
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 0f787537fb97f52ad69df7f0784b7fca3c45d7d1
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: 4cd9b7f02ba3b2a9766a2493353da6b6488ba8a2
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54111476"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485333"
 ---
 # <a name="compute-resource-consolidation-pattern"></a>Modèle de consolidation des ressources de calcul
 

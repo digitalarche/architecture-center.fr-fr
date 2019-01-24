@@ -1,3 +1,18 @@
+---
+title: Lacs de données
+description: ''
+author: zoinerTejada
+ms.date: 02/12/2018
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
+ms.openlocfilehash: d433867886ce0afc219fcc9f35eb7f8b3ce6bee1
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54484701"
+---
 # <a name="data-lakes"></a>Lacs de données
 
 Un lac de données est un référentiel de stockage qui contient une grande quantité de données au format natif, brut. Les lacs de données sont optimisés pour s’adapter à des téraoctets et pétaoctets de données. En général, les données proviennent de plusieurs sources hétérogènes et peuvent être structurées, semi-structurées ou non structurées. L’idée est de stocker des éléments dans leur état d’origine sans leur faire subir de transformation. Cette approche diffère d’un [entrepôt de données](../relational-data/data-warehousing.md) classique, qui transforme et traite les données au moment de l’ingestion.

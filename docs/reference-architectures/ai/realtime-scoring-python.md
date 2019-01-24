@@ -4,13 +4,16 @@ titleSuffix: Azure Reference Architectures
 description: Cette architecture de référence montre comment déployer des modèles Python en tant que services web sur Azure pour élaborer des prédictions en temps réel.
 author: msalvaris
 ms.date: 11/09/2018
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: b40072b43630adf13e8ead0b6aa6bec59ca1bfac
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: 135e86b447684efd9f54340eda4b6bf6e4c35bbb
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54110890"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54487676"
 ---
 # <a name="real-time-scoring-of-python-scikit-learn-and-deep-learning-models-on-azure"></a>Scoring en temps réel des modèles Python Scikit-Learn et Apprentissage profond sur Azure
 

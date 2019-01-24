@@ -4,13 +4,16 @@ titleSuffix: Best practices for cloud applications
 description: Recommandations liées au nommage des machines virtuelles, comptes de stockage, réseaux, réseaux virtuels, sous-réseaux et autres entités Azure.
 author: telmosampaio
 ms.date: 10/19/2018
+ms.topic: best-practice
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: f0349b5db7eb15037bd92567eaf917b5d044daa0
-ms.sourcegitcommit: 036cd03c39f941567e0de4bae87f4e2aa8c84cf8
+ms.openlocfilehash: a5fbe72e81a169fd4b29e07e037bb7f8928e0c45
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/05/2019
-ms.locfileid: "54058197"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54482380"
 ---
 # <a name="naming-conventions-for-azure-resources"></a>Conventions d’affectation de noms pour les ressources Azure
 

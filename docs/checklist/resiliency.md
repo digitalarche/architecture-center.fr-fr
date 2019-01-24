@@ -4,13 +4,16 @@ titleSuffix: Azure Design Review Framework
 description: Liste de vérification fournissant des indications relatives aux problématiques de résilience durant la conception.
 author: petertaylor9999
 ms.date: 11/26/2018
+ms.topic: checklist
+ms.service: architecture-center
+ms.subservice: cloud-design-principles
 ms.custom: resiliency, checklist
-ms.openlocfilehash: 1a3c7b899be1c61cc53eb9caee30f5153edeb5ae
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: b96195ced1cad091d0ec843ffcc0007b46f05f8d
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113601"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54486248"
 ---
 # <a name="resiliency-checklist"></a>Liste de vérification de résilience
 

@@ -3,12 +3,15 @@ title: Choisir une technologie de transfert de données
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 1cb763ade2aa263d07a59cc6bfc29d59bec7af19
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
+ms.openlocfilehash: c58d06813e3a500c6bb1b6c7889e65f401be6c33
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54113040"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54484531"
 ---
 # <a name="transferring-data-to-and-from-azure"></a>Transférer des données vers et à partir d’Azure
 
@@ -134,7 +137,7 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 | --- | --- | --- | --- |
 | Optimisé pour le Big Data | Non  | Non  | Oui |
 | Copie vers une base de données relationnelle | Non  | Non  | Oui |
-| Copie vers une base de données relationnelle | Non  | Non  | Oui |
+| Copie à partir d’une base de données relationnelle | Non  | Non  | Oui |
 | Copie vers le Stockage Blob | Oui | Non  | Oui |
 | Copie à partir du Stockage Blob | Oui | Non  | Oui |
 | Copie vers Data Lake Store | Non  | Non  | Oui |

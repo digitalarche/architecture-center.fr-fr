@@ -5,13 +5,16 @@ description: Déplacez les informations de configuration depuis le package de d�
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 7e37e5bc052a9d8e8747a3a4ac3d79a311185ea4
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: fd006437aab934d951d0a0bc947d32878edbf9d8
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54011308"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54482381"
 ---
 # <a name="external-configuration-store-pattern"></a>Modèle de magasin de configurations externe
 

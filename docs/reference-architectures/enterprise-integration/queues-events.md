@@ -4,15 +4,17 @@ titleSuffix: Azure Reference Architectures
 description: Architecture recommandée pour implémenter un modèle d’intégration d’entreprise avec Azure Logic Apps, Gestion des API Azure, Azure Service Bus et Azure Event Grid.
 author: mattfarm
 ms.reviewer: jonfan, estfan, LADocs
-ms.topic: article
+ms.topic: reference-architecture
 ms.date: 12/03/2018
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: integration-services
-ms.openlocfilehash: 6357cb5015c8f10c0f4a8aa1b310ddbb38367004
-ms.sourcegitcommit: a0a9981e7586bed8d876a54e055dea1e392118f8
+ms.openlocfilehash: 4c9d2e201bcfc077990d746a1decd55ede2f220a
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/11/2018
-ms.locfileid: "53233861"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54480672"
 ---
 # <a name="enterprise-integration-on-azure-using-message-queues-and-events"></a>Intégration d’entreprise sur Azure avec des files d’attente de messages et des événements
 

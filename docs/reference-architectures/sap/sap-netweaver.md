@@ -4,13 +4,16 @@ titleSuffix: Azure Reference Architectures
 description: Pratiques éprouvées d’exécution de SAP S/4HANA dans un environnement Linux sur Azure avec une haute disponibilité.
 author: lbrader
 ms.date: 08/03/2018
-ms.custom: seodec18
-ms.openlocfilehash: ace5348ccb32299b2f4167b3d384ba72972ca9ad
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: seodec18, SAP, Windows
+ms.openlocfilehash: 1167a65786c3df946ebaed3e52e4ed4033f50fd5
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53644003"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54486401"
 ---
 # <a name="deploy-sap-netweaver-windows-for-anydb-on-azure-virtual-machines"></a>Déployer SAP NetWeaver (Windows) pour AnyDB sur des machines virtuelles Azure
 

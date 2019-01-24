@@ -3,12 +3,15 @@ title: Sélectionner un magasin de données analytique
 description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
-ms.openlocfilehash: 166361c73a3a9c812e07445f6b039e843e5e32f8
-ms.sourcegitcommit: e7e0e0282fa93f0063da3b57128ade395a9c1ef9
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
+ms.openlocfilehash: 236f5eaffffa8eb1206f13f3eb7fb57828f0a12d
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/05/2018
-ms.locfileid: "52902329"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54483766"
 ---
 # <a name="choosing-an-analytical-data-store-in-azure"></a>Sélectionner un magasin de données analytique dans Azure
 
@@ -53,7 +56,7 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 ### <a name="general-capabilities"></a>Fonctionnalités générales
 
-| | Base de données SQL | SQL Data Warehouse | HBase/Phoenix sur HDInsight | Hive LLAP sur HDInsight | Azure Analysis Services | Cosmos DB |
+| | Base de données SQL | SQL Data Warehouse | HBase/Phoenix sur HDInsight | Hive LLAP sur HDInsight | Azure Analysis Services | Cosmos DB |
 | --- | --- | --- | --- | --- | --- | --- |
 | Est un service géré | Oui | Oui | Oui <sup>1</sup> | Oui <sup>1</sup> | Oui | Oui |
 | Modèle de base de données primaire | Relationnel (format en colonnes lors de l’utilisation des index columnstore) | Tables relationnelles avec stockage en colonnes | Stockage de colonnes larges | Hive/In-Memory | Modèles sémantiques MOLAP/tabulaires | Stockage de documents, graphiques, stockage de clé-valeur, stockage de colonnes larges |
@@ -66,7 +69,7 @@ Les tableaux suivants résument les principales différences entre les fonctionn
  
 ### <a name="scalability-capabilities"></a>Fonctionnalités d’évolutivité
 
-|                                                  | Base de données SQL | SQL Data Warehouse | HBase/Phoenix sur HDInsight | Hive LLAP sur HDInsight | Azure Analysis Services | Cosmos DB |
+|                                                  | Base de données SQL | SQL Data Warehouse | HBase/Phoenix sur HDInsight | Hive LLAP sur HDInsight | Azure Analysis Services | Cosmos DB |
 |--------------------------------------------------|--------------|--------------------|----------------------------|------------------------|-------------------------|-----------|
 | Serveurs régionaux redondants pour assurer une haute disponibilité |     Oui      |        OUI         |            Oui             |           Non            |           Non             |    Oui    |
 |             Prend en charge l’augmentation de la taille des instances de la requête             |      Non       |        OUI         |            OUI             |          OUI           |           OUI           |    Oui    |
@@ -75,7 +78,7 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 ### <a name="security-capabilities"></a>Fonctionnalités de sécurité
 
-| | Base de données SQL | SQL Data Warehouse | HBase/Phoenix sur HDInsight | Hive LLAP sur HDInsight | Azure Analysis Services | Cosmos DB |
+| | Base de données SQL | SQL Data Warehouse | HBase/Phoenix sur HDInsight | Hive LLAP sur HDInsight | Azure Analysis Services | Cosmos DB |
 | --- | --- | --- | --- | --- | --- | --- |
 | Authentification  | SQL / Azure Active Directory (Azure AD) | SQL / Azure AD | local / Azure AD<sup>1</sup> | local / Azure AD <sup>1</sup> | Azure AD | utilisateurs de base de données / Azure AD via un contrôle d’accès (IAM) |
 | Chiffrement des données au repos | Oui <sup>2</sup> | Oui <sup>2</sup> | Oui <sup>1</sup> | Oui <sup>1</sup> | Oui | Oui |

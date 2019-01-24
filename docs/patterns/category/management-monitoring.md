@@ -5,13 +5,16 @@ description: Les applications cloud s’exécutent dans un centre de données di
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: fc75a3a56323b61651b9e840068a3117b31cf203
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: 587caf680a884cda208baec50ff914f6c7238b48
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54009353"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54486869"
 ---
 # <a name="management-and-monitoring-patterns"></a>Modèles de gestion et de surveillance
 

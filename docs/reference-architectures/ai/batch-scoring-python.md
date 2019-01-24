@@ -3,13 +3,16 @@ title: Scoring par lots des modèles Python sur Azure
 description: Générez une solution scalable pour le scoring par lots des modèles selon une planification en parallèle à l’aide d’Azure Batch AI.
 author: njray
 ms.date: 12/13/2018
-ms.custom: azcat-ai
-ms.openlocfilehash: 4c43a3dadab11cb8dcf163cf63618795299283ad
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: azcat-ai, AI
+ms.openlocfilehash: a291821860a8e503ba4c6173ac6d8fd449d6ebf3
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54111047"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485364"
 ---
 # <a name="batch-scoring-of-python-models-on-azure"></a>Scoring par lots des modèles Python sur Azure
 

@@ -4,13 +4,16 @@ titleSuffix: Azure Application Architecture Guide
 description: Décrit les avantages, les inconvénients et les bonnes pratiques des architectures Big Data sur Azure.
 author: MikeWasson
 ms.date: 08/30/2018
-ms.custom: seojan19
-ms.openlocfilehash: 507cd4dcf74ed7e106a99b93dd029dfdffd6e4bc
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: seojan19, IoT
+ms.openlocfilehash: 07fb955fdc5475020097554070753689d1515462
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54112496"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488018"
 ---
 # <a name="big-data-architecture-style"></a>Style d’architecture Big Data
 

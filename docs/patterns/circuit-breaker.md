@@ -5,13 +5,16 @@ description: Gérer les erreurs dont la résolution peut prendre un certain temp
 keywords: modèle de conception
 author: dragon119
 ms.date: 06/23/2017
+ms.topic: design-pattern
+ms.service: architecture-center
+ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 56c90fcb23fd68b0d1b545db90adeab3272705c2
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.openlocfilehash: 7cc84b3c14ea277aa82643f3141f0693ec702a49
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54009761"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485602"
 ---
 # <a name="circuit-breaker-pattern"></a>Modèle Disjoncteur
 
@@ -19,7 +22,7 @@ Gérer les erreurs pour lesquelles la récupération peut prendre un certain tem
 
 ## <a name="context-and-problem"></a>Contexte et problème
 
-Dans un environnement distribué, les appels à des ressources et services distants peuvent échouer en raison d’erreurs temporaires telles que des connexions réseau lentes, des expirations de délais d’attente, ou encore une indisponibilité temporaire ou une sollicitation trop importante des ressources. Ces erreurs disparaissent en général automatiquement après un court laps de temps, et une application cloud robuste doit être prête à les gérer à l’aide d’une stratégie telle que le [modèle Nouvelle tentative][retry-pattern].
+Dans un environnement distribué, les appels à des ressources et services distants peuvent échouer en raison d’erreurs temporaires telles que des connexions réseau lentes, des expirations de délais d’attente, ou encore une indisponibilité temporaire ou une sollicitation trop importante des ressources. Ces erreurs disparaissent en général automatiquement après un court laps de temps, et une application cloud fiable doit être prête à les gérer à l’aide d’une stratégie telle que le [modèle Nouvelle tentative](./retry.md).
 
 Toutefois, dans certaines situations les erreurs sont dues à des événements imprévus et peuvent durer beaucoup plus longtemps. Ces erreurs peuvent aller d’une perte partielle de connectivité à la défaillance complète d’un service. Dans ces cas-là, il ne sert à rien qu’une application effectue de nouvelles tentatives qui sont vouées à l’échec. Au lieu de cela, elle doit rapidement reconnaître que l’opération a échoué et traiter cet échec en conséquence.
 

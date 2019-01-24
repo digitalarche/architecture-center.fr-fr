@@ -4,13 +4,16 @@ titleSuffix: Azure Example Scenarios
 description: ETL hybride avec des déploiements SSIS (SQL Server Integration Services) locaux existants et Azure Data Factory.
 author: alhieng
 ms.date: 09/20/2018
+ms.topic: example-scenario
+ms.service: architecture-center
+ms.subservice: example-scenario
 ms.custom: tsp-team
-ms.openlocfilehash: a2ca3817ed172e6d2332a92f68970ea2a5ad8f6c
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.openlocfilehash: 2fc5a94391b2e7e24209e884a790fe72070c4fc2
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54110388"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54485109"
 ---
 # <a name="hybrid-etl-with-existing-on-premises-ssis-and-azure-data-factory"></a>ETL hybride avec une instance SSIS locale existante et Azure Data Factory
 

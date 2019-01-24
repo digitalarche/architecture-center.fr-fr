@@ -4,13 +4,16 @@ titleSuffix: Azure Reference Architectures
 description: Implémentez une architecture réseau de site à site sécurisée qui s’étend sur un réseau virtuel Azure et un réseau local connecté à l’aide d’Azure ExpressRoute.
 author: telmosampaio
 ms.date: 10/22/2017
-ms.custom: seodec18
-ms.openlocfilehash: 1308f85f2f6d05b86e22f2558d89f164d076d182
-ms.sourcegitcommit: 1f4cdb08fe73b1956e164ad692f792f9f635b409
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: seodec18, networking
+ms.openlocfilehash: eff7d3e88cc9578b6d5ff83628f7d03b00717b5f
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/08/2019
-ms.locfileid: "54112785"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54487853"
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-expressroute"></a>Connecter un réseau local à Azure à l’aide d’ExpressRoute
 

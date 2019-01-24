@@ -3,14 +3,18 @@ title: 'Adoption du cloud d’entreprise : Déployer une charge de travail de ba
 description: Décrit comment déployer une charge de travail de base sur Azure
 author: petertaylor9999
 ms.date: 09/10/2018
-ms.openlocfilehash: 363e7e6f394389fb6c1577e2cbaeffeddcf2de1a
-ms.sourcegitcommit: b38ba378c9d6110da2dfd50b4233fadd94604bb0
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: Windows, Linux
+ms.openlocfilehash: 031a8f2e1dc0b137fc830733d025997a2657ef3c
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/25/2018
-ms.locfileid: "47167351"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54481403"
 ---
-# <a name="enterprise-cloud-adoption-deploy-a-basic-workload"></a>Adoption du cloud d’entreprise : Déployer une charge de travail de base
+# <a name="enterprise-cloud-adoption-deploy-a-basic-workload"></a>Adoption du cloud d’entreprise : Déployer une charge de travail de base
 
 Le terme **charge de travail** définit généralement une unité arbitraire de fonctionnalité, par exemple une application ou un service. Une charge de travail est envisagée sous l’angle des artefacts de code qui sont déployés sur un serveur, mais également sous l’angle de tous les autres services nécessaires. Cette définition se révèle pertinente dans le cas d’une application ou d’un service local(e), mais dans le cloud, elle mérite d’être développée.
 
