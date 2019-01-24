@@ -4,13 +4,16 @@ titleSuffix: Azure Reference Architectures
 description: Implémentez une architecture réseau de site à site sécurisée et hautement disponible qui s’étend sur un réseau virtuel Azure et un réseau local connecté à l’aide d’ExpressRoute avec basculement de passerelle VPN.
 author: telmosampaio
 ms.date: 10/22/2017
-ms.custom: seodec18
-ms.openlocfilehash: d32e4dfa81cf74a4ca74746120c15f1ddc066c3e
-ms.sourcegitcommit: 680c9cef945dff6fee5e66b38e24f07804510fa9
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
+ms.custom: seodec18, networking
+ms.openlocfilehash: fba07823d49aa43fdb67652f99a26bd7df3a57c3
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/04/2019
-ms.locfileid: "54011104"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488288"
 ---
 # <a name="connect-an-on-premises-network-to-azure-using-expressroute-with-vpn-failover"></a>Connecter un réseau local à Azure à l’aide d’ExpressRoute avec basculement VPN
 

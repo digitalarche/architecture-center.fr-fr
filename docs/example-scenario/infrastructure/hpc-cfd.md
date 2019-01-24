@@ -4,13 +4,16 @@ titleSuffix: Azure Example Scenarios
 description: Exécutez des simulations de diagramme de flux cumulé (CFD) sur Azure.
 author: mikewarr
 ms.date: 09/20/2018
+ms.topic: example-scenario
+ms.service: architecture-center
+ms.subservice: example-scenario
 ms.custom: fasttrack
-ms.openlocfilehash: af43a60e952d75f84b4c7903a1567b0c76b9f4c4
-ms.sourcegitcommit: bb7fcffbb41e2c26a26f8781df32825eb60df70c
+ms.openlocfilehash: 0bd0590ccc2975481e23ac2154c4f0998e1f0877
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/20/2018
-ms.locfileid: "53643932"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488475"
 ---
 # <a name="running-computational-fluid-dynamics-cfd-simulations-on-azure"></a>Exécution des simulations de diagramme de flux cumulé (CFD) sur Azure
 

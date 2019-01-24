@@ -4,12 +4,15 @@ titleSuffix: Enterprise Cloud Adoption
 description: Points importants à prendre en compte pour élaborer une justification de la migration cloud
 author: BrianBlanchard
 ms.date: 12/10/2018
-ms.openlocfilehash: dd712c83fd82e7d9efe40f4e382910e2403088b3
-ms.sourcegitcommit: e7f8676bbffe500fc4d6deb603b7c0b7ba1884a6
+ms.topic: guide
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.openlocfilehash: 8c27ce211f500ee2eec4f7775a7f68f214dba433
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/10/2018
-ms.locfileid: "53179675"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488322"
 ---
 # <a name="enterprise-cloud-adoption-building-a-cloud-migration-business-case"></a>Adoption du cloud d’entreprise : Création d’une analyse de rentabilisation d’une migration cloud
 

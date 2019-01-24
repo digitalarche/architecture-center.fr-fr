@@ -4,13 +4,16 @@ titleSuffix: Azure Reference Architectures
 description: Cette architecture de référence montre comment appliquer un transfert de style neuronal à une vidéo à l’aide d’Azure Batch AI.
 author: jiata
 ms.date: 10/02/2018
+ms.topic: reference-architecture
+ms.service: architecture-center
+ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 0396903a39d00a4131df65872a63f4b3fde8dce7
-ms.sourcegitcommit: 88a68c7e9b6b772172b7faa4b9fd9c061a9f7e9d
+ms.openlocfilehash: 26a83b3f75b2e7e9ec4a8a99ab8b4d8f1b1ef4d7
+ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/08/2018
-ms.locfileid: "53119878"
+ms.lasthandoff: 01/23/2019
+ms.locfileid: "54488560"
 ---
 # <a name="batch-scoring-on-azure-for-deep-learning-models"></a>Scoring par lots dans Azure pour les modèles d’apprentissage profond
 
@@ -24,7 +27,7 @@ Cette architecture de référence montre comment appliquer un transfert de style
 |--------|--------|---------|
 | <img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/style_image.jpg" width="300"> | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video.mp4 "Vidéo d’entrée") *cliquer pour voir la vidéo* | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video.mp4 "Vidéo de sortie") *cliquer pour voir la vidéo* |
 
-Cette architecture de référence a été conçue pour les charges de travail qui sont déclenchées par la présence de nouveaux médias dans le stockage Azure. Le traitement est constitué des étapes suivantes :
+Cette architecture de référence a été conçue pour les charges de travail qui sont déclenchées par la présence de nouveaux contenus multimédias dans le stockage Azure. Le traitement est constitué des étapes suivantes :
 
 1. Chargez une image de style sélectionnée (comme une peinture de Van Gogh) et un script de transfert de style dans Stockage Blob.
 1. Créez un cluster Batch AI avec mise à l’échelle automatique, prêt à commencer à accepter des tâches.
@@ -68,9 +71,9 @@ Cette architecture de référence utilise la séquence vidéo d’un orang-outan
 
 ## <a name="performance-considerations"></a>Considérations relatives aux performances
 
-### <a name="gpu-vs-cpu"></a>GPU et UC
+### <a name="gpu-vs-cpu"></a>GPU et CPU
 
-Pour les charges de travail d’apprentissage profond, les GPU (processeurs graphiques) sont généralement beaucoup plus performants que les UC (unités centrales), dans la mesure où il faut un cluster d’UC important pour obtenir des performances comparables. Bien qu’il soit possible d’utiliser uniquement des UC dans cette architecture, les GPU offrent un bien meilleur rapport coût/performances. Nous vous recommandons d’utiliser les dernières machines virtuelles optimisées pour les GPU [série NCv3] vm-sizes-gpu.
+Pour les charges de travail d’apprentissage profond, les GPU (processeurs graphiques) sont généralement beaucoup plus performants que les CPU (processeurs centraux), dans la mesure où il faut un cluster de CPU important pour obtenir des performances comparables. Bien qu’il soit possible d’utiliser uniquement des CPU dans cette architecture, les GPU offrent un bien meilleur rapport coût/performances. Nous vous recommandons d’utiliser les dernières machines virtuelles optimisées pour les GPU [série NCv3] vm-sizes-gpu.
 
 Les GPU ne sont pas compatibles par défaut dans toutes les régions. Veillez à sélectionner une région compatible avec les GPU. Par ailleurs, les abonnements ont un quota par défaut de zéro cœur pour les machines virtuelles optimisées pour les GPU. Vous pouvez augmenter ce quota en formulant une demande de support. Vérifiez que votre abonnement dispose d’un quota suffisant pour exécuter votre charge de travail.
 
@@ -112,7 +115,7 @@ Dans les scénarios à plusieurs utilisateurs, veillez à ce que les données se
 - Provisionnez deux comptes de stockage distincts. Stockez les données d’entrée et de sortie dans le premier compte. L’accès à ce compte peut être octroyé à des utilisateurs externes. Stockez les scripts exécutables et les fichiers journaux de sortie dans l’autre compte. Les utilisateurs externes ne doivent pas avoir accès à ce compte. Ainsi, les utilisateurs externes ne pourront pas modifier les fichiers exécutables (pour injecter du code malveillant) ni accéder aux fichiers journaux, qui peuvent contenir des informations sensibles.
 - Les utilisateurs malveillants peuvent lancer une attaque DDOS à l’encontre de la file d’attente des travaux ou injecter dans celle-ci des messages incohérents mal formés, entraînant ainsi le blocage du système ou des erreurs de retrait de la file d’attente.
 
-## <a name="monitoring-and-logging"></a>Surveillance et journalisation
+## <a name="monitoring-and-logging"></a>Supervision et journalisation
 
 ### <a name="monitoring-batch-ai-jobs"></a>Supervision des tâches Batch AI
 
@@ -134,7 +137,7 @@ Les étapes de déploiement pour cette architecture de référence montrent auss
 
 Par rapport aux composants de stockage et de planification, les ressources de calcul utilisées dans cette architecture de référence s’avèrent nettement plus coûteuses. L’une des principales difficultés est de paralléliser efficacement les tâches dans un cluster de machines compatibles avec les GPU.
 
-La taille du cluster Batch AI peut être mise automatiquement à l’échelle à la hausse ou à la baisse en fonction des tâches présentes dans la file d’attente. Avec Batch AI, vous pouvez activer la mise à l’échelle automatique de deux façons différentes. Vous pouvez le faire par programmation, ce que vous pouvez configurer dans le fichier `.env` lors des [étapes de déploiement][deployment], ou vous pouvez changer la formule de mise à l’échelle directement dans le portail une fois le cluster créé.
+La taille du cluster Batch AI peut être mise automatiquement à l’échelle à la hausse ou à la baisse en fonction des tâches présentes dans la file d’attente. Avec Batch AI, vous pouvez activer la mise à l’échelle automatique de deux façons différentes. Vous pouvez le faire programmatiquement, ce que vous pouvez configurer dans le fichier `.env` lors des [étapes de déploiement][deployment], ou vous pouvez changer la formule de mise à l’échelle directement dans le portail une fois le cluster créé.
 
 Pour les tâches qui ne nécessitent pas un traitement immédiat, configurez la formule de mise à l’échelle automatique de sorte que l’état par défaut (minimum) soit un cluster sans nœud. Avec cette configuration, le cluster démarre sans nœud et ne monte en puissance que s’il détecte des tâches dans la file d’attente. Si le processus de scoring par lots ne s’enclenche que quelques fois par jour, ce paramètre permet de réaliser des économies significatives.
 
