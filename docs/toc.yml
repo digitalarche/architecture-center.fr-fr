@@ -359,6 +359,8 @@ items:
       href: reference-architectures/ai/realtime-scoring-python.md
     - name: Scoring en temps réel des modèles Machine Learning R
       href: reference-architectures/ai/realtime-scoring-r.md
+    - name: Bot de conversation
+      href: reference-architectures/ai/conversational-bot.md
     - name: API de recommandation en temps réel
       href: reference-architectures/ai/real-time-recommendation.md
   - name: Données volumineuses (« Big Data »)
@@ -407,6 +409,10 @@ items:
       href: reference-architectures/identity/adfs.md
   - name: Internet des objets (IoT)
     href: reference-architectures/iot/index.md
+  - name: Microservices
+    items:
+    - name: Service Azure Kubernetes (AKS)
+      href: reference-architectures/microservices/aks.md
   - name: Zone DMZ réseau
     items:
     - name: Zone DMZ entre Azure et les réseaux locaux
@@ -589,9 +595,9 @@ items:
       href: cloud-adoption/appendix/azure-scaffold.md
     - name: Implémentation d’une structure d’entreprise Azure
       href: cloud-adoption/appendix/azure-scaffold-examples.md
-ms.openlocfilehash: 6f30cd38397f9c91577953e6ea763bbaa4d26e09
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 4e89b1ffad613f6d48dcd7e5a049f0ba8dbd3b52
+ms.sourcegitcommit: ed736a0a1b080f6acf4877c8b906cd9b56e12bdf
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54487829"
+ms.lasthandoff: 01/28/2019
+ms.locfileid: "55085767"
