@@ -9,12 +9,12 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: f9f33421f3e1030e2477379970082f5c45690390
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 0bbe8177abe708cf41c1b5a8d117c05fd280c948
+ms.sourcegitcommit: 3b15d65e7c35a19506e562c444343f8467b6a073
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486855"
+ms.lasthandoff: 01/25/2019
+ms.locfileid: "54908594"
 ---
 # <a name="throttling-pattern"></a>Modèle de limitation
 
@@ -38,7 +38,7 @@ Le système peut implémenter plusieurs stratégies de limitation, y compris :
 
 - La désactivation ou la dégradation des fonctionnalités des services non essentiels sélectionnés, afin que les services essentiels puissent s’exécuter normalement avec suffisamment de ressources. Par exemple, si l’application diffuse une vidéo, elle peut basculer sur une résolution plus faible.
 
-- L’utilisation du nivellement de la charge pour lisser le volume d’activité (cette approche est abordée plus en détail dans [Queue-based Load Leveling pattern](./queue-based-load-leveling.md)(Modèle de nivellement de la charge basé sur une file d’attente)). Dans un environnement multi-locataire, cette approche réduira les performances de chaque locataire. Si le système doit prendre en charge un mélange de locataires avec différents SLA, le travail des locataires prioritaires peut être effectué immédiatement. Les requêtes des autres locataires peuvent être retenues et gérées lorsque le backlog a été allégé. Vous pouvez vous servir du [modèle de file d’attente de priorité][] pour implémenter cette approche.
+- L’utilisation du nivellement de la charge pour lisser le volume d’activité (cette approche est abordée plus en détail dans [Queue-based Load Leveling pattern](./queue-based-load-leveling.md)(Modèle de nivellement de la charge basé sur une file d’attente)). Dans un environnement multi-locataire, cette approche réduira les performances de chaque locataire. Si le système doit prendre en charge un mélange de locataires avec différents SLA, le travail des locataires prioritaires peut être effectué immédiatement. Les requêtes des autres locataires peuvent être retenues et gérées lorsque le backlog a été allégé. Le [modèle de file d’attente de priorité](./priority-queue.md) peut être utilisé pour aider à implémenter cette approche.
 
 - Le report d’opérations en cours d’exécution pour le compte d’applications ou de locataires basse priorité. Ces opérations peuvent être suspendues ou limitées, avec une exception générée pour informer le locataire que le système est occupé et que l’opération doit être retentée ultérieurement.
 

@@ -7,12 +7,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai, AI
-ms.openlocfilehash: a291821860a8e503ba4c6173ac6d8fd449d6ebf3
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 1ca6cf385ddd3be56e247a3439e737c114a88dcb
+ms.sourcegitcommit: 40f3561cc94f721eca50d33f2d75dc974cb6f92b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54485364"
+ms.lasthandoff: 01/29/2019
+ms.locfileid: "55147278"
 ---
 # <a name="batch-scoring-of-python-models-on-azure"></a>Scoring par lots des modèles Python sur Azure
 
@@ -33,6 +33,9 @@ Cette architecture est constituée des composants suivants :
 [Azure Stream Analytics][stream-analytics]. Moteur de traitement des événements. Un travail Stream Analytics lit les flux de données provenant du hub d’événements et effectue le traitement des flux.
 
 [Azure Batch AI][batch-ai]. Ce moteur de calcul distribué est utilisé pour entraîner et tester les modèles de machine learning et d’intelligence artificielle à grande échelle dans Azure. Batch AI crée des machines virtuelles à la demande avec une option de mise à l’échelle automatique, où chaque nœud du cluster Batch AI exécute un travail de scoring pour un capteur spécifique. Le [script][python-script] Python de scoring s’exécute dans des conteneurs Docker qui sont créés sur chaque nœud du cluster, où il lit les données de capteurs pertinentes, génère des prédictions et les stocke dans le stockage Blob.
+
+> [!NOTE]
+> La date du retrait du service Azure Batch AI est fixée au mois de mars 2019 ; ses capacités d’entraînement et de scoring à grande échelle sont désormais disponibles dans [Azure Machine Learning service][amls]. Cette architecture de référence sera bientôt actualisée pour utiliser Machine Learning qui offre une cible de calcul managée appelée [Capacité de calcul Azure Machine Learning][aml-compute] pour l’entraînement, le déploiement et le scoring de modèles Machine Learning.
 
 [Stockage Blob Azure][storage]. Les conteneurs d’objets blob sont utilisés pour stocker les modèles préentraînés, les données et les prédictions de sortie. Les modèles sont chargés sur le stockage Blob dans le notebook [create\_resources.ipynb][create-resources]. Ces modèles [SVM à une classe][one-class-svm] sont entraînés sur des données qui représentent les valeurs de différents capteurs pour différents appareils. Cette solution part du principe que les valeurs de données sont agrégées sur un intervalle de temps fixe.
 
@@ -94,6 +97,8 @@ L’implémentation de référence de cette architecture est disponible sur [Git
 
 [acr]: /azure/container-registry/container-registry-intro
 [ai]: /azure/application-insights/app-insights-overview
+[aml-compute]: /azure/machine-learning/service/how-to-set-up-training-targets#amlcompute
+[amls]: /azure/machine-learning/service/overview-what-is-azure-ml
 [automatic-scaling]: /azure/batch/batch-automatic-scaling
 [azure-files]: /azure/storage/files/storage-files-introduction
 [batch-ai]: /azure/batch-ai/

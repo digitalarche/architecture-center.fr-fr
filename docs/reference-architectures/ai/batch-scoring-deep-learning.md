@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 26a83b3f75b2e7e9ec4a8a99ab8b4d8f1b1ef4d7
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 27975b42179e87f4520186778610159943a93090
+ms.sourcegitcommit: 40f3561cc94f721eca50d33f2d75dc974cb6f92b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488560"
+ms.lasthandoff: 01/29/2019
+ms.locfileid: "55147244"
 ---
 # <a name="batch-scoring-on-azure-for-deep-learning-models"></a>Scoring par lots dans Azure pour les modèles d’apprentissage profond
 
@@ -45,6 +45,9 @@ Cette architecture est constituée des composants suivants.
 ### <a name="compute"></a>Calcul
 
 **[Azure Batch AI][batch-ai]** sert à exécuter l’algorithme de transfert de style neuronal. Batch AI prend en charge les charges de travail d’apprentissage profond en fournissant des environnements conteneurisés qui sont préconfigurés pour les infrastructures d’apprentissage profond, sur des machines virtuelles compatibles avec les GPU. Batch AI peut aussi connecter le cluster de calcul à Stockage Blob.
+
+> [!NOTE]
+> La date du retrait du service Azure Batch AI est fixée au mois de mars 2019 ; ses capacités d’entraînement et de scoring à grande échelle sont désormais disponibles dans [Azure Machine Learning service][amls]. Cette architecture de référence sera bientôt actualisée pour utiliser Machine Learning qui offre une cible de calcul managée appelée [Capacité de calcul Azure Machine Learning][aml-compute] pour l’entraînement, le déploiement et le scoring de modèles Machine Learning.
 
 ### <a name="storage"></a>Stockage
 
@@ -149,6 +152,8 @@ Pour déployer cette architecture de référence, suivez les étapes décrites d
 
 <!-- links -->
 
+[aml-compute]: /azure/machine-learning/service/how-to-set-up-training-targets#amlcompute
+[amls]: /azure/machine-learning/service/overview-what-is-azure-ml
 [azcopy]: /azure/storage/common/storage-use-azcopy-linux
 [batch-ai]: /azure/batch-ai/
 [blobfuse]: https://github.com/Azure/azure-storage-fuse

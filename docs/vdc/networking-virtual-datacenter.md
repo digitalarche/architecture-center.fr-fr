@@ -10,12 +10,12 @@ ms.subservice: enterprise-cloud-adoption
 ms.custom: virtual-network
 ms.date: 11/28/2018
 ms.author: jonor
-ms.openlocfilehash: 1f61996d231f3bf0cc2c550f4d3e119116bb7bc0
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: a997a0f03da63bc1432f61f3299e7c6794278e5e
+ms.sourcegitcommit: 3b15d65e7c35a19506e562c444343f8467b6a073
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488645"
+ms.lasthandoff: 01/25/2019
+ms.locfileid: "54908550"
 ---
 # <a name="azure-virtual-datacenter-a-network-perspective"></a>Centre de données virtuel Azure : perspective réseau
 
@@ -262,12 +262,6 @@ Azure Load Balancer peut également analyser à l’aide de sondes l’intégrit
 
 [**Application Gateway**][AppGW] Microsoft Azure Application Gateway est une appliance virtuelle dédiée qui intègre Application Delivery Controller (ADC) en tant que service, offrant ainsi diverses fonctionnalités d’équilibrage de charge de couche 7 pour votre application. Cette appliance vous permet d’optimiser la productivité de la batterie de serveurs Web en déchargeant une terminaison SSL nécessitant de nombreuses ressources du processeur vers la passerelle Application Gateway. Elle fournit également d’autres fonctionnalités de routage de couche 7, notamment la distribution en tourniquet (round robin) du trafic entrant, l’affinité de session basée sur les cookies, le routage basé sur le chemin d’accès de l’URL et la possibilité d’héberger plusieurs sites web derrière une seule passerelle Application Gateway. Un pare-feu d’applications web (WAF) est également intégré à la référence SKU Application Gateway WAF. Cette référence SKU protège les applications web contre les vulnérabilités et les codes malveillants exploitant une faille de sécurité les plus courants sur le web. La passerelle Application Gateway peut être configurée en tant que passerelle internet, passerelle interne uniquement ou une combinaison des deux. 
 
-[**Application Gateway**][AppGW] est une appliance virtuelle dédiée qui intègre le service ADC (Application Delivery Controller), offrant ainsi diverses fonctionnalités d’équilibrage de charge de couche 7 à votre application. Vous pouvez optimiser la productivité de la batterie de serveurs web en déchargeant l’arrêt SSL nécessitant de nombreuses ressources d’UC vers l’instance Application Gateway. Elle fournit également d’autres fonctionnalités de routage de couche 7, notamment : 
-* Répartition en tourniquet (round robin) du trafic entrant. 
-* L’affinité de session basée sur les cookies. 
-* Routage basé sur le chemin de l’URL. 
-* Possibilité d’héberger plusieurs sites web derrière une seule instance Application Gateway. Un WAF (pare-feu d’applications web) est également fourni dans le cadre de la référence WAF Application Gateway. Cette référence SKU protège les applications web contre les vulnérabilités et les codes malveillants exploitant une faille de sécurité les plus courants sur le web. Vous pouvez configurer Application Gateway en tant que passerelle accessible sur Internet, passerelle interne uniquement ou une combinaison des deux. 
-
 [**Adresses IP publiques**][PIP]. Avec certaines fonctionnalités Azure, vous pouvez associer des points de terminaison de service à une adresse IP publique, pour que votre ressource soit accessible à partir d’Internet. Ce point de terminaison utilise NAT (traduction d’adresses réseau) pour router le trafic vers l’adresse et le port internes sur le réseau virtuel Azure. Il s’agit du principal chemin d’accès pour que le trafic externe passe dans le réseau virtuel. Vous pouvez configurer des adresses IP publiques pour déterminer le type de trafic passé ainsi que la façon dont la traduction s’opère sur le réseau virtuel et son emplacement précis.
 
 Le service [**Azure DDoS Protection standard**][DDOS] fournit des fonctionnalités d’atténuation supplémentaires par rapport au niveau de [service De base][DDOS] destinées spécifiquement aux ressources de réseau virtuel Azure. Le service DDoS Protection Standard est facile à activer et ne nécessite aucun changement de l’application. Les stratégies de protection sont paramétrées par le biais d’algorithmes de surveillance du trafic et d’apprentissage automatique dédiés. Ces stratégies sont appliquées aux adresses IP publiques associées aux ressources déployées sur des réseaux virtuels. Exemples : instances Azure Load Balancer, Azure Application Gateway et Azure Service Fabric. Les données de télémétrie en temps réel sont disponibles par le biais d’affichages Azure Monitor pendant une attaque et à des fins d’historique. Vous pouvez ajouter une protection de la couche Application via le pare-feu d’applications web Azure Application Gateway. La protection est assurée pour les adresses IP publiques IPv4 Azure.
@@ -331,7 +325,7 @@ Les possibilités de charge de travail sont illimitées. Voici quelques-uns des 
 
 **Big Data/Analytique** : En cas de scale-up lié à un volume de données très important, il peut arriver que le scale-up des bases de données ne s’effectue pas correctement. La technologie Hadoop offre un système permettant d’exécuter des requêtes distribuées en parallèle sur un grand nombre de nœuds. Les clients ont la possibilité d’exécuter des charges de travail de données dans des machines virtuelles IaaS ou PaaS ([HDInsight][HDI]). HDInsight prend en charge le déploiement dans un réseau virtuel basé sur l’emplacement et peut être déployé sur un cluster dans un rayon du VDC.
 
-**Événements et messagerie** : [Azure Event Hubs][EventHubs] est un service d’ingestion de données de télémétrie à très grande échelle qui collecte, transforme et stocke des millions d’événements. En tant que plateforme de streaming distribuée, il offre une faible latence et une durée de rétention configurable vous permettant d’ingérer des quantités massives de données de télémétrie dans Azure et de lire les données de plusieurs applications. Le service Event Hubs prend en charge le traitement de pipelines en temps réel et par lots sur le même flux.
+**Événements et messagerie** : Azure Event Hubs[EventHubs] est un service d’ingestion de données de télémétrie à très grande échelle qui collecte, transforme et stocke des millions d’événements. En tant que plateforme de streaming distribuée, il offre une faible latence et une durée de rétention configurable vous permettant d’ingérer des quantités massives de données de télémétrie dans Azure et de lire les données de plusieurs applications. Le service Event Hubs prend en charge le traitement de pipelines en temps réel et par lots sur le même flux.
 
 Vous pouvez implémenter un service de messagerie cloud à haut niveau de fiabilité entre applications et services via [Azure Service Bus][ServiceBus]. Il offre une messagerie répartie asynchrone entre le client et le serveur, une messagerie FIFO (premier entré, premier sorti) structurée ainsi que des fonctionnalités de publication et d’abonnement.
 
