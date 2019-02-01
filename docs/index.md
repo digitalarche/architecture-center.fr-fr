@@ -5,12 +5,12 @@ layout: LandingPage
 ms.topic: landing-page
 ms.date: 09/28/2018
 google-site-verification: b-xRLveOzJ9oSOh37wgRTRB2lMOoFY8HiHf9_0DIawE
-ms.openlocfilehash: c5141cbcdf848197dec214056b80620eec855402
-ms.sourcegitcommit: 95131d1011def26fb629731d42a4e8d4d49b3540
+ms.openlocfilehash: f690d95c78becbf16f02f913983533513d2f7c01
+ms.sourcegitcommit: 14226018a058e199523106199be9c07f6a3f8592
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/17/2019
-ms.locfileid: "54372809"
+ms.lasthandoff: 01/31/2019
+ms.locfileid: "55483077"
 ---
 # <a name="azure-architecture-center"></a>Centre des architectures Azure
 
@@ -264,6 +264,29 @@ ms.locfileid: "54372809"
                         <div class="cardText">
                             <h3>Anti-modèles de performance</h3>
                             <p>Comment détecter et résoudre des causes courantes de problèmes de performances et d’évolutivité dans les applications de cloud.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
+
+<ul class="panelContent cardsJ">
+    <li>
+        <a href="https://azure-architecture.uservoice.com/forums/918127-general" data-linktype="external">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="https://docs.microsoft.com/en-us/media/common/i_feedback.svg" alt="" data-linktype="external">
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Soumettre vos idées pour le Centre des architectures</h3>
+                            <p>Avez-vous des idées pour la nouvelle documentation d’architecture ou de conception ?</p>
+                            <p>Quels types d’articles aimeriez-vous voir dans le Centre des architectures Azure ?</p>
                         </div>
                     </div>
                 </div>
