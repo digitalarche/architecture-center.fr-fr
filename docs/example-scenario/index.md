@@ -7,8 +7,13 @@ layout: LandingPage
 ms.topic: landing-page
 ms.service: architecture-center
 ms.subservice: example-scenario
+ms.openlocfilehash: fc9b23866f1e52dcbc428026091605a42ead20a6
+ms.sourcegitcommit: 14226018a058e199523106199be9c07f6a3f8592
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 01/31/2019
+ms.locfileid: "55482890"
 ---
-
 # <a name="azure-example-scenarios"></a>Exemples de scénarios Azure
 
 Exemples de scénarios montrant comment résoudre des problématiques commerciales ou techniques spécifiques à l’aide d’Azure. Chaque scénario est basé sur un exemple de client réel et fournit des conseils faciles à lire rapidement pour accélérer votre propre implémentation.
@@ -24,9 +29,9 @@ Passer à : [Scénarios liés à l’IA](#ai-scenarios) | [Scénarios liés aux
                 <div class="card">
                     <div class="cardText">
                         <h3>Nouveaux scénarios</h3>
-                        <a class="barLink" href="/azure/architecture/example-scenario/infrastructure/multi-tier-app-disaster-recovery" data-linktype="absolute-path">Application web à plusieurs niveaux développée pour HA & DR</a>
-                        <a class="barLink" href="/azure/architecture/example-scenario/data/hybrid-etl-with-adf" data-linktype="absolute-path">ETL hybride avec SSIS et Data Factory</a>
-                        <a class="barLink" href="/azure/architecture/example-scenario/apps/decentralized-trust" data-linktype="absolute-path">Confiance décentralisée entre les banques sur Azure</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/infrastructure/image-modeling" data-linktype="absolute-path">Accélérer la modélisation basée sur les images numériques</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/ai/movie-recommendations" data-linktype="absolute-path">Suggestions de films sur Azure</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/infrastructure/multi-tier-app-disaster-recovery" data-linktype="absolute-path">Application web multiniveau créée pour la haute disponibilité et la reprise d’activité</a>
                     </div>
                 </div>
             </div>
@@ -38,9 +43,9 @@ Passer à : [Scénarios liés à l’IA](#ai-scenarios) | [Scénarios liés aux
                 <div class="card">
                     <div class="cardText">
                         <h3>Meilleurs scenarios</h3>
-                        <a class="barLink" href="/azure/architecture/example-scenario/infrastructure/regulated-multitier-app" data-linktype="absolute-path">Sécuriser une application web Windows pour les secteurs industriels réglementés</a>
-                        <a class="barLink" href="/azure/architecture/example-scenario/apps/devops-dotnet-webapp" data-linktype="absolute-path">Pipeline CI/CD avec Azure DevOps</a>
-                        <a class="barLink" href="/azure/architecture/example-scenario/data/fraud-detection" data-linktype="absolute-path">Détection des fraudes en temps réel dans Azure</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/infrastructure/regulated-multitier-app" data-linktype="absolute-path">Création d’applications web sécurisées avec des machines virtuelles Windows</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/data/data-warehouse" data-linktype="absolute-path">Entreposage et analytique de données pour les ventes et le marketing</a>
+                        <a class="barLink" href="/azure/architecture/example-scenario/infrastructure/wordpress" data-linktype="absolute-path">Sites web WordPress hautement scalables et sécurisés</a>
                     </div>
                 </div>
             </div>
@@ -51,7 +56,7 @@ Passer à : [Scénarios liés à l’IA](#ai-scenarios) | [Scénarios liés aux
             <div class="cardPadding">
                 <div class="card">
                     <div class="cardText">
-                        <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbRy0ZnoKOXdVBqaBz653YPElUNjlNMEpPMDNSSU1aWEIxMFNFNlY2T0E3NC4u" data-linktype="external">
+                        <a href="https://azure-architecture.uservoice.com/forums/918625-architecture-guidance" data-linktype="external">
                             <div class="cardSize cardsF">
                                 <div class="cardPadding">
                                     <div class="card">
