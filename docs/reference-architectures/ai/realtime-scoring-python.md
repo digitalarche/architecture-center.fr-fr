@@ -3,21 +3,21 @@ title: Scoring en temps réel des modèles de Python
 titleSuffix: Azure Reference Architectures
 description: Cette architecture de référence montre comment déployer des modèles Python en tant que services web sur Azure pour élaborer des prédictions en temps réel.
 author: msalvaris
-ms.date: 11/09/2018
+ms.date: 01/28/2019
 ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 135e86b447684efd9f54340eda4b6bf6e4c35bbb
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: ba2d9a295e5a231f0ffca9e3cf2d53ace4deddfe
+ms.sourcegitcommit: 1ee873aaf40010eb2a38314ac56974bc9e227736
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54487676"
+ms.lasthandoff: 01/28/2019
+ms.locfileid: "55141030"
 ---
 # <a name="real-time-scoring-of-python-scikit-learn-and-deep-learning-models-on-azure"></a>Scoring en temps réel des modèles Python Scikit-Learn et Apprentissage profond sur Azure
 
-Cette architecture de référence montre comment déployer des modèles Python en tant que services web pour élaborer des prédictions en temps réel. Deux scénarios sont couverts : le déploiement de modèles Python standards et les exigences spécifiques du déploiement de modèles d’apprentissage profond. Les deux scénarios utilisent l’architecture illustrée.
+Cette architecture de référence montre comment déployer des modèles Python en tant que services web pour élaborer des prédictions en temps réel avec le service Azure Machine Learning. Deux scénarios sont couverts : le déploiement de modèles Python standards et les exigences spécifiques du déploiement de modèles d’apprentissage profond. Les deux scénarios utilisent l’architecture illustrée.
 
 Deux implémentations de référence pour cette architecture sont disponibles sur GitHub, une pour [les modèles Python standards][github-python] et l’autre pour [les modèles d’apprentissage profond][github-dl].
 
@@ -33,13 +33,13 @@ Ce scénario utilise un sous-ensemble de données de question Stack Overflow qui
 
 Le flux d’application pour cette architecture est le suivant :
 
-1. Le client envoie une requête HTTP POST avec les données encodées de la question.
-
-2. L’application Flask extrait la question à partir de la requête.
-
-3. La question est envoyée au modèle de pipeline scikit-learn pour la personnalisation et le scoring.
-
-4. Les questions fréquentes correspondantes avec leurs scores sont transmises dans un objet JSON et retournées au client.
+1. Le modèle entraîné est inscrit dans le registre des modèles Machine Learning.
+2. Le service Machine Learning crée une image Docker qui inclut le modèle et le script de scoring.
+3. Machine Learning déploie l’image de scoring sur Azure Kubernetes Service (AKS) comme service web.
+4. Le client envoie une requête HTTP POST avec les données encodées de la question.
+5. Le service web créé par Machine Learning extrait la question de la requête.
+6. La question est envoyée au modèle de pipeline Scikit-learn pour la caractérisation et le scoring. 
+7. Les questions fréquentes correspondantes sont retournées avec leur score au client.
 
 Voici une capture d’écran de l’exemple d’application qui consomme les résultats :
 
@@ -53,25 +53,24 @@ Ce scénario utilise un modèle ResNet-152 préentraîné formé sur un jeu de d
 
 Le flux d’application pour le modèle d’apprentissage profond est comme suit :
 
-1. Le client envoie une requête HTTP POST avec les données encodées de l’image.
-
-2. L’application Flask extrait l’image à partir de la requête.
-
-3. L’image est prétraitée et envoyée au modèle pour le scoring.
-
-4. Le résultat du scoring est transmis dans un objet JSON et retourné au client.
+1. Le modèle d’apprentissage profond (deep learning) est inscrit dans le registre des modèles Machine Learning.
+2. Le service Machine Learning crée une image Docker qui inclut le modèle et le script de scoring.
+3. Machine Learning déploie l’image de scoring sur Azure Kubernetes Service (AKS) comme service web.
+4. Le client envoie une requête HTTP POST avec les données encodées de l’image.
+5. Le service web créé par Machine Learning prétraite les données de l’image et les envoie au modèle pour le calcul du score. 
+6. Les catégories prédites sont retournées avec leur score au client.
 
 ## <a name="architecture"></a>Architecture
 
 Cette architecture est constituée des composants suivants.
 
+Le **[service Azure Machine Learning][aml]** est un service cloud utilisé pour entraîner, déployer, automatiser et gérer des modèles Machine Learning, le tout à l’échelle étendue fournie par le cloud. Dans cette architecture, il est utilisé pour gérer le déploiement de modèles ainsi que pour l’authentification, le routage et l’équilibrage de charge du service web.
+
 **[Machine virtuelle][vm]**. La machine virtuelle est affichée comme un exemple d’appareil &mdash; local ou dans le cloud &mdash; pouvant envoyer une requête HTTP.
 
 **[Azure Kubernetes Service][aks]** (AKS) est utilisé pour déployer l’application au sein d’un cluster Kubernetes. AKS simplifie le déploiement et les opérations de Kubernetes. Le cluster peut être configuré à l’aide de machines virtuelles compatibles processeur uniquement pour des modèles Python standards ou des machines virtuelles compatibles GPU pour les modèles d’apprentissage profond.
 
-**[Équilibreur de charge][lb]**. Un équilibreur de charge approvisionné par AKS est utilisé pour exposer le service en externe. Le trafic venant de l’équilibreur de charge est dirigé vers les pods principaux.
-
-**[Docker Hub][docker]** est utilisé pour stocker l’image Docker déployée sur un cluster Kubernetes. DockerHub a été choisi pour cette architecture, car il est simple d’utilisation et constitue le référentiel d’images par défaut des utilisateurs de Docker. [Azure Container Registry][acr] peut aussi être utilisé pour cette architecture.
+**[Azure Container Registry] [acr]** permet le stockage des images pour tous les types de déploiements de conteneurs Docker, notamment DC/OS, Docker Swarm et Kubernetes. Les images de scoring sont déployées en tant que conteneurs sur Azure Kubernetes Service et utilisées pour exécuter le script de scoring. L’image utilisée ici est créée par Machine Learning à partir du modèle entraîné et du script de scoring, puis elle est envoyée à Azure Container Registry.
 
 ## <a name="performance-considerations"></a>Considérations relatives aux performances
 
@@ -83,7 +82,7 @@ Vous pouvez utiliser des processeurs pour cette architecture dans les deux cas, 
 
 ## <a name="scalability-considerations"></a>Considérations relatives à l’extensibilité
 
-Pour les modèles Python standards, où le cluster AKS est fourni avec des machines virtuelles pourvues uniquement de processeurs, faites attention lors de [l’extension du nombre de pods][manually-scale-pods]. L’objectif est d’utiliser pleinement le cluster. L’extensibilité dépend des requêtes du processeur et des limites définies pour les pods. Kubernetes prend également en charge [l’extension automatique][autoscale-pods] des pods pour ajuster le nombre de pods dans un déploiement en fonction de l’utilisation du processeur ou d’autres métriques. L’[autoscaler de cluster][autoscaler] (en préversion) peut mettre à l’échelle vos nœuds d’agent en fonction des pods en attente.
+Pour les modèles Python standard, où le cluster AKS est provisionné avec des machines virtuelles pourvues seulement de processeurs, faites attention lors du [scale-out du nombre de pods][manually-scale-pods]. L’objectif est d’utiliser pleinement le cluster. L’extensibilité dépend des requêtes du processeur et des limites définies pour les pods. Machine Learning via Kubernetes prend également en charge la [mise à l’échelle automatique des pods][autoscale-pods] en fonction de l’utilisation du processeur ou d’autres métriques. Le [dispositif de mise à l’échelle automatique de cluster][autoscaler] (en préversion) peut mettre à l’échelle les nœuds d’agent en fonction des pods en attente.
 
 Pour des scénarios d’apprentissage profond, à l’aide de machines virtuelles compatibles GPU, les limites de ressources sur les pods sont telles qu’un GPU est attribué à un pod. Selon le type de machine virtuelle utilisé, vous devez [mettre à l’échelle les nœuds du cluster][scale-cluster] pour répondre à la demande du service. Vous pouvez faire cela facilement à l’aide d’Azure CLI et de kubectl.
 
@@ -117,7 +116,7 @@ Utilisez le contrôle [RBAC][rbac] pour contrôler l’accès aux ressources Azu
 
 **Authentification**. Cette solution ne restreint pas l’accès aux points de terminaison. Pour déployer l’architecture dans un environnement d’entreprise, sécurisez les points de terminaison via des clés API et ajoutez une forme d’authentification utilisateur à l’application cliente.
 
-**Registre de conteneurs**. Cette solution utilise un registre public pour stocker l’image Docker. Le code dont dépend l’application, ainsi que le modèle, sont contenus dans cette image. Les applications d’entreprise doivent utiliser un registre privé pour se prémunir contre l’exécution de code malveillant et pour mieux éviter que les informations contenues dans le conteneur soient compromises.
+**Registre de conteneurs**. Cette solution utilise Azure Container Registry pour stocker l’image Docker. Le code dont dépend l’application, ainsi que le modèle, sont contenus dans cette image. Les applications d’entreprise doivent utiliser un registre privé pour se prémunir contre l’exécution de code malveillant et pour mieux éviter que les informations contenues dans le conteneur soient compromises.
 
 **Protection DDOS**. Envisagez l’activation de la [Protection DDoS Standard][ddos]. Bien que la protection DDoS soit activée sur la plateforme Azure, la protection DDoS standard offre des capacités d’atténuation des risques spécifiquement adaptées aux ressources de réseau virtuel Azure.
 
@@ -140,15 +139,14 @@ Pour déployer cette architecture de référence, suivez les étapes décrites d
 [autoscale-pods]: /azure/aks/tutorial-kubernetes-scale#autoscale-pods
 [azcopy]: /azure/storage/common/storage-use-azcopy-linux
 [ddos]: /azure/virtual-network/ddos-protection-overview
-[docker]: https://hub.docker.com/
 [get-started]: /azure/security-center/security-center-get-started
-[github-python]: https://github.com/Azure/MLAKSDeployment
-[github-dl]: https://github.com/Microsoft/AKSDeploymentTutorial
+[github-python]: https://github.com/Microsoft/MLAKSDeployAML
+[github-dl]: https://github.com/Microsoft/AKSDeploymentTutorial_AML
 [gpus-vs-cpus]: https://azure.microsoft.com/en-us/blog/gpus-vs-cpus-for-deployment-of-deep-learning-models/
 [https-ingress]: /azure/aks/ingress-tls
 [ingress-controller]: https://kubernetes.io/docs/concepts/services-networking/ingress/
 [kubectl]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[lb]: /azure/load-balancer/load-balancer-overview
+[aml]: /azure/machine-learning/service/overview-what-is-azure-ml
 [manually-scale-pods]: /azure/aks/tutorial-kubernetes-scale#manually-scale-pods
 [monitor-containers]: /azure/monitoring/monitoring-container-insights-overview
 [autorisations]: /azure/aks/concepts-identity

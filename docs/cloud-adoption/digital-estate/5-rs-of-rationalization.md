@@ -7,12 +7,12 @@ ms.date: 12/10/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 53beb2ee0f99c107ed390a4309273ad20e405b69
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 06058967e6ffcd9e3554a46c67144f72fb19078f
+ms.sourcegitcommit: 3b15d65e7c35a19506e562c444343f8467b6a073
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54484293"
+ms.lasthandoff: 01/25/2019
+ms.locfileid: "54908577"
 ---
 # <a name="enterprise-cloud-adoption-the-5-rs-of-rationalization"></a>Adoption du cloud d’entreprise : Les 5 R de la rationalisation
 
@@ -95,7 +95,7 @@ Facteurs d’analyse qualitative :
 
 ## <a name="rebuild"></a>Reconstruction
 
-Dans certains scénarios, les efforts nécessaires à la réarchitecture d’une application peuvent être trop importants pour justifier tout investissement supplémentaire. C’est particulièrement vrai pour les applications qui répondaient autrefois aux besoins de l’entreprise, mais qui désormais ne sont plus prises en charge ou ne sont plus alignées sur les processus actuels de l’entreprise. Dans ce cas, une nouvelle base de code est créée pour obtenir une application native du cloud.
+Dans certains scénarios, les efforts nécessaires à la réarchitecture d’une application peuvent être trop importants pour justifier tout investissement supplémentaire. C’est particulièrement vrai pour les applications qui répondaient autrefois aux besoins de l’entreprise, mais qui désormais ne sont plus prises en charge ou ne sont plus alignées sur les processus actuels de l’entreprise. Dans ce cas, une nouvelle base de code est créée pour s’aligner sur une approche [cloud native](https://azure.microsoft.com/overview/cloudnative/).
 
 Les moteurs les plus courants sont les suivants :
 
