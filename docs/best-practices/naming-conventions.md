@@ -81,16 +81,16 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 
 | Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
 | --- | --- | --- | --- | --- | --- | --- |
-|Groupe de ressources |Abonnement |1-90 |Non-respect de la casse |Alphanumériques, trait de soulignement, parenthèses, trait d’union, point (sauf à la fin) et caractères Unicode correspondant à l’expression régulière documentée [ici](/rest/api/resources/resourcegroups/createorupdate). |`<service short name>-<environment>-rg` |`profx-prod-rg` |
-|Groupe à haute disponibilité |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait de soulignement et trait d’union |`<service-short-name>-<context>-as` |`profx-sql-as` |
-|Tag |Entité associée |512 (nom), 256 (valeur) |Non-respect de la casse |Alphanumérique |`"key" : "value"` |`"department" : "Central IT"` |
+|Groupe de ressources |Abonnement |1-90 |Insensible à la casse |Alphanumériques, trait de soulignement, parenthèses, trait d’union, point (sauf à la fin) et caractères Unicode correspondant à l’expression régulière documentée [ici](/rest/api/resources/resourcegroups/createorupdate). |`<service short name>-<environment>-rg` |`profx-prod-rg` |
+|Groupe à haute disponibilité |Groupe de ressources |1-80 |Insensible à la casse |Alphanumériques, trait de soulignement et trait d’union |`<service-short-name>-<context>-as` |`profx-sql-as` |
+|Tag |Entité associée |512 (nom), 256 (valeur) |Insensible à la casse |Alphanumérique |`"key" : "value"` |`"department" : "Central IT"` |
 
 ### <a name="compute"></a>Calcul
 
 | Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
 | --- | --- | --- | --- | --- | --- | --- |
-|Machine virtuelle |Groupe de ressources |1-15 (Windows), 1-64 (Linux) |Non-respect de la casse |Alphanumériques et trait d’union |`<name>-<role>-vm<number>` |`profx-sql-vm1` |
-|Function App | Globale |1-60 |Non-respect de la casse |Alphanumériques et trait d’union |`<name>-func` |`calcprofit-func` |
+|Machine virtuelle |Groupe de ressources |1-15 (Windows), 1-64 (Linux) |Insensible à la casse |Alphanumériques et trait d’union |`<name>-<role>-vm<number>` |`profx-sql-vm1` |
+|Function App | Globale |1-60 |Insensible à la casse |Alphanumériques et trait d’union |`<name>-func` |`calcprofit-func` |
 
 > [!NOTE]
 > Les machines virtuelles dans Azure portent deux noms distincts : un nom de machine virtuelle et un nom d’hôte. Lorsque vous créez une machine virtuelle dans le portail, le même nom est utilisé pour le nom d’hôte et pour le nom de ressource de machine virtuelle. Les restrictions ci-dessus s’appliquent au nom d’hôte. Le nom de ressource proprement dit peut comporter jusqu’à 64 caractères.
@@ -104,7 +104,7 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 | Nom du conteneur |Compte de stockage |3-63 |Minuscules |Alphanumériques et trait d’union |`<context>` |`logs` |
 |Nom de l’objet blob | Conteneur |1-1024 |Respect de la casse |Tout caractère d’URL |`<variable based on blob usage>` |`<variable based on blob usage>` |
 |Nom de la file d'attente |Compte de stockage |3-63 |Minuscules |Alphanumériques et trait d’union |`<service short name>-<context>-<num>` |`awesomeservice-messages-001` |
-|Nom de la table | Compte de stockage |3-63 |Non-respect de la casse |Alphanumérique |`<service short name><context>` |`awesomeservicelogs` |
+|Nom de la table | Compte de stockage |3-63 |Insensible à la casse |Alphanumérique |`<service short name><context>` |`awesomeservicelogs` |
 |Nom de fichier | Compte de stockage |3-63 |Minuscules | Alphanumérique |`<variable based on blob usage>` |`<variable based on blob usage>` |
 |Data Lake Store | Globale |3-24 |Minuscules | Alphanumérique |`<name>dls` |`telemetrydls` |
 
@@ -112,22 +112,22 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 
 | Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
 | --- | --- | --- | --- | --- | --- | --- |
-|Réseau virtuel (VNet) |Groupe de ressources |2-64 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service short name>-vnet` |`profx-vnet` |
-|Sous-réseau |Réseau virtuel parent |2-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`web` |
-|Interface réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<vmname>-nic<num>` |`profx-sql1-vm1-nic1` |
-|Groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service short name>-<context>-nsg` |`profx-app-nsg` |
-|Règle de groupe de sécurité réseau |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`sql-allow` |
-|Adresse IP publique |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<vm or service name>-pip` |`profx-sql1-vm1-pip` |
-|Load Balancer |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service or role>-lb` |`profx-lb` |
-|Configuration des règles d’équilibrage de charge |Load Balancer |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`http` |
-|Azure Application Gateway |Groupe de ressources |1-80 |Non-respect de la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service or role>-agw` |`profx-agw` |
-|Profil Traffic Manager |Groupe de ressources |1-63 |Non-respect de la casse |Alphanumériques, trait d’union et point |`<descriptive context>` |`app1` |
+|Réseau virtuel (VNet) |Groupe de ressources |2-64 |Insensible à la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service short name>-vnet` |`profx-vnet` |
+|Sous-réseau |Réseau virtuel parent |2-80 |Insensible à la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`web` |
+|Interface réseau |Groupe de ressources |1-80 |Insensible à la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<vmname>-nic<num>` |`profx-sql1-vm1-nic1` |
+|Groupe de sécurité réseau |Groupe de ressources |1-80 |Insensible à la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service short name>-<context>-nsg` |`profx-app-nsg` |
+|Règle de groupe de sécurité réseau |Groupe de ressources |1-80 |Insensible à la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`sql-allow` |
+|Adresse IP publique |Groupe de ressources |1-80 |Insensible à la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<vm or service name>-pip` |`profx-sql1-vm1-pip` |
+|Load Balancer |Groupe de ressources |1-80 |Insensible à la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service or role>-lb` |`profx-lb` |
+|Configuration des règles d’équilibrage de charge |Load Balancer |1-80 |Insensible à la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<descriptive context>` |`http` |
+|Azure Application Gateway |Groupe de ressources |1-80 |Insensible à la casse |Alphanumériques, trait d’union, trait de soulignement et point |`<service or role>-agw` |`profx-agw` |
+|Profil Traffic Manager |Groupe de ressources |1-63 |Insensible à la casse |Alphanumériques, trait d’union et point |`<descriptive context>` |`app1` |
 
 ### <a name="containers"></a>Containers
 
 | Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
 | --- | --- | --- | --- | --- | --- | --- |
-|Container Registry | Globale |5 à 50 |Non-respect de la casse | Alphanumérique |`<service short name>registry` |`app1registry` |
+|Container Registry | Globale |5 à 50 |Insensible à la casse | Alphanumérique |`<service short name>registry` |`app1registry` |
 
 ## <a name="organize-resources-with-tags"></a>Organiser les ressources à l’aide de balises
 
