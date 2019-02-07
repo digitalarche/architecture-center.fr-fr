@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, networking
-ms.openlocfilehash: 80125626d0c79888445bc7828577846bcce9fc67
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 45ae8de1138b738fdfb42bdf57402711e1be6ebb
+ms.sourcegitcommit: 14226018a058e199523106199be9c07f6a3f8592
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488220"
+ms.lasthandoff: 01/31/2019
+ms.locfileid: "55482907"
 ---
 # <a name="implement-a-dmz-between-azure-and-the-internet"></a>Implémenter une zone DMZ entre Azure et Internet
 
@@ -101,7 +101,9 @@ Un déploiement pour une architecture de référence implémentant ces recommand
     azbb -s <subscription_id> -g <resource_group_name> -l <region> -p onprem.json --deploy
     ```
 
-3. Exécutez la commande suivante :
+3. Accédez au dossier `/dmz/ssecure-vnet-hybrid` du référentiel GitHub des architectures de référence.
+
+4. Exécutez la commande suivante :
 
     ```bash
     azbb -s <subscription_id> -g <resource_group_name> -l <region> -p secure-vnet-hybrid.json --deploy
