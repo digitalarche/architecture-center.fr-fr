@@ -9,12 +9,12 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 56e308b40e24d2febefe995dffc7a14069a5c078
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: c61758494435f61814953ab5ba48d8fed1e709ab
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482236"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897590"
 ---
 # <a name="azure-for-aws-professionals"></a>Azure pour les professionnels AWS
 
@@ -215,7 +215,7 @@ Azure offre plusieurs services de calcul qui n’ont pas d’équivalents direct
 
 - [Azure Batch](/azure/batch/batch-technical-overview) vous permet de gérer les travaux de calcul intensifs dans une collection scalable de machines virtuelles.
 
-- [Service Fabric](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-overview) est une plateforme pour le développement et l’hébergement scalable de solutions de [microservices](/azure/service-fabric/service-fabric-overview-microservices).
+- [Service Fabric](/azure/service-fabric/service-fabric-overview) est une plateforme pour le développement et l’hébergement scalable de solutions de [microservices](/azure/service-fabric/service-fabric-overview-microservices).
 
 #### <a name="see-also"></a>Voir aussi
 
