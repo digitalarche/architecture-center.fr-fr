@@ -1,29 +1,30 @@
 ---
 title: Architectures de référence Azure
-description: Architectures de référence, schémas et des recommandations préconisées de mise en œuvre pour les charges de travail courantes dans Azure.
+description: Architectures de référence et conseils d’implémentation pour les charges de travail courantes dans Azure.
 layout: LandingPage
-ms.topic: reference-architecture
-ms.date: 08/30/2018
-ms.service: architecture-center
-ms.subservice: reference-architecture
-ms.openlocfilehash: bdeaccd651b50f55975de446459d896706146fec
-ms.sourcegitcommit: ed736a0a1b080f6acf4877c8b906cd9b56e12bdf
+ms.topic: landing-page
+ms.date: 02/07/2019
+ms.openlocfilehash: 44111f5f10997c7aba38414b518245c5791d1cd0
+ms.sourcegitcommit: a68f248402c598f9d25bc1dc62f27a6a934ff001
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/28/2019
-ms.locfileid: "55085784"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55903229"
 ---
+<!-- This file is generated! -->
+<!-- See the templates in ./build/reference-architectures  -->
+<!-- See data in index.json -->
+
 # <a name="azure-reference-architectures"></a>Architectures de référence Azure
 
-Nos architectures de référence sont organisées par scénario, avec les architectures connexes regroupées. Chaque architecture comprend les pratiques recommandées, ainsi que des considérations pour l’extensibilité, la disponibilité, la facilité de gestion et la sécurité. La plupart incluent également une solution pouvant être déployée.
+Nos architectures de référence sont organisées par scénario. Chaque architecture comprend les pratiques recommandées, ainsi que des considérations pour l’extensibilité, la disponibilité, la facilité de gestion et la sécurité. La plupart d’entre elles comprend aussi une implémentation de référence ou de solution déployable.
 
-Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [IoT](#internet-of-things) | [Serverless](#serverless-applications) | [Réseaux virtuels](#virtual-networks) | [Charges de travail de machine virtuelle](#vm-workloads) | [SAP](#sap) | [Applications web](#web-applications) | [Active Directory](#extend-on-premises-active-directory-to-azure)
+Passer à : [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | [IoT](#internet-of-things) | [Microservices](#microservices) | [Serverless](#serverless-applications) | [Réseaux virtuels](#virtual-networks) | [Charges de travail de machine virtuelle](#vm-workloads) | [SAP](#sap) | [Active Directory](#extend-on-premises-active-directory-to-azure) | [Applications web](#web-applications)
 
 <!-- markdownlint-disable MD033 -->
 
 ## <a name="ai-and-machine-learning"></a>IA et Machine Learning
 
-<!-- markdownlint-disable MD033 -->
 <ul  class="panelContent cardsF">
 <!-- Distributed training of deep learning models -->
 <li style="display: flex; flex-direction: column;">
@@ -33,7 +34,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/batch-ai.svg" />
+                            <img src="../_images/icons/batch-ai.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -53,7 +54,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/batch-ai.svg" />
+                            <img src="../_images/icons/batch-ai.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -73,7 +74,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/python-powered-h.svg" />
+                            <img src="../_images/icons/python-powered-h.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -85,7 +86,27 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Real-time scoring of Python models -->
+<!-- Batch scoring of Spark models on Azure Databricks -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./ai/batch-scoring-databricks.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/databricks.png" height="140px" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Scoring par lots de modèles Spark sur Azure Databricks</h3>
+                        <p>Créez une solution scalable pour le scoring par lots d’un modèle de classification Apache Spark avec Azure Databricks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+<!-- Real-time scoring of Python and deep learning models -->
 <li style="display: flex; flex-direction: column;">
     <a href="./ai/realtime-scoring-python.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -93,7 +114,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/python-powered-h.svg" />
+                            <img src="../_images/icons/python-powered-h.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -105,7 +126,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Real-time scoring of R models -->
+<!-- Real-time scoring of R machine learning models -->
 <li style="display: flex; flex-direction: column;">
     <a href="./ai/realtime-scoring-r.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -113,7 +134,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/logo-r.svg" />
+                            <img src="../_images/icons/logo-r.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -125,7 +146,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Real-time Recommendation API -->
+<!-- Real-time recommendation API -->
 <li style="display: flex; flex-direction: column;">
     <a href="./ai/real-time-recommendation.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -133,7 +154,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/machine-learning.svg" />
+                            <img src="../_images/icons/machine-learning.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -145,7 +166,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Distributed training of deep learning models -->
+<!-- Enterprise-grade conversational bot -->
 <li style="display: flex; flex-direction: column;">
     <a href="./ai/conversational-bot.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -153,7 +174,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/bot-services.svg" />
+                            <img src="../_images/icons/bot-services.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -170,7 +191,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
 ## <a name="big-data-solutions"></a>Solutions Big Data
 
 <ul  class="panelContent cardsF">
-<!-- SQL Data Warehouse -->
+<!-- Enterprise BI with SQL Data Warehouse -->
 <li style="display: flex; flex-direction: column;">
     <a href="./data/enterprise-bi-sqldw.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -178,7 +199,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/data-guide.svg" />
+                            <img src="../_images/icons/data-guide.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -190,6 +211,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
+<!-- Automated enterprise BI with Azure Data Factory -->
 <li style="display: flex; flex-direction: column;">
     <a href="./data/enterprise-bi-adf.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -197,7 +219,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/data-guide.svg" />
+                            <img src="../_images/icons/data-guide.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -209,7 +231,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Databricks -->
+<!-- Stream processing with Azure Databricks -->
 <li style="display: flex; flex-direction: column;">
     <a href="./data/stream-processing-databricks.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -217,7 +239,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/databricks.png" />
+                            <img src="../_images/icons/databricks.png" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -229,7 +251,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Stream Analytics -->
+<!-- Stream processing with Azure Stream Analytics -->
 <li style="display: flex; flex-direction: column;">
     <a href="./data/stream-processing-stream-analytics.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -237,7 +259,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/azure-analysis-service.svg" />
+                            <img src="../_images/icons/azure-analysis-service.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -253,8 +275,8 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
 
 ## <a name="internet-of-things"></a>Internet des Objets
 
-<ul class="panelContent cardsF">
-<!-- IoT reference architecture -->
+<ul  class="panelContent cardsF">
+<!-- Azure IoT reference architecture -->
 <li style="display: flex; flex-direction: column;">
     <a href="./iot/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -262,7 +284,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="./iot/_images/iot.svg" />
+                            <img src="./iot/_images/iot.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -278,8 +300,8 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
 
 ## <a name="microservices"></a>Microservices
 
-<ul class="panelContent cardsF">
-<!-- IoT reference architecture -->
+<ul  class="panelContent cardsF">
+<!-- Microservices on Azure Kubernetes Service (AKS) -->
 <li style="display: flex; flex-direction: column;">
     <a href="./microservices/aks.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -287,7 +309,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/aks.svg" />
+                            <img src="../_images/icons/aks.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -303,7 +325,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
 
 ## <a name="serverless-applications"></a>Applications serverless
 
-<ul class="panelContent cardsF">
+<ul  class="panelContent cardsF">
 <!-- Serverless web application -->
 <li style="display: flex; flex-direction: column;">
     <a href="./serverless/web-app.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
@@ -312,7 +334,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/functions.svg" />
+                            <img src="../_images/icons/functions.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -324,7 +346,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Serverless web application -->
+<!-- Event processing using Azure Functions -->
 <li style="display: flex; flex-direction: column;">
     <a href="./serverless/event-processing.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -332,7 +354,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="../_images/icons/functions.svg" />
+                            <img src="../_images/icons/functions.svg" height="140px" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -349,6 +371,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
 ## <a name="virtual-networks"></a>Réseaux virtuels
 
 <ul  class="panelContent cardsF">
+<!-- Hybrid network using a virtual private network (VPN) -->
 <li style="display: flex; flex-direction: column;">
     <a href="./hybrid-networking/vpn.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -368,7 +391,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- ExpressRoute -->
+<!-- Hybrid network using ExpressRoute -->
 <li style="display: flex; flex-direction: column;">
     <a href="./hybrid-networking/expressroute.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -388,7 +411,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- ExpressRoute + VPN -->
+<!-- Hybrid network using ExpressRoute with VPN failover -->
 <li style="display: flex; flex-direction: column;">
     <a href="./hybrid-networking/expressroute-vpn-failover.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -408,7 +431,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Hub spoke -->
+<!-- Hub-spoke network topology -->
 <li style="display: flex; flex-direction: column;">
     <a href="./hybrid-networking/hub-spoke.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -428,7 +451,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Shared services -->
+<!-- Hub-spoke topology with shared services -->
 <li style="display: flex; flex-direction: column;">
     <a href="./hybrid-networking/shared-services.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -448,7 +471,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Hybrid DMZ -->
+<!-- DMZ between Azure and on-premises -->
 <li style="display: flex; flex-direction: column;">
     <a href="./dmz/secure-vnet-hybrid.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -468,7 +491,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Internet DMZ -->
+<!-- DMZ between Azure and the Internet -->
 <li style="display: flex; flex-direction: column;">
     <a href="./dmz/secure-vnet-dmz.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -488,7 +511,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- HA NVA -->
+<!-- Highly available network virtual appliances -->
 <li style="display: flex; flex-direction: column;">
     <a href="./dmz/nva-ha.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -513,7 +536,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
 ## <a name="vm-workloads"></a>Charges de travail de machine virtuelle
 
 <ul  class="panelContent cardsF">
-<!-- n-tier windows -->
+<!-- N-tier application with SQL Server -->
 <li style="display: flex; flex-direction: column;">
     <a href="./n-tier/n-tier-sql-server.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -533,7 +556,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Multi-region n-tier windows -->
+<!-- Multi-region N-tier application -->
 <li style="display: flex; flex-direction: column;">
     <a href="./n-tier/multi-region-sql-server.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -553,7 +576,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- N-tier Linux -->
+<!-- N-tier application with Cassandra -->
 <li style="display: flex; flex-direction: column;">
     <a href="./n-tier/n-tier-cassandra.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -573,7 +596,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- Jenkins -->
+<!-- Jenkins build server -->
 <li style="display: flex; flex-direction: column;">
     <a href="./jenkins/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -593,7 +616,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- SharePoint -->
+<!-- SharePoint Server 2016 farm -->
 <li style="display: flex; flex-direction: column;">
     <a href="./sharepoint/index.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -618,7 +641,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
 ## <a name="sap"></a>SAP
 
 <ul  class="panelContent cardsF">
-<!-- SAP -->
+<!-- SAP NetWeaver -->
 <li style="display: flex; flex-direction: column;">
     <a href="./sap/sap-netweaver.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -638,6 +661,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
+<!-- SAP S/4HANA -->
 <li style="display: flex; flex-direction: column;">
     <a href="./sap/sap-s4hana.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -657,6 +681,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
+<!-- SAP HANA on Azure Large Instances -->
 <li style="display: flex; flex-direction: column;">
     <a href="./sap/hana-large-instances.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -680,8 +705,8 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
 
 ## <a name="extend-on-premises-active-directory-to-azure"></a>Étendre Active Directory en local à Azure
 
-<ul class="panelContent cardsF">
-<!-- Azure AD -->
+<ul  class="panelContent cardsF">
+<!-- Integrate with Azure Active Directory -->
 <li style="display: flex; flex-direction: column;">
     <a href="./identity/azure-ad.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -701,7 +726,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- AD DS -->
+<!-- Extend an on-premises Active Directory domain to Azure -->
 <li style="display: flex; flex-direction: column;">
     <a href="./identity/adds-extend-domain.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -721,7 +746,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- AD DS Forest -->
+<!-- Create an AD DS forest in Azure -->
 <li style="display: flex; flex-direction: column;">
     <a href="./identity/adds-forest.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -741,7 +766,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
-<!-- AD FS -->
+<!-- Extend Active Directory Federation Services (AD FS) to Azure -->
 <li style="display: flex; flex-direction: column;">
     <a href="./identity/adfs.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -766,6 +791,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
 ## <a name="web-applications"></a>Applications web
 
 <ul  class="panelContent cardsF">
+<!-- Basic web application -->
 <li style="display: flex; flex-direction: column;">
     <a href="./app-service-web-app/basic-web-app.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -785,6 +811,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
+<!-- Highly scalable web application -->
 <li style="display: flex; flex-direction: column;">
     <a href="./app-service-web-app/scalable-web-app.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -804,6 +831,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
+<!-- Highly available web application -->
 <li style="display: flex; flex-direction: column;">
     <a href="./app-service-web-app/multi-region.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -823,6 +851,7 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
         </div>
     </a>
 </li>
+<!-- Web application monitoring on Azure -->
 <li style="display: flex; flex-direction: column;">
     <a href="./app-service-web-app/app-monitoring.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
@@ -843,5 +872,3 @@ Passer à : [AI](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
     </a>
 </li>
 </ul>
-
-<!-- markdownlint-disable MD033 -->

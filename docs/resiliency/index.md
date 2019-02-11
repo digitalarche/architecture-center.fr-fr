@@ -7,12 +7,12 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-design-principles
 ms.custom: resiliency
-ms.openlocfilehash: ba3637ce90b793425b1238ee0d99d36a936da6ca
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 1cca2bd39339ba671ee8a298f2ded73d3e252c32
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488594"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897778"
 ---
 # <a name="designing-resilient-applications-for-azure"></a>Conception d’applications résilientes pour Azure
 
@@ -182,12 +182,12 @@ Pour plus d’informations sur le processus FMA, avec des recommandations spéci
 | --- | --- |
 | Le service est indisponible |HTTP 5xx |
 | Limitation |HTTP 429 (Trop de demandes) |
-| Authentification |HTTP 401 (Non autorisé) |
+| Authentication |HTTP 401 (Non autorisé) |
 | Temps de réponse lent |Délai d’expiration de la requête |
 
 ### <a name="redundancy-and-designing-for-failure"></a>Redondance et conception pour les défaillances
 
-Les défaillances n’ont pas toutes la même incidence. Certaines défaillances matérielles, comme une panne de disque, peuvent affecter un seul ordinateur hôte. Un commutateur réseau défaillant peut impacter un rack entier de serveurs. Vous déplorerez moins fréquemment des défaillances perturbant un centre de données dans son ensemble, comme une panne d’alimentation. Exceptionnellement, une région entière peut être indisponible.
+Les défaillances n’ont pas toutes la même incidence. Certaines défaillances matérielles, comme une panne de disque, peuvent affecter un seul ordinateur hôte. Un commutateur réseau défaillant peut impacter un rack entier de serveurs. Vous déplorerez moins fréquemment des défaillances perturbant un centre de données tout entier, comme une panne d’alimentation. Exceptionnellement, une région entière peut être indisponible.
 
 La redondance est l’un des moyens de rendre une application résiliente. Toutefois, vous devez planifier en fonction de cette redondance lorsque vous concevez l’application. Par ailleurs, le niveau de redondance dont vous avez besoin dépend des exigences de votre entreprise. Toutes les applications ne nécessitent pas une redondance entre les régions à titre de prévention contre les pannes régionales. En général, il existe un compromis entre redondance et fiabilité supérieures d’un côté contre complexité et coûts plus élevés de l’autre.  
 

@@ -4,12 +4,12 @@ description: Architecture recommandée pour les applications IoT sur Azure utili
 titleSuffix: Azure Reference Architectures
 author: MikeWasson
 ms.date: 01/09/2019
-ms.openlocfilehash: c0aa1771abc99b1f17f1e553c9626e50a386f34c
-ms.sourcegitcommit: d5ea427c25f9f7799cc859b99f328739ca2d8c1c
+ms.openlocfilehash: 5a4b104044f3e64ffdce98e3952201d397d41f33
+ms.sourcegitcommit: 700a4f6ce61b1ebe68e227fc57443e49282e35aa
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/15/2019
-ms.locfileid: "54307686"
+ms.lasthandoff: 02/07/2019
+ms.locfileid: "55887350"
 ---
 # <a name="azure-iot-reference-architecture"></a>Architecture de référence Azure IoT
 
@@ -145,3 +145,5 @@ Bien que la journalisation en texte brut ait moins d’impact sur les coûts de 
 - Pour obtenir une présentation plus détaillée de l’architecture recommandée et des options d’implémentation, consultez [Architecture de référence Microsoft Azure IoT](http://aka.ms/iotrefarchitecture) (PDF).
 
 - Pour obtenir une documentation détaillée sur les différents services Azure IoT, consultez [Notions de base d’Azure IoT](/azure/iot-fundamentals/).
+
+- Un exemple d’implémentation IoT est disponible sur [GitHub](https://github.com/mspnp/iot-guidance).
