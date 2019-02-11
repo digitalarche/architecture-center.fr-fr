@@ -5,12 +5,12 @@ layout: LandingPage
 ms.topic: landing-page
 ms.date: 09/28/2018
 google-site-verification: b-xRLveOzJ9oSOh37wgRTRB2lMOoFY8HiHf9_0DIawE
-ms.openlocfilehash: f690d95c78becbf16f02f913983533513d2f7c01
-ms.sourcegitcommit: 14226018a058e199523106199be9c07f6a3f8592
+ms.openlocfilehash: 3c48ba77b7f97c6047f5d1441a22f2bd79ee0a3e
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/31/2019
-ms.locfileid: "55483077"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898287"
 ---
 # <a name="azure-architecture-center"></a>Centre des architectures Azure
 
@@ -58,8 +58,8 @@ ms.locfileid: "55483077"
                     <div class="card">
                         <img src="_images/cloud-adoption.svg" alt="" />
                         <div class="cardText">
-                            <h3>Adoption du cloud d’entreprise</h3>
-                            <p>Ce guide décrit un processus pour la création d’une stratégie d’adoption du cloud à l’échelle de l’organisation. Il se concentre sur l’infrastructure, la gouvernance et la disponibilité organisationnelle.</p>
+                            <h3>Framework d’adoption du cloud Microsoft pour Azure</h3>
+                            <p>Processus de création d’une stratégie d’adoption du cloud à l’échelle de l’organisation axé sur des politiques, la gouvernance et l’infrastructure.</p>
                         </div>
                     </div>
                 </div>
