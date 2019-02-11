@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: a5fbe72e81a169fd4b29e07e037bb7f8928e0c45
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 9f14b47a9659ad0b7451d106168f4d7b5a6ab0c7
+ms.sourcegitcommit: eee3a35dd5a5a2f0dc117fa1c30f16d6db213ba2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482380"
+ms.lasthandoff: 02/06/2019
+ms.locfileid: "55782079"
 ---
 # <a name="naming-conventions-for-azure-resources"></a>Conventions d’affectation de noms pour les ressources Azure
 
@@ -83,7 +83,7 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 | --- | --- | --- | --- | --- | --- | --- |
 |Groupe de ressources |Abonnement |1-90 |Insensible à la casse |Alphanumériques, trait de soulignement, parenthèses, trait d’union, point (sauf à la fin) et caractères Unicode correspondant à l’expression régulière documentée [ici](/rest/api/resources/resourcegroups/createorupdate). |`<service short name>-<environment>-rg` |`profx-prod-rg` |
 |Groupe à haute disponibilité |Groupe de ressources |1-80 |Insensible à la casse |Alphanumériques, trait de soulignement et trait d’union |`<service-short-name>-<context>-as` |`profx-sql-as` |
-|Tag |Entité associée |512 (nom), 256 (valeur) |Insensible à la casse |Alphanumérique |`"key" : "value"` |`"department" : "Central IT"` |
+|Tag |Entité associée |512 (nom), 256 (valeur) |Insensible à la casse |Alphanumériques, caractères spéciaux, excepté `<`, `>`, `%`, `&`, `\`, `?`, `/`. Consultez les limitations [ici](/azure/azure-resource-manager/resource-group-using-tags). |`"key" : "value"` |`"department" : "Central IT"` |
 
 ### <a name="compute"></a>Calcul
 

@@ -7,18 +7,20 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: f622041824d65978346bf39abb3de30732bad193
-ms.sourcegitcommit: 3b15d65e7c35a19506e562c444343f8467b6a073
+ms.openlocfilehash: 0f5de0eca6fbd35cca1a0e8443f363df09ffc6aa
+ms.sourcegitcommit: 287344b6c220bdbd8076aed7a281eb02253e15be
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/25/2019
-ms.locfileid: "54908629"
+ms.lasthandoff: 02/04/2019
+ms.locfileid: "55712148"
 ---
 # <a name="enterprise-grade-conversational-bot"></a>Bot de conversation de classe Entreprise
 
 Cette architecture de référence décrit comment générer un bot de conversation (chatbot) de classe entreprise à l’aide d’[Azure Bot Framework][bot-framework]. Chaque bot est différent, mais ils ont en commun des modèles, des workflows et des technologies à connaître. Pour ce qui est des bots au service de charges de travail d’entreprise, il existe de nombreuses considérations liées à leur conception au-delà de leur simple fonctionnalité. Cet article couvre les aspects les plus importants de cette conception et présente les outils nécessaires pour générer un bot robuste, sécurisé et actif dans son apprentissage.
 
 [![Diagramme de l’architecture][0]][0]
+
+Les exemples d’utilitaires de bonnes pratiques utilisés dans cette architecture sont entièrement open source et sont disponibles sur [GitHub][git-repo-base]. 
 
 ## <a name="architecture"></a>Architecture
 
@@ -139,23 +141,20 @@ Une autre option consiste à intégrer votre propre service d’intelligence art
 
 ## <a name="quality-assurance-and-enhancement"></a>Assurance qualité et amélioration
 
-**Journalisation**. Journalisez les conversations de l’utilisateur avec le bot, notamment les mesures de performances sous-jacentes et les erreurs éventuelles. Ces journaux s’avèrent très précieux pour déboguer les problèmes, comprendre les interactions de l’utilisateur et améliorer le système. Différents magasins de données peuvent convenir à différents types de journaux. Par exemple, envisagez d’utiliser Application Insights pour les journaux web, Cosmos DB pour les conversations et Stockage Azure pour les grosses charges utiles. Consultez [Écrire directement dans le stockage][transcript-storage].
+**Journalisation**. Journalisez les conversations de l’utilisateur avec le bot, notamment les mesures de performances sous-jacentes et les erreurs éventuelles. Ces journaux s’avèrent très précieux pour déboguer les problèmes, comprendre les interactions de l’utilisateur et améliorer le système. Différents magasins de données peuvent convenir à différents types de journaux. Par exemple, envisagez d’utiliser Application Insights pour les journaux web, Cosmos DB pour les conversations et Stockage Azure pour les grosses charges utiles. Consultez [Écrire directement dans Stockage Azure][transcript-storage].
 
 **Commentaires**. Il est également important de comprendre le niveau de satisfaction des utilisateurs vis-à-vis de leurs interactions avec le bot. Si vous avez recueilli les commentaires des utilisateurs, vous pouvez utiliser ces données pour concentrer vos efforts sur l’amélioration de certaines interactions et sur le réentraînement des modèles d’intelligence artificielle à des fins d’amélioration des performances. Utilisez les commentaires pour réentraîner les modèles, comme LUIS, dans votre système.
 
 **Test**. Tester un bot implique des tests unitaires, des tests d’intégration, des tests de régression et des tests fonctionnels. À des fins de test, nous recommandons d’enregistrer des réponses HTTP réelles des services externes, comme Recherche Azure ou QnA Maker, pour qu’elles puissent être lues pendant le test unitaire sans avoir à effectuer des appels réseau réels aux services externes.
 
-Pour lancer votre développement dans ces domaines, reportez-vous à [Botbuilder Utils pour JavaScript](https://github.com/Microsoft/botbuilder-utils-js). Ce dépôt contient des exemples de code d’utilitaire pour les bots générés avec [Microsoft Bot Framework v4][bot-framework] et exécutant Node.js. Il inclut les packages suivants :
-
-- [Enregistreur de test HTTP](https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-http-test-recorder). Enregistre le trafic HTTP des services externes. Ce package est préintégré avec la prise en charge de LUIS, Recherche Azure et QnAMaker, mais des extensions sont disponibles pour prendre en charge n’importe quel service.
-
-- [Cosmos DB Transcript Store](https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-transcript-cosmosdb). Montre comment stocker et interroger des transcriptions de bot dans Cosmos DB.
-
-- [Application Insights Transcript Store](https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-transcript-app-insights). Montre comment stocker et interroger des transcriptions de bot dans Application Insights.
-
-- [Feedback Collection Middleware](https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-feedback). Exemple de middleware pouvant servir à créer un mécanisme de demande de commentaires.
-
-> [!NOTE]
+>[!NOTE]
+> Pour lancer votre développement dans ces domaines, consultez [Utilitaires de génération de bots pour JavaScript][git-repo-base]. Ce dépôt contient des exemples de code d’utilitaire pour les bots générés avec [Microsoft Bot Framework v4][bot-framework] et exécutant Node.js. Il inclut les packages suivants :
+>
+> - [Magasin de journalisation de Cosmos DB][cosmosdb-logger]. Montre comment stocker et interroger des journaux de bot dans Cosmos DB.
+> - [Magasin de journalisation d’Application Insights][appinsights-logger]. Montre comment stocker et interroger des journaux de bot dans Application Insights.
+> - [Middleware de collecte de commentaires][feedback-util]. Exemple de middleware (intergiciel) fournissant un mécanisme de demande de commentaires d’utilisateur de bot.
+> - [Enregistreur de test HTTP][testing util]. Enregistre le trafic HTTP de services externes vers le bot. Ce package est préintégré avec la prise en charge de LUIS, Recherche Azure et QnAMaker, mais des extensions sont disponibles pour prendre en charge n’importe quel service. Ceci vous permet d’automatiser les tests de bot.
+>
 > Ces packages sont fournis sous forme d’exemple de code d’utilitaire, sans aucune garantie de prise en charge ni mise à jour.
 
 ## <a name="availability-considerations"></a>Considérations relatives à la disponibilité
@@ -200,6 +199,12 @@ Vous pouvez déployer la logique de bot directement à partir de votre environne
 [devops]: https://azure.microsoft.com/solutions/devops/
 [functions]: /azure/azure-functions/
 [functions-triggers]: /azure/azure-functions/functions-triggers-bindings
+[git-repo-appinsights-logger]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-transcript-app-insights
+[git-repo-base]: https://github.com/Microsoft/botbuilder-utils-js
+[git-repo-cosmosdb-logger]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-transcript-cosmosdb
+[git-repo-feedback-util]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-feedback
+[git-repo-testing-util]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-http-test-recorder
+[testing-util]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-http-test-recorder
 [key-vault]: /azure/key-vault/
 [lda]: https://wikipedia.org/wiki/Latent_Dirichlet_allocation/
 [logic-apps]: /azure/logic-apps/logic-apps-overview
@@ -214,3 +219,9 @@ Vous pouvez déployer la logique de bot directement à partir de votre environne
 [vscode]: https://azure.microsoft.com/products/visual-studio-code/
 [webapp]: /azure/app-service/overview
 [webchat]: /azure/bot-service/bot-service-channel-connect-webchat?view=azure-bot-service-4.0/
+
+[cosmosdb-logger]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-transcript-cosmosdb
+[appinsights-logger]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-transcript-app-insights
+[feedback-util]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-feedback
+[testing util]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-http-test-recorder
+

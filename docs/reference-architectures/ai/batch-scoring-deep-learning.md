@@ -1,25 +1,25 @@
 ---
 title: Scoring par lots pour les modèles d’apprentissage profond
 titleSuffix: Azure Reference Architectures
-description: Cette architecture de référence montre comment appliquer un transfert de style neuronal à une vidéo à l’aide d’Azure Batch AI.
+description: Cette architecture de référence montre comment appliquer un transfert de style neuronal à une vidéo avec Azure Machine Learning.
 author: jiata
 ms.date: 10/02/2018
 ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 27975b42179e87f4520186778610159943a93090
-ms.sourcegitcommit: 40f3561cc94f721eca50d33f2d75dc974cb6f92b
+ms.openlocfilehash: 3fc0b85380b6b46f7a52382e0184490104ead5a3
+ms.sourcegitcommit: eee3a35dd5a5a2f0dc117fa1c30f16d6db213ba2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/29/2019
-ms.locfileid: "55147244"
+ms.lasthandoff: 02/06/2019
+ms.locfileid: "55782045"
 ---
 # <a name="batch-scoring-on-azure-for-deep-learning-models"></a>Scoring par lots dans Azure pour les modèles d’apprentissage profond
 
-Cette architecture de référence montre comment appliquer un transfert de style neuronal à une vidéo à l’aide d’Azure Batch AI. Le *transfert de style* est une technique d’apprentissage profond (« deep learning ») qui compose une image existante dans le style d’une autre image. Cette architecture peut être généralisée à un scénario qui utilise le scoring par lots avec l’apprentissage profond. [**Déployez cette solution**](#deploy-the-solution).
+Cette architecture de référence montre comment appliquer un transfert de style neuronal à une vidéo avec Azure Machine Learning. Le *transfert de style* est une technique d’apprentissage profond (« deep learning ») qui compose une image existante dans le style d’une autre image. Cette architecture peut être généralisée à un scénario qui utilise le scoring par lots avec l’apprentissage profond. [**Déployez cette solution**](#deploy-the-solution).
 
-![Diagramme d’architecture pour les modèles d’apprentissage profond avec Azure Batch AI](./_images/batch-ai-deep-learning.png)
+![Diagramme d’architecture pour les modèles d’apprentissage profond avec Azure Machine Learning](./_images/aml-scoring-deep-learning.png)
 
 **Scénario** : une société de multimédia souhaite changer le style d’une vidéo pour qu’elle ressemble à une peinture spécifique. L’objectif est d’appliquer ce style à toutes les images de la vidéo en temps voulu et de façon automatisée. Pour plus d’informations sur les algorithmes de transfert de style neuronal, consultez le document [Image Style Transfer Using Convolutional Neural Networks][image-style-transfer] (PDF).
 
@@ -27,16 +27,14 @@ Cette architecture de référence montre comment appliquer un transfert de style
 |--------|--------|---------|
 | <img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/style_image.jpg" width="300"> | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video.mp4 "Vidéo d’entrée") *cliquer pour voir la vidéo* | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video.mp4 "Vidéo de sortie") *cliquer pour voir la vidéo* |
 
-Cette architecture de référence a été conçue pour les charges de travail qui sont déclenchées par la présence de nouveaux contenus multimédias dans le stockage Azure. Le traitement est constitué des étapes suivantes :
+Cette architecture de référence a été conçue pour les charges de travail qui sont déclenchées par la présence de nouveaux contenus multimédias dans le stockage Azure.
 
-1. Chargez une image de style sélectionnée (comme une peinture de Van Gogh) et un script de transfert de style dans Stockage Blob.
-1. Créez un cluster Batch AI avec mise à l’échelle automatique, prêt à commencer à accepter des tâches.
-1. Divisez le fichier vidéo en images individuelles et chargez ces images dans Stockage Blob.
-1. Une fois que toutes les images ont été chargées, chargez un fichier déclencheur dans Stockage Blob.
-1. Ce fichier déclenche une application logique qui crée un conteneur s’exécutant dans Azure Container Instances.
-1. Le conteneur exécute un script qui crée des tâches Batch AI. Chaque tâche applique le transfert de style neuronal en parallèle dans tous les nœuds du cluster Batch AI.
-1. Une fois générées, les images sont enregistrées dans Stockage Blob.
-1. Téléchargez les images générées, puis réincorporez-les dans une vidéo.
+Le traitement est constitué des étapes suivantes :
+
+1. Charger un fichier vidéo sur le stockage.
+1. Le fichier vidéo déclenche l’envoi par Logic App d’une demande au point de terminaison publié du pipeline Azure Machine Learning.
+1. Le pipeline traite la vidéo, applique le transfert de style avec MPI et effectue le post-traitement de la vidéo.
+1. La sortie est réenregistrée dans le stockage blob une fois le pipeline terminé.
 
 ## <a name="architecture"></a>Architecture
 
@@ -44,33 +42,25 @@ Cette architecture est constituée des composants suivants.
 
 ### <a name="compute"></a>Calcul
 
-**[Azure Batch AI][batch-ai]** sert à exécuter l’algorithme de transfert de style neuronal. Batch AI prend en charge les charges de travail d’apprentissage profond en fournissant des environnements conteneurisés qui sont préconfigurés pour les infrastructures d’apprentissage profond, sur des machines virtuelles compatibles avec les GPU. Batch AI peut aussi connecter le cluster de calcul à Stockage Blob.
-
-> [!NOTE]
-> La date du retrait du service Azure Batch AI est fixée au mois de mars 2019 ; ses capacités d’entraînement et de scoring à grande échelle sont désormais disponibles dans [Azure Machine Learning service][amls]. Cette architecture de référence sera bientôt actualisée pour utiliser Machine Learning qui offre une cible de calcul managée appelée [Capacité de calcul Azure Machine Learning][aml-compute] pour l’entraînement, le déploiement et le scoring de modèles Machine Learning.
+**[Azure Machine Learning Service][amls]** utilise des pipelines Azure Machine Learning pour créer des séquences de calcul reproductibles et faciles à gérer. Il offre également une cible de calcul managée (sur laquelle un calcul de pipeline peut s’exécuter) appelée [Capacité de calcul Azure Machine Learning][aml-compute] pour l’entraînement, le déploiement et le scoring des modèles Machine Learning. 
 
 ### <a name="storage"></a>Stockage
 
-**[Stockage Blob][blob-storage]** sert à stocker toutes les images (images d’entrée, images de style et images de sortie), ainsi que tous les journaux générés à partir de Batch AI. Stockage Blob s’intègre à Batch AI via [blobfuse][blobfuse], système de fichiers virtuel open source reposant sur Stockage Blob. Stockage Blob se montre aussi très économique par rapport aux performances qu’exige cette charge de travail.
+**[Stockage Blob][blob-storage]** est utilisé pour stocker toutes les images (images d’entrée, images de style et images de sortie). Azure Machine Learning Service s’intègre à Stockage Blob : les utilisateurs ne doivent donc pas déplacer manuellement les données entre les plateformes de calcul et Stockage Blob. Stockage Blob se montre aussi très économique par rapport aux performances qu’exige cette charge de travail.
 
 ### <a name="trigger--scheduling"></a>Déclenchement/planification
 
-**[Azure Logic Apps][logic-apps]** sert à déclencher le workflow. Quand l’application logique détecte qu’un objet blob a été ajouté au conteneur, elle déclenche le processus Batch AI. Logic Apps est parfaitement adapté à cette architecture de référence, car il permet de détecter facilement les modifications apportées à Stockage Blob et propose un processus simple pour modifier le déclencheur.
+**[Azure Logic Apps][logic-apps]** sert à déclencher le workflow. Quand l’application logique détecte qu’un objet blob a été ajouté au conteneur, elle déclenche le pipeline Azure Machine Learning. Logic Apps est parfaitement adapté à cette architecture de référence, car il permet de détecter facilement les modifications apportées à Stockage Blob et propose un processus simple pour modifier le déclencheur.
 
-**[Azure Container Instances][container-instances]** sert à exécuter les scripts Python qui créent les tâches Batch AI. L’exécution de ces scripts à l’intérieur d’un conteneur Docker est un moyen pratique de les exécuter à la demande. Pour cette architecture, nous utilisons Container Instances, car il existe un connecteur d’application logique prédéfini qui permet à l’application logique de déclencher la tâche Batch AI. Container Instances peut faire tourner rapidement les processus sans état.
+### <a name="preprocessing-and-postprocessing-our-data"></a>Prétraitement et post-traitement de nos données
 
-**[DockerHub][dockerhub]** sert à stocker l’image Docker utilisée par Container Instances pour exécuter le processus de création de tâche. DockerHub a été choisi pour cette architecture, car il est simple d’utilisation et constitue le référentiel d’images par défaut des utilisateurs de Docker. [Azure Container Registry][container-registry] peut aussi être utilisé.
+Cette architecture de référence utilise la séquence vidéo d’un orang-outan dans un arbre. Vous pouvez télécharger la séquence vidéo [ici][source-video].
 
-### <a name="data-preparation"></a>Préparation des données
-
-Cette architecture de référence utilise la séquence vidéo d’un orang-outan dans un arbre. Vous pouvez télécharger la séquence [ici][source-video] et la traiter pour le workflow en suivant ces étapes :
-
-1. Utilisez [AzCopy][azcopy] pour télécharger la vidéo à partir de l’objet blob public.
-2. Utilisez [FFmpeg][ffmpeg] pour extraire le fichier audio en vue de le réincorporer par la suite dans la vidéo de sortie.
-3. Utilisez FFmpeg pour découper la vidéo en images individuelles. Les images seront traitées indépendamment, en parallèle.
-4. Utilisez AzCopy pour copier les images individuelles dans votre conteneur d’objets blob.
-
-À ce stade, la séquence vidéo se trouve dans un format utilisable pour le transfert de style neuronal.
+1. Utilisez [FFmpeg][ffmpeg] pour extraire le fichier audio de la séquence vidéo, de façon à pouvoir le réincorporer par la suite dans la vidéo en sortie.
+1. Utilisez FFmpeg pour découper la vidéo en images individuelles. Les images seront traitées indépendamment, en parallèle.
+1. À ce stade, nous pouvons appliquer le transfert de style neuronal en parallèle à chaque trame individuelle.
+1. Quand chaque trame a été traitée, nous devons utiliser FFmpeg pour les réassembler.
+1. Enfin, nous réattachons le fichier audio à la séquence vidéo réassemblée.
 
 ## <a name="performance-considerations"></a>Considérations relatives aux performances
 
@@ -86,13 +76,9 @@ Quand vous exécutez un processus de transfert de style en tant que traitement p
 
 Pour cette charge de travail, ces deux options offrent des performances comparables. Le fait d’utiliser moins de machines virtuelles avec plus de GPU par machine virtuelle peut contribuer à réduire le déplacement de données. Cependant, le volume de données par tâche pour cette charge de travail n’étant pas très important, la limitation imposée par Stockage Blob n’est pas significative.
 
-### <a name="images-batch-size-per-batch-ai-job"></a>Taille de lot d’images par tâche Batch AI
+### <a name="mpi-step"></a>Étape MPI 
 
-Un autre paramètre qui doit être configuré est le nombre d’images à traiter par tâche Batch AI. D’un côté, vous voulez faire en sorte que la tâche soit plus ou moins bien répartie entre les nœuds et qu’en cas d’échec d’une tâche, vous n’ayez pas besoin de réessayer avec un trop grand nombre d’images. Cela laisse entrevoir un nombre important de tâches Batch AI et donc peu d’images à traiter par tâche. D’un autre côté, si trop peu d’images sont traitées par tâche, le temps de configuration/démarrage devient exagérément long. Vous pouvez définir un nombre de tâches égal au nombre maximal de nœuds présents dans le cluster. Il s’agit de la solution la plus performante à condition qu’aucune tâche n’échoue, car le coût de configuration/démarrage est limité. En revanche, si une tâche échoue, beaucoup d’images risquent de devoir être retraitées.
-
-### <a name="file-servers"></a>Serveurs de fichiers
-
-Quand vous utilisez Batch AI, vous pouvez choisir plusieurs options de stockage, selon le débit nécessaire à votre scénario. Pour les charges de travail qui demandent peu de débit, l’utilisation de Stockage Blob (via blobfuse) doit suffire. Sinon, Batch AI prend aussi en charge un serveur de fichiers Batch AI, un système NFS à un seul nœud géré, qui peut être monté automatiquement sur les nœuds du cluster pour fournir un emplacement de stockage accessible de façon centralisée pour les tâches. Dans la plupart des cas, un seul serveur de fichiers s’avère nécessaire dans un espace de travail, et vous pouvez répartir les données de vos travaux d’entraînement dans différents répertoires. Si un système NFS à un seul nœud ne convient pas pour vos charges de travail, Batch AI prend en charge d’autres options de stockage, dont Azure Files ou les solutions personnalisées que sont le système de fichiers Gluster ou Lustre.
+Lors de la création du pipeline dans Azure Machine Learning, une des étapes utilisées pour effectuer le calcul parallèle est l’étape MPI. L’étape MPI aide à fractionner les données uniformément entre les nœuds disponibles. L’étape MPI n’est pas exécutée tant que tous les nœuds demandés ne sont pas prêts. Si un nœud échoue ou est préempté (s’il s’agit d’une machine virtuelle de faible priorité), l’étape MPI doit être réexécutée. 
 
 ## <a name="security-considerations"></a>Considérations relatives à la sécurité
 
@@ -106,9 +92,9 @@ Dans les scénarios faisant intervenir des données plus sensibles, veillez à c
 
 Cette architecture de référence utilise le transfert de style comme exemple de processus de scoring par lots. Pour les scénarios avec des données plus sensibles, les données contenues dans le stockage doivent être chiffrées au repos. Chaque fois que des données sont déplacées d’un emplacement à l’autre, utilisez SSL pour sécuriser le transfert de données. Pour plus d’informations, consultez le [guide de sécurité Stockage Azure][storage-security].
 
-### <a name="securing-data-in-a-virtual-network"></a>Sécurisation des données dans un réseau virtuel
+### <a name="securing-your-computation-in-a-virtual-network"></a>Sécurisation de votre calcul dans un réseau virtuel
 
-Au moment de déployer votre cluster Batch AI, vous pouvez le configurer afin qu’il soit provisionné à l’intérieur d’un sous-réseau de réseau virtuel. Les nœuds de calcul du cluster peuvent ainsi communiquer de façon sécurisée avec d’autres machines virtuelles, voire avec un réseau local. Vous pouvez aussi utiliser des [points de terminaison de service][service-endpoints] avec Stockage Blob pour octroyer un accès à partir d’un réseau virtuel ou utiliser un système NFS à un seul nœud à l’intérieur du réseau virtuel avec Batch AI pour assurer une protection permanente des données.
+Lors du déploiement de votre cluster de capacité de calcul Machine Learning, vous pouvez le configurer pour qu’il soit provisionné à l’intérieur du sous-réseau d’un [réseau virtuel][virtual-network]. Ceci permet aux nœuds de calcul du cluster de communiquer de façon sécurisée avec d’autres machines virtuelles. 
 
 ### <a name="protecting-against-malicious-activity"></a>Protection contre les activités malveillantes
 
@@ -120,52 +106,52 @@ Dans les scénarios à plusieurs utilisateurs, veillez à ce que les données se
 
 ## <a name="monitoring-and-logging"></a>Supervision et journalisation
 
-### <a name="monitoring-batch-ai-jobs"></a>Supervision des tâches Batch AI
+### <a name="monitoring-batch-jobs"></a>Supervision des travaux Batch
 
 Pendant que vous exécutez votre tâche, il est important de superviser la progression et de vérifier que tout fonctionne comme prévu. Cependant, superviser un cluster de nœuds actifs peut s’avérer ardu.
 
-Pour vous faire une idée de l’état global du cluster, accédez au panneau Batch AI du portail Azure pour inspecter l’état des nœuds du cluster. Si un nœud est inactif ou si une tâche a échoué, les journaux d’erreurs sont enregistrés dans Stockage Blob et sont aussi accessibles dans le panneau Tâches du portail Azure.
+Pour vous faire une idée de l’état global du cluster, accédez au panneau Machine Learning du portail Azure pour inspecter l’état des nœuds du cluster. Si un nœud est inactif ou si un travail a échoué, vous pouvez consulter les journaux d’erreurs enregistrés dans Stockage Blob. Ils sont également accessibles dans le portail Azure.
 
-La supervision peut encore être enrichie en connectant les journaux à Application Insights ou en exécutant des processus distincts pour demander l’état du cluster Batch AI et de ses tâches.
+La supervision peut encore être approfondie en connectant les journaux à Application Insights, ou en exécutant des processus distincts pour interroger l’état du cluster et de ses travaux.
 
-### <a name="logging-in-batch-ai"></a>Journalisation dans Batch AI
+### <a name="logging-with-azure-machine-learning"></a>Journalisation avec Azure Machine Learning
 
-Batch AI journalise automatiquement tous les stdout/stderr dans le compte Stockage Blob associé. L’utilisation d’un outil de navigation de stockage comme l’Explorateur Stockage facilite nettement l’expérience de navigation dans les fichiers journaux.
-
-Les étapes de déploiement pour cette architecture de référence montrent aussi comment configurer un système de journalisation plus simple, de sorte que tous les journaux des différentes tâches soient enregistrés dans un même répertoire de votre conteneur d’objets blob, comme illustré ci-dessous. Ces journaux s’avèrent utiles pour superviser la durée de traitement de chaque tâche et de chaque image. Vous pouvez ainsi vous faire une idée plus précise de la façon de mieux optimiser le processus.
-
-![Capture d’écran de la journalisation pour Azure Batch AI](./_images/batch-ai-logging.png)
+Azure Machine Learning journalise automatiquement tous les stdout/stderr dans le compte Stockage Blob associé. Sauf indication contraire, votre espace de travail Azure Machine Learning provisionne automatiquement un compte de stockage et y enregistre vos journaux. Vous pouvez aussi utiliser un outil de navigation de stockage comme l’Explorateur Stockage, qui facilite nettement l’expérience de navigation dans les fichiers journaux.
 
 ## <a name="cost-considerations"></a>Considérations relatives au coût
 
 Par rapport aux composants de stockage et de planification, les ressources de calcul utilisées dans cette architecture de référence s’avèrent nettement plus coûteuses. L’une des principales difficultés est de paralléliser efficacement les tâches dans un cluster de machines compatibles avec les GPU.
 
-La taille du cluster Batch AI peut être mise automatiquement à l’échelle à la hausse ou à la baisse en fonction des tâches présentes dans la file d’attente. Avec Batch AI, vous pouvez activer la mise à l’échelle automatique de deux façons différentes. Vous pouvez le faire programmatiquement, ce que vous pouvez configurer dans le fichier `.env` lors des [étapes de déploiement][deployment], ou vous pouvez changer la formule de mise à l’échelle directement dans le portail une fois le cluster créé.
+La taille du cluster de capacité de calcul Machine Learning peut faire l’objet d’un scale-up ou d’un scale-down automatique, en fonction des travaux présents dans la file d’attente. Vous pouvez activer la mise à l’échelle automatique par programmation en définissant le nombre minimal et le nombre maximal de nœuds.
 
-Pour les tâches qui ne nécessitent pas un traitement immédiat, configurez la formule de mise à l’échelle automatique de sorte que l’état par défaut (minimum) soit un cluster sans nœud. Avec cette configuration, le cluster démarre sans nœud et ne monte en puissance que s’il détecte des tâches dans la file d’attente. Si le processus de scoring par lots ne s’enclenche que quelques fois par jour, ce paramètre permet de réaliser des économies significatives.
+Pour les tâches qui ne nécessitent pas un traitement immédiat, configurez la mise à l’échelle automatique, de sorte que l’état par défaut (minimal) soit un cluster sans nœud. Avec cette configuration, le cluster démarre sans nœud et ne monte en puissance que s’il détecte des tâches dans la file d’attente. Si le processus de scoring par lots ne s’enclenche que quelques fois par jour, ce paramètre permet de réaliser des économies significatives.
 
 La mise à l’échelle peut ne pas convenir pour les tâches Batch trop rapprochées les unes des autres. Le temps nécessaire au lancement et à l’arrêt d’un cluster a aussi un coût. De ce fait, si une charge de travail Batch commence seulement quelques minutes après la fin de la tâche précédente, il peut être plus rentable de laisser le cluster s’exécuter entre les tâches.
+
+Capacité de calcul Machine Learning prend également en charge les machines virtuelles de faible priorité. Ceci vous permet d’exécuter votre calcul sur des machines virtuelles avec remise, avec cette limitation qu’elles peuvent être préemptées à tout moment. Les machines virtuelles de faible priorité sont idéales pour les charges de travail de scoring par lots qui ne sont pas critiques.
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
 Pour déployer cette architecture de référence, suivez les étapes décrites dans le [dépôt GitHub][deployment].
+
+> [!NOTE]
+> Vous pouvez également déployer une architecture de scoring par lots pour les modèles d’apprentissage profond avec Azure Kubernetes Service. Suivez les étapes décrites dans ce [dépôt GitHub][deployment2].
+
 
 <!-- links -->
 
 [aml-compute]: /azure/machine-learning/service/how-to-set-up-training-targets#amlcompute
 [amls]: /azure/machine-learning/service/overview-what-is-azure-ml
 [azcopy]: /azure/storage/common/storage-use-azcopy-linux
-[batch-ai]: /azure/batch-ai/
-[blobfuse]: https://github.com/Azure/azure-storage-fuse
 [blob-storage]: /azure/storage/blobs/storage-blobs-introduction
 [container-instances]: /azure/container-instances/
 [container-registry]: /azure/container-registry/
-[deployment]: https://github.com/Azure/batch-scoring-for-dl-models
-[dockerhub]: https://hub.docker.com/
+[deployment]: https://github.com/Azure/Batch-Scoring-Deep-Learning-Models-With-AML
+[deployment2]: https://github.com/Azure/Batch-Scoring-Deep-Learning-Models-With-AKS
 [ffmpeg]: https://www.ffmpeg.org/
 [image-style-transfer]: https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf
 [logic-apps]: /azure/logic-apps/
-[service-endpoints]: /azure/storage/common/storage-network-security?toc=%2fazure%2fvirtual-network%2ftoc.json#grant-access-from-a-virtual-network
 [source-video]: https://happypathspublic.blob.core.windows.net/videos/orangutan.mp4
 [storage-security]: /azure/storage/common/storage-security-guide
 [vm-sizes-gpu]: /azure/virtual-machines/windows/sizes-gpu
+[virtual-network]: /azure/machine-learning/service/how-to-enable-virtual-network

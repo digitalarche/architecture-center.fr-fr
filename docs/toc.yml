@@ -357,6 +357,8 @@ items:
       href: reference-architectures/ai/batch-scoring-deep-learning.md
     - name: Scoring par lots des modèles Python
       href: reference-architectures/ai/batch-scoring-python.md
+    - name: Scoring par lots de modèles Spark sur Azure Databricks
+      href: reference-architectures/ai/batch-scoring-databricks.md
     - name: Scoring en temps réel des modèles Python et d’apprentissage profond
       href: reference-architectures/ai/realtime-scoring-python.md
     - name: Scoring en temps réel des modèles Machine Learning R
@@ -651,11 +653,11 @@ items:
           href: cloud-adoption/governance/policy-compliance/what-is-data-classification.md
       - name: Implémentation des cinq disciplines de la gouvernance cloud
         items:
-        - name: Gestion des coûts
+        - name: Cost Management
           items:
           - name: Vue d’ensemble de la discipline Gestion des coûts
             href: cloud-adoption/governance/cost-management/overview.md
-          - name: Télécharger le modèle
+          - name: Téléchargez le modèle
             href: cloud-adoption/governance/cost-management/template.md
           - name: Comprendre les risques métier
             href: cloud-adoption/governance/cost-management/business-risks.md
@@ -673,7 +675,7 @@ items:
           items:
           - name: Vue d’ensemble de la discipline Base de référence de la sécurité
             href: cloud-adoption/governance/security-baseline/overview.md
-          - name: Télécharger le modèle
+          - name: Téléchargez le modèle
             href: cloud-adoption/governance/security-baseline/template.md
           - name: Comprendre les risques métier
             href: cloud-adoption/governance/security-baseline/business-risks.md
@@ -695,7 +697,7 @@ items:
           items:
           - name: Vue d’ensemble de la discipline Base de référence des identités
             href: cloud-adoption/governance/identity-baseline/overview.md
-          - name: Télécharger le modèle
+          - name: Téléchargez le modèle
             href: cloud-adoption/governance/identity-baseline/template.md
           - name: Comprendre les risques métier
             href: cloud-adoption/governance/identity-baseline/business-risks.md
@@ -713,7 +715,7 @@ items:
           items:
           - name: Vue d’ensemble de la discipline Cohérence des ressources
             href: cloud-adoption/governance/resource-consistency/overview.md
-          - name: Télécharger le modèle
+          - name: Téléchargez le modèle
             href: cloud-adoption/governance/resource-consistency/template.md
           - name: Comprendre les risques métier
             href: cloud-adoption/governance/resource-consistency/business-risks.md
@@ -815,9 +817,9 @@ items:
           href: cloud-adoption/decision-guides/software-defined-network/hub-spoke.md
       - name: Journaux et rapports
         href: cloud-adoption/decision-guides/log-and-report/overview.md
-ms.openlocfilehash: 608761d954c2a26968a970c99f506ee03b40867d
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.openlocfilehash: 2ba7e4b0b9eb049c0492557a0543778d2fbb2518
+ms.sourcegitcommit: a68f248402c598f9d25bc1dc62f27a6a934ff001
 ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 02/08/2019
-ms.locfileid: "55898457"
+ms.locfileid: "55903246"
