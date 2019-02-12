@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: cfbe877a4e3a4a1d5aa87c4a77ad2c5f23a6d664
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: a87972a3901ed9499b5b25831131a79ff5db8f87
+ms.sourcegitcommit: eee3a35dd5a5a2f0dc117fa1c30f16d6db213ba2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54484480"
+ms.lasthandoff: 02/06/2019
+ms.locfileid: "55782096"
 ---
 # <a name="data-partitioning-strategies"></a>Stratégies de partitionnement de données
 
@@ -105,7 +105,7 @@ Considérez les points suivants quand vous concevez vos entités pour le stockag
 
 - Si vous générez des clés de partition à l’aide d’une séquence incrémentielle unitone (par exemple, « 0001 », « 0002 », « 0003 ») et que chaque partition contient uniquement une quantité limitée de données, le stockage de tables Azure peut regrouper physiquement ces partitions sur le même serveur. Le stockage Azure suppose que l’application est plus susceptible d’effectuer des requêtes sur une plage contiguë de partitions (requêtes de plage) et est optimisée pour cet usage. Cependant, cette approche peut conduire à la présence de zones réactives, car toutes les insertions de nouvelles entités seront probablement concentrées sur l’une des extrémités de la plage contiguë. Elle peut également réduire l’évolutivité. Pour répartir la charge de manière plus homogène, il peut être nécessaire de hacher la clé de partition.
 
-- Le stockage de tables Azure prend en charge les opérations transactionnelles pour les entités appartenant à la même partition. Une application peut effectuer plusieurs opérations d’insertion, de mise à jour, de suppression, de remplacement ou de fusion sous forme d’unité atomique tant que la transaction ne comporte pas plus de 100 entités et que la charge utile de la requête ne dépasse pas 4 Mo. Les opérations qui chevauchent plusieurs partitions ne sont pas transactionnelles et peuvent vous obliger à implémenter la cohérence finale. Pour plus d’informations sur le stockage de tables et les transactions, consultez la page [Performing Entity Group Transactions].
+- Le stockage de tables Azure prend en charge les opérations transactionnelles pour les entités appartenant à la même partition. Une application peut effectuer plusieurs opérations d’insertion, de mise à jour, de suppression, de remplacement ou de fusion sous forme d’unité atomique tant que la transaction ne comporte pas plus de 100 entités et que la charge utile de la requête ne dépasse pas 4 Mo. Les opérations qui chevauchent plusieurs partitions ne sont pas transactionnelles et peuvent vous obliger à implémenter la cohérence finale. Pour plus d’informations sur le stockage de tables et les transactions, consultez la page [Exécution de transactions de groupe d’entités].
 
 - Prenez en compte la granularité de la clé de partition :
 
@@ -115,7 +115,7 @@ Considérez les points suivants quand vous concevez vos entités pour le stockag
 
   - Le fait de partager la clé de partition au sein d’un sous-ensemble d’entités permet de regrouper les entités associées au sein de la même partition. Les opérations qui impliquent des entités associées peuvent être effectuées à l’aide de transactions relatives à des groupes d’entités et les requêtes intervenant sur un jeu d’entités associées peuvent être traitées en accédant à un seul serveur.
 
-Pour plus d’informations, consultez le [Azure Storage Table Design Guide].
+Pour plus d’informations, consultez le [Guide de conception de table de stockage Azure].
 
 ## <a name="partitioning-azure-blob-storage"></a>Partitionner le stockage d’objets blob Azure 
 
@@ -203,7 +203,7 @@ Lorsque vous décidez de la procédure à suivre pour partitionner des données 
 
 ## <a name="partitioning-azure-search"></a>Partitionnement Recherche Azure
 
-La capacité à rechercher des données est souvent la méthode principale de navigation et d’exploration fournie par de nombreuses applications web. Elle permet aux utilisateurs de trouver des ressources rapidement (par exemple, des produits dans une application de commerce électronique) en fonction de combinaisons de critères de recherche. Le service de recherche Azure Search propose des fonctionnalités de recherche en texte intégral dans le contenu Web, ainsi que des fonctionnalités telles que les requêtes prédictives, les requêtes suggérées en fonction des correspondances suivantes et la navigation à facettes. Pour plus d’informations, consultez [Présentation d’Azure Search].
+La capacité à rechercher des données est souvent la méthode principale de navigation et d’exploration fournie par de nombreuses applications web. Elle permet aux utilisateurs de trouver des ressources rapidement (par exemple, des produits dans une application de commerce électronique) en fonction de combinaisons de critères de recherche. Le service de recherche Azure Search propose des fonctionnalités de recherche en texte intégral dans le contenu Web, ainsi que des fonctionnalités telles que les requêtes prédictives, les requêtes suggérées en fonction des correspondances suivantes et la navigation à facettes. Pour plus d’informations, consultez [Qu’est-ce que Recherche Azure ?].
 
 Azure Search stocke le contenu pouvant faire l’objet d’une recherche sous forme de documents JSON dans une base de données. Vous définissez des index qui spécifient les champs de recherche dans ces documents et fournissez ces définitions à Azure Search. Quand un utilisateur soumet une demande de recherche, Azure Search utilise les index appropriés pour trouver les éléments correspondants.
 
@@ -242,7 +242,7 @@ Les applications clientes envoient simplement les demandes à l’un des serveur
 Ce modèle est mis en œuvre à l’aide du clustering Redis et est décrit plus en détail sur la page [Redis cluster tutorial] sur le site web de Redis. Le clustering Redis est transparent pour les applications clientes. Vous pouvez ajouter des serveurs Redis supplémentaires au cluster (et repartitionner les données) sans avoir à reconfigurer les clients.
 
 > [!IMPORTANT]
-> Le cache Redis Azure ne prend pas en charge le clustering Redis. Si vous souhaitez implémenter cette approche avec Azure, vous devez implémenter vos propres serveurs Redis en installant Redis sur un ensemble de machines virtuelles Azure et en les configurant manuellement. La page [Running Redis on a CentOS Linux VM in Windows Azure] présente un exemple décrivant comment créer et configurer un nœud Redis exécuté en tant que machine virtuelle Azure.
+> Le Cache Redis Azure prend actuellement en charge le clustering Redis seulement dans le niveau [Premium](/azure/azure-cache-for-redis/cache-how-to-premium-clustering).
 
 La page [Partitioning: how to split data among multiple Redis instances] sur le site web de Redis fournit des informations supplémentaires sur l’implémentation du partitionnement avec Redis. Le reste de cette section part du principe que vous mettez en œuvre le partitionnement côté client ou assisté par proxy.
 
@@ -256,7 +256,7 @@ Considérez les points suivants quand vous décidez de partitionner des données
   - Ensembles (triés et non triés)
   - Hachages (qui peuvent regrouper des champs associés, tels que des éléments qui représentent les champs d’un objet)
 
-- Les types d’agrégation permettent d’associer de nombreuses valeurs connexes avec la même clé. Une clé Redis identifie une liste, un ensemble ou un hachage plutôt que les éléments de données qu’elle contient. Ces types sont tous disponibles avec le cache Redis Azure et sont décrits dans la page [Types de données] sur le site web de Redis. Par exemple, dans le cadre d’un système de commerce électronique qui assure le suivi des commandes passées par les clients, les détails de chaque client peuvent être stockés dans un hachage Redis indexé à l’aide de l’ID du client. Chaque hachage peut contenir une collection d’ID de commande relatifs au client. Un jeu Redis distinct peut contenir les commandes, à nouveau structurées sous forme de hachages, indexées à l’aide de l’ID de la commande. La figure 8 illustre cette structure. Remarquez que Redis ne met pas en œuvre toutes les formes d’intégrité référentielle ; il incombe au développeur de maintenir les relations entre les clients et commandes.
+- Les types d’agrégation permettent d’associer de nombreuses valeurs connexes avec la même clé. Une clé Redis identifie une liste, un ensemble ou un hachage plutôt que les éléments de données qu’elle contient. Ces types sont tous disponibles avec le cache Redis Azure et sont décrits dans la page [Data types] sur le site web de Redis. Par exemple, dans le cadre d’un système de commerce électronique qui assure le suivi des commandes passées par les clients, les détails de chaque client peuvent être stockés dans un hachage Redis indexé à l’aide de l’ID du client. Chaque hachage peut contenir une collection d’ID de commande relatifs au client. Un jeu Redis distinct peut contenir les commandes, à nouveau structurées sous forme de hachages, indexées à l’aide de l’ID de la commande. La figure 8 illustre cette structure. Remarquez que Redis ne met pas en œuvre toutes les formes d’intégrité référentielle ; il incombe au développeur de maintenir les relations entre les clients et commandes.
 
 ![Structure suggérée au sein du stockage Redis pour enregistrer les commandes des clients et les détails associés](./images/data-partitioning/RedisCustomersandOrders.png)
 
@@ -306,13 +306,13 @@ Pour découvrir des considérations relatives aux compromis entre la disponibili
 [Azure Content Delivery Network]: /azure/cdn/cdn-overview
 [Cache Redis Azure]: https://azure.microsoft.com/services/cache/
 [Azure Storage Scalability and Performance Targets]: /azure/storage/storage-scalability-targets
-[Azure Storage Table Design Guide]: /azure/storage/storage-table-design-guide
+[Guide de conception de table de stockage Azure]: /azure/storage/storage-table-design-guide
 [Building a Polyglot Solution]: https://msdn.microsoft.com/library/dn313279.aspx
 [cosmos-db-ru]: /azure/cosmos-db/request-units
 [Data Access for Highly-Scalable Solutions: Using SQL, NoSQL, and Polyglot Persistence]: https://msdn.microsoft.com/library/dn271399.aspx
 [Data consistency primer]: https://aka.ms/Data-Consistency-Primer
 [Data Partitioning Guidance]: https://msdn.microsoft.com/library/dn589795.aspx
-[Types de données]: https://redis.io/topics/data-types
+[Data types]: https://redis.io/topics/data-types
 [cosmosdb-sql-api]: /azure/cosmos-db/sql-api-introduction
 [Elastic Database features overview]: /azure/sql-database/sql-database-elastic-scale-introduction
 [event-hubs]: /azure/event-hubs
@@ -322,9 +322,9 @@ Pour découvrir des considérations relatives aux compromis entre la disponibili
 [Vue d’ensemble d’Azure Service Fabric]: /azure/service-fabric/service-fabric-overview
 [Partitionnement des services fiables Service Fabric]: /azure/service-fabric/service-fabric-concepts-partitioning
 [Partitioning: how to split data among multiple Redis instances]: https://redis.io/topics/partitioning
-[Performing Entity Group Transactions]: /rest/api/storageservices/Performing-Entity-Group-Transactions
+[Exécution de transactions de groupe d’entités]: /rest/api/storageservices/Performing-Entity-Group-Transactions
 [Redis cluster tutorial]: https://redis.io/topics/cluster-tutorial
-[Running Redis on a CentOS Linux VM in Windows Azure]: https://blogs.msdn.microsoft.com/tconte/2012/06/08/running-redis-on-a-centos-linux-vm-in-windows-azure/
+[Running Redis on a CentOS Linux VM in Azure]: https://blogs.msdn.microsoft.com/tconte/2012/06/08/running-redis-on-a-centos-linux-vm-in-windows-azure/
 [Scaling using the Elastic Database split-merge tool]: /azure/sql-database/sql-database-elastic-scale-overview-split-and-merge
 [Using Azure Content Delivery Network]: /azure/cdn/cdn-create-new-endpoint
 [Quotas Service Bus]: /azure/service-bus-messaging/service-bus-quotas
@@ -334,6 +334,6 @@ Pour découvrir des considérations relatives aux compromis entre la disponibili
 [Types de données pris en charge (Azure Search)]:  https://msdn.microsoft.com/library/azure/dn798938.aspx
 [Transactions]: https://redis.io/topics/transactions
 [Qu’est-ce qu’Event Hubs ?]: /azure/event-hubs/event-hubs-what-is-event-hubs
-[Présentation d’Azure Search]: /azure/search/search-what-is-azure-search
+[Qu’est-ce que Recherche Azure ?]: /azure/search/search-what-is-azure-search
 [What is Azure SQL Database?]: /azure/sql-database/sql-database-technical-overview
 [objectifs d’extensibilité]: /azure/storage/common/storage-scalability-targets
