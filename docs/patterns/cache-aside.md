@@ -9,12 +9,12 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: bb2aa5a7ae6d7a33eac33dce4588380ec82a0df7
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: c4b423b2031699210d5917f12a4c14df0f4a694c
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488169"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898270"
 ---
 # <a name="cache-aside-pattern"></a>Modèle Cache-Aside
 
@@ -125,7 +125,7 @@ public async Task<MyEntity> GetMyEntityAsync(int id)
 }
 ```
 
-> Ces exemples utilisent Cache Redis pour accéder au magasin de données et récupérer des informations depuis le cache. Pour plus d’informations, consultez les articles [Using Microsoft Azure Redis Cache](https://docs.microsoft.com/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) (Utilisation du Cache Redis Microsoft Azure) et [Création d’une application web avec le Cache Redis](https://docs.microsoft.com/azure/redis-cache/cache-web-app-howto).
+> Ces exemples utilisent Cache Redis pour accéder au magasin de données et récupérer des informations depuis le cache. Pour plus d’informations, consultez les articles [Using Microsoft Azure Redis Cache](/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache) (Utilisation du Cache Redis Microsoft Azure) et [Création d’une application web avec le Cache Redis](/azure/redis-cache/cache-web-app-howto).
 
 La méthode `UpdateEntityAsync` illustrée ci-dessous montre comment invalider un objet dans le cache lorsque sa valeur est modifiée par l’application. Le code met à jour la banque de données d’origine, puis supprime l’élément en cache du cache.
 
@@ -150,6 +150,6 @@ public async Task UpdateEntityAsync(MyEntity entity)
 
 Les informations suivantes peuvent également être pertinentes durant l’implémentation de ce modèle :
 
-- [Recommandations en matière de cache](https://docs.microsoft.com/azure/architecture/best-practices/caching). Fournit des informations supplémentaires sur la façon dont vous pouvez mettre en cache des données dans une solution cloud, ainsi que les points à prendre en compte lorsque vous implémentez un cache.
+- [Recommandations en matière de cache](/azure/architecture/best-practices/caching). Fournit des informations supplémentaires sur la façon dont vous pouvez mettre en cache des données dans une solution cloud, ainsi que les points à prendre en compte lorsque vous implémentez un cache.
 
 - [Manuel d’introduction à la cohérence des données](https://msdn.microsoft.com/library/dn589800.aspx). Les applications cloud utilisent généralement des données réparties dans plusieurs banques de données. La gestion et la maintenance de la cohérence des données dans cet environnement constituent un aspect essentiel du système, notamment par rapport aux problèmes de concurrence et de disponibilité pouvant survenir. Ce manuel décrit les problèmes de cohérence des données distribuées et explique comment une application peut implémenter la cohérence éventuelle pour garantir la disponibilité des données.

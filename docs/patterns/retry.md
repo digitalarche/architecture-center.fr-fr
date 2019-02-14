@@ -9,12 +9,12 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 28e840d31a0df063edce82ef52f11064da3b17fb
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 8d37bc2aed17bfef4d54f29f269b23ce4a5c52c0
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54483375"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897658"
 ---
 # <a name="retry-pattern"></a>Modèle Nouvelle tentative
 
@@ -52,7 +52,7 @@ L’application doit inclure toutes les tentatives d’accès à un service dist
 
 Une application doit consigner les détails des erreurs et des opérations ayant échoué. Ces informations sont utiles pour les opérateurs. Si un service est fréquemment occupé ou indisponible, cela signifie souvent que le service a épuisé ses ressources. Vous pouvez réduire la fréquence de ces erreurs en procédant à une montée en charge du service. Par exemple, si un service de base de données est surchargé en permanence, il peut être utile de partitionner la base de données et de répartir la charge sur plusieurs serveurs.
 
-> [Microsoft Entity Framework](https://docs.microsoft.com/ef/) fournit des fonctionnalités pour relancer les opérations de base de données. De même, la plupart des services Azure et des kits de développement logiciel (SDK) clients incluent un mécanisme de nouvelle tentative. Pour plus d’informations, consultez [Guide du mécanisme de nouvelle tentative relatif aux différents services](https://docs.microsoft.com/azure/architecture/best-practices/retry-service-specific).
+> [Microsoft Entity Framework](https://docs.microsoft.com/ef/) fournit des fonctionnalités pour relancer les opérations de base de données. De même, la plupart des services Azure et des kits de développement logiciel (SDK) clients incluent un mécanisme de nouvelle tentative. Pour plus d’informations, consultez [Guide du mécanisme de nouvelle tentative relatif aux différents services](/azure/architecture/best-practices/retry-service-specific).
 
 ## <a name="issues-and-considerations"></a>Problèmes et considérations
 
@@ -176,5 +176,5 @@ private bool IsTransient(Exception ex)
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 
 - [Modèle Disjoncteur](./circuit-breaker.md). Le modèle Nouvelle tentative est idéal pour gérer les erreurs temporaires. Lorsque l’erreur semble être de plus longue durée, il peut être plus judicieux d’implémenter le modèle Disjoncteur. Le modèle Nouvelle tentative peut également être combiné à un modèle Disjoncteur afin de mettre en place une approche complète de gestion des erreurs.
-- [Guide du mécanisme de nouvelle tentative relatif aux différents services](https://docs.microsoft.com/azure/architecture/best-practices/retry-service-specific)
+- [Guide du mécanisme de nouvelle tentative relatif aux différents services](/azure/architecture/best-practices/retry-service-specific)
 - [Résilience de connexion](https://docs.microsoft.com/ef/core/miscellaneous/connection-resiliency)

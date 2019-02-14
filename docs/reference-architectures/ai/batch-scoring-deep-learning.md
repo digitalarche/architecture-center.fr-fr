@@ -3,17 +3,17 @@ title: Scoring par lots pour les modèles d’apprentissage profond
 titleSuffix: Azure Reference Architectures
 description: Cette architecture de référence montre comment appliquer un transfert de style neuronal à une vidéo avec Azure Machine Learning.
 author: jiata
-ms.date: 10/02/2018
+ms.date: 02/06/2019
 ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 3fc0b85380b6b46f7a52382e0184490104ead5a3
-ms.sourcegitcommit: eee3a35dd5a5a2f0dc117fa1c30f16d6db213ba2
+ms.openlocfilehash: 85d04f179b988fd5b00b361149f2170d13608e6d
+ms.sourcegitcommit: 700a4f6ce61b1ebe68e227fc57443e49282e35aa
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/06/2019
-ms.locfileid: "55782045"
+ms.lasthandoff: 02/07/2019
+ms.locfileid: "55887384"
 ---
 # <a name="batch-scoring-on-azure-for-deep-learning-models"></a>Scoring par lots dans Azure pour les modèles d’apprentissage profond
 
@@ -104,7 +104,7 @@ Dans les scénarios à plusieurs utilisateurs, veillez à ce que les données se
 - Provisionnez deux comptes de stockage distincts. Stockez les données d’entrée et de sortie dans le premier compte. L’accès à ce compte peut être octroyé à des utilisateurs externes. Stockez les scripts exécutables et les fichiers journaux de sortie dans l’autre compte. Les utilisateurs externes ne doivent pas avoir accès à ce compte. Ainsi, les utilisateurs externes ne pourront pas modifier les fichiers exécutables (pour injecter du code malveillant) ni accéder aux fichiers journaux, qui peuvent contenir des informations sensibles.
 - Les utilisateurs malveillants peuvent lancer une attaque DDOS à l’encontre de la file d’attente des travaux ou injecter dans celle-ci des messages incohérents mal formés, entraînant ainsi le blocage du système ou des erreurs de retrait de la file d’attente.
 
-## <a name="monitoring-and-logging"></a>Supervision et journalisation
+## <a name="monitoring-and-logging"></a>Surveillance et journalisation
 
 ### <a name="monitoring-batch-jobs"></a>Supervision des travaux Batch
 

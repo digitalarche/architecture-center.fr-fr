@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, SAP, Windows
-ms.openlocfilehash: 1167a65786c3df946ebaed3e52e4ed4033f50fd5
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: e866727a40551b60e74fc26878a15a5a48e69cf6
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486401"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897624"
 ---
 # <a name="deploy-sap-netweaver-windows-for-anydb-on-azure-virtual-machines"></a>Déployer SAP NetWeaver (Windows) pour AnyDB sur des machines virtuelles Azure
 
@@ -91,7 +91,7 @@ Les déploiements SAP locaux traditionnels implémentent plusieurs cartes résea
 
 Cette architecture divise l’espace d’adressage du réseau virtuel en sous-réseaux. Cette architecture de référence est principalement axée sur le sous-réseau de la couche Application. Chaque sous-réseau peut être associé à un NSG qui définit les stratégies d’accès pour ce sous-réseau. Placez les serveurs d’applications dans un sous-réseau distinct afin de pouvoir les sécuriser plus facilement en gérant les stratégies de sécurité du sous-réseau plutôt que les serveurs individuels.
 
-Quand un NSG est associé à un sous-réseau, il s’applique à tous les serveurs au sein de ce sous-réseau. Pour plus d’informations sur l’utilisation de NSG pour un contrôle précis des serveurs d’un sous-réseau, consultez [Filtrer le trafic réseau avec les groupes de sécurité réseau](https://azure.microsoft.com/en-us/blog/multiple-vm-nics-and-network-virtual-appliances-in-azure/).
+Quand un NSG est associé à un sous-réseau, il s’applique à tous les serveurs au sein de ce sous-réseau. Pour plus d’informations sur l’utilisation de NSG pour un contrôle précis des serveurs d’un sous-réseau, consultez [Filtrer le trafic réseau avec les groupes de sécurité réseau](https://azure.microsoft.com/blog/multiple-vm-nics-and-network-virtual-appliances-in-azure).
 
 ### <a name="load-balancers"></a>Équilibreurs de charge
 
@@ -181,7 +181,7 @@ Les communautés peuvent répondre aux questions et vous aider à paramétrer un
 - [Blog Running SAP Applications on the Microsoft Platform](https://blogs.msdn.microsoft.com/saponsqlserver/2017/05/04/sap-on-azure-general-update-for-customers-partners-april-2017/) (Exécution d’applications SAP sur la plateforme Microsoft)
 - [Support de la communauté Azure](https://azure.microsoft.com/support/community/)
 - [Communauté SAP](https://www.sap.com/community.html)
-- [Dépassement de capacité de la pile](https://stackoverflow.com/tags/sap/)
+- [Stack Overflow](https://stackoverflow.com/tags/sap/)
 
 ## <a name="related-resources"></a>Ressources associées
 

@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
-ms.openlocfilehash: 384634acb8690c64f75eabbfebc5f1de414f6da2
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 9fce082a0e762e25981929f6fa8685033017f3eb
+ms.sourcegitcommit: f4ed242dff8b204cfd8ebebb7778f356a19f5923
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54484616"
+ms.lasthandoff: 02/13/2019
+ms.locfileid: "56224179"
 ---
 # <a name="run-an-n-tier-application-in-multiple-azure-regions-for-high-availability"></a>Exécuter une application multiniveau dans plusieurs régions pour une haute disponibilité
 
@@ -119,7 +119,7 @@ Pour configurer le groupe de disponibilité
     ```
 
 - Créez un cluster [WSFC (Clustering de basculement Windows Server)][wsfc] qui inclut les instances de SQL Server dans les deux régions.
-- Créez un groupe de disponibilité SQL Server AlwaysOn qui inclut les instances de SQL Server dans les régions primaire et secondaire. Pour connaître les étapes, consultez [Extending AlwaysOn Availability Group to Remote Azure Datacenter (PowerShell) (Extension de groupe de disponibilité AlwaysOn à un centre de données Azure à distance (PowerShell)](https://blogs.msdn.microsoft.com/sqlcat/2014/09/22/extending-alwayson-availability-group-to-remote-azure-datacenter-powershell/).
+- Créez un groupe de disponibilité SQL Server AlwaysOn qui inclut les instances de SQL Server dans les régions primaire et secondaire. Pour connaître les étapes, consultez [Extending AlwaysOn Availability Group to Remote Azure Datacenter (PowerShell) (Extension de groupe de disponibilité AlwaysOn à un centre de données Azure à distance (PowerShell)](https://techcommunity.microsoft.com/t5/DataCAT/Extending-AlwaysOn-Availability-Group-to-Remote-Azure-Datacenter/ba-p/305217).
 
   - Placez le réplica principal dans la région primaire.
   - Placez un ou plusieurs réplicas secondaires dans la région primaire. Configurez-les pour qu’ils utilisent la validation synchrone avec basculement automatique.
