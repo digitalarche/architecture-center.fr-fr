@@ -129,7 +129,7 @@ Le déploiement illustré ici se trouve dans une seule région Azure. Pour une a
 
 - **Cosmos DB**. COSMOS DB prend en charge [plusieurs régions principales][cosmosdb-geo], ce qui permet des écritures sur n’importe quelle région que vous ajoutez à votre compte Cosmos DB. Si vous n’activez pas multimaître, vous pouvez toujours basculer vers la région d’écriture primaire. Les kits de développement client Cosmos DB et les liaisons d’Azure Function gèrent automatiquement le basculement, vous n’avez pas besoin de mettre à jour les paramètres de configuration d’application.
 
-- **Stockage Azure**. Utilisez le stockage [RA-GRS] [ ra-grs] pour la file d’attente de lettres mortes. Cette opération crée un réplica en lecture seule dans une autre région. Si la région primaire devient indisponible, vous pouvez lire les éléments actuellement présents dans la file d’attente. En outre, configurez un autre compte de stockage dans la région secondaire à laquelle la fonction peut écrire après un basculement.
+- **Stockage Azure**. Utilisez le stockage [RA-GRS][ra-grs] pour la file d’attente de lettres mortes. Cette opération crée un réplica en lecture seule dans une autre région. Si la région primaire devient indisponible, vous pouvez lire les éléments actuellement présents dans la file d’attente. En outre, configurez un autre compte de stockage dans la région secondaire à laquelle la fonction peut écrire après un basculement.
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
