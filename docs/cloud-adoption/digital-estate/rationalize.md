@@ -1,20 +1,21 @@
 ---
-title: Rationaliser le patrimoine numérique
-titleSuffix: Enterprise Cloud Adoption
-description: Processus permettant d’évaluer les ressources numériques en vue de trouver la meilleure façon de les héberger dans le cloud.
+title: 'Framework d’adoption du cloud : Rationaliser le patrimoine numérique'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
+description: Évaluez vos ressources numériques pour déterminer la meilleure façon de les héberger dans le cloud.
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
-ms.service: architecture-center
-ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 2002b5273aed4aef2d283f23f83aa08d1d6f5c95
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 02189c9edcbfea0a55fe69a53bf610e85470a4d0
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54485721"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897199"
 ---
-# <a name="enterprise-cloud-adoption-rationalize-the-digital-estate"></a>Adoption du cloud d’entreprise : Rationaliser le patrimoine numérique
+# <a name="rationalize-the-digital-estate"></a>Rationaliser le patrimoine numérique
 
 La rationalisation du cloud est le processus qui consiste à évaluer des ressources dans le but de déterminer la meilleure façon de les héberger dans le cloud. Une fois que vous avez déterminé l’[approche](approach.md) à adopter et que vous avez réalisé un [inventaire](inventory.md), vous êtes prêt pour rationalisation du cloud. La rubrique [Les 5 R de la rationalisation](5-rs-of-rationalization.md) traite des options de rationalisation les plus courantes.
 
@@ -122,7 +123,7 @@ Parallèlement à la rationalisation continue, l’équipe chargée de l’adopt
 - Définir les services principaux (et les standards Azure) qui sont nécessaires à une vision à long terme
 - Mieux comprendre comment les opérations peuvent être amenées à évoluer lors de la transformation
 - Comprendre les risques commerciaux inhérents ainsi que la tolérance de l’entreprise à de tels risques
-- Établir une ligne de base ou un produit au minimum viable pour la gouvernance, en fonction de la tolérance de l’entreprise aux risques inhérents
+- Établir une ligne de base ou un produit minimum viable (MVP) pour la gouvernance, en fonction de la tolérance de l’entreprise aux risques inhérents
 
 ## <a name="release-planning"></a>Planification de la mise en production
 
@@ -154,7 +155,7 @@ Dans certains cas, le modèle financier peut être trop strict pour permettre un
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-La rationalisation génère un backlog hiérarchisé comprenant toutes les ressources qui seront impactées par la transformation choisie. Ce backlog est maintenant prêt à servir de base pour les modèles de coûts des services cloud.
+La rationalisation génère un backlog hiérarchisé comprenant toutes les ressources qui seront affectées par la transformation choisie. Ce backlog est maintenant prêt à servir de base pour les modèles de coûts des services cloud.
 
 > [!div class="nextstepaction"]
 > [Aligner les modèles de coûts sur le patrimoine numérique](calculate.md)

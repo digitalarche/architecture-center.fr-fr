@@ -1,41 +1,43 @@
 ---
-title: 'Adoption du cloud d’entreprise : Prise en main'
-description: Décrit une vue d’ensemble de la première phase de la transformation numérique d’une entreprise pour l’adoption de technologies cloud Azure
-author: petertaylor9999
-ms.date: 09/10/2018
-ms.topic: guide
+title: 'Framework d’adoption du cloud : Prise en main du framework d’adoption du cloud'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 027757c76008da092e0d7ab65b072259a04b3cad
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.custom: governance
+description: Décrit une vue d’ensemble de la première phase de la transformation numérique d’une entreprise pour l’adoption de technologies cloud Azure.
+author: petertaylor9999
+ms.date: 2/11/2019
+ms.openlocfilehash: bfa325ded8c39915ad4d495b4309b700abd71cc2
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488084"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898355"
 ---
-# <a name="enterprise-cloud-adoption-getting-started"></a>Adoption du cloud d’entreprise : Prise en main 
+# <a name="getting-started-with-the-cloud-adoption-framework"></a>Prise en main du framework d’adoption du cloud
 
-La **transformation numérique** vers le cloud computing implique de passer d’un fonctionnement local à un fonctionnement dans le cloud. Ce changement induit de nouvelles méthodes de gestion d’une entreprise. Par exemple, la transformation numérique implique de passer de dépenses en capital pour les logiciels et les matériels de centre de données à des dépenses d’exploitation pour l’utilisation des ressources cloud. 
+La **transformation numérique** vers le cloud computing implique de passer d’un fonctionnement local à un fonctionnement dans le cloud. Ce changement induit de nouvelles méthodes de gestion d’une entreprise. Par exemple, la transformation numérique implique de passer de dépenses en capital pour les logiciels et les matériels de centre de données à des dépenses d’exploitation pour l’utilisation des ressources cloud. Découvrons comment utiliser le [framework d’adoption du cloud Microsoft pour Azure](../overview.md).
 
-## <a name="digital-transformation-process"></a>Transformation numérique : processus
+## <a name="the-digital-transformation-process"></a>Processus de transformation numérique
 
 Pour réussir son adoption du cloud, une entreprise doit préparer son organisation, son personnel et ses processus à cette transformation numérique. Chaque structure organisationnelle d’entreprise étant différente, aucune approche en matière de préparation organisationnelle ne conviendra à tout le monde. Ce document décrit les principales étapes que votre entreprise peut suivre pour se préparer. Votre organisation devra prendre le temps d’élaborer un plan détaillé pour réaliser chacune des étapes répertoriées.
 
 Voici le principal processus à suivre pour la transformation numérique :
 
 1. Constituez une équipe de stratégie cloud. Cette équipe est responsable du pilotage de la transformation numérique. À ce stade, il est également important de constituer une équipe dédiée à la gouvernance et une équipe dédiée à la sécurité pour la transformation numérique.
-2. Les membres de l’équipe de stratégie cloud apprennent ce qui est nouveau et différent au sujet des technologies cloud.  
+2. Les membres de l’équipe de stratégie cloud apprennent ce qui est nouveau et différent au sujet des technologies cloud.
 3. L’équipe de stratégie cloud prépare l’entreprise en créant l’analyse de cas pour la transformation numérique ; elle énumère tous les écarts actuels de la stratégie métier et détermine les principales solutions pour les supprimer.
 4. Alignez les solutions principales avec des groupes métier. Identifiez les parties prenantes dans chaque groupe métier pour être en possession de la conception et de l’implémentation de chaque solution.
-5. Convertissez les rôles, compétences et processus existants pour inclure des rôles, compétences et processus cloud.  
-<!--6. Develop processes for operating in the cloud to make solutions more robust in terms of availability, resiliency, and security. 
-7. Optimize solutions for performance, scalability, and cost efficiency.-->
+5. Convertissez les rôles, compétences et processus existants pour inclure des rôles, compétences et processus cloud.
 
-## <a name="step-1-create-a-cloud-strategy-team"></a>Étape 1 : Constituer une équipe de stratégie cloud
+<!--6. Develop processes for operating in the cloud to make solutions more robust in terms of availability, resiliency, and security.
+1. Optimize solutions for performance, scalability, and cost efficiency.-->
+
+## <a name="step-1-create-a-cloud-strategy-team"></a>Étape 1 : Constituer une équipe de stratégie cloud
 
 La première étape de la transformation numérique de votre entreprise est de faire appel à des leaders métier de toute l’organisation pour constituer une équipe de stratégie cloud. Cette équipe rassemble des responsables métier issus des départements des finances, des infrastructures informatiques et des groupes d’applications. Ces équipes peuvent apporter leurs compétences pour la phase d’expérimentation et d’analyse cloud.
 
-Par exemple, une équipe de stratégie cloud peut être pilotée par le directeur technique et être composée de membres de l’équipe d’architecture d’entreprise, du département de finance et d’informatique, de techniciens experts issus de divers groupes d’applications informatiques (ressources humaines, finance, etc.) et de responsables d’équipes de mise en réseau, de sécurité et d’infrastructure.  
+Par exemple, une équipe de stratégie cloud peut être pilotée par le directeur technique et être composée de membres de l’équipe d’architecture d’entreprise, du département de finance et d’informatique, de techniciens experts issus de divers groupes d’applications informatiques (ressources humaines, finance, etc.) et de responsables d’équipes de mise en réseau, de sécurité et d’infrastructure.
 
 Il est également important de former deux autres équipes principales : une équipe dédiée à la gouvernance et une équipe dédiée à la sécurité. Ces équipes sont responsables de la conception, de l’implémentation et de l’audit en cours des stratégies de sécurité et de la gouvernance de l’entreprise. L’équipe dédiée à la gouvernance a besoin de membres ayant travaillé dans les domaines de la protection des ressources, de la gestion des coûts, de la stratégie de groupe et autres sujets associés. L’équipe dédiée à la sécurité requiert des membres qui connaissent bien les normes de sécurité actuelles du secteur, ainsi que les exigences de sécurité de l’entreprise.
 
@@ -46,7 +48,7 @@ L’équipe dédiée à la gouvernance est responsable de la conception et de l�
 L’équipe dédiée à la sécurité est responsable de la conception et de l’implémentation de la stratégie de sécurité de l’entreprise dans le cloud et collabore étroitement avec l’équipe dédiée à la gouvernance. L’équipe dédiée à la sécurité possède l’extension de la limite de sécurité du réseau local pour inclure le réseau virtuel dans le cloud. Cela peut consister à posséder et maintenir les pare-feu entrants et sortants sur le réseau virtuel cloud, ainsi qu’à garantir que la stratégie et les outils empêchent le déploiement des ressources non autorisées.
 
 ## <a name="step-2-learn-whats-new-in-the-cloud"></a>Étape 2 : Découvrir les nouveautés dans le cloud
- 
+
 L’étape suivante de la transformation numérique de votre entreprise implique que les membres de l’équipe de stratégie cloud apprennent comment la technologie cloud va changer la méthode de gestion de l’entreprise. Il s’agit de préparer et de planifier les changements qui vont affecter votre activité, votre personnel et vos technologies. Il est essentiel que les membres de l’équipe de stratégie cloud comprennent les nouveautés et les différences entre un environnement cloud et un environnement local.
 
 ![Les équipes chargées de la stratégie cloud, de la gouvernance et de la sécurité découvrent les meilleures pratiques d’utilisation du cloud.](../_images/getting-started-overview-2.png)
@@ -64,10 +66,10 @@ Ils peuvent être classés dans les catégories suivantes :
 |Catégorie|Description|
 |-----|-----|
 |la gestion des coûts ;|Représente un écart dans la façon dont l’entreprise paie pour la technologie.|
-|Gouvernance|Représente un écart dans les processus utilisés par l’entreprise pour protéger ses ressources d’une utilisation incorrecte qui peut entraîner des surcoûts, des problèmes de sécurité ou des problèmes de conformité. | 
+|Gouvernance|Représente un écart dans les processus utilisés par l’entreprise pour protéger ses ressources d’une utilisation incorrecte qui peut entraîner des surcoûts, des problèmes de sécurité ou des problèmes de conformité. |
 |Conformité|Représente un écart dans la façon dont l’entreprise respecte ses processus et stratégies internes, ainsi que les normes, réglementations et lois externes. |
 |Sécurité|Représente un écart dans la façon dont l’entreprise protège ses ressources de données et technologies des menaces externes. |
-|Gouvernance des données|Représente un écart dans la façon dont une entreprise gère ses données, notamment les données client. Par exemple, le nouveau Règlement général sur la protection des données (RGPD) de l’Union européenne contient des exigences strictes en matière de protection des données client qui peuvent nécessiter de nouveaux matériels et logiciels.|    
+|Gouvernance des données|Représente un écart dans la façon dont une entreprise gère ses données, notamment les données client. Par exemple, le nouveau Règlement général sur la protection des données (RGPD) de l’Union européenne contient des exigences strictes en matière de protection des données client qui peuvent nécessiter de nouveaux matériels et logiciels.|
 
 Une fois que votre entreprise a classé tous les écarts de stratégie métier dans ces catégories, l’étape suivante consiste à identifier une solution principale pour chaque problème.
 
@@ -81,11 +83,11 @@ Le tableau suivant fournit plusieurs exemples :
 
 Une fois tous les écarts de la stratégie métier énumérés et les solutions principales déterminées, classez la liste par ordre de priorité. Pour ce faire, vous pouvez aligner les écarts de la stratégie métier avec les objectifs à court et long termes de l’entreprise pour chaque catégorie. Par exemple, si l’entreprise a un objectif à court terme de réduction des dépenses informatiques des deux prochains trimestres, les écarts métiers dans la catégorie *Gestion des coûts* peuvent être classés par ordre de priorité en se basant sur les économies prévues associées à chacun des écarts.
 
-À l’issue de ce processus, vous obtenez une liste classée des solutions principales alignées avec les catégories métier. 
+À l’issue de ce processus, vous obtenez une liste classée des solutions principales alignées avec les catégories métier.
 
-## <a name="step-4-align-high-level-solutions-with-business-groups-to-design-solutions"></a>Étape 4 : Aligner les solutions principales avec des groupes métier pour concevoir des solutions 
+## <a name="step-4-align-high-level-solutions-with-business-groups-to-design-solutions"></a>Étape 4 : Aligner les solutions principales avec des groupes métier pour concevoir des solutions
 
-Maintenant que les objectifs de la transformation numérique ont été énumérés, classés par ordre de priorité et que des solutions principales ont été proposées, l’étape suivante pour l’équipe de stratégie cloud consiste à aligner chaque solution principale avec les équipes d’implémentation et de conception de chaque groupe métier. 
+Maintenant que les objectifs de la transformation numérique ont été énumérés, classés par ordre de priorité et que des solutions principales ont été proposées, l’étape suivante pour l’équipe de stratégie cloud consiste à aligner chaque solution principale avec les équipes d’implémentation et de conception de chaque groupe métier.
 
 Les équipes récupèrent les listes classées par ordre de priorité et étudient une à une les solutions principales pour concevoir chaque solution. Le processus de conception implique la spécification d’une nouvelle infrastructure et de nouvelles charges de travail. Des modifications peuvent être appliquées aux rôles des personnes et aux processus qu’elles suivent. À ce stade, il est aussi primordial que chaque équipe de conception fasse appel aux équipes dédiées à la sécurité et à la gouvernance pour examiner chaque conception. Toutes les conceptions doivent respecter les stratégies et procédures définies par les équipes dédiées à la sécurité et à la gouvernance, et ces dernières doivent participer à l’approbation finale de chaque conception.
 
@@ -95,28 +97,29 @@ La conception de chaque solution n’est pas une tâche anodine, et à mesure de
 
 Une fois la conception de la solution terminée, l’équipe passe à la phase d’implémentation de chaque conception. La phase d’implémentation de chaque conception de solution peut être effectuée via des processus de gestion de projets standard.
 
-## <a name="step-5-translate-existing-roles-skills-and-process-for-the-cloud"></a>Étape 5 : Convertir les rôles, compétences et processus existants pour le cloud
+## <a name="step-5-translate-existing-roles-skills-and-process-for-the-cloud"></a>Étape 5 : Convertir les rôles, compétences et processus existants pour le cloud
 
-Lors de chaque phase évolutive de l’histoire du secteur informatique, les changements les plus notables sont souvent observés au niveau des rôles du personnel. Pendant la transition des mainframes au modèle client/serveur, le rôle de l’opérateur informatique a largement disparu, remplacé par celui de l’administrateur système. À l’arrivée de la virtualisation, la demande en personnel travaillant avec des serveurs physiques a diminué, remplacée par un besoin en spécialistes de la virtualisation. De même, à mesure que les institutions passent au cloud computing, les rôles vont probablement changer. Par exemple, les spécialistes de centres de données peuvent être remplacés par des analystes financiers du cloud. Même dans les cas où l’intitulé des postes informatiques n’a pas changé, les rôles de travail quotidien ont considérablement évolué. 
+Lors de chaque phase évolutive de l’histoire du secteur informatique, les changements les plus notables sont souvent observés au niveau des rôles du personnel. Pendant la transition des mainframes au modèle client/serveur, le rôle de l’opérateur informatique a largement disparu, remplacé par celui de l’administrateur système. À l’arrivée de la virtualisation, la demande en personnel travaillant avec des serveurs physiques a diminué, remplacée par un besoin en spécialistes de la virtualisation. De même, à mesure que les institutions passent au cloud computing, les rôles vont probablement changer. Par exemple, les spécialistes de centres de données peuvent être remplacés par des analystes financiers du cloud. Même dans les cas où l’intitulé des postes informatiques n’a pas changé, les rôles de travail quotidien ont considérablement évolué.
 
-Les membres du personnel informatique peuvent s’inquiéter quant à leur poste et rôle quand ils se rendent compte qu’un ensemble de compétences différent est nécessaire pour prendre en charge les solutions cloud. Mais les employés agiles qui découvrent et explorent les nouvelles technologies cloud n’ont pas à ressentir cette peur. Ils peuvent piloter l’adoption des services cloud et aider l’organisation à comprendre et appréhender les changements associés. 
+Les membres du personnel informatique peuvent s’inquiéter quant à leur poste et rôle quand ils se rendent compte qu’un ensemble de compétences différent est nécessaire pour prendre en charge les solutions cloud. Mais les employés agiles qui découvrent et explorent les nouvelles technologies cloud n’ont pas à ressentir cette peur. Ils peuvent piloter l’adoption des services cloud et aider l’organisation à comprendre et appréhender les changements associés.
 
 ### <a name="capturing-concerns"></a>Recueil des préoccupations
 
-Lors de la transformation numérique, chaque équipe doit recueillir les préoccupations que le personnel peut avoir. Au cours de cette opération, identifiez les aspects suivants : 
+Lors de la transformation numérique, chaque équipe doit recueillir les préoccupations que le personnel peut avoir. Au cours de cette opération, identifiez les aspects suivants :
+
 * Le type de préoccupation. Par exemple, les employés peuvent être réfractaires aux changements apportés à leurs tâches suite à la transformation numérique.
-* L’impact de la préoccupation si elle n’est pas traitée. Par exemple, le fait d’être réfractaire à la transformation numérique peut entraîner un ralentissement des employés pour effectuer les changements nécessaires. 
-* Le domaine compétent pour traiter la préoccupation. Par exemple, si les employés du département informatique sont réticents à acquérir de nouvelles compétences, le domaine des parties prenantes informatiques est le plus compétent pour traiter cette préoccupation. Identifier le domaine peut être simple pour certains problèmes, et dans ce genre de situation, vous avez peut-être besoin de faire remonter l’information à la direction. 
+* L’impact de la préoccupation si elle n’est pas traitée. Par exemple, le fait d’être réfractaire à la transformation numérique peut entraîner un ralentissement des employés pour effectuer les changements nécessaires.
+* Le domaine compétent pour traiter la préoccupation. Par exemple, si les employés du département informatique sont réticents à acquérir de nouvelles compétences, le domaine des parties prenantes informatiques est le plus compétent pour traiter cette préoccupation. Identifier le domaine peut être simple pour certains problèmes, et dans ce genre de situation, vous avez peut-être besoin de faire remonter l’information à la direction.
 
 ### <a name="identify-gaps"></a>Identifier les écarts
 
-Un autre aspect de l’étude des problèmes liés à la transformation numérique de votre entreprise est l’identification des **écarts**. Un écart est un rôle, une compétence ou un processus requis pour votre transformation numérique qui n’existe actuellement pas dans votre entreprise. 
+Un autre aspect de l’étude des problèmes liés à la transformation numérique de votre entreprise est l’identification des **écarts**. Un écart est un rôle, une compétence ou un processus requis pour votre transformation numérique qui n’existe actuellement pas dans votre entreprise.
 
 Commencez en énumérant les nouvelles responsabilités qui accompagnent la transformation numérique, en mettant l’accent sur les nouvelles responsabilités et les responsabilités actuelles à supprimer. Identifiez le domaine qui s’aligne sur chaque responsabilité. Pour les nouvelles responsabilités, déterminez à quel point elles sont alignées avec le domaine. Certaines responsabilités peuvent s’étendre sur plusieurs domaines, et cela représente une opportunité d’alignement meilleur qui doit être collectée en tant que préoccupation. Dans le cas où aucun domaine responsable ne peut être identifié, recueillez cela comme un écart.
 
 Ensuite, identifiez les compétences nécessaires pour prendre en charge la responsabilité. Déterminez si votre entreprise possède des ressources existantes avec ces compétences. En l’absence de ressources existantes, déterminez quels programmes de formation ou recrutements sont nécessaires. Déterminez l’intervalle de temps durant lequel la responsabilité doit être prise pour respecter le calendrier de votre transformation numérique.
 
-Enfin, identifiez les rôles qui mettront en pratique ces compétences. Certains de vos effectifs existants assureront une partie du rôle, et dans d’autres cas, un nouveau rôle pourra être nécessaire. 
+Enfin, identifiez les rôles qui mettront en pratique ces compétences. Certains de vos effectifs existants assureront une partie du rôle, et dans d’autres cas, un nouveau rôle pourra être nécessaire.
 
 ### <a name="partner-across-teams"></a>Collaborer avec les équipes
 
@@ -128,7 +131,7 @@ Suivez ces dépendances et notez les processus qui les prendront en charge, et i
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-La transformation numérique est un processus itératif, et avec chaque itération, les équipes impliquées deviendront plus efficaces. 
+La transformation numérique est un processus itératif, et avec chaque itération, les équipes impliquées deviendront plus efficaces.
 
 > [!div class="nextstepaction"]
 > [Comprendre le fonctionnement d’Azure](what-is-azure.md)

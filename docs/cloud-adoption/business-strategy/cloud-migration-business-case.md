@@ -1,20 +1,21 @@
 ---
-title: Création d’une analyse de rentabilisation d’une migration cloud
-titleSuffix: Enterprise Cloud Adoption
-description: Points importants à prendre en compte pour élaborer une justification de la migration cloud
+title: 'Framework d’adoption du cloud : Créer une analyse de rentabilisation d’une migration cloud'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
+description: Considérations relatives à l’élaboration d’une justification professionnelle pour la migration vers le cloud.
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
-ms.service: architecture-center
-ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 8c27ce211f500ee2eec4f7775a7f68f214dba433
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 21c2b877a0f329711027f020fd0047479e8c7bfb
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488322"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898304"
 ---
-# <a name="enterprise-cloud-adoption-building-a-cloud-migration-business-case"></a>Adoption du cloud d’entreprise : Création d’une analyse de rentabilisation d’une migration cloud
+# <a name="build-a-business-justification-for-cloud-migration"></a>Créer une justification professionnelle pour la migration vers le cloud
 
 Les migrations cloud peuvent rapidement générer un retour sur investissement (ROI), grâce aux efforts de transformation du cloud. Toutefois, l’élaboration d’une justification qui présente concrètement tous les coûts et bénéfices connexes peut s’avérer complexe. Cet article vise à vous aider à réfléchir aux données dont vous avez besoin pour créer un modèle financier aligné sur les résultats d’une migration cloud. Avant toute chose, nous allons dissiper quelques mythes autour de la migration cloud afin d’éviter à votre organisation de commettre certaines erreurs courantes.
 
@@ -26,7 +27,7 @@ Les migrations cloud peuvent rapidement générer un retour sur investissement (
 
 **Mythe : La mise en miroir de mon environnement local va m’aider à faire des économies dans le cloud.** Lors de la planification du patrimoine numérique, il n’est pas rare que les clients détectent une sous-utilisation des ressources de 50 % par rapport à la capacité de l’environnement provisionné. Si les ressources sont provisionnées dans le cloud en fonction du provisionnement actuel, vous aurez du mal à réaliser des économies. Essayez de réduire la taille des ressources déployées pour les aligner avec les modèles d’utilisation plutôt qu’avec les modèles de provisionnement.
 
-**Mythe : Les coûts de serveur impactent les analyses de rentabilisation de la migration cloud.** Cela est parfois vrai. Certaines entreprises jugent qu’il est important de réduire leurs dépenses d’investissement actuelles pour les serveurs. Cela dépend toutefois de plusieurs facteurs. Les entreprises qui renouvellent leur matériel tous les cinq à huit ans ont peu de chance d’obtenir un retour sur investissement rapide de leur migration cloud. Celles qui ont des cycles de renouvellement standards ou fixes peuvent atteindre un seuil de rentabilité rapidement. Dans les deux cas, d’autres types de dépenses peuvent être les déclencheurs financiers qui justifient la migration. Voici quelques exemples des coûts qui sont souvent négligés dans une analyse axée sur les coûts des serveurs uniquement ou sur les coûts des machines virtuelles uniquement :
+**Mythe : Les coûts de serveur impactent les analyses de rentabilisation de la migration cloud.** Cela est parfois vrai. Certaines entreprises jugent qu’il est important de réduire leurs dépenses d’investissement actuelles pour les serveurs. Cela dépend toutefois de plusieurs facteurs. Les entreprises qui renouvellent leur matériel tous les cinq à huit ans ont peu de chance d’obtenir un retour sur investissement rapide de leur migration cloud. Celles qui ont des cycles de renouvellement standards ou fixes peuvent atteindre un seuil de rentabilité rapidement. Dans les deux cas, d’autres types de dépenses peuvent être les déclencheurs financiers qui justifient la migration. Voici quelques exemples des coûts qui sont souvent négligés dans une analyse axée sur les coûts des serveurs uniquement ou sur les coûts des machines virtuelles uniquement :
 
 - Les coûts logiciels pour la virtualisation, les serveurs et les middlewares (intergiciels) peuvent être considérables. Les fournisseurs de cloud éliminent certains de ces coûts. Les programmes [Azure Hybrid Benefit](https://azure.microsoft.com/pricing/hybrid-benefit/#services) et [Réservations](https://azure.microsoft.com/reservations/) sont deux exemples de fournisseur de cloud qui permettent de réduire les coûts de virtualisation.
 - Les pertes financières dues à des pannes peuvent rapidement dépasser les coûts matériels ou logiciels. Si le centre de données actuel est instable, travaillez avec l’entreprise pour quantifier l’impact des arrêts sur les coûts d’opportunité ou les coûts d’exploitation actuels.
@@ -109,4 +110,4 @@ Si le retour sur investissement n’est toujours pas suffisant, travaillez en co
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Créer un modèle financier pour la transformation cloud](financial-models.md)
+> [Créer un modèle financier pour la transformation cloud](./financial-models.md)

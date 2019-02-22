@@ -1,27 +1,45 @@
 ---
-title: 'Adoption du cloud d’entreprise : Vue d’ensemble de la gouvernance'
-description: Vue d’ensemble du contenu de la gouvernance pour l’adoption du cloud d’entreprise Azure
-author: petertaylor9999
-ms.date: 09/10/2018
-ms.topic: guide
-ms.service: architecture-center
-ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: a30c834bb92bcdd47ea812d9e368fb0e93fe8623
-ms.sourcegitcommit: eee3a35dd5a5a2f0dc117fa1c30f16d6db213ba2
+title: 'Framework d’adoption du cloud : Gouvernance cloud'
+description: Présentation du contenu relatif à la gouvernance cloud
+author: BrianBlanchard
+ms.date: 2/11/2019
+ms.openlocfilehash: 8a9701677eec913788ca72f86444a3600e170d07
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/06/2019
-ms.locfileid: "55781994"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897369"
 ---
-# <a name="enterprise-cloud-adoption-governance-overview"></a>Adoption du cloud d’entreprise : Vue d’ensemble de la gouvernance
+# <a name="cloud-governance-in-the-microsoft-caf-for-azure"></a>Gouvernance cloud dans le framework d’adoption du cloud Microsoft pour Azure
 
-Cette section de l’adoption du cloud d’entreprise Azure aborde le sujet de *la gouvernance*. Si vous découvrez la question de la gouvernance dans Azure, vous pouvez commencer par lire les articles [Qu’est-ce que la gouvernance de ressources cloud ?](../getting-started/what-is-governance.md) et [Gestion de l’accès aux ressources dans Azure](../getting-started/azure-resource-access.md) dans la section [Bien démarrer](../getting-started/overview.md).
+Le cloud crée de nouveaux paradigmes à propos des technologies sur lesquelles repose l’entreprise. Ces nouveaux paradigmes transforment également la façon dont ces technologies sont adoptées, gérées et régies. Alors qu’il est désormais possible de détruire et de recréer intégralement un centre de données grâce à une seule ligne de code exécutée à partir d’un processus sans assistance, nous devons repenser les approches traditionnelles. Cette affirmation est également vraie pour tout ce qui touche à la gouvernance.
 
-Si le concept de la gouvernance n’a plus de secrets pour vous, cette section traite de [la conception de la gouvernance pour une charge de travail simple](governance-single-team.md) et de [la conception de la gouvernance pour plusieurs équipes et charges de travail](governance-multiple-teams.md). Les deux documents correspondant comprennent un guide d’implémentation.
+Pour les organisations qui disposent déjà de stratégies régissant les environnements informatiques locaux, la gouvernance cloud vient en complément de ces stratégies. Cependant, le niveau d’intégration entre les stratégies d’entreprise locales et cloud varie en fonction de la maturité de la gouvernance cloud et du patrimoine numérique dans le cloud. Les processus de gouvernance et les stratégies cloud évoluent au même rythme que le patrimoine cloud.
+
+Les instructions de cette section du framework d’adoption du cloud visent deux objectifs :
+
+* Proposer des parcours client immédiatement actionnables qui illustrent des expériences communes rencontrées par les clients. Chacun de ces parcours inclut les risques commerciaux, les stratégies d’entreprise pour l’atténuation des risques et des conseils de conception pour implémenter des solutions techniques. Par définition, les conseils de conception sont propres à Azure. Tous les autres conseils de ces parcours peuvent être appliqués dans le cadre d’une approche indépendante du cloud ou multicloud.
+* Aider les lecteurs à créer des solutions de gouvernance personnalisées capables de satisfaire plusieurs des besoins de l’entreprise, notamment la gouvernance de plusieurs clouds publics grâce à des instructions détaillées sur le développement de stratégies, processus et outils appliqués à l’entreprise.
+
+Ce contenu s’adresse à l’équipe de gouvernance cloud. Il peut également servir aux architectes du cloud qui cherchent à développer des fondements solides pour la gouvernance cloud.
+
+## <a name="audience"></a>Audience
+
+Le contenu du framework d’adoption du cloud touche l’activité, la technologie et la culture des entreprises. Cette section du framework d’adoption du cloud implique des interactions avec les équipes chargées de la sécurité informatique, la gouvernance informatique et la finance, avec les responsables des applications cœur de métier et avec les équipes chargées de la mise en réseau, l’identité et l’adoption du cloud. Plusieurs codépendances sont à noter entre ces acteurs et nécessitent une approche facilitante de la part des architectes du cloud qui font usage de ce guide. Il se peut que la facilitation entre les équipes découle d’une action ponctuelle, mais dans certains cas, elle requiert des interactions récurrentes entre les acteurs.
+
+L’architecte du cloud joue le rôle de facilitateur et de leader d’opinion pour rassembler tous ces publics. Le contenu figurant dans cette collection de guides est conçu pour aider l’architecte du cloud à faciliter les discussions avec les publics appropriés et ainsi générer les décisions nécessaires. La transformation de l’entreprise qu’engendre le cloud repose sur le rôle de l’architecte du cloud qui oriente les décisions des équipes commerciales et informatiques.
+
+**Spécialisation Architecte du cloud dans cette section :** Chaque section du framework d’adoption du cloud représente une spécialisation ou une variante différente du rôle de l’architecte du cloud. La présente section s’adresse aux architectes du cloud qui s’intéressent à la réduction et l’élimination des risques techniques. De nombreux fournisseurs de cloud nomment ces spécialistes des « gardiens du cloud ». Nous préférons nous y référer en tant « qu’équipe de gouvernance cloud ». Chacun des parcours client immédiatement actionnables comporte des articles détaillant la composition et le rôle de l’équipe de gouvernance cloud et son évolution au fil du temps.
+
+## <a name="using-this-guide"></a>Comment utiliser ce guide
+
+Pour les lecteurs qui souhaitent suivre ce guide du début à la fin, ce contenu les aidera à développer une stratégie de gouvernance cloud fiable en même temps qu’ils implémentent le cloud. Les différentes instructions guident le lecteur à travers la théorie et la mise en pratique de cette stratégie.
+
+Pour un cours théorique accéléré et un accès rapide à l’implémentation Azure, commencez avec la [Vue d’ensemble des parcours de gouvernance actionnables](./journeys/overview.md). Grâce à ce guide, le lecteur peut commencer pas à pas et faire évoluer ses besoins de gouvernance en même temps que ses efforts d’adoption cloud.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Une fois que vous avez découvert comment concevoir et implémenter un modèle de gouvernance dans Azure, vous pouvez apprendre à déployer une [infrastructure](../infrastructure/basic-workload.md) sur Azure.
+Passez en revue les parcours de gouvernance actionnables.
 
 > [!div class="nextstepaction"]
-> [En savoir plus sur l’accès aux ressources pour une seule équipe](governance-single-team.md)
+> [Parcours de gouvernance actionnables](./journeys/overview.md)

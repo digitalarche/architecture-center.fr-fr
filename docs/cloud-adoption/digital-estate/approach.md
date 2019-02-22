@@ -1,20 +1,21 @@
 ---
-title: Approches de la planification du patrimoine numérique
-titleSuffix: Enterprise Cloud Adoption
+title: 'Framework d’adoption du cloud : Approches de la planification du patrimoine numérique'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
 description: Décrit les approches de planification du patrimoine numérique
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
-ms.service: architecture-center
-ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 59c9e208254eaa0e8beb365718ef59d0694094f3
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 8b6c680cf477ea188cbd263ecc04389d6daaed89
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482219"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898015"
 ---
-# <a name="enterprise-cloud-adoption-approaches-to-digital-estate-planning"></a>Adoption du cloud d’entreprise : Approches de la planification du patrimoine numérique
+# <a name="approaches-to-digital-estate-planning"></a>Approches de la planification du patrimoine numérique
 
 Le patrimoine numérique peut prendre plusieurs formes, selon les résultats escomptés et la taille du patrimoine existant. Chaque approche propose plusieurs options. Il est important de définir ses propres attentes relativement tôt dans le cycle de planification. Des attentes qui n’ont pas été clairement définies mènent souvent à des retards dus à la nécessité d’effectuer des inventaires supplémentaires. Cet article présente trois approches pour l’analyse.
 
@@ -36,7 +37,7 @@ Cette approche fournit un plan basé sur les ressources qui prennent en charge u
 
 ## <a name="incremental-approach"></a>Approche incrémentielle
 
-Comme souvent avec l’adoption du cloud en entreprise, une approche incrémentielle est fortement recommandée. Dans le cas de la planification du patrimoine numérique, cela équivaut à un processus multiphase :
+Comme pour la plupart du framework d’adoption du cloud, une approche incrémentielle est fortement recommandée. Dans le cas de la planification du patrimoine numérique, cela équivaut à un processus multiphase :
 
 - Analyse des coûts initiale : Si une validation financière est nécessaire, commencez par une approche basée sur les ressources (décrite ci-dessus) afin d’obtenir un premier calcul des coûts pour l’intégralité du patrimoine numérique, sans rationalisation. Ceci établit un banc d’essai du scénario le plus défavorable.
 

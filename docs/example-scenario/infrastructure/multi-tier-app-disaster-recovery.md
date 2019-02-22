@@ -9,12 +9,12 @@ ms.service: architecture-center
 ms.subservice: example-scenario
 ms.custom: product-team
 social_image_url: /azure/architecture/example-scenario/infrastructure/media/arhitecture-disaster-recovery-multi-tier-app.png
-ms.openlocfilehash: c60a2a07db578c447eb0682270c105b79e80e12b
-ms.sourcegitcommit: 3b15d65e7c35a19506e562c444343f8467b6a073
+ms.openlocfilehash: 1f82f0bf5421bb251bda2eb60349cc74014fd454
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/25/2019
-ms.locfileid: "54908509"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898100"
 ---
 # <a name="multitier-web-application-built-for-high-availability-and-disaster-recovery-on-azure"></a>Application web multiniveau développée pour la haute disponibilité et la reprise d’activité sur Azure
 

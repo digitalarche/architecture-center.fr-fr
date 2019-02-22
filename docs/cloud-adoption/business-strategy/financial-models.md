@@ -1,20 +1,21 @@
 ---
-title: Créer un modèle financier pour la transformation cloud
-titleSuffix: Enterprise Cloud Adoption
-description: Comment créer un modèle financier pour la transformation cloud
+title: 'Framework d’adoption du cloud : Créer un modèle financier pour la transformation cloud'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
+description: Comment créer un modèle financier pour la transformation cloud.
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
-ms.service: architecture-center
-ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: d1a5cd0cefef4786a0f55592cad58451c3cae9c4
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 4fe9b178962bf2cd6a79233278c73085237772f0
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482185"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898202"
 ---
-# <a name="enterprise-cloud-adoption-how-to-create-a-financial-model-for-cloud-transformation"></a>Adoption du cloud d’entreprise : Comment créer un modèle financier pour la transformation cloud
+# <a name="create-a-financial-model-for-cloud-transformation"></a>Créer un modèle financier pour la transformation cloud
 
 La création d’un modèle financier qui fait un état précis de tous les bénéfices d’une transformation cloud pour l’entreprise peut être compliquée. Les modèles financiers et les justifications varient souvent d’une organisation à l’autre. Cet article présente quelques formules de calcul et met en évidence un certain nombre d’éléments qui sont communément négligés au moment de la création d’un modèle financier.
 
@@ -97,3 +98,10 @@ Il y a une exception, quand la capacité opérationnelle est fournie par un tier
 Les dépenses d’investissement (CAPEX) sont légèrement différentes des dépenses d’exploitation. En règle générale, cette catégorie s’applique aux cycles de renouvellement ou à l’extension des centres de données. Par exemple, une extension de centre de données serait l’ajout d’un nouveau cluster à hautes performances pour héberger une solution de Big Data ou un entrepôt de données. Cette extension serait généralement à inclure dans la catégorie des dépenses d’investissement. Les cycles standards de renouvellement sont les cas les plus courants. Certaines entreprises ont mis en place des cycles fixes de renouvellement de leur matériel, c’est-à-dire qu’elles mettent hors service et remplacent leurs ressources selon un cycle régulier (habituellement tous les trois, cinq ou huit ans). Souvent, ces cycles coïncident avec les cycles de location ou la durée de vie prévue des équipements. À chaque nouveau cycle de renouvellement, le service informatique investit pour acquérir du nouveau matériel.
 
 Si un cycle de renouvellement est approuvé et budgétisé, la transformation cloud peut vous aider à éliminer ce coût. Si un cycle de renouvellement est planifié, mais pas encore approuvé, la transformation cloud peut engendrer un évitement de coûts d’exploitation. Les deux scénarios sont à inclure dans les écarts de coûts.
+
+## <a name="next-steps"></a>Étapes suivantes
+
+Consultez quelques exemples de résultats comptables dans le contexte d’une transformation cloud.
+
+> [!div class="nextstepaction"]
+> [Exemples de résultats comptables](./business-outcomes/fiscal-outcomes.md)

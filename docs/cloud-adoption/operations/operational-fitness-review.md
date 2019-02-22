@@ -1,17 +1,17 @@
 ---
-title: 'Adoption du cloud d’entreprise : Principes opérationnels de base'
+title: 'Framework d’adoption du cloud : Principes opérationnels de base'
 description: Aide sur les principes opérationnels de base
 author: petertaylor9999
 ms.date: 09/20/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 26867e3ecce738f18c5a03ff41754281229851f4
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: afecf380b1a75d006f6f2bc0cb0e5058cd3feffc
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54481123"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897097"
 ---
 # <a name="establishing-an-operational-fitness-review"></a>Mettre en place une évaluation de l’adéquation opérationnelle
 
@@ -49,7 +49,7 @@ Pour préserver les performances et assurer la continuité des services de l’e
 
 Les étapes de cette phase visent à capturer les exigences associées à une évaluation régulière des services importants.
 
-- **Identifier les opérations d’entreprise critiques**. Identifiez les opérations **stratégiques** de l’entreprise. Les opérations d’entreprise sont indépendantes des fonctions de service de soutien. En d’autres termes, elles représentent les activités réelles que doit effectuer l’entreprise et sont portées par un ensemble de services informatiques. Le terme _stratégique_, ou _critique pour l’entreprise_, reflète un impact très important pour l’entreprise si l’opération est entravée. Prenons l’exemple d’un détaillant en ligne et de deux de ses opérations d’entreprise : « permettre à un client d’ajouter un article au panier » ou « traiter un paiement par carte de crédit ». Si l’une des deux échouait, les clients ne pourraient pas mener à bien les transactions et l’entreprise ne réaliserait pas de ventes.
+- **Identifier les opérations d’entreprise critiques**. Identifiez les opérations stratégiques de l’entreprise. Les opérations d’entreprise sont indépendantes des fonctions de service de soutien. En d’autres termes, elles représentent les activités réelles que doit effectuer l’entreprise et sont portées par un ensemble de services informatiques. Le terme **stratégique** (ou **critique pour l’entreprise**), reflète un impact très important pour l’entreprise si l’opération est entravée. Prenons l’exemple d’un détaillant en ligne et de deux de ses opérations d’entreprise : « permettre à un client d’ajouter un article au panier » ou « traiter un paiement par carte de crédit ». Si l’une des deux échouait, les clients ne pourraient pas mener à bien les transactions et l’entreprise ne réaliserait pas de ventes.
 
 - **Faire correspondre les opérations aux services**. Faites correspondre ces opérations d’entreprise aux services de soutien associés. Dans l’exemple du panier ci-dessus, plusieurs services peuvent être concernés : un service de gestion des stocks, un service de panier d’achat, etc. Dans l’exemple précédent de paiement par carte de crédit, un service de paiement local est susceptible d’interagir avec un service tiers de traitement des paiements.
 
@@ -65,8 +65,7 @@ Il est important de souligner que ces métriques doivent refléter directement l
 
 La phase d’évaluation des services est essentielle au processus d’évaluation de l’adéquation opérationnelle.
 
-- **Mettre en place des métriques de service**. Les indicateurs de tableau de bord permettent d’effectuer le monitoring des services pour vérifier qu’ils répondent aux attentes de l’entreprise. Cette surveillance est donc essentielle. Si vous n’êtes pas en mesure d’assurer le monitoring d’un ensemble de services en regard des exigences non fonctionnelles, les indicateurs de tableau de bord correspondants doivent être considérés comme rouges. La première étape pour y remédier consiste à implémenter le monitoring du service en question.
-Par exemple, si l’entreprise attend d’un service qu’il fonctionne avec une disponibilité de 99,99 %, mais qu’aucune télémétrie de production n’est en place pour la mesurer, partez du principe que vous ne répondez pas à cette exigence.
+- **Mettre en place des métriques de service**. Les indicateurs de tableau de bord permettent d’effectuer le monitoring des services pour vérifier qu’ils répondent aux attentes de l’entreprise. Cette surveillance est donc essentielle. Si vous n’êtes pas en mesure d’assurer le monitoring d’un ensemble de services en regard des exigences non fonctionnelles, les indicateurs de tableau de bord correspondants doivent être considérés comme rouges. La première étape pour y remédier consiste à implémenter le monitoring du service en question. Par exemple, si l’entreprise attend d’un service qu’il fonctionne avec une disponibilité de 99,99 %, mais qu’aucune télémétrie de production n’est en place pour la mesurer, partez du principe que vous ne répondez pas à cette exigence.
 
 - **Prévoir des mesures de correction**. Pour chaque opération de service dont les métriques se situent sous le seuil admissible, calculez ce que coûterait une correction du service permettant d’y remédier. Si ce coût est supérieur au revenu attendu du service, prenez en compte les coûts non tangibles comme l’expérience utilisateur. Par exemple, si les clients ont des difficultés à passer une commande à l’aide du service, ils risquent de choisir un concurrent à la place.
 
@@ -78,7 +77,7 @@ Ce processus est itératif. Dans l’idéal, l’entreprise doit avoir une équi
 
 L’équipe d’évaluation de l’adéquation opérationnelle se compose des rôles suivants :
 
-1. **Responsable des résultats d’entreprise (Business Owner)**. Source de connaissances sur l’entreprise, il identifie et hiérarchise les opérations « critiques » pour l'entreprise. Il compare également le coût de prévention à l’impact sur l’entreprise et prend la décision finale concernant les mesures de correction à appliquer.
+1. **Responsable des résultats d’entreprise (Business Owner)**. Source de connaissances sur l’entreprise, il identifie et hiérarchise les opérations « critiques » pour l’entreprise. Il compare également le coût de prévention à l’impact sur l’entreprise et prend la décision finale concernant les mesures de correction à appliquer.
 
 2. **Conseiller d’entreprise (Business Advocate)**. Il est chargé de décomposer les opérations d’entreprise en différentes parties correspondant à une infrastructure et des services cloud et locaux. Une connaissance approfondie des technologies associées à chaque opération est nécessaire.
 
@@ -107,10 +106,10 @@ Les détails du processus et des réunions doivent être parfaitement adaptés �
 ## <a name="recommended-resources"></a>Ressources recommandées
 
 - [Piliers de la qualité logicielle](../../guide/pillars.md).
-Cette section du guide d’architecture des applications Azure décrit les cinq piliers de la qualité logicielle : scalabilité, disponibilité, résilience, gestion et sécurité.
+    Cette section du guide d’architecture des applications Azure décrit les cinq piliers de la qualité logicielle : scalabilité, disponibilité, résilience, gestion et sécurité.
 - [Dix principes de conception pour les applications Azure](../../guide/design-principles/index.md).
-Cette section du guide d’architecture des applications Azure présente un ensemble de principes de conception visant à rendre les applications plus évolutives, plus résilientes et plus faciles à gérer.
+    Cette section du guide d’architecture des applications Azure présente un ensemble de principes de conception visant à rendre les applications plus évolutives, plus résilientes et plus faciles à gérer.
 - [Concevoir des applications résilientes pour Azure](../../resiliency/index.md).
-Ce guide commence par une définition du terme « résilience » et des concepts associés. Il décrit ensuite un processus pour atteindre une résilience, à l’aide d’une approche structurée pendant la durée de vie d’une application, depuis la conception et l’implémentation jusqu’au déploiement et aux opérations.
+    Ce guide commence par une définition du terme « résilience » et des concepts associés. Il décrit ensuite un processus pour atteindre une résilience, à l’aide d’une approche structurée pendant la durée de vie d’une application, depuis la conception et l’implémentation jusqu’au déploiement et aux opérations.
 - [Modèles de conception cloud](../../patterns/index.md).
-Ces modèles de conception sont utiles aux équipes d’ingénieurs qui souhaitent créer des applications selon les piliers de la qualité logicielle.
+    Ces modèles de conception sont utiles aux équipes d’ingénieurs qui souhaitent créer des applications selon les piliers de la qualité logicielle.

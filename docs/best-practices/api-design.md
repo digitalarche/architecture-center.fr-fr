@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 2c4a76ea3a9acdeb1141a1274f6926667c67c81b
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: b15b97de2042a0e213192dd586ffdcc4c51b1f11
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54484106"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897981"
 ---
 # <a name="api-design"></a>Conception d’API
 
@@ -21,7 +21,7 @@ Les applications web plus modernes exposent les API que les clients peuvent util
 
 - **Indépendance de la plateforme**. Tous les clients doivent être en mesure d’appeler l’API, quelle que soit la façon dont l’API est implémentée en interne. Cela requiert l’utilisation de protocoles standard et un mécanisme où le client et le service web peuvent convenir du format des données à échanger.
 
-- **Évolution des services**. L’API web doit être en mesure d’évoluer et ses fonctionnalités doivent pouvoir être ajoutées indépendamment des applications clientes. À mesure que l’API évolue, les applications clientes existantes doivent continuer de fonctionner sans modifications. Toutes les fonctionnalités doivent être détectables, de sorte que les applications clientes puissent les utiliser pleinement.
+- **Évolution des services**. L’API web doit être en mesure d’évoluer et ses fonctionnalités doivent pouvoir être ajoutées indépendamment des applications clientes. À mesure que l’API évolue, les applications clientes existantes doivent continuer de fonctionner sans modifications. Toutes les fonctionnalités doivent être détectables, de sorte que les applications clientes peuvent les utiliser pleinement.
 
 Ce guide décrit les problèmes à prendre en compte lorsque vous concevez une API web.
 

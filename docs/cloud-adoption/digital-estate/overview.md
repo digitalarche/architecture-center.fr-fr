@@ -1,20 +1,22 @@
 ---
-title: Qu’est-ce qu’un patrimoine numérique ?
-titleSuffix: Enterprise Cloud Adoption
-description: Explication du concept de patrimoine numérique
+title: 'Framework d’adoption du cloud : Qu’est-ce qu’un patrimoine numérique ?'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+description: Qu’est-ce qu’un patrimoine numérique ?
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: ce21a2d72fcb630f5f197dbd6b87b16ef8f41435
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: d23bdbdd98226e8b9cdb9bbb5fefa5a918a498d8
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54481539"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898423"
 ---
-# <a name="enterprise-cloud-adoption-what-is-a-digital-estate"></a>Adoption du cloud d’entreprise : Qu’est-ce qu’un patrimoine numérique ?
+<!-- markdownlint-disable MD026 -->
+
+# <a name="caf-what-is-a-digital-estate"></a>Framework d’adoption du cloud : Qu’est-ce qu’un patrimoine numérique ?
 
 Toutes les entreprises modernes ont un patrimoine numérique. Tout comme le patrimoine matériel, le patrimoine numérique est une référence abstraite à des ressources tangibles ayant un propriétaire. Dans un patrimoine numérique, ces ressources sont constituées de machines virtuelles, de serveurs, d’applications, de données, etc. En réalité, un patrimoine numérique correspond à l’ensemble des ressources informatiques sur lesquelles reposent les processus métier et les opérations associées.
 
@@ -53,4 +55,4 @@ Les modèles financiers et les backlogs de migration peuvent être modifiés pou
 Avant de commencer la planification du patrimoine numérique, vous devez déterminer l’approche à utiliser.
 
 > [!div class="nextstepaction"]
-> [Déterminer la méthode d’analyse](approach.md)
+> [Approches de la planification du patrimoine numérique](approach.md)

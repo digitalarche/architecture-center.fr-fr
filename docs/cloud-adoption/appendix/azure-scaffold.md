@@ -7,12 +7,12 @@ ms.date: 9/22/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 883f32b1533261977aa274f64c78762c9e7b13f3
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 86ac3a1c696479279962a17b01c2df73fb5a9849
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54484412"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898321"
 ---
 # <a name="azure-enterprise-scaffold-prescriptive-subscription-governance"></a>Structure d’entreprise Azure : Gouvernance normative de l’abonnement
 
@@ -21,7 +21,7 @@ Les entreprises adoptent de plus en plus le cloud public en raison de son agilit
 Décider d’utiliser Microsoft Azure n’est que la première étape pour bénéficier de l’avantage du cloud. La deuxième étape consiste à comprendre comment l’entreprise peut utiliser Azure efficacement et identifier les fonctionnalités de base qui doivent être présentes pour répondre à certaines questions comme :
 
 * « Je suis inquiet au sujet de la souveraineté des données ; comment puis-je m’assurer que mes données et systèmes répondent à notre réglementation ? »
-* « Comment savoir ce que chaque ressource prend en charge afin de les comptabiliser et de les facturer avec exactitude ? »
+* « Comment savoir ce que chaque ressource prend en charge afin de les comptabiliser et de les facturer avec exactitude ? »
 * « Je veux m’assurer que tout ce que nous déployons ou faisons dans le cloud public le soit d’abord dans un souci de sécurité ; comment faire pour faciliter cela ? »
 
 La perspective d’un abonnement vide sans garde-fou est décourageante. Elle peut même vous décourager de migrer vers Azure.
@@ -71,12 +71,12 @@ Les trois modèles courants pour les inscriptions Azure sont :
 
 Bien que chacun de ces modèles ait sa place, le modèle **division** est de plus en plus adopté pour sa souplesse quand il s’agit de modéliser le modèle de coût d’une organisation et de représenter l’étendue du contrôle. Le groupe Microsoft Core Engineering and Operations a créé un sous-ensemble du modèle **division** qui s’avère très efficace (niveaux **Fédéral**, **État** et **Local**). (Pour plus d’informations, consultez [Organizing subscriptions and resource groups within the Enterprise](https://azure.microsoft.com/blog/organizing-subscriptions-and-resource-groups-within-the-enterprise/).)
 
-### <a name="management-groups"></a>Groupes d'administration
+### <a name="azure-management-groups"></a>Groupes d’administration Azure
 
 Microsoft a récemment rendu publique une nouvelle façon de modéliser votre hiérarchie : [Groupes d’administration Azure](/azure/azure-resource-manager/management-groups-overview). Les groupes d’administration sont bien plus flexibles que les services et les comptes et peuvent être imbriqués sur six niveaux. Les groupes d’administration vous permettent de créer une hiérarchie distincte de votre hiérarchie de facturation, seulement dans une optique de gestion efficace des ressources. Les groupes d’administration permettent de reproduire une hiérarchie de facturation et c’est ce par quoi les entreprises commencent souvent. Cependant, la puissance des groupes d’administration se manifeste quand ils sont utilisés pour modéliser l’organisation dans laquelle des abonnements associés &mdash; qu’ils se trouvent où non dans la hiérarchie de facturation &mdash; sont regroupés avec la nécessité de leur attribuer des rôles communs, ainsi que des stratégies et des initiatives. Quelques exemples :
 
 * **Production/hors production**. Certaines entreprises créent des groupes d’administration pour identifier leurs abonnements production et hors production. Les groupes d’administration permettent à ces clients de gérer plus facilement les rôles et les stratégies. Par exemple, si un abonnement hors production peut octroyer aux développeurs un accès « contributeur », en production, ils ne bénéficie que d’un accès « lecteur ».
-* **Services internes/services externe**. À l’instar des abonnements production/hors production, les entreprises ont souvent des exigences, des stratégies et des rôles différents pour les services internes et les services externes (destinés aux clients).
+* **Services internes/services externe**. À l’instar des abonnements de production/hors production, les entreprises ont souvent des exigences, des stratégies et des rôles différents pour les services internes et les services externes (destinés aux clients).
 
 Des groupes d’administration bien pensés constituent, avec une stratégie et des initiatives Azure, l’élément central d’une gouvernance efficace d’Azure.
 
@@ -108,16 +108,16 @@ Le premier pilier de la structure est une norme d’attribution de noms cohéren
 
 > [!TIP]
 > Pour les conventions de dénomination :
-> * Passez en revue et adoptez autant que possible les [modèles et pratiques recommandées](https://docs.microsoft.com/en-us/azure/architecture/best-practices/naming-conventions). Ces recommandations vous aident à choisir une norme d’attribution de noms explicite et fournissent de nombreux exemples.
+> * Passez en revue et adoptez autant que possible les [modèles et pratiques recommandées](/azure/architecture/best-practices/naming-conventions). Ces recommandations vous aident à choisir une norme d’attribution de noms explicite et fournissent de nombreux exemples.
 > * Utilisation de stratégies Resource Manager pour appliquer des normes d’affectation de noms
 >
->Ne perdez pas de vue qu’il est difficile de changer les noms par la suite et que les quelques minutes passées ici vous éviterons des problèmes plus tard.
+> Ne perdez pas de vue qu’il est difficile de changer les noms par la suite et que les quelques minutes passées ici vous éviterons des problèmes plus tard.
 
 Vos normes d’affectation de noms doivent viser les ressources les plus utilisées et recherchées.  Par exemple, tous les groupes de ressources doivent suivre une norme bien définie par souci de clarté.
 
 ### <a name="resource-tags"></a>Balises de ressource
 
-Les balises de ressource sont en parfaite adéquation avec les normes d’affectation de noms. Plus vous ajoutez des ressources aux abonnement, plus il est important de les classer logiquement pour les besoins de la facturation, de la gestion et de l’exploitation. Pour plus d’informations, consultez [Organisation des ressources Azure à l’aide de balises](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-using-tags).
+Les balises de ressource sont en parfaite adéquation avec les normes d’affectation de noms. Plus vous ajoutez des ressources aux abonnement, plus il est important de les classer logiquement pour les besoins de la facturation, de la gestion et de l’exploitation. Pour plus d’informations, consultez [Organisation des ressources Azure à l’aide de balises](/azure/azure-resource-manager/resource-group-using-tags).
 
 > [!IMPORTANT]
 > Les balises peuvent contenir des informations personnelles et être visées par les dispositions du RGPD. Planifiez soigneusement la gestion de vos balises. Si vous êtes en quête d’informations générales sur le RGPD, consultez la section RGPD du [portail Service Trust](https://servicetrust.microsoft.com/ViewPage/GDPRGetStarted).
@@ -132,7 +132,7 @@ La stratégie et les initiatives Azure sont encore plus efficaces quand elles so
 
 ### <a name="common-uses-of-resource-manager-policies"></a>Utilisations courantes de stratégies Resource Manager
 
-Les stratégies et les initiatives Azure représentent un outil puissant dans le kit de ressources Azure. Les stratégies permettent aux entreprises de fournir des contrôles pour les charges de travail de type « Informatique traditionnelle » et ainsi d’apporter aux applications métier la stabilité dont elles ont besoin tout en autorisant aussi les charges de travail de type « Agile ». Cela permet, par exemple, de développer des applications client sans exposer l’entreprise à des risques supplémentaires. Les modèles les plus courants pour les stratégies sont les suivants :
+Les stratégies et les initiatives Azure représentent un outil puissant dans le kit de ressources Azure. Les stratégies permettent aux entreprises de fournir des contrôles pour les charges de travail de type « Informatique traditionnelle » et ainsi d’apporter aux applications métier la stabilité dont elles ont besoin tout en autorisant aussi les charges de travail de type « Agile ». Cela permet, par exemple, de développer des applications client sans exposer l’entreprise à des risques supplémentaires. Les modèles les plus courants pour les stratégies sont les suivants :
 
 * **Conformité géographique/souveraineté des données**. Azure dispose d’une liste de régions dans le monde qui ne cesse de s’allonger. Les entreprises doivent souvent faire en sorte que les ressources situées dans une étendue particulière restent dans une région géographique pour répondre à des exigences réglementaires.
 * **Éviter une exposition publique des serveurs**. Une stratégie Azure peut interdire le déploiement de certains types de ressources. Il est fréquent par exemple de créer une stratégie pour interdire la création d’une adresse IP publique dans une étendue particulière et ainsi éviter d’exposer involontairement un serveur sur Internet.
@@ -142,7 +142,7 @@ Les stratégies et les initiatives Azure représentent un outil puissant dans le
 
 L’introduction des initiatives a permis aux entreprises de regrouper les stratégies logiques et de les suivre dans leur globalité. Les initiatives permettent à l’entreprise de mieux répondre aux besoins des charges de travail de type « agile » et « traditionnelle ». Les initiatives sont parfois utilisées de façon très créative, mais voici les usages les plus courants :
 
-* **Habilitation de la supervision dans Azure Security Center**. Il s’agit d’une initiative par défaut dans Azure Policy qui illustre parfaitement ce qu’est une initiative. Elle habilite les stratégies qui identifient les bases de données SQL non chiffrées, les vulnérabilités des machines virtuelles et des besoins plus courants liés à la sécurité.
+* **Habilitation de la supervision dans Azure Security Center**. Il s’agit d’une initiative par défaut dans Azure Policy qui illustre parfaitement ce qu’est une initiative. Elle habilite les stratégies qui identifient les bases de données SQL non chiffrées, les vulnérabilités des machines virtuelles (VM) et des besoins plus courants liés à la sécurité.
 * **Initiative spécifique de nature réglementaire**. Les entreprises regroupent souvent les stratégies courantes dans une exigence réglementaire (comme HIPAA) de sorte que les contrôles et la conformité vis-à-vis de ces contrôles soient suivis avec efficacité.
 * **Types de ressources et références SKU**. La création d’une initiative qui limite les types de ressources et les références SKU pouvant être déployés peut aider à contrôler les coûts et à garantir à votre organisation qu’elle déploie uniquement des ressources que votre équipe peut prendre en charge compte tenu de ses compétences et de ses procédures.
 
@@ -201,7 +201,7 @@ Le kit DevOps sécurisé (AzSK) est une collection de scripts, d’outils, d’e
 * Sécurisation du développement
 * Intégration de la sécurité dans l’intégration et le déploiement en continu
 * Assurance continue
-* Génération d’alertes et supervision
+* Alertes et monitoring
 * Gouvernance des risques du cloud
 
 ![Kit de ressources Azure DevOps](_images/Secure_DevOps_Kit_Azure.png)
@@ -210,7 +210,7 @@ AzSK est un ensemble complet d’outils, de scripts et d’informations qui repr
 
 ### <a name="azure-update-management"></a>Azure Update Management
 
-L’une des mesures clés que vous pouvez prendre pour assurer la sécurité de votre environnement est de veiller à ce que vos serveurs soient corrigés avec les dernières mises à jour. Bien que de nombreux outils permettent d’assurer cette tâche, Azure met à disposition la solution [Azure Update Management](/azure/automation/automation-update-management) pour gérer l’identification et le déploiement des correctifs critiques du système d’exploitation.  Cette solution s’appuie sur Azure Automation, dont il est question dans la section [Automatiser](#automate), plus loin dans ce guide.
+L’une des mesures clés que vous pouvez prendre pour assurer la sécurité de votre environnement est de veiller à ce que vos serveurs soient corrigés avec les dernières mises à jour. Bien que de nombreux outils permettent d’assurer cette tâche, Azure met à disposition la solution [Azure Update Management](/azure/automation/automation-update-management) pour gérer l’identification et le déploiement des correctifs critiques du système d’exploitation. Cette solution utilise Azure Automation, qui est abordé dans la section [Automatiser](#automate), plus loin dans ce guide.
 
 ## <a name="monitor-and-alerts"></a>Supervision et génération d’alertes
 
@@ -305,14 +305,14 @@ L’automation est une tâche à temps plein qui deviendra rapidement l’une de
 
 ## <a name="templates-and-devops"></a>Modèles et DevOps
 
-Comme nous l’avons souligné dans la section Automatiser, votre objectif en tant qu’organisation doit être de provisionner les ressources à l’aide de scripts et de modèles sous contrôle de code source et de limiter la configuration interactive de vos environnements. Cette approche d’« infrastructure en tant que code » couplée à un processus DevOps rigoureux pour le déploiement continu peut assurer la cohérence et réduire la dérive dans vos environnements. Pratiquement toutes les ressources Azure peuvent être déployées à l’aide de [modèles JSON Azure Resource Manager (ARM)](/azure/azure-resource-manager/resource-group-template-deploy) en combinaison avec PowerShell ou l’interface CLI multiplateforme d’Azure et des outils comme Terraform de Hashicorp (qui bénéficie d’une prise en charge de premier ordre et qui est intégré à Azure Cloud Shell).
+Comme nous l’avons souligné dans la section Automatiser, votre objectif en tant qu’organisation doit être de provisionner les ressources à l’aide de scripts et de modèles sous contrôle de code source et de limiter la configuration interactive de vos environnements. Cette approche d’« infrastructure en tant que code » couplée à un processus DevOps rigoureux pour le déploiement continu peut assurer la cohérence et réduire la dérive dans vos environnements. Pratiquement toutes les ressources Azure peuvent être déployées à l’aide de [modèles JSON Azure Resource Manager ](/azure/azure-resource-manager/resource-group-template-deploy) en combinaison avec PowerShell ou l’interface CLI multiplateforme d’Azure et des outils comme Terraform de Hashicorp (qui bénéficie d’une prise en charge de premier ordre et qui est intégré à Azure Cloud Shell).
 
-Certains articles comme [celui-ci](https://blogs.msdn.microsoft.com/mvpawardprogram/2018/05/01/azure-resource-manager/) font un excellent exposé sur les bonnes pratiques et les enseignements tirés de la mise en œuvre d’une approche DevOps sur des modèles ARM avec la chaîne d’outils [Azure DevOps](/azure/devops/user-guide/?view=vsts). Prenez le temps de développer un ensemble de modèles en fonction des besoins spécifiques de votre organisation, ainsi que des pipelines de livraison continue avec les chaînes d’outils DevOps (Azure DevOps, Jenkins, Bamboo, Teamcity, Concourse), en particulier pour vos environnements de production et d’assurance qualité. Il existe une grande bibliothèque de [modèles de démarrage rapide Azure](https://github.com/Azure/azure-quickstart-templates) sur GitHub qui peuvent vous servir de point de départ pour les modèles, et vous pouvez rapidement créer des pipelines de livraison basés sur le cloud avec Azure DevOps.
+Certains articles comme [celui-ci](https://blogs.msdn.microsoft.com/mvpawardprogram/2018/05/01/azure-resource-manager/) font un excellent exposé sur les bonnes pratiques et les enseignements tirés de la mise en œuvre d’une approche DevOps sur des modèles Azure Resource Manager avec la chaîne d’outils [Azure DevOps](/azure/devops/user-guide/?view=vsts). Prenez le temps de développer un ensemble de modèles en fonction des besoins spécifiques de votre organisation, ainsi que des pipelines de livraison continue avec les chaînes d’outils DevOps (comme Azure DevOps, Jenkins, Bamboo, Teamcity, Concourse), en particulier pour vos environnements de production et d’assurance qualité. Il existe une grande bibliothèque de [modèles de démarrage rapide Azure](https://github.com/Azure/azure-quickstart-templates) sur GitHub qui peuvent vous servir de point de départ pour les modèles, et vous pouvez rapidement créer des pipelines de livraison basés sur le cloud avec Azure DevOps.
 
 En guise de bonne pratique pour les abonnements de production ou les groupes de ressources, votre objectif doit être d’utiliser la sécurité RBAC pour interdire les utilisateurs interactifs par défaut et d’utiliser des pipelines de livraison continue automatisés basés sur des principaux de service pour provisionner toutes les ressources et livrer tout le code d’application. Aucun administrateur ou développeur ne doit toucher au portail Azure pour configurer les ressources de manière interactive. Ce niveau de DevOps demande un effort concerté et utilise tous les concepts de la structure Azure. Par ailleurs, il fournit un environnement cohérent et plus sécurisé qui répondra aux besoins de votre organisation à mesure qu’elle se développera.
 
 > [!TIP]
-> Pour concevoir et développer des modèles ARM complexes, utilisez des [modèles liés](/azure/azure-resource-manager/resource-group-linked-templates) de façon à organiser et à refactoriser les relations de ressources complexes à partir de fichiers JSON monolithiques. Cela vous permettra de gérer les ressources individuellement et vos modèles gagneront en lisibilité, testabilité et réutilisabilité.
+> Pour concevoir et développer des modèles Azure Resource Manager complexes, utilisez des [modèles liés](/azure/azure-resource-manager/resource-group-linked-templates) de façon à organiser et à refactoriser les relations de ressources complexes à partir de fichiers JSON monolithiques. Cela vous permettra de gérer les ressources individuellement et vos modèles gagneront en lisibilité, testabilité et réutilisabilité.
 
 Azure est un fournisseur de cloud hyperscale et quand vous faites passer votre organisation de l’univers des serveurs locaux au cloud, l’adoption des concepts utilisés par les fournisseurs de cloud et les applications SaaS permet à votre organisation de répondre bien plus efficacement aux besoins métier.
 
@@ -324,14 +324,14 @@ La composante finale du modèle de référence de structure Azure est essentiell
 * Les **itinéraires définis par l’utilisateur** vous permettent de manipuler la table de routage au sein d’un sous-réseau, ce qui vous permet d’envoyer le trafic par l’intermédiaire d’une appliance virtuelle réseau ou à une passerelle distante sur un réseau virtuel appairé.
 * L’**appairage de réseaux virtuels** vous permet de connecter plusieurs réseaux virtuels Azure sans interruption, de créer des conceptions Hub & Spoke plus complexes ou des réseaux de services partagés.
 * **Points de terminaison de service**. Par le passé, les services PaaS s’appuyaient sur différentes méthodes pour sécuriser l’accès aux ressources des réseaux virtuels. Les points de terminaison de service vous permettent de sécuriser l’accès aux services PaaS activés à partir UNIQUEMENT de points de terminaison connectés, ce qui améliore la sécurité globale.
-* Les **groupes de sécurité** constituent un ensemble complet de règles qui vous permettent d’autoriser ou de refuser le trafic entrant et sortant des ressources Azure. Les [groupes de sécurité](/azure/virtual-network/security-overview) sont constitués de règles de sécurité, qui peuvent être enrichis avec des **balises de service** (qui définissent des services Azure courants comme AzureKeyVault, Sql, etc.) et des **groupes d’applications** (qui définissent la structure d’application comme WebServers, AppServers, etc.)
+* Les **groupes de sécurité** constituent un ensemble complet de règles qui vous permettent d’autoriser ou de refuser le trafic entrant et sortant des ressources Azure. Les [groupes de sécurité](/azure/virtual-network/security-overview) sont constitués de règles de sécurité, qui peuvent être enrichies avec des **balises de service** (qui définissent des services Azure courants comme AzureKeyVault, Azure SQL Database et d’autres) et des **groupes d’applications** (qui définissent la structure d’application comme les serveurs Web ou les serveurs d’applications).
 
 > [!TIP]
-> Vous pouvez utiliser des balises de service et des groupes d’applications dans vos groupes de sécurité réseau non seulement pour améliorer la lisibilité de vos règles, ce qui est essentiel pour en comprendre l’impact, mais aussi pour permettre une micro-segmentation efficace au sein d’un sous-réseau plus vaste, ce qui réduit la prolifération et améliore la flexibilité.
+> Vous pouvez utiliser des balises de service et des groupes d’applications dans vos groupes de sécurité réseau non seulement pour améliorer la lisibilité de vos règles, &mdash;ce qui est essentiel pour en comprendre l’impact&mdash;, mais aussi pour permettre une micro-segmentation efficace au sein d’un sous-réseau plus vaste, ce qui réduit la prolifération et améliore la flexibilité.
 
 ### <a name="virtual-data-center"></a>Centre de données virtuel
 
-Azure met à votre disposition à la fois des fonctionnalités internes et des fonctionnalités tierces issues de notre vaste réseau de partenaires qui vous permettent d’avoir une posture de sécurité efficace. Plus important encore, Microsoft communique les bonnes pratiques et des recommandations via le [centre de données virtuel Azure](/azure/architecture/vdc/networking-virtual-datacenter). Quand vous passez d’une charge de travail unique à plusieurs charges de travail qui exploitent des fonctionnalités hybrides, les recommandations du centre de données virtuel vous indiquent comment mettre en place un réseau flexible capable de croître en même temps que vos charges de travail Azure.  
+Azure met à votre disposition à la fois des fonctionnalités internes et des fonctionnalités tierces issues de notre vaste réseau de partenaires qui vous permettent d’avoir une posture de sécurité efficace. Plus important encore, Microsoft communique les bonnes pratiques et des recommandations via le [centre de données virtuel Azure](/azure/architecture/vdc/networking-virtual-datacenter). Quand vous passez d’une charge de travail unique à plusieurs charges de travail qui exploitent des fonctionnalités hybrides, les recommandations du centre de données virtuel vous indiquent comment mettre en place un réseau flexible capable de croître en même temps que vos charges de travail Azure.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

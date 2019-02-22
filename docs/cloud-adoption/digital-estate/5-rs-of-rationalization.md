@@ -1,20 +1,21 @@
 ---
-title: Les 5 R de la rationalisation
-titleSuffix: Enterprise Cloud Adoption
-description: Décrit les options qui sont disponibles lors de la rationalisation d’un patrimoine numérique
+title: 'Framework d’adoption du cloud : Les 5 R de la rationalisation'
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
+description: Passez en revue les options disponibles pour rationaliser un patrimoine numérique.
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
-ms.service: architecture-center
-ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 06058967e6ffcd9e3554a46c67144f72fb19078f
-ms.sourcegitcommit: 3b15d65e7c35a19506e562c444343f8467b6a073
+ms.openlocfilehash: ee196487e6f59b1e1b3c63bab9496cbbf805affd
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/25/2019
-ms.locfileid: "54908577"
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55897471"
 ---
-# <a name="enterprise-cloud-adoption-the-5-rs-of-rationalization"></a>Adoption du cloud d’entreprise : Les 5 R de la rationalisation
+# <a name="the-5-rs-of-rationalization"></a>Les 5 R de la rationalisation
 
 La rationalisation du cloud est le processus qui consiste à évaluer des ressources dans le but de déterminer la meilleure approche à adopter pour la migration ou la modernisation de chaque ressource présente dans le cloud. Pour plus d’informations sur le processus de rationalisation, consultez [Qu’est-ce qu’un patrimoine numérique ?](overview.md)
 
@@ -135,7 +136,7 @@ Facteurs d’analyse quantitative :
 
 Facteurs d’analyse qualitative :
 
-* Analyse coûts-avantages de l’architecture actuelle par rapport à une solution SaaS
+* Analyse coûts-avantages de l’architecture actuelle par rapport à une solution SaaS
 * Diagramme des processus métier
 * Schémas de données
 * Processus personnalisés ou automatisés
