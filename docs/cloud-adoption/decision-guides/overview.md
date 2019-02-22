@@ -1,0 +1,49 @@
+---
+title: "Framework d’adoption du cloud : Guides de décision en matière d'architecture"
+titleSuffix: Microsoft Cloud Adoption Framework for Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
+ms.date: 02/11/2019
+description: Découvrez les guides de décision en matière d'architecture du framework d'adoption du cloud.
+author: rotycenh
+ms.openlocfilehash: b43047b5fc5b636bc84b9f28ec24846730e63672
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55901062"
+---
+# <a name="architectural-decision-guides"></a><span data-ttu-id="157f0-103">Guides de décision en matière d'architecture</span><span class="sxs-lookup"><span data-stu-id="157f0-103">Architectural decision guides</span></span>
+
+<span data-ttu-id="157f0-104">Les guides de décision en matière d’architecture du framework d'adoption du cloud décrivent les modèles qui permettent de formuler des recommandations de conception de gouvernance cloud.</span><span class="sxs-lookup"><span data-stu-id="157f0-104">The architectural decision guides in the Cloud Adoption Framework describe patterns and models that help when creating cloud governance design guidance.</span></span> <span data-ttu-id="157f0-105">Chaque guide de décision se concentre sur un composant d'infrastructure de base en matière de déploiement cloud et répertorie les modèles conçus pour prendre en charge des scénarios spécifiques de déploiement dans le cloud.</span><span class="sxs-lookup"><span data-stu-id="157f0-105">Each decision guide focuses on one core infrastructure component of cloud deployments and lists potential patterns or models intended to support specific cloud deployment scenarios.</span></span>
+
+<span data-ttu-id="157f0-106">Lorsque vous commencez à établir la gouvernance cloud de votre organisation, des parcours de gouvernance exploitables fournissent une feuille de route de référence.</span><span class="sxs-lookup"><span data-stu-id="157f0-106">When you begin to establish cloud governance for your organization,  actionable governance journeys provide a baseline roadmap.</span></span> <span data-ttu-id="157f0-107">Cela étant, ces parcours reposent sur des hypothèses en termes d'exigences et de priorités, qui ne reflètent pas systématiquement celles de votre organisation.</span><span class="sxs-lookup"><span data-stu-id="157f0-107">However, these journeys make assumptions about requirements and priorities that may not reflect those of your organization.</span></span>
+<span data-ttu-id="157f0-108">Ces guides de décision complètent les exemples de parcours de gouvernance en proposant d'autres modèles pour vous permettre d'aligner les choix de conception architecturale faits dans les exemples de recommandations de conception avec vos propres exigences.</span><span class="sxs-lookup"><span data-stu-id="157f0-108">These decision guides supplement the sample governance journeys by providing alternative patterns and models that help you align the architectural design choices made in the example design guidance with your own requirements.</span></span>
+
+## <a name="design-guidance-categories"></a><span data-ttu-id="157f0-109">Catégories de recommandations de conception</span><span class="sxs-lookup"><span data-stu-id="157f0-109">Design guidance categories</span></span>
+
+<span data-ttu-id="157f0-110">Chacune des catégories suivantes représente une technologie de base de tout déploiement dans le cloud.</span><span class="sxs-lookup"><span data-stu-id="157f0-110">Each of the following categories represents a foundational technology of all cloud deployments.</span></span> <span data-ttu-id="157f0-111">Pour chaque choix des exemples de parcours de conception ne correspondant pas à vos besoins, examinez les options dans la section appropriée ci-dessous afin de sélectionner un modèle mieux adapté vos besoins.</span><span class="sxs-lookup"><span data-stu-id="157f0-111">For each choice in the example design journeys that doesn’t match your requirements, examine the options in the relevant section below to choose a pattern or model better suited to your needs.</span></span>
+
+<span data-ttu-id="157f0-112">[Abonnements](./subscriptions/overview.md) : Planifiez la conception d'abonnement et la structure de compte de votre déploiement dans le cloud pour répondre aux fonctionnalités de votre organisation en termes de propriété, de facturation et de gestion.</span><span class="sxs-lookup"><span data-stu-id="157f0-112">[Subscriptions](./subscriptions/overview.md): Plan your cloud deployment's subscription design and account structure to match your organization's ownership, billing, and management capabilities.</span></span>
+
+<span data-ttu-id="157f0-113">[Identité](./identity/overview.md) : Intégrez des services d’identité basés sur le cloud à vos ressources d’identité existantes pour prendre en charge le contrôle d’accès au sein de votre environnement informatique.</span><span class="sxs-lookup"><span data-stu-id="157f0-113">[Identity](./identity/overview.md): Integrate cloud-based identity services with your existing identity resources to support access control within your IT environment.</span></span>
+
+<span data-ttu-id="157f0-114">[Application de stratégies](./policy-enforcement/overview.md) : Définissez et appliquez des règles de stratégie organisationnelle pour les ressources et charges de travail que vous déployez dans le cloud.</span><span class="sxs-lookup"><span data-stu-id="157f0-114">[Policy Enforcement](./policy-enforcement/overview.md): Define and enforce organizational policy rules for resources and workloads that you deploy to the cloud.</span></span>
+
+<span data-ttu-id="157f0-115">[Cohérence des ressources](./resource-consistency/overview.md) : Vérifiez que le déploiement et l'organisation de vos ressources cloud s'alignent en termes de gestion des ressources et d'exigences de stratégie.</span><span class="sxs-lookup"><span data-stu-id="157f0-115">[Resource Consistency](./resource-consistency/overview.md): Ensure that deployment and organization of your cloud-based resources align to enforce resource management and policy requirements.</span></span>
+
+<span data-ttu-id="157f0-116">[Identification des ressources](./resource-tagging/overview.md) : Organisez vos ressources cloud de manière à ce qu'elles prennent en charge les modèles de facturation, les approches en matière de comptabilité cloud, le contrôle d'accès et l'efficacité opérationnelle.</span><span class="sxs-lookup"><span data-stu-id="157f0-116">[Resource Tagging](./resource-tagging/overview.md): Organize your cloud-based resources to support billing models, cloud accounting approaches, management, access control, and operational efficiency.</span></span> <span data-ttu-id="157f0-117">L'identification des ressources requiert un schéma d'attribution de noms et de métadonnées cohérent et bien organisé.</span><span class="sxs-lookup"><span data-stu-id="157f0-117">Resource tagging requires a consistent and well-organized naming and metadata scheme.</span></span>
+
+<span data-ttu-id="157f0-118">[Réseaux à définition logicielle](./software-defined-network/overview.md) : Déployez des charges de travail sécurisées dans le cloud moyennant le déploiement rapide et la modification des fonctionnalités de mise en réseau virtualisées.</span><span class="sxs-lookup"><span data-stu-id="157f0-118">[Software Defined Networks](./software-defined-network/overview.md): Deploy secure workloads to the cloud using rapid deployment and modification of virtualized networking capabilities.</span></span> <span data-ttu-id="157f0-119">Les réseaux à définition logicielle peuvent prendre en charge des flux de travail agiles, isoler des ressources et intégrer des systèmes basés sur le cloud à votre infrastructure informatique existante.</span><span class="sxs-lookup"><span data-stu-id="157f0-119">Software-defined networks (SDNs) can support agile workflows, isolate resources, and integrate cloud-based systems with your existing IT infrastructure.</span></span>
+
+<span data-ttu-id="157f0-120">[Chiffrement](./encryption/overview.md) : Sécurisez vos données sensibles à l’aide du chiffrement, un point important en matière de sécurité au sein d’un déploiement dans le cloud.</span><span class="sxs-lookup"><span data-stu-id="157f0-120">[Encryption](./encryption/overview.md): Secure your sensitive data using encryption, an important aspect of security within a cloud deployment.</span></span>
+
+<span data-ttu-id="157f0-121">[Journaux et rapports](./log-and-report/overview.md) : Surveillez les données de journal générées par les ressources cloud.</span><span class="sxs-lookup"><span data-stu-id="157f0-121">[Logs and Reporting](./log-and-report/overview.md): Monitor log data generated by cloud-based resources.</span></span> <span data-ttu-id="157f0-122">L'analyse des données vous renseigne sur l'intégrité des opérations, de la maintenance et le statut de mise en œuvre de la stratégie des charges de travail.</span><span class="sxs-lookup"><span data-stu-id="157f0-122">Analyzing data provides health-related insights into the operations, maintenance, and policy enforcement status of workloads.</span></span>
+
+## <a name="next-steps"></a><span data-ttu-id="157f0-123">Étapes suivantes</span><span class="sxs-lookup"><span data-stu-id="157f0-123">Next steps</span></span>
+
+<span data-ttu-id="157f0-124">Découvrez comment les abonnements et les comptes servent de base à un déploiement dans le cloud.</span><span class="sxs-lookup"><span data-stu-id="157f0-124">Learn how subscriptions and accounts serve as the base of a cloud deployment.</span></span>
+
+> [!div class="nextstepaction"]
+> [<span data-ttu-id="157f0-125">Conception des abonnements</span><span class="sxs-lookup"><span data-stu-id="157f0-125">Subscriptions design</span></span>](subscriptions/overview.md)
