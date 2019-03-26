@@ -8,13 +8,8 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 1b53806b2939a7c44a8b48c9146d5e86c84d9e2e
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486163"
 ---
+
 # <a name="synchronous-io-antipattern"></a>Anti-modèle E/S synchrone
 
 Bloquer le thread appelant lorsque l’E/S se termine peut réduire les performances et affecter l’extensibilité verticale.

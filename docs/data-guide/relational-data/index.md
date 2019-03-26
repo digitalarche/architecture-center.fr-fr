@@ -1,18 +1,13 @@
 ---
 title: Données relationnelles
-description: ''
+description: null
 author: zoinerTejada
 ms.date: 02/12/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
-ms.openlocfilehash: d68bddcb75e5c8f786a7739e85de2645a2c3d641
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54484927"
 ---
+
 # <a name="traditional-relational-database-solutions"></a>Solutions de bases de données relationnelles traditionnelles
 
 Les données relationnelles sont modélisées à l’aide du modèle relationnel. Dans ce modèle, les données sont exprimées sous forme de tuples. Un *tuple* est un ensemble de paires attribut/valeur. Par exemple, un tuple peut être (itemid = 5, orderid = 1, item = « Siège », quantité = 200,00). Un jeu de tuples qui partagent tous les mêmes attributs est appelé *relation*.
