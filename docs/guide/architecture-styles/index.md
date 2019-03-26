@@ -7,13 +7,8 @@ ms.topic: landing-page
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.date: 08/30/2018
-ms.openlocfilehash: 6895ffc9c73dac29c27e7d8df68550c94f68b10a
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54480655"
 ---
+
 # <a name="architecture-styles"></a>Styles d’architecture
 
 Un *style d’architecture* est une famille d’architectures qui partagent certaines caractéristiques. Par exemple, [multiniveau][n-tier] est un style d’architecture courant. Plus récemment, [les architectures de microservice][microservices] ont commencé à obtenir une place de choix. Les styles d’architecture ne nécessitent pas l’utilisation de technologies particulières, mais certaines technologies sont bien adaptées pour certaines architectures. Par exemple, les conteneurs sont naturellement adaptés aux microservices.
