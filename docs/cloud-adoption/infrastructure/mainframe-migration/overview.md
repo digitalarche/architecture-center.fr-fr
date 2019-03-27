@@ -4,11 +4,11 @@ description: Découvrez comment migrer des applications à partir d’environnem
 author: njray
 ms.date: 12/27/2018
 ms.openlocfilehash: 41fc799f15500276ada1667121e5f1fce3413a3a
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900788"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58247260"
 ---
 # <a name="mainframe-migration-overview"></a>Vue d’ensemble de la migration d’ordinateurs mainframe
 
@@ -36,7 +36,7 @@ Les ordinateurs mainframe ont la réputation d’être extrêmement fiables et d
 
 Une architecture mainframe IBM classique inclut généralement ces composants :
 
-- **Systèmes frontaux :** Les utilisateurs peuvent initier des transactions à partir de terminaux, de pages web ou de stations de travail à distance.  Les applications mainframe affichent souvent des interfaces utilisateur personnalisées qui peuvent être conservées après la migration vers Azure. Les émulateurs de terminaux sont toujours utilisés pour accéder aux applications mainframe. Ils sont également appelés des terminaux à écran vert.
+- **Systèmes frontaux :** Les utilisateurs peuvent initier des transactions à partir de terminaux, de pages web ou de stations de travail à distance. Les applications mainframe affichent souvent des interfaces utilisateur personnalisées qui peuvent être conservées après la migration vers Azure. Les émulateurs de terminaux sont toujours utilisés pour accéder aux applications mainframe. Ils sont également appelés des terminaux à écran vert.
 
 - **Couche Application :** Les ordinateurs mainframe incluent généralement un système de contrôle des informations client (CICS), une suite de gestion des transactions majeure pour ordinateurs mainframe IBM z/OS (souvent utilisée avec IBM Information Management System, IMS) et un gestionnaire de transactions utilisant les messages. Les systèmes de traitement par lots gèrent les mises à jour de données à débit élevé pour de gros volumes d’enregistrements de compte.
 

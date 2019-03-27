@@ -1,5 +1,5 @@
 ---
-title: 'Framework d’adoption du cloud : Gestion de l’accès aux ressources dans Azure'
+title: 'Framework d’adoption du cloud : Gestion de l’accès aux ressources dans Azure'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: 'Présentation des constructions de gestion des accès aux ressources dans Azure : Azure Resource Manager, abonnements, groupes de ressources et ressources'
 author: petertaylor9999
 ms.openlocfilehash: b98cdc94d6d3a37c1e65da1d4de35d5d9520d6eb
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55901161"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58243200"
 ---
 # <a name="resource-access-management-in-azure"></a>Gestion de l’accès aux ressources dans Azure
 
@@ -45,7 +45,7 @@ Un abonnement Azure est similaire à un groupe de ressources : il s’agit d’u
 ![Diagramme d’un abonnement Azure](../../_images/governance-1-11.png)
 *Figure 3. Un abonnement Azure.*
 
-## <a name="what-is-azure-resource-manager"></a>Qu’est-ce qu’Azure Resource Manager ?
+## <a name="what-is-azure-resource-manager"></a>Qu’est-ce qu’Azure Resource Manager ?
 
 Dans [Comment fonctionne Azure ?](../../getting-started/what-is-azure.md), vous avez appris qu’Azure comprend un « serveur frontal » avec de nombreux services qui orchestrent toutes les fonctions d’Azure. L’un de ces services, [Azure Resource Manager](/azure/azure-resource-manager/), héberge l’API RESTful utilisée par les clients pour gérer les ressources.
 
@@ -107,7 +107,7 @@ Le contrôle final vérifie que la requête est comprise dans l’engagement fin
 
 ## <a name="summary"></a>Résumé
 
-Dans cet article, vous avez découvert comment l’accès aux ressources est géré dans Azure à l’aide d’Azure Resource Manager.
+Dans cet article, vous avez étudié la gestion des accès aux ressources dans Azure à l’aide d’Azure Resource Manager.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

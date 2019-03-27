@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Discussion à propos du modèle « PaaS uniquement » pour la fonctionnalité de mise en réseau basée sur le cloud
 author: rotycenh
 ms.openlocfilehash: 2f3f82d781ddb6544721e82e7b7d795222a2f8ff
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900946"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58241200"
 ---
 # <a name="software-defined-networks-paas-only"></a>Réseaux à définition logicielle : PaaS uniquement
 

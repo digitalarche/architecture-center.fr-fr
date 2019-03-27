@@ -9,11 +9,11 @@ ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, networking
 ms.openlocfilehash: 82327cca08e614bfe5226c9ca1a414388878a7c2
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482508"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58243510"
 ---
 # <a name="implement-a-dmz-between-azure-and-your-on-premises-datacenter"></a>Implémenter une zone DMZ entre Azure et votre centre de données local
 

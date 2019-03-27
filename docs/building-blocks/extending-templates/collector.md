@@ -7,11 +7,11 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.openlocfilehash: 5dc910b8577e27059761db417e6350cd38cdf2b8
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54484718"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58243750"
 ---
 # <a name="implement-a-property-transformer-and-collector-in-an-azure-resource-manager-template"></a>Implémenter un transformateur et un collecteur de propriétés dans un modèle Azure Resource Manager
 

@@ -8,11 +8,11 @@ ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: AI
 ms.openlocfilehash: e8bbdf4874d5fc669e1c08add8cf212217d176a4
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482644"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58246210"
 ---
 # <a name="choosing-a-microsoft-cognitive-services-technology"></a>Sélectionner une technologie Cognitive Services Microsoft
 

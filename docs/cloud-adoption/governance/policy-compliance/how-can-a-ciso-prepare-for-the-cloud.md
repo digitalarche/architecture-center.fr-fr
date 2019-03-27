@@ -3,12 +3,12 @@ title: 'Framework d’adoption du cloud : Préparation d’un Chef de la sécur
 description: Comment un Chef de la sécurité des systèmes d’information peut se préparer au cloud
 author: BrianBlanchard
 ms.date: 10/03/2018
-ms.openlocfilehash: cedb86488304e2fc84897e1da373730768adce66
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.openlocfilehash: a4535163990797decdacdacdcb6a33f0118366e9
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55901169"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58238358"
 ---
 # <a name="ciso-cloud-readiness-guide"></a>Guide de préparation au cloud pour un Chef de la sécurité des systèmes d’information
 
@@ -38,7 +38,7 @@ Ressources de la plateforme de sécurité :
 * [Formation obligatoire sur les mesures de sécurité, vérifications de la formation](https://downloads.cloudsecurityalliance.org/star/self-assessment/StandardResponsetoRequestforInformationWindowsAzureSecurityPrivacy.docx)
 * [Test de pénétration, détection d’intrusion, DDoS, audits et journalisation](https://www.microsoft.com/trustcenter/Security/AuditingAndLogging)
 * [Centre de données ultramoderne](https://www.microsoft.com/cloud-platform/global-datacenters), sécurité physique, [réseau sécurisé](/azure/security/security-network-overview)
-* [Réponse de Microsoft Azure aux problèmes de sécurité dans le cloud (PDF)](http://aka.ms/SecurityResponsePaper)
+* [Réponse de Microsoft Azure aux problèmes de sécurité dans le cloud (PDF)](https://aka.ms/SecurityResponsePaper)
 
 Confidentialité et contrôles :
 
@@ -58,7 +58,7 @@ Conformité :
 Transparence :
 
 * [Comment Microsoft sécurise les données client dans les services Azure](https://www.microsoft.com/trustcenter/Transparency/default.aspx)
-* [Comment Microsoft gère l’emplacement des données dans les services Azure](http://azuredatacentermap.azurewebsites.net/)
+* [Comment Microsoft gère l’emplacement des données dans les services Azure](https://azuredatacentermap.azurewebsites.net/)
 * [Qui dans Microsoft peut accéder à vos données dans quelles conditions](https://www.microsoft.com/trustcenter/Privacy/Who-can-access-your-data-and-on-what-terms)
 * [Comment Microsoft sécurise les données client dans les services Azure](https://www.microsoft.com/trustcenter/Transparency/default.aspx)
 * [Passer en revue la certification des services Azure, hub de transparence](https://www.microsoft.com/trustcenter/Compliance/default.aspx)

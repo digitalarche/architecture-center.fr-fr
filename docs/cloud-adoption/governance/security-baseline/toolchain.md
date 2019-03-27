@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Explication des outils capables d’améliorer la base de référence de la sécurité dans Azure
 author: BrianBlanchard
 ms.openlocfilehash: b316626c8ad717514f7f592abefa0f33a92afdca
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900885"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58243170"
 ---
 # <a name="security-baseline-tools-in-azure"></a>Outils de base de référence de la sécurité dans Azure
 

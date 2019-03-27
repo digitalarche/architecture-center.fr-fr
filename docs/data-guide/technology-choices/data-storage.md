@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: 0aac064f30c384520a27d2e42b21c9243d5914b2
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54483460"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58244040"
 ---
 # <a name="choosing-a-big-data-storage-technology-in-azure"></a>Sélectionner une technologie de stockage de Big Data dans Azure
 
@@ -105,7 +105,7 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 | Objectif | Stockage optimisé pour les charges de travail d’analyse de données volumineuses |Magasin d’objets polyvalent adapté à un large éventail de scénarios de stockage |
 | Cas d'utilisation | Données par lots, d’analyse de diffusion en continu et d’apprentissage machine (par exemple, fichiers journaux, données IoT, données sur le parcours de navigation, jeux de données volumineux) | N’importe quel type de données texte ou binaires, par exemple données d’application principale, de sauvegarde, de stockage de médias pour la diffusion en continu, et d’usage général |
 | Structure | Système de fichiers hiérarchique | Magasin d’objets avec espace de noms plat |
-| Authentification | Basées sur les [Identités Azure Active Directory](/azure/active-directory/active-directory-authentication-scenarios) | Basées sur les secrets partagés : [clés d’accès au compte](/azure/storage/common/storage-create-storage-account#manage-your-storage-account), [clés de signature d’accès partagé](/azure/storage/common/storage-dotnet-shared-access-signature-part-1) et [contrôle d’accès en fonction du rôle (RBAC)](/azure/security/security-storage-overview) |
+| Authentication | Basées sur les [Identités Azure Active Directory](/azure/active-directory/active-directory-authentication-scenarios) | Basées sur les secrets partagés : [clés d’accès au compte](/azure/storage/common/storage-create-storage-account#manage-your-storage-account), [clés de signature d’accès partagé](/azure/storage/common/storage-dotnet-shared-access-signature-part-1) et [contrôle d’accès en fonction du rôle (RBAC)](/azure/security/security-storage-overview) |
 | Protocole d’authentification | OAuth 2.0. Les appels doivent contenir un JWT (jeton web JSON) valide émis par Azure Active Directory | Code d’authentification de message basé sur le hachage (HMAC). Les appels doivent contenir un hachage SHA-256 codé en Base64 sur une partie de la requête HTTP. |
 | Authorization | Listes de contrôle d’accès (ACL) POSIX. Les listes ACL basées sur les identités Azure Active Directory peuvent être définies aux niveaux fichier et dossier. | Pour l’autorisation au niveau des comptes, utilisez des [clés d’accès au compte](/azure/storage/common/storage-create-storage-account#manage-your-storage-account). Pour l’autorisation au niveau d'un compte, d'un conteneur ou d'un objet blob, utilisez des [clés de signature d’accès partagé](/azure/storage/common/storage-dotnet-shared-access-signature-part-1). |
 | Audit | Disponible.  |Disponible |
@@ -120,8 +120,8 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 |                                    |                                           Azure Cosmos DB                                           |                                                             HBase sur HDInsight                                                             |
 |------------------------------------|-----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 |       Modèle de base de données primaire       |                      Stockage de documents, graphiques, stockage de valeurs clés, stockage de colonnes larges                      |                                                             Stockage de colonnes larges                                                              |
-|         Index secondaires          |                                                 Oui                                                 |                                                                     Non                                                                      |
-|        Prise en charge du langage SQL        |                                                 Oui                                                 |                                     Oui (à l’aide du pilote JDBC [Phoenix](https://phoenix.apache.org/))                                      |
+|         Index secondaires          |                                                 OUI                                                 |                                                                     Non                                                                      |
+|        Prise en charge du langage SQL        |                                                 OUI                                                 |                                     Oui (à l’aide du pilote JDBC [Phoenix](https://phoenix.apache.org/))                                      |
 |            Cohérence             |                   Fort, Obsolescence limitée, Session, Préfixe cohérent et Éventuel                   |                                                                   Remarque                                                                   |
 | Intégration native à Azure Functions |                        [Oui](/azure/cosmos-db/serverless-computing-database)                        |                                                                     Non                                                                      |
 |   Distribution mondiale automatique    |                          [Oui](/azure/cosmos-db/distribute-data-globally)                           | Aucune [réplication de cluster HBase ne peut être configurée ](/azure/hdinsight/hbase/apache-hbase-replication) dans les régions avec une cohérence éventuelle |

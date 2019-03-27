@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Risques métier et motivations associés à la cohérence des ressources
 author: alexbuckgit
 ms.openlocfilehash: 19e0d761e4afa3473099bde2edc960c8b9eadb79
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900917"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58242460"
 ---
 # <a name="resource-consistency-motivations-and-business-risks"></a>Risques métier et motivations associés à la cohérence des ressources
 
@@ -45,7 +45,7 @@ Les risques diffèrent en fonction de l’organisation, mais ceux présentés ci
 
 À l’aide du [modèle de gestion du cloud](./template.md), documentez les risques métier susceptibles d’être introduits par le plan d’adoption du cloud actuel.
 
-Une fois tous les risques métier réalistes appréhendés, l’étape suivante consiste à documenter la tolérance de l’entreprise aux risques, ainsi que les indicateurs et métriques clés permettant de surveiller cette tolérance.
+Une fois tous les risques métier réalistes appréhendés, l’étape suivante consiste à documenter la tolérance de l’activité aux risques, ainsi que les indicateurs et métriques clés permettant de surveiller cette tolérance.
 
 > [!div class="nextstepaction"]
 > [Comprendre les indicateurs, les métriques et la tolérance au risque](./metrics-tolerance.md)

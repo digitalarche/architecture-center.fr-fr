@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Parcours de gouvernance pour les petites et moyennes entreprises
 author: BrianBlanchard
 ms.openlocfilehash: a3e078845038a12977e7be5affbf22708411069f
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900938"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58245160"
 ---
 # <a name="small-to-medium-enterprise-governance-journey"></a>Parcours de gouvernance pour les petites et moyennes entreprises
 

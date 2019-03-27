@@ -9,11 +9,11 @@ ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
 ms.openlocfilehash: 14adb9de7f46c3196e893451859385d87212b375
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482390"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58243860"
 ---
 # <a name="enterprise-bi-in-azure-with-sql-data-warehouse"></a>Enterprise BI dans Azure avec SQL Data Warehouse
 
@@ -49,7 +49,7 @@ L’architecture est constituée des composants suivants.
 
 **Power BI**. Power BI est une suite d’outils d’analyse métier pour analyser les données et obtenir des informations métier. Dans cette architecture, il demande le modèle sémantique stocké dans Analysis Services.
 
-### <a name="authentication"></a>Authentification
+### <a name="authentication"></a>Authentication
 
 **Azure Active Directory (Azure AD)** authentifie les utilisateurs qui se connectent au serveur Analysis Services via Power BI.
 

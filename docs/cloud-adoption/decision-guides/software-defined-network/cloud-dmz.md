@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Cette architecture de réseau permet un accès limité entre vos réseaux locaux et ceux basés sur le cloud.
 author: rotycenh
 ms.openlocfilehash: a192541dcfb0f3d713f4139a2ab0541d0c7202db
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900918"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58242810"
 ---
 # <a name="software-defined-networks-cloud-dmz"></a>Réseaux à définition logicielle : Zone DMZ cloud
 

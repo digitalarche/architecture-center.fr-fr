@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: f1f8a9ddc0a728f6be4350edb361afd19901de20
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54483588"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58245960"
 ---
 # <a name="non-relational-data-and-nosql"></a>Données non relationnelles et NoSQL
 
@@ -158,8 +158,8 @@ La liste suivante compare la configuration requise pour chaque magasin de donné
 | Modèle d’accès | Accès aléatoire | Agrégats sur données hautes/larges | Accès aléatoire | Accès aléatoire |
 | Indexation | Index primaires et secondaires | Index primaires et secondaires | Index primaire uniquement | Index primaires et secondaires |
 | Forme des données | Document | Tabulaire avec familles de colonnes contenant des colonnes | Clé et valeur | Graphe contenant des bords et des sommets |
-| Partiellement alloué | Oui | OUI | Oui | Non  |
-| Large (un grand nombre de colonnes et d’attributs) | Oui | Oui | Non  | Non  |  
+| Partiellement alloué | OUI | OUI | OUI | Non  |
+| Large (un grand nombre de colonnes et d’attributs) | OUI | OUI | Non  | Non  |  
 | Taille de donnée | Petite (Ko) à moyenne (faible Mo) | Moyenne (Mo) à grande (faible Go) | Petite (Ko) | Petite (Ko) |
 | Échelle maximale globale | Très grande (Po) | Très grande (Po) | Très grande (Po) | Grande (To) |
 
@@ -174,6 +174,6 @@ La liste suivante compare la configuration requise pour chaque magasin de donné
 | Indexation | Index primaires et secondaires | Index primaire uniquement | N/A |
 | Forme des données | Tabulaire | Blob et métadonnées | Document |
 | Partiellement alloué | Non  | N/A | Non  |
-| Large (un grand nombre de colonnes et d’attributs) |  Non  | OUI | Oui |  
+| Large (un grand nombre de colonnes et d’attributs) |  Non  | OUI | OUI |  
 | Taille de donnée | Petite (Ko) | Grande (Go) à très grande (To) | Petite (Ko) |
 | Échelle maximale globale | Grande (faible To)  | Très grande (Po) | Grande (faible To) |

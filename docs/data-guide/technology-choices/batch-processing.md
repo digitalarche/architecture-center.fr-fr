@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: 53f8b233b0e0c1ff83a72a04b2707caa528d6f6b
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486452"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58248514"
 ---
 # <a name="choosing-a-batch-processing-technology-in-azure"></a>Choisir une technologie de traitement par lots dans Azure
 
@@ -86,8 +86,8 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 | | Service Analytique Azure Data Lake | Azure SQL Data Warehouse | HDInsight | Azure Databricks |
 | --- | --- | --- | --- | --- | --- |
-| Est un service géré | Oui | Oui | Oui <sup>1</sup> | Oui |
-| Magasin de données relationnel | Oui | Oui | Non  | Non  |
+| Est un service géré | OUI | OUI | Oui <sup>1</sup> | OUI |
+| Magasin de données relationnel | OUI | OUI | Non  | Non  |
 | Modèle de tarification | Par programme de traitement par lots | Par heure de cluster | Par heure de cluster | Unité Databricks<sup>2</sup> + heure de cluster |
 
 [1] Avec mise à l’échelle et configuration manuelles.
@@ -98,14 +98,14 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 | | Service Analytique Azure Data Lake | SQL Data Warehouse | HDInsight avec Spark | HDInsight avec Hive | HDInsight avec Hive LLAP | Azure Databricks |
 | --- | --- | --- | --- | --- | --- | --- |
-| Mise à l’échelle automatique | Non  | Non  | Non  | Non  | Non  | Oui |
+| Mise à l’échelle automatique | Non  | Non  | Non  | Non  | Non  | OUI |
 | Granularité de la montée en charge  | Par tâche | Par cluster | Par cluster | Par cluster | Par cluster | Par cluster |
-| Mise en cache des données en mémoire | Non  | OUI | Oui | Non  | OUI | Oui |
-| Interrogation à partir de magasins relationnels externes | Oui | Non  | Oui | Non  | Non  | Oui |
-| Authentification  | Azure AD | SQL / Azure AD | Non  | Azure AD<sup>1</sup> | Azure AD<sup>1</sup> | Azure AD |
-| Audit  | Oui | Oui | Non  | Oui <sup>1</sup> | Oui <sup>1</sup> | Oui |
+| Mise en cache des données en mémoire | Non  | OUI | OUI | Non  | OUI | OUI |
+| Interrogation à partir de magasins relationnels externes | OUI | Non  | OUI | Non  | Non  | OUI |
+| Authentication  | Azure AD | SQL / Azure AD | Non  | Azure AD<sup>1</sup> | Azure AD<sup>1</sup> | Azure AD |
+| Audit  | OUI | OUI | Non  | Oui <sup>1</sup> | Oui <sup>1</sup> | OUI |
 | Sécurité au niveau des lignes | Non  | Non  | Non  | Oui <sup>1</sup> | Oui <sup>1</sup> | Non  |
-| Prend en charge les pare-feu | Oui | OUI | Oui | Oui <sup>2</sup> | Oui <sup>2</sup> | Non  |
+| Prend en charge les pare-feu | OUI | OUI | OUI | Oui <sup>2</sup> | Oui <sup>2</sup> | Non  |
 | Masquage des données dynamiques | Non  | Non  | Non  | Oui <sup>1</sup> | Oui <sup>1</sup> | Non  |
 
 <!-- markdownlint-enable MD033 -->

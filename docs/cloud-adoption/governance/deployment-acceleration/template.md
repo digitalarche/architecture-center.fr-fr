@@ -5,14 +5,14 @@ titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
-ms.date: 1/18/2019
+ms.date: 02/11/2019
 author: alexbuckgit
-ms.openlocfilehash: 13fbe778f2641b5c0482055aa474e6eec13f023a
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.openlocfilehash: 779e9a802a7e7870c76fa54eefb05d58a737a9fc
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900711"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58246530"
 ---
 # <a name="caf-deployment-acceleration-template"></a>Framework d'adoption du cloud : Modèle d'accélération du déploiement
 
@@ -31,7 +31,7 @@ Bien que ce modèle contienne un exemple de contenu lié à la discipline Gestio
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Des pratiques de gouvernance solides commencent par une compréhension des risques métier. Consultez l'article sur les risques métier, et commencez à documenter les risques qui correspondent à votre plan actuel d'adoption du cloud.
+Des pratiques de gouvernance solides commencent par une compréhension des risques métier. Consultez l’article sur les risques métier, et commencez à documenter les risques qui correspondent à votre plan actuel d’adoption du cloud.
 
 > [!div class="nextstepaction"]
 > [Comprendre les risques métier](./business-risks.md)

@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, networking
-ms.openlocfilehash: 45ae8de1138b738fdfb42bdf57402711e1be6ebb
-ms.sourcegitcommit: 14226018a058e199523106199be9c07f6a3f8592
+ms.openlocfilehash: 2595352075c708e015a0f0c536be31ceb5614fcd
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/31/2019
-ms.locfileid: "55482907"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58245680"
 ---
 # <a name="implement-a-dmz-between-azure-and-the-internet"></a>Implémenter une zone DMZ entre Azure et Internet
 
@@ -101,12 +101,10 @@ Un déploiement pour une architecture de référence implémentant ces recommand
     azbb -s <subscription_id> -g <resource_group_name> -l <region> -p onprem.json --deploy
     ```
 
-3. Accédez au dossier `/dmz/ssecure-vnet-hybrid` du référentiel GitHub des architectures de référence.
-
 4. Exécutez la commande suivante :
 
     ```bash
-    azbb -s <subscription_id> -g <resource_group_name> -l <region> -p secure-vnet-hybrid.json --deploy
+    azbb -s <subscription_id> -g <resource_group_name> -l <region> -p secure-vnet-dmz.json --deploy
     ```
 
 ### <a name="connect-the-on-premises-and-azure-gateways"></a>Connecter les passerelles Azure et locales

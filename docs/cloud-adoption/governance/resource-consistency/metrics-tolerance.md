@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Métriques de cohérence des ressources, indicateurs et tolérance au risque
 author: BrianBlanchard
 ms.openlocfilehash: 3a2561a6d1d81a6395bb256e921a7a26898b45a0
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55901033"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58241990"
 ---
 # <a name="resource-consistency-metrics-indicators-and-risk-tolerance"></a>Métriques de cohérence des ressources, indicateurs et tolérance au risque
 
@@ -46,7 +46,7 @@ Cependant, à mesure que la taille de vos ressources cloud augmente, leur gestio
 
 Au début de l’adoption du cloud, collaborez avec votre équipe des opérations informatiques et les parties prenantes de l’entreprise pour identifier les [risques commerciaux](business-risks.md) liés à la cohérence des ressources, puis déterminez une ligne de base acceptable pour la tolérance au risque. Cette section du Framework d’adoption du cloud fournit des exemples, mais les risques et les lignes de base détaillés pour votre entreprise ou vos déploiements peuvent être différents.
 
-Une fois que vous avez une ligne de base, établissez des seuils minimaux représentant une augmentation inacceptable de vos risques identifiés. Ces seuils font office de déclencheurs lorsque vous devez prendre des mesures pour atténuer ces risques. Vous trouverez ci-dessous quelques exemples montrant comment des métriques d’exploitation telles que celles décrites ci-dessus peuvent justifier un investissement accru dans la discipline Cohérence des ressources.
+Une fois que vous avez une base de référence, établissez des seuils minimaux représentant une augmentation inacceptable de vos risques identifiés. Ces seuils font office de déclencheurs lorsque vous devez prendre des mesures pour atténuer ces risques. Vous trouverez ci-dessous quelques exemples montrant comment des métriques d’exploitation telles que celles décrites ci-dessus peuvent justifier un investissement accru dans la discipline Cohérence des ressources.
 
 - **Déclencheur de marquage et de nommage**. Une entreprise disposant de plus de X ressources dépourvues des informations de marquage requises ou ne respectant pas les standards de nommage doit envisager d’investir dans la discipline Cohérence des ressources afin d’affiner ces standards et de garantir leur application cohérente aux ressources déployées dans le cloud.
 - **Déclencheur de surapprovisionnement de ressources**. Si une entreprise a plus de X % de ses ressources utilisant régulièrement une très faible proportion de leurs capacités de mémoire, d’UC ou de réseau disponibles, il est conseillé d’investir dans la discipline Cohérence des ressources afin d’optimiser l’utilisation des ressources pour ces éléments.

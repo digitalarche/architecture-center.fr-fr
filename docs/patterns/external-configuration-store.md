@@ -10,11 +10,11 @@ ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
 ms.openlocfilehash: fd006437aab934d951d0a0bc947d32878edbf9d8
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482381"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58244400"
 ---
 # <a name="external-configuration-store-pattern"></a>Modèle de magasin de configurations externe
 

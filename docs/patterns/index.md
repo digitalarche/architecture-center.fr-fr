@@ -1,21 +1,16 @@
 ---
 title: Modèles de conception de cloud
 titleSuffix: Azure Architecture Center
-description: Modèles de conception pour créer des applications fiables, scalables et sécurisées dans le cloud.
+description: 'Modèles de conception pour créer des applications fiables, scalables et sécurisées dans le cloud.'
 keywords: Azure
 author: dragon119
-ms.date: 12/10/2018
+ms.date: 03/01/2018
 ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 1f3a76a104f0157526db3cff338c2b8b08dd573c
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488254"
 ---
+
 # <a name="cloud-design-patterns"></a>Modèles de conception de cloud
 
 Ces modèles de conception sont utiles pour développer des applications fiables, évolutives et sécurisées dans le cloud.
@@ -95,10 +90,11 @@ Chaque modèle décrit le problème traité par le modèle, les aspects à prend
 |                       [Cloisonnement](./bulkhead.md)                       |                                                        Isolez les éléments d’une application sous forme de pools afin qu’en cas de défaillance de l’un d’eux, les autres continuent à fonctionner.                                                        |
 |                    [Cache-Aside](./cache-aside.md)                    |                                                                                   Chargez les données à la demande dans un cache à partir d’un magasin de données.                                                                                    |
 |                [Disjoncteur](./circuit-breaker.md)                |                                                     Gérer les erreurs dont la résolution peut prendre un certain temps lors de la connexion à une ressource ou à un service distant.                                                     |
-|                           [CQRS](./cqrs.md)                           |                                                           Séparez les opérations qui lisent les données des opérations qui mettent à jour les données en utilisant des interfaces distinctes.                                                            |
+| [Vérification des revendications](./claim-check.md) | Diviser un message volumineux en une vérification des revendications et une charge utile pour éviter de surcharger un bus de messages. |
 |       [Transaction de compensation](./compensating-transaction.md)       |                                                         Annulez le travail effectué par une série d’étapes qui définissent ensemble une opération cohérente.                                                         |
 |            [Consommateurs concurrents](./competing-consumers.md)            |                                                            Ce modèle vise à permettre à plusieurs consommateurs concurrents de traiter les messages reçus sur un même canal de messagerie.                                                             |
 | [Consolidation des ressources de calcul](./compute-resource-consolidation.md) |                                                                        Consolidez plusieurs tâches ou opérations en une seule unité de calcul.                                                                        |
+|                           [CQRS](./cqrs.md)                           |                                                           Séparez les opérations qui lisent les données des opérations qui mettent à jour les données en utilisant des interfaces distinctes.                                                            |
 |                 [Approvisionnement en événements](./event-sourcing.md)                 |                                                      Utilisez un magasin d’ajout uniquement pour enregistrer la série complète d’événements qui décrivent les actions exécutées sur les données dans un domaine.                                                      |
 |   [Magasin de configurations externes](./external-configuration-store.md)   |                                                           Déplacez les informations de configuration depuis le package de déploiement d’application vers un emplacement centralisé.                                                           |
 |             [Identité fédérée](./federated-identity.md)             |                                                                                Déléguez l’authentification à un fournisseur d’identité externe.                                                                                |

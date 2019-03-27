@@ -3,12 +3,12 @@ title: 'Migration à partir d’un environnement mainframe : Migration d’appl
 description: Découvrez comment migrer des applications à partir d’environnements mainframe vers Azure, une infrastructure fiable, hautement disponible et évolutive adaptée aux systèmes qui sont actuellement exécutés sur des ordinateurs mainframe
 author: njray
 ms.date: 12/26/2018
-ms.openlocfilehash: dcae5077e26ab8ba9b08e0da71a5e69d0d9f62e3
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.openlocfilehash: 2a22eb038da693671ce309c76afcfc41946034f3
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900821"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58246390"
 ---
 # <a name="mainframe-application-migration"></a>Migration d’applications d’un environnement mainframe
 
@@ -24,7 +24,7 @@ La migration d’applications engage généralement une ou plusieurs des straté
 
 - Rebuild : certaines organisations choisissent de réécrire entièrement les programmes à l’aide de techniques modernes. Cette approche est moins courante que l’approche « lift-and-shift », car elle s’avère plus chère et plus complexe. Après ce type de migration, il est souvent judicieux de commencer à remplacer des modules et du code en s’aidant de moteurs de transformation de code.
 
-- Remplacement : cette approche remplace les fonctionnalités du mainframe par des options équivalentes dans le cloud. SaaS (software as a service) est une option disponible : elle utilise une solution créée spécifiquement pour répondre à un besoin de l’entreprise, comme la finance, les ressources humaines, la fabrication ou la planification des ressources métier. En outre, il existe maintenant de nombreuses applications métier capables de résoudre des problématiques qui étaient auparavant gérées par des solutions mainframe personnalisées.
+- Remplacez : cette approche remplace les fonctionnalités du mainframe par des options équivalentes dans le cloud. SaaS (software as a service) est une option disponible : elle utilise une solution créée spécifiquement pour répondre à un besoin de l’entreprise, comme la finance, les ressources humaines, la fabrication ou la planification des ressources métier. En outre, il existe maintenant de nombreuses applications métier capables de résoudre des problématiques qui étaient auparavant gérées par des solutions mainframe personnalisées.
 
 Vous devez commencer par planifier les charges de travail que vous souhaitez migrer en priorité, puis déterminer les prérequis pour déplacer les ressources associées (les applications, les codes base hérités et les bases de données).
 
@@ -74,7 +74,7 @@ Pour optimiser les performances des traitements par lots à l’aide d’Azure, 
 
 ### <a name="compute"></a>Calcul
 
-Conseils :
+Utilisez :
 
 - Utilisez des machines virtuelles avec la fréquence d’horloge la plus élevée. Les applications mainframe sont souvent monothread et les processeurs mainframe ont une fréquence d’horloge très élevée.
 
@@ -86,7 +86,7 @@ Conseils :
 
 ### <a name="storage"></a>Stockage
 
-Conseils :
+Utilisez :
 
 - Utilisez [Azure SSD Premium](/azure/virtual-machines/windows/premium-storage) ou [Azure SSD Ultra](/azure/virtual-machines/windows/disks-ultra-ssd) pour bénéficier d’un débit IOPS maximal.
 
@@ -98,7 +98,7 @@ Conseils :
 
 - Activez l’[accélération réseau Azure](/azure/virtual-network/create-vm-accelerated-networking-powershell) pour réduire la latence.
 
-### <a name="monitoring"></a>Supervision
+### <a name="monitoring"></a>Surveillance
 
 - Utilisez des outils de supervision, [Azure Monitor](/azure/azure-monitor/overview), [Azure Application Insights](/azure/application-insights/app-insights-overview) et même les journaux Azure afin d’aider les administrateurs à identifier les surcharges de performances liées aux traitements par lots et à éliminer les goulots d’étranglement.
 
@@ -168,7 +168,7 @@ Le processus de déplacement des solutions d’un ordinateur mainframe vers Azur
 
 Un scénario courant consiste à déplacer une application vers Azure, mais en conservant sur l’ordinateur mainframe toutes les données dont a besoin l’application. Un logiciel spécifique est utilisé pour que les applications sur Azure puissent accéder aux données à partir de l’ordinateur mainframe. Heureusement, il existe un large éventail de solutions qui permettent l’intégration entre Azure et les environnements mainframe existants, la prise en charge de scénarios hybrides et la migration progressive. Les partenaires Microsoft, les éditeurs de logiciels indépendants et les intégrateurs système peuvent vous aider dans votre démarche.
 
-[Microsoft Host Integration Server](https://docs.microsoft.com/host-integration-server/) (HIS) est l’une des solutions disponibles. Elle fournit l’architecture de base de données relationnelle distribuée (DRDA) requise par les applications dans Azure pour accéder aux données dans DB2 conservées sur l’ordinateur mainframe. Il existe d’autres options pour l’intégration entre les environnements mainframe et Azure, parmi lesquelles les solutions fournies par IBM, Attunity et Codit, entre autres, ainsi que des solutions open source.
+[Microsoft Host Integration Server](/host-integration-server) (HIS) est l’une des solutions disponibles. Elle fournit l’architecture de base de données relationnelle distribuée (DRDA) requise par les applications dans Azure pour accéder aux données dans DB2 conservées sur l’ordinateur mainframe. Il existe d’autres options pour l’intégration entre les environnements mainframe et Azure, parmi lesquelles les solutions fournies par IBM, Attunity et Codit, entre autres, ainsi que des solutions open source.
 
 ## <a name="partner-solutions"></a>Solutions de partenaires
 
@@ -188,4 +188,4 @@ Pour plus d’informations, consultez les ressources suivantes :
 
 - [Déployer IBM DB2 pureScale sur Azure](https://azure.microsoft.com/resources/deploy-ibm-db2-purescale-on-azure)
 
-- [Documentation Host Integration Server (HIS)](https://docs.microsoft.com/host-integration-server/)
+- [Documentation Host Integration Server (HIS)](/host-integration-server)

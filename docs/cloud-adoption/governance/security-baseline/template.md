@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Explication du concept de Base de référence de la sécurité dans le cadre de la gouvernance cloud
 author: BrianBlanchard
 ms.openlocfilehash: 93622fee899824fffe604d7b3f588f5ed179b371
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900889"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58241690"
 ---
 # <a name="security-baseline-template"></a>Modèle Base de référence de la sécurité
 
@@ -31,7 +31,7 @@ Bien que ce modèle contienne un exemple de contenu lié à la discipline Gestio
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Des pratiques de gouvernance solides commencent par une compréhension des risques commerciaux. Consultez l’article sur les risques métier, et commencez à documenter ceux qui correspondent à votre plan actuel d’adoption du cloud.
+Des pratiques de gouvernance solides commencent par une compréhension des risques métier. Consultez l’article sur les risques métier, et commencez à documenter les risques qui correspondent à votre plan actuel d’adoption du cloud.
 
 > [!div class="nextstepaction"]
 > [Comprendre les risques métier](./business-risks.md)

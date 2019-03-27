@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Stratégie Base de référence de la sécurité Native cloud
 author: BrianBlanchard
 ms.openlocfilehash: fc161009f6ce7aa2b775fe6b3b53ff1e1d62a848
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900739"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58242430"
 ---
 # <a name="cloud-native-security-baseline-policy"></a>Stratégie Base de référence de la sécurité Native cloud
 

@@ -7,12 +7,12 @@ ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
 ms.date: 02/11/2019
 author: BrianBlanchard
-ms.openlocfilehash: 8d2cae87b8a3a11bfde87aafc04d4d2ef55cbbe9
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.openlocfilehash: cd00f2fa132f5f177ccc12f61be8b5342b71197d
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55901058"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58247420"
 ---
 # <a name="deployment-acceleration-tools-in-azure"></a>Outils d'accélération du déploiement dans Azure
 
@@ -22,7 +22,7 @@ Les opérateurs, gardiens et architectes du cloud qui s'intéressent à la gouve
 
 La liste suivante énumère les outils natifs qui peuvent contribuer à faire mûrir les stratégies et les processus qui soutiennent cette discipline de gouvernance.
 
-|  |Azure Policy  |Groupes d'administration Azure  |Modèles Azure Resource Manager  |Azure Blueprints  | Azure Resource Graph | Gestion des coûts Azure |
+|  | Azure Policy | Groupes d'administration Azure | Modèles Azure Resource Manager | Azure Blueprints | Azure Resource Graph | Gestion des coûts Azure |
 |---------|---------|---------|---------|---------|---------|---------|
 |Implémentation de stratégies d'entreprise     |OUI |Non   |Non   |Non  | Non  |Non  |
 |Application de stratégies dans les abonnements     |Obligatoire |OUI  |Non   |Non  | Non  |Non  |

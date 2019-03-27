@@ -8,11 +8,11 @@ ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: data-analytics
 ms.openlocfilehash: 72b889e2fe0d862ab1ff280cea76c2880b0fadc4
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54481914"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58245950"
 ---
 # <a name="choosing-a-data-analytics-technology-in-azure"></a>Sélectionner une technologie d’analytique de données dans Azure
 
@@ -89,16 +89,16 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 | | Power BI | Blocs-notes Jupyter | Blocs-notes Zeppelin | Blocs-notes Microsoft Azure |
 | --- | --- | --- | --- | --- |
-| Se connecter à un cluster Big Data pour un traitement avancé | Oui | OUI | Oui | Non  |
-| Service géré | Oui | Oui <sup>1</sup> | Oui <sup>1</sup> | Oui |
-| Se connecter à des centaines de sources de données | Oui | Non  | Non  | Non  |
+| Se connecter à un cluster Big Data pour un traitement avancé | OUI | OUI | OUI | Non  |
+| Service géré | OUI | Oui <sup>1</sup> | Oui <sup>1</sup> | OUI |
+| Se connecter à des centaines de sources de données | OUI | Non  | Non  | Non  |
 | Fonctionnalités hors ligne | Oui <sup>2</sup> | Non  | Non  | Non  |
-| Fonctionnalités d’incorporation | Oui | Non  | Non  | Non  |
-| Actualisation automatique des données | Oui | Non  | Non  | Non  |
+| Fonctionnalités d’incorporation | OUI | Non  | Non  | Non  |
+| Actualisation automatique des données | OUI | Non  | Non  | Non  |
 | Accès à de nombreux packages open source | Non  | Oui <sup>3</sup> | Oui <sup>3</sup> | Oui <sup>4</sup> |
 | Options de nettoyage/transformer de données | [Power Query](https://powerbi.microsoft.com/blog/getting-started-with-power-query-part-i/), R | 40 langues, y compris Python, R, Julia et Scala | Plus de 20 interpréteurs, y compris Python, JDBC et R | Python, F#, R |
 | Tarifs | Gratuit pour Power BI Desktop (création), consultez la section [Tarification](https://powerbi.microsoft.com/pricing/) pour les options d’hébergement | Gratuit | Gratuit | Gratuit |
-| Collaboration multi-utilisateur | [Oui](/power-bi/service-how-to-collaborate-distribute-dashboards-reports) | Oui (via le partage ou avec un serveur multi-utilisateur comme [JupyterHub](https://github.com/jupyterhub/jupyterhub)) | Oui | Oui (via le partage) |
+| Collaboration multi-utilisateur | [Oui](/power-bi/service-how-to-collaborate-distribute-dashboards-reports) | Oui (via le partage ou avec un serveur multi-utilisateur comme [JupyterHub](https://github.com/jupyterhub/jupyterhub)) | OUI | Oui (via le partage) |
 
 <!-- markdownlint-enable MD033 -->
 

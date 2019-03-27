@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: 6679ff620ca9e64036c02fce38608de38c57df93
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482168"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58246360"
 ---
 # <a name="data-warehousing-and-data-marts"></a>Entreposage de données et mini-Data Warehouses
 
@@ -130,13 +130,13 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 
 | | Azure SQL Database | SQL Server (machine virtuelle) | SQL Data Warehouse | Apache Hive sur HDInsight | Hive LLAP sur HDInsight |
 | --- | --- | --- | --- | --- | --- | -- |
-| Est un service géré | Oui | Non  | Oui | Oui <sup>1</sup> | Oui<sup>1</sup> |
-| Nécessite l’orchestration des données (conserve une copie des données/données historiques) | Non  | Non  | OUI | OUI | Oui |
-| Intègre facilement plusieurs sources de données | Non  | Non  | OUI | OUI | Oui |
-| Prend en charge l’interruption du calcul | Non  | Non  | Oui | Non<sup>2</sup> | Non<sup>2</sup> |
-| Magasin de données relationnel | Oui | OUI |  Oui | Non  | Non  |
-| Rapports en temps réel | Oui | Oui | Non  | Non  | Oui |
-| Points de restauration de sauvegarde flexibles | Oui | Oui | Non<sup>3</sup> | Oui<sup>4</sup> | Oui<sup>4</sup> |
+| Est un service géré | OUI | Non  | OUI | Oui <sup>1</sup> | Oui<sup>1</sup> |
+| Nécessite l’orchestration des données (conserve une copie des données/données historiques) | Non  | Non  | OUI | OUI | OUI |
+| Intègre facilement plusieurs sources de données | Non  | Non  | OUI | OUI | OUI |
+| Prend en charge l’interruption du calcul | Non  | Non  | OUI | Non<sup>2</sup> | Non<sup>2</sup> |
+| Magasin de données relationnel | OUI | OUI |  OUI | Non  | Non  |
+| Rapports en temps réel | OUI | OUI | Non  | Non  | OUI |
+| Points de restauration de sauvegarde flexibles | OUI | OUI | Non<sup>3</sup> | Oui<sup>4</sup> | Oui<sup>4</sup> |
 | SMP/MPP | SMP | SMP | MPP | MPP | MPP |
 
 <!-- markdownlint-enable MD033 -->
@@ -155,10 +155,10 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 
 | | Azure SQL Database | SQL Server (machine virtuelle) |  SQL Data Warehouse | Apache Hive sur HDInsight | Hive LLAP sur HDInsight |
 | --- | --- | --- | --- | --- | --- | -- |
-| Serveurs régionaux redondants pour assurer une haute disponibilité  | Oui | OUI | Oui | Non  | Non  |
-| Prend en charge les requêtes avec montée en charge (requêtes distribuées)  | Non  | Non  | OUI | OUI | Oui |
-| Évolutivité dynamique | Oui | Non  | Oui <sup>1</sup> | Non  | Non  |
-| Prend en charge la mise en cache en mémoire des données | Oui |  Oui | Non  | OUI | Oui |
+| Serveurs régionaux redondants pour assurer une haute disponibilité  | OUI | OUI | OUI | Non  | Non  |
+| Prend en charge les requêtes avec montée en charge (requêtes distribuées)  | Non  | Non  | OUI | OUI | OUI |
+| Évolutivité dynamique | OUI | Non  | Oui <sup>1</sup> | Non  | Non  |
+| Prend en charge la mise en cache en mémoire des données | OUI |  OUI | Non  | OUI | OUI |
 
 [1] SQL Data Warehouse permet de monter ou de descendre en puissance en ajustant le nombre d’unités DWU (Data Warehouse Unit). Voir [Gérer la puissance de calcul dans Azure SQL Data Warehouse](/azure/sql-data-warehouse/sql-data-warehouse-manage-compute-overview).
 
@@ -170,13 +170,13 @@ Les tableaux suivants résument les principales différences de fonctionnalités
 
 |                         |           Azure SQL Database            |  SQL Server dans une machine virtuelle  | SQL Data Warehouse |   Apache Hive sur HDInsight    |    Hive LLAP sur HDInsight     |
 |-------------------------|-----------------------------------------|-----------------------------------|--------------------|-------------------------------|-------------------------------|
-|     Authentification      | SQL / Azure Active Directory (Azure AD) | SQL / Azure AD / Active Directory |   SQL / Azure AD   | local / Azure AD<sup>1</sup> | local / Azure AD <sup>1</sup> |
-|      Authorization      |                   Oui                   |                OUI                |        OUI         |              Oui              |       Oui <sup>1</sup>        |
-|        Audit         |                   Oui                   |                OUI                |        OUI         |              Oui              |       Oui <sup>1</sup>        |
+|     Authentication      | SQL / Azure Active Directory (Azure AD) | SQL / Azure AD / Active Directory |   SQL / Azure AD   | local / Azure AD<sup>1</sup> | local / Azure AD <sup>1</sup> |
+|      Authorization      |                   OUI                   |                OUI                |        OUI         |              OUI              |       Oui <sup>1</sup>        |
+|        Audit         |                   OUI                   |                OUI                |        OUI         |              OUI              |       Oui <sup>1</sup>        |
 | Chiffrement des données au repos |            Oui <sup>2</sup>             |         Oui<sup>2</sup>          |  Oui<sup>2</sup>  |       Oui <sup>2</sup>        |       Oui <sup>1</sup>        |
-|   Sécurité au niveau des lignes    |                   Oui                   |                OUI                |        Oui         |              Non                |       Oui <sup>1</sup>        |
-|   Prend en charge les pare-feu    |                   Oui                   |                OUI                |        OUI         |              Oui              |       Oui <sup>3</sup>        |
-|  Masquage des données dynamiques   |                   Oui                   |                OUI                |        Oui         |              Non                |       Oui <sup>1</sup>        |
+|   Sécurité au niveau des lignes    |                   OUI                   |                OUI                |        OUI         |              Non                |       Oui <sup>1</sup>        |
+|   Prend en charge les pare-feu    |                   OUI                   |                OUI                |        OUI         |              OUI              |       Oui <sup>3</sup>        |
+|  Masquage des données dynamiques   |                   OUI                   |                OUI                |        OUI         |              Non                |       Oui <sup>1</sup>        |
 
 <!-- markdownlint-enable MD033 -->
 

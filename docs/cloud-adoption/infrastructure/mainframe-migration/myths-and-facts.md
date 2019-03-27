@@ -4,11 +4,11 @@ description: Migrez des applications d’environnements mainframe vers Azure, in
 author: njray
 ms.date: 12/27/2018
 ms.openlocfilehash: bcad01ec044d2d802b055e328a9496aae7b33311
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900838"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58241540"
 ---
 # <a name="mainframe-myths-and-facts"></a>Mythes et réalités concernant les ordinateurs mainframe
 

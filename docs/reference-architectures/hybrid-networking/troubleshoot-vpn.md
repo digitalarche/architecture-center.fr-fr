@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: networking
-ms.openlocfilehash: 49dfcf444665ef526e76cac0f4ad13104a142840
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 2140c67f23f11c355b286b28653d243b4adf8c73
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54485925"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58243830"
 ---
 # <a name="troubleshoot-a-hybrid-vpn-connection"></a>Résoudre les problèmes d’une connexion VPN hybride
 
@@ -35,7 +35,7 @@ La propriété *Message* de chaque entrée fournit une description de l’erreur
 
   ```console
   EventID            : 20111
-  MachineName        : on-prem-vm
+  MachineName        : on-premises-vm
   Data               : {41, 3, 0, 0}
   Index              : 14231
   Category           : (0)
@@ -67,7 +67,7 @@ La propriété *Message* de chaque entrée fournit une description de l’erreur
 
   ```console
   EventID            : 20111
-  MachineName        : on-prem-vm
+  MachineName        : on-premises-vm
   Data               : {233, 53, 0, 0}
   Index              : 14245
   Category           : (0)
@@ -99,7 +99,7 @@ En cas d’échec de connexion, ce fichier journal contient des erreurs semblabl
 
 ```console
 EventID            : 20227
-MachineName        : on-prem-vm
+MachineName        : on-premises-vm
 Data               : {}
 Index              : 4203
 Category           : (0)

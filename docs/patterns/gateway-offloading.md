@@ -10,11 +10,11 @@ ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
 ms.openlocfilehash: 8be05c30ac974b3e58fb0decc52ab623fc5478c8
-ms.sourcegitcommit: eee3a35dd5a5a2f0dc117fa1c30f16d6db213ba2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/06/2019
-ms.locfileid: "55782028"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58248330"
 ---
 # <a name="gateway-offloading-pattern"></a>Modèle de déchargement de passerelle
 

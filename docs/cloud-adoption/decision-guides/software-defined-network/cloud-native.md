@@ -1,5 +1,5 @@
 ---
-title: 'Framework d’adoption du cloud : Réseau à définition logicielle – Natif dans le cloud'
+title: 'Framework d’adoption du cloud : Réseau à définition logicielle – Natif dans le cloud'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Présentation des services de réseau virtuel natifs dans le cloud
 author: rotycenh
 ms.openlocfilehash: c6200491bc9ba35a9f00e0003e51716b58628980
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900704"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58242150"
 ---
 # <a name="software-defined-networks-cloud-native"></a>Réseaux à définition logicielle : Cloud natif
 

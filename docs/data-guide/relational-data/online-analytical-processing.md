@@ -7,11 +7,11 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.openlocfilehash: 70c18e1a5294b09bb156d2af06af7a32d33858da
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54485472"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58246180"
 ---
 # <a name="online-analytical-processing-olap"></a>Traitement analytique en ligne (OLAP)
 
@@ -133,13 +133,13 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 | | Azure Analysis Services | SQL Server Analysis Services | SQL Server avec index Columnstore | SQL Database Azure avec des index Columnstore |
 | --- | --- | --- | --- | --- |
-| Est un service géré | Oui | Non  | Non  | Oui |
-| Prend en charge des cubes multidimensionnels | Non  | Oui | Non  | Non  |
-| Prend en charge les modèles sémantiques tabulaires | Oui | Oui | Non  | Non  |
-| Intègre facilement plusieurs sources de données | Oui | Oui | Nonn <sup>1</sup> | Nonn <sup>1</sup> |
-| Prend en charge l’analytique en temps réel | Non  | Non  | OUI | Oui |
-| Exige un processus pour copier des données à partir de sources | Oui | Oui | Non  | Non  |
-| Intégration Azure AD | Oui | Non  | Non<sup>2</sup> | Oui |
+| Est un service géré | OUI | Non  | Non  | OUI |
+| Prend en charge des cubes multidimensionnels | Non  | OUI | Non  | Non  |
+| Prend en charge les modèles sémantiques tabulaires | OUI | OUI | Non  | Non  |
+| Intègre facilement plusieurs sources de données | OUI | OUI | Nonn <sup>1</sup> | Nonn <sup>1</sup> |
+| Prend en charge l’analytique en temps réel | Non  | Non  | OUI | OUI |
+| Exige un processus pour copier des données à partir de sources | OUI | OUI | Non  | Non  |
+| Intégration Azure AD | OUI | Non  | Non<sup>2</sup> | OUI |
 
 <!-- markdownlint-enable MD033 -->
 
@@ -151,6 +151,6 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 |                                                  | Azure Analysis Services | SQL Server Analysis Services | SQL Server avec index Columnstore | SQL Database Azure avec des index Columnstore |
 |--------------------------------------------------|-------------------------|------------------------------|-------------------------------------|---------------------------------------------|
-| Serveurs régionaux redondants pour assurer une haute disponibilité |           Oui           |              Non               |                 OUI                 |                     Oui                     |
-|             Prend en charge l’augmentation de la taille des instances de la requête             |           Oui           |              Non               |                 Oui                 |                     Non                       |
-|          Évolutivité dynamique (montée en puissance)          |           Oui           |              Non               |                 Oui                 |                     Non                       |
+| Serveurs régionaux redondants pour assurer une haute disponibilité |           OUI           |              Non               |                 OUI                 |                     OUI                     |
+|             Prend en charge l’augmentation de la taille des instances de la requête             |           OUI           |              Non               |                 OUI                 |                     Non                       |
+|          Évolutivité dynamique (montée en puissance)          |           OUI           |              Non               |                 OUI                 |                     Non                       |

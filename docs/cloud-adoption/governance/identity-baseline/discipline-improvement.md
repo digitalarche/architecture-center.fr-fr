@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Amélioration de la discipline Base de référence des identités
 author: BrianBlanchard
 ms.openlocfilehash: c96a638af549782fec22b2068c9b4943df4b943a
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900751"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58243250"
 ---
 # <a name="identity-baseline-discipline-improvement"></a>Amélioration de la discipline Base de référence des identités
 
@@ -24,14 +24,14 @@ Cet article décrit certaines tâches potentielles que votre entreprise peut ent
 
 *Figure 1 : Phases d’adoption de l’approche incrémentielle de la gouvernance cloud.*
 
-Il est impossible pour tout un document de prendre en compte les exigences de toutes les organisations. En tant que tel, cet article présente des exemples d’activités minimales et potentielles suggérés pour chaque phase du processus de maturation de la gouvernance. L’objectif initial de ces activités est de vous aider à créer un [MVP de stratégie](../journeys/overview.md#an-incremental-approach-to-cloud-governance) et à établir une infrastructure pour une évolution de stratégie incrémentielle. Votre équipe de gouvernance cloud devra décider combien investir dans ces activités pour améliorer vos fonctionnalités de gouvernance de Base de référence des identités.
+Il est impossible pour un même document de prendre en compte les exigences de toutes les organisations. Par conséquent, cet article présente des exemples d’activités minimales et potentielles suggérés pour chaque phase du processus de maturation de la gouvernance. L’objectif initial de ces activités est de vous aider à créer un [produit minimum viable de stratégie](../journeys/overview.md#an-incremental-approach-to-cloud-governance) et à établir une infrastructure pour une évolution de stratégie incrémentielle. Votre équipe de gouvernance cloud devra décider combien investir dans ces activités pour améliorer vos fonctionnalités de gouvernance de base de référence des identités.
 
 > [!CAUTION]
-> Les activités minimales ou potentielles décrites dans cet article ne sont pas alignées sur des stratégies d’entreprise spécifiques ou des exigences de conformité de tiers. Ces conseils sont conçus pour faciliter les conversations qui conduiront à un alignement des deux exigences avec un modèle de gouvernance cloud.
+> Les activités minimales ou potentielles décrites dans cet article ne sont pas alignées sur des stratégies d’entreprise spécifiques ou des exigences de conformité de tiers. Ces conseils visent à favoriser les échanges qui conduiront à un alignement des deux exigences avec un modèle de gouvernance cloud.
 
 ## <a name="planning-and-readiness"></a>Planification et préparation
 
-Cette phase de maturité de la gouvernance comble le fossé entre les résultats opérationnels et les stratégies concrètes. Au cours de ce processus, l’équipe de direction définit des métriques spécifiques, les mappe au parc numérique, et commence à planifier l’effort global de migration.
+Cette phase de maturité de la gouvernance comble le fossé entre les résultats opérationnels et les stratégies concrètes. Au cours de ce processus, l’équipe de direction définit des métriques spécifiques, les mappe au patrimoine numérique, et commence à planifier l’effort global de migration.
 
 **Activités minimales suggérées :**
 
@@ -50,7 +50,7 @@ Cette phase de maturité de la gouvernance comble le fossé entre les résultats
 
 ## <a name="build-and-pre-deployment"></a>Génération et prédéploiement
 
-Un certain nombre de conditions techniques et non techniques sont requises pour migrer un environnement correctement. Ce processus se concentre sur les décisions, l’état de préparation et l’infrastructure de base qui permettent une migration.
+Il convient de répondre à un certain nombre de prérequis techniques et non techniques pour réussir la migration d’un environnement. Ce processus porte essentiellement sur les décisions, la préparation et l’infrastructure qui sert de base à la migration.
 
 **Activités minimales suggérées :**
 
@@ -82,13 +82,13 @@ Un certain nombre de conditions techniques et non techniques sont requises pour 
 
 ## <a name="adopt-and-migrate"></a>Adoption et migration
 
-Une migration est un processus incrémentiel qui se concentre sur le déplacement, le test et l’adoption d’applications ou de charges de travail à l’intérieur d’un parc numérique.
+La migration est un processus incrémentiel qui porte essentiellement sur le déplacement, le test et l’adoption d’applications ou de charges de travail dans un patrimoine numérique.
 
 **Activités minimales suggérées :**
 
 * Migrez votre [chaîne d’outils d’identité](toolchain.md) du développement vers la production.
 * Mettez à jour le document d’instructions relatives à l’architecture et distribuez-le aux principales parties prenantes.
-* Développez une documentation et des ressources pédagogiques, des communications de sensibilisation, des incitations et d’autres programmes afin d’encourager l’adoption par les utilisateurs.
+* Élaborer une documentation et des ressources pédagogiques, des messages de sensibilisation, des incitations et d’autres programmes afin de favoriser l’adoption par les utilisateurs.
 
 **Activités potentielles :**
 
@@ -104,7 +104,7 @@ Une migration est un processus incrémentiel qui se concentre sur le déplacemen
 
 ## <a name="operate-and-post-implementation"></a>Exploitation et post-implémentation
 
-Une fois la transformation terminée, la gouvernance et les opérations doivent rester actives pendant le cycle de vie naturel d’une application ou d’une charge de travail. Cette phase de maturité de la gouvernance se concentre sur les activités couramment conduites une fois que la solution est implémentée et que le cycle de transformation commence à se stabiliser.
+Une fois la transformation terminée, la gouvernance et les opérations doivent perdurer tout au long du cycle de vie naturel d’une application ou d’une charge de travail. Cette phase de maturité de la gouvernance est centrée sur les activités qui interviennent généralement après l’implémentation de la solution et le début de stabilisation du cycle de transformation.
 
 **Activités minimales suggérées :**
 
@@ -132,7 +132,7 @@ Une fois la transformation terminée, la gouvernance et les opérations doivent 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-À présent que vous avez compris le concept de gouvernance des identités cloud, examinez la [chaîne d’outils Base de référence des identités](toolchain.md) pour identifier les outils et fonctionnalités Azure dont vous aurez besoin lors du développement de la discipline de gouvernance Base de référence des identités sur la plateforme Azure.
+À présent que vous avez compris le concept de gouvernance des identités cloud, examinez la [chaîne d’outils de base de référence des identités](toolchain.md) pour identifier les outils et fonctionnalités Azure dont vous aurez besoin lors du développement de la discipline de gouvernance Base de référence des identités sur la plateforme Azure.
 
 > [!div class="nextstepaction"]
-> [Chaîne d’outils Base de référence des identités pour Azure](toolchain.md)
+> [Chaîne d’outils de base de référence des identités pour Azure](toolchain.md)

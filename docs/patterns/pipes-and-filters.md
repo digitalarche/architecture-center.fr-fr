@@ -10,11 +10,11 @@ ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
 ms.openlocfilehash: c7e9346ac3ee7143d33b7ebcabc942ad0e92cfbd
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54483511"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58248734"
 ---
 # <a name="pipes-and-filters-pattern"></a>Modèle de canaux et de filtres
 

@@ -4,11 +4,11 @@ description: Migrez des applications d’environnements mainframe vers Azure, in
 author: njray
 ms.date: 12/26/2018
 ms.openlocfilehash: 9243f757182f95cc227fd6cd7a5374f9c1371ccc
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55901174"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58243110"
 ---
 # <a name="make-the-switch-from-mainframes-to-azure"></a>Assurer la transition d’ordinateurs mainframe vers Azure
 
@@ -45,7 +45,7 @@ Azure offre des garanties de disponibilité supplémentaires en répliquant les 
 
 Si vous utilisez des ressources PaaS (« platform as a service ») Azure, comme [Azure SQL Database](/azure/sql-database/sql-database-technical-overview) et [Azure Cosmos Database](/azure/cosmos-db/introduction), Azure peut gérer automatiquement les basculements. Si vous utilisez Azure IaaS (infrastructure as a service), le basculement s’appuie sur des fonctionnalités système spécifiques, comme les fonctionnalités SQL Server AlwaysOn, des instances de clustering de basculement et des groupes de disponibilité.
 
-## <a name="scalability"></a>Scalabilité
+## <a name="scalability"></a>Extensibilité
 
 En règle générale, les ordinateurs mainframe procèdent à un scale-up, tandis que les environnements cloud procèdent à un scale-out. Le scale-out des ordinateurs mainframe est possible moyennant une fonctionnalité de couplage, mais les coûts élevés en matériel et stockage font du scale-out une opération très onéreuse sur un ordinateur mainframe.
 

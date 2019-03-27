@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Parcours de gouvernance pour les grandes entreprises
 author: BrianBlanchard
 ms.openlocfilehash: 689b600524c3be6c505ade8c5aaa447d772c6e35
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900763"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58245240"
 ---
 # <a name="caf-large-enterprise-governance-journey"></a>Framework d’adoption du cloud : Parcours de gouvernance pour les grandes entreprises
 
@@ -50,7 +50,7 @@ Ces modèles laissent de l’espace pour la croissance sans compliquer la hiéra
 
 ## <a name="governance-evolutions"></a>Évolutions de la gouvernance
 
-Une fois que ce MVP a été déployé, des couches supplémentaires de gouvernance peuvent être rapidement intégrées à l’environnement. Voici quelques méthodes permettant de faire évoluer le MVP afin de répondre aux besoins spécifiques de l’entreprise :
+Une fois que ce MVP a été déployé, des couches supplémentaires de gouvernance peuvent être rapidement intégrées à l’environnement. Voici quelques méthodes permettant de faire évoluer le MVP afin de répondre aux besoins spécifiques de l’entreprise :
 
 - [Base de référence de sécurité pour les données protégées](./security-baseline-evolution.md)
 - [Configurations des ressources pour les applications critiques](./resource-consistency-evolution.md)
@@ -59,7 +59,7 @@ Une fois que ce MVP a été déployé, des couches supplémentaires de gouvernan
 
 <!-- markdownlint-disable MD026 -->
 
-## <a name="what-does-this-best-practice-do"></a>Concrètement, que font les meilleures pratiques ?
+## <a name="what-does-this-best-practice-do"></a>Concrètement, que font les meilleures pratiques ?
 
 Dans le MVP, les pratiques et les outils venant de la discipline [Accélération du déploiement](../../deployment-acceleration/overview.md) ont été conçus pour appliquer rapidement la stratégie d’entreprise. Plus précisément, le MVP utilise Azure Blueprints, Azure Policy et les groupes d’administration Azure pour appliquer quelques stratégies d’entreprise basiques, comme le définit le scénario pour cette entreprise fictive. Ces stratégies d’entreprise sont appliquées à l’aide de modèles Azure Resource Manager et de stratégies Azure afin d’établir une petite base de référence pour l’identité et la sécurité.
 

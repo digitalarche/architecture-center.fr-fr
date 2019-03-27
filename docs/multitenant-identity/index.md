@@ -1,18 +1,13 @@
 ---
 title: Gestion des identités pour les applications multilocataires
-description: Meilleures pratiques pour la gestion de l’authentification, de l’autorisation et de l’identité dans les applications multi-locataires.
+description: 'Meilleures pratiques pour la gestion de l’authentification, de l’autorisation et de l’identité dans les applications multi-locataires.'
 author: MikeWasson
 ms.date: 07/21/2017
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
-ms.openlocfilehash: f8875612ad6b1a71fdb6f7a768078ae599eb70b5
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54480545"
 ---
+
 # <a name="manage-identity-in-multitenant-applications"></a>Gérer l’identité dans les applications mutualisées
 
 Cette série d’articles décrit les meilleures pratiques pour les applications multi-locataires, lors de l’utilisation d’Azure AD pour l’authentification et la gestion des identités.
@@ -74,7 +69,7 @@ Toute requête peut être acheminée vers n’importe quelle instance. Globaleme
 
 Dans une application multi-locataire, vous devez considérer les utilisateurs dans le contexte des locataires.
 
-### <a name="authentication"></a>Authentification
+### <a name="authentication"></a>Authentication
 
 - Les utilisateurs se connectent à l’application avec les informations d’identification de leur organisation. Ils n’ont pas à créer de nouveaux profils utilisateur pour l’application.
 - Les utilisateurs appartenant à la même organisation font partie du même locataire.
@@ -90,9 +85,7 @@ Dans une application multi-locataire, vous devez considérer les utilisateurs da
 Dans ce guide, nous examinerons plus particulièrement l’utilisation d’Azure AD pour la gestion des identités.
 
 - Nous supposons que le client stocke ses profils utilisateur dans Azure AD (notamment les locataires Office 365 et Dynamics CRM).
-- Les clients disposant d’Active Directory (AD) local peuvent utiliser [Azure AD Connect](/azure/active-directory/hybrid/whatis-hybrid-identity) pour synchroniser leur Active Directory local avec Azure AD.
-
-Si un client disposant d’AD local ne peut pas utiliser Azure AD Connect (en raison d’une stratégie informatique d’entreprise ou pour d’autres raisons), le fournisseur SaaS peut fédérer avec l’AD du client via les services ADFS (Active Directory Federation Services). Cette option est décrite dans [Fédération avec les services ADFS d’un client](adfs.md).
+- Les clients disposant d’Active Directory local peuvent utiliser [Azure AD Connect](/azure/active-directory/hybrid/whatis-hybrid-identity) pour synchroniser leur Active Directory local avec Azure AD. Si un client disposant d’Active Directory local ne peut pas utiliser Azure AD Connect (en raison d’une stratégie informatique d’entreprise ou pour d’autres raisons), le fournisseur SaaS peut fédérer avec l’annuaire du client par le biais des services AD FS (Active Directory Federation Services). Cette option est décrite dans [Fédération avec les services ADFS d’un client](adfs.md).
 
 Ce guide ne prend pas en considération les autres aspects d’une architecture mutualisée, comme le partitionnement des données, la configuration par locataire, etc.
 

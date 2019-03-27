@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Risques métier et motivations associés à Gestion des coûts
 author: BrianBlanchard
 ms.openlocfilehash: b9bf31a796ea1a7530c6a668a231d74b9b765509
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900929"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58247470"
 ---
 # <a name="cost-management-motivations-and-business-risks"></a>Risques métier et motivations associés à Gestion des coûts
 

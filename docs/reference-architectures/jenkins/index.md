@@ -8,13 +8,8 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
-ms.openlocfilehash: 2717b3b11f0315b698d43d067b30472481ffa527
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54483426"
 ---
+
 # <a name="run-a-jenkins-server-on-azure"></a>Exécuter un serveur Jenkins sur Azure
 
 Cette architecture de référence montre comment déployer et utiliser un serveur Jenkins professionnel et évolutif sur Azure sécurisé avec l’authentification unique (SSO). L’architecture utilise également Azure Monitor pour surveiller l’état du serveur Jenkins. [**Déployez cette solution**](#deploy-the-solution).
@@ -41,7 +36,7 @@ L’architecture est constituée des composants suivants :
 
 - **Réseau virtuel**. Un [réseau virtuel][vnet] connecte des ressources Azure entre elles et fournit une isolation logique. Dans cette architecture, le serveur Jenkins s’exécute dans un réseau virtuel.
 
-- **Sous-réseaux**. Le serveur Jenkins est isolé dans un [sous-réseau][subnet] pour le rendre plus facile à gérer et répartir le trafic réseau sans impact sur les performances.
+- **Sous-réseaux**. Le serveur Jenkins est isolé dans un [sous-réseau][subnet] pour faciliter la gestion et la répartition du trafic réseau sans nuire aux performances.
 
 - **NSG**. Utilisez des [groupes de sécurité réseau][nsg] (NSG) pour limiter le trafic réseau à partir d’Internet vers le sous-réseau d’un réseau virtuel.
 
@@ -65,7 +60,7 @@ Le locataire [Azure AD][azure-ad] pour votre abonnement Azure est utilisé pour 
 
 L’autorisation et l’authentification unique sont implémentées par le plug-in Azure AD installé sur le serveur Jenkins. L’authentification unique vous permet de vous authentifier à l’aide des informations d’identification Azure AD de votre organisation lors de la connexion au serveur Jenkins. Lorsque vous configurez le plug-in Azure AD, vous pouvez spécifier le niveau d’accès autorisé d’un utilisateur au serveur Jenkins.
 
-Pour fournir des travaux Jenkins avec accès aux ressources Azure, un administrateur Azure AD crée des principaux de service. Ces derniers accordent aux applications, dans ce cas, les travaux Jenkins : [un accès autorisé et authentifié][ad-sp] aux ressources Azure.
+Pour fournir des travaux Jenkins avec accès aux ressources Azure, un administrateur Azure AD crée des principaux de service. Ces derniers accordent aux applications (dans le cas présent, les travaux Jenkins) un [accès autorisé et authentifié][ad-sp] aux ressources Azure.
 
 Le [contrôle d’accès en fonction du rôle (RBAC)][rbac] définit et contrôle davantage l’accès aux ressources Azure pour les utilisateurs ou les principaux de service via leur rôle assigné. Les rôles intégrés et personnalisés sont pris en charge. Les rôles peuvent également aider à sécuriser le pipeline et garantissent que les responsabilités de l’agent ou de l’utilisateur sont affectées et autorisées correctement. En outre, la fonctionnalité RBAC peut être configurée pour limiter l’accès aux ressources Azure. Par exemple, un utilisateur peut être limité à l’utilisation des composants dans un groupe de ressources particulier.
 
@@ -123,7 +118,7 @@ Dans le contexte d’un serveur Jenkins, la disponibilité signifie être en mes
 
 - L’objectif de point de récupération (RPO) indique la quantité de données que vous pouvez vous permettre de perdre si une interruption de service affecte Jenkins.
 
-Dans la pratique, le RTO et le RPO impliquent la redondance et la sauvegarde. La disponibilité n’est pas une question de récupération du matériel, qui fait partie d’Azure, mais plutôt de maintien à jour de l’état de votre serveur Jenkins. Microsoft propose un [contrat de niveau de service][sla] (SLA) pour les instances de machine virtuelle uniques. Si ce contrat de niveau de service (SLA) ne répond pas à vos exigences de durée de fonctionnement, assurez vous de disposer d’un plan de récupération d’urgence, ou envisagez l’utilisation d’un déploiement de [serveur Jenkins multimaître][multi-master] (non traitée dans ce document).
+Dans la pratique, le RTO et le RPO impliquent la redondance et la sauvegarde. La disponibilité n’est pas une question de récupération du matériel, qui fait partie d’Azure, mais plutôt de garantie du maintien à jour de l’état de votre serveur Jenkins. Microsoft propose un [contrat de niveau de service][sla] (SLA) pour les instances de machine virtuelle uniques. Si ce contrat de niveau de service (SLA) ne répond pas à vos exigences de durée de fonctionnement, assurez vous de disposer d’un plan de récupération d’urgence, ou envisagez l’utilisation d’un déploiement de [serveur Jenkins multimaître][multi-master] (non traitée dans ce document).
 
 Envisagez l’utilisation des [scripts][disaster] de récupération d’urgence à l’étape 7 du déploiement pour créer un compte de stockage Azure avec des disques managés pour stocker l’état du serveur Jenkins. Si Jenkins tombe en panne, il peut être restauré à l’état stocké dans ce compte de stockage distinct.
 

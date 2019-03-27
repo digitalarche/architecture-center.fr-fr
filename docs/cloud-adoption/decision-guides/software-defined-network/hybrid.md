@@ -8,11 +8,11 @@ ms.date: 02/11/2019
 description: Discussion sur la manière dont des réseaux hybrides permettent à vos réseaux virtuels dans le cloud de se connecter à des ressources locales
 author: rotycenh
 ms.openlocfilehash: 02d181db0ae9baef3b453b8623d212b624f6b16a
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900733"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58243360"
 ---
 # <a name="software-defined-networks-hybrid-network"></a>Réseaux à définition logicielle : Réseau hybride
 

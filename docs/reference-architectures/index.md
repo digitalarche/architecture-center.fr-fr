@@ -1,15 +1,9 @@
 ---
-title: Architectures de référence Azure
+title: "Architectures de référence\_Azure"
 description: Architectures de référence et conseils d’implémentation pour les charges de travail courantes dans Azure.
 layout: LandingPage
 ms.topic: landing-page
-ms.date: 02/07/2019
-ms.openlocfilehash: 44111f5f10997c7aba38414b518245c5791d1cd0
-ms.sourcegitcommit: a68f248402c598f9d25bc1dc62f27a6a934ff001
-ms.translationtype: HT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55903229"
+ms.date: 03/07/2019
 ---
 <!-- This file is generated! -->
 <!-- See the templates in ./build/reference-architectures  -->
@@ -40,6 +34,26 @@ Passer à : [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                     <div class="cardText">
                         <h3>Entraînement distribué des modèles d’apprentissage profond</h3>
                         <p>Effectuez un entraînement distribué des modèles d’apprentissage profond sur les clusters des machines virtuelles avec processeur.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+<!-- Training of Python scikit-learn models -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./ai/training-python-models.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/python-powered-h.svg" height="140px" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Entraînement des modèles scikit-learn Python</h3>
+                        <p>Pratiques recommandées pour le réglage des hyperparamètres d’un modèle Python scikit-learn.</p>
                     </div>
                 </div>
             </div>
@@ -79,7 +93,7 @@ Passer à : [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                     </div>
                     <div class="cardText">
                         <h3>Scoring par lots des modèles Python</h3>
-                        <p>Effectuez un scoring par lots de nombreux modèles Python en parallèle selon une planification à l’aide d’Azure Batch AI.</p>
+                        <p>Procédez au scoring par lots de nombreux modèles Python en parallèle selon une planification à l’aide d’Azure Machine Learning.</p>
                     </div>
                 </div>
             </div>
@@ -314,7 +328,27 @@ Passer à : [IA](#ai-and-machine-learning) | [Big data](#big-data-solutions) | 
                     </div>
                     <div class="cardText">
                         <h3>Microservices sur Azure Kubernetes Service (AKS)</h3>
-                        <p>Architecture recommandée pour déployer une architecture de microservices sur AKS.</p>
+                        <p>Architecture recommandée pour déployer des microservices sur AKS.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+<!-- Microservices architecture on Azure Service Fabric -->
+<li style="display: flex; flex-direction: column;">
+    <a href="./microservices/service-fabric.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="../_images/icons/sf.svg" height="140px" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Architecture des microservices sur Azure Service Fabric</h3>
+                        <p>Architecture recommandée pour les microservices sur Service Fabric.</p>
                     </div>
                 </div>
             </div>

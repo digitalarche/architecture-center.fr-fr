@@ -9,11 +9,11 @@ ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
 ms.openlocfilehash: 95f634284fe821386704174894a85a4dbca815f7
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54485075"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58248664"
 ---
 # <a name="run-a-basic-web-application-in-azure"></a>Exécuter une application web de base dans Azure
 
@@ -194,7 +194,7 @@ Une application App Service comprend un point de terminaison SSL sur un sous-dom
 
 Comme meilleure pratique de sécurité, votre application doit appliquer le protocole HTTPS en redirigeant les requêtes HTTP. Vous pouvez implémenter cela à l’intérieur de votre application ou utiliser une règle de réécriture d’URL, comme décrit dans [Activer le protocole HTTPS pour une application dans Azure App Service][ssl-redirect].
 
-### <a name="authentication"></a>Authentification
+### <a name="authentication"></a>Authentication
 
 Nous vous recommandons l’authentification via un fournisseur d’identité (IDP), tels que Azure AD, Facebook, Google, ou Twitter. Utilisez OAuth 2 ou OpenID Connect (OIDC) pour le flux d’authentification. Azure AD fournit des fonctionnalités permettant de gérer les utilisateurs et les groupes, créer des rôles d’application, intégrer vos identités locales et consommer des services principaux tels que Office 365 et Skype pour entreprises.
 

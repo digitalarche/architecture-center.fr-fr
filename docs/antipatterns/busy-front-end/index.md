@@ -8,13 +8,8 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 61470b630f735c1d49ad9b4bfbec853b308630cf
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54481522"
 ---
+
 # <a name="busy-front-end-antipattern"></a>Antimodèle Serveur frontal occupé
 
 L’exécution d’un travail asynchrone sur un grand nombre de threads d’arrière-plan peut priver les tâches de premier plan simultanées de ressources, donnant lieu à des temps de réponse inacceptables.
@@ -146,7 +141,7 @@ Les sections suivantes appliquent ces étapes à l’exemple d’application dé
 
 ### <a name="identify-points-of-slowdown"></a>Identifier les points de ralentissement
 
-Instrumentez chaque méthode pour suivre la durée des différentes requêtes et les ressources consommées par celles-ci. Ensuite, analysez l’application en production. Vous bénéficierez ainsi d’une vue d’ensemble de la manière dont les requêtes s’opposent. Pendant les périodes de forte activité, les requêtes gourmandes en ressources et dont l’exécution est lente sont susceptibles d’avoir un impact négatif sur les autres opérations, un comportement qu’il est possible de constater en analysant le système et en observant la baisse des performances.
+Instrumentez chaque méthode pour suivre la durée des différentes requêtes et les ressources consommées par celles-ci. Ensuite, analysez l’application en production. Vous bénéficierez ainsi d’une vue d’ensemble de la manière dont les requêtes s’opposent. Pendant les périodes de forte activité, les requêtes gourmandes en ressources et dont l’exécution est lente sont susceptibles d’affecter d’autres opérations. Il est possible de constater ce comportement en supervisant le système et en constatant la baisse des performances.
 
 L’image suivante illustre un tableau de bord d’analyse (nous avons utilisé [AppDynamics] pour nos tests). Au départ, le système présente une charge faible. Ensuite, les utilisateurs commencent à envoyer des requêtes pour la méthode GET au contrôleur `UserProfile`. Les performances sont relativement bonnes jusqu'à ce que d’autres utilisateurs commencent à émettre des requêtes pour la méthode POST à destination du contrôleur `WorkInFrontEnd`. À ce moment-là, les temps de réponse augmentent considérablement (première flèche). Les temps de réponse s’améliorent uniquement après la diminution du volume de requêtes envoyées au contrôleur `WorkInFrontEnd` (seconde flèche).
 
