@@ -8,11 +8,11 @@ ms.topic: landing-page
 ms.service: architecture-center
 ms.subservice: example-scenario
 ms.openlocfilehash: d8ab5103a42480b7bcd428a40afe05d15c00526a
-ms.sourcegitcommit: a05494afd63a5e74dee1ef85611341e4ec964126
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/12/2019
-ms.locfileid: "56157063"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58245770"
 ---
 # <a name="azure-example-scenarios"></a>Exemples de scénarios Azure
 
