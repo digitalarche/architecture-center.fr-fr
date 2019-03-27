@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, networking
-ms.openlocfilehash: a0973fad14bd9b4e81ec9940c83b8ebb31e9599b
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
+ms.openlocfilehash: 18a8620d835488be7a3639e8fbde86f9f10f946c
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486784"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58244990"
 ---
 # <a name="deploy-highly-available-network-virtual-appliances"></a>Déployer des appliances virtuelles réseau hautement disponibles
 
@@ -54,7 +54,7 @@ La figure suivante montre une architecture à haute disponibilité qui implémen
 L’avantage de cette architecture réside dans le fait que toutes les appliances virtuelles réseau sont actives et qu’en cas d’échec de l’une d’entre elles l’équilibreur de charge dirige le trafic réseau vers l’autre appliance virtuelle. Les deux appliances virtuelles réseau acheminent le trafic vers l’équilibreur de charge interne. Ainsi, le trafic est maintenu tant que l’une d’entre elles est active. Les appliances virtuelles réseau doivent arrêter le trafic SSL destiné aux machines virtuelles de la couche web. Ces appliances virtuelles réseau ne peuvent pas être étendues pour gérer le trafic local, car celui-ci nécessite un autre ensemble dédié d’appliances virtuelles réseau possédant leurs propres itinéraires réseau.
 
 > [!NOTE]
-> Cette architecture est utilisée dans l’architecture de référence de la [zone DMZ située entre Azure et votre centre de données local][dmz-on-prem] et celle de la [zone DMZ située entre Azure et Internet][dmz-internet]. Chacune de ces architectures de référence inclue une solution de déploiement utilisable. Suivez les liens ci-après pour plus d’informations.
+> Cette architecture est utilisée dans l’architecture de référence de la [zone DMZ située entre Azure et votre centre de données local][dmz-on-premises] et celle de la [zone DMZ située entre Azure et Internet][dmz-internet]. Chacune de ces architectures de référence inclue une solution de déploiement utilisable. Suivez les liens ci-après pour plus d’informations.
 
 ## <a name="egress-with-layer-7-nvas"></a>Sortie avec appliances virtuelles réseau de couche 7
 
@@ -65,7 +65,7 @@ L’architecture précédente peut être développée de manière à fournir une
 Dans cette architecture, tout le trafic provenant d’Azure est acheminé vers un équilibreur de charge interne. Ce dernier répartit les requêtes sortantes entre un ensemble d’appliances virtuelles réseau. Celles-ci dirigent le trafic vers Internet à l’aide de leurs adresses IP publiques individuelles.
 
 > [!NOTE]
-> Cette architecture est utilisée dans l’architecture de référence de la [zone DMZ située entre Azure et votre centre de données local][dmz-on-prem] et celle de la [zone DMZ située entre Azure et Internet][dmz-internet]. Chacune de ces architectures de référence inclue une solution de déploiement utilisable. Suivez les liens ci-après pour plus d’informations.
+> Cette architecture est utilisée dans l’architecture de référence de la [zone DMZ située entre Azure et votre centre de données local][dmz-on-premises] et celle de la [zone DMZ située entre Azure et Internet][dmz-internet]. Chacune de ces architectures de référence inclue une solution de déploiement utilisable. Suivez les liens ci-après pour plus d’informations.
 
 ## <a name="ingress-egress-with-layer-7-nvas"></a>Entrée-sortie avec appliances virtuelles réseau de couche 7
 
@@ -118,14 +118,14 @@ Vous choisissez le type de sonde que vous souhaitez utiliser au moment de config
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Découvrez comment [implémenter une zone DMZ située entre Azure et votre centre de données local] [ dmz-on-prem] à l’aide des appliances virtuelles réseau de couche 7.
+- Découvrez comment [implémenter une zone DMZ située entre Azure et votre centre de données local] [ dmz-on-premises] à l’aide des appliances virtuelles réseau de couche 7.
 - Découvrez comment [implémenter une zone DMZ située entre Azure et Internet][dmz-internet] à l’aide des appliances virtuelles réseau de couche 7.
 - [Problèmes d’appliance virtuelle réseau dans Azure](/azure/virtual-network/virtual-network-troubleshoot-nva)
 
 <!-- links -->
 
 [cloud-security]: /azure/best-practices-network-security
-[dmz-on-prem]: ./secure-vnet-hybrid.md
+[dmz-on-premises]: ./secure-vnet-hybrid.md
 [dmz-internet]: ./secure-vnet-dmz.md
 [egress-with-layer-7]: #egress-with-layer-7-nvas
 [ingress-with-layer-7]: #ingress-with-layer-7-nvas
