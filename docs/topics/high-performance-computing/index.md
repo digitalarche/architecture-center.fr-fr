@@ -165,8 +165,8 @@ La génération d’un système HPC à partir de zéro sur Azure offre une grand
 
 1. Configurez votre environnement de cluster dans des machines virtuelles Azure ou dans des [groupes de machines virtuelles identiques](/azure/virtual-machine-scale-sets/overview?context=/azure/architecture/topics/high-performance-computing/context/hpc-context).
 2. Utilisez les modèles Azure Resource Manager pour déployer des [gestionnaires de charge de travail](#workload-managers) principaux, des infrastructures et des [applications](#hpc-applications).
-3. Choisissez les [tailles de HPC et de GPU de la machine virtuelle](#hpc-and-gpu-sizes), comprenant des matériels et connexions réseau spécialisés pour les charges de travail MPI et GPU.
-4. Ajoutez du [stockage de haute performance](#hpc-storage) aux charges de travail intensives d’E/S.
+3. Choisissez des [tailles de machine virtuelle](#compute) HPC et GPU qui comprennent du matériel spécialisé et des connexions réseau pour les charges de travail MPI ou GPU.
+4. Ajoutez du [stockage de haute performance](#storage) aux charges de travail intensives d’E/S.
 
 ### <a name="hybrid-and-cloud-bursting"></a>Éclatement hybride et cloud bursting
 
@@ -231,7 +231,7 @@ Tout d’abord, consultez l’article [Options pour la connexion d’un réseau 
     </li>
 </ul>
 
-Une fois la connectivité réseau établie de manière sécurisée, vous pouvez commencer à utiliser des ressources de calcul cloud à la demande avec les fonctionnalités d’éclatement de votre [gestionnaire de charges de travail](#workload-manager) existant.
+Une fois la connectivité réseau établie de manière sécurisée, vous pouvez commencer à utiliser des ressources de calcul cloud à la demande avec les fonctionnalités d’éclatement de votre [gestionnaire de charges de travail](#workload-managers) existant.
 
 ### <a name="marketplace-solutions"></a>Solutions de la Place de marché
 
