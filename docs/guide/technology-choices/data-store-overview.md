@@ -8,12 +8,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: 91a551025ae697d5828fc1e398b204d2901d17f6
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: c76b28fc53f36024867838e8ac36f256b242bf4a
+ms.sourcegitcommit: 548374a0133f3caed3934fda6a380c76e6eaecea
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58242020"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58419952"
 ---
 # <a name="choose-the-right-data-store"></a>Choisir le magasin de données correct
 
@@ -35,11 +35,13 @@ Un SGBDR prend normalement en charge un modèle de schéma à l’écriture, où
 
 Un SGBDR est très utile lorsque de fortes garanties de cohérence sont importantes &mdash; où toutes les modifications sont atomiques et les transactions laissent toujours les données dans un état cohérent. Toutefois, les structures sous-jacentes ne se prêtent pas à la mise à l’échelle par la distribution du stockage et du traitement sur plusieurs ordinateurs. En outre, les informations stockées dans un système SGBDR, doivent être placées dans une structure relationnelle en suivant le processus de normalisation. Bien que ce processus soit bien compris, il peut entraîner un manque d’efficacité, à cause du besoin de désassembler les entités logiques dans des lignes au sein de tables distinctes, puis en remontant les données lors de l’exécution des requêtes.
 
-Service Azure approprié :
+Services Azure appropriés :
 
 - [Azure SQL Database][sql-db]
 - [Azure Database pour MySQL][mysql]
 - [Azure Database pour PostgreSQL][postgres]
+- [Azure Database pour MariaDB][mariadb]
+
 
 ## <a name="keyvalue-stores"></a>Magasins de clés/valeurs
 
@@ -112,6 +114,7 @@ Services Azure appropriés :
 
 - [SQL Data Warehouse][sql-dw]
 - [Azure Data Lake][data-lake]
+- [Explorateur de données Azure](https://azure.microsoft.com/services/data-explorer/)
 
 ## <a name="search-engine-databases"></a>Bases de données de moteur de recherche  
 
@@ -152,6 +155,7 @@ Service Azure approprié : [Stockage Fichier][file-storage]
 [hbase]: /azure/hdinsight/hdinsight-hbase-overview
 [mysql]: https://azure.microsoft.com/services/mysql/
 [postgres]: https://azure.microsoft.com/services/postgresql/
+[mariadb]: https://azure.microsoft.com/services/mariadb/
 [redis-cache]: https://azure.microsoft.com/services/cache/
 [search]: https://azure.microsoft.com/services/search/
 [sql-db]: https://azure.microsoft.com/services/sql-database

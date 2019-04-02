@@ -11,12 +11,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, identity
-ms.openlocfilehash: bf62544028741d500e9c4172d4ac0206c95cb919
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 5fe966f657782b41ec1926d0fd4bb83eb7a3c0fb
+ms.sourcegitcommit: 548374a0133f3caed3934fda6a380c76e6eaecea
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58241350"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58420037"
 ---
 # <a name="create-an-active-directory-domain-services-ad-ds-resource-forest-in-azure"></a>Créer une forêt de ressources Active Directory Domain Services (AD DS) dans Azure
 
@@ -44,10 +44,7 @@ L’architecture possède les composants suivants :
 
 ## <a name="recommendations"></a>Recommandations
 
-Pour obtenir des recommandations spécifiques sur l’implémentation d’Active Directory dans Azure, consultez les articles suivants :
-
-- [Extension d’Active Directory Domain Services (AD DS) à Azure][adds-extend-domain].
-- [Recommandations pour déployer Windows Server Active Directory sur des machines virtuelles Azure][ad-azure-guidelines].
+Pour obtenir des recommandations spécifiques sur l’implémentation d’Active Directory dans Azure, consultez [extension Active Directory Services de domaine (AD DS) pour Azure][adds-extend-domain].
 
 ### <a name="trust"></a>Trust
 
@@ -94,7 +91,7 @@ Pour connaître les considérations relatives à la sécurité propres à Active
 
 Un déploiement pour cette architecture est disponible sur [GitHub][github]. Remarque : le déploiement entier peut prendre jusqu’à deux heures, en incluant la création de la passerelle VPN et l’exécution des scripts qui configurent AD DS.
 
-### <a name="prerequisites"></a>Prérequis
+### <a name="prerequisites"></a>Conditions préalables
 
 1. Clonez, dupliquez ou téléchargez le fichier zip pour le [dépôt GitHub](https://github.com/mspnp/identity-reference-architectures).
 

@@ -6,12 +6,12 @@ ms.subservice: enterprise-cloud-adoption
 ms.date: 02/11/2019
 description: Fonctionnement de la gouvernance des ressources cloud sur Azure
 author: petertaylor9999
-ms.openlocfilehash: 5d022e83a1c97a5e5af8208ec00339575bb88be1
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 602ac81f2b2201c77746df971d282582ceee23f7
+ms.sourcegitcommit: 9854bd27fb5cf92041bbfb743d43045cd3552a69
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58242120"
+ms.lasthandoff: 03/27/2019
+ms.locfileid: "58503194"
 ---
 <!-- markdownlint-disable MD026 -->
 
@@ -35,11 +35,11 @@ Le RBAC définit des rôles, qui eux-mêmes définissent les fonctionnalités do
 
 Les stratégies de ressources définissent des règles pour la création de ressources. Par exemple, une stratégie de ressources peut limiter la référence SKU d’une machine virtuelle à une taille donnée pré-approuvée. Une stratégie de ressources peut également appliquer l’ajout d’une étiquette auprès d’un centre de coûts au moment de la demande de création de la ressource.
 
-Lors de la configuration de ces outils, il est important de veiller à garantir le meilleur compromis entre gouvernance et agilité organisationnelle. Autrement dit, plus votre stratégie de gouvernance sera restrictive, moins vos développeurs et vos ingénieurs informatiques seront agiles. Une stratégie de gouvernance restrictive peut en effet impliquer davantage d’étapes manuelles, par exemple exiger d’un développeur de remplir un formulaire ou d’envoyer un e-mail à une personne de l’équipe de gouvernance pour créer manuellement une ressource. L’équipe de gouvernance a des capacités limitées et peut être retardée. Résultat : en attendant que leurs ressources soient créées, les équipes de développement ne sont plus productives et les ressources inutiles entraînent une augmentation des coûts tant qu’elles n’ont pas été supprimées.
+Lors de la configuration de ces outils, il est important de veiller à garantir le meilleur compromis entre gouvernance et agilité organisationnelle. Autrement dit, plus votre stratégie de gouvernance sera restrictive, moins vos développeurs et vos ingénieurs informatiques seront agiles. Il s’agit, car une stratégie de gouvernance restrictif peut nécessiter plus d’étapes manuelles, telles que le développeur d’avoir à remplir un formulaire ou envoyez un e-mail à une personne de l’équipe de gouvernance pour créer manuellement une ressource. L’équipe de gouvernance possède des fonctionnalités limitées et peut être retardé, ce qui entraîne des équipes de développement non productives en attente de leurs ressources comptabiliser les coûts en attente de suppression de ressources créé et inutiles.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Maintenant que vous comprenez le concept de gouvernance des ressources cloud, poursuivez votre apprentissage avec la gestion de l’accès aux ressources dans Azure.
+Maintenant que vous comprenez le concept de gouvernance des ressources de cloud, en savoir plus sur la gestion des accès aux ressources dans Azure.
 
 > [!div class="nextstepaction"]
 > [En savoir plus sur l’accès aux ressources dans Azure](azure-resource-access.md)

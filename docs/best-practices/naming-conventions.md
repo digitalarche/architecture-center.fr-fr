@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 9f14b47a9659ad0b7451d106168f4d7b5a6ab0c7
-ms.sourcegitcommit: eee3a35dd5a5a2f0dc117fa1c30f16d6db213ba2
-ms.translationtype: HT
+ms.openlocfilehash: 87869d1b38d2b4a71cd5b604436e04deab993131
+ms.sourcegitcommit: 548374a0133f3caed3934fda6a380c76e6eaecea
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/06/2019
-ms.locfileid: "55782079"
+ms.lasthandoff: 03/25/2019
+ms.locfileid: "58420020"
 ---
 # <a name="naming-conventions-for-azure-resources"></a>Conventions d’affectation de noms pour les ressources Azure
 
@@ -84,6 +84,7 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 |Groupe de ressources |Abonnement |1-90 |Insensible à la casse |Alphanumériques, trait de soulignement, parenthèses, trait d’union, point (sauf à la fin) et caractères Unicode correspondant à l’expression régulière documentée [ici](/rest/api/resources/resourcegroups/createorupdate). |`<service short name>-<environment>-rg` |`profx-prod-rg` |
 |Groupe à haute disponibilité |Groupe de ressources |1-80 |Insensible à la casse |Alphanumériques, trait de soulignement et trait d’union |`<service-short-name>-<context>-as` |`profx-sql-as` |
 |Tag |Entité associée |512 (nom), 256 (valeur) |Insensible à la casse |Alphanumériques, caractères spéciaux, excepté `<`, `>`, `%`, `&`, `\`, `?`, `/`. Consultez les limitations [ici](/azure/azure-resource-manager/resource-group-using-tags). |`"key" : "value"` |`"department" : "Central IT"` |
+|Application web |Globale |1-60 |Insensible à la casse |Alphanumériques et trait d’union |`<app_name>-<source-slot-name>` |`contoso-staging` |
 
 ### <a name="compute"></a>Calcul
 
@@ -128,6 +129,12 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 | Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
 | --- | --- | --- | --- | --- | --- | --- |
 |Container Registry | Globale |5 à 50 |Insensible à la casse | Alphanumérique |`<service short name>registry` |`app1registry` |
+
+### <a name="service-bus"></a>Service Bus
+
+| Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
+| --- | --- | --- | --- | --- | --- | --- |
+|Espace de noms Service Bus | Globale |6-50 |Insensible à la casse | Alphanumériques, trait d’union, doit commencer par plus tard ; consultez [ici](/rest/api/servicebus/create-namespace) pour plus d’informations. |`<service short name>-bus` |`app1-bus` |
 
 ## <a name="organize-resources-with-tags"></a>Organiser les ressources à l’aide de balises
 
