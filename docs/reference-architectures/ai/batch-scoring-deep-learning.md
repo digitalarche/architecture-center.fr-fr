@@ -8,14 +8,14 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 85d04f179b988fd5b00b361149f2170d13608e6d
-ms.sourcegitcommit: 700a4f6ce61b1ebe68e227fc57443e49282e35aa
-ms.translationtype: HT
+ms.openlocfilehash: a1c0701185c85f8e7bcbc183b32c4834529fc524
+ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/07/2019
-ms.locfileid: "55887384"
+ms.lasthandoff: 04/03/2019
+ms.locfileid: "58887860"
 ---
-# <a name="batch-scoring-on-azure-for-deep-learning-models"></a>Scoring par lots dans Azure pour les modèles d’apprentissage profond
+# <a name="batch-scoring-of-deep-learning-models-on-azure"></a>Modèles de notation par lot d’apprentissage profond sur Azure
 
 Cette architecture de référence montre comment appliquer un transfert de style neuronal à une vidéo avec Azure Machine Learning. Le *transfert de style* est une technique d’apprentissage profond (« deep learning ») qui compose une image existante dans le style d’une autre image. Cette architecture peut être généralisée à un scénario qui utilise le scoring par lots avec l’apprentissage profond. [**Déployez cette solution**](#deploy-the-solution).
 
@@ -23,9 +23,13 @@ Cette architecture de référence montre comment appliquer un transfert de style
 
 **Scénario** : une société de multimédia souhaite changer le style d’une vidéo pour qu’elle ressemble à une peinture spécifique. L’objectif est d’appliquer ce style à toutes les images de la vidéo en temps voulu et de façon automatisée. Pour plus d’informations sur les algorithmes de transfert de style neuronal, consultez le document [Image Style Transfer Using Convolutional Neural Networks][image-style-transfer] (PDF).
 
+<!-- markdownlint-disable MD033 -->
+
 | Image du style : | Vidéo d’entrée/contenu : | Vidéo de sortie : |
 |--------|--------|---------|
 | <img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/style_image.jpg" width="300"> | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/input_video.mp4 "Vidéo d’entrée") *cliquer pour voir la vidéo* | [<img src="https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video_image_0.jpg" width="300" height="300">](https://happypathspublic.blob.core.windows.net/assets/batch_scoring_for_dl/output_video.mp4 "Vidéo de sortie") *cliquer pour voir la vidéo* |
+
+<!-- markdownlint-enable MD033 -->
 
 Cette architecture de référence a été conçue pour les charges de travail qui sont déclenchées par la présence de nouveaux contenus multimédias dans le stockage Azure.
 
@@ -42,7 +46,7 @@ Cette architecture est constituée des composants suivants.
 
 ### <a name="compute"></a>Calcul
 
-**[Azure Machine Learning Service][amls]** utilise des pipelines Azure Machine Learning pour créer des séquences de calcul reproductibles et faciles à gérer. Il offre également une cible de calcul managée (sur laquelle un calcul de pipeline peut s’exécuter) appelée [Capacité de calcul Azure Machine Learning][aml-compute] pour l’entraînement, le déploiement et le scoring des modèles Machine Learning. 
+**[Azure Machine Learning Service][amls]** utilise des pipelines Azure Machine Learning pour créer des séquences de calcul reproductibles et faciles à gérer. Il offre également une cible de calcul managée (sur laquelle un calcul de pipeline peut s’exécuter) appelée [Capacité de calcul Azure Machine Learning][aml-compute] pour l’entraînement, le déploiement et le scoring des modèles Machine Learning.
 
 ### <a name="storage"></a>Stockage
 
@@ -64,21 +68,21 @@ Cette architecture de référence utilise la séquence vidéo d’un orang-outan
 
 ## <a name="performance-considerations"></a>Considérations relatives aux performances
 
-### <a name="gpu-vs-cpu"></a>GPU et CPU
+### <a name="gpu-versus-cpu"></a>GPU et UC
 
 Pour les charges de travail d’apprentissage profond, les GPU (processeurs graphiques) sont généralement beaucoup plus performants que les CPU (processeurs centraux), dans la mesure où il faut un cluster de CPU important pour obtenir des performances comparables. Bien qu’il soit possible d’utiliser uniquement des CPU dans cette architecture, les GPU offrent un bien meilleur rapport coût/performances. Nous vous recommandons d’utiliser les dernières machines virtuelles optimisées pour les GPU [série NCv3] vm-sizes-gpu.
 
 Les GPU ne sont pas compatibles par défaut dans toutes les régions. Veillez à sélectionner une région compatible avec les GPU. Par ailleurs, les abonnements ont un quota par défaut de zéro cœur pour les machines virtuelles optimisées pour les GPU. Vous pouvez augmenter ce quota en formulant une demande de support. Vérifiez que votre abonnement dispose d’un quota suffisant pour exécuter votre charge de travail.
 
-### <a name="parallelizing-across-vms-vs-cores"></a>Parallélisation dans les machines virtuelles et les cœurs
+### <a name="parallelizing-across-vms-versus-cores"></a>Parallélisation entre machines virtuelles par rapport aux cœurs
 
 Quand vous exécutez un processus de transfert de style en tant que traitement par lots, les tâches qui s’exécutent principalement sur les GPU doivent être parallélisées dans toutes les machines virtuelles. Deux approches sont possibles : vous pouvez soit créer un cluster plus grand contenant des machines virtuelles avec un seul GPU, soit créer un cluster plus petit contenant des machines virtuelles avec un grand nombre de GPU.
 
 Pour cette charge de travail, ces deux options offrent des performances comparables. Le fait d’utiliser moins de machines virtuelles avec plus de GPU par machine virtuelle peut contribuer à réduire le déplacement de données. Cependant, le volume de données par tâche pour cette charge de travail n’étant pas très important, la limitation imposée par Stockage Blob n’est pas significative.
 
-### <a name="mpi-step"></a>Étape MPI 
+### <a name="mpi-step"></a>Étape MPI
 
-Lors de la création du pipeline dans Azure Machine Learning, une des étapes utilisées pour effectuer le calcul parallèle est l’étape MPI. L’étape MPI aide à fractionner les données uniformément entre les nœuds disponibles. L’étape MPI n’est pas exécutée tant que tous les nœuds demandés ne sont pas prêts. Si un nœud échoue ou est préempté (s’il s’agit d’une machine virtuelle de faible priorité), l’étape MPI doit être réexécutée. 
+Lors de la création du pipeline dans Azure Machine Learning, une des étapes utilisées pour effectuer le calcul parallèle est l’étape MPI. L’étape MPI aide à fractionner les données uniformément entre les nœuds disponibles. L’étape MPI n’est pas exécutée tant que tous les nœuds demandés ne sont pas prêts. Si un nœud échoue ou est préempté (s’il s’agit d’une machine virtuelle de faible priorité), l’étape MPI doit être réexécutée.
 
 ## <a name="security-considerations"></a>Considérations relatives à la sécurité
 
@@ -94,7 +98,7 @@ Cette architecture de référence utilise le transfert de style comme exemple de
 
 ### <a name="securing-your-computation-in-a-virtual-network"></a>Sécurisation de votre calcul dans un réseau virtuel
 
-Lors du déploiement de votre cluster de capacité de calcul Machine Learning, vous pouvez le configurer pour qu’il soit provisionné à l’intérieur du sous-réseau d’un [réseau virtuel][virtual-network]. Ceci permet aux nœuds de calcul du cluster de communiquer de façon sécurisée avec d’autres machines virtuelles. 
+Lors du déploiement de votre cluster de capacité de calcul Machine Learning, vous pouvez le configurer pour qu’il soit provisionné à l’intérieur du sous-réseau d’un [réseau virtuel][virtual-network]. Ceci permet aux nœuds de calcul du cluster de communiquer de façon sécurisée avec d’autres machines virtuelles.
 
 ### <a name="protecting-against-malicious-activity"></a>Protection contre les activités malveillantes
 
@@ -136,7 +140,6 @@ Pour déployer cette architecture de référence, suivez les étapes décrites d
 
 > [!NOTE]
 > Vous pouvez également déployer une architecture de scoring par lots pour les modèles d’apprentissage profond avec Azure Kubernetes Service. Suivez les étapes décrites dans ce [dépôt GitHub][deployment2].
-
 
 <!-- links -->
 

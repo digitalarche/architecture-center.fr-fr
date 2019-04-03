@@ -7,14 +7,14 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 1b6f10edf098ed8d9fa14c16de113fc765372835
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: cba8d272ddbdbf2c2da94f68b288e9fb79be7de2
+ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58231416"
+ms.lasthandoff: 04/03/2019
+ms.locfileid: "58887809"
 ---
-# <a name="batch-scoring-of-spark-models-on-azure-databricks"></a>Scoring par lots de modèles Spark sur Azure Databricks
+# <a name="batch-scoring-of-spark-machine-learning-models-on-azure-databricks"></a>Modèles de notation par lot de machine learning Spark sur Azure Databricks
 
 Cette architecture de référence montre comment construire une solution évolutive pour le scoring par lots d’un modèle de classification Apache Spark basé sur une planification à l’aide d’Azure Databricks, une plateforme d’analyse basée sur Apache Spark optimisée pour Azure. La solution peut servir de modèle généralisé à d’autres scénarios.
 
