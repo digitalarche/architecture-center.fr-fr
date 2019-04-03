@@ -7,14 +7,14 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai, AI
-ms.openlocfilehash: 81dc353735eaa6573c72d9e588c949fe96a329ef
-ms.sourcegitcommit: eee3a35dd5a5a2f0dc117fa1c30f16d6db213ba2
-ms.translationtype: HT
+ms.openlocfilehash: b7607984bcf2c4bd046421aeb6e9d52dd8e7c18e
+ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/06/2019
-ms.locfileid: "55782011"
+ms.lasthandoff: 04/03/2019
+ms.locfileid: "58887741"
 ---
-# <a name="batch-scoring-of-python-models-on-azure"></a>Scoring par lots des modèles Python sur Azure
+# <a name="batch-scoring-of-python-machine-learning-models-on-azure"></a>Modèles de notation par lot de l’apprentissage de Python sur Azure
 
 Cette architecture de référence montre comment créer une solution scalable pour le scoring par lots d’un grand nombre de modèles selon une planification en parallèle avec Azure Machine Learning Service. La solution peut être utilisée comme modèle et appliquée à différents problèmes.
 
@@ -49,9 +49,9 @@ Cette architecture est constituée des composants suivants :
 
 ## <a name="performance-considerations"></a>Considérations relatives aux performances
 
-Pour les modèles Python standard, il est généralement admis que les processeurs sont suffisants pour gérer la charge de travail. Cette architecture utilise des processeurs. Toutefois, pour les [charges de travail d’apprentissage profond][deep], les GPU sont généralement beaucoup plus performants que les CPU, dans la mesure où un cluster de CPU important est nécessaire pour obtenir des performances comparables.
+Pour les modèles Python standard, il est généralement admis que les processeurs sont suffisants pour gérer la charge de travail. Cette architecture utilise des processeurs. Toutefois, pour [charges de travail d’apprentissage approfondi][deep], GPU généralement plus performantes que les unités centrales par une quantité considérable &mdash; un cluster important d’UC est généralement nécessaire pour obtenir des performances comparables.
 
-### <a name="parallelizing-across-vms-vs-cores"></a>Parallélisation dans les machines virtuelles et les cœurs
+### <a name="parallelizing-across-vms-versus-cores"></a>Parallélisation entre machines virtuelles par rapport aux cœurs
 
 Lors de l’exécution des processus de scoring de nombreux modèles en mode Batch, le travail doit être mis en parallèle sur les machines virtuelles. Deux approches sont possibles :
 
@@ -87,7 +87,7 @@ Pour déployer cette architecture de référence, suivez les étapes décrites d
 [amls]: /azure/machine-learning/service/overview-what-is-azure-ml
 [automatic-scaling]: /azure/batch/batch-automatic-scaling
 [azure-files]: /azure/storage/files/storage-files-introduction
-[cli]: https://docs.microsoft.com/en-us/cli/azure
+[cli]: /cli/azure
 [create-resources]: https://github.com/Microsoft/AMLBatchScoringPipeline/blob/master/01_create_resources.ipynb
 [deep]: /azure/architecture/reference-architectures/ai/batch-scoring-deep-learning
 [event-hubs]: /azure/event-hubs/event-hubs-geo-dr
@@ -95,10 +95,10 @@ Pour déployer cette architecture de référence, suivez les étapes décrites d
 [github]: https://github.com/Microsoft/AMLBatchScoringPipeline
 [one-class-svm]: http://scikit-learn.org/stable/modules/generated/sklearn.svm.OneClassSVM.html
 [portal]: https://portal.azure.com
-[ml-workspace]: https://docs.microsoft.com/en-us/azure/machine-learning/studio/create-workspace
+[ml-workspace]: /azure/machine-learning/studio/create-workspace
 [python-script]: https://github.com/Azure/BatchAIAnomalyDetection/blob/master/batchai/predict.py
 [pyscript]: https://github.com/Microsoft/AMLBatchScoringPipeline/blob/master/scripts/predict.py
 [storage]: /azure/storage/blobs/storage-blobs-overview
 [stream-analytics]: /azure/stream-analytics/
-[sql-database]: https://docs.microsoft.com/en-us/azure/sql-database/
-[app-insights]: https://docs.microsoft.com/en-us/azure/application-insights/app-insights-overview
+[sql-database]: /azure/sql-database/
+[app-insights]: /azure/application-insights/app-insights-overview
