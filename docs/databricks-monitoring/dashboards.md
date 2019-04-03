@@ -3,18 +3,20 @@ title: Utiliser des tableaux de bord pour visualiser les métriques d’Azure Da
 description: Comment déployer un tableau de bord Grafana pour analyser les performances dans Azure Databricks
 author: petertaylor9999
 ms.date: 03/26/2019
-ms.openlocfilehash: dbc04b00a781dd20c3224b5a031a8d98ddadce94
-ms.sourcegitcommit: 9854bd27fb5cf92041bbfb743d43045cd3552a69
+ms.openlocfilehash: 36fcd93f6ca757e8e750d0fcbbdf0311c08560b0
+ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2019
-ms.locfileid: "58503410"
+ms.lasthandoff: 04/03/2019
+ms.locfileid: "58887826"
 ---
 # <a name="use-dashboards-to-visualize-azure-databricks-metrics"></a>Utiliser des tableaux de bord pour visualiser les métriques d’Azure Databricks
 
+Cet article explique comment configurer un tableau de bord Grafana pour surveiller les travaux Azure Databricks pour les problèmes de performances.
+
 [Azure Databricks](/azure/azure-databricks/) est rapide, puissante et de collaboration [Apache Spark](https://spark.apache.org/)– en fonction du service d’analytique qui facilite la rapidement développer et déployer l’analytique de big data et les solutions d’intelligence artificielle (IA). La surveillance est un composant essentiel de l’utilisation de charges de travail Azure Databricks en production. La première étape consiste à collecter des mesures dans un espace de travail pour l’analyse. Dans Azure, la meilleure solution pour la gestion des données de journal est [Azure Monitor](/azure/azure-monitor/). Databricks Azure ne prend pas en charge envoi de données de journal à Azure monitor, mais un [bibliothèque pour cette fonctionnalité](https://github.com/mspnp/spark-monitoring) est disponible dans [Github](https://github.com).
 
-Cette bibliothèque Active la journalisation des métriques de service Azure Databricks aussi structure Apache Spark streaming des métriques d’événement de requête. Une fois que vous avez correctement déployé cette bibliothèque dans un cluster Azure Databricks, vous pouvez plus déployer un ensemble de [Azure Monitor](/azure/azure-monitor/) ou [Grafana](https://granfana.com) des tableaux de bord que vous pouvez déployer dans le cadre de votre production. environnement. Ce document inclut une discussion sur les types courants de problèmes de performances et comment les identifier à l’aide de ces tableaux de bord.
+Cette bibliothèque Active la journalisation des métriques de service Azure Databricks aussi structure Apache Spark streaming des métriques d’événement de requête. Une fois que vous avez correctement déployé cette bibliothèque dans un cluster Azure Databricks, vous pouvez plus déployer un ensemble de [Grafana](https://granfana.com) des tableaux de bord que vous pouvez déployer dans le cadre de votre environnement de production.
 
 ![Capture d’écran du tableau de bord](./_images/dashboard-screenshot.png)
 
@@ -188,6 +190,11 @@ Voici un ensemble de visualisations du tableau de bord qui afficher le rapport d
 ### <a name="shuffle-metrics"></a>Métriques de lecture aléatoire
 
 L’ensemble final d’afficher des visualisations mesures associées à une requête de diffusion en continu structurée entre tous les exécuteurs de lecture aléatoire les données. Ceux-ci incluent la lecture aléatoire octets de lecture, de lecture aléatoire d’octets écrits, de lecture aléatoire de mémoire et l’utilisation du disque dans les requêtes où le système de fichiers est utilisé.
+
+## <a name="next-steps"></a>Étapes suivantes
+
+> [!div class="nextstepaction"]
+> [Résoudre les goulots d’étranglement de performances](./performance-troubleshooting.md)
 
 <!-- links -->
 
