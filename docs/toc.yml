@@ -557,6 +557,16 @@ items:
       href: service-fabric/migrate-from-cloud-services.md
     - name: Refactoriser une application Service Fabric
       href: service-fabric/refactor-migrated-app.md
+  - name: Superviser Azure Databricks
+    items:
+    - name: Vue d’ensemble
+      href: databricks-monitoring/index.md
+    - name: Configurer Databricks pour envoyer des métriques à Azure Monitor
+      href: databricks-monitoring/configure-cluster.md
+    - name: Envoyer les journaux des applications Databricks à Azure Monitor
+      href: databricks-monitoring/application-logs.md
+    - name: Utiliser des tableaux de bord pour visualiser les métriques Databricks
+      href: databricks-monitoring/dashboards.md
 - name: Framework de révision de la conception
   items:
   - name: Conception pour la résilience
@@ -851,9 +861,9 @@ items:
           href: cloud-adoption/decision-guides/software-defined-network/hub-spoke.md
       - name: Journaux et rapports
         href: cloud-adoption/decision-guides/log-and-report/overview.md
-ms.openlocfilehash: 06737190911118bab802d8141d959b04f6589f0a
-ms.sourcegitcommit: ea97ac004c38c6b456794c1a8eef29f8d2b77d50
+ms.openlocfilehash: 861170224f9575dc5e45d993678bda482b0ed944
+ms.sourcegitcommit: 9854bd27fb5cf92041bbfb743d43045cd3552a69
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2019
-ms.locfileid: "58489213"
+ms.lasthandoff: 03/27/2019
+ms.locfileid: "58503245"
