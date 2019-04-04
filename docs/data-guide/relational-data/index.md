@@ -1,13 +1,18 @@
 ---
 title: Données relationnelles
-description: null
+description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
+ms.openlocfilehash: d68bddcb75e5c8f786a7739e85de2645a2c3d641
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58345411"
 ---
-
 # <a name="traditional-relational-database-solutions"></a><span data-ttu-id="27dd1-102">Solutions de bases de données relationnelles traditionnelles</span><span class="sxs-lookup"><span data-stu-id="27dd1-102">Traditional relational database solutions</span></span>
 
 <span data-ttu-id="27dd1-103">Les données relationnelles sont modélisées à l’aide du modèle relationnel.</span><span class="sxs-lookup"><span data-stu-id="27dd1-103">Relational data is data modeled using the relational model.</span></span> <span data-ttu-id="27dd1-104">Dans ce modèle, les données sont exprimées sous forme de tuples.</span><span class="sxs-lookup"><span data-stu-id="27dd1-104">In this model, data is expressed as tuples.</span></span> <span data-ttu-id="27dd1-105">Un *tuple* est un ensemble de paires attribut/valeur.</span><span class="sxs-lookup"><span data-stu-id="27dd1-105">A *tuple* is a set of attribute/value pairs.</span></span> <span data-ttu-id="27dd1-106">Par exemple, un tuple peut être (itemid = 5, orderid = 1, item = « Siège », quantité = 200,00).</span><span class="sxs-lookup"><span data-stu-id="27dd1-106">For example, a tuple might be (itemid = 5, orderid = 1, item = "Chair", amount = 200.00).</span></span> <span data-ttu-id="27dd1-107">Un jeu de tuples qui partagent tous les mêmes attributs est appelé *relation*.</span><span class="sxs-lookup"><span data-stu-id="27dd1-107">A set of tuples that all share the same attributes is called a *relation*.</span></span>

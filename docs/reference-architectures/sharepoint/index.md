@@ -1,15 +1,20 @@
 ---
-title: "Exécuter une batterie de serveurs SharePoint Server\_2016 hautement disponible dans Azure"
+title: Exécuter une batterie de serveurs SharePoint Server 2016 hautement disponible dans Azure
 titleSuffix: Azure Reference Architectures
-description: "Architecture recommandée pour déployer une batterie de serveurs SharePoint Server\_2016 à haute disponibilité sur Azure."
+description: Architecture recommandée pour déployer une batterie de serveurs SharePoint Server 2016 à haute disponibilité sur Azure.
 author: njray
 ms.date: 07/26/2018
 ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
+ms.openlocfilehash: 0cce207dedd0eb42e29a152b3bb84acc2dca323a
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58344986"
 ---
-
 # <a name="run-a-highly-available-sharepoint-server-2016-farm-in-azure"></a><span data-ttu-id="d0b47-103">Exécuter une batterie de serveurs SharePoint Server 2016 hautement disponible dans Azure</span><span class="sxs-lookup"><span data-stu-id="d0b47-103">Run a highly available SharePoint Server 2016 farm in Azure</span></span>
 
 <span data-ttu-id="d0b47-104">Cette architecture de référence présente des pratiques éprouvées pour déployer une batterie de serveurs SharePoint Server 2016 hautement disponible sur Azure à l’aide de la topologie MinRole et de groupes de disponibilité Always On SQL Server.</span><span class="sxs-lookup"><span data-stu-id="d0b47-104">This reference architecture shows proven practices for deploying a highly available SharePoint Server 2016 farm on Azure, using MinRole topology and SQL Server Always On availability groups.</span></span> <span data-ttu-id="d0b47-105">La batterie de serveurs SharePoint est déployée dans un réseau virtuel sécurisé sans aucun point de terminaison ou présence exposé à Internet.</span><span class="sxs-lookup"><span data-stu-id="d0b47-105">The SharePoint farm is deployed in a secured virtual network with no Internet-facing endpoint or presence.</span></span> <span data-ttu-id="d0b47-106">[**Déployez cette solution**](#deploy-the-solution).</span><span class="sxs-lookup"><span data-stu-id="d0b47-106">[**Deploy this solution**](#deploy-the-solution).</span></span>

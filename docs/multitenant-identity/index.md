@@ -1,13 +1,18 @@
 ---
 title: Gestion des identités pour les applications multilocataires
-description: 'Meilleures pratiques pour la gestion de l’authentification, de l’autorisation et de l’identité dans les applications multi-locataires.'
+description: Meilleures pratiques pour la gestion de l’authentification, de l’autorisation et de l’identité dans les applications multi-locataires.
 author: MikeWasson
 ms.date: 07/21/2017
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
+ms.openlocfilehash: be906106fb12c381d57ad40ae22e748dcff9722f
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58346074"
 ---
-
 # <a name="manage-identity-in-multitenant-applications"></a><span data-ttu-id="705d9-103">Gérer l’identité dans les applications mutualisées</span><span class="sxs-lookup"><span data-stu-id="705d9-103">Manage identity in multitenant applications</span></span>
 
 <span data-ttu-id="705d9-104">Cette série d’articles décrit les meilleures pratiques pour les applications multi-locataires, lors de l’utilisation d’Azure AD pour l’authentification et la gestion des identités.</span><span class="sxs-lookup"><span data-stu-id="705d9-104">This series of articles describes best practices for multitenancy, when using Azure AD for authentication and identity management.</span></span>

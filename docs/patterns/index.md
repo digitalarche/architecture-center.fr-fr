@@ -1,7 +1,7 @@
 ---
 title: Modèles de conception de cloud
 titleSuffix: Azure Architecture Center
-description: 'Modèles de conception pour créer des applications fiables, scalables et sécurisées dans le cloud.'
+description: Modèles de conception pour créer des applications fiables, scalables et sécurisées dans le cloud.
 keywords: Azure
 author: dragon119
 ms.date: 03/01/2018
@@ -9,8 +9,13 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: c8fe971e031825632c2bb157bfd23e15f56520a3
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58343473"
 ---
-
 # <a name="cloud-design-patterns"></a><span data-ttu-id="187e8-104">Modèles de conception de cloud</span><span class="sxs-lookup"><span data-stu-id="187e8-104">Cloud Design Patterns</span></span>
 
 <span data-ttu-id="187e8-105">Ces modèles de conception sont utiles pour développer des applications fiables, évolutives et sécurisées dans le cloud.</span><span class="sxs-lookup"><span data-stu-id="187e8-105">These design patterns are useful for building reliable, scalable, secure applications in the cloud.</span></span>

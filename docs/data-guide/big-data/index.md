@@ -1,13 +1,18 @@
 ---
 title: Architectures de Big Data
-description: null
+description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
+ms.openlocfilehash: 269a4c2b8fd0c186e1b44b6c0cfdcbfa4d37b57c
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58346159"
 ---
-
 # <a name="big-data-architectures"></a><span data-ttu-id="2b7cd-102">Architectures de Big Data</span><span class="sxs-lookup"><span data-stu-id="2b7cd-102">Big data architectures</span></span>
 
 <span data-ttu-id="2b7cd-103">Une architecture Big Data est conçue pour gérer l’ingestion, le traitement et l’analyse de données trop volumineuses ou complexes pour les systèmes de base de données traditionnels.</span><span class="sxs-lookup"><span data-stu-id="2b7cd-103">A big data architecture is designed to handle the ingestion, processing, and analysis of data that is too large or complex for traditional database systems.</span></span> <span data-ttu-id="2b7cd-104">Le seuil à partir duquel les organisations basculent dans le domaine Big Data varie selon les capacités des utilisateurs et leurs outils.</span><span class="sxs-lookup"><span data-stu-id="2b7cd-104">The threshold at which organizations enter into the big data realm differs, depending on the capabilities of the users and their tools.</span></span> <span data-ttu-id="2b7cd-105">Pour certaines, ce seuil est fixé à plusieurs centaines de gigaoctets de données, tandis que pour d’autres, il s’agit de centaines de téraoctets.</span><span class="sxs-lookup"><span data-stu-id="2b7cd-105">For some, it can mean hundreds of gigabytes of data, while for others it means hundreds of terabytes.</span></span> <span data-ttu-id="2b7cd-106">L’amélioration des outils de gestion du Big Data redéfinit la notion même de Big Data.</span><span class="sxs-lookup"><span data-stu-id="2b7cd-106">As tools for working with big data sets advance, so does the meaning of big data.</span></span> <span data-ttu-id="2b7cd-107">Ce terme est de plus en plus associé à la valeur que vous pouvez tirer de vos jeux de données via une analytique avancée, plutôt qu’à la taille stricte des données, bien que dans ce cas, ces données ont tendance à être très volumineuses.</span><span class="sxs-lookup"><span data-stu-id="2b7cd-107">More and more, this term relates to the value you can extract from your data sets through advanced analytics, rather than strictly the size of the data, although in these cases they tend to be quite large.</span></span>

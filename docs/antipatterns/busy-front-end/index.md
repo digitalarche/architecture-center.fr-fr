@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: f1ab728d68747856fb2586804d58d45c4ea4fcc1
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58344493"
 ---
-
 # <a name="busy-front-end-antipattern"></a><span data-ttu-id="32eaa-103">Antimodèle Serveur frontal occupé</span><span class="sxs-lookup"><span data-stu-id="32eaa-103">Busy Front End antipattern</span></span>
 
 <span data-ttu-id="32eaa-104">L’exécution d’un travail asynchrone sur un grand nombre de threads d’arrière-plan peut priver les tâches de premier plan simultanées de ressources, donnant lieu à des temps de réponse inacceptables.</span><span class="sxs-lookup"><span data-stu-id="32eaa-104">Performing asynchronous work on a large number of background threads can starve other concurrent foreground tasks of resources, decreasing response times to unacceptable levels.</span></span>

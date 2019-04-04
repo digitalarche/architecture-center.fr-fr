@@ -6,8 +6,13 @@ ms.date: 06/09/2017
 ms.topic: article
 ms.service: architecture-center
 ms.subservice: reference-architecture
+ms.openlocfilehash: 108d82066d9867682c246c4de802849e2e561cbc
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58343830"
 ---
-
 # <a name="extend-azure-resource-manager-template-functionality"></a><span data-ttu-id="e4452-103">Étend la fonctionnalité des modèles Azure Resource Manager</span><span class="sxs-lookup"><span data-stu-id="e4452-103">Extend Azure Resource Manager template functionality</span></span>
 
 <span data-ttu-id="e4452-104">En 2016, l’équipe de modèles et pratiques Microsoft a créé un ensemble de [modèles de blocs de construction](https://github.com/mspnp/template-building-blocks/wiki) Azure Resource Manager afin de simplifier le déploiement de ressources.</span><span class="sxs-lookup"><span data-stu-id="e4452-104">In 2016, the Microsoft patterns & practices team created a set of Azure Resource Manager [template building blocks](https://github.com/mspnp/template-building-blocks/wiki) with the goal of simplifying resource deployment.</span></span> <span data-ttu-id="e4452-105">Chaque bloc de construction contient un ensemble de modèles prédéfinis qui déploient des ensembles de ressources spécifiés par des fichiers de paramètres distincts.</span><span class="sxs-lookup"><span data-stu-id="e4452-105">Each building block contains a set of pre-built templates that deploy sets of resources specified by separate parameter files.</span></span>

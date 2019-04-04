@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: e3d6fbb789e422af22ce54b0defd6bb73099f15a
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58346329"
 ---
-
 # <a name="monolithic-persistence-antipattern"></a><span data-ttu-id="3e11e-103">Antimodèle de persistance monolithique</span><span class="sxs-lookup"><span data-stu-id="3e11e-103">Monolithic Persistence antipattern</span></span>
 
 <span data-ttu-id="3e11e-104">Rassembler toutes les données d’une application dans un magasin de données unique peut nuire aux performances car cela provoque un conflit de ressources ou bien parce que le magasin de données n’est pas adapté à toutes les données.</span><span class="sxs-lookup"><span data-stu-id="3e11e-104">Putting all of an application's data into a single data store can hurt performance, either because it leads to resource contention, or because the data store is not a good fit for some of the data.</span></span>

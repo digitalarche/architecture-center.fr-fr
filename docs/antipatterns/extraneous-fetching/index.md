@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: c1172531b332854a6d4940c072b61cb3f6bcd7ba
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58345105"
 ---
-
 # <a name="extraneous-fetching-antipattern"></a><span data-ttu-id="1fa13-103">Antimodèle de récupération superflue</span><span class="sxs-lookup"><span data-stu-id="1fa13-103">Extraneous Fetching antipattern</span></span>
 
 <span data-ttu-id="1fa13-104">Récupérer plus de données que nécessaire pour une opération d’entreprise peut provoquer une surcharge d’E/S inutile et réduire les temps de réponse.</span><span class="sxs-lookup"><span data-stu-id="1fa13-104">Retrieving more data than needed for a business operation can result in unnecessary I/O overhead and reduce responsiveness.</span></span>

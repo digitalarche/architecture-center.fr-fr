@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: 7d3fe47407eff7168dfd227a1dd1bd5917c7d431
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58344850"
 ---
-
 # <a name="busy-database-antipattern"></a><span data-ttu-id="59aef-103">Antimodèle de base de données occupé</span><span class="sxs-lookup"><span data-stu-id="59aef-103">Busy Database antipattern</span></span>
 
 <span data-ttu-id="59aef-104">Suite au déchargement du traitement sur un serveur de base de données, ce dernier peut consacrer une part importante de son temps à exécuter du code plutôt qu’à répondre aux demandes de stockage et de récupération des données.</span><span class="sxs-lookup"><span data-stu-id="59aef-104">Offloading processing to a database server can cause it to spend a significant proportion of time running code, rather than responding to requests to store and retrieve data.</span></span>
