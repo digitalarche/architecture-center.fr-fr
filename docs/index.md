@@ -1,12 +1,17 @@
 ---
 title: Centre des architectures Azure
-description: 'Le centre des architectures Azure est le centre officiel pour obtenir des instructions, des schémas, des modèles et les meilleures pratiques pour la création de solutions avec Microsoft Azure. Il est organisé par l’équipe Modèles et pratiques de Microsoft.'
+description: Le centre des architectures Azure est le centre officiel pour obtenir des instructions, des schémas, des modèles et les meilleures pratiques pour la création de solutions avec Microsoft Azure. Il est organisé par l’équipe Modèles et pratiques de Microsoft.
 layout: LandingPage
 ms.topic: landing-page
 ms.date: 09/28/2018
 google-site-verification: b-xRLveOzJ9oSOh37wgRTRB2lMOoFY8HiHf9_0DIawE
+ms.openlocfilehash: 3c48ba77b7f97c6047f5d1441a22f2bd79ee0a3e
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898287"
 ---
-
 # <a name="azure-architecture-center"></a>Centre des architectures Azure
 
 <!-- markdownlint-disable MD033 -->
@@ -99,26 +104,6 @@ google-site-verification: b-xRLveOzJ9oSOh37wgRTRB2lMOoFY8HiHf9_0DIawE
                         <div class="cardText">
                             <h3>Guide d’architecture des données Azure</h3>
                             <p>Une approche structurée pour concevoir des solutions orientées données sur Microsoft Azure.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- HPC Topic Page -->
-    <li>
-        <a href="./topics/high-performance-computing/index.md">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/hpc-blue-multi.svg" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Calcul haute performance (HPC) sur Azure</h3>
-                            <p>Guide de conception et informations sur le composant pour la génération d’applications de calcul haute performance (HPC) sur Azure.</p>
                         </div>
                     </div>
                 </div>
@@ -225,6 +210,26 @@ google-site-verification: b-xRLveOzJ9oSOh37wgRTRB2lMOoFY8HiHf9_0DIawE
             </div>
         </a>
     </li>
+    <!-- Azure Virtual Datacenter -->
+    <li>
+        <a href="./vdc/index.md">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="_images/virtual-datacenter.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3>Centre de données virtuel Azure</h3>
+                            <p>Lorsqu’ils déploient des charges de travail d’entreprise dans le cloud, les services informatiques et les unités opérationnelles doivent équilibrer la gouvernance et l’agilité des développeurs. Le centre de données virtuel Azure apporte des modèles pour atteindre cet équilibre en mettant l’accent sur la gouvernance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
         <!-- Azure for AWS Professionals -->
     <li>
         <a href="/azure/architecture/aws-professional">
@@ -259,26 +264,6 @@ google-site-verification: b-xRLveOzJ9oSOh37wgRTRB2lMOoFY8HiHf9_0DIawE
                         <div class="cardText">
                             <h3>Anti-modèles de performance</h3>
                             <p>Comment détecter et résoudre des causes courantes de problèmes de performances et d’évolutivité dans les applications de cloud.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </li>
-    <!-- Azure Virtual Datacenter -->
-    <li>
-        <a href="./vdc/index.md">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="_images/virtual-datacenter.svg" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h3>Centre de données virtuel Azure</h3>
-                            <p>Lorsqu’ils déploient des charges de travail d’entreprise dans le cloud, les services informatiques et les unités opérationnelles doivent équilibrer la gouvernance et l’agilité des développeurs. Le centre de données virtuel Azure apporte des modèles pour atteindre cet équilibre en mettant l’accent sur la gouvernance.</p>
                         </div>
                     </div>
                 </div>

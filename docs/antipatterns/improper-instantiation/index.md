@@ -1,15 +1,20 @@
 ---
 title: Antimodèle d’instanciation incorrect
 titleSuffix: Performance antipatterns for cloud apps
-description: 'Évitez de créer continuellement de nouvelles instances d’un objet destiné à être créé une seule fois, puis partagé.'
+description: Évitez de créer continuellement de nouvelles instances d’un objet destiné à être créé une seule fois, puis partagé.
 author: dragon119
 ms.date: 06/05/2017
 ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: a2e42e35ae1b56b61c8f9f9ecb21ee104cd3222e
+ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 02/08/2019
+ms.locfileid: "55898049"
 ---
-
 # <a name="improper-instantiation-antipattern"></a>Antimodèle d’instanciation incorrect
 
 Le fait de créer continuellement de nouvelles instances d’un objet destiné à être créé une seule fois, puis partagé, peut affecter les performances.
