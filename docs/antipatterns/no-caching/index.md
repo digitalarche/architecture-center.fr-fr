@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: 5c3062c0a17de708ada83ba81dcb111e6b1f8440
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58343847"
 ---
-
 # <a name="no-caching-antipattern"></a>Absence d’antimodèle de mise en cache
 
 Dans une application cloud gérant de nombreuses requêtes simultanées, l’extraction répétée de mêmes données peut réduire l’évolutivité et les performances.

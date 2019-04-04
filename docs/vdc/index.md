@@ -6,8 +6,13 @@ layout: LandingPage
 ms.topic: landing-page
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
+ms.openlocfilehash: 57f28808d3c49c74bc010133c670a186206a4466
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58344527"
 ---
-
 # <a name="azure-virtual-datacenter-and-the-enterprise-control-plane"></a>Le centre de données virtuel Azure et le plan de contrôle entreprise
 
 Le centre de données virtuel Azure est une approche permettant de tirer le meilleur parti des capacités Azure tout en respectant vos stratégies de sécurité et réseau existantes. Lorsqu’ils déploient des charges de travail d’entreprise dans le cloud, les services informatiques et les unités opérationnelles doivent équilibrer la gouvernance et l’agilité des développeurs. Le centre de données virtuel Azure apporte des modèles pour atteindre cet équilibre en mettant l’accent sur la gouvernance.

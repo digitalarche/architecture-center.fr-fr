@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: 212930368942728fc0be0c9b2af1a90293906b39
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58344833"
 ---
-
 # <a name="performance-antipatterns-for-cloud-applications"></a>Anti-modèles de performance pour les applications cloud
 
 Un *anti-modèle de performance* est une pratique courante susceptible de causer des problèmes d’extensibilité lorsqu’une application est sous pression.

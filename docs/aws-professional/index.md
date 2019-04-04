@@ -9,12 +9,12 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: c61758494435f61814953ab5ba48d8fed1e709ab
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
+ms.openlocfilehash: 89434c0ce72b9f061e4b092354b1dcbaf683b7c6
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55897590"
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58346312"
 ---
 # <a name="azure-for-aws-professionals"></a>Azure pour les professionnels AWS
 
@@ -300,9 +300,9 @@ Azure fournit des connexions dédiées de site à site similaires via son servic
 
 Azure fournit plusieurs services de base de données relationnelle différents qui sont l’équivalent du RDS d’AWS.
 
-- [Base de données SQL](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview)
-- [Azure Database pour MySQL](https://docs.microsoft.com/azure/mysql/overview)
-- [Base de données Azure pour PostgreSQL](https://docs.microsoft.com/azure/postgresql/overview)
+- [Base de données SQL](/azure/sql-database/sql-database-technical-overview)
+- [Azure Database pour MySQL](/azure/mysql/overview)
+- [Base de données Azure pour PostgreSQL](/azure/postgresql/overview)
 
 D’autres moteurs de base de données tels que [SQL Server](https://azure.microsoft.com/services/virtual-machines/sql-server/), [Oracle](https://azure.microsoft.com/campaigns/oracle/) et [MySQL](https://azure.microsoft.com/documentation/articles/virtual-machines-windows-classic-mysql-2008r2/) peuvent être déployés à l’aide des instances de machines virtuelles Azure.
 
@@ -394,7 +394,7 @@ En plus des tests frontaux, [Azure DevTest Labs](https://azure.microsoft.com/ser
 
 - [Présentation des solutions Big Data de Microsoft](https://msdn.microsoft.com/library/dn749804.aspx)
 
-- [Blog Azure Data Lake & Azure HDInsight](https://blogs.msdn.microsoft.com/azuredatalake/)
+- [Blog Azure Data Lake et Azure HDInsight](https://blogs.msdn.microsoft.com/azuredatalake/)
 
 ### <a name="internet-of-things"></a>Internet des Objets
 

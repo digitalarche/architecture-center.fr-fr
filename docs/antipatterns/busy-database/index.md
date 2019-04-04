@@ -8,8 +8,13 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
+ms.openlocfilehash: 7d3fe47407eff7168dfd227a1dd1bd5917c7d431
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58344850"
 ---
-
 # <a name="busy-database-antipattern"></a>Antimodèle de base de données occupé
 
 Suite au déchargement du traitement sur un serveur de base de données, ce dernier peut consacrer une part importante de son temps à exécuter du code plutôt qu’à répondre aux demandes de stockage et de récupération des données.

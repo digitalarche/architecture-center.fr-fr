@@ -1,13 +1,18 @@
 ---
 title: Architectures de Big Data
-description: null
+description: ''
 author: zoinerTejada
 ms.date: 02/12/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
+ms.openlocfilehash: 269a4c2b8fd0c186e1b44b6c0cfdcbfa4d37b57c
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58346159"
 ---
-
 # <a name="big-data-architectures"></a>Architectures de Big Data
 
 Une architecture Big Data est conçue pour gérer l’ingestion, le traitement et l’analyse de données trop volumineuses ou complexes pour les systèmes de base de données traditionnels. Le seuil à partir duquel les organisations basculent dans le domaine Big Data varie selon les capacités des utilisateurs et leurs outils. Pour certaines, ce seuil est fixé à plusieurs centaines de gigaoctets de données, tandis que pour d’autres, il s’agit de centaines de téraoctets. L’amélioration des outils de gestion du Big Data redéfinit la notion même de Big Data. Ce terme est de plus en plus associé à la valeur que vous pouvez tirer de vos jeux de données via une analytique avancée, plutôt qu’à la taille stricte des données, bien que dans ce cas, ces données ont tendance à être très volumineuses.

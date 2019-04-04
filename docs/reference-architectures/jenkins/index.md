@@ -8,8 +8,13 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
+ms.openlocfilehash: 4b8d84ef6eedd93f1a3ec948e7c6d6e3d1c465fc
+ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.translationtype: HT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 03/20/2019
+ms.locfileid: "58346023"
 ---
-
 # <a name="run-a-jenkins-server-on-azure"></a>Exécuter un serveur Jenkins sur Azure
 
 Cette architecture de référence montre comment déployer et utiliser un serveur Jenkins professionnel et évolutif sur Azure sécurisé avec l’authentification unique (SSO). L’architecture utilise également Azure Monitor pour surveiller l’état du serveur Jenkins. [**Déployez cette solution**](#deploy-the-solution).
