@@ -1,38 +1,44 @@
 ---
+title: Framework d’adoption du cloud Microsoft pour Azure
+ms.service: architecture-center
+ms.subservice: enterprise-cloud-adoption
+ms.custom: governance
+ms.date: 02/11/2019
 layout: LandingPage
 ms.topic: landing-page
 author: BrianBlanchard
-ms.date: 2/11/2019
-ms.openlocfilehash: b67b58348d6a7dffdb63b0cc776a9eea02c2fb36
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: cb5f5a61ad71d60e0e5805fd7e8d6bd78f893293
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55897454"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068801"
 ---
 # <a name="microsoft-cloud-adoption-framework-for-azure"></a>Framework d’adoption du cloud Microsoft pour Azure
 
-Le cloud présente un changement fondamental dans la façon dont les entreprises se procurent et utilisent des ressources technologiques. Par le passé, elles étaient propriétaires et responsables de tous les niveaux technologiques, des infrastructures aux logiciels. À présent, le cloud offre la possibilité de changer de façon d’utiliser les technologies en approvisionnant et en consommant les ressources nécessaires. Tandis que le cloud offre une flexibilité presque illimitée en termes de choix de conception, les entreprises recherchent une méthodologie éprouvée et cohérente dans l’adoption de technologies cloud. Le framework d’adoption du cloud fournit le framework souhaité pour guider vos décisions tout au long du processus d’adoption.
+Le cloud change radicalement comment les entreprises se procurer et utilisent des ressources technologiques. En règle générale, les entreprises étaient propriétaires et responsables de tous les aspects de la technologie d’infrastructure au logiciel. Le cloud permet aux entreprises d’approvisionnement et la consommation des ressources uniquement si nécessaire. Si le cloud offre une grande flexibilité dans le choix de conception, les entreprises ont besoin une méthodologie éprouvée et cohérente pour les technologies de cloud adoption. Le Framework de l’Adoption du Cloud Microsoft pour Azure (CAF) répond à ce besoin, aider à prendre des décisions de guide tout au long de l’adoption du cloud.
 
-Notez toutefois que le cloud est une solution, et pas un objectif en soi. Une adoption du cloud réellement efficace débute bien avant le choix du fournisseur de plateforme cloud. Elle commence lorsque les décisionnaires informatiques et métier prennent conscience du fait que le cloud peut accélérer un objectif de transformation métier bien spécifique. Le framework d’adoption du cloud vise à simplifier l’alignement des stratégies en matière de transformation technique, culturelle et métier de façon à pouvoir atteindre les objectifs métier souhaités. Le framework d’adoption du cloud fournit des conseils techniques en lien avec Microsoft Azure. Partant du principe que les clients peuvent encore être dans la phase de sélection d’un fournisseur cloud, ce framework donne des conseils d’ordre général sur le cloud pour faciliter, dans la mesure du possible, les décisions de plus haut niveau.
+Toutefois, l’adoption du cloud est un moyen à une fin. Adoption du cloud réussie commence bien avant la sélection d’un fournisseur de plateforme cloud. Il commence lorsque l’entreprise et décideurs informatiques réalisez que le cloud peut accélérer un objectif de transformation métier spécifiques. Aides CAF à aligner les stratégies d’entreprise, de culture et de modification technique pour obtenir les résultats de l’entreprise souhaité.
+
+CAF fournit des conseils techniques sur Microsoft Azure. En reconnaissant que les clients peuvent toujours être en train de choisir un fournisseur de cloud, cette infrastructure guide indépendant du cloud pour les décisions de niveau supérieurs si possible.
 
 ## <a name="product-truths"></a>Caractéristiques du produit
 
-Le framework d’adoption du cloud est actuellement disponible en préversion publique. Il sera proposé en version Disponibilité générale une fois que les objectifs mentionnés précédemment auront été atteints. Dans la préversion actuelle, nous insistons principalement sur la [gouvernance cloud](./governance/journeys/overview.md). Le framework d’adoption du cloud fera l’objet de développement régulier, à mesure de la progression de l’équipe vers la version Disponibilité générale.
+Le framework d’adoption du cloud est actuellement disponible en préversion publique. Le framework marquera la disponibilité générale (GA) lorsque les objectifs formelle ci-dessus sont remplies. Dans cette version préliminaire de CAF, est la principale zone de focus [gouvernance Cloud](./governance/journeys/overview.md). CAF adoptent souvent comme il se rapproche de version en disponibilité générale.
 
 ## <a name="audience"></a>Audience
 
-Le contenu du framework d’adoption du cloud a une incidence sur l’activité, la technologie et la culture des entreprises. Voici la liste des rôles concernés : directeurs métier, décisionnaires métier, décisionnaires informatiques, département financier, administrateurs d’entreprise, opérations informatiques, conformité et sécurité informatiques, gouvernance informatique, propriétaires de développements de charges de travail et propriétaires d’opérations de charges de travail. Toutes ces fonctions et personnes utilisent un jargon qui leur est propre. En outre, leurs objectifs et indicateurs de performance clés sont différents. Il est donc impossible qu’un seul ensemble de contenus puisse correspondre à chacun de ces publics.
+Le contenu de CAF affecte l’entreprise, la technologie et la culture des entreprises. Voici la liste des rôles concernés : directeurs métier, décisionnaires métier, décisionnaires informatiques, département financier, administrateurs d’entreprise, opérations informatiques, conformité et sécurité informatiques, gouvernance informatique, propriétaires de développements de charges de travail et propriétaires d’opérations de charges de travail. Chaque rôle utilise jargon différents. En outre, leurs objectifs et indicateurs de performance clés sont différents. Un ensemble unique de contenu ne peut pas traiter chacun de ces publics efficacement.
 
-Découvrez l’architecte cloud : il joue le rôle de facilitateur et de leader d’opinion pour rassembler tous ces publics. Le contenu figurant dans cette collection de guides est conçu pour aider l’architecte cloud à adapter les discussions en fonction des publics et ainsi prendre les décisions nécessaires. La transformation métier rendue possible par le cloud dépend des conseils donnés par l’architecte cloud aux équipes métier et informatiques.
+Entrez le **Cloud architecte**. L’architecte du cloud joue le rôle de facilitateur et de leader d’opinion pour rassembler tous ces publics. Cette collection de guides est conçue pour faciliter les conversations de droite avec le bon public pour prendre des décisions requises de l’architecte de Cloud. Transformation métier habilitée par le cloud varie selon le rôle de l’architecte de Cloud pour aider à prendre des décisions de guide tout au long de l’entreprise et informatique.
 
-Spécialisations de l’architecte cloud : chaque section du framework d’adoption du cloud représente une spécialisation ou une variante différente du rôle de l’architecte cloud. Ces sections permettent également de répartir la charge de l’architecte cloud entre les membres d’une équipe d’architectes cloud. Exemple de spécialisation : la section dédiée à la gouvernance est conçue pour les architectes cloud qui s’intéressent à la réduction des risques techniques. De nombreux fournisseurs de cloud nomment ces spécialistes « gardiens du cloud ». Nous préférons les appeler « équipe de gouvernance cloud ».
+chaque section du framework d’adoption du cloud représente une spécialisation ou une variante différente du rôle de l’architecte cloud. Ces sections créent également des opportunités de partage des responsabilités d’architecture de cloud dans une équipe des architectes du nuage. Par exemple, la section de gouvernance de CAF est conçue pour les architectes cloud avec une passion pour atténuer les risques techniques. Certains fournisseurs cloud font référence à ces spécialistes comme opérateurs de Cloud ; Nous préférons le terme **Cloud Guardian**, ou collectivement, l’équipe de gouvernance du Cloud.
 
 ## <a name="how-to-use-the-microsoft-cloud-adoption-framework-for-azure"></a>Utilisation du framework d’adoption du cloud Microsoft pour Azure
 
-Si votre entreprise ne connaît pas encore bien Azure, commencez par consulter la [vue d’ensemble](./getting-started/overview.md) dans la section *Prise en main*. Ce document inclut des instructions pour la transformation numérique de votre entreprise, en vous guidant pour chaque étape du processus.
+Si votre entreprise est une nouveauté dans Azure, commencez par lire [mise en route avec l’infrastructure d’Adoption Cloud](./getting-started/overview.md). Cette présentation fournit des instructions pour la transformation numérique de votre entreprise, vous guider tout au long de chaque étape du processus.
 
-Si votre entreprise connaît Azure et si elle recherche des conseils précis et des meilleures pratiques pour des domaines spécifiques, consultez les sections dédiées à la [gouvernance](./governance/overview.md) et aux [guides de décision](./decision-guides/overview.md). D’autres sections seront ajoutées à mesure de la progression vers la version Disponibilité générale.
+Si votre entreprise a d’expérience avec Azure et tente d’obtenir des instructions plus détaillées et les meilleures pratiques pour des domaines spécifiques, consultez le [vue d’ensemble de la gouvernance](./governance/overview.md) et [en matière d’architecture guides](./decision-guides/overview.md). Plus de sections seront ajoutés en tant que les approches de mise en production de la disponibilité générale.
 
 > [!div class="nextstepaction"]
 > [Prise en main](./getting-started/overview.md)
