@@ -279,7 +279,7 @@ items:
     href: reference-architectures/index.md
   - name: AI
     items:
-    - name: Entraînement et scoring des modèles d’apprentissage profond et des modèles Python
+    - name: Entraînement et scoring des modèles Python
       items:
       - name: Entraînement distribué des modèles d’apprentissage profond
         href: reference-architectures/ai/training-deep-learning.md
@@ -871,9 +871,9 @@ items:
           href: cloud-adoption/decision-guides/software-defined-network/hub-spoke.md
       - name: Journaux et rapports
         href: cloud-adoption/decision-guides/log-and-report/overview.md
-ms.openlocfilehash: 953c7cbdee185a88d8470199fb4ba92244adaa84
-ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.openlocfilehash: c85a89cc8b4442cf4876269ef10124426b9b9763
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2019
-ms.locfileid: "58887775"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59069039"
