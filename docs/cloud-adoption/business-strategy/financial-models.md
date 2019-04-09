@@ -8,12 +8,12 @@ description: Comment créer un modèle financier pour la transformation cloud.
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
-ms.openlocfilehash: 4fe9b178962bf2cd6a79233278c73085237772f0
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: 1f3ed8a84b84ba577ad5e5db8b1becd318dc04a3
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55898202"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068869"
 ---
 # <a name="create-a-financial-model-for-cloud-transformation"></a>Créer un modèle financier pour la transformation cloud
 
@@ -26,7 +26,7 @@ Le retour sur investissement (ROI) est souvent un critère important pour la dir
 ![Le retour sur investissement est égal à : (Gain de l’investissement – Coût de l’investissement) / Coût de l’investissement](../_images/formula-roi.png)
 
 <!-- markdownlint-disable MD036 -->
-*Retour sur investissement = (Gain de l’investissement &minus; Investissement initial) / Investissement initial*
+<!--*ROI = (Gain from Investment &minus; Initial Investment) / Initial Investment*-->
 <!-- markdownlint-enable MD036 -->
 
 Dans les sections suivantes, nous allons voir quelles données sont à inclure dans le calcul de l’investissement initial et du gain de cet investissement (revenus).
@@ -46,7 +46,7 @@ Pour calculer les revenus, vous devez utiliser deux variables :
 ![Le gain de l’investissement est égal à : Écarts de revenus + Écarts de coûts](../_images/formula-gain-from-investment.png)
 
 <!-- markdownlint-disable MD036 -->
-*Gain de l’investissement = Écarts de revenus + Écarts de coûts*
+<!--*Gain from Investment = Revenue Deltas + Cost Deltas*-->
 <!-- markdownlint-enable MD036 -->
 
 Chaque variable est décrite ci-après.
@@ -57,7 +57,7 @@ L’écart de revenus doit être estimé en amont avec l’entreprise. Une fois 
 
 ## <a name="cost-deltas"></a>Écarts de coûts
 
-Les écarts de coûts correspondent à la variation des coûts, à la hausse ou à la baisse, résultant de la transformation. Plusieurs variables peuvent impacter les écarts de coûts indépendamment les unes des autres. Les revenus dépendent en grande partie de coûts de base comme les réductions de dépenses d’investissement, l’évitement de coûts, les réductions de coûts d’exploitation et les amortissements dégressifs. Les sections suivantes présentent des exemples d’écarts de coûts à prendre en compte.
+Les écarts de coûts correspondent à la variation des coûts, à la hausse ou à la baisse, résultant de la transformation. Il existe un nombre de variables indépendantes qui peuvent affecter les deltas de coût. Les revenus dépendent en grande partie de coûts de base comme les réductions de dépenses d’investissement, l’évitement de coûts, les réductions de coûts d’exploitation et les amortissements dégressifs. Les sections suivantes présentent des exemples d’écarts de coûts à prendre en compte.
 
 ### <a name="depreciation-reductions-or-acceleration"></a>Amortissement dégressif ou accéléré
 
@@ -75,7 +75,7 @@ Dans certains cas, les ressources mises hors service peuvent être vendues, gén
 
 Les dépenses récurrentes nécessaires au fonctionnement de l’entreprise sont souvent appelées dépenses d’exploitation (OPEX). La catégorie des dépenses d’exploitation est très large. Dans la plupart des modèles comptables, elle inclut les éléments suivants : les licences logicielles, les frais d’hébergement, les factures d’électricité, les loyers immobiliers, les dépenses de climatisation, le personnel temporaire embauché, les locations d’équipements, les pièces de rechange, les contrats de maintenance, les services de réparation, les services de continuité d’activité/reprise d’activité après sinistre, et plusieurs autres dépenses non soumises à l’obligation d’approbation des dépenses d’investissement.
 
-Cette catégorie est l’une des catégories recouvrant le plus de types de dépenses différentes pendant une transformation opérationnelle. Le temps consacré à l’établissement d’une liste exhaustive des dépenses est rarement du temps perdu. Interrogez le directeur informatique et le service financier pour vous assurer que vous avez bien pris en compte tous les coûts d’exploitation.
+Cette catégorie est un des domaines de bénéfices plus grande lorsque vous envisagez une Transformation opérationnelle. Le temps consacré à l’établissement d’une liste exhaustive des dépenses est rarement du temps perdu. Interrogez le directeur informatique et le service financier pour vous assurer que vous avez bien pris en compte tous les coûts d’exploitation.
 
 ### <a name="cost-avoidance"></a>Évitement des coûts
 
@@ -95,7 +95,7 @@ Il y a une exception, quand la capacité opérationnelle est fournie par un tier
 
 ### <a name="capital-expense-reductions-or-avoidance"></a>Réductions ou évitement des dépenses d’investissement
 
-Les dépenses d’investissement (CAPEX) sont légèrement différentes des dépenses d’exploitation. En règle générale, cette catégorie s’applique aux cycles de renouvellement ou à l’extension des centres de données. Par exemple, une extension de centre de données serait l’ajout d’un nouveau cluster à hautes performances pour héberger une solution de Big Data ou un entrepôt de données. Cette extension serait généralement à inclure dans la catégorie des dépenses d’investissement. Les cycles standards de renouvellement sont les cas les plus courants. Certaines entreprises ont mis en place des cycles fixes de renouvellement de leur matériel, c’est-à-dire qu’elles mettent hors service et remplacent leurs ressources selon un cycle régulier (habituellement tous les trois, cinq ou huit ans). Souvent, ces cycles coïncident avec les cycles de location ou la durée de vie prévue des équipements. À chaque nouveau cycle de renouvellement, le service informatique investit pour acquérir du nouveau matériel.
+Les dépenses d’investissement (CAPEX) sont légèrement différentes des dépenses d’exploitation. En règle générale, cette catégorie s’applique aux cycles de renouvellement ou à l’extension des centres de données. Par exemple, une extension de centre de données serait l’ajout d’un nouveau cluster à hautes performances pour héberger une solution de Big Data ou un entrepôt de données. Cette extension serait généralement à inclure dans la catégorie des dépenses d’investissement. Les cycles standards de renouvellement sont les cas les plus courants. Certaines entreprises ont matériel rigide de cycles d’actualisation, les ressources de signification sont mis hors service et remplacés selon un cycle régulière (généralement toutes trois, cinq ou huit ans). Souvent, ces cycles coïncident avec les cycles de location ou la durée de vie prévue des équipements. À chaque nouveau cycle de renouvellement, le service informatique investit pour acquérir du nouveau matériel.
 
 Si un cycle de renouvellement est approuvé et budgétisé, la transformation cloud peut vous aider à éliminer ce coût. Si un cycle de renouvellement est planifié, mais pas encore approuvé, la transformation cloud peut engendrer un évitement de coûts d’exploitation. Les deux scénarios sont à inclure dans les écarts de coûts.
 

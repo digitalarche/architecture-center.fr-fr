@@ -7,16 +7,16 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
-ms.openlocfilehash: 026d22bb9cfdcb69b1a12294410af748e7af5c39
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
+ms.openlocfilehash: 1a927beb23a2e45b509b2648a6bccce4c2ad242d
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54480791"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068971"
 ---
 # <a name="designing-microservices-continuous-integration"></a>Conception de microservices : Intégration continue
 
-L’intégration et la livraison continues sont une condition essentielle à la réussite des microservices. Sans processus efficace d’intégration et de livraison continues, vous n’obtiendrez pas l’agilité attendue des microservices. Certaines des difficultés du processus appliqué aux microservices proviennent de la multiplication des bases de code et de l’hétérogénéité des environnements de génération pour les divers services. Ce chapitre décrit ces obstacles et recommande certaines stratégies pour les surmonter.
+L’intégration et la livraison continues sont une condition essentielle à la réussite des microservices. Sans processus efficace d’intégration et de livraison continues, vous n’obtiendrez pas l’agilité attendue des microservices. Certaines des difficultés du processus appliqué aux microservices proviennent de la multiplication des bases de code et de l’hétérogénéité des environnements de génération pour les divers services. Cet article décrit ces obstacles et recommande certaines stratégies pour le problème.
 
 ![Diagramme de CI/CD pour les microservices](./images/ci-cd.png)
 
@@ -123,4 +123,4 @@ Au sein du marché de la consommation, une amélioration de l’expérience util
 
 Les microservices sont une réponse à cette évolution. En décomposant une application monolithique en groupe de services sommairement liés, nous sommes en mesure de réguler la publication de chaque service et de mettre en œuvre des mises à jour fréquentes sans déplorer de périodes d’interruption ni bouleversement fondamental. Les microservices, par ailleurs, présentent des avantages en matière d’évolutivité, d’isolation des défaillances et de résilience. Parallèlement, les plateformes cloud simplifient le développement et l’exécution des microservices, avec un approvisionnement automatisé des ressources de calcul, des orchestrateurs de conteneur en tant que service et des environnements sans serveur basés sur les événements.
 
-Cependant, comme nous l’avons vu, les architectures de microservices présentent de nombreuses difficultés. Pour réussir, vous devez partir d’une conception robuste. Il est nécessaire d’analyser soigneusement le domaine, et de prendre soin de bien choisir les technologies, modéliser les données et concevoir les API tout en veillant à instaurer une culture DevOps mature. Nous espérons que ce guide et l’[implémentation de référence](https://github.com/mspnp/microservices-reference-implementation) associée vous ont éclairé la voie sur le chemin de la réussite.
+Cependant, comme nous l’avons vu, les architectures de microservices présentent de nombreuses difficultés. Pour réussir, vous devez partir d’une conception robuste. Il est nécessaire d’analyser soigneusement le domaine, et de prendre soin de bien choisir les technologies, modéliser les données et concevoir les API tout en veillant à instaurer une culture DevOps mature. Nous espérons que ce guide et l’[implémentation de référence](https://github.com/mspnp/microservices-reference-implementation/tree/v0.1.0-orig) associée vous ont éclairé la voie sur le chemin de la réussite.

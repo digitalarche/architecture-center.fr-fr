@@ -6,22 +6,22 @@ ms.subservice: enterprise-cloud-adoption
 ms.date: 02/11/2019
 description: Fonctionnement de la gouvernance des ressources cloud sur Azure
 author: petertaylor9999
-ms.openlocfilehash: 602ac81f2b2201c77746df971d282582ceee23f7
-ms.sourcegitcommit: 9854bd27fb5cf92041bbfb743d43045cd3552a69
+ms.openlocfilehash: 0989a5aad8a6290cce07fd71771c690bbd615e0d
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2019
-ms.locfileid: "58503194"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068852"
 ---
 <!-- markdownlint-disable MD026 -->
 
 # <a name="what-is-cloud-resource-governance"></a>Qu’est-ce que la gouvernance des ressources cloud ?
 
-Dans l’article [Comment fonctionne Azure ?](what-is-azure.md), vous avez appris qu’Azure est une collection de serveurs et d’équipements de mise en réseau sur lesquels fonctionnent du matériel virtualisé et des logiciels pour le compte des utilisateurs. Azure garantit l’agilité des développeurs et des services informatiques de votre organisation en les aidant à créer, lire, mettre à jour et supprimer des ressources en fonction de leurs besoins.
+Dans [comment fonctionne Azure ?](what-is-azure.md), vous avez appris qu’Azure est une collection de serveurs et du matériel en cours d’exécution un matériel virtualisé et logiciels pour le compte utilisateurs réseau. Azure permet le développement d’applications et services informatiques à être agile en facilitant la créer, lire, mettre à jour et supprimer des ressources en fonction des besoins de votre organisation.
 
-Mais si le fait d’accorder aux développeurs un accès illimité aux ressources les fait considérablement gagner en agilité, une telle approche peut également entraîner des coûts inattendus. Par exemple, une équipe de développement peut être autorisée à déployer un ensemble de ressources à des fins de test mais oublier de les supprimer une fois les tests terminés. Ces ressources continueront d’engendrer des coûts, même si leur utilisation n’est plus nécessaire ou autorisée.
+Toutefois, pendant un accès illimité aux ressources peut rendre les développeurs très souple, il peut également entraîner les coûts inattendus. Par exemple, une équipe de développement peut être autorisée à déployer un ensemble de ressources à des fins de test mais oublier de les supprimer une fois les tests terminés. Ces ressources continueront à s’accumuler les coûts, même si elles ne sont plus approuvées ou nécessaires.
 
-La **gouvernance** de l’accès aux ressources offre un moyen de résoudre ce problème. La gouvernance consiste à gérer, surveiller et contrôler en continu les ressources Azure afin d’atteindre les objectifs et de satisfaire aux exigences de votre organisation.
+La solution est la gouvernance des accès aux ressources. **Gouvernance** est le processus en cours de la gestion, la surveillance et l’audit de l’utilisation des ressources Azure pour satisfaire les besoins de votre organisation.
 
 <!-- markdownlint-disable MD034 -->
 
@@ -29,13 +29,13 @@ La **gouvernance** de l’accès aux ressources offre un moyen de résoudre ce p
 
 <!-- markdownlint-enable MD034 -->
 
-Ces objectifs et exigences étant propres à chaque organisation, il est impossible de définir une approche unique de la gouvernance. C’est pourquoi Azure implémente deux principaux outils de gouvernance : le **contrôle d’accès en fonction du rôle (RBAC)** et la **stratégie de ressources**. Il appartient à chaque organisation d’utiliser ces outils pour concevoir son propre modèle de gouvernance.
+Ces exigences sont uniques à chaque organisation, donc une approche unique de la gouvernance n’est pas utile. Au lieu de cela, c’est à chaque organisation pour concevoir leur modèle de gouvernance à l’aide de deux outils de gouvernance principale d’Azure : **contrôle d’accès en fonction du rôle (RBAC)** et **stratégie de ressource**.
 
-Le RBAC définit des rôles, qui eux-mêmes définissent les fonctionnalités dont dispose un utilisateur à qui est attribué le rôle. Par exemple, le rôle de **propriétaire** active toutes les fonctionnalités (création, lecture, mise à jour et suppression) pour une ressource, tandis que les rôles de **lecteur** activent uniquement la fonction de lecture. Les rôles peuvent couvrir une vaste étendue qui s’applique à de nombreux types de ressources. Ils peuvent aussi avoir une portée étroite qui s’applique à seulement quelques ressources.
+Définit les rôles RBAC et les rôles définissent les fonctionnalités de chaque utilisateur affecté ce rôle. Par exemple, le **propriétaire** rôle permet à toutes les fonctionnalités (créer, lire, mettre à jour et supprimer) pour une ressource, tandis que le **lecteur** rôle permet uniquement la fonctionnalité de lecture. Les rôles peuvent être définis avec une large étendue s’applique à de nombreux types de ressources ou d’une portée étroite s’applique à quelques.
 
-Les stratégies de ressources définissent des règles pour la création de ressources. Par exemple, une stratégie de ressources peut limiter la référence SKU d’une machine virtuelle à une taille donnée pré-approuvée. Une stratégie de ressources peut également appliquer l’ajout d’une étiquette auprès d’un centre de coûts au moment de la demande de création de la ressource.
+Les stratégies de ressources définissent des règles pour la création de ressources. Par exemple, une stratégie de ressource peut limiter la référence (SKU) d’un ordinateur virtuel à une taille particulière pré-approuvée. Une autre stratégie de ressource peut imposer l’application d’une balise pour un centre de coût affecté lors de la demande est faite pour créer la ressource.
 
-Lors de la configuration de ces outils, il est important de veiller à garantir le meilleur compromis entre gouvernance et agilité organisationnelle. Autrement dit, plus votre stratégie de gouvernance sera restrictive, moins vos développeurs et vos ingénieurs informatiques seront agiles. Il s’agit, car une stratégie de gouvernance restrictif peut nécessiter plus d’étapes manuelles, telles que le développeur d’avoir à remplir un formulaire ou envoyez un e-mail à une personne de l’équipe de gouvernance pour créer manuellement une ressource. L’équipe de gouvernance possède des fonctionnalités limitées et peut être retardé, ce qui entraîne des équipes de développement non productives en attente de leurs ressources comptabiliser les coûts en attente de suppression de ressources créé et inutiles.
+Lorsque vous configurez ces outils, il est important d’équilibrer la gouvernance et réactivité de l’entreprise. Le plus restrictif votre stratégie de gouvernance, la moins souple seront de vos développeurs et le personnel des services informatiques. Une stratégie de gouvernance restrictif peut nécessiter plus d’étapes manuelles par exemple, exigez un développeur remplir un formulaire ou envoyez un e-mail à un membre de l’équipe de gouvernance pour créer manuellement une ressource. L’équipe de gouvernance a une capacité finie et peut devenir un goulot d’étranglement, ce qui entraîne des équipes de développement en attente unproductively pour leurs ressources soient créées ou inutiles ressources comptabiliser des coûts avant d’être supprimés.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

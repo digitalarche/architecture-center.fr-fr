@@ -4,15 +4,14 @@ titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
-description: Décrit une vue d’ensemble de la première phase de la transformation numérique d’une entreprise pour l’adoption de technologies cloud Azure.
-author: petertaylor9999
-ms.date: 2/11/2019
-ms.openlocfilehash: bfa325ded8c39915ad4d495b4309b700abd71cc2
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+description: Fournit une vue d’ensemble de la première phase de transformation numérique de l’entreprise dans l’adoption des technologies de cloud Azure.
+ms.date: 02/11/2019
+ms.openlocfilehash: 29b02964b5f1cd09857a51c17cf94d6c64e05e88
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55898355"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068954"
 ---
 # <a name="getting-started-with-the-cloud-adoption-framework"></a>Prise en main du framework d’adoption du cloud
 
@@ -59,7 +58,7 @@ Pour en apprendre davantage, l’équipe dédiée à la gouvernance doit passer 
 
 ## <a name="step-3-identify-gaps-in-business-strategy"></a>Étape 3 : Identifier les écarts dans la stratégie métier
 
-L’étape suivante s’adresse à l’équipe de stratégie cloud : elle doit énumérer les problèmes métier qui nécessitent une solution de transformation numérique. Par exemple, une entreprise peut avoir un centre de données local existant avec un matériel en fin de vie qui doit être remplacé. Dans un autre exemple, une entreprise peut rencontrer des difficultés pour commercialiser des fonctionnalités et services nouveaux et être en retard sur la concurrence. Ces écarts représentent les *objectifs* de la transformation numérique de votre entreprise.
+L’étape suivante s’adresse à l’équipe de stratégie cloud : elle doit énumérer les problèmes métier qui nécessitent une solution de transformation numérique. Par exemple, une entreprise peut avoir un centre de données local existant avec le matériel de fin de vie qui doit être remplacé. Dans un autre exemple, une entreprise peut rencontrer des difficultés pour commercialiser des fonctionnalités et services nouveaux et être en retard sur la concurrence. Ces écarts représentent les *objectifs* de la transformation numérique de votre entreprise.
 
 Ils peuvent être classés dans les catégories suivantes :
 
@@ -108,7 +107,7 @@ Les membres du personnel informatique peuvent s’inquiéter quant à leur poste
 Lors de la transformation numérique, chaque équipe doit recueillir les préoccupations que le personnel peut avoir. Au cours de cette opération, identifiez les aspects suivants :
 
 * Le type de préoccupation. Par exemple, les employés peuvent être réfractaires aux changements apportés à leurs tâches suite à la transformation numérique.
-* L’impact de la préoccupation si elle n’est pas traitée. Par exemple, le fait d’être réfractaire à la transformation numérique peut entraîner un ralentissement des employés pour effectuer les changements nécessaires.
+* L’effet si le problème n’est pas traité. Par exemple, le fait d’être réfractaire à la transformation numérique peut entraîner un ralentissement des employés pour effectuer les changements nécessaires.
 * Le domaine compétent pour traiter la préoccupation. Par exemple, si les employés du département informatique sont réticents à acquérir de nouvelles compétences, le domaine des parties prenantes informatiques est le plus compétent pour traiter cette préoccupation. Identifier le domaine peut être simple pour certains problèmes, et dans ce genre de situation, vous avez peut-être besoin de faire remonter l’information à la direction.
 
 ### <a name="identify-gaps"></a>Identifier les écarts
@@ -134,4 +133,4 @@ Suivez ces dépendances et notez les processus qui les prendront en charge, et i
 La transformation numérique est un processus itératif, et avec chaque itération, les équipes impliquées deviendront plus efficaces.
 
 > [!div class="nextstepaction"]
-> [Comprendre le fonctionnement d’Azure](what-is-azure.md)
+> [Comprendre le fonctionne d’Azure](what-is-azure.md)

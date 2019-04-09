@@ -8,12 +8,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: f7c19501b9f28db3892285b5f35a33f02edd87ab
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 3fd3badd66edbe561bea88576bb80d9fc3e0bb79
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58242330"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068920"
 ---
 # <a name="criteria-for-choosing-a-data-store"></a>Critères de sélection d’une banque de données
 
@@ -61,7 +61,7 @@ Pour débuter votre comparaison, rassemblez le maximum d’informations ci-desso
 
 - **Disponibilité dans les régions** : pour les services managés, le service est-il disponible dans toutes les régions Azure ? Votre solution doit-elle être hébergée dans certaines régions Azure ?
 
-- **Portabilité** : vos données devront-elles être migrées localement, vers des centres de données externes ou vers d’autres environnements d’hébergement cloud ?
+- **Portabilité** : Vos données devront-elles être migrées vers en local, les centres de données externes ou les autres environnements d’hébergement cloud ?
 
 - **Licences** : avez-vous une préférence quant au type de licence : propriétaire ou OSS ? Existe-t-il d’autres restrictions externes quant au type de licence que vous pouvez utiliser ?
 

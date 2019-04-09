@@ -1,18 +1,18 @@
 ---
-title: 'Framework d’adoption du cloud : Grandes entreprises – Détails techniques supplémentaires concernant un MVP de gouvernance'
+title: 'Framework d’adoption du cloud : Grande entreprise – meilleures pratiques expliquées'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
 ms.date: 02/11/2019
-description: Grandes entreprises – Détails techniques supplémentaires concernant un MVP de gouvernance
+description: Grande entreprise – meilleures pratiques expliquées
 author: BrianBlanchard
-ms.openlocfilehash: 50b0ae1ebb386d2f0b693a347d599ff29680a9cb
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: 2d52797f1c3541fab1c97d97d0438210d2e66f79
+ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900954"
+ms.lasthandoff: 04/08/2019
+ms.locfileid: "59068988"
 ---
 # <a name="large-enterprise-best-practice-explained"></a>Grandes entreprises : Bonne pratique, explication
 
@@ -38,7 +38,7 @@ Cette implémentation peut également être décrite à l’aide d’une simple 
 
 1. Sollicitez des décisions concernant les principales dépendances : identité, réseau et chiffrement.
 2. Déterminez le modèle à utiliser lors de l’application des stratégies d’entreprise.
-3. Déterminez les modèles de gouvernance appropriés pour les disciplines suivantes : cohérence des ressources, identification des ressources et création de rapports.
+3. Déterminer les modèles de gouvernance appropriée pour la cohérence de la ressource, le balisage des ressources et les disciplines de journalisation et création de rapports.
 4. Implémentez les outils de gouvernance alignés sur le modèle d’application de stratégie choisi, dans le but d’appliquer des décisions dépendantes et des décisions de gouvernance.
 
 [!INCLUDE [implementation-process](../../../../../includes/cloud-adoption/governance/implementation-process.md)]
@@ -90,7 +90,7 @@ Certaines instructions de stratégie ne peuvent pas ou ne doivent pas être cont
 
 **Formation technique** : L’équipe de gouvernance cloud propose des sessions de formation bimensuelles et a créé deux vidéos pour les ingénieurs. Ces ressources aident les ingénieurs à se familiariser rapidement avec la culture de la gouvernance et avec l’exécution des déploiements. L’équipe ajoute des ressources de formation qui mettent en évidence la différence entre les déploiements en production et les autres, afin que les ingénieurs comprennent l’impact des nouvelles stratégies sur l’adoption du cloud. Il est ainsi possible d’obtenir des déploiements cohérents sans avoir à imposer une adhésion stricte.
 
-**Planification de déploiement** : Avant de déployer toute ressource contenant des données protégées, l’équipe de gouvernance cloud est responsable d’examiner les scripts de déploiement afin de valider l’alignement de la gouvernance. Les équipes existantes dont les déploiements ont déjà été approuvés feront l’objet d’un audit à l’aide d’outils de programmation.
+**Planification de déploiement** : Avant de déployer n’importe quel élément multimédia contenant des données protégées, l’équipe de gouvernance du Cloud sera chargé de la vérification des scripts de déploiement pour valider l’alignement de gouvernance. Les équipes existantes dont les déploiements ont déjà été approuvés feront l’objet d’un audit à l’aide d’outils de programmation.
 
 **Audit et création de rapports mensuels** : Chaque mois, l’équipe de gouvernance cloud effectue un audit de tous les déploiements cloud afin de valider l’adéquation continue à la stratégie. Lorsque des écarts sont identifiés, ils sont documentés et partagés avec les équipes d’adoption du cloud. Lorsque l’implémentation ne risque pas d’entraîner une interruption des activités ou une fuite de données, les stratégies sont automatiquement implémentées. À la fin de l’audit, l’équipe de gouvernance cloud compile un rapport pour l’équipe de la stratégie cloud et chaque équipe d’adoption du cloud afin de communiquer sur l’adhésion générale des parties prenantes à la stratégie. Le rapport est également conservé à des fins d’audit et juridiques.
 
@@ -102,12 +102,12 @@ Si l’un des modèles choisis dans ce parcours de gouvernance ne correspond pas
 
 - [Modèles de chiffrement](../../../decision-guides/encryption/overview.md)
 - [Modèles d’identité](../../../decision-guides/identity/overview.md)
-- [Modèles de journalisation et de création de rapports](../../../decision-guides/log-and-report/overview.md)
-- [Modèles d’implémentation de stratégie](../../../decision-guides/policy-enforcement/overview.md)
+- [Journaux et des modèles de rapports](../../../decision-guides/log-and-report/overview.md)
+- [Modèles de mise en œuvre de stratégie](../../../decision-guides/policy-enforcement/overview.md)
 - [Modèles de cohérence des ressources](../../../decision-guides/resource-consistency/overview.md)
-- [Modèles d’étiquetage des ressources](../../../decision-guides/resource-tagging/overview.md)
-- [Modèles SDN (Software Defined Network)](../../../decision-guides/software-defined-network/overview.md)
-- [Modèles de conception des abonnements](../../../decision-guides/subscriptions/overview.md)
+- [Modèles de balisage de ressources](../../../decision-guides/resource-tagging/overview.md)
+- [Modèles de réseau défini par logiciel](../../../decision-guides/software-defined-network/overview.md)
+- [Modèles de conception d’abonnement](../../../decision-guides/subscriptions/overview.md)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
