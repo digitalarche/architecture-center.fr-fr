@@ -50,7 +50,7 @@ Cette architecture est constituée des composants suivants.
 
 [Stockage d’objets Blob Azure] [ blob] est utilisé pour stocker les données d’entrée, les modèles d’apprentissage automatique préformé et les résultats de prévision. Il offre un stockage très économique pour les performances nécessitant cette charge de travail.
 
-[Azure Container Instances] [ aci] fournir le calcul sans serveur à la demande. Dans ce cas, une instance de conteneur est déployée selon une planification pour déclencher les tâches de traitement par lots qui génèrent les prévisions. Les traitements par lots sont déclenchés à partir d’un script R à l’aide du [doAzureParallel] [ doAzureParallel] package. L’instance de conteneur s’arrête automatiquement une fois les travaux terminés.
+[Azure Container Instances] [ aci] fournir le calcul sans serveur à la demande. Dans ce cas, une instance de conteneur est déployée selon une planification pour déclencher les tâches de traitement par lots qui génèrent les prévisions. Les traitements par lots sont déclenchés à partir d’un script R à l’aide du [doAzureParallel][doAzureParallel] package. L’instance de conteneur s’arrête automatiquement une fois les travaux terminés.
 
 [Azure Logic Apps] [ logic-apps] déclencher l’intégralité du workflow en déployant les instances de conteneur selon une planification. Un connecteur dans Logic Apps d’Azure Container Instances permet à une instance à être déployé sur une plage de déclencher des événements.
 
@@ -86,13 +86,13 @@ Surveiller et arrêter le traitement par lots à partir de la **travaux** volet 
 
 Le package doAzureParallel collecte automatiquement des journaux de tous les stdout/stderr pour chaque tâche envoyée sur Azure Batch. Vous la trouverez dans le compte de stockage créé lors de l’installation. Pour les afficher, utilisez un outil de navigation de stockage comme [Azure Storage Explorer] [ storage-explorer] ou le portail Azure.
 
-Pour déboguer rapidement des traitements par lots pendant le développement, imprimer des journaux dans votre session R locale à l’aide du [getJobFiles] [ getJobFiles] de doAzureParallel (fonction).
+Pour déboguer rapidement des traitements par lots pendant le développement, imprimer des journaux dans votre session R locale à l’aide du [getJobFiles][getJobFiles] de doAzureParallel (fonction).
 
 ## <a name="cost-considerations"></a>Considérations relatives au coût
 
 Les ressources de calcul utilisées dans cette architecture de référence sont les composants plus coûteuses. Pour ce scénario, un cluster de taille fixe est créé chaque fois que la tâche est déclenchée, puis arrêtez une fois la tâche terminée. Des frais sont facturés uniquement pendant que les nœuds de cluster sont démarrage, en cours d’exécution ou en cours d’arrêt. Cette approche est appropriée pour un scénario où les ressources de calcul requises pour générer les prévisions demeurent relativement constants à partir d’un travail à un travail.
 
-Dans les scénarios où la quantité de calcul requis pour terminer la tâche n’est pas connue d’avance, il peut être plus judicieux d’utiliser la mise à l’échelle automatique. Avec cette approche, la taille du cluster est mis à l’échelle vers le haut ou vers le bas en fonction de la taille de la tâche. Azure Batch prend en charge une plage de formules à l’échelle automatique que vous pouvez définir lors de la définition du cluster à l’aide de la [doAzureParallel] [ doAzureParallel] API.
+Dans les scénarios où la quantité de calcul requis pour terminer la tâche n’est pas connue d’avance, il peut être plus judicieux d’utiliser la mise à l’échelle automatique. Avec cette approche, la taille du cluster est mis à l’échelle vers le haut ou vers le bas en fonction de la taille de la tâche. Azure Batch prend en charge une plage de formules à l’échelle automatique que vous pouvez définir lors de la définition du cluster à l’aide de la [doAzureParallel][doAzureParallel] API.
 
 Dans certains scénarios, le temps entre les travaux peut être trop court pour arrêter et démarrer le cluster. Dans ce cas, conserver le cluster en cours d’exécution entre les travaux si nécessaire.
 
@@ -100,7 +100,7 @@ Azure Batch et doAzureParallel prend en charge l’utilisation de machines virtu
 
 ## <a name="deployment"></a>Déploiement
 
-Pour déployer cette architecture de référence, suivez les étapes décrites dans le [GitHub] [ github] dépôt.
+Pour déployer cette architecture de référence, suivez les étapes décrites dans le [GitHub][github] dépôt.
 
 
 [0]: ./_images/batch-scoring-r-models.png
