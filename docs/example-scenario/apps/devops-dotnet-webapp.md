@@ -9,12 +9,12 @@ ms.service: architecture-center
 ms.subservice: example-scenario
 ms.custom: fasttrack, seodec18
 social_image_url: /azure/architecture/example-scenario/apps/media/architecture-devops-dotnet-webapp.svg
-ms.openlocfilehash: 0d6ac13fb357657a2ec5e6284abadb46d6926907
-ms.sourcegitcommit: 3b15d65e7c35a19506e562c444343f8467b6a073
-ms.translationtype: HT
+ms.openlocfilehash: f999b2ffdf234161f668887d5b2327ecf50f0e55
+ms.sourcegitcommit: bb75a25bd589a761c79e39f2ccdec4acc7d71d60
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/25/2019
-ms.locfileid: "54908492"
+ms.lasthandoff: 04/11/2019
+ms.locfileid: "59480131"
 ---
 # <a name="design-a-cicd-pipeline-using-azure-devops"></a>Concevoir un pipeline CI/CD à l’aide d’Azure DevOps
 
@@ -93,11 +93,11 @@ Cet [arbre de décision pour les services de calcul Azure](/azure/architecture/g
 
 ### <a name="walk-through"></a>Procédure pas à pas
 
-Le [projet Azure DevOps](/azure/devops-project/azure-devops-project-github) déploie automatiquement un plan App Service, une instance App Service ainsi qu’une ressource App Insights, et configure automatiquement le projet Azure DevOps.
+[Azure DevOps Projects](/azure/devops-project/azure-devops-project-github) sera déployer un Plan App Service, App Service et une ressource application Insights pour vous, ainsi que configurer un pipeline de Pipelines d’Azure pour vous.
 
-Une fois le projet Azure DevOps déployé et la compilation effectuée, vérifiez les modifications du code, les éléments de travail et les résultats des tests associés. Vous remarquerez qu’aucun résultat de test n’est affiché, car le code ne contient aucun test à exécuter.
+Une fois que vous avez configuré un pipeline avec Azure DevOps Projects et la build est terminée, passez en revue la modification du code, éléments de travail et résultats des tests. Vous remarquerez qu’aucun résultat de test n’est affiché, car le code ne contient aucun test à exécuter.
 
-Le projet crée un pipeline de mise en production et un déclenchement de déploiement continu, ce qui déploie notre application dans l’environnement de développement. Dans le cadre d’un processus de déploiement continu, il est possible que les mises en production couvrent plusieurs environnements. Une mise en production peut s’étendre sur chaque infrastructure (à l’aide de techniques telles qu’IaC) et peut également déployer les packages d’application requis en même temps que toutes les tâches de post-configuration.
+Le pipeline crée une définition de version et un déclencheur de déploiement continu, le déploiement notre application dans l’environnement de développement. Dans le cadre d’un processus de déploiement continu, il est possible que les mises en production couvrent plusieurs environnements. Une mise en production peut s’étendre sur chaque infrastructure (à l’aide de techniques telles qu’IaC) et peut également déployer les packages d’application requis en même temps que toutes les tâches de post-configuration.
 
 ## <a name="pricing"></a>Tarifs
 
@@ -115,7 +115,7 @@ Pour plus d’informations sur les déploiements CI/CD et Azure DevOps, consulte
 - [DevOps at Microsoft - How we work with Azure DevOps][devops-microsoft] (DevOps chez Microsoft - Comment nous travaillons avec Azure DevOps)
 - [Tutoriels pas à pas : DevOps avec Azure DevOps][devops-with-vsts]
 - [Liste de contrôle DevOps][devops-checklist]
-- [Créer un pipeline CI/CD pour .NET avec Azure DevOps Project][devops-project-create]
+- [Créer un pipeline CI/CD pour .NET avec Azure DevOps Projects][devops-project-create]
 
 <!-- links -->
 

@@ -3,17 +3,17 @@ title: Style d’architecture Web-File d’attente-Worker
 titleSuffix: Azure Application Architecture Guide
 description: Décrit les avantages, les inconvénients et les bonnes pratiques des architectures Web-File d’attente-Worker sur Azure.
 author: MikeWasson
-ms.date: 08/30/2018
+ms.date: 04/10/2019
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: b471d270af09df7ffd58dfdd49e7d03d05bfe582
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 974b8b8595d6d9333552c41dfe1f3f2af848d264
+ms.sourcegitcommit: bb75a25bd589a761c79e39f2ccdec4acc7d71d60
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58244590"
+ms.lasthandoff: 04/11/2019
+ms.locfileid: "59480080"
 ---
 # <a name="web-queue-worker-architecture-style"></a>Style d’architecture Web-File d’attente-Worker
 
@@ -71,15 +71,15 @@ Cette section décrit une architecture Web-File d’attente-Worker recommandée 
 
 ![Diagramme physique du style d’architecture Web-File d’attente-Worker](./images/web-queue-worker-physical.png)
 
-Le serveur frontal est implémenté en tant qu’application web Azure App Service et le Worker est implémenté en tant que WebJob. L’application web et WebJob sont associés à un plan App Service qui fournit les instances de machine virtuelle.
+- Le serveur frontal est implémenté comme une application web Azure App Service, et le processus de travail est implémenté comme une application Azure Functions. L’application web et l’application de fonction sont associés à un plan App Service qui fournit les instances de machine virtuelle.
 
-Vous pouvez utiliser les files d’attente Azure Service Bus ou de stockage Azure pour la file d’attente de messages. (Le schéma montre une file d’attente de stockage Azure.)
+- Vous pouvez utiliser les files d’attente Azure Service Bus ou de stockage Azure pour la file d’attente de messages. (Le schéma montre une file d’attente de stockage Azure.)
 
-Cache Redis Azure stocke l’état de session et d’autres données qui nécessitent un accès à faible latence.
+- Cache Redis Azure stocke l’état de session et d’autres données qui nécessitent un accès à faible latence.
 
-Azure CDN est utilisé pour mettre en cache le contenu statique comme des images, des CSS ou des HTML.
+- Azure CDN est utilisé pour mettre en cache le contenu statique comme des images, des CSS ou des HTML.
 
-Pour le stockage, choisissez les technologies de stockage qui répondent le mieux aux besoins de l’application. Vous pouvez utiliser plusieurs technologies de stockage (persistance polyglotte). Pour illustrer cette idée, le schéma montre Azure SQL Database et Azure Cosmos DB.
+- Pour le stockage, choisissez les technologies de stockage qui répondent le mieux aux besoins de l’application. Vous pouvez utiliser plusieurs technologies de stockage (persistance polyglotte). Pour illustrer cette idée, le schéma montre Azure SQL Database et Azure Cosmos DB.
 
 Pour plus d’informations, consultez [Improve scalability in a web application][scalable-web-app] (Améliorer l’évolutivité d’une application web).
 
@@ -89,7 +89,7 @@ Pour plus d’informations, consultez [Improve scalability in a web application]
 
 - Utilisez la fonctionnalité de mise à l’échelle intégrée d’App Service pour augmenter la taille des instances de machine virtuelle. Si la charge sur l’application suit les modèles prévisibles, utilisez la mise à l’échelle automatique basée sur la planification. Si la charge est imprévisible, utilisez des règles de mise à l’échelle automatique basée sur des métriques.
 
-- Envisagez de placer l’application web et WebJob dans des plans App Service distincts. De cette manière, ils sont hébergés sur des instances distinctes de machine virtuelle et peuvent être mis à l’échelle indépendamment.
+- Envisagez de placer l’application web et l’application de fonction dans des plans App Service distincts. De cette façon, ils peuvent être mis à l’échelle indépendamment.
 
 - Utilisez des plans App Service distincts pour la production et le test. Sinon, si vous utilisez le même plan pour la production et le test, cela signifie que l’exécution des tests a lieu sur vos machines virtuelles de production.
 
