@@ -7,20 +7,18 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
-ms.openlocfilehash: 535c53faa810f74299e715a204e427c8919ce360
-ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.openlocfilehash: 3e93a036bdb7cdf9f4e49ae81887063624372a6b
+ms.sourcegitcommit: d58e6b2b891c9c99e951c59f15fce71addcb96b1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2019
-ms.locfileid: "59069022"
+ms.lasthandoff: 04/12/2019
+ms.locfileid: "59533122"
 ---
 # <a name="microservices-architecture-on-azure-kubernetes-service-aks"></a>Architecture des microservices sur AKS (Azure Kubernetes Service)
 
 Cette architecture de référence montre une application de microservices déployée sur AKS (Azure Kubernetes Service). Il décrit une configuration AKS de base qui peut être le point de départ pour la plupart des déploiements. Cet article suppose une connaissance élémentaire de Kubernetes. Il se concentre principalement sur l’infrastructure et les considérations DevOps liées à l’exécution d’une architecture de microservices sur AKS. Pour obtenir des conseils sur la conception de microservices, consultez [création de microservices sur Azure](../../microservices/index.md).
 
-![Logo de GitHub](../../_images/github.png) une implémentation de référence de cette architecture est disponible sur [GitHub](https://github.com/mspnp/microservices-reference-implementation).
-
-
+![Logo de GitHub](../../_images/github.png) une implémentation de référence de cette architecture est disponible sur [GitHub][ri].
 
 ![Architecture de référence AKS](./_images/aks.png)
 
@@ -202,7 +200,7 @@ Les informations d’identification d’administrateur de cluster étant particu
 
 - Le « Rôle administrateur de cluster du service Azure Kubernetes » est autorisé à télécharger les informations d’identification d’administrateur de cluster. Seuls les administrateurs de cluster doivent être assignés à ce rôle.
 
-- Le « Rôle utilisateur de cluster du service Azure Kubernetes » est autorisé à télécharger les informations d’identification d’utilisateur de cluster. Les utilisateurs non-administrateurs peuvent être assignés à ce rôle. Ce rôle ne donne pas d’autorisations spécifiques sur les ressources Kubernetes à l’intérieur du cluster &mdash; il permet simplement à un utilisateur de se connecter au serveur d’API. 
+- Le « Rôle utilisateur de cluster du service Azure Kubernetes » est autorisé à télécharger les informations d’identification d’utilisateur de cluster. Les utilisateurs non-administrateurs peuvent être assignés à ce rôle. Ce rôle ne donne pas d’autorisations spécifiques sur les ressources Kubernetes à l’intérieur du cluster &mdash; il permet simplement à un utilisateur de se connecter au serveur d’API.
 
 Quand vous définissez vos stratégies RBAC (Kubernetes et Azure), pensez aux rôles dans votre organisation :
 
@@ -259,109 +257,18 @@ Automatisez la mise à jour corrective des images à l’aide d’ACR Tasks, fon
 Voici certains objectifs d’un processus CI/CD robuste pour une architecture de microservices :
 
 - Chaque équipe peut générer et déployer ses propres services de manière indépendante, sans affecter ou interrompre d’autres équipes.
-
 - Avant d’être déployée en production, une nouvelle version d’un service est déployée sur les environnements de développement/test/assurance qualité à des fins de validation. Des critères de qualité sont appliqués à chaque étape.
-
 - Une nouvelle version d’un service peut être déployée côte à côte avec la version précédente.
-
 - Des stratégies de contrôle d’accès suffisantes sont en place.
+- Pour les charges de travail, vous pouvez approuver les images de conteneur qui sont déployés en production.
 
-- Vous pouvez approuver les images conteneur qui sont déployées en production.
+Pour en savoir plus sur les défis, consultez [CI/CD pour les architectures de microservices](../../microservices/ci-cd.md).
 
-### <a name="isolation-of-environments"></a>Isolation des environnements
+Pour obtenir des recommandations spécifiques et les meilleures pratiques, consultez [CI/CD pour les microservices sur Kubernetes](../../microservices/ci-cd-kubernetes.md).
 
-Vous avez plusieurs environnements sur lesquels vous déployez les services, notamment des environnements de développement, de test de détection de fumée, de test d’intégration, de test de chargement et, enfin, de production. Ces environnements ont besoin d’un certain niveau d’isolation. Dans Kubernetes, vous avez le choix entre l’isolation physique et l’isolation logique. Dans le cadre de l’isolation physique, le déploiement est effectué sur des clusters distincts. L’isolation logique utilise des espaces de noms et des stratégies, comme décrit précédemment.
+## <a name="deploy-the-solution"></a>Déployer la solution
 
-Nous vous recommandons de créer un cluster de production dédié ainsi qu’un cluster distinct pour vos environnements de développement/test. L’isolation logique permet de séparer les environnements au sein du cluster de développement/test. Les services déployés sur le cluster de développement/test ne doivent jamais avoir accès à des magasins de données qui contiennent des données métier. 
+Pour déployer l’implémentation de référence pour cette architecture, suivez les étapes décrites dans le [référentiel GitHub][ri-deploy].
 
-### <a name="helm"></a>Helm
-
-Envisagez d’utiliser Helm pour gérer la génération et le déploiement des services. Voici quelques-unes des fonctionnalités de Helm qui facilitent l’intégration et le déploiement continus :
-
-- Organisation de tous les objets Kubernetes pour un microservice spécifique en un chart Helm unique
-- Déploiement du chart en tant que commande helm unique, plutôt que série de commandes kubectl
-- Suivi des mises à jour et des révisions, à l’aide du contrôle de version sémantique, avec possibilité de restaurer une version précédente
-- Utilisation de modèles pour éviter la duplication d’informations, telles que les étiquettes et les sélecteurs, dans plusieurs fichiers
-- Gestion des dépendances entre charts
-- Publication des charts dans un dépôt Helm, tel qu’Azure Container Registry, et intégration de ces derniers au pipeline de build
-
-Pour plus d’informations sur l’utilisation de Container Registry comme dépôt Helm, consultez [Utiliser Azure Container Registry comme référentiel Helm pour les graphiques de votre application](/azure/container-registry/container-registry-helm-repos).
-
-### <a name="cicd-workflow"></a>Workflow CI/CD
-
-Avant de créer un workflow CI/CD, vous devez savoir comment la base de code est structurée et gérée.
-
-- Les équipes travaillent-elles dans des dépôts distincts ou dans un même dépôt (un dépôt unique) ?
-- Quelle est votre stratégie de création de branche ?
-- Qui peut envoyer (push) du code en production ? Existe-t-il un rôle de gestionnaire de mise en production ?
-
-L’approche « dépôt unique » est de plus en plus utilisée, mais les deux approches ont des avantages et des inconvénients.
-
-| &nbsp; | Dépôt unique | Dépôts multiples |
-|--------|----------|----------------|
-| **Avantages** | Partage du code<br/>Code et outils plus faciles à standardiser<br/>Code plus facile à refactoriser<br/>Découvrabilité - une même vue du code<br/> | Propriété clairement établie par équipe<br/>Potentiellement moins de conflits de fusion<br/>Aide à appliquer le découplage des microservices |
-| **Défis** | Les modifications apportées au code partagé peuvent affecter plusieurs microservices<br/>Plus grand risque de conflits de fusion<br/>Les outils doivent être adaptés pour une grande base de code<br/>Contrôle d’accès<br/>Processus de déploiement plus complexe | Partage du code plus difficile<br/>Standards de codage plus difficiles à appliquer<br/>Gestion des dépendances<br/>Base de code diffuse, découvrabilité faible<br/>Manque d’infrastructure partagée
-
-Dans cette section, nous présentons un workflow CI/CD possible, basé sur les hypothèses suivantes :
-
-- Le dépôt de code est un « dépôt unique », avec des dossiers organisés par microservice.
-- La stratégie de création de branche de l’équipe est basée sur un [développement de type tronc](https://trunkbaseddevelopment.com/).
-- L’équipe utilise [Azure Pipelines](/azure/devops/pipelines) pour effectuer le processus CI/CD.
-- L’équipe utilise des [espaces de noms](/azure/container-registry/container-registry-best-practices#repository-namespaces) dans Azure Container Registry pour isoler les images approuvées pour la production des images qui sont toujours en cours de test.
-
-Dans cet exemple, un développeur travaille sur un microservice appelé « Delivery Service ». (Le nom provient de l’implémentation de référence décrite [ici](../../microservices/design/index.md#scenario).) Lors du développement d’une nouvelle fonctionnalité, le développeur archive le code dans une branche de fonctionnalité.
-
-![Workflow CI/CD](./_images/aks-cicd-1.png)
-
-Le fait d’envoyer (push) des validations vers cette branche déclenche une build CI pour le microservice. Par convention, les branches de fonctionnalité sont nommées `feature/*`. Le [fichier de définition de build](/azure/devops/pipelines/yaml-schema) inclut un déclencheur qui filtre par nom de branche et par chemin source. Avec cette approche, chaque équipe peut avoir son propre du pipeline de build.
-
-```yaml
-trigger:
-  batch: true
-  branches:
-    include:
-    - master
-    - feature/*
-
-    exclude:
-    - feature/experimental/*
-
-  paths:
-     include:
-     - /src/shipping/delivery/
-```
-
-À ce stade du workflow , la build CI exécute une vérification minimale du code :
-
-1. Générer le code
-1. Exécuter des tests unitaires
-
-L’idée consiste ici à avoir des durées de génération courtes, de façon à ce que le développeur obtienne un feedback rapide. Quand la fonctionnalité est prête à être fusionnée dans la branche master, le développeur ouvre une demande de tirage. Cette action déclenche une autre build CI qui effectue des vérifications supplémentaires :
-
-1. Générer le code
-1. Exécuter des tests unitaires
-1. Générer l’image du conteneur d’exécution
-1. Effectuer des analyses de vulnérabilité sur l’image
-
-![Workflow CI/CD](./_images/aks-cicd-2.png)
-
-> [!NOTE]
-> Dans Azure Repos, vous pouvez définir des [stratégies](/azure/devops/repos/git/branch-policies) pour protéger les branches. Par exemple, la stratégie peut exiger une build CI réussie ainsi qu’une validation d’un approbateur pour fusionner dans la branche master.
-
-À un moment donné, l’équipe est prête à déployer une nouvelle version du service « Delivery ». Pour cela, le gestionnaire de versions crée une branche à partir de la branche master avec ce modèle de nommage : `release/<microservice name>/<semver>`. Par exemple : `release/delivery/v1.0.2`.
-Cela déclenche une build CI complète qui exécute toutes les étapes précédentes, plus ceci :
-
-1. Envoyer l’image Docker vers Azure Container Registry. L’image est étiquetée avec le numéro de version tiré du nom de la branche.
-2. Exécuter `helm package` pour empaqueter le chart Helm
-3. Envoyer le package Helm à Container Registry en exécutant `az acr helm push`.
-
-Si cette build réussit, elle déclenche un processus de déploiement avec un [pipeline de mise en production](/azure/devops/pipelines/release/what-is-release-management) Azure Pipelines. Ce pipeline
-
-1. exécute `helm upgrade` pour déployer le chart Helm sur un environnement d’assurance qualité.
-1. Un approbateur effectue une validation avant que le package passe en production. Consultez [Contrôler le déploiement de mise en production avec des approbations](/azure/devops/pipelines/release/approvals/approvals).
-1. Réappliquez une étiquette à l’image Docker pour l’espace de noms de production dans Azure Container Registry. Par exemple, si l’étiquette actuelle est `myrepo.azurecr.io/delivery:v1.0.2`, l’étiquette de production est `myrepo.azurecr.io/prod/delivery:v1.0.2`.
-1. Exécutez `helm upgrade` pour déployer le chart Helm sur l’environnement de production.
-
-![Workflow CI/CD](./_images/aks-cicd-3.png)
-
-Il est important de se rappeler que même dans un dépôt unique, ces tâches peuvent être limitées à des microservices individuels, afin que les équipes puissent effectuer des déploiements très rapidement. Le processus comprend quelques étapes manuelles : Approbation des demandes de tirage, création de branches de mise en production et approbation des déploiements sur le cluster de production. Ces étapes sont définies comme « manuelles » par la stratégie : elles peuvent cependant être entièrement automatisées si l’organisation le préfère.
+[ri]: https://github.com/mspnp/microservices-reference-implementation
+[ri-deploy]: https://github.com/mspnp/microservices-reference-implementation/blob/master/deployment.md
