@@ -437,8 +437,10 @@ items:
     items:
     - name: Enregistrement et surveillance
       href: microservices/logging-monitoring.md
-    - name: Intégration/déploiement continues
+    - name: Intégration et livraison continues pour les microservices
       href: microservices/ci-cd.md
+    - name: CI/CD pour les microservices sur Kubernetes
+      href: microservices/ci-cd-kubernetes.md
 - name: Guides de conception
   items:
   - name: Guide d’architecture des données
@@ -871,9 +873,9 @@ items:
           href: cloud-adoption/decision-guides/software-defined-network/hub-spoke.md
       - name: Journaux et rapports
         href: cloud-adoption/decision-guides/log-and-report/overview.md
-ms.openlocfilehash: c85a89cc8b4442cf4876269ef10124426b9b9763
-ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.openlocfilehash: f931e785077b6014bcc8428922572d9a8bd1d97d
+ms.sourcegitcommit: d58e6b2b891c9c99e951c59f15fce71addcb96b1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2019
-ms.locfileid: "59069039"
+ms.lasthandoff: 04/12/2019
+ms.locfileid: "59533105"
