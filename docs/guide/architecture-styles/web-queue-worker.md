@@ -9,11 +9,11 @@ ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
 ms.openlocfilehash: 974b8b8595d6d9333552c41dfe1f3f2af848d264
-ms.sourcegitcommit: bb75a25bd589a761c79e39f2ccdec4acc7d71d60
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/11/2019
-ms.locfileid: "59480080"
+ms.lasthandoff: 04/18/2019
+ms.locfileid: "59740389"
 ---
 # <a name="web-queue-worker-architecture-style"></a>Style d’architecture Web-File d’attente-Worker
 

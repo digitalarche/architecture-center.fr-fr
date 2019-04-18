@@ -3,18 +3,18 @@ title: Accélérer la modélisation basée sur des images numériques dans Azure
 titleSuffix: Azure Example Scenarios
 description: Accélérer la modélisation basée sur des images numériques dans Azure en utilisant Avere et Agisoft PhotoScan
 author: adamboeglin
-ms.date: 1/11/2019
+ms.date: 01/11/2019
 ms.topic: example-scenario
 ms.service: architecture-center
 ms.subservice: example-scenario
 ms.custom: cat-team, Linux, HPC
 social_image_url: /azure/architecture/example-scenario/infrastructure/media/architecture-image-modeling.png
-ms.openlocfilehash: 87b43347fb5f4baec0081a67c8b003dccd2fdf0d
-ms.sourcegitcommit: 14226018a058e199523106199be9c07f6a3f8592
-ms.translationtype: HT
+ms.openlocfilehash: 981d9f01ef12f75d9b292196f754f3a0affa791a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/31/2019
-ms.locfileid: "55483009"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640377"
 ---
 # <a name="accelerate-digital-image-based-modeling-on-azure"></a>Accélérer la modélisation basée sur des images numériques dans Azure
 
@@ -50,7 +50,7 @@ Cette architecture comprend également des contrôleurs de domaine Active Direct
 - [Avere vFXT](/azure/avere-vfxt/avere-vfxt-overview) est une solution de mise en cache de fichiers qui utilise le stockage d’objets et un stockage NAS traditionnel pour optimiser le stockage de jeux de données volumineux.  Il inclut :
   - Contrôleur Avere. Cette machine virtuelle exécute le script qui installe le cluster Avere vFXT et exécute Ubuntu 18.04 LTS. La machine virtuelle peut être utilisée ultérieurement pour ajouter ou supprimer des nœuds de cluster ainsi que pour détruire le cluster.
   - Cluster vFXT. Au moins trois machines virtuelles sont utilisées, une pour chacun des nœuds Avere vFXT basés sur Avere OS 5.0.2.1. Ces machines virtuelles forment le cluster vFXT, qui est attaché à Stockage Blob Azure.
-- Les [contrôleurs de domaine Microsoft Active Directory](/windows/desktop/ad/active-directory-domain-services) permettent à l’hôte d’accéder aux ressources du domaine et fournissent la résolution de noms DNS. Avere vFXT ajoute un certain nombre d’enregistrements A : par exemple, chaque enregistrement A dans un cluster vFXT pointe vers l’adresse IP de chaque nœud Avere vFXT. Dans cette configuration, toutes les machines virtuelles utilisent le modèle de tourniquet (round robin) pour accéder aux exportations de vFXT.
+- Les [contrôleurs de domaine Microsoft Active Directory](/windows/desktop/ad/active-directory-domain-services) permettent à l’hôte d’accéder aux ressources du domaine et fournissent la résolution de noms DNS. AVERE vFXT ajoute un nombre d’enregistrements A &mdash; , par exemple, chaque enregistrement A dans un cluster vFXT pointe vers l’adresse IP de chaque nœud de vFXT Avere. Dans cette configuration, toutes les machines virtuelles utilisent le modèle de tourniquet (round robin) pour accéder aux exportations de vFXT.
 - Les [autres machines virtuelles](/azure/virtual-machines/) servent d’ordinateurs Jump Box utilisées par l’administrateur pour accéder au nœud du planificateur et aux nœuds de traitement. L’ordinateur Jump Box Windows est obligatoire pour permettre à l’administrateur d’accéder au nœud principal via le protocole RDP. Le deuxième ordinateur Jump Box est facultatif et exécute Linux pour l’administration des nœuds worker.
 - Les [groupes de sécurité réseau](/azure/virtual-network/manage-network-security-group) limitent l’accès à l’adresse IP publique et autorisent les ports 3389 et 22 pour l’accès aux machines virtuelles attachées au sous-réseau de l’ordinateur Jump Box.
 - Le [peering de réseau virtuel](/azure/virtual-network/virtual-network-peering-overview) connecte un réseau virtuel PhotoScan à un réseau virtuel Avere.
@@ -71,7 +71,7 @@ Ce scénario est conçu spécifiquement pour fournir un stockage haute performan
 Les considérations relatives au déploiement dépendent des applications et des services utilisés, mais il faut prendre en compte quelques remarques :
 
 - Lors de la création d’applications haute performance, utilisez Stockage Azure Premium et [optimisez la couche Application](/azure/virtual-machines/windows/premium-storage-performance). Optimisez le stockage pour les accès fréquents en utilisant le [niveau d’accès chaud](/azure/storage/blobs/storage-blob-storage-tiers) de Stockage Blob Azure.
-- Utilisez une [option de réplication](/azure/storage/common/storage-redundancy) du stockage qui répond à vos besoins de disponibilité et de performances. Dans cet exemple, Avere vFXT est configuré par défaut pour la haute disponibilité, avec un stockage localement redondant (LRS). Pour l’équilibrage de charge, toutes les machines virtuelles utilisent le modèle de tourniquet (round robin) pour accéder aux exportations de vFXT.
+- Utiliser un stockage [option de réplication](/azure/storage/common/storage-redundancy) qui répond à vos besoins de disponibilité et les performances. Dans cet exemple, Avere vFXT est configuré par défaut pour la haute disponibilité, avec un stockage localement redondant (LRS). Pour l’équilibrage de charge, toutes les machines virtuelles utilisent le modèle de tourniquet (round robin) pour accéder aux exportations de vFXT.
 - Si le stockage back-end est utilisé à la fois par des clients Windows et des clients Linux, utilisez des serveurs Samba pour prendre en charge les nœuds Windows. Une [version](https://github.com/paulomarquesc/beegfs-template) de cet exemple de scénario basé sur BeeGFS utilise Samba pour prendre en charge le nœud du planificateur de la charge de travail HPC (PhotoScan) s’exécutant sur Windows. Un équilibreur de charge est déployé pour agir comme remplacement intelligent pour le tourniquet (round robin) DNS.
 - Exécutez les applications HPC en utilisant le type de machine virtuelle le mieux adapté à votre charge de travail [Windows](/azure/virtual-machines/windows/sizes-hpc) ou [Linux](/azure/virtual-machines/linux/sizes?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 - Pour isoler la charge de travail HPC des ressources de stockage, déployez chaque ressource dans son propre réseau virtuel, puis utilisez le [peering](/azure/virtual-network/virtual-network-peering-overview) de réseau virtuel pour connecter les deux réseaux. Le peering crée une connexion haut débit à faible latence entre les ressources dans différents réseaux virtuels et route le trafic à travers l’infrastructure principale Microsoft via des adresses IP privées uniquement.
@@ -91,7 +91,7 @@ Considérez les options suivantes pour améliorer la sécurité dans ce scénari
 
 ## <a name="pricing"></a>Tarifs
 
-Le coût d’exécution de ce scénario peut varier considérablement en fonction de plusieurs facteurs.  Le nombre et la taille des machines virtuelles, la quantité de stockage nécessaire et le temps nécessaire pour effectuer un travail détermineront le coût.
+Le coût d’exécution de ce scénario peut varier considérablement selon plusieurs facteurs.  Le nombre et la taille des machines virtuelles, la quantité de stockage nécessaire et le temps nécessaire pour effectuer un travail détermineront le coût.
 
 L’exemple de profil de coûts suivant dans la [calculatrice de prix Azure](https://azure.com/e/42362ddfd2e245a28a8e78bc609c80f3) est basé sur une configuration classique pour Avere vFXT et PhotoScan :
 

@@ -9,12 +9,12 @@ ms.subservice: reference-architecture
 pnp.series.title: Manage Identity in Multitenant Applications
 pnp.series.prev: authorize
 pnp.series.next: token-cache
-ms.openlocfilehash: a895276a77c111e660f29397d250373bee53f29e
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
+ms.openlocfilehash: fd0ac254604470ba51ea00537490cfb22b224e80
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54480766"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640173"
 ---
 # <a name="secure-a-backend-web-api"></a>Sécuriser une API web principale
 
@@ -47,7 +47,7 @@ Comme l’API web n’autorise pas les requêtes anonymes, l’application web d
 Il existe deux approches principales possibles :
 
 * Identité d’utilisateur délégué. L’application web s’authentifie avec l’identité de l’utilisateur.
-* Identité d’application. L’application web s’authentifie avec son ID client, à l’aide du flux d’informations d’identification du client OAuth2.
+* Identité d’application. L’application web s’authentifie avec son ID de client, à l’aide du flux des informations d’identification du client OAuth 2.
 
 L’application de Tailspin implémente l’identité d’utilisateur délégué. Voici les principales différences :
 
@@ -116,7 +116,7 @@ Voici les différents paramètres qui sont nécessaires :
 * `authorizationCode`. Code d’authentification que vous avez obtenu du fournisseur d’identité.
 * `clientId`. ID client de l’application web.
 * `clientSecret`. Clé secrète client de l’application web.
-* `redirectUri`. URI de redirection que vous définissez pour OpenID Connect. Il s’agit de l’endroit où le fournisseur d’identité rappelle avec le jeton.
+* `redirectUri`. L’URI de redirection que vous définissez pour OpenID Connect. Il s’agit de l’endroit où le fournisseur d’identité rappelle avec le jeton.
 * `resourceID`. URI d’ID d’application de l’API web, que vous avez créé quand vous avez inscrit l’API web dans Azure AD.
 * `tokenCache`. Objet qui met en cache les jetons d’accès. Consultez la page [Mise en cache de jeton].
 
@@ -230,7 +230,7 @@ Comme le montre cet exemple, vous pouvez également utiliser l’événement **T
 
 Pour obtenir une description générale de l’autorisation, voir [Autorisation basée sur les ressources et les rôles][Authorization].
 
-L’intergiciel (middleware) JwtBearer gère les réponses d’autorisation. Par exemple, pour limiter une action de contrôleur aux seuls utilisateurs authentifiés, utilisez l’attribut **[Authorize]** et spécifiez **JwtBearerDefaults.AuthenticationScheme** en tant que schéma d’authentification :
+L’intergiciel (middleware) JwtBearer gère les réponses d’autorisation. Par exemple, pour limiter une action de contrôleur aux utilisateurs authentifiés, utilisez le **[Authorize]** d’attribut et spécifiez **JwtBearerDefaults.AuthenticationScheme** en tant que le schéma d’authentification :
 
 ```csharp
 [Authorize(ActiveAuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

@@ -7,12 +7,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat
-ms.openlocfilehash: 5219d08fce5cf09b075b6d7adfb73970e007ded4
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 34c21f4b5356dc0acbd5c2c85124300a6ed13c99
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248674"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640496"
 ---
 # <a name="web-application-monitoring-on-azure"></a>Supervision des applications web sur Azure
 
@@ -40,14 +40,14 @@ Ce scénario utilise un environnement Azure managé pour héberger une applicati
 4. Les développeurs et administrateurs peuvent passer en revue les informations relatives à l’intégrité, aux performances et à l’utilisation.
 5. Azure SQL Database génère des données de télémétrie.
 6. Azure Monitor collecte et analyse des métriques et quotas et d’infrastructure.
-7. Log Analytics collecte et analyse des journaux et métriques.
+7. Log Analytics collecte et analyse des journaux d’activité et métriques.
 8. Les développeurs et administrateurs peuvent passer en revue les informations relatives à l’intégrité, aux performances et à l’utilisation.
 
 ### <a name="components"></a>Composants
 
 - [Azure App Service](/azure/app-service/) est un service PaaS de création et d’hébergement d’applications dans des machines virtuelles managées. L’infrastructure de calcul sous-jacente sur laquelle vos applications sont exécutées est gérée pour vous. App Service permet de surveiller les quotas d’utilisation des ressources et les métriques d’application, les informations de journalisation des diagnostics et les alertes basées sur les métriques. Mieux encore, vous pouvez utiliser Application Insights pour créer des [tests de disponibilité][availability-tests] afin de tester votre application à partir de différentes régions.
 - [Application Insights][application-insights] est un service extensible de gestion des performances des applications (APM) destiné aux développeurs et prend en charge plusieurs plateformes. Il surveille l’application, détecte les anomalies de l’application comme les faibles performances et les échecs, et envoie les données de télémétrie au portail Azure. Application Insights peut également être utilisé pour journalisation, le suivi distribué et les métriques d’application personnalisées.
-- [Azure Monitor][azure-monitor] fournit des [métriques et des journaux][metrics] de niveau de base d’infrastructure pour la plupart des services Azure. Vous pouvez interagir de différentes manières avec les métriques, y compris en créant des graphiques dans le portail Azure, en y accédant via l’API REST ou en envoyant des requêtes avec PowerShell ou l’interface CLI. Azure Monitor fournit également ses données directement dans [Log Analytics et autres services], où vous pouvez les interroger et les associer à des données provenant d’autres sources locales ou dans le cloud.
+- [Azure Monitor][azure-monitor] fournit des [métriques et des journaux d’activité][metrics] de niveau de base d’infrastructure pour la plupart des services Azure. Vous pouvez interagir de différentes manières avec les métriques, y compris en créant des graphiques dans le portail Azure, en y accédant via l’API REST ou en envoyant des requêtes avec PowerShell ou l’interface CLI. Azure Monitor fournit également ses données directement dans [Log Analytics et autres services], où vous pouvez les interroger et les associer à des données provenant d’autres sources locales ou dans le cloud.
 - [Log Analytics][log-analytics] permet de mettre en corrélation les données de performances et d’utilisation collectées par Application Insights avec les données de performances et de configuration des ressources Azure qui prennent en charge l’application. Ce scénario utilise l’[agent Azure Log Analytics][Azure Log Analytics agent] pour envoyer des journaux d’audit SQL Server à Log Analytics. Vous pouvez écrire des requêtes et afficher les données dans le panneau Log Analytics du portail Azure.
 
 ## <a name="considerations"></a>Considérations
@@ -78,7 +78,7 @@ Ce scénario se concentre sur des solutions PaaS pour la supervision, principale
 
 Application Insights [limite][app-insights-limits] le nombre de requêtes pouvant être traitées par seconde. Si vous dépassez la limite de requêtes, vous pouvez rencontrer une limitation des messages. Pour éviter cette limitation, implémentez un [filtrage][message-filtering] ou un [échantillonnage][message-sampling] afin de réduire le débit de données
 
-Toutefois, les considérations relatives à la haute disponibilité de l’application que vous exécutez sont de la responsabilité du développeur. Pour plus d’informations sur la mise à l’échelle, par exemple, consultez la section des [considérations relatives à l’extensibilité](#scalability-considerations) dans l’architecture de référence d’application web de base. Lorsqu’une application est déployée, vous pouvez configurer des tests pour [surveiller sa disponibilité][monitor its availability] à l’aide d’Application Insights.
+Toutefois, les considérations relatives à la haute disponibilité de l’application que vous exécutez sont de la responsabilité du développeur. Pour plus d’informations sur la mise à l’échelle, par exemple, consultez la section des [considérations relatives à l’extensibilité](./basic-web-app.md#scalability-considerations) dans l’architecture de référence d’application web de base. Lorsqu’une application est déployée, vous pouvez configurer des tests pour [surveiller sa disponibilité][monitor its availability] à l’aide d’Application Insights.
 
 ### <a name="security"></a>Sécurité
 

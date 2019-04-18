@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 4f973a6173e882d6ae839833bd3c5bf86f8d7fb6
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: bb810f549c78d16eabd4a96cd811cdc120cc8b6f
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55898134"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640938"
 ---
 # <a name="data-partitioning-strategies"></a>Stratégies de partitionnement de données
 
@@ -53,11 +53,11 @@ Les pools élastiques permettent d’ajouter et de supprimer des partitions à m
 
 Si une application doit fractionner une partition en deux partitions distinctes ou combiner des partitions, utilisez [l’outil de fractionnement et de fusion](/azure/sql-database/sql-database-elastic-scale-overview-split-and-merge). Cet outil s’exécute comme un service web Azure et effectue une migration des données sécurisée entre les partitions.
 
-Le schéma de partition peut considérablement affecter les performances de votre système. Il peut également affecter la vitesse à laquelle les partitions doivent être ajoutées ou supprimées, celle à laquelle les données doivent être repartitionnées entre les partitions. Observez les points suivants :
+Le schéma de partitionnement peut affecter considérablement les performances de votre système. Il peut également affecter la vitesse à laquelle les partitions doivent être ajoutées ou supprimées, celle à laquelle les données doivent être repartitionnées entre les partitions. Observez les points suivants :
 
 - Regroupez les données utilisées conjointement dans une même partition et évitez les opérations qui ont un accès à des données présentes dans plusieurs partitions. Une partition est une base de données SQL à part entière et les jonctions entre plusieurs bases de données doivent être effectuées du côté client.
 
-    Bien que SQL Database ne prenne pas en charge les jointures entre les bases de données, vous pouvez utiliser les outils de bases de données élastiques pour effectuer des [requêtes multi-partitions](/azure/sql-database/sql-database-elastic-scale-multishard-querying). Une requête multi-partitions envoie des requêtes individuelles à chaque base de données et fusionne les résultats.
+    Bien que la base de données SQL ne prend pas en charge les jointures de bases de données croisées, vous pouvez utiliser les outils de base de données élastique pour exécuter [requêtes sur plusieurs partitions](/azure/sql-database/sql-database-elastic-scale-multishard-querying). Une requête multi-partitions envoie des requêtes individuelles à chaque base de données et fusionne les résultats.
 
 - Ne créez pas un système présentant des dépendances entre les partitions. Les contraintes d’intégrité référentielle, les déclencheurs et les procédures stockées dans une base de données ne peuvent pas faire référence à des objets présents dans une seconde base de données.
 
@@ -135,7 +135,7 @@ Les files d’attente de stockage Azure vous permettent de mettre en œuvre une 
 
 Chaque file d’attente de stockage a un nom unique au sein du compte de stockage qui la contient. Azure partitionne les files d’attente en fonction du nom. Tous les messages de la même file d’attente sont stockés dans la même partition, qui est contrôlée par un serveur unique. Différentes files d’attente peuvent être gérées par différents serveurs afin d’équilibrer la charge. La répartition des files d’attente entre les serveurs est transparente pour les applications et les utilisateurs.
 
-Dans une application à grande échelle, n’utilisez pas la même file d’attente de stockage pour toutes les instances de l’application, car cette approche peut transformer le serveur qui héberge la file d’attente en zone sensible. Utilisez plutôt différentes files d’attente pour les différentes zones fonctionnelles de l’application. Les files d’attente de stockage Azure ne prennent pas en charge les transactions. Ainsi, le fait de diriger les messages vers différentes files d’attente ne présente que des répercussions limitées sur la cohérence de la messagerie.
+Dans une application à grande échelle, n’utilisez pas la même file d’attente de stockage pour toutes les instances de l’application, car cette approche peut transformer le serveur qui héberge la file d’attente en zone sensible. Utilisez plutôt différentes files d’attente pour les différentes zones fonctionnelles de l’application. Files d’attente de stockage Azure ne gèrent pas les transactions, afin de diriger les messages vers différentes files d’attente doit avoir peu d’effet sur la cohérence de la messagerie.
 
 Une file d’attente de stockage Azure peut gérer jusqu’à 2 000 messages par seconde. Si vous devez traiter les messages à une vitesse supérieure, créez plusieurs files d’attente. Par exemple, dans une application globale, créez des files d’attente de stockage distinctes dans des comptes de stockage distincts pour gérer les instances de l’application en cours d’exécution dans chaque région.
 

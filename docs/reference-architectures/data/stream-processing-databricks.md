@@ -9,11 +9,11 @@ ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
 ms.openlocfilehash: 3d109cb830b7dfc8c3d4de0e654f9d8667acf101
-ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2019
-ms.locfileid: "58887792"
+ms.lasthandoff: 04/18/2019
+ms.locfileid: "59740457"
 ---
 # <a name="create-a-stream-processing-pipeline-with-azure-databricks"></a>Créer un pipeline de traitement de flux avec Azure Databricks
 
@@ -236,9 +236,9 @@ Dans le code, les secrets sont accessibles via les [utilitaires de secrets](http
 
 ## <a name="monitoring-considerations"></a>Surveillance - Éléments à prendre en compte
 
-Azure Databricks est basé sur Apache Spark et tous deux utilisent [log4j](https://logging.apache.org/log4j/2.x/) comme bibliothèque standard pour la journalisation. En plus de la journalisation par défaut fournie par Apache Spark, cette architecture de référence envoie des journaux et des métriques à [Azure Log Analytics](/azure/log-analytics/).
+Azure Databricks est basé sur Apache Spark et tous deux utilisent [log4j](https://logging.apache.org/log4j/2.x/) comme bibliothèque standard pour la journalisation. En plus de la journalisation par défaut fournie par Apache Spark, cette architecture de référence envoie des journaux d’activité et des métriques à [Azure Log Analytics](/azure/log-analytics/).
 
-La classe **com.microsoft.pnp.TaxiCabReader** configure le système de journalisation Apache Spark pour envoyer ses journaux à Azure Log Analytics en utilisant les valeurs contenues dans le fichier **log4j.properties**. Si les messages du journaliseur Apache Spark sont des chaînes, Azure Log Analytics nécessite de son côté des messages de journal au format JSON. La classe **com.microsoft.pnp.log4j.LogAnalyticsAppender** transforme ces messages au format JSON :
+La classe **com.microsoft.pnp.TaxiCabReader** configure le système de journalisation Apache Spark pour envoyer ses journaux d’activité à Azure Log Analytics en utilisant les valeurs contenues dans le fichier **log4j.properties**. Si les messages du journaliseur Apache Spark sont des chaînes, Azure Log Analytics nécessite de son côté des messages de journal au format JSON. La classe **com.microsoft.pnp.log4j.LogAnalyticsAppender** transforme ces messages au format JSON :
 
 ```scala
 
@@ -275,7 +275,7 @@ La dernière métrique à être journalisée dans l’espace de travail Azure Lo
 spark.streams.addListener(new StreamingMetricsListener())
 ```
 
-Les méthodes contenues dans StreamingMetricsListener sont appelées par le runtime Apache Spark chaque fois qu’un événement Structured Streaming se produit ; les messages de journal et les métriques sont alors envoyés à l’espace de travail Azure Log Analytics. Vous pouvez utiliser les requêtes suivantes dans votre espace de travail pour superviser l’application :
+Les méthodes contenues dans StreamingMetricsListener sont appelées par le runtime Apache Spark chaque fois qu’un événement Structured Streaming se produit ; les messages de journal d’activité et les métriques sont alors envoyés à l’espace de travail Azure Log Analytics. Vous pouvez utiliser les requêtes suivantes dans votre espace de travail pour superviser l’application :
 
 ### <a name="latency-and-throughput-for-streaming-queries"></a>Latence et débit pour les requêtes de streaming
 

@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: b93041d87ec1edde91724f6cf6374cb00b8a4941
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
+ms.openlocfilehash: db97f2983d71f63b12e6e4b2f0070b1989b482c4
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54488492"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641023"
 ---
 # <a name="caching"></a>Mise en cache
 
@@ -144,7 +144,7 @@ Veillez à ne pas introduire de dépendances critiques sur la disponibilité d'u
 
 Par conséquent, l'application doit pouvoir détecter la disponibilité du service de cache et revenir au magasin de données d'origine si le cache n'est pas accessible. Le [modèle du disjoncteur](../patterns/circuit-breaker.md) est utile dans ce scénario. Le service qui fournit le cache peut être récupéré et, dès qu’il est disponible, le cache peut être rempli à nouveau à mesure que des données sont lues à partir du magasin de données d’origine, en suivant une stratégie telle que le [mode de type cache-aside](../patterns/cache-aside.md).
 
-Toutefois, l’extensibilité du système peut être affectée si l’application revient au magasin de données d’origine lorsque le cache est temporairement indisponible. Durant la récupération du magasin de données, le magasin d’origine peut être submergé de demandes de données, ce qui entraîne des délais d’attente et des échecs de connexion.
+Toutefois, l’évolutivité du système peut être affectée si l’application revient au magasin de données d’origine lorsque le cache est temporairement indisponible. Durant la récupération du magasin de données, le magasin d’origine peut être submergé de demandes de données, ce qui entraîne des délais d’attente et des échecs de connexion.
 
 Songez à implémenter un cache local privé dans chaque instance d’une application, en plus du cache partagé auquel toutes les instances de l’application accèdent. Quand l’application récupère un élément, elle peut vérifier le cache local, puis le cache partagé, puis le magasin de données d’origine. Le cache local peut être rempli à l’aide des données du cache partagé ou de la base de données si le cache partagé n’est pas disponible.
 
@@ -297,7 +297,7 @@ Pour plus d’informations, consultez l’article [Fournisseur d’état de sess
 > [!NOTE]
 > N’utilisez pas le fournisseur d’état de session pour le cache Redis Azure avec des applications ASP.NET qui s’exécutent en dehors de l’environnement Azure. La latence de l’accès au cache depuis l’extérieur d'Azure peut éliminer les avantages en matière de performances de la mise en cache de données.
 
-De même, le fournisseur de caches de sortie pour le cache Redis Azure vous permet d’enregistrer les réponses HTTP générées par une application web ASP.NET. L’utilisation du fournisseur de caches de sortie avec le cache Redis Azure peut améliorer les temps de réponse d’applications qui restituent une sortie HTML complexe. Des instances d’application qui génèrent des réponses similaires peuvent faire usage des fragments de sortie partagés dans le cache au lieu de générer entièrement cette sortie HTML. Pour plus d’informations, consultez l’article [Fournisseur de caches de sortie ASP.NET pour le Cache Redis Azure](/azure/redis-cache/cache-aspnet-output-cache-provider/).
+De même, le fournisseur de caches de sortie pour le cache Redis Azure vous permet d’enregistrer les réponses HTTP générées par une application web ASP.NET. L’utilisation du fournisseur de caches de sortie avec le cache Redis Azure peut améliorer les temps de réponse d’applications qui restituent une sortie HTML complexe. Instances d’applications qui génèrent des réponses similaires peuvent utiliser les fragments de sortie partagés dans le cache au lieu de générer entièrement cette sortie HTML. Pour plus d’informations, consultez l’article [Fournisseur de caches de sortie ASP.NET pour le Cache Redis Azure](/azure/redis-cache/cache-aspnet-output-cache-provider/).
 
 ## <a name="building-a-custom-redis-cache"></a>Création d'un cache Redis personnalisé
 
@@ -651,7 +651,7 @@ Vous pouvez également combiner les ensembles existants pour créer de nouveaux 
 
 Les extraits de code suivants montrent comment les ensembles peuvent être utiles pour rapidement stocker et récupérer des collections d'éléments connexes. Ce code utilise le type `BlogPost` décrit dans la section Implémenter des applications clientes de cache Redis, plus haut dans cet article.
 
-Un objet `BlogPost` contient quatre champs : un ID, un titre, un classement et une collection de balises. Le premier extrait de code ci-dessous montre les exemples de données utilisés pour remplir une liste C# d’objets `BlogPost` :
+Un `BlogPost` objet contient quatre champs &mdash; un ID, un titre, un score de classement et une collection de balises. Le premier extrait de code ci-dessous montre les exemples de données utilisés pour remplir une liste C# d’objets `BlogPost` :
 
 ```csharp
 List<string[]> tags = new List<string[]>
@@ -700,7 +700,7 @@ foreach (BlogPost post in posts)
     await cache.SetAddAsync(
         redisKey, post.Tags.Select(s => (RedisValue)s).ToArray());
 
-    // Now do the inverse so we can figure how which blog posts have a given tag
+    // Now do the inverse so we can figure out which blog posts have a given tag
     foreach (var tag in post.Tags)
     {
         await cache.SetAddAsync(string.Format(CultureInfo.InvariantCulture,
