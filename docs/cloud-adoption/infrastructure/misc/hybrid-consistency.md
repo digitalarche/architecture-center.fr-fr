@@ -3,12 +3,12 @@ title: 'Framework d’adoption du cloud : Créer une cohérence de cloud hybrid
 description: Définition de l’approche pour créer une cohérence de cloud hybride
 author: BrianBlanchard
 ms.date: 12/27/2018
-ms.openlocfilehash: 726ea56f52d68f6c9b0d1478d19a91c2b7f12fdd
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: d5cfc8565a97c0342b5dc200512308d4c795422a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55901166"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639918"
 ---
 # <a name="create-hybrid-cloud-consistency"></a>Créer une cohérence de cloud hybride
 
@@ -18,7 +18,7 @@ Les modèles de déploiement hybrides pendant la migration peuvent réduire les 
 
 ## <a name="integrate-hybrid-cloud-consistency"></a>Intégrer la cohérence de cloud hybride
 
-L’utilisation d’une solution de cloud hybride permet aux organisations d’adapter l’échelle des ressources de calcul. Elle élimine aussi la nécessité de consentir des investissements conséquents pour gérer de brefs pics de demande. Quand des changements dans vos activités impliquent de libérer des ressources locales pour céder la place à des données ou applications plus sensibles, il est plus simple, plus rapide et moins coûteux de déprovisionner des ressources cloud. Vous payez uniquement pour les ressources que votre organisation utilise temporairement, au lieu de devoir acheter et gérer des ressources supplémentaires. Cela réduit la quantité d’équipements qui pourraient rester inutilisés pendant de longues périodes. Le cloud computing hybride est une plateforme offrant le meilleur des deux mondes : les avantages du cloud computing (flexibilité, scalabilité et rentabilité), et une exposition minimale des données.
+L’utilisation d’une solution de cloud hybride permet aux organisations d’adapter l’échelle des ressources de calcul. Elle élimine aussi la nécessité de consentir des investissements conséquents pour gérer de brefs pics de demande. Quand des changements dans vos activités impliquent de libérer des ressources locales pour céder la place à des données ou applications plus sensibles, il est plus simple, plus rapide et moins coûteux de déprovisionner des ressources cloud. Vous payez uniquement pour les ressources que votre organisation utilise temporairement, au lieu de devoir acheter et gérer des ressources supplémentaires. Cela réduit la quantité d’équipements qui pourraient rester inutilisés pendant de longues périodes. Cloud computing hybride est une plateforme « meilleure des mondes », qui offre tous les avantages du cloud computing flexible, évolutif et réduction des coûts ; tout avec le plus faible risque possible de l’exposition des données.
 
 ![Création de la cohérence de cloud hybride entre identité, gestion, sécurité, données, développement et DevOps](../../_images/hybrid-consistency.png)
 *Figure 1. Création de la cohérence de cloud hybride entre identité, gestion, sécurité, données, développement et DevOps*
@@ -32,7 +32,7 @@ Une solution de cloud hybride véritable doit fournir quatre composants, chacun 
   
 Voici quelques exemples de ces composants d’un point de vue Azure :
 
-- Azure Active Directory (Azure AD), qui fonctionne avec Azure AD en local pour fournir une identité commune à tous les utilisateurs. L’authentification unique en local et via le cloud permet aux utilisateurs d’accéder facilement et en toute sécurité aux applications et ressources dont ils ont besoin. Les administrateurs peuvent gérer les contrôles de sécurité et de gouvernance pour que les utilisateurs puissent accéder à ce dont ils ont besoin, avec la possibilité d’adapter ces autorisations sans affecter l’expérience utilisateur.
+- Azure Active Directory (Azure AD), qui fonctionne avec Azure AD en local pour fournir une identité commune à tous les utilisateurs. L’authentification unique en local et via le cloud permet aux utilisateurs d’accéder facilement et en toute sécurité aux applications et ressources dont ils ont besoin. Les administrateurs peuvent gérer les contrôles de sécurité et de gouvernance afin que les utilisateurs peuvent accéder à ce que dont ils ont besoin, avec la possibilité d’ajuster ces autorisations sans affecter l’expérience utilisateur.
 - Azure fournit des services de sécurité et gestion intégrées pour les infrastructures locales et dans le cloud qui incluent un ensemble intégré d’outils pour la supervision, la configuration et la protection des clouds hybrides. Cette approche de bout en bout de la gestion concerne plus particulièrement les défis du monde réel auxquels font face les organisations qui envisagent une solution de cloud hybride.
 - Le cloud hybride Azure fournit des outils courants qui garantissent un accès sécurisé à toutes les données, efficacement et en toute transparence. Les services de données Azure s’associent à Microsoft SQL Server pour créer une plateforme de données cohérente. Un modèle de cloud hybride cohérent permet aux utilisateurs de travailler avec des données opérationnelles et analytiques, en fournissant les mêmes services en local et dans le cloud pour l’entreposage de données, l’analyse de données et la visualisation de données.
 - Les services cloud Microsoft Azure, associés à Microsoft Azure Stack en local, fournissent un développement unifié et DevOps. La cohérence dans le cloud et en local signifie que votre équipe DevOps peut créer des applications qui s’exécutent dans un environnement et peut facilement déployer sur l’emplacement approprié. Vous pouvez aussi réutiliser les modèles dans la solution hybride, ce qui peut grandement simplifier les processus DevOps.
@@ -56,7 +56,7 @@ Vous disposez de deux options pour déployer Azure Stack :
 
 ## <a name="azure-stack-one-cloud-ecosystem"></a>Écosystème cloud Azure Stack
 
-Vous pouvez accélérer les initiatives Azure Stack en tirant parti de l’écosystème Azure complet :
+Vous pouvez accélérer les initiatives de Azure Stack à l’aide de l’écosystème Azure complète :
 
 - Azure garantit que la plupart des applications et services certifiés pour Azure fonctionnent sur Azure Stack. Plusieurs éditeurs de logiciels indépendants &mdash;notamment Bitnami, Docker, Kemp Technologies, Pivotal Cloud Foundry, Red Hat Enterprise Linux et SUSE Linux &mdash; étendent leurs solutions sur Azure Stack.
 - Vous pouvez décider qu’Azure Stack doit être fourni et utilisé comme un service complètement managé. Plusieurs partenaires &mdash; notamment Tieto, Yourhosting, Revera, Pulsant et NTT &mdash; recevront des offres de services managés sur Azure et Azure Stack sous peu. Ces partenaires ont apporté des services managés pour Azure via le programme des fournisseurs de solutions cloud (fournisseurs de cloud) et étendent désormais leurs offres pour inclure des solutions hybrides.

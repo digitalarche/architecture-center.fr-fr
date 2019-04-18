@@ -8,16 +8,16 @@ ms.topic: checklist
 ms.service: architecture-center
 ms.subservice: cloud-design-principles
 ms.custom: resiliency, checklist
-ms.openlocfilehash: fbb7501a663c8b5e326b2b601685419c8e5a0806
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
+ms.openlocfilehash: db42bd259bf71ef2ffa3e9efc5e4cd6ba2078e6b
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54486911"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639697"
 ---
 # <a name="resiliency-checklist-for-specific-azure-services"></a>Liste de vérification de la résilience pour des services Azure spécifiques
 
-La résilience est la capacité d’un système à récupérer après des défaillances et à continuer de fonctionner ; elle est l’un des [piliers de la qualité logicielle](../guide/pillars.md). Chaque technologie a ses propres modes d’échec, que vous devez prendre en compte lorsque vous concevez et implémentez votre application. Utilisez cette liste de vérification pour passer en revue les considérations relatives à la résilience de services Azure spécifiques. Examinez également la [liste de vérification de résilience générale](./resiliency.md).
+La résilience est la capacité d’un système à récupérer après des défaillances et continuer à fonctionner. Chaque technologie a ses propres modes d’échec, que vous devez prendre en compte lorsque vous concevez et implémentez votre application. Utilisez cette liste de vérification pour passer en revue les considérations relatives à la résilience de services Azure spécifiques. Pour plus d’informations sur la conception d’applications résilientes, consultez [concevoir des applications Azure fiables](../reliability/index.md).
 
 ## <a name="app-service"></a>App Service
 
@@ -41,7 +41,7 @@ La résilience est la capacité d’un système à récupérer après des défai
 
 **Effectuez la journalisation dans un stockage Blob.** Cela facilite la collecte et l’analyse des données.
 
-**Créez un compte de stockage distinct pour les journaux.** N’utilisez pas le même compte de stockage pour les journaux et les données d’application. Cela permet d’empêcher la journalisation de dégrader les performances de l’application.
+**Créez un compte de stockage distinct pour les journaux d’activité.** N’utilisez pas le même compte de stockage pour les journaux d’activité et les données d’application. Cela permet d’empêcher la journalisation de dégrader les performances de l’application.
 
 **Analysez les performances.** Utilisez un service d’analyse des performances tel que [New Relic](https://newrelic.com/) ou [Application Insights](/azure/application-insights/app-insights-overview/) pour analyser les performances et le comportement de l’application sous charge.  L’analyse des performances vous offre des renseignements en temps réel sur l’application. Elle vous permet de diagnostiquer les problèmes et d’effectuer une analyse des causes premières des échecs.
 
@@ -143,7 +143,7 @@ Si vous utilisez Cache Redis comme un cache de données temporaire et non comme 
 
 **Placez chaque couche Application dans un groupe à haute disponibilité distinct.** Dans une application multiniveau, ne placez pas de machines virtuelles de niveaux différents dans le même groupe à haute disponibilité. Les machines virtuelles d’un groupe à haute disponibilité sont réparties dans des domaines d’erreur et des domaines de mise à jour. Toutefois, pour tirer parti de la redondance des domaines d’erreur et des domaines de mise à jour, chaque machine virtuelle du groupe à haute disponibilité doit être en mesure de gérer les mêmes requêtes de clients.
 
-**Répliquez les machines virtuelles à l’aide d’Azure Site Recovery.** Quand vous répliquez des machines virtuelles Azure à l’aide de [Site Recovery][site-recovery], tous les disques de machine virtuelle sont répliqués en continu sur la région cible en mode asynchrone. Les points de récupération sont créés à intervalle de quelques minutes. Cela vous donne un objectif de point de récupération (RPO) de l’ordre de quelques minutes. Vous pouvez effectuer des exercices de reprise d’activité autant de fois que vous le souhaitez sans impacter l’application de production ou la réplication en cours. Pour plus d’informations, consultez [Effectuer un exercice de reprise d’activité sur Azure][site-recovery-test].
+**Répliquez les machines virtuelles à l’aide d’Azure Site Recovery.** Quand vous répliquez des machines virtuelles Azure à l’aide de [Site Recovery][site-recovery], tous les disques de machine virtuelle sont répliqués en continu sur la région cible en mode asynchrone. Les points de récupération sont créés à intervalle de quelques minutes. Cela vous donne un objectif de point de récupération (RPO) de l’ordre de quelques minutes. Vous pouvez effectuer des exercices de récupération d’urgence autant de fois que vous le souhaitez, sans affecter l’application de production ou de la réplication en cours. Pour plus d’informations, consultez [Effectuer un exercice de reprise d’activité sur Azure][site-recovery-test].
 
 **Choisissez la taille de machine virtuelle appropriée en fonction des exigences de performances.** Quand vous déplacez une charge de travail existante vers Azure, commencez par choisir la taille de machine virtuelle qui correspond le mieux à vos serveurs locaux. Mesurez ensuite les performances de votre charge de travail réelle en termes de processeur, de mémoire et d’IOPS de disque, puis ajustez la taille si nécessaire. Vous aurez ainsi l’assurance que l’application se comportera comme prévu dans un environnement cloud. En outre, si vous avez besoin de plusieurs cartes réseau, tenez compte de la limite de la carte réseau pour chaque taille.
 
@@ -153,9 +153,9 @@ Si vous utilisez Cache Redis comme un cache de données temporaire et non comme 
 
 **Utilisez le service Sauvegarde Azure pour sauvegarder les machines virtuelles.** Les sauvegardes assurent une protection contre la perte accidentelle de données. Pour plus d’informations, consultez [Protéger les machines virtuelles Azure avec un coffre Recovery Services](/azure/backup/backup-azure-vms-first-look-arm/).
 
-**Activez les journaux de diagnostic**, y compris les mesures d’intégrité de base, les journaux d’infrastructure et les [diagnostics de démarrage][boot-diagnostics]. Les diagnostics de démarrage peuvent vous aider à identifier le problème de démarrage si votre machine virtuelle refuse de démarrer. Pour plus d’informations, consultez [Présentation des journaux de diagnostic Azure][diagnostics-logs].
+**Activez les journaux de diagnostic**, y compris les mesures d’intégrité de base, les journaux d’activité d’infrastructure et les [diagnostics de démarrage][boot-diagnostics]. Les diagnostics de démarrage peuvent vous aider à identifier le problème de démarrage si votre machine virtuelle refuse de démarrer. Pour plus d’informations, consultez [Présentation des journaux de diagnostic Azure][diagnostics-logs].
 
-**Utilisez l’extension AzureLogCollector** (machines virtuelles Windows uniquement). Cette extension agrège les journaux de la plateforme Azure et les charge dans le stockage Azure, sans que l’opérateur ait à se connecter à distance à la machine virtuelle. Pour plus d’informations, consultez [Extension AzureLogCollector](/azure/virtual-machines/virtual-machines-windows-log-collector-extension/?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+**Utilisez l’extension AzureLogCollector** (machines virtuelles Windows uniquement). Cette extension agrège les journaux d’activité de la plateforme Azure et les charge dans le stockage Azure, sans que l’opérateur ait à se connecter à distance à la machine virtuelle. Pour plus d’informations, consultez [Extension AzureLogCollector](/azure/virtual-machines/virtual-machines-windows-log-collector-extension/?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
 ## <a name="virtual-network"></a>Réseau virtuel
 
@@ -165,7 +165,7 @@ Si vous utilisez Cache Redis comme un cache de données temporaire et non comme 
 
 **Ne bloquez la sonde d’intégrité.** La sonde d’intégrité de Load Balancer est envoyée à partir d’une adresse IP connue, à savoir 168.63.129.16. Ne bloquez le trafic à destination ou en provenance de cette adresse IP dans aucune stratégie de pare-feu ou règle NSG. Si vous bloquez la sonde d’intégrité, l’équilibreur de charge supprimera la machine virtuelle de la rotation.
 
-**Activez la journalisation de Load Balancer.** Les journaux indiquent combien de machines virtuelles sur le serveur principal ne reçoivent pas de trafic réseau en raison d’une absence de réponse de la part de la sonde. Pour plus d’informations, consultez [Analyse des journaux d’Azure Load Balancer](/azure/load-balancer/load-balancer-monitor-log/).
+**Activez la journalisation de Load Balancer.** Les journaux d’activité indiquent combien de machines virtuelles sur le serveur principal ne reçoivent pas de trafic réseau en raison d’une absence de réponse de la part de la sonde. Pour plus d’informations, consultez [Analyse des journaux d’Azure Load Balancer](/azure/load-balancer/load-balancer-monitor-log/).
 
 <!-- links -->
 [boot-diagnostics]: https://azure.microsoft.com/blog/boot-diagnostics-for-virtual-machines-v2/

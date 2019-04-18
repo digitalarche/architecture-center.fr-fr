@@ -6,12 +6,12 @@ ms.date: 02/12/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
-ms.openlocfilehash: 1551736d8ef3d2b82eb0a2fdb626330798ec1c65
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: aa578464947e51964fee9859395149b44b47fa00
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58246190"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639986"
 ---
 # <a name="extract-transform-and-load-etl"></a>Extraire, transformer et charger (ETL)
 
@@ -49,7 +49,7 @@ Dans la pratique, le magasin de données cible est un [entrepôt de données](./
 
 Le magasin de données gère uniquement le schéma des données et applique le schéma lors de la lecture. Par exemple, un cluster Hadoop utilisant Hive décrit une table Hive où la source des données est en réalité un chemin d’accès à un ensemble de fichiers dans HDFS. Dans SQL Data Warehouse, PolyBase peut obtenir le même résultat &mdash; créant une table sur des données stockées en externe à la base de données. Une fois la source de données chargée, les données présentes dans les tables externes peuvent être traitées grâce aux fonctionnalités du magasin de données. Dans les scénarios Big Data, cela signifie que le magasin de données doit être capable d’un traitement parallèle massif (MPP), qui fractionne les données en segments plus petits et distribue le traitement des segments sur plusieurs machines en parallèle.
 
-La dernière phase du pipeline ELT consiste généralement à transformer la source de données dans un format final plus efficace pour les types de requêtes qui doivent être pris en charge. Par exemple, les données peuvent être partitionnées. En outre, ELT peut utiliser des formats de stockage optimisé comme Parquet, qui stocke les données orientées ligne dans un mode en colonnes et fournit une indexation optimisée.
+La dernière phase du pipeline ELT consiste généralement à transformer la source de données dans un format final plus efficace pour les types de requêtes qui doivent être pris en charge. Par exemple, les données peuvent être partitionnées. En outre, ELT peut utiliser des formats de stockage optimisé comme Parquet, qui stocke les données en ligne dans un mode en colonnes et assure l’indexation optimisée.
 
 Service Azure approprié :
 
@@ -66,7 +66,7 @@ Autres outils :
 
 Dans le contexte de pipelines de données, le flux de contrôle garantit le traitement de façon ordonnée d’un ensemble de tâches. Pour appliquer l’ordre de traitement correct de ces tâches, des contraintes de priorité sont utilisées. Vous pouvez comparer ces contraintes à des connecteurs dans un diagramme de flux de travail, comme indiqué dans l’image ci-dessous. Chaque tâche a un résultat, comme la réussite, l’échec ou l’achèvement. Le traitement de la tâche suivante n’est lancé que lorsque la tâche précédente est terminée avec l’un de ces résultats.
 
-Les flux de contrôle exécutent les flux de données en tant que tâche. Dans une tâche de flux de données, les données sont extraites d’une source, transformées ou chargées dans un magasin de données. La sortie d’une tâche de flux de données peut correspondre à l’entrée de la prochaine tâche de flux de données et les flux de données peuvent s’exécuter en parallèle. Contrairement aux flux de contrôle, vous ne pouvez pas ajouter de contraintes entre les tâches d’un flux de données. Toutefois, vous pouvez ajouter une visionneuse de données afin d’observer les données lorsqu’elles sont traitées par chaque tâche.
+Les flux de contrôle exécutent les flux de données en tant que tâche. Dans une tâche de flux de données, les données sont extraites d’une source, transformées ou chargées dans un magasin de données. La sortie de tâche de flux de données peut être l’entrée de la prochaine tâche de flux de données et flux de données peuvent s’exécuter en parallèle. Contrairement aux flux de contrôle, vous ne pouvez pas ajouter de contraintes entre les tâches d’un flux de données. Toutefois, vous pouvez ajouter une visionneuse de données afin d’observer les données lorsqu’elles sont traitées par chaque tâche.
 
 ![Flux de données exécuté en tant que tâche dans un flux de contrôle](../images/control-flow-data-flow.png)
 

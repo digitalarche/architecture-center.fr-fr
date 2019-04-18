@@ -7,12 +7,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: data-analytics
-ms.openlocfilehash: 72b889e2fe0d862ab1ff280cea76c2880b0fadc4
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: bfdfeefe36dd44478f407008e2f9f3749f7a70d6
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58245950"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639749"
 ---
 # <a name="choosing-a-data-analytics-technology-in-azure"></a>Sélectionner une technologie d’analytique de données dans Azure
 
@@ -73,7 +73,7 @@ Pour restreindre les choix, commencez par répondre à ces questions :
 
 - Devez-vous vous connecter à plusieurs sources de données, en indiquant un emplacement centralisé afin de créer des rapports pour les données réparties dans l’ensemble de votre domaine ? Dans ce cas, choisissez une option vous permettant de vous connecter à des centaines de sources de données.
 
-- Souhaitez-vous incorporer des visualisations dynamiques dans un site web ou une application externe ? Dans ce cas, choisissez une option proposant des fonctionnalités d’incorporation.
+- Vous souhaitez incorporer des visualisations dynamiques dans une application ou un site Web externe ? Dans ce cas, choisissez une option proposant des fonctionnalités d’incorporation.
 
 - Souhaitez-vous concevoir vos visualisations et vos rapports en mode hors connexion ? Si oui, choisissez une option proposant des fonctionnalités hors connexion.
 
@@ -89,16 +89,16 @@ Les tableaux suivants résument les principales différences entre les fonctionn
 
 | | Power BI | Blocs-notes Jupyter | Blocs-notes Zeppelin | Blocs-notes Microsoft Azure |
 | --- | --- | --- | --- | --- |
-| Se connecter à un cluster Big Data pour un traitement avancé | OUI | OUI | OUI | Non  |
-| Service géré | OUI | Oui <sup>1</sup> | Oui <sup>1</sup> | OUI |
-| Se connecter à des centaines de sources de données | OUI | Non  | Non  | Non  |
+| Se connecter à un cluster Big Data pour un traitement avancé | Oui | OUI | Oui | Non  |
+| Service géré | Oui | Oui <sup>1</sup> | Oui <sup>1</sup> | Oui |
+| Se connecter à des centaines de sources de données | Oui | Non  | Non  | Non  |
 | Fonctionnalités hors ligne | Oui <sup>2</sup> | Non  | Non  | Non  |
-| Fonctionnalités d’incorporation | OUI | Non  | Non  | Non  |
-| Actualisation automatique des données | OUI | Non  | Non  | Non  |
+| Fonctionnalités d’incorporation | Oui | Non  | Non  | Non  |
+| Actualisation automatique des données | Oui | Non  | Non  | Non  |
 | Accès à de nombreux packages open source | Non  | Oui <sup>3</sup> | Oui <sup>3</sup> | Oui <sup>4</sup> |
 | Options de nettoyage/transformer de données | [Power Query](https://powerbi.microsoft.com/blog/getting-started-with-power-query-part-i/), R | 40 langues, y compris Python, R, Julia et Scala | Plus de 20 interpréteurs, y compris Python, JDBC et R | Python, F#, R |
 | Tarifs | Gratuit pour Power BI Desktop (création), consultez la section [Tarification](https://powerbi.microsoft.com/pricing/) pour les options d’hébergement | Gratuit | Gratuit | Gratuit |
-| Collaboration multi-utilisateur | [Oui](/power-bi/service-how-to-collaborate-distribute-dashboards-reports) | Oui (via le partage ou avec un serveur multi-utilisateur comme [JupyterHub](https://github.com/jupyterhub/jupyterhub)) | OUI | Oui (via le partage) |
+| Collaboration multi-utilisateur | [Oui](/power-bi/service-how-to-collaborate-distribute-dashboards-reports) | Oui (via le partage ou avec un serveur multi-utilisateur comme [JupyterHub](https://github.com/jupyterhub/jupyterhub)) | Oui | Oui (via le partage) |
 
 <!-- markdownlint-enable MD033 -->
 

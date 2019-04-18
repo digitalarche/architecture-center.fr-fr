@@ -8,12 +8,12 @@ ms.topic: example-scenario
 ms.service: architecture-center
 ms.subservice: example-scenario
 social_image_url: /azure/architecture/example-scenario/infrastructure/media/secure-scalable-wordpress.png
-ms.openlocfilehash: 6032247dce0d090885bc560d963f1e714d91f69c
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 4f347f91d5958fb83404856ec5d36d70a7ed0d19
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58244630"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640088"
 ---
 # <a name="highly-scalable-and-secure-wordpress-website"></a>Sites web WordPress hautement évolutifs et sécurisés
 
@@ -72,15 +72,13 @@ Le second flux de travail correspond au mode de contribution des auteurs pour le
 
 Dans ce scénario, les instances de machine virtuelle sont déployées dans plusieurs régions, avec les données répliquées entre les deux via RSYNC pour le contenu de WordPress et une réplication maître/subordonné pour les clusters MariaDB.
 
-Pour consulter d’autres rubriques relatives à la disponibilité, consultez la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
-
 ### <a name="scalability"></a>Extensibilité
 
 Ce scénario utilise des groupes de machines virtuelles identiques pour les deux clusters de serveurs web frontaux dans chaque région. Avec des groupes identiques, le nombre d’instances de machine virtuelle qui s’exécutent au niveau de la couche Application frontale peut être automatiquement mis à l’échelle selon la demande du client ou une planification définie. Pour plus d’informations, voir [Vue d’ensemble de la mise à l’échelle automatique avec des groupes de machines virtuelles identiques][docs-vmss-autoscale].
 
 Le serveur principal est un cluster MariaDB dans un groupe à haute disponibilité. Pour plus d’informations, consultez le [didacticiel portant sur le cluster MariaDB][mariadb-tutorial].
 
-Pour consulter d’autres rubriques relatives à l’extensibilité, consultez la [liste de contrôle de l’extensibilité][scalability] dans le Centre des architectures Azure.
+Pour d’autres rubriques de l’évolutivité, consultez la [liste de vérification évolutivité] [évolutivité] dans le centre d’Architecture Azure.
 
 ### <a name="security"></a>Sécurité
 
@@ -92,7 +90,7 @@ Pour obtenir des conseils d’ordre général sur la conception de scénarios s�
 
 Conjointement avec l’utilisation de plusieurs régions, la réplication des données et les groupes de machines virtuelles identiques, ce scénario utilise des équilibreurs de charge Azure. Ces composants réseau distribuent le trafic vers les instances de machine virtuelle connectées et incluent des sondes d’intégrité qui garantissent que le trafic est uniquement distribué vers des machines virtuelles saines. Tous ces composants réseau sont exposés via un réseau CDN. De cette façon, les ressources réseau et l’application sont résilientes aux problèmes qui perturberaient autrement le trafic et affecteraient l’accès de l’utilisateur final.
 
-Pour obtenir des conseils d’ordre général sur la conception de scénarios résilients, consultez l’article [Conception d’applications résilientes pour Azure][resiliency].
+Pour obtenir des instructions générales sur la conception des scénarios résilients, consultez [conception d’applications Azure fiables](../../reliability/index.md).
 
 ## <a name="pricing"></a>Tarifs
 
@@ -112,6 +110,4 @@ Nous avons fourni un [profil de coût][pricing] préconfiguré basé sur le diag
 [docs-nsg]: /azure/virtual-network/security-overview
 [security]: /azure/security/
 [availability]: ../../checklist/availability.md
-[resiliency]: /azure/architecture/resiliency/
-[scalability]: /azure/architecture/checklist/scalability
 [pricing]: https://azure.com/e/a8c4809dab444c1ca4870c489fbb196b

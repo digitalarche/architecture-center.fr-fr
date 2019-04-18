@@ -9,12 +9,12 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: c736afced1b0478e8eb1a2694acc4d6a6f0c62fc
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 267d630d97a998c76a75a70191a77f9b74e801ef
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248724"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641057"
 ---
 # <a name="queue-based-load-leveling-pattern"></a>Modèle de nivellement de charge basé sur une file d’attente
 
@@ -67,8 +67,6 @@ Une application web écrit des données dans un magasin de données externes. Si
 Pour résoudre ce problème, vous pouvez utiliser une file d’attente afin de niveler la charge entre les instances d’application et le magasin de données. Une application Azure Functions lit les messages de la file d’attente et exécute les requêtes de lecture/écriture dans le magasin de données. La logique d’application de l’application de fonction peut contrôler la fréquence à laquelle les requêtes sont passées au magasin de données pour éviter la surcharge de ce dernier. (Sinon, l’application de fonction réintroduit simplement le même problème sur le serveur back-end.)
 
 ![Figure 3 - Utilisation d’une file d’attente et d’une application de fonction pour niveler la charge](./_images/queue-based-load-leveling-function.png)
-
-
 
 ## <a name="related-patterns-and-guidance"></a>Conseils et modèles connexes
 

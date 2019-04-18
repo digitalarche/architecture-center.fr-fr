@@ -6,12 +6,12 @@ ms.date: 02/12/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
-ms.openlocfilehash: 281a2e9995d1d04aa9688e811e0d4ff8088fe30b
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: fdad7e9241ddd9c11c18e31a1fd2da5a163d05ac
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58249704"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640513"
 ---
 # <a name="natural-language-processing"></a>Traitement en langage naturel
 

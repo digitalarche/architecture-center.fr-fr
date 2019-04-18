@@ -7,12 +7,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 0f5de0eca6fbd35cca1a0e8443f363df09ffc6aa
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: caee864285a03affa43739317d1c4c6fd2131450
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248694"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640632"
 ---
 # <a name="enterprise-grade-conversational-bot"></a>Bot de conversation de classe Entreprise
 
@@ -79,17 +79,17 @@ Avant d’aborder les spécificités de cette architecture, commençons par nous
 
 **Réponse**. À ce stade, le bot a déterminé la meilleure réponse et l’envoie à l’utilisateur. Si le score de confiance de la meilleure réponse est faible, la réponse peut être une question visant à lever les ambiguïtés ou une reconnaissance de l’incapacité du bot à répondre de manière adéquate.
 
-**Journalisation**. Lors de la réception d’une demande de l’utilisateur ou de l’envoi d’une réponse, toutes les actions de conversation doivent être journalisées dans un magasin de journalisation, ainsi que les mesures de performances et les erreurs générales des services externes. Ces journaux se montreront utiles ultérieurement pour diagnostiquer les problèmes et améliorer le système.
+**Journalisation**. Lors de la réception d’une demande de l’utilisateur ou de l’envoi d’une réponse, toutes les actions de conversation doivent être journalisées dans un magasin de journalisation, ainsi que les mesures de performances et les erreurs générales des services externes. Ces journaux d’activité se montreront utiles ultérieurement pour diagnostiquer les problèmes et améliorer le système.
 
 **Commentaires**. Une autre bonne pratique consiste à collecter les commentaires des utilisateurs et les niveaux de satisfaction. Dans le cadre d’un suivi consécutif à la réponse finale du bot, ce dernier doit demander à l’utilisateur d’évaluer s’il est satisfait de la réponse. Les commentaires peuvent vous aider à résoudre le problème lié à la compréhension du langage naturel lors du démarrage à froid, afin d’améliorer constamment la précision des réponses.
 
 ### <a name="system-data-flow"></a>Flux de données système
 
-**ETL**. Le bot s’appuie sur les informations et les connaissances extraites des données brutes par un processus ETL dans le back-end. Ces données peuvent être structurées (base de données SQL), semi-structurées (système CRM, questions fréquentes (FAQ)) ou non structurées (documents Word, PDF, journaux web). Un sous-système ETL extrait les données selon une planification fixe. Le contenu est transformé et enrichi, puis chargé dans un magasin de données intermédiaire, comme Cosmos DB ou Stockage Blob Azure.
+**ETL**. Le bot s’appuie sur les informations et les connaissances extraites des données brutes par un processus ETL dans le back-end. Ces données peuvent être structurées (base de données SQL), semi-structurées (système CRM, questions fréquentes (FAQ)) ou non structurées (documents Word, PDF, journaux d’activité web). Un sous-système ETL extrait les données selon une planification fixe. Le contenu est transformé et enrichi, puis chargé dans un magasin de données intermédiaire, comme Cosmos DB ou Stockage Blob Azure.
 
 Les données contenues dans le magasin intermédiaire sont ensuite indexées dans Recherche Azure à des fins de récupération de documents, chargées dans QnA Maker pour créer des paires question/réponse ou chargées dans une application web personnalisée à des fins de traitement de texte non structuré. Les données sont également utilisées pour entraîner un modèle LUIS à l’extraction des intentions et entités.
 
-**Assurance qualité**. Les journaux de conversation sont utilisés pour diagnostiquer et corriger des bogues, fournir un aperçu de la façon dont le bot est utilisé et effectuer le suivi des performances globales. Les données de commentaires s’avèrent utiles pour réentraîner les modèles d’intelligence artificielle afin d’améliorer les performances du bot.
+**Assurance qualité**. Les journaux d’activité de conversation sont utilisés pour diagnostiquer et corriger des bogues, fournir un aperçu de la façon dont le bot est utilisé et effectuer le suivi des performances globales. Les données de commentaires s’avèrent utiles pour réentraîner les modèles d’intelligence artificielle afin d’améliorer les performances du bot.
 
 ## <a name="building-a-bot"></a>Création d’un bot
 
@@ -141,7 +141,7 @@ Une autre option consiste à intégrer votre propre service d’intelligence art
 
 ## <a name="quality-assurance-and-enhancement"></a>Assurance qualité et amélioration
 
-**Journalisation**. Journalisez les conversations de l’utilisateur avec le bot, notamment les mesures de performances sous-jacentes et les erreurs éventuelles. Ces journaux s’avèrent très précieux pour déboguer les problèmes, comprendre les interactions de l’utilisateur et améliorer le système. Différents magasins de données peuvent convenir à différents types de journaux. Par exemple, envisagez d’utiliser Application Insights pour les journaux web, Cosmos DB pour les conversations et Stockage Azure pour les grosses charges utiles. Consultez [Écrire directement dans Stockage Azure][transcript-storage].
+**Journalisation**. Journalisez les conversations de l’utilisateur avec le bot, notamment les mesures de performances sous-jacentes et les erreurs éventuelles. Ces journaux d’activité s’avèrent très précieux pour déboguer les problèmes, comprendre les interactions de l’utilisateur et améliorer le système. Différents magasins de données peuvent convenir à différents types de journaux d’activité. Par exemple, envisagez d’utiliser Application Insights pour les journaux d’activité web, Cosmos DB pour les conversations et Stockage Azure pour les grosses charges utiles. Consultez [Écrire directement dans Stockage Azure][transcript-storage].
 
 **Commentaires**. Il est également important de comprendre le niveau de satisfaction des utilisateurs vis-à-vis de leurs interactions avec le bot. Si vous avez recueilli les commentaires des utilisateurs, vous pouvez utiliser ces données pour concentrer vos efforts sur l’amélioration de certaines interactions et sur le réentraînement des modèles d’intelligence artificielle à des fins d’amélioration des performances. Utilisez les commentaires pour réentraîner les modèles, comme LUIS, dans votre système.
 
@@ -169,7 +169,7 @@ Comme avec toute autre application, le bot peut être conçu pour gérer des don
 
 ### <a name="monitoring-and-reporting"></a>Surveillance et création de rapports
 
-Une fois que votre bot s’exécute en production, vous avez besoin d’une équipe DevOps pour que cela continue. Supervisez en permanence le système pour maintenir le fonctionnement du bot à son niveau optimal. Utilisez les journaux envoyés à Application Insights ou Cosmos DB pour créer des tableaux de bord de supervision, en utilisant Application Insights lui-même, Power BI ou un tableau de bord d’application web personnalisé. Envoyez des alertes à l’équipe DevOps si des erreurs critiques se produisent ou si les performances chutent en dessous d’un seuil acceptable.
+Une fois que votre bot s’exécute en production, vous avez besoin d’une équipe DevOps pour que cela continue. Supervisez en permanence le système pour maintenir le fonctionnement du bot à son niveau optimal. Utilisez les journaux d’activité envoyés à Application Insights ou Cosmos DB pour créer des tableaux de bord de supervision, en utilisant Application Insights lui-même, Power BI ou un tableau de bord d’application web personnalisé. Envoyez des alertes à l’équipe DevOps si des erreurs critiques se produisent ou si les performances chutent en dessous d’un seuil acceptable.
 
 ### <a name="automated-resource-deployment"></a>Déploiement automatisé des ressources
 
@@ -224,4 +224,3 @@ Vous pouvez déployer la logique de bot directement à partir de votre environne
 [appinsights-logger]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-transcript-app-insights
 [feedback-util]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-feedback
 [testing util]: https://github.com/Microsoft/botbuilder-utils-js/tree/master/packages/botbuilder-http-test-recorder
-

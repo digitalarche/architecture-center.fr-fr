@@ -9,12 +9,12 @@ ms.service: architecture-center
 ms.subservice: example-scenario
 ms.custom: seodec18, Windows
 social_image_url: /azure/architecture/example-scenario/infrastructure/media/architecture-regulated-multitier-app.png
-ms.openlocfilehash: 440d208b423703fe791dcbe2cad0609fef0e6508
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 2e3bb28abf870a1ce358dd67efeb3f422b983651
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58246220"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639935"
 ---
 # <a name="building-secure-web-applications-with-windows-virtual-machines-on-azure"></a>Création d’applications web sécurisées avec des machines virtuelles Windows Azure
 
@@ -67,8 +67,6 @@ Dans ce scénario, les instances de machine virtuelle sont déployées sur des [
 
 La couche Données peut être configurée pour utiliser des groupes de disponibilité Always On. Avec cette configuration de SQL Server, une base de données primaire au sein d’un cluster est configurée avec un maximum de huit bases de données secondaires. En cas de problème avec la base de données primaire, le cluster bascule sur l’une des bases de données secondaires, ce qui permet à l’application de rester disponible. Pour plus d’informations, consultez [Vue d’ensemble des groupes de disponibilité AlwaysOn pour SQL Server][sqlalwayson-docs].
 
-Pour obtenir d’autres conseils sur la disponibilité, consultez la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
-
 ### <a name="scalability"></a>Extensibilité
 
 Ce scénario utilise des groupes de machines virtuelles identiques pour les composants frontaux et principaux. Avec des groupes identiques, le nombre d’instances de machine virtuelle qui s’exécutent au niveau de la couche Application frontale peut être automatiquement mis à l’échelle selon la demande du client ou une planification définie. Pour plus d’informations, voir [Vue d’ensemble de la mise à l’échelle automatique avec des groupes de machines virtuelles identiques][vmssautoscale-docs].
@@ -85,7 +83,7 @@ Pour afficher des conseils sur le déploiement d’une [infrastructure conforme]
 
 En conjonction avec l’utilisation de zones de disponibilité et de groupe de machines virtuelles identiques, ce scénario utilise Azure Application Gateway et un équilibreur de charge. Ces deux composants de mise en réseau distribuent le trafic vers les instances de machine virtuelle connectées et incluent des sondes d’intégrité qui garantissent que le trafic est uniquement distribué vers des machines virtuelles saines. Deux instances Application Gateway sont configurées dans une configuration actif/passif, et un équilibreur de charge redondant interzone est utilisé. Cette configuration rend les ressources de mise en réseau et l’application résilientes aux problèmes qui perturberaient autrement le trafic et affecteraient l’accès de l’utilisateur final.
 
-Pour obtenir des conseils d’ordre général sur la conception de scénarios résilients, consultez l’article [Conception d’applications résilientes pour Azure][resiliency].
+Pour obtenir des instructions générales sur la conception de solutions résilientes, consultez [conception d’applications Azure fiables](../../reliability/index.md).
 
 ## <a name="deploy-the-scenario"></a>Déployez le scénario
 
@@ -133,12 +131,10 @@ Pour obtenir un guide d’implémentation plus détaillé, consultez l’[archit
 [appgateway-docs]: /azure/application-gateway/overview
 [architecture]: ./media/architecture-regulated-multitier-app.png
 [autoscaling]: /azure/architecture/best-practices/auto-scaling
-[availability]: ../../checklist/availability.md
 [cloudwitness-docs]: /windows-server/failover-clustering/deploy-cloud-witness
 [loadbalancer-docs]: /azure/load-balancer/load-balancer-overview
 [nsg-docs]: /azure/virtual-network/security-overview
 [ntiersql-ra]: /azure/architecture/reference-architectures/n-tier/n-tier-sql-server
-[resiliency]: /azure/architecture/resiliency/
 [security]: /azure/security/
 [scalability]: /azure/architecture/checklist/scalability
 [scaleset-docs]: /azure/virtual-machine-scale-sets/overview

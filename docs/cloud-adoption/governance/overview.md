@@ -7,10 +7,10 @@ ms.date: 02/11/2019
 description: Gouvernance dans le CAF Microsoft pour Azure
 author: BrianBlanchard
 ms.openlocfilehash: ce407de0daa590e767382346692c80e0a113bb3c
-ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068835"
 ---
 # <a name="governance-in-the-microsoft-caf-for-azure"></a>Gouvernance dans le CAF Microsoft pour Azure
@@ -45,4 +45,4 @@ Pour un cours intensif sur la théorie et un accès rapide à l’implémentatio
 Passez en revue les parcours de gouvernance exploitables.
 
 > [!div class="nextstepaction"]
-> [Parcours de gouvernance actionnables](./journeys/overview.md)
+> [Parcours de gouvernance exploitables](./journeys/overview.md)

@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, networking
-ms.openlocfilehash: 2595352075c708e015a0f0c536be31ceb5614fcd
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 046ca8c9c67c2d8a77efc87c2106c79670bd153f
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58245680"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640071"
 ---
 # <a name="implement-a-dmz-between-azure-and-the-internet"></a>Implémenter une zone DMZ entre Azure et Internet
 
@@ -81,13 +81,13 @@ Cette architecture de référence implémente plusieurs niveaux de sécurité :
 - Les règles du groupe de sécurité réseau pour les sous-réseaux de la zone DMZ publique entrants et sortants empêchent la compromission des appliances virtuelles réseau par le blocage des requêtes se trouvant en dehors des règles du groupe de sécurité réseau.
 - La configuration du routage NAT pour les appliances virtuelles réseau dirige les requêtes entrantes sur les ports 80 et 443 vers l’équilibreur de charge de la couche web, mais ignore les requêtes sur tous les autres ports.
 
-Vous devez journaliser toutes les requêtes entrantes sur tous les ports. Effectuez un audit régulier des journaux en accordant une attention particulière aux requêtes qui se trouvent en dehors des paramètres attendus, comme cela peut indiquer des tentatives d’intrusion.
+Vous devez journaliser toutes les requêtes entrantes sur tous les ports. Effectuez un audit régulier des journaux d’activité en accordant une attention particulière aux requêtes qui se trouvent en dehors des paramètres attendus, comme cela peut indiquer des tentatives d’intrusion.
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
 Un déploiement pour une architecture de référence implémentant ces recommandations est disponible sur [GitHub][github-folder].
 
-### <a name="prerequisites"></a>Prérequis
+### <a name="prerequisites"></a>Conditions préalables
 
 [!INCLUDE [ref-arch-prerequisites.md](../../../includes/ref-arch-prerequisites.md)]
 
@@ -95,13 +95,13 @@ Un déploiement pour une architecture de référence implémentant ces recommand
 
 1. Accédez au dossier `/dmz/secure-vnet-dmz` du référentiel GitHub des architectures de référence.
 
-2. Exécutez la commande suivante :
+1. Exécutez la commande suivante :
 
     ```bash
     azbb -s <subscription_id> -g <resource_group_name> -l <region> -p onprem.json --deploy
     ```
 
-4. Exécutez la commande suivante :
+1. Exécutez la commande suivante :
 
     ```bash
     azbb -s <subscription_id> -g <resource_group_name> -l <region> -p secure-vnet-dmz.json --deploy

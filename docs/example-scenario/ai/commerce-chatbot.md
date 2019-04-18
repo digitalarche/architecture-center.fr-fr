@@ -8,12 +8,12 @@ ms.topic: example-scenario
 ms.service: architecture-center
 ms.subservice: example-scenario
 social_image_url: /azure/architecture/example-scenario/ai/media/architecture-commerce-chatbot.png
-ms.openlocfilehash: 48f85e7443bcd6149c8024d20fb50816c1a4df38
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: c4859cb0e43603991e4f8e6a0311a28537f29f1a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58245850"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640258"
 ---
 # <a name="conversational-chatbot-for-hotel-reservations-on-azure"></a>Bot conversationnel pour les réservations d’hôtel sur Azure
 
@@ -65,8 +65,6 @@ Ce scénario présente un bot conversationnel qui fonctionne comme le concierge 
 
 Ce scénario utilise Azure SQL Database pour stocker les réservations de clients. SQL Database inclut des bases de données redondantes dans une zone, des groupes de basculement et la géoréplication. Pour en savoir plus, consultez la section relative aux [fonctionnalités de disponibilité d’Azure SQL Database][sqlavailability-docs].
 
-Pour consulter d’autres rubriques relatives à la disponibilité, consultez la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
-
 ### <a name="scalability"></a>Extensibilité
 
 Ce scénario utilise Azure App Service. Avec App Service, vous pouvez automatiquement mettre à l’échelle le nombre d’instances qui exécutent votre bot. Cette fonctionnalité vous permet de faire face à la demande de la clientèle pour votre application web et votre bot conversationnel. Pour plus d’informations sur la mise à l’échelle automatique, voir [Meilleures pratiques de mise à l’échelle automatique][autoscaling] dans le Centre des architectures Azure.
@@ -87,17 +85,17 @@ Ce scénario utilise Azure SQL Database pour stocker les réservations de client
 
 Pour surveiller l’intégrité de votre application, ce scénario utilise Application Insights. Avec Application Insights, vous pouvez générer des alertes et résoudre les problèmes de performances qui auraient un impact sur l’expérience client et la disponibilité du bot conversationnel. Pour plus d’informations, consultez l’article [Présentation d’Application Insights][appinsights-docs].
 
-Pour obtenir des conseils d’ordre général sur la conception de solutions résilientes, consultez l’article [Conception d’applications résilientes pour Azure][resiliency].
+Pour d’autres rubriques de la résilience, consultez [conception d’applications Azure fiables](../../reliability/index.md).
 
 ## <a name="deploy-the-scenario"></a>Déployez le scénario
 
 Ce scénario est divisé en trois composants pour vous permettre d’explorer les zones sur lesquelles vous êtes le plus axé :
 
-- [Composants d’infrastructure](#deploy-infrastructure-components). Utilisez un modèle Azure Resource Manager pour déployer les composants d’infrastructure de base d’un service App Service, de Web App, d’Application Insights, d’un compte de stockage, de SQL Server et d’une base de données.
+- [Composants d’infrastructure](#walk-through). Utilisez un modèle Azure Resource Manager pour déployer les composants d’infrastructure de base d’un service App Service, de Web App, d’Application Insights, d’un compte de stockage, de SQL Server et d’une base de données.
 - [Bot conversationnel d’application web](#deploy-web-app-chatbot). Utilisez l’interface de ligne de commande Azure pour déployer un bot avec Bot Service et l’application Language Understanding Intelligent Service (LUIS).
 - [Exemple d’application de bot conversationnel en C#](#deploy-chatbot-c-application-code). Utilisez Visual Studio pour vérifier le code de l’exemple d’application en C# de réservation d’hôtel et le déployer vers un bot dans Azure.
 
-### <a name="prerequisites"></a>Prérequis
+### <a name="prerequisites"></a>Conditions préalables
 
 Vous devez disposer d’un compte Azure existant. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -170,7 +168,6 @@ Pour obtenir un ensemble de didacticiels interactifs sur Azure Bot Service, cons
 [appservice-docs]: /azure/app-service/
 [architecture]: ./media/architecture-commerce-chatbot.png
 [autoscaling]: ../../best-practices/auto-scaling.md
-[availability]: ../../checklist/availability.md
 [botservice-docs]: /azure/bot-service/
 [cognitive-docs]: /azure/cognitive-services/
 [resiliency]: ../../resiliency/index.md

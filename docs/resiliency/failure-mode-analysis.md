@@ -1,28 +1,26 @@
 ---
 title: Analyse du mode d’échec
-description: Instructions pour effectuer l’analyse du mode d’échec pour les solutions cloud basées sur Azure.
+description: Instructions pour effectuer une analyse du mode d’échec pour les solutions de cloud basées sur Azure.
 author: MikeWasson
 ms.date: 05/07/2018
 ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-design-principles
 ms.custom: resiliency
-ms.openlocfilehash: 6d0f58161c5b9d5922c21f24b1b1a50bab836bb1
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 0d89570ca42aa087a9c18148b5a4019b6f348e6b
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248066"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640972"
 ---
-# <a name="failure-mode-analysis"></a>Analyse du mode d’échec
-
-[!INCLUDE [header](../_includes/header.md)]
+# <a name="failure-mode-analysis-for-azure-applications"></a>Analyse du mode d’échec pour les applications Azure
 
 L’analyse du mode d’échec (FMA) est un processus de création de résilience dans un système, en identifiant les points de défaillance possibles. La FMA doit faire partie des phases de conception et d’architecture, afin que vous puissiez générer une récupération après une défaillance dans le système depuis le début.
 
 Voici le processus général pour effectuer une FMA :
 
-1. Identifiez tous les composants dans le système. Incluez les dépendances externes, telles que les fournisseurs d’identité, les services tiers et ainsi de suite.
+1. Identifiez tous les composants dans le système. Inclure des dépendances externes, telles que les fournisseurs d’identité, les services tiers et ainsi de suite.
 2. Pour chaque composant, identifiez les défaillances qui peuvent se produire. Un seul composant peut avoir plusieurs modes d’échec. Par exemple, vous devriez prendre en compte séparément les échecs de lecture et d’écriture, car les solutions et les impacts possibles seront différents.
 3. Évaluez chaque mode d’échec en fonction de son niveau de risque global. Tenez compte de ces facteurs :
 
@@ -61,11 +59,11 @@ L’enregistrement Application_End interceptera l’arrêt du domaine d’applic
 - Pour empêcher un opérateur d’arrêter l’application, définissez un verrou de ressource avec un niveau `ReadOnly`. Consultez [Verrouiller des ressources avec Azure Resource Manager][rm-locks].
 - En cas de blocage de l’application ou si une machine virtuelle de App Service devient indisponible, App Service redémarre automatiquement l’application.
 
-**Diagnostics**. Journaux des serveurs web et d'applications. Consultez la page [Activer la journalisation des diagnostics pour les applications web dans Azure App Service][app-service-logging].
+**Diagnostics**. Journaux d’activité des serveurs web et d’applications. Consultez la page [Activer la journalisation des diagnostics pour les applications web dans Azure App Service][app-service-logging].
 
 ### <a name="a-particular-user-repeatedly-makes-bad-requests-or-overloads-the-system"></a>Un utilisateur particulier effectue des requêtes incorrectes ou surcharge le système à plusieurs reprises.
 
-**Détection**. Authentifiez les utilisateurs et incluez l’ID d’utilisateur dans les journaux d’applications.
+**Détection**. Authentifiez les utilisateurs et incluez l’ID d’utilisateur dans les journaux d’activité d’applications.
 
 **Récupération :**
 
@@ -135,7 +133,7 @@ La stratégie de nouvelles tentatives par défaut utilise une temporisation expo
 - Utilisez un déploiement en mode rack, avec les nœuds de données répartis entre les domaines d’erreur.
 - Déployez dans plusieurs régions avec une cohérence de quorum locale. Si une défaillance non temporaire se produit, basculez vers une autre région.
 
-**Diagnostics**. Journaux d’application
+**Diagnostics**. Journaux d’activité d’application
 
 ## <a name="cloud-service"></a>Service cloud
 
@@ -278,7 +276,7 @@ Le réplica utilise une chaîne de connexion différente, vous devrez donc la me
 - En tant qu’un plan d’atténuation, isolez les pools de connexions pour chaque cas d’usage, de sorte qu’un seul cas d’usage ne puisse pas dominer toutes les connexions.
 - Augmentez les pools de connexions maximales.
 
-**Diagnostics**. Journaux d’application.
+**Diagnostics**. Journaux d’activité d’application.
 
 ### <a name="database-connection-limit-is-reached"></a>La limite de connexion de base de données est atteinte.
 
@@ -373,7 +371,7 @@ Pour plus d’informations, voir [Vue d’ensemble des files d’attente de lett
 
 **Récupération**. Utilisez le jeton d’annulation pour détecter l’arrêt. Lorsque Service Fabric demande l’annulation, terminez votre travail et quittez `RunAsync` aussi rapidement que possible.
 
-**Diagnostics**. Journaux d’application
+**Diagnostics**. Journaux d’activité d’application
 
 ## <a name="storage"></a>Stockage
 
@@ -426,13 +424,13 @@ Pour plus d’informations, voir [Vue d’ensemble des files d’attente de lett
 
 **Récupération**. Pour chaque couche d’application, placez plusieurs instances de machine virtuelle dans le même groupe à haute disponibilité et placez un équilibreur de charge devant les machines virtuelles. Si une sonde ne répond pas, l’équilibreur de charge n’envoie plus de nouvelles connexions à l’instance défectueuse.
 
-**Diagnostics**. - Utilisez [l’analyse des journaux][lb-monitor] de l’équilibreur de charge.
+**Diagnostics**. - Utilisez [l’analytique des journaux d’activité][lb-monitor] de l’équilibreur de charge.
 
 - Configurer votre système de surveillance pour surveiller tous les points de terminaison d’analyse du fonctionnement.
 
 ### <a name="operator-accidentally-shuts-down-a-vm"></a>Un opérateur arrête accidentellement une machine virtuelle.
 
-**Détection**. N/A
+**Détection**. S.O.
 
 **Récupération**. Définissez un verrou de ressource avec un niveau `ReadOnly`. Consultez [Verrouiller des ressources avec Azure Resource Manager][rm-locks].
 

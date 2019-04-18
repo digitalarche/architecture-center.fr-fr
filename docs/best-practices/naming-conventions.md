@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: ed1811495e81965fa514ab66dcfa49d00d2a59f2
-ms.sourcegitcommit: bb75a25bd589a761c79e39f2ccdec4acc7d71d60
+ms.openlocfilehash: e67da8043beed01c99f36da689dfd0553e012535
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/11/2019
-ms.locfileid: "59480097"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640394"
 ---
 # <a name="naming-conventions-for-azure-resources"></a>Conventions d’affectation de noms pour les ressources Azure
 
@@ -101,7 +101,7 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 
 | Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
 | --- | --- | --- | --- | --- | --- | --- |
-|Nom du compte de stockage (données) |Globale |3-24 |Minuscules |Alphanumérique |`<globally unique name><number>` (utiliser une fonction pour calculer un guid unique pour nommer les comptes de stockage) |`profxdata001` |
+|Nom du compte de stockage (données) |Globale |3-24 |Minuscules |Alphanumérique |`<globally unique name><number>` (utilisez une fonction afin de calculer un GUID unique pour l’affectation de noms aux comptes de stockage) |`profxdata001` |
 |Nom du compte de stockage (disques) |Globale |3-24 |Minuscules |Alphanumérique |`<vm name without hyphens>st<number>` |`profxsql001st0` |
 | Nom du conteneur |Compte de stockage |3-63 |Minuscules |Alphanumériques et trait d’union |`<context>` |`logs` |
 |Nom de l’objet blob | Conteneur |1-1024 |Respect de la casse |Tout caractère d’URL |`<variable based on blob usage>` |`<variable based on blob usage>` |
@@ -135,7 +135,7 @@ En règle générale, évitez d’utiliser des caractères spéciaux (`-` ou `_`
 
 | Entité | Étendue | Longueur | Casse | Caractères valides | Modèle suggéré | Exemples |
 | --- | --- | --- | --- | --- | --- | --- |
-|Espace de noms Service Bus | Globale |6-50 |Insensible à la casse | Alphanumériques, trait d’union, doit commencer par plus tard ; consultez [ici](/rest/api/servicebus/create-namespace) pour plus d’informations. |`<service short name>-bus` |`app1-bus` |
+|Espace de noms Service Bus | Globale |6-50 |Insensible à la casse | Alphanumériques, trait d’union, doit commencer par une lettre ; consultez [ici](/rest/api/servicebus/create-namespace) pour plus d’informations. |`<service short name>-bus` |`app1-bus` |
 
 ## <a name="organize-resources-with-tags"></a>Organiser les ressources à l’aide de balises
 
@@ -192,8 +192,8 @@ Pour plus d’informations sur la configuration de cette fonctionnalité, consul
 
 Pour plus d’informations sur l’affectation de noms aux blobs, conteneurs et tables, consultez les articles répertoriés ci-après :
 
-- [Désignation et référencement des conteneurs, objets BLOB et métadonnées](https://msdn.microsoft.com/library/dd135715.aspx)
-- [Les files d’attente d’affectation de noms et les métadonnées](https://msdn.microsoft.com/library/dd179349.aspx)
+- [Désignation et référencement des conteneurs, des objets BLOB et des métadonnées](https://msdn.microsoft.com/library/dd135715.aspx)
+- [Affectation de noms pour les files d’attente et les métadonnées](https://msdn.microsoft.com/library/dd179349.aspx)
 - [Noms de table](https://msdn.microsoft.com/library/azure/dd179338.aspx)
 
 Un nom de blob peut comporter n’importe quelle combinaison de caractères, mais les caractères d’URL réservés doivent être correctement placés dans une séquence d’échappement. Évitez les noms de blob qui se terminent par un point (.),une barre oblique (/) ou une séquence ou combinaison des deux. Par convention, la barre oblique correspond au séparateur de répertoires *virtuel*. N’utilisez pas de barre oblique (\\) dans un nom de blob. Bien que les API de client puissent l’autoriser, le hachage échouera et les signatures ne correspondront pas.
@@ -202,4 +202,3 @@ Vous ne pouvez pas modifier le nom d’un compte de stockage ou d’un conteneur
 
 > [!TIP]
 > Nous vous recommandons d’établir une convention d’affectation de noms pour tous les types et comptes de stockage avant de commencer le développement d’un nouveau service ou d’une nouvelle application.
-

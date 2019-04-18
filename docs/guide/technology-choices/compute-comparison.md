@@ -8,12 +8,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: 2b6b9b941bf7a3c0136b71ecb65bfe4b4a59e07b
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: c4ce7a5da196e0fcf8f85376439e53683432883e
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58245600"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640462"
 ---
 # <a name="criteria-for-choosing-an-azure-compute-service"></a>Critères de sélection d’un service de calcul Azure
 
@@ -31,7 +31,7 @@ Le terme *calcul* fait référence au modèle d’hébergement pour les ressourc
 | Gestion de l'état | Sans état ou avec état | Sans état | Sans état ou avec état | Sans état | Sans état ou avec état | Sans état | Sans état |
 | Hébergement web | Sans dépendance | Intégré | Sans dépendance | Non applicable | Sans dépendance | Sans dépendance | Non  |
 | Peut être déployé vers le réseau virtuel dédié ? | Pris en charge | Pris en charge<a href="#note5"><sup>5</sup></a> | Pris en charge | Pris en charge <a href="#note5"><sup>5</sup></a> | [Pris en charge](/azure/aks/networking-overview) | Non pris en charge | Pris en charge |
-| Connectivité hybride | Pris en charge | Pris en charge <a href="#note6"><sup>6</sup></a>  | Pris en charge | Pris en charge <a href="#node7"><sup>7</sup></a> | Pris en charge | Non pris en charge | Pris en charge |
+| Connectivité hybride | Pris en charge | Pris en charge <a href="#note6"><sup>6</sup></a>  | Pris en charge | Pris en charge <a href="#note7"><sup>7</sup></a> | Pris en charge | Non pris en charge | Pris en charge |
 
 Notes
 
@@ -60,7 +60,7 @@ Notes
 
 | Critères | Virtual Machines | App Service | Service Fabric | Azure Functions | Azure Kubernetes Service | Container Instances | Azure Batch |
 |----------|-----------------|-------------|----------------|-----------------|-------------------------|----------------|-------------|
-| Mise à l’échelle automatique | Groupes de machines virtuelles identiques (VMSS) | Service intégré | Groupes de machines virtuelles identiques (VMSS) | Service intégré | Non pris en charge | Non pris en charge | N/A |
+| Mise à l’échelle automatique | Groupes de machines virtuelles identiques (VMSS) | Service intégré | Groupes de machines virtuelles identiques (VMSS) | Service intégré | Non pris en charge | Non pris en charge | S.O. |
 | Équilibrage de charge | Azure Load Balancer | Intégré | Azure Load Balancer | Intégré | Intégré |  Aucune prise en charge intégrée | Azure Load Balancer |
 | Limite de mise à l’échelle<a href="#note1c"><sup>1</sup></a> | Image de plateforme : 1 000 nœuds par groupe de machines virtuelles identiques, image personnalisée : 100 nœuds par VMSS | 20 instances, 100 avec App Service Environment | 100 nœuds par VMSS | 200 instances par application de fonction | 100 nœuds par cluster (limite par défaut) |20 groupes de conteneurs par abonnement (limite par défaut). | Limite de 20 cœurs (limite par défaut). |
 

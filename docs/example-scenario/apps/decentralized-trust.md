@@ -9,12 +9,12 @@ ms.service: architecture-center
 ms.subservice: example-scenario
 ms.custom: csa-team
 social_image_url: /azure/architecture/example-scenario/apps/media/architecture-decentralized-trust.png
-ms.openlocfilehash: a3c497f91b3861bf02f05981ee92e578a22a14ca
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 3bc75e59a4d391c74a0e606f9670c88509a3375b
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58246280"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640445"
 ---
 # <a name="decentralized-trust-between-banks-on-azure"></a>Confiance décentralisée entre les banques sur Azure
 
@@ -72,8 +72,6 @@ Pour d’autres scénarios étendus ou différents, des problèmes relatifs à l
 
 [Azure Monitor][monitor] est utilisé pour surveiller en permanence le réseau de blockchain et ainsi garantir la disponibilité. Un lien vers un tableau de bord de supervision personnalisé basé sur Azure Monitor vous est envoyé après le déploiement du modèle de solution de blockchain utilisé dans ce scénario. Le tableau de bord affiche les nœuds qui signalent des pulsations au cours des 30 dernières minutes, ainsi que d’autres statistiques utiles.
 
-Pour consulter d’autres rubriques relatives à la disponibilité, consultez la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
-
 ### <a name="scalability"></a>Extensibilité
 
 Un problème courant des blockchains est le nombre de transactions qu’une blockchain peut inclure dans une durée prédéfinie. Ce scénario utilise PoA (Proof-of-Authority) quand une telle extensibilité peut être mieux gérée qu’avec PoW (Proof-of-Work). Dans les réseaux basés &ndash;sur PoA, les participants au consensus sont connus et gérés, ce qui est plus approprié pour une blockchain privée destinée à un consortium d’organisations qui se connaissent entre elles. Les paramètres tels que la durée de bloc moyenne, les transactions par minute et la consommation des ressources de calcul peuvent être facilement surveillées via le tableau de bord personnalisé. Les ressources peuvent ensuite être ajustées en fonction des exigences de mise à l’échelle.
@@ -90,7 +88,7 @@ Pour obtenir des conseils d’ordre général sur la conception de solutions sé
 
 La blockchain Ethereum PoA peut offrir un certain degré de résilience puisque les nœuds de validateur peuvent être déployés dans différentes régions. Azure permet d’effectuer des déploiements dans plus de 54 régions du monde entier. Une blockchain comme celle de notre exemple offre des possibilités uniques et nouvelles de coopération pour accroître la résilience. La résilience du réseau n’est pas fournie uniquement pour une seule partie centralisée, mais pour tous les membres du consortium. Une blockchain basée&ndash;sur PoA permet d’obtenir une résilience réseau plus planifiée et délibérée.
 
-Pour obtenir des conseils d’ordre général sur la conception de solutions résilientes, consultez l’article [Conception d’applications résilientes pour Azure][resiliency].
+Pour obtenir des instructions générales sur la conception de solutions résilientes, consultez [conception d’applications Azure fiables](../../reliability/index.md).
 
 ## <a name="pricing"></a>Tarifs
 
@@ -120,8 +118,6 @@ Pour plus d’informations sur l’utilisation du modèle de solution Ethereum P
 [deploy]: https://portal.azure.com/?pub_source=email&pub_status=success#create/microsoft-azure-blockchain.azure-blockchain-ethereumethereum-poa-consortium
 [source]: https://github.com/vitoc/creditscoreblockchain
 [monitor]: /azure/monitoring-and-diagnostics/monitoring-overview-azure-monitor
-[availability]: /azure/architecture/checklist/availability
 [scalability]: /azure/architecture/checklist/scalability
-[resiliency]: ../../resiliency/index.md
 [security]: /azure/security/
 [vault]: https://azure.microsoft.com/services/key-vault/

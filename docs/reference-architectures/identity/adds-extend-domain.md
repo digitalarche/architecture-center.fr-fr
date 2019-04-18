@@ -1,29 +1,29 @@
 ---
-title: Étendre Active Directory Domain Services (AD DS) à Azure
+title: Étendre votre domaine local Active Directory à Azure
 titleSuffix: Azure Reference Architectures
-description: Étendez votre domaine Active Directory local à Azure.
+description: Déployer des Services de domaine Active Directory (AD DS) dans un réseau virtuel Azure.
 author: telmosampaio
 ms.date: 05/02/2018
 ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, identity
-ms.openlocfilehash: 67f23ae3676d0fb95ef484fa6dcb7a8bb92e0fa2
-ms.sourcegitcommit: 548374a0133f3caed3934fda6a380c76e6eaecea
+ms.openlocfilehash: c617a0ceba900fc9cd78eff21aadf5c94f6b143b
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2019
-ms.locfileid: "58420003"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640343"
 ---
-# <a name="extend-active-directory-domain-services-ad-ds-to-azure"></a>Étendre Active Directory Domain Services (AD DS) à Azure
+# <a name="extend-your-on-premises-active-directory-domain-to-azure"></a>Étendre votre domaine local Active Directory à Azure
 
-Cette architecture de référence indique comment étendre votre environnement Active Directory à Azure pour fournir des services d’authentification distribuée à l’aide d’Active Directory Domain Services (AD DS). [**Déployez cette solution**](#deploy-the-solution).
+Cette architecture montre comment étendre un domaine d’Active Directory en local à Azure pour fournir des services d’authentification distribuée. [**Déployez cette solution**](#deploy-the-solution).
 
 ![Architecture réseau hybride sécurisée avec Active Directory](./images/adds-extend-domain.png)
 
 *Téléchargez un [fichier Visio][visio-download] de cette architecture.*
 
-AD DS est utilisé pour authentifier un utilisateur, un ordinateur, une application ou autres identités qui sont incluses dans un domaine de sécurité. Il peut être hébergé localement, mais si votre application est hébergée en partie localement et en partie dans Azure, il peut être plus efficace de répliquer cette fonctionnalité dans Azure. Cela peut réduire la latence provoquée par l’envoi des demandes d’authentification et d’autorisation locale depuis le cloud vers les services AD DS exécutés localement.
+Si votre application est hébergée en partie en local et en partie dans Azure, il peut être plus efficace de répliquer les Services de domaine Active Directory (AD DS) dans Azure. Cela peut réduire la latence provoquée par l’envoi de demandes d’authentification à partir du cloud à AD DS s’exécutant en local.
 
 Cette architecture est couramment utilisée quand le réseau local et le réseau virtuel Azure sont connectés par une connexion VPN ou ExpressRoute. De plus, cette architecture prend en charge la réplication bidirectionnelle : si des modifications sont effectuées localement ou dans le cloud, les deux sources restent cohérentes. Parmi les utilisations courantes de cette architecture citons les applications hybrides dans lesquelles la fonctionnalité est répartie entre l’environnement local et Azure, et les applications et services qui effectuent l’authentification à l’aide d’Active Directory.
 
@@ -48,7 +48,7 @@ Les recommandations suivantes s’appliquent à la plupart des scénarios. Suive
 
 Déterminez la [taille de machine virtuelle][vm-windows-sizes] requise en fonction du volume attendu de demandes d’authentification. Utilisez les spécifications des machines hébergeant AD DS localement comme point de départ et mettez-les en correspondance avec les tailles des machines virtuelles Azure. Une fois le déploiement effectué, surveillez l’utilisation et procédez à un ajustement d’échelle en fonction de la charge réelle qui pèse sur les machines virtuelles. Pour plus d’informations sur le dimensionnement des contrôleurs de domaine AD DS, consultez [Capacity Planning for Active Directory Domain Services][capacity-planning-for-adds] (Planification de la capacité pour Active Directory Domain Services).
 
-Créez un disque de données virtuel distinct pour le stockage de la base de données, des journaux et de SYSVOL pour Active Directory. Ne stockez pas ces éléments sur le même disque que le système d’exploitation. Par défaut, les disques de données qui sont attachés à une machine virtuelle utilisent le cache à double écriture. Toutefois, cette forme de mise en cache peut entrer en conflit avec les exigences d’AD DS. Vous devez donc, sur le disque de données, définir le paramètre *Préférences de cache d’hôte* sur *Aucun*.
+Créez un disque de données virtuel distinct pour le stockage de la base de données, des journaux d’activité et de SYSVOL pour Active Directory. Ne stockez pas ces éléments sur le même disque que le système d’exploitation. Par défaut, les disques de données qui sont attachés à une machine virtuelle utilisent le cache à double écriture. Toutefois, cette forme de mise en cache peut entrer en conflit avec les exigences d’AD DS. Vous devez donc, sur le disque de données, définir le paramètre *Préférences de cache d’hôte* sur *Aucun*.
 
 Déployez au moins deux machines virtuelles exécutant AD DS en tant que contrôleurs de domaine et ajoutez-les à un [groupe à haute disponibilité][availability-set].
 

@@ -6,12 +6,12 @@ ms.date: 09/20/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: afecf380b1a75d006f6f2bc0cb0e5058cd3feffc
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 7d7f6bd46fb60a190a7fb27432d5ff4b74b0c597
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58241640"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640700"
 ---
 # <a name="establishing-an-operational-fitness-review"></a>Mettre en place une évaluation de l’adéquation opérationnelle
 
@@ -31,11 +31,11 @@ Comme vous l’avez appris dans [Bien démarrer](../../cloud-adoption/getting-st
 
 Pendant ce processus, l’accent est souvent mis sur les _fonctions_ du service. Autrement dit, il existe un ensemble d’exigences _fonctionnelles_ souhaitées pour que le service fonctionne. Prenons par exemple un service de livraison de produits. Plusieurs fonctions sont nécessaires : déterminer les lieux de départ et de destination du produit, assurer son suivi au cours de la livraison, envoyer des notifications aux clients, etc.
 
-Les exigences _non fonctionnelles_, elles, se rapportent à des propriétés comme la [disponibilité](../../checklist/availability.md), la [résilience](../../resiliency/index.md), et [l’extensibilité](../../checklist/scalability.md) du service. Ces propriétés diffèrent des exigences fonctionnelles, car elles n’affectent pas directement les fonctions finales du service. En revanche, elles touchent aux _performances_ et à la _continuité_ du service.
+En revanche, le _non fonctionnelles_ exigences se rapportent aux propriétés telles que le service [fiabilité](../../reliability/index.md) et [évolutivité](../../checklist/scalability.md). Ces propriétés diffèrent des exigences fonctionnelles, car elles n’affectent pas directement les fonctions finales du service. En revanche, elles touchent aux _performances_ et à la _continuité_ du service.
 
 Certaines exigences non fonctionnelles peuvent être spécifiées par un contrat de niveau de service (SLA). Par exemple, en ce qui concerne la continuité du service, on peut exprimer l’exigence de disponibilité sous forme de pourcentage, comme **disponible 99,99 % du temps**. D’autres exigences non fonctionnelles sont plus difficiles à définir et susceptibles de changer en fonction de l’évolution des besoins de production. Par exemple, un service aux consommateurs risque de se retrouver face à des exigences de débit imprévues après une forte hausse de popularité.
 
-![REMARQUE] La définition des exigences de résilience ainsi que l’explication des concepts de RPO, de RTO, de SLA et autres sont abordées plus en détail dans [Concevoir des applications résilientes pour Azure](../../resiliency/index.md#define-your-availability-requirements).
+! [REMARQUE] Définition de la configuration requise pour la résilience, y compris les explications de RPO, RTO, contrat SLA et des concepts connexes, sont abordées plus en détail dans [développement de spécifications pour les applications Azure résilientes](../../reliability/requirements.md).
 
 ## <a name="operational-fitness-review-process"></a>Le processus d’évaluation de l’adéquation opérationnelle
 
@@ -53,7 +53,7 @@ Les étapes de cette phase visent à capturer les exigences associées à une é
 
 - **Faire correspondre les opérations aux services**. Faites correspondre ces opérations d’entreprise aux services de soutien associés. Dans l’exemple du panier ci-dessus, plusieurs services peuvent être concernés : un service de gestion des stocks, un service de panier d’achat, etc. Dans l’exemple précédent de paiement par carte de crédit, un service de paiement local est susceptible d’interagir avec un service tiers de traitement des paiements.
 
-- **Analyser les dépendances entre les services**. La plupart des opérations d’entreprise impliquent une orchestration entre plusieurs services de soutien. Il est important de comprendre les dépendances entre les services et le flux de transactions critiques à travers ces services. Examinez également les dépendances entre les services locaux et les services Azure. Dans l’exemple du panier d’achat, le service de gestion des stocks peut être hébergé en local et ingérer des données d’entrée émises par les employés dans un entrepôt physique, ou bien stocker des données dans un service Azure comme le [Stockage Azure](/azure/storage/common/storage-introduction) ou une base de données comme [Azure Cosmos DB](/azure/cosmos-db/introduction).
+- **Analyser les dépendances entre les services**. La plupart des opérations d’entreprise impliquent une orchestration entre plusieurs services de soutien. Il est important de comprendre les dépendances entre les services et le flux de transactions critiques via ces services. Examinez également les dépendances entre les services locaux et les services Azure. Dans l’exemple du panier d’achat, le service de gestion des stocks peut être hébergé en local et ingérer des données d’entrée émises par les employés dans un entrepôt physique, ou bien stocker des données dans un service Azure comme le [Stockage Azure](/azure/storage/common/storage-introduction) ou une base de données comme [Azure Cosmos DB](/azure/cosmos-db/introduction).
 
 À partir de ces activités est produite une série **d’indicateurs de tableau de bord** pour les opérations de service. Ces métriques sont classées en fonction des critères non fonctionnels, comme la disponibilité, l’extensibilité et la récupération d’urgence, que le service doit respecter d’un point de vue opérationnel. Elles sont exprimées à un niveau de granularité adapté à l’opération de service, quel qu’il soit.
 
@@ -81,7 +81,7 @@ L’équipe d’évaluation de l’adéquation opérationnelle se compose des r�
 
 2. **Conseiller d’entreprise (Business Advocate)**. Il est chargé de décomposer les opérations d’entreprise en différentes parties correspondant à une infrastructure et des services cloud et locaux. Une connaissance approfondie des technologies associées à chaque opération est nécessaire.
 
-3. **Responsable de l’ingénierie (Engineering Owner)**. Il est chargé d’implémenter les services associés à l’opération d’entreprise. Ils peuvent participer à la conception, à la mise en œuvre et au déploiement de solutions à des problèmes liés aux exigences non fonctionnelles et révélés par l’équipe d’évaluation de l’adéquation opérationnelle.
+3. **Responsable de l’ingénierie (Engineering Owner)**. Ce rôle est chargé d’implémenter les services associés à l’opération de l’entreprise. Ils peuvent participer à la conception, à la mise en œuvre et au déploiement de solutions à des problèmes liés aux exigences non fonctionnelles et révélés par l’équipe d’évaluation de l’adéquation opérationnelle.
 
 4. **Responsable des services (Service Owner)**. Il est responsable du fonctionnement des applications et des services de l’entreprise. Ils collectent des données de journalisation et d’utilisation de ces applications et services, qui servent à identifier les problèmes et à vérifier les correctifs une fois déployés.
 
@@ -95,7 +95,7 @@ Les détails du processus et des réunions doivent être parfaitement adaptés �
 
 2. Les responsables de l’ingénierie et des services font correspondre **l’état actuel** des opérations d’entreprise aux services cloud et locaux associés : la liste des composants de chaque service est orientée sous la forme d’une arborescence des dépendances. Une fois la liste et l’arborescence générées, il convient de déterminer les **chemins critiques** dans l’arborescence.
 
-3. Les responsables de l’ingénierie et des services évaluent l’état actuel de la journalisation et du monitoring opérationnels des services listés à l’étape précédente. Il est essentiel que la journalisation et le monitoring soient robustes et suffisants pour identifier les composants de service qui contribuent au non-respect des exigences non fonctionnelles. Sinon, il faut créer et mettre en œuvre un plan permettant de les mettre en place.
+3. Les responsables de l’ingénierie et des services évaluent l’état actuel de la journalisation et du monitoring opérationnels des services listés à l’étape précédente. Journalisation robuste et de surveillance sont critiques, afin d’identifier les composants de service qui contribuent à ne pas répondre aux exigences non fonctionnelles. Sinon, il faut créer et mettre en œuvre un plan permettant de les mettre en place.
 
 4. Des indicateurs de tableau de bord sont créés pour les nouvelles opérations d’entreprise. Ce tableau de bord se compose de la liste des composants constitutifs de chacun des services identifiés à l’étape 2, alignés sur les exigences non fonctionnelles, et de métriques représentant la manière dont les composants respectent ces exigences.
 
@@ -109,7 +109,7 @@ Les détails du processus et des réunions doivent être parfaitement adaptés �
     Cette section du guide d’architecture des applications Azure décrit les cinq piliers de la qualité logicielle : scalabilité, disponibilité, résilience, gestion et sécurité.
 - [Dix principes de conception pour les applications Azure](../../guide/design-principles/index.md).
     Cette section du guide d’architecture des applications Azure présente un ensemble de principes de conception visant à rendre les applications plus évolutives, plus résilientes et plus faciles à gérer.
-- [Concevoir des applications résilientes pour Azure](../../resiliency/index.md).
+- [Conception d’applications Azure fiables](../../reliability/index.md).
     Ce guide commence par une définition du terme « résilience » et des concepts associés. Il décrit ensuite un processus pour atteindre une résilience, à l’aide d’une approche structurée pendant la durée de vie d’une application, depuis la conception et l’implémentation jusqu’au déploiement et aux opérations.
 - [Modèles de conception cloud](../../patterns/index.md).
     Ces modèles de conception sont utiles aux équipes d’ingénieurs qui souhaitent créer des applications selon les piliers de la qualité logicielle.

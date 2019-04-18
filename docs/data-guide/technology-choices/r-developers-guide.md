@@ -9,12 +9,12 @@ ms.devlang: R
 ms.topic: article
 ms.date: 03/19/2019
 ms.author: jepeach
-ms.openlocfilehash: a14c8ce76f78baa7274f22b939eb28cb025ef87e
-ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.openlocfilehash: 7b263d0f49b3b41c9a25b5842de908d5e507780b
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2019
-ms.locfileid: "58888016"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640479"
 ---
 # <a name="r-developers-guide-to-azure"></a>Guide du développeur R sur Azure
 
@@ -32,13 +32,13 @@ Cet article couvre les services Azure suivants qui prennent en charge le langage
 
 |de diffusion en continu                                                          |Description                                                                       |
 |-----------------------------------------------------------------|----------------------------------------------------------------------------------|
-|[Machine virtuelle de science des données](#data-science-virtual-machine)    |Une machine virtuelle personnalisée à utiliser comme une station de travail de science des données ou comme une cible de calcul personnalisée|
+|[Data Science Virtual Machine](#data-science-virtual-machine) (Machine virtuelle Science des données)    |Une machine virtuelle personnalisée à utiliser comme une station de travail de science des données ou comme une cible de calcul personnalisée|
 |[ML Services sur HDInsight](#ml-services-on-hdinsight)            |Système basé sur un cluster pour l’exécution d’analyses R sur des grands jeux de données sur de nombreux nœuds   |
 |[Azure Databricks](#azure-databricks)                            |Environnement Spark collaboratif qui prend en charge R et autres langages               |
-|[Azure Machine Learning Studio](#azure-machine-learning-studio)  |Exécuter des scripts R personnalisés dans les expériences de machine learning d’Azure                      |
+|[Azure Machine Learning Studio](#azure-machine-learning-studio)  |Exécuter des scripts R personnalisés dans les expériences de machine learning d’Azure                      |
 |[Azure Batch](#azure-batch)                                      |Offre différentes options pour exécuter de façon économique du code R sur de nombreux nœuds dans un cluster|
 |[Azure Notebooks](#azure-notebooks)                              |une version cloud gratuite des notebooks Jupyter                  |
-|[Azure SQL Database](#azure-sql-database)                        |Exécuter des scripts R à l’intérieur du moteur de base de données SQL Server                            |
+|[Base de données SQL Azure](#azure-sql-database)                        |Exécuter des scripts R à l’intérieur du moteur de base de données SQL Server                            |
 
 ## <a name="data-science-virtual-machine"></a>Machine virtuelle de science des données
 
@@ -47,7 +47,7 @@ La machine virtuelle [DSVM (Data Science Virtual Machine)](https://docs.microsof
 * [Microsoft R Open](https://mran.microsoft.com/open/)
 * [Microsoft Machine Learning Server](https://docs.microsoft.com/machine-learning-server/what-is-machine-learning-server)
 * [RStudio Desktop](https://www.rstudio.com/products/rstudio/#Desktop)
-* [RStudio Server](https://www.rstudio.com/products/rstudio/#Server)
+* [RStudio Server](https://www.rstudio.com/products/rstudio/#Server) ;
 
 La machine virtuelle DSVM peut être provisionnée avec Windows ou Linux comme système d’exploitation.  Vous pouvez utiliser la machine virtuelle DSVM de deux façons différentes : comme station de travail interactive ou comme plateforme de calcul pour un cluster personnalisé.
 
@@ -129,14 +129,13 @@ Cette fonctionnalité offre un moteur incorporé d’analytique prédictive et d
 
 Si Machine Learning Services fait partie de SQL Server depuis 2016, il est relativement nouveau dans Azure SQL Database.  Il est actuellement en [préversion limitée](https://docs.microsoft.com/sql/advanced-analytics/what-s-new-in-sql-server-machine-learning-services?view=sql-server-2017#azure-sql-database-roadmap), mais il continue d’évoluer.
 
-
 ### <a name="next-steps"></a>Étapes suivantes
 
 * [Exécution de votre code R sur Azure avec mrsdeploy](https://blog.revolutionanalytics.com/2017/03/running-your-r-code-azure.html)
-* [Machine Learning Server dans le Cloud](https://docs.microsoft.com/machine-learning-server/install/machine-learning-server-in-the-cloud)
+* [Machine Learning Server dans le cloud](https://docs.microsoft.com/machine-learning-server/install/machine-learning-server-in-the-cloud)
 * [Ressources supplémentaires pour Machine Learning Server et Microsoft R](https://docs.microsoft.com/machine-learning-server/resources-more)
 * [R sur Azure](https://github.com/yueguoguo/r-on-azure) : une vue d’ensemble des packages, des outils et d’études de cas pour l’utilisation de R avec Azure
 
 ---
 
-<sub>Le logo de R est &copy; 2016 la R Foundation et est utilisé dans le cadre de la [les licence Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/).</sub>
+<sub>Le logo R est « &copy; 2016 The R Foundation » et il est utilisé selon les termes de la [licence internationale Creative Commons Attribution-ShareAlike 4.0](https://creativecommons.org/licenses/by-sa/4.0/).</sub>

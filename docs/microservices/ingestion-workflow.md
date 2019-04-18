@@ -7,18 +7,21 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
-ms.openlocfilehash: aa5c2b4357ed53da9bebf4795fcbefb89afe0c78
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
+ms.openlocfilehash: a36d2b4c7bfd2b26d5e1de44ddd8005fbce4bdd2
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54482568"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640853"
 ---
 # <a name="designing-microservices-ingestion-and-workflow"></a>Conception de microservices : Ingestion et workflow
 
 La plupart du temps, les microservices présentent un workflow qui s’étend sur plusieurs services pour une même transaction. Ce workflow doit être fiable ; autrement dit, il ne peut pas perdre de transactions ni les laisser dans un état incomplet. Il est également primordial de contrôler le taux d’ingestion des requêtes entrantes. Étant donné qu’une multitude de petits services communiquent entre eux, il existe un risque qu’une rafale de requêtes entrantes submerge la communication interservice.
 
 ![Schéma du workflow d’ingestion](./images/ingestion-workflow.png)
+
+> [!NOTE]
+> Cet article est basé sur une implémentation de référence de microservices appelée le [application Drone Delivery](./design/index.md).
 
 ## <a name="the-drone-delivery-workflow"></a>Workflow de livraison par drone
 
@@ -83,7 +86,7 @@ Dans une partition, l’hôte du processeur d’événements attend que la méth
 > [!NOTE]
 > L’hôte du processeur *n’attend* pas à proprement parler, dans le sens où il bloquerait un thread. La méthode `ProcessEventsAsync` est asynchrone, de sorte que l’hôte du processeur peut accomplir d’autres tâches pendant que la méthode s’exécute. Mais il ne remettra aucun autre lot de messages pour cette partition tant que la méthode n’aura pas été renvoyée.
 
-Dans l’application de livraison par drone, un lot de messages peut être traité en parallèle. Toutefois, l’attente du traitement de la totalité du lot est toujours susceptible d’entraîner un goulot d’étranglement. La vitesse du traitement est tributaire de celle du message le plus lent d’un lot. Toute variation des temps de réponse peut engendrer une « longue file » dans le cadre de laquelle quelques réponses lentes ralentissent la totalité du système. Nos tests de performances ont montré que cette approche ne nous permettait pas d’atteindre notre débit cible. Cela ne signifie *pas* qu’il vous faille éviter d’utiliser l’hôte du processeur d’événements. Mais dans le cas d’un débit élevé, évitez d’exécuter des tâches de longue durée à l’intérieur de la méthode `ProcesssEventsAsync`. Traitez chaque lot rapidement.
+Dans l’application de livraison par drone, un lot de messages peut être traité en parallèle. Toutefois, l’attente du traitement de la totalité du lot est toujours susceptible d’entraîner un goulot d’étranglement. La vitesse du traitement est tributaire de celle du message le plus lent d’un lot. Toute variation des temps de réponse peut engendrer une « longue file » dans le cadre de laquelle quelques réponses lentes ralentissent la totalité du système. Nos tests de performances ont montré que cette approche ne nous permettait pas d’atteindre notre débit cible. Cela ne signifie *pas* qu’il vous faille éviter d’utiliser l’hôte du processeur d’événements. Mais dans le cas d’un débit élevé, évitez d’exécuter des tâches de longue durée à l’intérieur de la méthode `ProcessEventsAsync`. Traitez chaque lot rapidement.
 
 ### <a name="iothub-react"></a>IotHub React
 
@@ -176,7 +179,7 @@ Si la logique des transactions de compensation se révèle complexe, envisagez d
 
 ![Diagramme illustrant le microservice Supervisor](./images/supervisor.png)
 
-## <a name="idempotent-vs-non-idempotent-operations"></a>Opérations idempotentes et non idempotentes
+## <a name="idempotent-versus-non-idempotent-operations"></a>Idempotent par rapport aux opérations non idempotent
 
 Pour éviter toute perte de requêtes, le service Scheduler doit garantir que tous les messages sont traités au moins une fois. Event Hubs peut garantir que les messages ont été remis au moins une fois si le client applique une stratégie de points de contrôle adéquate.
 
@@ -239,9 +242,6 @@ public async Task<IActionResult> Put([FromBody]Delivery delivery, string id)
 ```
 
 En principe, la plupart des requêtes créeront une entité ; par conséquent, la méthode anticipe les choses en appelant `CreateAsync` sur l’objet de référentiel, puis traite toutes les exceptions de ressources en double en mettant à jour la ressource à la place.
-
-> [!div class="nextstepaction"]
-> [Passerelles d’API](./gateway.md)
 
 <!-- links -->
 

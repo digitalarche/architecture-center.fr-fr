@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, serverless
-ms.openlocfilehash: 60af3df5bbb75d97d6ba797874c8b37319b2fad5
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
+ms.openlocfilehash: edf569b82a0a632e6ca048fee12c1dc61c039cd9
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54487387"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640802"
 ---
 # <a name="serverless-web-application-on-azure"></a>Application web serverless sur Azure
 
@@ -39,9 +39,6 @@ Les fonctions sont exécutées lorsqu’un déclencheur externe se produit, par 
 L’architecture est constituée des composants suivants :
 
 **Stockage d'objets blob**. Le contenu web statique, tels que les fichiers HTML, CSS et JavaScript, sont stockés dans le Stockage Blob Azure et pris en charge pour les clients en utilisant [l’hébergement de site web statique][static-hosting]. Toute interaction dynamique se produit par le biais du code JavaScript en passant des appels vers le serveur principal des API. Il n’existe aucun code côté serveur pour restituer la page web. Les supports d’hébergement de site web statique indexent les documents et les pages d’erreurs 404 personnalisées.
-
-> [!NOTE]
-> L’hébergement de site web statique est actuellement en [aperçu][static-hosting-preview].
 
 **CDN**. Utilisez [Azure Content Delivery Network][cdn] (CDN) pour mettre en cache le contenu afin de réduire la latence et fournir un point de terminaison HTTPS.
 
@@ -135,9 +132,9 @@ Le déploiement illustré ici se trouve dans une seule région Azure. Pour une a
 
 ## <a name="security-considerations"></a>Considérations relatives à la sécurité
 
-### <a name="authentication"></a>Authentification
+### <a name="authentication"></a>Authentication
 
-L’`GetStatus`API dans l’implémentation de référence utilise Azure AD pour authentifier les requêtes. Azure AD prend en charge le protocole Open ID Connect, qui est un protocole d’authentification basé sur le protocole OAuth 2.
+L’`GetStatus`API dans l’implémentation de référence utilise Azure AD pour authentifier les requêtes. Azure AD prend en charge le protocole OpenID Connect, qui est un protocole d’authentification basé sur le protocole OAuth 2.
 
 Dans cette architecture, l’application cliente est une application monopage (SPA) qui s’exécute dans le navigateur. Ce type d’application cliente ne peut pas suivre une clé secrète client ou un code d’autorisation masqué, donc le flux d’octroi implicite est approprié. (Consultez [Quel flux OAuth 2.0 dois-je utiliser ?] [oauth-flow]). Voici la séquence générale :
 
@@ -329,7 +326,7 @@ Pour déployer cette architecture de référence, affichez le [fichier readme de
 [functions-zip-deploy]: /azure/azure-functions/deployment-zip-push
 [graph]: https://developer.microsoft.com/graph/docs/concepts/overview
 [key-vault-web-app]: /azure/key-vault/tutorial-web-application-keyvault
-[microservices-domain-analysis]: ../../microservices/domain-analysis.md
+[microservices-domain-analysis]: ../../microservices/model/domain-analysis.md
 [monitor]: /azure/azure-monitor/overview
 [oauth-flow]: https://auth0.com/docs/api-auth/which-oauth-flow-to-use
 [partition-key]: /azure/cosmos-db/partition-data

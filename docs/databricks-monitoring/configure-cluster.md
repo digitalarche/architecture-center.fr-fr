@@ -1,20 +1,20 @@
 ---
-title: Configurer Azure Databricks pour envoyer des métriques Azure Monitor
+title: Configurer Azure Databricks pour envoyer des métriques à Azure Monitor
 description: Une bibliothèque scala pour activer la surveillance des métriques et la journalisation des données dans Azure Log Analytique
 author: petertaylor9999
 ms.date: 03/26/2019
-ms.openlocfilehash: af6b6433f87964ac60c179ecf498e54129344126
-ms.sourcegitcommit: 9854bd27fb5cf92041bbfb743d43045cd3552a69
+ms.openlocfilehash: f2fc1fd19da661b74ddf032dd1d5153ce575345c
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2019
-ms.locfileid: "58503405"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639884"
 ---
 <!-- markdownlint-disable MD040 -->
 
-# <a name="configure-azure-databricks-to-send-metrics-to-azure-monitor"></a>Configurer Azure Databricks pour envoyer des métriques Azure Monitor
+# <a name="configure-azure-databricks-to-send-metrics-to-azure-monitor"></a>Configurer Azure Databricks pour envoyer des métriques à Azure Monitor
 
-Cet article explique comment configurer un cluster Azure Databricks pour envoyer des mesures à un [espace de travail Analytique de journal](/azure/azure-monitor/platform/manage-access). Il utilise le [bibliothèque d’analyse Azure Databricks](https://github.com/mspnp/spark-monitoring), qui est disponible sur GitHub. Présentation de Java, Scala et Maven sont recommandées comme prerequisistes.
+Cet article explique comment configurer un cluster Azure Databricks pour envoyer des mesures à un [espace de travail Analytique de journal](/azure/azure-monitor/platform/manage-access). Il utilise le [bibliothèque d’analyse Azure Databricks](https://github.com/mspnp/spark-monitoring), qui est disponible sur GitHub. Présentation de Java, Scala et Maven sont recommandées comme composants requis.
 
 ## <a name="about-the-azure-databricks-monitoring-library"></a>À propos de la bibliothèque d’analyse de Databricks Azure
 

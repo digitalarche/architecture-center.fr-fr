@@ -8,12 +8,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: 5e5af0be41fa892e490d556ef4286d5367144fd9
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 84bc6e5c8d78517e3dc1dc0ee8d250346a33ce43
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58249504"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641193"
 ---
 # <a name="design-for-self-healing"></a>Penser la conception des applications pour la réparation spontanée
 
@@ -59,7 +59,7 @@ En outre, ne pensez pas uniquement aux événements importants tels que les pann
 
 **Adopter l’ingénierie du chaos**. L’ingénierie du chaos étend la notion d’injection d’erreurs en injectant de manière aléatoire des défaillances ou des conditions anormales dans les instances de production.
 
-Pour mettre en place une approche structurée permettant la réparation spontanée de vos applications, consultez l’article [Conception d’applications résilientes pour Azure][resiliency-overview].
+Pour une approche structurée pour rendre vos applications spontanée, consultez [concevoir des applications fiables pour Azure][resiliency-overview].
 
 <!-- links -->
 
@@ -67,7 +67,7 @@ Pour mettre en place une approche structurée permettant la réparation spontan�
 [compensating-transactions]: ../../patterns/compensating-transaction.md
 [leader-election]: ../../patterns/leader-election.md
 [load-level]: ../../patterns/queue-based-load-leveling.md
-[resiliency-overview]: ../../resiliency/index.md
+[resiliency-overview]: ../../reliability/index.md
 [retry]: ../../patterns/retry.md
 [throttle]: ../../patterns/throttling.md
 [transient-fault-handling]: ../../best-practices/transient-faults.md

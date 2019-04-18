@@ -7,10 +7,10 @@ ms.custom: governance
 description: Fournit une vue d’ensemble de la première phase de transformation numérique de l’entreprise dans l’adoption des technologies de cloud Azure.
 ms.date: 02/11/2019
 ms.openlocfilehash: 29b02964b5f1cd09857a51c17cf94d6c64e05e88
-ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068954"
 ---
 # <a name="getting-started-with-the-cloud-adoption-framework"></a>Prise en main du framework d’adoption du cloud
@@ -32,7 +32,7 @@ Voici le principal processus à suivre pour la transformation numérique :
 <!--6. Develop processes for operating in the cloud to make solutions more robust in terms of availability, resiliency, and security.
 1. Optimize solutions for performance, scalability, and cost efficiency.-->
 
-## <a name="step-1-create-a-cloud-strategy-team"></a>Étape 1 : Constituer une équipe de stratégie cloud
+## <a name="step-1-create-a-cloud-strategy-team"></a>Étape 1 : Constituer une équipe de stratégie cloud
 
 La première étape de la transformation numérique de votre entreprise est de faire appel à des leaders métier de toute l’organisation pour constituer une équipe de stratégie cloud. Cette équipe rassemble des responsables métier issus des départements des finances, des infrastructures informatiques et des groupes d’applications. Ces équipes peuvent apporter leurs compétences pour la phase d’expérimentation et d’analyse cloud.
 
@@ -46,7 +46,7 @@ L’équipe dédiée à la gouvernance est responsable de la conception et de l�
 
 L’équipe dédiée à la sécurité est responsable de la conception et de l’implémentation de la stratégie de sécurité de l’entreprise dans le cloud et collabore étroitement avec l’équipe dédiée à la gouvernance. L’équipe dédiée à la sécurité possède l’extension de la limite de sécurité du réseau local pour inclure le réseau virtuel dans le cloud. Cela peut consister à posséder et maintenir les pare-feu entrants et sortants sur le réseau virtuel cloud, ainsi qu’à garantir que la stratégie et les outils empêchent le déploiement des ressources non autorisées.
 
-## <a name="step-2-learn-whats-new-in-the-cloud"></a>Étape 2 : Découvrir les nouveautés dans le cloud
+## <a name="step-2-learn-whats-new-in-the-cloud"></a>Étape 2 : Découvrir les nouveautés dans le cloud
 
 L’étape suivante de la transformation numérique de votre entreprise implique que les membres de l’équipe de stratégie cloud apprennent comment la technologie cloud va changer la méthode de gestion de l’entreprise. Il s’agit de préparer et de planifier les changements qui vont affecter votre activité, votre personnel et vos technologies. Il est essentiel que les membres de l’équipe de stratégie cloud comprennent les nouveautés et les différences entre un environnement cloud et un environnement local.
 
@@ -56,7 +56,7 @@ Pour comprendre le cloud, il faut commencer par se pencher sur le [fonctionnemen
 
 Pour en apprendre davantage, l’équipe dédiée à la gouvernance doit passer en revue les guides de conception et les concepts dans la section sur la gouvernance de la table des matières. Les sections portant sur l’infrastructure et les charges de travail sont utiles pour en savoir plus sur les architectures et charges de travail classiques dans le cloud.
 
-## <a name="step-3-identify-gaps-in-business-strategy"></a>Étape 3 : Identifier les écarts dans la stratégie métier
+## <a name="step-3-identify-gaps-in-business-strategy"></a>Étape 3 : Identifier les écarts dans la stratégie métier
 
 L’étape suivante s’adresse à l’équipe de stratégie cloud : elle doit énumérer les problèmes métier qui nécessitent une solution de transformation numérique. Par exemple, une entreprise peut avoir un centre de données local existant avec le matériel de fin de vie qui doit être remplacé. Dans un autre exemple, une entreprise peut rencontrer des difficultés pour commercialiser des fonctionnalités et services nouveaux et être en retard sur la concurrence. Ces écarts représentent les *objectifs* de la transformation numérique de votre entreprise.
 
@@ -84,7 +84,7 @@ Une fois tous les écarts de la stratégie métier énumérés et les solutions 
 
 À l’issue de ce processus, vous obtenez une liste classée des solutions principales alignées avec les catégories métier.
 
-## <a name="step-4-align-high-level-solutions-with-business-groups-to-design-solutions"></a>Étape 4 : Aligner les solutions principales avec des groupes métier pour concevoir des solutions
+## <a name="step-4-align-high-level-solutions-with-business-groups-to-design-solutions"></a>Étape 4 : Aligner les solutions principales avec des groupes métier pour concevoir des solutions
 
 Maintenant que les objectifs de la transformation numérique ont été énumérés, classés par ordre de priorité et que des solutions principales ont été proposées, l’étape suivante pour l’équipe de stratégie cloud consiste à aligner chaque solution principale avec les équipes d’implémentation et de conception de chaque groupe métier.
 
@@ -133,4 +133,4 @@ Suivez ces dépendances et notez les processus qui les prendront en charge, et i
 La transformation numérique est un processus itératif, et avec chaque itération, les équipes impliquées deviendront plus efficaces.
 
 > [!div class="nextstepaction"]
-> [Comprendre le fonctionne d’Azure](what-is-azure.md)
+> [Comprendre le fonctionnement d’Azure](what-is-azure.md)

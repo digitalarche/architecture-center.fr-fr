@@ -7,12 +7,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai, AI
-ms.openlocfilehash: b7607984bcf2c4bd046421aeb6e9d52dd8e7c18e
-ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.openlocfilehash: 9341b9e4c17025e9623902a6202076c352b237b9
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2019
-ms.locfileid: "58887741"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640546"
 ---
 # <a name="batch-scoring-of-python-machine-learning-models-on-azure"></a>Modèles de notation par lot de l’apprentissage de Python sur Azure
 
@@ -25,11 +25,12 @@ Une implémentation de référence pour cette architecture est disponible sur [G
 **Scénario** : Cette solution supervise le fonctionnement d’un grand nombre d’appareils dans un paramètre IoT où chaque appareil envoie des lectures de capteurs en permanence. Chaque appareil est supposé être associé à des modèles de détection des anomalies préentraînés, qui doivent être utilisés pour prédire si une série de mesures, agrégées sur un intervalle de temps prédéfini, correspondent ou non à une anomalie. Dans les scénarios réels, il peut s’agir d’un flux de lectures de capteurs qui doivent être filtrées et agrégées avant d’être utilisées dans l’entraînement ou le scoring en temps réel. Pour simplifier, cette solution utilise le même fichier de données lors de l’exécution des travaux de scoring.
 
 Cette architecture de référence est conçue pour des charges de travail déclenchées selon une planification. Le traitement est constitué des étapes suivantes :
-1.  Envoyer des lectures de capteurs pour ingestion à Azure Event Hubs.
-2.  Effectuer le traitement des flux et stocker les données brutes.
-3.  Envoyer les données à un cluster Machine Learning prêt à travailler. Chaque nœud du cluster exécute un travail de scoring pour un capteur spécifique. 
-4.  Exécuter le pipeline de scoring, qui exécute les travaux de scoring en parallèle avec des scripts Python Machine Learning. Le pipeline est créé et publié, et son exécution est planifiée à un intervalle de temps prédéfini.
-5.  Générer des prédictions et les stocker dans Stockage Blob pour les utiliser plus tard.
+
+1. Envoyer des lectures de capteurs pour ingestion à Azure Event Hubs.
+2. Effectuer le traitement des flux et stocker les données brutes.
+3. Envoyer les données à un cluster Machine Learning prêt à travailler. Chaque nœud du cluster exécute un travail de scoring pour un capteur spécifique. 
+4. Exécuter le pipeline de scoring, qui exécute les travaux de scoring en parallèle avec des scripts Python Machine Learning. Le pipeline est créé et publié, et son exécution est planifiée à un intervalle de temps prédéfini.
+5. Générer des prédictions et les stocker dans Stockage Blob pour les utiliser plus tard.
 
 ## <a name="architecture"></a>Architecture
 
@@ -65,8 +66,8 @@ Pour des raisons pratiques, dans ce scénario, une seule tâche de scoring est e
 
 ## <a name="management-considerations"></a>Considérations relatives à la gestion
 
-- **Superviser les travaux**. Il est important de superviser la progression de l’exécution de travaux, mais cela peut s’avérer ardu sur un cluster de nœuds actifs. Pour examiner l’état des nœuds du cluster, utilisez le [portail Azure][portal] pour gérer l’[espace de travail Machine Learning][ml-workspace]. Si un nœud est inactif ou si un travail a échoué, vous pouvez consulter les journaux d’erreurs enregistrés dans Stockage Blob. Ils sont également accessibles dans la section Pipelines. Pour une supervision approfondie, connectez les journaux à [Application Insights][app-insights], ou exécutez des processus distincts pour interroger l’état du cluster et de ses travaux.
--   **Journalisation**. Machine Learning Service journalise tous les stdout/stderr dans le compte de stockage Azure associé. Pour consulter facilement les fichiers journaux, utilisez un outil de navigation dans le stockage comme [Explorateur Stockage Azure][explorer].
+- **Superviser les travaux**. Il est important de superviser la progression de l’exécution de travaux, mais cela peut s’avérer ardu sur un cluster de nœuds actifs. Pour examiner l’état des nœuds du cluster, utilisez le [portail Azure][portal] pour gérer l’[espace de travail Machine Learning][ml-workspace]. Si un nœud est inactif ou si un travail a échoué, vous pouvez consulter les journaux d’activité d’erreurs enregistrés dans Stockage Blob. Ils sont également accessibles dans la section Pipelines. Pour une supervision approfondie, connectez les journaux d’activité à [Application Insights][app-insights], ou exécutez des processus distincts pour interroger l’état du cluster et de ses travaux.
+- **Journalisation**. Machine Learning Service journalise tous les stdout/stderr dans le compte de stockage Azure associé. Pour consulter facilement les fichiers journaux, utilisez un outil de navigation dans le stockage comme [Explorateur Stockage Azure][explorer].
 
 ## <a name="cost-considerations"></a>Considérations relatives au coût
 
@@ -75,7 +76,6 @@ Les composants les plus coûteux utilisés dans cette architecture de référenc
 Pour les tâches qui ne nécessitent pas un traitement immédiat, configurez la formule de mise à l’échelle automatique de sorte que l’état par défaut (minimum) soit un cluster sans nœud. Avec cette configuration, le cluster démarre sans nœud et ne monte en puissance que s’il détecte des tâches dans la file d’attente. Si le processus de scoring par lots ne se produit que quelques fois par jour ou moins, ce paramètre permet de réaliser des économies significatives.
 
 La mise à l’échelle automatique peut ne pas convenir pour les traitements par lots trop rapprochés les uns des autres. Le temps nécessaire au lancement et à l’arrêt d’un cluster a aussi un coût. De ce fait, si une charge de travail par lots commence seulement quelques minutes après la fin du travail précédent, il peut être plus rentable de laisser le cluster en fonctionnement entre les travaux. Cela dépend si les processus de scoring sont planifiés pour s’exécuter très fréquemment (toutes les heures, par exemple) ou moins fréquemment (une fois par mois, par exemple).
-
 
 ## <a name="deployment"></a>Déploiement
 

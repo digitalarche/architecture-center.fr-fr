@@ -6,12 +6,12 @@ ms.date: 04/11/2018
 ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
-ms.openlocfilehash: 66f1431f45a0c9accf3a8227fa8cbb5966568372
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: a1fc28737b194fe69e2ae094bd996d97363eb29c
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248010"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641108"
 ---
 # <a name="migrate-an-azure-cloud-services-application-to-azure-service-fabric"></a>Migrer une application Azure Cloud Services vers Azure Service Fabric 
 
@@ -26,7 +26,6 @@ Avant de lire cet article, il sera utile de comprendre les principes fondamentau
 - [Vue d’ensemble d’Azure Service Fabric][sf-overview]
 - [Pourquoi adopter une approche de microservices pour la conception d’applications ?][sf-why-microservices]
 
-
 ## <a name="about-the-surveys-application"></a>À propos de l’application Surveys
 
 En 2012, le groupe Patterns & Practices a créé une application appelée Surveys pour un livre appelé [Developing Multi-tenant Applications for the Cloud][tailspin-book] (Développement d’applications multilocataires pour le cloud). Dans cet ouvrage, une société fictive nommée Tailspin conçoit et implémente l’application Surveys.
@@ -35,8 +34,8 @@ Surveys est une application multilocataire qui permet aux clients de créer des 
 
 Tailspin souhaite désormais déplacer l’application Surveys vers une architecture de microservices en utilisant une infrastructure Service Fabric exécutée dans Azure. Étant donné que l’application est déjà déployée en tant qu’application Cloud Services, Tailspin adopte une approche en deux phases :
 
-1.  Déplacement des services cloud vers Service Fabric tout en limitant les modifications apportées à l’application.
-2.  Optimisation de l’application pour Service Fabric en la déplaçant vers une architecture de microservices.
+1. Déplacement des services cloud vers Service Fabric tout en limitant les modifications apportées à l’application.
+2. Optimisation de l’application pour Service Fabric en la déplaçant vers une architecture de microservices.
 
 Cet article décrit la première phase. La deuxième phase fera l’objet d’un prochain article. Dans un projet réel, il est probable que les deux phases se déroulent en même temps. En même temps que vous effectuerez le déplacement vers Service Fabric, vous commencerez à redéfinir l’architecture de l’application en une infrastructure de microservices. Plus tard, vous pourrez continuer à affiner l’infrastructure, par exemple en divisant les services à granularité grossière en services de plus petite taille.  
 
@@ -87,7 +86,6 @@ Le tableau suivant présente quelques-unes des principales différences entre le
 | Mise à l’échelle automatique | [Service intégré][cloud-service-autoscale] | VM Scale Sets pour la mise à l’échelle automatique |
 | Débogage | Émulateur local | Cluster local |
 
-
 \* Les services avec état utilisent des [collections fiables][sf-reliable-collections] pour stocker l’état des différents réplicas. Ainsi, toutes les lectures s’effectuent localement au niveau des nœuds du cluster. Les écritures sont répliquées sur plusieurs nœuds pour offrir une meilleure fiabilité. Les services sans état peuvent avoir un état externe via l’utilisation d’une base de données ou d’un autre support de stockage externe.
 
 ** Les rôles de travail peuvent également auto-héberger l’API Web ASP.NET à l’aide d’un hôte OWIN.
@@ -123,7 +121,6 @@ Comme indiqué précédemment, l’objectif de cette phase était d’opérer un
 ![](./images/tailspin02.png)
 
 Intentionnellement, cette architecture est très similaire à l’application d’origine. Toutefois, le schéma masque certaines différences importantes. Ces différences seront abordées dans la suite de cet article. 
-
 
 ## <a name="converting-the-cloud-service-roles-to-services"></a>Convertir les rôles de service cloud en services
 
@@ -216,7 +213,6 @@ Pour prendre en charge les paramètres de configuration pour plusieurs environne
 2. Dans le manifeste d’application, définissez un remplacement pour le paramètre.
 3. Placez les paramètres spécifiques à l’environnement dans les fichiers de paramètres d’application.
 
-
 ## <a name="deploying-the-application"></a>Déploiement de l’application
 
 Alors qu’Azure Cloud Services est un service managé, Service Fabric est un runtime. Vous pouvez créer des clusters Service Fabric dans de nombreux environnements, notamment dans Azure ou dans un environnement local. Dans cet article, nous nous concentrons sur le déploiement dans Azure. 
@@ -265,8 +261,8 @@ Le schéma suivant illustre un cluster qui sépare les services frontaux et les 
 
 Pour implémenter cette approche :
 
-1.  Lorsque vous créez le cluster, définissez deux ou plusieurs types de nœuds. 
-2.  Pour chaque service, utilisez [les contraintes de placement][sf-placement-constraints] pour affecter le service à un type de nœud.
+1. Lorsque vous créez le cluster, définissez deux ou plusieurs types de nœuds. 
+2. Pour chaque service, utilisez [les contraintes de placement][sf-placement-constraints] pour affecter le service à un type de nœud.
 
 Lorsque vous déployez dans Azure, chaque type de nœud est déployé sur un groupe de machines virtuelles identiques distinct. Le cluster Service Fabric s’étend sur tous les types de nœuds. Pour en savoir plus, consultez [Relation entre les types de nœuds Service Fabric et les groupes de machines virtuelles identiques][sf-node-types].
 
@@ -280,8 +276,7 @@ Pour configurer un point de terminaison HTTPS public, consultez [Spécifier des 
 
 Vous pouvez faire évoluer l’application en ajoutant des machines virtuelles au cluster. Les groupes de machines virtuelles identiques prennent en charge la mise à l’échelle automatique à l’aide de règles de mise à l’échelle automatique basées sur les compteurs de performance. Pour plus d’informations, consultez l’article [Augmenter ou diminuer la taille des instances d’un cluster Service Fabric à l’aide de règles de mise à l’échelle automatique][sf-auto-scale].
 
-Lorsque le cluster est en cours d’exécution, vous devez collecter les journaux à partir de tous les nœuds dans un emplacement central. Pour plus d’informations, consultez [Collecte des journaux avec Azure Diagnostics][sf-logs].   
-
+Lorsque le cluster est en cours d’exécution, vous devez collecter les journaux d’activité à partir de tous les nœuds dans un emplacement central. Pour plus d’informations, consultez [Collecte des journaux avec Diagnostics Azure][sf-logs].   
 
 ## <a name="conclusion"></a>Conclusion
 

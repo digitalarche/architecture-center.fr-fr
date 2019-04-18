@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18, identity
-ms.openlocfilehash: 22a2a2042c85e70d0d5a523c9ecf72395a9e774c
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 873b6a86da14e00d0a537f910d10922444cc1ded
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58244390"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640734"
 ---
 # <a name="extend-active-directory-federation-services-ad-fs-to-azure"></a>Étendre les services de fédération Active Directory (AD FS) dans Azure
 
@@ -126,7 +126,7 @@ Publiez les applications web de votre organisation et rendez-les accessibles aux
 
 AD FS prend en charge l’augmentation et la transformation des jetons. Azure Active Directory ne fournit pas cette fonctionnalité. Avec AD FS, lorsque vous configurez des relations d’approbation, vous pouvez :
 
-- Configurer des transformations de revendication pour les règles d’autorisation. Par exemple, vous pouvez mapper une sécurité de groupe à partir d’une représentation utilisée par une organisation partenaire non-Microsoft sur un élément que le service Active Directory DS peut autoriser dans votre organisation.
+- Configurer des transformations de revendication pour les règles d’autorisation. Par exemple, vous pouvez mapper la sécurité de groupe à partir d’une représentation utilisée par une organisation partenaire non-Microsoft sur une valeur qui Active Directory DS peut autoriser dans votre organisation.
 - Convertir des revendications d’un format vers un autre. Par exemple, vous pouvez effectuer un mappage de SAML 2.0 vers SAML 1.1 si votre application prend uniquement en charge les revendications au format SAML 1.1.
 
 ### <a name="ad-fs-monitoring"></a>Analyse des services AD FS
@@ -195,7 +195,7 @@ Envisagez d’utiliser un ensemble d’appliances réseau virtuelles qui enregis
 
 Un déploiement pour cette architecture est disponible sur [GitHub][github]. Notez que le déploiement entier peut prendre jusqu’à deux heures, en incluant la création de la passerelle VPN et l’exécution des scripts qui configurent Active Directory et AD FS.
 
-### <a name="prerequisites"></a>Prérequis
+### <a name="prerequisites"></a>Conditions préalables
 
 1. Clonez, dupliquez ou téléchargez le fichier zip pour le [dépôt GitHub](https://github.com/mspnp/identity-reference-architectures).
 

@@ -8,12 +8,12 @@ ms.topic: example-scenario
 ms.service: architecture-center
 ms.subservice: example-scenario
 social_image_url: /azure/architecture/example-scenario/apps/media/architecture-devops-with-aks.png
-ms.openlocfilehash: 89e50e67b2c933637442f0f01bf83ecc95743691
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 9be4f828c96c4ac321acf9d9719d0ef465fb35cf
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58244030"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641176"
 ---
 # <a name="cicd-pipeline-for-container-based-workloads"></a>Pipeline CI/CD pour les charges de travail basées sur des conteneurs
 
@@ -70,8 +70,6 @@ Pour surveiller les performances de vos applications et créer des rapports sur 
 
 Partie intégrante du cluster Azure Kubernetes Service, un équilibreur de charge distribue le trafic des applications vers un ou plusieurs conteneurs (pods) qui exécutent votre application. Cette méthode d’exécution des applications en conteneur dans Kubernetes assure à vos clients une infrastructure hautement disponible.
 
-Pour plus d’informations sur la disponibilité, voir la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
-
 ### <a name="scalability"></a>Extensibilité
 
 Azure Kubernetes Service vous permet de mettre à l’échelle le nombre de nœuds de cluster pour répondre aux besoins de vos applications. À mesure que vos applications augmentent, vous pouvez augmenter le nombre de nœuds Kubernetes qui exécutent votre service.
@@ -82,7 +80,7 @@ Pour plus d’informations sur l’extensibilité, voir la [liste de contrôle d
 
 ### <a name="security"></a>Sécurité
 
-Pour réduire l’empreinte des attaques, ce scénario n’expose pas l’instance de machine virtuelle Jenkins via HTTP. Pour les tâches de gestion qui nécessitent votre interaction avec Jenkins, vous allez créer une connexion à distance sécurisée à l’aide d’un tunnel SSH à partir de votre ordinateur local. Seule l’authentification par clé publique SSH est autorisée pour les instances de machines virtuelles Jenkins et Grafana. Les connexions par mot de passe sont désactivées. Pour plus d’informations, consultez l’article [Exécuter un serveur Jenkins sur Azure](../../reference-architectures/jenkins/index.md).
+Pour réduire l’empreinte des attaques, ce scénario n’expose pas l’instance de machine virtuelle Jenkins via HTTP. Pour les tâches de gestion qui nécessitent votre interaction avec Jenkins, vous allez créer une connexion à distance sécurisée à l’aide d’un tunnel SSH à partir de votre ordinateur local. Seule l’authentification par clé publique SSH est autorisée pour les instances de machines virtuelles Jenkins et Grafana. Les connexions par mot de passe sont désactivées. Pour plus d’informations, consultez l’article [Exécuter un serveur Jenkins sur Azure](./jenkins.md).
 
 Pour assurer la séparation des informations d’identification et des autorisations, ce scénario utilise un principal de service Azure Active Directory (AD) dédié. Les informations d’identification de ce principal de service sont stockées sous la forme d’un objet d’informations d’identification sécurisé dans Jenkins afin qu’elles ne soient pas directement exposées ni visibles dans les scripts ou le pipeline de build.
 
@@ -92,7 +90,7 @@ Pour obtenir des conseils d’ordre général sur la conception de solutions sé
 
 Ce scénario utilise Azure Kubernetes Service pour votre application. Des composants de résilience sont intégrés à Kubernetes et surveillent et redémarrent les conteneurs (pods) en cas de problème. Si elle est associée à l’exécution de plusieurs nœuds Kubernetes, votre application peut tolérer un pod ou un nœud non disponible.
 
-Pour obtenir des conseils d’ordre général sur la conception de solutions résilientes, consultez l’article [Conception d’applications résilientes pour Azure][resiliency].
+Pour obtenir des instructions générales sur la conception de solutions résilientes, consultez [conception d’applications Azure fiables](../../reliability/index.md).
 
 ## <a name="deploy-the-scenario"></a>Déployez le scénario
 
@@ -147,7 +145,6 @@ Ce scénario a utilisé Azure Container Registry et Azure Kubernetes Service pou
 <!-- links -->
 [architecture]: ./media/architecture-devops-with-aks.png
 [autoscaling]: ../../best-practices/auto-scaling.md
-[availability]: ../../checklist/availability.md
 [docs-aci]: /azure/container-instances/container-instances-overview
 [docs-acr]: /azure/container-registry/container-registry-intro
 [docs-aks]: /azure/aks/intro-kubernetes
@@ -157,7 +154,6 @@ Ce scénario a utilisé Azure Container Registry et Azure Kubernetes Service pou
 [createsp]: /cli/azure/ad/sp#az-ad-sp-create
 [grafana]: https://grafana.com/
 [jenkins]: https://jenkins.io/
-[resiliency]: ../../resiliency/index.md
 [resource-groups]: /azure/azure-resource-manager/resource-group-overview
 [security]: /azure/security/
 [scalability]: ../../checklist/scalability.md

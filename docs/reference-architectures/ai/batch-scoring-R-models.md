@@ -7,12 +7,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: 4fa57168c337b01c8e7d0fc86ba54fee59a7ae47
-ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.openlocfilehash: 72769cf078596f0312a1f4293205dda5a086ef41
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2019
-ms.locfileid: "58887985"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639901"
 ---
 # <a name="batch-scoring-of-r-machine-learning-models-on-azure"></a>Modèles de notation par lot de l’apprentissage de R sur Azure
 
@@ -101,7 +101,6 @@ Azure Batch et doAzureParallel prend en charge l’utilisation de machines virtu
 ## <a name="deployment"></a>Déploiement
 
 Pour déployer cette architecture de référence, suivez les étapes décrites dans le [GitHub][github] dépôt.
-
 
 [0]: ./_images/batch-scoring-r-models.png
 [1]: ./_images/sales-forecasts.png

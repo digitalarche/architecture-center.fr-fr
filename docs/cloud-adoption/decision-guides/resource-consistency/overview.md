@@ -7,29 +7,24 @@ ms.custom: governance
 ms.date: 02/11/2019
 description: Apprenez-en davantage sur la cohérence des ressources lors de la planification d’une migration Azure.
 author: rotycenh
-ms.openlocfilehash: 8170bfd09218a451e086a57e0631b7e567eb2b82
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: 3159e4b7aeddfdd99261c0f68591998d741f3359
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900865"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640042"
 ---
 # <a name="caf-resource-consistency-decision-guide"></a>Framework d’adoption du cloud : Guide de décision pour la cohérence des ressources
 
-La [conception d’abonnement](../subscriptions/overview.md) Azure définit la façon dont vous organisez vos ressources cloud par rapport à la structure globale de votre organisation. De plus, l’intégration de vos normes de gestion informatique existantes et de vos stratégies organisationnelles dépend de la façon dont vous déployez et organisez les ressources cloud au sein d’un abonnement.
-
-Les outils disponibles pour mettre en œuvre le déploiement, le regroupement et la gestion de vos ressources varient selon la plateforme cloud utilisée. En général, chaque solution comprend les fonctionnalités suivantes :
-
-- Mécanisme de regroupement logique sous le niveau de l’abonnement ou du compte.
-- Possibilité de déployer les ressources par programmation avec des API.
-- Modèles permettant de créer des déploiements standardisés.
-- Possibilité de déployer des règles de stratégie au niveau de l’abonnement, du compte et du regroupement des ressources.
+Azure [conception d’un abonnement](../subscriptions/overview.md) définit la manière dont vous organisez vos ressources cloud par rapport à la structure de votre organisation, des pratiques de gestion des comptes et des besoins de charge de travail. En plus de ce niveau de structure, l’adressage de vos exigences de stratégie de gouvernance d’organisation entre vos biens immobiliers cloud nécessite la possibilité de manière cohérente organiser, déployer et gérer des ressources au sein d’un abonnement.
 
 ![Traçage des options d’application de la stratégie de la moins complexe à la plus complexe, dans l’ordre des liens ci-dessous](../../_images/discovery-guides/discovery-guide-resource-consistency.png)
 
 Passer à : [Regroupement de base](#basic-grouping) | [Cohérence de déploiement](#deployment-consistency) | [Cohérence de stratégie](#policy-consistency) | [Cohérence hiérarchique](#hierarchical-consistency) | [Cohérence automatisée](#automated-consistency)
 
-Les décisions de déploiement et de regroupement des ressources sont principalement motivées par les facteurs suivants : la taille du parc numérique après la migration, la complexité métier ou environnementale qui ne s’intègre pas parfaitement dans vos approches de conception d’abonnement existantes, ou la nécessité de renforcer la gouvernance au fil du temps après le déploiement des ressources. Les conceptions de regroupement des ressources plus avancées exigent un effort accru pour assurer un regroupement précis, ce qui se traduit par une augmentation du temps consacré à la gestion et au suivi des changements.
+Décisions concernant le niveau d’exigences de cohérence des ressources de votre espace de cloud sont essentiellement motivées par ces facteurs : taille de biens immobiliers numérique après la migration, entreprise ou exigences environnementales qui ne correspondent pas parfaitement dans votre abonnement approches de conception, ni d’assurer la gouvernance au fil du temps une fois que les ressources ont été déployés. 
+
+Ces facteurs gagne en importance, les avantages d’assurer un déploiement cohérent, regroupement et la gestion des ressources de cloud devient importante. Atteindre des niveaux de cohérence des ressources pour répondre aux besoins croissants nécessite plus de temps passé dans automation, outils et l’application de la cohérence, et il en résulte une plus de temps passé sur la gestion des modifications et de suivi.
 
 ## <a name="basic-grouping"></a>Regroupement de base
 
@@ -42,11 +37,11 @@ Les groupes de ressources servent de conteneurs pour les ressources ayant un cyc
 
 ## <a name="deployment-consistency"></a>Cohérence du déploiement
 
-S’appuyant sur le mécanisme de regroupement des ressources de base, la plupart des plateformes cloud offrent un système permettant d’utiliser des modèles de déploiement de vos ressources dans l’environnement cloud. Vous pouvez utiliser des modèles pour créer une organisation et des conventions de nommage cohérentes lors du déploiement des charges de travail, en appliquant ces aspects de la conception du déploiement et de la gestion de vos ressources.
+Bâtis sur le mécanisme de regroupement des ressources de base, la plateforme Azure fournit un système à l’aide de modèles pour déployer vos ressources à l’environnement de cloud. Vous pouvez utiliser des modèles pour créer une organisation et des conventions de nommage cohérentes lors du déploiement des charges de travail, en appliquant ces aspects de la conception du déploiement et de la gestion de vos ressources.
 
 Les [modèles Azure Resource Manager](/azure/azure-resource-manager/resource-group-overview#template-deployment) vous permettent de déployer vos ressources de façon répétée et cohérente en utilisant une configuration prédéterminée et une structure de groupes de ressources. Les modèles Resource Manager vous aident à définir un ensemble de standards qui serviront de base à vos déploiements.
 
-Par exemple, vous pouvez disposer d’un modèle standard pour déployer une charge de travail de serveur web qui contient deux machines virtuelles en tant que serveurs web combinés avec un équilibreur de charge gérant le trafic entre les serveurs. Vous pouvez ensuite réutiliser ce modèle pour créer des déploiements structurellement identiques chaque fois qu’une nouvelle charge de travail de serveur web est nécessaire, en ne modifiant que le nom du déploiement et les adresses IP concernées.
+Par exemple, vous pouvez avoir un modèle standard pour le déploiement d’une charge de travail du serveur web qui contient les deux machines virtuelles en tant que serveurs web associés à un équilibreur de charge pour répartir le trafic entre les serveurs. Vous pouvez réutiliser ce modèle pour créer un ensemble structurellement identique de machines virtuelles et un équilibreur de charge chaque fois que ce type de charge de travail est nécessaire, modifier uniquement le nom du déploiement et des adresses IP impliquées.
 
 Notez que vous pouvez également déployer ces modèles à l’aide d’un programme et les intégrer à vos systèmes de CI/CD.
 
@@ -62,9 +57,9 @@ La section [Application de stratégie](../policy-enforcement/overview.md) fourni
 
 ## <a name="hierarchical-consistency"></a>Cohérence hiérarchique
 
-Au fur et à mesure que la taille de votre investissement cloud augmente, vous aurez peut-être des exigences de gouvernance plus complexes que celles qui peuvent être prises en charge par la hiérarchie Entreprise/Service/Compte /Abonnement de l’accord Entreprise Azure. Les groupes de ressources vous permettent de prendre en charge des niveaux hiérarchiques supplémentaires au sein de votre organisation, en appliquant les règles Azure Policy et les contrôles d’accès au niveau d’un groupe de ressources.
+Groupes de ressources permet de prendre en charge des niveaux supplémentaires de la hiérarchie au sein de votre organisation au sein de l’abonnement, en appliquant des règles de stratégie de Azure et accéder à des contrôles au niveau du groupe de ressources. Toutefois, comme la taille de votre activité principale cloud augmente, vous devrez peut-être prendre en charge plus complexe entre abonnements gouvernance que peut être pris en charge à l’aide de la hiérarchie d’entreprise/service/compte/abonnement de l’accord entreprise Azure. 
 
-Les [groupes d’administration Azure](../subscriptions/overview.md#management-groups) peuvent prendre en charge des structures organisationnelles plus complexes en superposant une hiérarchie alternative à la structure de votre accord entreprise. Cela permet aux abonnements et aux ressources qu’ils contiennent de prendre en charge les mécanismes de contrôle d’accès et d’implémentation des stratégies organisés en fonction des exigences organisationnelles de votre entreprise.
+[Groupes d’administration Azure](../subscriptions/overview.md#management-groups) vous permet d’abonnements d’organisation dans les structures organisationnelles plus complexes par regroupement des abonnements dans une autre hiérarchie à celle établie par la structure de l’accord de votre entreprise. Cette hiérarchie autre vous permet d’appliquer des mécanismes de mise en œuvre contrôle et la stratégie d’accès entre plusieurs abonnements et les ressources qu’ils contiennent. Les hiérarchies de groupes de gestion peuvent servir à correspondent à des abonnements de votre espace cloud avec les opérations ou les exigences de gouvernance d’entreprise. 
 
 ## <a name="automated-consistency"></a>Cohérence automatisée
 

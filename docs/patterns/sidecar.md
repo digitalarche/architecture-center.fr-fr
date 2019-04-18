@@ -9,12 +9,12 @@ ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 2b0e46a06f7fe47f281f726f73128db1d7dd1067
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 20a63cdd935f28cc47686238d34d654da2798985
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58243560"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639595"
 ---
 # <a name="sidecar-pattern"></a>Modèle side-car
 
@@ -46,7 +46,7 @@ Avantages de l’utilisation d’un modèle side-car :
 
 - En raison de sa proximité avec l’application principale, il n’existe aucune latence importante quand l’un et l’autre communiquent.
 
-- Même pour les applications qui ne fournissent pas de mécanisme d’extensibilité, vous pouvez utiliser un side-car pour étendre les fonctionnalités en le joignant en tant que processus propre dans le même hôte ou sous-conteneur que l’application principale.
+- Même pour les applications qui ne fournissent pas un mécanisme d’extensibilité, vous pouvez utiliser un side-car pour étendre les fonctionnalités en le joignant comme son propre processus dans le même hôte ou sous-conteneur que l’application principale.
 
 Le modèle side-car est souvent utilisé avec des conteneurs et est appelé « conteneur side-car » ou « conteneur assistant ».
 

@@ -7,16 +7,14 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-design-principles
 ms.custom: resiliency
-ms.openlocfilehash: 7f207bbc0bb0128126f9b828dc100d43553cb100
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: b58e8fa1cc4955f90e7171e17aaa70ac0cfb7b71
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58242710"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640564"
 ---
-[!INCLUDE [header](../_includes/header.md)]
-
-# <a name="azure-resiliency-technical-guidance-recovery-from-a-region-wide-service-disruption"></a>Guide technique de la résilience Azure - Récupération d’une interruption de service à l’échelle de la région
+# <a name="recover-from-a-region-wide-service-disruption"></a>Récupérer à partir d’une interruption de service à l’échelle de la région
 
 Azure est divisé physiquement et logiquement en unités appelées régions. Une région se compose d’un ou plusieurs centres de données très proches les uns des autres.
 
@@ -121,7 +119,7 @@ Lorsque vous tentez d’exécuter votre service cloud dans plusieurs régions Az
 
 ### <a name="service-bus"></a>Service Bus
 
-Azure Service Bus utilise un espace de noms unique qui ne couvre pas les régions Azure. La première exigence consiste donc à configurer les espaces de noms du Service Bus nécessaires dans l’autre région. Toutefois, il faut également réfléchir à la durabilité des messages mis en file d’attente. Il existe plusieurs stratégies de réplication des messages entre les régions Azure. Pour plus d’informations sur ces stratégies de réplication et d’autres stratégies de récupération d’urgence, consultez [Bonnes pratiques pour protéger les applications contre les pannes de Service Bus et les sinistres](/azure/service-bus-messaging/service-bus-outages-disasters/). Pour d’autres considérations relatives à la disponibilité, consultez la section [Service Bus (Disponibilité)](recovery-local-failures.md#other-azure-platform-services).
+Azure Service Bus utilise un espace de noms unique qui ne couvre pas les régions Azure. La première exigence consiste donc à configurer les espaces de noms du Service Bus nécessaires dans l’autre région. Toutefois, il faut également réfléchir à la durabilité des messages mis en file d’attente. Il existe plusieurs stratégies de réplication des messages entre les régions Azure. Pour plus d’informations sur ces stratégies de réplication et d’autres stratégies de récupération d’urgence, consultez [Bonnes pratiques pour protéger les applications contre les pannes de Service Bus et les sinistres](/azure/service-bus-messaging/service-bus-outages-disasters/).
 
 ### <a name="app-service"></a>App Service
 
@@ -129,7 +127,7 @@ Pour migrer une application Azure App Service, comme Web Apps ou Mobile Apps, ve
 
 ### <a name="hdinsight"></a>HDInsight
 
-Par défaut, les données associées à HDInsight sont stockées dans Azure Blob Storage. HDInsight nécessite qu’un cluster Hadoop traitant des tâches MapReduce se trouve dans la même région que le compte de stockage qui contient les données en cours d’analyse. Si vous utilisez la fonctionnalité de géoréplication disponible dans Azure Storage, vous pouvez accéder à vos données dans la région secondaire dans laquelle les données ont été répliquées si pour une raison quelconque la région primaire n’est plus disponible. Vous pouvez créer un nouveau cluster Hadoop dans la région où les données ont été répliquées et poursuivre leur traitement. Pour d’autres considérations relatives à la disponibilité, consultez la section [HDInsight (Disponibilité)](recovery-local-failures.md#other-azure-platform-services).
+Par défaut, les données associées à HDInsight sont stockées dans Azure Blob Storage. HDInsight nécessite qu’un cluster Hadoop traitant des tâches MapReduce se trouve dans la même région que le compte de stockage qui contient les données en cours d’analyse. Si vous utilisez la fonctionnalité de géoréplication disponible dans Azure Storage, vous pouvez accéder à vos données dans la région secondaire dans laquelle les données ont été répliquées si pour une raison quelconque la région primaire n’est plus disponible. Vous pouvez créer un nouveau cluster Hadoop dans la région où les données ont été répliquées et poursuivre leur traitement.
 
 ### <a name="sql-reporting"></a>SQL Reporting
 

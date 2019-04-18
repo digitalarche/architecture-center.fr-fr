@@ -8,12 +8,12 @@ ms.topic: checklist
 ms.service: architecture-center
 ms.subservice: cloud-design-principles
 ms.custom: checklist
-ms.openlocfilehash: 1a000c811cce57cc9b1fcda84d0eb7e2a1312aca
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: b08884d2a39550b56b4c1b52a418f6607eda00fe
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58243380"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640717"
 ---
 # <a name="devops-checklist"></a>Liste de contrôle DevOps
 
@@ -91,7 +91,7 @@ Après la mise en production initiale, vous devez effectuer des tests de capacit
 
 **Implémentez des stratégies de gestion des mises en production afin de réduire les risques liés au déploiement.** Le déploiement d’une mise à jour applicative en production implique toujours des risques. Pour les réduire au maximum, vous pouvez recourir à des stratégies telles que les [versions de contrôle de validité][canary-release] ou les [déploiements bleu-vert][blue-green] pour déployer des mises à jour dans un sous-ensemble d’utilisateurs. Vérifiez que la mise à jour fonctionne comme prévu, puis déployez la mise à jour sur le reste du système.
 
-**Documentez toutes les modifications.** Les modifications de configuration et les mises à jour mineures peuvent vite devenir sources de confusion et de conflit de version. C’est pourquoi il est important de toujours conserver une trace de toutes les modifications, quelle que soit leur importance. Prenez note de tout ce qui a été modifié, y compris les correctifs et les modifications apportées aux stratégies et à la configuration. (Évitez d’inclure des données sensibles dans ces notes. Par exemple, vous pouvez noter que des informations d’identification ont été mises à jour et indiquer le nom de la personne qui a apporté la modification, mais ne précisez pas de quelles informations d’identification il s’agit.) Ces notes sur les modifications doivent être accessibles à toute l’équipe.
+**Documentez toutes les modifications.** Les modifications de configuration et les mises à jour mineures peuvent vite devenir sources de confusion et de conflit de version. C’est pourquoi il est important de toujours conserver une trace de toutes les modifications, quelle que soit leur importance. Prenez note de tout ce qui a été modifié, y compris les correctifs et les modifications apportées aux stratégies et à la configuration. (Évitez d’inclure des données sensibles dans ces journaux d’activité. Par exemple, vous pouvez noter que des informations d’identification ont été mises à jour et indiquer le nom de la personne qui a apporté la modification, mais ne précisez pas de quelles informations d’identification il s’agit.) Ces notes sur les modifications doivent être accessibles à toute l’équipe.
 
 **Automatisez les déploiements.** Automatisez tous les déploiements et mettez en place des systèmes pour détecter les problèmes lors du lancement. Prévoyez un processus d’atténuation pour conserver le code et les données qui existent en production, avant que la mise à jour ne les remplace dans toutes les instances de production. Mettez en place un moyen de restaurer les correctifs par progression ou de restaurer les modifications.
 
@@ -99,9 +99,9 @@ Après la mise en production initiale, vous devez effectuer des tests de capacit
 
 ## <a name="monitoring"></a>Surveillance
 
-**Améliorez la visibilité sur vos systèmes.** L’équipe chargée des opérations doit toujours bénéficier d’une bonne visibilité sur l’intégrité et sur l’état d’un système ou d’un service. Vous pouvez définir des points de terminaison d’intégrité externes pour contrôler l’état et vérifier que les applications sont codées de façon à instrumenter les métriques opérationnelles. Utilisez un schéma commun et cohérent qui vous permet de mettre en corrélation les événements entre les systèmes. [Azure Diagnostics][azure-diagnostics] et [Application Insights][app-insights] représentent la méthode standard pour le suivi de l’intégrité et de l’état des ressources Azure. Microsoft [Operation Management Suite][oms] fournit également des fonctions de surveillance et de gestion centralisées pour les solutions cloud ou hybrides.
+**Améliorez la visibilité sur vos systèmes.** L’équipe chargée des opérations doit toujours bénéficier d’une bonne visibilité sur l’intégrité et sur l’état d’un système ou d’un service. Vous pouvez définir des points de terminaison d’intégrité externes pour contrôler l’état et vérifier que les applications sont codées de façon à instrumenter les métriques opérationnelles. Utilisez un schéma commun et cohérent qui vous permet de mettre en corrélation les événements entre les systèmes. [Diagnostics Azure][azure-diagnostics] et [Application Insights][app-insights] représentent la méthode standard pour le suivi de l’intégrité et de l’état des ressources Azure. Microsoft [Operation Management Suite][oms] fournit également des fonctions de surveillance et de gestion centralisées pour les solutions cloud ou hybrides.
 
-**Agrégez et mettez en corrélation les métriques et journaux**. Un système de télémétrie correctement instrumenté fournit une grande quantité de données de performances brutes ainsi que des journaux d’événements. Assurez-vous que les données de télémétrie et les données issues des journaux sont traitées et mises en corrélation rapidement, afin que l’équipe chargée des opérations puisse toujours avoir un aperçu pertinent de l’intégrité du système. Organisez et affichez les données de manière à obtenir une vue cohérente de tous les problèmes, afin que vous puissiez clairement savoir lorsque plusieurs événements sont liés.
+**Agrégez et mettez en corrélation les métriques et journaux d’activité**. Un système de télémétrie correctement instrumenté fournit une grande quantité de données de performances brutes ainsi que des journaux d’événements. Assurez-vous que les données de télémétrie et les données issues des journaux sont traitées et mises en corrélation rapidement, afin que l’équipe chargée des opérations puisse toujours avoir un aperçu pertinent de l’intégrité du système. Organisez et affichez les données de manière à obtenir une vue cohérente de tous les problèmes, afin que vous puissiez clairement savoir lorsque plusieurs événements sont liés.
 
 > Consultez la stratégie de rétention de votre entreprise pour connaître les exigences en matière de traitement des données et de durée de stockage.
 
@@ -119,7 +119,7 @@ Après la mise en production initiale, vous devez effectuer des tests de capacit
 
 Les conteneurs créent également une couche d’abstraction entre l’application et le système d’exploitation sous-jacent. Vous bénéficiez ainsi d’environnements cohérents. Cette couche d’abstraction permet aussi d’isoler un conteneur des autres processus ou applications qui s’exécutent sur un ordinateur hôte.
 
-**Implémentez des stratégies de résilience et la réparation spontanée.** La résilience d’une application est sa capacité à récupérer après une défaillance. Exemples de stratégies pour assurer la résilience : relancer les échecs temporaires, basculer vers une instance secondaire ou même une autre région. Pour plus d’informations, consultez l’article [Conception d’applications résilientes pour Azure][resiliency]. Instrumentez vos applications afin que les problèmes soient signalés immédiatement et que vous puissiez gérer les pannes ou autres défaillances du système.
+**Implémentez des stratégies de résilience et la réparation spontanée.** La résilience d’une application est sa capacité à récupérer après une défaillance. Exemples de stratégies pour assurer la résilience : relancer les échecs temporaires, basculer vers une instance secondaire ou même une autre région. Pour plus d’informations, consultez [conception d’applications Azure fiables](../reliability/index.md) . Instrumentez vos applications afin que les problèmes soient signalés immédiatement et que vous puissiez gérer les pannes ou autres défaillances du système.
 
 **Compilez un manuel des opérations.** Un manuel des opérations, ou *runbook*, documente les procédures et les informations de gestion nécessaires pour aider l’équipe chargée des opérations à mettre à jour un système. Documentez-y également tous les scénarios d’opérations et les plans d’atténuation qui peuvent entrer en jeu lors d’une défaillance ou de toute autre interruption de votre service. Créez cette documentation pendant le processus de développement et assurez-vous de la tenir à jour par la suite. Ce document doit être vérifié, testé et amélioré régulièrement selon l’évolution de vos processus.
 
@@ -158,7 +158,6 @@ Pour plus d’informations sur le DevOps, consultez l’article [Qu’est-ce que
 [feature-toggles]: https://www.martinfowler.com/articles/feature-toggles.html
 [oms]: https://www.microsoft.com/cloud-platform/operations-management-suite
 [rbac]: /azure/active-directory/role-based-access-control-what-is
-[resiliency]: ../resiliency/index.md
 [resource-manager]: /azure/azure-resource-manager/
 [trunk-based]: https://trunkbaseddevelopment.com/
 [what-is-devops]: https://www.visualstudio.com/learn/what-is-devops/

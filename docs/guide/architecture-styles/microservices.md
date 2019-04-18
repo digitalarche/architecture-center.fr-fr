@@ -8,12 +8,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19, microservices
-ms.openlocfilehash: cc72f61003f4146fd65e501feebda0c0d1d27993
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: 87a9dd31b6d935dd11a5a2a2950b6de11f337741
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58245090"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639969"
 ---
 # <a name="microservices-architecture-style"></a>Style d’architecture de microservices
 
@@ -71,7 +71,7 @@ Envisagez ce style d’architecture pour :
 
 - **Petites équipes spécialisées** : les équipes peuvent se concentrer sur un seul service. la portée de chaque service étant plus limitée, le code base est plus facile à comprendre et les nouveaux membres d’équipes s’intègrent plus facilement.
 
-- **Isolation des erreurs** : si un service tombe en panne, il n’impacte pas l’ensemble de l’application. Cependant, cela ne signifie pas pour autant que vous bénéficiez d’une résilience ex nihilo. Vous devez toujours suivre les bonnes pratiques de résilience et les modèles de conception. Consultez [Conception d’applications résilientes pour Azure][resiliency-overview].
+- **Isolation des erreurs** : si un service tombe en panne, il n’impacte pas l’ensemble de l’application. Cependant, cela ne signifie pas pour autant que vous bénéficiez d’une résilience ex nihilo. Vous devez toujours suivre les bonnes pratiques de résilience et les modèles de conception. Consultez [conception d’applications Azure fiables][resiliency-overview].
 
 - **Piles de technologies mixtes** : les équipes peuvent opter pour les technologies qui se prêtent le mieux à leur service.
 
@@ -113,7 +113,7 @@ Envisagez ce style d’architecture pour :
 
 - Le couplage entre les services doit être faible et leur cohésion fonctionnelle élevée. Les fonctions susceptibles de changer en même temps doivent être empaquetées et déployées ensemble. Si elles résident dans des services distincts, ces services finissent par être fortement couplés, car une modification dans un service nécessite la mise à jour de l’autre service. Une communication proéminente entre deux services peut être le signe d’un couplage étroit et d’une faible cohésion.
 
-- Isolez les défaillances. Utilisez des stratégies de résilience pour empêcher que les défaillances au sein d’un service se répercutent en cascade. Consultez [Modèles de résilience][resiliency-patterns] et [Conception d’applications résilientes][resiliency-overview].
+- Isolez les défaillances. Utilisez des stratégies de résilience pour empêcher que les défaillances au sein d’un service se répercutent en cascade. Consultez [modèles de résilience] [ resiliency-patterns] et [conception d’applications fiables][resiliency-overview].
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -121,5 +121,5 @@ Pour obtenir des instructions détaillées sur la création d’une architecture
 
 <!-- links -->
 
-[resiliency-overview]: ../../resiliency/index.md
+[resiliency-overview]: ../../reliability/index.md
 [resiliency-patterns]: ../../patterns/category/resiliency.md

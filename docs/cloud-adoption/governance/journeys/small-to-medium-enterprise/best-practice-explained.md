@@ -1,28 +1,28 @@
 ---
-title: 'Framework d’adoption du cloud : Petite ou moyenne entreprise – Détails techniques supplémentaires concernant le MVP de gouvernance'
+title: 'Framework d’adoption du cloud : Petites et moyennes entreprises – meilleures pratiques expliquées'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
 ms.date: 02/11/2019
-description: Explication pour petite ou moyenne entreprise – Détails techniques supplémentaires concernant le MVP de gouvernance
+description: Petites et moyennes entreprises – meilleures pratiques expliquées
 author: BrianBlanchard
-ms.openlocfilehash: e726213459c8bee63e3cc77ab54868fe7196b3ac
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: b9b385be345098bf1b9e0e1cdce7fd3cceeb5523
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900873"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639578"
 ---
-# <a name="small-to-medium-enterprise-best-practice-explained"></a>Petite ou moyenne entreprise : Bonne pratique, explication
+# <a name="small-to-medium-enterprise-best-practice-explained"></a>Petites et moyennes entreprises : Bonne pratique, explication
 
 Ce parcours de gouvernance commence par un ensemble de [stratégies d’entreprise](./initial-corporate-policy.md) initiales. Ces stratégies permettent de définir un produit minimum viable (MVP) pour la gouvernance reflétant les [meilleures pratiques](./overview.md).
 
-Dans cet article, nous allons parler des stratégies de haut niveau qui sont nécessaires pour créer un MVP de gouvernance. Au cœur d’un MVP de gouvernance se trouve la discipline : [Accélération du déploiement](../../deployment-acceleration/overview.md). À ce stade, les outils et modèles qui sont appliqués permettent les évolutions incrémentielles nécessaires pour étendre la gouvernance à l’avenir.
+Dans cet article, nous allons parler des stratégies de haut niveau qui sont nécessaires pour créer un MVP de gouvernance. Au cœur d’un MVP de gouvernance se trouve la discipline : [Accélération du déploiement](../../deployment-acceleration/overview.md). À ce stade, les outils et modèles qui sont appliqués permettent les évolutions incrémentielles nécessaires pour étendre la gouvernance à l’avenir.
 
 ## <a name="governance-mvp-cloud-adoption-foundation"></a>MVP de gouvernance (base d’adoption du cloud)
 
-Grâce à quelques principes simples et à des outils de gouvernance basés sur le cloud, il est possible d’adopter rapidement la gouvernance et une stratégie d’entreprise. Voici la première des trois disciplines de gouvernance à aborder lors d’un processus de gouvernance. Chaque discipline sera détaillée dans cet article.
+Grâce à quelques principes simples et à des outils de gouvernance basés sur le cloud, il est possible d’adopter rapidement la gouvernance et une stratégie d’entreprise. Voici les trois premiers disciplines approche dans n’importe quel processus de gouvernance. Chaque discipline sera détaillée dans cet article.
 
 Pour établir le point de départ, cet article traite des stratégies de haut niveau derrière la base de référence des identités, la base de référence de la sécurité et l’accélération du déploiement. Ces stratégies sont requises pour créer un MVP de gouvernance, qui serve de base pour l’ensemble du processus d’adoption.
 
@@ -34,11 +34,11 @@ L’implémentation du MVP de gouvernance dépend de l’identité, de la sécur
 
 ![Exemple de MVP de gouvernance incrémentielle](../../../_images/governance/governance-mvp-implementation-flow.png)
 
-Cette implémentation peut également être décrite à l’aide d’une simple check-list :
+Cette implémentation peut également être décrite à l’aide d’une simple check-list :
 
-1. Sollicitez des décisions concernant les principales dépendances : identité, réseau et chiffrement.
+1. Sollicitez des décisions concernant les principales dépendances : identité, réseau et chiffrement.
 2. Déterminez le modèle à utiliser lors de l’application des stratégies d’entreprise.
-3. Déterminez les modèles de gouvernance appropriés pour les disciplines suivantes : cohérence des ressources, identification des ressources et création de rapports.
+3. Déterminer les modèles de gouvernance appropriée pour la cohérence de la ressource, le balisage des ressources et les disciplines de journalisation et création de rapports.
 4. Implémentez les outils de gouvernance alignés sur le modèle d’application de stratégie choisi, dans le but d’appliquer des décisions dépendantes et des décisions de gouvernance.
 
 [!INCLUDE [implementation-process](../../../../../includes/cloud-adoption/governance/implementation-process.md)]
@@ -92,7 +92,7 @@ Avec l’évolution de la gouvernance, certaines instructions de stratégie ne p
 
 **Planification de déploiement** : Avant de déployer toute ressources contenant des données protégées, l’équipe de gouvernance du cloud examine les scripts de déploiement pour valider l’adéquation de la ressource à la gouvernance. Les équipes existantes dont les déploiements ont déjà été approuvés feront l’objet d’un audit à l’aide d’outils de programmation.
 
-**Audit et création de rapports mensuels** : Chaque mois, l’équipe de gouvernance du cloud effectue un audit de tous les déploiements cloud afin de valider l’adéquation continue à la stratégie. Lorsque des écarts sont identifiés, ils sont documentés et partagés avec les équipes d’adoption du cloud. Lorsque l’implémentation ne risque pas d’entraîner une interruption des activités ou une fuite de données, les stratégies sont automatiquement implémentées. À la fin de l’audit, l’équipe de gouvernance du cloud compile un rapport pour l’équipe de la stratégie cloud et chaque équipe d’adoption du cloud afin de communiquer sur l’adhésion générale des parties prenantes à la stratégie. Le rapport est également conservé à des fins d’audit et juridiques.
+**Audit et création de rapports mensuels** : Chaque mois, l’équipe de gouvernance du cloud effectue un audit de tous les déploiements cloud afin de valider l’adéquation continue à la stratégie. Lorsque des écarts sont identifiés, ils sont documentés et partagés avec les équipes d’adoption du cloud. Lorsque l’implémentation ne risque pas d’entraîner une interruption des activités ou une fuite de données, les stratégies sont automatiquement implémentées. À la fin de l’audit, l’équipe de gouvernance cloud compile un rapport pour l’équipe de la stratégie cloud et chaque équipe d’adoption du cloud afin de communiquer sur l’adhésion générale des parties prenantes à la stratégie. Le rapport est également conservé à des fins d’audit et juridiques.
 
 **Révision de la planification trimestrielle** : Chaque trimestre, l’équipe de gouvernance du cloud et l’équipe de la stratégie cloud examinent les résultats de l’audit et proposent que des modifications soient apportés à la stratégie de l’entreprise. La plupart de ces suggestions sont le résultat d’améliorations continues et de l’observation des modèles d’utilisation. Les modifications de stratégie approuvées sont intégrées à l’outil de gouvernance au cours des cycles d’audit ultérieurs.
 

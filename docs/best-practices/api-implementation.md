@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: 9b6bef0fd803db5b488e93d246642d4e3681a94c
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: dcbfa528a4fdd640b08b42904ceadb7a802b806e
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55897760"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640921"
 ---
 # <a name="api-implementation"></a>Implémentation de l’API
 
@@ -582,7 +582,7 @@ ServicePoint sp = ServicePointManager.FindServicePoint(uri);
 sp.Expect100Continue = false;
 ```
 
-Vous pouvez également définir la propriété statique `Expect100Continue` de la classe `ServicePointManager` pour spécifier la valeur par défaut de cette propriété pour l’ensemble des objets [ServicePoint]](/dotnet/api/system.net.servicepoint) créés par la suite.
+Vous pouvez également définir la méthode statique `Expect100Continue` propriété de la `ServicePointManager` classe pour spécifier la valeur par défaut de cette propriété pour tous les créés par la suite [ServicePoint](/dotnet/api/system.net.servicepoint) objets.
 
 ### <a name="support-pagination-for-requests-that-may-return-large-numbers-of-objects"></a>Prenez en charge la pagination pour les requêtes qui peuvent renvoyer de très nombreux objets
 
@@ -708,7 +708,7 @@ Méfiez-vous des codes de statut de réponse inattendus, situés dans la plage 5
 
 - Testez les chaînes de recherche. Si une opération accepte les paramètres facultatifs (comme les requêtes de pagination), testez les différentes combinaisons et ordres de paramètres.
 
-- Vérifiez que les opérations asynchrones s’effectuent correctement Si l’API Web prend en charge la diffusion en continu pour les requêtes renvoyant des objets binaires de taille importante (comme l’audio ou la vidéo), assurez-vous que les requêtes des clients ne sont pas bloquées pendant la diffusion des données. Si l’API Web implémente une fonctionnalité d’interrogation des opérations de modification de données de longue durée, vérifiez que les opérations signalent correctement leur statut au cours de l’exécution.
+- Vérifiez que les opérations asynchrones s’effectuent correctement Si l’API Web prend en charge la diffusion en continu pour les requêtes renvoyant des objets binaires de taille importante (comme l’audio ou la vidéo), assurez-vous que les requêtes des clients ne sont pas bloquées pendant la diffusion des données. Si l’API web implémente d’interrogation pour les opérations de modification de données longues, vérifiez que les opérations signalent leur état correctement.
 
 Vous devez également créer et exécuter des tests de performances afin de vérifier que l’API Web fonctionne correctement sous contraintes. Pour développer un projet de test de chargement et de performances Web, utilisez Visual Studio Ultimate. Pour plus d’informations, consultez l’article [Exécuter des tests de performances sur votre application](https://msdn.microsoft.com/library/dn250793.aspx).
 

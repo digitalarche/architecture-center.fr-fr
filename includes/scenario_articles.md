@@ -3,25 +3,6 @@
 
 <ul  class="panelContent cardsC">
 <li style="display: flex; flex-direction: column;">
-    <a href="./ai/newsfeed-ingestion.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
-        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
-            <div class="cardPadding" style="display: flex;">
-                <div class="card">
-                    <div class="cardImageOuter">
-                        <div class="cardImage">
-                            <img src="./ai/media/mass-ingestion-newsfeeds-architecture.png" height="140px" />
-                        </div>
-                    </div>
-                    <div class="cardText">
-                        <h3>Ingestion et analyse en masse de flux d’actualités sur Azure</h3>
-                        <p>Créez un pipeline pour ingérer et analyser du texte, des images, des sentiments et autres données de flux d’actualités RSS en utilisant seulement des services Azure, notamment Azure Cosmos DB et Azure Cognitive Services.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</li>
-<li style="display: flex; flex-direction: column;">
     <a href="./ai/commerce-chatbot.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
             <div class="cardPadding" style="display: flex;">
@@ -78,8 +59,26 @@
         </div>
     </a>
 </li>
+<li style="display: flex; flex-direction: column;">
+    <a href="./ai/newsfeed-ingestion.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="./ai/media/mass-ingestion-newsfeeds-architecture.png" height="140px" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Ingestion et analyse en masse de flux d’actualités sur Azure</h3>
+                        <p>Créez un pipeline pour ingérer et analyser du texte, des images, des sentiments et autres données de flux d’actualités RSS en utilisant seulement des services Azure, notamment Azure Cosmos DB et Azure Cognitive Services.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
 </ul>
-
 
 ## <a name="application-scenarios"></a>Scénarios d’application
 
@@ -218,6 +217,25 @@
     </a>
 </li>
 <li style="display: flex; flex-direction: column;">
+    <a href="./apps/jenkins.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
+        <div class="cardSize" style="flex: 1 0 auto; display: flex;">
+            <div class="cardPadding" style="display: flex;">
+                <div class="card">
+                    <div class="cardImageOuter">
+                        <div class="cardImage">
+                            <img src="./apps/media/architecture-jenkins.png" height="140px" />
+                        </div>
+                    </div>
+                    <div class="cardText">
+                        <h3>Exécuter un serveur Jenkins sur Azure</h3>
+                        <p>Cette architecture recommandée montre comment déployer et utiliser un serveur Jenkins scalable de classe entreprise sur Azure sécurisé avec l’authentification unique (SSO).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+<li style="display: flex; flex-direction: column;">
     <a href="./apps/sap-dev-test.md" style="display: flex; flex-direction: column; flex: 1 0 auto;">
         <div class="cardSize" style="flex: 1 0 auto; display: flex;">
             <div class="cardPadding" style="display: flex;">
@@ -256,7 +274,6 @@
     </a>
 </li>
 </ul>
-
 
 ## <a name="data-scenarios"></a>Scénarios liés aux données
 
@@ -376,7 +393,6 @@
     </a>
 </li>
 </ul>
-
 
 ## <a name="infrastructure-scenarios"></a>Scénarios liés aux infrastructures
 
@@ -534,4 +550,3 @@
     </a>
 </li>
 </ul>
-

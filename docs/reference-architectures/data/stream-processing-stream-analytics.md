@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seodec18
-ms.openlocfilehash: af56a010e90fb176b13c1110ad4000dcababe009
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: e891c0fe490f57e0723b1ec133e33e70d2e23554
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58243870"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640411"
 ---
 # <a name="create-a-stream-processing-pipeline-with-azure-stream-analytics"></a>Créer un pipeline de traitement de flux avec Azure Stream Analytics
 
@@ -196,7 +196,7 @@ Dans cette architecture de référence, les nouveaux documents sont créés une 
 
 ## <a name="monitoring-considerations"></a>Surveillance - Éléments à prendre en compte
 
-Avec des solutions de traitement des flux de données, il est important de surveiller les performances et l’intégrité du système. [Azure Monitor](/azure/monitoring-and-diagnostics/) collecte des journaux de métriques et de diagnostics pour les services Azure utilisés dans l’architecture. Azure Monitor est intégré à la plateforme Azure et ne nécessite pas de code supplémentaire dans votre application.
+Avec des solutions de traitement des flux de données, il est important de surveiller les performances et l’intégrité du système. [Azure Monitor](/azure/monitoring-and-diagnostics/) collecte des journaux d’activité de métriques et de diagnostics pour les services Azure utilisés dans l’architecture. Azure Monitor est intégré à la plateforme Azure et ne nécessite pas de code supplémentaire dans votre application.
 
 Signaux d’avertissement indiquant que vous devez faire évoluer la ressource Azure appropriée :
 
@@ -234,4 +234,3 @@ Vous pouvez consulter les [exemples de scénarios Azure](/azure/architecture/exa
 <!-- links -->
 
 [github]: https://github.com/mspnp/azure-stream-analytics-data-pipeline
-

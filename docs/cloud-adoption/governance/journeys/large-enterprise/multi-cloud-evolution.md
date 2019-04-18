@@ -1,18 +1,18 @@
 ---
-title: 'Framework d’adoption du cloud : Grandes entreprises - Évolution multicloud'
+title: 'Framework d’adoption du cloud : Grande entreprise – évolution de multicloud'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
 ms.date: 02/11/2019
-description: Grandes entreprises - Évolution multicloud
+description: Grande entreprise – évolution de multicloud
 author: BrianBlanchard
-ms.openlocfilehash: 5ef29aa523c04ff93b2d4f983482f94654a4a039
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: 62a2fdd6e340c96494354f4f0cf2f78ab572c251
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900989"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641142"
 ---
 # <a name="large-enterprise-multi-cloud-evolution"></a>Grandes entreprises : Évolution multicloud
 
@@ -31,7 +31,7 @@ Depuis, certains changements ont eu lieu et ceux-ci vont avoir un impact sur la 
 - L’identité est contrôlée par une instance locale d’Active Directory. L’identité hybride est facilitée grâce à la réplication vers Azure Active Directory.
 - Les opérations informatiques ou opérations cloud sont principalement gérées par Azure Monitor et les autres automatisations associées.
 - La continuité d’activité et la reprise d’activité sont contrôlées par des instances Azure Vault.
-- Azure Security Center est utilisé pour surveiller les attaques et les violations de sécurité.
+- Azure Security Center est utilisé pour superviser les attaques et les violations de sécurité.
 - Azure Security Center et Azure Monitor sont utilisés pour surveiller la gouvernance du cloud.
 - Azure Blueprints, Azure Policy et des groupes d’administration sont utilisés pour automatiser la conformité à la stratégie.
 
@@ -58,7 +58,7 @@ Les modifications suivantes apportées à la stratégie permettront de réduire 
 
 ## <a name="evolution-of-the-best-practices"></a>Évolution des meilleures pratiques
 
-Cette section de l’article va faire évoluer la conception du produit minimum viable pour la gouvernance afin d’inclure de nouvelles stratégies Azure, ainsi qu’une implémentation d’Azure Cost Management. Ensemble, ces deux modifications de la conception permettront de répondre aux nouvelles instructions de la stratégie d’entreprise.
+Cette section de l’article va faire évoluer la conception du produit minimum viable (MVP) de gouvernance afin d’inclure de nouvelles stratégies Azure, ainsi qu’une implémentation d’Azure Cost Management. Ensemble, ces deux modifications de la conception permettront de répondre aux nouvelles instructions de la stratégie d’entreprise.
 
 1. Connectez les réseaux. Cette tâche est exécutée par les équipes responsables de la sécurité informatique et de la mise en réseau, et prise en charge par la gouvernance
     1. L’ajout d’une connexion d’un fournisseur MPLS/de ligne allouée au nouveau cloud intégrera les réseaux. L’ajout de configurations de pare-feu et de tables de routage contrôlera l’accès et le trafic entre les environnements.
@@ -82,7 +82,7 @@ Au fur et à mesure du développement de l’adoption du cloud, l’évolution d
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans de nombreuses grandes entreprises, les disciplines de la gouvernance cloud peuvent bloquer l’adoption. L’article suivant présente des réflexions sur comment transformer la gouvernance en sport collectif, pour assurer la réussite à long terme dans le cloud.
+Dans de nombreuses grandes entreprises, les Disciplines de gouvernance de Cloud cinq peuvent être des blocages à l’adoption. L’article suivant contient quelques réflexions supplémentaires sur la création de gouvernance un véritable sport d’équipe pour aider à garantir la réussite à long terme dans le cloud.
 
 > [!div class="nextstepaction"]
 > [Couches de gouvernance multiples](./multiple-layers-of-governance.md)

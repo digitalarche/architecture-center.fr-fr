@@ -1,16 +1,16 @@
 ---
-title: Utiliser des tableaux de bord pour visualiser les métriques d’Azure Databricks
+title: Utiliser des tableaux de bord pour visualiser les métriques Azure Databricks
 description: Comment déployer un tableau de bord Grafana pour analyser les performances dans Azure Databricks
 author: petertaylor9999
 ms.date: 03/26/2019
-ms.openlocfilehash: 36fcd93f6ca757e8e750d0fcbbdf0311c08560b0
-ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.openlocfilehash: a84203a9188848e6363a80ac455332e8f6a73cda
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2019
-ms.locfileid: "58887826"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640309"
 ---
-# <a name="use-dashboards-to-visualize-azure-databricks-metrics"></a>Utiliser des tableaux de bord pour visualiser les métriques d’Azure Databricks
+# <a name="use-dashboards-to-visualize-azure-databricks-metrics"></a>Utiliser des tableaux de bord pour visualiser les métriques Azure Databricks
 
 Cet article explique comment configurer un tableau de bord Grafana pour surveiller les travaux Azure Databricks pour les problèmes de performances.
 
@@ -20,7 +20,7 @@ Cette bibliothèque Active la journalisation des métriques de service Azure Dat
 
 ![Capture d’écran du tableau de bord](./_images/dashboard-screenshot.png)
 
-## <a name="prequisites"></a>Configuration requise
+## <a name="prerequisites"></a>Conditions préalables
 
 Clone le [référentiel Github](https://github.com/mspnp/spark-monitoring) et [suivez les instructions de déploiement](./configure-cluster.md) pour générer et configurer la journalisation d’Azure Monitor pour la bibliothèque Azure Databricks envoyer les journaux à votre espace de travail Analytique des journaux Azure.
 
@@ -40,7 +40,7 @@ Pour déployer l’espace de travail Analytique des journaux Azure, procédez co
     az group deployment create --resource-group <resource-group-name> --template-file logAnalyticsDeploy.json --parameters location='East US' serviceTier='Standalone'
     ```
 
-Ce modèle crée l’espace de travail et crée également un ensemble de requêtes prédéfinies qui sont utilisées par en tableau de bord.
+Ce modèle crée l’espace de travail et crée également un ensemble de requêtes prédéfinies qui sont utilisés par le tableau de bord.
 
 ## <a name="deploy-grafana-in-a-virtual-machine"></a>Déployer Grafana dans une machine virtuelle
 
@@ -81,7 +81,7 @@ Ensuite, modifiez le mot de passe administrateur Grafana en suivant ces étapes�
 
 1. Dans le portail Azure, sélectionnez la machine virtuelle, puis cliquez sur **vue d’ensemble**.
 1. Copiez l’adresse IP publique.
-1. Ouvrez un navigateur web et accédez à l’URL suivante : `http://<IP addresss>:3000`.
+1. Ouvrez un navigateur web et accédez à l’URL suivante : `http://<IP address>:3000`.
 1. À l’écran de connexion Grafana, entrez **administrateur** le nom d’utilisateur et utilisez le mot de passe Grafana lors des étapes précédentes.
 1. Une fois connecté, sélectionnez **Configuration** (l’icône d’engrenage).
 1. Sélectionnez **administrateur du serveur**.
@@ -177,7 +177,7 @@ Cette visualisation est une vue de haut niveau d’éléments de travail indexé
 
 ### <a name="streaming-throughputlatency"></a>Diffusion en continu de débit et de latence
 
-Cette visualzation concerne les mesures associées à une requête de diffusion en continu structurée. Les graphiques présente le nombre de lignes d’entrée par seconde et le nombre de lignes traitées par seconde. Les mesures de diffusion en continu sont également représentés par l’application. Ces mesures sont envoyés lorsque l’événement OnQueryProgress est généré comme traitement de la requête de diffusion en continu structurée et la visualisation représente latence en tant que la quantité de temps de diffusion en continu, en millisecondes, nécessaire pour exécuter un traitement de requêtes.
+Cette visualisation concerne les mesures associées à une requête de diffusion en continu structurée. Les graphiques présente le nombre de lignes d’entrée par seconde et le nombre de lignes traitées par seconde. Les mesures de diffusion en continu sont également représentés par l’application. Ces mesures sont envoyés lorsque l’événement OnQueryProgress est généré comme traitement de la requête de diffusion en continu structurée et la visualisation représente latence en tant que la quantité de temps de diffusion en continu, en millisecondes, nécessaire pour exécuter un traitement de requêtes.
 
 ### <a name="resource-consumption-per-executor"></a>Consommation des ressources par exécuteur
 

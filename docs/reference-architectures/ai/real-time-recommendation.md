@@ -7,18 +7,18 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: c4bfd6e92fc9c770a03a63355fc922d19ef27b7b
-ms.sourcegitcommit: f4ed242dff8b204cfd8ebebb7778f356a19f5923
-ms.translationtype: HT
+ms.openlocfilehash: c7e7423da11667c90d53247c2c5303a8fbd1a76a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/13/2019
-ms.locfileid: "56224162"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640156"
 ---
 # <a name="build-a-real-time-recommendation-api-on-azure"></a>Générer une API de recommandation en temps réel sur Azure
 
 Cette architecture de référence montre comment entraîner un modèle de recommandation à l’aide d’Azure Databricks et le déployer en tant qu’API en utilisant Azure Cosmos DB, Azure Machine Learning et Azure Kubernetes Service (AKS). Cette architecture peut être étendue à la plupart des scénarios de moteur de recommandation, notamment des recommandations pour des produits, films et actualités.
 
-Une implémentation de référence pour cette architecture est disponible sur [GitHub](https://github.com/Microsoft/Recommenders/blob/master/notebooks/05_operationalize/als_movie_o16n.ipynb).
+Une implémentation de référence pour cette architecture est disponible sur [GitHub][als-example].
 
 ![Architecture d’un modèle Machine Learning pour l’entraînement de recommandations sur des films](./_images/recommenders-architecture.png)
 
@@ -92,14 +92,14 @@ Gérez les coûts Azure Databricks en réentraînant moins fréquemment et en d�
 
 ## <a name="deploy-the-solution"></a>Déployer la solution
 
-Pour déployer cette architecture, commencez par créer un environnement Azure Databricks pour préparer des données et entraîner un modèle de recommandation :
+Pour déployer cette architecture, suivez le **Azure Databricks** des instructions dans le [document de configuration][setup]. En bref, les instructions nécessitent :
 
 1. Créez un [espace de travail Azure Databricks][workspace].
 
-2. Créez un cluster dans Azure Databricks. La configuration suivante est requise :
+1. Créer un cluster avec la configuration suivante dans Azure Databricks :
 
     - Mode de cluster : standard
-    - Version de Databricks Runtime : 4.1 (comprend Apache Spark 2.3.0, Scala 2.11)
+    - Version de Databricks Runtime : 4.3 (comprend Apache Spark 2.3.1, Scala 2.11)
     - Version de Python : 3
     - Type de pilote : Standard\_DS3\_v2
     - Type de traitement web : Standard\_DS3\_v2 (min et max en fonction des besoins)
@@ -107,30 +107,27 @@ Pour déployer cette architecture, commencez par créer un environnement Azure D
     - Configuration Spark : (en fonction des besoins)
     - Variables d’environnement : (en fonction des besoins)
 
-3. Clonez le dépôt [Microsoft Recommenders][github] sur votre ordinateur local.
+1. Créer un jeton d’accès personnel dans le [espace de travail Azure Databricks][workspace]. Consultez l’authentification Azure Databricks [documentation] [ adbauthentication] pour plus d’informations.
 
-4. Compressez le contenu dans le dossier Recommenders :
+1. Clone le [Microsoft Recommenders] [ github] référentiel dans un environnement où vous pouvez exécuter des scripts (par exemple, votre ordinateur local).
 
-    ```console
-    cd Recommenders
-    zip -r Recommenders.zip
-    ```
+1. Suivez le **d’installation rapide** instructions de configuration [installer les bibliothèques pertinentes] [ setup] sur Azure Databricks.
 
-5. Attachez la bibliothèque Recommenders à votre cluster comme suit :
+1. Suivez le **d’installation rapide** instructions de configuration [préparer Azure Databricks pour l’Opérationnalisation][setupo16n].
 
-    1. Dans le menu suivant, utilisez l’option pour importer une bibliothèque (« pour importer une bibliothèque, comme un fichier jar ou egg, cliquez ici ») et appuyez sur **cliquer ici**.
+1. Importer le [bloc-notes d’Opérationnalisation de film ALS] [ als-example] dans votre espace de travail. Une fois connecté à votre espace de travail Azure Databricks, procédez comme suit :
 
-    2. Dans le premier menu déroulant, sélectionnez l’option **Upload Python egg or PyPI** (Charger Python Egg ou PyPi).
+    a. Cliquez sur **accueil** sur le côté gauche de l’espace de travail.
 
-    3. Sélectionnez **Drop library egg here to upload** (Déposer la bibliothèque Egg ici à charger) et le fichier Recommenders.zip que vous venez de créer.
+    b. Avec le bouton droit sur l’espace blanc dans votre répertoire de base. Sélectionnez **Importer**.
 
-    4. Sélectionnez **Créer une bibliothèque** pour charger le fichier .zip et le rendre disponible dans votre espace de travail.
+    c. Sélectionnez **URL**et collez le texte suivant dans le champ de texte : `https://github.com/Microsoft/Recommenders/blob/master/notebooks/05_operationalize/als_movie_o16n.ipynb`
 
-    5. Dans le menu suivant, attachez la bibliothèque à votre cluster.
+    d. Cliquez sur **Importer**.
 
-6. Dans votre espace de travail, importez l’[exemple ALS Movie Operationalization][als-example].
+1. Ouvrir le bloc-notes dans Azure Databricks et joindre le cluster configuré.
 
-7. Exécutez le notebook ALS Movie Operationalization afin de générer les ressources requises pour créer une API de recommandation qui fournit les 10 meilleures recommandations de films pour un utilisateur donné.
+1. Exécutez le bloc-notes pour créer les ressources Azure nécessaires pour créer une API de recommandation qui fournit les recommandations de films de top 10 pour un utilisateur donné.
 
 ## <a name="related-architectures"></a>Architectures connexes
 
@@ -139,9 +136,10 @@ Nous avons également construit une architecture de référence qui utilise Spar
 <!-- links -->
 [aci]: /azure/container-instances/container-instances-overview
 [aad]: /azure/active-directory-b2c/active-directory-b2c-overview
+[adbauthentication]: https://docs.azuredatabricks.net/api/latest/authentication.html#generate-a-token
 [aks]: /azure/aks/intro-kubernetes
 [als]: https://spark.apache.org/docs/latest/ml-collaborative-filtering.html
-[als-example]: https://github.com/Microsoft/Recommenders/blob/master/notebooks/04_operationalize/als_movie_o16n.ipynb
+[als-example]: https://github.com/Microsoft/Recommenders/blob/master/notebooks/05_operationalize/als_movie_o16n.ipynb
 [autoscaling]: https://docs.azuredatabricks.net/user-guide/clusters/sizing.html
 [autoscale]: https://docs.azuredatabricks.net/user-guide/clusters/sizing.html#autoscaling
 [availability]: /azure/architecture/checklist/availability
@@ -170,7 +168,8 @@ Nous avons également construit une architecture de référence qui utilise Spar
 [resiliency]: /azure/architecture/resiliency/
 [ru]: /azure/cosmos-db/request-units
 [sec-docs]: /azure/security/
-[setup]: https://github.com/Microsoft/Recommenders/blob/master/SETUP.md%60
+[setup]: https://github.com/Microsoft/Recommenders/blob/master/SETUP.md#repository-installation
+[setupo16n]: https://github.com/Microsoft/Recommenders/blob/master/SETUP.md#prepare-azure-databricks-for-operationalization
 [scale]: /azure/aks/tutorial-kubernetes-scale
 [sla]: https://azure.microsoft.com/support/legal/sla/virtual-machines/v1_8/
 [vm-size]: /azure/virtual-machines/virtual-machines-linux-change-vm-size

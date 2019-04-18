@@ -8,12 +8,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: seojan19
-ms.openlocfilehash: 76870f58fc957f6d82f6dc176d1c538c795a7d20
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: d6eed98c6e224956942c45b52621ec02832be015
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58243060"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639763"
 ---
 # <a name="pillars-of-software-quality"></a>Piliers de la qualité logicielle
 
@@ -76,8 +76,6 @@ Dans Azure, les contrats de niveau de service (SLA) décrivent les engagements d
 
 Les applications dépendent souvent de plusieurs services. En règle générale, la probabilité d’un temps d’arrêt de chacun de ces services est indépendante. Par exemple, supposons que votre application dépende de deux services, chacun ayant un contrat de niveau de service de 99,9 %. Le contrat SLA composite pour les deux services est de 99,9 % &times; 99,9 % &asymp; 99,8 % ou légèrement inférieur à chaque service en lui-même.
 
-Utilisez la [liste de vérification de disponibilité][availability-checklist] pour revoir votre conception du point de vue de la disponibilité.
-
 ### <a name="availability-guidance"></a>Guide de disponibilité
 
 - [Modèles de conception pour la disponibilité][availability-patterns]
@@ -104,11 +102,9 @@ Ceci dit, vous devez toujours faire en sorte que votre application soit résilie
 
 Lorsque vous concevez une application qui doit être résiliente, vous devez comprendre vos besoins en matière de disponibilité. Quel temps d’arrêt maximal est acceptable ? Cela dépend en partie du coût. Combien les temps d’arrêt vont-ils coûter à votre entreprise ? Combien devriez-vous investir pour rendre l’application hautement disponible ?
 
-Utilisez la [liste de vérification de la résilience][resiliency-checklist] pour revoir votre conception du point de vue de la résilience.
-
 ### <a name="resiliency-guidance"></a>Aide relative à la résilience
 
-- [Conception d’applications résilientes pour Azure][resiliency]
+- [Conception d’applications Azure fiables][resiliency]
 - [Modèles de conception pour la résilience][resiliency-patterns]
 - Meilleure pratique : [Gestion des erreurs temporaires][transient-fault-handling], [Guide du mécanisme de nouvelle tentative relatif aux différents services][retry-service-specific]
 
@@ -122,7 +118,7 @@ La surveillance et les diagnostics sont cruciaux. Les applications cloud s’ex�
 
 Le processus d’analyse et de diagnostic comporte plusieurs phases distinctes :
 
-- Instrumentation. Générer des données brutes, à partir de journaux des applications, de journaux de serveurs web, de diagnostics intégrés à la plateforme Azure et d’autres sources.
+- Instrumentation. Générer des données brutes, à partir de journaux des applications, de journaux d’activité de serveurs web, de diagnostics intégrés à la plateforme Azure et d’autres sources.
 - Collecte et stockage. Consolider les données de manière centralisée.
 - Analyse et diagnostic. Résoudre les problèmes et examiner l’intégrité globale.
 - Visualisation et alertes. Utilisation de la télémétrie pour détecter les tendances ou alerter l’équipe chargée des opérations.
@@ -173,7 +169,7 @@ Utilisez le coffre de clés pour protéger les clés et les secrets de chiffreme
 
 [dr-guidance]: ../resiliency/disaster-recovery-azure-applications.md
 [identity-ref-arch]: ../reference-architectures/identity/index.md
-[resiliency]: ../resiliency/index.md
+[resiliency]: ../reliability/index.md
 
 [ad-subscriptions]: /azure/active-directory/active-directory-how-subscriptions-associated-directory
 [data-warehouse-encryption]: /azure/data-lake-store/data-lake-store-security-overview#data-protection
@@ -205,7 +201,5 @@ Utilisez le coffre de clés pour protéger les clés et les secrets de chiffreme
 [transient-fault-handling]: ../best-practices/transient-faults.md
 
 <!-- checklist -->
-[availability-checklist]: ../checklist/availability.md
 [devops-checklist]: ../checklist/dev-ops.md
-[resiliency-checklist]: ../checklist/resiliency.md
 [scalability-checklist]: ../checklist/scalability.md

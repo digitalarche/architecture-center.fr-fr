@@ -4,10 +4,10 @@ description: Explication des risques commerciaux associés à une transformation
 author: BrianBlanchard
 ms.date: 10/10/2018
 ms.openlocfilehash: 774a6703b353a3c670b3764505185aecb794784f
-ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068937"
 ---
 # <a name="evaluating-risk-tolerance"></a>Évaluer la tolérance au risque
@@ -93,7 +93,7 @@ Après avoir répondu à ces questions, ainsi que des questions comme détermin�
 - Risque élevé : Au fil du temps, il est d’augmenter moins probable que l’entreprise, élimine l’impact de ce risque.
 - Diminution du risque : le risque est moyen à élevé. Toutefois, les mesures prises par les équipes informatiques ou commerciales réduisent la probabilité d'un impact.
 
-**Détermination de la tolérance de panne :**
+**Détermination de la tolérance :**
 
 Les trois catégories de questions ci-dessus doivent fournir suffisamment de données pour déterminer les tolérances initiales. Lorsque le risque et probabilité sont faibles, et les coûts de mise à jour risque sont élevés, l’entreprise est peu probable d’investir dans la mise à jour. Lorsque risque et probabilité sont élevés, l’entreprise est susceptible de prendre en compte un investissement, tant les coûts ne dépassent pas les risques potentiels.
 
@@ -102,4 +102,4 @@ Les trois catégories de questions ci-dessus doivent fournir suffisamment de don
 Ce type de conversation peut aider les équipes commerciales et informatiques à évaluer plus efficacement la tolérance. Ces conversations peuvent être utilisées lors de la création des stratégies MVP et lors des révisions incrémentielles des stratégies.
 
 > [!div class="nextstepaction"]
-> [Définir la stratégie de l’entreprise](./define-policy.md)
+> [Définir la stratégie de l'entreprise](./define-policy.md)

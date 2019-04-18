@@ -7,16 +7,16 @@ ms.date: 12/07/2018
 ms.topic: design-pattern
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
-ms.openlocfilehash: 9b931337f7f0e5dc58f83701271c7d3491af5bfd
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: f3d15d65aeab41977e6d30b8141baaa956da29d3
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248744"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640768"
 ---
 # <a name="publisher-subscriber-pattern"></a>Modèle éditeur-abonné
 
-Activez une application pour annoncer des événements à plusieurs consommateurs intéressés de manière asynchrone, sans coupler les expéditeurs aux destinataires.
+Permettre à une application annoncer les événements à plusieurs consommateurs intéressées de façon asynchrone, sans couplage les expéditeurs aux récepteurs.
 
 **Également appelé** : Messagerie de publication/d’abonnement
 
@@ -88,7 +88,7 @@ Prenez en compte les points suivants lorsque vous choisissez comment implémente
 
 - **Répétition des messages**. Le même message peut être envoyé plusieurs fois. Par exemple, l’expéditeur peut subir un échec après avoir posté un message. Une nouvelle instance de l’expéditeur peut alors démarrer et répéter ce message. L’infrastructure de messagerie doit implémenter la détection et la suppression des messages en double en fonction des ID de message afin de veiller à ce qu’ils soient au maximum remis une fois.
 
-- **Expiration des messages.** Un message peut avoir une durée de vie limitée. S’il n’est pas traité pendant cette durée, il n’est peut-être plus pertinent et doit alors être ignoré. Un expéditeur peut spécifier un délai d’expiration dans le cadre des données du message. Un destinataire peut examiner ces informations avant de décider d’exécuter la logique métier associée au message.
+- **Expiration des messages.** Un message peut avoir une durée de vie limitée. S’il n’est pas traité pendant cette durée, il n’est peut-être plus pertinent et doit alors être ignoré. Un expéditeur peut spécifier un délai d’expiration en tant que partie des données dans le message. Un destinataire peut examiner ces informations avant de décider d’exécuter la logique métier associée au message.
 
 - **Planification des messages.** Un message peut être temporairement interdit et ne pas être traité avant une date et une heure spécifiques. Il ne doit pas être disponible pour un destinataire avant cette date.
 
@@ -130,4 +130,4 @@ Les modèles et les conseils suivants peuvent présenter un intérêt quand il s
 
 - [Modèle observateur](https://en.wikipedia.org/wiki/Observer_pattern). Le modèle éditeur-abonné s’appuie sur le modèle observateur en dissociant les sujets des observateurs par le biais d’une messagerie asynchrone.
 
-- [Modèle du courtier de messages](https://en.wikipedia.org/wiki/Message_broker). De nombreux sous-systèmes de messagerie qui prennent en charge le modèle éditeur-abonné sont implémentés par le biais d’un courtier de messages.
+- [Modèle du courtier de messages](https://en.wikipedia.org/wiki/Message_broker). Nombreux sous-systèmes de messagerie qui prennent en charge de publication-abonnement modèle sont implémentées via un courtier de messages.

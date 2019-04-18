@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: d99c63b9cb5f2ed7ffcd869b5b8ac7910b9dabe3
-ms.sourcegitcommit: 1b50810208354577b00e89e5c031b774b02736e2
-ms.translationtype: HT
+ms.openlocfilehash: 170a38f6b8a6c107670561e63f236e43af948d7d
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/23/2019
-ms.locfileid: "54487135"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641040"
 ---
 # <a name="retry-guidance-for-specific-services"></a>Guide du mécanisme de nouvelle tentative relatif aux différents services
 
@@ -25,7 +25,7 @@ Le tableau suivant récapitule les fonctionnalités de nouvelle tentative pour l
 
 | **Service** | **Fonctionnalités de nouvelle tentative** | **Configuration de la stratégie** | **Portée** | **Fonctionnalités de télémétrie** |
 | --- | --- | --- | --- | --- |
-| **[Azure Active Directory](#azure-active-directory)** |Native dans la bibliothèque ADAL |Incorporée dans la bibliothèque ADAL |Interne |Aucun |
+| **[Azure Active Directory](#azure-active-directory)** |Native dans la bibliothèque ADAL |Incorporé dans la bibliothèque ADAL |Interne |Aucun |
 | **[Cosmos DB](#cosmos-db)** |Native dans le service |Non configurable |Globale |TraceSource |
 | **Data Lake Store** |Native dans le client |Non configurable |Opérations individuelles |Aucun |
 | **[Event Hubs](#event-hubs)** |Native dans le client |Par programme |Client |Aucun |
@@ -169,7 +169,7 @@ Cache Redis Azure est un service de cache de faible latence et d’accès aux do
 
 Les instructions de cette section sont basées sur l’utilisation du client StackExchange.Redis pour accéder au cache. Vous trouverez une liste des autres clients appropriés sur le [site web de Redis](https://redis.io/clients), qui peuvent avoir des mécanismes de nouvelle tentative différents.
 
-Notez que le client StackExchange.Redis utilise le multiplexage via une connexion unique. L’utilisation recommandée consiste à créer une instance du client au démarrage de l’application et à utiliser cette instance pour toutes les opérations sur le cache. Pour cette raison, la connexion au cache est effectuée une seule fois. Ainsi, toutes les instructions de cette section sont associées à la stratégie de nouvelle tentative pour cette connexion initiale et non pour chaque opération qui accède au cache.
+Notez que le client StackExchange.Redis utilise le multiplexage via une connexion unique. L’utilisation recommandée consiste à créer une instance du client au démarrage de l’application et à utiliser cette instance pour toutes les opérations sur le cache. Pour cette raison, la connexion au cache est effectuée qu’une seule fois, et par conséquent, toutes les instructions de cette section est associé à la stratégie de nouvelle tentative pour cette connexion initiale &mdash; et non pour chaque opération qui accède au cache.
 
 ### <a name="retry-mechanism"></a>Mécanisme de nouvelle tentative
 
@@ -903,7 +903,7 @@ Vous pouvez remplacer les options de demande client en transmettant une instance
 var stats = await client.GetServiceStatsAsync(interactiveRequestOption, operationContext: null);
 ```
 
-Vous utilisez une instance **OperationContext** pour spécifier le code à exécuter lorsqu’une nouvelle tentative se produit et qu’une opération est terminée. Ce code peut collecter des informations sur l’opération à utiliser dans les journaux et la télémétrie
+Vous utilisez une instance **OperationContext** pour spécifier le code à exécuter lorsqu’une nouvelle tentative se produit et qu’une opération est terminée. Ce code peut collecter des informations sur l’opération à utiliser dans les journaux d’activité et la télémétrie
 
 ```csharp
 // Set up notifications for an operation
@@ -955,7 +955,7 @@ Respectez les consignes suivantes lorsque vous accédez aux services de stockage
 
 - Utilisez les stratégies de nouvelle tentative intégrées de l’espace de noms Microsoft.WindowsAzure.Storage.RetryPolicies, lorsqu’elles sont adaptées à vos besoins. Dans la plupart des cas, ces stratégies suffisent.
 
-- Utilisez la stratégie **ExponentialRetry** dans les opérations de traitement par lots, les tâches en arrière-plan ou les scénarios non interactifs. Dans ces scénarios, vous pouvez généralement accorder plus de temps à la récupération du service, ce qui par conséquent accroît les chances de réussite de l’opération.
+- Utilisez la stratégie **ExponentialRetry** dans les opérations de traitement par lots, les tâches en arrière-plan ou les scénarios non interactifs. Dans ces scénarios, vous pouvez généralement accorder plus de temps pour le service à récupérer &mdash; avec conséquent accroît les chances de l’opération de réussite.
 
 - Vous pouvez spécifier la propriété **MaximumExecutionTime** du paramètre **RequestOptions** pour limiter la durée d’exécution totale. Prenez en compte le type et la taille de l’opération lorsque vous choisissez une valeur de délai d’attente.
 
@@ -1123,7 +1123,7 @@ Voici les types d’intervalles de stratégie de nouvelle tentative classiques 
 
 ### <a name="transient-fault-handling-with-polly"></a>Gestion des erreurs temporaires avec Polly
 
-[Polly][polly] est une bibliothèque permettant de gérer par programmation les nouvelles tentatives et les stratégies de [disjoncteur](../patterns/circuit-breaker.md). Le projet Polly est un membre de l’organisation [.NET Foundation][dotnet-foundation]. Dans le cas des services pour lesquels le client ne prend pas en charge les nouvelles tentatives en mode natif, Polly constitue une alternative valide et évite d’avoir à écrire un code de nouvelle tentative personnalisé, qui peut être difficile à implémenter correctement. Polly vous offre également un moyen de tracer les erreurs lorsqu’elles se produisent, ce qui vous permet de journaliser les nouvelles tentatives.
+[Polly] [ polly] est une bibliothèque à gérer par programme les nouvelles tentatives et [disjoncteur](../patterns/circuit-breaker.md) stratégies. Le projet Polly est un membre de l’organisation [.NET Foundation][dotnet-foundation]. Dans le cas des services pour lesquels le client ne prend pas en charge les nouvelles tentatives en mode natif, Polly constitue une alternative valide et évite d’avoir à écrire un code de nouvelle tentative personnalisé, qui peut être difficile à implémenter correctement. Polly vous offre également un moyen de tracer les erreurs lorsqu’elles se produisent, ce qui vous permet de journaliser les nouvelles tentatives.
 
 ### <a name="more-information"></a>Plus d’informations
 

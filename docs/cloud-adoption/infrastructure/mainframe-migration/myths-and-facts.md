@@ -3,12 +3,12 @@ title: 'Migration d’ordinateurs mainframe : Mythes et réalités'
 description: Migrez des applications d’environnements mainframe vers Azure, infrastructure fiable, hautement disponible et scalable pour les systèmes qui s’exécutent sur des ordinateurs mainframe.
 author: njray
 ms.date: 12/27/2018
-ms.openlocfilehash: bcad01ec044d2d802b055e328a9496aae7b33311
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: e56f5b1b7e502ac727b28e583105bdee1c9cecd8
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58241540"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640326"
 ---
 # <a name="mainframe-myths-and-facts"></a>Mythes et réalités concernant les ordinateurs mainframe
 
@@ -32,7 +32,7 @@ Les nouveaux systèmes multicœurs Intel ont une capacité de calcul égale à c
 
 ## <a name="myth-the-cloud-cannot-accommodate-mission-critical-applications-for-large-companies-such-as-financial-institutions"></a>Mythe : le cloud ne peut pas prendre en charge les applications critiques des grandes entreprises, telles que les institutions financières
 
-Même s’il peut exister des cas isolés où les solutions cloud ne sont pas satisfaisantes, cela s’explique en général par le fait que les algorithmes d’application ne peuvent pas être distribués. Ces quelques exemples représentent plutôt l’exception que la règle.
+Il peut y avoir certains cas isolés où peuvent faillir dans les solutions de cloud, mais il est généralement parce que les algorithmes d’application ne peuvent pas être distribuées. Ces quelques exemples représentent plutôt l’exception que la règle.
 
 ## <a name="summary"></a>Résumé
 

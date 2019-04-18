@@ -8,12 +8,12 @@ description: Considérations relatives à l’élaboration d’une justification
 author: BrianBlanchard
 ms.date: 12/10/2018
 ms.topic: guide
-ms.openlocfilehash: 21c2b877a0f329711027f020fd0047479e8c7bfb
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: a2fdb225fb978eaade39850560ca1adbbb3476e7
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55898304"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640649"
 ---
 # <a name="build-a-business-justification-for-cloud-migration"></a>Créer une justification professionnelle pour la migration vers le cloud
 
@@ -30,8 +30,8 @@ Les migrations cloud peuvent rapidement générer un retour sur investissement (
 **Mythe : Les coûts de serveur impactent les analyses de rentabilisation de la migration cloud.** Cela est parfois vrai. Certaines entreprises jugent qu’il est important de réduire leurs dépenses d’investissement actuelles pour les serveurs. Cela dépend toutefois de plusieurs facteurs. Les entreprises qui renouvellent leur matériel tous les cinq à huit ans ont peu de chance d’obtenir un retour sur investissement rapide de leur migration cloud. Celles qui ont des cycles de renouvellement standards ou fixes peuvent atteindre un seuil de rentabilité rapidement. Dans les deux cas, d’autres types de dépenses peuvent être les déclencheurs financiers qui justifient la migration. Voici quelques exemples des coûts qui sont souvent négligés dans une analyse axée sur les coûts des serveurs uniquement ou sur les coûts des machines virtuelles uniquement :
 
 - Les coûts logiciels pour la virtualisation, les serveurs et les middlewares (intergiciels) peuvent être considérables. Les fournisseurs de cloud éliminent certains de ces coûts. Les programmes [Azure Hybrid Benefit](https://azure.microsoft.com/pricing/hybrid-benefit/#services) et [Réservations](https://azure.microsoft.com/reservations/) sont deux exemples de fournisseur de cloud qui permettent de réduire les coûts de virtualisation.
-- Les pertes financières dues à des pannes peuvent rapidement dépasser les coûts matériels ou logiciels. Si le centre de données actuel est instable, travaillez avec l’entreprise pour quantifier l’impact des arrêts sur les coûts d’opportunité ou les coûts d’exploitation actuels.
-- Les coûts environnementaux peuvent également avoir un impact à ne pas négliger. Pour une famille américaine moyenne, le logement constitue le plus gros investissement et le coût le plus élevé dans leur budget. Ce constat est souvent le même pour les centres de données. Les coûts immobiliers, d’équipement et d’énergie représentent une bonne part des coûts locaux. À la mise hors service des centres de données, l’entreprise peut reconvertir ces équipements ou éventuellement les sortir entièrement des coûts.
+- Les pertes financières dues à des pannes peuvent rapidement dépasser les coûts matériels ou logiciels. Si le centre de données actuelle est instable, demandez à l’entreprise pour quantifier l’effet de pannes en termes de coûts d’opportunité ou d’entreprise.
+- Les coûts environnementaux peuvent également être significatives. Pour une famille américaine moyenne, le logement constitue le plus gros investissement et le coût le plus élevé dans leur budget. Vaut souvent des centres de données. Les coûts immobiliers, d’équipement et d’énergie représentent une bonne part des coûts locaux. Lorsque les centres de données sont mis hors service, ces installations peuvent être réaffectées par l’entreprise ou potentiellement l’entreprise peut être libérée entièrement des coûts.
 
 **Mythe : Les dépenses d’exploitation (OPEX) sont préférables aux dépenses d’investissement (CAPEX).** Comme cela est expliqué dans l’article sur les [résultats financiers](business-outcomes/fiscal-outcomes.md), les dépenses d’exploitation peuvent être une bonne chose. Cependant, elles sont parfois perçues de façon négative par les entreprises de certains secteurs d’activité. Par exemple, les points suivants sur les dépenses d’exploitation méritent d’être discutés en détail avec les unités comptables et commerciales de l’entreprise :
 
@@ -70,17 +70,17 @@ La décomposition de cette formule crée une vue axée sur la migration de la fo
 
 ## <a name="migration-specific-initial-investment"></a>Investissement initial pour la migration
 
-- Les fournisseurs de cloud comme Azure proposent des outils de calcul pour estimer le montant des investissements dans le cloud. La [calculatrice de prix Azure](https://azure.microsoft.com/en-in/pricing/) en est un exemple.
+- Les fournisseurs de cloud comme Azure proposent des outils de calcul pour estimer le montant des investissements dans le cloud. La [calculatrice de prix Azure](https://azure.microsoft.com/pricing) en est un exemple.
 - Certains fournisseurs de cloud prennent également en charge des calculatrices d’écarts de coûts. Un exemple est la [calculatrice du coût total de possession (TCO) Azure](https://azure.com/tco).
 - Pour des structures de coûts plus détaillées, effectuez plutôt une [planification du patrimoine numérique](../digital-estate/overview.md).
 - Estimez le coût de la migration.
-- Estimez le coût des besoins de formation. [Microsoft Learn](https://docs.microsoft.com/learn/) peut être une solution pour atténuer ces coûts.
+- Estimez le coût des besoins de formation. [Microsoft Learn](/learn) peut être une solution pour atténuer ces coûts.
 - Dans certaines entreprises, le temps passé par le personnel existant doit aussi être inclus dans les coûts initiaux. Pour obtenir des conseils, consultez le service financier.
 - Discutez des coûts supplémentaires ou des coûts cachés éventuels avec le service financier pour faire valider votre estimation.
 
 ## <a name="migration-specific-revenue-deltas"></a>Écarts de revenus liés à la migration
 
-Cet aspect est souvent négligé lors de l’élaboration d’une justification de la migration. Dans certains domaines, le cloud peut réduire les coûts. Toutefois, l’objectif final de toute transformation est d’améliorer les résultats à long terme. Tenez compte des répercussions en aval pour comprendre comment améliorer les revenus dans la durée. Quelles nouvelles technologies seront à la disposition de l’entreprise après cette migration, mais qui ne peuvent pas encore être exploitées aujourd’hui ? Quels projets ou objectifs de l’entreprise sont bloqués en raison de dépendances sur des technologies héritées ? Quels programmes sont en attente à cause des coûts d’exploitation élevés des technologies sous-jacentes ?
+Cet aspect est souvent négligé lors de l’élaboration d’une justification de la migration. Dans certains domaines, le cloud peut réduire les coûts. Toutefois, l’objectif final de toute transformation est d’améliorer les résultats à long terme. Tenez compte des répercussions en aval pour comprendre comment améliorer les revenus dans la durée. Les nouvelles technologies seront disponibles pour l’entreprise après cette migration ne peut pas être utilisée aujourd'hui ? Quels projets ou objectifs de l’entreprise sont bloqués en raison de dépendances sur des technologies héritées ? Quels programmes sont en attente à cause des coûts d’exploitation élevés des technologies sous-jacentes ?
 
 Après avoir étudié les nouvelles opportunités offertes par le cloud, travaillez avec l’entreprise pour calculer les hausses de revenus envisageables grâce à ces opportunités.
 
@@ -88,24 +88,24 @@ Après avoir étudié les nouvelles opportunités offertes par le cloud, travail
 
 Calculez les nouveaux coûts estimés après la migration proposée. Pour plus d’informations sur les différents types d’écarts de coûts, consultez [Modèles financiers](financial-models.md). Les fournisseurs de cloud proposent souvent des outils permettant de calculer les écarts de coûts. Un exemple est la [calculatrice du coût total de possession (TCO) Azure](https://azure.com/tco).
 
-Voici d’autres exemples de coûts qu’une migration cloud peut réduire :
+Autres exemples de coûts qui peuvent être réduits grâce à une migration vers le cloud :
 
-- Arrêt ou réduction du centre de données (coûts environnementaux)
-- Diminution de la consommation d’énergie (coûts environnementaux)
-- Arrêt du rack (récupération de ressources physiques)
-- Pas de renouvellement du matériel (évitement de coûts)
-- Pas de renouvellement des logiciels (réduction des coûts opérationnels ou évitement de coûts)
-- Regroupement des achats (réduction des coûts opérationnels et réduction potentielle des coûts accessoires)
+- Arrêt de centre de données ou de réduction (coûts environnementaux)
+- Réduction de la consommation d’énergie (coûts environnementaux)
+- Arrêt de rack (récupération des ressources physiques)
+- Prévention de l’actualisation de matériel (une baisse des coûts)
+- Évitement de renouvellement de logiciels (éviter les coûts d’exploitation réduction ou de coût)
+- Consolidation de fournisseur (réduction des coûts opérationnels et réduction des coûts de manière réversible potentiels)
 
 ## <a name="when-roi-results-are-surprising"></a>Quand les résultats de retour sur investissement ne sont pas ceux escomptés
 
-Si le retour sur investissement d’une migration cloud n’est pas conforme aux attentes, il peut être utile de revoir la section sur les mythes courants au début de cet article.
+Si le retour sur investissement pour une migration vers le cloud ne correspond pas aux attentes, il peut être intéressant de revoir les mythes courants répertoriés au début de cet article.
 
 Cependant, vous devez aussi savoir qu’une migration cloud n’est pas toujours synonyme d’économies. Certaines applications ont un coût d’exploitation plus élevé dans le cloud qu’en local. Elles peuvent donc largement biaiser les résultats dans une analyse.
 
 Quand le retour sur investissement est inférieur à 20 %, envisagez d’effectuer une [planification du patrimoine numérique](../digital-estate/overview.md), en portant une attention particulière à la [rationalisation](../digital-estate/rationalize.md). Durant l’analyse quantitative, examinez chaque application pour rechercher les charges de travail qui faussent les résultats. Il peut être judicieux de supprimer ces charges de travail du plan. Si des données d’utilisation sont disponibles, essayez de réduire la taille des machines virtuelles en fonction de l’utilisation réelle.
 
-Si le retour sur investissement n’est toujours pas suffisant, travaillez en collaboration avec votre représentant commercial Microsoft ou [demandez de l’aide à un partenaire expérimenté](https://azure.microsoft.com/en-us/migration/partners/).
+Si le retour sur investissement n’est toujours pas suffisant, travaillez en collaboration avec votre représentant commercial Microsoft ou [demandez de l’aide à un partenaire expérimenté](https://azure.microsoft.com/migration/support).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

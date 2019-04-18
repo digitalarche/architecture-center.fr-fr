@@ -8,12 +8,12 @@ ms.topic: example-scenario
 ms.service: architecture-center
 ms.subservice: example-scenario
 social_image_url: /azure/architecture/example-scenario/data/media/architecture-fraud-detection.png
-ms.openlocfilehash: b10838635cb592eb93d35ce745832c55a6daae8b
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: fc2222874b807a53b5e575973aa6dd4eca63fa3b
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58245790"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640043"
 ---
 # <a name="real-time-fraud-detection-on-azure"></a>Détection des fraudes en temps réel dans Azure
 
@@ -62,8 +62,6 @@ En outre, des algorithmes plus complexes pour la détection des fraudes peuvent 
 
 Azure Monitor fournit des interfaces utilisateur unifiées pour la surveillance entre divers services Azure. Pour plus d’informations, consultez l’article [Monitoring in Microsoft Azure](/azure/monitoring-and-diagnostics/monitoring-overview) (Surveillance dans Microsoft Azure). Event Hubs et Stream Analytics sont intégrés à Azure Monitor.
 
-Pour voir d’autres considérations relatives à la disponibilité, consultez la [liste de contrôle de la disponibilité][availability] dans le Centre des architectures Azure.
-
 ### <a name="scalability"></a>Extensibilité
 
 Les composants de ce scénario sont conçus pour une ingestion à très grande échelle et une analyse en temps réel parallèle. Azure Event Hubs est un service très évolutif, capable de recevoir et de traiter des millions d’événements par seconde avec une faible latence. Event Hubs peut effectuer [automatiquement une montée en puissance](/azure/event-hubs/event-hubs-auto-inflate) en augmentant le nombre d’unités de débit pour répondre aux besoins d’utilisation. Azure Stream Analytics est capable d’analyser des volumes élevés de données de diffusion en continu provenant de nombreuses sources. Vous pouvez monter en puissance Stream Analytics en augmentant le nombre [d’unités de streaming](/azure/stream-analytics/stream-analytics-streaming-unit-consumption) allouées pour exécuter votre travail de diffusion en continu.
@@ -78,7 +76,7 @@ Pour obtenir des conseils d’ordre général sur la conception de solutions sé
 
 ### <a name="resiliency"></a>Résilience
 
-Pour obtenir des conseils d’ordre général sur la conception de solutions résilientes, consultez l’article [Conception d’applications résilientes pour Azure][resiliency].
+Pour obtenir des instructions générales sur la conception de solutions résilientes, consultez [conception d’applications Azure fiables](../../reliability/index.md).
 
 ## <a name="deploy-the-scenario"></a>Déployez le scénario
 
@@ -111,7 +109,5 @@ Les scénarios de détection des fraudes plus complexes peuvent bénéficier d�
 [docs-r-server-sample-solutions]: /machine-learning-server/r/sample-solutions
 [r-server-fraud-detection]: https://microsoft.github.io/r-server-fraud-detection/
 [technet-fraud-detection]: https://blogs.technet.microsoft.com/machinelearning/2017/06/28/using-azure-data-lake-and-r-for-fraud-detection/
-[availability]: /azure/architecture/checklist/availability
 [scalability]: /azure/architecture/checklist/scalability
-[resiliency]: ../../resiliency/index.md
 [security]: /azure/security/

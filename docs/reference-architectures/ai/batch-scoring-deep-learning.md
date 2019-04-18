@@ -8,12 +8,12 @@ ms.topic: reference-architecture
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: azcat-ai
-ms.openlocfilehash: a1c0701185c85f8e7bcbc183b32c4834529fc524
-ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.openlocfilehash: 3459f7895b7b57833da5853a77b2641dc7c85a9e
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2019
-ms.locfileid: "58887860"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639714"
 ---
 # <a name="batch-scoring-of-deep-learning-models-on-azure"></a>Modèles de notation par lot d’apprentissage profond sur Azure
 
@@ -114,13 +114,13 @@ Dans les scénarios à plusieurs utilisateurs, veillez à ce que les données se
 
 Pendant que vous exécutez votre tâche, il est important de superviser la progression et de vérifier que tout fonctionne comme prévu. Cependant, superviser un cluster de nœuds actifs peut s’avérer ardu.
 
-Pour vous faire une idée de l’état global du cluster, accédez au panneau Machine Learning du portail Azure pour inspecter l’état des nœuds du cluster. Si un nœud est inactif ou si un travail a échoué, vous pouvez consulter les journaux d’erreurs enregistrés dans Stockage Blob. Ils sont également accessibles dans le portail Azure.
+Pour vous faire une idée de l’état global du cluster, accédez au panneau Machine Learning du portail Azure pour inspecter l’état des nœuds du cluster. Si un nœud est inactif ou si un travail a échoué, vous pouvez consulter les journaux d’activité d’erreurs enregistrés dans Stockage Blob. Ils sont également accessibles dans le portail Azure.
 
-La supervision peut encore être approfondie en connectant les journaux à Application Insights, ou en exécutant des processus distincts pour interroger l’état du cluster et de ses travaux.
+La supervision peut encore être approfondie en connectant les journaux d’activité à Application Insights, ou en exécutant des processus distincts pour interroger l’état du cluster et de ses travaux.
 
 ### <a name="logging-with-azure-machine-learning"></a>Journalisation avec Azure Machine Learning
 
-Azure Machine Learning journalise automatiquement tous les stdout/stderr dans le compte Stockage Blob associé. Sauf indication contraire, votre espace de travail Azure Machine Learning provisionne automatiquement un compte de stockage et y enregistre vos journaux. Vous pouvez aussi utiliser un outil de navigation de stockage comme l’Explorateur Stockage, qui facilite nettement l’expérience de navigation dans les fichiers journaux.
+Azure Machine Learning enregistrera automatiquement tous les stdout/stderr au compte de stockage blob associé. Sauf indication contraire, votre espace de travail Azure Machine Learning provisionne automatiquement un compte de stockage et y enregistre vos journaux d’activité. Vous pouvez aussi utiliser un outil de navigation de stockage comme l’Explorateur Stockage, qui facilite nettement l’expérience de navigation dans les fichiers journaux.
 
 ## <a name="cost-considerations"></a>Considérations relatives au coût
 

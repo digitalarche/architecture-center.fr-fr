@@ -7,12 +7,12 @@ ms.topic: guide
 ms.service: architecture-center
 ms.subservice: reference-architecture
 ms.custom: microservices
-ms.openlocfilehash: f7f3f3d48087db51c40f134e3e4cf11ec58501bb
-ms.sourcegitcommit: d58e6b2b891c9c99e951c59f15fce71addcb96b1
+ms.openlocfilehash: c52ff3d0a330f564e5f7e9b0b07f0ba84c328c8b
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/12/2019
-ms.locfileid: "59533088"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639781"
 ---
 # <a name="cicd-for-microservices-architectures"></a>CI/CD pour les architectures de microservices
 
@@ -64,7 +64,7 @@ Pour obtenir une grande rapidité de diffusion, votre pipeline de versions doit 
 
 - **Gestion des mises en production**. Chaque équipe doit être en mesure de déployer une mise à jour en production. Cela ne signifie pas que tous les membres doivent être autorisés à le faire. Cependant, une organisation disposant d’un rôle centralisé de gestionnaire des versions peut constater un ralentissement de ses déploiements.
 
-    **Migitation**: Plus le processus d’intégration et de livraison continue est automatisé et fiable, moins la nécessité d’une autorité centrale se fait sentir. Ceci dit, vous pouvez avoir plusieurs stratégies, adaptées à la fois à la publication des modifications majeures de fonctionnalités et des correctifs mineurs. La décentralisation ne signifie pas aucune trace de gouvernance.
+    **Atténuation** : Plus le processus d’intégration et de livraison continue est automatisé et fiable, moins la nécessité d’une autorité centrale se fait sentir. Ceci dit, vous pouvez avoir plusieurs stratégies, adaptées à la fois à la publication des modifications majeures de fonctionnalités et des correctifs mineurs. La décentralisation ne signifie pas aucune trace de gouvernance.
 
 - **Mises à jour de service**. Lorsque vous mettez à jour un service vers une nouvelle version, il ne doit pas perturber les autres services qui en dépendent.
 
@@ -74,7 +74,7 @@ Pour obtenir une grande rapidité de diffusion, votre pipeline de versions doit 
 
 Avant de créer un workflow CI/CD, vous devez savoir comment la base de code est structurée et gérée.
 
-- Les équipes travaillent-elles dans des dépôts distincts ou dans un même dépôt (un dépôt unique) ?
+- Équipes fonctionnent dans les référentiels séparés ou dans un monorepo (référentiel unique) ?
 - Quelle est votre stratégie de création de branche ?
 - Qui peut envoyer (push) du code en production ? Existe-t-il un rôle de gestionnaire de mise en production ?
 

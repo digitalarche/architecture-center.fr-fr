@@ -1,20 +1,20 @@
 ---
-title: 'Framework d’adoption du cloud : Petites et moyennes entreprises – Évolution de la base de référence de la sécurité'
+title: 'Framework d’adoption du cloud : Petites et moyennes entreprises – évolution de la base de sécurité'
 titleSuffix: Microsoft Cloud Adoption Framework for Azure
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
 ms.custom: governance
 ms.date: 02/11/2019
-description: 'Explication : Petites et moyennes entreprises – Évolution de la base de référence de la sécurité'
+description: Entreprise de petite à moyenne explication – évolution de la base de sécurité
 author: BrianBlanchard
-ms.openlocfilehash: 5714b886ef63cc2392905250d97ea905839f6011
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: bb26fa2f0d21bda6b1af1213bca817136b0c963f
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55900834"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640241"
 ---
-# <a name="caf-small-to-medium-enterprise-security-baseline-evolution"></a>Framework d’adoption du cloud : Petites et moyennes entreprises : Évolution de la base de référence de la sécurité
+# <a name="caf-small-to-medium-enterprise-security-baseline-evolution"></a>Framework d’adoption du cloud : Petites et moyennes entreprises : Évolution de la base de référence de la sécurité
 
 Cet article développe le scénario en ajoutant des contrôles de sécurité qui prennent en charge le déplacement des données protégées vers le cloud.
 
@@ -22,11 +22,11 @@ Cet article développe le scénario en ajoutant des contrôles de sécurité qui
 
 La direction du département informatique et celle de l’entreprise ont été satisfaites des résultats des premières expérimentations effectuées par les équipes chargées de l’informatique, du développement d’applications et du décisionnel. Pour tirer une valeur ajoutée tangible de ces expérimentations, ces équipes doivent être autorisées à intégrer des données protégées dans les solutions. Ceci induit des changements de stratégie des entreprises, mais nécessite également une évolution des implémentations de la gouvernance du cloud avant que des données protégées puissent être placées dans le cloud.
 
-### <a name="evolution-of-the-cloud-governance-team"></a>Évolution de l’équipe Gouvernance du cloud
+### <a name="evolution-of-the-cloud-governance-team"></a>Évolution de l’équipe de gouvernance cloud
 
-Étant donné l’impact du changement de scénario et de la prise en charge fournie jusqu’à présent, l’équipe Gouvernance du cloud est maintenant vue différemment. Les deux administrateurs système qui ont démarré l’équipe sont maintenant vus comme des architectes cloud expérimentés. Au fil du développement de ce scénario, la perception de ces deux personnes va passer d’agents de maintenance du cloud à un rôle qui sera davantage celui de gardien du cloud.
+Étant donné l’effet de la variation narration et prise en charge fournie jusqu'à présent, l’équipe de gouvernance du Cloud est maintenant affiché différemment. Les deux administrateurs système qui ont démarré l’équipe sont maintenant vus comme des architectes cloud expérimentés. Au fil du développement de ce scénario, la perception de ces deux personnes va passer d’agents de maintenance du cloud à un rôle qui sera davantage celui de gardien du cloud.
 
-Si cette différence est subtile, il s’agit néanmoins d’une distinction importante lors de l’élaboration d’une culture informatique centrée sur la gouvernance. Un agent de maintenance du cloud s’occupe de la remise en ordre rendue nécessaire par les actions innovantes des architectes cloud. Les deux rôles engendrent naturellement des frictions et ont des objectifs opposés. D’un autre côté, un gardien du cloud aide à conserver le cloud sécurisé, afin que d’autres architectes cloud puissent effectuer les migrations plus rapidement, avec moins de désordres. De plus, un gardien du cloud est impliqué dans la création de modèles qui en accélèrent le déploiement et l’adoption, ce qui en fait un accélérateur de l’innovation et un défenseur des cinq disciplines du cloud.
+Si cette différence est subtile, il s’agit néanmoins d’une distinction importante lors de l’élaboration d’une culture informatique centrée sur la gouvernance. Un agent de maintenance du cloud s’occupe de la remise en ordre rendue nécessaire par les actions innovantes des architectes cloud. Les deux rôles engendrent naturellement des frictions et ont des objectifs opposés. D’un autre côté, un gardien du cloud aide à conserver le cloud sécurisé, afin que d’autres architectes cloud puissent effectuer les migrations plus rapidement, avec moins de désordres. En outre, un gardien Cloud est impliqué dans la création de modèles qui accélèrent le déploiement et l’adoption, rendant un accélérateur de l’innovation, mais aussi un defender de Disciplines cinq de gouvernance Cloud.
 
 ### <a name="evolution-of-the-current-state"></a>Évolution de l’état actuel
 
@@ -51,9 +51,9 @@ Les modifications apportées aux états actuel et futur exposent à de nouveaux 
 
 **Violation des données** : L’adoption d’une nouvelle plateforme de données entraîne une augmentation inhérente des responsabilités liées à des violations potentielles des données. Les techniciens adoptant des technologies cloud ont des responsabilités plus grandes quant à l’implémentation de solutions pouvant réduire ce risque. Une stratégie de gouvernance et de sécurité robuste doit être implémentée pour garantir que ces techniciens prennent bien ces responsabilités.
 
-Ce risque métier peut être lié à quelques risques techniques :
+Ce risque métier peut s’associer à quelques risques techniques :
 
-- Des applications critiques ou des données protégées peuvent être déployées par inadvertance.
+- Les applications critiques ou des données protégées peuvent être déployées par inadvertance.
 - Des données protégées peuvent être exposées lors du stockage en raison de mauvaises décisions quant au chiffrement.
 - Des utilisateurs non autorisés peuvent accéder à des données protégées.
 - Une intrusion depuis l’extérieur peut aboutir à l’accès à des données protégées.

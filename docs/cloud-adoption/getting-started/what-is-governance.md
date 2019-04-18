@@ -7,10 +7,10 @@ ms.date: 02/11/2019
 description: Fonctionnement de la gouvernance des ressources cloud sur Azure
 author: petertaylor9999
 ms.openlocfilehash: 0989a5aad8a6290cce07fd71771c690bbd615e0d
-ms.sourcegitcommit: 0a8a60d782facc294f7f78ec0e9033e3ee16bf4a
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2019
+ms.lasthandoff: 04/17/2019
 ms.locfileid: "59068852"
 ---
 <!-- markdownlint-disable MD026 -->

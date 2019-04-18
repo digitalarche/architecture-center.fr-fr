@@ -8,12 +8,12 @@ ms.topic: best-practice
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: b15b97de2042a0e213192dd586ffdcc4c51b1f11
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: 06090b0862a7c737d9ee93512f851d3fcf2e2d9f
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55897981"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640870"
 ---
 # <a name="api-design"></a>Conception d’API
 
@@ -97,7 +97,7 @@ L’envoi d’une requête GET HTTP à l’URI de la collection récupère une l
 
 Adoptez une convention d’affectation de noms cohérente pour les URI. En général, il est recommandé d’utiliser des noms au pluriel pour les URI qui référencent des collections. Il est judicieux d’organiser les URI pour les collections et les éléments dans une hiérarchie. Par exemple, `/customers` est le chemin d’accès à la collection des clients, et `/customers/5` est le chemin d’accès au client avec un ID égal à 5. Cette approche contribue à préserver l’intuitivité de l’API web. En outre, plusieurs infrastructures d’API web peuvent acheminer les requêtes en fonction de chemins d’accès paramétrables pour que vous puissiez définir un itinéraire pour le chemin d’accès `/customers/{id}`.
 
-Prenez également en compte les relations entre les différents types de ressources et la façon dont vous pouvez exposer ces associations. Par exemple, le `/customers/5/orders` peut représenter toutes les commandes du client 5. Vous pouvez également aller dans l’autre sens et représenter l’association d’une commande vers un client avec un URI tel que `/orders/99/customer`. Cependant, développer ce modèle de façon trop poussée peut complexifier son implémentation. Une meilleure solution consiste à fournir des liens navigables vers des ressources associées dans le corps du message de réponse HTTP. Ce mécanisme est décrit plus en détail dans la section [Utilisation de l’approche HATEOAS pour autoriser la navigation vers des ressources associées](#using-the-hateoas-approach-to-enable-navigation-to-related-resources) plus loin dans cet article.
+Prenez également en compte les relations entre les différents types de ressources et la façon dont vous pouvez exposer ces associations. Par exemple, le `/customers/5/orders` peut représenter toutes les commandes du client 5. Vous pouvez également aller dans l’autre sens et représenter l’association d’une commande vers un client avec un URI tel que `/orders/99/customer`. Cependant, développer ce modèle de façon trop poussée peut complexifier son implémentation. Une meilleure solution consiste à fournir des liens navigables vers des ressources associées dans le corps du message de réponse HTTP. Ce mécanisme est décrit plus en détail dans la section [HATEOAS d’utilisation pour permettre la navigation vers des ressources associées](#use-hateoas-to-enable-navigation-to-related-resources).
 
 Dans les systèmes plus complexes, il peut être tentant de fournir des URI qui permettent à un client de naviguer parmi différents niveaux de relations, tels que `/customers/1/orders/99/products`. Toutefois, ce niveau de complexité peut être difficile à gérer et n’offre aucune flexibilité si les relations entre les ressources changent ultérieurement. Au lieu de cela, optez pour des URI aussi simples que possible. Une fois qu’une application a une référence à une ressource, il doit être possible d’utiliser cette référence pour rechercher des éléments liés à cette ressource. La requête précédente peut être remplacée par l’URI `/customers/1/orders` pour rechercher toutes les commandes pour le client 1, puis par `/orders/99/products` pour rechercher les produits dans cette commande.
 
@@ -442,7 +442,7 @@ Plutôt que de fournir plusieurs URI, vous pouvez spécifier la version de la re
 D’un point de vue sémantique, cette approche présente l’avantage suivant : la même ressource est toujours extraite du même URI, mais cela dépend du code qui gère la demande d’analyse de la chaîne de requête et de renvoi de la réponse HTTP appropriée. D’autre part, cette approche présente les mêmes inconvénients que le mécanisme de contrôle de version d’URI concernant l’implémentation de HATEOAS.
 
 > [!NOTE]
-> Certains proxys et navigateurs web anciens ne mettent pas en cache les réponses aux requêtes qui incluent une chaîne de requête dans l’URI. Cela peut avoir un impact négatif sur les performances des applications web qui utilisent une API web et qui s’exécutent à partir des navigateurs web.
+> Certains proxys et navigateurs web anciens ne mettent pas en cache les réponses aux requêtes qui incluent une chaîne de requête dans l’URI. Cela peut dégrader les performances des applications web qui utilisent une API web et qui s’exécutent à partir de ce type de navigateur web.
 
 ### <a name="header-versioning"></a>Contrôle de version d’en-tête
 

@@ -4,12 +4,12 @@ description: Architecture recommandée pour les applications IoT sur Azure utili
 titleSuffix: Azure Reference Architectures
 author: MikeWasson
 ms.date: 01/09/2019
-ms.openlocfilehash: 5a4b104044f3e64ffdce98e3952201d397d41f33
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.openlocfilehash: 04bff9419a30a3610d59e3ca8f27c004a0bcb2be
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58344578"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641125"
 ---
 # <a name="azure-iot-reference-architecture"></a>Architecture de référence Azure IoT
 
@@ -136,13 +136,13 @@ Le suivi des données de télémétrie permet à un opérateur de suivre l’év
 
 ### <a name="logging"></a>Journalisation
 
-Les systèmes de journalisation sont déterminants pour comprendre les actions ou les activités qu’une solution a effectuées et les défaillances qui se sont produites. De plus, ils peuvent aider à corriger ces défaillances. Les journaux peuvent être analysés pour comprendre et résoudre des conditions d’erreur, améliorer les caractéristiques de performances et garantir la conformité aux règles et réglementations applicables.
+Les systèmes de journalisation sont déterminants pour comprendre les actions ou les activités qu’une solution a effectuées et les défaillances qui se sont produites. De plus, ils peuvent aider à corriger ces défaillances. Les journaux d’activité peuvent être analysés pour comprendre et résoudre des conditions d’erreur, améliorer les caractéristiques de performances et garantir la conformité aux règles et réglementations applicables.
 
 Bien que la journalisation en texte brut ait moins d’impact sur les coûts de développement initiaux, elle est plus difficile à analyser/lire par un ordinateur. Nous vous recommandons d’utiliser une journalisation structurée, car les informations collectées sont à la fois analysables par un ordinateur et lisibles par l’homme. La journalisation structurée ajoute un contexte situationnel et des métadonnées aux informations du journal. Dans la journalisation structurée, les propriétés sont de première classe, sous la forme de paires clé/valeur ou avec un schéma fixe pour améliorer les fonctionnalités de recherche et de requête.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Pour obtenir une présentation plus détaillée de l’architecture recommandée et des options d’implémentation, consultez [Architecture de référence Microsoft Azure IoT](http://aka.ms/iotrefarchitecture) (PDF).
+- Pour obtenir une présentation plus détaillée de l’architecture recommandée et des options d’implémentation, consultez [Architecture de référence Microsoft Azure IoT](https://aka.ms/iotrefarchitecture) (PDF).
 
 - Pour obtenir une documentation détaillée sur les différents services Azure IoT, consultez [Notions de base d’Azure IoT](/azure/iot-fundamentals/).
 

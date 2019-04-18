@@ -9,12 +9,12 @@ ms.service: architecture-center
 ms.subservice: example-scenario
 ms.custom: fasttrack, Linux
 social_image_url: /azure/architecture/example-scenario/infrastructure/media/azure-citrix-sample-diagram.png
-ms.openlocfilehash: 77093cba0e5646146ec9de68655754d9ac1e5461
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
-ms.translationtype: HT
+ms.openlocfilehash: e59e785df80efc9de134d27664ba1581a61dd1d1
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58248484"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640275"
 ---
 # <a name="linux-virtual-desktops-with-citrix"></a>Bureaux virtuels Linux avec Citrix
 
@@ -71,7 +71,7 @@ Dans ce scénario, les références SKU suivantes sont utilisées :
 - [Azure SQL Database](/azure/sql-database/sql-database-technical-overview) est une base de données relationnelle en tant que service reposant sur la dernière version stable du moteur de base de données Microsoft SQL Server. Elle sert à l’hébergement des bases de données Citrix.
 - [ExpressRoute](/azure/expressroute/expressroute-introduction) vous permet d’étendre vos réseaux locaux au cloud de Microsoft via une connexion privée assurée par un fournisseur de connectivité.
 - [Les services de domaine Active Directory sont utilisés pour les services d’annuaire et l’authentification des utilisateurs
-- Les [groupes à haute disponibilité Azure](/azure/virtual-machines/windows/tutorial-availability-sets) veillent à ce que les machines virtuelles que vous déployez sur Azure soient distribuées sur plusieurs nœuds matériels isolés d’un cluster. Leur utilisation garantit qu’en cas de défaillance matérielle ou logicielle dans Azure, seul un sous-ensemble de vos machines virtuelles est affecté et que votre solution globale reste disponible et opérationnelle.
+- [Haute disponibilité Azure](/azure/virtual-machines/windows/tutorial-availability-sets) garantit que les machines virtuelles que vous déployez sur Azure soient distribuées sur plusieurs nœuds matériels isolés d’un cluster. Leur utilisation garantit qu’en cas de défaillance matérielle ou logicielle dans Azure, seul un sous-ensemble de vos machines virtuelles est affecté et que votre solution globale reste disponible et opérationnelle.
 - [Citrix ADC (NetScaler)](https://www.citrix.com/products/citrix-adc) est un contrôleur de livraison d’applications qui effectue des analyses de trafic spécifiques sur les applications afin de distribuer, d’optimiser et de protéger de façon intelligente le trafic réseau couche 4-couche 7 (L4-L7) pour les applications Web.
 - [Citrix StoreFront](https://www.citrix.com/products/citrix-virtual-apps-and-desktops/citrix-storefront.html) est un magasin d’applications professionnelles qui améliore la sécurité et simplifie les déploiements pour une expérience utilisateur moderne et presque native inégalée sur toutes les plateformes Citrix Receiver. StoreFront facilite la gestion des environnements d’applications et de bureaux virtuels Citrix sur plusieurs sites et en plusieurs versions.
 - [Citrix License Server](https://www.citrix.com/buy/licensing/overview.html) gère les licences des produits Citrix.
