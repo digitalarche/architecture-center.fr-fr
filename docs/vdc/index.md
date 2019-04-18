@@ -6,18 +6,19 @@ layout: LandingPage
 ms.topic: landing-page
 ms.service: architecture-center
 ms.subservice: enterprise-cloud-adoption
-ms.openlocfilehash: 57f28808d3c49c74bc010133c670a186206a4466
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.openlocfilehash: f49640f4a994bf1cdca8029260fc95a5da323ff2
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58344527"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640615"
 ---
 # <a name="azure-virtual-datacenter-and-the-enterprise-control-plane"></a>Le centre de données virtuel Azure et le plan de contrôle entreprise
 
 Le centre de données virtuel Azure est une approche permettant de tirer le meilleur parti des capacités Azure tout en respectant vos stratégies de sécurité et réseau existantes. Lorsqu’ils déploient des charges de travail d’entreprise dans le cloud, les services informatiques et les unités opérationnelles doivent équilibrer la gouvernance et l’agilité des développeurs. Le centre de données virtuel Azure apporte des modèles pour atteindre cet équilibre en mettant l’accent sur la gouvernance.
- 
+
 ## <a name="resources"></a>Ressources
+
 <table>
 <tr>
     <td style="width: 64px; vertical-align: middle;"><a href="https://aka.ms/VDC/Concepts"><img src="../_images/virtual-datacenter.svg" alt="Virtual Datacenter eBook" /></a></td>
@@ -55,9 +56,8 @@ Le déploiement des charges de travail vers le cloud crée le besoin de dévelop
 
 <img src="./images/vdc-components.svg" alt="Virtual Datacenter components" style="max-width:700px;"/>
 
-Voici les quatre composants indispensables du centre de données virtuel Azure : identité, chiffrement, SDN (Software-Defined Networking) et conformité (y compris les journaux et rapports).
+Voici les quatre composants indispensables du centre de données virtuel Azure : identité, chiffrement, SDN (Software-Defined Networking) et conformité (y compris les journaux d’activité et rapports).
 
 Dans le modèle de centre de données virtuel Azure, vous pouvez appliquer des stratégies d’isolation, rendre le cloud plus semblable aux centres de données physiques que vous connaissez et atteindre les niveaux de sécurité et de confiance dont vous avez besoin. Quatre composants que toutes les équipes informatiques d’entreprise reconnaîtront rendent cela possible : SDN (Software-Defined Networking), le chiffrement, la gestion des identités ainsi que les standards de conformité et les certifications sous-jacentes de la plateforme Azure. Ces quatre points sont essentiels pour faire d’un centre de données virtuel une extension de confiance de vos investissements d’infrastructure existants.
-
 
 Continuez à lire le livre électronique <a href="https://aka.ms/VDC/eBook">Azure Virtual Datacenter Concepts</a> (Centre de données virtuel Azure : Concepts)

@@ -9,12 +9,12 @@ description: Vue d’ensemble du contenu de la gouvernance dans le framework d'a
 author: BrianBlanchard
 layout: LandingPage
 ms.topic: landing-page
-ms.openlocfilehash: 1721e2ff7b4e7879637a7c09a40a5571b73c9ace
-ms.sourcegitcommit: 273e690c0cfabbc3822089c7d8bc743ef41d2b6e
-ms.translationtype: HT
+ms.openlocfilehash: ddd7f5e4b7e79ebe2ddf87be7421b6c4691aced1
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/08/2019
-ms.locfileid: "55901038"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59639867"
 ---
 # <a name="the-five-disciplines-of-cloud-governance"></a>Les cinq disciplines de la gouvernance cloud
 
@@ -26,7 +26,7 @@ ms.locfileid: "55901038"
         <div class="cardPadding" style="padding-bottom:10px;">
             <div class="card" style="padding-bottom:10px;">
                 <div class="cardText" style="padding-left:0px;">
-Toute modification apportée à des processus métier ou à des plates-formes technologiques présente un risque. Les équipes de gouvernance cloud, dont les membres sont parfois appelés les gardiens du cloud, sont chargées de minimiser ces risques tout en évitant d’interrompre l’adoption et l’innovation.<br/><br/>Le modèle de gouvernance du framework d'adoption du cloud guide ces décisions (indépendamment de la plateforme cloud choisie) en se concentrant sur le <a href="#corporate-policy">développement d'une stratégie d’entreprise</a> et les <a href="#disciplines-of-cloud-governance">disciplines de gouvernance cloud</a>. Les <a href="#actionable-journeys">guides de conception actionnables</a> illustrent ce modèle qui utilise des services Azure. Cet article fait office de page d'accueil pour les cinq disciplines du modèle de gouvernance CAF.
+Toute modification apportée à des processus métier ou à des plates-formes technologiques présente un risque. Les équipes de gouvernance cloud, dont les membres sont parfois appelés les gardiens du cloud, sont chargées de minimiser ces risques tout en évitant d’interrompre l’adoption et l’innovation.<br/><br/>Le modèle de gouvernance CAF Guide ces décisions (quel que soit la plateforme de cloud choisi) en se concentrant sur le développement de la stratégie d’entreprise et <a href="#disciplines-of-cloud-governance">Disciplines de gouvernance Cloud de</a>. <a href="./journeys/overview.md">Parcours actionnables</a> illustrent ce modèle à l’aide des services Azure. Cet article fait office de page d'accueil pour les cinq disciplines du modèle de gouvernance CAF.
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@ Toute modification apportée à des processus métier ou à des plates-formes te
                     <div class="cardText" style="padding-left:0px;">
 <img src="../_images/operational-transformation-govern-highres.png" alt="Diagram of the CAF governance model: Corporate policy and governance disciplines">
 <br>
-<i>Figure 1 : Visuel de la stratégie d’entreprise et les cinq disciplines de la gouvernance cloud</i>
+<i>Figure 1 : Diagramme de la stratégie d’entreprise et les Disciplines de gouvernance de Cloud cinq</i>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@ Toute modification apportée à des processus métier ou à des plates-formes te
 
 ## <a name="disciplines-of-cloud-governance"></a>Disciplines de gouvernance cloud
 
-Chaque fournisseur de cloud utilise des disciplines de gouvernance cloud communes, qui peuvent faire office de guide pour connaître les stratégies et aligner les chaînes d’outils. Ces disciplines orientent les décisions en matière de niveau d'automatisation et de mise en œuvre de la stratégie d’entreprise entre fournisseurs de cloud.
+Sur chaque fournisseur de cloud, il existe des disciplines gouvernance courantes qui peuvent servir de guide pour aider à informer les stratégies et aligner les chaînes d’outils. Ces disciplines orientent les décisions en matière de niveau d'automatisation et de mise en œuvre de la stratégie d’entreprise entre fournisseurs de cloud.
 
 <!-- markdownlint-disable MD033 -->
 
