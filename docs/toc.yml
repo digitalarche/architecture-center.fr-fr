@@ -241,6 +241,8 @@ items:
       href: example-scenario/apps/apim-api-scenario.md
     - name: Recherche de produit de e-commerce
       href: example-scenario/apps/ecommerce-search.md
+    - name: Serveur Jenkins
+      href: example-scenario/apps/jenkins.md
   - name: Données et analyse
     items:
     - name: ETL hybride avec Data Factory
@@ -383,8 +385,6 @@ items:
       href: reference-architectures/n-tier/linux-vm.md
     - name: Machine virtuelle Windows unique
       href: reference-architectures/n-tier/windows-vm.md
-    - name: Serveur Jenkins
-      href: reference-architectures/jenkins/index.md
     - name: Application multiniveau avec SQL Server
       href: reference-architectures/n-tier/n-tier-sql-server.md
     - name: Application multiniveau multirégion
@@ -581,18 +581,32 @@ items:
       href: databricks-monitoring/performance-troubleshooting.md
 - name: Framework de révision de la conception
   items:
-  - name: Conception pour la résilience
-    href: resiliency/index.md
-  - name: Analyse du mode d’échec
-    href: resiliency/failure-mode-analysis.md
-  - name: Liste de contrôle de disponibilité
-    href: checklist/availability.md
+  - name: Concevoir des applications Azure fiables
+    items:
+    - name: Vue d’ensemble
+      href: reliability/index.md
+    - name: Définir les conditions requises
+      href: reliability/requirements.md
+    - name: Concevoir l’architecture dans un souci de fiabilité
+      href: reliability/architect.md
+    - name: Tester dans un souci de fiabilité
+      href: reliability/testing.md
+    - name: Déployer dans un souci de fiabilité
+      href: reliability/deploy.md
+    - name: Superviser l’intégrité de l’application
+      href: reliability/monitoring.md
+    - name: Planifier le traitement des défaillances et des sinistres
+      href: reliability/disaster-recovery.md
+    - name: Liste de vérification de la résilience pour les services Azure
+      href: checklist/resiliency-per-service.md
+    - name: Analyse du mode d’échec
+      href: resiliency/failure-mode-analysis.md
+    - name: Récupérer après une interruption de service à l’échelle de la région
+      href: resiliency/recovery-loss-azure-region.md
+    - name: Récupérer suite à une altération de données ou à une suppression accidentelle
+      href: resiliency/recovery-data-corruption.md
   - name: Liste de contrôle DevOps
     href: checklist/dev-ops.md
-  - name: Liste de vérification de la résilience (général)
-    href: checklist/resiliency.md
-  - name: Liste de vérification de la résilience (services Azure)
-    href: checklist/resiliency-per-service.md
   - name: Liste de contrôle de l’extensibilité
     href: checklist/scalability.md
 - name: Framework d’adoption du cloud
@@ -871,11 +885,11 @@ items:
           href: cloud-adoption/decision-guides/software-defined-network/hybrid.md
         - name: Modèle hub-and-spoke
           href: cloud-adoption/decision-guides/software-defined-network/hub-spoke.md
-      - name: Journaux et rapports
+      - name: Journaux d’activité et rapports
         href: cloud-adoption/decision-guides/log-and-report/overview.md
-ms.openlocfilehash: f931e785077b6014bcc8428922572d9a8bd1d97d
-ms.sourcegitcommit: d58e6b2b891c9c99e951c59f15fce71addcb96b1
+ms.openlocfilehash: f934a26d459d509fad45b4b3aef372535e46b8e3
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/12/2019
-ms.locfileid: "59533105"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59641074"

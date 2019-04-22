@@ -3,12 +3,12 @@ title: Supervision d’Azure Databricks avec Azure Monitor
 description: Bibliothèque scala pour activer la supervision d’Azure Databricks dans Azure Log Analytics
 author: petertaylor9999
 ms.date: 03/26/2019
-ms.openlocfilehash: 4544d3abc3264ec459a80ac1a61a912e6d30d6b2
-ms.sourcegitcommit: 1a3cc91530d56731029ea091db1f15d41ac056af
+ms.openlocfilehash: 93798ccf74735a880eab2999008b1495e6a63e10
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2019
-ms.locfileid: "58887690"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640530"
 ---
 # <a name="monitoring-azure-databricks"></a>Supervision Azure Databricks
 

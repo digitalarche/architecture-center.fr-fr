@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: architecture-center
 ms.subservice: cloud-fundamentals
 ms.custom: seodec18
-ms.openlocfilehash: f1ab728d68747856fb2586804d58d45c4ea4fcc1
-ms.sourcegitcommit: c053e6edb429299a0ad9b327888d596c48859d4a
+ms.openlocfilehash: 4f94b181bd61b09c2ea79defe1c551402c1dc877
+ms.sourcegitcommit: 579c39ff4b776704ead17a006bf24cd4cdc65edd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/20/2019
-ms.locfileid: "58344493"
+ms.lasthandoff: 04/17/2019
+ms.locfileid: "59640955"
 ---
 # <a name="busy-front-end-antipattern"></a>Antimodèle Serveur frontal occupé
 
