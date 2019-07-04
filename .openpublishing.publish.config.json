@@ -1,21 +1,38 @@
 {
   "need_generate_pdf": true,
-  "docsets_to_publish": [],
+  "need_generate_intellisense": false,
+  "docsets_to_publish": [
+    {
+      "docset_name": "azure-architecture-center",
+      "build_source_folder": "docs",
+      "build_output_subfolder": "azure-architecture-center",
+      "locale": "fr-fr",
+      "monikers": [],
+      "open_to_public_contributors": true,
+      "type_mapping": {
+        "Conceptual": "Content",
+        "ManagedReference": "Content",
+        "ContextObject": "Toc"
+      },
+      "build_entry_point": "docs",
+      "template_folder": "_themes",
+      "version": 0
+    }
+  ],
   "notification_subscribers": [],
-  "sync_notification_subscribers": [],
   "branches_to_filter": [
     "live",
     "master-sxs"
   ],
   "git_repository_url_open_to_public_contributors": "https://github.com/microsoftdocs/architecture-center.fr-fr",
   "git_repository_branch_open_to_public_contributors": "live",
+  "contribution_branch_mappings": {
+		       "live-sxs": "live"
+  },
   "continue_with_document_error": true,
   "skip_source_output_uploading": false,
   "need_preview_pull_request": true,
   "enable_incremental_build": true,
-  "contribution_branch_mappings": {
-    "live-sxs": "live"
-  },
   "dependent_repositories": [
     {
       "path_to_root": "_themes",
@@ -37,25 +54,22 @@
         "live": "live",
         "master": "master"
       }
-    },
-    {
-      "path_to_root": "_themes",
-      "url": "https://github.com/Microsoft/templates.docs.msft.fr-FR",
-      "branch": "master",
-      "branch_mapping": {}
     }
   ],
-  "branch_target_mapping": {
-    "live-sxs": [
-      "Publish",
-      "Pdf"
+  "need_generate_pdf_url_template": false,
+"branch_target_mapping": {
+     "live-sxs": [
+           "Publish",
+           "Pdf" 
     ],
     "live": [
-      "Publish",
-      "Pdf"
+           "Publish",
+           "Pdf"
     ]
-  },
-  "need_generate_pdf_url_template": false,
-  "targets": {},
-  "need_generate_intellisense": false
+},
+"Targets": {
+     "Pdf": {
+               "template_folder": "_themes.pdf"
+     }
+}
 }
